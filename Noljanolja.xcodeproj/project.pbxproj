@@ -15,6 +15,20 @@
 		CFFD709D298ABA0100D4F5A2 /* NoljanoljaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD709C298ABA0100D4F5A2 /* NoljanoljaUITests.swift */; };
 		CFFD709F298ABA0100D4F5A2 /* NoljanoljaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD709E298ABA0100D4F5A2 /* NoljanoljaUITestsLaunchTests.swift */; };
 		CFFD70B3298AC38000D4F5A2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CFFD70B2298AC38000D4F5A2 /* Localizable.strings */; };
+		CFFD70C4298AC5F800D4F5A2 /* NetworkLoggerPluggin.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD70B9298AC5F800D4F5A2 /* NetworkLoggerPluggin.swift */; };
+		CFFD70C5298AC5F800D4F5A2 /* RequestTimeoutPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD70BA298AC5F800D4F5A2 /* RequestTimeoutPlugin.swift */; };
+		CFFD70C6298AC5F800D4F5A2 /* AuthorizationPluggin.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD70BB298AC5F800D4F5A2 /* AuthorizationPluggin.swift */; };
+		CFFD70C7298AC5F800D4F5A2 /* DisableLocalCachePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD70BC298AC5F800D4F5A2 /* DisableLocalCachePlugin.swift */; };
+		CFFD70C8298AC5F800D4F5A2 /* BaseAuthTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD70BE298AC5F800D4F5A2 /* BaseAuthTargetType.swift */; };
+		CFFD70C9298AC5F800D4F5A2 /* TargetType+RawTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD70BF298AC5F800D4F5A2 /* TargetType+RawTarget.swift */; };
+		CFFD70CA298AC5F800D4F5A2 /* TargetType+Default.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD70C0298AC5F800D4F5A2 /* TargetType+Default.swift */; };
+		CFFD70CB298AC5F800D4F5A2 /* ApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD70C2298AC5F800D4F5A2 /* ApiProvider.swift */; };
+		CFFD70CC298AC5F800D4F5A2 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD70C3298AC5F800D4F5A2 /* Api.swift */; };
+		CFFD70D0298AC7A900D4F5A2 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = CFFD70CF298AC7A900D4F5A2 /* CombineMoya */; };
+		CFFD70D3298AC89000D4F5A2 /* NetworkConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD70D2298AC89000D4F5A2 /* NetworkConfigs.swift */; };
+		CFFD70D5298AC92500D4F5A2 /* AuthorizationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD70D4298AC92500D4F5A2 /* AuthorizationAPI.swift */; };
+		CFFD70D7298ACA8700D4F5A2 /* AuthorizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD70D6298ACA8700D4F5A2 /* AuthorizationModel.swift */; };
+		CFFD70D9298ACAF600D4F5A2 /* BaseTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD70D8298ACAF600D4F5A2 /* BaseTargetType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +60,19 @@
 		CFFD709C298ABA0100D4F5A2 /* NoljanoljaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoljanoljaUITests.swift; sourceTree = "<group>"; };
 		CFFD709E298ABA0100D4F5A2 /* NoljanoljaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoljanoljaUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		CFFD70B2298AC38000D4F5A2 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		CFFD70B9298AC5F800D4F5A2 /* NetworkLoggerPluggin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPluggin.swift; sourceTree = "<group>"; };
+		CFFD70BA298AC5F800D4F5A2 /* RequestTimeoutPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestTimeoutPlugin.swift; sourceTree = "<group>"; };
+		CFFD70BB298AC5F800D4F5A2 /* AuthorizationPluggin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationPluggin.swift; sourceTree = "<group>"; };
+		CFFD70BC298AC5F800D4F5A2 /* DisableLocalCachePlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisableLocalCachePlugin.swift; sourceTree = "<group>"; };
+		CFFD70BE298AC5F800D4F5A2 /* BaseAuthTargetType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAuthTargetType.swift; sourceTree = "<group>"; };
+		CFFD70BF298AC5F800D4F5A2 /* TargetType+RawTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TargetType+RawTarget.swift"; sourceTree = "<group>"; };
+		CFFD70C0298AC5F800D4F5A2 /* TargetType+Default.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TargetType+Default.swift"; sourceTree = "<group>"; };
+		CFFD70C2298AC5F800D4F5A2 /* ApiProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiProvider.swift; sourceTree = "<group>"; };
+		CFFD70C3298AC5F800D4F5A2 /* Api.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
+		CFFD70D2298AC89000D4F5A2 /* NetworkConfigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfigs.swift; sourceTree = "<group>"; };
+		CFFD70D4298AC92500D4F5A2 /* AuthorizationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationAPI.swift; sourceTree = "<group>"; };
+		CFFD70D6298ACA8700D4F5A2 /* AuthorizationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationModel.swift; sourceTree = "<group>"; };
+		CFFD70D8298ACAF600D4F5A2 /* BaseTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTargetType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFFD70D0298AC7A900D4F5A2 /* CombineMoya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,6 +177,7 @@
 		CFFD70AD298AC1B400D4F5A2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CFFD70D6298ACA8700D4F5A2 /* AuthorizationModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -163,8 +192,9 @@
 		CFFD70AF298AC21000D4F5A2 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				CFFD70B7298AC55600D4F5A2 /* Network */,
+				CFFD70CD298AC5FD00D4F5A2 /* APIs */,
 				CFFD70AD298AC1B400D4F5A2 /* Models */,
+				CFFD70B7298AC55600D4F5A2 /* Network */,
 				CFFD70AE298AC1CE00D4F5A2 /* Services */,
 			);
 			path = Services;
@@ -214,8 +244,59 @@
 		CFFD70B7298AC55600D4F5A2 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				CFFD70D1298AC87800D4F5A2 /* Configs */,
+				CFFD70C1298AC5F800D4F5A2 /* API */,
+				CFFD70B8298AC5F800D4F5A2 /* Plugins */,
+				CFFD70BD298AC5F800D4F5A2 /* Targets */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		CFFD70B8298AC5F800D4F5A2 /* Plugins */ = {
+			isa = PBXGroup;
+			children = (
+				CFFD70B9298AC5F800D4F5A2 /* NetworkLoggerPluggin.swift */,
+				CFFD70BA298AC5F800D4F5A2 /* RequestTimeoutPlugin.swift */,
+				CFFD70BB298AC5F800D4F5A2 /* AuthorizationPluggin.swift */,
+				CFFD70BC298AC5F800D4F5A2 /* DisableLocalCachePlugin.swift */,
+			);
+			path = Plugins;
+			sourceTree = "<group>";
+		};
+		CFFD70BD298AC5F800D4F5A2 /* Targets */ = {
+			isa = PBXGroup;
+			children = (
+				CFFD70BE298AC5F800D4F5A2 /* BaseAuthTargetType.swift */,
+				CFFD70D8298ACAF600D4F5A2 /* BaseTargetType.swift */,
+				CFFD70BF298AC5F800D4F5A2 /* TargetType+RawTarget.swift */,
+				CFFD70C0298AC5F800D4F5A2 /* TargetType+Default.swift */,
+			);
+			path = Targets;
+			sourceTree = "<group>";
+		};
+		CFFD70C1298AC5F800D4F5A2 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				CFFD70C2298AC5F800D4F5A2 /* ApiProvider.swift */,
+				CFFD70C3298AC5F800D4F5A2 /* Api.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		CFFD70CD298AC5FD00D4F5A2 /* APIs */ = {
+			isa = PBXGroup;
+			children = (
+				CFFD70D4298AC92500D4F5A2 /* AuthorizationAPI.swift */,
+			);
+			path = APIs;
+			sourceTree = "<group>";
+		};
+		CFFD70D1298AC87800D4F5A2 /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				CFFD70D2298AC89000D4F5A2 /* NetworkConfigs.swift */,
+			);
+			path = Configs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,6 +315,9 @@
 			dependencies = (
 			);
 			name = Noljanolja;
+			packageProductDependencies = (
+				CFFD70CF298AC7A900D4F5A2 /* CombineMoya */,
+			);
 			productName = Noljanolja;
 			productReference = CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */;
 			productType = "com.apple.product-type.application";
@@ -306,6 +390,9 @@
 				Base,
 			);
 			mainGroup = CFFD7075298AB9FF00D4F5A2;
+			packageReferences = (
+				CFFD70CE298AC7A900D4F5A2 /* XCRemoteSwiftPackageReference "Moya" */,
+			);
 			productRefGroup = CFFD707F298AB9FF00D4F5A2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -349,8 +436,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFFD70C5298AC5F800D4F5A2 /* RequestTimeoutPlugin.swift in Sources */,
 				CFFD7084298AB9FF00D4F5A2 /* ContentView.swift in Sources */,
+				CFFD70D3298AC89000D4F5A2 /* NetworkConfigs.swift in Sources */,
+				CFFD70C9298AC5F800D4F5A2 /* TargetType+RawTarget.swift in Sources */,
+				CFFD70C8298AC5F800D4F5A2 /* BaseAuthTargetType.swift in Sources */,
+				CFFD70D9298ACAF600D4F5A2 /* BaseTargetType.swift in Sources */,
+				CFFD70C6298AC5F800D4F5A2 /* AuthorizationPluggin.swift in Sources */,
+				CFFD70CC298AC5F800D4F5A2 /* Api.swift in Sources */,
+				CFFD70D5298AC92500D4F5A2 /* AuthorizationAPI.swift in Sources */,
 				CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */,
+				CFFD70C7298AC5F800D4F5A2 /* DisableLocalCachePlugin.swift in Sources */,
+				CFFD70CB298AC5F800D4F5A2 /* ApiProvider.swift in Sources */,
+				CFFD70C4298AC5F800D4F5A2 /* NetworkLoggerPluggin.swift in Sources */,
+				CFFD70CA298AC5F800D4F5A2 /* TargetType+Default.swift in Sources */,
+				CFFD70D7298ACA8700D4F5A2 /* AuthorizationModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -669,6 +769,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CFFD70CE298AC7A900D4F5A2 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				kind = exactVersion;
+				version = 15.0.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CFFD70CF298AC7A900D4F5A2 /* CombineMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CFFD70CE298AC7A900D4F5A2 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = CombineMoya;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CFFD7076298AB9FF00D4F5A2 /* Project object */;
 }
