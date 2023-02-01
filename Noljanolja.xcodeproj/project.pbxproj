@@ -14,6 +14,7 @@
 		CFFD7093298ABA0100D4F5A2 /* NoljanoljaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD7092298ABA0100D4F5A2 /* NoljanoljaTests.swift */; };
 		CFFD709D298ABA0100D4F5A2 /* NoljanoljaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD709C298ABA0100D4F5A2 /* NoljanoljaUITests.swift */; };
 		CFFD709F298ABA0100D4F5A2 /* NoljanoljaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD709E298ABA0100D4F5A2 /* NoljanoljaUITestsLaunchTests.swift */; };
+		CFFD70B3298AC38000D4F5A2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CFFD70B2298AC38000D4F5A2 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		CFFD7098298ABA0100D4F5A2 /* NoljanoljaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoljanoljaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFFD709C298ABA0100D4F5A2 /* NoljanoljaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoljanoljaUITests.swift; sourceTree = "<group>"; };
 		CFFD709E298ABA0100D4F5A2 /* NoljanoljaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoljanoljaUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		CFFD70B2298AC38000D4F5A2 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,9 +96,8 @@
 		CFFD7080298AB9FF00D4F5A2 /* Noljanolja */ = {
 			isa = PBXGroup;
 			children = (
-				CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */,
-				CFFD7083298AB9FF00D4F5A2 /* ContentView.swift */,
-				CFFD7085298ABA0100D4F5A2 /* Assets.xcassets */,
+				CFFD70AB298AC19400D4F5A2 /* Sources */,
+				CFFD70AC298AC19F00D4F5A2 /* Resources */,
 				CFFD7087298ABA0100D4F5A2 /* Preview Content */,
 			);
 			path = Noljanolja;
@@ -125,6 +126,96 @@
 				CFFD709E298ABA0100D4F5A2 /* NoljanoljaUITestsLaunchTests.swift */,
 			);
 			path = NoljanoljaUITests;
+			sourceTree = "<group>";
+		};
+		CFFD70AB298AC19400D4F5A2 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				CFFD70B4298AC42800D4F5A2 /* Application */,
+				CFFD70AF298AC21000D4F5A2 /* Services */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		CFFD70AC298AC19F00D4F5A2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CFFD70B1298AC34200D4F5A2 /* Generated */,
+				CFFD70B0298AC33C00D4F5A2 /* Sources */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		CFFD70AD298AC1B400D4F5A2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CFFD70AE298AC1CE00D4F5A2 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		CFFD70AF298AC21000D4F5A2 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CFFD70B7298AC55600D4F5A2 /* Network */,
+				CFFD70AD298AC1B400D4F5A2 /* Models */,
+				CFFD70AE298AC1CE00D4F5A2 /* Services */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		CFFD70B0298AC33C00D4F5A2 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				CFFD7085298ABA0100D4F5A2 /* Assets.xcassets */,
+				CFFD70B2298AC38000D4F5A2 /* Localizable.strings */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		CFFD70B1298AC34200D4F5A2 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		CFFD70B4298AC42800D4F5A2 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				CFFD70B6298AC43B00D4F5A2 /* App */,
+				CFFD70B5298AC43200D4F5A2 /* Screens */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		CFFD70B5298AC43200D4F5A2 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				CFFD7083298AB9FF00D4F5A2 /* ContentView.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		CFFD70B6298AC43B00D4F5A2 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		CFFD70B7298AC55600D4F5A2 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +323,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFFD7089298ABA0100D4F5A2 /* Preview Assets.xcassets in Resources */,
+				CFFD70B3298AC38000D4F5A2 /* Localizable.strings in Resources */,
 				CFFD7086298ABA0100D4F5A2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
