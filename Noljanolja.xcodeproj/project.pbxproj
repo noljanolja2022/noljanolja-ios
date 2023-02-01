@@ -1,0 +1,582 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */; };
+		CFFD7084298AB9FF00D4F5A2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD7083298AB9FF00D4F5A2 /* ContentView.swift */; };
+		CFFD7086298ABA0100D4F5A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7085298ABA0100D4F5A2 /* Assets.xcassets */; };
+		CFFD7089298ABA0100D4F5A2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7088298ABA0100D4F5A2 /* Preview Assets.xcassets */; };
+		CFFD7093298ABA0100D4F5A2 /* NoljanoljaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD7092298ABA0100D4F5A2 /* NoljanoljaTests.swift */; };
+		CFFD709D298ABA0100D4F5A2 /* NoljanoljaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD709C298ABA0100D4F5A2 /* NoljanoljaUITests.swift */; };
+		CFFD709F298ABA0100D4F5A2 /* NoljanoljaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD709E298ABA0100D4F5A2 /* NoljanoljaUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CFFD708F298ABA0100D4F5A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CFFD7076298AB9FF00D4F5A2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFFD707D298AB9FF00D4F5A2;
+			remoteInfo = Noljanolja;
+		};
+		CFFD7099298ABA0100D4F5A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CFFD7076298AB9FF00D4F5A2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CFFD707D298AB9FF00D4F5A2;
+			remoteInfo = Noljanolja;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Noljanolja.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoljanoljaApp.swift; sourceTree = "<group>"; };
+		CFFD7083298AB9FF00D4F5A2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CFFD7085298ABA0100D4F5A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CFFD7088298ABA0100D4F5A2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CFFD708E298ABA0100D4F5A2 /* NoljanoljaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoljanoljaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFFD7092298ABA0100D4F5A2 /* NoljanoljaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoljanoljaTests.swift; sourceTree = "<group>"; };
+		CFFD7098298ABA0100D4F5A2 /* NoljanoljaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoljanoljaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CFFD709C298ABA0100D4F5A2 /* NoljanoljaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoljanoljaUITests.swift; sourceTree = "<group>"; };
+		CFFD709E298ABA0100D4F5A2 /* NoljanoljaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoljanoljaUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CFFD707B298AB9FF00D4F5A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFFD708B298ABA0100D4F5A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFFD7095298ABA0100D4F5A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CFFD7075298AB9FF00D4F5A2 = {
+			isa = PBXGroup;
+			children = (
+				CFFD7080298AB9FF00D4F5A2 /* Noljanolja */,
+				CFFD7091298ABA0100D4F5A2 /* NoljanoljaTests */,
+				CFFD709B298ABA0100D4F5A2 /* NoljanoljaUITests */,
+				CFFD707F298AB9FF00D4F5A2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CFFD707F298AB9FF00D4F5A2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */,
+				CFFD708E298ABA0100D4F5A2 /* NoljanoljaTests.xctest */,
+				CFFD7098298ABA0100D4F5A2 /* NoljanoljaUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CFFD7080298AB9FF00D4F5A2 /* Noljanolja */ = {
+			isa = PBXGroup;
+			children = (
+				CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */,
+				CFFD7083298AB9FF00D4F5A2 /* ContentView.swift */,
+				CFFD7085298ABA0100D4F5A2 /* Assets.xcassets */,
+				CFFD7087298ABA0100D4F5A2 /* Preview Content */,
+			);
+			path = Noljanolja;
+			sourceTree = "<group>";
+		};
+		CFFD7087298ABA0100D4F5A2 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				CFFD7088298ABA0100D4F5A2 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CFFD7091298ABA0100D4F5A2 /* NoljanoljaTests */ = {
+			isa = PBXGroup;
+			children = (
+				CFFD7092298ABA0100D4F5A2 /* NoljanoljaTests.swift */,
+			);
+			path = NoljanoljaTests;
+			sourceTree = "<group>";
+		};
+		CFFD709B298ABA0100D4F5A2 /* NoljanoljaUITests */ = {
+			isa = PBXGroup;
+			children = (
+				CFFD709C298ABA0100D4F5A2 /* NoljanoljaUITests.swift */,
+				CFFD709E298ABA0100D4F5A2 /* NoljanoljaUITestsLaunchTests.swift */,
+			);
+			path = NoljanoljaUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CFFD707D298AB9FF00D4F5A2 /* Noljanolja */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFFD70A2298ABA0100D4F5A2 /* Build configuration list for PBXNativeTarget "Noljanolja" */;
+			buildPhases = (
+				CFFD707A298AB9FF00D4F5A2 /* Sources */,
+				CFFD707B298AB9FF00D4F5A2 /* Frameworks */,
+				CFFD707C298AB9FF00D4F5A2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Noljanolja;
+			productName = Noljanolja;
+			productReference = CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CFFD708D298ABA0100D4F5A2 /* NoljanoljaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFFD70A5298ABA0100D4F5A2 /* Build configuration list for PBXNativeTarget "NoljanoljaTests" */;
+			buildPhases = (
+				CFFD708A298ABA0100D4F5A2 /* Sources */,
+				CFFD708B298ABA0100D4F5A2 /* Frameworks */,
+				CFFD708C298ABA0100D4F5A2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CFFD7090298ABA0100D4F5A2 /* PBXTargetDependency */,
+			);
+			name = NoljanoljaTests;
+			productName = NoljanoljaTests;
+			productReference = CFFD708E298ABA0100D4F5A2 /* NoljanoljaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CFFD7097298ABA0100D4F5A2 /* NoljanoljaUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CFFD70A8298ABA0100D4F5A2 /* Build configuration list for PBXNativeTarget "NoljanoljaUITests" */;
+			buildPhases = (
+				CFFD7094298ABA0100D4F5A2 /* Sources */,
+				CFFD7095298ABA0100D4F5A2 /* Frameworks */,
+				CFFD7096298ABA0100D4F5A2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CFFD709A298ABA0100D4F5A2 /* PBXTargetDependency */,
+			);
+			name = NoljanoljaUITests;
+			productName = NoljanoljaUITests;
+			productReference = CFFD7098298ABA0100D4F5A2 /* NoljanoljaUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CFFD7076298AB9FF00D4F5A2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					CFFD707D298AB9FF00D4F5A2 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					CFFD708D298ABA0100D4F5A2 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = CFFD707D298AB9FF00D4F5A2;
+					};
+					CFFD7097298ABA0100D4F5A2 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = CFFD707D298AB9FF00D4F5A2;
+					};
+				};
+			};
+			buildConfigurationList = CFFD7079298AB9FF00D4F5A2 /* Build configuration list for PBXProject "Noljanolja" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CFFD7075298AB9FF00D4F5A2;
+			productRefGroup = CFFD707F298AB9FF00D4F5A2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CFFD707D298AB9FF00D4F5A2 /* Noljanolja */,
+				CFFD708D298ABA0100D4F5A2 /* NoljanoljaTests */,
+				CFFD7097298ABA0100D4F5A2 /* NoljanoljaUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CFFD707C298AB9FF00D4F5A2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFFD7089298ABA0100D4F5A2 /* Preview Assets.xcassets in Resources */,
+				CFFD7086298ABA0100D4F5A2 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFFD708C298ABA0100D4F5A2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFFD7096298ABA0100D4F5A2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CFFD707A298AB9FF00D4F5A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFFD7084298AB9FF00D4F5A2 /* ContentView.swift in Sources */,
+				CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFFD708A298ABA0100D4F5A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFFD7093298ABA0100D4F5A2 /* NoljanoljaTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CFFD7094298ABA0100D4F5A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CFFD709F298ABA0100D4F5A2 /* NoljanoljaUITestsLaunchTests.swift in Sources */,
+				CFFD709D298ABA0100D4F5A2 /* NoljanoljaUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CFFD7090298ABA0100D4F5A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFFD707D298AB9FF00D4F5A2 /* Noljanolja */;
+			targetProxy = CFFD708F298ABA0100D4F5A2 /* PBXContainerItemProxy */;
+		};
+		CFFD709A298ABA0100D4F5A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CFFD707D298AB9FF00D4F5A2 /* Noljanolja */;
+			targetProxy = CFFD7099298ABA0100D4F5A2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		CFFD70A0298ABA0100D4F5A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CFFD70A1298ABA0100D4F5A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CFFD70A3298ABA0100D4F5A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Noljanolja/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Noljanolja;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CFFD70A4298ABA0100D4F5A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Noljanolja/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Noljanolja;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CFFD70A6298ABA0100D4F5A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.NoljanoljaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Noljanolja.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Noljanolja";
+			};
+			name = Debug;
+		};
+		CFFD70A7298ABA0100D4F5A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.NoljanoljaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Noljanolja.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Noljanolja";
+			};
+			name = Release;
+		};
+		CFFD70A9298ABA0100D4F5A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.NoljanoljaUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Noljanolja;
+			};
+			name = Debug;
+		};
+		CFFD70AA298ABA0100D4F5A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.NoljanoljaUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Noljanolja;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CFFD7079298AB9FF00D4F5A2 /* Build configuration list for PBXProject "Noljanolja" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFFD70A0298ABA0100D4F5A2 /* Debug */,
+				CFFD70A1298ABA0100D4F5A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFFD70A2298ABA0100D4F5A2 /* Build configuration list for PBXNativeTarget "Noljanolja" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFFD70A3298ABA0100D4F5A2 /* Debug */,
+				CFFD70A4298ABA0100D4F5A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFFD70A5298ABA0100D4F5A2 /* Build configuration list for PBXNativeTarget "NoljanoljaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFFD70A6298ABA0100D4F5A2 /* Debug */,
+				CFFD70A7298ABA0100D4F5A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CFFD70A8298ABA0100D4F5A2 /* Build configuration list for PBXNativeTarget "NoljanoljaUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CFFD70A9298ABA0100D4F5A2 /* Debug */,
+				CFFD70AA298ABA0100D4F5A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CFFD7076298AB9FF00D4F5A2 /* Project object */;
+}
