@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */; };
 		CFFD7084298AB9FF00D4F5A2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD7083298AB9FF00D4F5A2 /* ContentView.swift */; };
-		CFFD7086298ABA0100D4F5A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7085298ABA0100D4F5A2 /* Assets.xcassets */; };
+		CFFD7086298ABA0100D4F5A2 /* ImageAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7085298ABA0100D4F5A2 /* ImageAssets.xcassets */; };
 		CFFD7089298ABA0100D4F5A2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7088298ABA0100D4F5A2 /* Preview Assets.xcassets */; };
 		CFFD7093298ABA0100D4F5A2 /* NoljanoljaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD7092298ABA0100D4F5A2 /* NoljanoljaTests.swift */; };
 		CFFD709D298ABA0100D4F5A2 /* NoljanoljaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD709C298ABA0100D4F5A2 /* NoljanoljaUITests.swift */; };
@@ -29,6 +29,7 @@
 		CFFD70D5298AC92500D4F5A2 /* AuthorizationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD70D4298AC92500D4F5A2 /* AuthorizationAPI.swift */; };
 		CFFD70D7298ACA8700D4F5A2 /* AuthorizationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD70D6298ACA8700D4F5A2 /* AuthorizationModel.swift */; };
 		CFFD70D9298ACAF600D4F5A2 /* BaseTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD70D8298ACAF600D4F5A2 /* BaseTargetType.swift */; };
+		CFFD718D298AD38C00D4F5A2 /* ColorAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD718C298AD38C00D4F5A2 /* ColorAssets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +53,7 @@
 		CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Noljanolja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoljanoljaApp.swift; sourceTree = "<group>"; };
 		CFFD7083298AB9FF00D4F5A2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		CFFD7085298ABA0100D4F5A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CFFD7085298ABA0100D4F5A2 /* ImageAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImageAssets.xcassets; sourceTree = "<group>"; };
 		CFFD7088298ABA0100D4F5A2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CFFD708E298ABA0100D4F5A2 /* NoljanoljaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoljanoljaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFFD7092298ABA0100D4F5A2 /* NoljanoljaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoljanoljaTests.swift; sourceTree = "<group>"; };
@@ -73,6 +74,7 @@
 		CFFD70D4298AC92500D4F5A2 /* AuthorizationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationAPI.swift; sourceTree = "<group>"; };
 		CFFD70D6298ACA8700D4F5A2 /* AuthorizationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationModel.swift; sourceTree = "<group>"; };
 		CFFD70D8298ACAF600D4F5A2 /* BaseTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTargetType.swift; sourceTree = "<group>"; };
+		CFFD718C298AD38C00D4F5A2 /* ColorAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorAssets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,7 +205,8 @@
 		CFFD70B0298AC33C00D4F5A2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				CFFD7085298ABA0100D4F5A2 /* Assets.xcassets */,
+				CFFD718C298AD38C00D4F5A2 /* ColorAssets.xcassets */,
+				CFFD7085298ABA0100D4F5A2 /* ImageAssets.xcassets */,
 				CFFD70B2298AC38000D4F5A2 /* Localizable.strings */,
 			);
 			path = Sources;
@@ -411,7 +414,8 @@
 			files = (
 				CFFD7089298ABA0100D4F5A2 /* Preview Assets.xcassets in Resources */,
 				CFFD70B3298AC38000D4F5A2 /* Localizable.strings in Resources */,
-				CFFD7086298ABA0100D4F5A2 /* Assets.xcassets in Resources */,
+				CFFD718D298AD38C00D4F5A2 /* ColorAssets.xcassets in Resources */,
+				CFFD7086298ABA0100D4F5A2 /* ImageAssets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
