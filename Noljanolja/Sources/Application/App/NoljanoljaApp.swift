@@ -11,7 +11,7 @@ import SwiftUI
 struct NoljanoljaApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
         }
     }
 }
