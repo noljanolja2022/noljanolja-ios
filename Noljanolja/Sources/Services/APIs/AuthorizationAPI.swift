@@ -9,6 +9,8 @@ import Combine
 import Foundation
 import Moya
 
+// MARK: - AuthorizationTargets
+
 private enum AuthorizationTargets {
     struct Login: BaseTargetType {
         var path: String { "login" }
@@ -20,9 +22,13 @@ private enum AuthorizationTargets {
     }
 }
 
+// MARK: - AuthorizationAPIType
+
 protocol AuthorizationAPIType {
     func login(username: String, password: String) -> AnyPublisher<AuthorizationModel, Error>
 }
+
+// MARK: - AuthorizationAPI
 
 final class AuthorizationAPI: AuthorizationAPIType {
     private let api: ApiType = Api.default

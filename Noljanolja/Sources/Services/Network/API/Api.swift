@@ -10,9 +10,13 @@ import CombineMoya
 import Foundation
 import Moya
 
+// MARK: - ApiType
+
 protocol ApiType {
     func request<Model: Decodable>(target: TargetType) -> AnyPublisher<Model, Error>
 }
+
+// MARK: - Api
 
 final class Api: ApiType {
     static let `default` = Api()

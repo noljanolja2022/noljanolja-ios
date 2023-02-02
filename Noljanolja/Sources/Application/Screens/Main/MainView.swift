@@ -7,11 +7,13 @@
 
 import SwiftUI
 
+// MARK: - MainView
+
 struct MainView: View {
-    @State var selected: Int = 0
+    @State var selected = 0
 
     var body: some View {
-        VStack() {
+        VStack {
             Text("\(selected)")
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             TabItems(
@@ -20,7 +22,7 @@ struct MainView: View {
                     TabItem(systemName: "house"),
                     TabItem(systemName: "play.fill"),
                     TabItem(systemName: "bag"),
-                    TabItem(systemName: "person"),
+                    TabItem(systemName: "person")
                 ],
                 selected: $selected
             )
@@ -28,6 +30,8 @@ struct MainView: View {
         .ignoresSafeArea()
     }
 }
+
+// MARK: - MainView_Previews
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {

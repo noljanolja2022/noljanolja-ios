@@ -27,12 +27,14 @@ final class ApiProvider: MoyaProvider<MultiTarget> {
                   session: Session = MoyaProvider<Target>.defaultAlamofireSession(),
                   plugins: [PluginType] = defaultPlugins,
                   trackInflights: Bool = false) {
-        super.init(endpointClosure: endpointClosure,
-                   requestClosure: requestClosure,
-                   stubClosure: stubClosure,
-                   callbackQueue: callbackQueue,
-                   session: session,
-                   plugins: plugins,
-                   trackInflights: trackInflights)
+        super.init(
+            endpointClosure: endpointClosure,
+            requestClosure: requestClosure,
+            stubClosure: stubClosure,
+            callbackQueue: callbackQueue,
+            session: session,
+            plugins: plugins,
+            trackInflights: trackInflights
+        )
     }
 }
