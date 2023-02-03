@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF0E8845298D4E09000DAE4A /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = CF0E8844298D4E09000DAE4A /* FirebaseCrashlytics */; };
 		CF14F230298C05F900BC2066 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F22F298C05F900BC2066 /* MainView.swift */; };
 		CF14F235298C07B500BC2066 /* TabItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F234298C07B500BC2066 /* TabItemsView.swift */; };
 		CF14F237298C0BAE00BC2066 /* TabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F236298C0BAE00BC2066 /* TabItem.swift */; };
@@ -105,6 +106,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF14F24D298CC11700BC2066 /* FirebaseAnalytics in Frameworks */,
+				CF0E8845298D4E09000DAE4A /* FirebaseCrashlytics in Frameworks */,
 				CF14F24F298CC11700BC2066 /* FirebaseAuthCombine-Community in Frameworks */,
 				CFFD70D0298AC7A900D4F5A2 /* CombineMoya in Frameworks */,
 			);
@@ -127,6 +129,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CF0E8843298D4E09000DAE4A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CF14F22C298C05CC00BC2066 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +203,7 @@
 				CFFD7091298ABA0100D4F5A2 /* NoljanoljaTests */,
 				CFFD709B298ABA0100D4F5A2 /* NoljanoljaUITests */,
 				CFFD707F298AB9FF00D4F5A2 /* Products */,
+				CF0E8843298D4E09000DAE4A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -405,6 +415,7 @@
 				CFFD707A298AB9FF00D4F5A2 /* Sources */,
 				CFFD707B298AB9FF00D4F5A2 /* Frameworks */,
 				CFFD707C298AB9FF00D4F5A2 /* Resources */,
+				CF0E8846298D4E50000DAE4A /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -415,6 +426,7 @@
 				CFFD70CF298AC7A900D4F5A2 /* CombineMoya */,
 				CF14F24C298CC11700BC2066 /* FirebaseAnalytics */,
 				CF14F24E298CC11700BC2066 /* FirebaseAuthCombine-Community */,
+				CF0E8844298D4E09000DAE4A /* FirebaseCrashlytics */,
 			);
 			productName = Noljanolja;
 			productReference = CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */;
@@ -535,6 +547,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		CF0E8846298D4E50000DAE4A /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = Crashlytics;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
 		CF14F23E298C30EB00BC2066 /* SwiftFormat */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -938,6 +970,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CF0E8844298D4E09000DAE4A /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF14F24B298CC11600BC2066 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
 		CF14F24C298CC11700BC2066 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CF14F24B298CC11600BC2066 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
