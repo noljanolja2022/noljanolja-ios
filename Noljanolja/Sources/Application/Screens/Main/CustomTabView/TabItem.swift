@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct TabItem: View {
-    private let systemName: String
+struct TabItem {
+    let image: String
+    let offset: CGSize
+    let backgroundColor: Color
 
-    init(systemName: String) {
-        self.systemName = systemName
-    }
-
-    var body: some View {
-        Image(systemName: systemName)
+    init(image: String, offset: CGSize = .zero, backgroundColor: Color = .clear) {
+        self.image = image
+        self.offset = offset
+        self.backgroundColor = backgroundColor
     }
 }

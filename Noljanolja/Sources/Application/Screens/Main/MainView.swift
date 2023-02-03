@@ -10,21 +10,35 @@ import SwiftUI
 // MARK: - MainView
 
 struct MainView: View {
-    @State var selected = 0
+    @State var selectedIndex = 0
 
     var body: some View {
-        VStack {
-            Text("\(selected)")
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-            TabItems(
+        VStack(spacing: 0) {
+            if selectedIndex == 2 {
+                List {
+                    ForEach(1...100, id: \.self) {
+                        Text("\($0)")
+                    }
+                }
+            } else {
+                Text("\(selectedIndex)")
+                    .font(Font.system(size: 46))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .tag(0)
+            }
+            TabItemsView(
                 items: [
-                    TabItem(systemName: "list.dash"),
-                    TabItem(systemName: "house"),
-                    TabItem(systemName: "play.fill"),
-                    TabItem(systemName: "bag"),
-                    TabItem(systemName: "person")
+                    TabItem(image: "list.dash"),
+                    TabItem(image: "house"),
+                    TabItem(
+                        image: "play.fill",
+                        offset: CGSize(width: 0, height: -20),
+                        backgroundColor: .orange
+                    ),
+                    TabItem(image: "bag"),
+                    TabItem(image: "person")
                 ],
-                selected: $selected
+                selectedIndex: $selectedIndex
             )
         }
         .ignoresSafeArea()
