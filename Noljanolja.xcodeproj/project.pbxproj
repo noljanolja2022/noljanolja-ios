@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7647F56A2DB765C44F009B8C /* Pods_Noljanolja_NoljanoljaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 264F630FC4DDFC0E9074F9D2 /* Pods_Noljanolja_NoljanoljaUITests.framework */; };
+		8353A88CBCF1CAFD239985BE /* Pods_NoljanoljaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD0295CC3C0D04548A9867CB /* Pods_NoljanoljaTests.framework */; };
+		AEDBBDE12EEA3CADCA87D4F2 /* Pods_Noljanolja.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB5BA5AC93BBFAA68677C79 /* Pods_Noljanolja.framework */; };
 		CF0E8845298D4E09000DAE4A /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = CF0E8844298D4E09000DAE4A /* FirebaseCrashlytics */; };
 		CF14F230298C05F900BC2066 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F22F298C05F900BC2066 /* MainView.swift */; };
 		CF14F235298C07B500BC2066 /* TabItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F234298C07B500BC2066 /* TabItemsView.swift */; };
@@ -68,6 +71,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0DBF76FA6A01D9DCD69E6220 /* Pods-Noljanolja.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja.release.xcconfig"; path = "Target Support Files/Pods-Noljanolja/Pods-Noljanolja.release.xcconfig"; sourceTree = "<group>"; };
+		216373F9231F3C6A300BE8C9 /* Pods-Noljanolja-NoljanoljaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.release.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.release.xcconfig"; sourceTree = "<group>"; };
+		264F630FC4DDFC0E9074F9D2 /* Pods_Noljanolja_NoljanoljaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Noljanolja_NoljanoljaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		67F6E05E9B2EC43CAF12E51A /* Pods-Noljanolja.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja.debug.xcconfig"; path = "Target Support Files/Pods-Noljanolja/Pods-Noljanolja.debug.xcconfig"; sourceTree = "<group>"; };
+		73EF59F50B2CC10F71D05CCA /* Pods-NoljanoljaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoljanoljaTests.debug.xcconfig"; path = "Target Support Files/Pods-NoljanoljaTests/Pods-NoljanoljaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9437E8407EBB11681966323A /* Pods-Noljanolja-NoljanoljaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.debug.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		AD0295CC3C0D04548A9867CB /* Pods_NoljanoljaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoljanoljaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF14F22F298C05F900BC2066 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CF14F234298C07B500BC2066 /* TabItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemsView.swift; sourceTree = "<group>"; };
 		CF14F236298C0BAE00BC2066 /* TabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItem.swift; sourceTree = "<group>"; };
@@ -108,6 +118,8 @@
 		CFFD70D6298ACA8700D4F5A2 /* AuthorizationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationModel.swift; sourceTree = "<group>"; };
 		CFFD70D8298ACAF600D4F5A2 /* BaseTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTargetType.swift; sourceTree = "<group>"; };
 		CFFD718C298AD38C00D4F5A2 /* ColorAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorAssets.xcassets; sourceTree = "<group>"; };
+		F53231636127B61B7E5B0B97 /* Pods-NoljanoljaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoljanoljaTests.release.xcconfig"; path = "Target Support Files/Pods-NoljanoljaTests/Pods-NoljanoljaTests.release.xcconfig"; sourceTree = "<group>"; };
+		FAB5BA5AC93BBFAA68677C79 /* Pods_Noljanolja.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Noljanolja.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +133,7 @@
 				CFFD70D0298AC7A900D4F5A2 /* CombineMoya in Frameworks */,
 				CF14F263298CF33500BC2066 /* KakaoSDKUser in Frameworks */,
 				CF14F261298CF33500BC2066 /* KakaoSDKAuth in Frameworks */,
+				AEDBBDE12EEA3CADCA87D4F2 /* Pods_Noljanolja.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,6 +141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8353A88CBCF1CAFD239985BE /* Pods_NoljanoljaTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,15 +149,33 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7647F56A2DB765C44F009B8C /* Pods_Noljanolja_NoljanoljaUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7EDA28669CED10C0C42B836E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				67F6E05E9B2EC43CAF12E51A /* Pods-Noljanolja.debug.xcconfig */,
+				0DBF76FA6A01D9DCD69E6220 /* Pods-Noljanolja.release.xcconfig */,
+				9437E8407EBB11681966323A /* Pods-Noljanolja-NoljanoljaUITests.debug.xcconfig */,
+				216373F9231F3C6A300BE8C9 /* Pods-Noljanolja-NoljanoljaUITests.release.xcconfig */,
+				73EF59F50B2CC10F71D05CCA /* Pods-NoljanoljaTests.debug.xcconfig */,
+				F53231636127B61B7E5B0B97 /* Pods-NoljanoljaTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		CF0E8843298D4E09000DAE4A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FAB5BA5AC93BBFAA68677C79 /* Pods_Noljanolja.framework */,
+				264F630FC4DDFC0E9074F9D2 /* Pods_Noljanolja_NoljanoljaUITests.framework */,
+				AD0295CC3C0D04548A9867CB /* Pods_NoljanoljaTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -234,6 +266,7 @@
 				CFFD709B298ABA0100D4F5A2 /* NoljanoljaUITests */,
 				CFFD707F298AB9FF00D4F5A2 /* Products */,
 				CF0E8843298D4E09000DAE4A /* Frameworks */,
+				7EDA28669CED10C0C42B836E /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -442,12 +475,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CFFD70A2298ABA0100D4F5A2 /* Build configuration list for PBXNativeTarget "Noljanolja" */;
 			buildPhases = (
+				BEC4C7E6D3B93AE685205DFD /* [CP] Check Pods Manifest.lock */,
 				CF14F240298C317E00BC2066 /* SwiftGen */,
 				CF14F23E298C30EB00BC2066 /* SwiftFormat */,
 				CFFD707A298AB9FF00D4F5A2 /* Sources */,
 				CFFD707B298AB9FF00D4F5A2 /* Frameworks */,
 				CFFD707C298AB9FF00D4F5A2 /* Resources */,
 				CF0E8846298D4E50000DAE4A /* Crashlytics */,
+				51F25C28F75DE5BDD1BEDF70 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -470,6 +505,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CFFD70A5298ABA0100D4F5A2 /* Build configuration list for PBXNativeTarget "NoljanoljaTests" */;
 			buildPhases = (
+				E6DDCA06F15064E6E7F40ABF /* [CP] Check Pods Manifest.lock */,
 				CFFD708A298ABA0100D4F5A2 /* Sources */,
 				CFFD708B298ABA0100D4F5A2 /* Frameworks */,
 				CFFD708C298ABA0100D4F5A2 /* Resources */,
@@ -488,9 +524,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CFFD70A8298ABA0100D4F5A2 /* Build configuration list for PBXNativeTarget "NoljanoljaUITests" */;
 			buildPhases = (
+				7A342D1BD644929A68C3046B /* [CP] Check Pods Manifest.lock */,
 				CFFD7094298ABA0100D4F5A2 /* Sources */,
 				CFFD7095298ABA0100D4F5A2 /* Frameworks */,
 				CFFD7096298ABA0100D4F5A2 /* Resources */,
+				27934394C515CB0DC1EB374F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -537,7 +575,7 @@
 			packageReferences = (
 				CFFD70CE298AC7A900D4F5A2 /* XCRemoteSwiftPackageReference "Moya" */,
 				CF14F24B298CC11600BC2066 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				CF14F25F298CF33500BC2066 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+				CF14F25F298CF33500BC2066 /* XCRemoteSwiftPackageReference "kakao-ios-sdk.git" */,
 			);
 			productRefGroup = CFFD707F298AB9FF00D4F5A2 /* Products */;
 			projectDirPath = "";
@@ -582,6 +620,84 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		27934394C515CB0DC1EB374F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		51F25C28F75DE5BDD1BEDF70 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Noljanolja/Pods-Noljanolja-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Noljanolja/Pods-Noljanolja-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Noljanolja/Pods-Noljanolja-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7A342D1BD644929A68C3046B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Noljanolja-NoljanoljaUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BEC4C7E6D3B93AE685205DFD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Noljanolja-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		CF0E8846298D4E50000DAE4A /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -637,6 +753,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "cd Noljanolja/BuildTools\nSDKROOT=(xcrun --sdk macosx --show-sdk-path)\nswift run -c release swiftgen config run --config \"$SRCROOT/Noljanolja/BuildTools/Scripts/swiftgen.yml\"\n";
+		};
+		E6DDCA06F15064E6E7F40ABF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NoljanoljaTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -822,6 +960,7 @@
 		};
 		CFFD70A3298ABA0100D4F5A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 67F6E05E9B2EC43CAF12E51A /* Pods-Noljanolja.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -850,6 +989,7 @@
 		};
 		CFFD70A4298ABA0100D4F5A2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0DBF76FA6A01D9DCD69E6220 /* Pods-Noljanolja.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -878,6 +1018,7 @@
 		};
 		CFFD70A6298ABA0100D4F5A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 73EF59F50B2CC10F71D05CCA /* Pods-NoljanoljaTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -897,6 +1038,7 @@
 		};
 		CFFD70A7298ABA0100D4F5A2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F53231636127B61B7E5B0B97 /* Pods-NoljanoljaTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -916,6 +1058,7 @@
 		};
 		CFFD70A9298ABA0100D4F5A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9437E8407EBB11681966323A /* Pods-Noljanolja-NoljanoljaUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -933,6 +1076,7 @@
 		};
 		CFFD70AA298ABA0100D4F5A2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 216373F9231F3C6A300BE8C9 /* Pods-Noljanolja-NoljanoljaUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -998,7 +1142,7 @@
 				version = 10.4.0;
 			};
 		};
-		CF14F25F298CF33500BC2066 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+		CF14F25F298CF33500BC2066 /* XCRemoteSwiftPackageReference "kakao-ios-sdk.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kakao/kakao-ios-sdk.git";
 			requirement = {
@@ -1034,12 +1178,12 @@
 		};
 		CF14F260298CF33500BC2066 /* KakaoSDKAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CF14F25F298CF33500BC2066 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			package = CF14F25F298CF33500BC2066 /* XCRemoteSwiftPackageReference "kakao-ios-sdk.git" */;
 			productName = KakaoSDKAuth;
 		};
 		CF14F262298CF33500BC2066 /* KakaoSDKUser */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CF14F25F298CF33500BC2066 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			package = CF14F25F298CF33500BC2066 /* XCRemoteSwiftPackageReference "kakao-ios-sdk.git" */;
 			productName = KakaoSDKUser;
 		};
 		CFFD70CF298AC7A900D4F5A2 /* CombineMoya */ = {
