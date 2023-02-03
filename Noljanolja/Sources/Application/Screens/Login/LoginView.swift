@@ -20,6 +20,18 @@ struct LoginView: View {
         VStack {
             Button(
                 action: {
+                    viewModel.input.googleLoginTrigger.send()
+                },
+                label: {
+                    Text("Sign in with Google")
+                        .foregroundColor(Color.white)
+                        .font(Font.system(size: 20).bold())
+                        .padding(16)
+                }
+            )
+            .background(Color.red)
+            Button(
+                action: {
                     viewModel.input.kakaoLoginTrigger.send()
                 },
                 label: {

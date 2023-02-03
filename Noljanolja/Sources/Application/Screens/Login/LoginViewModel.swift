@@ -10,6 +10,7 @@ import Foundation
 
 extension LoginViewModel {
     struct Input {
+        let googleLoginTrigger = PassthroughSubject<Void, Never>()
         let kakaoLoginTrigger = PassthroughSubject<Void, Never>()
         let naverLoginTrigger = PassthroughSubject<Void, Never>()
     }
@@ -34,6 +35,15 @@ final class LoginViewModel: ObservableObject {
     }
 
     private func configure() {
+        input.googleLoginTrigger
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in
+                    self?.authorizationServices.loginWithGoogle()
+                }
+            )
+            .store(in: &cancellables)
+
         input.kakaoLoginTrigger
             .sink(
                 receiveCompletion: { _ in },

@@ -23,12 +23,13 @@
 		CF14F24D298CC11700BC2066 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = CF14F24C298CC11700BC2066 /* FirebaseAnalytics */; };
 		CF14F24F298CC11700BC2066 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = CF14F24E298CC11700BC2066 /* FirebaseAuthCombine-Community */; };
 		CF14F25E298CE68600BC2066 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF14F25D298CE68600BC2066 /* GoogleService-Info.plist */; };
-		CF14F261298CF33500BC2066 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CF14F260298CF33500BC2066 /* KakaoSDKAuth */; };
-		CF14F263298CF33500BC2066 /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = CF14F262298CF33500BC2066 /* KakaoSDKUser */; };
 		CF14F266298CF4E700BC2066 /* AppConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F265298CF4E700BC2066 /* AppConfigs.swift */; };
 		CF14F268298CF87E00BC2066 /* AuthorizationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F267298CF87E00BC2066 /* AuthorizationServices.swift */; };
 		CF14F26B298CFA4400BC2066 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F26A298CFA4400BC2066 /* LoginView.swift */; };
 		CF14F26D298CFA6B00BC2066 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F26C298CFA6B00BC2066 /* LoginViewModel.swift */; };
+		CFE9D2DD298D66F700D936DA /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = CFE9D2DC298D66F700D936DA /* GoogleSignIn */; };
+		CFE9D2E0298D6C1500D936DA /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CFE9D2DF298D6C1500D936DA /* KakaoSDKAuth */; };
+		CFE9D2E2298D6C1500D936DA /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = CFE9D2E1298D6C1500D936DA /* KakaoSDKUser */; };
 		CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */; };
 		CFFD7086298ABA0100D4F5A2 /* ImageAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7085298ABA0100D4F5A2 /* ImageAssets.xcassets */; };
 		CFFD7089298ABA0100D4F5A2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7088298ABA0100D4F5A2 /* Preview Assets.xcassets */; };
@@ -127,12 +128,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFE9D2E0298D6C1500D936DA /* KakaoSDKAuth in Frameworks */,
 				CF14F24D298CC11700BC2066 /* FirebaseAnalytics in Frameworks */,
+				CFE9D2DD298D66F700D936DA /* GoogleSignIn in Frameworks */,
 				CF0E8845298D4E09000DAE4A /* FirebaseCrashlytics in Frameworks */,
+				CFE9D2E2298D6C1500D936DA /* KakaoSDKUser in Frameworks */,
 				CF14F24F298CC11700BC2066 /* FirebaseAuthCombine-Community in Frameworks */,
 				CFFD70D0298AC7A900D4F5A2 /* CombineMoya in Frameworks */,
-				CF14F263298CF33500BC2066 /* KakaoSDKUser in Frameworks */,
-				CF14F261298CF33500BC2066 /* KakaoSDKAuth in Frameworks */,
 				AEDBBDE12EEA3CADCA87D4F2 /* Pods_Noljanolja.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -493,8 +495,9 @@
 				CF14F24C298CC11700BC2066 /* FirebaseAnalytics */,
 				CF14F24E298CC11700BC2066 /* FirebaseAuthCombine-Community */,
 				CF0E8844298D4E09000DAE4A /* FirebaseCrashlytics */,
-				CF14F260298CF33500BC2066 /* KakaoSDKAuth */,
-				CF14F262298CF33500BC2066 /* KakaoSDKUser */,
+				CFE9D2DC298D66F700D936DA /* GoogleSignIn */,
+				CFE9D2DF298D6C1500D936DA /* KakaoSDKAuth */,
+				CFE9D2E1298D6C1500D936DA /* KakaoSDKUser */,
 			);
 			productName = Noljanolja;
 			productReference = CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */;
@@ -574,7 +577,8 @@
 			packageReferences = (
 				CFFD70CE298AC7A900D4F5A2 /* XCRemoteSwiftPackageReference "Moya" */,
 				CF14F24B298CC11600BC2066 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				CF14F25F298CF33500BC2066 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+				CFE9D2DB298D66F700D936DA /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 			);
 			productRefGroup = CFFD707F298AB9FF00D4F5A2 /* Products */;
 			projectDirPath = "";
@@ -1141,7 +1145,15 @@
 				version = 10.4.0;
 			};
 		};
-		CF14F25F298CF33500BC2066 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+		CFE9D2DB298D66F700D936DA /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = exactVersion;
+				version = 7.0.0;
+			};
+		};
+		CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kakao/kakao-ios-sdk.git";
 			requirement = {
@@ -1175,14 +1187,19 @@
 			package = CF14F24B298CC11600BC2066 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseAuthCombine-Community";
 		};
-		CF14F260298CF33500BC2066 /* KakaoSDKAuth */ = {
+		CFE9D2DC298D66F700D936DA /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CF14F25F298CF33500BC2066 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			package = CFE9D2DB298D66F700D936DA /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		CFE9D2DF298D6C1500D936DA /* KakaoSDKAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
 			productName = KakaoSDKAuth;
 		};
-		CF14F262298CF33500BC2066 /* KakaoSDKUser */ = {
+		CFE9D2E1298D6C1500D936DA /* KakaoSDKUser */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CF14F25F298CF33500BC2066 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			package = CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
 			productName = KakaoSDKUser;
 		};
 		CFFD70CF298AC7A900D4F5A2 /* CombineMoya */ = {

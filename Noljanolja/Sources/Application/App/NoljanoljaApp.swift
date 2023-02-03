@@ -6,6 +6,7 @@
 //
 
 import FirebaseCore
+import GoogleSignIn
 import KakaoSDKAuth
 import KakaoSDKCommon
 import NaverThirdPartyLogin
@@ -34,11 +35,9 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        if AuthApi.isKakaoTalkLoginUrl(url) {
-            return AuthController.handleOpenUrl(url: url)
-        } else {
-            return NaverThirdPartyLoginConnection.getSharedInstance().application(app, open: url, options: options)
-        }
+        GIDSignIn.sharedInstance.handle(url)
+            || (AuthApi.isKakaoTalkLoginUrl(url) && AuthController.handleOpenUrl(url: url))
+            || NaverThirdPartyLoginConnection.getSharedInstance().application(app, open: url, options: options)
     }
 }
 
