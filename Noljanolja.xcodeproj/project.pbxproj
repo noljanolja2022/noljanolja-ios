@@ -20,6 +20,8 @@
 		CF14F24D298CC11700BC2066 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = CF14F24C298CC11700BC2066 /* FirebaseAnalytics */; };
 		CF14F24F298CC11700BC2066 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = CF14F24E298CC11700BC2066 /* FirebaseAuthCombine-Community */; };
 		CF14F25E298CE68600BC2066 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF14F25D298CE68600BC2066 /* GoogleService-Info.plist */; };
+		CF14F261298CF33500BC2066 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CF14F260298CF33500BC2066 /* KakaoSDKAuth */; };
+		CF14F263298CF33500BC2066 /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = CF14F262298CF33500BC2066 /* KakaoSDKUser */; };
 		CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */; };
 		CFFD7086298ABA0100D4F5A2 /* ImageAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7085298ABA0100D4F5A2 /* ImageAssets.xcassets */; };
 		CFFD7089298ABA0100D4F5A2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7088298ABA0100D4F5A2 /* Preview Assets.xcassets */; };
@@ -109,6 +111,8 @@
 				CF0E8845298D4E09000DAE4A /* FirebaseCrashlytics in Frameworks */,
 				CF14F24F298CC11700BC2066 /* FirebaseAuthCombine-Community in Frameworks */,
 				CFFD70D0298AC7A900D4F5A2 /* CombineMoya in Frameworks */,
+				CF14F263298CF33500BC2066 /* KakaoSDKUser in Frameworks */,
+				CF14F261298CF33500BC2066 /* KakaoSDKAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +431,8 @@
 				CF14F24C298CC11700BC2066 /* FirebaseAnalytics */,
 				CF14F24E298CC11700BC2066 /* FirebaseAuthCombine-Community */,
 				CF0E8844298D4E09000DAE4A /* FirebaseCrashlytics */,
+				CF14F260298CF33500BC2066 /* KakaoSDKAuth */,
+				CF14F262298CF33500BC2066 /* KakaoSDKUser */,
 			);
 			productName = Noljanolja;
 			productReference = CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */;
@@ -503,6 +509,7 @@
 			packageReferences = (
 				CFFD70CE298AC7A900D4F5A2 /* XCRemoteSwiftPackageReference "Moya" */,
 				CF14F24B298CC11600BC2066 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				CF14F25F298CF33500BC2066 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 			);
 			productRefGroup = CFFD707F298AB9FF00D4F5A2 /* Products */;
 			projectDirPath = "";
@@ -959,6 +966,14 @@
 				version = 10.4.0;
 			};
 		};
+		CF14F25F298CF33500BC2066 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao/kakao-ios-sdk.git";
+			requirement = {
+				kind = exactVersion;
+				version = 2.13.1;
+			};
+		};
 		CFFD70CE298AC7A900D4F5A2 /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya";
@@ -984,6 +999,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CF14F24B298CC11600BC2066 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseAuthCombine-Community";
+		};
+		CF14F260298CF33500BC2066 /* KakaoSDKAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF14F25F298CF33500BC2066 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKAuth;
+		};
+		CF14F262298CF33500BC2066 /* KakaoSDKUser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF14F25F298CF33500BC2066 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKUser;
 		};
 		CFFD70CF298AC7A900D4F5A2 /* CombineMoya */ = {
 			isa = XCSwiftPackageProductDependency;
