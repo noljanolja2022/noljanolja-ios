@@ -30,6 +30,18 @@ struct LoginView: View {
                 }
             )
             .background(Color.red)
+            Button(
+                action: {
+                    viewModel.input.naverLoginTrigger.send()
+                },
+                label: {
+                    Text("Sign in with Naver")
+                        .foregroundColor(Color.black)
+                        .font(Font.system(size: 20).bold())
+                        .padding(16)
+                }
+            )
+            .background(Color.green)
         }
     }
 }

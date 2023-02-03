@@ -166,7 +166,6 @@
 				73EF59F50B2CC10F71D05CCA /* Pods-NoljanoljaTests.debug.xcconfig */,
 				F53231636127B61B7E5B0B97 /* Pods-NoljanoljaTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -481,8 +480,8 @@
 				CFFD707A298AB9FF00D4F5A2 /* Sources */,
 				CFFD707B298AB9FF00D4F5A2 /* Frameworks */,
 				CFFD707C298AB9FF00D4F5A2 /* Resources */,
-				CF0E8846298D4E50000DAE4A /* Crashlytics */,
 				51F25C28F75DE5BDD1BEDF70 /* [CP] Embed Pods Frameworks */,
+				CF0E8846298D4E50000DAE4A /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -575,7 +574,7 @@
 			packageReferences = (
 				CFFD70CE298AC7A900D4F5A2 /* XCRemoteSwiftPackageReference "Moya" */,
 				CF14F24B298CC11600BC2066 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				CF14F25F298CF33500BC2066 /* XCRemoteSwiftPackageReference "kakao-ios-sdk.git" */,
+				CF14F25F298CF33500BC2066 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 			);
 			productRefGroup = CFFD707F298AB9FF00D4F5A2 /* Products */;
 			projectDirPath = "";
@@ -1142,7 +1141,7 @@
 				version = 10.4.0;
 			};
 		};
-		CF14F25F298CF33500BC2066 /* XCRemoteSwiftPackageReference "kakao-ios-sdk.git" */ = {
+		CF14F25F298CF33500BC2066 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kakao/kakao-ios-sdk.git";
 			requirement = {
@@ -1178,12 +1177,12 @@
 		};
 		CF14F260298CF33500BC2066 /* KakaoSDKAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CF14F25F298CF33500BC2066 /* XCRemoteSwiftPackageReference "kakao-ios-sdk.git" */;
+			package = CF14F25F298CF33500BC2066 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
 			productName = KakaoSDKAuth;
 		};
 		CF14F262298CF33500BC2066 /* KakaoSDKUser */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CF14F25F298CF33500BC2066 /* XCRemoteSwiftPackageReference "kakao-ios-sdk.git" */;
+			package = CF14F25F298CF33500BC2066 /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
 			productName = KakaoSDKUser;
 		};
 		CFFD70CF298AC7A900D4F5A2 /* CombineMoya */ = {

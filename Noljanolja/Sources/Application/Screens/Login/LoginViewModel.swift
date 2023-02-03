@@ -11,6 +11,7 @@ import Foundation
 extension LoginViewModel {
     struct Input {
         let kakaoLoginTrigger = PassthroughSubject<Void, Never>()
+        let naverLoginTrigger = PassthroughSubject<Void, Never>()
     }
 
     struct Output {}
@@ -37,7 +38,16 @@ final class LoginViewModel: ObservableObject {
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] in
-                    self?.authorizationServices.loginWithKakaoAccount()
+                    self?.authorizationServices.loginWithKakao()
+                }
+            )
+            .store(in: &cancellables)
+
+        input.naverLoginTrigger
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { [weak self] in
+                    self?.authorizationServices.loginWithNaver()
                 }
             )
             .store(in: &cancellables)
