@@ -22,6 +22,10 @@
 		CF14F25E298CE68600BC2066 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF14F25D298CE68600BC2066 /* GoogleService-Info.plist */; };
 		CF14F261298CF33500BC2066 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CF14F260298CF33500BC2066 /* KakaoSDKAuth */; };
 		CF14F263298CF33500BC2066 /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = CF14F262298CF33500BC2066 /* KakaoSDKUser */; };
+		CF14F266298CF4E700BC2066 /* AppConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F265298CF4E700BC2066 /* AppConfigs.swift */; };
+		CF14F268298CF87E00BC2066 /* AuthorizationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F267298CF87E00BC2066 /* AuthorizationServices.swift */; };
+		CF14F26B298CFA4400BC2066 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F26A298CFA4400BC2066 /* LoginView.swift */; };
+		CF14F26D298CFA6B00BC2066 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F26C298CFA6B00BC2066 /* LoginViewModel.swift */; };
 		CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */; };
 		CFFD7086298ABA0100D4F5A2 /* ImageAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7085298ABA0100D4F5A2 /* ImageAssets.xcassets */; };
 		CFFD7089298ABA0100D4F5A2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7088298ABA0100D4F5A2 /* Preview Assets.xcassets */; };
@@ -76,6 +80,10 @@
 		CF14F247298C331C00BC2066 /* ColorAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorAssets.swift; sourceTree = "<group>"; };
 		CF14F25A298CE46100BC2066 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CF14F25D298CE68600BC2066 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CF14F265298CF4E700BC2066 /* AppConfigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigs.swift; sourceTree = "<group>"; };
+		CF14F267298CF87E00BC2066 /* AuthorizationServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationServices.swift; sourceTree = "<group>"; };
+		CF14F26A298CFA4400BC2066 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		CF14F26C298CFA6B00BC2066 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Noljanolja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoljanoljaApp.swift; sourceTree = "<group>"; };
 		CFFD7085298ABA0100D4F5A2 /* ImageAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImageAssets.xcassets; sourceTree = "<group>"; };
@@ -187,6 +195,7 @@
 		CF14F25B298CE68600BC2066 /* Configs */ = {
 			isa = PBXGroup;
 			children = (
+				CF14F264298CF4C300BC2066 /* App */,
 				CF14F25C298CE68600BC2066 /* Firebases */,
 			);
 			path = Configs;
@@ -198,6 +207,23 @@
 				CF14F25D298CE68600BC2066 /* GoogleService-Info.plist */,
 			);
 			path = Firebases;
+			sourceTree = "<group>";
+		};
+		CF14F264298CF4C300BC2066 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CF14F265298CF4E700BC2066 /* AppConfigs.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		CF14F269298CFA1200BC2066 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				CF14F26A298CFA4400BC2066 /* LoginView.swift */,
+				CF14F26C298CFA6B00BC2066 /* LoginViewModel.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		CFFD7075298AB9FF00D4F5A2 = {
@@ -287,6 +313,7 @@
 		CFFD70AE298AC1CE00D4F5A2 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				CF14F267298CF87E00BC2066 /* AuthorizationServices.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -335,6 +362,7 @@
 		CFFD70B5298AC43200D4F5A2 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				CF14F269298CFA1200BC2066 /* Login */,
 				CF14F22C298C05CC00BC2066 /* Main */,
 			);
 			path = Screens;
@@ -620,14 +648,18 @@
 				CFFD70C5298AC5F800D4F5A2 /* RequestTimeoutPlugin.swift in Sources */,
 				CFFD70D3298AC89000D4F5A2 /* NetworkConfigs.swift in Sources */,
 				CF14F249298C331C00BC2066 /* Localizable.swift in Sources */,
+				CF14F268298CF87E00BC2066 /* AuthorizationServices.swift in Sources */,
 				CFFD70C9298AC5F800D4F5A2 /* TargetType+RawTarget.swift in Sources */,
 				CFFD70C8298AC5F800D4F5A2 /* BaseAuthTargetType.swift in Sources */,
+				CF14F26B298CFA4400BC2066 /* LoginView.swift in Sources */,
 				CFFD70D9298ACAF600D4F5A2 /* BaseTargetType.swift in Sources */,
 				CFFD70C6298AC5F800D4F5A2 /* AuthorizationPluggin.swift in Sources */,
 				CFFD70CC298AC5F800D4F5A2 /* Api.swift in Sources */,
 				CF14F237298C0BAE00BC2066 /* TabItem.swift in Sources */,
 				CF14F24A298C331D00BC2066 /* ColorAssets.swift in Sources */,
 				CFFD70D5298AC92500D4F5A2 /* AuthorizationAPI.swift in Sources */,
+				CF14F26D298CFA6B00BC2066 /* LoginViewModel.swift in Sources */,
+				CF14F266298CF4E700BC2066 /* AppConfigs.swift in Sources */,
 				CF14F230298C05F900BC2066 /* MainView.swift in Sources */,
 				CF14F235298C07B500BC2066 /* TabItemsView.swift in Sources */,
 				CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */,

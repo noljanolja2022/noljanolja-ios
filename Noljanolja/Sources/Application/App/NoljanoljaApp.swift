@@ -6,6 +6,8 @@
 //
 
 import FirebaseCore
+import KakaoSDKAuth
+import KakaoSDKCommon
 import SwiftUI
 
 // MARK: - AppDelegate
@@ -13,8 +15,17 @@ import SwiftUI
 final class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        KakaoSDK.initSDK(appKey: AppConfigs.SDK.kakaoNativeAppKey)
         FirebaseApp.configure()
         return true
+    }
+
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        if AuthApi.isKakaoTalkLoginUrl(url) {
+            return AuthController.handleOpenUrl(url: url)
+        }
+
+        return false
     }
 }
 
@@ -26,7 +37,7 @@ struct NoljanoljaApp: App {
 
     var body: some Scene {
         WindowGroup {
-            MainView()
+            LoginView()
         }
     }
 }
