@@ -7,8 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF14F230298C05F900BC2066 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F22F298C05F900BC2066 /* MainView.swift */; };
+		CF14F235298C07B500BC2066 /* TabItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F234298C07B500BC2066 /* TabItemsView.swift */; };
+		CF14F237298C0BAE00BC2066 /* TabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F236298C0BAE00BC2066 /* TabItem.swift */; };
+		CF14F23A298C123300BC2066 /* UIApplication+KeyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F239298C123300BC2066 /* UIApplication+KeyWindow.swift */; };
+		CF14F243298C31C200BC2066 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = CF14F241298C31C200BC2066 /* swiftgen.yml */; };
+		CF14F244298C31C200BC2066 /* .swiftformat in Resources */ = {isa = PBXBuildFile; fileRef = CF14F242298C31C200BC2066 /* .swiftformat */; };
+		CF14F248298C331C00BC2066 /* ImageAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F245298C331C00BC2066 /* ImageAssets.swift */; };
+		CF14F249298C331C00BC2066 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F246298C331C00BC2066 /* Localizable.swift */; };
+		CF14F24A298C331D00BC2066 /* ColorAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F247298C331C00BC2066 /* ColorAssets.swift */; };
 		CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */; };
-		CFFD7084298AB9FF00D4F5A2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD7083298AB9FF00D4F5A2 /* ContentView.swift */; };
 		CFFD7086298ABA0100D4F5A2 /* ImageAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7085298ABA0100D4F5A2 /* ImageAssets.xcassets */; };
 		CFFD7089298ABA0100D4F5A2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7088298ABA0100D4F5A2 /* Preview Assets.xcassets */; };
 		CFFD7093298ABA0100D4F5A2 /* NoljanoljaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD7092298ABA0100D4F5A2 /* NoljanoljaTests.swift */; };
@@ -50,9 +58,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CF14F22F298C05F900BC2066 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		CF14F234298C07B500BC2066 /* TabItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemsView.swift; sourceTree = "<group>"; };
+		CF14F236298C0BAE00BC2066 /* TabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItem.swift; sourceTree = "<group>"; };
+		CF14F239298C123300BC2066 /* UIApplication+KeyWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+KeyWindow.swift"; sourceTree = "<group>"; };
+		CF14F23C298C30B600BC2066 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		CF14F241298C31C200BC2066 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
+		CF14F242298C31C200BC2066 /* .swiftformat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftformat; sourceTree = "<group>"; };
+		CF14F245298C331C00BC2066 /* ImageAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAssets.swift; sourceTree = "<group>"; };
+		CF14F246298C331C00BC2066 /* Localizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
+		CF14F247298C331C00BC2066 /* ColorAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorAssets.swift; sourceTree = "<group>"; };
 		CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Noljanolja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoljanoljaApp.swift; sourceTree = "<group>"; };
-		CFFD7083298AB9FF00D4F5A2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CFFD7085298ABA0100D4F5A2 /* ImageAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImageAssets.xcassets; sourceTree = "<group>"; };
 		CFFD7088298ABA0100D4F5A2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CFFD708E298ABA0100D4F5A2 /* NoljanoljaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoljanoljaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,6 +120,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CF14F22C298C05CC00BC2066 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				CF14F231298C060300BC2066 /* CustomTabView */,
+				CF14F22F298C05F900BC2066 /* MainView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		CF14F231298C060300BC2066 /* CustomTabView */ = {
+			isa = PBXGroup;
+			children = (
+				CF14F234298C07B500BC2066 /* TabItemsView.swift */,
+				CF14F236298C0BAE00BC2066 /* TabItem.swift */,
+			);
+			path = CustomTabView;
+			sourceTree = "<group>";
+		};
+		CF14F238298C122100BC2066 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CF14F239298C123300BC2066 /* UIApplication+KeyWindow.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CF14F23B298C309600BC2066 /* BuildTools */ = {
+			isa = PBXGroup;
+			children = (
+				CF14F23F298C313A00BC2066 /* Scripts */,
+				CF14F23C298C30B600BC2066 /* Package.swift */,
+			);
+			path = BuildTools;
+			sourceTree = "<group>";
+		};
+		CF14F23F298C313A00BC2066 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				CF14F242298C31C200BC2066 /* .swiftformat */,
+				CF14F241298C31C200BC2066 /* swiftgen.yml */,
+			);
+			path = Scripts;
+			sourceTree = "<group>";
+		};
 		CFFD7075298AB9FF00D4F5A2 = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +187,7 @@
 		CFFD7080298AB9FF00D4F5A2 /* Noljanolja */ = {
 			isa = PBXGroup;
 			children = (
+				CF14F23B298C309600BC2066 /* BuildTools */,
 				CFFD70AB298AC19400D4F5A2 /* Sources */,
 				CFFD70AC298AC19F00D4F5A2 /* Resources */,
 				CFFD7087298ABA0100D4F5A2 /* Preview Content */,
@@ -215,6 +277,9 @@
 		CFFD70B1298AC34200D4F5A2 /* Generated */ = {
 			isa = PBXGroup;
 			children = (
+				CF14F247298C331C00BC2066 /* ColorAssets.swift */,
+				CF14F245298C331C00BC2066 /* ImageAssets.swift */,
+				CF14F246298C331C00BC2066 /* Localizable.swift */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -222,6 +287,7 @@
 		CFFD70B4298AC42800D4F5A2 /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				CF14F238298C122100BC2066 /* Extensions */,
 				CFFD70B6298AC43B00D4F5A2 /* App */,
 				CFFD70B5298AC43200D4F5A2 /* Screens */,
 			);
@@ -231,7 +297,7 @@
 		CFFD70B5298AC43200D4F5A2 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				CFFD7083298AB9FF00D4F5A2 /* ContentView.swift */,
+				CF14F22C298C05CC00BC2066 /* Main */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -309,6 +375,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CFFD70A2298ABA0100D4F5A2 /* Build configuration list for PBXNativeTarget "Noljanolja" */;
 			buildPhases = (
+				CF14F240298C317E00BC2066 /* SwiftGen */,
+				CF14F23E298C30EB00BC2066 /* SwiftFormat */,
 				CFFD707A298AB9FF00D4F5A2 /* Sources */,
 				CFFD707B298AB9FF00D4F5A2 /* Frameworks */,
 				CFFD707C298AB9FF00D4F5A2 /* Resources */,
@@ -413,6 +481,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFFD7089298ABA0100D4F5A2 /* Preview Assets.xcassets in Resources */,
+				CF14F243298C31C200BC2066 /* swiftgen.yml in Resources */,
+				CF14F244298C31C200BC2066 /* .swiftformat in Resources */,
 				CFFD70B3298AC38000D4F5A2 /* Localizable.strings in Resources */,
 				CFFD718D298AD38C00D4F5A2 /* ColorAssets.xcassets in Resources */,
 				CFFD7086298ABA0100D4F5A2 /* ImageAssets.xcassets in Resources */,
@@ -435,25 +505,70 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		CF14F23E298C30EB00BC2066 /* SwiftFormat */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftFormat;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd Noljanolja/BuildTools\nSDKROOT=(xcrun --sdk macosx --show-sdk-path)\nswift run -c release swiftformat \"$SRCROOT\" --config \"$SRCROOT/Noljanolja/BuildTools/Scripts/.swiftformat\"\n";
+		};
+		CF14F240298C317E00BC2066 /* SwiftGen */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftGen;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd Noljanolja/BuildTools\nSDKROOT=(xcrun --sdk macosx --show-sdk-path)\nswift run -c release swiftgen config run --config \"$SRCROOT/Noljanolja/BuildTools/Scripts/swiftgen.yml\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CFFD707A298AB9FF00D4F5A2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				CFFD70C5298AC5F800D4F5A2 /* RequestTimeoutPlugin.swift in Sources */,
-				CFFD7084298AB9FF00D4F5A2 /* ContentView.swift in Sources */,
 				CFFD70D3298AC89000D4F5A2 /* NetworkConfigs.swift in Sources */,
+				CF14F249298C331C00BC2066 /* Localizable.swift in Sources */,
 				CFFD70C9298AC5F800D4F5A2 /* TargetType+RawTarget.swift in Sources */,
 				CFFD70C8298AC5F800D4F5A2 /* BaseAuthTargetType.swift in Sources */,
 				CFFD70D9298ACAF600D4F5A2 /* BaseTargetType.swift in Sources */,
 				CFFD70C6298AC5F800D4F5A2 /* AuthorizationPluggin.swift in Sources */,
 				CFFD70CC298AC5F800D4F5A2 /* Api.swift in Sources */,
+				CF14F237298C0BAE00BC2066 /* TabItem.swift in Sources */,
+				CF14F24A298C331D00BC2066 /* ColorAssets.swift in Sources */,
 				CFFD70D5298AC92500D4F5A2 /* AuthorizationAPI.swift in Sources */,
+				CF14F230298C05F900BC2066 /* MainView.swift in Sources */,
+				CF14F235298C07B500BC2066 /* TabItemsView.swift in Sources */,
 				CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */,
 				CFFD70C7298AC5F800D4F5A2 /* DisableLocalCachePlugin.swift in Sources */,
 				CFFD70CB298AC5F800D4F5A2 /* ApiProvider.swift in Sources */,
+				CF14F23A298C123300BC2066 /* UIApplication+KeyWindow.swift in Sources */,
 				CFFD70C4298AC5F800D4F5A2 /* NetworkLoggerPluggin.swift in Sources */,
 				CFFD70CA298AC5F800D4F5A2 /* TargetType+Default.swift in Sources */,
+				CF14F248298C331C00BC2066 /* ImageAssets.swift in Sources */,
 				CFFD70D7298ACA8700D4F5A2 /* AuthorizationModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

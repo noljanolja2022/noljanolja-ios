@@ -8,6 +8,8 @@
 import Foundation
 import Moya
 
+// MARK: - BaseTargetType
+
 protocol BaseTargetType: TargetType {}
 
 extension BaseTargetType {

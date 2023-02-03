@@ -8,7 +8,11 @@
 import Foundation
 import Moya
 
+// MARK: - AuthorizationConfigurable
+
 protocol AuthorizationConfigurable {}
+
+// MARK: - AuthorizationPluggin
 
 struct AuthorizationPluggin: PluginType {
     func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {

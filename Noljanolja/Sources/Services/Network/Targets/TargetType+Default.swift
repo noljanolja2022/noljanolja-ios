@@ -10,22 +10,22 @@ import Moya
 
 extension TargetType {
     var headers: [String: String]? {
-        return nil
+        nil
     }
 
     var urlParameters: [String: Any]? {
-        return nil
+        nil
     }
 
     var parameterEncoding: ParameterEncoding {
-        return JSONEncoding.default
+        JSONEncoding.default
     }
 
     var sampleData: Data {
-        return Data()
+        Data()
     }
 
     var validate: Bool {
-        return false
+        false
     }
 }

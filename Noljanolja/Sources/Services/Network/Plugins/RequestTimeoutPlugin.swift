@@ -8,9 +8,13 @@
 import Foundation
 import Moya
 
+// MARK: - RequestTimeoutConfigurable
+
 protocol RequestTimeoutConfigurable {
     var timeout: TimeInterval { get }
 }
+
+// MARK: - RequestTimeoutPlugin
 
 struct RequestTimeoutPlugin: PluginType {
     func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
