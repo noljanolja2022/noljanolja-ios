@@ -5,86 +5,57 @@
 //  Created by Nguyen The Trinh on 03/02/2023.
 //
 
+import Combine
 import FirebaseAuth
+import FirebaseAuthCombineSwift
 import Foundation
-import GoogleSignIn
-import KakaoSDKUser
-import NaverThirdPartyLogin
 
 // MARK: - AuthorizationServicesType
 
 protocol AuthorizationServicesType {
-    func loginWithGoogle()
-    func loginWithKakao()
-    func loginWithNaver()
+    func signInWithApple() -> AnyPublisher<String, Error>
+    func signInWithGoogle() -> AnyPublisher<String, Error>
+    func signInWithKakao() -> AnyPublisher<String, Error>
+    func signInWithNaver() -> AnyPublisher<String, Error>
 }
 
 // MARK: - AuthorizationServices
 
 final class AuthorizationServices: NSObject, AuthorizationServicesType {
-    private let naverLoginConnection = NaverThirdPartyLoginConnection.getSharedInstance()
+    private let appleAuthorizationAPI = AppleAuthorizationAPI()
+    private let googleAuthorizationAPI = GoogleAuthorizationAPI()
+    private let kakaoAuthorizationAPI = KakaoAuthorizationAPI()
+    private let naverAuthorizationAPI = NaverAuthorizationAPI()
 
-    func loginWithGoogle() {
-        guard let rootViewController = UIApplication.shared.rootKeyWindow?.rootViewController else { return }
-        GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController) { result, error in
-            if let error {
-                // ...
-                return
+    func signInWithApple() -> AnyPublisher<String, Error> {
+        appleAuthorizationAPI.signIn()
+            .flatMap {
+                let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: $0.0, rawNonce: $0.1)
+                return Auth.auth().signIn(with: credential)
             }
-
-            guard let idToken = result?.user.idToken?.tokenString, let accessToken = result?.user.accessToken.tokenString else { return }
-
-            let credential = GoogleAuthProvider.credential(
-                withIDToken: idToken,
-                accessToken: accessToken
-            )
-
-            Auth.auth().signIn(with: credential) { _, error in
-                if let error {
-                    // ...
-                    return
-                }
-                print("loginWithGoogle() success.")
+            .flatMap {
+                $0.user.getIDTokenResult()
             }
-        }
+            .eraseToAnyPublisher()
     }
 
-    func loginWithKakao() {
-        UserApi.shared.loginWithKakaoAccount { oauthToken, error in
-            if let error {
-                print(error)
-            } else {
-                print("loginWithKakaoAccount() success.")
-
-                // Do something
-                _ = oauthToken
+    func signInWithGoogle() -> AnyPublisher<String, Error> {
+        googleAuthorizationAPI.signIn()
+            .flatMap {
+                let credential = GoogleAuthProvider.credential(withIDToken: $0.0, accessToken: $0.1)
+                return Auth.auth().signIn(with: credential)
             }
-        }
+            .flatMap {
+                $0.user.getIDTokenResult()
+            }
+            .eraseToAnyPublisher()
     }
 
-    func loginWithNaver() {
-        naverLoginConnection?.delegate = self
-        naverLoginConnection?.requestThirdPartyLogin()
-    }
-}
-
-// MARK: NaverThirdPartyLoginConnectionDelegate
-
-extension AuthorizationServices: NaverThirdPartyLoginConnectionDelegate {
-    func oauth20ConnectionDidFinishRequestACTokenWithAuthCode() {
-        print("oauth20ConnectionDidFinishRequestACTokenWithAuthCode")
-        print(naverLoginConnection?.accessToken)
+    func signInWithKakao() -> AnyPublisher<String, Error> {
+        kakaoAuthorizationAPI.signIn().eraseToAnyPublisher()
     }
 
-    func oauth20ConnectionDidFinishRequestACTokenWithRefreshToken() {
-        print("oauth20ConnectionDidFinishRequestACTokenWithRefreshToken")
-    }
-
-    func oauth20ConnectionDidFinishDeleteToken() {
-        print("oauth20ConnectionDidFinishDeleteToken")
-    }
-
-    func oauth20Connection(_ oauthConnection: NaverThirdPartyLoginConnection!, didFailWithError error: Error!) {
-        print("oauth20ConnectionDidFinishDeleteToken")
+    func signInWithNaver() -> AnyPublisher<String, Error> {
+        naverAuthorizationAPI.signIn().eraseToAnyPublisher()
     }
 }

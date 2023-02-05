@@ -10,9 +10,10 @@ import Foundation
 
 extension LoginViewModel {
     struct Input {
-        let googleLoginTrigger = PassthroughSubject<Void, Never>()
-        let kakaoLoginTrigger = PassthroughSubject<Void, Never>()
-        let naverLoginTrigger = PassthroughSubject<Void, Never>()
+        let signInWithAppleTrigger = PassthroughSubject<Void, Never>()
+        let signInWithGoogleTrigger = PassthroughSubject<Void, Never>()
+        let signInWithKakaoTrigger = PassthroughSubject<Void, Never>()
+        let signInWithNaverTrigger = PassthroughSubject<Void, Never>()
     }
 
     struct Output {}
@@ -21,10 +22,10 @@ extension LoginViewModel {
 // MARK: - LoginViewModel
 
 final class LoginViewModel: ObservableObject {
-    private let authorizationServices: AuthorizationServicesType
-
     let input = Input()
     let output = Output()
+
+    private let authorizationServices: AuthorizationServicesType
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -35,29 +36,82 @@ final class LoginViewModel: ObservableObject {
     }
 
     private func configure() {
-        input.googleLoginTrigger
+        input.signInWithAppleTrigger
+            .flatMap { [weak self] _ -> AnyPublisher<String, Error> in
+                guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
+                return self.authorizationServices.signInWithApple()
+            }
             .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in
-                    self?.authorizationServices.loginWithGoogle()
+                receiveCompletion: { completion in
+                    switch completion {
+                    case let .failure(error):
+                        logger.info("Sign in with Apple Fail: \(error.localizedDescription)")
+                    case .finished:
+                        logger.info("Sign in with Apple finished")
+                    }
+                },
+                receiveValue: { idToken in
+                    logger.info("Sign in with Apple IDToken: \(idToken)")
                 }
             )
             .store(in: &cancellables)
 
-        input.kakaoLoginTrigger
+        input.signInWithGoogleTrigger
+            .flatMap { [weak self] _ -> AnyPublisher<String, Error> in
+                guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
+                return self.authorizationServices.signInWithGoogle()
+            }
             .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in
-                    self?.authorizationServices.loginWithKakao()
+                receiveCompletion: { completion in
+                    switch completion {
+                    case let .failure(error):
+                        logger.info("Sign in with Google Fail: \(error.localizedDescription)")
+                    case .finished:
+                        logger.info("Sign in with Google finished")
+                    }
+                },
+                receiveValue: { idToken in
+                    logger.info("Sign in with Google IDToken: \(idToken)")
                 }
             )
             .store(in: &cancellables)
 
-        input.naverLoginTrigger
+        input.signInWithKakaoTrigger
+            .flatMap { [weak self] _ -> AnyPublisher<String, Error> in
+                guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
+                return self.authorizationServices.signInWithKakao()
+            }
             .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in
-                    self?.authorizationServices.loginWithNaver()
+                receiveCompletion: { completion in
+                    switch completion {
+                    case let .failure(error):
+                        logger.info("Sign in with Kakaofail: \(error.localizedDescription)")
+                    case .finished:
+                        logger.info("Sign in with Kakaofinished")
+                    }
+                },
+                receiveValue: { accessToken in
+                    logger.info("Sign in with Kakaotoken: \(accessToken)")
+                }
+            )
+            .store(in: &cancellables)
+
+        input.signInWithNaverTrigger
+            .flatMap { [weak self] _ -> AnyPublisher<String, Error> in
+                guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
+                return self.authorizationServices.signInWithNaver()
+            }
+            .sink(
+                receiveCompletion: { completion in
+                    switch completion {
+                    case let .failure(error):
+                        logger.info("Sign in with Naver fail: \(error.localizedDescription)")
+                    case .finished:
+                        logger.info("Sign in with Naver finished")
+                    }
+                },
+                receiveValue: { accessToken in
+                    logger.info("Sign in with Naver token: \(accessToken)")
                 }
             )
             .store(in: &cancellables)

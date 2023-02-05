@@ -20,7 +20,19 @@ struct LoginView: View {
         VStack {
             Button(
                 action: {
-                    viewModel.input.googleLoginTrigger.send()
+                    viewModel.input.signInWithAppleTrigger.send()
+                },
+                label: {
+                    Text("Sign in with Apple")
+                        .foregroundColor(Color.black)
+                        .font(Font.system(size: 20).bold())
+                        .padding(16)
+                }
+            )
+            .background(Color.yellow)
+            Button(
+                action: {
+                    viewModel.input.signInWithGoogleTrigger.send()
                 },
                 label: {
                     Text("Sign in with Google")
@@ -32,7 +44,7 @@ struct LoginView: View {
             .background(Color.red)
             Button(
                 action: {
-                    viewModel.input.kakaoLoginTrigger.send()
+                    viewModel.input.signInWithKakaoTrigger.send()
                 },
                 label: {
                     Text("Sign in with Kakao")
@@ -44,7 +56,7 @@ struct LoginView: View {
             .background(Color.red)
             Button(
                 action: {
-                    viewModel.input.naverLoginTrigger.send()
+                    viewModel.input.signInWithNaverTrigger.send()
                 },
                 label: {
                     Text("Sign in with Naver")
