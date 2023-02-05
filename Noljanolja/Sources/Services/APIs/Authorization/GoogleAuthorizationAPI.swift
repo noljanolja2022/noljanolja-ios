@@ -11,10 +11,6 @@ import GoogleSignIn
 
 // MARK: - GoogleAuthorizationError
 
-enum GoogleAuthorizationError: Error {
-    case tokenNotExit
-}
-
 // MARK: - GoogleAuthorizationAPI
 
 final class GoogleAuthorizationAPI {

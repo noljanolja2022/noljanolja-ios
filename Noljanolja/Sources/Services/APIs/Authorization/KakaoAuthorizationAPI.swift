@@ -9,12 +9,6 @@ import Combine
 import Foundation
 import KakaoSDKUser
 
-// MARK: - KakaoAuthorizationError
-
-enum KakaoAuthorizationError: Error {
-    case tokenNotExit
-}
-
 // MARK: - KakaoAuthorizationAPI
 
 final class KakaoAuthorizationAPI {

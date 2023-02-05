@@ -10,12 +10,6 @@ import Combine
 import CryptoKit
 import Foundation
 
-// MARK: - AppleAuthorizationError
-
-enum AppleAuthorizationError: Error {
-    case tokenNotExit
-}
-
 // MARK: - AppleAuthorizationAPI
 
 final class AppleAuthorizationAPI: NSObject {

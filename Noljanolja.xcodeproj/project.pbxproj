@@ -34,6 +34,11 @@
 		CFE0925F298EACF200F197F0 /* GoogleAuthorizationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0925E298EACF200F197F0 /* GoogleAuthorizationAPI.swift */; };
 		CFE09263298EB69700F197F0 /* FirebaseUser+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE09262298EB69700F197F0 /* FirebaseUser+Combine.swift */; };
 		CFE09265298EB92D00F197F0 /* AppleAuthorizationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE09264298EB92D00F197F0 /* AppleAuthorizationAPI.swift */; };
+		CFE0926B298FE73000F197F0 /* CloudFunctionAuthorizationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0926A298FE73000F197F0 /* CloudFunctionAuthorizationAPI.swift */; };
+		CFE0926D298FE75500F197F0 /* FirebaseFunctionsCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = CFE0926C298FE75500F197F0 /* FirebaseFunctionsCombine-Community */; };
+		CFE09272298FEACD00F197F0 /* SwifterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CFE09271298FEACD00F197F0 /* SwifterSwift */; };
+		CFE0933E298FFC5B00F197F0 /* AuthorizationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0933D298FFC5B00F197F0 /* AuthorizationError.swift */; };
+		CFE09341299007E400F197F0 /* Publisher+FlatMapTranforming.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE09340299007E400F197F0 /* Publisher+FlatMapTranforming.swift */; };
 		CFE9D2DD298D66F700D936DA /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = CFE9D2DC298D66F700D936DA /* GoogleSignIn */; };
 		CFE9D2E0298D6C1500D936DA /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CFE9D2DF298D6C1500D936DA /* KakaoSDKAuth */; };
 		CFE9D2E2298D6C1500D936DA /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = CFE9D2E1298D6C1500D936DA /* KakaoSDKUser */; };
@@ -109,6 +114,9 @@
 		CFE09262298EB69700F197F0 /* FirebaseUser+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseUser+Combine.swift"; sourceTree = "<group>"; };
 		CFE09264298EB92D00F197F0 /* AppleAuthorizationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthorizationAPI.swift; sourceTree = "<group>"; };
 		CFE09269298FC6DB00F197F0 /* Noljanolja.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Noljanolja.entitlements; sourceTree = "<group>"; };
+		CFE0926A298FE73000F197F0 /* CloudFunctionAuthorizationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudFunctionAuthorizationAPI.swift; sourceTree = "<group>"; };
+		CFE0933D298FFC5B00F197F0 /* AuthorizationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationError.swift; sourceTree = "<group>"; };
+		CFE09340299007E400F197F0 /* Publisher+FlatMapTranforming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+FlatMapTranforming.swift"; sourceTree = "<group>"; };
 		CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Noljanolja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoljanoljaApp.swift; sourceTree = "<group>"; };
 		CFFD7085298ABA0100D4F5A2 /* ImageAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImageAssets.xcassets; sourceTree = "<group>"; };
@@ -144,7 +152,9 @@
 			files = (
 				CFE9D2E0298D6C1500D936DA /* KakaoSDKAuth in Frameworks */,
 				CF14F24D298CC11700BC2066 /* FirebaseAnalytics in Frameworks */,
+				CFE09272298FEACD00F197F0 /* SwifterSwift in Frameworks */,
 				CFE9D2DD298D66F700D936DA /* GoogleSignIn in Frameworks */,
+				CFE0926D298FE75500F197F0 /* FirebaseFunctionsCombine-Community in Frameworks */,
 				CF0E8845298D4E09000DAE4A /* FirebaseCrashlytics in Frameworks */,
 				CFE9D2E2298D6C1500D936DA /* KakaoSDKUser in Frameworks */,
 				CF14F24F298CC11700BC2066 /* FirebaseAuthCombine-Community in Frameworks */,
@@ -282,6 +292,7 @@
 				CFE0925C298DFDCB00F197F0 /* KakaoAuthorizationAPI.swift */,
 				CFE09253298DF69600F197F0 /* NaverAuthorizationAPI.swift */,
 				CFE09264298EB92D00F197F0 /* AppleAuthorizationAPI.swift */,
+				CFE0926A298FE73000F197F0 /* CloudFunctionAuthorizationAPI.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -289,6 +300,7 @@
 		CFE09258298DF79300F197F0 /* Commons */ = {
 			isa = PBXGroup;
 			children = (
+				CFE0933F299007C600F197F0 /* Extensions */,
 				CFE09259298DF7A000F197F0 /* Loggers */,
 			);
 			path = Commons;
@@ -300,6 +312,14 @@
 				CFE0925A298DF7AF00F197F0 /* Logger+SwiftyBeaver.swift */,
 			);
 			path = Loggers;
+			sourceTree = "<group>";
+		};
+		CFE0933F299007C600F197F0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CFE09340299007E400F197F0 /* Publisher+FlatMapTranforming.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		CFFD7075298AB9FF00D4F5A2 = {
@@ -385,6 +405,7 @@
 			isa = PBXGroup;
 			children = (
 				CFFD70D6298ACA8700D4F5A2 /* HomeModel.swift */,
+				CFE0933D298FFC5B00F197F0 /* AuthorizationError.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -545,6 +566,8 @@
 				CFE9D2DF298D6C1500D936DA /* KakaoSDKAuth */,
 				CFE9D2E1298D6C1500D936DA /* KakaoSDKUser */,
 				CFE09256298DF78700F197F0 /* SwiftyBeaver */,
+				CFE0926C298FE75500F197F0 /* FirebaseFunctionsCombine-Community */,
+				CFE09271298FEACD00F197F0 /* SwifterSwift */,
 			);
 			productName = Noljanolja;
 			productReference = CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */;
@@ -627,6 +650,7 @@
 				CFE9D2DB298D66F700D936DA /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
+				CFE09270298FEACD00F197F0 /* XCRemoteSwiftPackageReference "SwifterSwift" */,
 			);
 			productRefGroup = CFFD707F298AB9FF00D4F5A2 /* Products */;
 			projectDirPath = "";
@@ -844,9 +868,11 @@
 				CF14F26B298CFA4400BC2066 /* LoginView.swift in Sources */,
 				CFFD70D9298ACAF600D4F5A2 /* BaseTargetType.swift in Sources */,
 				CFFD70C6298AC5F800D4F5A2 /* AuthorizationPluggin.swift in Sources */,
+				CFE0926B298FE73000F197F0 /* CloudFunctionAuthorizationAPI.swift in Sources */,
 				CFFD70CC298AC5F800D4F5A2 /* Api.swift in Sources */,
 				CF14F237298C0BAE00BC2066 /* TabItem.swift in Sources */,
 				CF14F24A298C331D00BC2066 /* ColorAssets.swift in Sources */,
+				CFE09341299007E400F197F0 /* Publisher+FlatMapTranforming.swift in Sources */,
 				CFFD70D5298AC92500D4F5A2 /* HomeAPI.swift in Sources */,
 				CFE09254298DF69600F197F0 /* NaverAuthorizationAPI.swift in Sources */,
 				CF14F26D298CFA6B00BC2066 /* LoginViewModel.swift in Sources */,
@@ -857,6 +883,7 @@
 				CFFD70C7298AC5F800D4F5A2 /* DisableLocalCachePlugin.swift in Sources */,
 				CFFD70CB298AC5F800D4F5A2 /* ApiProvider.swift in Sources */,
 				CF14F23A298C123300BC2066 /* UIApplication+KeyWindow.swift in Sources */,
+				CFE0933E298FFC5B00F197F0 /* AuthorizationError.swift in Sources */,
 				CFE0925B298DF7AF00F197F0 /* Logger+SwiftyBeaver.swift in Sources */,
 				CFE09265298EB92D00F197F0 /* AppleAuthorizationAPI.swift in Sources */,
 				CFFD70C4298AC5F800D4F5A2 /* NetworkLoggerPluggin.swift in Sources */,
@@ -1209,6 +1236,14 @@
 				version = 1.9.6;
 			};
 		};
+		CFE09270298FEACD00F197F0 /* XCRemoteSwiftPackageReference "SwifterSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwifterSwift/SwifterSwift";
+			requirement = {
+				kind = exactVersion;
+				version = 5.3.0;
+			};
+		};
 		CFE9D2DB298D66F700D936DA /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
@@ -1255,6 +1290,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
 			productName = SwiftyBeaver;
+		};
+		CFE0926C298FE75500F197F0 /* FirebaseFunctionsCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF14F24B298CC11600BC2066 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFunctionsCombine-Community";
+		};
+		CFE09271298FEACD00F197F0 /* SwifterSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CFE09270298FEACD00F197F0 /* XCRemoteSwiftPackageReference "SwifterSwift" */;
+			productName = SwifterSwift;
 		};
 		CFE9D2DC298D66F700D936DA /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;

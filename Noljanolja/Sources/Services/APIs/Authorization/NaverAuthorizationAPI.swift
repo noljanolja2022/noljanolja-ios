@@ -9,12 +9,6 @@ import Combine
 import Foundation
 import NaverThirdPartyLogin
 
-// MARK: - NaverAuthorizationError
-
-enum NaverAuthorizationError: Error {
-    case tokenNotExit
-}
-
 // MARK: - NaverAuthorizationAPI
 
 final class NaverAuthorizationAPI: NSObject {
@@ -58,6 +52,11 @@ extension NaverAuthorizationAPI: NaverThirdPartyLoginConnectionDelegate {
 
     func oauth20ConnectionDidFinishRequestACTokenWithRefreshToken() {
         logger.info("FinishRequestACTokenWithRefreshToken")
+        if let accessToken = naverLoginConnection?.accessToken {
+            successTrigger.send(accessToken)
+        } else {
+            failTrigger.send(NaverAuthorizationError.tokenNotExit)
+        }
     }
 
     func oauth20ConnectionDidFinishDeleteToken() {

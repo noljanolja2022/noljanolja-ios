@@ -22,10 +22,11 @@ protocol AuthorizationServicesType {
 // MARK: - AuthorizationServices
 
 final class AuthorizationServices: NSObject, AuthorizationServicesType {
-    private let appleAuthorizationAPI = AppleAuthorizationAPI()
-    private let googleAuthorizationAPI = GoogleAuthorizationAPI()
-    private let kakaoAuthorizationAPI = KakaoAuthorizationAPI()
-    private let naverAuthorizationAPI = NaverAuthorizationAPI()
+    private lazy var appleAuthorizationAPI = AppleAuthorizationAPI()
+    private lazy var googleAuthorizationAPI = GoogleAuthorizationAPI()
+    private lazy var kakaoAuthorizationAPI = KakaoAuthorizationAPI()
+    private lazy var naverAuthorizationAPI = NaverAuthorizationAPI()
+    private lazy var cloudFunctionAuthorizationAPI = CloudFunctionAuthorizationAPI()
 
     func signInWithApple() -> AnyPublisher<String, Error> {
         appleAuthorizationAPI.signIn()
@@ -52,10 +53,32 @@ final class AuthorizationServices: NSObject, AuthorizationServicesType {
     }
 
     func signInWithKakao() -> AnyPublisher<String, Error> {
-        kakaoAuthorizationAPI.signIn().eraseToAnyPublisher()
+        kakaoAuthorizationAPI.signIn()
+            .flatMap { [weak self] in
+                guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
+                return self.cloudFunctionAuthorizationAPI.authWithKakao(token: $0)
+            }
+            .flatMap {
+                Auth.auth().signIn(withCustomToken: $0)
+            }
+            .flatMap {
+                $0.user.getIDTokenResult()
+            }
+            .eraseToAnyPublisher()
     }
 
     func signInWithNaver() -> AnyPublisher<String, Error> {
         naverAuthorizationAPI.signIn().eraseToAnyPublisher()
+            .flatMap { [weak self] in
+                guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
+                return self.cloudFunctionAuthorizationAPI.authWithNaver(token: $0)
+            }
+            .flatMap {
+                Auth.auth().signIn(withCustomToken: $0)
+            }
+            .flatMap {
+                $0.user.getIDTokenResult()
+            }
+            .eraseToAnyPublisher()
     }
 }
