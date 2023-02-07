@@ -27,6 +27,7 @@ final class AuthorizationServices: NSObject, AuthorizationServicesType {
     private lazy var kakaoAuthorizationAPI = KakaoAuthorizationAPI()
     private lazy var naverAuthorizationAPI = NaverAuthorizationAPI()
     private lazy var cloudFunctionAuthorizationAPI = CloudFunctionAuthorizationAPI()
+    private lazy var authorizationStoreAPI = AuthorizationStoreAPI.default
 
     func signInWithApple() -> AnyPublisher<String, Error> {
         appleAuthorizationAPI.signIn()
@@ -37,6 +38,9 @@ final class AuthorizationServices: NSObject, AuthorizationServicesType {
             .flatMap {
                 $0.user.getIDTokenResult()
             }
+            .handleEvents(receiveOutput: { [weak self] in
+                self?.authorizationStoreAPI.token = $0
+            })
             .eraseToAnyPublisher()
     }
 
@@ -49,6 +53,9 @@ final class AuthorizationServices: NSObject, AuthorizationServicesType {
             .flatMap {
                 $0.user.getIDTokenResult()
             }
+            .handleEvents(receiveOutput: { [weak self] in
+                self?.authorizationStoreAPI.token = $0
+            })
             .eraseToAnyPublisher()
     }
 
@@ -64,6 +71,9 @@ final class AuthorizationServices: NSObject, AuthorizationServicesType {
             .flatMap {
                 $0.user.getIDTokenResult()
             }
+            .handleEvents(receiveOutput: { [weak self] in
+                self?.authorizationStoreAPI.token = $0
+            })
             .eraseToAnyPublisher()
     }
 
@@ -79,6 +89,9 @@ final class AuthorizationServices: NSObject, AuthorizationServicesType {
             .flatMap {
                 $0.user.getIDTokenResult()
             }
+            .handleEvents(receiveOutput: { [weak self] in
+                self?.authorizationStoreAPI.token = $0
+            })
             .eraseToAnyPublisher()
     }
 }

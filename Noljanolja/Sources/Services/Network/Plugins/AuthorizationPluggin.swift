@@ -18,9 +18,11 @@ struct AuthorizationPluggin: PluginType {
     func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
         guard target.rawTarget is AuthorizationConfigurable else { return request }
 
-//        Do something with request
-//        var request = request
-//        request.addValue("Bearer _____", forHTTPHeaderField: "Authorization")
+        var request = request
+        if let token = AuthorizationStoreAPI.default.token {
+            request.addValue(token, forHTTPHeaderField: "Authorization")
+        }
+
         return request
     }
 }
