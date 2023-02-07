@@ -6,6 +6,10 @@
 //
 
 import FirebaseCore
+import GoogleSignIn
+import KakaoSDKAuth
+import KakaoSDKCommon
+import NaverThirdPartyLogin
 import SwiftUI
 
 // MARK: - AppDelegate
@@ -13,8 +17,27 @@ import SwiftUI
 final class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        KakaoSDK.initSDK(appKey: AppConfigs.SDK.Kakao.nativeAppKey)
+
+        let naverLoginConnection = NaverThirdPartyLoginConnection.getSharedInstance()
+        naverLoginConnection?.isNaverAppOauthEnable = true
+        naverLoginConnection?.isInAppOauthEnable = true
+        naverLoginConnection?.setOnlyPortraitSupportInIphone(true)
+
+        naverLoginConnection?.serviceUrlScheme = AppConfigs.SDK.Naver.serviceUrlScheme
+        naverLoginConnection?.consumerKey = AppConfigs.SDK.Naver.consumerKey
+        naverLoginConnection?.consumerSecret = AppConfigs.SDK.Naver.consumerSecret
+        naverLoginConnection?.appName = AppConfigs.SDK.Naver.appName
+
         FirebaseApp.configure()
+
         return true
+    }
+
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        GIDSignIn.sharedInstance.handle(url)
+            || (AuthApi.isKakaoTalkLoginUrl(url) && AuthController.handleOpenUrl(url: url))
+            || NaverThirdPartyLoginConnection.getSharedInstance().application(app, open: url, options: options)
     }
 }
 
@@ -26,7 +49,7 @@ struct NoljanoljaApp: App {
 
     var body: some Scene {
         WindowGroup {
-            MainView()
+            LoginView()
         }
     }
 }
