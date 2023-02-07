@@ -30,6 +30,12 @@ final class AppleAuthorizationAPI: NSObject {
                 .store(in: &self.cancellables)
         }
     }
+
+    func signOutIfNeeded() -> Future<Void, Error> {
+        Future { promise in
+            promise(.success(()))
+        }
+    }
 }
 
 // MARK: ASAuthorizationControllerPresentationContextProviding, ASAuthorizationControllerDelegate

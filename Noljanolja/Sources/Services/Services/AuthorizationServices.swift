@@ -17,6 +17,7 @@ protocol AuthorizationServicesType {
     func signInWithGoogle() -> AnyPublisher<String, Error>
     func signInWithKakao() -> AnyPublisher<String, Error>
     func signInWithNaver() -> AnyPublisher<String, Error>
+    func signOut() -> AnyPublisher<Void, Error>
 }
 
 // MARK: - AuthorizationServices
@@ -27,7 +28,7 @@ final class AuthorizationServices: NSObject, AuthorizationServicesType {
     private lazy var kakaoAuthorizationAPI = KakaoAuthorizationAPI()
     private lazy var naverAuthorizationAPI = NaverAuthorizationAPI()
     private lazy var cloudFunctionAuthorizationAPI = CloudFunctionAuthorizationAPI()
-    private lazy var authorizationStoreAPI = AuthorizationStoreAPI.default
+    private lazy var authorizationStore = AuthorizationStore.default
 
     func signInWithApple() -> AnyPublisher<String, Error> {
         appleAuthorizationAPI.signIn()
@@ -39,7 +40,7 @@ final class AuthorizationServices: NSObject, AuthorizationServicesType {
                 $0.user.getIDTokenResult()
             }
             .handleEvents(receiveOutput: { [weak self] in
-                self?.authorizationStoreAPI.token = $0
+                self?.authorizationStore.saveToken($0)
             })
             .eraseToAnyPublisher()
     }
@@ -54,7 +55,7 @@ final class AuthorizationServices: NSObject, AuthorizationServicesType {
                 $0.user.getIDTokenResult()
             }
             .handleEvents(receiveOutput: { [weak self] in
-                self?.authorizationStoreAPI.token = $0
+                self?.authorizationStore.saveToken($0)
             })
             .eraseToAnyPublisher()
     }
@@ -72,7 +73,7 @@ final class AuthorizationServices: NSObject, AuthorizationServicesType {
                 $0.user.getIDTokenResult()
             }
             .handleEvents(receiveOutput: { [weak self] in
-                self?.authorizationStoreAPI.token = $0
+                self?.authorizationStore.saveToken($0)
             })
             .eraseToAnyPublisher()
     }
@@ -90,8 +91,24 @@ final class AuthorizationServices: NSObject, AuthorizationServicesType {
                 $0.user.getIDTokenResult()
             }
             .handleEvents(receiveOutput: { [weak self] in
-                self?.authorizationStoreAPI.token = $0
+                self?.authorizationStore.saveToken($0)
             })
             .eraseToAnyPublisher()
+    }
+
+    func signOut() -> AnyPublisher<Void, Error> {
+        Publishers.CombineLatest4(
+            appleAuthorizationAPI.signOutIfNeeded(),
+            googleAuthorizationAPI.signOutIfNeeded(),
+            kakaoAuthorizationAPI.signOutIfNeeded(),
+            naverAuthorizationAPI.signOutIfNeeded()
+        )
+        .flatMap { _ in
+            Auth.auth().signOutCombine()
+        }
+        .handleEvents(receiveOutput: { [weak self] in
+            self?.authorizationStore.clearToken()
+        })
+        .eraseToAnyPublisher()
     }
 }

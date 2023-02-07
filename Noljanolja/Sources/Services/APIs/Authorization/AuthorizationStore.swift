@@ -1,5 +1,5 @@
 //
-//  AuthorizationStoreAPI.swift
+//  AuthorizationStore.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 07/02/2023.
@@ -15,10 +15,10 @@ private extension Keychain {
     }()
 }
 
-// MARK: - AuthorizationStoreAPI
+// MARK: - AuthorizationStore
 
-final class AuthorizationStoreAPI {
-    static let `default` = AuthorizationStoreAPI(keychain: .default)
+final class AuthorizationStore {
+    static let `default` = AuthorizationStore(keychain: .default)
 
     private let keychain: Keychain
 
@@ -26,13 +26,15 @@ final class AuthorizationStoreAPI {
         self.keychain = keychain
     }
 
-    var token: String? {
-        get {
-            keychain[string: "token"]
-        }
-        set {
-            guard let newValue else { return }
-            keychain[string: "token"] = newValue
-        }
+    func saveToken(_ token: String) {
+        keychain[string: "token"] = token
+    }
+
+    func getToken() -> String? {
+        keychain[string: "token"]
+    }
+
+    func clearToken() {
+        keychain[string: "token"] = nil
     }
 }

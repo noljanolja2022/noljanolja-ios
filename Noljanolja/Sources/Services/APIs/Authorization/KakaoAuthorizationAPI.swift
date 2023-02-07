@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import KakaoSDKAuth
 import KakaoSDKUser
 
 // MARK: - KakaoAuthorizationAPI
@@ -21,6 +22,24 @@ final class KakaoAuthorizationAPI {
                     promise(.success(accessToken))
                 } else {
                     promise(.failure(KakaoAuthorizationError.tokenNotExit))
+                }
+            }
+        }
+    }
+
+    func signOutIfNeeded() -> Future<Void, Error> {
+        Future { promise in
+            guard AuthApi.hasToken() else {
+                promise(.success(()))
+                return
+            }
+            UserApi.shared.logout { error in
+                promise(.success(()))
+                if let error {
+                    promise(.failure(error))
+                    logger.error(error.localizedDescription)
+                } else {
+                    promise(.success(()))
                 }
             }
         }

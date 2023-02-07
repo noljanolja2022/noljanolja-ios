@@ -24,19 +24,19 @@ struct LoginView: View {
                 },
                 label: {
                     Text("Sign in with Apple")
-                        .foregroundColor(Color.black)
+                        .foregroundColor(Color.white)
                         .font(Font.system(size: 20).bold())
                         .padding(16)
                 }
             )
-            .background(Color.yellow)
+            .background(Color.black)
             Button(
                 action: {
                     viewModel.input.signInWithGoogleTrigger.send()
                 },
                 label: {
                     Text("Sign in with Google")
-                        .foregroundColor(Color.white)
+                        .foregroundColor(Color.black)
                         .font(Font.system(size: 20).bold())
                         .padding(16)
                 }
@@ -48,12 +48,12 @@ struct LoginView: View {
                 },
                 label: {
                     Text("Sign in with Kakao")
-                        .foregroundColor(Color.black)
+                        .foregroundColor(Color.white)
                         .font(Font.system(size: 20).bold())
                         .padding(16)
                 }
             )
-            .background(Color.red)
+            .background(Color.yellow)
             Button(
                 action: {
                     viewModel.input.signInWithNaverTrigger.send()
@@ -66,6 +66,30 @@ struct LoginView: View {
                 }
             )
             .background(Color.green)
+            Button(
+                action: {
+                    print("TOKEN TOKEN", AuthorizationStore.default.getToken() ?? "")
+                },
+                label: {
+                    Text("Print token")
+                        .foregroundColor(Color.orange)
+                        .font(Font.system(size: 20).bold())
+                        .padding(16)
+                }
+            )
+            .background(Color.blue)
+            Button(
+                action: {
+                    viewModel.input.signOutTrigger.send(())
+                },
+                label: {
+                    Text("Sign out")
+                        .foregroundColor(Color.orange)
+                        .font(Font.system(size: 20).bold())
+                        .padding(16)
+                }
+            )
+            .background(Color.clear)
         }
     }
 }

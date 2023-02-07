@@ -36,6 +36,15 @@ final class NaverAuthorizationAPI: NSObject {
                 .store(in: &self.cancellables)
         }
     }
+
+    func signOutIfNeeded() -> Future<Void, Error> {
+        Future { [weak self] promise in
+            if self?.naverLoginConnection?.accessToken != nil {
+                self?.naverLoginConnection?.resetToken()
+            }
+            promise(.success(()))
+        }
+    }
 }
 
 // MARK: NaverThirdPartyLoginConnectionDelegate

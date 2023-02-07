@@ -14,6 +14,7 @@ extension LoginViewModel {
         let signInWithGoogleTrigger = PassthroughSubject<Void, Never>()
         let signInWithKakaoTrigger = PassthroughSubject<Void, Never>()
         let signInWithNaverTrigger = PassthroughSubject<Void, Never>()
+        let signOutTrigger = PassthroughSubject<Void, Never>()
     }
 
     struct Output {}
@@ -47,7 +48,7 @@ final class LoginViewModel: ObservableObject {
                 receiveValue: { result in
                     switch result {
                     case let .success(idToken):
-                        logger.info("Sign in with Apple - Token: \(idToken)")
+                        logger.info("Signed in with Apple - Token: \(idToken)")
                     case let .failure(error):
                         logger.error("Sign in with Apple failed: \(error.localizedDescription)")
                     }
@@ -66,7 +67,7 @@ final class LoginViewModel: ObservableObject {
                 receiveValue: { result in
                     switch result {
                     case let .success(idToken):
-                        logger.info("Sign in with Google - Token: \(idToken)")
+                        logger.info("Signed in with Google - Token: \(idToken)")
                     case let .failure(error):
                         logger.error("Sign in with Google failed: \(error.localizedDescription)")
                     }
@@ -85,7 +86,7 @@ final class LoginViewModel: ObservableObject {
                 receiveValue: { result in
                     switch result {
                     case let .success(idToken):
-                        logger.info("Sign in with Kakao - Token: \(idToken)")
+                        logger.info("Signed in with Kakao - Token: \(idToken)")
                     case let .failure(error):
                         logger.error("Sign in with Kakao failed: \(error.localizedDescription)")
                     }
@@ -104,9 +105,28 @@ final class LoginViewModel: ObservableObject {
                 receiveValue: { result in
                     switch result {
                     case let .success(idToken):
-                        logger.info("Sign in with Naver - Token: \(idToken)")
+                        logger.info("Signed in with Naver - Token: \(idToken)")
                     case let .failure(error):
                         logger.error("Sign in with Naver failed: \(error.localizedDescription)")
+                    }
+                }
+            )
+            .store(in: &cancellables)
+
+        input.signOutTrigger
+            .flatMap { [weak self] _ -> AnyPublisher<Result<Void, Error>, Never> in
+                guard let self else { return Empty<Result<Void, Error>, Never>().eraseToAnyPublisher() }
+                return self.authorizationServices
+                    .signOut()
+                    .eraseToResultAnyPublisher()
+            }
+            .sink(
+                receiveValue: { result in
+                    switch result {
+                    case .success:
+                        logger.info("Signed out")
+                    case let .failure(error):
+                        logger.error("Sign out failed: \(error.localizedDescription)")
                     }
                 }
             )

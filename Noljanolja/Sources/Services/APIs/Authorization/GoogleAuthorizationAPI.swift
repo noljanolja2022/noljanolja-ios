@@ -28,4 +28,13 @@ final class GoogleAuthorizationAPI {
             }
         }
     }
+
+    func signOutIfNeeded() -> Future<Void, Error> {
+        Future { promise in
+            if GIDSignIn.sharedInstance.currentUser != nil {
+                GIDSignIn.sharedInstance.signOut()
+            }
+            promise(.success(()))
+        }
+    }
 }
