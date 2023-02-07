@@ -12,7 +12,7 @@ import NaverThirdPartyLogin
 // MARK: - NaverAuthorizationAPI
 
 final class NaverAuthorizationAPI: NSObject {
-    private let naverLoginConnection = NaverThirdPartyLoginConnection.getSharedInstance()
+    private lazy var naverLoginConnection = NaverThirdPartyLoginConnection.getSharedInstance()
 
     private let successTrigger = PassthroughSubject<String, Never>()
     private let failTrigger = PassthroughSubject<Error, Never>()
@@ -64,7 +64,7 @@ extension NaverAuthorizationAPI: NaverThirdPartyLoginConnectionDelegate {
     }
 
     func oauth20Connection(_ oauthConnection: NaverThirdPartyLoginConnection!, didFailWithError error: Error!) {
-        logger.info("FailWithError - \(error.debugDescription)")
+        logger.error("FailWithError - \(error.debugDescription)")
         failTrigger.send(error)
     }
 }

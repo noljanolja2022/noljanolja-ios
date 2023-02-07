@@ -44,20 +44,12 @@ final class LoginViewModel: ObservableObject {
                     .eraseToResultAnyPublisher()
             }
             .sink(
-                receiveCompletion: { completion in
-                    switch completion {
-                    case let .failure(error):
-                        logger.info("Sign in with Apple failed: \(error.localizedDescription)")
-                    case .finished:
-                        logger.info("Sign in with Apple finished")
-                    }
-                },
                 receiveValue: { result in
                     switch result {
-                    case let .failure(error):
-                        logger.info("Sign in with Apple failed: \(error.localizedDescription)")
                     case let .success(idToken):
                         logger.info("Sign in with Apple - Token: \(idToken)")
+                    case let .failure(error):
+                        logger.error("Sign in with Apple failed: \(error.localizedDescription)")
                     }
                 }
             )
@@ -71,20 +63,12 @@ final class LoginViewModel: ObservableObject {
                     .eraseToResultAnyPublisher()
             }
             .sink(
-                receiveCompletion: { completion in
-                    switch completion {
-                    case let .failure(error):
-                        logger.info("Sign in with Google failed: \(error.localizedDescription)")
-                    case .finished:
-                        logger.info("Sign in with Google finished")
-                    }
-                },
                 receiveValue: { result in
                     switch result {
-                    case let .failure(error):
-                        logger.info("Sign in with Google failed: \(error.localizedDescription)")
                     case let .success(idToken):
                         logger.info("Sign in with Google - Token: \(idToken)")
+                    case let .failure(error):
+                        logger.error("Sign in with Google failed: \(error.localizedDescription)")
                     }
                 }
             )
@@ -98,20 +82,12 @@ final class LoginViewModel: ObservableObject {
                     .eraseToResultAnyPublisher()
             }
             .sink(
-                receiveCompletion: { completion in
-                    switch completion {
-                    case let .failure(error):
-                        logger.info("Sign in with Kakao failed: \(error.localizedDescription)")
-                    case .finished:
-                        logger.info("Sign in with Kakao finished")
-                    }
-                },
                 receiveValue: { result in
                     switch result {
-                    case let .failure(error):
-                        logger.info("Sign in with Kakao failed: \(error.localizedDescription)")
                     case let .success(idToken):
                         logger.info("Sign in with Kakao - Token: \(idToken)")
+                    case let .failure(error):
+                        logger.error("Sign in with Kakao failed: \(error.localizedDescription)")
                     }
                 }
             )
@@ -125,20 +101,12 @@ final class LoginViewModel: ObservableObject {
                     .eraseToResultAnyPublisher()
             }
             .sink(
-                receiveCompletion: { completion in
-                    switch completion {
-                    case let .failure(error):
-                        logger.info("Sign in with Naver failed: \(error.localizedDescription)")
-                    case .finished:
-                        logger.info("Sign in with Naver finished")
-                    }
-                },
                 receiveValue: { result in
                     switch result {
-                    case let .failure(error):
-                        logger.info("Sign in with Naver failed: \(error.localizedDescription)")
                     case let .success(idToken):
                         logger.info("Sign in with Naver - Token: \(idToken)")
+                    case let .failure(error):
+                        logger.error("Sign in with Naver failed: \(error.localizedDescription)")
                     }
                 }
             )

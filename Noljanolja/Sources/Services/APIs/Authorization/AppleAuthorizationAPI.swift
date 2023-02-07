@@ -40,6 +40,7 @@ extension AppleAuthorizationAPI: ASAuthorizationControllerPresentationContextPro
     }
 
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        logger.info("didCompleteWithAuthorization")
         if let credential = authorization.credential as? ASAuthorizationAppleIDCredential {
             if let nonce = currentNonce,
                let idToken = credential.identityToken,
@@ -52,7 +53,7 @@ extension AppleAuthorizationAPI: ASAuthorizationControllerPresentationContextPro
     }
 
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        logger.error("Sign in with apple failed")
+        logger.error("didCompleteWithError - \(error.localizedDescription)")
         failTrigger.send(error)
     }
 }
