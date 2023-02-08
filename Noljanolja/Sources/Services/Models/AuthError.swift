@@ -36,3 +36,10 @@ enum NaverAuthError: Error {
 enum CloudFunctionAuthError: Error {
     case tokenNotExit
 }
+
+// MARK: - FirebaseAuthError
+
+enum FirebaseAuthError: Error {
+    case userNotFound
+    case emailNotVerified
+}

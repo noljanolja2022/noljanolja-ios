@@ -12,8 +12,6 @@
 		AEDBBDE12EEA3CADCA87D4F2 /* Pods_Noljanolja.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB5BA5AC93BBFAA68677C79 /* Pods_Noljanolja.framework */; };
 		CF0E8845298D4E09000DAE4A /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = CF0E8844298D4E09000DAE4A /* FirebaseCrashlytics */; };
 		CF14F230298C05F900BC2066 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F22F298C05F900BC2066 /* MainView.swift */; };
-		CF14F235298C07B500BC2066 /* TabItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F234298C07B500BC2066 /* TabItemsView.swift */; };
-		CF14F237298C0BAE00BC2066 /* TabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F236298C0BAE00BC2066 /* TabItem.swift */; };
 		CF14F23A298C123300BC2066 /* UIApplication+KeyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F239298C123300BC2066 /* UIApplication+KeyWindow.swift */; };
 		CF14F243298C31C200BC2066 /* swiftgen.yml in Resources */ = {isa = PBXBuildFile; fileRef = CF14F241298C31C200BC2066 /* swiftgen.yml */; };
 		CF14F244298C31C200BC2066 /* .swiftformat in Resources */ = {isa = PBXBuildFile; fileRef = CF14F242298C31C200BC2066 /* .swiftformat */; };
@@ -25,9 +23,25 @@
 		CF14F25E298CE68600BC2066 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF14F25D298CE68600BC2066 /* GoogleService-Info.plist */; };
 		CF14F266298CF4E700BC2066 /* AppConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F265298CF4E700BC2066 /* AppConfigs.swift */; };
 		CF14F268298CF87E00BC2066 /* AuthServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F267298CF87E00BC2066 /* AuthServices.swift */; };
-		CF14F26B298CFA4400BC2066 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F26A298CFA4400BC2066 /* LoginView.swift */; };
-		CF14F26D298CFA6B00BC2066 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F26C298CFA6B00BC2066 /* LoginViewModel.swift */; };
+		CF15500B29938C5C0053E86D /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15500929938C5C0053E86D /* ProfileView.swift */; };
+		CF15500C29938C5C0053E86D /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15500A29938C5C0053E86D /* ProfileViewModel.swift */; };
+		CF15501029939A350053E86D /* TabLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15500F29939A350053E86D /* TabLayout.swift */; };
+		CF1550142993A0A30053E86D /* EmailVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1550122993A0A30053E86D /* EmailVerificationView.swift */; };
+		CF1550152993A0A30053E86D /* EmailVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1550132993A0A30053E86D /* EmailVerificationViewModel.swift */; };
+		CF1550182993B55F0053E86D /* ResetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1550162993B55F0053E86D /* ResetPasswordView.swift */; };
+		CF1550192993B55F0053E86D /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1550172993B55F0053E86D /* ResetPasswordViewModel.swift */; };
+		CF1550232993B5C90053E86D /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1550212993B5C90053E86D /* TabBar.swift */; };
+		CF1550242993B5C90053E86D /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1550222993B5C90053E86D /* TabBarItem.swift */; };
 		CF43BF73299274D900FD3180 /* FirebaseAuth+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF43BF72299274D900FD3180 /* FirebaseAuth+Combine.swift */; };
+		CF6ABC1329935C2D00D78213 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC0C29935C2D00D78213 /* SignUpViewModel.swift */; };
+		CF6ABC1429935C2D00D78213 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC0D29935C2D00D78213 /* SignUpView.swift */; };
+		CF6ABC1529935C2D00D78213 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC0E29935C2D00D78213 /* AuthViewModel.swift */; };
+		CF6ABC1629935C2D00D78213 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC0F29935C2D00D78213 /* AuthView.swift */; };
+		CF6ABC1729935C2D00D78213 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC1129935C2D00D78213 /* SignInView.swift */; };
+		CF6ABC1829935C2D00D78213 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC1229935C2D00D78213 /* SignInViewModel.swift */; };
+		CF6ABC1F29935D7B00D78213 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC1D29935D7B00D78213 /* RootView.swift */; };
+		CF6ABC2029935D7B00D78213 /* RootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC1E29935D7B00D78213 /* RootViewModel.swift */; };
+		CF6ABC232993618000D78213 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = CF6ABC222993618000D78213 /* Introspect */; };
 		CFE09254298DF69600F197F0 /* NaverAuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE09253298DF69600F197F0 /* NaverAuthAPI.swift */; };
 		CFE09257298DF78700F197F0 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = CFE09256298DF78700F197F0 /* SwiftyBeaver */; };
 		CFE0925B298DF7AF00F197F0 /* Logger+SwiftyBeaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0925A298DF7AF00F197F0 /* Logger+SwiftyBeaver.swift */; };
@@ -95,8 +109,6 @@
 		9437E8407EBB11681966323A /* Pods-Noljanolja-NoljanoljaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.debug.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		AD0295CC3C0D04548A9867CB /* Pods_NoljanoljaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoljanoljaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF14F22F298C05F900BC2066 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		CF14F234298C07B500BC2066 /* TabItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemsView.swift; sourceTree = "<group>"; };
-		CF14F236298C0BAE00BC2066 /* TabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItem.swift; sourceTree = "<group>"; };
 		CF14F239298C123300BC2066 /* UIApplication+KeyWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+KeyWindow.swift"; sourceTree = "<group>"; };
 		CF14F23C298C30B600BC2066 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		CF14F241298C31C200BC2066 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
@@ -108,9 +120,24 @@
 		CF14F25D298CE68600BC2066 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CF14F265298CF4E700BC2066 /* AppConfigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigs.swift; sourceTree = "<group>"; };
 		CF14F267298CF87E00BC2066 /* AuthServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServices.swift; sourceTree = "<group>"; };
-		CF14F26A298CFA4400BC2066 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		CF14F26C298CFA6B00BC2066 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		CF15500929938C5C0053E86D /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		CF15500A29938C5C0053E86D /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		CF15500F29939A350053E86D /* TabLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabLayout.swift; sourceTree = "<group>"; };
+		CF1550122993A0A30053E86D /* EmailVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationView.swift; sourceTree = "<group>"; };
+		CF1550132993A0A30053E86D /* EmailVerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewModel.swift; sourceTree = "<group>"; };
+		CF1550162993B55F0053E86D /* ResetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordView.swift; sourceTree = "<group>"; };
+		CF1550172993B55F0053E86D /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
+		CF1550212993B5C90053E86D /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		CF1550222993B5C90053E86D /* TabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		CF43BF72299274D900FD3180 /* FirebaseAuth+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseAuth+Combine.swift"; sourceTree = "<group>"; };
+		CF6ABC0C29935C2D00D78213 /* SignUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		CF6ABC0D29935C2D00D78213 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		CF6ABC0E29935C2D00D78213 /* AuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		CF6ABC0F29935C2D00D78213 /* AuthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		CF6ABC1129935C2D00D78213 /* SignInView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		CF6ABC1229935C2D00D78213 /* SignInViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		CF6ABC1D29935D7B00D78213 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		CF6ABC1E29935D7B00D78213 /* RootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
 		CFE09253298DF69600F197F0 /* NaverAuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverAuthAPI.swift; sourceTree = "<group>"; };
 		CFE0925A298DF7AF00F197F0 /* Logger+SwiftyBeaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+SwiftyBeaver.swift"; sourceTree = "<group>"; };
 		CFE0925C298DFDCB00F197F0 /* KakaoAuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoAuthAPI.swift; sourceTree = "<group>"; };
@@ -156,6 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFE9D2E0298D6C1500D936DA /* KakaoSDKAuth in Frameworks */,
+				CF6ABC232993618000D78213 /* Introspect in Frameworks */,
 				CF14F24D298CC11700BC2066 /* FirebaseAnalytics in Frameworks */,
 				CFE09272298FEACD00F197F0 /* SwifterSwift in Frameworks */,
 				CFE9D2DD298D66F700D936DA /* GoogleSignIn in Frameworks */,
@@ -215,19 +243,9 @@
 		CF14F22C298C05CC00BC2066 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				CF14F231298C060300BC2066 /* CustomTabView */,
 				CF14F22F298C05F900BC2066 /* MainView.swift */,
 			);
 			path = Main;
-			sourceTree = "<group>";
-		};
-		CF14F231298C060300BC2066 /* CustomTabView */ = {
-			isa = PBXGroup;
-			children = (
-				CF14F234298C07B500BC2066 /* TabItemsView.swift */,
-				CF14F236298C0BAE00BC2066 /* TabItem.swift */,
-			);
-			path = CustomTabView;
 			sourceTree = "<group>";
 		};
 		CF14F238298C122100BC2066 /* Extensions */ = {
@@ -281,13 +299,105 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		CF14F269298CFA1200BC2066 /* Login */ = {
+		CF15500829938C4E0053E86D /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				CF14F26A298CFA4400BC2066 /* LoginView.swift */,
-				CF14F26C298CFA6B00BC2066 /* LoginViewModel.swift */,
+				CF15500929938C5C0053E86D /* ProfileView.swift */,
+				CF15500A29938C5C0053E86D /* ProfileViewModel.swift */,
 			);
-			path = Login;
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		CF15500D299396260053E86D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CF1550202993B5C90053E86D /* CustomTabBar */,
+				CF15500E299397F70053E86D /* CustomTabLayout */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CF15500E299397F70053E86D /* CustomTabLayout */ = {
+			isa = PBXGroup;
+			children = (
+				CF15500F29939A350053E86D /* TabLayout.swift */,
+			);
+			path = CustomTabLayout;
+			sourceTree = "<group>";
+		};
+		CF1550112993A08F0053E86D /* EmailVerification */ = {
+			isa = PBXGroup;
+			children = (
+				CF1550122993A0A30053E86D /* EmailVerificationView.swift */,
+				CF1550132993A0A30053E86D /* EmailVerificationViewModel.swift */,
+			);
+			path = EmailVerification;
+			sourceTree = "<group>";
+		};
+		CF15501A2993B5640053E86D /* ResetPassword */ = {
+			isa = PBXGroup;
+			children = (
+				CF1550162993B55F0053E86D /* ResetPasswordView.swift */,
+				CF1550172993B55F0053E86D /* ResetPasswordViewModel.swift */,
+			);
+			path = ResetPassword;
+			sourceTree = "<group>";
+		};
+		CF1550202993B5C90053E86D /* CustomTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				CF1550212993B5C90053E86D /* TabBar.swift */,
+				CF1550222993B5C90053E86D /* TabBarItem.swift */,
+			);
+			path = CustomTabBar;
+			sourceTree = "<group>";
+		};
+		CF6ABC0A29935C2D00D78213 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				CF15501A2993B5640053E86D /* ResetPassword */,
+				CF1550112993A08F0053E86D /* EmailVerification */,
+				CF6ABC1929935D4800D78213 /* Auth */,
+				CF6ABC0B29935C2D00D78213 /* SignUp */,
+				CF6ABC1029935C2D00D78213 /* SignIn */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		CF6ABC0B29935C2D00D78213 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				CF6ABC0C29935C2D00D78213 /* SignUpViewModel.swift */,
+				CF6ABC0D29935C2D00D78213 /* SignUpView.swift */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		CF6ABC1029935C2D00D78213 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				CF6ABC1129935C2D00D78213 /* SignInView.swift */,
+				CF6ABC1229935C2D00D78213 /* SignInViewModel.swift */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
+		CF6ABC1929935D4800D78213 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				CF6ABC0E29935C2D00D78213 /* AuthViewModel.swift */,
+				CF6ABC0F29935C2D00D78213 /* AuthView.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		CF6ABC1A29935D5800D78213 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				CF6ABC1D29935D7B00D78213 /* RootView.swift */,
+				CF6ABC1E29935D7B00D78213 /* RootViewModel.swift */,
+			);
+			path = Root;
 			sourceTree = "<group>";
 		};
 		CFE09252298DF67D00F197F0 /* Auth */ = {
@@ -308,6 +418,7 @@
 		CFE09258298DF79300F197F0 /* Commons */ = {
 			isa = PBXGroup;
 			children = (
+				CF15500D299396260053E86D /* Views */,
 				CFE0933F299007C600F197F0 /* Extensions */,
 				CFE09259298DF7A000F197F0 /* Loggers */,
 			);
@@ -470,7 +581,9 @@
 		CFFD70B5298AC43200D4F5A2 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				CF14F269298CFA1200BC2066 /* Login */,
+				CF6ABC1A29935D5800D78213 /* Root */,
+				CF6ABC0A29935C2D00D78213 /* Auth */,
+				CF15500829938C4E0053E86D /* Profile */,
 				CF14F22C298C05CC00BC2066 /* Main */,
 			);
 			path = Screens;
@@ -577,6 +690,7 @@
 				CFE0926C298FE75500F197F0 /* FirebaseFunctionsCombine-Community */,
 				CFE09271298FEACD00F197F0 /* SwifterSwift */,
 				CFE48BC0299206830062C903 /* KeychainAccess */,
+				CF6ABC222993618000D78213 /* Introspect */,
 			);
 			productName = Noljanolja;
 			productReference = CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */;
@@ -661,6 +775,7 @@
 				CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 				CFE09270298FEACD00F197F0 /* XCRemoteSwiftPackageReference "SwifterSwift" */,
 				CFE48BBF299206830062C903 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				CF6ABC212993617F00D78213 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = CFFD707F298AB9FF00D4F5A2 /* Products */;
 			projectDirPath = "";
@@ -868,33 +983,45 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF1550142993A0A30053E86D /* EmailVerificationView.swift in Sources */,
 				CF43BF73299274D900FD3180 /* FirebaseAuth+Combine.swift in Sources */,
 				CFFD70C5298AC5F800D4F5A2 /* RequestTimeoutPlugin.swift in Sources */,
+				CF1550232993B5C90053E86D /* TabBar.swift in Sources */,
+				CF1550182993B55F0053E86D /* ResetPasswordView.swift in Sources */,
 				CFE0925F298EACF200F197F0 /* GoogleAuthAPI.swift in Sources */,
+				CF6ABC1329935C2D00D78213 /* SignUpViewModel.swift in Sources */,
 				CFFD70D3298AC89000D4F5A2 /* NetworkConfigs.swift in Sources */,
 				CF14F249298C331C00BC2066 /* Localizable.swift in Sources */,
+				CF6ABC1629935C2D00D78213 /* AuthView.swift in Sources */,
 				CF14F268298CF87E00BC2066 /* AuthServices.swift in Sources */,
+				CF6ABC1829935C2D00D78213 /* SignInViewModel.swift in Sources */,
 				CFFD70C9298AC5F800D4F5A2 /* TargetType+RawTarget.swift in Sources */,
 				CFFD70C8298AC5F800D4F5A2 /* BaseAuthTargetType.swift in Sources */,
-				CF14F26B298CFA4400BC2066 /* LoginView.swift in Sources */,
 				CFFD70D9298ACAF600D4F5A2 /* BaseTargetType.swift in Sources */,
+				CF6ABC1529935C2D00D78213 /* AuthViewModel.swift in Sources */,
+				CF15500B29938C5C0053E86D /* ProfileView.swift in Sources */,
+				CF6ABC1729935C2D00D78213 /* SignInView.swift in Sources */,
+				CF1550242993B5C90053E86D /* TabBarItem.swift in Sources */,
 				CFFD70C6298AC5F800D4F5A2 /* AuthPluggin.swift in Sources */,
+				CF15501029939A350053E86D /* TabLayout.swift in Sources */,
 				CFE0926B298FE73000F197F0 /* CloudFunctionAuthAPI.swift in Sources */,
 				CFFD70CC298AC5F800D4F5A2 /* Api.swift in Sources */,
-				CF14F237298C0BAE00BC2066 /* TabItem.swift in Sources */,
+				CF15500C29938C5C0053E86D /* ProfileViewModel.swift in Sources */,
 				CF14F24A298C331D00BC2066 /* ColorAssets.swift in Sources */,
 				CFE09341299007E400F197F0 /* Publisher+FlatMapTranforming.swift in Sources */,
 				CFFD70D5298AC92500D4F5A2 /* HomeAPI.swift in Sources */,
 				CFE09254298DF69600F197F0 /* NaverAuthAPI.swift in Sources */,
-				CF14F26D298CFA6B00BC2066 /* LoginViewModel.swift in Sources */,
+				CF6ABC2029935D7B00D78213 /* RootViewModel.swift in Sources */,
 				CF14F266298CF4E700BC2066 /* AppConfigs.swift in Sources */,
 				CF14F230298C05F900BC2066 /* MainView.swift in Sources */,
-				CF14F235298C07B500BC2066 /* TabItemsView.swift in Sources */,
 				CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */,
+				CF6ABC1429935C2D00D78213 /* SignUpView.swift in Sources */,
 				CFFD70C7298AC5F800D4F5A2 /* DisableLocalCachePlugin.swift in Sources */,
 				CFE48BC3299207DA0062C903 /* AuthStore.swift in Sources */,
 				CFFD70CB298AC5F800D4F5A2 /* ApiProvider.swift in Sources */,
+				CF6ABC1F29935D7B00D78213 /* RootView.swift in Sources */,
 				CF14F23A298C123300BC2066 /* UIApplication+KeyWindow.swift in Sources */,
+				CF1550152993A0A30053E86D /* EmailVerificationViewModel.swift in Sources */,
 				CFE0933E298FFC5B00F197F0 /* AuthError.swift in Sources */,
 				CFE0925B298DF7AF00F197F0 /* Logger+SwiftyBeaver.swift in Sources */,
 				CFE09265298EB92D00F197F0 /* AppleAuthAPI.swift in Sources */,
@@ -904,6 +1031,7 @@
 				CF14F248298C331C00BC2066 /* ImageAssets.swift in Sources */,
 				CFE09263298EB69700F197F0 /* FirebaseUser+Combine.swift in Sources */,
 				CFFD70D7298ACA8700D4F5A2 /* HomeModel.swift in Sources */,
+				CF1550192993B55F0053E86D /* ResetPasswordViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1240,6 +1368,14 @@
 				version = 10.4.0;
 			};
 		};
+		CF6ABC212993617F00D78213 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
+			requirement = {
+				kind = exactVersion;
+				version = 0.1.4;
+			};
+		};
 		CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver.git";
@@ -1305,6 +1441,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CF14F24B298CC11600BC2066 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseAuthCombine-Community";
+		};
+		CF6ABC222993618000D78213 /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF6ABC212993617F00D78213 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
 		};
 		CFE09256298DF78700F197F0 /* SwiftyBeaver */ = {
 			isa = XCSwiftPackageProductDependency;

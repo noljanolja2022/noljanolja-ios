@@ -13,6 +13,13 @@ import Foundation
 // MARK: - AuthServicesType
 
 protocol AuthServicesType {
+    var isAuthenticated: CurrentValueSubject<Bool, Never> { get set }
+
+    func signUp(email: String, password: String) -> AnyPublisher<String, Error>
+    func sendEmailVerification() -> AnyPublisher<Void, Error>
+    func sendPasswordReset(email: String) -> AnyPublisher<Void, Error>
+
+    func signIn(email: String, password: String) -> AnyPublisher<String, Error>
     func signInWithApple() -> AnyPublisher<String, Error>
     func signInWithGoogle() -> AnyPublisher<String, Error>
     func signInWithKakao() -> AnyPublisher<String, Error>
@@ -23,39 +30,99 @@ protocol AuthServicesType {
 // MARK: - AuthServices
 
 final class AuthServices: NSObject, AuthServicesType {
+    static let `default` = AuthServices()
+
     private lazy var appleAuthAPI = AppleAuthAPI()
     private lazy var googleAuthAPI = GoogleAuthAPI()
     private lazy var kakaoAuthAPI = KakaoAuthAPI()
     private lazy var naverAuthAPI = NaverAuthAPI()
     private lazy var cloudFunctionAuthAPI = CloudFunctionAuthAPI()
+    private lazy var firebaseAuth = Auth.auth()
     private lazy var authStore = AuthStore.default
+
+    lazy var isAuthenticated = CurrentValueSubject<Bool, Never>(authStore.getToken() != nil)
+
+    func signUp(email: String, password: String) -> AnyPublisher<String, Error> {
+        firebaseAuth.createUser(withEmail: email, password: password)
+            .flatMap { result in
+                if result.user.isEmailVerified {
+                    return result.user.getIDTokenResult().eraseToAnyPublisher()
+                } else {
+                    return Fail<String, Error>(error: FirebaseAuthError.emailNotVerified).eraseToAnyPublisher()
+                }
+            }
+            .handleEvents(receiveOutput: { [weak self] token in
+                self?.authStore.saveToken(token)
+                self?.isAuthenticated.send(true)
+            })
+            .eraseToAnyPublisher()
+    }
+
+    func sendEmailVerification() -> AnyPublisher<Void, Error> {
+        if let user = firebaseAuth.currentUser {
+            return user.sendEmailVerification()
+                .eraseToAnyPublisher()
+        } else {
+            return Fail<Void, Error>(error: FirebaseAuthError.userNotFound)
+                .eraseToAnyPublisher()
+        }
+    }
+
+    func sendPasswordReset(email: String) -> AnyPublisher<Void, Error> {
+        firebaseAuth.sendPasswordReset(withEmail: email)
+            .eraseToAnyPublisher()
+    }
+
+    func signIn(email: String, password: String) -> AnyPublisher<String, Error> {
+        firebaseAuth.signIn(withEmail: email, password: password)
+            .flatMap { result in
+                if result.user.isEmailVerified {
+                    return result.user.getIDTokenResult().eraseToAnyPublisher()
+                } else {
+                    return Fail<String, Error>(error: FirebaseAuthError.emailNotVerified).eraseToAnyPublisher()
+                }
+            }
+            .handleEvents(receiveOutput: { [weak self] token in
+                self?.authStore.saveToken(token)
+                self?.isAuthenticated.send(true)
+            })
+            .eraseToAnyPublisher()
+    }
 
     func signInWithApple() -> AnyPublisher<String, Error> {
         appleAuthAPI.signIn()
-            .flatMap {
-                let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: $0.0, rawNonce: $0.1)
-                return Auth.auth().signIn(with: credential)
+            .flatMap { [weak self] idToken, nonce in
+                guard let self else { return Empty<AuthDataResult, Error>().eraseToAnyPublisher() }
+                let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idToken, rawNonce: nonce)
+                return self.firebaseAuth
+                    .signIn(with: credential)
+                    .eraseToAnyPublisher()
             }
-            .flatMap {
-                $0.user.getIDTokenResult()
+            .flatMap { result in
+                result.user.getIDTokenResult()
             }
-            .handleEvents(receiveOutput: { [weak self] in
-                self?.authStore.saveToken($0)
+            .handleEvents(receiveOutput: { [weak self] token in
+                self?.authStore.saveToken(token)
+                self?.isAuthenticated.send(true)
             })
             .eraseToAnyPublisher()
     }
 
     func signInWithGoogle() -> AnyPublisher<String, Error> {
         googleAuthAPI.signIn()
-            .flatMap {
-                let credential = GoogleAuthProvider.credential(withIDToken: $0.0, accessToken: $0.1)
-                return Auth.auth().signIn(with: credential)
+            .flatMap { [weak self] idToken, accessToken in
+                guard let self else { return Empty<AuthDataResult, Error>().eraseToAnyPublisher() }
+                let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
+                return self.firebaseAuth
+                    .signIn(with: credential)
+                    .eraseToAnyPublisher()
             }
-            .flatMap {
-                $0.user.getIDTokenResult()
+            .flatMap { result in
+                result.user.getIDTokenResult()
             }
-            .handleEvents(receiveOutput: { [weak self] in
-                self?.authStore.saveToken($0)
+            .handleEvents(receiveOutput: { [weak self] token in
+                self?.authStore.saveToken(token)
+                self?.isAuthenticated.send(true)
             })
             .eraseToAnyPublisher()
     }
@@ -66,14 +133,18 @@ final class AuthServices: NSObject, AuthServicesType {
                 guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
                 return self.cloudFunctionAuthAPI.authWithKakao(token: $0)
             }
-            .flatMap {
-                Auth.auth().signIn(withCustomToken: $0)
+            .flatMap { [weak self] in
+                guard let self else { return Empty<AuthDataResult, Error>().eraseToAnyPublisher() }
+                return self.firebaseAuth
+                    .signIn(withCustomToken: $0)
+                    .eraseToAnyPublisher()
             }
-            .flatMap {
-                $0.user.getIDTokenResult()
+            .flatMap { result in
+                result.user.getIDTokenResult()
             }
-            .handleEvents(receiveOutput: { [weak self] in
-                self?.authStore.saveToken($0)
+            .handleEvents(receiveOutput: { [weak self] token in
+                self?.authStore.saveToken(token)
+                self?.isAuthenticated.send(true)
             })
             .eraseToAnyPublisher()
     }
@@ -84,14 +155,18 @@ final class AuthServices: NSObject, AuthServicesType {
                 guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
                 return self.cloudFunctionAuthAPI.authWithNaver(token: $0)
             }
-            .flatMap {
-                Auth.auth().signIn(withCustomToken: $0)
+            .flatMap { [weak self] in
+                guard let self else { return Empty<AuthDataResult, Error>().eraseToAnyPublisher() }
+                return self.firebaseAuth
+                    .signIn(withCustomToken: $0)
+                    .eraseToAnyPublisher()
             }
-            .flatMap {
-                $0.user.getIDTokenResult()
+            .flatMap { result in
+                result.user.getIDTokenResult()
             }
-            .handleEvents(receiveOutput: { [weak self] in
-                self?.authStore.saveToken($0)
+            .handleEvents(receiveOutput: { [weak self] token in
+                self?.authStore.saveToken(token)
+                self?.isAuthenticated.send(true)
             })
             .eraseToAnyPublisher()
     }
@@ -103,11 +178,15 @@ final class AuthServices: NSObject, AuthServicesType {
             kakaoAuthAPI.signOutIfNeeded(),
             naverAuthAPI.signOutIfNeeded()
         )
-        .flatMap { _ in
-            Auth.auth().signOutCombine()
+        .flatMap { [weak self] _ in
+            guard let self else { return Empty<Void, Error>().eraseToAnyPublisher() }
+            return self.firebaseAuth
+                .signOutCombine()
+                .eraseToAnyPublisher()
         }
         .handleEvents(receiveOutput: { [weak self] in
             self?.authStore.clearToken()
+            self?.isAuthenticated.send(false)
         })
         .eraseToAnyPublisher()
     }

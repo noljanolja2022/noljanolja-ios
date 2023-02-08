@@ -15,9 +15,17 @@ private extension Keychain {
     }()
 }
 
+// MARK: - AuthStoreType
+
+protocol AuthStoreType {
+    func saveToken(_ token: String)
+    func getToken() -> String?
+    func clearToken()
+}
+
 // MARK: - AuthStore
 
-final class AuthStore {
+final class AuthStore: AuthStoreType {
     static let `default` = AuthStore(keychain: .default)
 
     private let keychain: Keychain
