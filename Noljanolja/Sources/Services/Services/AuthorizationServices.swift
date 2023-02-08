@@ -23,7 +23,7 @@ protocol AuthorizationServicesType {
 // MARK: - AuthorizationServices
 
 final class AuthorizationServices: NSObject, AuthorizationServicesType {
-    private lazy var appleAuthorizationAPI = AppleAuthorizationAPI()
+    private lazy var appleAuthAPI = AppleAuthAPI()
     private lazy var googleAuthorizationAPI = GoogleAuthorizationAPI()
     private lazy var kakaoAuthorizationAPI = KakaoAuthorizationAPI()
     private lazy var naverAuthorizationAPI = NaverAuthorizationAPI()
@@ -31,7 +31,7 @@ final class AuthorizationServices: NSObject, AuthorizationServicesType {
     private lazy var authStore = AuthStore.default
 
     func signInWithApple() -> AnyPublisher<String, Error> {
-        appleAuthorizationAPI.signIn()
+        appleAuthAPI.signIn()
             .flatMap {
                 let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: $0.0, rawNonce: $0.1)
                 return Auth.auth().signIn(with: credential)
@@ -98,7 +98,7 @@ final class AuthorizationServices: NSObject, AuthorizationServicesType {
 
     func signOut() -> AnyPublisher<Void, Error> {
         Publishers.CombineLatest4(
-            appleAuthorizationAPI.signOutIfNeeded(),
+            appleAuthAPI.signOutIfNeeded(),
             googleAuthorizationAPI.signOutIfNeeded(),
             kakaoAuthorizationAPI.signOutIfNeeded(),
             naverAuthorizationAPI.signOutIfNeeded()

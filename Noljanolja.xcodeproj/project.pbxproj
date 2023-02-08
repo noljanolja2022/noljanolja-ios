@@ -34,7 +34,7 @@
 		CFE0925D298DFDCB00F197F0 /* KakaoAuthorizationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0925C298DFDCB00F197F0 /* KakaoAuthorizationAPI.swift */; };
 		CFE0925F298EACF200F197F0 /* GoogleAuthorizationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0925E298EACF200F197F0 /* GoogleAuthorizationAPI.swift */; };
 		CFE09263298EB69700F197F0 /* FirebaseUser+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE09262298EB69700F197F0 /* FirebaseUser+Combine.swift */; };
-		CFE09265298EB92D00F197F0 /* AppleAuthorizationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE09264298EB92D00F197F0 /* AppleAuthorizationAPI.swift */; };
+		CFE09265298EB92D00F197F0 /* AppleAuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE09264298EB92D00F197F0 /* AppleAuthAPI.swift */; };
 		CFE0926B298FE73000F197F0 /* CloudFunctionAuthorizationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0926A298FE73000F197F0 /* CloudFunctionAuthorizationAPI.swift */; };
 		CFE0926D298FE75500F197F0 /* FirebaseFunctionsCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = CFE0926C298FE75500F197F0 /* FirebaseFunctionsCombine-Community */; };
 		CFE09272298FEACD00F197F0 /* SwifterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CFE09271298FEACD00F197F0 /* SwifterSwift */; };
@@ -116,7 +116,7 @@
 		CFE0925C298DFDCB00F197F0 /* KakaoAuthorizationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoAuthorizationAPI.swift; sourceTree = "<group>"; };
 		CFE0925E298EACF200F197F0 /* GoogleAuthorizationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthorizationAPI.swift; sourceTree = "<group>"; };
 		CFE09262298EB69700F197F0 /* FirebaseUser+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseUser+Combine.swift"; sourceTree = "<group>"; };
-		CFE09264298EB92D00F197F0 /* AppleAuthorizationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthorizationAPI.swift; sourceTree = "<group>"; };
+		CFE09264298EB92D00F197F0 /* AppleAuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthAPI.swift; sourceTree = "<group>"; };
 		CFE09269298FC6DB00F197F0 /* Noljanolja.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Noljanolja.entitlements; sourceTree = "<group>"; };
 		CFE0926A298FE73000F197F0 /* CloudFunctionAuthorizationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudFunctionAuthorizationAPI.swift; sourceTree = "<group>"; };
 		CFE0933D298FFC5B00F197F0 /* AuthorizationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationError.swift; sourceTree = "<group>"; };
@@ -293,7 +293,7 @@
 		CFE09252298DF67D00F197F0 /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
-				CFE09264298EB92D00F197F0 /* AppleAuthorizationAPI.swift */,
+				CFE09264298EB92D00F197F0 /* AppleAuthAPI.swift */,
 				CFE0925E298EACF200F197F0 /* GoogleAuthorizationAPI.swift */,
 				CFE0925C298DFDCB00F197F0 /* KakaoAuthorizationAPI.swift */,
 				CFE09253298DF69600F197F0 /* NaverAuthorizationAPI.swift */,
@@ -897,7 +897,7 @@
 				CF14F23A298C123300BC2066 /* UIApplication+KeyWindow.swift in Sources */,
 				CFE0933E298FFC5B00F197F0 /* AuthorizationError.swift in Sources */,
 				CFE0925B298DF7AF00F197F0 /* Logger+SwiftyBeaver.swift in Sources */,
-				CFE09265298EB92D00F197F0 /* AppleAuthorizationAPI.swift in Sources */,
+				CFE09265298EB92D00F197F0 /* AppleAuthAPI.swift in Sources */,
 				CFFD70C4298AC5F800D4F5A2 /* NetworkLoggerPluggin.swift in Sources */,
 				CFE0925D298DFDCB00F197F0 /* KakaoAuthorizationAPI.swift in Sources */,
 				CFFD70CA298AC5F800D4F5A2 /* TargetType+Default.swift in Sources */,
