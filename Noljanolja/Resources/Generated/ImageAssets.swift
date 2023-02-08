@@ -23,11 +23,13 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum ImageAssets {
   internal static let icPlaceholder = ImageAsset(name: "ic_placeholder")
+  internal static let logo = ImageAsset(name: "logo")
 
   // swiftlint:disable trailing_comma
   @available(*, deprecated, message: "All values properties are now deprecated")
   internal static let allImages: [ImageAsset] = [
     icPlaceholder,
+    logo,
   ]
   // swiftlint:enable trailing_comma
 }
