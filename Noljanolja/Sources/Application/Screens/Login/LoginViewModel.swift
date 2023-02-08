@@ -26,12 +26,12 @@ final class LoginViewModel: ObservableObject {
     let input = Input()
     let output = Output()
 
-    private let authorizationServices: AuthorizationServicesType
+    private let authServices: AuthServicesType
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(authorizationServices: AuthorizationServicesType = AuthorizationServices()) {
-        self.authorizationServices = authorizationServices
+    init(authServices: AuthServicesType = AuthServices()) {
+        self.authServices = authServices
 
         configure()
     }
@@ -40,7 +40,7 @@ final class LoginViewModel: ObservableObject {
         input.signInWithAppleTrigger
             .flatMap { [weak self] _ -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
-                return self.authorizationServices
+                return self.authServices
                     .signInWithApple()
                     .eraseToResultAnyPublisher()
             }
@@ -59,7 +59,7 @@ final class LoginViewModel: ObservableObject {
         input.signInWithGoogleTrigger
             .flatMap { [weak self] _ -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
-                return self.authorizationServices
+                return self.authServices
                     .signInWithGoogle()
                     .eraseToResultAnyPublisher()
             }
@@ -78,7 +78,7 @@ final class LoginViewModel: ObservableObject {
         input.signInWithKakaoTrigger
             .flatMap { [weak self] _ -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
-                return self.authorizationServices
+                return self.authServices
                     .signInWithKakao()
                     .eraseToResultAnyPublisher()
             }
@@ -97,7 +97,7 @@ final class LoginViewModel: ObservableObject {
         input.signInWithNaverTrigger
             .flatMap { [weak self] _ -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
-                return self.authorizationServices
+                return self.authServices
                     .signInWithNaver()
                     .eraseToResultAnyPublisher()
             }
@@ -116,7 +116,7 @@ final class LoginViewModel: ObservableObject {
         input.signOutTrigger
             .flatMap { [weak self] _ -> AnyPublisher<Result<Void, Error>, Never> in
                 guard let self else { return Empty<Result<Void, Error>, Never>().eraseToAnyPublisher() }
-                return self.authorizationServices
+                return self.authServices
                     .signOut()
                     .eraseToResultAnyPublisher()
             }

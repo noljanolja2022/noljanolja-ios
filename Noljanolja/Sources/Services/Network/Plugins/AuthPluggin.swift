@@ -1,5 +1,5 @@
 //
-//  AuthorizationPluggin.swift
+//  AuthPluggin.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 01/02/2023.
@@ -8,15 +8,15 @@
 import Foundation
 import Moya
 
-// MARK: - AuthorizationConfigurable
+// MARK: - AuthConfigurable
 
-protocol AuthorizationConfigurable {}
+protocol AuthConfigurable {}
 
-// MARK: - AuthorizationPluggin
+// MARK: - AuthPluggin
 
-struct AuthorizationPluggin: PluginType {
+struct AuthPluggin: PluginType {
     func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
-        guard target.rawTarget is AuthorizationConfigurable else { return request }
+        guard target.rawTarget is AuthConfigurable else { return request }
 
         var request = request
         if let token = AuthStore.default.getToken() {

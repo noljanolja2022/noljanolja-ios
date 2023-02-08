@@ -1,5 +1,5 @@
 //
-//  AuthorizationServices.swift
+//  AuthServices.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 03/02/2023.
@@ -10,9 +10,9 @@ import FirebaseAuth
 import FirebaseAuthCombineSwift
 import Foundation
 
-// MARK: - AuthorizationServicesType
+// MARK: - AuthServicesType
 
-protocol AuthorizationServicesType {
+protocol AuthServicesType {
     func signInWithApple() -> AnyPublisher<String, Error>
     func signInWithGoogle() -> AnyPublisher<String, Error>
     func signInWithKakao() -> AnyPublisher<String, Error>
@@ -20,14 +20,14 @@ protocol AuthorizationServicesType {
     func signOut() -> AnyPublisher<Void, Error>
 }
 
-// MARK: - AuthorizationServices
+// MARK: - AuthServices
 
-final class AuthorizationServices: NSObject, AuthorizationServicesType {
+final class AuthServices: NSObject, AuthServicesType {
     private lazy var appleAuthAPI = AppleAuthAPI()
     private lazy var googleAuthAPI = GoogleAuthAPI()
     private lazy var kakaoAuthAPI = KakaoAuthAPI()
-    private lazy var naverAuthorizationAPI = NaverAuthorizationAPI()
-    private lazy var cloudFunctionAuthorizationAPI = CloudFunctionAuthorizationAPI()
+    private lazy var naverAuthAPI = NaverAuthAPI()
+    private lazy var cloudFunctionAuthAPI = CloudFunctionAuthAPI()
     private lazy var authStore = AuthStore.default
 
     func signInWithApple() -> AnyPublisher<String, Error> {
@@ -64,7 +64,7 @@ final class AuthorizationServices: NSObject, AuthorizationServicesType {
         kakaoAuthAPI.signIn()
             .flatMap { [weak self] in
                 guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
-                return self.cloudFunctionAuthorizationAPI.authWithKakao(token: $0)
+                return self.cloudFunctionAuthAPI.authWithKakao(token: $0)
             }
             .flatMap {
                 Auth.auth().signIn(withCustomToken: $0)
@@ -79,10 +79,10 @@ final class AuthorizationServices: NSObject, AuthorizationServicesType {
     }
 
     func signInWithNaver() -> AnyPublisher<String, Error> {
-        naverAuthorizationAPI.signIn().eraseToAnyPublisher()
+        naverAuthAPI.signIn().eraseToAnyPublisher()
             .flatMap { [weak self] in
                 guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
-                return self.cloudFunctionAuthorizationAPI.authWithNaver(token: $0)
+                return self.cloudFunctionAuthAPI.authWithNaver(token: $0)
             }
             .flatMap {
                 Auth.auth().signIn(withCustomToken: $0)
@@ -101,7 +101,7 @@ final class AuthorizationServices: NSObject, AuthorizationServicesType {
             appleAuthAPI.signOutIfNeeded(),
             googleAuthAPI.signOutIfNeeded(),
             kakaoAuthAPI.signOutIfNeeded(),
-            naverAuthorizationAPI.signOutIfNeeded()
+            naverAuthAPI.signOutIfNeeded()
         )
         .flatMap { _ in
             Auth.auth().signOutCombine()

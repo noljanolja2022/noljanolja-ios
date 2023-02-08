@@ -1,5 +1,5 @@
 //
-//  AuthorizationError.swift
+//  AuthError.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 05/02/2023.
