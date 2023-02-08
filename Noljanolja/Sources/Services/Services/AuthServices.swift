@@ -16,7 +16,6 @@ protocol AuthServicesType {
     var isAuthenticated: CurrentValueSubject<Bool, Never> { get set }
 
     func signUp(email: String, password: String) -> AnyPublisher<String, Error>
-    func sendEmailVerification() -> AnyPublisher<Void, Error>
     func sendPasswordReset(email: String) -> AnyPublisher<Void, Error>
 
     func signIn(email: String, password: String) -> AnyPublisher<String, Error>
@@ -45,27 +44,13 @@ final class AuthServices: NSObject, AuthServicesType {
     func signUp(email: String, password: String) -> AnyPublisher<String, Error> {
         firebaseAuth.createUser(withEmail: email, password: password)
             .flatMap { result in
-                if result.user.isEmailVerified {
-                    return result.user.getIDTokenResult().eraseToAnyPublisher()
-                } else {
-                    return Fail<String, Error>(error: FirebaseAuthError.emailNotVerified).eraseToAnyPublisher()
-                }
+                result.user.getIDTokenResult()
             }
             .handleEvents(receiveOutput: { [weak self] token in
                 self?.authStore.saveToken(token)
                 self?.isAuthenticated.send(true)
             })
             .eraseToAnyPublisher()
-    }
-
-    func sendEmailVerification() -> AnyPublisher<Void, Error> {
-        if let user = firebaseAuth.currentUser {
-            return user.sendEmailVerification()
-                .eraseToAnyPublisher()
-        } else {
-            return Fail<Void, Error>(error: FirebaseAuthError.userNotFound)
-                .eraseToAnyPublisher()
-        }
     }
 
     func sendPasswordReset(email: String) -> AnyPublisher<Void, Error> {
@@ -76,11 +61,7 @@ final class AuthServices: NSObject, AuthServicesType {
     func signIn(email: String, password: String) -> AnyPublisher<String, Error> {
         firebaseAuth.signIn(withEmail: email, password: password)
             .flatMap { result in
-                if result.user.isEmailVerified {
-                    return result.user.getIDTokenResult().eraseToAnyPublisher()
-                } else {
-                    return Fail<String, Error>(error: FirebaseAuthError.emailNotVerified).eraseToAnyPublisher()
-                }
+                result.user.getIDTokenResult()
             }
             .handleEvents(receiveOutput: { [weak self] token in
                 self?.authStore.saveToken(token)

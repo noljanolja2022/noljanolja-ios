@@ -21,20 +21,6 @@ struct SignInView: View {
     }
     
     var body: some View {
-        NavigationView {
-            VStack {
-                content
-                NavigationLink(
-                    destination: EmailVerificationView(),
-                    isActive: $viewModel.isShowingEmailVerificationView,
-                    label: { EmptyView() }
-                )
-            }
-            .navigationBarHidden(true)
-        }
-    }
-
-    var content: some View {
         VStack(spacing: 12) {
             TextField("Email", text: $email)
                 .keyboardType(.emailAddress)

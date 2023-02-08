@@ -24,10 +24,6 @@ final class SignInViewModel: ObservableObject {
     let signInWithKakaoTrigger = PassthroughSubject<Void, Never>()
     let signInWithNaverTrigger = PassthroughSubject<Void, Never>()
 
-    // MARK: Output
-
-    @Published var isShowingEmailVerificationView = false
-
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
@@ -51,12 +47,7 @@ final class SignInViewModel: ObservableObject {
                 case let .success(idToken):
                     logger.info("Signed in with Email/Password - Token: \(idToken)")
                 case let .failure(error):
-                    switch error {
-                    case let error as FirebaseAuthError where error == .emailNotVerified:
-                        self.isShowingEmailVerificationView = true
-                    default:
-                        logger.error("Sign in with Email/Password failed: \(error.localizedDescription)")
-                    }
+                    logger.error("Sign in with Email/Password failed: \(error.localizedDescription)")
                 }
             })
             .store(in: &cancellables)

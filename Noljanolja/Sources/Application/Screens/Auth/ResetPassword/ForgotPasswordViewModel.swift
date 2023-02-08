@@ -1,14 +1,14 @@
 //
-//  ResetPasswordViewModel.swift
+//  ForgotPasswordViewModel.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 08/02/2023.
-//  
+//
 //
 
 import Combine
 
-final class ResetPasswordViewModel: ObservableObject {
+final class ForgotPasswordViewModel: ObservableObject {
     // MARK: Dependencies
 
     // MARK: Input
