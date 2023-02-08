@@ -24,8 +24,8 @@ protocol AuthorizationServicesType {
 
 final class AuthorizationServices: NSObject, AuthorizationServicesType {
     private lazy var appleAuthAPI = AppleAuthAPI()
-    private lazy var googleAuthorizationAPI = GoogleAuthorizationAPI()
-    private lazy var kakaoAuthorizationAPI = KakaoAuthorizationAPI()
+    private lazy var googleAuthAPI = GoogleAuthAPI()
+    private lazy var kakaoAuthAPI = KakaoAuthAPI()
     private lazy var naverAuthorizationAPI = NaverAuthorizationAPI()
     private lazy var cloudFunctionAuthorizationAPI = CloudFunctionAuthorizationAPI()
     private lazy var authStore = AuthStore.default
@@ -46,7 +46,7 @@ final class AuthorizationServices: NSObject, AuthorizationServicesType {
     }
 
     func signInWithGoogle() -> AnyPublisher<String, Error> {
-        googleAuthorizationAPI.signIn()
+        googleAuthAPI.signIn()
             .flatMap {
                 let credential = GoogleAuthProvider.credential(withIDToken: $0.0, accessToken: $0.1)
                 return Auth.auth().signIn(with: credential)
@@ -61,7 +61,7 @@ final class AuthorizationServices: NSObject, AuthorizationServicesType {
     }
 
     func signInWithKakao() -> AnyPublisher<String, Error> {
-        kakaoAuthorizationAPI.signIn()
+        kakaoAuthAPI.signIn()
             .flatMap { [weak self] in
                 guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
                 return self.cloudFunctionAuthorizationAPI.authWithKakao(token: $0)
@@ -99,8 +99,8 @@ final class AuthorizationServices: NSObject, AuthorizationServicesType {
     func signOut() -> AnyPublisher<Void, Error> {
         Publishers.CombineLatest4(
             appleAuthAPI.signOutIfNeeded(),
-            googleAuthorizationAPI.signOutIfNeeded(),
-            kakaoAuthorizationAPI.signOutIfNeeded(),
+            googleAuthAPI.signOutIfNeeded(),
+            kakaoAuthAPI.signOutIfNeeded(),
             naverAuthorizationAPI.signOutIfNeeded()
         )
         .flatMap { _ in
