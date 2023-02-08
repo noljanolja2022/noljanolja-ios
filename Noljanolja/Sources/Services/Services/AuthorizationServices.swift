@@ -28,7 +28,7 @@ final class AuthorizationServices: NSObject, AuthorizationServicesType {
     private lazy var kakaoAuthorizationAPI = KakaoAuthorizationAPI()
     private lazy var naverAuthorizationAPI = NaverAuthorizationAPI()
     private lazy var cloudFunctionAuthorizationAPI = CloudFunctionAuthorizationAPI()
-    private lazy var authorizationStore = AuthorizationStore.default
+    private lazy var authStore = AuthStore.default
 
     func signInWithApple() -> AnyPublisher<String, Error> {
         appleAuthorizationAPI.signIn()
@@ -40,7 +40,7 @@ final class AuthorizationServices: NSObject, AuthorizationServicesType {
                 $0.user.getIDTokenResult()
             }
             .handleEvents(receiveOutput: { [weak self] in
-                self?.authorizationStore.saveToken($0)
+                self?.authStore.saveToken($0)
             })
             .eraseToAnyPublisher()
     }
@@ -55,7 +55,7 @@ final class AuthorizationServices: NSObject, AuthorizationServicesType {
                 $0.user.getIDTokenResult()
             }
             .handleEvents(receiveOutput: { [weak self] in
-                self?.authorizationStore.saveToken($0)
+                self?.authStore.saveToken($0)
             })
             .eraseToAnyPublisher()
     }
@@ -73,7 +73,7 @@ final class AuthorizationServices: NSObject, AuthorizationServicesType {
                 $0.user.getIDTokenResult()
             }
             .handleEvents(receiveOutput: { [weak self] in
-                self?.authorizationStore.saveToken($0)
+                self?.authStore.saveToken($0)
             })
             .eraseToAnyPublisher()
     }
@@ -91,7 +91,7 @@ final class AuthorizationServices: NSObject, AuthorizationServicesType {
                 $0.user.getIDTokenResult()
             }
             .handleEvents(receiveOutput: { [weak self] in
-                self?.authorizationStore.saveToken($0)
+                self?.authStore.saveToken($0)
             })
             .eraseToAnyPublisher()
     }
@@ -107,7 +107,7 @@ final class AuthorizationServices: NSObject, AuthorizationServicesType {
             Auth.auth().signOutCombine()
         }
         .handleEvents(receiveOutput: { [weak self] in
-            self?.authorizationStore.clearToken()
+            self?.authStore.clearToken()
         })
         .eraseToAnyPublisher()
     }

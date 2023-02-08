@@ -1,5 +1,5 @@
 //
-//  AuthorizationStore.swift
+//  AuthStore.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 07/02/2023.
@@ -15,10 +15,10 @@ private extension Keychain {
     }()
 }
 
-// MARK: - AuthorizationStore
+// MARK: - AuthStore
 
-final class AuthorizationStore {
-    static let `default` = AuthorizationStore(keychain: .default)
+final class AuthStore {
+    static let `default` = AuthStore(keychain: .default)
 
     private let keychain: Keychain
 

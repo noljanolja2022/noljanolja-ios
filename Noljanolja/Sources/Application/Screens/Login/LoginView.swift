@@ -68,7 +68,7 @@ struct LoginView: View {
             .background(Color.green)
             Button(
                 action: {
-                    print("TOKEN TOKEN", AuthorizationStore.default.getToken() ?? "")
+                    print("TOKEN TOKEN", AuthStore.default.getToken() ?? "")
                 },
                 label: {
                     Text("Print token")

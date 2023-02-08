@@ -19,7 +19,7 @@ struct AuthorizationPluggin: PluginType {
         guard target.rawTarget is AuthorizationConfigurable else { return request }
 
         var request = request
-        if let token = AuthorizationStore.default.getToken() {
+        if let token = AuthStore.default.getToken() {
             request.addValue(token, forHTTPHeaderField: "Authorization")
         }
 
