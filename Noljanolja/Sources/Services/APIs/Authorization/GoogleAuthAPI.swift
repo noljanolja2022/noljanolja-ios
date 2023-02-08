@@ -21,7 +21,7 @@ final class GoogleAuthAPI {
                 } else if let idToken = result?.user.idToken?.tokenString, let accessToken = result?.user.accessToken.tokenString {
                     promise(.success((idToken, accessToken)))
                 } else {
-                    promise(.failure(GoogleAuthorizationError.tokenNotExit))
+                    promise(.failure(GoogleAuthError.tokenNotExit))
                 }
             }
         }

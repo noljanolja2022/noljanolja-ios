@@ -21,7 +21,7 @@ final class KakaoAuthAPI {
                 } else if let accessToken = oauthToken?.accessToken {
                     promise(.success(accessToken))
                 } else {
-                    promise(.failure(KakaoAuthorizationError.tokenNotExit))
+                    promise(.failure(KakaoAuthError.tokenNotExit))
                 }
             }
         }

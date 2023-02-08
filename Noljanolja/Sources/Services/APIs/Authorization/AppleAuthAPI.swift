@@ -53,7 +53,7 @@ extension AppleAuthAPI: ASAuthorizationControllerPresentationContextProviding, A
                let idTokenString = String(data: idToken, encoding: .utf8) {
                 successTrigger.send((nonce, idTokenString))
             } else {
-                failTrigger.send(AppleAuthorizationError.tokenNotExit)
+                failTrigger.send(AppleAuthError.tokenNotExit)
             }
         }
     }

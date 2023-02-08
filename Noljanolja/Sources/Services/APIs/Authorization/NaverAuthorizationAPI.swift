@@ -55,7 +55,7 @@ extension NaverAuthorizationAPI: NaverThirdPartyLoginConnectionDelegate {
         if let accessToken = naverLoginConnection?.accessToken {
             successTrigger.send(accessToken)
         } else {
-            failTrigger.send(NaverAuthorizationError.tokenNotExit)
+            failTrigger.send(NaverAuthError.tokenNotExit)
         }
     }
 
@@ -64,7 +64,7 @@ extension NaverAuthorizationAPI: NaverThirdPartyLoginConnectionDelegate {
         if let accessToken = naverLoginConnection?.accessToken {
             successTrigger.send(accessToken)
         } else {
-            failTrigger.send(NaverAuthorizationError.tokenNotExit)
+            failTrigger.send(NaverAuthError.tokenNotExit)
         }
     }
 

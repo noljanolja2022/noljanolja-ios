@@ -28,7 +28,7 @@ final class CloudFunctionAuthorizationAPI {
                 if let token = $0.data as? String {
                     return token
                 } else {
-                    throw CloudFunctionAuthorizationError.tokenNotExit
+                    throw CloudFunctionAuthError.tokenNotExit
                 }
             }
             .eraseToAnyPublisher()
