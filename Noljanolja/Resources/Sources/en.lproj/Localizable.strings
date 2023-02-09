@@ -1,1 +1,19 @@
 "app_name" = "Noljanolja";
+
+"auth.log_in.title" = "Log in";
+"auth.join_the_membership.title" = "Join the membership";
+
+"auth.log_in.email.placeholder" = "Please enter your email";
+"auth.log_in.password.placeholder" = "Please enter a password";
+"auth.log_in.forgot_password" = "Forgot your password?";
+"auth.log_in.log_in_with_sns" = "Log in with SNS";
+
+"validation.email.error.invalid" = "Please enter a valid email";
+
+"validation.password.error.invalid_length" = "The password must be 8-12 characters long";
+"validation.password.error.letter_required" = "The password must have at least one letter";
+"validation.password.error.digit_required" = "The password must have at least one digit";
+"validation.password.error.special_characters_required" = "The password must have at least one special character (~!@#%^&*()-_=+)";
+
+"error.title" = "Error";
+"ok.title" = "OK";

@@ -23,59 +23,34 @@ public struct TabLayout: View {
     /// The font of the tab title
     let font: Font
 
-    /// The selection bar sliding animation type
-    let animation: Animation
+    /// The accent color when the tab is not selected
+    let accentColor: Color
 
     /// The accent color when the tab is selected
-    let activeAccentColor: Color
-
-    /// The accent color when the tab is not selected
-    let inactiveAccentColor: Color
-
-    /// The color of the selection bar
-    let selectionBarColor: Color
+    let selectedAccentColor: Color
 
     /// The tab color when the tab is not selected
-    let inactiveTabColor: Color
+    let backgroundColor: Color
 
     /// The tab color when the tab is  selected
-    let activeTabColor: Color
-
-    /// The height of the selection bar
-    let selectionBarHeight: CGFloat
-
-    /// The selection bar background color
-    let selectionBarBackgroundColor: Color
-
-    /// The height of the selection bar background
-    let selectionBarBackgroundHeight: CGFloat
+    let selectedBackgroundColor: Color
 
     // MARK: init
 
     public init(selection: Binding<Int>,
                 tabs: [String],
-                font: Font = .body,
-                animation: Animation = .spring(),
-                activeAccentColor: Color = .blue,
-                inactiveAccentColor: Color = Color.black.opacity(0.4),
-                selectionBarColor: Color = .blue,
-                inactiveTabColor: Color = .clear,
-                activeTabColor: Color = .clear,
-                selectionBarHeight: CGFloat = 2,
-                selectionBarBackgroundColor: Color = Color.gray.opacity(0.2),
-                selectionBarBackgroundHeight: CGFloat = 1) {
+                font: Font = Font.system(size: 16),
+                accentColor: Color = Color.black,
+                selectedAccentColor: Color = Color.white,
+                backgroundColor: Color = Color.gray,
+                selectedBackgroundColor: Color = Color.black) {
         self._selection = selection
         self.tabs = tabs
         self.font = font
-        self.animation = animation
-        self.activeAccentColor = activeAccentColor
-        self.inactiveAccentColor = inactiveAccentColor
-        self.selectionBarColor = selectionBarColor
-        self.inactiveTabColor = inactiveTabColor
-        self.activeTabColor = activeTabColor
-        self.selectionBarHeight = selectionBarHeight
-        self.selectionBarBackgroundColor = selectionBarBackgroundColor
-        self.selectionBarBackgroundHeight = selectionBarBackgroundHeight
+        self.accentColor = accentColor
+        self.selectedAccentColor = selectedAccentColor
+        self.backgroundColor = backgroundColor
+        self.selectedBackgroundColor = selectedBackgroundColor
     }
 
     // MARK: View Construction
@@ -83,56 +58,30 @@ public struct TabLayout: View {
     public var body: some View {
         assert(tabs.count > 1, "Must have at least 2 tabs")
 
-        return VStack(alignment: .leading, spacing: 0) {
-            HStack(spacing: 0) {
-                ForEach(self.tabs, id: \.self) { tab in
-                    Button(action: {
+        return HStack(spacing: 0) {
+            ForEach(self.tabs, id: \.self) { tab in
+                Button(
+                    action: {
                         self.selection = self.tabs.firstIndex(of: tab) ?? 0
-                    }) {
-                        HStack {
-                            Spacer()
-                            Text(tab).font(self.font)
-                            Spacer()
-                        }
+                    },
+                    label: {
+                        Text(tab)
+                            .font(self.font)
+                            .padding(.horizontal, 24)
+                            .padding(.vertical, 10)
                     }
-                    .padding(.vertical, 16)
-                    .accentColor(
-                        self.isSelected(tabIdentifier: tab)
-                            ? self.activeAccentColor
-                            : self.inactiveAccentColor)
-                    .background(
-                        self.isSelected(tabIdentifier: tab)
-                            ? self.activeTabColor
-                            : self.inactiveTabColor)
-                }
+                )
+                .padding(.vertical, 16)
+                .accentColor(
+                    tabs[selection] == tab ? self.selectedAccentColor : self.accentColor
+                )
+                .background(
+                    tabs[selection] == tab ? self.selectedBackgroundColor : self.backgroundColor
+                )
             }
-            GeometryReader { geometry in
-                ZStack(alignment: .leading) {
-                    Rectangle()
-                        .fill(self.selectionBarColor)
-                        .frame(width: self.tabWidth(from: geometry.size.width), height: self.selectionBarHeight, alignment: .leading)
-                        .offset(x: self.selectionBarXOffset(from: geometry.size.width), y: 0)
-                        .animation(self.animation)
-                    Rectangle()
-                        .fill(self.selectionBarBackgroundColor)
-                        .frame(width: geometry.size.width, height: self.selectionBarBackgroundHeight, alignment: .leading)
-                }.fixedSize(horizontal: false, vertical: true)
-            }.fixedSize(horizontal: false, vertical: true)
         }
-    }
-
-    // MARK: Private Helper
-
-    private func isSelected(tabIdentifier: String) -> Bool {
-        tabs[selection] == tabIdentifier
-    }
-
-    private func selectionBarXOffset(from totalWidth: CGFloat) -> CGFloat {
-        tabWidth(from: totalWidth) * CGFloat(selection)
-    }
-
-    private func tabWidth(from totalWidth: CGFloat) -> CGFloat {
-        totalWidth / CGFloat(tabs.count)
+        .frame(height: 42)
+        .cornerRadius(8)
     }
 }
 
@@ -142,6 +91,9 @@ struct TabLayout_Previews: PreviewProvider {
     @State private static var selection = 0
 
     static var previews: some View {
-        TabLayout(selection: $selection, tabs: ["Tab 0", "Tab 1", "Tab 2", "Tab 3"])
+        TabLayout(
+            selection: $selection,
+            tabs: ["Tab 0", "Tab 1", "Tab 2", "Tab 3"]
+        )
     }
 }

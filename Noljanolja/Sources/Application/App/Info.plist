@@ -31,5 +31,11 @@
 		<key>UISceneConfigurations</key>
 		<dict/>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Resources/Sources/Fonts/NotoSans-Bold.ttf</string>
+		<string>Resources/Sources/Fonts/NotoSans-Regular.ttf</string>
+		<string>Resources/Sources/Fonts/NotoSans-Medium.ttf</string>
+	</array>
 </dict>
 </plist>

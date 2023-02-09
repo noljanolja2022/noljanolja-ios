@@ -22,41 +22,25 @@ internal typealias AssetColorTypeAlias = ColorAsset.Color
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum ColorAssets {
-  internal static let alert = ColorAsset(name: "Alert")
-  internal static let anotherGray = ColorAsset(name: "Another Gray")
   internal static let black = ColorAsset(name: "Black")
-  internal static let box = ColorAsset(name: "Box")
-  internal static let button = ColorAsset(name: "Button")
-  internal static let darkYellow = ColorAsset(name: "Dark Yellow")
-  internal static let disabled = ColorAsset(name: "Disabled")
-  internal static let footer2 = ColorAsset(name: "Footer 2")
-  internal static let footer = ColorAsset(name: "Footer")
-  internal static let input = ColorAsset(name: "Input")
-  internal static let lightGray = ColorAsset(name: "Light Gray")
-  internal static let main = ColorAsset(name: "Main")
-  internal static let point = ColorAsset(name: "Point")
-  internal static let secondary = ColorAsset(name: "Secondary")
-  internal static let third = ColorAsset(name: "Third")
+  internal static let forcegroundPrimary = ColorAsset(name: "Forceground Primary")
+  internal static let forcegroundSecondary = ColorAsset(name: "Forceground Secondary")
+  internal static let forcegroundTertiary = ColorAsset(name: "Forceground tertiary")
+  internal static let gray = ColorAsset(name: "Gray")
+  internal static let highlightPrimary = ColorAsset(name: "Highlight Primary")
+  internal static let red = ColorAsset(name: "Red")
   internal static let white = ColorAsset(name: "White")
 
   // swiftlint:disable trailing_comma
   @available(*, deprecated, message: "All values properties are now deprecated")
   internal static let allColors: [ColorAsset] = [
-    alert,
-    anotherGray,
     black,
-    box,
-    button,
-    darkYellow,
-    disabled,
-    footer2,
-    footer,
-    input,
-    lightGray,
-    main,
-    point,
-    secondary,
-    third,
+    forcegroundPrimary,
+    forcegroundSecondary,
+    forcegroundTertiary,
+    gray,
+    highlightPrimary,
+    red,
     white,
   ]
   // swiftlint:enable trailing_comma

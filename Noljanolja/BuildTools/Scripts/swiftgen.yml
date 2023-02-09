@@ -27,3 +27,12 @@ xcassets:
           enumName: ImageAssets
           allValues: true
           publicAccess: false
+fonts:
+  inputs: Fonts
+  outputs:
+    templateName: swift5
+    output: FontAssets.swift
+    params:
+      fontAliasName: FontAssets
+      allValues: true
+      publicAccess: true

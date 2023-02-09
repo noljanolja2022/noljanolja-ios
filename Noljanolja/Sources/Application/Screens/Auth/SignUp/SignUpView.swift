@@ -65,7 +65,6 @@ struct SignUpView: View {
             .padding(.vertical, 4)
         }
         .frame(maxHeight: .infinity)
-        .padding(16)
     }
 }
 
