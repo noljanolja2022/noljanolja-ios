@@ -1,5 +1,5 @@
 //
-//  NaverAuthorizationAPI.swift
+//  NaverAuthAPI.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 04/02/2023.
@@ -9,9 +9,9 @@ import Combine
 import Foundation
 import NaverThirdPartyLogin
 
-// MARK: - NaverAuthorizationAPI
+// MARK: - NaverAuthAPI
 
-final class NaverAuthorizationAPI: NSObject {
+final class NaverAuthAPI: NSObject {
     private lazy var naverLoginConnection = NaverThirdPartyLoginConnection.getSharedInstance()
 
     private let successTrigger = PassthroughSubject<String, Never>()
@@ -49,13 +49,13 @@ final class NaverAuthorizationAPI: NSObject {
 
 // MARK: NaverThirdPartyLoginConnectionDelegate
 
-extension NaverAuthorizationAPI: NaverThirdPartyLoginConnectionDelegate {
+extension NaverAuthAPI: NaverThirdPartyLoginConnectionDelegate {
     func oauth20ConnectionDidFinishRequestACTokenWithAuthCode() {
         logger.info("FinishRequestACTokenWithAuthCode - \(naverLoginConnection?.accessToken ?? "")")
         if let accessToken = naverLoginConnection?.accessToken {
             successTrigger.send(accessToken)
         } else {
-            failTrigger.send(NaverAuthorizationError.tokenNotExit)
+            failTrigger.send(NaverAuthError.tokenNotExit)
         }
     }
 
@@ -64,7 +64,7 @@ extension NaverAuthorizationAPI: NaverThirdPartyLoginConnectionDelegate {
         if let accessToken = naverLoginConnection?.accessToken {
             successTrigger.send(accessToken)
         } else {
-            failTrigger.send(NaverAuthorizationError.tokenNotExit)
+            failTrigger.send(NaverAuthError.tokenNotExit)
         }
     }
 

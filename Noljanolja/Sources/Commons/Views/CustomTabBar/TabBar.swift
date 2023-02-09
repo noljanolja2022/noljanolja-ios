@@ -1,5 +1,5 @@
 //
-//  TabItems.swift
+//  TabBar.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 02/02/2023.
@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct TabItemsView: View {
-    private let items: [TabItem]
-    @Binding private var selectedIndex: Int
+struct TabBar: View {
+    private let items: [TabBarItem]
+    @Binding private var selection: Int
 
-    init(items: [TabItem], selectedIndex: Binding<Int>) {
+    init(selection: Binding<Int>, items: [TabBarItem]) {
+        self._selection = selection
         self.items = items
-        self._selectedIndex = selectedIndex
     }
 
     var body: some View {
@@ -28,7 +28,7 @@ struct TabItemsView: View {
                                 .fill(item.backgroundColor)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                             Button(
-                                action: { selectedIndex = index },
+                                action: { selection = index },
                                 label: {
                                     Image(systemName: item.image)
                                         .resizable()

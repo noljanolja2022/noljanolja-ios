@@ -1,5 +1,5 @@
 //
-//  TabItem.swift
+//  TabBarItem.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 02/02/2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TabItem {
+struct TabBarItem {
     let image: String
     let offset: CGSize
     let backgroundColor: Color

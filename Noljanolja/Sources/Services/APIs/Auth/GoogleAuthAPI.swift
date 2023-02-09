@@ -1,5 +1,5 @@
 //
-//  GoogleAuthorizationAPI.swift
+//  GoogleAuthAPI.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 04/02/2023.
@@ -9,11 +9,9 @@ import Combine
 import Foundation
 import GoogleSignIn
 
-// MARK: - GoogleAuthorizationError
+// MARK: - GoogleAuthAPI
 
-// MARK: - GoogleAuthorizationAPI
-
-final class GoogleAuthorizationAPI {
+final class GoogleAuthAPI {
     func signIn() -> Future<(String, String), Error> {
         Future { promise in
             guard let rootViewController = UIApplication.shared.rootKeyWindow?.rootViewController else { return }
@@ -23,7 +21,7 @@ final class GoogleAuthorizationAPI {
                 } else if let idToken = result?.user.idToken?.tokenString, let accessToken = result?.user.accessToken.tokenString {
                     promise(.success((idToken, accessToken)))
                 } else {
-                    promise(.failure(GoogleAuthorizationError.tokenNotExit))
+                    promise(.failure(GoogleAuthError.tokenNotExit))
                 }
             }
         }

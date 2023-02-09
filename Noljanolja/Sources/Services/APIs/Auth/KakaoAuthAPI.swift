@@ -1,5 +1,5 @@
 //
-//  KakaoAuthorizationAPI.swift
+//  KakaoAuthAPI.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 04/02/2023.
@@ -10,9 +10,9 @@ import Foundation
 import KakaoSDKAuth
 import KakaoSDKUser
 
-// MARK: - KakaoAuthorizationAPI
+// MARK: - KakaoAuthAPI
 
-final class KakaoAuthorizationAPI {
+final class KakaoAuthAPI {
     func signIn() -> Future<String, Error> {
         Future { promise in
             UserApi.shared.loginWithKakaoAccount { oauthToken, error in
@@ -21,7 +21,7 @@ final class KakaoAuthorizationAPI {
                 } else if let accessToken = oauthToken?.accessToken {
                     promise(.success(accessToken))
                 } else {
-                    promise(.failure(KakaoAuthorizationError.tokenNotExit))
+                    promise(.failure(KakaoAuthError.tokenNotExit))
                 }
             }
         }

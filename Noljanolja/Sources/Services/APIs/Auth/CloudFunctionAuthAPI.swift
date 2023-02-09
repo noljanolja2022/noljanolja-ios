@@ -1,5 +1,5 @@
 //
-//  CloudFunctionAuthorizationAPI.swift
+//  CloudFunctionAuthAPI.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 05/02/2023.
@@ -11,7 +11,7 @@ import FirebaseFunctionsCombineSwift
 import Foundation
 import SwifterSwift
 
-final class CloudFunctionAuthorizationAPI {
+final class CloudFunctionAuthAPI {
     private lazy var functions = Functions.functions(region: "asia-northeast3")
 
     func authWithKakao(token: String) -> AnyPublisher<String, Error> {
@@ -28,7 +28,7 @@ final class CloudFunctionAuthorizationAPI {
                 if let token = $0.data as? String {
                     return token
                 } else {
-                    throw CloudFunctionAuthorizationError.tokenNotExit
+                    throw CloudFunctionAuthError.tokenNotExit
                 }
             }
             .eraseToAnyPublisher()
