@@ -41,6 +41,7 @@ final class NaverAuthAPI: NSObject {
         Future { [weak self] promise in
             if self?.naverLoginConnection?.accessToken != nil {
                 self?.naverLoginConnection?.resetToken()
+                self?.naverLoginConnection?.removeNaverLoginCookie()
             }
             promise(.success(()))
         }
