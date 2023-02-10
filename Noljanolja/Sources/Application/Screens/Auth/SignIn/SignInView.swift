@@ -18,29 +18,29 @@ struct SignInView: View {
     }
     
     var body: some View {
-        ZStack {
-            ScrollView {
-                VStack(spacing: 12) {
-                    signInWithEmailPasswordContent
-                    signInWithSNSContent
-                }
-                .padding(.horizontal, 16)
-                .padding(.vertical, 24)
+        ScrollView {
+            VStack(spacing: 12) {
+                signInWithEmailPasswordContent
+                signInWithSNSContent
             }
+            .padding(16)
+        }
+        .introspectScrollView { scrollView in
+            scrollView.alwaysBounceVertical = false
         }
         .alert(isPresented: $viewModel.isAlertMessagePresented) {
             Alert(
-                title: Text(L10n.Error.title),
+                title: Text(L10n.Common.Error.title),
                 message: Text(viewModel.errorAlertMessage),
-                dismissButton: .default(Text(L10n.Ok.title))
+                dismissButton: .default(Text(L10n.Common.ok))
             )
         }
     }
     
-    var signInWithEmailPasswordContent: some View {
+    private var signInWithEmailPasswordContent: some View {
         VStack(spacing: 16) {
             CustomTextField(
-                placeholder: L10n.Auth.LogIn.Email.placeholder,
+                placeholder: L10n.Auth.Email.placeholder,
                 text: $viewModel.email,
                 font: FontFamily.NotoSans.medium.font(size: 16),
                 contentInset: UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
@@ -53,7 +53,7 @@ struct SignInView: View {
             )
 
             CustomTextField(
-                placeholder: L10n.Auth.LogIn.Password.placeholder,
+                placeholder: L10n.Auth.Password.placeholder,
                 text: $viewModel.password,
                 font: FontFamily.NotoSans.medium.font(size: 16),
                 isSecureTextEntry: true,
@@ -71,7 +71,7 @@ struct SignInView: View {
                 Button(
                     action: {},
                     label: {
-                        Text(L10n.Auth.LogIn.forgotPassword)
+                        Text(L10n.Auth.forgotPassword)
                             .font(FontFamily.NotoSans.regular.swiftUIFont(size: 14))
                             .foregroundColor(ColorAssets.forcegroundSecondary.swiftUIColor)
                             .frame(height: 20)
@@ -79,45 +79,26 @@ struct SignInView: View {
                 )
                 .padding(.vertical, 16)
             }
-            Button(
+
+            PrimaryButton(
+                title: L10n.Auth.SignIn.title,
                 action: {
                     viewModel.signInWithEmailPasswordTrigger.send(
                         (viewModel.email, viewModel.password)
                     )
                 },
-                label: {
-                    Text(L10n.Auth.LogIn.title)
-                        .font(FontFamily.NotoSans.bold.swiftUIFont(size: 16))
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-            )
-            .frame(height: 48)
-            .padding(.vertical, 4)
-            .disabled(!viewModel.isSignInButtonEnabled)
-            .foregroundColor(
-                viewModel.isSignInButtonEnabled
-                    ? ColorAssets.white.swiftUIColor
-                    : ColorAssets.forcegroundSecondary.swiftUIColor
-            )
-            .background(
-                viewModel.isSignInButtonEnabled
-                    ? ColorAssets.highlightPrimary.swiftUIColor
-                    : ColorAssets.gray.swiftUIColor
-            )
-            .cornerRadius(8)
-            .shadow(
-                color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
+                isEnabled: $viewModel.isSignInButtonEnabled
             )
         }
     }
     
-    var signInWithSNSContent: some View {
+    private var signInWithSNSContent: some View {
         VStack(spacing: 12) {
             HStack {
                 Rectangle()
                     .frame(height: 1)
                     .overlay(ColorAssets.forcegroundTertiary.swiftUIColor)
-                Text(L10n.Auth.LogIn.logInWithSns)
+                Text(L10n.Auth.signInWithSns)
                     .font(FontFamily.NotoSans.regular.swiftUIFont(size: 12))
                     .foregroundColor(ColorAssets.forcegroundSecondary.swiftUIColor)
                 Rectangle()

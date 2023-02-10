@@ -60,24 +60,27 @@ public struct TabLayout: View {
 
         return HStack(spacing: 0) {
             ForEach(self.tabs, id: \.self) { tab in
-                Button(
-                    action: {
-                        self.selection = self.tabs.firstIndex(of: tab) ?? 0
-                    },
-                    label: {
-                        Text(tab)
-                            .font(self.font)
-                            .padding(.horizontal, 24)
-                            .padding(.vertical, 10)
-                    }
-                )
-                .padding(.vertical, 16)
-                .accentColor(
-                    tabs[selection] == tab ? self.selectedAccentColor : self.accentColor
-                )
-                .background(
-                    tabs[selection] == tab ? self.selectedBackgroundColor : self.backgroundColor
-                )
+                ZStack {
+                    Button(
+                        action: {
+                            self.selection = self.tabs.firstIndex(of: tab) ?? 0
+                        },
+                        label: {
+                            Text(tab)
+                                .font(self.font)
+                                .frame(maxHeight: .infinity)
+                                .padding(.horizontal, 24)
+                        }
+                    )
+                    .background(
+                        tabs[selection] == tab ? self.selectedBackgroundColor : self.backgroundColor
+                    )
+                    Text(tab)
+                        .font(self.font)
+                        .foregroundColor(
+                            tabs[selection] == tab ? self.selectedAccentColor : self.accentColor
+                        )
+                }
             }
         }
         .frame(height: 42)

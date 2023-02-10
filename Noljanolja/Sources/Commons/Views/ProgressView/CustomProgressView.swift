@@ -1,5 +1,5 @@
 //
-//  LoadingView.swift
+//  CustomProgressView.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 09/02/2023.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-// MARK: - LoadingView
+// MARK: - CustomProgressView
 
-struct LoadingView: View {
+struct CustomProgressView: View {
     var body: some View {
         HStack {
             ProgressView()
@@ -25,10 +25,10 @@ struct LoadingView: View {
     }
 }
 
-// MARK: - LoadingView_Previews
+// MARK: - CustomProgressView_Previews
 
-struct LoadingView_Previews: PreviewProvider {
+struct CustomProgressView_Previews: PreviewProvider {
     static var previews: some View {
-        LoadingView()
+        CustomProgressView()
     }
 }

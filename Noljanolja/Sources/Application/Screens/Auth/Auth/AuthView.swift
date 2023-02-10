@@ -20,20 +20,22 @@ struct AuthView: View {
     }
 
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 4) {
             ImageAssets.logo.swiftUIImage
                 .frame(width: 166, height: 66)
-                .padding(.vertical, 64)
+                .padding(.vertical, 16)
             content
         }
-        .background(ColorAssets.highlightPrimary.swiftUIColor.edgesIgnoringSafeArea(.top))
+        .background(
+            ColorAssets.highlightPrimary.swiftUIColor.edgesIgnoringSafeArea(.top)
+        )
     }
 
-    var content: some View {
-        VStack(spacing: 0) {
+    private var content: some View {
+        VStack(spacing: 8) {
             TabLayout(
                 selection: $selectedIndex,
-                tabs: [L10n.Auth.LogIn.title, L10n.Auth.JoinTheMembership.title],
+                tabs: [L10n.Auth.SignIn.title, L10n.Auth.JoinTheMembership.title],
                 font: FontFamily.NotoSans.bold.swiftUIFont(size: 16),
                 accentColor: ColorAssets.forcegroundTertiary.swiftUIColor,
                 selectedAccentColor: ColorAssets.white.swiftUIColor,
@@ -45,9 +47,9 @@ struct AuthView: View {
 
             TabView(selection: $selectedIndex) {
                 SignInView().tag(0)
-                SignUpView().tag(1)
+                SignUpRootView().tag(1)
             }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+//            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .introspectTabBarController { tabBarController in
                 tabBarController.tabBar.isHidden = true
             }

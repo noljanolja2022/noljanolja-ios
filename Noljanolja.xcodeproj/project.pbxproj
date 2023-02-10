@@ -18,7 +18,7 @@
 		CF00D163299423FB00505702 /* View+EdgeCornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D162299423FB00505702 /* View+EdgeCornerRadius.swift */; };
 		CF00D1692994E0A700505702 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D1682994E0A700505702 /* CustomTextField.swift */; };
 		CF00D16F2994FC9E00505702 /* String+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D16E2994FC9E00505702 /* String+Validation.swift */; };
-		CF00D1732995457600505702 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D1722995457600505702 /* LoadingView.swift */; };
+		CF00D1732995457600505702 /* CustomProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D1722995457600505702 /* CustomProgressView.swift */; };
 		CF0E8845298D4E09000DAE4A /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = CF0E8844298D4E09000DAE4A /* FirebaseCrashlytics */; };
 		CF14F230298C05F900BC2066 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F22F298C05F900BC2066 /* MainView.swift */; };
 		CF14F23A298C123300BC2066 /* UIApplication+KeyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F239298C123300BC2066 /* UIApplication+KeyWindow.swift */; };
@@ -49,6 +49,17 @@
 		CF6ABC1F29935D7B00D78213 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC1D29935D7B00D78213 /* RootView.swift */; };
 		CF6ABC2029935D7B00D78213 /* RootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC1E29935D7B00D78213 /* RootViewModel.swift */; };
 		CF6ABC232993618000D78213 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = CF6ABC222993618000D78213 /* Introspect */; };
+		CFC709E02996051800B64216 /* View+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709DF2996051800B64216 /* View+Progress.swift */; };
+		CFC709E32996276C00B64216 /* RoundedLinearProgressViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709E22996276C00B64216 /* RoundedLinearProgressViewStyle.swift */; };
+		CFC709E729962CD100B64216 /* SignUpRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709E529962CD100B64216 /* SignUpRootView.swift */; };
+		CFC709E829962CD100B64216 /* SignUpRootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709E629962CD100B64216 /* SignUpRootViewModel.swift */; };
+		CFC709EC29962DF700B64216 /* TermAndCoditionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709EA29962DF700B64216 /* TermAndCoditionView.swift */; };
+		CFC709ED29962DF700B64216 /* TermAndCoditionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709EB29962DF700B64216 /* TermAndCoditionViewModel.swift */; };
+		CFC709F029962F9200B64216 /* TermItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709EF29962F9200B64216 /* TermItemView.swift */; };
+		CFD83DBF29967A2E00B9A6BB /* SignUpStepHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD83DBE29967A2E00B9A6BB /* SignUpStepHeaderView.swift */; };
+		CFD83DC22996812B00B9A6BB /* TermAndCoditionItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD83DC12996812B00B9A6BB /* TermAndCoditionItemType.swift */; };
+		CFD83DC52996A07700B9A6BB /* SignUpStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD83DC42996A07700B9A6BB /* SignUpStep.swift */; };
+		CFDCA37929964501003C2C77 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDCA37829964501003C2C77 /* PrimaryButton.swift */; };
 		CFE09254298DF69600F197F0 /* NaverAuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE09253298DF69600F197F0 /* NaverAuthAPI.swift */; };
 		CFE09257298DF78700F197F0 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = CFE09256298DF78700F197F0 /* SwiftyBeaver */; };
 		CFE0925B298DF7AF00F197F0 /* Logger+SwiftyBeaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0925A298DF7AF00F197F0 /* Logger+SwiftyBeaver.swift */; };
@@ -123,7 +134,7 @@
 		CF00D162299423FB00505702 /* View+EdgeCornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+EdgeCornerRadius.swift"; sourceTree = "<group>"; };
 		CF00D1682994E0A700505702 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		CF00D16E2994FC9E00505702 /* String+Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Validation.swift"; sourceTree = "<group>"; };
-		CF00D1722995457600505702 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		CF00D1722995457600505702 /* CustomProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressView.swift; sourceTree = "<group>"; };
 		CF14F22F298C05F900BC2066 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CF14F239298C123300BC2066 /* UIApplication+KeyWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+KeyWindow.swift"; sourceTree = "<group>"; };
 		CF14F23C298C30B600BC2066 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
@@ -152,6 +163,17 @@
 		CF6ABC1229935C2D00D78213 /* SignInViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		CF6ABC1D29935D7B00D78213 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		CF6ABC1E29935D7B00D78213 /* RootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
+		CFC709DF2996051800B64216 /* View+Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Progress.swift"; sourceTree = "<group>"; };
+		CFC709E22996276C00B64216 /* RoundedLinearProgressViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedLinearProgressViewStyle.swift; sourceTree = "<group>"; };
+		CFC709E529962CD100B64216 /* SignUpRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRootView.swift; sourceTree = "<group>"; };
+		CFC709E629962CD100B64216 /* SignUpRootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRootViewModel.swift; sourceTree = "<group>"; };
+		CFC709EA29962DF700B64216 /* TermAndCoditionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermAndCoditionView.swift; sourceTree = "<group>"; };
+		CFC709EB29962DF700B64216 /* TermAndCoditionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermAndCoditionViewModel.swift; sourceTree = "<group>"; };
+		CFC709EF29962F9200B64216 /* TermItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermItemView.swift; sourceTree = "<group>"; };
+		CFD83DBE29967A2E00B9A6BB /* SignUpStepHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpStepHeaderView.swift; sourceTree = "<group>"; };
+		CFD83DC12996812B00B9A6BB /* TermAndCoditionItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermAndCoditionItemType.swift; sourceTree = "<group>"; };
+		CFD83DC42996A07700B9A6BB /* SignUpStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpStep.swift; sourceTree = "<group>"; };
+		CFDCA37829964501003C2C77 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		CFE09253298DF69600F197F0 /* NaverAuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverAuthAPI.swift; sourceTree = "<group>"; };
 		CFE0925A298DF7AF00F197F0 /* Logger+SwiftyBeaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+SwiftyBeaver.swift"; sourceTree = "<group>"; };
 		CFE0925C298DFDCB00F197F0 /* KakaoAuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoAuthAPI.swift; sourceTree = "<group>"; };
@@ -265,7 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				CF00D162299423FB00505702 /* View+EdgeCornerRadius.swift */,
-				CF00D1722995457600505702 /* LoadingView.swift */,
+				CFC709DF2996051800B64216 /* View+Progress.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -367,6 +389,8 @@
 		CF15500D299396260053E86D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CFDCA377299644E7003C2C77 /* PrimaryButton */,
+				CFC709E12996211E00B64216 /* ProgressView */,
 				CF00D1672994E08A00505702 /* CustomTextField */,
 				CF1550202993B5C90053E86D /* CustomTabBar */,
 				CF15500E299397F70053E86D /* CustomTabLayout */,
@@ -403,6 +427,8 @@
 		CF6ABC0A29935C2D00D78213 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				CFC709E929962DD900B64216 /* TermAndCoditions */,
+				CFC709E429962CB300B64216 /* SignUpRoot */,
 				CF15501A2993B5640053E86D /* ResetPassword */,
 				CF6ABC1929935D4800D78213 /* Auth */,
 				CF6ABC0B29935C2D00D78213 /* SignUp */,
@@ -445,6 +471,77 @@
 				CF6ABC1E29935D7B00D78213 /* RootViewModel.swift */,
 			);
 			path = Root;
+			sourceTree = "<group>";
+		};
+		CFC709E12996211E00B64216 /* ProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				CF00D1722995457600505702 /* CustomProgressView.swift */,
+				CFC709E22996276C00B64216 /* RoundedLinearProgressViewStyle.swift */,
+			);
+			path = ProgressView;
+			sourceTree = "<group>";
+		};
+		CFC709E429962CB300B64216 /* SignUpRoot */ = {
+			isa = PBXGroup;
+			children = (
+				CFD83DC32996A06B00B9A6BB /* Models */,
+				CFD83DBD29967A0D00B9A6BB /* Views */,
+				CFC709E529962CD100B64216 /* SignUpRootView.swift */,
+				CFC709E629962CD100B64216 /* SignUpRootViewModel.swift */,
+			);
+			path = SignUpRoot;
+			sourceTree = "<group>";
+		};
+		CFC709E929962DD900B64216 /* TermAndCoditions */ = {
+			isa = PBXGroup;
+			children = (
+				CFD83DC02996810D00B9A6BB /* Models */,
+				CFC709EE29962F8500B64216 /* Views */,
+				CFC709EA29962DF700B64216 /* TermAndCoditionView.swift */,
+				CFC709EB29962DF700B64216 /* TermAndCoditionViewModel.swift */,
+			);
+			path = TermAndCoditions;
+			sourceTree = "<group>";
+		};
+		CFC709EE29962F8500B64216 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CFC709EF29962F9200B64216 /* TermItemView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CFD83DBD29967A0D00B9A6BB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CFD83DBE29967A2E00B9A6BB /* SignUpStepHeaderView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CFD83DC02996810D00B9A6BB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CFD83DC12996812B00B9A6BB /* TermAndCoditionItemType.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CFD83DC32996A06B00B9A6BB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CFD83DC42996A07700B9A6BB /* SignUpStep.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CFDCA377299644E7003C2C77 /* PrimaryButton */ = {
+			isa = PBXGroup;
+			children = (
+				CFDCA37829964501003C2C77 /* PrimaryButton.swift */,
+			);
+			path = PrimaryButton;
 			sourceTree = "<group>";
 		};
 		CFE09252298DF67D00F197F0 /* Auth */ = {
@@ -1042,8 +1139,11 @@
 				CF43BF73299274D900FD3180 /* FirebaseAuth+Combine.swift in Sources */,
 				CFFD70C5298AC5F800D4F5A2 /* RequestTimeoutPlugin.swift in Sources */,
 				CF1550232993B5C90053E86D /* TabBar.swift in Sources */,
+				CFD83DBF29967A2E00B9A6BB /* SignUpStepHeaderView.swift in Sources */,
 				CF1550182993B55F0053E86D /* ForgotPasswordView.swift in Sources */,
+				CFD83DC52996A07700B9A6BB /* SignUpStep.swift in Sources */,
 				CFE0925F298EACF200F197F0 /* GoogleAuthAPI.swift in Sources */,
+				CFC709E729962CD100B64216 /* SignUpRootView.swift in Sources */,
 				CF6ABC1329935C2D00D78213 /* SignUpViewModel.swift in Sources */,
 				CFFD70D3298AC89000D4F5A2 /* NetworkConfigs.swift in Sources */,
 				CF14F249298C331C00BC2066 /* Localizable.swift in Sources */,
@@ -1053,33 +1153,41 @@
 				CFFD70C9298AC5F800D4F5A2 /* TargetType+RawTarget.swift in Sources */,
 				CFFD70C8298AC5F800D4F5A2 /* BaseAuthTargetType.swift in Sources */,
 				CFFD70D9298ACAF600D4F5A2 /* BaseTargetType.swift in Sources */,
-				CF00D1732995457600505702 /* LoadingView.swift in Sources */,
+				CF00D1732995457600505702 /* CustomProgressView.swift in Sources */,
 				CF6ABC1529935C2D00D78213 /* AuthViewModel.swift in Sources */,
 				CF15500B29938C5C0053E86D /* ProfileView.swift in Sources */,
+				CFC709E02996051800B64216 /* View+Progress.swift in Sources */,
 				CF6ABC1729935C2D00D78213 /* SignInView.swift in Sources */,
 				CF1550242993B5C90053E86D /* TabBarItem.swift in Sources */,
 				CF00D1572994174600505702 /* FontAssets.swift in Sources */,
 				CFFD70C6298AC5F800D4F5A2 /* AuthPluggin.swift in Sources */,
 				CF15501029939A350053E86D /* TabLayout.swift in Sources */,
 				CFE0926B298FE73000F197F0 /* CloudFunctionAuthAPI.swift in Sources */,
+				CFC709EC29962DF700B64216 /* TermAndCoditionView.swift in Sources */,
 				CFFD70CC298AC5F800D4F5A2 /* Api.swift in Sources */,
 				CF15500C29938C5C0053E86D /* ProfileViewModel.swift in Sources */,
 				CF14F24A298C331D00BC2066 /* ColorAssets.swift in Sources */,
 				CFE09341299007E400F197F0 /* Publisher+FlatMapTranforming.swift in Sources */,
 				CFFD70D5298AC92500D4F5A2 /* HomeAPI.swift in Sources */,
+				CFC709ED29962DF700B64216 /* TermAndCoditionViewModel.swift in Sources */,
 				CFE09254298DF69600F197F0 /* NaverAuthAPI.swift in Sources */,
 				CF6ABC2029935D7B00D78213 /* RootViewModel.swift in Sources */,
 				CF14F266298CF4E700BC2066 /* AppConfigs.swift in Sources */,
+				CFC709E829962CD100B64216 /* SignUpRootViewModel.swift in Sources */,
+				CFD83DC22996812B00B9A6BB /* TermAndCoditionItemType.swift in Sources */,
 				CF14F230298C05F900BC2066 /* MainView.swift in Sources */,
 				CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */,
 				CF6ABC1429935C2D00D78213 /* SignUpView.swift in Sources */,
 				CF00D1692994E0A700505702 /* CustomTextField.swift in Sources */,
 				CFFD70C7298AC5F800D4F5A2 /* DisableLocalCachePlugin.swift in Sources */,
+				CFDCA37929964501003C2C77 /* PrimaryButton.swift in Sources */,
+				CFC709E32996276C00B64216 /* RoundedLinearProgressViewStyle.swift in Sources */,
 				CF00D16F2994FC9E00505702 /* String+Validation.swift in Sources */,
 				CFE48BC3299207DA0062C903 /* AuthStore.swift in Sources */,
 				CFFD70CB298AC5F800D4F5A2 /* ApiProvider.swift in Sources */,
 				CF6ABC1F29935D7B00D78213 /* RootView.swift in Sources */,
 				CF14F23A298C123300BC2066 /* UIApplication+KeyWindow.swift in Sources */,
+				CFC709F029962F9200B64216 /* TermItemView.swift in Sources */,
 				CFE0933E298FFC5B00F197F0 /* AuthError.swift in Sources */,
 				CFE0925B298DF7AF00F197F0 /* Logger+SwiftyBeaver.swift in Sources */,
 				CFE09265298EB92D00F197F0 /* AppleAuthAPI.swift in Sources */,

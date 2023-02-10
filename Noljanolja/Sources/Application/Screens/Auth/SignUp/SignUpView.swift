@@ -23,48 +23,77 @@ struct SignUpView: View {
 
     var body: some View {
         VStack(spacing: 12) {
-            TextField("Email", text: $email)
-                .font(Font.system(size: 16))
-                .frame(height: 48)
-                .padding(.horizontal, 8)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.gray, lineWidth: 1)
+            signUp
+            PrimaryButton(
+                title: L10n.Auth.SignUp.title,
+                action: {
+                    viewModel.signUpTrigger.send(
+                        (viewModel.email, viewModel.password)
+                    )
+                },
+                isEnabled: $viewModel.isSignUpButtonEnabled
+            )
+            .padding(.horizontal, 16)
+        }
+        .alert(isPresented: $viewModel.isAlertMessagePresented) {
+            Alert(
+                title: Text(L10n.Common.Error.title),
+                message: Text(viewModel.errorAlertMessage),
+                dismissButton: .default(Text(L10n.Common.ok))
+            )
+        }
+        .navigationBarHidden(true)
+    }
+
+    private var signUp: some View {
+        ScrollView {
+            VStack(spacing: 16) {
+                CustomTextField(
+                    placeholder: L10n.Auth.Email.placeholder,
+                    text: $viewModel.email,
+                    font: FontFamily.NotoSans.medium.font(size: 16),
+                    contentInset: UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
                 )
-            SecureField("Password", text: $password)
-                .font(Font.system(size: 16))
-                .frame(height: 48)
-                .padding(.horizontal, 8)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.gray, lineWidth: 1)
-                )
-            SecureField("Confirm password", text: $confirmPassword)
-                .font(Font.system(size: 16))
-                .frame(height: 48)
-                .padding(.horizontal, 8)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.gray, lineWidth: 1)
+                .frame(height: 50)
+                .background(ColorAssets.gray.swiftUIColor)
+                .cornerRadius(8)
+                .shadow(
+                    color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
                 )
 
-            Button(
-                action: {
-                    viewModel.signUpTrigger.send((email, password))
-                },
-                label: {
-                    Text("Sign Up")
-                        .font(Font.system(size: 16).bold())
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-            )
-            .frame(height: 48)
-            .background(Color.green)
-            .cornerRadius(8)
-            .padding(.vertical, 4)
+                CustomTextField(
+                    placeholder: L10n.Auth.Password.placeholder,
+                    text: $viewModel.password,
+                    font: FontFamily.NotoSans.medium.font(size: 16),
+                    isSecureTextEntry: true,
+                    contentInset: UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
+                )
+                .frame(height: 50)
+                .background(ColorAssets.gray.swiftUIColor)
+                .cornerRadius(8)
+                .shadow(
+                    color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
+                )
+
+                CustomTextField(
+                    placeholder: L10n.Auth.ConfirmPassword.placeholder,
+                    text: $viewModel.confirmPassword,
+                    font: FontFamily.NotoSans.medium.font(size: 16),
+                    isSecureTextEntry: true,
+                    contentInset: UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
+                )
+                .frame(height: 50)
+                .background(ColorAssets.gray.swiftUIColor)
+                .cornerRadius(8)
+                .shadow(
+                    color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
+                )
+            }
+            .padding(16)
         }
-        .frame(maxHeight: .infinity)
+        .introspectScrollView { scrollView in
+            scrollView.alwaysBounceVertical = false
+        }
     }
 }
 

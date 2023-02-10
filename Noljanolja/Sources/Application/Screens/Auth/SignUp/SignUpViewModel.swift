@@ -17,7 +17,18 @@ final class SignUpViewModel: ObservableObject {
 
     // MARK: Input
 
+    @Published var email = ""
+    @Published var password = ""
+    @Published var confirmPassword = ""
+
     let signUpTrigger = PassthroughSubject<(String, String), Never>()
+
+    // MARK: Output
+
+    @Published var isSignUpButtonEnabled = false
+    @Published var isLoading = false
+    @Published var isAlertMessagePresented = false
+    @Published var errorAlertMessage = ""
 
     // MARK: Private
 
@@ -31,18 +42,22 @@ final class SignUpViewModel: ObservableObject {
 
     private func configure() {
         signUpTrigger
+            .handleEvents(receiveOutput: { [weak self] _ in self?.isLoading = true })
             .flatMap { [weak self] email, password -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
                     .signUp(email: email, password: password)
                     .eraseToResultAnyPublisher()
             }
-            .sink(receiveValue: { result in
+            .sink(receiveValue: { [weak self] result in
+                self?.isLoading = false
                 switch result {
                 case let .success(idToken):
                     logger.info("Signed up with Email/Password - Token: \(idToken)")
                 case let .failure(error):
                     logger.error("Sign in with Email/Password failed: \(error.localizedDescription)")
+                    self?.isAlertMessagePresented = true
+                    self?.errorAlertMessage = "Sign in with Email/Password failed: \(error.localizedDescription)"
                 }
             })
             .store(in: &cancellables)

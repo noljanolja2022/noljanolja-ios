@@ -13,34 +13,58 @@ internal enum L10n {
   /// Noljanolja
   internal static let appName = L10n.tr("Localizable", "app_name", fallback: "Noljanolja")
   internal enum Auth {
+    /// Forgot your password?
+    internal static let forgotPassword = L10n.tr("Localizable", "auth.forgot_password", fallback: "Forgot your password?")
+    /// Log in with SNS
+    internal static let signInWithSns = L10n.tr("Localizable", "auth.sign_in_with_sns", fallback: "Log in with SNS")
+    internal enum ConfirmPassword {
+      /// Please confirm password
+      internal static let placeholder = L10n.tr("Localizable", "auth.confirm_password.placeholder", fallback: "Please confirm password")
+    }
+    internal enum Email {
+      /// Please enter your email
+      internal static let placeholder = L10n.tr("Localizable", "auth.email.placeholder", fallback: "Please enter your email")
+    }
     internal enum JoinTheMembership {
       /// Join the membership
       internal static let title = L10n.tr("Localizable", "auth.join_the_membership.title", fallback: "Join the membership")
     }
-    internal enum LogIn {
-      /// Forgot your password?
-      internal static let forgotPassword = L10n.tr("Localizable", "auth.log_in.forgot_password", fallback: "Forgot your password?")
-      /// Log in with SNS
-      internal static let logInWithSns = L10n.tr("Localizable", "auth.log_in.log_in_with_sns", fallback: "Log in with SNS")
+    internal enum Password {
+      /// Please enter password
+      internal static let placeholder = L10n.tr("Localizable", "auth.password.placeholder", fallback: "Please enter password")
+    }
+    internal enum SignIn {
       /// Log in
-      internal static let title = L10n.tr("Localizable", "auth.log_in.title", fallback: "Log in")
-      internal enum Email {
-        /// Please enter your email
-        internal static let placeholder = L10n.tr("Localizable", "auth.log_in.email.placeholder", fallback: "Please enter your email")
+      internal static let title = L10n.tr("Localizable", "auth.sign_in.title", fallback: "Log in")
+    }
+    internal enum SignUp {
+      /// Create account
+      internal static let title = L10n.tr("Localizable", "auth.sign_up.title", fallback: "Create account")
+      internal enum Step1 {
+        /// You need to agree to the terms and conditions before signing up
+        internal static let description = L10n.tr("Localizable", "auth.sign_up.step1.description", fallback: "You need to agree to the terms and conditions before signing up")
+        /// STEP.1
+        internal static let title = L10n.tr("Localizable", "auth.sign_up.step1.title", fallback: "STEP.1")
       }
-      internal enum Password {
-        /// Please enter a password
-        internal static let placeholder = L10n.tr("Localizable", "auth.log_in.password.placeholder", fallback: "Please enter a password")
+      internal enum Step2 {
+        /// Sign up with email and password
+        internal static let description = L10n.tr("Localizable", "auth.sign_up.step2.description", fallback: "Sign up with email and password")
+        /// STEP.2
+        internal static let title = L10n.tr("Localizable", "auth.sign_up.step2.title", fallback: "STEP.2")
       }
     }
   }
-  internal enum Error {
-    /// Error
-    internal static let title = L10n.tr("Localizable", "error.title", fallback: "Error")
-  }
-  internal enum Ok {
+  internal enum Common {
+    /// Next
+    internal static let next = L10n.tr("Localizable", "common.next", fallback: "Next")
     /// OK
-    internal static let title = L10n.tr("Localizable", "ok.title", fallback: "OK")
+    internal static let ok = L10n.tr("Localizable", "common.ok", fallback: "OK")
+    internal enum Error {
+      /// Error! An error occurred. Please try again later.
+      internal static let message = L10n.tr("Localizable", "common.error.message", fallback: "Error! An error occurred. Please try again later.")
+      /// Error
+      internal static let title = L10n.tr("Localizable", "common.error.title", fallback: "Error")
+    }
   }
   internal enum Validation {
     internal enum Email {

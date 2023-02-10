@@ -29,7 +29,7 @@ final class SignInViewModel: ObservableObject {
 
     // MARK: Output
 
-    @Published private(set) var isSignInButtonEnabled = true
+    @Published var isSignInButtonEnabled = true
     @Published var isLoading = false
     @Published var isAlertMessagePresented = false
     @Published var errorAlertMessage = ""
