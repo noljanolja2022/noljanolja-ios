@@ -28,7 +28,7 @@ final class SignUpViewModel: ObservableObject {
     @Published var isSignUpButtonEnabled = false
     @Published var isLoading = false
     @Published var isAlertMessagePresented = false
-    @Published var errorAlertMessage = ""
+    @Published var alertMessage = ""
 
     // MARK: Private
 
@@ -57,7 +57,7 @@ final class SignUpViewModel: ObservableObject {
                 case let .failure(error):
                     logger.error("Sign in with Email/Password failed: \(error.localizedDescription)")
                     self?.isAlertMessagePresented = true
-                    self?.errorAlertMessage = "Sign in with Email/Password failed: \(error.localizedDescription)"
+                    self?.alertMessage = "Sign in with Email/Password failed.\nDETAIL: \(error.localizedDescription)"
                 }
             })
             .store(in: &cancellables)

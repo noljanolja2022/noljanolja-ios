@@ -7,28 +7,28 @@
 
 import SwiftUI
 
-// MARK: - CustomProgressView
+// MARK: - FullScreenProgressView
 
-struct CustomProgressView: View {
+struct FullScreenProgressView: View {
     var body: some View {
         HStack {
             ProgressView()
                 .scaleEffect(2)
-                .frame(width: 72, height: 72)
+                .frame(width: 80, height: 80)
                 .progressViewStyle(CircularProgressViewStyle(tint: ColorAssets.black.swiftUIColor))
                 .background(ColorAssets.gray.swiftUIColor)
                 .cornerRadius(8)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.black.opacity(0.1))
+        .background(Color.black.opacity(0.2))
         .ignoresSafeArea()
     }
 }
 
-// MARK: - CustomProgressView_Previews
+// MARK: - FullScreenProgressView_Previews
 
-struct CustomProgressView_Previews: PreviewProvider {
+struct FullScreenProgressView_Previews: PreviewProvider {
     static var previews: some View {
-        CustomProgressView()
+        FullScreenProgressView()
     }
 }

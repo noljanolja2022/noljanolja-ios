@@ -12,26 +12,14 @@ import SwiftUI
 
 struct AuthView: View {
     @StateObject private var viewModel: AuthViewModel
-
+    
     @State private var selectedIndex = 0
-
+    
     init(viewModel: AuthViewModel = AuthViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
-        VStack(spacing: 4) {
-            ImageAssets.logo.swiftUIImage
-                .frame(width: 166, height: 66)
-                .padding(.vertical, 16)
-            content
-        }
-        .background(
-            ColorAssets.highlightPrimary.swiftUIColor.edgesIgnoringSafeArea(.top)
-        )
-    }
-
-    private var content: some View {
         VStack(spacing: 8) {
             TabLayout(
                 selection: $selectedIndex,
@@ -43,19 +31,18 @@ struct AuthView: View {
                 selectedBackgroundColor: ColorAssets.black.swiftUIColor
             )
             .frame(height: 42)
-            .padding(.top, 18)
+            .padding(.top, 12)
 
             TabView(selection: $selectedIndex) {
                 SignInView().tag(0)
                 SignUpRootView().tag(1)
             }
-//            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+            //                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .introspectTabBarController { tabBarController in
                 tabBarController.tabBar.isHidden = true
             }
         }
-        .background(Color.white)
-        .cornerRadius(24, corners: [.topLeft, .topRight])
+        .navigationBarHidden(true)
     }
 }
 

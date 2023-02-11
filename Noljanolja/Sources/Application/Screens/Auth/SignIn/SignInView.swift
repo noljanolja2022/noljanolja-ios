@@ -12,12 +12,32 @@ import SwiftUI
 
 struct SignInView: View {
     @StateObject private var viewModel: SignInViewModel
+
+    @State private var isShowingForgotPasswordView = false
     
     init(viewModel: SignInViewModel = SignInViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     
     var body: some View {
+        ZStack {
+            content
+            NavigationLink(
+                destination: ForgotPasswordView(isShowingForgotPasswordView: $isShowingForgotPasswordView),
+                isActive: $isShowingForgotPasswordView,
+                label: { EmptyView() }
+            )
+        }
+        .alert(isPresented: $viewModel.isAlertMessagePresented) {
+            Alert(
+                title: Text(L10n.Common.Error.title),
+                message: Text(viewModel.alertMessage),
+                dismissButton: .default(Text(L10n.Common.ok))
+            )
+        }
+    }
+
+    private var content: some View {
         ScrollView {
             VStack(spacing: 12) {
                 signInWithEmailPasswordContent
@@ -27,13 +47,6 @@ struct SignInView: View {
         }
         .introspectScrollView { scrollView in
             scrollView.alwaysBounceVertical = false
-        }
-        .alert(isPresented: $viewModel.isAlertMessagePresented) {
-            Alert(
-                title: Text(L10n.Common.Error.title),
-                message: Text(viewModel.errorAlertMessage),
-                dismissButton: .default(Text(L10n.Common.ok))
-            )
         }
     }
     
@@ -69,9 +82,9 @@ struct SignInView: View {
             HStack {
                 Spacer()
                 Button(
-                    action: {},
+                    action: { isShowingForgotPasswordView = true },
                     label: {
-                        Text(L10n.Auth.forgotPassword)
+                        Text(L10n.Auth.ForgotPassword.title)
                             .font(FontFamily.NotoSans.regular.swiftUIFont(size: 14))
                             .foregroundColor(ColorAssets.forcegroundSecondary.swiftUIColor)
                             .frame(height: 20)
@@ -98,7 +111,7 @@ struct SignInView: View {
                 Rectangle()
                     .frame(height: 1)
                     .overlay(ColorAssets.forcegroundTertiary.swiftUIColor)
-                Text(L10n.Auth.signInWithSns)
+                Text(L10n.Auth.SignInWithSns.title)
                     .font(FontFamily.NotoSans.regular.swiftUIFont(size: 12))
                     .foregroundColor(ColorAssets.forcegroundSecondary.swiftUIColor)
                 Rectangle()

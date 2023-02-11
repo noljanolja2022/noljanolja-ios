@@ -13,10 +13,6 @@ internal enum L10n {
   /// Noljanolja
   internal static let appName = L10n.tr("Localizable", "app_name", fallback: "Noljanolja")
   internal enum Auth {
-    /// Forgot your password?
-    internal static let forgotPassword = L10n.tr("Localizable", "auth.forgot_password", fallback: "Forgot your password?")
-    /// Log in with SNS
-    internal static let signInWithSns = L10n.tr("Localizable", "auth.sign_in_with_sns", fallback: "Log in with SNS")
     internal enum ConfirmPassword {
       /// Please confirm password
       internal static let placeholder = L10n.tr("Localizable", "auth.confirm_password.placeholder", fallback: "Please confirm password")
@@ -24,6 +20,10 @@ internal enum L10n {
     internal enum Email {
       /// Please enter your email
       internal static let placeholder = L10n.tr("Localizable", "auth.email.placeholder", fallback: "Please enter your email")
+    }
+    internal enum ForgotPassword {
+      /// Forgot your password?
+      internal static let title = L10n.tr("Localizable", "auth.forgot_password.title", fallback: "Forgot your password?")
     }
     internal enum JoinTheMembership {
       /// Join the membership
@@ -33,9 +33,21 @@ internal enum L10n {
       /// Please enter password
       internal static let placeholder = L10n.tr("Localizable", "auth.password.placeholder", fallback: "Please enter password")
     }
+    internal enum ResetPassword {
+      /// Reset password
+      internal static let title = L10n.tr("Localizable", "auth.reset_password.title", fallback: "Reset password")
+      internal enum Success {
+        /// Reset password link has been sent to your email. Follow this link to reset your password and try login again
+        internal static let description = L10n.tr("Localizable", "auth.reset_password.success.description", fallback: "Reset password link has been sent to your email. Follow this link to reset your password and try login again")
+      }
+    }
     internal enum SignIn {
       /// Log in
       internal static let title = L10n.tr("Localizable", "auth.sign_in.title", fallback: "Log in")
+    }
+    internal enum SignInWithSns {
+      /// Log in with SNS
+      internal static let title = L10n.tr("Localizable", "auth.sign_in_with_sns.title", fallback: "Log in with SNS")
     }
     internal enum SignUp {
       /// Create account
@@ -59,11 +71,17 @@ internal enum L10n {
     internal static let next = L10n.tr("Localizable", "common.next", fallback: "Next")
     /// OK
     internal static let ok = L10n.tr("Localizable", "common.ok", fallback: "OK")
+    /// Previous
+    internal static let previous = L10n.tr("Localizable", "common.previous", fallback: "Previous")
     internal enum Error {
       /// Error! An error occurred. Please try again later.
       internal static let message = L10n.tr("Localizable", "common.error.message", fallback: "Error! An error occurred. Please try again later.")
       /// Error
       internal static let title = L10n.tr("Localizable", "common.error.title", fallback: "Error")
+    }
+    internal enum Success {
+      /// Success
+      internal static let title = L10n.tr("Localizable", "common.success.title", fallback: "Success")
     }
   }
   internal enum Validation {

@@ -18,7 +18,7 @@
 		CF00D163299423FB00505702 /* View+EdgeCornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D162299423FB00505702 /* View+EdgeCornerRadius.swift */; };
 		CF00D1692994E0A700505702 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D1682994E0A700505702 /* CustomTextField.swift */; };
 		CF00D16F2994FC9E00505702 /* String+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D16E2994FC9E00505702 /* String+Validation.swift */; };
-		CF00D1732995457600505702 /* CustomProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D1722995457600505702 /* CustomProgressView.swift */; };
+		CF00D1732995457600505702 /* FullScreenProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D1722995457600505702 /* FullScreenProgressView.swift */; };
 		CF0E8845298D4E09000DAE4A /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = CF0E8844298D4E09000DAE4A /* FirebaseCrashlytics */; };
 		CF14F230298C05F900BC2066 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F22F298C05F900BC2066 /* MainView.swift */; };
 		CF14F23A298C123300BC2066 /* UIApplication+KeyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F239298C123300BC2066 /* UIApplication+KeyWindow.swift */; };
@@ -39,6 +39,8 @@
 		CF1550192993B55F0053E86D /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1550172993B55F0053E86D /* ForgotPasswordViewModel.swift */; };
 		CF1550232993B5C90053E86D /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1550212993B5C90053E86D /* TabBar.swift */; };
 		CF1550242993B5C90053E86D /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1550222993B5C90053E86D /* TabBarItem.swift */; };
+		CF3201812997723400E8F914 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3201802997723400E8F914 /* AppState.swift */; };
+		CF32018429978C7C00E8F914 /* ForgotPasswordAlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF32018329978C7C00E8F914 /* ForgotPasswordAlertModel.swift */; };
 		CF43BF73299274D900FD3180 /* FirebaseAuth+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF43BF72299274D900FD3180 /* FirebaseAuth+Combine.swift */; };
 		CF6ABC1329935C2D00D78213 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC0C29935C2D00D78213 /* SignUpViewModel.swift */; };
 		CF6ABC1429935C2D00D78213 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC0D29935C2D00D78213 /* SignUpView.swift */; };
@@ -59,6 +61,9 @@
 		CFD83DBF29967A2E00B9A6BB /* SignUpStepHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD83DBE29967A2E00B9A6BB /* SignUpStepHeaderView.swift */; };
 		CFD83DC22996812B00B9A6BB /* TermAndCoditionItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD83DC12996812B00B9A6BB /* TermAndCoditionItemType.swift */; };
 		CFD83DC52996A07700B9A6BB /* SignUpStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD83DC42996A07700B9A6BB /* SignUpStep.swift */; };
+		CFD83DCD29973A5F00B9A6BB /* AuthNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD83DCB29973A5F00B9A6BB /* AuthNavigationView.swift */; };
+		CFD83DCE29973A5F00B9A6BB /* AuthNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD83DCC29973A5F00B9A6BB /* AuthNavigationViewModel.swift */; };
+		CFD83DD029974E4E00B9A6BB /* Navigation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD83DCF29974E4E00B9A6BB /* Navigation+Extension.swift */; };
 		CFDCA37929964501003C2C77 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDCA37829964501003C2C77 /* PrimaryButton.swift */; };
 		CFE09254298DF69600F197F0 /* NaverAuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE09253298DF69600F197F0 /* NaverAuthAPI.swift */; };
 		CFE09257298DF78700F197F0 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = CFE09256298DF78700F197F0 /* SwiftyBeaver */; };
@@ -134,7 +139,7 @@
 		CF00D162299423FB00505702 /* View+EdgeCornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+EdgeCornerRadius.swift"; sourceTree = "<group>"; };
 		CF00D1682994E0A700505702 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		CF00D16E2994FC9E00505702 /* String+Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Validation.swift"; sourceTree = "<group>"; };
-		CF00D1722995457600505702 /* CustomProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressView.swift; sourceTree = "<group>"; };
+		CF00D1722995457600505702 /* FullScreenProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenProgressView.swift; sourceTree = "<group>"; };
 		CF14F22F298C05F900BC2066 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CF14F239298C123300BC2066 /* UIApplication+KeyWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+KeyWindow.swift"; sourceTree = "<group>"; };
 		CF14F23C298C30B600BC2066 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
@@ -154,6 +159,8 @@
 		CF1550172993B55F0053E86D /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		CF1550212993B5C90053E86D /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		CF1550222993B5C90053E86D /* TabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
+		CF3201802997723400E8F914 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		CF32018329978C7C00E8F914 /* ForgotPasswordAlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordAlertModel.swift; sourceTree = "<group>"; };
 		CF43BF72299274D900FD3180 /* FirebaseAuth+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseAuth+Combine.swift"; sourceTree = "<group>"; };
 		CF6ABC0C29935C2D00D78213 /* SignUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		CF6ABC0D29935C2D00D78213 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -173,6 +180,9 @@
 		CFD83DBE29967A2E00B9A6BB /* SignUpStepHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpStepHeaderView.swift; sourceTree = "<group>"; };
 		CFD83DC12996812B00B9A6BB /* TermAndCoditionItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermAndCoditionItemType.swift; sourceTree = "<group>"; };
 		CFD83DC42996A07700B9A6BB /* SignUpStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpStep.swift; sourceTree = "<group>"; };
+		CFD83DCB29973A5F00B9A6BB /* AuthNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNavigationView.swift; sourceTree = "<group>"; };
+		CFD83DCC29973A5F00B9A6BB /* AuthNavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNavigationViewModel.swift; sourceTree = "<group>"; };
+		CFD83DCF29974E4E00B9A6BB /* Navigation+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Navigation+Extension.swift"; sourceTree = "<group>"; };
 		CFDCA37829964501003C2C77 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		CFE09253298DF69600F197F0 /* NaverAuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverAuthAPI.swift; sourceTree = "<group>"; };
 		CFE0925A298DF7AF00F197F0 /* Logger+SwiftyBeaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+SwiftyBeaver.swift"; sourceTree = "<group>"; };
@@ -288,6 +298,7 @@
 			children = (
 				CF00D162299423FB00505702 /* View+EdgeCornerRadius.swift */,
 				CFC709DF2996051800B64216 /* View+Progress.swift */,
+				CFD83DCF29974E4E00B9A6BB /* Navigation+Extension.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -409,6 +420,7 @@
 		CF15501A2993B5640053E86D /* ResetPassword */ = {
 			isa = PBXGroup;
 			children = (
+				CF32018229978C5F00E8F914 /* Models */,
 				CF1550162993B55F0053E86D /* ForgotPasswordView.swift */,
 				CF1550172993B55F0053E86D /* ForgotPasswordViewModel.swift */,
 			);
@@ -424,15 +436,24 @@
 			path = CustomTabBar;
 			sourceTree = "<group>";
 		};
+		CF32018229978C5F00E8F914 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CF32018329978C7C00E8F914 /* ForgotPasswordAlertModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		CF6ABC0A29935C2D00D78213 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				CFC709E929962DD900B64216 /* TermAndCoditions */,
-				CFC709E429962CB300B64216 /* SignUpRoot */,
-				CF15501A2993B5640053E86D /* ResetPassword */,
 				CF6ABC1929935D4800D78213 /* Auth */,
-				CF6ABC0B29935C2D00D78213 /* SignUp */,
+				CFD83DCA29973A3200B9A6BB /* AuthNavigation */,
+				CF15501A2993B5640053E86D /* ResetPassword */,
 				CF6ABC1029935C2D00D78213 /* SignIn */,
+				CF6ABC0B29935C2D00D78213 /* SignUp */,
+				CFC709E429962CB300B64216 /* SignUpRoot */,
+				CFC709E929962DD900B64216 /* TermAndCoditions */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -476,7 +497,7 @@
 		CFC709E12996211E00B64216 /* ProgressView */ = {
 			isa = PBXGroup;
 			children = (
-				CF00D1722995457600505702 /* CustomProgressView.swift */,
+				CF00D1722995457600505702 /* FullScreenProgressView.swift */,
 				CFC709E22996276C00B64216 /* RoundedLinearProgressViewStyle.swift */,
 			);
 			path = ProgressView;
@@ -534,6 +555,15 @@
 				CFD83DC42996A07700B9A6BB /* SignUpStep.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		CFD83DCA29973A3200B9A6BB /* AuthNavigation */ = {
+			isa = PBXGroup;
+			children = (
+				CFD83DCB29973A5F00B9A6BB /* AuthNavigationView.swift */,
+				CFD83DCC29973A5F00B9A6BB /* AuthNavigationViewModel.swift */,
+			);
+			path = AuthNavigation;
 			sourceTree = "<group>";
 		};
 		CFDCA377299644E7003C2C77 /* PrimaryButton */ = {
@@ -679,6 +709,7 @@
 			isa = PBXGroup;
 			children = (
 				CF14F267298CF87E00BC2066 /* AuthServices.swift */,
+				CF3201802997723400E8F914 /* AppState.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1136,6 +1167,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF00D163299423FB00505702 /* View+EdgeCornerRadius.swift in Sources */,
+				CFD83DD029974E4E00B9A6BB /* Navigation+Extension.swift in Sources */,
 				CF43BF73299274D900FD3180 /* FirebaseAuth+Combine.swift in Sources */,
 				CFFD70C5298AC5F800D4F5A2 /* RequestTimeoutPlugin.swift in Sources */,
 				CF1550232993B5C90053E86D /* TabBar.swift in Sources */,
@@ -1153,7 +1185,7 @@
 				CFFD70C9298AC5F800D4F5A2 /* TargetType+RawTarget.swift in Sources */,
 				CFFD70C8298AC5F800D4F5A2 /* BaseAuthTargetType.swift in Sources */,
 				CFFD70D9298ACAF600D4F5A2 /* BaseTargetType.swift in Sources */,
-				CF00D1732995457600505702 /* CustomProgressView.swift in Sources */,
+				CF00D1732995457600505702 /* FullScreenProgressView.swift in Sources */,
 				CF6ABC1529935C2D00D78213 /* AuthViewModel.swift in Sources */,
 				CF15500B29938C5C0053E86D /* ProfileView.swift in Sources */,
 				CFC709E02996051800B64216 /* View+Progress.swift in Sources */,
@@ -1176,6 +1208,7 @@
 				CFC709E829962CD100B64216 /* SignUpRootViewModel.swift in Sources */,
 				CFD83DC22996812B00B9A6BB /* TermAndCoditionItemType.swift in Sources */,
 				CF14F230298C05F900BC2066 /* MainView.swift in Sources */,
+				CF32018429978C7C00E8F914 /* ForgotPasswordAlertModel.swift in Sources */,
 				CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */,
 				CF6ABC1429935C2D00D78213 /* SignUpView.swift in Sources */,
 				CF00D1692994E0A700505702 /* CustomTextField.swift in Sources */,
@@ -1183,7 +1216,9 @@
 				CFDCA37929964501003C2C77 /* PrimaryButton.swift in Sources */,
 				CFC709E32996276C00B64216 /* RoundedLinearProgressViewStyle.swift in Sources */,
 				CF00D16F2994FC9E00505702 /* String+Validation.swift in Sources */,
+				CFD83DCD29973A5F00B9A6BB /* AuthNavigationView.swift in Sources */,
 				CFE48BC3299207DA0062C903 /* AuthStore.swift in Sources */,
+				CFD83DCE29973A5F00B9A6BB /* AuthNavigationViewModel.swift in Sources */,
 				CFFD70CB298AC5F800D4F5A2 /* ApiProvider.swift in Sources */,
 				CF6ABC1F29935D7B00D78213 /* RootView.swift in Sources */,
 				CF14F23A298C123300BC2066 /* UIApplication+KeyWindow.swift in Sources */,
@@ -1194,6 +1229,7 @@
 				CFFD70C4298AC5F800D4F5A2 /* NetworkLoggerPluggin.swift in Sources */,
 				CFE0925D298DFDCB00F197F0 /* KakaoAuthAPI.swift in Sources */,
 				CFFD70CA298AC5F800D4F5A2 /* TargetType+Default.swift in Sources */,
+				CF3201812997723400E8F914 /* AppState.swift in Sources */,
 				CF14F248298C331C00BC2066 /* ImageAssets.swift in Sources */,
 				CFE09263298EB69700F197F0 /* FirebaseUser+Combine.swift in Sources */,
 				CFFD70D7298ACA8700D4F5A2 /* HomeModel.swift in Sources */,

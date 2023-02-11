@@ -41,6 +41,10 @@ final class AuthServices: NSObject, AuthServicesType {
 
     lazy var isAuthenticated = CurrentValueSubject<Bool, Never>(authStore.getToken() != nil)
 
+    override private init() {
+        super.init()
+    }
+
     func signUp(email: String, password: String) -> AnyPublisher<String, Error> {
         firebaseAuth.createUser(withEmail: email, password: password)
             .flatMap { result in

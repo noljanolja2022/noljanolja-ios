@@ -72,14 +72,12 @@ public struct TabLayout: View {
                                 .padding(.horizontal, 24)
                         }
                     )
+                    .foregroundColor(
+                        tabs[selection] == tab ? self.selectedAccentColor : self.accentColor
+                    )
                     .background(
                         tabs[selection] == tab ? self.selectedBackgroundColor : self.backgroundColor
                     )
-                    Text(tab)
-                        .font(self.font)
-                        .foregroundColor(
-                            tabs[selection] == tab ? self.selectedAccentColor : self.accentColor
-                        )
                 }
             }
         }

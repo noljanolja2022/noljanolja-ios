@@ -13,32 +13,23 @@ import SwiftUI
 struct SignUpView: View {
     @StateObject private var viewModel: SignUpViewModel
 
-    @State private var email = ""
-    @State private var password = ""
-    @State private var confirmPassword = ""
+    @Binding var isShowingSignUpView: Bool
 
-    init(viewModel: SignUpViewModel = SignUpViewModel()) {
+    init(viewModel: SignUpViewModel = SignUpViewModel(),
+         isShowingSignUpView: Binding<Bool>) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        _isShowingSignUpView = isShowingSignUpView
     }
 
     var body: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 0) {
             signUp
-            PrimaryButton(
-                title: L10n.Auth.SignUp.title,
-                action: {
-                    viewModel.signUpTrigger.send(
-                        (viewModel.email, viewModel.password)
-                    )
-                },
-                isEnabled: $viewModel.isSignUpButtonEnabled
-            )
-            .padding(.horizontal, 16)
+            actions
         }
         .alert(isPresented: $viewModel.isAlertMessagePresented) {
             Alert(
                 title: Text(L10n.Common.Error.title),
-                message: Text(viewModel.errorAlertMessage),
+                message: Text(viewModel.alertMessage),
                 dismissButton: .default(Text(L10n.Common.ok))
             )
         }
@@ -95,12 +86,36 @@ struct SignUpView: View {
             scrollView.alwaysBounceVertical = false
         }
     }
+
+    private var actions: some View {
+        HStack(spacing: 12) {
+            PrimaryButton(
+                title: L10n.Common.previous,
+                action: { isShowingSignUpView = false },
+                isEnabled: Binding<Bool>(get: { true }, set: { _ in }),
+                enabledBackgroundColor: ColorAssets.black.swiftUIColor
+            )
+            .frame(width: 128)
+            PrimaryButton(
+                title: L10n.Auth.SignUp.title,
+                action: {
+                    viewModel.signUpTrigger.send(
+                        (viewModel.email, viewModel.password)
+                    )
+                },
+                isEnabled: $viewModel.isSignUpButtonEnabled
+            )
+        }
+        .padding(16)
+    }
 }
 
 // MARK: - SignUpView_Previews
 
 struct SignUpView_Previews: PreviewProvider {
+    @State private static var isShowingSignUpView = true
+
     static var previews: some View {
-        SignUpView()
+        SignUpView(isShowingSignUpView: $isShowingSignUpView)
     }
 }

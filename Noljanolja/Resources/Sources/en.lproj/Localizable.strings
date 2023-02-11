@@ -2,6 +2,8 @@
 
 "common.ok" = "OK";
 "common.next" = "Next";
+"common.previous" = "Previous";
+"common.success.title" = "Success";
 "common.error.title" = "Error";
 "common.error.message" = "Error! An error occurred. Please try again later.";
 
@@ -11,8 +13,11 @@
 "auth.email.placeholder" = "Please enter your email";
 "auth.password.placeholder" = "Please enter password";
 "auth.confirm_password.placeholder" = "Please confirm password";
-"auth.forgot_password" = "Forgot your password?";
-"auth.sign_in_with_sns" = "Log in with SNS";
+"auth.forgot_password.title" = "Forgot your password?";
+"auth.sign_in_with_sns.title" = "Log in with SNS";
+
+"auth.reset_password.title" = "Reset password";
+"auth.reset_password.success.description" = "Reset password link has been sent to your email. Follow this link to reset your password and try login again";
 
 "auth.sign_up.title" = "Create account";
 "auth.sign_up.step1.title" = "STEP.1";

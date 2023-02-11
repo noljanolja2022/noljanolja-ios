@@ -21,9 +21,8 @@ struct ProgressViewModifier: ViewModifier {
     func body(content: Content) -> some View {
         ZStack {
             content
-
             if active {
-                CustomProgressView()
+                FullScreenProgressView()
             }
         }
     }

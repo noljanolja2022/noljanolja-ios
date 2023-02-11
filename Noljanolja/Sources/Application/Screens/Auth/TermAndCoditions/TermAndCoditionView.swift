@@ -23,16 +23,15 @@ struct TermAndConditionView: View {
         ZStack {
             content
             NavigationLink(
-                destination: SignUpView(),
+                destination: SignUpView(isShowingSignUpView: $isShowingSignUpView),
                 isActive: $isShowingSignUpView,
                 label: { EmptyView() }
             )
         }
-        .navigationBarHidden(true)
     }
 
     private var content: some View {
-        VStack(spacing: 12) {
+        VStack {
             terms
             PrimaryButton(
                 title: L10n.Common.next,
@@ -42,7 +41,7 @@ struct TermAndConditionView: View {
                 },
                 isEnabled: $viewModel.allTermAgreed
             )
-            .padding(.horizontal, 16)
+            .padding(16)
         }
     }
 
