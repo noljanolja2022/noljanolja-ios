@@ -23,7 +23,10 @@ struct TermAndConditionView: View {
         ZStack {
             content
             NavigationLink(
-                destination: SignUpView(isShowingSignUpView: $isShowingSignUpView),
+                destination: SignUpView(
+                    viewModel: SignUpViewModel(signUpStep: $viewModel.signUpStep),
+                    isShowingSignUpView: $isShowingSignUpView
+                ),
                 isActive: $isShowingSignUpView,
                 label: { EmptyView() }
             )

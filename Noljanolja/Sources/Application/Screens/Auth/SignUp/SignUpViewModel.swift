@@ -7,6 +7,7 @@
 //
 
 import Combine
+import SwiftUI
 
 // MARK: - SignUpViewModel
 
@@ -25,6 +26,8 @@ final class SignUpViewModel: ObservableObject {
 
     // MARK: Output
 
+    @Binding var signUpStep: SignUpStep
+
     @Published var isSignUpButtonEnabled = false
     @Published var isLoading = false
     @Published var isAlertMessagePresented = false
@@ -34,15 +37,27 @@ final class SignUpViewModel: ObservableObject {
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(authServices: AuthServicesType = AuthServices.default) {
+    init(authServices: AuthServicesType = AuthServices.default,
+         signUpStep: Binding<SignUpStep>) {
         self.authServices = authServices
+        self._signUpStep = signUpStep
 
         configure()
     }
 
     private func configure() {
+        Publishers.CombineLatest3($email, $password, $confirmPassword)
+            .sink(receiveValue: { [weak self] email, password, confirmPassword in
+                let emailValidateResult = email.validateEmail()
+                let passwordValidateResult = password.validatePassword()
+                let matchPassword = password == confirmPassword
+
+                self?.isSignUpButtonEnabled = emailValidateResult == nil && passwordValidateResult == nil && matchPassword
+            })
+            .store(in: &cancellables)
+
         signUpTrigger
-            .handleEvents(receiveOutput: { [weak self] _ in self?.isLoading = true })
+            .handleEvents(receiveOutput: { _ in AppState.default.isLoading = true })
             .flatMap { [weak self] email, password -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
@@ -50,14 +65,15 @@ final class SignUpViewModel: ObservableObject {
                     .eraseToResultAnyPublisher()
             }
             .sink(receiveValue: { [weak self] result in
-                self?.isLoading = false
+                AppState.default.isLoading = false
                 switch result {
                 case let .success(idToken):
+                    self?.signUpStep = .third
                     logger.info("Signed up with Email/Password - Token: \(idToken)")
                 case let .failure(error):
-                    logger.error("Sign in with Email/Password failed: \(error.localizedDescription)")
+                    logger.error("Sign up with Email/Password failed: \(error.localizedDescription)")
                     self?.isAlertMessagePresented = true
-                    self?.alertMessage = "Sign in with Email/Password failed.\nDETAIL: \(error.localizedDescription)"
+                    self?.alertMessage = "Sign up with Email/Password failed.\nDETAIL: \(error.localizedDescription)"
                 }
             })
             .store(in: &cancellables)

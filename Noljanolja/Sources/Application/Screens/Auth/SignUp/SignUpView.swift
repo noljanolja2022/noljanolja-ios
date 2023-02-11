@@ -15,7 +15,7 @@ struct SignUpView: View {
 
     @Binding var isShowingSignUpView: Bool
 
-    init(viewModel: SignUpViewModel = SignUpViewModel(),
+    init(viewModel: SignUpViewModel,
          isShowingSignUpView: Binding<Bool>) {
         _viewModel = StateObject(wrappedValue: viewModel)
         _isShowingSignUpView = isShowingSignUpView
@@ -91,7 +91,10 @@ struct SignUpView: View {
         HStack(spacing: 12) {
             PrimaryButton(
                 title: L10n.Common.previous,
-                action: { isShowingSignUpView = false },
+                action: {
+                    viewModel.signUpStep = .first
+                    isShowingSignUpView = false
+                },
                 isEnabled: Binding<Bool>(get: { true }, set: { _ in }),
                 enabledBackgroundColor: ColorAssets.black.swiftUIColor
             )
@@ -114,8 +117,12 @@ struct SignUpView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     @State private static var isShowingSignUpView = true
+    @State private static var signUpStep: SignUpStep = .first
 
     static var previews: some View {
-        SignUpView(isShowingSignUpView: $isShowingSignUpView)
+        SignUpView(
+            viewModel: SignUpViewModel(signUpStep: $signUpStep),
+            isShowingSignUpView: $isShowingSignUpView
+        )
     }
 }

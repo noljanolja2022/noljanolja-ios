@@ -22,7 +22,7 @@ struct SignUpStepHeaderView: View {
                 .font(FontFamily.NotoSans.medium.swiftUIFont(size: 10))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.bottom, 24)
-            ProgressView(value: step.index, total: CGFloat(SignUpStep.allCases.count + 1))
+            ProgressView(value: step.index, total: CGFloat(SignUpStep.allCases.count))
                 .progressViewStyle(RoundedLinearProgressViewStyle())
                 .frame(height: 42)
         }
