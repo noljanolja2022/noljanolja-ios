@@ -29,7 +29,6 @@ final class SignUpViewModel: ObservableObject {
     @Binding var signUpStep: SignUpStep
 
     @Published var isSignUpButtonEnabled = false
-    @Published var isLoading = false
     @Published var isAlertMessagePresented = false
     @Published var alertMessage = ""
 

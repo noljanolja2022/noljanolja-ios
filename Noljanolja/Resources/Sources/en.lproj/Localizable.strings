@@ -17,6 +17,7 @@
 "auth.sign_in_with_sns.title" = "Log in with SNS";
 
 "auth.reset_password.title" = "Reset password";
+"auth.reset_password.success.title" = "Reset password link to your email has been sent";
 "auth.reset_password.success.description" = "Reset password link has been sent to your email. Follow this link to reset your password and try login again";
 
 "auth.sign_up.title" = "Create account";

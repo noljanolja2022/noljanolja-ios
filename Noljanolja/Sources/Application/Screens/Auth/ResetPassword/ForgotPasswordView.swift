@@ -23,6 +23,40 @@ struct ForgotPasswordView: View {
 
     var body: some View {
         VStack(spacing: 0) {
+            if viewModel.isSuccess {
+                success
+            } else {
+                content
+            }
+        }
+        .navigationBarTitle(
+            Text(L10n.Auth.ForgotPassword.title),
+            displayMode: .inline
+        )
+        .navigationBarHidden(false)
+    }
+
+    private var success: some View {
+        VStack(spacing: 24) {
+            Text(L10n.Auth.ResetPassword.Success.title)
+                .multilineTextAlignment(.center)
+                .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
+
+            Text(L10n.Auth.ResetPassword.Success.description)
+                .multilineTextAlignment(.center)
+                .font(FontFamily.NotoSans.medium.swiftUIFont(size: 14))
+
+//            PrimaryButton(
+//                title: L10n.Auth.SignIn.title,
+//                action: { isShowingForgotPasswordView = false },
+//                isEnabled: Binding<Bool>(get: { true }, set: { _ in })
+//            )
+        }
+        .padding(16)
+    }
+
+    private var content: some View {
+        VStack(spacing: 0) {
             CustomTextField(
                 placeholder: L10n.Auth.Email.placeholder,
                 text: $viewModel.email,
@@ -39,31 +73,17 @@ struct ForgotPasswordView: View {
             PrimaryButton(
                 title: L10n.Auth.ResetPassword.title,
                 action: { viewModel.resetPasswordTrigger.send(viewModel.email) },
-                isEnabled: $viewModel.isButtonEnabled
+                isEnabled: $viewModel.isResetButtonEnabled
             )
         }
         .padding(16)
-        .navigationBarTitle(
-            Text(L10n.Auth.ForgotPassword.title),
-            displayMode: .inline
-        )
-        .navigationBarHidden(false)
-        .alert(item: $viewModel.alertType, content: { type in
+        .alert(isPresented: $viewModel.isAlertMessagePresented) {
             Alert(
-                title: Text(type.title),
-                message: Text(type.message),
-                dismissButton: Alert.Button.default(
-                    Text(type.actionTitle),
-                    action: {
-//                        TODO: Update
-//                        switch type {
-//                        case .success: isShowingForgotPasswordView = false
-//                        case .error: isShowingForgotPasswordView = false
-//                        }
-                    }
-                )
+                title: Text(L10n.Common.Error.title),
+                message: Text(viewModel.alertMessage),
+                dismissButton: Alert.Button.default(Text(L10n.Common.ok))
             )
-        })
+        }
     }
 }
 

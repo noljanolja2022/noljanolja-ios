@@ -40,7 +40,6 @@
 		CF1550232993B5C90053E86D /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1550212993B5C90053E86D /* TabBar.swift */; };
 		CF1550242993B5C90053E86D /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1550222993B5C90053E86D /* TabBarItem.swift */; };
 		CF3201812997723400E8F914 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3201802997723400E8F914 /* AppState.swift */; };
-		CF32018429978C7C00E8F914 /* ForgotPasswordAlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF32018329978C7C00E8F914 /* ForgotPasswordAlertModel.swift */; };
 		CF43BF73299274D900FD3180 /* FirebaseAuth+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF43BF72299274D900FD3180 /* FirebaseAuth+Combine.swift */; };
 		CF6ABC1329935C2D00D78213 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC0C29935C2D00D78213 /* SignUpViewModel.swift */; };
 		CF6ABC1429935C2D00D78213 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC0D29935C2D00D78213 /* SignUpView.swift */; };
@@ -161,7 +160,6 @@
 		CF1550212993B5C90053E86D /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		CF1550222993B5C90053E86D /* TabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		CF3201802997723400E8F914 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
-		CF32018329978C7C00E8F914 /* ForgotPasswordAlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordAlertModel.swift; sourceTree = "<group>"; };
 		CF43BF72299274D900FD3180 /* FirebaseAuth+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseAuth+Combine.swift"; sourceTree = "<group>"; };
 		CF6ABC0C29935C2D00D78213 /* SignUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		CF6ABC0D29935C2D00D78213 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -422,7 +420,6 @@
 		CF15501A2993B5640053E86D /* ResetPassword */ = {
 			isa = PBXGroup;
 			children = (
-				CF32018229978C5F00E8F914 /* Models */,
 				CF1550162993B55F0053E86D /* ForgotPasswordView.swift */,
 				CF1550172993B55F0053E86D /* ForgotPasswordViewModel.swift */,
 			);
@@ -436,14 +433,6 @@
 				CF1550222993B5C90053E86D /* TabBarItem.swift */,
 			);
 			path = CustomTabBar;
-			sourceTree = "<group>";
-		};
-		CF32018229978C5F00E8F914 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				CF32018329978C7C00E8F914 /* ForgotPasswordAlertModel.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		CF6ABC0A29935C2D00D78213 /* Auth */ = {
@@ -1220,7 +1209,6 @@
 				CFC709E829962CD100B64216 /* SignUpRootViewModel.swift in Sources */,
 				CFD83DC22996812B00B9A6BB /* TermAndCoditionItemType.swift in Sources */,
 				CF14F230298C05F900BC2066 /* MainView.swift in Sources */,
-				CF32018429978C7C00E8F914 /* ForgotPasswordAlertModel.swift in Sources */,
 				CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */,
 				CF6ABC1429935C2D00D78213 /* SignUpView.swift in Sources */,
 				CF00D1692994E0A700505702 /* CustomTextField.swift in Sources */,

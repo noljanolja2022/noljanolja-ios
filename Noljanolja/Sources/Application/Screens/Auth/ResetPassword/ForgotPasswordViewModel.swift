@@ -21,8 +21,10 @@ final class ForgotPasswordViewModel: ObservableObject {
 
     // MARK: Output
 
-    @Published var isButtonEnabled = false
-    @Published var alertType: ForgotPasswordAlertType? = nil
+    @Published var isResetButtonEnabled = false
+    @Published var isSuccess = false
+    @Published var isAlertMessagePresented = false
+    @Published var alertMessage = ""
 
     // MARK: Private
 
@@ -36,7 +38,7 @@ final class ForgotPasswordViewModel: ObservableObject {
 
     private func configure() {
         $email
-            .sink { [weak self] in self?.isButtonEnabled = $0.isValidEmail }
+            .sink { [weak self] in self?.isResetButtonEnabled = $0.isValidEmail }
             .store(in: &cancellables)
 
         resetPasswordTrigger
@@ -52,10 +54,12 @@ final class ForgotPasswordViewModel: ObservableObject {
                 switch result {
                 case .success:
                     logger.info("Reset password sucessful")
-                    self?.alertType = .success
+                    self?.isSuccess = true
                 case let .failure(error):
                     logger.error("Reset password failed: \(error.localizedDescription)")
-                    self?.alertType = .error(error: error)
+                    self?.isSuccess = false
+                    self?.isAlertMessagePresented = true
+                    self?.alertMessage = "Reset password failed.\nDETAIL: \(error.localizedDescription)"
                 }
             })
             .store(in: &cancellables)
