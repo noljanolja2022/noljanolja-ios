@@ -36,6 +36,10 @@ internal enum L10n {
     internal enum ResetPassword {
       /// Reset password
       internal static let title = L10n.tr("Localizable", "auth.reset_password.title", fallback: "Reset password")
+      internal enum Retry {
+        /// Resend reset password link
+        internal static let title = L10n.tr("Localizable", "auth.reset_password.retry.title", fallback: "Resend reset password link")
+      }
       internal enum Success {
         /// Reset password link has been sent to your email. Follow this link to reset your password and try login again
         internal static let description = L10n.tr("Localizable", "auth.reset_password.success.description", fallback: "Reset password link has been sent to your email. Follow this link to reset your password and try login again")

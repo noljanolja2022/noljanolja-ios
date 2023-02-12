@@ -13,20 +13,17 @@ import SwiftUI
 struct SignInView: View {
     @StateObject private var viewModel: SignInViewModel
     
-    @State private var isShowingResetPasswordView = false
+    @Binding private var isShowingResetPasswordView: Bool
     
-    init(viewModel: SignInViewModel = SignInViewModel()) {
+    init(viewModel: SignInViewModel = SignInViewModel(),
+         isShowingResetPasswordView: Binding<Bool>) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        _isShowingResetPasswordView = isShowingResetPasswordView
     }
     
     var body: some View {
         ZStack {
             content
-            NavigationLink(
-                destination: ResetPasswordView(isShowingResetPasswordView: $isShowingResetPasswordView),
-                isActive: $isShowingResetPasswordView,
-                label: { EmptyView() }
-            )
         }
         .alert(isPresented: $viewModel.isAlertMessagePresented) {
             Alert(
@@ -159,8 +156,9 @@ struct SignInView: View {
 // MARK: - SignInView_Previews
 
 struct SignInView_Previews: PreviewProvider {
+    @State private static var isShowingResetPasswordView = false
     static var previews: some View {
-        SignInView()
+        SignInView(isShowingResetPasswordView: $isShowingResetPasswordView)
     }
 }
 

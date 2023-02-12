@@ -18,7 +18,8 @@
 
 "auth.reset_password.title" = "Reset password";
 "auth.reset_password.success.title" = "Reset password link to your email has been sent";
-"auth.reset_password.success.description" = "Reset password link has been sent to your email. Follow this link to reset your password and try login again";
+"auth.reset_password.success.description" = "Reset password link has been sent to your email. Follow this link to reset your password";
+"auth.reset_password.retry.title" = "Resend reset password link";
 
 "auth.sign_up.title" = "Create account";
 "auth.sign_up.step1.title" = "STEP.1";
@@ -28,7 +29,7 @@
 
 "validation.email.error.invalid" = "Please enter a valid email";
 
-"validation.password.error.invalid_length" = "The password must be 8-12 characters long";
+"validation.password.error.invalid_length" = "The password must be 8-12 characters";
 "validation.password.error.letter_required" = "The password must have at least one letter";
 "validation.password.error.digit_required" = "The password must have at least one digit";
 "validation.password.error.special_characters_required" = "The password must have at least one special character (~!@#%^&*()-_=+)";

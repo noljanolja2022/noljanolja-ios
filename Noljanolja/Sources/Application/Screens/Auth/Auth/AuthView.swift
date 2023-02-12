@@ -14,12 +14,25 @@ struct AuthView: View {
     @StateObject private var viewModel: AuthViewModel
     
     @State private var selectedIndex = 0
+    @State private var isShowingResetPasswordView = false
     
     init(viewModel: AuthViewModel = AuthViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
+        ZStack {
+            content
+            NavigationLink(
+                destination: ResetPasswordView(isShowingResetPasswordView: $isShowingResetPasswordView),
+                isActive: $isShowingResetPasswordView,
+                label: { EmptyView() }
+            )
+        }
+        .navigationBarHidden(true)
+    }
+
+    private var content: some View {
         VStack(spacing: 8) {
             TabLayout(
                 selection: $selectedIndex,
@@ -34,7 +47,7 @@ struct AuthView: View {
             .padding(.top, 12)
 
             TabView(selection: $selectedIndex) {
-                SignInView().tag(0)
+                SignInView(isShowingResetPasswordView: $isShowingResetPasswordView).tag(0)
                 SignUpRootView().tag(1)
             }
             //                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
@@ -42,7 +55,6 @@ struct AuthView: View {
                 tabBarController.tabBar.isHidden = true
             }
         }
-        .navigationBarHidden(true)
     }
 }
 

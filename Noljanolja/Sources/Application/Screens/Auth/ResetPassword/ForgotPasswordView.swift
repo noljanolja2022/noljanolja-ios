@@ -23,7 +23,7 @@ struct ResetPasswordView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            if viewModel.isSuccess {
+            if !viewModel.isSuccess {
                 success
             } else {
                 content
@@ -37,21 +37,36 @@ struct ResetPasswordView: View {
     }
 
     private var success: some View {
-        VStack(spacing: 24) {
-            Text(L10n.Auth.ResetPassword.Success.title)
-                .multilineTextAlignment(.center)
-                .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
-
-            Text(L10n.Auth.ResetPassword.Success.description)
-                .multilineTextAlignment(.center)
-                .font(FontFamily.NotoSans.medium.swiftUIFont(size: 14))
-
-            Button(
-                L10n.Auth.SignIn.title,
-                action: { isShowingResetPasswordView = false }
-            )
-            .frame(height: 48)
-            .buttonStyle(PrimaryButtonStyle())
+        VStack(spacing: 36) {
+            VStack(spacing: 16) {
+                Text(L10n.Auth.ResetPassword.Success.title)
+                    .multilineTextAlignment(.center)
+                    .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
+                    .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
+                Text(L10n.Auth.ResetPassword.Success.description)
+                    .multilineTextAlignment(.center)
+                    .font(FontFamily.NotoSans.medium.swiftUIFont(size: 14))
+                    .padding(.horizontal, 24)
+                    .foregroundColor(ColorAssets.forcegroundSecondary.swiftUIColor)
+            }
+            VStack(spacing: 0) {
+                Button(
+                    L10n.Auth.SignIn.title,
+                    action: { isShowingResetPasswordView = false }
+                )
+                .frame(height: 48)
+                .buttonStyle(PrimaryButtonStyle())
+                
+                Button(
+                    L10n.Auth.ResetPassword.Retry.title,
+                    action: {
+                        viewModel.resetPasswordTrigger.send(viewModel.email)
+                    }
+                )
+                .frame(height: 48)
+                .font(FontFamily.NotoSans.bold.swiftUIFont(size: 16))
+                .foregroundColor(ColorAssets.forcegroundSecondary.swiftUIColor)
+            }
         }
         .padding(16)
     }
