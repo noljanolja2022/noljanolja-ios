@@ -13,138 +13,150 @@ import SwiftUI
 struct SignInView: View {
     @StateObject private var viewModel: SignInViewModel
 
-    @State private var email = ""
-    @State private var password = ""
-
+    @State private var isShowingForgotPasswordView = false
+    
     init(viewModel: SignInViewModel = SignInViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
     
     var body: some View {
-        VStack(spacing: 12) {
-            TextField("Email", text: $email)
-                .keyboardType(.emailAddress)
-                .font(Font.system(size: 16))
-                .frame(height: 48)
-                .padding(.horizontal, 8)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.gray, lineWidth: 1)
-                )
-            SecureField("Password", text: $password)
-                .font(Font.system(size: 16))
-                .frame(height: 48)
-                .padding(.horizontal, 8)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.gray, lineWidth: 1)
-                )
-            ZStack(alignment: .trailing) {
+        ZStack {
+            content
+            NavigationLink(
+                destination: ForgotPasswordView(isShowingForgotPasswordView: $isShowingForgotPasswordView),
+                isActive: $isShowingForgotPasswordView,
+                label: { EmptyView() }
+            )
+        }
+        .alert(isPresented: $viewModel.isAlertMessagePresented) {
+            Alert(
+                title: Text(L10n.Common.Error.title),
+                message: Text(viewModel.alertMessage),
+                dismissButton: .default(Text(L10n.Common.ok))
+            )
+        }
+    }
+
+    private var content: some View {
+        ScrollView {
+            VStack(spacing: 12) {
+                signInWithEmailPasswordContent
+                signInWithSNSContent
+            }
+            .padding(16)
+        }
+        .introspectScrollView { scrollView in
+            scrollView.alwaysBounceVertical = false
+        }
+    }
+    
+    private var signInWithEmailPasswordContent: some View {
+        VStack(spacing: 16) {
+            CustomTextField(
+                placeholder: L10n.Auth.Email.placeholder,
+                text: $viewModel.email,
+                font: FontFamily.NotoSans.medium.font(size: 16),
+                contentInset: UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
+            )
+            .frame(height: 50)
+            .background(ColorAssets.gray.swiftUIColor)
+            .cornerRadius(8)
+            .shadow(
+                color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
+            )
+
+            CustomTextField(
+                placeholder: L10n.Auth.Password.placeholder,
+                text: $viewModel.password,
+                font: FontFamily.NotoSans.medium.font(size: 16),
+                isSecureTextEntry: true,
+                contentInset: UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
+            )
+            .frame(height: 50)
+            .background(ColorAssets.gray.swiftUIColor)
+            .cornerRadius(8)
+            .shadow(
+                color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
+            )
+
+            HStack {
+                Spacer()
                 Button(
-                    action: {
-                        viewModel.signInWithEmailPasswordTrigger.send((email, password))
-                    },
+                    action: { isShowingForgotPasswordView = true },
                     label: {
-                        Text("Forgot password")
-                            .font(Font.system(size: 16).italic())
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        Text(L10n.Auth.ForgotPassword.title)
+                            .font(FontFamily.NotoSans.regular.swiftUIFont(size: 14))
+                            .foregroundColor(ColorAssets.forcegroundSecondary.swiftUIColor)
+                            .frame(height: 20)
                     }
                 )
+                .padding(.vertical, 16)
             }
-            .frame(height: 20)
-            Button(
-                action: {
-                    viewModel.signInWithEmailPasswordTrigger.send((email, password))
-                },
-                label: {
-                    Text("Sign In")
-                        .font(Font.system(size: 16).bold())
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-            )
-            .frame(height: 48)
-            .background(Color.green)
-            .cornerRadius(8)
-            .padding(.vertical, 4)
 
+            PrimaryButton(
+                title: L10n.Auth.SignIn.title,
+                action: {
+                    viewModel.signInWithEmailPasswordTrigger.send(
+                        (viewModel.email, viewModel.password)
+                    )
+                },
+                isEnabled: $viewModel.isSignInButtonEnabled
+            )
+        }
+    }
+    
+    private var signInWithSNSContent: some View {
+        VStack(spacing: 12) {
             HStack {
                 Rectangle()
                     .frame(height: 1)
-                    .overlay(Color.gray)
-                    .padding(8)
-                Text("OR")
-                    .font(Font.system(size: 16))
-                    .foregroundColor(.gray)
+                    .overlay(ColorAssets.forcegroundTertiary.swiftUIColor)
+                Text(L10n.Auth.SignInWithSns.title)
+                    .font(FontFamily.NotoSans.regular.swiftUIFont(size: 12))
+                    .foregroundColor(ColorAssets.forcegroundSecondary.swiftUIColor)
                 Rectangle()
                     .frame(height: 1)
-                    .overlay(Color.gray)
-                    .padding(8)
+                    .overlay(ColorAssets.forcegroundTertiary.swiftUIColor)
             }
-            .padding(.vertical, 12)
-
-            HStack(spacing: 16) {
-                Button(
-                    action: {
-                        viewModel.signInWithAppleTrigger.send()
-                    },
-                    label: {
-                        Text("A")
-                            .font(Font.system(size: 20).bold())
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    }
-                )
-                .frame(width: 48, height: 48)
-                .background(Color.black)
-                .cornerRadius(32)
-                Button(
-                    action: {
-                        viewModel.signInWithGoogleTrigger.send()
-                    },
-                    label: {
-                        Text("G")
-                            .font(Font.system(size: 20).bold())
-                            .foregroundColor(.red)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    }
-                )
-                .frame(width: 48, height: 48)
-                .background(Color.white)
-                .cornerRadius(32)
-                Button(
-                    action: {
-                        viewModel.signInWithKakaoTrigger.send()
-                    },
-                    label: {
-                        Text("K")
-                            .font(Font.system(size: 20).bold())
-                            .foregroundColor(.black)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    }
-                )
-                .frame(width: 48, height: 48)
-                .background(Color.yellow)
-                .cornerRadius(32)
-                Button(
-                    action: {
-                        viewModel.signInWithNaverTrigger.send()
-                    },
-                    label: {
-                        Text("N")
-                            .font(Font.system(size: 20).bold())
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    }
-                )
-                .frame(width: 48, height: 48)
-                .background(Color.green)
-                .cornerRadius(32)
+            .padding(.vertical, 24)
+            
+            HStack(spacing: 24) {
+                ForEach(0...3, id: \.self) { index in
+                    Button(
+                        action: {
+                            switch index {
+                            case 0:
+                                viewModel.signInWithKakaoTrigger.send()
+                            case 1:
+                                viewModel.signInWithNaverTrigger.send()
+                            case 2:
+                                viewModel.signInWithGoogleTrigger.send()
+                            case 3:
+                                viewModel.signInWithAppleTrigger.send()
+                            default:
+                                break
+                            }
+                        },
+                        label: {
+                            switch index {
+                            case 0:
+                                ImageAssets.icKakao.swiftUIImage.resizable()
+                            case 1:
+                                ImageAssets.icNaver.swiftUIImage.resizable()
+                            case 2:
+                                ImageAssets.icGoogle.swiftUIImage.resizable()
+                            case 3:
+                                ImageAssets.icApple.swiftUIImage.resizable()
+                            default:
+                                EmptyView()
+                            }
+                        }
+                    )
+                    .frame(width: 42, height: 42)
+                    .cornerRadius(21)
+                }
             }
         }
-        .frame(maxHeight: .infinity)
-        .padding(16)
     }
 }
 

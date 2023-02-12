@@ -12,26 +12,37 @@ import SwiftUI
 
 struct AuthView: View {
     @StateObject private var viewModel: AuthViewModel
-
+    
     @State private var selectedIndex = 0
-
+    
     init(viewModel: AuthViewModel = AuthViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
-        VStack {
-            TabLayout(selection: $selectedIndex, tabs: ["Sign In", "Sign Up"])
+        VStack(spacing: 8) {
+            TabLayout(
+                selection: $selectedIndex,
+                tabs: [L10n.Auth.SignIn.title, L10n.Auth.JoinTheMembership.title],
+                font: FontFamily.NotoSans.bold.swiftUIFont(size: 16),
+                accentColor: ColorAssets.forcegroundTertiary.swiftUIColor,
+                selectedAccentColor: ColorAssets.white.swiftUIColor,
+                backgroundColor: ColorAssets.gray.swiftUIColor,
+                selectedBackgroundColor: ColorAssets.black.swiftUIColor
+            )
+            .frame(height: 42)
+            .padding(.top, 12)
+
             TabView(selection: $selectedIndex) {
-                SignInView()
-                    .tag(0)
-                SignUpView()
-                    .tag(1)
+                SignInView().tag(0)
+                SignUpRootView().tag(1)
             }
+            //                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .introspectTabBarController { tabBarController in
                 tabBarController.tabBar.isHidden = true
             }
         }
+        .navigationBarHidden(true)
     }
 }
 

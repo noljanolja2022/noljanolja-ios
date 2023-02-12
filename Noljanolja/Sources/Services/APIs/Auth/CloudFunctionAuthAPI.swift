@@ -9,7 +9,6 @@ import Combine
 import FirebaseFunctions
 import FirebaseFunctionsCombineSwift
 import Foundation
-import SwifterSwift
 
 final class CloudFunctionAuthAPI {
     private lazy var functions = Functions.functions(region: "asia-northeast3")

@@ -18,6 +18,7 @@ final class RootViewModel: ObservableObject {
     // MARK: Output
 
     @Published private(set) var isAuthenticated: Bool
+    @Published var isLoading = false
 
     // MARK: Private
 
@@ -34,6 +35,10 @@ final class RootViewModel: ObservableObject {
     private func configure() {
         authService.isAuthenticated
             .sink { [weak self] in self?.isAuthenticated = $0 }
+            .store(in: &cancellables)
+
+        AppState.default.$isLoading
+            .sink { [weak self] in self?.isLoading = $0 }
             .store(in: &cancellables)
     }
 }

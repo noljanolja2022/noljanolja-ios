@@ -10,6 +10,7 @@ import GoogleSignIn
 import KakaoSDKAuth
 import KakaoSDKCommon
 import NaverThirdPartyLogin
+import SwifterSwift
 import SwiftUI
 
 // MARK: - AppDelegate

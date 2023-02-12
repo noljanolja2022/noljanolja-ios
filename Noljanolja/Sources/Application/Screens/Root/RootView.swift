@@ -20,8 +20,10 @@ struct RootView: View {
     var body: some View {
         if viewModel.isAuthenticated {
             MainView()
+                .progress(active: $viewModel.isLoading)
         } else {
-            AuthView()
+            AuthNavigationView()
+                .progress(active: $viewModel.isLoading)
         }
     }
 }

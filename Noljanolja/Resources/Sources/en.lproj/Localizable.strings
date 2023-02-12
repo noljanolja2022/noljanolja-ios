@@ -1,0 +1,34 @@
+"app_name" = "Noljanolja";
+
+"common.ok" = "OK";
+"common.next" = "Next";
+"common.previous" = "Previous";
+"common.success.title" = "Success";
+"common.error.title" = "Error";
+"common.error.message" = "Error! An error occurred. Please try again later.";
+
+"auth.sign_in.title" = "Log in";
+"auth.join_the_membership.title" = "Join the membership";
+
+"auth.email.placeholder" = "Please enter your email";
+"auth.password.placeholder" = "Please enter password";
+"auth.confirm_password.placeholder" = "Please confirm password";
+"auth.forgot_password.title" = "Forgot your password?";
+"auth.sign_in_with_sns.title" = "Log in with SNS";
+
+"auth.reset_password.title" = "Reset password";
+"auth.reset_password.success.description" = "Reset password link has been sent to your email. Follow this link to reset your password and try login again";
+
+"auth.sign_up.title" = "Create account";
+"auth.sign_up.step1.title" = "STEP.1";
+"auth.sign_up.step1.description" = "You need to agree to the terms and conditions before signing up";
+"auth.sign_up.step2.title" = "STEP.2";
+"auth.sign_up.step2.description" = "Sign up with email and password";
+
+"validation.email.error.invalid" = "Please enter a valid email";
+
+"validation.password.error.invalid_length" = "The password must be 8-12 characters long";
+"validation.password.error.letter_required" = "The password must have at least one letter";
+"validation.password.error.digit_required" = "The password must have at least one digit";
+"validation.password.error.special_characters_required" = "The password must have at least one special character (~!@#%^&*()-_=+)";
+
