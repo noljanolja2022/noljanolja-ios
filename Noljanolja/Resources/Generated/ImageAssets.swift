@@ -32,7 +32,7 @@ internal enum ImageAssets {
   internal static let icKakao = ImageAsset(name: "ic_kakao")
   internal static let icNaver = ImageAsset(name: "ic_naver")
   internal static let icPpyy = ImageAsset(name: "ic_ppyy")
-  internal static let icSplashWelcomeText = ImageAsset(name: "ic_splash_welcome_text")
+  internal static let icWelcomeText = ImageAsset(name: "ic_welcome_text")
   internal static let logo = ImageAsset(name: "logo")
 
   // swiftlint:disable trailing_comma
@@ -48,7 +48,7 @@ internal enum ImageAssets {
     icKakao,
     icNaver,
     icPpyy,
-    icSplashWelcomeText,
+    icWelcomeText,
     logo,
   ]
   // swiftlint:enable trailing_comma
