@@ -1,5 +1,5 @@
 //
-//  ForgotPasswordViewModel.swift
+//  ResetPasswordViewModel.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 08/02/2023.
@@ -8,7 +8,7 @@
 
 import Combine
 
-final class ForgotPasswordViewModel: ObservableObject {
+final class ResetPasswordViewModel: ObservableObject {
     // MARK: Dependencies
 
     private let authServices: AuthServicesType
@@ -69,7 +69,7 @@ final class ForgotPasswordViewModel: ObservableObject {
                     logger.error("Reset password failed: \(error.localizedDescription)")
                     self?.isSuccess = false
                     self?.isAlertMessagePresented = true
-                    self?.alertMessage = "Reset password failed.\nDETAIL: \(error.localizedDescription)"
+                    self?.alertMessage = L10n.Common.Error.message
                 }
             })
             .store(in: &cancellables)

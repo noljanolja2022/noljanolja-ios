@@ -19,7 +19,7 @@ struct ErrorViewModifier: ViewModifier {
 
             if let message {
                 Text(message)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 24)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(ColorAssets.red.swiftUIColor)

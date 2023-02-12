@@ -13,7 +13,7 @@ import SwiftUI
 struct SignInView: View {
     @StateObject private var viewModel: SignInViewModel
     
-    @State private var isShowingForgotPasswordView = false
+    @State private var isShowingResetPasswordView = false
     
     init(viewModel: SignInViewModel = SignInViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -23,8 +23,8 @@ struct SignInView: View {
         ZStack {
             content
             NavigationLink(
-                destination: ForgotPasswordView(isShowingForgotPasswordView: $isShowingForgotPasswordView),
-                isActive: $isShowingForgotPasswordView,
+                destination: ResetPasswordView(isShowingResetPasswordView: $isShowingResetPasswordView),
+                isActive: $isShowingResetPasswordView,
                 label: { EmptyView() }
             )
         }
@@ -78,7 +78,7 @@ struct SignInView: View {
             HStack {
                 Spacer()
                 Button(
-                    action: { isShowingForgotPasswordView = true },
+                    action: { isShowingResetPasswordView = true },
                     label: {
                         Text(L10n.Auth.ForgotPassword.title)
                             .font(FontFamily.NotoSans.regular.swiftUIFont(size: 14))

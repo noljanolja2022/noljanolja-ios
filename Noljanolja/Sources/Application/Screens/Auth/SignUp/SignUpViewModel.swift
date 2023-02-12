@@ -99,7 +99,7 @@ final class SignUpViewModel: ObservableObject {
                 case let .failure(error):
                     logger.error("Sign up with Email/Password failed: \(error.localizedDescription)")
                     self?.isAlertMessagePresented = true
-                    self?.alertMessage = "Sign up with Email/Password failed.\nDETAIL: \(error.localizedDescription)"
+                    self?.alertMessage = L10n.Common.Error.message
                 }
             })
             .store(in: &cancellables)

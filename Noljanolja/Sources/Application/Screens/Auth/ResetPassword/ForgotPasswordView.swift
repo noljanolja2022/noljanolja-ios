@@ -1,5 +1,5 @@
 //
-//  ForgotPasswordView.swift
+//  ResetPasswordView.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 08/02/2023.
@@ -8,17 +8,17 @@
 
 import SwiftUI
 
-// MARK: - ForgotPasswordView
+// MARK: - ResetPasswordView
 
-struct ForgotPasswordView: View {
-    @StateObject private var viewModel: ForgotPasswordViewModel
+struct ResetPasswordView: View {
+    @StateObject private var viewModel: ResetPasswordViewModel
 
-    @Binding private var isShowingForgotPasswordView: Bool
+    @Binding private var isShowingResetPasswordView: Bool
 
-    init(viewModel: ForgotPasswordViewModel = ForgotPasswordViewModel(),
-         isShowingForgotPasswordView: Binding<Bool>) {
+    init(viewModel: ResetPasswordViewModel = ResetPasswordViewModel(),
+         isShowingResetPasswordView: Binding<Bool>) {
         _viewModel = StateObject(wrappedValue: viewModel)
-        _isShowingForgotPasswordView = isShowingForgotPasswordView
+        _isShowingResetPasswordView = isShowingResetPasswordView
     }
 
     var body: some View {
@@ -46,11 +46,12 @@ struct ForgotPasswordView: View {
                 .multilineTextAlignment(.center)
                 .font(FontFamily.NotoSans.medium.swiftUIFont(size: 14))
 
-//            PrimaryButton(
-//                title: L10n.Auth.SignIn.title,
-//                action: { isShowingForgotPasswordView = false },
-//                isEnabled: Binding<Bool>(get: { true }, set: { _ in })
-//            )
+            Button(
+                L10n.Auth.SignIn.title,
+                action: { isShowingResetPasswordView = false }
+            )
+            .frame(height: 48)
+            .buttonStyle(PrimaryButtonStyle())
         }
         .padding(16)
     }
@@ -69,7 +70,6 @@ struct ForgotPasswordView: View {
                 )
                 .errorMessage($viewModel.emailErrorMessage)
             Spacer()
-
             Button(
                 L10n.Auth.ResetPassword.title,
                 action: {
@@ -91,12 +91,12 @@ struct ForgotPasswordView: View {
     }
 }
 
-// MARK: - ForgotPasswordView_Previews
+// MARK: - ResetPasswordView_Previews
 
-struct ForgotPasswordView_Previews: PreviewProvider {
-    @State private static var isShowingForgotPasswordView = true
+struct ResetPasswordView_Previews: PreviewProvider {
+    @State private static var isShowingResetPasswordView = true
 
     static var previews: some View {
-        ForgotPasswordView(isShowingForgotPasswordView: $isShowingForgotPasswordView)
+        ResetPasswordView(isShowingResetPasswordView: $isShowingResetPasswordView)
     }
 }
