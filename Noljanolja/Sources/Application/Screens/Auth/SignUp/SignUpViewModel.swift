@@ -28,6 +28,10 @@ final class SignUpViewModel: ObservableObject {
 
     @Binding var signUpStep: SignUpStep
 
+    @Published var emailErrorMessage: String? = nil
+    @Published var passwordErrorMessage: String? = nil
+    @Published var confirmPasswordErrorMessage: String? = nil
+
     @Published var isSignUpButtonEnabled = false
     @Published var isAlertMessagePresented = false
     @Published var alertMessage = ""
@@ -45,13 +49,36 @@ final class SignUpViewModel: ObservableObject {
     }
 
     private func configure() {
-        Publishers.CombineLatest3($email, $password, $confirmPassword)
-            .sink(receiveValue: { [weak self] email, password, confirmPassword in
-                let emailValidateResult = email.validateEmail()
-                let passwordValidateResult = password.validatePassword()
-                let matchPassword = password == confirmPassword
+        let emailValidateResult = $email
+            .removeDuplicates()
+            .dropFirst()
+            .map { StringValidator.validateEmail($0) }
+            .handleEvents(receiveOutput: { [weak self] result in
+                self?.emailErrorMessage = result?.message
+            })
 
-                self?.isSignUpButtonEnabled = emailValidateResult == nil && passwordValidateResult == nil && matchPassword
+        let passwordsValidateResult = Publishers
+            .CombineLatest(
+                $password.removeDuplicates(),
+                $confirmPassword.removeDuplicates()
+            )
+            .dropFirst()
+            .map {
+                (
+                    StringValidator.validatePassword($0.0),
+                    StringValidator.validatePasswords(password: $0.0, confirmPassword: $0.1)
+                )
+            }
+            .handleEvents(receiveOutput: { [weak self] passwordValidateResult, confirmPasswordValidateResult in
+                self?.passwordErrorMessage = passwordValidateResult?.message
+                self?.confirmPasswordErrorMessage = confirmPasswordValidateResult?.message
+            })
+
+        Publishers.CombineLatest(emailValidateResult, passwordsValidateResult)
+            .sink(receiveValue: { [weak self] emailValidateResult, passwordsValidateResult in
+                self?.isSignUpButtonEnabled = emailValidateResult == nil
+                    && passwordsValidateResult.0 == nil
+                    && passwordsValidateResult.1 == nil
             })
             .store(in: &cancellables)
 

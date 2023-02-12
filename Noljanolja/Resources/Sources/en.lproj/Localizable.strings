@@ -32,4 +32,5 @@
 "validation.password.error.letter_required" = "The password must have at least one letter";
 "validation.password.error.digit_required" = "The password must have at least one digit";
 "validation.password.error.special_characters_required" = "The password must have at least one special character (~!@#%^&*()-_=+)";
+"validation.password.error.not_match" = "Those passwords didn’t match. Try again";
 

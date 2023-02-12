@@ -101,6 +101,8 @@ internal enum L10n {
         internal static let invalidLength = L10n.tr("Localizable", "validation.password.error.invalid_length", fallback: "The password must be 8-12 characters long")
         /// The password must have at least one letter
         internal static let letterRequired = L10n.tr("Localizable", "validation.password.error.letter_required", fallback: "The password must have at least one letter")
+        /// Those passwords didn’t match. Try again
+        internal static let notMatch = L10n.tr("Localizable", "validation.password.error.not_match", fallback: "Those passwords didn’t match. Try again")
         /// The password must have at least one special character (~!@#%^&*()-_=+)
         internal static let specialCharactersRequired = L10n.tr("Localizable", "validation.password.error.special_characters_required", fallback: "The password must have at least one special character (~!@#%^&*()-_=+)")
       }

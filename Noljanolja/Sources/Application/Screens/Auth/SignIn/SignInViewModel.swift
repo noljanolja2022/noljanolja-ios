@@ -29,6 +29,9 @@ final class SignInViewModel: ObservableObject {
 
     // MARK: Output
 
+    @Published var emailErrorMessage: String? = nil
+    @Published var passwordErrorMessage: String? = nil
+
     @Published var isSignInButtonEnabled = true
     @Published var isAlertMessagePresented = false
     @Published var alertMessage = ""
@@ -44,11 +47,24 @@ final class SignInViewModel: ObservableObject {
     }
 
     private func configure() {
-        Publishers.CombineLatest($email, $password)
-            .sink(receiveValue: { [weak self] email, password in
-                let emailValidateResult = email.validateEmail()
-                let passwordValidateResult = password.validatePassword()
+        let emailValidateResult = $email
+            .removeDuplicates()
+            .dropFirst()
+            .map { StringValidator.validateEmail($0) }
+            .handleEvents(receiveOutput: { [weak self] result in
+                self?.emailErrorMessage = result?.message
+            })
 
+        let passwordValidateResult = $password
+            .removeDuplicates()
+            .dropFirst()
+            .map { StringValidator.validatePassword($0) }
+            .handleEvents(receiveOutput: { [weak self] result in
+                self?.passwordErrorMessage = result?.message
+            })
+
+        Publishers.CombineLatest(emailValidateResult, passwordValidateResult)
+            .sink(receiveValue: { [weak self] emailValidateResult, passwordValidateResult in
                 self?.isSignInButtonEnabled = emailValidateResult == nil && passwordValidateResult == nil
             })
             .store(in: &cancellables)

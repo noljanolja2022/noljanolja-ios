@@ -21,7 +21,9 @@ final class ForgotPasswordViewModel: ObservableObject {
 
     // MARK: Output
 
+    @Published var emailErrorMessage: String? = nil
     @Published var isResetButtonEnabled = false
+
     @Published var isSuccess = false
     @Published var isAlertMessagePresented = false
     @Published var alertMessage = ""
@@ -37,8 +39,16 @@ final class ForgotPasswordViewModel: ObservableObject {
     }
 
     private func configure() {
-        $email
-            .sink { [weak self] in self?.isResetButtonEnabled = $0.isValidEmail }
+        let emailValidateResult = $email
+            .removeDuplicates()
+            .dropFirst()
+            .map { StringValidator.validateEmail($0) }
+            .handleEvents(receiveOutput: { [weak self] result in
+                self?.emailErrorMessage = result?.message
+            })
+
+        emailValidateResult
+            .sink { [weak self] in self?.isResetButtonEnabled = $0 != nil }
             .store(in: &cancellables)
 
         resetPasswordTrigger

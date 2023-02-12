@@ -12,7 +12,7 @@ import SwiftUI
 
 struct SignInView: View {
     @StateObject private var viewModel: SignInViewModel
-
+    
     @State private var isShowingForgotPasswordView = false
     
     init(viewModel: SignInViewModel = SignInViewModel()) {
@@ -36,7 +36,7 @@ struct SignInView: View {
             )
         }
     }
-
+    
     private var content: some View {
         ScrollView {
             VStack(spacing: 12) {
@@ -52,33 +52,29 @@ struct SignInView: View {
     
     private var signInWithEmailPasswordContent: some View {
         VStack(spacing: 16) {
-            CustomTextField(
-                placeholder: L10n.Auth.Email.placeholder,
-                text: $viewModel.email,
-                font: FontFamily.NotoSans.medium.font(size: 16),
-                contentInset: UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
-            )
-            .frame(height: 50)
-            .background(ColorAssets.gray.swiftUIColor)
-            .cornerRadius(8)
-            .shadow(
-                color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
-            )
+            TextField(L10n.Auth.Email.placeholder, text: $viewModel.email)
+                .keyboardType(.emailAddress)
+                .textFieldStyle(FullSizeTappableTextFieldStyle())
+                .textFieldStyle(AuthTextFieldStyle())
+                .setAuthTextFieldStyle()
+                .overlayBorder(
+                    color: viewModel.emailErrorMessage == nil
+                        ? Color.clear
+                        : ColorAssets.red.swiftUIColor
+                )
+                .errorMessage($viewModel.emailErrorMessage)
 
-            CustomTextField(
-                placeholder: L10n.Auth.Password.placeholder,
-                text: $viewModel.password,
-                font: FontFamily.NotoSans.medium.font(size: 16),
-                isSecureTextEntry: true,
-                contentInset: UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
-            )
-            .frame(height: 50)
-            .background(ColorAssets.gray.swiftUIColor)
-            .cornerRadius(8)
-            .shadow(
-                color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
-            )
-
+            SecureField(L10n.Auth.Password.placeholder, text: $viewModel.password)
+                .textFieldStyle(FullSizeTappableTextFieldStyle())
+                .textFieldStyle(AuthTextFieldStyle())
+                .setAuthTextFieldStyle()
+                .overlayBorder(
+                    color: viewModel.passwordErrorMessage == nil
+                        ? Color.clear
+                        : ColorAssets.red.swiftUIColor
+                )
+                .errorMessage($viewModel.passwordErrorMessage)
+            
             HStack {
                 Spacer()
                 Button(
@@ -92,7 +88,7 @@ struct SignInView: View {
                 )
                 .padding(.vertical, 16)
             }
-
+            
             PrimaryButton(
                 title: L10n.Auth.SignIn.title,
                 action: {
