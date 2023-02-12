@@ -48,7 +48,7 @@ final class ForgotPasswordViewModel: ObservableObject {
             })
 
         emailValidateResult
-            .sink { [weak self] in self?.isResetButtonEnabled = $0 != nil }
+            .sink { [weak self] in self?.isResetButtonEnabled = $0 == nil }
             .store(in: &cancellables)
 
         resetPasswordTrigger

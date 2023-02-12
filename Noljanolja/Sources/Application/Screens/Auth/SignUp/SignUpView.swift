@@ -82,25 +82,26 @@ struct SignUpView: View {
 
     private var actions: some View {
         HStack(spacing: 12) {
-            PrimaryButton(
-                title: L10n.Common.previous,
+            Button(
+                L10n.Common.previous,
                 action: {
                     viewModel.signUpStep = .first
                     isShowingSignUpView = false
-                },
-                isEnabled: Binding<Bool>(get: { true }, set: { _ in }),
-                enabledBackgroundColor: ColorAssets.black.swiftUIColor
+                }
             )
-            .frame(width: 128)
-            PrimaryButton(
-                title: L10n.Auth.SignUp.title,
+            .frame(width: 100)
+            .buttonStyle(ThridyButtonStyle())
+
+            Button(
+                L10n.Auth.SignUp.title,
                 action: {
                     viewModel.signUpTrigger.send(
                         (viewModel.email, viewModel.password)
                     )
-                },
-                isEnabled: $viewModel.isSignUpButtonEnabled
+                }
             )
+            .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.isSignUpButtonEnabled))
+            .disabled(!viewModel.isSignUpButtonEnabled)
         }
         .padding(16)
     }

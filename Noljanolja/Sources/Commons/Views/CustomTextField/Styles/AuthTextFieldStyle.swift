@@ -28,9 +28,9 @@ extension View {
             .shadow(color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1)
     }
 
-    func overlayBorder(color: Color, lineWidth: CGFloat = 1) -> some View {
+    func overlayBorder(color: Color, cornerRadius: CGFloat = 8, lineWidth: CGFloat = 1) -> some View {
         overlay(
-            RoundedRectangle(cornerRadius: 14).stroke(color, lineWidth: lineWidth)
+            RoundedRectangle(cornerRadius: cornerRadius).stroke(color, lineWidth: lineWidth)
         )
     }
 }

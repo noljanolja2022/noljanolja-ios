@@ -32,7 +32,7 @@ final class SignInViewModel: ObservableObject {
     @Published var emailErrorMessage: String? = nil
     @Published var passwordErrorMessage: String? = nil
 
-    @Published var isSignInButtonEnabled = true
+    @Published var isSignInButtonEnabled = false
     @Published var isAlertMessagePresented = false
     @Published var alertMessage = ""
 

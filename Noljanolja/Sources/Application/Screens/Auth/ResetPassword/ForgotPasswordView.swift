@@ -69,11 +69,16 @@ struct ForgotPasswordView: View {
                 )
                 .errorMessage($viewModel.emailErrorMessage)
             Spacer()
-            PrimaryButton(
-                title: L10n.Auth.ResetPassword.title,
-                action: { viewModel.resetPasswordTrigger.send(viewModel.email) },
-                isEnabled: $viewModel.isResetButtonEnabled
+
+            Button(
+                L10n.Auth.ResetPassword.title,
+                action: {
+                    viewModel.resetPasswordTrigger.send(viewModel.email)
+                }
             )
+            .frame(height: 48)
+            .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.isResetButtonEnabled))
+            .disabled(!viewModel.isResetButtonEnabled)
         }
         .padding(16)
         .alert(isPresented: $viewModel.isAlertMessagePresented) {
