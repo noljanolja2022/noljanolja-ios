@@ -41,8 +41,8 @@ internal enum L10n {
         internal static let title = L10n.tr("Localizable", "auth.reset_password.retry.title", fallback: "Resend reset password link")
       }
       internal enum Success {
-        /// Reset password link has been sent to your email. Follow this link to reset your password and try login again
-        internal static let description = L10n.tr("Localizable", "auth.reset_password.success.description", fallback: "Reset password link has been sent to your email. Follow this link to reset your password and try login again")
+        /// Reset password link has been sent to your email. Follow this link to reset your password
+        internal static let description = L10n.tr("Localizable", "auth.reset_password.success.description", fallback: "Reset password link has been sent to your email. Follow this link to reset your password")
         /// Reset password link to your email has been sent
         internal static let title = L10n.tr("Localizable", "auth.reset_password.success.title", fallback: "Reset password link to your email has been sent")
       }
@@ -101,8 +101,8 @@ internal enum L10n {
       internal enum Error {
         /// The password must have at least one digit
         internal static let digitRequired = L10n.tr("Localizable", "validation.password.error.digit_required", fallback: "The password must have at least one digit")
-        /// The password must be 8-12 characters long
-        internal static let invalidLength = L10n.tr("Localizable", "validation.password.error.invalid_length", fallback: "The password must be 8-12 characters long")
+        /// The password must be 8-12 characters
+        internal static let invalidLength = L10n.tr("Localizable", "validation.password.error.invalid_length", fallback: "The password must be 8-12 characters")
         /// The password must have at least one letter
         internal static let letterRequired = L10n.tr("Localizable", "validation.password.error.letter_required", fallback: "The password must have at least one letter")
         /// Those passwords didn’t match. Try again

@@ -17,6 +17,7 @@ struct TermItemView: View {
     var checkedForegroundColor: Color? = ColorAssets.highlightPrimary.swiftUIColor
     var idArrowIconHidden = false
     var minTitleWidth: CGFloat = 0
+    var action: (() -> Void)?
 
     var body: some View {
         HStack(alignment: .top, spacing: 6) {
@@ -33,20 +34,29 @@ struct TermItemView: View {
                 selected ? checkedForegroundColor : foregroundColor
             )
             .alignmentGuide(.top, computeValue: { _ in 4 })
-            Text(title)
-                .frame(minWidth: minTitleWidth, alignment: .leading)
-                .font(FontFamily.NotoSans.medium.swiftUIFont(size: 14))
-                .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
-            Text(description)
-                .font(FontFamily.NotoSans.medium.swiftUIFont(size: 14))
-                .foregroundColor(ColorAssets.forcegroundSecondary.swiftUIColor)
-            Spacer(minLength: 4)
-            if !idArrowIconHidden {
-                ImageAssets.icArrowRight.swiftUIImage
-                    .resizable()
-                    .frame(width: 24, height: 24)
-                    .alignmentGuide(.top, computeValue: { _ in 4 })
-            }
+            Button(
+                action: { action?() },
+                label: {
+                    HStack(alignment: .top, spacing: 6) {
+                        Text(title)
+                            .frame(minWidth: minTitleWidth, alignment: .leading)
+                            .font(FontFamily.NotoSans.medium.swiftUIFont(size: 14))
+                            .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
+                        Text(description)
+                            .font(FontFamily.NotoSans.medium.swiftUIFont(size: 14))
+                            .foregroundColor(ColorAssets.forcegroundSecondary.swiftUIColor)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .multilineTextAlignment(.leading)
+                        Spacer(minLength: 4)
+                        if !idArrowIconHidden {
+                            ImageAssets.icArrowRight.swiftUIImage
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                        }
+                    }
+                }
+            )
+            .alignmentGuide(.top, computeValue: { _ in -1 })
         }
         .frame(maxWidth: .infinity)
     }

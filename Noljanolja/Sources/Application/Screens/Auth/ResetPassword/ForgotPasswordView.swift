@@ -23,7 +23,7 @@ struct ResetPasswordView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            if !viewModel.isSuccess {
+            if viewModel.isSuccess {
                 success
             } else {
                 content

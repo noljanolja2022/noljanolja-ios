@@ -15,6 +15,7 @@ struct AuthView: View {
     
     @State private var selectedIndex = 0
     @State private var isShowingResetPasswordView = false
+    @State private var termAndCoditionItemType: TermAndCoditionItemType? = nil
     
     init(viewModel: AuthViewModel = AuthViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -26,6 +27,20 @@ struct AuthView: View {
             NavigationLink(
                 destination: ResetPasswordView(isShowingResetPasswordView: $isShowingResetPasswordView),
                 isActive: $isShowingResetPasswordView,
+                label: { EmptyView() }
+            )
+            NavigationLink(
+                destination: TermDetailView(termAndCoditionItemType: termAndCoditionItemType ?? .termOfService),
+                isActive: Binding<Bool>(
+                    get: {
+                        termAndCoditionItemType != nil
+                    },
+                    set: {
+                        if !$0 {
+                            termAndCoditionItemType = nil
+                        }
+                    }
+                ),
                 label: { EmptyView() }
             )
         }
@@ -48,7 +63,7 @@ struct AuthView: View {
 
             TabView(selection: $selectedIndex) {
                 SignInView(isShowingResetPasswordView: $isShowingResetPasswordView).tag(0)
-                SignUpRootView().tag(1)
+                SignUpRootView(termAndCoditionItemType: $termAndCoditionItemType).tag(1)
             }
             //                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .introspectTabBarController { tabBarController in

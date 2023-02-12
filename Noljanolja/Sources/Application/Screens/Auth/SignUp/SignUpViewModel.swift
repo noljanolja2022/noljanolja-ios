@@ -94,7 +94,6 @@ final class SignUpViewModel: ObservableObject {
                 AppState.default.isLoading = false
                 switch result {
                 case let .success(idToken):
-                    self?.signUpStep = .third
                     logger.info("Signed up with Email/Password - Token: \(idToken)")
                 case let .failure(error):
                     logger.error("Sign up with Email/Password failed: \(error.localizedDescription)")
