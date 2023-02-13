@@ -14,12 +14,40 @@ struct AuthView: View {
     @StateObject private var viewModel: AuthViewModel
     
     @State private var selectedIndex = 0
+    @State private var isShowingResetPasswordView = false
+    @State private var termAndCoditionItemType: TermAndCoditionItemType? = nil
     
     init(viewModel: AuthViewModel = AuthViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
+        ZStack {
+            content
+            NavigationLink(
+                destination: ResetPasswordView(isShowingResetPasswordView: $isShowingResetPasswordView),
+                isActive: $isShowingResetPasswordView,
+                label: { EmptyView() }
+            )
+            NavigationLink(
+                destination: TermDetailView(termAndCoditionItemType: termAndCoditionItemType ?? .termOfService),
+                isActive: Binding<Bool>(
+                    get: {
+                        termAndCoditionItemType != nil
+                    },
+                    set: {
+                        if !$0 {
+                            termAndCoditionItemType = nil
+                        }
+                    }
+                ),
+                label: { EmptyView() }
+            )
+        }
+        .navigationBarHidden(true)
+    }
+
+    private var content: some View {
         VStack(spacing: 8) {
             TabLayout(
                 selection: $selectedIndex,
@@ -34,15 +62,14 @@ struct AuthView: View {
             .padding(.top, 12)
 
             TabView(selection: $selectedIndex) {
-                SignInView().tag(0)
-                SignUpRootView().tag(1)
+                SignInView(isShowingResetPasswordView: $isShowingResetPasswordView).tag(0)
+                SignUpRootView(termAndCoditionItemType: $termAndCoditionItemType).tag(1)
             }
             //                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .introspectTabBarController { tabBarController in
                 tabBarController.tabBar.isHidden = true
             }
         }
-        .navigationBarHidden(true)
     }
 }
 

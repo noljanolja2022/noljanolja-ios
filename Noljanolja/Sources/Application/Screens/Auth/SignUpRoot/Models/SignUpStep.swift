@@ -23,14 +23,16 @@ enum SignUpStep: CaseIterable {
     var title: String {
         switch self {
         case .first: return L10n.Auth.SignUp.Step1.title
-        case .second, .third: return L10n.Auth.SignUp.Step2.title
+        case .second: return L10n.Auth.SignUp.Step2.title
+        case .third: return L10n.Auth.SignUp.Step3.title
         }
     }
 
     var description: String {
         switch self {
         case .first: return L10n.Auth.SignUp.Step1.description
-        case .second, .third: return L10n.Auth.SignUp.Step2.description
+        case .second: return L10n.Auth.SignUp.Step2.description
+        case .third: return L10n.Auth.SignUp.Step3.description
         }
     }
 }

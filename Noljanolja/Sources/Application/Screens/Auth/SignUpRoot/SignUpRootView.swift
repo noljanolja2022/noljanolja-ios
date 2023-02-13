@@ -13,8 +13,12 @@ import SwiftUI
 struct SignUpRootView: View {
     @StateObject private var viewModel: SignUpRootViewModel
 
-    init(viewModel: SignUpRootViewModel = SignUpRootViewModel()) {
+    @Binding private var termAndCoditionItemType: TermAndCoditionItemType?
+
+    init(viewModel: SignUpRootViewModel = SignUpRootViewModel(),
+         termAndCoditionItemType: Binding<TermAndCoditionItemType?>) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        _termAndCoditionItemType = termAndCoditionItemType
     }
 
     var body: some View {
@@ -33,7 +37,12 @@ struct SignUpRootView: View {
 
     private var content: some View {
         NavigationView {
-            TermAndConditionView(viewModel: TermAndConditionViewModel(signUpStep: $viewModel.step))
+            TermAndConditionView(
+                viewModel: TermAndConditionViewModel(
+                    signUpStep: $viewModel.step
+                ),
+                termAndCoditionItemType: $termAndCoditionItemType
+            )
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
@@ -42,8 +51,10 @@ struct SignUpRootView: View {
 // MARK: - SignUpRootView_Previews
 
 struct SignUpRootView_Previews: PreviewProvider {
+    @State private static var termAndCoditionItemType: TermAndCoditionItemType? = nil
+
     static var previews: some View {
-        SignUpRootView()
+        SignUpRootView(termAndCoditionItemType: $termAndCoditionItemType)
     }
 }
 

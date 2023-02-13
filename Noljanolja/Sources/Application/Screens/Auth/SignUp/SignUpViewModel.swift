@@ -36,6 +36,8 @@ final class SignUpViewModel: ObservableObject {
     @Published var isAlertMessagePresented = false
     @Published var alertMessage = ""
 
+    @Published var isShowingEmailVerificationView = false
+
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
@@ -94,12 +96,18 @@ final class SignUpViewModel: ObservableObject {
                 AppState.default.isLoading = false
                 switch result {
                 case let .success(idToken):
-                    self?.signUpStep = .third
                     logger.info("Signed up with Email/Password - Token: \(idToken)")
                 case let .failure(error):
                     logger.error("Sign up with Email/Password failed: \(error.localizedDescription)")
-                    self?.isAlertMessagePresented = true
-                    self?.alertMessage = "Sign up with Email/Password failed.\nDETAIL: \(error.localizedDescription)"
+
+                    switch error {
+                    case FirebaseAuthError.emailNotVerified as FirebaseAuthError:
+                        self?.isShowingEmailVerificationView = true
+                        self?.signUpStep = .third
+                    default:
+                        self?.isAlertMessagePresented = true
+                        self?.alertMessage = L10n.Common.Error.message
+                    }
                 }
             })
             .store(in: &cancellables)

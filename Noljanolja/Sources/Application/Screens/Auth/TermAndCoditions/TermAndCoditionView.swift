@@ -14,9 +14,12 @@ struct TermAndConditionView: View {
     @StateObject private var viewModel: TermAndConditionViewModel
 
     @State private var isShowingSignUpView = false
+    @Binding private var termAndCoditionItemType: TermAndCoditionItemType?
 
-    init(viewModel: TermAndConditionViewModel) {
+    init(viewModel: TermAndConditionViewModel,
+         termAndCoditionItemType: Binding<TermAndCoditionItemType?>) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        _termAndCoditionItemType = termAndCoditionItemType
     }
 
     var body: some View {
@@ -88,7 +91,8 @@ struct TermAndConditionView: View {
                         selected: seleted,
                         title: itemType.title,
                         description: itemType.description,
-                        minTitleWidth: array.map { $0.key }.maxTitleWidth(with: FontFamily.NotoSans.medium.font(size: 14))
+                        minTitleWidth: array.map { $0.key }.maxTitleWidth(with: FontFamily.NotoSans.medium.font(size: 14)),
+                        action: { termAndCoditionItemType = itemType }
                     )
 
                     if itemType.isSeparatoRequired {
@@ -110,8 +114,14 @@ struct TermAndConditionView: View {
 
 struct TermAndConditionView_Previews: PreviewProvider {
     @State private static var step: SignUpStep = .first
+    @State private static var termAndCoditionItemType: TermAndCoditionItemType? = nil
 
     static var previews: some View {
-        TermAndConditionView(viewModel: TermAndConditionViewModel(signUpStep: $step))
+        TermAndConditionView(
+            viewModel: TermAndConditionViewModel(
+                signUpStep: $step
+            ),
+            termAndCoditionItemType: $termAndCoditionItemType
+        )
     }
 }

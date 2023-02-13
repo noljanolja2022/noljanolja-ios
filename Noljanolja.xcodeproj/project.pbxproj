@@ -39,6 +39,8 @@
 		CF1550242993B5C90053E86D /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1550222993B5C90053E86D /* TabBarItem.swift */; };
 		CF3201812997723400E8F914 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3201802997723400E8F914 /* AppState.swift */; };
 		CF43BF73299274D900FD3180 /* FirebaseAuth+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF43BF72299274D900FD3180 /* FirebaseAuth+Combine.swift */; };
+		CF595387299A6DD400A7EE55 /* EmailVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF595385299A6DD300A7EE55 /* EmailVerificationView.swift */; };
+		CF595388299A6DD400A7EE55 /* EmailVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF595386299A6DD300A7EE55 /* EmailVerificationViewModel.swift */; };
 		CF6ABC1329935C2D00D78213 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC0C29935C2D00D78213 /* SignUpViewModel.swift */; };
 		CF6ABC1429935C2D00D78213 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC0D29935C2D00D78213 /* SignUpView.swift */; };
 		CF6ABC1529935C2D00D78213 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC0E29935C2D00D78213 /* AuthViewModel.swift */; };
@@ -82,6 +84,8 @@
 		CFE9D2DD298D66F700D936DA /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = CFE9D2DC298D66F700D936DA /* GoogleSignIn */; };
 		CFE9D2E0298D6C1500D936DA /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CFE9D2DF298D6C1500D936DA /* KakaoSDKAuth */; };
 		CFE9D2E2298D6C1500D936DA /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = CFE9D2E1298D6C1500D936DA /* KakaoSDKUser */; };
+		CFFCB8A329993E3D00498834 /* TermDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFCB8A129993E3D00498834 /* TermDetailView.swift */; };
+		CFFCB8A429993E3D00498834 /* TermDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFCB8A229993E3D00498834 /* TermDetailViewModel.swift */; };
 		CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */; };
 		CFFD7086298ABA0100D4F5A2 /* ImageAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7085298ABA0100D4F5A2 /* ImageAssets.xcassets */; };
 		CFFD7089298ABA0100D4F5A2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7088298ABA0100D4F5A2 /* Preview Assets.xcassets */; };
@@ -161,6 +165,8 @@
 		CF1550222993B5C90053E86D /* TabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		CF3201802997723400E8F914 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		CF43BF72299274D900FD3180 /* FirebaseAuth+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseAuth+Combine.swift"; sourceTree = "<group>"; };
+		CF595385299A6DD300A7EE55 /* EmailVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationView.swift; sourceTree = "<group>"; };
+		CF595386299A6DD300A7EE55 /* EmailVerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewModel.swift; sourceTree = "<group>"; };
 		CF6ABC0C29935C2D00D78213 /* SignUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		CF6ABC0D29935C2D00D78213 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		CF6ABC0E29935C2D00D78213 /* AuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
@@ -197,6 +203,8 @@
 		CFE09340299007E400F197F0 /* Publisher+FlatMapTranforming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+FlatMapTranforming.swift"; sourceTree = "<group>"; };
 		CFE48BC2299207DA0062C903 /* AuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStore.swift; sourceTree = "<group>"; };
 		CFE978702998876B00A50083 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		CFFCB8A129993E3D00498834 /* TermDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermDetailView.swift; sourceTree = "<group>"; };
+		CFFCB8A229993E3D00498834 /* TermDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermDetailViewModel.swift; sourceTree = "<group>"; };
 		CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Noljanolja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoljanoljaApp.swift; sourceTree = "<group>"; };
 		CFFD7085298ABA0100D4F5A2 /* ImageAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImageAssets.xcassets; sourceTree = "<group>"; };
@@ -438,9 +446,20 @@
 			path = CustomTabBar;
 			sourceTree = "<group>";
 		};
+		CF595384299A6DC200A7EE55 /* EmailVerification */ = {
+			isa = PBXGroup;
+			children = (
+				CF595385299A6DD300A7EE55 /* EmailVerificationView.swift */,
+				CF595386299A6DD300A7EE55 /* EmailVerificationViewModel.swift */,
+			);
+			path = EmailVerification;
+			sourceTree = "<group>";
+		};
 		CF6ABC0A29935C2D00D78213 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				CF595384299A6DC200A7EE55 /* EmailVerification */,
+				CFFCB8A029993E2700498834 /* TermDetail */,
 				CF6ABC1929935D4800D78213 /* Auth */,
 				CFD83DCA29973A3200B9A6BB /* AuthNavigation */,
 				CF15501A2993B5640053E86D /* ResetPassword */,
@@ -626,6 +645,15 @@
 				CFE978702998876B00A50083 /* Launch Screen.storyboard */,
 			);
 			path = Launch;
+			sourceTree = "<group>";
+		};
+		CFFCB8A029993E2700498834 /* TermDetail */ = {
+			isa = PBXGroup;
+			children = (
+				CFFCB8A129993E3D00498834 /* TermDetailView.swift */,
+				CFFCB8A229993E3D00498834 /* TermDetailViewModel.swift */,
+			);
+			path = TermDetail;
 			sourceTree = "<group>";
 		};
 		CFFD7075298AB9FF00D4F5A2 = {
@@ -1184,6 +1212,7 @@
 				CF1550232993B5C90053E86D /* TabBar.swift in Sources */,
 				CFD83DBF29967A2E00B9A6BB /* SignUpStepHeaderView.swift in Sources */,
 				CF1550182993B55F0053E86D /* ForgotPasswordView.swift in Sources */,
+				CFFCB8A329993E3D00498834 /* TermDetailView.swift in Sources */,
 				CFD83DC52996A07700B9A6BB /* SignUpStep.swift in Sources */,
 				CFE0925F298EACF200F197F0 /* GoogleAuthAPI.swift in Sources */,
 				CFC709E729962CD100B64216 /* SignUpRootView.swift in Sources */,
@@ -1218,6 +1247,7 @@
 				CF6ABC2029935D7B00D78213 /* RootViewModel.swift in Sources */,
 				CF14F266298CF4E700BC2066 /* AppConfigs.swift in Sources */,
 				CFC709E829962CD100B64216 /* SignUpRootViewModel.swift in Sources */,
+				CF595388299A6DD400A7EE55 /* EmailVerificationViewModel.swift in Sources */,
 				CFD83DC22996812B00B9A6BB /* TermAndCoditionItemType.swift in Sources */,
 				CF14F230298C05F900BC2066 /* MainView.swift in Sources */,
 				CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */,
@@ -1242,7 +1272,9 @@
 				CFE0925D298DFDCB00F197F0 /* KakaoAuthAPI.swift in Sources */,
 				CFFD70CA298AC5F800D4F5A2 /* TargetType+Default.swift in Sources */,
 				CF3201812997723400E8F914 /* AppState.swift in Sources */,
+				CFFCB8A429993E3D00498834 /* TermDetailViewModel.swift in Sources */,
 				CF14F248298C331C00BC2066 /* ImageAssets.swift in Sources */,
+				CF595387299A6DD400A7EE55 /* EmailVerificationView.swift in Sources */,
 				CFE09263298EB69700F197F0 /* FirebaseUser+Combine.swift in Sources */,
 				CFFD70D7298ACA8700D4F5A2 /* HomeModel.swift in Sources */,
 				CF1550192993B55F0053E86D /* ForgotPasswordViewModel.swift in Sources */,

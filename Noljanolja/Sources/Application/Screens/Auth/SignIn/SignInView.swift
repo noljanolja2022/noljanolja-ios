@@ -13,18 +13,30 @@ import SwiftUI
 struct SignInView: View {
     @StateObject private var viewModel: SignInViewModel
     
-    @State private var isShowingForgotPasswordView = false
+    @Binding private var isShowingResetPasswordView: Bool
     
-    init(viewModel: SignInViewModel = SignInViewModel()) {
+    init(viewModel: SignInViewModel = SignInViewModel(),
+         isShowingResetPasswordView: Binding<Bool>) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        _isShowingResetPasswordView = isShowingResetPasswordView
     }
     
     var body: some View {
         ZStack {
             content
             NavigationLink(
-                destination: ForgotPasswordView(isShowingForgotPasswordView: $isShowingForgotPasswordView),
-                isActive: $isShowingForgotPasswordView,
+                isActive: $viewModel.isShowingEmailVerificationView,
+                destination: {
+                    EmailVerificationView(
+                        viewModel: EmailVerificationViewModel(signUpStep: .constant(.third)),
+                        isShowingEmailVerificationView: $viewModel.isShowingEmailVerificationView
+                    )
+                    .navigationBarTitle(
+                        Text("Email verification"),
+                        displayMode: .inline
+                    )
+                    .navigationBarHidden(false)
+                },
                 label: { EmptyView() }
             )
         }
@@ -78,7 +90,7 @@ struct SignInView: View {
             HStack {
                 Spacer()
                 Button(
-                    action: { isShowingForgotPasswordView = true },
+                    action: { isShowingResetPasswordView = true },
                     label: {
                         Text(L10n.Auth.ForgotPassword.title)
                             .font(FontFamily.NotoSans.regular.swiftUIFont(size: 14))
@@ -159,8 +171,9 @@ struct SignInView: View {
 // MARK: - SignInView_Previews
 
 struct SignInView_Previews: PreviewProvider {
+    @State private static var isShowingResetPasswordView = false
     static var previews: some View {
-        SignInView()
+        SignInView(isShowingResetPasswordView: $isShowingResetPasswordView)
     }
 }
 

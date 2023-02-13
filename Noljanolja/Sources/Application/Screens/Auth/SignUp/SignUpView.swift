@@ -22,9 +22,22 @@ struct SignUpView: View {
     }
 
     var body: some View {
-        VStack(spacing: 0) {
-            signUp
-            actions
+        ZStack {
+            VStack(spacing: 0) {
+                signUp
+                actions
+            }
+            NavigationLink(
+                isActive: $viewModel.isShowingEmailVerificationView,
+                destination: {
+                    EmailVerificationView(
+                        viewModel: EmailVerificationViewModel(signUpStep: $viewModel.signUpStep),
+                        isShowingEmailVerificationView: $viewModel.isShowingEmailVerificationView
+                    )
+                    .navigationBarHidden(true)
+                },
+                label: { EmptyView() }
+            )
         }
         .alert(isPresented: $viewModel.isAlertMessagePresented) {
             Alert(

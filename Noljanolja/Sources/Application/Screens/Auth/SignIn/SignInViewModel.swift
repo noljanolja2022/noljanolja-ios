@@ -36,6 +36,8 @@ final class SignInViewModel: ObservableObject {
     @Published var isAlertMessagePresented = false
     @Published var alertMessage = ""
 
+    @Published var isShowingEmailVerificationView = false
+
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
@@ -84,8 +86,14 @@ final class SignInViewModel: ObservableObject {
                     logger.info("Signed in with Email/Password - Token: \(idToken)")
                 case let .failure(error):
                     logger.error("Sign in with Email/Password failed: \(error.localizedDescription)")
-                    self?.isAlertMessagePresented = true
-                    self?.alertMessage = "Sign in with Email/Password failed.\nDETAIL: \(error.localizedDescription)"
+
+                    switch error {
+                    case FirebaseAuthError.emailNotVerified as FirebaseAuthError:
+                        self?.isShowingEmailVerificationView = true
+                    default:
+                        self?.isAlertMessagePresented = true
+                        self?.alertMessage = L10n.Common.Error.message
+                    }
                 }
             })
             .store(in: &cancellables)
@@ -106,7 +114,7 @@ final class SignInViewModel: ObservableObject {
                 case let .failure(error):
                     logger.error("Sign in with Apple failed: \(error.localizedDescription)")
                     self?.isAlertMessagePresented = true
-                    self?.alertMessage = "Sign in with Apple failed.\nDETAIL: \(error.localizedDescription)"
+                    self?.alertMessage = L10n.Common.Error.message
                 }
             })
             .store(in: &cancellables)
@@ -127,7 +135,7 @@ final class SignInViewModel: ObservableObject {
                 case let .failure(error):
                     logger.error("Sign in with Google failed: \(error.localizedDescription)")
                     self?.isAlertMessagePresented = true
-                    self?.alertMessage = "Sign in with Google failed.\nDETAIL: \(error.localizedDescription)"
+                    self?.alertMessage = L10n.Common.Error.message
                 }
             }
             )
@@ -149,17 +157,18 @@ final class SignInViewModel: ObservableObject {
                 case let .failure(error):
                     logger.error("Sign in with Kakao failed: \(error.localizedDescription)")
                     self?.isAlertMessagePresented = true
-                    self?.alertMessage = "Sign in with Kakao failed.\nDETAIL: \(error.localizedDescription)"
+                    self?.alertMessage = L10n.Common.Error.message
                 }
             })
             .store(in: &cancellables)
 
         signInWithNaverTrigger
-            .handleEvents(receiveOutput: { _ in AppState.default.isLoading = true })
             .flatMap { [weak self] _ -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
-                    .signInWithNaver()
+                    .signInWithNaver {
+                        AppState.default.isLoading = true
+                    }
                     .eraseToResultAnyPublisher()
             }
             .sink(receiveValue: { [weak self] result in
@@ -170,7 +179,7 @@ final class SignInViewModel: ObservableObject {
                 case let .failure(error):
                     logger.error("Sign in with Naver failed: \(error.localizedDescription)")
                     self?.isAlertMessagePresented = true
-                    self?.alertMessage = "Sign in with Naver failed.\nDETAIL: \(error.localizedDescription)"
+                    self?.alertMessage = L10n.Common.Error.message
                 }
             }
             )
