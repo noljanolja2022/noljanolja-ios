@@ -7,12 +7,12 @@
 
 import Foundation
 import UIKit
-//
-// extension UINavigationController {
-//    override open func viewWillLayoutSubviews() {
-//        super.viewWillLayoutSubviews()
-//
-//        UINavigationBar.appearance().titleTextAttributes = [.font: FontFamily.NotoSans.bold.font(size: 16)]
-//        navigationBar.topItem?.backButtonDisplayMode = .minimal
-//    }
-// }
+
+extension UINavigationController {
+    override open func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+
+        UINavigationBar.appearance().titleTextAttributes = [.font: FontFamily.NotoSans.bold.font(size: 16)]
+        navigationBar.topItem?.backButtonDisplayMode = .minimal
+    }
+}

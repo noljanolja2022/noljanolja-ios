@@ -29,9 +29,6 @@ struct TermDetailView: View {
                 .padding(16)
         }
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button("") {}
-            }
             ToolbarItem(placement: .principal) {
                 VStack {
                     Text(termAndCoditionItemType.title)
