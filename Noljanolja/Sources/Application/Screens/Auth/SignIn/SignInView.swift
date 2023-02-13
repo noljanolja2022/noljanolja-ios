@@ -24,6 +24,21 @@ struct SignInView: View {
     var body: some View {
         ZStack {
             content
+            NavigationLink(
+                isActive: $viewModel.isShowingEmailVerificationView,
+                destination: {
+                    EmailVerificationView(
+                        viewModel: EmailVerificationViewModel(signUpStep: .constant(.third)),
+                        isShowingEmailVerificationView: $viewModel.isShowingEmailVerificationView
+                    )
+                    .navigationBarTitle(
+                        Text("Email verification"),
+                        displayMode: .inline
+                    )
+                    .navigationBarHidden(false)
+                },
+                label: { EmptyView() }
+            )
         }
         .alert(isPresented: $viewModel.isAlertMessagePresented) {
             Alert(

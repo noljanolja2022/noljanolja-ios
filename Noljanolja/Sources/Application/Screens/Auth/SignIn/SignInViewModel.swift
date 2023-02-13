@@ -36,6 +36,8 @@ final class SignInViewModel: ObservableObject {
     @Published var isAlertMessagePresented = false
     @Published var alertMessage = ""
 
+    @Published var isShowingEmailVerificationView = false
+
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
@@ -84,8 +86,14 @@ final class SignInViewModel: ObservableObject {
                     logger.info("Signed in with Email/Password - Token: \(idToken)")
                 case let .failure(error):
                     logger.error("Sign in with Email/Password failed: \(error.localizedDescription)")
-                    self?.isAlertMessagePresented = true
-                    self?.alertMessage = L10n.Common.Error.message
+
+                    switch error {
+                    case FirebaseAuthError.emailNotVerified as FirebaseAuthError:
+                        self?.isShowingEmailVerificationView = true
+                    default:
+                        self?.isAlertMessagePresented = true
+                        self?.alertMessage = L10n.Common.Error.message
+                    }
                 }
             })
             .store(in: &cancellables)
@@ -155,11 +163,12 @@ final class SignInViewModel: ObservableObject {
             .store(in: &cancellables)
 
         signInWithNaverTrigger
-            .handleEvents(receiveOutput: { _ in AppState.default.isLoading = true })
             .flatMap { [weak self] _ -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
-                    .signInWithNaver()
+                    .signInWithNaver {
+                        AppState.default.isLoading = true
+                    }
                     .eraseToResultAnyPublisher()
             }
             .sink(receiveValue: { [weak self] result in

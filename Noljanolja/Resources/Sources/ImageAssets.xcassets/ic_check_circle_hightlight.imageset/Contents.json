@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ic_ppyy.png",
+      "filename" : "CheckCircle.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ic_ppyy@2x.png",
+      "filename" : "CheckCircle@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ic_ppyy@3x.png",
+      "filename" : "CheckCircle@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -26,6 +26,8 @@
 "auth.sign_up.step1.description" = "You need to agree to the terms and conditions before signing up";
 "auth.sign_up.step2.title" = "STEP.2";
 "auth.sign_up.step2.description" = "Sign up with email and password";
+"auth.sign_up.step3.title" = "STEP.3";
+"auth.sign_up.step3.description" = "Verification link has been sent to your email. Please check your email and follow it to continue";
 
 "validation.email.error.invalid" = "Please enter a valid email";
 

@@ -16,13 +16,15 @@ protocol AuthServicesType {
     var isAuthenticated: CurrentValueSubject<Bool, Never> { get set }
 
     func signUp(email: String, password: String) -> AnyPublisher<String, Error>
+    func sendEmailVerification() -> AnyPublisher<Void, Error>
+    func verifyEmail() -> AnyPublisher<String, Error>
     func sendPasswordReset(email: String) -> AnyPublisher<Void, Error>
 
     func signIn(email: String, password: String) -> AnyPublisher<String, Error>
     func signInWithApple() -> AnyPublisher<String, Error>
     func signInWithGoogle() -> AnyPublisher<String, Error>
     func signInWithKakao() -> AnyPublisher<String, Error>
-    func signInWithNaver() -> AnyPublisher<String, Error>
+    func signInWithNaver(_ signInWithNaverCompletion: (() -> Void)?) -> AnyPublisher<String, Error>
     func signOut() -> AnyPublisher<Void, Error>
 }
 
@@ -48,7 +50,45 @@ final class AuthServices: NSObject, AuthServicesType {
     func signUp(email: String, password: String) -> AnyPublisher<String, Error> {
         firebaseAuth.createUser(withEmail: email, password: password)
             .flatMap { result in
-                result.user.getIDTokenResult()
+                if result.user.isEmailVerified {
+                    return result.user.getIDTokenResult()
+                        .eraseToAnyPublisher()
+                } else {
+                    return Fail<String, Error>(error: FirebaseAuthError.emailNotVerified)
+                        .eraseToAnyPublisher()
+                }
+            }
+            .handleEvents(receiveOutput: { [weak self] token in
+                self?.authStore.saveToken(token)
+                self?.isAuthenticated.send(true)
+            })
+            .eraseToAnyPublisher()
+    }
+
+    func sendEmailVerification() -> AnyPublisher<Void, Error> {
+        if let user = firebaseAuth.currentUser {
+            return user.sendEmailVerification()
+                .eraseToAnyPublisher()
+        } else {
+            return Fail<Void, Error>(error: FirebaseAuthError.userNotFound)
+                .eraseToAnyPublisher()
+        }
+    }
+
+    func verifyEmail() -> AnyPublisher<String, Error> {
+        guard let user = firebaseAuth.currentUser else {
+            return Fail<String, Error>(error: FirebaseAuthError.userNotFound)
+                .eraseToAnyPublisher()
+        }
+        return user.reloadCombine()
+            .flatMap { user in
+                if user.isEmailVerified {
+                    return user.getIDTokenResult()
+                        .eraseToAnyPublisher()
+                } else {
+                    return Fail<String, Error>(error: FirebaseAuthError.emailNotVerified)
+                        .eraseToAnyPublisher()
+                }
             }
             .handleEvents(receiveOutput: { [weak self] token in
                 self?.authStore.saveToken(token)
@@ -65,7 +105,13 @@ final class AuthServices: NSObject, AuthServicesType {
     func signIn(email: String, password: String) -> AnyPublisher<String, Error> {
         firebaseAuth.signIn(withEmail: email, password: password)
             .flatMap { result in
-                result.user.getIDTokenResult()
+                if result.user.isEmailVerified {
+                    return result.user.getIDTokenResult()
+                        .eraseToAnyPublisher()
+                } else {
+                    return Fail<String, Error>(error: FirebaseAuthError.emailNotVerified)
+                        .eraseToAnyPublisher()
+                }
             }
             .handleEvents(receiveOutput: { [weak self] token in
                 self?.authStore.saveToken(token)
@@ -84,7 +130,13 @@ final class AuthServices: NSObject, AuthServicesType {
                     .eraseToAnyPublisher()
             }
             .flatMap { result in
-                result.user.getIDTokenResult()
+                if result.user.isEmailVerified {
+                    return result.user.getIDTokenResult()
+                        .eraseToAnyPublisher()
+                } else {
+                    return Fail<String, Error>(error: FirebaseAuthError.emailNotVerified)
+                        .eraseToAnyPublisher()
+                }
             }
             .handleEvents(receiveOutput: { [weak self] token in
                 self?.authStore.saveToken(token)
@@ -134,8 +186,10 @@ final class AuthServices: NSObject, AuthServicesType {
             .eraseToAnyPublisher()
     }
 
-    func signInWithNaver() -> AnyPublisher<String, Error> {
-        naverAuthAPI.signIn().eraseToAnyPublisher()
+    func signInWithNaver(_ signInWithNaverCompletion: (() -> Void)?) -> AnyPublisher<String, Error> {
+        naverAuthAPI
+            .signIn()
+            .handleEvents(receiveOutput: { _ in signInWithNaverCompletion?() })
             .flatMap { [weak self] in
                 guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
                 return self.cloudFunctionAuthAPI.authWithNaver(token: $0)

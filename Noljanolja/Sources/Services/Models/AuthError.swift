@@ -41,4 +41,5 @@ enum CloudFunctionAuthError: Error {
 
 enum FirebaseAuthError: Error {
     case userNotFound
+    case emailNotVerified
 }

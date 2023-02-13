@@ -39,6 +39,8 @@
 		CF1550242993B5C90053E86D /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1550222993B5C90053E86D /* TabBarItem.swift */; };
 		CF3201812997723400E8F914 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3201802997723400E8F914 /* AppState.swift */; };
 		CF43BF73299274D900FD3180 /* FirebaseAuth+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF43BF72299274D900FD3180 /* FirebaseAuth+Combine.swift */; };
+		CF595387299A6DD400A7EE55 /* EmailVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF595385299A6DD300A7EE55 /* EmailVerificationView.swift */; };
+		CF595388299A6DD400A7EE55 /* EmailVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF595386299A6DD300A7EE55 /* EmailVerificationViewModel.swift */; };
 		CF6ABC1329935C2D00D78213 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC0C29935C2D00D78213 /* SignUpViewModel.swift */; };
 		CF6ABC1429935C2D00D78213 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC0D29935C2D00D78213 /* SignUpView.swift */; };
 		CF6ABC1529935C2D00D78213 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC0E29935C2D00D78213 /* AuthViewModel.swift */; };
@@ -163,6 +165,8 @@
 		CF1550222993B5C90053E86D /* TabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		CF3201802997723400E8F914 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		CF43BF72299274D900FD3180 /* FirebaseAuth+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseAuth+Combine.swift"; sourceTree = "<group>"; };
+		CF595385299A6DD300A7EE55 /* EmailVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationView.swift; sourceTree = "<group>"; };
+		CF595386299A6DD300A7EE55 /* EmailVerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewModel.swift; sourceTree = "<group>"; };
 		CF6ABC0C29935C2D00D78213 /* SignUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		CF6ABC0D29935C2D00D78213 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		CF6ABC0E29935C2D00D78213 /* AuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
@@ -442,9 +446,19 @@
 			path = CustomTabBar;
 			sourceTree = "<group>";
 		};
+		CF595384299A6DC200A7EE55 /* EmailVerification */ = {
+			isa = PBXGroup;
+			children = (
+				CF595385299A6DD300A7EE55 /* EmailVerificationView.swift */,
+				CF595386299A6DD300A7EE55 /* EmailVerificationViewModel.swift */,
+			);
+			path = EmailVerification;
+			sourceTree = "<group>";
+		};
 		CF6ABC0A29935C2D00D78213 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				CF595384299A6DC200A7EE55 /* EmailVerification */,
 				CFFCB8A029993E2700498834 /* TermDetail */,
 				CF6ABC1929935D4800D78213 /* Auth */,
 				CFD83DCA29973A3200B9A6BB /* AuthNavigation */,
@@ -1233,6 +1247,7 @@
 				CF6ABC2029935D7B00D78213 /* RootViewModel.swift in Sources */,
 				CF14F266298CF4E700BC2066 /* AppConfigs.swift in Sources */,
 				CFC709E829962CD100B64216 /* SignUpRootViewModel.swift in Sources */,
+				CF595388299A6DD400A7EE55 /* EmailVerificationViewModel.swift in Sources */,
 				CFD83DC22996812B00B9A6BB /* TermAndCoditionItemType.swift in Sources */,
 				CF14F230298C05F900BC2066 /* MainView.swift in Sources */,
 				CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */,
@@ -1259,6 +1274,7 @@
 				CF3201812997723400E8F914 /* AppState.swift in Sources */,
 				CFFCB8A429993E3D00498834 /* TermDetailViewModel.swift in Sources */,
 				CF14F248298C331C00BC2066 /* ImageAssets.swift in Sources */,
+				CF595387299A6DD400A7EE55 /* EmailVerificationView.swift in Sources */,
 				CFE09263298EB69700F197F0 /* FirebaseUser+Combine.swift in Sources */,
 				CFFD70D7298ACA8700D4F5A2 /* HomeModel.swift in Sources */,
 				CF1550192993B55F0053E86D /* ForgotPasswordViewModel.swift in Sources */,

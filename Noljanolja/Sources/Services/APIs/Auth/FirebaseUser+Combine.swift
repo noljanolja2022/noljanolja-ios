@@ -21,4 +21,16 @@ extension User {
             }
         }
     }
+
+    func reloadCombine() -> Future<User, Error> {
+        Future { promise in
+            self.reload { error in
+                if let error {
+                    promise(.failure(error))
+                } else {
+                    promise(.success(self))
+                }
+            }
+        }
+    }
 }

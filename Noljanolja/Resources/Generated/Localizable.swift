@@ -70,6 +70,12 @@ internal enum L10n {
         /// STEP.2
         internal static let title = L10n.tr("Localizable", "auth.sign_up.step2.title", fallback: "STEP.2")
       }
+      internal enum Step3 {
+        /// Verification link has been sent to your email. Please check your email and follow it to continue
+        internal static let description = L10n.tr("Localizable", "auth.sign_up.step3.description", fallback: "Verification link has been sent to your email. Please check your email and follow it to continue")
+        /// STEP.3
+        internal static let title = L10n.tr("Localizable", "auth.sign_up.step3.title", fallback: "STEP.3")
+      }
     }
   }
   internal enum Common {

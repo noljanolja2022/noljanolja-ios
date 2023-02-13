@@ -10,11 +10,13 @@ import Foundation
 enum SignUpStep: CaseIterable {
     case first
     case second
+    case third
 
     var index: CGFloat {
         switch self {
         case .first: return 1
         case .second: return 2
+        case .third: return 3
         }
     }
 
@@ -22,6 +24,7 @@ enum SignUpStep: CaseIterable {
         switch self {
         case .first: return L10n.Auth.SignUp.Step1.title
         case .second: return L10n.Auth.SignUp.Step2.title
+        case .third: return L10n.Auth.SignUp.Step3.title
         }
     }
 
@@ -29,6 +32,7 @@ enum SignUpStep: CaseIterable {
         switch self {
         case .first: return L10n.Auth.SignUp.Step1.description
         case .second: return L10n.Auth.SignUp.Step2.description
+        case .third: return L10n.Auth.SignUp.Step3.description
         }
     }
 }
