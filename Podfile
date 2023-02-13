@@ -6,7 +6,7 @@ target 'Noljanolja' do
   use_frameworks!
 
   # Pods for Noljanolja
-  pod 'naveridlogin-sdk-ios'
+  pod 'naveridlogin-sdk-ios', '4.1.5'
 
   target 'NoljanoljaTests' do
     inherit! :search_paths

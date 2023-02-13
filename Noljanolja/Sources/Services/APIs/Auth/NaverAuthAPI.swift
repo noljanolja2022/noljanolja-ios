@@ -40,6 +40,7 @@ final class NaverAuthAPI: NSObject {
     func signOutIfNeeded() -> Future<Void, Error> {
         Future { [weak self] promise in
             if self?.naverLoginConnection?.accessToken != nil {
+                self?.naverLoginConnection?.requestDeleteToken()
                 self?.naverLoginConnection?.resetToken()
                 self?.naverLoginConnection?.removeNaverLoginCookie()
             }
