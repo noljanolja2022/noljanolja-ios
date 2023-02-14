@@ -109,9 +109,7 @@ struct ResetPasswordView: View {
 // MARK: - ResetPasswordView_Previews
 
 struct ResetPasswordView_Previews: PreviewProvider {
-    @State private static var isShowingResetPasswordView = true
-
     static var previews: some View {
-        ResetPasswordView(isShowingResetPasswordView: $isShowingResetPasswordView)
+        ResetPasswordView(isShowingResetPasswordView: .constant(true))
     }
 }

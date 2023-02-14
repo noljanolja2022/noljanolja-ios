@@ -123,13 +123,10 @@ struct SignUpView: View {
 // MARK: - SignUpView_Previews
 
 struct SignUpView_Previews: PreviewProvider {
-    @State private static var isShowingSignUpView = true
-    @State private static var signUpStep: SignUpStep = .first
-
     static var previews: some View {
         SignUpView(
-            viewModel: SignUpViewModel(signUpStep: $signUpStep),
-            isShowingSignUpView: $isShowingSignUpView
+            viewModel: SignUpViewModel(signUpStep: .constant(.first)),
+            isShowingSignUpView: .constant(true)
         )
     }
 }

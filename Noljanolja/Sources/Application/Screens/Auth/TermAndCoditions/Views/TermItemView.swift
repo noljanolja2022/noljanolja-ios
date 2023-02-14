@@ -65,17 +65,15 @@ struct TermItemView: View {
 // MARK: - TermItemView_Previews
 
 struct TermItemView_Previews: PreviewProvider {
-    @State private static var selected = true
-
     static var previews: some View {
         VStack {
             TermItemView(
-                selected: $selected,
+                selected: .constant(false),
                 title: "[Essential]",
                 description: "Subscribe Terms of Service"
             )
             TermItemView(
-                selected: $selected,
+                selected: .constant(true),
                 title: "[Select]",
                 description: "Subscribe Terms of Service Terms of ServiceSubscribe Terms of Service Terms of Service"
             )

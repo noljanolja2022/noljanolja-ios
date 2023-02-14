@@ -51,10 +51,8 @@ struct SignUpRootView: View {
 // MARK: - SignUpRootView_Previews
 
 struct SignUpRootView_Previews: PreviewProvider {
-    @State private static var termAndCoditionItemType: TermAndCoditionItemType? = nil
-
     static var previews: some View {
-        SignUpRootView(termAndCoditionItemType: $termAndCoditionItemType)
+        SignUpRootView(termAndCoditionItemType: .constant(nil))
     }
 }
 

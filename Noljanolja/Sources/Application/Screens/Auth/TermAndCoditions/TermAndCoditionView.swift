@@ -113,15 +113,12 @@ struct TermAndConditionView: View {
 // MARK: - TermAndConditionView_Previews
 
 struct TermAndConditionView_Previews: PreviewProvider {
-    @State private static var step: SignUpStep = .first
-    @State private static var termAndCoditionItemType: TermAndCoditionItemType? = nil
-
     static var previews: some View {
         TermAndConditionView(
             viewModel: TermAndConditionViewModel(
-                signUpStep: $step
+                signUpStep: .constant(.first)
             ),
-            termAndCoditionItemType: $termAndCoditionItemType
+            termAndCoditionItemType: .constant(nil)
         )
     }
 }

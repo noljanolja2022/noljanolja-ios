@@ -171,9 +171,8 @@ struct SignInView: View {
 // MARK: - SignInView_Previews
 
 struct SignInView_Previews: PreviewProvider {
-    @State private static var isShowingResetPasswordView = false
     static var previews: some View {
-        SignInView(isShowingResetPasswordView: $isShowingResetPasswordView)
+        SignInView(isShowingResetPasswordView: .constant(false))
     }
 }
 

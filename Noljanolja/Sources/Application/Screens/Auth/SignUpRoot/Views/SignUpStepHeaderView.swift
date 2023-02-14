@@ -32,9 +32,7 @@ struct SignUpStepHeaderView: View {
 // MARK: - SignUpStepHeaderView_Previews
 
 struct SignUpStepHeaderView_Previews: PreviewProvider {
-    @State private static var step = SignUpStep.first
-
     static var previews: some View {
-        SignUpStepHeaderView(step: $step)
+        SignUpStepHeaderView(step: .constant(.first))
     }
 }
