@@ -2,7 +2,7 @@
 //  EmailVerificationView.swift
 //  Noljanolja
 //
-//  Created by Nguyen The Trinh on 13/02/2023.
+//  Created by Nguyen The Trinh on 15/02/2023.
 //
 //
 
@@ -10,16 +10,18 @@ import SwiftUI
 
 // MARK: - EmailVerificationView
 
-struct EmailVerificationView: View {
-    @StateObject private var viewModel: EmailVerificationViewModel
+struct EmailVerificationView<ViewModel: EmailVerificationViewModelType>: View {
+    // MARK: View Model
+
+    @StateObject private var viewModel: ViewModel
+
+    // MARK: State
 
     @Environment(\.scenePhase) var scenePhase
-    @Binding private var isShowingEmailVerificationView: Bool
+    @Environment(\.presentationMode) private var presentationMode
 
-    init(viewModel: EmailVerificationViewModel,
-         isShowingEmailVerificationView: Binding<Bool>) {
+    init(viewModel: ViewModel = EmailVerificationViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
-        _isShowingEmailVerificationView = isShowingEmailVerificationView
     }
 
     var body: some View {
@@ -29,11 +31,12 @@ struct EmailVerificationView: View {
         }
         .padding(16)
         .onAppear {
+            viewModel.updateSignUpStepTrigger.send(.third)
             viewModel.sendEmailVerificationTrigger.send(())
         }
         .onChange(of: scenePhase) { newPhase in
             if newPhase == .active {
-                viewModel.verifyEmailTrigger.send(())
+                viewModel.checkEmailVerificationTrigger.send(())
             }
         }
     }
@@ -44,7 +47,7 @@ struct EmailVerificationView: View {
             ImageAssets.icCheckCircleHightlight.swiftUIImage
                 .resizable()
                 .scaledToFill()
-            
+
                 .frame(width: 62, height: 62)
             Text("Identity verification complete!")
                 .font(FontFamily.NotoSans.bold.swiftUIFont(size: 16))
@@ -58,8 +61,7 @@ struct EmailVerificationView: View {
             Button(
                 L10n.Common.previous,
                 action: {
-                    viewModel.signUpStep = .second
-                    isShowingEmailVerificationView = false
+                    presentationMode.wrappedValue.dismiss()
                 }
             )
             .frame(width: 100)
@@ -67,7 +69,7 @@ struct EmailVerificationView: View {
 
             Button(
                 "Email verification",
-                action: { viewModel.verifyEmailTrigger.send(()) }
+                action: { viewModel.checkEmailVerificationTrigger.send(()) }
             )
             .buttonStyle(PrimaryButtonStyle())
         }
@@ -78,9 +80,6 @@ struct EmailVerificationView: View {
 
 struct EmailVerificationView_Previews: PreviewProvider {
     static var previews: some View {
-        EmailVerificationView(
-            viewModel: EmailVerificationViewModel(signUpStep: .constant(.third)),
-            isShowingEmailVerificationView: .constant(true)
-        )
+        EmailVerificationView()
     }
 }

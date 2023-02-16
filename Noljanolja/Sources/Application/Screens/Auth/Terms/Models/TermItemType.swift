@@ -9,9 +9,9 @@ import Foundation
 import SwifterSwift
 import SwiftUI
 
-// MARK: - TermAndCoditionItemType
+// MARK: - TermItemType
 
-enum TermAndCoditionItemType: Int, CaseIterable {
+enum TermItemType: Int, CaseIterable {
     case termOfService
     case mainAge
     case personalInfo
@@ -68,7 +68,7 @@ enum TermAndCoditionItemType: Int, CaseIterable {
     }
 }
 
-extension [TermAndCoditionItemType] {
+extension [TermItemType] {
     func maxTitleWidth(with font: UIFont, defaultWidth: CGFloat = 72) -> CGFloat {
         let widths = map {
             let constraintRect = CGSize(width: CGFloat.greatestFiniteMagnitude, height: font.lineHeight)

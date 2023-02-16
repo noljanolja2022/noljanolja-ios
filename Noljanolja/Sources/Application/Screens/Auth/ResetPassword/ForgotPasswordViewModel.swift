@@ -8,18 +8,40 @@
 
 import Combine
 
-final class ResetPasswordViewModel: ObservableObject {
+// MARK: - ResetPasswordViewModelDelegate
+
+protocol ResetPasswordViewModelDelegate: AnyObject {}
+
+// MARK: - ResetPasswordViewModelType
+
+protocol ResetPasswordViewModelType: ObservableObject {
+    // MARK: State
+
+    var email: String { get set }
+
+    var emailErrorMessage: String? { get set }
+    var isResetButtonEnabled: Bool { get set }
+
+    var isSuccess: Bool { get set }
+    var isAlertMessagePresented: Bool { get set }
+    var alertMessage: String { get set }
+
+    // MARK: Action
+
+    var resetPasswordTrigger: PassthroughSubject<String, Never> { get }
+}
+
+// MARK: - ResetPasswordViewModel
+
+final class ResetPasswordViewModel: ResetPasswordViewModelType {
     // MARK: Dependencies
 
+    private weak var delegate: ResetPasswordViewModelDelegate?
     private let authServices: AuthServicesType
 
-    // MARK: Input
+    // MARK: State
 
     @Published var email = ""
-
-    let resetPasswordTrigger = PassthroughSubject<String, Never>()
-
-    // MARK: Output
 
     @Published var emailErrorMessage: String? = nil
     @Published var isResetButtonEnabled = false
@@ -28,11 +50,17 @@ final class ResetPasswordViewModel: ObservableObject {
     @Published var isAlertMessagePresented = false
     @Published var alertMessage = ""
 
+    // MARK: Action
+
+    let resetPasswordTrigger = PassthroughSubject<String, Never>()
+
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(authServices: AuthServicesType = AuthServices.default) {
+    init(delegate: ResetPasswordViewModelDelegate? = nil,
+         authServices: AuthServicesType = AuthServices.default) {
+        self.delegate = delegate
         self.authServices = authServices
 
         configure()

@@ -10,10 +10,16 @@ import SwiftUI
 
 // MARK: - AuthNavigationView
 
-struct AuthNavigationView: View {
-    @StateObject private var viewModel: AuthNavigationViewModel
+struct AuthNavigationView<ViewModel: AuthNavigationViewModelType>: View {
+    // MARK: Dependencies
 
-    init(viewModel: AuthNavigationViewModel = AuthNavigationViewModel()) {
+    @StateObject private var viewModel: ViewModel
+
+    // MARK: State
+
+    @StateObject private var appState = AppState.default
+
+    init(viewModel: ViewModel = AuthNavigationViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
@@ -34,6 +40,7 @@ struct AuthNavigationView: View {
         .background(
             ColorAssets.highlightPrimary.swiftUIColor.edgesIgnoringSafeArea(.top)
         )
+        .progress(active: $appState.isLoading)
     }
 }
 

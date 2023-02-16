@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-final class AppState {
+final class AppState: ObservableObject {
     static let `default` = AppState()
 
     @Published var isLoading = false

@@ -8,26 +8,51 @@
 import Combine
 import Foundation
 
+// MARK: - SignInViewModelDelegate
+
+protocol SignInViewModelDelegate: AnyObject {
+    func routeToResetPassword()
+}
+
+// MARK: - SignInViewModelType
+
+protocol SignInViewModelType: ObservableObject {
+    // MARK: State
+
+    var email: String { get set }
+    var password: String { get set }
+
+    var emailErrorMessage: String? { get set }
+    var passwordErrorMessage: String? { get set }
+
+    var isSignInButtonEnabled: Bool { get set }
+    var isAlertMessagePresented: Bool { get set }
+    var alertMessage: String { get set }
+
+    var isShowingEmailVerificationView: Bool { get set }
+
+    // MARK: Action
+
+    var forgotPasswordTrigger: PassthroughSubject<Void, Never> { get }
+    var signInWithEmailPasswordTrigger: PassthroughSubject<(String, String), Never> { get }
+    var signInWithAppleTrigger: PassthroughSubject<Void, Never> { get }
+    var signInWithGoogleTrigger: PassthroughSubject<Void, Never> { get }
+    var signInWithKakaoTrigger: PassthroughSubject<Void, Never> { get }
+    var signInWithNaverTrigger: PassthroughSubject<Void, Never> { get }
+}
+
 // MARK: - SignInViewModel
 
-final class SignInViewModel: ObservableObject {
+final class SignInViewModel: SignInViewModelType {
     // MARK: Dependencies
 
+    private weak var delegate: SignInViewModelDelegate?
     private let authServices: AuthServicesType
 
-    // MARK: Input
+    // MARK: State
 
     @Published var email = ""
     @Published var password = ""
-
-    let forgotPasswordTrigger = PassthroughSubject<Void, Never>()
-    let signInWithEmailPasswordTrigger = PassthroughSubject<(String, String), Never>()
-    let signInWithAppleTrigger = PassthroughSubject<Void, Never>()
-    let signInWithGoogleTrigger = PassthroughSubject<Void, Never>()
-    let signInWithKakaoTrigger = PassthroughSubject<Void, Never>()
-    let signInWithNaverTrigger = PassthroughSubject<Void, Never>()
-
-    // MARK: Output
 
     @Published var emailErrorMessage: String? = nil
     @Published var passwordErrorMessage: String? = nil
@@ -38,11 +63,22 @@ final class SignInViewModel: ObservableObject {
 
     @Published var isShowingEmailVerificationView = false
 
+    // MARK: Action
+
+    let forgotPasswordTrigger = PassthroughSubject<Void, Never>()
+    let signInWithEmailPasswordTrigger = PassthroughSubject<(String, String), Never>()
+    let signInWithAppleTrigger = PassthroughSubject<Void, Never>()
+    let signInWithGoogleTrigger = PassthroughSubject<Void, Never>()
+    let signInWithKakaoTrigger = PassthroughSubject<Void, Never>()
+    let signInWithNaverTrigger = PassthroughSubject<Void, Never>()
+
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(authServices: AuthServicesType = AuthServices.default) {
+    init(delegate: SignInViewModelDelegate? = nil,
+         authServices: AuthServicesType = AuthServices.default) {
+        self.delegate = delegate
         self.authServices = authServices
 
         configure()
@@ -183,6 +219,10 @@ final class SignInViewModel: ObservableObject {
                 }
             }
             )
+            .store(in: &cancellables)
+
+        forgotPasswordTrigger
+            .sink { [weak self] in self?.delegate?.routeToResetPassword() }
             .store(in: &cancellables)
     }
 }

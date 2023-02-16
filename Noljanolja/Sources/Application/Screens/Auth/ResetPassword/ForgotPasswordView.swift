@@ -11,14 +11,16 @@ import SwiftUI
 // MARK: - ResetPasswordView
 
 struct ResetPasswordView: View {
+    // MARK: Dependencies
+
     @StateObject private var viewModel: ResetPasswordViewModel
 
-    @Binding private var isShowingResetPasswordView: Bool
+    // MARK: State
 
-    init(viewModel: ResetPasswordViewModel = ResetPasswordViewModel(),
-         isShowingResetPasswordView: Binding<Bool>) {
+    @Environment(\.presentationMode) private var presentationMode
+
+    init(viewModel: ResetPasswordViewModel = ResetPasswordViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
-        _isShowingResetPasswordView = isShowingResetPasswordView
     }
 
     var body: some View {
@@ -52,7 +54,7 @@ struct ResetPasswordView: View {
             VStack(spacing: 0) {
                 Button(
                     L10n.Auth.SignIn.title,
-                    action: { isShowingResetPasswordView = false }
+                    action: { presentationMode.wrappedValue.dismiss() }
                 )
                 .frame(height: 48)
                 .buttonStyle(PrimaryButtonStyle())
@@ -110,6 +112,6 @@ struct ResetPasswordView: View {
 
 struct ResetPasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        ResetPasswordView(isShowingResetPasswordView: .constant(true))
+        ResetPasswordView()
     }
 }

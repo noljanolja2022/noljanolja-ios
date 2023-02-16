@@ -2,7 +2,7 @@
 //  TermDetailView.swift
 //  Noljanolja
 //
-//  Created by Nguyen The Trinh on 12/02/2023.
+//  Created by Nguyen The Trinh on 15/02/2023.
 //
 //
 
@@ -10,20 +10,18 @@ import SwiftUI
 
 // MARK: - TermDetailView
 
-struct TermDetailView: View {
-    @StateObject private var viewModel: TermDetailViewModel
+struct TermDetailView<ViewModel: TermDetailViewModelType>: View {
+    // MARK: View Model
 
-    var termAndCoditionItemType: TermAndCoditionItemType
+    @StateObject private var viewModel: ViewModel
 
-    init(viewModel: TermDetailViewModel = TermDetailViewModel(),
-         termAndCoditionItemType: TermAndCoditionItemType) {
+    init(viewModel: ViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
-        self.termAndCoditionItemType = termAndCoditionItemType
     }
 
     var body: some View {
         ScrollView {
-            Text(termAndCoditionItemType.content)
+            Text(viewModel.termItemType.content)
                 .font(FontFamily.NotoSans.medium.swiftUIFont(size: 11))
                 .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
                 .padding(16)
@@ -31,8 +29,8 @@ struct TermDetailView: View {
         .toolbar {
             ToolbarItem(placement: .principal) {
                 VStack {
-                    Text(termAndCoditionItemType.title)
-                    Text(termAndCoditionItemType.description)
+                    Text(viewModel.termItemType.title)
+                    Text(viewModel.termItemType.description)
                 }
                 .font(FontFamily.NotoSans.bold.swiftUIFont(size: 16))
             }
@@ -45,6 +43,6 @@ struct TermDetailView: View {
 
 struct TermDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        TermDetailView(termAndCoditionItemType: .termOfService)
+        TermDetailView(viewModel: TermDetailViewModel(termItemType: .termOfService))
     }
 }

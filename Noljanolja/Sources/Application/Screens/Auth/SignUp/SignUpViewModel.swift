@@ -7,26 +7,51 @@
 //
 
 import Combine
-import SwiftUI
+
+// MARK: - SignUpViewModelDelegate
+
+protocol SignUpViewModelDelegate: AnyObject {
+    func updateSignUpStep(_ step: SignUpStep)
+}
+
+// MARK: - SignUpViewModelType
+
+protocol SignUpViewModelType: ObservableObject, EmailVerificationViewModelDelegate {
+    // MARK: State
+
+    var email: String { get set }
+    var password: String { get set }
+    var confirmPassword: String { get set }
+
+    var emailErrorMessage: String? { get set }
+    var passwordErrorMessage: String? { get set }
+    var confirmPasswordErrorMessage: String? { get set }
+
+    var isSignUpButtonEnabled: Bool { get set }
+    var isAlertMessagePresented: Bool { get set }
+    var alertMessage: String { get set }
+
+    var isShowingEmailVerificationView: Bool { get set }
+
+    // MARK: Action
+
+    var signUpTrigger: PassthroughSubject<(String, String), Never> { get }
+    var updateSignUpStepTrigger: PassthroughSubject<SignUpStep, Never> { get }
+}
 
 // MARK: - SignUpViewModel
 
-final class SignUpViewModel: ObservableObject {
+final class SignUpViewModel: SignUpViewModelType {
     // MARK: Dependencies
 
+    private weak var delegate: SignUpViewModelDelegate?
     private let authServices: AuthServicesType
 
-    // MARK: Input
+    // MARK: State
 
     @Published var email = ""
     @Published var password = ""
     @Published var confirmPassword = ""
-
-    let signUpTrigger = PassthroughSubject<(String, String), Never>()
-
-    // MARK: Output
-
-    @Binding var signUpStep: SignUpStep
 
     @Published var emailErrorMessage: String? = nil
     @Published var passwordErrorMessage: String? = nil
@@ -38,14 +63,19 @@ final class SignUpViewModel: ObservableObject {
 
     @Published var isShowingEmailVerificationView = false
 
+    // MARK: Action
+
+    let signUpTrigger = PassthroughSubject<(String, String), Never>()
+    let updateSignUpStepTrigger = PassthroughSubject<SignUpStep, Never>()
+
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(authServices: AuthServicesType = AuthServices.default,
-         signUpStep: Binding<SignUpStep>) {
+    init(delegate: SignUpViewModelDelegate? = nil,
+         authServices: AuthServicesType = AuthServices.default) {
+        self.delegate = delegate
         self.authServices = authServices
-        self._signUpStep = signUpStep
 
         configure()
     }
@@ -103,7 +133,7 @@ final class SignUpViewModel: ObservableObject {
                     switch error {
                     case FirebaseAuthError.emailNotVerified as FirebaseAuthError:
                         self?.isShowingEmailVerificationView = true
-                        self?.signUpStep = .third
+                        self?.updateSignUpStepTrigger.send(.third)
                     default:
                         self?.isAlertMessagePresented = true
                         self?.alertMessage = L10n.Common.Error.message
@@ -111,5 +141,17 @@ final class SignUpViewModel: ObservableObject {
                 }
             })
             .store(in: &cancellables)
+
+        updateSignUpStepTrigger
+            .sink { [weak self] in self?.delegate?.updateSignUpStep($0) }
+            .store(in: &cancellables)
+    }
+}
+
+// MARK: EmailVerificationViewModelDelegate
+
+extension SignUpViewModel: EmailVerificationViewModelDelegate {
+    func updateSignUpStep(_ step: SignUpStep) {
+        delegate?.updateSignUpStep(step)
     }
 }

@@ -1,25 +1,22 @@
 //
-//  TermAndConditionView.swift
+//  TermsView.swift
 //  Noljanolja
 //
-//  Created by Nguyen The Trinh on 10/02/2023.
+//  Created by Nguyen The Trinh on 15/02/2023.
 //
 //
 
 import SwiftUI
 
-// MARK: - TermAndConditionView
+// MARK: - TermsView
 
-struct TermAndConditionView: View {
-    @StateObject private var viewModel: TermAndConditionViewModel
+struct TermsView<ViewModel: TermsViewModelType>: View {
+    // MARK: Dependencies
 
-    @State private var isShowingSignUpView = false
-    @Binding private var termAndCoditionItemType: TermAndCoditionItemType?
+    @StateObject private var viewModel: ViewModel
 
-    init(viewModel: TermAndConditionViewModel,
-         termAndCoditionItemType: Binding<TermAndCoditionItemType?>) {
+    init(viewModel: ViewModel = TermsViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
-        _termAndCoditionItemType = termAndCoditionItemType
     }
 
     var body: some View {
@@ -27,26 +24,24 @@ struct TermAndConditionView: View {
             content
             NavigationLink(
                 destination: SignUpView(
-                    viewModel: SignUpViewModel(signUpStep: $viewModel.signUpStep),
-                    isShowingSignUpView: $isShowingSignUpView
+                    viewModel: SignUpViewModel(delegate: viewModel)
                 ),
-                isActive: $isShowingSignUpView,
+                isActive: $viewModel.isShowingSignUpView,
                 label: { EmptyView() }
             )
         }
+        .onAppear { viewModel.updateSignUpStepTrigger.send(.first) }
     }
 
     private var content: some View {
         VStack {
             terms
-            PrimaryButton(
-                title: L10n.Common.next,
-                action: {
-                    viewModel.signUpStep = .second
-                    isShowingSignUpView = true
-                },
-                isEnabled: $viewModel.allTermAgreed
+            Button(
+                L10n.Common.next,
+                action: { viewModel.isShowingSignUpView = true }
             )
+            .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.allTermAgreed))
+            .disabled(!viewModel.allTermAgreed)
             .padding(16)
         }
     }
@@ -92,7 +87,7 @@ struct TermAndConditionView: View {
                         title: itemType.title,
                         description: itemType.description,
                         minTitleWidth: array.map { $0.key }.maxTitleWidth(with: FontFamily.NotoSans.medium.font(size: 14)),
-                        action: { termAndCoditionItemType = itemType }
+                        action: { viewModel.selectedtermItemType = itemType }
                     )
 
                     if itemType.isSeparatoRequired {
@@ -110,15 +105,10 @@ struct TermAndConditionView: View {
     }
 }
 
-// MARK: - TermAndConditionView_Previews
+// MARK: - TermsView_Previews
 
-struct TermAndConditionView_Previews: PreviewProvider {
+struct TermsView_Previews: PreviewProvider {
     static var previews: some View {
-        TermAndConditionView(
-            viewModel: TermAndConditionViewModel(
-                signUpStep: .constant(.first)
-            ),
-            termAndCoditionItemType: .constant(nil)
-        )
+        TermsView()
     }
 }

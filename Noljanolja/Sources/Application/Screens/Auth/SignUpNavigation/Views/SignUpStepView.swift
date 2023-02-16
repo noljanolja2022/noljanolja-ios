@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-// MARK: - SignUpStepHeaderView
+// MARK: - SignUpStepView
 
-struct SignUpStepHeaderView: View {
+struct SignUpStepView: View {
     @Binding var step: SignUpStep
 
     var body: some View {
@@ -29,10 +29,10 @@ struct SignUpStepHeaderView: View {
     }
 }
 
-// MARK: - SignUpStepHeaderView_Previews
+// MARK: - SignUpStepView_Previews
 
-struct SignUpStepHeaderView_Previews: PreviewProvider {
+struct SignUpStepView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpStepHeaderView(step: .constant(.first))
+        SignUpStepView(step: .constant(.first))
     }
 }

@@ -2,36 +2,53 @@
 //  EmailVerificationViewModel.swift
 //  Noljanolja
 //
-//  Created by Nguyen The Trinh on 13/02/2023.
+//  Created by Nguyen The Trinh on 15/02/2023.
 //
 //
 
 import Combine
-import SwiftUI
 
-final class EmailVerificationViewModel: ObservableObject {
+// MARK: - EmailVerificationViewModelDelegate
+
+protocol EmailVerificationViewModelDelegate: AnyObject {
+    func updateSignUpStep(_ step: SignUpStep)
+}
+
+// MARK: - EmailVerificationViewModelType
+
+protocol EmailVerificationViewModelType: ObservableObject {
+    // MARK: Action
+
+    var updateSignUpStepTrigger: PassthroughSubject<SignUpStep, Never> { get }
+    var sendEmailVerificationTrigger: PassthroughSubject<Void, Never> { get }
+    var checkEmailVerificationTrigger: PassthroughSubject<Void, Never> { get }
+}
+
+// MARK: - EmailVerificationViewModel
+
+final class EmailVerificationViewModel: EmailVerificationViewModelType {
     // MARK: Dependencies
 
+    private weak var delegate: EmailVerificationViewModelDelegate?
     private let authServices: AuthServicesType
 
-    // MARK: Input
+    // MARK: State
 
+    // MARK: Action
+
+    let updateSignUpStepTrigger = PassthroughSubject<SignUpStep, Never>()
     let sendEmailVerificationTrigger = PassthroughSubject<Void, Never>()
-    let verifyEmailTrigger = PassthroughSubject<Void, Never>()
-
-    // MARK: Output
-
-    @Binding var signUpStep: SignUpStep
+    let checkEmailVerificationTrigger = PassthroughSubject<Void, Never>()
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(authServices: AuthServicesType = AuthServices.default,
-         signUpStep: Binding<SignUpStep>) {
+    init(delegate: EmailVerificationViewModelDelegate? = nil,
+         authServices: AuthServicesType = AuthServices.default) {
+        self.delegate = delegate
         self.authServices = authServices
-        self._signUpStep = signUpStep
-
+        
         configure()
     }
 
@@ -55,7 +72,7 @@ final class EmailVerificationViewModel: ObservableObject {
             })
             .store(in: &cancellables)
 
-        verifyEmailTrigger
+        checkEmailVerificationTrigger
             .handleEvents(receiveOutput: { _ in AppState.default.isLoading = true })
             .flatMap { [weak self] _ -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
@@ -72,6 +89,10 @@ final class EmailVerificationViewModel: ObservableObject {
                     logger.error("Verify email failed: \(error.localizedDescription)")
                 }
             })
+            .store(in: &cancellables)
+
+        updateSignUpStepTrigger
+            .sink(receiveValue: { [weak self] in self?.delegate?.updateSignUpStep($0) })
             .store(in: &cancellables)
     }
 }

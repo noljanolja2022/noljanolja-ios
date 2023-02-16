@@ -13,6 +13,8 @@ import SwiftUI
 struct ProfileView: View {
     @StateObject private var viewModel: ProfileViewModel
 
+    @State private var isShowingAuthView = false
+
     init(viewModel: ProfileViewModel = ProfileViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
@@ -22,6 +24,9 @@ struct ProfileView: View {
             VStack(spacing: 16) {
                 Text(viewModel.token)
                     .font(Font.system(size: 16))
+                Button("Auth") {
+                    isShowingAuthView = true
+                }
                 Button(
                     action: {
                         viewModel.signOutTrigger.send(())
@@ -38,6 +43,9 @@ struct ProfileView: View {
                 .cornerRadius(8)
             }
             .padding(16)
+        }
+        .fullScreenCover(isPresented: $isShowingAuthView) {
+            AuthNavigationView()
         }
     }
 }

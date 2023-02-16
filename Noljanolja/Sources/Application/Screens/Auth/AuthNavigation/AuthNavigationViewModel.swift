@@ -8,18 +8,30 @@
 
 import Combine
 
-final class AuthNavigationViewModel: ObservableObject {
+// MARK: - AuthNavigationViewModelDelegate
+
+protocol AuthNavigationViewModelDelegate: AnyObject {}
+
+// MARK: - AuthNavigationViewModelType
+
+protocol AuthNavigationViewModelType: ObservableObject {}
+
+// MARK: - AuthNavigationViewModel
+
+final class AuthNavigationViewModel: AuthNavigationViewModelType {
     // MARK: Dependencies
 
-    // MARK: Input
+    private weak var delegate: AuthNavigationViewModelDelegate?
 
-    // MARK: Output
+    // MARK: State
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init() {
+    init(delegate: AuthNavigationViewModelDelegate? = nil) {
+        self.delegate = delegate
+
         configure()
     }
 

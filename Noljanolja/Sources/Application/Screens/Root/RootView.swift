@@ -10,21 +10,20 @@ import SwiftUI
 
 // MARK: - RootView
 
-struct RootView: View {
-    @StateObject private var viewModel: RootViewModel
+struct RootView<ViewModel: RootViewModelType>: View {
+    // MARK: Dependencies
+    
+    @StateObject private var viewModel: ViewModel
 
-    init(viewModel: RootViewModel = RootViewModel()) {
+    @StateObject private var appState = AppState.default
+
+    init(viewModel: ViewModel = RootViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
-        if viewModel.isAuthenticated {
-            MainView()
-                .progress(active: $viewModel.isLoading)
-        } else {
-            AuthNavigationView()
-                .progress(active: $viewModel.isLoading)
-        }
+        MainView()
+            .progress(active: $appState.isLoading)
     }
 }
 

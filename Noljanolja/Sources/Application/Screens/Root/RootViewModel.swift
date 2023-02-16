@@ -8,23 +8,33 @@
 
 import Combine
 
+// MARK: - RootViewModelDelegate
+
+protocol RootViewModelDelegate: AnyObject {}
+
+// MARK: - RootViewModelType
+
+protocol RootViewModelType: ObservableObject {}
+
 // MARK: - RootViewModel
 
-final class RootViewModel: ObservableObject {
+final class RootViewModel: RootViewModelType {
     // MARK: Dependencies
 
+    private weak var delegate: RootViewModelDelegate?
     private let authService: AuthServicesType
 
     // MARK: Output
 
     @Published private(set) var isAuthenticated: Bool
-    @Published var isLoading = false
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(authService: AuthServicesType = AuthServices.default) {
+    init(delegate: RootViewModelDelegate? = nil,
+         authService: AuthServicesType = AuthServices.default) {
+        self.delegate = delegate
         self.authService = authService
 
         self.isAuthenticated = authService.isAuthenticated.value
@@ -35,10 +45,6 @@ final class RootViewModel: ObservableObject {
     private func configure() {
         authService.isAuthenticated
             .sink { [weak self] in self?.isAuthenticated = $0 }
-            .store(in: &cancellables)
-
-        AppState.default.$isLoading
-            .sink { [weak self] in self?.isLoading = $0 }
             .store(in: &cancellables)
     }
 }
