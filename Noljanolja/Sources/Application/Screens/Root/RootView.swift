@@ -15,15 +15,12 @@ struct RootView<ViewModel: RootViewModelType>: View {
     
     @StateObject private var viewModel: ViewModel
 
-    @StateObject private var appState = AppState.default
-
     init(viewModel: ViewModel = RootViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
         MainView()
-            .progress(active: $appState.isLoading)
     }
 }
 

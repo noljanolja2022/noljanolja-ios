@@ -18,7 +18,7 @@ struct AuthNavigationView<ViewModel: AuthNavigationViewModelType>: View {
     // MARK: State
 
     @Environment(\.presentationMode) private var presentationMode
-    @StateObject private var appState = AppState.default
+    @StateObject private var progressHUBState = ProgressHUBState()
 
     init(viewModel: ViewModel = AuthNavigationViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -42,6 +42,8 @@ struct AuthNavigationView<ViewModel: AuthNavigationViewModelType>: View {
                     }
                 }
         }
+        .progressHUB(isActive: $progressHUBState.isLoading)
+        .environmentObject(progressHUBState)
     }
 
     private var content: some View {
@@ -61,7 +63,6 @@ struct AuthNavigationView<ViewModel: AuthNavigationViewModelType>: View {
         .background(
             ColorAssets.highlightPrimary.swiftUIColor.edgesIgnoringSafeArea(.top)
         )
-        .progress(active: $appState.isLoading)
     }
 }
 

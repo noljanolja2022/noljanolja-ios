@@ -20,6 +20,8 @@ struct EmailVerificationView<ViewModel: EmailVerificationViewModelType>: View {
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.presentationMode) private var presentationMode
 
+    @EnvironmentObject private var progressHUBState: ProgressHUBState
+
     init(viewModel: ViewModel = EmailVerificationViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
@@ -38,6 +40,9 @@ struct EmailVerificationView<ViewModel: EmailVerificationViewModelType>: View {
             if newPhase == .active {
                 viewModel.checkEmailVerificationTrigger.send(())
             }
+        }
+        .onReceive(viewModel.isProgressHUDShowingPublisher) {
+            progressHUBState.isLoading = $0
         }
     }
 

@@ -22,6 +22,8 @@ protocol ResetPasswordViewModelType: ObservableObject {
     var emailErrorMessage: String? { get set }
     var isResetButtonEnabled: Bool { get set }
 
+    var isProgressHUDShowingPublisher: Published<Bool>.Publisher { get }
+
     var isSuccess: Bool { get set }
     var isAlertMessagePresented: Bool { get set }
     var alertMessage: String { get set }
@@ -45,6 +47,9 @@ final class ResetPasswordViewModel: ResetPasswordViewModelType {
 
     @Published var emailErrorMessage: String? = nil
     @Published var isResetButtonEnabled = false
+
+    @Published private var isProgressHUDShowing = false
+    var isProgressHUDShowingPublisher: Published<Bool>.Publisher { $isProgressHUDShowing }
 
     @Published var isSuccess = false
     @Published var isAlertMessagePresented = false
@@ -80,7 +85,7 @@ final class ResetPasswordViewModel: ResetPasswordViewModelType {
             .store(in: &cancellables)
 
         resetPasswordTrigger
-            .handleEvents(receiveOutput: { _ in AppState.default.isLoading = true })
+            .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMap { [weak self] email -> AnyPublisher<Result<Void, Error>, Never> in
                 guard let self else { return Empty<Result<Void, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
@@ -88,7 +93,7 @@ final class ResetPasswordViewModel: ResetPasswordViewModelType {
                     .eraseToResultAnyPublisher()
             }
             .sink(receiveValue: { [weak self] result in
-                AppState.default.isLoading = false
+                self?.isProgressHUDShowing = false
                 switch result {
                 case .success:
                     logger.info("Reset password sucessful")

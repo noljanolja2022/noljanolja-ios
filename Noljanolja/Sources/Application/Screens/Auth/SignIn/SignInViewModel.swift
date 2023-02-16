@@ -25,6 +25,8 @@ protocol SignInViewModelType: ObservableObject {
     var emailErrorMessage: String? { get set }
     var passwordErrorMessage: String? { get set }
 
+    var isProgressHUDShowingPublisher: Published<Bool>.Publisher { get }
+
     var isSignInButtonEnabled: Bool { get set }
     var isAlertMessagePresented: Bool { get set }
     var alertMessage: String { get set }
@@ -58,6 +60,10 @@ final class SignInViewModel: SignInViewModelType {
     @Published var passwordErrorMessage: String? = nil
 
     @Published var isSignInButtonEnabled = false
+
+    @Published private var isProgressHUDShowing = false
+    var isProgressHUDShowingPublisher: Published<Bool>.Publisher { $isProgressHUDShowing }
+
     @Published var isAlertMessagePresented = false
     @Published var alertMessage = ""
 
@@ -108,7 +114,7 @@ final class SignInViewModel: SignInViewModelType {
             .store(in: &cancellables)
 
         signInWithEmailPasswordTrigger
-            .handleEvents(receiveOutput: { _ in AppState.default.isLoading = true })
+            .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMap { [weak self] email, password -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
@@ -116,7 +122,7 @@ final class SignInViewModel: SignInViewModelType {
                     .eraseToResultAnyPublisher()
             }
             .sink(receiveValue: { [weak self] result in
-                AppState.default.isLoading = false
+                self?.isProgressHUDShowing = false
                 switch result {
                 case let .success(idToken):
                     logger.info("Signed in with Email/Password - Token: \(idToken)")
@@ -135,7 +141,7 @@ final class SignInViewModel: SignInViewModelType {
             .store(in: &cancellables)
 
         signInWithAppleTrigger
-            .handleEvents(receiveOutput: { _ in AppState.default.isLoading = true })
+            .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMap { [weak self] _ -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
@@ -143,7 +149,7 @@ final class SignInViewModel: SignInViewModelType {
                     .eraseToResultAnyPublisher()
             }
             .sink(receiveValue: { [weak self] result in
-                AppState.default.isLoading = false
+                self?.isProgressHUDShowing = false
                 switch result {
                 case let .success(idToken):
                     logger.info("Signed in with Apple - Token: \(idToken)")
@@ -156,7 +162,7 @@ final class SignInViewModel: SignInViewModelType {
             .store(in: &cancellables)
 
         signInWithGoogleTrigger
-            .handleEvents(receiveOutput: { _ in AppState.default.isLoading = true })
+            .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMap { [weak self] _ -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
@@ -164,7 +170,7 @@ final class SignInViewModel: SignInViewModelType {
                     .eraseToResultAnyPublisher()
             }
             .sink(receiveValue: { [weak self] result in
-                AppState.default.isLoading = false
+                self?.isProgressHUDShowing = false
                 switch result {
                 case let .success(idToken):
                     logger.info("Signed in with Google - Token: \(idToken)")
@@ -178,7 +184,7 @@ final class SignInViewModel: SignInViewModelType {
             .store(in: &cancellables)
 
         signInWithKakaoTrigger
-            .handleEvents(receiveOutput: { _ in AppState.default.isLoading = true })
+            .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMap { [weak self] _ -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
@@ -186,7 +192,7 @@ final class SignInViewModel: SignInViewModelType {
                     .eraseToResultAnyPublisher()
             }
             .sink(receiveValue: { [weak self] result in
-                AppState.default.isLoading = false
+                self?.isProgressHUDShowing = false
                 switch result {
                 case let .success(idToken):
                     logger.info("Signed in with Kakao - Token: \(idToken)")
@@ -202,13 +208,13 @@ final class SignInViewModel: SignInViewModelType {
             .flatMap { [weak self] _ -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
-                    .signInWithNaver {
-                        AppState.default.isLoading = true
+                    .signInWithNaver { [weak self] in
+                        self?.isProgressHUDShowing = true
                     }
                     .eraseToResultAnyPublisher()
             }
             .sink(receiveValue: { [weak self] result in
-                AppState.default.isLoading = false
+                self?.isProgressHUDShowing = false
                 switch result {
                 case let .success(idToken):
                     logger.info("Signed in with Naver - Token: \(idToken)")

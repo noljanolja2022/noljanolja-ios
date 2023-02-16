@@ -19,6 +19,8 @@ struct ResetPasswordView: View {
 
     @Environment(\.presentationMode) private var presentationMode
 
+    @EnvironmentObject private var progressHUBState: ProgressHUBState
+
     init(viewModel: ResetPasswordViewModel = ResetPasswordViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
@@ -30,6 +32,9 @@ struct ResetPasswordView: View {
             } else {
                 content
             }
+        }
+        .onReceive(viewModel.isProgressHUDShowingPublisher) {
+            progressHUBState.isLoading = $0
         }
         .navigationBarTitle(
             Text(L10n.Auth.ForgotPassword.title),

@@ -11,6 +11,7 @@ import SwiftUI
 
 struct MainView: View {
     @State var selection = 0
+    @State private var isProgressHUBShowing = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -46,6 +47,7 @@ struct MainView: View {
             )
         }
         .edgesIgnoringSafeArea(.bottom)
+        .progressHUB(isActive: $isProgressHUBShowing)
     }
 }
 

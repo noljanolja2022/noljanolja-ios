@@ -18,7 +18,7 @@
 		CF00D163299423FB00505702 /* View+EdgeCornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D162299423FB00505702 /* View+EdgeCornerRadius.swift */; };
 		CF00D1692994E0A700505702 /* TextField+ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D1682994E0A700505702 /* TextField+ErrorMessage.swift */; };
 		CF00D16F2994FC9E00505702 /* String+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D16E2994FC9E00505702 /* String+Validation.swift */; };
-		CF00D1732995457600505702 /* FullScreenProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D1722995457600505702 /* FullScreenProgressView.swift */; };
+		CF00D1732995457600505702 /* ProgressHUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D1722995457600505702 /* ProgressHUDView.swift */; };
 		CF0E8845298D4E09000DAE4A /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = CF0E8844298D4E09000DAE4A /* FirebaseCrashlytics */; };
 		CF14F230298C05F900BC2066 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F22F298C05F900BC2066 /* MainView.swift */; };
 		CF14F23A298C123300BC2066 /* UIApplication+KeyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F239298C123300BC2066 /* UIApplication+KeyWindow.swift */; };
@@ -43,7 +43,6 @@
 		CF17471C299CBCB1001B93E8 /* TermDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF17471A299CBCB1001B93E8 /* TermDetailViewModel.swift */; };
 		CF174720299CBFDE001B93E8 /* EmailVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF17471E299CBFDE001B93E8 /* EmailVerificationView.swift */; };
 		CF174721299CBFDE001B93E8 /* EmailVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF17471F299CBFDE001B93E8 /* EmailVerificationViewModel.swift */; };
-		CF3201812997723400E8F914 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3201802997723400E8F914 /* AppState.swift */; };
 		CF43BF73299274D900FD3180 /* FirebaseAuth+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF43BF72299274D900FD3180 /* FirebaseAuth+Combine.swift */; };
 		CF6ABC1329935C2D00D78213 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC0C29935C2D00D78213 /* SignUpViewModel.swift */; };
 		CF6ABC1429935C2D00D78213 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC0D29935C2D00D78213 /* SignUpView.swift */; };
@@ -143,7 +142,7 @@
 		CF00D162299423FB00505702 /* View+EdgeCornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+EdgeCornerRadius.swift"; sourceTree = "<group>"; };
 		CF00D1682994E0A700505702 /* TextField+ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+ErrorMessage.swift"; sourceTree = "<group>"; };
 		CF00D16E2994FC9E00505702 /* String+Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Validation.swift"; sourceTree = "<group>"; };
-		CF00D1722995457600505702 /* FullScreenProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenProgressView.swift; sourceTree = "<group>"; };
+		CF00D1722995457600505702 /* ProgressHUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHUDView.swift; sourceTree = "<group>"; };
 		CF14F22F298C05F900BC2066 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CF14F239298C123300BC2066 /* UIApplication+KeyWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+KeyWindow.swift"; sourceTree = "<group>"; };
 		CF14F23C298C30B600BC2066 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
@@ -169,7 +168,6 @@
 		CF17471A299CBCB1001B93E8 /* TermDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermDetailViewModel.swift; sourceTree = "<group>"; };
 		CF17471E299CBFDE001B93E8 /* EmailVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationView.swift; sourceTree = "<group>"; };
 		CF17471F299CBFDE001B93E8 /* EmailVerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewModel.swift; sourceTree = "<group>"; };
-		CF3201802997723400E8F914 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		CF43BF72299274D900FD3180 /* FirebaseAuth+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseAuth+Combine.swift"; sourceTree = "<group>"; };
 		CF6ABC0C29935C2D00D78213 /* SignUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		CF6ABC0D29935C2D00D78213 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -539,7 +537,7 @@
 		CFC709E12996211E00B64216 /* ProgressView */ = {
 			isa = PBXGroup;
 			children = (
-				CF00D1722995457600505702 /* FullScreenProgressView.swift */,
+				CF00D1722995457600505702 /* ProgressHUDView.swift */,
 				CFC709E22996276C00B64216 /* RoundedLinearProgressViewStyle.swift */,
 			);
 			path = ProgressView;
@@ -748,7 +746,6 @@
 			isa = PBXGroup;
 			children = (
 				CF14F267298CF87E00BC2066 /* AuthServices.swift */,
-				CF3201802997723400E8F914 /* AppState.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1225,7 +1222,7 @@
 				CFFD70C8298AC5F800D4F5A2 /* BaseAuthTargetType.swift in Sources */,
 				CFFD70D9298ACAF600D4F5A2 /* BaseTargetType.swift in Sources */,
 				CF174717299CB72C001B93E8 /* TermsViewModel.swift in Sources */,
-				CF00D1732995457600505702 /* FullScreenProgressView.swift in Sources */,
+				CF00D1732995457600505702 /* ProgressHUDView.swift in Sources */,
 				CF17471B299CBCB1001B93E8 /* TermDetailView.swift in Sources */,
 				CF6ABC1529935C2D00D78213 /* AuthViewModel.swift in Sources */,
 				CF15500B29938C5C0053E86D /* ProfileView.swift in Sources */,
@@ -1271,7 +1268,6 @@
 				CFFD70C4298AC5F800D4F5A2 /* NetworkLoggerPluggin.swift in Sources */,
 				CFE0925D298DFDCB00F197F0 /* KakaoAuthAPI.swift in Sources */,
 				CFFD70CA298AC5F800D4F5A2 /* TargetType+Default.swift in Sources */,
-				CF3201812997723400E8F914 /* AppState.swift in Sources */,
 				CF17471C299CBCB1001B93E8 /* TermDetailViewModel.swift in Sources */,
 				CF14F248298C331C00BC2066 /* ImageAssets.swift in Sources */,
 				CF174720299CBFDE001B93E8 /* EmailVerificationView.swift in Sources */,

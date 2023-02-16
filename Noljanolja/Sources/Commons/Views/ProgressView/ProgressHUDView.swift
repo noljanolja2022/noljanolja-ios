@@ -7,9 +7,17 @@
 
 import SwiftUI
 
-// MARK: - FullScreenProgressView
+// MARK: - ProgressHUBState
 
-struct FullScreenProgressView: View {
+final class ProgressHUBState: ObservableObject {
+    static let `default` = ProgressHUBState()
+
+    @Published var isLoading = false
+}
+
+// MARK: - ProgressHUDView
+
+struct ProgressHUDView: View {
     var body: some View {
         HStack {
             ProgressView()
@@ -25,10 +33,10 @@ struct FullScreenProgressView: View {
     }
 }
 
-// MARK: - FullScreenProgressView_Previews
+// MARK: - ProgressHUDView_Previews
 
-struct FullScreenProgressView_Previews: PreviewProvider {
+struct ProgressHUDView_Previews: PreviewProvider {
     static var previews: some View {
-        FullScreenProgressView()
+        ProgressHUDView()
     }
 }

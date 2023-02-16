@@ -17,6 +17,10 @@ protocol EmailVerificationViewModelDelegate: AnyObject {
 // MARK: - EmailVerificationViewModelType
 
 protocol EmailVerificationViewModelType: ObservableObject {
+    // MARK: State
+
+    var isProgressHUDShowingPublisher: Published<Bool>.Publisher { get }
+
     // MARK: Action
 
     var updateSignUpStepTrigger: PassthroughSubject<SignUpStep, Never> { get }
@@ -33,6 +37,9 @@ final class EmailVerificationViewModel: EmailVerificationViewModelType {
     private let authServices: AuthServicesType
 
     // MARK: State
+
+    @Published private var isProgressHUDShowing = false
+    var isProgressHUDShowingPublisher: Published<Bool>.Publisher { $isProgressHUDShowing }
 
     // MARK: Action
 
@@ -54,15 +61,15 @@ final class EmailVerificationViewModel: EmailVerificationViewModelType {
 
     private func configure() {
         sendEmailVerificationTrigger
-            .handleEvents(receiveOutput: { _ in AppState.default.isLoading = true })
+            .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMap { [weak self] _ -> AnyPublisher<Result<Void, Error>, Never> in
                 guard let self else { return Empty<Result<Void, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
                     .sendEmailVerification()
                     .eraseToResultAnyPublisher()
             }
-            .sink(receiveValue: { result in
-                AppState.default.isLoading = false
+            .sink(receiveValue: { [weak self] result in
+                self?.isProgressHUDShowing = false
                 switch result {
                 case .success:
                     logger.info("Send email verification successful")
@@ -73,15 +80,15 @@ final class EmailVerificationViewModel: EmailVerificationViewModelType {
             .store(in: &cancellables)
 
         checkEmailVerificationTrigger
-            .handleEvents(receiveOutput: { _ in AppState.default.isLoading = true })
+            .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMap { [weak self] _ -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
                     .verifyEmail()
                     .eraseToResultAnyPublisher()
             }
-            .sink(receiveValue: { result in
-                AppState.default.isLoading = false
+            .sink(receiveValue: { [weak self] result in
+                self?.isProgressHUDShowing = false
                 switch result {
                 case .success:
                     logger.info("Verify email successful")

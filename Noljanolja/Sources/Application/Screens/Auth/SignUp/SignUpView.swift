@@ -19,6 +19,8 @@ struct SignUpView<ViewModel: SignUpViewModelType>: View {
 
     @Environment(\.presentationMode) private var presentationMode
 
+    @EnvironmentObject private var progressHUBState: ProgressHUBState
+
     init(viewModel: ViewModel = SignUpViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
@@ -39,6 +41,9 @@ struct SignUpView<ViewModel: SignUpViewModelType>: View {
                 },
                 label: { EmptyView() }
             )
+        }
+        .onReceive(viewModel.isProgressHUDShowingPublisher) {
+            progressHUBState.isLoading = $0
         }
         .alert(isPresented: $viewModel.isAlertMessagePresented) {
             Alert(

@@ -28,6 +28,9 @@ protocol SignUpViewModelType: ObservableObject, EmailVerificationViewModelDelega
     var confirmPasswordErrorMessage: String? { get set }
 
     var isSignUpButtonEnabled: Bool { get set }
+
+    var isProgressHUDShowingPublisher: Published<Bool>.Publisher { get }
+
     var isAlertMessagePresented: Bool { get set }
     var alertMessage: String { get set }
 
@@ -58,6 +61,10 @@ final class SignUpViewModel: SignUpViewModelType {
     @Published var confirmPasswordErrorMessage: String? = nil
 
     @Published var isSignUpButtonEnabled = false
+
+    @Published private var isProgressHUDShowing = false
+    var isProgressHUDShowingPublisher: Published<Bool>.Publisher { $isProgressHUDShowing }
+
     @Published var isAlertMessagePresented = false
     @Published var alertMessage = ""
 
@@ -115,7 +122,7 @@ final class SignUpViewModel: SignUpViewModelType {
             .store(in: &cancellables)
 
         signUpTrigger
-            .handleEvents(receiveOutput: { _ in AppState.default.isLoading = true })
+            .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMap { [weak self] email, password -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
@@ -123,7 +130,7 @@ final class SignUpViewModel: SignUpViewModelType {
                     .eraseToResultAnyPublisher()
             }
             .sink(receiveValue: { [weak self] result in
-                AppState.default.isLoading = false
+                self?.isProgressHUDShowing = false
                 switch result {
                 case let .success(idToken):
                     logger.info("Signed up with Email/Password - Token: \(idToken)")
