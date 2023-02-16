@@ -31,9 +31,14 @@ internal enum ImageAssets {
   internal static let icCheckCircleHightlight = ImageAsset(name: "ic_check_circle_hightlight")
   internal static let icClose = ImageAsset(name: "ic_close")
   internal static let icGoogle = ImageAsset(name: "ic_google")
+  internal static let icHome = ImageAsset(name: "ic_home")
   internal static let icKakao = ImageAsset(name: "ic_kakao")
+  internal static let icMenu = ImageAsset(name: "ic_menu")
   internal static let icNaver = ImageAsset(name: "ic_naver")
   internal static let icPpyy = ImageAsset(name: "ic_ppyy")
+  internal static let icProfile = ImageAsset(name: "ic_profile")
+  internal static let icShop = ImageAsset(name: "ic_shop")
+  internal static let icWallet = ImageAsset(name: "ic_wallet")
   internal static let icWelcomeText = ImageAsset(name: "ic_welcome_text")
   internal static let logo = ImageAsset(name: "logo")
 
@@ -49,9 +54,14 @@ internal enum ImageAssets {
     icCheckCircleHightlight,
     icClose,
     icGoogle,
+    icHome,
     icKakao,
+    icMenu,
     icNaver,
     icPpyy,
+    icProfile,
+    icShop,
+    icWallet,
     icWelcomeText,
     logo,
   ]

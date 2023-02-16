@@ -2,52 +2,51 @@
 //  MainView.swift
 //  Noljanolja
 //
-//  Created by Nguyen The Trinh on 02/02/2023.
+//  Created by Nguyen The Trinh on 16/02/2023.
+//
 //
 
 import SwiftUI
 
 // MARK: - MainView
 
-struct MainView: View {
-    @State var selection = 0
-    @State private var isProgressHUBShowing = false
+struct MainView<ViewModel: MainViewModelType>: View {
+    // MARK: Dependencies
+
+    @StateObject private var viewModel: ViewModel
+
+    // MARK: State
+
+    init(viewModel: ViewModel = MainViewModel()) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
 
     var body: some View {
         VStack(spacing: 0) {
-            TabView(selection: $selection) {
+            TabView(selection: $viewModel.selectedTabItem) {
                 ProfileView()
-                    .tag(0)
+                    .tag(TabBarItem.menu)
                 List {
                     ForEach(1...100, id: \.self) {
                         Text("\($0)")
                     }
                 }
-                .tag(1)
-                Text("\(selection)")
-                    .tag(2)
-                Text("\(selection)")
-                    .tag(3)
-                Text("\(selection)")
-                    .tag(4)
+                .tag(TabBarItem.home)
+                Text("2")
+                    .tag(TabBarItem.wallet)
+                Text("3")
+                    .tag(TabBarItem.shop)
+                Text("4")
+                    .tag(TabBarItem.myPage)
             }
-            TabBar(
-                selection: $selection,
-                items: [
-                    TabBarItem(image: "list.dash"),
-                    TabBarItem(image: "house"),
-                    TabBarItem(
-                        image: "play.fill",
-                        offset: CGSize(width: 0, height: -20),
-                        backgroundColor: .orange
-                    ),
-                    TabBarItem(image: "bag"),
-                    TabBarItem(image: "person")
-                ]
+            .introspectTabBarController { tabBarController in
+                tabBarController.tabBar.isHidden = true
+            }
+            TabBarView(
+                selection: $viewModel.selectedTabItem,
+                items: TabBarItem.allCases
             )
         }
-        .edgesIgnoringSafeArea(.bottom)
-        .progressHUB(isActive: $isProgressHUBShowing)
     }
 }
 

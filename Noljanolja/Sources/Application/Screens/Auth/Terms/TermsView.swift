@@ -99,9 +99,6 @@ struct TermsView<ViewModel: TermsViewModelType>: View {
             }
             .padding(16)
         }
-        .introspectScrollView { scrollView in
-            scrollView.alwaysBounceVertical = false
-        }
     }
 }
 

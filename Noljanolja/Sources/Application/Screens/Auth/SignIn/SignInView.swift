@@ -5,7 +5,6 @@
 //  Created by Nguyen The Trinh on 03/02/2023.
 //
 
-import Introspect
 import SwiftUI
 
 // MARK: - SignInView
@@ -60,9 +59,6 @@ struct SignInView<ViewModel: SignInViewModelType>: View {
                 signInWithSNSContent
             }
             .padding(16)
-        }
-        .introspectScrollView { scrollView in
-            scrollView.alwaysBounceVertical = false
         }
     }
     

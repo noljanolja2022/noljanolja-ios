@@ -77,7 +77,6 @@ struct AuthView<ViewModel: AuthViewModelType>: View {
                 )
                 .tag(1)
             }
-            //                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .introspectTabBarController { tabBarController in
                 tabBarController.tabBar.isHidden = true
             }

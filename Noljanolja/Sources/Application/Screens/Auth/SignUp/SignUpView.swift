@@ -94,9 +94,6 @@ struct SignUpView<ViewModel: SignUpViewModelType>: View {
             }
             .padding(16)
         }
-        .introspectScrollView { scrollView in
-            scrollView.alwaysBounceVertical = false
-        }
         .onAppear {
             viewModel.updateSignUpStepTrigger.send(.second)
         }

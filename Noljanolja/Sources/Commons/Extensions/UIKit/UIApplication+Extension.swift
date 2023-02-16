@@ -1,8 +1,8 @@
 //
-//  UIApplication+.swift
+//  UIApplication+Extension.swift
 //  Noljanolja
 //
-//  Created by Nguyen The Trinh on 02/02/2023.
+//  Created by Nguyen The Trinh on 16/02/2023.
 //
 
 import Foundation
