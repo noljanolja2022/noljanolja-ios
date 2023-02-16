@@ -17,6 +17,7 @@ struct AuthNavigationView<ViewModel: AuthNavigationViewModelType>: View {
 
     // MARK: State
 
+    @Environment(\.presentationMode) private var presentationMode
     @StateObject private var appState = AppState.default
 
     init(viewModel: ViewModel = AuthNavigationViewModel()) {
@@ -24,6 +25,26 @@ struct AuthNavigationView<ViewModel: AuthNavigationViewModelType>: View {
     }
 
     var body: some View {
+        NavigationView {
+            content
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button(
+                            action: {
+                                presentationMode.wrappedValue.dismiss()
+                            },
+                            label: {
+                                ImageAssets.icClose.swiftUIImage
+                                    .resizable()
+                                    .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
+                            }
+                        )
+                    }
+                }
+        }
+    }
+
+    private var content: some View {
         VStack(spacing: 0) {
             ImageAssets.logo.swiftUIImage
                 .frame(width: 166, height: 66)
