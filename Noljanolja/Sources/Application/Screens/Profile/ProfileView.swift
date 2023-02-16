@@ -29,7 +29,7 @@ struct ProfileView: View {
                 }
                 Button(
                     action: {
-                        viewModel.signOutTrigger.send(())
+                        viewModel.signOutTrigger.send()
                     },
                     label: {
                         Text("Sign Out")

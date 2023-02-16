@@ -40,7 +40,7 @@ struct SignInView<ViewModel: SignInViewModelType>: View {
                 label: { EmptyView() }
             )
         }
-        .onReceive(viewModel.isProgressHUDShowingPublisher) {
+        .onReceive(viewModel.isShowingProgressHUDPublisher) {
             progressHUBState.isLoading = $0
         }
         .alert(isPresented: $viewModel.isAlertMessagePresented) {
@@ -90,7 +90,7 @@ struct SignInView<ViewModel: SignInViewModelType>: View {
             HStack {
                 Spacer()
                 Button(
-                    action: { viewModel.forgotPasswordTrigger.send(()) },
+                    action: { viewModel.forgotPasswordTrigger.send() },
                     label: {
                         Text(L10n.Auth.ForgotPassword.title)
                             .font(FontFamily.NotoSans.regular.swiftUIFont(size: 14))
@@ -106,6 +106,9 @@ struct SignInView<ViewModel: SignInViewModelType>: View {
             )
             .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.isSignInButtonEnabled))
             .disabled(!viewModel.isSignInButtonEnabled)
+            .shadow(
+                color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
+            )
         }
     }
     
@@ -130,13 +133,13 @@ struct SignInView<ViewModel: SignInViewModelType>: View {
                         action: {
                             switch index {
                             case 0:
-                                viewModel.signInWithKakaoTrigger.send(())
+                                viewModel.signInWithKakaoTrigger.send()
                             case 1:
-                                viewModel.signInWithNaverTrigger.send(())
+                                viewModel.signInWithNaverTrigger.send()
                             case 2:
-                                viewModel.signInWithGoogleTrigger.send(())
+                                viewModel.signInWithGoogleTrigger.send()
                             case 3:
-                                viewModel.signInWithAppleTrigger.send(())
+                                viewModel.signInWithAppleTrigger.send()
                             default:
                                 break
                             }

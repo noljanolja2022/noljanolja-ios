@@ -79,6 +79,8 @@ internal enum L10n {
     }
   }
   internal enum Common {
+    /// Close
+    internal static let close = L10n.tr("Localizable", "common.close", fallback: "Close")
     /// Next
     internal static let next = L10n.tr("Localizable", "common.next", fallback: "Next")
     /// OK

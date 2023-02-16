@@ -42,7 +42,7 @@ struct SignUpView<ViewModel: SignUpViewModelType>: View {
                 label: { EmptyView() }
             )
         }
-        .onReceive(viewModel.isProgressHUDShowingPublisher) {
+        .onReceive(viewModel.isShowingProgressHUDPublisher) {
             progressHUBState.isLoading = $0
         }
         .alert(isPresented: $viewModel.isAlertMessagePresented) {
@@ -105,8 +105,11 @@ struct SignUpView<ViewModel: SignUpViewModelType>: View {
                 L10n.Common.previous,
                 action: { presentationMode.wrappedValue.dismiss() }
             )
-            .frame(width: 100)
             .buttonStyle(ThridyButtonStyle())
+            .frame(width: 100)
+            .shadow(
+                color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
+            )
 
             Button(
                 L10n.Auth.SignUp.title,
@@ -114,6 +117,9 @@ struct SignUpView<ViewModel: SignUpViewModelType>: View {
             )
             .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.isSignUpButtonEnabled))
             .disabled(!viewModel.isSignUpButtonEnabled)
+            .shadow(
+                color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
+            )
         }
         .padding(16)
     }

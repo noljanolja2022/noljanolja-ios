@@ -12,19 +12,35 @@ import SwiftUI
 
 struct MainView<ViewModel: MainViewModelType>: View {
     // MARK: Dependencies
-
+    
     @StateObject private var viewModel: ViewModel
-
+    
     // MARK: State
-
+    
     init(viewModel: ViewModel = MainViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
-
+    
     var body: some View {
+        ZStack {
+            content
+        }
+        .fullScreenCover(item: $viewModel.navigationType) { navigationType in
+            switch navigationType {
+            case .authPopup:
+                AuthPopupView(
+                    viewModel: AuthPopupViewModel(delegate: viewModel)
+                )
+            case .auth:
+                AuthNavigationView()
+            }
+        }
+    }
+    
+    private var content: some View {
         VStack(spacing: 0) {
             TabView(selection: $viewModel.selectedTabItem) {
-                ProfileView()
+                Text("Menu")
                     .tag(TabBarItem.menu)
                 List {
                     ForEach(1...100, id: \.self) {
@@ -32,19 +48,20 @@ struct MainView<ViewModel: MainViewModelType>: View {
                     }
                 }
                 .tag(TabBarItem.home)
-                Text("2")
+                Text("Wallet")
                     .tag(TabBarItem.wallet)
-                Text("3")
+                Text("Shop")
                     .tag(TabBarItem.shop)
-                Text("4")
+                ProfileView()
                     .tag(TabBarItem.myPage)
             }
             .introspectTabBarController { tabBarController in
                 tabBarController.tabBar.isHidden = true
             }
             TabBarView(
-                selection: $viewModel.selectedTabItem,
-                items: TabBarItem.allCases
+                selectionItem: $viewModel.selectedTabItem,
+                items: TabBarItem.allCases,
+                action: { viewModel.selectedTabItemTrigger.send($0) }
             )
         }
     }

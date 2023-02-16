@@ -34,14 +34,14 @@ struct EmailVerificationView<ViewModel: EmailVerificationViewModelType>: View {
         .padding(16)
         .onAppear {
             viewModel.updateSignUpStepTrigger.send(.third)
-            viewModel.sendEmailVerificationTrigger.send(())
+            viewModel.sendEmailVerificationTrigger.send()
         }
         .onChange(of: scenePhase) { newPhase in
             if newPhase == .active {
-                viewModel.checkEmailVerificationTrigger.send(())
+                viewModel.checkEmailVerificationTrigger.send()
             }
         }
-        .onReceive(viewModel.isProgressHUDShowingPublisher) {
+        .onReceive(viewModel.isShowingProgressHUDPublisher) {
             progressHUBState.isLoading = $0
         }
     }
@@ -69,14 +69,20 @@ struct EmailVerificationView<ViewModel: EmailVerificationViewModelType>: View {
                     presentationMode.wrappedValue.dismiss()
                 }
             )
-            .frame(width: 100)
             .buttonStyle(ThridyButtonStyle())
+            .frame(width: 100)
+            .shadow(
+                color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
+            )
 
             Button(
                 "Email verification",
-                action: { viewModel.checkEmailVerificationTrigger.send(()) }
+                action: { viewModel.checkEmailVerificationTrigger.send() }
             )
             .buttonStyle(PrimaryButtonStyle())
+            .shadow(
+                color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
+            )
         }
     }
 }

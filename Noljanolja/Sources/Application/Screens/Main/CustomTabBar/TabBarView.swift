@@ -8,17 +8,30 @@
 import SwiftUI
 
 struct TabBarView: View {
+    // MARK: Dependencies
+
     private let items: [TabBarItem]
-    @Binding private var selection: TabBarItem
+    @Binding private var selectionItem: TabBarItem
+    private let action: (TabBarItem) -> Void
+
+    private let selectedItemForegroundColor: Color
+    private let itemForegroundColor: Color
+
+    // MARK: Private
 
     private let highlightItemSize: CGFloat = 84
     private let itemSize: CGFloat = 36
-    private let selectedItemForegroundColor = Color.orange
-    private let itemForegroundColor = Color.black
 
-    init(selection: Binding<TabBarItem>, items: [TabBarItem]) {
-        self._selection = selection
+    init(selectionItem: Binding<TabBarItem>,
+         items: [TabBarItem],
+         action: @escaping (TabBarItem) -> Void,
+         selectedItemForegroundColor: Color = Color.orange,
+         itemForegroundColor: Color = Color.black) {
+        self._selectionItem = selectionItem
         self.items = items
+        self.action = action
+        self.selectedItemForegroundColor = selectedItemForegroundColor
+        self.itemForegroundColor = itemForegroundColor
     }
 
     var body: some View {
@@ -34,7 +47,7 @@ struct TabBarView: View {
     private var content: some View {
         ZStack {
             Button(
-                action: { selection = .wallet },
+                action: { action(.wallet) },
                 label: {
                     Image(uiImage: TabBarItem.wallet.image)
                         .resizable()
@@ -48,7 +61,7 @@ struct TabBarView: View {
                 ForEach(items.indices, id: \.self) { index in
                     let item = items[index]
                     Button(
-                        action: { selection = item },
+                        action: { action(item) },
                         label: {
                             if !item.isHighlight {
                                 Image(uiImage: item.image)
@@ -63,7 +76,7 @@ struct TabBarView: View {
                         }
                     )
                     .foregroundColor(
-                        selection == item ? selectedItemForegroundColor : itemForegroundColor
+                        selectionItem == item ? selectedItemForegroundColor : itemForegroundColor
                     )
                 }
             }
@@ -77,7 +90,7 @@ struct TabBarView: View {
             Path { path in
                 let centerX = geometry.size.width / 2
                 let curveSize = highlightItemSize / 2
-                let smallCurveSize: CGFloat = 24
+                let smallCurveSize: CGFloat = 20
                 let padding: CGFloat = 4
 
                 path.move(to: CGPoint(x: 0, y: 0))

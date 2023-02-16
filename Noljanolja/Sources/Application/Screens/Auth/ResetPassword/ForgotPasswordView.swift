@@ -33,7 +33,7 @@ struct ResetPasswordView: View {
                 content
             }
         }
-        .onReceive(viewModel.isProgressHUDShowingPublisher) {
+        .onReceive(viewModel.isShowingProgressHUDPublisher) {
             progressHUBState.isLoading = $0
         }
         .navigationBarTitle(
@@ -61,8 +61,10 @@ struct ResetPasswordView: View {
                     L10n.Auth.SignIn.title,
                     action: { presentationMode.wrappedValue.dismiss() }
                 )
-                .frame(height: 48)
                 .buttonStyle(PrimaryButtonStyle())
+                .shadow(
+                    color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
+                )
                 
                 Button(
                     L10n.Auth.ResetPassword.Retry.title,
@@ -98,7 +100,6 @@ struct ResetPasswordView: View {
                     viewModel.resetPasswordTrigger.send(viewModel.email)
                 }
             )
-            .frame(height: 48)
             .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.isResetButtonEnabled))
             .disabled(!viewModel.isResetButtonEnabled)
         }

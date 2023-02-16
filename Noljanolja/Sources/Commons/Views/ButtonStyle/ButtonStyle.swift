@@ -54,9 +54,6 @@ extension CustomButtonStyle {
                 color: isEnabled ? enabledBorderColor : disabledBorderColor, lineWidth: 1
             )
             .opacity(configuration.isPressed ? 0.5 : 1)
-            .shadow(
-                color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
-            )
             .disabled(!isEnabled)
     }
 }
@@ -106,5 +103,27 @@ struct ThridyButtonStyle: CustomButtonStyle {
 
     init(isEnabled: Bool = true) {
         self.isEnabled = isEnabled
+    }
+}
+
+// MARK: - PlainButtonStyle
+
+struct PlainButtonStyle: ButtonStyle {
+    let isEnabled: Bool
+    let enabledForegroundColor: Color = ColorAssets.white.swiftUIColor
+    let disabledForegroundColor: Color = ColorAssets.gray.swiftUIColor
+
+    init(isEnabled: Bool = true) {
+        self.isEnabled = isEnabled
+    }
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(FontFamily.NotoSans.regular.swiftUIFont(size: 16))
+            .foregroundColor(
+                isEnabled ? enabledForegroundColor : disabledForegroundColor
+            )
+            .opacity(configuration.isPressed ? 0.5 : 1)
+            .disabled(!isEnabled)
     }
 }

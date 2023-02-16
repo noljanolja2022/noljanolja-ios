@@ -42,6 +42,9 @@ struct TermsView<ViewModel: TermsViewModelType>: View {
             )
             .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.isAllTermAgreed))
             .disabled(!viewModel.isAllTermAgreed)
+            .shadow(
+                color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
+            )
             .padding(16)
         }
     }
