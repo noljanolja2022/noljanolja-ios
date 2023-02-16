@@ -40,8 +40,8 @@ struct TermsView<ViewModel: TermsViewModelType>: View {
                 L10n.Common.next,
                 action: { viewModel.isShowingSignUpView = true }
             )
-            .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.allTermAgreed))
-            .disabled(!viewModel.allTermAgreed)
+            .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.isAllTermAgreed))
+            .disabled(!viewModel.isAllTermAgreed)
             .padding(16)
         }
     }
@@ -51,9 +51,9 @@ struct TermsView<ViewModel: TermsViewModelType>: View {
             VStack(spacing: 12) {
                 TermItemView(
                     selected: Binding(
-                        get: { viewModel.allTermAgreed },
+                        get: { viewModel.isAllTermAgreed },
                         set: { value in
-                            viewModel.allTermAgreed = value
+                            viewModel.isAllTermAgreed = value
                             viewModel.termItemTypes.keys.forEach {
                                 viewModel.termItemTypes[$0] = value
                             }
@@ -76,7 +76,7 @@ struct TermsView<ViewModel: TermsViewModelType>: View {
                         get: { array[index].value },
                         set: {
                             viewModel.termItemTypes[itemType] = $0
-                            viewModel.allTermAgreed = viewModel.termItemTypes
+                            viewModel.isAllTermAgreed = viewModel.termItemTypes
                                 .map { $0.value }
                                 .reduce(true) { $0 && $1 }
                         }
@@ -87,7 +87,7 @@ struct TermsView<ViewModel: TermsViewModelType>: View {
                         title: itemType.title,
                         description: itemType.description,
                         minTitleWidth: array.map { $0.key }.maxTitleWidth(with: FontFamily.NotoSans.medium.font(size: 14)),
-                        action: { viewModel.selectedtermItemType = itemType }
+                        action: { viewModel.selectedTermItemType = itemType }
                     )
 
                     if itemType.isSeparatoRequired {

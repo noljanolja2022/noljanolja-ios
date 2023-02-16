@@ -12,11 +12,12 @@ import Foundation
 
 protocol SignInViewModelDelegate: AnyObject {
     func routeToResetPassword()
+    func closeAuthFlow()
 }
 
 // MARK: - SignInViewModelType
 
-protocol SignInViewModelType: ObservableObject {
+protocol SignInViewModelType: ObservableObject, EmailVerificationViewModelDelegate {
     // MARK: State
 
     var email: String { get set }
@@ -126,9 +127,9 @@ final class SignInViewModel: SignInViewModelType {
                 switch result {
                 case let .success(idToken):
                     logger.info("Signed in with Email/Password - Token: \(idToken)")
+                    self?.delegate?.closeAuthFlow()
                 case let .failure(error):
                     logger.error("Sign in with Email/Password failed: \(error.localizedDescription)")
-
                     switch error {
                     case FirebaseAuthError.emailNotVerified as FirebaseAuthError:
                         self?.isShowingEmailVerificationView = true
@@ -153,6 +154,7 @@ final class SignInViewModel: SignInViewModelType {
                 switch result {
                 case let .success(idToken):
                     logger.info("Signed in with Apple - Token: \(idToken)")
+                    self?.delegate?.closeAuthFlow()
                 case let .failure(error):
                     logger.error("Sign in with Apple failed: \(error.localizedDescription)")
                     self?.isAlertMessagePresented = true
@@ -174,6 +176,8 @@ final class SignInViewModel: SignInViewModelType {
                 switch result {
                 case let .success(idToken):
                     logger.info("Signed in with Google - Token: \(idToken)")
+                    self?.delegate?.closeAuthFlow()
+                    self?.delegate?.closeAuthFlow()
                 case let .failure(error):
                     logger.error("Sign in with Google failed: \(error.localizedDescription)")
                     self?.isAlertMessagePresented = true
@@ -196,6 +200,7 @@ final class SignInViewModel: SignInViewModelType {
                 switch result {
                 case let .success(idToken):
                     logger.info("Signed in with Kakao - Token: \(idToken)")
+                    self?.delegate?.closeAuthFlow()
                 case let .failure(error):
                     logger.error("Sign in with Kakao failed: \(error.localizedDescription)")
                     self?.isAlertMessagePresented = true
@@ -218,6 +223,7 @@ final class SignInViewModel: SignInViewModelType {
                 switch result {
                 case let .success(idToken):
                     logger.info("Signed in with Naver - Token: \(idToken)")
+                    self?.delegate?.closeAuthFlow()
                 case let .failure(error):
                     logger.error("Sign in with Naver failed: \(error.localizedDescription)")
                     self?.isAlertMessagePresented = true
@@ -230,5 +236,15 @@ final class SignInViewModel: SignInViewModelType {
         forgotPasswordTrigger
             .sink { [weak self] in self?.delegate?.routeToResetPassword() }
             .store(in: &cancellables)
+    }
+}
+
+// MARK: EmailVerificationViewModelDelegate
+
+extension SignInViewModel: EmailVerificationViewModelDelegate {
+    func updateSignUpStep(_: SignUpStep) {}
+
+    func closeAuthFlow() {
+        delegate?.closeAuthFlow()
     }
 }

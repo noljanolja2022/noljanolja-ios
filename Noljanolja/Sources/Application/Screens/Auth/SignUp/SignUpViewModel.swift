@@ -12,6 +12,7 @@ import Combine
 
 protocol SignUpViewModelDelegate: AnyObject {
     func updateSignUpStep(_ step: SignUpStep)
+    func closeAuthFlow()
 }
 
 // MARK: - SignUpViewModelType
@@ -134,6 +135,7 @@ final class SignUpViewModel: SignUpViewModelType {
                 switch result {
                 case let .success(idToken):
                     logger.info("Signed up with Email/Password - Token: \(idToken)")
+                    self?.delegate?.closeAuthFlow()
                 case let .failure(error):
                     logger.error("Sign up with Email/Password failed: \(error.localizedDescription)")
 
@@ -160,5 +162,9 @@ final class SignUpViewModel: SignUpViewModelType {
 extension SignUpViewModel: EmailVerificationViewModelDelegate {
     func updateSignUpStep(_ step: SignUpStep) {
         delegate?.updateSignUpStep(step)
+    }
+
+    func closeAuthFlow() {
+        delegate?.closeAuthFlow()
     }
 }

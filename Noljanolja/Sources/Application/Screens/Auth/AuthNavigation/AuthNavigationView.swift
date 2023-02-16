@@ -42,6 +42,9 @@ struct AuthNavigationView<ViewModel: AuthNavigationViewModelType>: View {
                     }
                 }
         }
+        .onReceive(viewModel.closePublisher) {
+            presentationMode.wrappedValue.dismiss()
+        }
         .progressHUB(isActive: $progressHUBState.isLoading)
         .environmentObject(progressHUBState)
     }
@@ -53,7 +56,9 @@ struct AuthNavigationView<ViewModel: AuthNavigationViewModelType>: View {
                 .padding(16)
 
             NavigationView {
-                AuthView()
+                AuthView(
+                    viewModel: AuthViewModel(delegate: viewModel)
+                )
             }
             .padding(.top, 8)
             .accentColor(ColorAssets.black.swiftUIColor)

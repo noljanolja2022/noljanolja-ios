@@ -29,12 +29,14 @@ struct SignInView<ViewModel: SignInViewModelType>: View {
             NavigationLink(
                 isActive: $viewModel.isShowingEmailVerificationView,
                 destination: {
-                    EmailVerificationView()
-                        .navigationBarTitle(
-                            Text("Email verification"),
-                            displayMode: .inline
-                        )
-                        .navigationBarHidden(false)
+                    EmailVerificationView(
+                        viewModel: EmailVerificationViewModel(delegate: viewModel)
+                    )
+                    .navigationBarTitle(
+                        Text("Email verification"),
+                        displayMode: .inline
+                    )
+                    .navigationBarHidden(false)
                 },
                 label: { EmptyView() }
             )

@@ -34,16 +34,16 @@ struct AuthView<ViewModel: AuthViewModelType>: View {
             NavigationLink(
                 destination: TermDetailView(
                     viewModel: TermDetailViewModel(
-                        termItemType: viewModel.termItemType ?? .termOfService
+                        termItemType: viewModel.selectedTermItemType ?? .termOfService
                     )
                 ),
                 isActive: Binding<Bool>(
                     get: {
-                        viewModel.termItemType != nil
+                        viewModel.selectedTermItemType != nil
                     },
                     set: {
                         if !$0 {
-                            viewModel.termItemType = nil
+                            viewModel.selectedTermItemType = nil
                         }
                     }
                 ),

@@ -9,7 +9,9 @@ import Combine
 
 // MARK: - AuthViewModelDelegate
 
-protocol AuthViewModelDelegate: AnyObject {}
+protocol AuthViewModelDelegate: AnyObject {
+    func closeAuthFlow()
+}
 
 // MARK: - AuthViewModelType
 
@@ -17,7 +19,7 @@ protocol AuthViewModelType: ObservableObject, SignInViewModelDelegate, SignUpNav
     // MARK: State
 
     var isShowingResetPasswordView: Bool { get set }
-    var termItemType: TermItemType? { get set }
+    var selectedTermItemType: TermItemType? { get set }
 }
 
 // MARK: - AuthViewModel
@@ -30,7 +32,7 @@ final class AuthViewModel: AuthViewModelType {
     // MARK: State
 
     @Published var isShowingResetPasswordView = false
-    @Published var termItemType: TermItemType? = nil
+    @Published var selectedTermItemType: TermItemType? = nil
 
     // MARK: Private
 
@@ -45,10 +47,18 @@ final class AuthViewModel: AuthViewModelType {
     private func configure() {}
 }
 
-// MARK: SignInViewModelDelegate
+// MARK: SignInViewModelDelegate, SignUpNavigationViewModelDelegate
 
-extension AuthViewModel: SignInViewModelDelegate {
+extension AuthViewModel: SignInViewModelDelegate, SignUpNavigationViewModelDelegate {
     func routeToResetPassword() {
         isShowingResetPasswordView = true
+    }
+
+    func selectTermItemType(_ item: TermItemType) {
+        selectedTermItemType = item
+    }
+
+    func closeAuthFlow() {
+        delegate?.closeAuthFlow()
     }
 }

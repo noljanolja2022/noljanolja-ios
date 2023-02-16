@@ -11,11 +11,14 @@ import UIKit
 
 // MARK: - SignUpNavigationViewModelDelegate
 
-protocol SignUpNavigationViewModelDelegate: AnyObject {}
+protocol SignUpNavigationViewModelDelegate: AnyObject {
+    func closeAuthFlow()
+    func selectTermItemType(_ item: TermItemType)
+}
 
 // MARK: - SignUpNavigationViewModelType
 
-protocol SignUpNavigationViewModelType: ObservableObject, TermsViewModelDelegate, SignUpViewModelDelegate {
+protocol SignUpNavigationViewModelType: ObservableObject, TermsViewModelDelegate {
     // MARK: State
 
     var step: SignUpStep { get set }
@@ -50,5 +53,13 @@ final class SignUpNavigationViewModel: SignUpNavigationViewModelType {
 extension SignUpNavigationViewModel: TermsViewModelDelegate, SignUpViewModelDelegate {
     func updateSignUpStep(_ step: SignUpStep) {
         self.step = step
+    }
+
+    func selectTermItemType(_ item: TermItemType) {
+        delegate?.selectTermItemType(item)
+    }
+
+    func closeAuthFlow() {
+        delegate?.closeAuthFlow()
     }
 }

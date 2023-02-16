@@ -12,6 +12,8 @@ import Combine
 
 protocol TermsViewModelDelegate: AnyObject {
     func updateSignUpStep(_ step: SignUpStep)
+    func selectTermItemType(_ item: TermItemType)
+    func closeAuthFlow()
 }
 
 // MARK: - TermsViewModelType
@@ -19,10 +21,10 @@ protocol TermsViewModelDelegate: AnyObject {
 protocol TermsViewModelType: ObservableObject, SignUpViewModelDelegate {
     // MARK: State
 
-    var allTermAgreed: Bool { get set }
+    var isAllTermAgreed: Bool { get set }
     var termItemTypes: [TermItemType: Bool] { get set }
 
-    var selectedtermItemType: TermItemType? { get set }
+    var selectedTermItemType: TermItemType? { get set }
 
     var isShowingSignUpView: Bool { get set }
 
@@ -40,10 +42,10 @@ final class TermsViewModel: TermsViewModelType {
 
     // MARK: State
 
-    @Published var allTermAgreed = false
+    @Published var isAllTermAgreed = false
     @Published var termItemTypes = Dictionary(uniqueKeysWithValues: TermItemType.allCases.map { ($0, false) })
 
-    @Published var selectedtermItemType: TermItemType?
+    @Published var selectedTermItemType: TermItemType?
 
     @Published var isShowingSignUpView = false
 
@@ -65,6 +67,11 @@ final class TermsViewModel: TermsViewModelType {
         updateSignUpStepTrigger
             .sink(receiveValue: { [weak self] in self?.delegate?.updateSignUpStep($0) })
             .store(in: &cancellables)
+
+        $selectedTermItemType
+            .compactMap { $0 }
+            .sink(receiveValue: { [weak self] in self?.delegate?.selectTermItemType($0) })
+            .store(in: &cancellables)
     }
 }
 
@@ -73,5 +80,9 @@ final class TermsViewModel: TermsViewModelType {
 extension TermsViewModel: SignUpViewModelDelegate {
     func updateSignUpStep(_ step: SignUpStep) {
         delegate?.updateSignUpStep(step)
+    }
+
+    func closeAuthFlow() {
+        delegate?.closeAuthFlow()
     }
 }

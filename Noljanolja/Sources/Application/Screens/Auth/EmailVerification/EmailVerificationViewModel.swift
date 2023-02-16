@@ -12,6 +12,7 @@ import Combine
 
 protocol EmailVerificationViewModelDelegate: AnyObject {
     func updateSignUpStep(_ step: SignUpStep)
+    func closeAuthFlow()
 }
 
 // MARK: - EmailVerificationViewModelType
@@ -92,6 +93,7 @@ final class EmailVerificationViewModel: EmailVerificationViewModelType {
                 switch result {
                 case .success:
                     logger.info("Verify email successful")
+                    self?.delegate?.closeAuthFlow()
                 case let .failure(error):
                     logger.error("Verify email failed: \(error.localizedDescription)")
                 }
