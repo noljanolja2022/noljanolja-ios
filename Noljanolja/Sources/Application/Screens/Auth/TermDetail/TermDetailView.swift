@@ -15,15 +15,18 @@ struct TermDetailView<ViewModel: TermDetailViewModelType>: View {
 
     @StateObject private var viewModel: ViewModel
 
+    // MARK: State
+
+    @Environment(\.presentationMode) private var presentationMode
+
     init(viewModel: ViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
-        ScrollView {
-            Text(viewModel.termItemType.content)
-                .font(FontFamily.NotoSans.medium.swiftUIFont(size: 11))
-                .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
+        VStack(spacing: 0) {
+            content
+            action
                 .padding(16)
         }
         .toolbar {
@@ -36,6 +39,27 @@ struct TermDetailView<ViewModel: TermDetailViewModelType>: View {
             }
         }
         .navigationBarHidden(false)
+        .navigationBarBackButtonHidden(true)
+    }
+
+    private var content: some View {
+        ScrollView {
+            Text(viewModel.termItemType.content)
+                .font(FontFamily.NotoSans.medium.swiftUIFont(size: 11))
+                .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
+                .padding(16)
+        }
+    }
+
+    private var action: some View {
+        Button(
+            L10n.Common.previous,
+            action: { presentationMode.wrappedValue.dismiss() }
+        )
+        .buttonStyle(ThridyButtonStyle())
+        .shadow(
+            color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
+        )
     }
 }
 

@@ -36,6 +36,7 @@ struct SignInView<ViewModel: SignInViewModelType>: View {
                         displayMode: .inline
                     )
                     .navigationBarHidden(false)
+                    .navigationBarBackButtonHidden(true)
                 },
                 label: { EmptyView() }
             )

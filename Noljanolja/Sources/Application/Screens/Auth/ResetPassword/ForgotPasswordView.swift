@@ -41,6 +41,7 @@ struct ResetPasswordView: View {
             displayMode: .inline
         )
         .navigationBarHidden(false)
+        .navigationBarBackButtonHidden(true)
     }
 
     private var success: some View {
@@ -94,14 +95,7 @@ struct ResetPasswordView: View {
                 )
                 .errorMessage($viewModel.emailErrorMessage)
             Spacer()
-            Button(
-                L10n.Auth.ResetPassword.title,
-                action: {
-                    viewModel.resetPasswordTrigger.send(viewModel.email)
-                }
-            )
-            .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.isResetButtonEnabled))
-            .disabled(!viewModel.isResetButtonEnabled)
+            actions
         }
         .padding(16)
         .alert(isPresented: $viewModel.isAlertMessagePresented) {
@@ -111,6 +105,32 @@ struct ResetPasswordView: View {
                 dismissButton: Alert.Button.default(Text(L10n.Common.ok))
             )
         }
+    }
+
+    private var actions: some View {
+        HStack(spacing: 12) {
+            Button(
+                L10n.Common.previous,
+                action: { presentationMode.wrappedValue.dismiss() }
+            )
+            .buttonStyle(ThridyButtonStyle())
+            .frame(width: 100)
+            .shadow(
+                color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
+            )
+
+            Button(
+                L10n.Auth.ResetPassword.title,
+                action: {
+                    viewModel.resetPasswordTrigger.send(viewModel.email)
+                }
+            )
+            .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.isResetButtonEnabled))
+            .disabled(!viewModel.isResetButtonEnabled).shadow(
+                color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
+            )
+        }
+        .padding(16)
     }
 }
 
