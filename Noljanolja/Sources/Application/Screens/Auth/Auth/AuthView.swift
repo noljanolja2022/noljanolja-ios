@@ -10,14 +10,16 @@ import SwiftUI
 
 // MARK: - AuthView
 
-struct AuthView: View {
-    @StateObject private var viewModel: AuthViewModel
+struct AuthView<ViewModel: AuthViewModelType>: View {
+    // MARK: Dependencies
+
+    @StateObject private var viewModel: ViewModel
     
+    // MARK: State
+
     @State private var selectedIndex = 0
-    @State private var isShowingResetPasswordView = false
-    @State private var termAndCoditionItemType: TermAndCoditionItemType? = nil
-    
-    init(viewModel: AuthViewModel = AuthViewModel()) {
+
+    init(viewModel: ViewModel = AuthViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
@@ -25,19 +27,23 @@ struct AuthView: View {
         ZStack {
             content
             NavigationLink(
-                destination: ResetPasswordView(isShowingResetPasswordView: $isShowingResetPasswordView),
-                isActive: $isShowingResetPasswordView,
+                destination: ResetPasswordView(),
+                isActive: $viewModel.isShowingResetPasswordView,
                 label: { EmptyView() }
             )
             NavigationLink(
-                destination: TermDetailView(termAndCoditionItemType: termAndCoditionItemType ?? .termOfService),
+                destination: TermDetailView(
+                    viewModel: TermDetailViewModel(
+                        termItemType: viewModel.selectedTermItemType ?? .termOfService
+                    )
+                ),
                 isActive: Binding<Bool>(
                     get: {
-                        termAndCoditionItemType != nil
+                        viewModel.selectedTermItemType != nil
                     },
                     set: {
                         if !$0 {
-                            termAndCoditionItemType = nil
+                            viewModel.selectedTermItemType = nil
                         }
                     }
                 ),
@@ -62,10 +68,15 @@ struct AuthView: View {
             .padding(.top, 12)
 
             TabView(selection: $selectedIndex) {
-                SignInView(isShowingResetPasswordView: $isShowingResetPasswordView).tag(0)
-                SignUpRootView(termAndCoditionItemType: $termAndCoditionItemType).tag(1)
+                SignInView(
+                    viewModel: SignInViewModel(delegate: viewModel)
+                )
+                .tag(0)
+                SignUpNavigationView(
+                    viewModel: SignUpNavigationViewModel(delegate: viewModel)
+                )
+                .tag(1)
             }
-            //                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .introspectTabBarController { tabBarController in
                 tabBarController.tabBar.isHidden = true
             }

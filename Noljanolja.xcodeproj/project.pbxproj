@@ -18,10 +18,8 @@
 		CF00D163299423FB00505702 /* View+EdgeCornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D162299423FB00505702 /* View+EdgeCornerRadius.swift */; };
 		CF00D1692994E0A700505702 /* TextField+ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D1682994E0A700505702 /* TextField+ErrorMessage.swift */; };
 		CF00D16F2994FC9E00505702 /* String+Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D16E2994FC9E00505702 /* String+Validation.swift */; };
-		CF00D1732995457600505702 /* FullScreenProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D1722995457600505702 /* FullScreenProgressView.swift */; };
+		CF00D1732995457600505702 /* ProgressHUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D1722995457600505702 /* ProgressHUDView.swift */; };
 		CF0E8845298D4E09000DAE4A /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = CF0E8844298D4E09000DAE4A /* FirebaseCrashlytics */; };
-		CF14F230298C05F900BC2066 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F22F298C05F900BC2066 /* MainView.swift */; };
-		CF14F23A298C123300BC2066 /* UIApplication+KeyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F239298C123300BC2066 /* UIApplication+KeyWindow.swift */; };
 		CF14F248298C331C00BC2066 /* ImageAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F245298C331C00BC2066 /* ImageAssets.swift */; };
 		CF14F249298C331C00BC2066 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F246298C331C00BC2066 /* Localizable.swift */; };
 		CF14F24A298C331D00BC2066 /* ColorAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F247298C331C00BC2066 /* ColorAssets.swift */; };
@@ -35,12 +33,18 @@
 		CF15501029939A350053E86D /* TabLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15500F29939A350053E86D /* TabLayout.swift */; };
 		CF1550182993B55F0053E86D /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1550162993B55F0053E86D /* ForgotPasswordView.swift */; };
 		CF1550192993B55F0053E86D /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1550172993B55F0053E86D /* ForgotPasswordViewModel.swift */; };
-		CF1550232993B5C90053E86D /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1550212993B5C90053E86D /* TabBar.swift */; };
+		CF1550232993B5C90053E86D /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1550212993B5C90053E86D /* TabBarView.swift */; };
 		CF1550242993B5C90053E86D /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1550222993B5C90053E86D /* TabBarItem.swift */; };
-		CF3201812997723400E8F914 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3201802997723400E8F914 /* AppState.swift */; };
+		CF174716299CB72C001B93E8 /* TermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF174714299CB72C001B93E8 /* TermsView.swift */; };
+		CF174717299CB72C001B93E8 /* TermsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF174715299CB72C001B93E8 /* TermsViewModel.swift */; };
+		CF17471B299CBCB1001B93E8 /* TermDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF174719299CBCB1001B93E8 /* TermDetailView.swift */; };
+		CF17471C299CBCB1001B93E8 /* TermDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF17471A299CBCB1001B93E8 /* TermDetailViewModel.swift */; };
+		CF174720299CBFDE001B93E8 /* EmailVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF17471E299CBFDE001B93E8 /* EmailVerificationView.swift */; };
+		CF174721299CBFDE001B93E8 /* EmailVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF17471F299CBFDE001B93E8 /* EmailVerificationViewModel.swift */; };
+		CF2FB264299E25D200756553 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2FB262299E25D200756553 /* MainView.swift */; };
+		CF2FB265299E25D300756553 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2FB263299E25D200756553 /* MainViewModel.swift */; };
+		CF3282ED299E3758006A459B /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3282EC299E3758006A459B /* UIApplication+Extension.swift */; };
 		CF43BF73299274D900FD3180 /* FirebaseAuth+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF43BF72299274D900FD3180 /* FirebaseAuth+Combine.swift */; };
-		CF595387299A6DD400A7EE55 /* EmailVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF595385299A6DD300A7EE55 /* EmailVerificationView.swift */; };
-		CF595388299A6DD400A7EE55 /* EmailVerificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF595386299A6DD300A7EE55 /* EmailVerificationViewModel.swift */; };
 		CF6ABC1329935C2D00D78213 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC0C29935C2D00D78213 /* SignUpViewModel.swift */; };
 		CF6ABC1429935C2D00D78213 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC0D29935C2D00D78213 /* SignUpView.swift */; };
 		CF6ABC1529935C2D00D78213 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC0E29935C2D00D78213 /* AuthViewModel.swift */; };
@@ -52,20 +56,19 @@
 		CF6ABC232993618000D78213 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = CF6ABC222993618000D78213 /* Introspect */; };
 		CF745A5A2998E5EA008177E5 /* FullSizeTappableTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF745A592998E5EA008177E5 /* FullSizeTappableTextFieldStyle.swift */; };
 		CF745A5C2998E5F2008177E5 /* AuthTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF745A5B2998E5F2008177E5 /* AuthTextFieldStyle.swift */; };
+		CF88ABCD299F2E7400D8AB67 /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = CF88ABCC299F2E7400D8AB67 /* SwiftUINavigation */; };
 		CFC709E02996051800B64216 /* View+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709DF2996051800B64216 /* View+Progress.swift */; };
 		CFC709E32996276C00B64216 /* RoundedLinearProgressViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709E22996276C00B64216 /* RoundedLinearProgressViewStyle.swift */; };
-		CFC709E729962CD100B64216 /* SignUpRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709E529962CD100B64216 /* SignUpRootView.swift */; };
-		CFC709E829962CD100B64216 /* SignUpRootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709E629962CD100B64216 /* SignUpRootViewModel.swift */; };
-		CFC709EC29962DF700B64216 /* TermAndCoditionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709EA29962DF700B64216 /* TermAndCoditionView.swift */; };
-		CFC709ED29962DF700B64216 /* TermAndCoditionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709EB29962DF700B64216 /* TermAndCoditionViewModel.swift */; };
+		CFC709E729962CD100B64216 /* SignUpNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709E529962CD100B64216 /* SignUpNavigationView.swift */; };
+		CFC709E829962CD100B64216 /* SignUpNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709E629962CD100B64216 /* SignUpNavigationViewModel.swift */; };
 		CFC709F029962F9200B64216 /* TermItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709EF29962F9200B64216 /* TermItemView.swift */; };
-		CFD83DBF29967A2E00B9A6BB /* SignUpStepHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD83DBE29967A2E00B9A6BB /* SignUpStepHeaderView.swift */; };
-		CFD83DC22996812B00B9A6BB /* TermAndCoditionItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD83DC12996812B00B9A6BB /* TermAndCoditionItemType.swift */; };
+		CFD83DBF29967A2E00B9A6BB /* SignUpStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD83DBE29967A2E00B9A6BB /* SignUpStepView.swift */; };
+		CFD83DC22996812B00B9A6BB /* TermItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD83DC12996812B00B9A6BB /* TermItemType.swift */; };
 		CFD83DC52996A07700B9A6BB /* SignUpStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD83DC42996A07700B9A6BB /* SignUpStep.swift */; };
 		CFD83DCD29973A5F00B9A6BB /* AuthNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD83DCB29973A5F00B9A6BB /* AuthNavigationView.swift */; };
 		CFD83DCE29973A5F00B9A6BB /* AuthNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD83DCC29973A5F00B9A6BB /* AuthNavigationViewModel.swift */; };
 		CFD83DD029974E4E00B9A6BB /* Navigation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD83DCF29974E4E00B9A6BB /* Navigation+Extension.swift */; };
-		CFDCA37929964501003C2C77 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDCA37829964501003C2C77 /* PrimaryButton.swift */; };
+		CFDCA37929964501003C2C77 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDCA37829964501003C2C77 /* ButtonStyle.swift */; };
 		CFE09254298DF69600F197F0 /* NaverAuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE09253298DF69600F197F0 /* NaverAuthAPI.swift */; };
 		CFE09257298DF78700F197F0 /* SwiftyBeaver in Frameworks */ = {isa = PBXBuildFile; productRef = CFE09256298DF78700F197F0 /* SwiftyBeaver */; };
 		CFE0925B298DF7AF00F197F0 /* Logger+SwiftyBeaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0925A298DF7AF00F197F0 /* Logger+SwiftyBeaver.swift */; };
@@ -78,14 +81,15 @@
 		CFE09272298FEACD00F197F0 /* SwifterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CFE09271298FEACD00F197F0 /* SwifterSwift */; };
 		CFE0933E298FFC5B00F197F0 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0933D298FFC5B00F197F0 /* AuthError.swift */; };
 		CFE09341299007E400F197F0 /* Publisher+FlatMapTranforming.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE09340299007E400F197F0 /* Publisher+FlatMapTranforming.swift */; };
+		CFE0A390299E79EF00E904B0 /* AuthPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0A38E299E79EF00E904B0 /* AuthPopupView.swift */; };
+		CFE0A391299E79EF00E904B0 /* AuthPopupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0A38F299E79EF00E904B0 /* AuthPopupViewModel.swift */; };
+		CFE0A394299E90BA00E904B0 /* MainNavigationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0A393299E90BA00E904B0 /* MainNavigationType.swift */; };
 		CFE48BC1299206830062C903 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = CFE48BC0299206830062C903 /* KeychainAccess */; };
 		CFE48BC3299207DA0062C903 /* AuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE48BC2299207DA0062C903 /* AuthStore.swift */; };
 		CFE978712998876B00A50083 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFE978702998876B00A50083 /* Launch Screen.storyboard */; };
 		CFE9D2DD298D66F700D936DA /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = CFE9D2DC298D66F700D936DA /* GoogleSignIn */; };
 		CFE9D2E0298D6C1500D936DA /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CFE9D2DF298D6C1500D936DA /* KakaoSDKAuth */; };
 		CFE9D2E2298D6C1500D936DA /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = CFE9D2E1298D6C1500D936DA /* KakaoSDKUser */; };
-		CFFCB8A329993E3D00498834 /* TermDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFCB8A129993E3D00498834 /* TermDetailView.swift */; };
-		CFFCB8A429993E3D00498834 /* TermDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFCB8A229993E3D00498834 /* TermDetailViewModel.swift */; };
 		CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */; };
 		CFFD7086298ABA0100D4F5A2 /* ImageAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7085298ABA0100D4F5A2 /* ImageAssets.xcassets */; };
 		CFFD7089298ABA0100D4F5A2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7088298ABA0100D4F5A2 /* Preview Assets.xcassets */; };
@@ -143,9 +147,7 @@
 		CF00D162299423FB00505702 /* View+EdgeCornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+EdgeCornerRadius.swift"; sourceTree = "<group>"; };
 		CF00D1682994E0A700505702 /* TextField+ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+ErrorMessage.swift"; sourceTree = "<group>"; };
 		CF00D16E2994FC9E00505702 /* String+Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Validation.swift"; sourceTree = "<group>"; };
-		CF00D1722995457600505702 /* FullScreenProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenProgressView.swift; sourceTree = "<group>"; };
-		CF14F22F298C05F900BC2066 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		CF14F239298C123300BC2066 /* UIApplication+KeyWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+KeyWindow.swift"; sourceTree = "<group>"; };
+		CF00D1722995457600505702 /* ProgressHUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHUDView.swift; sourceTree = "<group>"; };
 		CF14F23C298C30B600BC2066 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		CF14F241298C31C200BC2066 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		CF14F242298C31C200BC2066 /* .swiftformat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftformat; sourceTree = "<group>"; };
@@ -161,12 +163,18 @@
 		CF15500F29939A350053E86D /* TabLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabLayout.swift; sourceTree = "<group>"; };
 		CF1550162993B55F0053E86D /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		CF1550172993B55F0053E86D /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
-		CF1550212993B5C90053E86D /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		CF1550212993B5C90053E86D /* TabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		CF1550222993B5C90053E86D /* TabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
-		CF3201802997723400E8F914 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		CF174714299CB72C001B93E8 /* TermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsView.swift; sourceTree = "<group>"; };
+		CF174715299CB72C001B93E8 /* TermsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsViewModel.swift; sourceTree = "<group>"; };
+		CF174719299CBCB1001B93E8 /* TermDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermDetailView.swift; sourceTree = "<group>"; };
+		CF17471A299CBCB1001B93E8 /* TermDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermDetailViewModel.swift; sourceTree = "<group>"; };
+		CF17471E299CBFDE001B93E8 /* EmailVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationView.swift; sourceTree = "<group>"; };
+		CF17471F299CBFDE001B93E8 /* EmailVerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewModel.swift; sourceTree = "<group>"; };
+		CF2FB262299E25D200756553 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		CF2FB263299E25D200756553 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		CF3282EC299E3758006A459B /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		CF43BF72299274D900FD3180 /* FirebaseAuth+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseAuth+Combine.swift"; sourceTree = "<group>"; };
-		CF595385299A6DD300A7EE55 /* EmailVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationView.swift; sourceTree = "<group>"; };
-		CF595386299A6DD300A7EE55 /* EmailVerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewModel.swift; sourceTree = "<group>"; };
 		CF6ABC0C29935C2D00D78213 /* SignUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		CF6ABC0D29935C2D00D78213 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		CF6ABC0E29935C2D00D78213 /* AuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
@@ -179,18 +187,16 @@
 		CF745A5B2998E5F2008177E5 /* AuthTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextFieldStyle.swift; sourceTree = "<group>"; };
 		CFC709DF2996051800B64216 /* View+Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Progress.swift"; sourceTree = "<group>"; };
 		CFC709E22996276C00B64216 /* RoundedLinearProgressViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedLinearProgressViewStyle.swift; sourceTree = "<group>"; };
-		CFC709E529962CD100B64216 /* SignUpRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRootView.swift; sourceTree = "<group>"; };
-		CFC709E629962CD100B64216 /* SignUpRootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRootViewModel.swift; sourceTree = "<group>"; };
-		CFC709EA29962DF700B64216 /* TermAndCoditionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermAndCoditionView.swift; sourceTree = "<group>"; };
-		CFC709EB29962DF700B64216 /* TermAndCoditionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermAndCoditionViewModel.swift; sourceTree = "<group>"; };
+		CFC709E529962CD100B64216 /* SignUpNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNavigationView.swift; sourceTree = "<group>"; };
+		CFC709E629962CD100B64216 /* SignUpNavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNavigationViewModel.swift; sourceTree = "<group>"; };
 		CFC709EF29962F9200B64216 /* TermItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermItemView.swift; sourceTree = "<group>"; };
-		CFD83DBE29967A2E00B9A6BB /* SignUpStepHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpStepHeaderView.swift; sourceTree = "<group>"; };
-		CFD83DC12996812B00B9A6BB /* TermAndCoditionItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermAndCoditionItemType.swift; sourceTree = "<group>"; };
+		CFD83DBE29967A2E00B9A6BB /* SignUpStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpStepView.swift; sourceTree = "<group>"; };
+		CFD83DC12996812B00B9A6BB /* TermItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermItemType.swift; sourceTree = "<group>"; };
 		CFD83DC42996A07700B9A6BB /* SignUpStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpStep.swift; sourceTree = "<group>"; };
 		CFD83DCB29973A5F00B9A6BB /* AuthNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNavigationView.swift; sourceTree = "<group>"; };
 		CFD83DCC29973A5F00B9A6BB /* AuthNavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNavigationViewModel.swift; sourceTree = "<group>"; };
 		CFD83DCF29974E4E00B9A6BB /* Navigation+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Navigation+Extension.swift"; sourceTree = "<group>"; };
-		CFDCA37829964501003C2C77 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		CFDCA37829964501003C2C77 /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		CFE09253298DF69600F197F0 /* NaverAuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverAuthAPI.swift; sourceTree = "<group>"; };
 		CFE0925A298DF7AF00F197F0 /* Logger+SwiftyBeaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Logger+SwiftyBeaver.swift"; sourceTree = "<group>"; };
 		CFE0925C298DFDCB00F197F0 /* KakaoAuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoAuthAPI.swift; sourceTree = "<group>"; };
@@ -201,10 +207,11 @@
 		CFE0926A298FE73000F197F0 /* CloudFunctionAuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudFunctionAuthAPI.swift; sourceTree = "<group>"; };
 		CFE0933D298FFC5B00F197F0 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		CFE09340299007E400F197F0 /* Publisher+FlatMapTranforming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+FlatMapTranforming.swift"; sourceTree = "<group>"; };
+		CFE0A38E299E79EF00E904B0 /* AuthPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPopupView.swift; sourceTree = "<group>"; };
+		CFE0A38F299E79EF00E904B0 /* AuthPopupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPopupViewModel.swift; sourceTree = "<group>"; };
+		CFE0A393299E90BA00E904B0 /* MainNavigationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationType.swift; sourceTree = "<group>"; };
 		CFE48BC2299207DA0062C903 /* AuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStore.swift; sourceTree = "<group>"; };
 		CFE978702998876B00A50083 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		CFFCB8A129993E3D00498834 /* TermDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermDetailView.swift; sourceTree = "<group>"; };
-		CFFCB8A229993E3D00498834 /* TermDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermDetailViewModel.swift; sourceTree = "<group>"; };
 		CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Noljanolja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoljanoljaApp.swift; sourceTree = "<group>"; };
 		CFFD7085298ABA0100D4F5A2 /* ImageAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImageAssets.xcassets; sourceTree = "<group>"; };
@@ -249,6 +256,7 @@
 				CFE48BC1299206830062C903 /* KeychainAccess in Frameworks */,
 				CFFD70D0298AC7A900D4F5A2 /* CombineMoya in Frameworks */,
 				AEDBBDE12EEA3CADCA87D4F2 /* Pods_Noljanolja.framework in Frameworks */,
+				CF88ABCD299F2E7400D8AB67 /* SwiftUINavigation in Frameworks */,
 				CFE09257298DF78700F197F0 /* SwiftyBeaver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -343,17 +351,12 @@
 		CF14F22C298C05CC00BC2066 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				CF14F22F298C05F900BC2066 /* MainView.swift */,
+				CFE0A392299E90AD00E904B0 /* Models */,
+				CF1550202993B5C90053E86D /* CustomTabBar */,
+				CF2FB262299E25D200756553 /* MainView.swift */,
+				CF2FB263299E25D200756553 /* MainViewModel.swift */,
 			);
 			path = Main;
-			sourceTree = "<group>";
-		};
-		CF14F238298C122100BC2066 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				CF14F239298C123300BC2066 /* UIApplication+KeyWindow.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		CF14F23B298C309600BC2066 /* BuildTools */ = {
@@ -411,10 +414,9 @@
 		CF15500D299396260053E86D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CFDCA377299644E7003C2C77 /* PrimaryButton */,
+				CFDCA377299644E7003C2C77 /* ButtonStyle */,
 				CFC709E12996211E00B64216 /* ProgressView */,
 				CF00D1672994E08A00505702 /* CustomTextField */,
-				CF1550202993B5C90053E86D /* CustomTabBar */,
 				CF15500E299397F70053E86D /* CustomTabLayout */,
 			);
 			path = Views;
@@ -440,33 +442,62 @@
 		CF1550202993B5C90053E86D /* CustomTabBar */ = {
 			isa = PBXGroup;
 			children = (
-				CF1550212993B5C90053E86D /* TabBar.swift */,
+				CF1550212993B5C90053E86D /* TabBarView.swift */,
 				CF1550222993B5C90053E86D /* TabBarItem.swift */,
 			);
 			path = CustomTabBar;
 			sourceTree = "<group>";
 		};
-		CF595384299A6DC200A7EE55 /* EmailVerification */ = {
+		CF174707299CB662001B93E8 /* Terms */ = {
 			isa = PBXGroup;
 			children = (
-				CF595385299A6DD300A7EE55 /* EmailVerificationView.swift */,
-				CF595386299A6DD300A7EE55 /* EmailVerificationViewModel.swift */,
+				CFD83DC02996810D00B9A6BB /* Models */,
+				CFC709EE29962F8500B64216 /* Views */,
+				CF174714299CB72C001B93E8 /* TermsView.swift */,
+				CF174715299CB72C001B93E8 /* TermsViewModel.swift */,
+			);
+			path = Terms;
+			sourceTree = "<group>";
+		};
+		CF174718299CBC9F001B93E8 /* TermDetail */ = {
+			isa = PBXGroup;
+			children = (
+				CF174719299CBCB1001B93E8 /* TermDetailView.swift */,
+				CF17471A299CBCB1001B93E8 /* TermDetailViewModel.swift */,
+			);
+			path = TermDetail;
+			sourceTree = "<group>";
+		};
+		CF17471D299CBFD2001B93E8 /* EmailVerification */ = {
+			isa = PBXGroup;
+			children = (
+				CF17471E299CBFDE001B93E8 /* EmailVerificationView.swift */,
+				CF17471F299CBFDE001B93E8 /* EmailVerificationViewModel.swift */,
 			);
 			path = EmailVerification;
+			sourceTree = "<group>";
+		};
+		CF3282EB299E3746006A459B /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				CF3282EC299E3758006A459B /* UIApplication+Extension.swift */,
+			);
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 		CF6ABC0A29935C2D00D78213 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				CF595384299A6DC200A7EE55 /* EmailVerification */,
-				CFFCB8A029993E2700498834 /* TermDetail */,
+				CFE0A38D299E79DD00E904B0 /* AuthPopup */,
 				CF6ABC1929935D4800D78213 /* Auth */,
 				CFD83DCA29973A3200B9A6BB /* AuthNavigation */,
+				CF17471D299CBFD2001B93E8 /* EmailVerification */,
 				CF15501A2993B5640053E86D /* ResetPassword */,
 				CF6ABC1029935C2D00D78213 /* SignIn */,
 				CF6ABC0B29935C2D00D78213 /* SignUp */,
-				CFC709E429962CB300B64216 /* SignUpRoot */,
-				CFC709E929962DD900B64216 /* TermAndCoditions */,
+				CFC709E429962CB300B64216 /* SignUpNavigation */,
+				CF174718299CBC9F001B93E8 /* TermDetail */,
+				CF174707299CB662001B93E8 /* Terms */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -519,32 +550,21 @@
 		CFC709E12996211E00B64216 /* ProgressView */ = {
 			isa = PBXGroup;
 			children = (
-				CF00D1722995457600505702 /* FullScreenProgressView.swift */,
+				CF00D1722995457600505702 /* ProgressHUDView.swift */,
 				CFC709E22996276C00B64216 /* RoundedLinearProgressViewStyle.swift */,
 			);
 			path = ProgressView;
 			sourceTree = "<group>";
 		};
-		CFC709E429962CB300B64216 /* SignUpRoot */ = {
+		CFC709E429962CB300B64216 /* SignUpNavigation */ = {
 			isa = PBXGroup;
 			children = (
 				CFD83DC32996A06B00B9A6BB /* Models */,
 				CFD83DBD29967A0D00B9A6BB /* Views */,
-				CFC709E529962CD100B64216 /* SignUpRootView.swift */,
-				CFC709E629962CD100B64216 /* SignUpRootViewModel.swift */,
+				CFC709E529962CD100B64216 /* SignUpNavigationView.swift */,
+				CFC709E629962CD100B64216 /* SignUpNavigationViewModel.swift */,
 			);
-			path = SignUpRoot;
-			sourceTree = "<group>";
-		};
-		CFC709E929962DD900B64216 /* TermAndCoditions */ = {
-			isa = PBXGroup;
-			children = (
-				CFD83DC02996810D00B9A6BB /* Models */,
-				CFC709EE29962F8500B64216 /* Views */,
-				CFC709EA29962DF700B64216 /* TermAndCoditionView.swift */,
-				CFC709EB29962DF700B64216 /* TermAndCoditionViewModel.swift */,
-			);
-			path = TermAndCoditions;
+			path = SignUpNavigation;
 			sourceTree = "<group>";
 		};
 		CFC709EE29962F8500B64216 /* Views */ = {
@@ -558,7 +578,7 @@
 		CFD83DBD29967A0D00B9A6BB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CFD83DBE29967A2E00B9A6BB /* SignUpStepHeaderView.swift */,
+				CFD83DBE29967A2E00B9A6BB /* SignUpStepView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -566,7 +586,7 @@
 		CFD83DC02996810D00B9A6BB /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CFD83DC12996812B00B9A6BB /* TermAndCoditionItemType.swift */,
+				CFD83DC12996812B00B9A6BB /* TermItemType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -588,12 +608,12 @@
 			path = AuthNavigation;
 			sourceTree = "<group>";
 		};
-		CFDCA377299644E7003C2C77 /* PrimaryButton */ = {
+		CFDCA377299644E7003C2C77 /* ButtonStyle */ = {
 			isa = PBXGroup;
 			children = (
-				CFDCA37829964501003C2C77 /* PrimaryButton.swift */,
+				CFDCA37829964501003C2C77 /* ButtonStyle.swift */,
 			);
-			path = PrimaryButton;
+			path = ButtonStyle;
 			sourceTree = "<group>";
 		};
 		CFE09252298DF67D00F197F0 /* Auth */ = {
@@ -632,11 +652,29 @@
 		CFE0933F299007C600F197F0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				CF3282EB299E3746006A459B /* UIKit */,
 				CF00D16D2994FC3600505702 /* SwiftStdlib */,
 				CF00D161299423E300505702 /* SwiftUI */,
 				CF00D158299417F400505702 /* Combines */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CFE0A38D299E79DD00E904B0 /* AuthPopup */ = {
+			isa = PBXGroup;
+			children = (
+				CFE0A38E299E79EF00E904B0 /* AuthPopupView.swift */,
+				CFE0A38F299E79EF00E904B0 /* AuthPopupViewModel.swift */,
+			);
+			path = AuthPopup;
+			sourceTree = "<group>";
+		};
+		CFE0A392299E90AD00E904B0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CFE0A393299E90BA00E904B0 /* MainNavigationType.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		CFE9786D2998869E00A50083 /* Launch */ = {
@@ -645,15 +683,6 @@
 				CFE978702998876B00A50083 /* Launch Screen.storyboard */,
 			);
 			path = Launch;
-			sourceTree = "<group>";
-		};
-		CFFCB8A029993E2700498834 /* TermDetail */ = {
-			isa = PBXGroup;
-			children = (
-				CFFCB8A129993E3D00498834 /* TermDetailView.swift */,
-				CFFCB8A229993E3D00498834 /* TermDetailViewModel.swift */,
-			);
-			path = TermDetail;
 			sourceTree = "<group>";
 		};
 		CFFD7075298AB9FF00D4F5A2 = {
@@ -748,7 +777,6 @@
 			isa = PBXGroup;
 			children = (
 				CF14F267298CF87E00BC2066 /* AuthServices.swift */,
-				CF3201802997723400E8F914 /* AppState.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -789,7 +817,6 @@
 		CFFD70B4298AC42800D4F5A2 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				CF14F238298C122100BC2066 /* Extensions */,
 				CFFD70B6298AC43B00D4F5A2 /* App */,
 				CFFD70B5298AC43200D4F5A2 /* Screens */,
 			);
@@ -910,6 +937,7 @@
 				CFE09271298FEACD00F197F0 /* SwifterSwift */,
 				CFE48BC0299206830062C903 /* KeychainAccess */,
 				CF6ABC222993618000D78213 /* Introspect */,
+				CF88ABCC299F2E7400D8AB67 /* SwiftUINavigation */,
 			);
 			productName = Noljanolja;
 			productReference = CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */;
@@ -996,6 +1024,7 @@
 				CFE09270298FEACD00F197F0 /* XCRemoteSwiftPackageReference "SwifterSwift" */,
 				CFE48BBF299206830062C903 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				CF6ABC212993617F00D78213 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				CF88ABCB299F2E7400D8AB67 /* XCRemoteSwiftPackageReference "swiftui-navigation" */,
 			);
 			productRefGroup = CFFD707F298AB9FF00D4F5A2 /* Products */;
 			projectDirPath = "";
@@ -1209,13 +1238,12 @@
 				CFD83DD029974E4E00B9A6BB /* Navigation+Extension.swift in Sources */,
 				CF43BF73299274D900FD3180 /* FirebaseAuth+Combine.swift in Sources */,
 				CFFD70C5298AC5F800D4F5A2 /* RequestTimeoutPlugin.swift in Sources */,
-				CF1550232993B5C90053E86D /* TabBar.swift in Sources */,
-				CFD83DBF29967A2E00B9A6BB /* SignUpStepHeaderView.swift in Sources */,
+				CF1550232993B5C90053E86D /* TabBarView.swift in Sources */,
+				CFD83DBF29967A2E00B9A6BB /* SignUpStepView.swift in Sources */,
 				CF1550182993B55F0053E86D /* ForgotPasswordView.swift in Sources */,
-				CFFCB8A329993E3D00498834 /* TermDetailView.swift in Sources */,
 				CFD83DC52996A07700B9A6BB /* SignUpStep.swift in Sources */,
 				CFE0925F298EACF200F197F0 /* GoogleAuthAPI.swift in Sources */,
-				CFC709E729962CD100B64216 /* SignUpRootView.swift in Sources */,
+				CFC709E729962CD100B64216 /* SignUpNavigationView.swift in Sources */,
 				CF6ABC1329935C2D00D78213 /* SignUpViewModel.swift in Sources */,
 				CFFD70D3298AC89000D4F5A2 /* NetworkConfigs.swift in Sources */,
 				CF14F249298C331C00BC2066 /* Localizable.swift in Sources */,
@@ -1225,45 +1253,49 @@
 				CFFD70C9298AC5F800D4F5A2 /* TargetType+RawTarget.swift in Sources */,
 				CFFD70C8298AC5F800D4F5A2 /* BaseAuthTargetType.swift in Sources */,
 				CFFD70D9298ACAF600D4F5A2 /* BaseTargetType.swift in Sources */,
-				CF00D1732995457600505702 /* FullScreenProgressView.swift in Sources */,
+				CF2FB265299E25D300756553 /* MainViewModel.swift in Sources */,
+				CF174717299CB72C001B93E8 /* TermsViewModel.swift in Sources */,
+				CF00D1732995457600505702 /* ProgressHUDView.swift in Sources */,
+				CF17471B299CBCB1001B93E8 /* TermDetailView.swift in Sources */,
 				CF6ABC1529935C2D00D78213 /* AuthViewModel.swift in Sources */,
+				CFE0A391299E79EF00E904B0 /* AuthPopupViewModel.swift in Sources */,
 				CF15500B29938C5C0053E86D /* ProfileView.swift in Sources */,
 				CFC709E02996051800B64216 /* View+Progress.swift in Sources */,
 				CF6ABC1729935C2D00D78213 /* SignInView.swift in Sources */,
 				CF1550242993B5C90053E86D /* TabBarItem.swift in Sources */,
+				CF3282ED299E3758006A459B /* UIApplication+Extension.swift in Sources */,
 				CF00D1572994174600505702 /* FontAssets.swift in Sources */,
 				CF745A5C2998E5F2008177E5 /* AuthTextFieldStyle.swift in Sources */,
 				CFFD70C6298AC5F800D4F5A2 /* AuthPluggin.swift in Sources */,
 				CF15501029939A350053E86D /* TabLayout.swift in Sources */,
 				CFE0926B298FE73000F197F0 /* CloudFunctionAuthAPI.swift in Sources */,
-				CFC709EC29962DF700B64216 /* TermAndCoditionView.swift in Sources */,
 				CFFD70CC298AC5F800D4F5A2 /* Api.swift in Sources */,
+				CF2FB264299E25D200756553 /* MainView.swift in Sources */,
 				CF15500C29938C5C0053E86D /* ProfileViewModel.swift in Sources */,
 				CF14F24A298C331D00BC2066 /* ColorAssets.swift in Sources */,
 				CFE09341299007E400F197F0 /* Publisher+FlatMapTranforming.swift in Sources */,
 				CFFD70D5298AC92500D4F5A2 /* HomeAPI.swift in Sources */,
-				CFC709ED29962DF700B64216 /* TermAndCoditionViewModel.swift in Sources */,
 				CFE09254298DF69600F197F0 /* NaverAuthAPI.swift in Sources */,
 				CF6ABC2029935D7B00D78213 /* RootViewModel.swift in Sources */,
 				CF14F266298CF4E700BC2066 /* AppConfigs.swift in Sources */,
-				CFC709E829962CD100B64216 /* SignUpRootViewModel.swift in Sources */,
-				CF595388299A6DD400A7EE55 /* EmailVerificationViewModel.swift in Sources */,
-				CFD83DC22996812B00B9A6BB /* TermAndCoditionItemType.swift in Sources */,
-				CF14F230298C05F900BC2066 /* MainView.swift in Sources */,
+				CFC709E829962CD100B64216 /* SignUpNavigationViewModel.swift in Sources */,
+				CFD83DC22996812B00B9A6BB /* TermItemType.swift in Sources */,
+				CF174721299CBFDE001B93E8 /* EmailVerificationViewModel.swift in Sources */,
 				CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */,
 				CF6ABC1429935C2D00D78213 /* SignUpView.swift in Sources */,
 				CF00D1692994E0A700505702 /* TextField+ErrorMessage.swift in Sources */,
 				CF745A5A2998E5EA008177E5 /* FullSizeTappableTextFieldStyle.swift in Sources */,
 				CFFD70C7298AC5F800D4F5A2 /* DisableLocalCachePlugin.swift in Sources */,
-				CFDCA37929964501003C2C77 /* PrimaryButton.swift in Sources */,
+				CFDCA37929964501003C2C77 /* ButtonStyle.swift in Sources */,
 				CFC709E32996276C00B64216 /* RoundedLinearProgressViewStyle.swift in Sources */,
 				CF00D16F2994FC9E00505702 /* String+Validation.swift in Sources */,
 				CFD83DCD29973A5F00B9A6BB /* AuthNavigationView.swift in Sources */,
 				CFE48BC3299207DA0062C903 /* AuthStore.swift in Sources */,
 				CFD83DCE29973A5F00B9A6BB /* AuthNavigationViewModel.swift in Sources */,
+				CFE0A390299E79EF00E904B0 /* AuthPopupView.swift in Sources */,
 				CFFD70CB298AC5F800D4F5A2 /* ApiProvider.swift in Sources */,
 				CF6ABC1F29935D7B00D78213 /* RootView.swift in Sources */,
-				CF14F23A298C123300BC2066 /* UIApplication+KeyWindow.swift in Sources */,
+				CF174716299CB72C001B93E8 /* TermsView.swift in Sources */,
 				CFC709F029962F9200B64216 /* TermItemView.swift in Sources */,
 				CFE0933E298FFC5B00F197F0 /* AuthError.swift in Sources */,
 				CFE0925B298DF7AF00F197F0 /* Logger+SwiftyBeaver.swift in Sources */,
@@ -1271,12 +1303,12 @@
 				CFFD70C4298AC5F800D4F5A2 /* NetworkLoggerPluggin.swift in Sources */,
 				CFE0925D298DFDCB00F197F0 /* KakaoAuthAPI.swift in Sources */,
 				CFFD70CA298AC5F800D4F5A2 /* TargetType+Default.swift in Sources */,
-				CF3201812997723400E8F914 /* AppState.swift in Sources */,
-				CFFCB8A429993E3D00498834 /* TermDetailViewModel.swift in Sources */,
+				CF17471C299CBCB1001B93E8 /* TermDetailViewModel.swift in Sources */,
 				CF14F248298C331C00BC2066 /* ImageAssets.swift in Sources */,
-				CF595387299A6DD400A7EE55 /* EmailVerificationView.swift in Sources */,
+				CF174720299CBFDE001B93E8 /* EmailVerificationView.swift in Sources */,
 				CFE09263298EB69700F197F0 /* FirebaseUser+Combine.swift in Sources */,
 				CFFD70D7298ACA8700D4F5A2 /* HomeModel.swift in Sources */,
+				CFE0A394299E90BA00E904B0 /* MainNavigationType.swift in Sources */,
 				CF1550192993B55F0053E86D /* ForgotPasswordViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1636,6 +1668,14 @@
 				version = 0.1.4;
 			};
 		};
+		CF88ABCB299F2E7400D8AB67 /* XCRemoteSwiftPackageReference "swiftui-navigation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swiftui-navigation";
+			requirement = {
+				kind = exactVersion;
+				version = 0.6.1;
+			};
+		};
 		CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver.git";
@@ -1706,6 +1746,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CF6ABC212993617F00D78213 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
+		};
+		CF88ABCC299F2E7400D8AB67 /* SwiftUINavigation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF88ABCB299F2E7400D8AB67 /* XCRemoteSwiftPackageReference "swiftui-navigation" */;
+			productName = SwiftUINavigation;
 		};
 		CFE09256298DF78700F197F0 /* SwiftyBeaver */ = {
 			isa = XCSwiftPackageProductDependency;

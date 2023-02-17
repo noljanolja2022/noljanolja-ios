@@ -2,24 +2,42 @@
 //  TermDetailViewModel.swift
 //  Noljanolja
 //
-//  Created by Nguyen The Trinh on 12/02/2023.
+//  Created by Nguyen The Trinh on 15/02/2023.
 //
 //
 
 import Combine
 
-final class TermDetailViewModel: ObservableObject {
+// MARK: - TermDetailViewModelDelegate
+
+protocol TermDetailViewModelDelegate: AnyObject {}
+
+// MARK: - TermDetailViewModelType
+
+protocol TermDetailViewModelType: ObservableObject {
+    var termItemType: TermItemType { get set }
+}
+
+// MARK: - TermDetailViewModel
+
+final class TermDetailViewModel: TermDetailViewModelType {
     // MARK: Dependencies
 
-    // MARK: Input
+    private weak var delegate: TermDetailViewModelDelegate?
 
-    // MARK: Output
+    // MARK: State
+
+    @Published var termItemType: TermItemType
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init() {
+    init(delegate: TermDetailViewModelDelegate? = nil,
+         termItemType: TermItemType) {
+        self.delegate = delegate
+        self.termItemType = termItemType
+
         configure()
     }
 

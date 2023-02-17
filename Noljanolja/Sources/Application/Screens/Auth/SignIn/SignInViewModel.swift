@@ -8,17 +8,69 @@
 import Combine
 import Foundation
 
+// MARK: - SignInViewModelDelegate
+
+protocol SignInViewModelDelegate: AnyObject {
+    func routeToResetPassword()
+    func closeAuthFlow()
+}
+
+// MARK: - SignInViewModelType
+
+protocol SignInViewModelType: ObservableObject, EmailVerificationViewModelDelegate {
+    // MARK: State
+
+    var email: String { get set }
+    var password: String { get set }
+
+    var emailErrorMessage: String? { get set }
+    var passwordErrorMessage: String? { get set }
+
+    var isShowingProgressHUDPublisher: Published<Bool>.Publisher { get }
+
+    var isSignInButtonEnabled: Bool { get set }
+    var isAlertMessagePresented: Bool { get set }
+    var alertMessage: String { get set }
+
+    var isShowingEmailVerificationView: Bool { get set }
+
+    // MARK: Action
+
+    var forgotPasswordTrigger: PassthroughSubject<Void, Never> { get }
+    var signInWithEmailPasswordTrigger: PassthroughSubject<(String, String), Never> { get }
+    var signInWithAppleTrigger: PassthroughSubject<Void, Never> { get }
+    var signInWithGoogleTrigger: PassthroughSubject<Void, Never> { get }
+    var signInWithKakaoTrigger: PassthroughSubject<Void, Never> { get }
+    var signInWithNaverTrigger: PassthroughSubject<Void, Never> { get }
+}
+
 // MARK: - SignInViewModel
 
-final class SignInViewModel: ObservableObject {
+final class SignInViewModel: SignInViewModelType {
     // MARK: Dependencies
 
+    private weak var delegate: SignInViewModelDelegate?
     private let authServices: AuthServicesType
 
-    // MARK: Input
+    // MARK: State
 
     @Published var email = ""
     @Published var password = ""
+
+    @Published var emailErrorMessage: String? = nil
+    @Published var passwordErrorMessage: String? = nil
+
+    @Published var isSignInButtonEnabled = false
+
+    @Published private var isShowingProgressHUD = false
+    var isShowingProgressHUDPublisher: Published<Bool>.Publisher { $isShowingProgressHUD }
+
+    @Published var isAlertMessagePresented = false
+    @Published var alertMessage = ""
+
+    @Published var isShowingEmailVerificationView = false
+
+    // MARK: Action
 
     let forgotPasswordTrigger = PassthroughSubject<Void, Never>()
     let signInWithEmailPasswordTrigger = PassthroughSubject<(String, String), Never>()
@@ -27,22 +79,13 @@ final class SignInViewModel: ObservableObject {
     let signInWithKakaoTrigger = PassthroughSubject<Void, Never>()
     let signInWithNaverTrigger = PassthroughSubject<Void, Never>()
 
-    // MARK: Output
-
-    @Published var emailErrorMessage: String? = nil
-    @Published var passwordErrorMessage: String? = nil
-
-    @Published var isSignInButtonEnabled = false
-    @Published var isAlertMessagePresented = false
-    @Published var alertMessage = ""
-
-    @Published var isShowingEmailVerificationView = false
-
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(authServices: AuthServicesType = AuthServices.default) {
+    init(delegate: SignInViewModelDelegate? = nil,
+         authServices: AuthServicesType = AuthServices.default) {
+        self.delegate = delegate
         self.authServices = authServices
 
         configure()
@@ -72,7 +115,7 @@ final class SignInViewModel: ObservableObject {
             .store(in: &cancellables)
 
         signInWithEmailPasswordTrigger
-            .handleEvents(receiveOutput: { _ in AppState.default.isLoading = true })
+            .handleEvents(receiveOutput: { [weak self] _ in self?.isShowingProgressHUD = true })
             .flatMap { [weak self] email, password -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
@@ -80,13 +123,13 @@ final class SignInViewModel: ObservableObject {
                     .eraseToResultAnyPublisher()
             }
             .sink(receiveValue: { [weak self] result in
-                AppState.default.isLoading = false
+                self?.isShowingProgressHUD = false
                 switch result {
                 case let .success(idToken):
                     logger.info("Signed in with Email/Password - Token: \(idToken)")
+                    self?.delegate?.closeAuthFlow()
                 case let .failure(error):
                     logger.error("Sign in with Email/Password failed: \(error.localizedDescription)")
-
                     switch error {
                     case FirebaseAuthError.emailNotVerified as FirebaseAuthError:
                         self?.isShowingEmailVerificationView = true
@@ -99,7 +142,7 @@ final class SignInViewModel: ObservableObject {
             .store(in: &cancellables)
 
         signInWithAppleTrigger
-            .handleEvents(receiveOutput: { _ in AppState.default.isLoading = true })
+            .handleEvents(receiveOutput: { [weak self] _ in self?.isShowingProgressHUD = true })
             .flatMap { [weak self] _ -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
@@ -107,10 +150,11 @@ final class SignInViewModel: ObservableObject {
                     .eraseToResultAnyPublisher()
             }
             .sink(receiveValue: { [weak self] result in
-                AppState.default.isLoading = false
+                self?.isShowingProgressHUD = false
                 switch result {
                 case let .success(idToken):
                     logger.info("Signed in with Apple - Token: \(idToken)")
+                    self?.delegate?.closeAuthFlow()
                 case let .failure(error):
                     logger.error("Sign in with Apple failed: \(error.localizedDescription)")
                     self?.isAlertMessagePresented = true
@@ -120,7 +164,7 @@ final class SignInViewModel: ObservableObject {
             .store(in: &cancellables)
 
         signInWithGoogleTrigger
-            .handleEvents(receiveOutput: { _ in AppState.default.isLoading = true })
+            .handleEvents(receiveOutput: { [weak self] _ in self?.isShowingProgressHUD = true })
             .flatMap { [weak self] _ -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
@@ -128,10 +172,12 @@ final class SignInViewModel: ObservableObject {
                     .eraseToResultAnyPublisher()
             }
             .sink(receiveValue: { [weak self] result in
-                AppState.default.isLoading = false
+                self?.isShowingProgressHUD = false
                 switch result {
                 case let .success(idToken):
                     logger.info("Signed in with Google - Token: \(idToken)")
+                    self?.delegate?.closeAuthFlow()
+                    self?.delegate?.closeAuthFlow()
                 case let .failure(error):
                     logger.error("Sign in with Google failed: \(error.localizedDescription)")
                     self?.isAlertMessagePresented = true
@@ -142,7 +188,7 @@ final class SignInViewModel: ObservableObject {
             .store(in: &cancellables)
 
         signInWithKakaoTrigger
-            .handleEvents(receiveOutput: { _ in AppState.default.isLoading = true })
+            .handleEvents(receiveOutput: { [weak self] _ in self?.isShowingProgressHUD = true })
             .flatMap { [weak self] _ -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
@@ -150,10 +196,11 @@ final class SignInViewModel: ObservableObject {
                     .eraseToResultAnyPublisher()
             }
             .sink(receiveValue: { [weak self] result in
-                AppState.default.isLoading = false
+                self?.isShowingProgressHUD = false
                 switch result {
                 case let .success(idToken):
                     logger.info("Signed in with Kakao - Token: \(idToken)")
+                    self?.delegate?.closeAuthFlow()
                 case let .failure(error):
                     logger.error("Sign in with Kakao failed: \(error.localizedDescription)")
                     self?.isAlertMessagePresented = true
@@ -166,16 +213,17 @@ final class SignInViewModel: ObservableObject {
             .flatMap { [weak self] _ -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
-                    .signInWithNaver {
-                        AppState.default.isLoading = true
+                    .signInWithNaver { [weak self] in
+                        self?.isShowingProgressHUD = true
                     }
                     .eraseToResultAnyPublisher()
             }
             .sink(receiveValue: { [weak self] result in
-                AppState.default.isLoading = false
+                self?.isShowingProgressHUD = false
                 switch result {
                 case let .success(idToken):
                     logger.info("Signed in with Naver - Token: \(idToken)")
+                    self?.delegate?.closeAuthFlow()
                 case let .failure(error):
                     logger.error("Sign in with Naver failed: \(error.localizedDescription)")
                     self?.isAlertMessagePresented = true
@@ -184,5 +232,19 @@ final class SignInViewModel: ObservableObject {
             }
             )
             .store(in: &cancellables)
+
+        forgotPasswordTrigger
+            .sink { [weak self] in self?.delegate?.routeToResetPassword() }
+            .store(in: &cancellables)
+    }
+}
+
+// MARK: EmailVerificationViewModelDelegate
+
+extension SignInViewModel: EmailVerificationViewModelDelegate {
+    func updateSignUpStep(_: SignUpStep) {}
+
+    func closeAuthFlow() {
+        delegate?.closeAuthFlow()
     }
 }

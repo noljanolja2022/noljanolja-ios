@@ -3,6 +3,7 @@
 "common.ok" = "OK";
 "common.next" = "Next";
 "common.previous" = "Previous";
+"common.close" = "Close";
 "common.success.title" = "Success";
 "common.error.title" = "Error";
 "common.error.message" = "Error! An error occurred. Please try again later.";

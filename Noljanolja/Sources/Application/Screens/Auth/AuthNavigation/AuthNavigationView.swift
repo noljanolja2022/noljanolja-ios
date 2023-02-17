@@ -10,21 +10,55 @@ import SwiftUI
 
 // MARK: - AuthNavigationView
 
-struct AuthNavigationView: View {
-    @StateObject private var viewModel: AuthNavigationViewModel
+struct AuthNavigationView<ViewModel: AuthNavigationViewModelType>: View {
+    // MARK: Dependencies
 
-    init(viewModel: AuthNavigationViewModel = AuthNavigationViewModel()) {
+    @StateObject private var viewModel: ViewModel
+
+    // MARK: State
+
+    @Environment(\.presentationMode) private var presentationMode
+    @StateObject private var progressHUBState = ProgressHUBState()
+
+    init(viewModel: ViewModel = AuthNavigationViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
+        NavigationView {
+            content
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button(
+                            action: {
+                                presentationMode.wrappedValue.dismiss()
+                            },
+                            label: {
+                                ImageAssets.icClose.swiftUIImage
+                                    .resizable()
+                                    .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
+                            }
+                        )
+                    }
+                }
+        }
+        .onReceive(viewModel.closePublisher) {
+            presentationMode.wrappedValue.dismiss()
+        }
+        .progressHUB(isActive: $progressHUBState.isLoading)
+        .environmentObject(progressHUBState)
+    }
+
+    private var content: some View {
         VStack(spacing: 0) {
             ImageAssets.logo.swiftUIImage
                 .frame(width: 166, height: 66)
                 .padding(16)
 
             NavigationView {
-                AuthView()
+                AuthView(
+                    viewModel: AuthViewModel(delegate: viewModel)
+                )
             }
             .padding(.top, 8)
             .accentColor(ColorAssets.black.swiftUIColor)

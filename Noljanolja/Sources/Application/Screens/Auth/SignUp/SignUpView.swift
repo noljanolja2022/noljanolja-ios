@@ -10,15 +10,19 @@ import SwiftUI
 
 // MARK: - SignUpView
 
-struct SignUpView: View {
-    @StateObject private var viewModel: SignUpViewModel
+struct SignUpView<ViewModel: SignUpViewModelType>: View {
+    // MARK: Dependencies
 
-    @Binding var isShowingSignUpView: Bool
+    @StateObject private var viewModel: ViewModel
 
-    init(viewModel: SignUpViewModel,
-         isShowingSignUpView: Binding<Bool>) {
+    // MARK: State
+
+    @Environment(\.presentationMode) private var presentationMode
+
+    @EnvironmentObject private var progressHUBState: ProgressHUBState
+
+    init(viewModel: ViewModel = SignUpViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
-        _isShowingSignUpView = isShowingSignUpView
     }
 
     var body: some View {
@@ -31,13 +35,15 @@ struct SignUpView: View {
                 isActive: $viewModel.isShowingEmailVerificationView,
                 destination: {
                     EmailVerificationView(
-                        viewModel: EmailVerificationViewModel(signUpStep: $viewModel.signUpStep),
-                        isShowingEmailVerificationView: $viewModel.isShowingEmailVerificationView
+                        viewModel: EmailVerificationViewModel(delegate: viewModel)
                     )
                     .navigationBarHidden(true)
                 },
                 label: { EmptyView() }
             )
+        }
+        .onReceive(viewModel.isShowingProgressHUDPublisher) {
+            progressHUBState.isLoading = $0
         }
         .alert(isPresented: $viewModel.isAlertMessagePresented) {
             Alert(
@@ -88,8 +94,8 @@ struct SignUpView: View {
             }
             .padding(16)
         }
-        .introspectScrollView { scrollView in
-            scrollView.alwaysBounceVertical = false
+        .onAppear {
+            viewModel.updateSignUpStepTrigger.send(.second)
         }
     }
 
@@ -97,24 +103,23 @@ struct SignUpView: View {
         HStack(spacing: 12) {
             Button(
                 L10n.Common.previous,
-                action: {
-                    viewModel.signUpStep = .first
-                    isShowingSignUpView = false
-                }
+                action: { presentationMode.wrappedValue.dismiss() }
             )
-            .frame(width: 100)
             .buttonStyle(ThridyButtonStyle())
+            .frame(width: 100)
+            .shadow(
+                color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
+            )
 
             Button(
                 L10n.Auth.SignUp.title,
-                action: {
-                    viewModel.signUpTrigger.send(
-                        (viewModel.email, viewModel.password)
-                    )
-                }
+                action: { viewModel.signUpTrigger.send((viewModel.email, viewModel.password)) }
             )
             .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.isSignUpButtonEnabled))
             .disabled(!viewModel.isSignUpButtonEnabled)
+            .shadow(
+                color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
+            )
         }
         .padding(16)
     }
@@ -123,13 +128,7 @@ struct SignUpView: View {
 // MARK: - SignUpView_Previews
 
 struct SignUpView_Previews: PreviewProvider {
-    @State private static var isShowingSignUpView = true
-    @State private static var signUpStep: SignUpStep = .first
-
     static var previews: some View {
-        SignUpView(
-            viewModel: SignUpViewModel(signUpStep: $signUpStep),
-            isShowingSignUpView: $isShowingSignUpView
-        )
+        SignUpView()
     }
 }

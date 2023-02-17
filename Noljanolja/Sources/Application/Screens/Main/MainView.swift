@@ -2,50 +2,68 @@
 //  MainView.swift
 //  Noljanolja
 //
-//  Created by Nguyen The Trinh on 02/02/2023.
+//  Created by Nguyen The Trinh on 16/02/2023.
+//
 //
 
 import SwiftUI
 
 // MARK: - MainView
 
-struct MainView: View {
-    @State var selection = 0
-
+struct MainView<ViewModel: MainViewModelType>: View {
+    // MARK: Dependencies
+    
+    @StateObject private var viewModel: ViewModel
+    
+    // MARK: State
+    
+    init(viewModel: ViewModel = MainViewModel()) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
+    
     var body: some View {
+        ZStack {
+            content
+        }
+        .fullScreenCover(item: $viewModel.navigationType) { navigationType in
+            switch navigationType {
+            case .authPopup:
+                AuthPopupView(
+                    viewModel: AuthPopupViewModel(delegate: viewModel)
+                )
+            case .auth:
+                AuthNavigationView()
+            }
+        }
+    }
+    
+    private var content: some View {
         VStack(spacing: 0) {
-            TabView(selection: $selection) {
-                ProfileView()
-                    .tag(0)
+            TabView(selection: $viewModel.selectedTabItem) {
+                Text("Menu")
+                    .tag(TabBarItem.menu)
                 List {
                     ForEach(1...100, id: \.self) {
                         Text("\($0)")
                     }
                 }
-                .tag(1)
-                Text("\(selection)")
-                    .tag(2)
-                Text("\(selection)")
-                    .tag(3)
-                Text("\(selection)")
-                    .tag(4)
+                .tag(TabBarItem.home)
+                Text("Wallet")
+                    .tag(TabBarItem.wallet)
+                Text("Shop")
+                    .tag(TabBarItem.shop)
+                ProfileView()
+                    .tag(TabBarItem.myPage)
             }
-            TabBar(
-                selection: $selection,
-                items: [
-                    TabBarItem(image: "list.dash"),
-                    TabBarItem(image: "house"),
-                    TabBarItem(
-                        image: "play.fill",
-                        offset: CGSize(width: 0, height: -20),
-                        backgroundColor: .orange
-                    ),
-                    TabBarItem(image: "bag"),
-                    TabBarItem(image: "person")
-                ]
+            .introspectTabBarController { tabBarController in
+                tabBarController.tabBar.isHidden = true
+            }
+            TabBarView(
+                selectionItem: $viewModel.selectedTabItem,
+                items: TabBarItem.allCases,
+                action: { viewModel.selectedTabItemTrigger.send($0) }
             )
         }
-        .edgesIgnoringSafeArea(.bottom)
     }
 }
 

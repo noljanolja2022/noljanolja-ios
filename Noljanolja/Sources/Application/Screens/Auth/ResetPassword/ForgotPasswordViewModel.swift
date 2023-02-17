@@ -8,31 +8,64 @@
 
 import Combine
 
-final class ResetPasswordViewModel: ObservableObject {
+// MARK: - ResetPasswordViewModelDelegate
+
+protocol ResetPasswordViewModelDelegate: AnyObject {}
+
+// MARK: - ResetPasswordViewModelType
+
+protocol ResetPasswordViewModelType: ObservableObject {
+    // MARK: State
+
+    var email: String { get set }
+
+    var emailErrorMessage: String? { get set }
+    var isResetButtonEnabled: Bool { get set }
+
+    var isShowingProgressHUDPublisher: Published<Bool>.Publisher { get }
+
+    var isSuccess: Bool { get set }
+    var isAlertMessagePresented: Bool { get set }
+    var alertMessage: String { get set }
+
+    // MARK: Action
+
+    var resetPasswordTrigger: PassthroughSubject<String, Never> { get }
+}
+
+// MARK: - ResetPasswordViewModel
+
+final class ResetPasswordViewModel: ResetPasswordViewModelType {
     // MARK: Dependencies
 
+    private weak var delegate: ResetPasswordViewModelDelegate?
     private let authServices: AuthServicesType
 
-    // MARK: Input
+    // MARK: State
 
     @Published var email = ""
 
-    let resetPasswordTrigger = PassthroughSubject<String, Never>()
-
-    // MARK: Output
-
     @Published var emailErrorMessage: String? = nil
     @Published var isResetButtonEnabled = false
+
+    @Published private var isShowingProgressHUD = false
+    var isShowingProgressHUDPublisher: Published<Bool>.Publisher { $isShowingProgressHUD }
 
     @Published var isSuccess = false
     @Published var isAlertMessagePresented = false
     @Published var alertMessage = ""
 
+    // MARK: Action
+
+    let resetPasswordTrigger = PassthroughSubject<String, Never>()
+
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(authServices: AuthServicesType = AuthServices.default) {
+    init(delegate: ResetPasswordViewModelDelegate? = nil,
+         authServices: AuthServicesType = AuthServices.default) {
+        self.delegate = delegate
         self.authServices = authServices
 
         configure()
@@ -52,7 +85,7 @@ final class ResetPasswordViewModel: ObservableObject {
             .store(in: &cancellables)
 
         resetPasswordTrigger
-            .handleEvents(receiveOutput: { _ in AppState.default.isLoading = true })
+            .handleEvents(receiveOutput: { [weak self] _ in self?.isShowingProgressHUD = true })
             .flatMap { [weak self] email -> AnyPublisher<Result<Void, Error>, Never> in
                 guard let self else { return Empty<Result<Void, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
@@ -60,7 +93,7 @@ final class ResetPasswordViewModel: ObservableObject {
                     .eraseToResultAnyPublisher()
             }
             .sink(receiveValue: { [weak self] result in
-                AppState.default.isLoading = false
+                self?.isShowingProgressHUD = false
                 switch result {
                 case .success:
                     logger.info("Reset password sucessful")

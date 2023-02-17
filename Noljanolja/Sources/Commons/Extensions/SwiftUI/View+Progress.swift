@@ -5,24 +5,25 @@
 //  Created by Nguyen The Trinh on 10/02/2023.
 //
 
+import Combine
 import SwiftUI
 
 extension View {
-    func progress(active: Binding<Bool>) -> some View {
-        modifier(ProgressViewModifier(active: active))
+    func progressHUB(isActive: Binding<Bool>) -> some View {
+        modifier(ProgressHUBViewModifier(isActive: isActive))
     }
 }
 
-// MARK: - ProgressViewModifier
+// MARK: - ProgressHUBViewModifier
 
-struct ProgressViewModifier: ViewModifier {
-    @Binding var active: Bool
+struct ProgressHUBViewModifier: ViewModifier {
+    @Binding var isActive: Bool
 
     func body(content: Content) -> some View {
         ZStack {
             content
-            if active {
-                FullScreenProgressView()
+            if isActive {
+                ProgressHUDView()
             }
         }
     }

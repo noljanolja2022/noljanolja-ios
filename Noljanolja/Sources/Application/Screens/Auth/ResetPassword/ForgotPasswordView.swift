@@ -11,14 +11,18 @@ import SwiftUI
 // MARK: - ResetPasswordView
 
 struct ResetPasswordView: View {
+    // MARK: Dependencies
+
     @StateObject private var viewModel: ResetPasswordViewModel
 
-    @Binding private var isShowingResetPasswordView: Bool
+    // MARK: State
 
-    init(viewModel: ResetPasswordViewModel = ResetPasswordViewModel(),
-         isShowingResetPasswordView: Binding<Bool>) {
+    @Environment(\.presentationMode) private var presentationMode
+
+    @EnvironmentObject private var progressHUBState: ProgressHUBState
+
+    init(viewModel: ResetPasswordViewModel = ResetPasswordViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
-        _isShowingResetPasswordView = isShowingResetPasswordView
     }
 
     var body: some View {
@@ -29,11 +33,15 @@ struct ResetPasswordView: View {
                 content
             }
         }
+        .onReceive(viewModel.isShowingProgressHUDPublisher) {
+            progressHUBState.isLoading = $0
+        }
         .navigationBarTitle(
             Text(L10n.Auth.ForgotPassword.title),
             displayMode: .inline
         )
         .navigationBarHidden(false)
+        .navigationBarBackButtonHidden(true)
     }
 
     private var success: some View {
@@ -52,10 +60,12 @@ struct ResetPasswordView: View {
             VStack(spacing: 0) {
                 Button(
                     L10n.Auth.SignIn.title,
-                    action: { isShowingResetPasswordView = false }
+                    action: { presentationMode.wrappedValue.dismiss() }
                 )
-                .frame(height: 48)
                 .buttonStyle(PrimaryButtonStyle())
+                .shadow(
+                    color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
+                )
                 
                 Button(
                     L10n.Auth.ResetPassword.Retry.title,
@@ -85,15 +95,7 @@ struct ResetPasswordView: View {
                 )
                 .errorMessage($viewModel.emailErrorMessage)
             Spacer()
-            Button(
-                L10n.Auth.ResetPassword.title,
-                action: {
-                    viewModel.resetPasswordTrigger.send(viewModel.email)
-                }
-            )
-            .frame(height: 48)
-            .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.isResetButtonEnabled))
-            .disabled(!viewModel.isResetButtonEnabled)
+            actions
         }
         .padding(16)
         .alert(isPresented: $viewModel.isAlertMessagePresented) {
@@ -104,14 +106,38 @@ struct ResetPasswordView: View {
             )
         }
     }
+
+    private var actions: some View {
+        HStack(spacing: 12) {
+            Button(
+                L10n.Common.previous,
+                action: { presentationMode.wrappedValue.dismiss() }
+            )
+            .buttonStyle(ThridyButtonStyle())
+            .frame(width: 100)
+            .shadow(
+                color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
+            )
+
+            Button(
+                L10n.Auth.ResetPassword.title,
+                action: {
+                    viewModel.resetPasswordTrigger.send(viewModel.email)
+                }
+            )
+            .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.isResetButtonEnabled))
+            .disabled(!viewModel.isResetButtonEnabled).shadow(
+                color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
+            )
+        }
+        .padding(16)
+    }
 }
 
 // MARK: - ResetPasswordView_Previews
 
 struct ResetPasswordView_Previews: PreviewProvider {
-    @State private static var isShowingResetPasswordView = true
-
     static var previews: some View {
-        ResetPasswordView(isShowingResetPasswordView: $isShowingResetPasswordView)
+        ResetPasswordView()
     }
 }

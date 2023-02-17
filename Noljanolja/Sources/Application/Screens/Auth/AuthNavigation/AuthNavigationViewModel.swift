@@ -8,20 +8,46 @@
 
 import Combine
 
-final class AuthNavigationViewModel: ObservableObject {
+// MARK: - AuthNavigationViewModelDelegate
+
+protocol AuthNavigationViewModelDelegate: AnyObject {}
+
+// MARK: - AuthNavigationViewModelType
+
+protocol AuthNavigationViewModelType: ObservableObject, AuthViewModelDelegate {
+    // MARK: State
+
+    var closePublisher: PassthroughSubject<Void, Never> { get }
+}
+
+// MARK: - AuthNavigationViewModel
+
+final class AuthNavigationViewModel: AuthNavigationViewModelType {
     // MARK: Dependencies
 
-    // MARK: Input
+    private weak var delegate: AuthNavigationViewModelDelegate?
 
-    // MARK: Output
+    // MARK: State
+
+    let closePublisher = PassthroughSubject<Void, Never>()
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init() {
+    init(delegate: AuthNavigationViewModelDelegate? = nil) {
+        self.delegate = delegate
+
         configure()
     }
 
     private func configure() {}
+}
+
+// MARK: AuthViewModelDelegate
+
+extension AuthNavigationViewModel: AuthViewModelDelegate {
+    func closeAuthFlow() {
+        closePublisher.send()
+    }
 }
