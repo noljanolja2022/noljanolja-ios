@@ -56,6 +56,7 @@
 		CF6ABC232993618000D78213 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = CF6ABC222993618000D78213 /* Introspect */; };
 		CF745A5A2998E5EA008177E5 /* FullSizeTappableTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF745A592998E5EA008177E5 /* FullSizeTappableTextFieldStyle.swift */; };
 		CF745A5C2998E5F2008177E5 /* AuthTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF745A5B2998E5F2008177E5 /* AuthTextFieldStyle.swift */; };
+		CF88ABCD299F2E7400D8AB67 /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = CF88ABCC299F2E7400D8AB67 /* SwiftUINavigation */; };
 		CFC709E02996051800B64216 /* View+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709DF2996051800B64216 /* View+Progress.swift */; };
 		CFC709E32996276C00B64216 /* RoundedLinearProgressViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709E22996276C00B64216 /* RoundedLinearProgressViewStyle.swift */; };
 		CFC709E729962CD100B64216 /* SignUpNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709E529962CD100B64216 /* SignUpNavigationView.swift */; };
@@ -255,6 +256,7 @@
 				CFE48BC1299206830062C903 /* KeychainAccess in Frameworks */,
 				CFFD70D0298AC7A900D4F5A2 /* CombineMoya in Frameworks */,
 				AEDBBDE12EEA3CADCA87D4F2 /* Pods_Noljanolja.framework in Frameworks */,
+				CF88ABCD299F2E7400D8AB67 /* SwiftUINavigation in Frameworks */,
 				CFE09257298DF78700F197F0 /* SwiftyBeaver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -935,6 +937,7 @@
 				CFE09271298FEACD00F197F0 /* SwifterSwift */,
 				CFE48BC0299206830062C903 /* KeychainAccess */,
 				CF6ABC222993618000D78213 /* Introspect */,
+				CF88ABCC299F2E7400D8AB67 /* SwiftUINavigation */,
 			);
 			productName = Noljanolja;
 			productReference = CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */;
@@ -1021,6 +1024,7 @@
 				CFE09270298FEACD00F197F0 /* XCRemoteSwiftPackageReference "SwifterSwift" */,
 				CFE48BBF299206830062C903 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				CF6ABC212993617F00D78213 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				CF88ABCB299F2E7400D8AB67 /* XCRemoteSwiftPackageReference "swiftui-navigation" */,
 			);
 			productRefGroup = CFFD707F298AB9FF00D4F5A2 /* Products */;
 			projectDirPath = "";
@@ -1664,6 +1668,14 @@
 				version = 0.1.4;
 			};
 		};
+		CF88ABCB299F2E7400D8AB67 /* XCRemoteSwiftPackageReference "swiftui-navigation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swiftui-navigation";
+			requirement = {
+				kind = exactVersion;
+				version = 0.6.1;
+			};
+		};
 		CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver.git";
@@ -1734,6 +1746,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CF6ABC212993617F00D78213 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
+		};
+		CF88ABCC299F2E7400D8AB67 /* SwiftUINavigation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF88ABCB299F2E7400D8AB67 /* XCRemoteSwiftPackageReference "swiftui-navigation" */;
+			productName = SwiftUINavigation;
 		};
 		CFE09256298DF78700F197F0 /* SwiftyBeaver */ = {
 			isa = XCSwiftPackageProductDependency;
