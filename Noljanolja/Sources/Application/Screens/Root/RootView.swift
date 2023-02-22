@@ -20,7 +20,9 @@ struct RootView<ViewModel: RootViewModelType>: View {
     }
 
     var body: some View {
-        MainView()
+        NavigationView {
+            MainView()
+        }
     }
 }
 

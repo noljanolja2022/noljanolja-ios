@@ -38,3 +38,7 @@
 "validation.password.error.special_characters_required" = "The password must have at least one special character (~!@#%^&*()-_=+)";
 "validation.password.error.not_match" = "Those passwords didn’t match. Try again";
 
+"my_page" = "My page";
+"my_page.hello" = "Hello %@!";
+"my_page.service_guide" = "Service guide";
+"my_page.customer_service_center" = "Customer service center";

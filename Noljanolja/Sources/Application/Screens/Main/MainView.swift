@@ -35,6 +35,28 @@ struct MainView<ViewModel: MainViewModelType>: View {
                 AuthNavigationView()
             }
         }
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                switch viewModel.selectedTabItem {
+                case .menu:
+                    Text("Menu")
+                        .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
+                case .home:
+                    Text("Home")
+                        .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
+                case .wallet:
+                    Text("Wallet")
+                        .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
+                case .shop:
+                    Text("Shop")
+                        .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
+                case .myPage:
+                    Text(L10n.myPage)
+                        .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
+                }
+            }
+        }
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     private var content: some View {
@@ -52,7 +74,7 @@ struct MainView<ViewModel: MainViewModelType>: View {
                     .tag(TabBarItem.wallet)
                 Text("Shop")
                     .tag(TabBarItem.shop)
-                ProfileView()
+                MyPageView()
                     .tag(TabBarItem.myPage)
             }
             .introspectTabBarController { tabBarController in

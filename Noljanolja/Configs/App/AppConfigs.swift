@@ -22,4 +22,8 @@ enum AppConfigs {
             static let appName = "놀자놀자"
         }
     }
+
+    enum App {
+        static let customerServiceCenter = "1588-1588"
+    }
 }

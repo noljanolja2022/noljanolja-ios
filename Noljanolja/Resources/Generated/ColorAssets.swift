@@ -22,6 +22,7 @@ internal typealias AssetColorTypeAlias = ColorAsset.Color
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum ColorAssets {
+  internal static let background = ColorAsset(name: "Background")
   internal static let black = ColorAsset(name: "Black")
   internal static let forcegroundPrimary = ColorAsset(name: "Forceground Primary")
   internal static let forcegroundSecondary = ColorAsset(name: "Forceground Secondary")
@@ -34,6 +35,7 @@ internal enum ColorAssets {
   // swiftlint:disable trailing_comma
   @available(*, deprecated, message: "All values properties are now deprecated")
   internal static let allColors: [ColorAsset] = [
+    background,
     black,
     forcegroundPrimary,
     forcegroundSecondary,

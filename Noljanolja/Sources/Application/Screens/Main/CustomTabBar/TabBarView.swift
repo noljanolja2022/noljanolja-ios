@@ -41,7 +41,7 @@ struct TabBarView: View {
             content
         }
         .background(Color.clear)
-        .frame(height: 44)
+        .frame(height: 84)
     }
 
     private var content: some View {
