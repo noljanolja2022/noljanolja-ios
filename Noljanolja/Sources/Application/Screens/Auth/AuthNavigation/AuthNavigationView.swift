@@ -27,20 +27,20 @@ struct AuthNavigationView<ViewModel: AuthNavigationViewModelType>: View {
     var body: some View {
         NavigationView {
             content
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button(
-                            action: {
-                                presentationMode.wrappedValue.dismiss()
-                            },
-                            label: {
-                                ImageAssets.icClose.swiftUIImage
-                                    .resizable()
-                                    .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
-                            }
-                        )
-                    }
-                }
+//                .toolbar {
+//                    ToolbarItem(placement: .navigationBarLeading) {
+//                        Button(
+//                            action: {
+//                                presentationMode.wrappedValue.dismiss()
+//                            },
+//                            label: {
+//                                ImageAssets.icClose.swiftUIImage
+//                                    .resizable()
+//                                    .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
+//                            }
+//                        )
+//                    }
+//                }
         }
         .onReceive(viewModel.closePublisher) {
             presentationMode.wrappedValue.dismiss()

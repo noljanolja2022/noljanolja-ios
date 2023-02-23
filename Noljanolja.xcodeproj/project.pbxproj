@@ -94,6 +94,8 @@
 		CFFC5B5E29A6568C002B3381 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFC5B5C29A6568C002B3381 /* MyInfoView.swift */; };
 		CFFC5B5F29A6568C002B3381 /* MyInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFC5B5D29A6568C002B3381 /* MyInfoViewModel.swift */; };
 		CFFC5B6229A656B2002B3381 /* MyInfoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFC5B6129A656B2002B3381 /* MyInfoItemView.swift */; };
+		CFFC5B6729A7AD10002B3381 /* MainNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFC5B6529A7AD10002B3381 /* MainNavigationView.swift */; };
+		CFFC5B6829A7AD10002B3381 /* MainNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFC5B6629A7AD10002B3381 /* MainNavigationViewModel.swift */; };
 		CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */; };
 		CFFD7086298ABA0100D4F5A2 /* ImageAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7085298ABA0100D4F5A2 /* ImageAssets.xcassets */; };
 		CFFD7089298ABA0100D4F5A2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7088298ABA0100D4F5A2 /* Preview Assets.xcassets */; };
@@ -220,6 +222,8 @@
 		CFFC5B5C29A6568C002B3381 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
 		CFFC5B5D29A6568C002B3381 /* MyInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewModel.swift; sourceTree = "<group>"; };
 		CFFC5B6129A656B2002B3381 /* MyInfoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoItemView.swift; sourceTree = "<group>"; };
+		CFFC5B6529A7AD10002B3381 /* MainNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationView.swift; sourceTree = "<group>"; };
+		CFFC5B6629A7AD10002B3381 /* MainNavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationViewModel.swift; sourceTree = "<group>"; };
 		CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Noljanolja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoljanoljaApp.swift; sourceTree = "<group>"; };
 		CFFD7085298ABA0100D4F5A2 /* ImageAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImageAssets.xcassets; sourceTree = "<group>"; };
@@ -720,6 +724,24 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		CFFC5B6329A7ACD8002B3381 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				CFFC5B6429A7ACF3002B3381 /* MainNavigation */,
+				CF14F22C298C05CC00BC2066 /* Main */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		CFFC5B6429A7ACF3002B3381 /* MainNavigation */ = {
+			isa = PBXGroup;
+			children = (
+				CFFC5B6529A7AD10002B3381 /* MainNavigationView.swift */,
+				CFFC5B6629A7AD10002B3381 /* MainNavigationViewModel.swift */,
+			);
+			path = MainNavigation;
+			sourceTree = "<group>";
+		};
 		CFFD7075298AB9FF00D4F5A2 = {
 			isa = PBXGroup;
 			children = (
@@ -861,12 +883,12 @@
 		CFFD70B5298AC43200D4F5A2 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				CF6ABC0A29935C2D00D78213 /* Auth */,
+				CFE9786D2998869E00A50083 /* Launch */,
+				CFFC5B6329A7ACD8002B3381 /* Main */,
 				CFFC5B5B29A6567A002B3381 /* MyInfo */,
 				CFC5AC5629A603800028BEC4 /* MyPage */,
-				CFE9786D2998869E00A50083 /* Launch */,
 				CF6ABC1A29935D5800D78213 /* Root */,
-				CF6ABC0A29935C2D00D78213 /* Auth */,
-				CF14F22C298C05CC00BC2066 /* Main */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -1313,6 +1335,7 @@
 				CFE09341299007E400F197F0 /* Publisher+FlatMapTranforming.swift in Sources */,
 				CFFD70D5298AC92500D4F5A2 /* HomeAPI.swift in Sources */,
 				CFE09254298DF69600F197F0 /* NaverAuthAPI.swift in Sources */,
+				CFFC5B6729A7AD10002B3381 /* MainNavigationView.swift in Sources */,
 				CF6ABC2029935D7B00D78213 /* RootViewModel.swift in Sources */,
 				CF14F266298CF4E700BC2066 /* AppConfigs.swift in Sources */,
 				CFC709E829962CD100B64216 /* SignUpNavigationViewModel.swift in Sources */,
@@ -1340,6 +1363,7 @@
 				CFC5AC5A29A603A10028BEC4 /* MyPageViewModel.swift in Sources */,
 				CFE0925B298DF7AF00F197F0 /* Logger+SwiftyBeaver.swift in Sources */,
 				CFE09265298EB92D00F197F0 /* AppleAuthAPI.swift in Sources */,
+				CFFC5B6829A7AD10002B3381 /* MainNavigationViewModel.swift in Sources */,
 				CFFD70C4298AC5F800D4F5A2 /* NetworkLoggerPluggin.swift in Sources */,
 				CFE0925D298DFDCB00F197F0 /* KakaoAuthAPI.swift in Sources */,
 				CFFD70CA298AC5F800D4F5A2 /* TargetType+Default.swift in Sources */,

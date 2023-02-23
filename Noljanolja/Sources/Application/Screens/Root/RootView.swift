@@ -21,14 +21,10 @@ struct RootView<ViewModel: RootViewModelType>: View {
     }
 
     var body: some View {
-        NavigationView {
-            MainView()
-        }
-        .introspectNavigationController { navigationController in
-            navigationController.configure(
-                backgroundColor: ColorAssets.highlightPrimary.color,
-                foregroundColor: ColorAssets.forcegroundPrimary.color
-            )
+        if viewModel.isAuthenticated {
+            MainNavigationView()
+        } else {
+            AuthNavigationView()
         }
     }
 }
