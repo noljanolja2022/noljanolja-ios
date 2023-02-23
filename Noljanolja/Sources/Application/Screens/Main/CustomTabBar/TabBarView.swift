@@ -23,6 +23,7 @@ struct TabBarView: View {
 
     private let highlightItemSize: CGFloat = 72
     private let itemSize: CGFloat = 36
+    private let height: CGFloat = 56
 
     init(selectionItem: Binding<TabBarItem>,
          items: [TabBarItem],
@@ -42,23 +43,11 @@ struct TabBarView: View {
                 .ignoresSafeArea()
             content
         }
-        .background(Color.clear)
-        .frame(height: highlightItemSize)
+        .frame(height: height)
     }
 
     private var content: some View {
         ZStack {
-            Button(
-                action: { action(.wallet) },
-                label: {
-                    Image(uiImage: TabBarItem.wallet.image)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: highlightItemSize, height: highlightItemSize)
-                }
-            )
-            .offset(y: -highlightItemSize / 2)
-
             HStack(alignment: .center, spacing: 0) {
                 ForEach(items.indices, id: \.self) { index in
                     let item = items[index]
@@ -83,8 +72,20 @@ struct TabBarView: View {
                 }
             }
             .background(Color.clear)
+
+            Button(
+                action: { action(.wallet) },
+                label: {
+                    Image(uiImage: TabBarItem.wallet.image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: highlightItemSize, height: highlightItemSize)
+                }
+            )
+            .offset(y: -height / 2)
+            .background(Color.clear)
         }
-        .background(Color.clear)
+        .frame(height: height)
     }
 
     private var background: some View {
