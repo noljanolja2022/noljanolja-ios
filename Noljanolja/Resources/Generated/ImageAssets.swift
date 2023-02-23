@@ -26,6 +26,7 @@ internal enum ImageAssets {
   internal static let icAppMascot = ImageAsset(name: "ic_app_mascot")
   internal static let icApple = ImageAsset(name: "ic_apple")
   internal static let icArrowRight = ImageAsset(name: "ic_arrow_right")
+  internal static let icBack = ImageAsset(name: "ic_back")
   internal static let icBicycle = ImageAsset(name: "ic_bicycle")
   internal static let icCheckCircle = ImageAsset(name: "ic_check_circle")
   internal static let icCheckCircleHightlight = ImageAsset(name: "ic_check_circle_hightlight")
@@ -51,6 +52,7 @@ internal enum ImageAssets {
     icAppMascot,
     icApple,
     icArrowRight,
+    icBack,
     icBicycle,
     icCheckCircle,
     icCheckCircleHightlight,

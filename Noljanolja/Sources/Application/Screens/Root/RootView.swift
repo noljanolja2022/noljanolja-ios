@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 // MARK: - RootView
 
@@ -22,6 +23,12 @@ struct RootView<ViewModel: RootViewModelType>: View {
     var body: some View {
         NavigationView {
             MainView()
+        }
+        .introspectNavigationController { navigationController in
+            navigationController.configure(
+                backgroundColor: ColorAssets.highlightPrimary.color,
+                foregroundColor: ColorAssets.forcegroundPrimary.color
+            )
         }
     }
 }

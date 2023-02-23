@@ -86,6 +86,7 @@ struct MainView<ViewModel: MainViewModelType>: View {
                 action: { viewModel.selectedTabItemTrigger.send($0) }
             )
         }
+        .background(ColorAssets.background.swiftUIColor)
     }
 }
 

@@ -22,50 +22,60 @@ struct MyPageView<ViewModel: MyPageViewModelType>: View {
     }
 
     var body: some View {
-        ZStack {
-            ColorAssets.highlightPrimary.swiftUIColor
-                .ignoresSafeArea(edges: .top)
-            ScrollView {
-                VStack(spacing: 16) {
-                    MyPageItemView(
-                        title: L10n.MyPage.hello("noljanolja"),
-                        titleFont: FontFamily.NotoSans.bold.swiftUIFont(size: 18)
-                    )
+        ScrollView {
+            VStack(spacing: 16) {
+                NavigationLink(
+                    destination: {
+                        MyInfoView()
+                    },
+                    label: {
+                        MyPageItemView(
+                            title: L10n.MyPage.hello("noljanolja"),
+                            titleFont: FontFamily.NotoSans.bold.swiftUIFont(size: 18)
+                        )
+                    }
+                )
 
-                    Divider()
+                Divider()
+                    .background(ColorAssets.forcegroundTertiary.swiftUIColor)
 
-                    MyPageItemView(
-                        image: ImageAssets.icServiceGuide.image,
-                        title: L10n.MyPage.serviceGuide
-                    )
-                    .background(ColorAssets.white.swiftUIColor)
-                    .cornerRadius(8)
-                    .shadow(
-                        color: ColorAssets.black.swiftUIColor.opacity(0.15),
-                        radius: 2,
-                        y: 2
-                    )
+                MyPageItemView(
+                    image: ImageAssets.icServiceGuide.image,
+                    title: L10n.MyPage.serviceGuide
+                )
+                .background(ColorAssets.white.swiftUIColor)
+                .cornerRadius(8)
+                .shadow(
+                    color: ColorAssets.black.swiftUIColor.opacity(0.15),
+                    radius: 2,
+                    y: 2
+                )
 
-                    MyPageItemView(
-                        image: ImageAssets.icCustomerServiceCenter.image,
-                        title: L10n.MyPage.customerServiceCenter,
-                        subTitle: AppConfigs.App.customerServiceCenter,
-                        hasArrowImage: false,
-                        action: { viewModel.customerServiceCenterTrigger.send() }
-                    )
-                    .background(ColorAssets.white.swiftUIColor)
-                    .cornerRadius(8)
-                    .shadow(
-                        color: ColorAssets.black.swiftUIColor.opacity(0.15),
-                        radius: 2,
-                        y: 2
-                    )
-                }
-                .padding(16)
+                Button(
+                    action: {
+                        viewModel.customerServiceCenterTrigger.send()
+                    },
+                    label: {
+                        MyPageItemView(
+                            image: ImageAssets.icCustomerServiceCenter.image,
+                            title: L10n.MyPage.customerServiceCenter,
+                            subTitle: AppConfigs.App.customerServiceCenter,
+                            hasArrowImage: false
+                        )
+                    }
+                )
+                .background(ColorAssets.white.swiftUIColor)
+                .cornerRadius(8)
+                .shadow(
+                    color: ColorAssets.black.swiftUIColor.opacity(0.15),
+                    radius: 2,
+                    y: 2
+                )
             }
-            .background(ColorAssets.background.swiftUIColor)
-            .clipped()
+            .padding(16)
         }
+        .background(ColorAssets.background.swiftUIColor)
+        .clipped()
     }
 }
 

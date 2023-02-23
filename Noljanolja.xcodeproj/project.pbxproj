@@ -91,6 +91,9 @@
 		CFE9D2DD298D66F700D936DA /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = CFE9D2DC298D66F700D936DA /* GoogleSignIn */; };
 		CFE9D2E0298D6C1500D936DA /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CFE9D2DF298D6C1500D936DA /* KakaoSDKAuth */; };
 		CFE9D2E2298D6C1500D936DA /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = CFE9D2E1298D6C1500D936DA /* KakaoSDKUser */; };
+		CFFC5B5E29A6568C002B3381 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFC5B5C29A6568C002B3381 /* MyInfoView.swift */; };
+		CFFC5B5F29A6568C002B3381 /* MyInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFC5B5D29A6568C002B3381 /* MyInfoViewModel.swift */; };
+		CFFC5B6229A656B2002B3381 /* MyInfoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFC5B6129A656B2002B3381 /* MyInfoItemView.swift */; };
 		CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */; };
 		CFFD7086298ABA0100D4F5A2 /* ImageAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7085298ABA0100D4F5A2 /* ImageAssets.xcassets */; };
 		CFFD7089298ABA0100D4F5A2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7088298ABA0100D4F5A2 /* Preview Assets.xcassets */; };
@@ -214,6 +217,9 @@
 		CFE0A393299E90BA00E904B0 /* MainNavigationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationType.swift; sourceTree = "<group>"; };
 		CFE48BC2299207DA0062C903 /* AuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStore.swift; sourceTree = "<group>"; };
 		CFE978702998876B00A50083 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		CFFC5B5C29A6568C002B3381 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
+		CFFC5B5D29A6568C002B3381 /* MyInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewModel.swift; sourceTree = "<group>"; };
+		CFFC5B6129A656B2002B3381 /* MyInfoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoItemView.swift; sourceTree = "<group>"; };
 		CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Noljanolja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoljanoljaApp.swift; sourceTree = "<group>"; };
 		CFFD7085298ABA0100D4F5A2 /* ImageAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImageAssets.xcassets; sourceTree = "<group>"; };
@@ -696,6 +702,24 @@
 			path = Launch;
 			sourceTree = "<group>";
 		};
+		CFFC5B5B29A6567A002B3381 /* MyInfo */ = {
+			isa = PBXGroup;
+			children = (
+				CFFC5B6029A65697002B3381 /* View */,
+				CFFC5B5C29A6568C002B3381 /* MyInfoView.swift */,
+				CFFC5B5D29A6568C002B3381 /* MyInfoViewModel.swift */,
+			);
+			path = MyInfo;
+			sourceTree = "<group>";
+		};
+		CFFC5B6029A65697002B3381 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CFFC5B6129A656B2002B3381 /* MyInfoItemView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		CFFD7075298AB9FF00D4F5A2 = {
 			isa = PBXGroup;
 			children = (
@@ -837,6 +861,7 @@
 		CFFD70B5298AC43200D4F5A2 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				CFFC5B5B29A6567A002B3381 /* MyInfo */,
 				CFC5AC5629A603800028BEC4 /* MyPage */,
 				CFE9786D2998869E00A50083 /* Launch */,
 				CF6ABC1A29935D5800D78213 /* Root */,
@@ -1256,6 +1281,7 @@
 				CFE0925F298EACF200F197F0 /* GoogleAuthAPI.swift in Sources */,
 				CFC709E729962CD100B64216 /* SignUpNavigationView.swift in Sources */,
 				CF6ABC1329935C2D00D78213 /* SignUpViewModel.swift in Sources */,
+				CFFC5B6229A656B2002B3381 /* MyInfoItemView.swift in Sources */,
 				CFFD70D3298AC89000D4F5A2 /* NetworkConfigs.swift in Sources */,
 				CF14F249298C331C00BC2066 /* Localizable.swift in Sources */,
 				CF6ABC1629935C2D00D78213 /* AuthView.swift in Sources */,
@@ -1291,6 +1317,7 @@
 				CF14F266298CF4E700BC2066 /* AppConfigs.swift in Sources */,
 				CFC709E829962CD100B64216 /* SignUpNavigationViewModel.swift in Sources */,
 				CFD83DC22996812B00B9A6BB /* TermItemType.swift in Sources */,
+				CFFC5B5F29A6568C002B3381 /* MyInfoViewModel.swift in Sources */,
 				CF174721299CBFDE001B93E8 /* EmailVerificationViewModel.swift in Sources */,
 				CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */,
 				CF6ABC1429935C2D00D78213 /* SignUpView.swift in Sources */,
@@ -1303,6 +1330,7 @@
 				CFD83DCD29973A5F00B9A6BB /* AuthNavigationView.swift in Sources */,
 				CFE48BC3299207DA0062C903 /* AuthStore.swift in Sources */,
 				CFD83DCE29973A5F00B9A6BB /* AuthNavigationViewModel.swift in Sources */,
+				CFFC5B5E29A6568C002B3381 /* MyInfoView.swift in Sources */,
 				CFE0A390299E79EF00E904B0 /* AuthPopupView.swift in Sources */,
 				CFFD70CB298AC5F800D4F5A2 /* ApiProvider.swift in Sources */,
 				CF6ABC1F29935D7B00D78213 /* RootView.swift in Sources */,

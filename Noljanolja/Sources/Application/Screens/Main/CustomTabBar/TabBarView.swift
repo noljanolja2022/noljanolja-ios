@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// MARK: - TabBarView
+
 struct TabBarView: View {
     // MARK: Dependencies
 
@@ -19,7 +21,7 @@ struct TabBarView: View {
 
     // MARK: Private
 
-    private let highlightItemSize: CGFloat = 84
+    private let highlightItemSize: CGFloat = 72
     private let itemSize: CGFloat = 36
 
     init(selectionItem: Binding<TabBarItem>,
@@ -41,7 +43,7 @@ struct TabBarView: View {
             content
         }
         .background(Color.clear)
-        .frame(height: 84)
+        .frame(height: highlightItemSize)
     }
 
     private var content: some View {

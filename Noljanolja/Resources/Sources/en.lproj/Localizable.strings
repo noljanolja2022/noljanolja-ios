@@ -42,3 +42,10 @@
 "my_page.hello" = "Hello %@!";
 "my_page.service_guide" = "Service guide";
 "my_page.customer_service_center" = "Customer service center";
+
+"my_info" = "My Info";
+"my_info.edit_member_information" = "Edit member information";
+"my_info.change_password" = "Change Password";
+"my_info.exchange_account_management" = "Exchange account management";
+"my_info.setting" = "Setting";
+"my_info.log_out" = "Log out";
