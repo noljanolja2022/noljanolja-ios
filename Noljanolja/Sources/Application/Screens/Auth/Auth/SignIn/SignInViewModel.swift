@@ -177,7 +177,6 @@ final class SignInViewModel: SignInViewModelType {
                 case let .success(idToken):
                     logger.info("Signed in with Google - Token: \(idToken)")
                     self?.delegate?.closeAuthFlow()
-                    self?.delegate?.closeAuthFlow()
                 case let .failure(error):
                     logger.error("Sign in with Google failed: \(error.localizedDescription)")
                     self?.isAlertMessagePresented = true

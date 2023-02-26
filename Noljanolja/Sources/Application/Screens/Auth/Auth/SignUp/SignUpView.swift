@@ -61,7 +61,6 @@ struct SignUpView<ViewModel: SignUpViewModelType>: View {
                 TextField(L10n.Auth.Email.placeholder, text: $viewModel.email)
                     .keyboardType(.emailAddress)
                     .textFieldStyle(FullSizeTappableTextFieldStyle())
-                    .textFieldStyle(AuthTextFieldStyle())
                     .setAuthTextFieldStyle()
                     .overlayBorder(
                         color: viewModel.emailErrorMessage == nil
@@ -72,7 +71,6 @@ struct SignUpView<ViewModel: SignUpViewModelType>: View {
 
                 SecureField(L10n.Auth.Password.placeholder, text: $viewModel.password)
                     .textFieldStyle(FullSizeTappableTextFieldStyle())
-                    .textFieldStyle(AuthTextFieldStyle())
                     .setAuthTextFieldStyle()
                     .overlayBorder(
                         color: viewModel.passwordErrorMessage == nil
@@ -83,7 +81,6 @@ struct SignUpView<ViewModel: SignUpViewModelType>: View {
 
                 SecureField(L10n.Auth.ConfirmPassword.placeholder, text: $viewModel.confirmPassword)
                     .textFieldStyle(FullSizeTappableTextFieldStyle())
-                    .textFieldStyle(AuthTextFieldStyle())
                     .setAuthTextFieldStyle()
                     .overlayBorder(
                         color: viewModel.confirmPasswordErrorMessage == nil

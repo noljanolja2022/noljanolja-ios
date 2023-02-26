@@ -68,7 +68,6 @@ struct SignInView<ViewModel: SignInViewModelType>: View {
             TextField(L10n.Auth.Email.placeholder, text: $viewModel.email)
                 .keyboardType(.emailAddress)
                 .textFieldStyle(FullSizeTappableTextFieldStyle())
-                .textFieldStyle(AuthTextFieldStyle())
                 .setAuthTextFieldStyle()
                 .overlayBorder(
                     color: viewModel.emailErrorMessage == nil
@@ -79,7 +78,6 @@ struct SignInView<ViewModel: SignInViewModelType>: View {
 
             SecureField(L10n.Auth.Password.placeholder, text: $viewModel.password)
                 .textFieldStyle(FullSizeTappableTextFieldStyle())
-                .textFieldStyle(AuthTextFieldStyle())
                 .setAuthTextFieldStyle()
                 .overlayBorder(
                     color: viewModel.passwordErrorMessage == nil

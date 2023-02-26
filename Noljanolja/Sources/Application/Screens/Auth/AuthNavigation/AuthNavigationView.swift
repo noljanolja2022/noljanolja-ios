@@ -27,20 +27,6 @@ struct AuthNavigationView<ViewModel: AuthNavigationViewModelType>: View {
     var body: some View {
         NavigationView {
             content
-//                .toolbar {
-//                    ToolbarItem(placement: .navigationBarLeading) {
-//                        Button(
-//                            action: {
-//                                presentationMode.wrappedValue.dismiss()
-//                            },
-//                            label: {
-//                                ImageAssets.icClose.swiftUIImage
-//                                    .resizable()
-//                                    .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
-//                            }
-//                        )
-//                    }
-//                }
         }
         .onReceive(viewModel.closePublisher) {
             presentationMode.wrappedValue.dismiss()
@@ -56,18 +42,23 @@ struct AuthNavigationView<ViewModel: AuthNavigationViewModelType>: View {
                 .padding(16)
 
             NavigationView {
-                AuthView(
-                    viewModel: AuthViewModel(delegate: viewModel)
-                )
+                authView
             }
             .padding(.top, 8)
             .accentColor(ColorAssets.black.swiftUIColor)
-            .background(Color.white)
+            .background(Color.clear)
             .cornerRadius(24, corners: [.topLeft, .topRight])
         }
         .background(
             ColorAssets.highlightPrimary.swiftUIColor.edgesIgnoringSafeArea(.top)
         )
+    }
+
+    private var authView: some View {
+//        AuthView(
+//            viewModel: AuthViewModel(delegate: viewModel)
+//        )
+        AuthWithPhoneView()
     }
 }
 
