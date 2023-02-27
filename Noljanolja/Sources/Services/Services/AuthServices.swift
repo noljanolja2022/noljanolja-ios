@@ -20,6 +20,9 @@ protocol AuthServicesType {
     func verifyEmail() -> AnyPublisher<String, Error>
     func sendPasswordReset(email: String) -> AnyPublisher<Void, Error>
 
+    func sendPhoneVerificationCode(_ phoneNumber: String, languageCode: String) -> AnyPublisher<String, Error>
+    func verificationCode(verificationID: String, verificationCode: String) -> AnyPublisher<String, Error>
+
     func signIn(email: String, password: String) -> AnyPublisher<String, Error>
     func signInWithApple() -> AnyPublisher<String, Error>
     func signInWithGoogle() -> AnyPublisher<String, Error>
@@ -89,6 +92,28 @@ final class AuthServices: NSObject, AuthServicesType {
                     return Fail<String, Error>(error: FirebaseAuthError.emailNotVerified)
                         .eraseToAnyPublisher()
                 }
+            }
+            .handleEvents(receiveOutput: { [weak self] token in
+                self?.authStore.saveToken(token)
+                self?.isAuthenticated.send(true)
+            })
+            .eraseToAnyPublisher()
+    }
+
+    func sendPhoneVerificationCode(_ phoneNumber: String, languageCode: String) -> AnyPublisher<String, Error> {
+        firebaseAuth.languageCode = languageCode
+        return PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber)
+            .eraseToAnyPublisher()
+    }
+
+    func verificationCode(verificationID: String, verificationCode: String) -> AnyPublisher<String, Error> {
+        let credential = PhoneAuthProvider.provider().credential(
+            withVerificationID: verificationID,
+            verificationCode: verificationCode
+        )
+        return firebaseAuth.signIn(with: credential)
+            .flatMap { result in
+                result.user.getIDTokenResult()
             }
             .handleEvents(receiveOutput: { [weak self] token in
                 self?.authStore.saveToken(token)

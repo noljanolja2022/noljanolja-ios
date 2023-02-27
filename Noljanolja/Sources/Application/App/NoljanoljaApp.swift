@@ -5,6 +5,7 @@
 //  Created by Nguyen The Trinh on 01/02/2023.
 //
 
+import FirebaseAuth
 import FirebaseCore
 import GoogleSignIn
 import Introspect
@@ -13,6 +14,7 @@ import KakaoSDKCommon
 import NaverThirdPartyLogin
 import SwifterSwift
 import SwiftUI
+import SwiftUINavigation
 
 // MARK: - AppDelegate
 
@@ -36,8 +38,26 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
         return true
     }
 
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        // Pass device token to auth
+        Auth.auth().setAPNSToken(deviceToken, type: .prod)
+        
+        // Further handling of the device token if needed by the app
+    }
+
+    func application(_ application: UIApplication,
+                     didReceiveRemoteNotification notification: [AnyHashable: Any],
+                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        if Auth.auth().canHandleNotification(notification) {
+            completionHandler(.noData)
+            return
+        }
+        // This notification is not auth related; it should be handled separately.
+    }
+
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        GIDSignIn.sharedInstance.handle(url)
+        Auth.auth().canHandle(url)
+            || GIDSignIn.sharedInstance.handle(url)
             || (AuthApi.isKakaoTalkLoginUrl(url) && AuthController.handleOpenUrl(url: url))
             || NaverThirdPartyLoginConnection.getSharedInstance().application(app, open: url, options: options)
     }

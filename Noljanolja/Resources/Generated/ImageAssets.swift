@@ -26,17 +26,25 @@ internal enum ImageAssets {
   internal static let icAppMascot = ImageAsset(name: "ic_app_mascot")
   internal static let icApple = ImageAsset(name: "ic_apple")
   internal static let icArrowRight = ImageAsset(name: "ic_arrow_right")
+  internal static let icBack = ImageAsset(name: "ic_back")
   internal static let icBicycle = ImageAsset(name: "ic_bicycle")
+  internal static let icCalendar = ImageAsset(name: "ic_calendar")
+  internal static let icCart = ImageAsset(name: "ic_cart")
   internal static let icCheckCircle = ImageAsset(name: "ic_check_circle")
   internal static let icCheckCircleHightlight = ImageAsset(name: "ic_check_circle_hightlight")
   internal static let icClose = ImageAsset(name: "ic_close")
+  internal static let icCustomerServiceCenter = ImageAsset(name: "ic_customer_service_center")
   internal static let icGoogle = ImageAsset(name: "ic_google")
   internal static let icHome = ImageAsset(name: "ic_home")
   internal static let icKakao = ImageAsset(name: "ic_kakao")
   internal static let icMenu = ImageAsset(name: "ic_menu")
+  internal static let icMessage = ImageAsset(name: "ic_message")
   internal static let icNaver = ImageAsset(name: "ic_naver")
+  internal static let icPerson = ImageAsset(name: "ic_person")
+  internal static let icPlayCircle = ImageAsset(name: "ic_play_circle")
   internal static let icPpyy = ImageAsset(name: "ic_ppyy")
   internal static let icProfile = ImageAsset(name: "ic_profile")
+  internal static let icServiceGuide = ImageAsset(name: "ic_service_guide")
   internal static let icShop = ImageAsset(name: "ic_shop")
   internal static let icWallet = ImageAsset(name: "ic_wallet")
   internal static let icWelcomeText = ImageAsset(name: "ic_welcome_text")
@@ -49,17 +57,25 @@ internal enum ImageAssets {
     icAppMascot,
     icApple,
     icArrowRight,
+    icBack,
     icBicycle,
+    icCalendar,
+    icCart,
     icCheckCircle,
     icCheckCircleHightlight,
     icClose,
+    icCustomerServiceCenter,
     icGoogle,
     icHome,
     icKakao,
     icMenu,
+    icMessage,
     icNaver,
+    icPerson,
+    icPlayCircle,
     icPpyy,
     icProfile,
+    icServiceGuide,
     icShop,
     icWallet,
     icWelcomeText,

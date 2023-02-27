@@ -14,7 +14,9 @@ protocol RootViewModelDelegate: AnyObject {}
 
 // MARK: - RootViewModelType
 
-protocol RootViewModelType: ObservableObject {}
+protocol RootViewModelType: ObservableObject {
+    var isAuthenticated: Bool { get }
+}
 
 // MARK: - RootViewModel
 

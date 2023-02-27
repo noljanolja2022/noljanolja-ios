@@ -10,8 +10,22 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>kakao15d1b0d5dde51ea18a397effc5f25e3c</string>
-				<string>com.noljanolja.app.ios</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
 				<string>com.googleusercontent.apps.954965503519-ajo51hke58jsfhalvonone0eujp65elr</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.noljanolja.app.ios</string>
 			</array>
 		</dict>
 	</array>

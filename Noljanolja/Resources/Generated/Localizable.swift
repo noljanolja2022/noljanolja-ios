@@ -12,6 +12,10 @@ import Foundation
 internal enum L10n {
   /// Noljanolja
   internal static let appName = L10n.tr("Localizable", "app_name", fallback: "Noljanolja")
+  /// My Info
+  internal static let myInfo = L10n.tr("Localizable", "my_info", fallback: "My Info")
+  /// My page
+  internal static let myPage = L10n.tr("Localizable", "my_page", fallback: "My page")
   internal enum Auth {
     internal enum ConfirmPassword {
       /// Please confirm password
@@ -97,6 +101,28 @@ internal enum L10n {
       /// Success
       internal static let title = L10n.tr("Localizable", "common.success.title", fallback: "Success")
     }
+  }
+  internal enum MyInfo {
+    /// Change Password
+    internal static let changePassword = L10n.tr("Localizable", "my_info.change_password", fallback: "Change Password")
+    /// Edit member information
+    internal static let editMemberInformation = L10n.tr("Localizable", "my_info.edit_member_information", fallback: "Edit member information")
+    /// Exchange account management
+    internal static let exchangeAccountManagement = L10n.tr("Localizable", "my_info.exchange_account_management", fallback: "Exchange account management")
+    /// Log out
+    internal static let logOut = L10n.tr("Localizable", "my_info.log_out", fallback: "Log out")
+    /// Setting
+    internal static let setting = L10n.tr("Localizable", "my_info.setting", fallback: "Setting")
+  }
+  internal enum MyPage {
+    /// Customer service center
+    internal static let customerServiceCenter = L10n.tr("Localizable", "my_page.customer_service_center", fallback: "Customer service center")
+    /// Hello %@!
+    internal static func hello(_ p1: Any) -> String {
+      return L10n.tr("Localizable", "my_page.hello", String(describing: p1), fallback: "Hello %@!")
+    }
+    /// Service guide
+    internal static let serviceGuide = L10n.tr("Localizable", "my_page.service_guide", fallback: "Service guide")
   }
   internal enum Validation {
     internal enum Email {

@@ -22,15 +22,10 @@ struct AuthTextFieldStyle: TextFieldStyle {
 
 extension View {
     func setAuthTextFieldStyle() -> some View {
-        frame(height: 50)
+        textFieldStyle(AuthTextFieldStyle())
+            .frame(height: 50)
             .background(ColorAssets.gray.swiftUIColor)
             .cornerRadius(8)
             .shadow(color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1)
-    }
-
-    func overlayBorder(color: Color, cornerRadius: CGFloat = 8, lineWidth: CGFloat = 1) -> some View {
-        overlay(
-            RoundedRectangle(cornerRadius: cornerRadius).stroke(color, lineWidth: lineWidth)
-        )
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 // MARK: - RootView
 
@@ -20,7 +21,11 @@ struct RootView<ViewModel: RootViewModelType>: View {
     }
 
     var body: some View {
-        MainView()
+        if viewModel.isAuthenticated {
+            MainNavigationView()
+        } else {
+            AuthNavigationView()
+        }
     }
 }
 
