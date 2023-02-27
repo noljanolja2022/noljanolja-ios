@@ -14,6 +14,7 @@ import Moya
 
 protocol ApiType {
     func request<Model: Decodable>(target: TargetType) -> AnyPublisher<Model, Error>
+    func request<Model: Decodable>(target: TargetType, atKeyPath: String?) -> AnyPublisher<Model, Error>
 }
 
 // MARK: - Api
@@ -32,6 +33,15 @@ final class Api: ApiType {
             .requestPublisher(MultiTarget(target))
             .filterSuccessfulStatusCodes()
             .map(Model.self)
+            .mapError { error -> Error in error }
+            .eraseToAnyPublisher()
+    }
+    
+    func request<Model: Decodable>(target: TargetType, atKeyPath: String?) -> AnyPublisher<Model, Error> {
+        provider
+            .requestPublisher(MultiTarget(target))
+            .filterSuccessfulStatusCodes()
+            .tryMap { try $0.map(Model.self, atKeyPath: atKeyPath) }
             .mapError { error -> Error in error }
             .eraseToAnyPublisher()
     }

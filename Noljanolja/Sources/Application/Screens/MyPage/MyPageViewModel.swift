@@ -19,8 +19,11 @@ protocol MyPageViewModelDelegate: AnyObject {}
 protocol MyPageViewModelType: ObservableObject {
     // MARK: State
 
+    var viewState: ViewState<ProfileModel, Error> { get set }
+
     // MARK: Action
 
+    var loadDataTrigger: PassthroughSubject<Void, Never> { get }
     var customerServiceCenterTrigger: PassthroughSubject<Void, Never> { get }
 }
 
@@ -30,19 +33,25 @@ final class MyPageViewModel: MyPageViewModelType {
     // MARK: Dependencies
 
     private weak var delegate: MyPageViewModelDelegate?
+    private let profileService: ProfileServiceType
 
     // MARK: State
 
+    @Published var viewState: ViewState<ProfileModel, Error> = .loading
+
     // MARK: Action
 
+    let loadDataTrigger = PassthroughSubject<Void, Never>()
     let customerServiceCenterTrigger = PassthroughSubject<Void, Never>()
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(delegate: MyPageViewModelDelegate? = nil) {
+    init(delegate: MyPageViewModelDelegate? = nil,
+         profileService: ProfileServiceType = ProfileService()) {
         self.delegate = delegate
+        self.profileService = profileService
 
         configure()
     }
@@ -55,6 +64,32 @@ final class MyPageViewModel: MyPageViewModelType {
                     UIApplication.shared.open(url)
                 }
             })
+            .store(in: &cancellables)
+
+        loadDataTrigger
+            .combineLatest($viewState) { $1 }
+            .filter { !$0.isContent }
+            .handleEvents(receiveOutput: { [weak self] _ in
+                self?.viewState = .loading
+            })
+            .flatMap { [weak self] _ -> AnyPublisher<Result<ProfileModel, Error>, Never> in
+                guard let self else { return Empty<Result<ProfileModel, Error>, Never>().eraseToAnyPublisher() }
+                return self.profileService
+                    .getProfile()
+                    .eraseToResultAnyPublisher()
+            }
+            .sink(
+                receiveValue: { [weak self] result in
+                    switch result {
+                    case let .success(profileModel):
+                        self?.viewState = .content(profileModel)
+                        logger.info("Get profile successful - Profile: name - \(profileModel.name ?? "")")
+                    case let .failure(error):
+                        self?.viewState = .error(error)
+                        logger.error("Get profile failed - Error: \(error)")
+                    }
+                }
+            )
             .store(in: &cancellables)
     }
 }
