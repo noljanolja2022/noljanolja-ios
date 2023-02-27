@@ -36,7 +36,7 @@ final class MainViewModel: MainViewModelType {
 
     // MARK: State
 
-    @Published var selectedTabItem: TabBarItem = .home
+    @Published var selectedTabItem: TabBarItem = .chat
 
     @Published var navigationType: MainNavigationType? = nil
 
@@ -56,22 +56,7 @@ final class MainViewModel: MainViewModelType {
         configure()
     }
 
-    private func configure() {
-        selectedTabItemTrigger
-            .sink { [weak self] tabBarItem in
-                switch tabBarItem {
-                case .home:
-                    self?.selectedTabItem = tabBarItem
-                case .menu, .wallet, .shop, .myPage:
-                    if self?.authService.isAuthenticated.value ?? false {
-                        self?.selectedTabItem = tabBarItem
-                    } else {
-                        self?.navigationType = .authPopup
-                    }
-                }
-            }
-            .store(in: &cancellables)
-    }
+    private func configure() {}
 }
 
 // MARK: AuthPopupViewModelDelegate

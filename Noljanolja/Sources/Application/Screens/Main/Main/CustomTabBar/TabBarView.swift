@@ -21,8 +21,8 @@ struct TabBarView: View {
 
     // MARK: Private
 
-    private let highlightItemSize: CGFloat = 72
-    private let itemSize: CGFloat = 36
+    private let highlightItemSize: CGFloat = 68
+    private let itemSize: CGFloat = 28
     private let height: CGFloat = 56
 
     init(selectionItem: Binding<TabBarItem>,
@@ -74,16 +74,18 @@ struct TabBarView: View {
             .background(Color.clear)
 
             Button(
-                action: { action(.wallet) },
+                action: { action(.content) },
                 label: {
-                    Image(uiImage: TabBarItem.wallet.image)
+                    Image(uiImage: TabBarItem.content.image)
                         .resizable()
                         .scaledToFit()
                         .frame(width: highlightItemSize, height: highlightItemSize)
                 }
             )
             .offset(y: -height / 2)
-            .background(Color.clear)
+            .foregroundColor(
+                selectionItem == .content ? selectedItemForegroundColor : itemForegroundColor
+            )
         }
         .frame(height: height)
     }
@@ -94,7 +96,7 @@ struct TabBarView: View {
                 let centerX = geometry.size.width / 2
                 let curveSize = highlightItemSize / 2
                 let smallCurveSize: CGFloat = 20
-                let padding: CGFloat = 4
+                let padding: CGFloat = 8
 
                 path.move(to: CGPoint(x: 0, y: 0))
                 path.addLine(to: CGPoint(x: centerX - curveSize - smallCurveSize - padding, y: 0))

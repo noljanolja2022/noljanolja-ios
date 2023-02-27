@@ -37,23 +37,8 @@ struct MainView<ViewModel: MainViewModelType>: View {
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
-                switch viewModel.selectedTabItem {
-                case .menu:
-                    Text("Menu")
-                        .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
-                case .home:
-                    Text("Home")
-                        .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
-                case .wallet:
-                    Text("Wallet")
-                        .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
-                case .shop:
-                    Text("Shop")
-                        .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
-                case .myPage:
-                    Text(L10n.myPage)
-                        .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
-                }
+                Text(viewModel.selectedTabItem.name)
+                    .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
             }
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -62,20 +47,28 @@ struct MainView<ViewModel: MainViewModelType>: View {
     private var content: some View {
         VStack(spacing: 0) {
             TabView(selection: $viewModel.selectedTabItem) {
-                Text("Menu")
-                    .tag(TabBarItem.menu)
+                Text("Chat")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(ColorAssets.background.swiftUIColor)
+                    .tag(TabBarItem.chat)
                 List {
                     ForEach(1...100, id: \.self) {
                         Text("\($0)")
                     }
                 }
-                .tag(TabBarItem.home)
-                Text("Wallet")
-                    .tag(TabBarItem.wallet)
-                Text("Shop")
-                    .tag(TabBarItem.shop)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(ColorAssets.background.swiftUIColor)
+                .tag(TabBarItem.event)
+                Text("Content")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(ColorAssets.background.swiftUIColor)
+                    .tag(TabBarItem.content)
+                Text("Shopping")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(ColorAssets.background.swiftUIColor)
+                    .tag(TabBarItem.shopping)
                 MyPageView()
-                    .tag(TabBarItem.myPage)
+                    .tag(TabBarItem.profile)
             }
             .introspectTabBarController { tabBarController in
                 tabBarController.tabBar.isHidden = true
@@ -83,7 +76,7 @@ struct MainView<ViewModel: MainViewModelType>: View {
             TabBarView(
                 selectionItem: $viewModel.selectedTabItem,
                 items: TabBarItem.allCases,
-                action: { viewModel.selectedTabItemTrigger.send($0) }
+                action: { viewModel.selectedTabItem = $0 }
             )
         }
         .background(ColorAssets.background.swiftUIColor)

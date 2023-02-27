@@ -10,28 +10,38 @@ import SwiftUI
 // MARK: - TabBarItem
 
 enum TabBarItem: CaseIterable {
-    case menu
-    case home
-    case wallet
-    case shop
-    case myPage
+    case chat
+    case event
+    case content
+    case shopping
+    case profile
 }
 
 extension TabBarItem {
     var image: UIImage {
         switch self {
-        case .menu: return ImageAssets.icMenu.image
-        case .home: return ImageAssets.icHome.image
-        case .wallet: return ImageAssets.icWallet.image
-        case .shop: return ImageAssets.icShop.image
-        case .myPage: return ImageAssets.icProfile.image
+        case .chat: return ImageAssets.icMessage.image
+        case .event: return ImageAssets.icCalendar.image
+        case .content: return ImageAssets.icPlayCircle.image
+        case .shopping: return ImageAssets.icCart.image
+        case .profile: return ImageAssets.icPerson.image
+        }
+    }
+
+    var name: String {
+        switch self {
+        case .chat: return "Chat"
+        case .event: return "Event"
+        case .content: return "Content"
+        case .shopping: return "Shopping"
+        case .profile: return "Profile"
         }
     }
 
     var isHighlight: Bool {
         switch self {
-        case .menu, .home, .shop, .myPage: return false
-        case .wallet: return true
+        case .chat, .event, .shopping, .profile: return false
+        case .content: return true
         }
     }
 }
