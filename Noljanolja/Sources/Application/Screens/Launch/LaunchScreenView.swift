@@ -8,18 +8,6 @@
 
 import SwiftUI
 
-// MARK: - LaunchScreenViewController
-
-struct LaunchScreenViewController: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> some UIViewController {
-        let storyboard = UIStoryboard(name: "Launch Screen", bundle: Bundle.main)
-        let controller = storyboard.instantiateViewController(identifier: "Launch View Controller")
-        return controller
-    }
-
-    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
-}
-
 // MARK: - LaunchScreenView
 
 struct LaunchScreenView<ViewModel: LaunchScreenViewModelType>: View {
@@ -36,14 +24,48 @@ struct LaunchScreenView<ViewModel: LaunchScreenViewModelType>: View {
     }
 
     var body: some View {
-        LaunchScreenViewController()
-            .ignoresSafeArea()
-            .onAppear {
-                viewModel.loadDataTrigger.send()
+        ZStack {
+            content
+            navigationLinks
+        }
+        .onAppear {
+            viewModel.loadDataTrigger.send()
+        }
+        .onReceive(viewModel.contentTypePublisher) {
+            rootViewState.contentType = $0
+        }
+    }
+
+    var content: some View {
+        ZStack(alignment: .bottom) {
+            LaunchBackgroundView()
+                .ignoresSafeArea()
+
+            if !viewModel.isContinueHidden {
+                ZStack {
+                    Button(
+                        "Continue",
+                        action: { viewModel.isShowingTerm = true }
+                    )
+                    .buttonStyle(SecondaryButtonStyle())
+                    .shadow(
+                        color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
+                    )
+                    .background(ColorAssets.white.swiftUIColor)
+                    .cornerRadius(8)
+                }
+                .padding(.horizontal, 16)
+                .padding(.bottom, 4)
             }
-            .onReceive(viewModel.isLoadDataSuccessfulPublisher) {
-                rootViewState.contentType = $0 ? .main : .auth
-            }
+        }
+    }
+
+    var navigationLinks: some View {
+        NavigationLink(
+            isActive: $viewModel.isShowingTerm,
+            destination: { TermOfServiceView() },
+            label: { EmptyView() }
+        )
     }
 }
 

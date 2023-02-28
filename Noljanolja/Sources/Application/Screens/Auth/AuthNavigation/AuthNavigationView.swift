@@ -25,14 +25,12 @@ struct AuthNavigationView<ViewModel: AuthNavigationViewModelType>: View {
     }
 
     var body: some View {
-        NavigationView {
-            content
-        }
-        .onReceive(viewModel.closePublisher) {
-            presentationMode.wrappedValue.dismiss()
-        }
-        .progressHUB(isActive: $progressHUBState.isLoading)
-        .environmentObject(progressHUBState)
+        content
+            .onReceive(viewModel.closePublisher) {
+                presentationMode.wrappedValue.dismiss()
+            }
+            .progressHUB(isActive: $progressHUBState.isLoading)
+            .environmentObject(progressHUBState)
     }
 
     private var content: some View {

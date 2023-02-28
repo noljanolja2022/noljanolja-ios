@@ -43,6 +43,7 @@ internal enum ImageAssets {
   internal static let icPlayCircleFill = SymbolAsset(name: "ic_play_circle_fill")
   internal static let icPpyy = ImageAsset(name: "ic_ppyy")
   internal static let icProfile = ImageAsset(name: "ic_profile")
+  internal static let icQuestionmarkCircle = ImageAsset(name: "ic_questionmark_circle")
   internal static let icServiceGuide = ImageAsset(name: "ic_service_guide")
   internal static let icShop = ImageAsset(name: "ic_shop")
   internal static let icStoreFill = SymbolAsset(name: "ic_store_fill")
@@ -70,6 +71,7 @@ internal enum ImageAssets {
     icNaver,
     icPpyy,
     icProfile,
+    icQuestionmarkCircle,
     icServiceGuide,
     icShop,
     icWallet,

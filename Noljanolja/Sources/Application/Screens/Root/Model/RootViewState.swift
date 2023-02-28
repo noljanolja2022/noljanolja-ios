@@ -18,7 +18,6 @@ final class RootViewState: ObservableObject {
 extension RootViewState {
     enum ContentType {
         case launch
-        case auth
         case main
     }
 }

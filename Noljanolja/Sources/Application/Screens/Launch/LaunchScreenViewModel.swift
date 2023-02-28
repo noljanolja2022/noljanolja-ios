@@ -17,7 +17,9 @@ protocol LaunchScreenViewModelDelegate: AnyObject {}
 protocol LaunchScreenViewModelType: ObservableObject {
     // MARK: State
 
-    var isLoadDataSuccessfulPublisher: AnyPublisher<Bool, Never> { get }
+    var contentTypePublisher: AnyPublisher<RootViewState.ContentType, Never> { get }
+    var isContinueHidden: Bool { get set }
+    var isShowingTerm: Bool { get set }
 
     // MARK: Action
 
@@ -35,8 +37,11 @@ final class LaunchScreenViewModel: LaunchScreenViewModelType {
 
     // MARK: State
 
-    private let isLoadDataSuccessfulSubject = PassthroughSubject<Bool, Never>()
-    var isLoadDataSuccessfulPublisher: AnyPublisher<Bool, Never> { isLoadDataSuccessfulSubject.eraseToAnyPublisher() }
+    private let contentTypeSubject = PassthroughSubject<RootViewState.ContentType, Never>()
+    var contentTypePublisher: AnyPublisher<RootViewState.ContentType, Never> { contentTypeSubject.eraseToAnyPublisher() }
+
+    @Published var isContinueHidden = true
+    @Published var isShowingTerm = false
 
     // MARK: Action
 
@@ -73,8 +78,12 @@ final class LaunchScreenViewModel: LaunchScreenViewModelType {
             .eraseToResultAnyPublisher()
             .sink(receiveValue: { [weak self] result in
                 switch result {
-                case .success: self?.isLoadDataSuccessfulSubject.send(true)
-                case .failure: self?.isLoadDataSuccessfulSubject.send(false)
+                case .success:
+                    self?.contentTypeSubject.send(.main)
+                    logger.error("Get pre data successful")
+                case let .failure(error):
+                    self?.isContinueHidden = false
+                    logger.error("Get pre data failed - \(error.localizedDescription)")
                 }
             })
             .store(in: &cancellables)
