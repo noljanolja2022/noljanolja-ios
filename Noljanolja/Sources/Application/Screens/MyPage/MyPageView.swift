@@ -31,6 +31,7 @@ struct MyPageView<ViewModel: MyPageViewModelType>: View {
         }
         .background(ColorAssets.background.swiftUIColor)
         .onAppear {
+            AuthServices.default.getIDTokenResult()
             viewModel.loadDataTrigger.send()
         }
     }

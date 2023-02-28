@@ -68,6 +68,9 @@
 		CF6ABC232993618000D78213 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = CF6ABC222993618000D78213 /* Introspect */; };
 		CF745A5A2998E5EA008177E5 /* FullSizeTappableTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF745A592998E5EA008177E5 /* FullSizeTappableTextFieldStyle.swift */; };
 		CF745A5C2998E5F2008177E5 /* AuthTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF745A5B2998E5F2008177E5 /* AuthTextFieldStyle.swift */; };
+		CF7C904729ACFFF200054671 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7C904529ACFFF200054671 /* LaunchScreenView.swift */; };
+		CF7C904829ACFFF200054671 /* LaunchScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7C904629ACFFF200054671 /* LaunchScreenViewModel.swift */; };
+		CF7C904B29AD953900054671 /* RootViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7C904A29AD953900054671 /* RootViewState.swift */; };
 		CF88ABCD299F2E7400D8AB67 /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = CF88ABCC299F2E7400D8AB67 /* SwiftUINavigation */; };
 		CFC5AC5929A603A10028BEC4 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC5AC5729A603A10028BEC4 /* MyPageView.swift */; };
 		CFC5AC5A29A603A10028BEC4 /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC5AC5829A603A10028BEC4 /* MyPageViewModel.swift */; };
@@ -217,6 +220,9 @@
 		CF6ABC1E29935D7B00D78213 /* RootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
 		CF745A592998E5EA008177E5 /* FullSizeTappableTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullSizeTappableTextFieldStyle.swift; sourceTree = "<group>"; };
 		CF745A5B2998E5F2008177E5 /* AuthTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextFieldStyle.swift; sourceTree = "<group>"; };
+		CF7C904529ACFFF200054671 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
+		CF7C904629ACFFF200054671 /* LaunchScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewModel.swift; sourceTree = "<group>"; };
+		CF7C904A29AD953900054671 /* RootViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewState.swift; sourceTree = "<group>"; };
 		CFC5AC5729A603A10028BEC4 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		CFC5AC5829A603A10028BEC4 /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
 		CFC5AC5D29A604600028BEC4 /* MyPageItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageItemView.swift; sourceTree = "<group>"; };
@@ -630,6 +636,7 @@
 		CF6ABC1A29935D5800D78213 /* Root */ = {
 			isa = PBXGroup;
 			children = (
+				CF7C904929AD952D00054671 /* Model */,
 				CF6ABC1D29935D7B00D78213 /* RootView.swift */,
 				CF6ABC1E29935D7B00D78213 /* RootViewModel.swift */,
 			);
@@ -643,6 +650,14 @@
 				CF745A5B2998E5F2008177E5 /* AuthTextFieldStyle.swift */,
 			);
 			path = Styles;
+			sourceTree = "<group>";
+		};
+		CF7C904929AD952D00054671 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CF7C904A29AD953900054671 /* RootViewState.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		CFC5AC5629A603800028BEC4 /* MyPage */ = {
@@ -798,6 +813,8 @@
 			isa = PBXGroup;
 			children = (
 				CFE978702998876B00A50083 /* Launch Screen.storyboard */,
+				CF7C904529ACFFF200054671 /* LaunchScreenView.swift */,
+				CF7C904629ACFFF200054671 /* LaunchScreenViewModel.swift */,
 			);
 			path = Launch;
 			sourceTree = "<group>";
@@ -1390,6 +1407,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF7C904729ACFFF200054671 /* LaunchScreenView.swift in Sources */,
 				CF00D163299423FB00505702 /* View+EdgeCornerRadius.swift in Sources */,
 				CFD83DD029974E4E00B9A6BB /* Navigation+Extension.swift in Sources */,
 				CF0EA31029AA3DD30014A7DE /* CountryModel.swift in Sources */,
@@ -1404,6 +1422,7 @@
 				CF0EA30929AA088B0014A7DE /* View+Border.swift in Sources */,
 				CFE0925F298EACF200F197F0 /* GoogleAuthAPI.swift in Sources */,
 				CFC709E729962CD100B64216 /* SignUpNavigationView.swift in Sources */,
+				CF7C904829ACFFF200054671 /* LaunchScreenViewModel.swift in Sources */,
 				CF6ABC1329935C2D00D78213 /* SignUpViewModel.swift in Sources */,
 				CFFC5B6229A656B2002B3381 /* MyInfoItemView.swift in Sources */,
 				CFFD70D3298AC89000D4F5A2 /* NetworkConfigs.swift in Sources */,
@@ -1433,6 +1452,7 @@
 				CFFD70C6298AC5F800D4F5A2 /* AuthPluggin.swift in Sources */,
 				CF15501029939A350053E86D /* TabLayout.swift in Sources */,
 				CFE0926B298FE73000F197F0 /* CloudFunctionAuthAPI.swift in Sources */,
+				CF7C904B29AD953900054671 /* RootViewState.swift in Sources */,
 				CFFD70CC298AC5F800D4F5A2 /* Api.swift in Sources */,
 				CF2FB264299E25D200756553 /* MainView.swift in Sources */,
 				CF14F24A298C331D00BC2066 /* ColorAssets.swift in Sources */,

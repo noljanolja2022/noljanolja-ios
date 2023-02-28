@@ -16,15 +16,25 @@ struct RootView<ViewModel: RootViewModelType>: View {
     
     @StateObject private var viewModel: ViewModel
 
+    // MARK: State
+
+    @StateObject private var state = RootViewState()
+
     init(viewModel: ViewModel = RootViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
-        if viewModel.isAuthenticated {
-            MainNavigationView()
-        } else {
-            AuthNavigationView()
+        ZStack {
+            switch state.contentType {
+            case .launch: LaunchScreenView()
+            case .auth: AuthNavigationView()
+            case .main: MainNavigationView()
+            }
+        }
+        .environmentObject(state)
+        .onReceive(viewModel.isAuthenticatedPublisher) {
+            state.contentType = $0 ? .main : .auth
         }
     }
 }

@@ -15,7 +15,7 @@ protocol RootViewModelDelegate: AnyObject {}
 // MARK: - RootViewModelType
 
 protocol RootViewModelType: ObservableObject {
-    var isAuthenticated: Bool { get }
+    var isAuthenticatedPublisher: AnyPublisher<Bool, Never> { get }
 }
 
 // MARK: - RootViewModel
@@ -26,9 +26,10 @@ final class RootViewModel: RootViewModelType {
     private weak var delegate: RootViewModelDelegate?
     private let authService: AuthServicesType
 
-    // MARK: Output
+    // MARK: State
 
-    @Published private(set) var isAuthenticated: Bool
+    var isAuthenticatedPublisher: AnyPublisher<Bool, Never> { isAuthenticatedSubject.eraseToAnyPublisher() }
+    let isAuthenticatedSubject = PassthroughSubject<Bool, Never>()
 
     // MARK: Private
 
@@ -39,14 +40,14 @@ final class RootViewModel: RootViewModelType {
         self.delegate = delegate
         self.authService = authService
 
-        self.isAuthenticated = authService.isAuthenticated.value
-
         configure()
     }
 
     private func configure() {
         authService.isAuthenticated
-            .sink { [weak self] in self?.isAuthenticated = $0 }
+            .dropFirst()
+            .removeDuplicates()
+            .sink(receiveValue: { [weak self] in self?.isAuthenticatedSubject.send($0) })
             .store(in: &cancellables)
     }
 }

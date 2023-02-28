@@ -17,6 +17,8 @@ protocol ProfileServiceType {
 // MARK: - ProfileService
 
 final class ProfileService: ProfileServiceType {
+    static let `default` = ProfileService()
+
     private let profileAPI: ProfileAPIType
 
     init(profileAPI: ProfileAPIType = ProfileAPI()) {

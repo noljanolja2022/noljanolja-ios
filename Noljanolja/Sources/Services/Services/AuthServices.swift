@@ -28,6 +28,9 @@ protocol AuthServicesType {
     func signInWithGoogle() -> AnyPublisher<String, Error>
     func signInWithKakao() -> AnyPublisher<String, Error>
     func signInWithNaver(_ signInWithNaverCompletion: (() -> Void)?) -> AnyPublisher<String, Error>
+
+    func getIDTokenResult() -> AnyPublisher<String, Error>
+
     func signOut() -> AnyPublisher<Void, Error>
 }
 
@@ -52,19 +55,10 @@ final class AuthServices: NSObject, AuthServicesType {
 
     func signUp(email: String, password: String) -> AnyPublisher<String, Error> {
         firebaseAuth.createUser(withEmail: email, password: password)
-            .flatMap { result in
-                if result.user.isEmailVerified {
-                    return result.user.getIDTokenResult()
-                        .eraseToAnyPublisher()
-                } else {
-                    return Fail<String, Error>(error: FirebaseAuthError.emailNotVerified)
-                        .eraseToAnyPublisher()
-                }
+            .flatMap { [weak self] _ in
+                guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
+                return self.getIDTokenResult()
             }
-            .handleEvents(receiveOutput: { [weak self] token in
-                self?.authStore.saveToken(token)
-                self?.isAuthenticated.send(true)
-            })
             .eraseToAnyPublisher()
     }
 
@@ -84,19 +78,10 @@ final class AuthServices: NSObject, AuthServicesType {
                 .eraseToAnyPublisher()
         }
         return user.reloadCombine()
-            .flatMap { user in
-                if user.isEmailVerified {
-                    return user.getIDTokenResult()
-                        .eraseToAnyPublisher()
-                } else {
-                    return Fail<String, Error>(error: FirebaseAuthError.emailNotVerified)
-                        .eraseToAnyPublisher()
-                }
+            .flatMap { [weak self] _ in
+                guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
+                return self.getIDTokenResult()
             }
-            .handleEvents(receiveOutput: { [weak self] token in
-                self?.authStore.saveToken(token)
-                self?.isAuthenticated.send(true)
-            })
             .eraseToAnyPublisher()
     }
 
@@ -112,13 +97,10 @@ final class AuthServices: NSObject, AuthServicesType {
             verificationCode: verificationCode
         )
         return firebaseAuth.signIn(with: credential)
-            .flatMap { result in
-                result.user.getIDTokenResult()
+            .flatMap { [weak self] _ in
+                guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
+                return self.getIDTokenResult()
             }
-            .handleEvents(receiveOutput: { [weak self] token in
-                self?.authStore.saveToken(token)
-                self?.isAuthenticated.send(true)
-            })
             .eraseToAnyPublisher()
     }
 
@@ -129,19 +111,10 @@ final class AuthServices: NSObject, AuthServicesType {
 
     func signIn(email: String, password: String) -> AnyPublisher<String, Error> {
         firebaseAuth.signIn(withEmail: email, password: password)
-            .flatMap { result in
-                if result.user.isEmailVerified {
-                    return result.user.getIDTokenResult()
-                        .eraseToAnyPublisher()
-                } else {
-                    return Fail<String, Error>(error: FirebaseAuthError.emailNotVerified)
-                        .eraseToAnyPublisher()
-                }
+            .flatMap { [weak self] _ in
+                guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
+                return self.getIDTokenResult()
             }
-            .handleEvents(receiveOutput: { [weak self] token in
-                self?.authStore.saveToken(token)
-                self?.isAuthenticated.send(true)
-            })
             .eraseToAnyPublisher()
     }
 
@@ -154,19 +127,10 @@ final class AuthServices: NSObject, AuthServicesType {
                     .signIn(with: credential)
                     .eraseToAnyPublisher()
             }
-            .flatMap { result in
-                if result.user.isEmailVerified {
-                    return result.user.getIDTokenResult()
-                        .eraseToAnyPublisher()
-                } else {
-                    return Fail<String, Error>(error: FirebaseAuthError.emailNotVerified)
-                        .eraseToAnyPublisher()
-                }
+            .flatMap { [weak self] _ in
+                guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
+                return self.getIDTokenResult()
             }
-            .handleEvents(receiveOutput: { [weak self] token in
-                self?.authStore.saveToken(token)
-                self?.isAuthenticated.send(true)
-            })
             .eraseToAnyPublisher()
     }
 
@@ -179,13 +143,10 @@ final class AuthServices: NSObject, AuthServicesType {
                     .signIn(with: credential)
                     .eraseToAnyPublisher()
             }
-            .flatMap { result in
-                result.user.getIDTokenResult()
+            .flatMap { [weak self] _ in
+                guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
+                return self.getIDTokenResult()
             }
-            .handleEvents(receiveOutput: { [weak self] token in
-                self?.authStore.saveToken(token)
-                self?.isAuthenticated.send(true)
-            })
             .eraseToAnyPublisher()
     }
 
@@ -201,13 +162,10 @@ final class AuthServices: NSObject, AuthServicesType {
                     .signIn(withCustomToken: $0)
                     .eraseToAnyPublisher()
             }
-            .flatMap { result in
-                result.user.getIDTokenResult()
+            .flatMap { [weak self] _ in
+                guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
+                return self.getIDTokenResult()
             }
-            .handleEvents(receiveOutput: { [weak self] token in
-                self?.authStore.saveToken(token)
-                self?.isAuthenticated.send(true)
-            })
             .eraseToAnyPublisher()
     }
 
@@ -225,9 +183,26 @@ final class AuthServices: NSObject, AuthServicesType {
                     .signIn(withCustomToken: $0)
                     .eraseToAnyPublisher()
             }
-            .flatMap { result in
-                result.user.getIDTokenResult()
+            .flatMap { [weak self] _ in
+                guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
+                return self.getIDTokenResult()
             }
+            .eraseToAnyPublisher()
+    }
+
+    func getIDTokenResult() -> AnyPublisher<String, Error> {
+        guard let user = firebaseAuth.currentUser else {
+            return Fail<String, Error>(error: FirebaseAuthError.userNotFound)
+                .eraseToAnyPublisher()
+        }
+
+        guard user.providerData.first(where: { $0.providerID == "password" }) == nil ||
+            user.isEmailVerified else {
+            return Fail<String, Error>(error: FirebaseAuthError.emailNotVerified)
+                .eraseToAnyPublisher()
+        }
+
+        return user.getIDTokenResult()
             .handleEvents(receiveOutput: { [weak self] token in
                 self?.authStore.saveToken(token)
                 self?.isAuthenticated.send(true)

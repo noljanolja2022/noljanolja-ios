@@ -57,7 +57,7 @@ struct AuthNavigationView<ViewModel: AuthNavigationViewModelType>: View {
     private var authView: some View {
 //        AuthView(
 //            viewModel: AuthViewModel(delegate: viewModel)
-//        )message
+//        )
         AuthWithPhoneView()
     }
 }

@@ -49,7 +49,7 @@ final class MyPageViewModel: MyPageViewModelType {
     private var cancellables = Set<AnyCancellable>()
 
     init(delegate: MyPageViewModelDelegate? = nil,
-         profileService: ProfileServiceType = ProfileService()) {
+         profileService: ProfileServiceType = ProfileService.default) {
         self.delegate = delegate
         self.profileService = profileService
 
@@ -67,8 +67,7 @@ final class MyPageViewModel: MyPageViewModelType {
             .store(in: &cancellables)
 
         loadDataTrigger
-            .combineLatest($viewState) { $1 }
-            .filter { !$0.isContent }
+            .first()
             .handleEvents(receiveOutput: { [weak self] _ in
                 self?.viewState = .loading
             })
