@@ -55,7 +55,7 @@ struct TabBarView: View {
                         action: { action(item) },
                         label: {
                             if !item.isHighlight {
-                                Image(uiImage: item.image)
+                                Image(item.imageName)
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: itemSize, height: itemSize)
@@ -76,7 +76,7 @@ struct TabBarView: View {
             Button(
                 action: { action(.content) },
                 label: {
-                    Image(uiImage: TabBarItem.content.image)
+                    Image(TabBarItem.content.imageName)
                         .resizable()
                         .scaledToFit()
                         .frame(width: highlightItemSize, height: highlightItemSize)

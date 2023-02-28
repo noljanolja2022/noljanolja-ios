@@ -18,13 +18,13 @@ enum TabBarItem: CaseIterable {
 }
 
 extension TabBarItem {
-    var image: UIImage {
+    var imageName: String {
         switch self {
-        case .chat: return ImageAssets.icMessage.image
-        case .event: return ImageAssets.icCalendar.image
-        case .content: return ImageAssets.icPlayCircle.image
-        case .shopping: return ImageAssets.icCart.image
-        case .profile: return ImageAssets.icPerson.image
+        case .chat: return ImageAssets.icChatFill.name
+        case .event: return ImageAssets.icCelebrationFill.name
+        case .content: return ImageAssets.icPlayCircleFill.name
+        case .shopping: return ImageAssets.icStoreFill.name
+        case .profile: return ImageAssets.icPersonFill.name
         }
     }
 
