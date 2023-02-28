@@ -10,8 +10,6 @@ import SwiftUI
 // MARK: - ProgressHUBState
 
 final class ProgressHUBState: ObservableObject {
-    static let `default` = ProgressHUBState()
-
     @Published var isLoading = false
 }
 

@@ -18,6 +18,7 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
 
     // MARK: State
 
+    @EnvironmentObject private var rootViewState: RootViewState
     @EnvironmentObject private var progressHUBState: ProgressHUBState
 
     init(viewModel: ViewModel = AuthWithPhoneViewModel()) {

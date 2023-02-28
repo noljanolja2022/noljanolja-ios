@@ -17,6 +17,8 @@ protocol MyInfoViewModelDelegate: AnyObject {}
 protocol MyInfoViewModelType: ObservableObject {
     // MARK: State
 
+    var profileModel: ProfileModel? { get set }
+
     // MARK: Action
 
     var signOutTrigger: PassthroughSubject<Void, Never> { get }
@@ -32,6 +34,8 @@ final class MyInfoViewModel: MyInfoViewModelType {
 
     // MARK: State
 
+    @Published var profileModel: ProfileModel?
+
     // MARK: Action
 
     let signOutTrigger = PassthroughSubject<Void, Never>()
@@ -41,9 +45,11 @@ final class MyInfoViewModel: MyInfoViewModelType {
     private var cancellables = Set<AnyCancellable>()
 
     init(delegate: MyInfoViewModelDelegate? = nil,
-         authServices: AuthServicesType = AuthServices.default) {
+         authServices: AuthServicesType = AuthServices.default,
+         profileModel: ProfileModel?) {
         self.delegate = delegate
         self.authServices = authServices
+        self.profileModel = profileModel
 
         configure()
     }

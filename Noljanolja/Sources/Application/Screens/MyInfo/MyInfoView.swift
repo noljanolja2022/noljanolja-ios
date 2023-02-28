@@ -17,14 +17,14 @@ struct MyInfoView<ViewModel: MyInfoViewModelType>: View {
 
     // MARK: State
 
-    init(viewModel: ViewModel = MyInfoViewModel()) {
+    init(viewModel: ViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
-                Text("noljanolja")
+                Text(viewModel.profileModel?.name ?? "")
                     .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
                     .frame(height: 82)
                 Divider()
@@ -59,6 +59,6 @@ struct MyInfoView<ViewModel: MyInfoViewModelType>: View {
 
 struct MyInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        MyInfoView()
+        MyInfoView(viewModel: MyInfoViewModel(profileModel: nil))
     }
 }

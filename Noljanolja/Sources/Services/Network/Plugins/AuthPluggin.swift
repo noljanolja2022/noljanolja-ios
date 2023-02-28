@@ -20,7 +20,7 @@ struct AuthPluggin: PluginType {
 
         var request = request
         if let token = AuthStore.default.getToken() {
-            request.addValue(token, forHTTPHeaderField: "Authorization")
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
 
         return request

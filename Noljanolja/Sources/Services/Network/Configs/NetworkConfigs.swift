@@ -8,5 +8,5 @@
 import Foundation
 
 enum NetworkConfigs {
-    static let baseUrl = "https://www.google.com/"
+    static let baseUrl = "http://34.64.110.104/api"
 }

@@ -28,8 +28,8 @@ internal enum ImageAssets {
   internal static let icArrowRight = ImageAsset(name: "ic_arrow_right")
   internal static let icBack = ImageAsset(name: "ic_back")
   internal static let icBicycle = ImageAsset(name: "ic_bicycle")
-  internal static let icCalendar = ImageAsset(name: "ic_calendar")
-  internal static let icCart = ImageAsset(name: "ic_cart")
+  internal static let icCelebrationFill = SymbolAsset(name: "ic_celebration_fill")
+  internal static let icChatFill = SymbolAsset(name: "ic_chat_fill")
   internal static let icCheckCircle = ImageAsset(name: "ic_check_circle")
   internal static let icCheckCircleHightlight = ImageAsset(name: "ic_check_circle_hightlight")
   internal static let icClose = ImageAsset(name: "ic_close")
@@ -38,14 +38,15 @@ internal enum ImageAssets {
   internal static let icHome = ImageAsset(name: "ic_home")
   internal static let icKakao = ImageAsset(name: "ic_kakao")
   internal static let icMenu = ImageAsset(name: "ic_menu")
-  internal static let icMessage = ImageAsset(name: "ic_message")
   internal static let icNaver = ImageAsset(name: "ic_naver")
-  internal static let icPerson = ImageAsset(name: "ic_person")
-  internal static let icPlayCircle = ImageAsset(name: "ic_play_circle")
+  internal static let icPersonFill = SymbolAsset(name: "ic_person_fill")
+  internal static let icPlayCircleFill = SymbolAsset(name: "ic_play_circle_fill")
   internal static let icPpyy = ImageAsset(name: "ic_ppyy")
   internal static let icProfile = ImageAsset(name: "ic_profile")
+  internal static let icQuestionmarkCircle = ImageAsset(name: "ic_questionmark_circle")
   internal static let icServiceGuide = ImageAsset(name: "ic_service_guide")
   internal static let icShop = ImageAsset(name: "ic_shop")
+  internal static let icStoreFill = SymbolAsset(name: "ic_store_fill")
   internal static let icWallet = ImageAsset(name: "ic_wallet")
   internal static let icWelcomeText = ImageAsset(name: "ic_welcome_text")
   internal static let logo = ImageAsset(name: "logo")
@@ -59,8 +60,6 @@ internal enum ImageAssets {
     icArrowRight,
     icBack,
     icBicycle,
-    icCalendar,
-    icCart,
     icCheckCircle,
     icCheckCircleHightlight,
     icClose,
@@ -69,17 +68,23 @@ internal enum ImageAssets {
     icHome,
     icKakao,
     icMenu,
-    icMessage,
     icNaver,
-    icPerson,
-    icPlayCircle,
     icPpyy,
     icProfile,
+    icQuestionmarkCircle,
     icServiceGuide,
     icShop,
     icWallet,
     icWelcomeText,
     logo,
+  ]
+  @available(*, deprecated, message: "All values properties are now deprecated")
+  internal static let allSymbols: [SymbolAsset] = [
+    icCelebrationFill,
+    icChatFill,
+    icPersonFill,
+    icPlayCircleFill,
+    icStoreFill,
   ]
   // swiftlint:enable trailing_comma
 }
@@ -162,6 +167,66 @@ internal extension SwiftUI.Image {
   }
 
   init(decorative asset: ImageAsset) {
+    let bundle = BundleToken.bundle
+    self.init(decorative: asset.name, bundle: bundle)
+  }
+}
+#endif
+
+internal struct SymbolAsset {
+  internal fileprivate(set) var name: String
+
+  #if os(iOS) || os(tvOS) || os(watchOS)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+  internal typealias Configuration = UIImage.SymbolConfiguration
+  internal typealias Image = UIImage
+
+  @available(iOS 12.0, tvOS 12.0, watchOS 5.0, *)
+  internal var image: Image {
+    let bundle = BundleToken.bundle
+    #if os(iOS) || os(tvOS)
+    let image = Image(named: name, in: bundle, compatibleWith: nil)
+    #elseif os(watchOS)
+    let image = Image(named: name)
+    #endif
+    guard let result = image else {
+      fatalError("Unable to load symbol asset named \(name).")
+    }
+    return result
+  }
+
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+  internal func image(with configuration: Configuration) -> Image {
+    let bundle = BundleToken.bundle
+    guard let result = Image(named: name, in: bundle, with: configuration) else {
+      fatalError("Unable to load symbol asset named \(name).")
+    }
+    return result
+  }
+  #endif
+
+  #if canImport(SwiftUI)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+  internal var swiftUIImage: SwiftUI.Image {
+    SwiftUI.Image(asset: self)
+  }
+  #endif
+}
+
+#if canImport(SwiftUI)
+@available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+internal extension SwiftUI.Image {
+  init(asset: SymbolAsset) {
+    let bundle = BundleToken.bundle
+    self.init(asset.name, bundle: bundle)
+  }
+
+  init(asset: SymbolAsset, label: Text) {
+    let bundle = BundleToken.bundle
+    self.init(asset.name, bundle: bundle, label: label)
+  }
+
+  init(decorative asset: SymbolAsset) {
     let bundle = BundleToken.bundle
     self.init(decorative: asset.name, bundle: bundle)
   }

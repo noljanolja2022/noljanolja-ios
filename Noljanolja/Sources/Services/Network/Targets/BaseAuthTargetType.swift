@@ -8,4 +8,4 @@
 import Foundation
 import Moya
 
-protocol BaseAuthTargetType: BaseTargetType {}
+protocol BaseAuthTargetType: BaseTargetType, AuthConfigurable {}

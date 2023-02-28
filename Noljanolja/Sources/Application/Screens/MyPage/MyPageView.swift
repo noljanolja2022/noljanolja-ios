@@ -22,15 +22,32 @@ struct MyPageView<ViewModel: MyPageViewModelType>: View {
     }
 
     var body: some View {
+        ZStack {
+            switch viewModel.viewState {
+            case .loading: buildLoadingView()
+            case let .content(data): buildContentView(data)
+            case let .error(error): buildErrorView(error)
+            }
+        }
+        .background(ColorAssets.background.swiftUIColor)
+        .onAppear {
+            AuthServices.default.getIDTokenResult()
+            viewModel.loadDataTrigger.send()
+        }
+    }
+
+    private func buildContentView(_ data: ProfileModel) -> some View {
         ScrollView {
             VStack(spacing: 16) {
                 NavigationLink(
                     destination: {
-                        MyInfoView()
+                        MyInfoView(
+                            viewModel: MyInfoViewModel(profileModel: data)
+                        )
                     },
                     label: {
                         MyPageItemView(
-                            title: L10n.MyPage.hello("noljanolja"),
+                            title: L10n.MyPage.hello(data.name ?? ""),
                             titleFont: FontFamily.NotoSans.bold.swiftUIFont(size: 18)
                         )
                     }
@@ -74,8 +91,33 @@ struct MyPageView<ViewModel: MyPageViewModelType>: View {
             }
             .padding(16)
         }
-        .background(ColorAssets.background.swiftUIColor)
+        .background(Color.clear)
         .clipped()
+    }
+
+    private func buildLoadingView() -> some View {
+        LoadingView()
+            .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
+            .background(Color.clear)
+    }
+
+    private func buildErrorView(_: Error) -> some View {
+        StateView(
+            title: "Error",
+            description: L10n.Common.Error.message,
+            actions: {
+                Button("Try again") {
+                    viewModel.loadDataTrigger.send()
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
+                .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
+                .foregroundColor(ColorAssets.white.swiftUIColor)
+                .background(ColorAssets.red.swiftUIColor)
+                .cornerRadius(8)
+            }
+        )
+        .background(Color.clear)
     }
 }
 
