@@ -31,13 +31,15 @@ struct RootView<ViewModel: RootViewModelType>: View {
                 NavigationView {
                     LaunchScreenView()
                 }
+            case .auth:
+                AuthNavigationView()
             case .main:
                 MainNavigationView()
             }
         }
         .environmentObject(state)
         .onReceive(viewModel.isAuthenticatedPublisher) {
-            state.contentType = $0 ? .main : .launch
+            state.contentType = $0 ? .main : .auth
         }
     }
 }
