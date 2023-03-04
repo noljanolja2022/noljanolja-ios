@@ -26,7 +26,7 @@ struct AuthNavigationView<ViewModel: AuthNavigationViewModelType>: View {
 
     var body: some View {
         content
-            .onReceive(viewModel.closePublisher) {
+            .onReceive(viewModel.state.closePublisher) {
                 presentationMode.wrappedValue.dismiss()
             }
             .progressHUB(isActive: $progressHUBState.isLoading)

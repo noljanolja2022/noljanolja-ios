@@ -10,12 +10,12 @@ import Foundation
 // MARK: - Country
 
 struct Country: Equatable {
-    let nameCode: String
+    let code: String
     let phoneCode: String
     let name: String
 
-    init(_ nameCode: String, _ phoneCode: String, _ name: String) {
-        self.nameCode = nameCode
+    init(_ code: String, _ phoneCode: String, _ name: String) {
+        self.code = code
         self.phoneCode = phoneCode
         self.name = name
     }
@@ -24,12 +24,12 @@ struct Country: Equatable {
 // MARK: Identifiable
 
 extension Country: Identifiable {
-    var id: String { nameCode }
+    var id: String { code }
 }
 
 extension Country {
     func getFlagEmoji() -> String {
-        switch nameCode {
+        switch code {
         case "ad": return "🇦🇩"
         case "ae": return "🇦🇪"
         case "af": return "🇦🇫"
@@ -286,7 +286,7 @@ extension Country {
 }
 
 extension Country {
-    static let `default` = Country("vn", "84", "Vietnam")
+    static let `default` = Country("kr", "82", "South Korea")
 
     static let countries = [
         Country("ad", "376", "Andorra"),

@@ -7,6 +7,7 @@
 //
 
 import Combine
+import Foundation
 
 // MARK: - SelectCountryViewModelDelegate
 
@@ -16,62 +17,72 @@ protocol SelectCountryViewModelDelegate: AnyObject {
 
 // MARK: - SelectCountryViewModelType
 
-protocol SelectCountryViewModelType: ObservableObject {
-    // MARK: State
+protocol SelectCountryViewModelType:
+    ViewModelType where State == SelectCountryViewModel.State, Action == SelectCountryViewModel.Action {}
 
-    var searchText: String { get set }
-    var countries: [Country] { get set }
+extension SelectCountryViewModel {
+    struct State {
+        var searchString = ""
+        var selectedCountry: Country
+        var countries = [Country]()
+    }
 
-    // MARK: Action
-
-    var selectCountryTrigger: CurrentValueSubject<Country?, Never> { get }
+    enum Action {
+        case loadData
+        case selectCountry(Country)
+    }
 }
 
 // MARK: - SelectCountryViewModel
 
 final class SelectCountryViewModel: SelectCountryViewModelType {
+    // MARK: State
+
+    @Published var state: State
+
     // MARK: Dependencies
 
     private weak var delegate: SelectCountryViewModelDelegate?
 
-    // MARK: State
-
-    @Published var searchText = ""
-    @Published var countries: [Country] = Country.countries.sorted(by: \.name)
-
     // MARK: Action
-
-    let selectCountryTrigger: CurrentValueSubject<Country?, Never>
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(delegate: SelectCountryViewModelDelegate? = nil,
-         selectedCountry: Country? = nil) {
+    init(state: State,
+         delegate: SelectCountryViewModelDelegate? = nil) {
+        self.state = state
         self.delegate = delegate
-        self.selectCountryTrigger = CurrentValueSubject<Country?, Never>(selectedCountry)
 
         configure()
     }
 
+    func send(_ action: Action) {
+        switch action {
+        case .loadData:
+            state.countries = Country.countries.sorted(by: \.name)
+        case let .selectCountry(country):
+            delegate?.didSelectCountry(country)
+        }
+    }
+
     private func configure() {
-        $searchText
+        $state
+            .map { $0.searchString }
+            .removeDuplicates()
+            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
             .map { text in
                 Country.countries
                     .filter {
                         guard !text.isEmpty else { return true }
-                        return $0.name.lowercased().contains(text.lowercased())
+                        return $0.code.lowercased().contains(text.lowercased())
+                            || $0.phoneCode.lowercased().contains(text.lowercased())
+                            || $0.name.lowercased().contains(text.lowercased())
                     }
                     .sorted(by: \.name)
             }
-            .sink(receiveValue: { [weak self] in self?.countries = $0 })
-            .store(in: &cancellables)
-
-        selectCountryTrigger
-            .dropFirst()
-            .compactMap { $0 }
-            .sink(receiveValue: { [weak self] in self?.delegate?.didSelectCountry($0) })
+            .sink(receiveValue: { [weak self] in self?.state.countries = $0 })
             .store(in: &cancellables)
     }
 }

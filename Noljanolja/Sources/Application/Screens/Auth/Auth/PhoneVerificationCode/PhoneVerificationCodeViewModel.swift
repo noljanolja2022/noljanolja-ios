@@ -8,6 +8,7 @@
 
 import Combine
 import Foundation
+import SwiftUINavigation
 
 // MARK: - PhoneVerificationCodeViewModelDelegate
 
@@ -15,119 +16,132 @@ protocol PhoneVerificationCodeViewModelDelegate: AnyObject {}
 
 // MARK: - PhoneVerificationCodeViewModelType
 
-protocol PhoneVerificationCodeViewModelType: ObservableObject {
-    // MARK: State
+protocol PhoneVerificationCodeViewModelType:
+    ViewModelType where State == PhoneVerificationCodeViewModel.State, Action == PhoneVerificationCodeViewModel.Action {}
 
-    var phoneNumber: String { get }
-    var country: Country { get }
-    var verificationCode: String { get set }
+extension PhoneVerificationCodeViewModel {
+    struct State {
+        fileprivate let country: Country
+        fileprivate let phoneNumber: String
+        var fullPhoneNumber: String {
+            "+\(country.phoneCode)\(phoneNumber)"
+        }
 
-    var countdownResendCodeTime: Int { get set }
+        var verificationCode = ""
+        var countdownResendCodeTime = 0
+        var isProgressHUDShowing = false
+        var alertState: AlertState<Void>?
 
-    var isShowingProgressHUDPublisher: Published<Bool>.Publisher { get }
+        init(country: Country, phoneNumber: String) {
+            self.country = country
+            self.phoneNumber = phoneNumber
+        }
+    }
 
-    var isAlertMessagePresented: Bool { get set }
-    var alertMessage: String { get set }
-
-    // MARK: Action
-
-    var resendCodeTrigger: PassthroughSubject<Void, Never> { get }
-    var verifyTrigger: PassthroughSubject<Void, Never> { get }
+    enum Action {
+        case resendCode
+        case startResendCodeCountdownTime
+        case verifyCode
+    }
 }
 
 // MARK: - PhoneVerificationCodeViewModel
 
 final class PhoneVerificationCodeViewModel: PhoneVerificationCodeViewModelType {
-    // MARK: Dependencies
-
-    private weak var delegate: PhoneVerificationCodeViewModelDelegate?
-    private let authServices: AuthServicesType
-    let phoneNumber: String
-    let country: Country
-    private var verificationID: String
-
     // MARK: State
 
-    @Published var countdownResendCodeTime = 0
+    @Published var state: State
 
-    @Published var verificationCode = ""
+    // MARK: Dependencies
 
-    @Published private var isShowingProgressHUD = false
-    var isShowingProgressHUDPublisher: Published<Bool>.Publisher { $isShowingProgressHUD }
-
-    @Published var isAlertMessagePresented = false
-    @Published var alertMessage = ""
+    private var verificationID: String
+    private let authServices: AuthServicesType
+    private weak var delegate: PhoneVerificationCodeViewModelDelegate?
 
     // MARK: Action
 
-    let resendCodeTrigger = PassthroughSubject<Void, Never>()
-    let verifyTrigger = PassthroughSubject<Void, Never>()
+    private let resendCodeTrigger = PassthroughSubject<Void, Never>()
+    private let verifyTrigger = PassthroughSubject<Void, Never>()
 
     // MARK: Private
 
-    private let maxCountdownResendCodeTime = 60
-    private var countdownResendCodeTimeCancellable: AnyCancellable?
+    private let resendCodeDuration = 90
+    private var resendCodeCancellable: AnyCancellable?
     private var cancellables = Set<AnyCancellable>()
 
-    init(delegate: PhoneVerificationCodeViewModelDelegate? = nil,
+    init(state: State,
+         verificationID: String,
          authServices: AuthServicesType = AuthServices.default,
-         phoneNumber: String,
-         country: Country,
-         verificationID: String) {
-        self.delegate = delegate
-        self.authServices = authServices
-        self.phoneNumber = phoneNumber
-        self.country = country
+         delegate: PhoneVerificationCodeViewModelDelegate? = nil) {
+        self.state = state
         self.verificationID = verificationID
+        self.authServices = authServices
+        self.delegate = delegate
 
         configure()
     }
 
+    func send(_ action: Action) {
+        switch action {
+        case .resendCode:
+            resendCodeTrigger.send()
+        case .startResendCodeCountdownTime:
+            startCountdownResendCodeTime()
+        case .verifyCode:
+            verifyTrigger.send()
+        }
+    }
+
     private func configure() {
         resendCodeTrigger
-            .handleEvents(receiveOutput: { [weak self] _ in self?.isShowingProgressHUD = true })
+            .handleEvents(receiveOutput: { [weak self] _ in self?.state.isProgressHUDShowing = true })
             .flatMap { [weak self] _ -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
-                let phoneNumber = "+\(self.country.phoneCode)\(self.phoneNumber)"
-                logger.info("Send phone number verification code: \(phoneNumber)")
+                logger.info("Send verification code to phone: \(self.state.fullPhoneNumber)")
                 return self.authServices
-                    .sendPhoneVerificationCode(phoneNumber, languageCode: self.country.nameCode)
+                    .sendPhoneVerificationCode(self.state.fullPhoneNumber, languageCode: self.state.country.code)
                     .eraseToResultAnyPublisher()
             }
             .sink(receiveValue: { [weak self] result in
                 guard let self else { return }
-                self.isShowingProgressHUD = false
+                self.state.isProgressHUDShowing = false
                 switch result {
                 case let .success(verificationID):
-                    logger.info("Send phone number verification code successful - VerificationID: \(verificationID)")
+                    logger.info("Send verification code successful - VerificationID: \(verificationID)")
                     self.verificationID = verificationID
-                    self.startCountdownResendCodeTime()
+                    self.send(.startResendCodeCountdownTime)
                 case let .failure(error):
-                    logger.error("Send phone number verification code failed: \(error.localizedDescription)")
-                    self.isAlertMessagePresented = true
-                    self.alertMessage = L10n.Common.Error.message
+                    logger.error("Send verification code failed: \(error.localizedDescription)")
+                    self.state.alertState = AlertState(
+                        title: TextState("Error"),
+                        message: TextState(L10n.Common.Error.message),
+                        dismissButton: .cancel(TextState("OK"))
+                    )
                 }
             })
             .store(in: &cancellables)
 
         verifyTrigger
-            .handleEvents(receiveOutput: { [weak self] _ in self?.isShowingProgressHUD = true })
+            .handleEvents(receiveOutput: { [weak self] _ in self?.state.isProgressHUDShowing = true })
             .flatMap { [weak self] _ -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
-                    .verificationCode(verificationID: self.verificationID, verificationCode: self.verificationCode)
+                    .verificationCode(verificationID: self.verificationID, verificationCode: self.state.verificationCode)
                     .eraseToResultAnyPublisher()
             }
             .sink(receiveValue: { [weak self] result in
                 guard let self else { return }
-                self.isShowingProgressHUD = false
+                self.state.isProgressHUDShowing = false
                 switch result {
                 case let .success(token):
-                    logger.info("Verify phone number successful - Token: \(token)")
+                    logger.info("Verify verification code successful - Token: \(token)")
                 case let .failure(error):
-                    logger.error("Verify phone number code failed: \(error.localizedDescription)")
-                    self.isAlertMessagePresented = true
-                    self.alertMessage = L10n.Common.Error.message
+                    logger.error("Verify verification code code failed: \(error.localizedDescription)")
+                    self.state.alertState = AlertState(
+                        title: TextState("Error"),
+                        message: TextState(L10n.Common.Error.message),
+                        dismissButton: .cancel(TextState("OK"))
+                    )
                 }
             })
             .store(in: &cancellables)
@@ -136,15 +150,15 @@ final class PhoneVerificationCodeViewModel: PhoneVerificationCodeViewModelType {
     }
 
     private func startCountdownResendCodeTime() {
-        countdownResendCodeTime = maxCountdownResendCodeTime
-        countdownResendCodeTimeCancellable = Timer
+        state.countdownResendCodeTime = resendCodeDuration
+        resendCodeCancellable = Timer
             .publish(every: 1, on: .main, in: .common)
             .autoconnect()
             .sink(receiveValue: { [weak self] _ in
                 guard let self else { return }
-                self.countdownResendCodeTime -= 1
-                if self.countdownResendCodeTime == 0 {
-                    self.countdownResendCodeTimeCancellable = nil
+                self.state.countdownResendCodeTime -= 1
+                if self.state.countdownResendCodeTime == 0 {
+                    self.resendCodeCancellable = nil
                 }
             })
     }

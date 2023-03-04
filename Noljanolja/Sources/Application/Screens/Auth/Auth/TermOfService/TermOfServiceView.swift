@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SwiftUINavigation
 
 // MARK: - TermOfServiceView
 
@@ -36,7 +37,7 @@ struct TermOfServiceView<ViewModel: TermOfServiceViewModelType>: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(
-                    action: { viewModel.isShowHelpAlert = true },
+                    action: { viewModel.send(.openHelpAlert) },
                     label: {
                         ImageAssets.icQuestionmarkCircle.swiftUIImage
                             .resizable()
@@ -47,13 +48,7 @@ struct TermOfServiceView<ViewModel: TermOfServiceViewModelType>: View {
                 .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
             }
         }
-        .alert(isPresented: $viewModel.isShowHelpAlert) {
-            Alert(
-                title: Text(""),
-                message: Text("You may choose to agree to ther terms individually.\nYou may use ther service even if you don't agree to the optional terms and coditions"),
-                dismissButton: .cancel()
-            )
-        }
+        .alert(item: $viewModel.state.alertState) { Alert($0) { _ in } }
     }
 
     private var content: some View {
@@ -67,10 +62,10 @@ struct TermOfServiceView<ViewModel: TermOfServiceViewModelType>: View {
     private var action: some View {
         Button(
             "Agree and Continue",
-            action: { viewModel.isShowingAuthView = true }
+            action: { viewModel.send(.tapContinueButton) }
         )
-        .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.isAllTermAgreed))
-        .disabled(!viewModel.isAllTermAgreed)
+        .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.state.isAllTermChecked))
+        .disabled(!viewModel.state.isAllTermChecked)
         .shadow(
             color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
         )
@@ -79,14 +74,9 @@ struct TermOfServiceView<ViewModel: TermOfServiceViewModelType>: View {
 
     private var allTermItem: some View {
         TermOfServiceItemView(
-            selected: Binding(
-                get: { viewModel.isAllTermAgreed },
-                set: { value in
-                    viewModel.isAllTermAgreed = value
-                    viewModel.termItemTypes.keys.forEach {
-                        viewModel.termItemTypes[$0] = value
-                    }
-                }
+            selected: Binding<Bool>(
+                get: { viewModel.state.isAllTermChecked },
+                set: { viewModel.send(.checkAllTermItems(checked: $0)) }
             ),
             title: "I have read and agreed to all terms and conditions",
             titleLineLimit: nil,
@@ -111,20 +101,12 @@ struct TermOfServiceView<ViewModel: TermOfServiceViewModelType>: View {
                             }
                             .sorted { $0.rawValue < $1.rawValue }
                     ) { itemType in
-                        let seleted = Binding(
-                            get: { viewModel.termItemTypes[itemType] ?? false },
-                            set: {
-                                viewModel.termItemTypes[itemType] = $0
-                                viewModel.isAllTermAgreed = viewModel.termItemTypes
-                                    .map { $0.value }
-                                    .reduce(true) { $0 && $1 }
-                            }
-                        )
-
                         TermOfServiceItemView(
-                            selected: seleted,
-                            title: itemType.title,
-                            action: {}
+                            selected: Binding<Bool>(
+                                get: { viewModel.state.termItemCheckeds[itemType] ?? false },
+                                set: { viewModel.send(.checkTermItem(itemType: itemType, checked: $0)) }
+                            ),
+                            title: itemType.title
                         )
 
                         Divider()
@@ -139,7 +121,7 @@ struct TermOfServiceView<ViewModel: TermOfServiceViewModelType>: View {
 
     var navigationLinks: some View {
         NavigationLink(
-            isActive: $viewModel.isShowingAuthView,
+            isActive: $viewModel.state.isAuthShown,
             destination: { AuthNavigationView() },
             label: { EmptyView() }
         )

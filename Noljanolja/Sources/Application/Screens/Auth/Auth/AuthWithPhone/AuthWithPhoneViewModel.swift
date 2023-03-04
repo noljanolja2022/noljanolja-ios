@@ -7,6 +7,7 @@
 //
 
 import Combine
+import SwiftUINavigation
 
 // MARK: - AuthWithPhoneViewModelDelegate
 
@@ -14,75 +15,110 @@ protocol AuthWithPhoneViewModelDelegate: AnyObject {}
 
 // MARK: - AuthWithPhoneViewModelType
 
-protocol AuthWithPhoneViewModelType: ObservableObject, SelectCountryViewModelDelegate {
-    // MARK: State
+protocol AuthWithPhoneViewModelType: SelectCountryViewModelDelegate,
+    ViewModelType where State == AuthWithPhoneViewModel.State, Action == AuthWithPhoneViewModel.Action {}
 
-    var country: Country { get set }
+extension AuthWithPhoneViewModel {
+    struct State {
+        var phoneNumber = ""
+        var country = Country.default
+        var fullPhoneNumber: String {
+            "+\(country.phoneCode)\(phoneNumber)"
+        }
 
-    var phoneNumber: String { get set }
-    var phoneNumberErrorMessage: String? { get set }
+        var isSignInButtonEnabled: Bool {
+            !phoneNumber.isEmpty
+        }
 
-    var isShowingProgressHUDPublisher: Published<Bool>.Publisher { get }
+        var verificationID: String?
+        var isProgressHUDShowing = false
+        var alertState: AlertState<Bool>?
+    }
 
-    var isSignInButtonEnabled: Bool { get set }
-    var isAlertMessagePresented: Bool { get set }
-    var alertMessage: String { get set }
-
-    var isShowingSelectPhoneNumbers: Bool { get set }
-    var verificationID: String? { get set }
-
-    // MARK: Action
-
-    var sendPhoneVerificationCodeTrigger: PassthroughSubject<String, Never> { get }
-    var signInWithGoogleTrigger: PassthroughSubject<Void, Never> { get }
+    enum Action {
+        case showConfirmPhoneAlert
+        case sendVerificationCode
+        case signInWithGoogle
+    }
 }
 
 // MARK: - AuthWithPhoneViewModel
 
 final class AuthWithPhoneViewModel: AuthWithPhoneViewModelType {
-    // MARK: Dependencies
-
-    private weak var delegate: AuthWithPhoneViewModelDelegate?
-    private let authServices: AuthServicesType
-
     // MARK: State
 
-    @Published var country = Country.default
+    @Published var state: State
 
-    @Published var phoneNumber = ""
-    @Published var phoneNumberErrorMessage: String? = nil
+    // MARK: Dependencies
 
-    @Published var isSignInButtonEnabled = true
-
-    @Published private var isShowingProgressHUD = false
-    var isShowingProgressHUDPublisher: Published<Bool>.Publisher { $isShowingProgressHUD }
-
-    @Published var isAlertMessagePresented = false
-    @Published var alertMessage = ""
-
-    @Published var isShowingSelectPhoneNumbers = false
-    @Published var verificationID: String? = nil
+    private let authServices: AuthServicesType
+    private weak var delegate: AuthWithPhoneViewModelDelegate?
 
     // MARK: Action
 
-    let sendPhoneVerificationCodeTrigger = PassthroughSubject<String, Never>()
-    let signInWithGoogleTrigger = PassthroughSubject<Void, Never>()
+    private let sendVerificationCodeTrigger = PassthroughSubject<Void, Never>()
+    private let signInWithGoogleTrigger = PassthroughSubject<Void, Never>()
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(delegate: AuthWithPhoneViewModelDelegate? = nil,
-         authServices: AuthServicesType = AuthServices.default) {
-        self.delegate = delegate
+    init(state: State = State(),
+         authServices: AuthServicesType = AuthServices.default,
+         delegate: AuthWithPhoneViewModelDelegate? = nil) {
+        self.state = state
         self.authServices = authServices
+        self.delegate = delegate
 
         configure()
     }
 
+    func send(_ action: Action) {
+        switch action {
+        case .showConfirmPhoneAlert:
+            state.alertState = AlertState(
+                title: TextState(state.fullPhoneNumber),
+                message: TextState("You will receive a code to verify to this phone number via text message."),
+                primaryButton: .destructive(TextState("Cancel")),
+                secondaryButton: .default(TextState("Confirm"), action: .send(true))
+            )
+        case .sendVerificationCode:
+            sendVerificationCodeTrigger.send()
+        case .signInWithGoogle:
+            signInWithGoogleTrigger.send()
+        }
+    }
+
     private func configure() {
+        sendVerificationCodeTrigger
+            .handleEvents(receiveOutput: { [weak self] _ in self?.state.isProgressHUDShowing = true })
+            .flatMap { [weak self] _ -> AnyPublisher<Result<String, Error>, Never> in
+                guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
+                logger.info("Send verification code to phone: \(self.state.fullPhoneNumber)")
+                return self.authServices
+                    .sendPhoneVerificationCode(self.state.fullPhoneNumber, languageCode: self.state.country.code)
+                    .eraseToResultAnyPublisher()
+            }
+            .sink(receiveValue: { [weak self] result in
+                guard let self else { return }
+                self.state.isProgressHUDShowing = false
+                switch result {
+                case let .success(verificationID):
+                    logger.info("Send verification code successful - VerificationID: \(verificationID)")
+                    self.state.verificationID = verificationID
+                case let .failure(error):
+                    logger.error("Send verification code failed: \(error.localizedDescription)")
+                    self.state.alertState = AlertState(
+                        title: TextState("Error"),
+                        message: TextState(L10n.Common.Error.message),
+                        dismissButton: .cancel(TextState("OK"))
+                    )
+                }
+            })
+            .store(in: &cancellables)
+
         signInWithGoogleTrigger
-            .handleEvents(receiveOutput: { [weak self] _ in self?.isShowingProgressHUD = true })
+            .handleEvents(receiveOutput: { [weak self] _ in self?.state.isProgressHUDShowing = true })
             .flatMap { [weak self] _ -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
@@ -90,39 +126,17 @@ final class AuthWithPhoneViewModel: AuthWithPhoneViewModelType {
                     .eraseToResultAnyPublisher()
             }
             .sink(receiveValue: { [weak self] result in
-                self?.isShowingProgressHUD = false
+                self?.state.isProgressHUDShowing = false
                 switch result {
                 case let .success(idToken):
                     logger.info("Signed in with Google successful - Token: \(idToken)")
                 case let .failure(error):
                     logger.error("Sign in with Google failed: \(error.localizedDescription)")
-                    self?.isAlertMessagePresented = true
-                    self?.alertMessage = L10n.Common.Error.message
-                }
-            })
-            .store(in: &cancellables)
-
-        sendPhoneVerificationCodeTrigger
-            .handleEvents(receiveOutput: { [weak self] _ in self?.isShowingProgressHUD = true })
-            .flatMap { [weak self] phoneNumber -> AnyPublisher<Result<String, Error>, Never> in
-                guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
-                let phoneNumber = "+\(self.country.phoneCode)\(phoneNumber)"
-                logger.info("Send phone number verification code: \(phoneNumber)")
-                return self.authServices
-                    .sendPhoneVerificationCode(phoneNumber, languageCode: self.country.nameCode)
-                    .eraseToResultAnyPublisher()
-            }
-            .sink(receiveValue: { [weak self] result in
-                guard let self else { return }
-                self.isShowingProgressHUD = false
-                switch result {
-                case let .success(verificationID):
-                    logger.info("Send phone number verification code successful - VerificationID: \(verificationID)")
-                    self.verificationID = verificationID
-                case let .failure(error):
-                    logger.error("Send phone number verification code failed: \(error.localizedDescription)")
-                    self.isAlertMessagePresented = true
-                    self.alertMessage = L10n.Common.Error.message
+                    self?.state.alertState = AlertState(
+                        title: TextState("Error"),
+                        message: TextState(L10n.Common.Error.message),
+                        dismissButton: .cancel(TextState("OK"))
+                    )
                 }
             })
             .store(in: &cancellables)
@@ -133,6 +147,6 @@ final class AuthWithPhoneViewModel: AuthWithPhoneViewModelType {
 
 extension AuthWithPhoneViewModel: SelectCountryViewModelDelegate {
     func didSelectCountry(_ country: Country) {
-        self.country = country
+        state.country = country
     }
 }

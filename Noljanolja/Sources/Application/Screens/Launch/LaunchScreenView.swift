@@ -15,10 +15,6 @@ struct LaunchScreenView<ViewModel: LaunchScreenViewModelType>: View {
 
     @StateObject private var viewModel: ViewModel
 
-    // MARK: State
-
-    @EnvironmentObject private var rootViewState: RootViewState
-
     init(viewModel: ViewModel = LaunchScreenViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
@@ -28,12 +24,7 @@ struct LaunchScreenView<ViewModel: LaunchScreenViewModelType>: View {
             content
             navigationLinks
         }
-        .onAppear {
-            viewModel.loadDataTrigger.send()
-        }
-        .onReceive(viewModel.contentTypePublisher) {
-            rootViewState.contentType = $0
-        }
+        .onAppear { viewModel.send(.loadData) }
     }
 
     var content: some View {
@@ -41,11 +32,13 @@ struct LaunchScreenView<ViewModel: LaunchScreenViewModelType>: View {
             LaunchBackgroundView()
                 .ignoresSafeArea()
 
-            if !viewModel.isContinueHidden {
+            if !viewModel.state.isContinueButtonHidden {
                 ZStack {
                     Button(
                         "Continue",
-                        action: { viewModel.isShowingTerm = true }
+                        action: {
+                            viewModel.send(.navigateToTerms)
+                        }
                     )
                     .buttonStyle(SecondaryButtonStyle())
                     .shadow(
@@ -62,7 +55,7 @@ struct LaunchScreenView<ViewModel: LaunchScreenViewModelType>: View {
 
     var navigationLinks: some View {
         NavigationLink(
-            isActive: $viewModel.isShowingTerm,
+            isActive: $viewModel.state.isTermsShown,
             destination: { TermOfServiceView() },
             label: { EmptyView() }
         )

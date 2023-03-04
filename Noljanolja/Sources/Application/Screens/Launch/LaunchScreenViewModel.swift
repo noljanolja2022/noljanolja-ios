@@ -10,55 +10,67 @@ import Combine
 
 // MARK: - LaunchScreenViewModelDelegate
 
-protocol LaunchScreenViewModelDelegate: AnyObject {}
+protocol LaunchScreenViewModelDelegate: AnyObject {
+    func getLaunchDataFailed()
+}
 
 // MARK: - LaunchScreenViewModelType
 
-protocol LaunchScreenViewModelType: ObservableObject {
-    // MARK: State
+protocol LaunchScreenViewModelType:
+    ViewModelType where State == LaunchScreenViewModel.State, Action == LaunchScreenViewModel.Action {}
 
-    var contentTypePublisher: AnyPublisher<RootViewState.ContentType, Never> { get }
-    var isContinueHidden: Bool { get set }
-    var isShowingTerm: Bool { get set }
+extension LaunchScreenViewModel {
+    struct State {
+        var isContinueButtonHidden = true
+        var isTermsShown = false
+    }
 
-    // MARK: Action
-
-    var loadDataTrigger: PassthroughSubject<Void, Never> { get }
+    enum Action {
+        case loadData
+        case navigateToTerms
+    }
 }
 
 // MARK: - LaunchScreenViewModel
 
 final class LaunchScreenViewModel: LaunchScreenViewModelType {
-    // MARK: Dependencies
-
-    private weak var delegate: LaunchScreenViewModelDelegate?
-    private let authServices: AuthServicesType
-    private let profileService: ProfileServiceType
-
     // MARK: State
 
-    private let contentTypeSubject = PassthroughSubject<RootViewState.ContentType, Never>()
-    var contentTypePublisher: AnyPublisher<RootViewState.ContentType, Never> { contentTypeSubject.eraseToAnyPublisher() }
+    @Published var state: State
 
-    @Published var isContinueHidden = true
-    @Published var isShowingTerm = false
+    // MARK: Dependencies
+
+    private let authServices: AuthServicesType
+    private let profileService: ProfileServiceType
+    private weak var delegate: LaunchScreenViewModelDelegate?
 
     // MARK: Action
 
-    let loadDataTrigger = PassthroughSubject<Void, Never>()
+    private let loadDataTrigger = PassthroughSubject<Void, Never>()
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(delegate: LaunchScreenViewModelDelegate? = nil,
+    init(state: State = State(),
          authServices: AuthServicesType = AuthServices.default,
-         profileService: ProfileServiceType = ProfileService.default) {
-        self.delegate = delegate
+         profileService: ProfileServiceType = ProfileService.default,
+         delegate: LaunchScreenViewModelDelegate? = nil) {
+        self.state = state
         self.authServices = authServices
         self.profileService = profileService
+        self.delegate = delegate
 
         configure()
+    }
+
+    func send(_ action: Action) {
+        switch action {
+        case .loadData:
+            loadDataTrigger.send()
+        case .navigateToTerms:
+            state.isTermsShown = true
+        }
     }
 
     private func configure() {
@@ -79,11 +91,10 @@ final class LaunchScreenViewModel: LaunchScreenViewModelType {
             .sink(receiveValue: { [weak self] result in
                 switch result {
                 case .success:
-                    self?.contentTypeSubject.send(.main)
                     logger.error("Get pre data successful")
                 case let .failure(error):
-                    self?.isContinueHidden = false
                     logger.error("Get pre data failed - \(error.localizedDescription)")
+                    self?.state.isContinueButtonHidden = false
                 }
             })
             .store(in: &cancellables)

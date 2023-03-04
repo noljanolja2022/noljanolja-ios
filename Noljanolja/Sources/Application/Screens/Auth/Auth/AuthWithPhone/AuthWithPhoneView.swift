@@ -18,7 +18,7 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
 
     // MARK: State
 
-    @EnvironmentObject private var rootViewState: RootViewState
+    @State private var isSelectCountryShown = false
     @EnvironmentObject private var progressHUBState: ProgressHUBState
 
     init(viewModel: ViewModel = AuthWithPhoneViewModel()) {
@@ -29,13 +29,15 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
         ZStack {
             content
             NavigationLink(
-                unwrapping: $viewModel.verificationID,
+                unwrapping: $viewModel.state.verificationID,
                 onNavigate: { _ in },
                 destination: { verificationID in
                     PhoneVerificationCodeView(
                         viewModel: PhoneVerificationCodeViewModel(
-                            phoneNumber: viewModel.phoneNumber,
-                            country: viewModel.country,
+                            state: PhoneVerificationCodeViewModel.State(
+                                country: viewModel.state.country,
+                                phoneNumber: viewModel.state.phoneNumber
+                            ),
                             verificationID: verificationID.wrappedValue
                         )
                     )
@@ -43,23 +45,27 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
                 label: { EmptyView() }
             )
         }
-        .onReceive(viewModel.isShowingProgressHUDPublisher) {
+        .onChange(of: viewModel.state.isProgressHUDShowing) {
             progressHUBState.isLoading = $0
         }
-        .fullScreenCover(isPresented: $viewModel.isShowingSelectPhoneNumbers) {
-            SelectCountryView(
-                viewModel: SelectCountryViewModel(
-                    delegate: viewModel,
-                    selectedCountry: viewModel.country
+        .fullScreenCover(isPresented: $isSelectCountryShown) {
+            NavigationView {
+                SelectCountryView(
+                    viewModel: SelectCountryViewModel(
+                        state: SelectCountryViewModel.State(
+                            selectedCountry: viewModel.state.country
+                        ),
+                        delegate: viewModel
+                    )
                 )
-            )
+            }
         }
-        .alert(isPresented: $viewModel.isAlertMessagePresented) {
-            Alert(
-                title: Text(L10n.Common.Error.title),
-                message: Text(viewModel.alertMessage),
-                dismissButton: .default(Text(L10n.Common.ok))
-            )
+        .alert(item: $viewModel.state.alertState) {
+            Alert($0) { action in
+                if let action, action {
+                    viewModel.send(.sendVerificationCode)
+                }
+            }
         }
     }
 
@@ -80,15 +86,13 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
                 .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
             HStack(spacing: 12) {
                 Button(
-                    action: {
-                        viewModel.isShowingSelectPhoneNumbers = true
-                    },
+                    action: { isSelectCountryShown = true },
                     label: {
                         VStack(spacing: 4) {
                             Text("Contry")
                                 .font(FontFamily.NotoSans.medium.swiftUIFont(size: 16))
                                 .foregroundColor(ColorAssets.forcegroundSecondary.swiftUIColor)
-                            Text(viewModel.country.name)
+                            Text(viewModel.state.country.name)
                                 .font(FontFamily.NotoSans.medium.swiftUIFont(size: 16))
                                 .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
                                 .frame(height: 32)
@@ -104,9 +108,9 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
                         .font(FontFamily.NotoSans.medium.swiftUIFont(size: 16))
                         .foregroundColor(ColorAssets.forcegroundSecondary.swiftUIColor)
                     HStack(spacing: 4) {
-                        Text("+\(viewModel.country.phoneCode)")
+                        Text("+\(viewModel.state.country.phoneCode)")
                             .font(FontFamily.NotoSans.medium.swiftUIFont(size: 16))
-                        TextField("", text: $viewModel.phoneNumber)
+                        TextField("", text: $viewModel.state.phoneNumber)
                             .keyboardType(.phonePad)
                             .textFieldStyle(FullSizeTappableTextFieldStyle())
                             .frame(height: 32)
@@ -116,22 +120,14 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
                 .padding(12)
                 .background(ColorAssets.gray.swiftUIColor)
                 .cornerRadius(12)
-                .overlayBorder(
-                    color: viewModel.phoneNumberErrorMessage == nil
-                        ? Color.clear
-                        : ColorAssets.red.swiftUIColor
-                )
-                .errorMessage($viewModel.phoneNumberErrorMessage)
             }
 
             Button(
                 L10n.Auth.SignIn.title,
-                action: {
-                    viewModel.sendPhoneVerificationCodeTrigger.send(viewModel.phoneNumber)
-                }
+                action: { viewModel.send(.showConfirmPhoneAlert) }
             )
-            .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.isSignInButtonEnabled))
-            .disabled(!viewModel.isSignInButtonEnabled)
+            .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.state.isSignInButtonEnabled))
+            .disabled(!viewModel.state.isSignInButtonEnabled)
             .shadow(
                 color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
             )
@@ -154,12 +150,8 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
             .padding(.vertical, 24)
 
             Button(
-                action: {
-                    viewModel.signInWithGoogleTrigger.send()
-                },
-                label: {
-                    ImageAssets.icGoogle.swiftUIImage.resizable()
-                }
+                action: { viewModel.send(.signInWithGoogle) },
+                label: { ImageAssets.icGoogle.swiftUIImage.resizable() }
             )
             .frame(width: 42, height: 42)
             .cornerRadius(21)

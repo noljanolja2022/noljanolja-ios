@@ -38,35 +38,29 @@ struct PhoneVerificationCodeView<ViewModel: PhoneVerificationCodeViewModelType>:
                     .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
             }
         }
-        .onReceive(viewModel.isShowingProgressHUDPublisher) {
+        .onChange(of: viewModel.state.isProgressHUDShowing) {
             progressHUBState.isLoading = $0
         }
-        .alert(isPresented: $viewModel.isAlertMessagePresented) {
-            Alert(
-                title: Text(L10n.Common.Error.title),
-                message: Text(viewModel.alertMessage),
-                dismissButton: .default(Text(L10n.Common.ok))
-            )
-        }
+        .alert(item: $viewModel.state.alertState) { Alert($0) { _ in } }
     }
 
     var content: some View {
         VStack(spacing: 16) {
-            Text("We've sent a text message with your verification code to +\(viewModel.country.phoneCode)\(viewModel.phoneNumber)")
+            Text("We've sent a text message with your verification code to \(viewModel.state.fullPhoneNumber)")
                 .font(FontFamily.NotoSans.medium.swiftUIFont(size: 16))
                 .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
-            CodeView(text: $viewModel.verificationCode) {
-                viewModel.verifyTrigger.send()
+            CodeView(text: $viewModel.state.verificationCode) {
+                viewModel.send(.verifyCode)
             }
             HStack {
                 Spacer()
-                if viewModel.countdownResendCodeTime != 0 {
-                    Text("Resend code in \(viewModel.countdownResendCodeTime) seconds")
+                if viewModel.state.countdownResendCodeTime != 0 {
+                    Text("Resend code in \(viewModel.state.countdownResendCodeTime) seconds")
                 } else {
                     Button("Resend code") {
-                        viewModel.resendCodeTrigger.send(())
+                        viewModel.send(.resendCode)
                     }
                 }
             }
@@ -94,8 +88,10 @@ struct PhoneVerificationCodeView_Previews: PreviewProvider {
     static var previews: some View {
         PhoneVerificationCodeView(
             viewModel: PhoneVerificationCodeViewModel(
-                phoneNumber: "123456789",
-                country: .default,
+                state: PhoneVerificationCodeViewModel.State(
+                    country: .default,
+                    phoneNumber: "12345678"
+                ),
                 verificationID: ""
             )
         )

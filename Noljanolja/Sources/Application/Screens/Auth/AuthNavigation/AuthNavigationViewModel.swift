@@ -14,10 +14,19 @@ protocol AuthNavigationViewModelDelegate: AnyObject {}
 
 // MARK: - AuthNavigationViewModelType
 
-protocol AuthNavigationViewModelType: ObservableObject, AuthViewModelDelegate {
-    // MARK: State
+protocol AuthNavigationViewModelType:
+    ViewModelType where State == AuthNavigationViewModel.State, Action == AuthNavigationViewModel.Action {}
 
-    var closePublisher: PassthroughSubject<Void, Never> { get }
+extension AuthNavigationViewModel {
+    struct State {
+        var closePublisher: AnyPublisher<Void, Never> { closeSubject.eraseToAnyPublisher() }
+
+        // MARK: Private
+
+        fileprivate let closeSubject = PassthroughSubject<Void, Never>()
+    }
+
+    enum Action {}
 }
 
 // MARK: - AuthNavigationViewModel
@@ -29,7 +38,7 @@ final class AuthNavigationViewModel: AuthNavigationViewModelType {
 
     // MARK: State
 
-    let closePublisher = PassthroughSubject<Void, Never>()
+    @Published var state = State()
 
     // MARK: Private
 
@@ -42,12 +51,14 @@ final class AuthNavigationViewModel: AuthNavigationViewModelType {
     }
 
     private func configure() {}
+
+    func send(_: Action) {}
 }
 
 // MARK: AuthViewModelDelegate
 
 extension AuthNavigationViewModel: AuthViewModelDelegate {
     func closeAuthFlow() {
-        closePublisher.send()
+        state.closeSubject.send()
     }
 }

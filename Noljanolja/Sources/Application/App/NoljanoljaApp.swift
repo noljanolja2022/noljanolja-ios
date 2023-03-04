@@ -5,6 +5,7 @@
 //  Created by Nguyen The Trinh on 01/02/2023.
 //
 
+import _SwiftUINavigationState
 import FirebaseAuth
 import FirebaseCore
 import GoogleSignIn
