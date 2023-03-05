@@ -14,40 +14,81 @@ protocol RootViewModelDelegate: AnyObject {}
 
 // MARK: - RootViewModelType
 
-protocol RootViewModelType: ObservableObject {
-    var isAuthenticatedPublisher: AnyPublisher<Bool, Never> { get }
+private typealias SubViewModelDelegates = LaunchRootViewModelDelegate & AuthRootViewModelDelegate
+
+// MARK: - RootViewModelType
+
+protocol RootViewModelType: LaunchRootViewModelDelegate,
+    AuthRootViewModelDelegate,
+    MainViewModelDelegate,
+    ViewModelType where State == RootViewModel.State, Action == RootViewModel.Action {}
+
+// MARK: - RootViewModel
+
+extension RootViewModel {
+    struct State {
+        enum ContentType {
+            case launch
+            case auth
+            case main
+        }
+
+        var contentType: ContentType = .launch
+    }
+
+    enum Action {}
 }
 
 // MARK: - RootViewModel
 
 final class RootViewModel: RootViewModelType {
+    // MARK: State
+
+    @Published var state: State
+
     // MARK: Dependencies
 
     private weak var delegate: RootViewModelDelegate?
-    private let authService: AuthServicesType
-
-    // MARK: State
-
-    var isAuthenticatedPublisher: AnyPublisher<Bool, Never> { isAuthenticatedSubject.eraseToAnyPublisher() }
-    let isAuthenticatedSubject = PassthroughSubject<Bool, Never>()
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(delegate: RootViewModelDelegate? = nil,
-         authService: AuthServicesType = AuthServices.default) {
+    init(state: State = State(),
+         delegate: RootViewModelDelegate? = nil) {
+        self.state = state
         self.delegate = delegate
-        self.authService = authService
 
         configure()
     }
 
-    private func configure() {
-        authService.isAuthenticated
-            .dropFirst()
-            .removeDuplicates()
-            .sink(receiveValue: { [weak self] in self?.isAuthenticatedSubject.send($0) })
-            .store(in: &cancellables)
+    func send(_: Action) {}
+
+    private func configure() {}
+}
+
+extension RootViewModel {
+    func navigateToMain() {
+        state.contentType = .main
+    }
+}
+
+// MARK: LaunchRootViewModelDelegate
+
+extension RootViewModel: LaunchRootViewModelDelegate {
+    func navigateToAuth() {
+        state.contentType = .auth
+    }
+}
+
+// MARK: AuthRootViewModelDelegate
+
+extension RootViewModel: AuthRootViewModelDelegate {}
+
+// MARK: MainViewModelDelegate
+
+extension RootViewModel: MainViewModelDelegate {
+    func didSignOut() {
+        state.contentType = .auth
     }
 }

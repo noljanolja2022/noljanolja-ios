@@ -8,12 +8,16 @@
 import Foundation
 
 struct ProfileModel: Decodable {
-    let id: String
-    let name: String?
-    let profileImage: String?
-    let pushToken: String?
-    let pushNotiEnabled: Bool?
-    let phone: String?
     let email: String?
+    let id: String
     let isEmailVerified: Bool?
+    let name: String?
+    let phone: String?
+    let profileImage: String?
+    let pushNotiEnabled: Bool?
+    let pushToken: String?
+
+    var isSetup: Bool {
+        !name.unwrapped(or: "").isEmpty
+    }
 }
