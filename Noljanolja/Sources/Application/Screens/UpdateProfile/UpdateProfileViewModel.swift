@@ -13,7 +13,9 @@ import UIKit
 
 // MARK: - UpdateProfileViewModelDelegate
 
-protocol UpdateProfileViewModelDelegate: AnyObject {}
+protocol UpdateProfileViewModelDelegate: AnyObject {
+    func didUpdateProfile()
+}
 
 // MARK: - UpdateProfileViewModelType
 
@@ -40,6 +42,7 @@ extension UpdateProfileViewModel {
     enum Action {
         case openAvatarActionSheet
         case openGenderActionSheet
+        case updateProfile
     }
 }
 
@@ -74,6 +77,8 @@ final class UpdateProfileViewModel: UpdateProfileViewModelType {
             state.actionSheetType = .avatar
         case .openGenderActionSheet:
             state.actionSheetType = .gender
+        case .updateProfile:
+            delegate?.didUpdateProfile()
         }
     }
 

@@ -19,13 +19,13 @@ public protocol ViewModelType<State, Action>: ObservableObject {
     func send(_ action: Action)
 }
 
-// MARK: - ViewModelGetOnlyType
+// MARK: - ViewModelStateGetOnlyType
 
-public protocol ViewModelGetOnlyType<State, Action>: ObservableObject {
+public protocol ViewModelStateGetOnlyType<State, Action>: ObservableObject {
     associatedtype State
     associatedtype Action
 
-    var state: State { get set }
+    var state: State { get }
 
     func send(_ action: Action)
 }

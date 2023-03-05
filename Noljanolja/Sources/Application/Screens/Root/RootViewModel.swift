@@ -14,20 +14,26 @@ protocol RootViewModelDelegate: AnyObject {}
 
 // MARK: - RootViewModelType
 
-protocol RootViewModelType: LaunchScreenViewModelDelegate,
+private typealias SubViewModelDelegates = LaunchRootViewModelDelegate & AuthRootViewModelDelegate
+
+// MARK: - RootViewModelType
+
+protocol RootViewModelType: LaunchRootViewModelDelegate,
+    AuthRootViewModelDelegate,
+    MainViewModelDelegate,
     ViewModelType where State == RootViewModel.State, Action == RootViewModel.Action {}
 
 // MARK: - RootViewModel
 
 extension RootViewModel {
     struct State {
-        var contentType: ContentType = .launch
-
         enum ContentType {
             case launch
             case auth
             case main
         }
+
+        var contentType: ContentType = .launch
     }
 
     enum Action {}
@@ -43,17 +49,14 @@ final class RootViewModel: RootViewModelType {
     // MARK: Dependencies
 
     private weak var delegate: RootViewModelDelegate?
-    private let authService: AuthServicesType
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
     init(state: State = State(),
-         delegate: RootViewModelDelegate? = nil,
-         authService: AuthServicesType = AuthServices.default) {
+         delegate: RootViewModelDelegate? = nil) {
         self.state = state
-        self.authService = authService
         self.delegate = delegate
 
         configure()
@@ -61,29 +64,31 @@ final class RootViewModel: RootViewModelType {
 
     func send(_: Action) {}
 
-    private func configure() {
-        authService.isAuthenticated
-            .dropFirst()
-            .removeDuplicates()
-            .sink(receiveValue: { [weak self] in
-                self?.state.contentType = $0 ? .main : .auth
-            })
-            .store(in: &cancellables)
+    private func configure() {}
+}
 
-//        authService
-//            .signOut()
-//            .sink(
-//                receiveCompletion: { _ in },
-//                receiveValue: { _ in }
-//            )
-//            .store(in: &cancellables)
+extension RootViewModel {
+    func navigateToMain() {
+        state.contentType = .main
     }
 }
 
-// MARK: LaunchScreenViewModelDelegate
+// MARK: LaunchRootViewModelDelegate
 
-extension RootViewModel: LaunchScreenViewModelDelegate {
-    func getLaunchDataFailed() {
+extension RootViewModel: LaunchRootViewModelDelegate {
+    func navigateToAuth() {
+        state.contentType = .auth
+    }
+}
+
+// MARK: AuthRootViewModelDelegate
+
+extension RootViewModel: AuthRootViewModelDelegate {}
+
+// MARK: MainViewModelDelegate
+
+extension RootViewModel: MainViewModelDelegate {
+    func didSignOut() {
         state.contentType = .auth
     }
 }

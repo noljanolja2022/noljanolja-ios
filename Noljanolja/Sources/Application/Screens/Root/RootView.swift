@@ -26,15 +26,31 @@ struct RootView<ViewModel: RootViewModelType>: View {
         ZStack {
             switch viewModel.state.contentType {
             case .launch:
+                LaunchRootView(
+                    viewModel: LaunchRootViewModel(
+                        delegate: viewModel
+                    )
+                )
+            case .auth:
+                AuthRootView(
+                    viewModel: AuthRootViewModel(
+                        delegate: viewModel
+                    )
+                )
+            case .main:
                 NavigationView {
-                    LaunchScreenView(
-                        viewModel: LaunchScreenViewModel(delegate: viewModel)
+                    MainView(
+                        viewModel: MainViewModel(
+                            delegate: viewModel
+                        )
                     )
                 }
-            case .auth:
-                AuthNavigationView()
-            case .main:
-                MainNavigationView()
+                .introspectNavigationController { navigationController in
+                    navigationController.configure(
+                        backgroundColor: ColorAssets.highlightPrimary.color,
+                        foregroundColor: ColorAssets.forcegroundPrimary.color
+                    )
+                }
             }
         }
     }

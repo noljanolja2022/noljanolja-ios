@@ -140,7 +140,7 @@ struct UpdateProfileView<ViewModel: UpdateProfileViewModelType>: View {
 
             Button(
                 "OK",
-                action: {}
+                action: { viewModel.send(.updateProfile) }
             )
             .buttonStyle(PrimaryButtonStyle())
             .shadow(
