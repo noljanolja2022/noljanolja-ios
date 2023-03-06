@@ -58,8 +58,10 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
     }
 
     var newChatView: some View {
-        Button(
-            action: {},
+        NavigationLink(
+            destination: {
+                ContactListView()
+            },
             label: {
                 HStack(spacing: 12) {
                     Image(systemName: "plus.message")
@@ -78,6 +80,7 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
                 .shadow(color: Color.black.opacity(0.3), radius: 8, y: 8)
             }
         )
+        .foregroundColor(Color.black)
         .padding(16)
     }
 }
