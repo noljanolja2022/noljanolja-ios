@@ -25,6 +25,7 @@ struct AuthRootView<ViewModel: AuthRootViewModelType>: View {
 
     var body: some View {
         content
+            .progressHUB(isActive: $progressHUBState.isLoading)
             .environmentObject(progressHUBState)
     }
 
