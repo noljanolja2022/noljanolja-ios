@@ -22,10 +22,20 @@ struct MainView<ViewModel: MainViewModelType>: View {
     }
 
     var body: some View {
-        TabView {
-            Text("Chat")
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(ColorAssets.background.swiftUIColor)
+        content
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text(viewModel.state.selectedTab.rawValue)
+                        .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
+                }
+            }
+    }
+
+    var content: some View {
+        TabView(selection: $viewModel.state.selectedTab) {
+            ConversationListView()
+                .tag(ViewModel.State.Tab.chat)
                 .tabItem {
                     Image(systemName: "message.fill")
                         .resizable()
@@ -36,8 +46,8 @@ struct MainView<ViewModel: MainViewModelType>: View {
                 }
 
             Text("Events")
+                .tag(ViewModel.State.Tab.events)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(ColorAssets.background.swiftUIColor)
                 .tabItem {
                     Image(systemName: "calendar")
                         .resizable()
@@ -48,8 +58,8 @@ struct MainView<ViewModel: MainViewModelType>: View {
                 }
 
             Text("Content")
+                .tag(ViewModel.State.Tab.content)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(ColorAssets.background.swiftUIColor)
                 .tabItem {
                     Image(systemName: "play.circle.fill")
                         .resizable()
@@ -60,8 +70,8 @@ struct MainView<ViewModel: MainViewModelType>: View {
                 }
             
             Text("Shop")
+                .tag(ViewModel.State.Tab.shop)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(ColorAssets.background.swiftUIColor)
                 .tabItem {
                     Image(systemName: "cart.fill")
                         .resizable()
@@ -76,6 +86,7 @@ struct MainView<ViewModel: MainViewModelType>: View {
                     delegate: viewModel
                 )
             )
+            .tag(ViewModel.State.Tab.profile)
             .tabItem {
                 Image(systemName: "person.fill")
                     .resizable()
@@ -93,6 +104,14 @@ struct MainView<ViewModel: MainViewModelType>: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        NavigationView {
+            MainView()
+        }
+        .introspectNavigationController { navigationController in
+            navigationController.configure(
+                backgroundColor: ColorAssets.highlightPrimary.color,
+                foregroundColor: ColorAssets.forcegroundPrimary.color
+            )
+        }
     }
 }

@@ -51,5 +51,7 @@
 		<key>UISceneConfigurations</key>
 		<dict/>
 	</dict>
+	<key>NSContactsUsageDescription</key>
+	<string>To help you message friends and family on Noja Noja, allow Noja Noja access to your contacts</string>
 </dict>
 </plist>

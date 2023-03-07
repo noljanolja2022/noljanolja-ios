@@ -21,7 +21,17 @@ protocol MainViewModelType: ProfileViewModelDelegate,
     ViewModelType where State == MainViewModel.State, Action == MainViewModel.Action {}
 
 extension MainViewModel {
-    struct State {}
+    struct State {
+        enum Tab: String {
+            case chat = "Chat"
+            case events = "Events"
+            case content = "Content"
+            case shop = "Shop"
+            case profile = "Profile"
+        }
+
+        var selectedTab = Tab.chat
+    }
 
     enum Action {}
 }

@@ -101,13 +101,12 @@ final class PhoneVerificationCodeViewModel: PhoneVerificationCodeViewModelType {
     private func configure() {
         resendCodeTrigger
             .handleEvents(receiveOutput: { [weak self] _ in self?.state.isProgressHUDShowing = true })
-            .flatMap { [weak self] _ -> AnyPublisher<String, Error> in
+            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<String, Error> in
                 guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
                 logger.info("Send verification code to phone: \(self.state.fullPhoneNumber)")
                 return self.authServices
                     .sendPhoneVerificationCode(self.state.fullPhoneNumber, languageCode: self.state.country.code)
             }
-            .eraseToResultAnyPublisher()
             .sink(receiveValue: { [weak self] result in
                 guard let self else { return }
                 self.state.isProgressHUDShowing = false
@@ -128,19 +127,20 @@ final class PhoneVerificationCodeViewModel: PhoneVerificationCodeViewModelType {
             .store(in: &cancellables)
 
         verifyTrigger
+            .print("OKOKOKOKOK - trigger")
             .handleEvents(receiveOutput: { [weak self] _ in self?.state.isProgressHUDShowing = true })
-            .flatMap { [weak self] _ -> AnyPublisher<String, Error> in
-                guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
-                return self.authServices
-                    .verificationCode(verificationID: self.verificationID, verificationCode: self.state.verificationCode)
-            }
-            .flatMap { [weak self] _ -> AnyPublisher<ProfileModel, Error> in
+            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<ProfileModel, Error> in
                 guard let self else {
                     return Empty<ProfileModel, Error>().eraseToAnyPublisher()
                 }
-                return self.profileService.getProfile()
+                return self.authServices
+                    .verificationCode(verificationID: self.verificationID, verificationCode: self.state.verificationCode)
+                    .flatMap { _ in
+                        self.profileService.getProfile()
+                    }
+                    .eraseToAnyPublisher()
             }
-            .eraseToResultAnyPublisher()
+            .print("OKOKOKOKOK - era")
             .sink(receiveValue: { [weak self] result in
                 self?.state.isProgressHUDShowing = false
                 switch result {

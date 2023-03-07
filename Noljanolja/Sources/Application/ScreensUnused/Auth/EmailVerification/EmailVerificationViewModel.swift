@@ -67,7 +67,7 @@ final class EmailVerificationViewModel: EmailVerificationViewModelType {
                 guard let self else { return Empty<Result<Void, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
                     .sendEmailVerification()
-                    .eraseToResultAnyPublisher()
+                    .mapToResult()
             }
             .sink(receiveValue: { [weak self] result in
                 self?.isShowingProgressHUD = false
@@ -86,7 +86,7 @@ final class EmailVerificationViewModel: EmailVerificationViewModelType {
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
                     .verifyEmail()
-                    .eraseToResultAnyPublisher()
+                    .mapToResult()
             }
             .sink(receiveValue: { [weak self] result in
                 self?.isShowingProgressHUD = false

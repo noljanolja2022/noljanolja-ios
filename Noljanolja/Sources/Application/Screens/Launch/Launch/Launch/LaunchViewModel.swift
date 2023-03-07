@@ -76,19 +76,14 @@ final class LaunchViewModel: LaunchViewModelType {
 
     private func configure() {
         loadDataTrigger
-            .flatMap { [weak self] _ -> AnyPublisher<String, Error> in
-                guard let self else {
-                    return Empty<String, Error>().eraseToAnyPublisher()
-                }
-                return self.authServices.getIDTokenResult()
-            }
-            .flatMap { [weak self] _ -> AnyPublisher<ProfileModel, Error> in
+            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<ProfileModel, Error> in
                 guard let self else {
                     return Empty<ProfileModel, Error>().eraseToAnyPublisher()
                 }
-                return self.profileService.getProfile()
+                return self.authServices.getIDTokenResult()
+                    .flatMap { _ in self.profileService.getProfile() }
+                    .eraseToAnyPublisher()
             }
-            .eraseToResultAnyPublisher()
             .sink(receiveValue: { [weak self] result in
                 switch result {
                 case let .success(profileModel):

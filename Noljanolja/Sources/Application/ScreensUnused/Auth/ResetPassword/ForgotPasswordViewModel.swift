@@ -90,7 +90,7 @@ final class ResetPasswordViewModel: ResetPasswordViewModelType {
                 guard let self else { return Empty<Result<Void, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
                     .sendPasswordReset(email: email)
-                    .eraseToResultAnyPublisher()
+                    .mapToResult()
             }
             .sink(receiveValue: { [weak self] result in
                 self?.isShowingProgressHUD = false

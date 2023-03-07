@@ -120,7 +120,7 @@ final class SignInViewModel: SignInViewModelType {
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
                     .signIn(email: email, password: password)
-                    .eraseToResultAnyPublisher()
+                    .mapToResult()
             }
             .sink(receiveValue: { [weak self] result in
                 self?.isShowingProgressHUD = false
@@ -147,7 +147,7 @@ final class SignInViewModel: SignInViewModelType {
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
                     .signInWithApple()
-                    .eraseToResultAnyPublisher()
+                    .mapToResult()
             }
             .sink(receiveValue: { [weak self] result in
                 self?.isShowingProgressHUD = false
@@ -169,7 +169,7 @@ final class SignInViewModel: SignInViewModelType {
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
                     .signInWithGoogle()
-                    .eraseToResultAnyPublisher()
+                    .mapToResult()
             }
             .sink(receiveValue: { [weak self] result in
                 self?.isShowingProgressHUD = false
@@ -191,7 +191,7 @@ final class SignInViewModel: SignInViewModelType {
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
                     .signInWithKakao()
-                    .eraseToResultAnyPublisher()
+                    .mapToResult()
             }
             .sink(receiveValue: { [weak self] result in
                 self?.isShowingProgressHUD = false
@@ -214,7 +214,7 @@ final class SignInViewModel: SignInViewModelType {
                     .signInWithNaver { [weak self] in
                         self?.isShowingProgressHUD = true
                     }
-                    .eraseToResultAnyPublisher()
+                    .mapToResult()
             }
             .sink(receiveValue: { [weak self] result in
                 self?.isShowingProgressHUD = false

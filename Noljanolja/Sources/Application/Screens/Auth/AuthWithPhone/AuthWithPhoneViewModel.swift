@@ -96,13 +96,12 @@ final class AuthWithPhoneViewModel: AuthWithPhoneViewModelType {
     private func configure() {
         sendVerificationCodeTrigger
             .handleEvents(receiveOutput: { [weak self] _ in self?.state.isProgressHUDShowing = true })
-            .flatMap { [weak self] _ -> AnyPublisher<String, Error> in
+            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<String, Error> in
                 guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
                 logger.info("Send verification code to phone: \(self.state.fullPhoneNumber)")
                 return self.authServices
                     .sendPhoneVerificationCode(self.state.fullPhoneNumber, languageCode: self.state.country.code)
             }
-            .eraseToResultAnyPublisher()
             .sink(receiveValue: { [weak self] result in
                 guard let self else { return }
                 self.state.isProgressHUDShowing = false
@@ -123,12 +122,11 @@ final class AuthWithPhoneViewModel: AuthWithPhoneViewModelType {
 
         signInWithGoogleTrigger
             .handleEvents(receiveOutput: { [weak self] _ in self?.state.isProgressHUDShowing = true })
-            .flatMap { [weak self] _ -> AnyPublisher<String, Error> in
+            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<String, Error> in
                 guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
                 return self.authServices
                     .signInWithGoogle()
             }
-            .eraseToResultAnyPublisher()
             .sink(receiveValue: { [weak self] result in
                 self?.state.isProgressHUDShowing = false
                 switch result {
