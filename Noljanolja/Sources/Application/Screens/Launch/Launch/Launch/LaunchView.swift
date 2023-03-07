@@ -20,11 +20,11 @@ struct LaunchView<ViewModel: LaunchViewModelType>: View {
     }
 
     var body: some View {
-        content
+        buildContentView()
             .onAppear { viewModel.send(.loadData) }
     }
 
-    var content: some View {
+    private func buildContentView() -> some View {
         ZStack(alignment: .bottom) {
             LaunchBackgroundView()
                 .ignoresSafeArea()

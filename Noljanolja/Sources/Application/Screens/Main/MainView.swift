@@ -22,7 +22,7 @@ struct MainView<ViewModel: MainViewModelType>: View {
     }
 
     var body: some View {
-        content
+        buildContentView()
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -32,7 +32,7 @@ struct MainView<ViewModel: MainViewModelType>: View {
             }
     }
 
-    var content: some View {
+    private func buildContentView() -> some View {
         TabView(selection: $viewModel.state.selectedTab) {
             ConversationListView()
                 .tag(ViewModel.State.Tab.chat)

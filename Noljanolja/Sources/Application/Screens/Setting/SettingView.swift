@@ -22,7 +22,7 @@ struct SettingView<ViewModel: SettingViewModelType>: View {
     }
 
     var body: some View {
-        content
+        buildContentView()
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("Setting")
@@ -32,7 +32,7 @@ struct SettingView<ViewModel: SettingViewModelType>: View {
             }
     }
 
-    var content: some View {
+    private func buildContentView() -> some View {
         ScrollView {
             VStack(spacing: 0) {
                 Section {

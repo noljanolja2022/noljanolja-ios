@@ -26,9 +26,9 @@ struct PhoneVerificationCodeView<ViewModel: PhoneVerificationCodeViewModelType>:
 
     var body: some View {
         VStack(spacing: 0) {
-            content
+            buildContentView()
             Spacer()
-            action
+            buildActionView()
                 .padding(16)
         }
         .navigationBarBackButtonHidden(true)
@@ -44,7 +44,7 @@ struct PhoneVerificationCodeView<ViewModel: PhoneVerificationCodeViewModelType>:
         .alert(item: $viewModel.state.alertState) { Alert($0) { _ in } }
     }
 
-    var content: some View {
+    private func buildContentView() -> some View {
         VStack(spacing: 16) {
             Text("We've sent a text message with your verification code to \(viewModel.state.fullPhoneNumber)")
                 .font(FontFamily.NotoSans.medium.swiftUIFont(size: 16))
@@ -70,7 +70,7 @@ struct PhoneVerificationCodeView<ViewModel: PhoneVerificationCodeViewModelType>:
         .padding(16)
     }
 
-    private var action: some View {
+    private func buildActionView() -> some View {
         Button(
             L10n.Common.previous,
             action: { presentationMode.wrappedValue.dismiss() }

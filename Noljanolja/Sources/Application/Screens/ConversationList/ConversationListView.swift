@@ -22,23 +22,24 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
     }
 
     var body: some View {
-        bodyView
-            .onAppear { viewModel.send(.loadData) }
+        buildBodyView()
     }
 
-    var bodyView: some View {
+    private func buildBodyView() -> some View {
         ZStack(alignment: .bottomTrailing) {
-            if viewModel.state.conversationModels.isEmpty {
-                emptyView
-            } else {
-                contentView
-            }
-
-            newChatView
+            buildContentView()
+                .statefull(
+                    state: $viewModel.state.viewState,
+                    isEmpty: { viewModel.state.conversationModels.isEmpty },
+                    loading: buildLoadingView,
+                    empty: buildEmptyView,
+                    error: buildErrorView
+                )
+            buildNewChatView()
         }
     }
 
-    var contentView: some View {
+    private func buildContentView() -> some View {
         List {
             ForEach(viewModel.state.conversationModels, id: \.id) { conversationModel in
                 ConversationItemView(
@@ -52,12 +53,21 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
         .listStyle(PlainListStyle())
     }
 
-    var emptyView: some View {
+    private func buildLoadingView() -> some View {
+        LoadingView()
+    }
+
+    private func buildEmptyView() -> some View {
         Text("No conversations found")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
-    var newChatView: some View {
+    private func buildErrorView() -> some View {
+        Text("Error")
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private func buildNewChatView() -> some View {
         NavigationLink(
             destination: {
                 ContactListView()

@@ -23,10 +23,10 @@ struct ProfileView<ViewModel: ProfileViewModelType>: View {
     }
 
     var body: some View {
-        content
+        buildContentView()
     }
 
-    var content: some View {
+    private func buildContentView() -> some View {
         VStack(spacing: 16) {
             HStack {
                 Spacer()

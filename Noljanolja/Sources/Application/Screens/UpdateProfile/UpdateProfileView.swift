@@ -28,15 +28,15 @@ struct UpdateProfileView<ViewModel: UpdateProfileViewModelType>: View {
     }
 
     var body: some View {
-        content
+        buildContentView()
             .actionSheet(item: $viewModel.state.actionSheetType) {
                 buildActionSheet($0)
             }
             .popover(item: $imageSourceType) { buildImagePicker($0) }
-            .popover(isPresented: $isDatePickerShown) { datePicker }
+            .popover(isPresented: $isDatePickerShown) { buildDatePickerView() }
     }
 
-    var content: some View {
+    private func buildContentView() -> some View {
         VStack(spacing: 16) {
             ZStack(alignment: .bottomTrailing) {
                 if let image = viewModel.state.image {
@@ -152,7 +152,7 @@ struct UpdateProfileView<ViewModel: UpdateProfileViewModelType>: View {
         .padding(16)
     }
 
-    var datePicker: some View {
+    private func buildDatePickerView() -> some View {
         VStack(spacing: 0) {
             Spacer()
             VStack(spacing: 0) {
