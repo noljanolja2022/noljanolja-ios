@@ -11,12 +11,14 @@ import UIKit
 
 struct ContactModel {
     let id: String
+    let name: String
+    let phone: [String]
     let image: UIImage?
-    let name: String?
 
     init(_ contact: CNContact) {
         self.id = contact.identifier
+        self.name = CNContactFormatter.string(from: contact, style: .fullName) ?? ""
+        self.phone = contact.phoneNumbers.map { $0.value.stringValue }
         self.image = contact.imageData.flatMap { UIImage(data: $0) }
-        self.name = CNContactFormatter.string(from: contact, style: .fullName)
     }
 }

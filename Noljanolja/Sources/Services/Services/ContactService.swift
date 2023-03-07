@@ -46,12 +46,8 @@ final class ContactService: ContactServiceType {
                 promise(.failure(ContactsError.unknown))
                 return
             }
-            self.store.requestAccess(for: .contacts) { isGranted, error in
-                if let error {
-                    promise(.failure(error))
-                } else {
-                    promise(.success(isGranted))
-                }
+            self.store.requestAccess(for: .contacts) { isGranted, _ in
+                promise(.success(isGranted))
             }
         }
         .eraseToAnyPublisher()
@@ -99,7 +95,7 @@ final class ContactService: ContactServiceType {
                         let predicate = CNContact.predicateForContactsInContainer(withIdentifier: $0.identifier)
                         let keys = [
                             CNContactFormatter.descriptorForRequiredKeys(for: .fullName),
-                            CNContactFormatter.descriptorForRequiredKeys(for: .phoneticFullName),
+                            CNContactPhoneNumbersKey as CNKeyDescriptor,
                             CNContactImageDataKey as CNKeyDescriptor,
                             CNContactThumbnailImageDataKey as CNKeyDescriptor
                         ]

@@ -17,6 +17,8 @@ struct ContactListView<ViewModel: ContactListViewModelType>: View {
     @StateObject private var viewModel: ViewModel
 
     // MARK: State
+    
+    @Environment(\.presentationMode) private var presentationMode
 
     init(viewModel: ViewModel = ContactListViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -35,6 +37,15 @@ struct ContactListView<ViewModel: ContactListViewModelType>: View {
                 viewModel.send(.loadData)
             }
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(
+                        action: { presentationMode.wrappedValue.dismiss() },
+                        label: {
+                            Image(systemName: "xmark")
+                        }
+                    )
+                    .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
+                }
                 ToolbarItem(placement: .principal) {
                     Text("Select country")
                         .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
@@ -44,13 +55,48 @@ struct ContactListView<ViewModel: ContactListViewModelType>: View {
     }
 
     private func buildContentView() -> some View {
-        List {
-            ForEach(viewModel.state.contactModels, id: \.id) {
-                ContactItemView(image: $0.image, name: $0.name)
+        VStack {
+            HStack(spacing: 8) {
+                HStack(spacing: 8) {
+                    Image(systemName: "magnifyingglass")
+                        .resizable()
+                        .frame(width: 22, height: 22)
+                        .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
+                    TextField("Search", text: $viewModel.state.searchString)
+                        .keyboardType(.phonePad)
+                        .textFieldStyle(FullSizeTappableTextFieldStyle())
+                        .frame(height: 32)
+                        .font(FontFamily.NotoSans.medium.swiftUIFont(size: 16))
+                    if !viewModel.state.searchString.isEmpty {
+                        Button(
+                            action: {
+                                viewModel.state.searchString = ""
+                            },
+                            label: {
+                                Image(systemName: "xmark.circle.fill")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
+                            }
+                        )
+                    }
+                }
+                .padding(.leading, 12)
+                .padding(.trailing, 8)
+                .frame(height: 44)
+                .background(ColorAssets.gray.swiftUIColor)
+                .cornerRadius(12)
             }
-            .listRowInsets(EdgeInsets())
+            .padding(.horizontal, 16)
+
+            List {
+                ForEach(viewModel.state.contactModels, id: \.id) {
+                    ContactItemView(image: $0.image, name: $0.name)
+                }
+                .listRowInsets(EdgeInsets())
+            }
+            .listStyle(PlainListStyle())
         }
-        .listStyle(PlainListStyle())
     }
 
     private func buildLoadingView() -> some View {
@@ -61,7 +107,32 @@ struct ContactListView<ViewModel: ContactListViewModelType>: View {
         IfLet($viewModel.state.error) {
             if let contactsError = $0.wrappedValue as? ContactsError,
                contactsError.isPermissionError {
-                Text("error")
+                VStack(spacing: 16) {
+                    Text("Permission")
+                        .font(.system(size: 20).bold())
+                    Text("To help you message friends and family on Noja Noja, allow Noja Noja access to your contacts")
+                        .font(.system(size: 16))
+                        .multilineTextAlignment(.center)
+                    Button(
+                        action: {
+                            if contactsError == .permissionNotDetermined {
+                                viewModel.send(.requestContactsPermission)
+                            } else {
+                                viewModel.send(.openAppSetting)
+                            }
+                        },
+                        label: {
+                            Text("Accept")
+                                .font(.system(size: 16).bold())
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 52)
+                        }
+                    )
+                    .foregroundColor(.white)
+                    .background(Color.blue)
+                    .cornerRadius(26)
+                }
+                .padding(16)
             } else {
                 Text("Error")
             }

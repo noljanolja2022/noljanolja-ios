@@ -135,6 +135,7 @@
 		CFECC13129B4D6D500E20B58 /* UILaunchBackgroundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFECC12B29B4D6D400E20B58 /* UILaunchBackgroundView.xib */; };
 		CFECC13229B4D6D500E20B58 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFECC12C29B4D6D400E20B58 /* Launch Screen.storyboard */; };
 		CFECC13329B4D6D500E20B58 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFECC12D29B4D6D500E20B58 /* LaunchViewModel.swift */; };
+		CFF1F79A29B6E7FE00B25DD2 /* CombineExt in Frameworks */ = {isa = PBXBuildFile; productRef = CFF1F79929B6E7FE00B25DD2 /* CombineExt */; };
 		CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */; };
 		CFFD7086298ABA0100D4F5A2 /* ImageAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7085298ABA0100D4F5A2 /* ImageAssets.xcassets */; };
 		CFFD7089298ABA0100D4F5A2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7088298ABA0100D4F5A2 /* Preview Assets.xcassets */; };
@@ -332,6 +333,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFF1F79A29B6E7FE00B25DD2 /* CombineExt in Frameworks */,
 				CFE9D2E0298D6C1500D936DA /* KakaoSDKAuth in Frameworks */,
 				CF6ABC232993618000D78213 /* Introspect in Frameworks */,
 				CF14F24D298CC11700BC2066 /* FirebaseAnalytics in Frameworks */,
@@ -1259,6 +1261,7 @@
 				CF88ABCC299F2E7400D8AB67 /* SwiftUINavigation */,
 				CF62EF8C29B254DD00D6B688 /* _SwiftUINavigationState */,
 				CF18898529B349AE00701583 /* Kingfisher */,
+				CFF1F79929B6E7FE00B25DD2 /* CombineExt */,
 			);
 			productName = Noljanolja;
 			productReference = CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */;
@@ -1347,6 +1350,7 @@
 				CF6ABC212993617F00D78213 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				CF88ABCB299F2E7400D8AB67 /* XCRemoteSwiftPackageReference "swiftui-navigation" */,
 				CF18898429B349AE00701583 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				CFF1F79829B6E7FE00B25DD2 /* XCRemoteSwiftPackageReference "CombineExt" */,
 			);
 			productRefGroup = CFFD707F298AB9FF00D4F5A2 /* Products */;
 			projectDirPath = "";
@@ -2089,6 +2093,14 @@
 				version = 2.13.1;
 			};
 		};
+		CFF1F79829B6E7FE00B25DD2 /* XCRemoteSwiftPackageReference "CombineExt" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CombineCommunity/CombineExt";
+			requirement = {
+				kind = exactVersion;
+				version = 1.8.1;
+			};
+		};
 		CFFD70CE298AC7A900D4F5A2 /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya";
@@ -2169,6 +2181,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
 			productName = KakaoSDKUser;
+		};
+		CFF1F79929B6E7FE00B25DD2 /* CombineExt */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CFF1F79829B6E7FE00B25DD2 /* XCRemoteSwiftPackageReference "CombineExt" */;
+			productName = CombineExt;
 		};
 		CFFD70CF298AC7A900D4F5A2 /* CombineMoya */ = {
 			isa = XCSwiftPackageProductDependency;

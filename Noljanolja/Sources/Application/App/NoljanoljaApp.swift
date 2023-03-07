@@ -6,6 +6,7 @@
 //
 
 import _SwiftUINavigationState
+import CombineExt
 import FirebaseAuth
 import FirebaseCore
 import GoogleSignIn

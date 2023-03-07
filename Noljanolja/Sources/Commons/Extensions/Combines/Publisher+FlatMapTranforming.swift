@@ -9,11 +9,20 @@ import Combine
 import Foundation
 
 extension Publisher {
-    func eraseToResultAnyPublisher() -> AnyPublisher<Result<Output, Failure>, Never> {
-        map { Result.success($0) }
-            .catch { error -> AnyPublisher<Result<Output, Failure>, Never> in
-                Just(Result.failure(error)).eraseToAnyPublisher()
-            }
-            .eraseToAnyPublisher()
+    func flatMapToResult<P>(maxPublishers: Subscribers.Demand = .unlimited,
+                            _ transform: @escaping (Self.Output) -> P) -> AnyPublisher<Result<P.Output, P.Failure>, Failure> where P: Publisher {
+        flatMap(maxPublishers: maxPublishers) { output -> AnyPublisher<Result<P.Output, P.Failure>, Never> in
+            transform(output).mapToResult()
+        }
+        .eraseToAnyPublisher()
+    }
+}
+
+extension Publisher where Self.Failure == Never {
+    func flatMapLatestToResult<P>(_ transform: @escaping (Self.Output) -> P) -> AnyPublisher<Result<P.Output, P.Failure>, Failure> where P: Publisher {
+        flatMapLatest { output -> AnyPublisher<Result<P.Output, P.Failure>, Never> in
+            transform(output).mapToResult()
+        }
+        .eraseToAnyPublisher()
     }
 }

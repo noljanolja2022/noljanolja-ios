@@ -128,7 +128,7 @@ final class SignUpViewModel: SignUpViewModelType {
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
                 return self.authServices
                     .signUp(email: email, password: password)
-                    .eraseToResultAnyPublisher()
+                    .mapToResult()
             }
             .sink(receiveValue: { [weak self] result in
                 self?.isShowingProgressHUD = false

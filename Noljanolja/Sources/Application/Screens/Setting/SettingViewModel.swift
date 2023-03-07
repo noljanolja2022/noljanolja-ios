@@ -67,13 +67,12 @@ final class SettingViewModel: SettingViewModelType {
 
     private func configure() {
         signOutTrigger
-            .flatMap { [weak self] in
+            .flatMapLatestToResult { [weak self] in
                 guard let self else {
                     return Empty<Void, Error>().eraseToAnyPublisher()
                 }
                 return self.authService.signOut()
             }
-            .eraseToResultAnyPublisher()
             .sink(receiveValue: { [weak self] _ in
                 self?.delegate?.didSignOut()
             })
