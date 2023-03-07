@@ -1,5 +1,5 @@
 //
-//  AuthServices.swift
+//  AuthService.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 03/02/2023.
@@ -10,9 +10,9 @@ import FirebaseAuth
 import FirebaseAuthCombineSwift
 import Foundation
 
-// MARK: - AuthServicesType
+// MARK: - AuthServiceType
 
-protocol AuthServicesType {
+protocol AuthServiceType {
     var isAuthenticated: CurrentValueSubject<Bool, Never> { get set }
 
     func signUp(email: String, password: String) -> AnyPublisher<String, Error>
@@ -34,10 +34,10 @@ protocol AuthServicesType {
     func signOut() -> AnyPublisher<Void, Error>
 }
 
-// MARK: - AuthServices
+// MARK: - AuthService
 
-final class AuthServices: NSObject, AuthServicesType {
-    static let `default` = AuthServices()
+final class AuthService: NSObject, AuthServiceType {
+    static let `default` = AuthService()
 
     private lazy var appleAuthAPI = AppleAuthAPI()
     private lazy var googleAuthAPI = GoogleAuthAPI()

@@ -50,7 +50,7 @@ final class SignInViewModel: SignInViewModelType {
     // MARK: Dependencies
 
     private weak var delegate: SignInViewModelDelegate?
-    private let authServices: AuthServicesType
+    private let authService: AuthServiceType
 
     // MARK: State
 
@@ -84,9 +84,9 @@ final class SignInViewModel: SignInViewModelType {
     private var cancellables = Set<AnyCancellable>()
 
     init(delegate: SignInViewModelDelegate? = nil,
-         authServices: AuthServicesType = AuthServices.default) {
+         authService: AuthServiceType = AuthService.default) {
         self.delegate = delegate
-        self.authServices = authServices
+        self.authService = authService
 
         configure()
     }
@@ -118,7 +118,7 @@ final class SignInViewModel: SignInViewModelType {
             .handleEvents(receiveOutput: { [weak self] _ in self?.isShowingProgressHUD = true })
             .flatMap { [weak self] email, password -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
-                return self.authServices
+                return self.authService
                     .signIn(email: email, password: password)
                     .mapToResult()
             }
@@ -145,7 +145,7 @@ final class SignInViewModel: SignInViewModelType {
             .handleEvents(receiveOutput: { [weak self] _ in self?.isShowingProgressHUD = true })
             .flatMap { [weak self] _ -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
-                return self.authServices
+                return self.authService
                     .signInWithApple()
                     .mapToResult()
             }
@@ -167,7 +167,7 @@ final class SignInViewModel: SignInViewModelType {
             .handleEvents(receiveOutput: { [weak self] _ in self?.isShowingProgressHUD = true })
             .flatMap { [weak self] _ -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
-                return self.authServices
+                return self.authService
                     .signInWithGoogle()
                     .mapToResult()
             }
@@ -189,7 +189,7 @@ final class SignInViewModel: SignInViewModelType {
             .handleEvents(receiveOutput: { [weak self] _ in self?.isShowingProgressHUD = true })
             .flatMap { [weak self] _ -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
-                return self.authServices
+                return self.authService
                     .signInWithKakao()
                     .mapToResult()
             }
@@ -210,7 +210,7 @@ final class SignInViewModel: SignInViewModelType {
         signInWithNaverTrigger
             .flatMap { [weak self] _ -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
-                return self.authServices
+                return self.authService
                     .signInWithNaver { [weak self] in
                         self?.isShowingProgressHUD = true
                     }

@@ -67,6 +67,8 @@ final class RootViewModel: RootViewModelType {
     private func configure() {}
 }
 
+// MARK: Delegate
+
 extension RootViewModel {
     func navigateToMain() {
         state.contentType = .main

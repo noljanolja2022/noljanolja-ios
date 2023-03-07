@@ -43,7 +43,7 @@
 		CF14F24F298CC11700BC2066 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = CF14F24E298CC11700BC2066 /* FirebaseAuthCombine-Community */; };
 		CF14F25E298CE68600BC2066 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF14F25D298CE68600BC2066 /* GoogleService-Info.plist */; };
 		CF14F266298CF4E700BC2066 /* AppConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F265298CF4E700BC2066 /* AppConfigs.swift */; };
-		CF14F268298CF87E00BC2066 /* AuthServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F267298CF87E00BC2066 /* AuthServices.swift */; };
+		CF14F268298CF87E00BC2066 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F267298CF87E00BC2066 /* AuthService.swift */; };
 		CF15501029939A350053E86D /* TabLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15500F29939A350053E86D /* TabLayout.swift */; };
 		CF1550232993B5C90053E86D /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1550212993B5C90053E86D /* TabBarView.swift */; };
 		CF1550242993B5C90053E86D /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1550222993B5C90053E86D /* TabBarItem.swift */; };
@@ -71,6 +71,7 @@
 		CF28A1B029B5066A0003C204 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF28A1AE29B5066A0003C204 /* SettingViewModel.swift */; };
 		CF31ADB029B37D240002900B /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF31ADAF29B37D240002900B /* ImagePickerView.swift */; };
 		CF3282ED299E3758006A459B /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3282EC299E3758006A459B /* UIApplication+Extension.swift */; };
+		CF3CE18529B79FD50054BBEF /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3CE18429B79FD50054BBEF /* UserDefaults.swift */; };
 		CF43BF73299274D900FD3180 /* FirebaseAuth+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF43BF72299274D900FD3180 /* FirebaseAuth+Combine.swift */; };
 		CF4DE2DC29B3B6A7006E75E5 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC0F29935C2D00D78213 /* AuthView.swift */; };
 		CF4DE2DD29B3B6A7006E75E5 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC0E29935C2D00D78213 /* AuthViewModel.swift */; };
@@ -225,7 +226,7 @@
 		CF14F25A298CE46100BC2066 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CF14F25D298CE68600BC2066 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CF14F265298CF4E700BC2066 /* AppConfigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigs.swift; sourceTree = "<group>"; };
-		CF14F267298CF87E00BC2066 /* AuthServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthServices.swift; sourceTree = "<group>"; };
+		CF14F267298CF87E00BC2066 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		CF15500F29939A350053E86D /* TabLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabLayout.swift; sourceTree = "<group>"; };
 		CF1550162993B55F0053E86D /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		CF1550172993B55F0053E86D /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
@@ -260,6 +261,7 @@
 		CF28A1AE29B5066A0003C204 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		CF31ADAF29B37D240002900B /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		CF3282EC299E3758006A459B /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
+		CF3CE18429B79FD50054BBEF /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		CF43BF72299274D900FD3180 /* FirebaseAuth+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseAuth+Combine.swift"; sourceTree = "<group>"; };
 		CF62EF8A29B23E0000D6B688 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		CF6ABC0C29935C2D00D78213 /* SignUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
@@ -1122,9 +1124,10 @@
 		CFFD70AE298AC1CE00D4F5A2 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				CF14F267298CF87E00BC2066 /* AuthServices.swift */,
-				CF1BD1FC29ACEAA000778786 /* ProfileService.swift */,
+				CF14F267298CF87E00BC2066 /* AuthService.swift */,
 				CF08A86129B5A26600D6CE5F /* ContactService.swift */,
+				CF1BD1FC29ACEAA000778786 /* ProfileService.swift */,
+				CF3CE18429B79FD50054BBEF /* UserDefaults.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1212,11 +1215,11 @@
 		CFFD70B8298AC5F800D4F5A2 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				CFFD70BB298AC5F800D4F5A2 /* AuthPluggin.swift */,
 				CF12604529B78AAF00B5373B /* DeviceIdentityPlugin.swift */,
+				CFFD70BC298AC5F800D4F5A2 /* DisableLocalCachePlugin.swift */,
 				CFFD70B9298AC5F800D4F5A2 /* NetworkLoggerPluggin.swift */,
 				CFFD70BA298AC5F800D4F5A2 /* RequestTimeoutPlugin.swift */,
-				CFFD70BB298AC5F800D4F5A2 /* AuthPluggin.swift */,
-				CFFD70BC298AC5F800D4F5A2 /* DisableLocalCachePlugin.swift */,
 			);
 			path = Plugins;
 			sourceTree = "<group>";
@@ -1620,7 +1623,7 @@
 				CF0EA30D29AA0F010014A7DE /* SelectCountryView.swift in Sources */,
 				CF1EEE3729AE3FA8004F570A /* TermOfServiceItemView.swift in Sources */,
 				CF08A86029B5A17A00D6CE5F /* ContactListViewModel.swift in Sources */,
-				CF14F268298CF87E00BC2066 /* AuthServices.swift in Sources */,
+				CF14F268298CF87E00BC2066 /* AuthService.swift in Sources */,
 				CFFD70C9298AC5F800D4F5A2 /* TargetType+RawTarget.swift in Sources */,
 				CF28A1AF29B5066A0003C204 /* SettingView.swift in Sources */,
 				CF4DE2F129B3B6A7006E75E5 /* SignUpNavigationViewModel.swift in Sources */,
@@ -1649,6 +1652,7 @@
 				CFF1F7A429B7371600B25DD2 /* ChatView.swift in Sources */,
 				CF4DE2EA29B3B6A7006E75E5 /* SignUpStep.swift in Sources */,
 				CF08A85F29B5A17A00D6CE5F /* ContactListView.swift in Sources */,
+				CF3CE18529B79FD50054BBEF /* UserDefaults.swift in Sources */,
 				CF14F24A298C331D00BC2066 /* ColorAssets.swift in Sources */,
 				CFE09341299007E400F197F0 /* Publisher+ResultTranforming.swift in Sources */,
 				CFFD70D5298AC92500D4F5A2 /* ProfileAPI.swift in Sources */,

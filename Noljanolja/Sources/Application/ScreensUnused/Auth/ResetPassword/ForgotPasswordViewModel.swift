@@ -39,7 +39,7 @@ final class ResetPasswordViewModel: ResetPasswordViewModelType {
     // MARK: Dependencies
 
     private weak var delegate: ResetPasswordViewModelDelegate?
-    private let authServices: AuthServicesType
+    private let authService: AuthServiceType
 
     // MARK: State
 
@@ -64,9 +64,9 @@ final class ResetPasswordViewModel: ResetPasswordViewModelType {
     private var cancellables = Set<AnyCancellable>()
 
     init(delegate: ResetPasswordViewModelDelegate? = nil,
-         authServices: AuthServicesType = AuthServices.default) {
+         authService: AuthServiceType = AuthService.default) {
         self.delegate = delegate
-        self.authServices = authServices
+        self.authService = authService
 
         configure()
     }
@@ -88,7 +88,7 @@ final class ResetPasswordViewModel: ResetPasswordViewModelType {
             .handleEvents(receiveOutput: { [weak self] _ in self?.isShowingProgressHUD = true })
             .flatMap { [weak self] email -> AnyPublisher<Result<Void, Error>, Never> in
                 guard let self else { return Empty<Result<Void, Error>, Never>().eraseToAnyPublisher() }
-                return self.authServices
+                return self.authService
                     .sendPasswordReset(email: email)
                     .mapToResult()
             }

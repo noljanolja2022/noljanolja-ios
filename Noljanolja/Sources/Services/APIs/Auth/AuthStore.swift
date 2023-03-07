@@ -30,7 +30,7 @@ final class AuthStore: AuthStoreType {
 
     private let keychain: Keychain
 
-    init(keychain: Keychain) {
+    private init(keychain: Keychain) {
         self.keychain = keychain
     }
 
