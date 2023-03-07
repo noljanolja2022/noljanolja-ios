@@ -48,14 +48,14 @@ struct ProfileView<ViewModel: ProfileViewModelType>: View {
             }
             .frame(maxWidth: .infinity)
 
-            KFImage(URL(string: "https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg"))
+            KFImage(URL(string: viewModel.state.profileModel?.profileImage ?? ""))
                 .resizable()
                 .scaledToFill()
                 .frame(width: 140, height: 140)
                 .background(Color.gray.opacity(0.5))
                 .cornerRadius(52)
 
-            Text("Username")
+            Text(viewModel.state.profileModel?.name ?? "")
                 .font(FontFamily.NotoSans.medium.swiftUIFont(fixedSize: 16))
 
             NavigationLink(
