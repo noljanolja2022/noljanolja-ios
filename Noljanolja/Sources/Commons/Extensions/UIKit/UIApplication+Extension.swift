@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import UIKit
 
 extension UIApplication {
@@ -24,5 +25,15 @@ extension UIApplication {
                 .flatMap { $0.windows }
                 .first { $0.isKeyWindow }
         }
+    }
+
+    func endEditing() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
+extension View {
+    func endEditing() {
+        UIApplication.shared.endEditing()
     }
 }

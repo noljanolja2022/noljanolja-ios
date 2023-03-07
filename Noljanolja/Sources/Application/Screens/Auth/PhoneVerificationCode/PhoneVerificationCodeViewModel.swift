@@ -127,7 +127,6 @@ final class PhoneVerificationCodeViewModel: PhoneVerificationCodeViewModelType {
             .store(in: &cancellables)
 
         verifyTrigger
-            .print("OKOKOKOKOK - trigger")
             .handleEvents(receiveOutput: { [weak self] _ in self?.state.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] _ -> AnyPublisher<ProfileModel, Error> in
                 guard let self else {
@@ -140,7 +139,6 @@ final class PhoneVerificationCodeViewModel: PhoneVerificationCodeViewModelType {
                     }
                     .eraseToAnyPublisher()
             }
-            .print("OKOKOKOKOK - era")
             .sink(receiveValue: { [weak self] result in
                 self?.state.isProgressHUDShowing = false
                 switch result {

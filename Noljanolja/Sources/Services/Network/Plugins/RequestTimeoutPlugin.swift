@@ -18,10 +18,12 @@ protocol RequestTimeoutConfigurable {
 
 struct RequestTimeoutPlugin: PluginType {
     func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
-        guard let target = target.rawTarget as? RequestTimeoutConfigurable else { return request }
-
         var request = request
-        request.timeoutInterval = target.timeout
+        if let target = target.rawTarget as? RequestTimeoutConfigurable {
+            request.timeoutInterval = target.timeout
+        } else {
+            request.timeoutInterval = 60
+        }
         return request
     }
 }
