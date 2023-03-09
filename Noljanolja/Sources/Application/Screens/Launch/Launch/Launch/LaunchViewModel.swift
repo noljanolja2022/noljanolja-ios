@@ -80,9 +80,9 @@ final class LaunchViewModel: LaunchViewModelType {
 
     private func configure() {
         loadDataTrigger
-            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<ProfileModel, Error> in
+            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<User, Error> in
                 guard let self else {
-                    return Empty<ProfileModel, Error>().eraseToAnyPublisher()
+                    return Empty<User, Error>().eraseToAnyPublisher()
                 }
                 let trigger: AnyPublisher<Void, Error> = {
                     logger.debug("First launch app: \(self.userDefaults.isFirstLaunch)")
@@ -102,9 +102,9 @@ final class LaunchViewModel: LaunchViewModelType {
             }
             .sink(receiveValue: { [weak self] result in
                 switch result {
-                case let .success(profileModel):
+                case let .success(user):
                     logger.info("Get pre data successful")
-                    if profileModel.isSetup {
+                    if user.isSetup {
                         self?.delegate?.navigateToAuth()
                     } else {
                         self?.delegate?.navigateToUpdateProfile()

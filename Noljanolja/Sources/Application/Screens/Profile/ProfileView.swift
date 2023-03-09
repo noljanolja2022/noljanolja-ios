@@ -48,14 +48,14 @@ struct ProfileView<ViewModel: ProfileViewModelType>: View {
             }
             .frame(maxWidth: .infinity)
 
-            KFImage(URL(string: viewModel.state.profileModel?.avatar ?? ""))
+            KFImage(URL(string: viewModel.state.user?.avatar ?? ""))
                 .resizable()
                 .scaledToFill()
                 .frame(width: 140, height: 140)
                 .background(Color.gray.opacity(0.5))
                 .cornerRadius(52)
 
-            Text(viewModel.state.profileModel?.name ?? "")
+            Text(viewModel.state.user?.name ?? "")
                 .font(FontFamily.NotoSans.medium.swiftUIFont(fixedSize: 16))
 
             NavigationLink(

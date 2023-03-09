@@ -28,15 +28,17 @@ final class ContactStore: ContactStoreType {
     }
 
     func saveContact(_ users: [User]) {
-        let storableContacts = users.map { StorableUser($0) }
-        realm.add(storableContacts, update: .modified)
+        try? realm.write {
+            let storableContacts = users.map { StorableUser($0) }
+            realm.add(storableContacts, update: .modified)
+        }
     }
 
     func observeContacts() -> AnyPublisher<[User], Error> {
         realm.objects(StorableUser.self)
             .collectionPublisher
             .freeze()
-            .map { users -> [User] in users.map { $0.user } }
+            .map { users -> [User] in users.compactMap { $0.model } }
             .eraseToAnyPublisher()
     }
 }

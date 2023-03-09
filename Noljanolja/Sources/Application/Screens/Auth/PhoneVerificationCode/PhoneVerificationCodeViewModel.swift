@@ -128,9 +128,9 @@ final class PhoneVerificationCodeViewModel: PhoneVerificationCodeViewModelType {
 
         verifyTrigger
             .handleEvents(receiveOutput: { [weak self] _ in self?.state.isProgressHUDShowing = true })
-            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<ProfileModel, Error> in
+            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<User, Error> in
                 guard let self else {
-                    return Empty<ProfileModel, Error>().eraseToAnyPublisher()
+                    return Empty<User, Error>().eraseToAnyPublisher()
                 }
                 return self.authService
                     .verificationCode(verificationID: self.verificationID, verificationCode: self.state.verificationCode)
@@ -142,9 +142,9 @@ final class PhoneVerificationCodeViewModel: PhoneVerificationCodeViewModelType {
             .sink(receiveValue: { [weak self] result in
                 self?.state.isProgressHUDShowing = false
                 switch result {
-                case let .success(profileModel):
+                case let .success(user):
                     logger.info("Verify verification code successful")
-                    if profileModel.isSetup {
+                    if user.isSetup {
                         self?.delegate?.navigateToMain()
                     } else {
                         self?.delegate?.navigateToUpdateProfile()

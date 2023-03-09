@@ -30,23 +30,30 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
             buildContentView()
                 .statefull(
                     state: $viewModel.state.viewState,
-                    isEmpty: { viewModel.state.conversationModels.isEmpty },
+                    isEmpty: { viewModel.state.conversations.isEmpty },
                     loading: buildLoadingView,
                     empty: buildEmptyView,
                     error: buildErrorView
                 )
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .onAppear { viewModel.send(.loadData) }
+
             buildNewChatView()
+            
+            buildNavigationLinkViews()
         }
     }
 
     private func buildContentView() -> some View {
         List {
-            ForEach(viewModel.state.conversationModels, id: \.id) { conversationModel in
+            ForEach(viewModel.state.conversations, id: \.id) { conversation in
                 ConversationItemView(
-                    avatar: conversationModel.avatar,
-                    name: conversationModel.name,
-                    lastMessage: conversationModel.lastMessage
+                    avatar: "",
+                    name: conversation.title,
+                    lastMessage: conversation.messages.last?.message
                 )
+                .background(Color.white)
+                .onTapGesture { viewModel.send(.openChat(conversation)) }
             }
             .listRowInsets(EdgeInsets())
         }
@@ -70,7 +77,11 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
     private func buildNewChatView() -> some View {
         NavigationLink(
             destination: {
-                ContactListView()
+                ContactListView(
+                    viewModel: ContactListViewModel(
+                        delegate: viewModel
+                    )
+                )
             },
             label: {
                 HStack(spacing: 12) {
@@ -79,7 +90,7 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 28, height: 28)
 
-                    if viewModel.state.conversationModels.isEmpty {
+                    if viewModel.state.conversations.isEmpty {
                         Text("New Chat")
                             .font(.system(size: 16).bold())
                     }
@@ -92,6 +103,20 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
         )
         .foregroundColor(Color.black)
         .padding(16)
+    }
+
+    private func buildNavigationLinkViews() -> some View {
+        NavigationLink(
+            unwrapping: $viewModel.state.navigationLinkItem,
+            onNavigate: { _ in },
+            destination: { item in
+                switch item.wrappedValue {
+                case let .chat(conversation):
+                    ChatView()
+                }
+            },
+            label: { EmptyView() }
+        )
     }
 }
 

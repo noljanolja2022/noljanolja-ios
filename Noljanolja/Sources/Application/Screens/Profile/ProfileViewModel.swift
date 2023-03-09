@@ -22,7 +22,7 @@ protocol ProfileViewModelType: SettingViewModelDelegate,
 
 extension ProfileViewModel {
     struct State {
-        var profileModel: ProfileModel?
+        var user: User?
         var error: Error?
         var viewState: ViewState = .content
     }
@@ -73,15 +73,15 @@ final class ProfileViewModel: ProfileViewModelType {
             .handleEvents(receiveOutput: { [weak self] in self?.state.viewState = .loading })
             .flatMapLatestToResult { [weak self] in
                 guard let self else {
-                    return Empty<ProfileModel, Error>().eraseToAnyPublisher()
+                    return Empty<User, Error>().eraseToAnyPublisher()
                 }
                 return self.profileService.getProfileIfNeeded()
             }
             .sink(receiveValue: { [weak self] result in
                 switch result {
-                case let .success(profileModel):
+                case let .success(user):
                     logger.info("Get profile successful")
-                    self?.state.profileModel = profileModel
+                    self?.state.user = user
                     self?.state.viewState = .content
                 case let .failure(error):
                     logger.error("Get profile successful")

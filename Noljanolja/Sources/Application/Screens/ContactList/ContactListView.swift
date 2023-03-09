@@ -17,6 +17,8 @@ struct ContactListView<ViewModel: ContactListViewModelType>: View {
     @StateObject private var viewModel: ViewModel
 
     // MARK: State
+
+    @EnvironmentObject private var progressHUBState: ProgressHUBState
     
     init(viewModel: ViewModel = ContactListViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
@@ -31,6 +33,9 @@ struct ContactListView<ViewModel: ContactListViewModelType>: View {
                 empty: buildEmptyView,
                 error: buildErrorView
             )
+            .onChange(of: viewModel.state.isProgressHUDShowing) {
+                progressHUBState.isLoading = $0
+            }
             .onAppear {
                 viewModel.send(.loadData)
             }
@@ -79,13 +84,16 @@ struct ContactListView<ViewModel: ContactListViewModelType>: View {
             .padding(.horizontal, 16)
 
             List {
-                ForEach(viewModel.state.users, id: \.id) {
-                    ContactItemView(name: $0.name)
+                ForEach(viewModel.state.users, id: \.id) { user in
+                    ContactItemView(name: user.name)
+                        .background(Color.white)
+                        .onTapGesture { viewModel.send(.createConversation(user)) }
                 }
                 .listRowInsets(EdgeInsets())
             }
             .listStyle(PlainListStyle())
         }
+        .padding(.top, 12)
     }
 
     private func buildLoadingView() -> some View {

@@ -18,11 +18,19 @@ struct RootView<ViewModel: RootViewModelType>: View {
 
     // MARK: State
 
+    @StateObject private var progressHUBState = ProgressHUBState()
+
     init(viewModel: ViewModel = RootViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
+        buildContentView()
+            .progressHUB(isActive: $progressHUBState.isLoading)
+            .environmentObject(progressHUBState)
+    }
+
+    private func buildContentView() -> some View {
         ZStack {
             switch viewModel.state.contentType {
             case .launch:

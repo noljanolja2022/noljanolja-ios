@@ -12,7 +12,9 @@ import UIKit
 
 // MARK: - ContactListViewModelDelegate
 
-protocol ContactListViewModelDelegate: AnyObject {}
+protocol ContactListViewModelDelegate: AnyObject {
+    func didCreateConversation(_ conversation: Conversation)
+}
 
 // MARK: - ContactListViewModelType
 
@@ -24,6 +26,8 @@ extension ContactListViewModel {
         var searchString = ""
         var users = [User]()
         var error: Error?
+
+        var isProgressHUDShowing = false
         var viewState = ViewState.content
     }
 
@@ -31,6 +35,7 @@ extension ContactListViewModel {
         case loadData
         case requestContactsPermission
         case openAppSetting
+        case createConversation(User)
     }
 }
 
@@ -44,12 +49,14 @@ final class ContactListViewModel: ContactListViewModelType {
     // MARK: Dependencies
 
     private let contactService: ContactServiceType
+    private let conversationService: ConversationServiceType
     private weak var delegate: ContactListViewModelDelegate?
 
     // MARK: Action
 
-    private let getContactsTrigger = PassthroughSubject<Void, Never>()
+    private let loadDataTrigger = PassthroughSubject<Void, Never>()
     private let requestContactsPermissionTrigger = PassthroughSubject<Void, Never>()
+    private let createConversationTrigger = PassthroughSubject<User, Never>()
 
     // MARK: Private
 
@@ -58,9 +65,11 @@ final class ContactListViewModel: ContactListViewModelType {
 
     init(state: State = State(),
          contactService: ContactServiceType = ContactService.default,
+         conversationService: ConversationServiceType = ConversationService.default,
          delegate: ContactListViewModelDelegate? = nil) {
         self.state = state
         self.contactService = contactService
+        self.conversationService = conversationService
         self.delegate = delegate
 
         configure()
@@ -69,40 +78,26 @@ final class ContactListViewModel: ContactListViewModelType {
     func send(_ action: Action) {
         switch action {
         case .loadData:
-            getContactsTrigger.send()
+            loadDataTrigger.send()
         case .requestContactsPermission:
             requestContactsPermissionTrigger.send()
         case .openAppSetting:
             guard let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) else { return }
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        case let .createConversation(user):
+            createConversationTrigger.send(user)
         }
     }
 
     private func configure() {
-//        $state
-//            .map(\.searchString)
-//            .removeDuplicates()
-//            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
-//            .map { [weak self] text in
-//                let allUsers = self?.allUsers ?? []
-//                return allUsers
-//                    .filter {
-//                        guard !text.isEmpty else { return true }
-//                        return $0.name.lowercased().contains(text.lowercased())
-//                            || $0.phones.reduce(false) { $0 || $1.lowercased().contains(text.lowercased()) }
-//                    }
-//                    .sorted(by: \.name)
-//            }
-//            .sink(receiveValue: { [weak self] in self?.state.contacts = $0 })
-//            .store(in: &cancellables)
-
-        getContactsTrigger
+        loadDataTrigger
             .handleEvents(receiveOutput: { [weak self] _ in self?.state.viewState = .loading })
             .flatMapLatestToResult { [weak self] _ -> AnyPublisher<[User], Error> in
                 guard let self else {
                     return Empty<[User], Error>().eraseToAnyPublisher()
                 }
-                return self.contactService.getAuthorizationStatus()
+                return self.contactService
+                    .getAuthorizationStatus()
                     .flatMap { [weak self] _ -> AnyPublisher<[User], Error> in
                         guard let self else {
                             return Empty<[User], Error>().eraseToAnyPublisher()
@@ -136,9 +131,49 @@ final class ContactListViewModel: ContactListViewModelType {
             .sink(receiveValue: { [weak self] result in
                 switch result {
                 case .success:
-                    self?.getContactsTrigger.send()
-                case .failure:
-                    break
+                    logger.error("Request contact permission successful")
+                    self?.loadDataTrigger.send()
+                case let .failure(error):
+                    logger.error("Request contact permission failed: \(error.localizedDescription)")
+                    self?.state.error = error
+                    self?.state.viewState = .error
+                }
+            })
+            .store(in: &cancellables)
+
+        $state
+            .map(\.searchString)
+            .removeDuplicates()
+            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
+            .map { [weak self] text in
+                let allUsers = self?.allUsers ?? []
+                return allUsers
+                    .filter {
+                        guard !text.isEmpty else { return true }
+                        return ($0.name ?? "").lowercased().contains(text.lowercased())
+                            || ($0.phone ?? "").lowercased().contains(text.lowercased())
+                    }
+            }
+            .sink(receiveValue: { [weak self] in self?.state.users = $0 })
+            .store(in: &cancellables)
+
+        createConversationTrigger
+            .handleEvents(receiveOutput: { [weak self] _ in self?.state.isProgressHUDShowing = true })
+            .flatMapLatestToResult { [weak self] user -> AnyPublisher<Conversation, Error> in
+                guard let self else {
+                    return Empty<Conversation, Error>().eraseToAnyPublisher()
+                }
+                return self.conversationService
+                    .createConversation(title: "Conversation", type: .single, participants: [user])
+            }
+            .sink(receiveValue: { [weak self] result in
+                self?.state.isProgressHUDShowing = false
+                switch result {
+                case let .success(conversation):
+                    logger.info("Create conversation successful - conversation id: \(conversation.id)")
+                    self?.delegate?.didCreateConversation(conversation)
+                case let .failure(error):
+                    logger.error("Create conversation failed: \(error.localizedDescription)")
                 }
             })
             .store(in: &cancellables)

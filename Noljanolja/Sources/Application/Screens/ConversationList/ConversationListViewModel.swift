@@ -16,17 +16,25 @@ protocol ConversationListViewModelDelegate: AnyObject {}
 // MARK: - ConversationListViewModelType
 
 protocol ConversationListViewModelType:
+    ContactListViewModelDelegate,
     ViewModelType where State == ConversationListViewModel.State, Action == ConversationListViewModel.Action {}
 
 extension ConversationListViewModel {
     struct State {
-        var conversationModels = [ConversationModel]()
+        enum NavigationLinkItem {
+            case chat(Conversation)
+        }
+
+        var conversations = [Conversation]()
         var error: Error?
         var viewState = ViewState.content
+
+        var navigationLinkItem: NavigationLinkItem?
     }
 
     enum Action {
         case loadData
+        case openChat(Conversation)
     }
 }
 
@@ -39,6 +47,7 @@ final class ConversationListViewModel: ConversationListViewModelType {
 
     // MARK: Dependencies
 
+    private let conversationService: ConversationServiceType
     private weak var delegate: ConversationListViewModelDelegate?
 
     // MARK: Action
@@ -50,8 +59,10 @@ final class ConversationListViewModel: ConversationListViewModelType {
     private var cancellables = Set<AnyCancellable>()
 
     init(state: State = State(),
+         conversationService: ConversationServiceType = ConversationService.default,
          delegate: ConversationListViewModelDelegate? = nil) {
         self.state = state
+        self.conversationService = conversationService
         self.delegate = delegate
 
         configure()
@@ -59,31 +70,30 @@ final class ConversationListViewModel: ConversationListViewModelType {
 
     func send(_ action: Action) {
         switch action {
-        case .loadData: loadDataTrigger.send()
+        case .loadData:
+            loadDataTrigger.send()
+        case let .openChat(conversation):
+            state.navigationLinkItem = .chat(conversation)
         }
     }
 
     private func configure() {
         loadDataTrigger
-            .handleEvents(receiveOutput: { [weak self] in self?.state.viewState = .loading })
+            .handleEvents(receiveOutput: { [weak self] in
+                self?.state.viewState = .loading
+
+            })
             .flatMapLatestToResult { [weak self] in
                 guard let self else {
-                    return Empty<[ConversationModel], Error>().eraseToAnyPublisher()
+                    return Empty<[Conversation], Error>().eraseToAnyPublisher()
                 }
-                let value = Bool.random()
-                    ? [ConversationModel(
-                        avatar: "https://upload.wikimedia.org/wikipedia/en/8/86/Avatar_Aang.png",
-                        name: "Trinh",
-                        lastMessage: "Hi, everyone"
-                    )]
-                    : []
-                return Just(value).setFailureType(to: Error.self).eraseToAnyPublisher()
+                return self.conversationService
+                    .getConversations()
             }
-            .delay(for: .seconds(2), scheduler: RunLoop.main)
             .sink(receiveValue: { [weak self] result in
                 switch result {
-                case let .success(conversationModels):
-                    self?.state.conversationModels = conversationModels
+                case let .success(conversations):
+                    self?.state.conversations = conversations
                     self?.state.viewState = .content
                 case let .failure(error):
                     self?.state.error = error
@@ -91,5 +101,13 @@ final class ConversationListViewModel: ConversationListViewModelType {
                 }
             })
             .store(in: &cancellables)
+    }
+}
+
+// MARK: ContactListViewModelDelegate
+
+extension ConversationListViewModel: ContactListViewModelDelegate {
+    func didCreateConversation(_ conversation: Conversation) {
+        send(.openChat(conversation))
     }
 }
