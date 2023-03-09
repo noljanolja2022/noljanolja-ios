@@ -48,7 +48,7 @@ struct ProfileView<ViewModel: ProfileViewModelType>: View {
             }
             .frame(maxWidth: .infinity)
 
-            KFImage(URL(string: viewModel.state.profileModel?.profileImage ?? ""))
+            KFImage(URL(string: viewModel.state.profileModel?.avatar ?? ""))
                 .resizable()
                 .scaledToFill()
                 .frame(width: 140, height: 140)

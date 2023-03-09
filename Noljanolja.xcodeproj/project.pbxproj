@@ -21,8 +21,7 @@
 		CF00D1732995457600505702 /* ProgressHUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D1722995457600505702 /* ProgressHUDView.swift */; };
 		CF08A85F29B5A17A00D6CE5F /* ContactListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF08A85D29B5A17A00D6CE5F /* ContactListView.swift */; };
 		CF08A86029B5A17A00D6CE5F /* ContactListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF08A85E29B5A17A00D6CE5F /* ContactListViewModel.swift */; };
-		CF08A86229B5A26600D6CE5F /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF08A86129B5A26600D6CE5F /* ContactService.swift */; };
-		CF08A86529B5A31E00D6CE5F /* ContactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF08A86429B5A31E00D6CE5F /* ContactModel.swift */; };
+		CF08A86229B5A26600D6CE5F /* LocalContactAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF08A86129B5A26600D6CE5F /* LocalContactAPI.swift */; };
 		CF08A86829B5E66F00D6CE5F /* ContactItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF08A86729B5E66F00D6CE5F /* ContactItemView.swift */; };
 		CF0E8845298D4E09000DAE4A /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = CF0E8844298D4E09000DAE4A /* FirebaseCrashlytics */; };
 		CF0EA30629AA02120014A7DE /* AuthWithPhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0EA30429AA02120014A7DE /* AuthWithPhoneView.swift */; };
@@ -95,6 +94,13 @@
 		CF4DE2EF29B3B6A7006E75E5 /* TermDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF17471A299CBCB1001B93E8 /* TermDetailViewModel.swift */; };
 		CF4DE2F029B3B6A7006E75E5 /* AuthPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0A38E299E79EF00E904B0 /* AuthPopupView.swift */; };
 		CF4DE2F129B3B6A7006E75E5 /* SignUpNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709E629962CD100B64216 /* SignUpNavigationViewModel.swift */; };
+		CF52AB5F29B8D3B900C9C90C /* ContactAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF52AB5E29B8D3B900C9C90C /* ContactAPI.swift */; };
+		CF52AB6129B8D6BE00C9C90C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF52AB6029B8D6BE00C9C90C /* User.swift */; };
+		CF52AB6429B8D85000C9C90C /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF52AB6329B8D85000C9C90C /* ContactService.swift */; };
+		CF52AB6829B8D93D00C9C90C /* StorableUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF52AB6729B8D93D00C9C90C /* StorableUser.swift */; };
+		CF52AB7029B8DE4000C9C90C /* ContactStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF52AB6F29B8DE4000C9C90C /* ContactStore.swift */; };
+		CF52AB7329B8E3B700C9C90C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CF52AB7229B8E3B700C9C90C /* RealmSwift */; };
+		CF52AB7C29B8EE1A00C9C90C /* Realm+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF52AB7B29B8EE1A00C9C90C /* Realm+Init.swift */; };
 		CF62EF8B29B23E0000D6B688 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF62EF8A29B23E0000D6B688 /* ViewModelType.swift */; };
 		CF62EF8D29B254DD00D6B688 /* _SwiftUINavigationState in Frameworks */ = {isa = PBXBuildFile; productRef = CF62EF8C29B254DD00D6B688 /* _SwiftUINavigationState */; };
 		CF6ABC1F29935D7B00D78213 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC1D29935D7B00D78213 /* RootView.swift */; };
@@ -107,7 +113,10 @@
 		CF74A1A029B581DD00419342 /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF74A19F29B581DD00419342 /* ConversationModel.swift */; };
 		CF74A1A529B5831800419342 /* ConversationItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF74A1A429B5831800419342 /* ConversationItemView.swift */; };
 		CF74A1A729B586EF00419342 /* StatefullView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF74A1A629B586EF00419342 /* StatefullView.swift */; };
+		CF8633FD29B8F2F50091BF5D /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8633FC29B8F2F50091BF5D /* Contact.swift */; };
+		CF8633FF29B8F6020091BF5D /* Encodable+Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8633FE29B8F6020091BF5D /* Encodable+Encode.swift */; };
 		CF88ABCD299F2E7400D8AB67 /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = CF88ABCC299F2E7400D8AB67 /* SwiftUINavigation */; };
+		CFBCE41829B98A65000D6F73 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBCE41729B98A65000D6F73 /* CommonError.swift */; };
 		CFC709E02996051800B64216 /* View+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709DF2996051800B64216 /* View+Progress.swift */; };
 		CFC709E32996276C00B64216 /* RoundedLinearProgressViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709E22996276C00B64216 /* RoundedLinearProgressViewStyle.swift */; };
 		CFD83DCD29973A5F00B9A6BB /* AuthNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD83DCB29973A5F00B9A6BB /* AuthNavigationView.swift */; };
@@ -203,8 +212,7 @@
 		CF00D1722995457600505702 /* ProgressHUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHUDView.swift; sourceTree = "<group>"; };
 		CF08A85D29B5A17A00D6CE5F /* ContactListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListView.swift; sourceTree = "<group>"; };
 		CF08A85E29B5A17A00D6CE5F /* ContactListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListViewModel.swift; sourceTree = "<group>"; };
-		CF08A86129B5A26600D6CE5F /* ContactService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
-		CF08A86429B5A31E00D6CE5F /* ContactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactModel.swift; sourceTree = "<group>"; };
+		CF08A86129B5A26600D6CE5F /* LocalContactAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalContactAPI.swift; sourceTree = "<group>"; };
 		CF08A86729B5E66F00D6CE5F /* ContactItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactItemView.swift; sourceTree = "<group>"; };
 		CF0EA30429AA02120014A7DE /* AuthWithPhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthWithPhoneView.swift; sourceTree = "<group>"; };
 		CF0EA30529AA02120014A7DE /* AuthWithPhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthWithPhoneViewModel.swift; sourceTree = "<group>"; };
@@ -263,6 +271,12 @@
 		CF3282EC299E3758006A459B /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		CF3CE18429B79FD50054BBEF /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		CF43BF72299274D900FD3180 /* FirebaseAuth+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseAuth+Combine.swift"; sourceTree = "<group>"; };
+		CF52AB5E29B8D3B900C9C90C /* ContactAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactAPI.swift; sourceTree = "<group>"; };
+		CF52AB6029B8D6BE00C9C90C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		CF52AB6329B8D85000C9C90C /* ContactService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
+		CF52AB6729B8D93D00C9C90C /* StorableUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorableUser.swift; sourceTree = "<group>"; };
+		CF52AB6F29B8DE4000C9C90C /* ContactStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactStore.swift; sourceTree = "<group>"; };
+		CF52AB7B29B8EE1A00C9C90C /* Realm+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Realm+Init.swift"; sourceTree = "<group>"; };
 		CF62EF8A29B23E0000D6B688 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		CF6ABC0C29935C2D00D78213 /* SignUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		CF6ABC0D29935C2D00D78213 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
@@ -279,6 +293,9 @@
 		CF74A19F29B581DD00419342 /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
 		CF74A1A429B5831800419342 /* ConversationItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationItemView.swift; sourceTree = "<group>"; };
 		CF74A1A629B586EF00419342 /* StatefullView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatefullView.swift; sourceTree = "<group>"; };
+		CF8633FC29B8F2F50091BF5D /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		CF8633FE29B8F6020091BF5D /* Encodable+Encode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Encode.swift"; sourceTree = "<group>"; };
+		CFBCE41729B98A65000D6F73 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
 		CFC709DF2996051800B64216 /* View+Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Progress.swift"; sourceTree = "<group>"; };
 		CFC709E22996276C00B64216 /* RoundedLinearProgressViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedLinearProgressViewStyle.swift; sourceTree = "<group>"; };
 		CFC709E529962CD100B64216 /* SignUpNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpNavigationView.swift; sourceTree = "<group>"; };
@@ -346,6 +363,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF52AB7329B8E3B700C9C90C /* RealmSwift in Frameworks */,
 				CFF1F79A29B6E7FE00B25DD2 /* CombineExt in Frameworks */,
 				CFE9D2E0298D6C1500D936DA /* KakaoSDKAuth in Frameworks */,
 				CF6ABC232993618000D78213 /* Introspect in Frameworks */,
@@ -442,6 +460,7 @@
 			isa = PBXGroup;
 			children = (
 				CF00D16E2994FC9E00505702 /* String+Validation.swift */,
+				CF8633FE29B8F6020091BF5D /* Encodable+Encode.swift */,
 			);
 			path = SwiftStdlib;
 			sourceTree = "<group>";
@@ -767,6 +786,36 @@
 			path = Launch/Launch;
 			sourceTree = "<group>";
 		};
+		CF52AB6229B8D7D000C9C90C /* Stores */ = {
+			isa = PBXGroup;
+			children = (
+				CFE48BC2299207DA0062C903 /* AuthStore.swift */,
+				CF52AB6F29B8DE4000C9C90C /* ContactStore.swift */,
+				CF52AB7B29B8EE1A00C9C90C /* Realm+Init.swift */,
+			);
+			path = Stores;
+			sourceTree = "<group>";
+		};
+		CF52AB6529B8D90D00C9C90C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CF0EA30F29AA3DD30014A7DE /* CountryModel.swift */,
+				CF8633FC29B8F2F50091BF5D /* Contact.swift */,
+				CFFD70D6298ACA8700D4F5A2 /* ProfileModel.swift */,
+				CF74A19F29B581DD00419342 /* ConversationModel.swift */,
+				CF52AB6029B8D6BE00C9C90C /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CF52AB6629B8D91200C9C90C /* StorableModels */ = {
+			isa = PBXGroup;
+			children = (
+				CF52AB6729B8D93D00C9C90C /* StorableUser.swift */,
+			);
+			path = StorableModels;
+			sourceTree = "<group>";
+		};
 		CF62EF8929B23DF200D6B688 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -855,6 +904,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		CFBCE41629B98A4E000D6F73 /* Erros */ = {
+			isa = PBXGroup;
+			children = (
+				CFBCE41729B98A65000D6F73 /* CommonError.swift */,
+			);
+			path = Erros;
+			sourceTree = "<group>";
+		};
 		CFC709E12996211E00B64216 /* ProgressView */ = {
 			isa = PBXGroup;
 			children = (
@@ -933,7 +990,6 @@
 				CFE0925C298DFDCB00F197F0 /* KakaoAuthAPI.swift */,
 				CFE09253298DF69600F197F0 /* NaverAuthAPI.swift */,
 				CFE0926A298FE73000F197F0 /* CloudFunctionAuthAPI.swift */,
-				CFE48BC2299207DA0062C903 /* AuthStore.swift */,
 				CFE09262298EB69700F197F0 /* FirebaseUser+Combine.swift */,
 				CF43BF72299274D900FD3180 /* FirebaseAuth+Combine.swift */,
 			);
@@ -1113,10 +1169,9 @@
 		CFFD70AD298AC1B400D4F5A2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CF0EA30F29AA3DD30014A7DE /* CountryModel.swift */,
-				CFFD70D6298ACA8700D4F5A2 /* ProfileModel.swift */,
-				CF74A19F29B581DD00419342 /* ConversationModel.swift */,
-				CF08A86429B5A31E00D6CE5F /* ContactModel.swift */,
+				CFBCE41629B98A4E000D6F73 /* Erros */,
+				CF52AB6629B8D91200C9C90C /* StorableModels */,
+				CF52AB6529B8D90D00C9C90C /* Models */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1125,9 +1180,9 @@
 			isa = PBXGroup;
 			children = (
 				CF14F267298CF87E00BC2066 /* AuthService.swift */,
-				CF08A86129B5A26600D6CE5F /* ContactService.swift */,
 				CF1BD1FC29ACEAA000778786 /* ProfileService.swift */,
 				CF3CE18429B79FD50054BBEF /* UserDefaults.swift */,
+				CF52AB6329B8D85000C9C90C /* ContactService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1135,6 +1190,7 @@
 		CFFD70AF298AC21000D4F5A2 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				CF52AB6229B8D7D000C9C90C /* Stores */,
 				CFFD70CD298AC5FD00D4F5A2 /* APIs */,
 				CFFD70AD298AC1B400D4F5A2 /* Models */,
 				CFFD70B7298AC55600D4F5A2 /* Network */,
@@ -1247,8 +1303,10 @@
 		CFFD70CD298AC5FD00D4F5A2 /* APIs */ = {
 			isa = PBXGroup;
 			children = (
-				CFFD70D4298AC92500D4F5A2 /* ProfileAPI.swift */,
 				CFE09252298DF67D00F197F0 /* Auth */,
+				CF52AB5E29B8D3B900C9C90C /* ContactAPI.swift */,
+				CF08A86129B5A26600D6CE5F /* LocalContactAPI.swift */,
+				CFFD70D4298AC92500D4F5A2 /* ProfileAPI.swift */,
 			);
 			path = APIs;
 			sourceTree = "<group>";
@@ -1300,6 +1358,7 @@
 				CF18898529B349AE00701583 /* Kingfisher */,
 				CFF1F79929B6E7FE00B25DD2 /* CombineExt */,
 				CFF1F7AA29B737F400B25DD2 /* SwiftUIX */,
+				CF52AB7229B8E3B700C9C90C /* RealmSwift */,
 			);
 			productName = Noljanolja;
 			productReference = CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */;
@@ -1390,6 +1449,7 @@
 				CF18898429B349AE00701583 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				CFF1F79829B6E7FE00B25DD2 /* XCRemoteSwiftPackageReference "CombineExt" */,
 				CFF1F7A929B737F300B25DD2 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+				CF52AB7129B8E3B600C9C90C /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = CFFD707F298AB9FF00D4F5A2 /* Products */;
 			projectDirPath = "";
@@ -1605,7 +1665,7 @@
 				CFD83DD029974E4E00B9A6BB /* Navigation+Extension.swift in Sources */,
 				CF0EA31029AA3DD30014A7DE /* CountryModel.swift in Sources */,
 				CF74A1A729B586EF00419342 /* StatefullView.swift in Sources */,
-				CF08A86229B5A26600D6CE5F /* ContactService.swift in Sources */,
+				CF08A86229B5A26600D6CE5F /* LocalContactAPI.swift in Sources */,
 				CF43BF73299274D900FD3180 /* FirebaseAuth+Combine.swift in Sources */,
 				CFFD70C5298AC5F800D4F5A2 /* RequestTimeoutPlugin.swift in Sources */,
 				CF1550232993B5C90053E86D /* TabBarView.swift in Sources */,
@@ -1618,11 +1678,13 @@
 				CF4DE2DD29B3B6A7006E75E5 /* AuthViewModel.swift in Sources */,
 				CFE0925F298EACF200F197F0 /* GoogleAuthAPI.swift in Sources */,
 				CFECC12E29B4D6D500E20B58 /* LaunchView.swift in Sources */,
+				CF52AB5F29B8D3B900C9C90C /* ContactAPI.swift in Sources */,
 				CFFD70D3298AC89000D4F5A2 /* NetworkConfigs.swift in Sources */,
 				CF14F249298C331C00BC2066 /* Localizable.swift in Sources */,
 				CF0EA30D29AA0F010014A7DE /* SelectCountryView.swift in Sources */,
 				CF1EEE3729AE3FA8004F570A /* TermOfServiceItemView.swift in Sources */,
 				CF08A86029B5A17A00D6CE5F /* ContactListViewModel.swift in Sources */,
+				CF52AB6429B8D85000C9C90C /* ContactService.swift in Sources */,
 				CF14F268298CF87E00BC2066 /* AuthService.swift in Sources */,
 				CFFD70C9298AC5F800D4F5A2 /* TargetType+RawTarget.swift in Sources */,
 				CF28A1AF29B5066A0003C204 /* SettingView.swift in Sources */,
@@ -1635,6 +1697,7 @@
 				CF00D1732995457600505702 /* ProgressHUDView.swift in Sources */,
 				CFC709E02996051800B64216 /* View+Progress.swift in Sources */,
 				CF0EA30729AA02120014A7DE /* AuthWithPhoneViewModel.swift in Sources */,
+				CF8633FF29B8F6020091BF5D /* Encodable+Encode.swift in Sources */,
 				CF1550242993B5C90053E86D /* TabBarItem.swift in Sources */,
 				CF3282ED299E3758006A459B /* UIApplication+Extension.swift in Sources */,
 				CF18898229B347E500701583 /* UpdateProfileView.swift in Sources */,
@@ -1650,9 +1713,11 @@
 				CF12604629B78AAF00B5373B /* DeviceIdentityPlugin.swift in Sources */,
 				CF1EEE3429AE3F81004F570A /* TermOfServiceViewModel.swift in Sources */,
 				CFF1F7A429B7371600B25DD2 /* ChatView.swift in Sources */,
+				CF8633FD29B8F2F50091BF5D /* Contact.swift in Sources */,
 				CF4DE2EA29B3B6A7006E75E5 /* SignUpStep.swift in Sources */,
 				CF08A85F29B5A17A00D6CE5F /* ContactListView.swift in Sources */,
 				CF3CE18529B79FD50054BBEF /* UserDefaults.swift in Sources */,
+				CF52AB7C29B8EE1A00C9C90C /* Realm+Init.swift in Sources */,
 				CF14F24A298C331D00BC2066 /* ColorAssets.swift in Sources */,
 				CFE09341299007E400F197F0 /* Publisher+ResultTranforming.swift in Sources */,
 				CFFD70D5298AC92500D4F5A2 /* ProfileAPI.swift in Sources */,
@@ -1674,6 +1739,7 @@
 				CF4DE2EB29B3B6A7006E75E5 /* TermItemType.swift in Sources */,
 				CF28A1A429B4FE410003C204 /* MainViewModel.swift in Sources */,
 				CF1EEE2D29AE355E004F570A /* NibOwnerLoadable.swift in Sources */,
+				CFBCE41829B98A65000D6F73 /* CommonError.swift in Sources */,
 				CF4DE2E829B3B6A7006E75E5 /* SignUpStepView.swift in Sources */,
 				CF00D1692994E0A700505702 /* TextField+ErrorMessage.swift in Sources */,
 				CF28A1A729B4FFC50003C204 /* ProfileView.swift in Sources */,
@@ -1690,7 +1756,6 @@
 				CFD83DCD29973A5F00B9A6BB /* AuthNavigationView.swift in Sources */,
 				CF74A1A029B581DD00419342 /* ConversationModel.swift in Sources */,
 				CFE48BC3299207DA0062C903 /* AuthStore.swift in Sources */,
-				CF08A86529B5A31E00D6CE5F /* ContactModel.swift in Sources */,
 				CF28A19F29B4E9CF0003C204 /* AuthRootView.swift in Sources */,
 				CFD83DCE29973A5F00B9A6BB /* AuthNavigationViewModel.swift in Sources */,
 				CFFD70CB298AC5F800D4F5A2 /* ApiProvider.swift in Sources */,
@@ -1703,6 +1768,7 @@
 				CF4DE2DF29B3B6A7006E75E5 /* SignUpView.swift in Sources */,
 				CF0EA31A29AA56E90014A7DE /* Binding+LimitString.swift in Sources */,
 				CF18898329B347E500701583 /* UpdateProfileViewModel.swift in Sources */,
+				CF52AB6129B8D6BE00C9C90C /* User.swift in Sources */,
 				CFFD70C4298AC5F800D4F5A2 /* NetworkLoggerPluggin.swift in Sources */,
 				CF4DE2E329B3B6A7006E75E5 /* SignInViewModel.swift in Sources */,
 				CF28A1A829B4FFC50003C204 /* ProfileViewModel.swift in Sources */,
@@ -1712,11 +1778,13 @@
 				CF4DE2EE29B3B6A7006E75E5 /* TermsView.swift in Sources */,
 				CF74A1A529B5831800419342 /* ConversationItemView.swift in Sources */,
 				CFFD70CA298AC5F800D4F5A2 /* TargetType+Default.swift in Sources */,
+				CF52AB7029B8DE4000C9C90C /* ContactStore.swift in Sources */,
 				CF4DE2E029B3B6A7006E75E5 /* SignUpViewModel.swift in Sources */,
 				CF4DE2E229B3B6A7006E75E5 /* EmailVerificationViewModel.swift in Sources */,
 				CF1EEE3A29AE438C004F570A /* TermOfServiceItemType.swift in Sources */,
 				CF4DE2EC29B3B6A7006E75E5 /* TermItemView.swift in Sources */,
 				CF14F248298C331C00BC2066 /* ImageAssets.swift in Sources */,
+				CF52AB6829B8D93D00C9C90C /* StorableUser.swift in Sources */,
 				CF1BD20B29ACF67D00778786 /* StateView.swift in Sources */,
 				CFE09263298EB69700F197F0 /* FirebaseUser+Combine.swift in Sources */,
 				CFFD70D7298ACA8700D4F5A2 /* ProfileModel.swift in Sources */,
@@ -2082,6 +2150,14 @@
 				version = 7.6.2;
 			};
 		};
+		CF52AB7129B8E3B600C9C90C /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				kind = exactVersion;
+				version = 10.36.0;
+			};
+		};
 		CF6ABC212993617F00D78213 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
@@ -2184,6 +2260,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CF18898429B349AE00701583 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		CF52AB7229B8E3B700C9C90C /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF52AB7129B8E3B600C9C90C /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 		CF62EF8C29B254DD00D6B688 /* _SwiftUINavigationState */ = {
 			isa = XCSwiftPackageProductDependency;

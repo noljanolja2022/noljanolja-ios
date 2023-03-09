@@ -18,8 +18,6 @@ struct ContactListView<ViewModel: ContactListViewModelType>: View {
 
     // MARK: State
     
-    @Environment(\.presentationMode) private var presentationMode
-
     init(viewModel: ViewModel = ContactListViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
@@ -28,7 +26,7 @@ struct ContactListView<ViewModel: ContactListViewModelType>: View {
         buildContentView()
             .statefull(
                 state: $viewModel.state.viewState,
-                isEmpty: { viewModel.state.contactModels.isEmpty },
+                isEmpty: { viewModel.state.users.isEmpty },
                 loading: buildLoadingView,
                 empty: buildEmptyView,
                 error: buildErrorView
@@ -37,17 +35,8 @@ struct ContactListView<ViewModel: ContactListViewModelType>: View {
                 viewModel.send(.loadData)
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(
-                        action: { presentationMode.wrappedValue.dismiss() },
-                        label: {
-                            Image(systemName: "xmark")
-                        }
-                    )
-                    .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
-                }
                 ToolbarItem(placement: .principal) {
-                    Text("Select country")
+                    Text("Select Contact")
                         .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
                         .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
                 }
@@ -90,8 +79,8 @@ struct ContactListView<ViewModel: ContactListViewModelType>: View {
             .padding(.horizontal, 16)
 
             List {
-                ForEach(viewModel.state.contactModels, id: \.id) {
-                    ContactItemView(image: $0.image, name: $0.name)
+                ForEach(viewModel.state.users, id: \.id) {
+                    ContactItemView(name: $0.name)
                 }
                 .listRowInsets(EdgeInsets())
             }

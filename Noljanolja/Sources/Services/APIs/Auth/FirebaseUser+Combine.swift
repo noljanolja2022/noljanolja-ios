@@ -9,7 +9,7 @@ import Combine
 import FirebaseAuth
 import Foundation
 
-extension User {
+extension FirebaseAuth.User {
     func getIDTokenResult() -> Future<String, Error> {
         Future { promise in
             self.getIDTokenResult(forcingRefresh: true) { authTokenResult, error in
@@ -22,7 +22,7 @@ extension User {
         }
     }
 
-    func reloadCombine() -> Future<User, Error> {
+    func reloadCombine() -> Future<FirebaseAuth.User, Error> {
         Future { promise in
             self.reload { error in
                 if let error {

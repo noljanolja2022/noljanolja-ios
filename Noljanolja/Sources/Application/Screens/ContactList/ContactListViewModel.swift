@@ -22,7 +22,7 @@ protocol ContactListViewModelType:
 extension ContactListViewModel {
     struct State {
         var searchString = ""
-        var contactModels = [ContactModel]()
+        var users = [User]()
         var error: Error?
         var viewState = ViewState.content
     }
@@ -53,7 +53,7 @@ final class ContactListViewModel: ContactListViewModelType {
 
     // MARK: Private
 
-    private var allContactModels = [ContactModel]()
+    private var allUsers = [User]()
     private var cancellables = Set<AnyCancellable>()
 
     init(state: State = State(),
@@ -79,37 +79,44 @@ final class ContactListViewModel: ContactListViewModelType {
     }
 
     private func configure() {
-        $state
-            .map(\.searchString)
-            .removeDuplicates()
-            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
-            .map { [weak self] text in
-                let allContactModels = self?.allContactModels ?? []
-                return allContactModels
-                    .filter {
-                        guard !text.isEmpty else { return true }
-                        return $0.name.lowercased().contains(text.lowercased())
-                            || $0.phone.reduce(false) { $0 || $1.lowercased().contains(text.lowercased()) }
-                    }
-                    .sorted(by: \.name)
-            }
-            .sink(receiveValue: { [weak self] in self?.state.contactModels = $0 })
-            .store(in: &cancellables)
+//        $state
+//            .map(\.searchString)
+//            .removeDuplicates()
+//            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
+//            .map { [weak self] text in
+//                let allUsers = self?.allUsers ?? []
+//                return allUsers
+//                    .filter {
+//                        guard !text.isEmpty else { return true }
+//                        return $0.name.lowercased().contains(text.lowercased())
+//                            || $0.phones.reduce(false) { $0 || $1.lowercased().contains(text.lowercased()) }
+//                    }
+//                    .sorted(by: \.name)
+//            }
+//            .sink(receiveValue: { [weak self] in self?.state.contacts = $0 })
+//            .store(in: &cancellables)
 
         getContactsTrigger
             .handleEvents(receiveOutput: { [weak self] _ in self?.state.viewState = .loading })
-            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<[ContactModel], Error> in
+            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<[User], Error> in
                 guard let self else {
-                    return Empty<[ContactModel], Error>().eraseToAnyPublisher()
+                    return Empty<[User], Error>().eraseToAnyPublisher()
                 }
-                return self.contactService.getContacts()
+                return self.contactService.getAuthorizationStatus()
+                    .flatMap { [weak self] _ -> AnyPublisher<[User], Error> in
+                        guard let self else {
+                            return Empty<[User], Error>().eraseToAnyPublisher()
+                        }
+                        return self.contactService.getContacts()
+                    }
+                    .eraseToAnyPublisher()
             }
             .sink(receiveValue: { result in
                 switch result {
-                case let .success(contactModels):
+                case let .success(users):
                     logger.info("Get contacts successful")
-                    self.allContactModels = contactModels.sorted(by: \.name)
-                    self.state.contactModels = contactModels.sorted(by: \.name)
+                    self.allUsers = users
+                    self.state.users = users
                     self.state.viewState = .content
                 case let .failure(error):
                     logger.error("Get contacts failed: \(error.localizedDescription)")
