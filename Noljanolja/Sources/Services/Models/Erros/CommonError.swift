@@ -7,6 +7,14 @@
 
 import Foundation
 
+// MARK: - CommonError
+
 enum CommonError: Error {
     case unknown
+}
+
+// MARK: - NetworkError
+
+enum NetworkError: Error {
+    case mapping(String)
 }

@@ -144,7 +144,7 @@ final class ContactListViewModel: ContactListViewModelType {
         $state
             .map(\.searchString)
             .removeDuplicates()
-            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
+            .debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
             .map { [weak self] text in
                 let allUsers = self?.allUsers ?? []
                 return allUsers

@@ -42,7 +42,7 @@ final class ContactService: ContactServiceType {
     }
 
     func getContacts() -> AnyPublisher<[User], Error> {
-        let syncContacts = localContactAPI
+        let remoteContacts = localContactAPI
             .getContacts()
             .map { $0.filter { !$0.emails.isEmpty && !$0.phones.isEmpty } }
             .flatMap { [weak self] contacts -> AnyPublisher<[User], Error> in
@@ -56,7 +56,7 @@ final class ContactService: ContactServiceType {
                 self?.contactStore.saveContact($0)
             })
 
-        let observeContacts = Just<[User]>([
+        let localContacts = Just<[User]>([
             User(
                 id: "TLl9y9w7P2d1RH7WjJW9dfhVqK82",
                 name: "123456789",
@@ -82,8 +82,9 @@ final class ContactService: ContactServiceType {
         ])
         .setFailureType(to: Error.self)
 //        let observeContacts = contactStore.observeContacts()
+//        .filter { !$0.isEmpty }
 
-        return Publishers.Merge(syncContacts, observeContacts)
+        return Publishers.Merge(remoteContacts, localContacts)
             .removeDuplicates()
             .eraseToAnyPublisher()
     }

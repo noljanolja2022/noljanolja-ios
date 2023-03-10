@@ -2,7 +2,8 @@
 //  ChatInputView.swift
 //  Noljanolja
 //
-//  Created by Nguyen The Trinh on 07/03/2023.
+//  Created by Nguyen The Trinh on 09/03/2023.
+//
 //
 
 import SwiftUI
@@ -10,9 +11,18 @@ import SwiftUIX
 
 // MARK: - ChatInputView
 
-struct ChatInputView: View {
-    @Binding var text: String
+struct ChatInputView<ViewModel: ChatInputViewModelType>: View {
+    // MARK: Dependencies
+
+    @StateObject private var viewModel: ViewModel
+
+    // MARK: State
+
     @State private var isMediaInputHidden = false
+
+    init(viewModel: ViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
 
     var body: some View {
         HStack(spacing: 10) {
@@ -85,7 +95,7 @@ struct ChatInputView: View {
     private func buildTextInputView() -> some View {
         TextField(
             "Aa",
-            text: $text,
+            text: $viewModel.state.text,
             onEditingChanged: { isEditing in
                 withAnimation { isMediaInputHidden = isEditing }
             }
@@ -99,7 +109,7 @@ struct ChatInputView: View {
 
     private func buildSendView() -> some View {
         Button(
-            action: {},
+            action: { viewModel.send(.sendPlaintextMessage) },
             label: {
                 Image(systemName: "arrowtriangle.right.circle.fill")
                     .resizable()
@@ -115,6 +125,31 @@ struct ChatInputView: View {
 
 struct ChatInputView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatInputView(text: .constant(""))
+        ChatInputView(
+            viewModel: ChatInputViewModel(
+                state: ChatInputViewModel.State(
+                    conversation: Conversation(
+                        id: 0,
+                        title: "title",
+                        creator: User(
+                            id: "id",
+                            name: "name",
+                            avatar: "avatar",
+                            phone: "1234567890",
+                            email: "email@gmail.com",
+                            isEmailVerified: false,
+                            pushToken: "pushToken",
+                            dob: "dob",
+                            gender: "Male"
+                        ),
+                        type: .single,
+                        messages: [],
+                        participants: [],
+                        createdAt: Date(),
+                        updatedAt: Date()
+                    )
+                )
+            )
+        )
     }
 }

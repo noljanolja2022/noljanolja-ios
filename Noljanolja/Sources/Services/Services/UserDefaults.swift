@@ -17,7 +17,7 @@ protocol UserDefaultsType {
 
 extension UserDefaults {
     enum Keys {
-        static let isFirstLaunch = "is_first_launch"
+        static let isNotFirstLaunch = "is_not_first_launch"
     }
 }
 
@@ -25,7 +25,7 @@ extension UserDefaults {
 
 extension UserDefaults: UserDefaultsType {
     var isFirstLaunch: Bool {
-        get { bool(forKey: Keys.isFirstLaunch) }
-        set { set(newValue, forKey: Keys.isFirstLaunch) }
+        get { !bool(forKey: Keys.isNotFirstLaunch) }
+        set { set(!newValue, forKey: Keys.isNotFirstLaunch) }
     }
 }

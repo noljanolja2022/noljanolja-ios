@@ -36,9 +36,7 @@ struct ContactListView<ViewModel: ContactListViewModelType>: View {
             .onChange(of: viewModel.state.isProgressHUDShowing) {
                 progressHUBState.isLoading = $0
             }
-            .onAppear {
-                viewModel.send(.loadData)
-            }
+            .onAppear { viewModel.send(.loadData) }
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("Select Contact")
@@ -83,7 +81,7 @@ struct ContactListView<ViewModel: ContactListViewModelType>: View {
             }
             .padding(.horizontal, 16)
 
-            List {
+            ListView {
                 ForEach(viewModel.state.users, id: \.id) { user in
                     ContactItemView(name: user.name)
                         .background(Color.white)

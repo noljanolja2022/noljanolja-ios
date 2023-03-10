@@ -14,6 +14,9 @@ import RealmSwift
 protocol ConversationStoreType {
     func saveConversations(_ conversations: [Conversation])
     func observeConversations() -> AnyPublisher<[Conversation], Error>
+
+    func saveMessages(_ messages: [Message])
+    func observeMessages(conversationID: Int) -> AnyPublisher<[Message], Error>
 }
 
 // MARK: - ConversationStore
@@ -38,6 +41,21 @@ final class ConversationStore: ConversationStoreType {
         realm.objects(StorableConversation.self)
             .collectionPublisher
             .map { conversations -> [Conversation] in conversations.compactMap { $0.model } }
+            .eraseToAnyPublisher()
+    }
+
+    func saveMessages(_ messages: [Message]) {
+        try? realm.write {
+            let storableMessages = messages.map { StorableMessage($0) }
+            realm.add(storableMessages, update: .modified)
+        }
+    }
+
+    func observeMessages(conversationID: Int) -> AnyPublisher<[Message], Error> {
+        realm.objects(StorableMessage.self)
+            .where { $0.conversationID == conversationID }
+            .collectionPublisher
+            .map { messages -> [Message] in messages.compactMap { $0.model } }
             .eraseToAnyPublisher()
     }
 }

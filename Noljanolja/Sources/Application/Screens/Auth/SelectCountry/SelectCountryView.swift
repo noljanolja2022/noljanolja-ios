@@ -88,7 +88,7 @@ struct SelectCountryView<ViewModel: SelectCountryViewModelType>: View {
     }
 
     private func buildCountriesView() -> some View {
-        List {
+        ListView {
             ForEach(viewModel.state.countries) { country in
                 Button(
                     action: {

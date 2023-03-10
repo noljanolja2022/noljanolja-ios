@@ -15,8 +15,8 @@ final class StorableConversation: Object, StorableModel {
     @Persisted var type: String?
     @Persisted var messages = List<StorableMessage>()
     @Persisted var participants = List<StorableUser>()
-    @Persisted var createdAt: String?
-    @Persisted var updatedAt: String?
+    @Persisted var createdAt: Date?
+    @Persisted var updatedAt: Date?
 
     var model: Conversation? {
         guard let creator = creator?.model,

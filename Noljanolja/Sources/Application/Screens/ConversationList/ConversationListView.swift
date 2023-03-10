@@ -23,6 +23,7 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
 
     var body: some View {
         buildBodyView()
+            .onAppear { viewModel.send(.loadData) }
     }
 
     private func buildBodyView() -> some View {
@@ -36,7 +37,6 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
                     error: buildErrorView
                 )
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .onAppear { viewModel.send(.loadData) }
 
             buildNewChatView()
             
@@ -45,19 +45,13 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
     }
 
     private func buildContentView() -> some View {
-        List {
+        ListView {
             ForEach(viewModel.state.conversations, id: \.id) { conversation in
-                ConversationItemView(
-                    avatar: "",
-                    name: conversation.title,
-                    lastMessage: conversation.messages.last?.message
-                )
-                .background(Color.white)
-                .onTapGesture { viewModel.send(.openChat(conversation)) }
+                ConversationItemView(model: conversation)
+                    .background(Color.white)
+                    .onTapGesture { viewModel.send(.openChat(conversation)) }
             }
-            .listRowInsets(EdgeInsets())
         }
-        .listStyle(PlainListStyle())
     }
 
     private func buildLoadingView() -> some View {
@@ -112,7 +106,13 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
             destination: { item in
                 switch item.wrappedValue {
                 case let .chat(conversation):
-                    ChatView()
+                    ChatView(
+                        viewModel: ChatViewModel(
+                            state: ChatViewModel.State(
+                                conversation: conversation
+                            )
+                        )
+                    )
                 }
             },
             label: { EmptyView() }

@@ -38,7 +38,10 @@ final class ConversationService: ConversationServiceType {
                 self?.conversationStore.saveConversations($0)
             })
 
-        let localConversations = conversationStore.observeConversations()
+        let localConversations = conversationStore
+            .observeConversations()
+            .filter { !$0.isEmpty }
+            .map { $0.sorted { $0.updatedAt > $1.updatedAt } }
 
         return Publishers.Merge(remoteConversations, localConversations)
             .removeDuplicates()
