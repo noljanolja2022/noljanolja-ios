@@ -31,7 +31,7 @@ struct ChatView<ViewModel: ChatViewModelType>: View {
             buildContentView()
                 .statefull(
                     state: $viewModel.state.viewState,
-                    isEmpty: { viewModel.state.messages.isEmpty },
+                    isEmpty: { viewModel.state.chatItems.isEmpty },
                     loading: buildLoadingView,
                     empty: buildEmptyView,
                     error: buildErrorView
@@ -48,8 +48,8 @@ struct ChatView<ViewModel: ChatViewModelType>: View {
 
     private func buildContentView() -> some View {
         ListView {
-            ForEach(viewModel.state.messages, id: \.id) { message in
-                MessageView(messageItemModel: message)
+            ForEach(viewModel.state.chatItems, id: \.id) { chatItem in
+                ChatItemView(chatItem: chatItem)
             }
             .listRowInsets(EdgeInsets())
             .scaleEffect(x: 1, y: -1, anchor: .center)

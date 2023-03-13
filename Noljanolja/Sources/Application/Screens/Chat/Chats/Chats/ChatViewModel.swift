@@ -22,7 +22,7 @@ extension ChatViewModel {
     struct State {
         let conversation: Conversation
 
-        var messages = [MessageItemModel]()
+        var chatItems = [ChatItemModelType]()
         var error: Error?
         var viewState = ViewState.content
     }
@@ -80,16 +80,11 @@ final class ChatViewModel: ChatViewModelType {
     private func configure() {
         Publishers.CombineLatest(currentUserSubject, messagesSubject)
             .map { currentUser, messages in
-                messages
-                    .map {
-                        MessageItemModel(
-                            currentUser: currentUser,
-                            message: $0
-                        )
-                    }
+                MessageItemModelBuilder(currentUser: currentUser, messages: messages)
+                    .build()
             }
             .sink(receiveValue: { [weak self] in
-                self?.state.messages = $0
+                self?.state.chatItems = $0
                 self?.state.viewState = .content
             })
             .store(in: &cancellables)

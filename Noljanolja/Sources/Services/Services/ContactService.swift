@@ -44,7 +44,7 @@ final class ContactService: ContactServiceType {
     func getContacts() -> AnyPublisher<[User], Error> {
         let remoteContacts = localContactAPI
             .getContacts()
-            .map { $0.filter { !$0.emails.isEmpty && !$0.phones.isEmpty } }
+            .map { $0.filter { !$0.phones.isEmpty } }
             .flatMap { [weak self] contacts -> AnyPublisher<[User], Error> in
                 guard let self else {
                     return Empty<[User], Error>().eraseToAnyPublisher()
@@ -56,36 +56,14 @@ final class ContactService: ContactServiceType {
                 self?.contactStore.saveContact($0)
             })
 
-        let localContacts = Just<[User]>([
-            User(
-                id: "TLl9y9w7P2d1RH7WjJW9dfhVqK82",
-                name: "123456789",
-                avatar: nil,
-                phone: nil,
-                email: nil,
-                isEmailVerified: false,
-                pushToken: nil,
-                dob: nil,
-                gender: nil
-            ),
-            User(
-                id: "VPYmgzX0mggWPQBu3GgDa5Yo6Ow1",
-                name: "123456788",
-                avatar: nil,
-                phone: nil,
-                email: nil,
-                isEmailVerified: false,
-                pushToken: nil,
-                dob: nil,
-                gender: nil
-            )
-        ])
-        .setFailureType(to: Error.self)
-//        let observeContacts = contactStore.observeContacts()
-//        .filter { !$0.isEmpty }
-
-        return Publishers.Merge(remoteContacts, localContacts)
-            .removeDuplicates()
+        return remoteContacts
             .eraseToAnyPublisher()
+
+//        let localContacts = contactStore.observeContacts()
+//            .filter { !$0.isEmpty }
+//
+//        return Publishers.Merge(remoteContacts, localContacts)
+//            .removeDuplicates()
+//            .eraseToAnyPublisher()
     }
 }

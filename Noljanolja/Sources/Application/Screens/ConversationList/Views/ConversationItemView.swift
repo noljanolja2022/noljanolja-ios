@@ -14,12 +14,12 @@ struct ConversationItemView: View {
     var model: ConversationItemModel
 
     var body: some View {
-        HStack(spacing: 16) {
+        HStack(alignment: .top, spacing: 16) {
             KFImage(URL(string: model.image ?? ""))
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 40, height: 40)
-                .background(Color.gray)
+                .background(ColorAssets.neutralLightGrey.swiftUIColor)
                 .cornerRadius(14)
 
             VStack(alignment: .leading, spacing: 8) {
@@ -29,6 +29,7 @@ struct ConversationItemView: View {
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 if let lastMessage = model.lastMessage, !lastMessage.isEmpty {
                     Text(lastMessage)
+                        .lineLimit(2)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .font(Font.system(size: 14, weight: .regular))
                         .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
@@ -37,12 +38,13 @@ struct ConversationItemView: View {
             .frame(maxWidth: .infinity)
 
             Text(model.date ?? "")
-                .lineLimit(2)
+                .lineLimit(1)
+                .frame(height: 40)
                 .font(Font.system(size: 12, weight: .regular))
                 .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
         }
         .frame(maxWidth: .infinity)
-        .padding(.vertical, 8)
+        .padding(.vertical, 10)
         .padding(.horizontal, 16)
     }
 }
@@ -56,7 +58,7 @@ struct ConversationItemView_Previews: PreviewProvider {
                 id: 0,
                 image: "https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg",
                 title: "Title",
-                lastMessage: "Last message",
+                lastMessage: "Last message\nLast message\nLast message",
                 date: "06:12"
             )
         )

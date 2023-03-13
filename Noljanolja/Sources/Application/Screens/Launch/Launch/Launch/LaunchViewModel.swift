@@ -105,7 +105,7 @@ final class LaunchViewModel: LaunchViewModelType {
                 case let .success(user):
                     logger.info("Get pre data successful")
                     if user.isSetup {
-                        self?.delegate?.navigateToAuth()
+                        self?.delegate?.navigateToMain()
                     } else {
                         self?.delegate?.navigateToUpdateProfile()
                     }

@@ -14,28 +14,16 @@ struct ContactItemView: View {
     var name: String?
 
     var body: some View {
-        HStack(spacing: 16) {
-            if let image {
-                Image(uiImage: image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 52, height: 52)
-                    .background(Color.gray)
-                    .cornerRadius(26)
-            } else {
-                Image(systemName: "person.fill")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding(.top, 8)
-                    .frame(width: 52, height: 52)
-                    .background(Color.gray)
-                    .cornerRadius(26)
-            }
+        VStack {
             Text(name ?? "")
-                .font(.system(size: 18).bold())
+                .height(48)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .font(.system(size: 16))
+
+            Divider()
+                .background(ColorAssets.neutralLightGrey.swiftUIColor)
         }
-        .padding(16)
+        .padding(.horizontal, 16)
     }
 }
 

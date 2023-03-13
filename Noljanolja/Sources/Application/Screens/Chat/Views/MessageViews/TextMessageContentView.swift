@@ -1,5 +1,5 @@
 //
-//  TextMessageView.swift
+//  TextMessageItemView.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 07/03/2023.
@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - TextMessageContentView
 
 struct TextMessageContentView: View {
-    var contentItemModel: PlaintextMessageContentItemModel
+    var contentItemModel: TextMessageContentModel
 
     var body: some View {
         Text(contentItemModel.message ?? "")
@@ -27,7 +27,6 @@ struct TextMessageContentView: View {
                     ? ColorAssets.neutralLight.swiftUIColor
                     : ColorAssets.neutralDarkGrey.swiftUIColor
             )
-            .cornerRadius(16)
     }
 }
 
@@ -36,7 +35,7 @@ struct TextMessageContentView: View {
 struct TextMessageContentView_Previews: PreviewProvider {
     static var previews: some View {
         TextMessageContentView(
-            contentItemModel: PlaintextMessageContentItemModel(
+            contentItemModel: TextMessageContentModel(
                 isSenderMessage: true,
                 message: "Hello, world"
             )

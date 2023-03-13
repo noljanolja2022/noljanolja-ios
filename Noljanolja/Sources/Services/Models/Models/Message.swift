@@ -44,7 +44,7 @@ struct Message: Equatable, Codable {
         self.type = try container.decode(MessageType.self, forKey: .type)
         self.sender = try container.decode(User.self, forKey: .sender)
         if let createdAtString = try container.decodeIfPresent(String.self, forKey: .createdAt),
-           let createdAt = createdAtString.date(withFormat: NetworkConfigs.Format.apiDateFromat) {
+           let createdAt = createdAtString.date(withFormats: NetworkConfigs.Format.apiDateFormats) {
             self.createdAt = createdAt
         } else {
             throw NetworkError.mapping("\(Swift.type(of: type)) at key createdAt")

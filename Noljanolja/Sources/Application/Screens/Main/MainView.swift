@@ -17,6 +17,8 @@ struct MainView<ViewModel: MainViewModelType>: View {
 
     // MARK: State
 
+    @State private var isContactListShown = false
+
     init(viewModel: ViewModel = MainViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
@@ -29,12 +31,31 @@ struct MainView<ViewModel: MainViewModelType>: View {
                     Text(viewModel.state.selectedTab.rawValue)
                         .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
                 }
+
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    switch viewModel.state.selectedTab {
+                    case .chat:
+                        Button(
+                            action: { isContactListShown = true },
+                            label: {
+                                ImageAssets.icGroupAdd.swiftUIImage
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 24, height: 24)
+                                    .padding(12)
+                            }
+                        )
+                        .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
+                    default:
+                        EmptyView()
+                    }
+                }
             }
     }
 
     private func buildContentView() -> some View {
         TabView(selection: $viewModel.state.selectedTab) {
-            ConversationListView()
+            ConversationListView(isContactListShown: $isContactListShown)
                 .tag(ViewModel.State.Tab.chat)
                 .tabItem {
                     Image(systemName: "message.fill")

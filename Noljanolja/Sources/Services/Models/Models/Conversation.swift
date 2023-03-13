@@ -35,14 +35,14 @@ struct Conversation: Equatable, Codable {
         self.messages = try container.decode([Message].self, forKey: .messages)
         self.participants = try container.decode([User].self, forKey: .participants)
         if let createdAtString = try container.decodeIfPresent(String.self, forKey: .createdAt),
-           let createdAt = createdAtString.date(withFormat: NetworkConfigs.Format.apiDateFromat) {
+           let createdAt = createdAtString.date(withFormats: NetworkConfigs.Format.apiDateFormats) {
             self.createdAt = createdAt
         } else {
             throw NetworkError.mapping("\(Swift.type(of: type)) at key createdAt")
         }
 
         if let updatedAtString = try container.decodeIfPresent(String.self, forKey: .updatedAt),
-           let updatedAt = updatedAtString.date(withFormat: NetworkConfigs.Format.apiDateFromat) {
+           let updatedAt = updatedAtString.date(withFormats: NetworkConfigs.Format.apiDateFormats) {
             self.updatedAt = updatedAt
         } else {
             throw NetworkError.mapping("\(Swift.type(of: type)) at key updatedAt")

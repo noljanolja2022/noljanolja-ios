@@ -54,14 +54,17 @@ final class ConversationDetailService: ConversationDetailServiceType {
                 self?.conversationDetailStore.saveMessages($0)
             })
 
-        let localMessages = conversationDetailStore
-            .observeMessages(conversationID: conversationID)
-            .filter { !$0.isEmpty }
-            .map { $0.sorted { $0.createdAt > $1.createdAt } }
-
-        return Publishers.Merge(remoteMessages, localMessages)
-            .removeDuplicates()
+        return remoteMessages
             .eraseToAnyPublisher()
+
+//        let localMessages = conversationDetailStore
+//            .observeMessages(conversationID: conversationID)
+//            .filter { !$0.isEmpty }
+//            .map { $0.sorted { $0.createdAt > $1.createdAt } }
+//
+//        return Publishers.Merge(remoteMessages, localMessages)
+//            .removeDuplicates()
+//            .eraseToAnyPublisher()
     }
 
     func sendMessage(conversationID: Int,
