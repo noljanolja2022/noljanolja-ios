@@ -48,9 +48,9 @@ struct AuthRootView<ViewModel: AuthRootViewModelType>: View {
                         )
                     )
                 }
-            case .updateProfile:
-                UpdateProfileView(
-                    viewModel: UpdateProfileViewModel(
+            case .updateCurrentUser:
+                UpdateCurrentUserView(
+                    viewModel: UpdateCurrentUserViewModel(
                         delegate: viewModel
                     )
                 )

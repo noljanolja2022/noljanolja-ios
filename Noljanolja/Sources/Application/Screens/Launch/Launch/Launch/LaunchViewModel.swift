@@ -13,7 +13,7 @@ import Foundation
 
 protocol LaunchViewModelDelegate: AnyObject {
     func navigateToAuth()
-    func navigateToUpdateProfile()
+    func navigateToUpdateCurrentUser()
     func navigateToMain()
 }
 
@@ -44,7 +44,7 @@ final class LaunchViewModel: LaunchViewModelType {
 
     private var userDefaults: UserDefaultsType
     private let authService: AuthServiceType
-    private let profileService: ProfileServiceType
+    private let userService: UserServiceType
     private weak var delegate: LaunchViewModelDelegate?
 
     // MARK: Action
@@ -58,12 +58,12 @@ final class LaunchViewModel: LaunchViewModelType {
     init(state: State = State(),
          userDefaults: UserDefaultsType = UserDefaults.standard,
          authService: AuthServiceType = AuthService.default,
-         profileService: ProfileServiceType = ProfileService.default,
+         userService: UserServiceType = UserService.default,
          delegate: LaunchViewModelDelegate? = nil) {
         self.state = state
         self.userDefaults = userDefaults
         self.authService = authService
-        self.profileService = profileService
+        self.userService = userService
         self.delegate = delegate
 
         configure()
@@ -97,7 +97,7 @@ final class LaunchViewModel: LaunchViewModelType {
                 }()
                 return trigger
                     .flatMap { _ in self.authService.getIDTokenResult() }
-                    .flatMap { _ in self.profileService.getProfile() }
+                    .flatMap { _ in self.userService.getCurrentUser() }
                     .eraseToAnyPublisher()
             }
             .sink(receiveValue: { [weak self] result in
@@ -107,7 +107,7 @@ final class LaunchViewModel: LaunchViewModelType {
                     if user.isSetup {
                         self?.delegate?.navigateToMain()
                     } else {
-                        self?.delegate?.navigateToUpdateProfile()
+                        self?.delegate?.navigateToUpdateCurrentUser()
                     }
                 case let .failure(error):
                     logger.error("Get pre data failed - \(error.localizedDescription)")

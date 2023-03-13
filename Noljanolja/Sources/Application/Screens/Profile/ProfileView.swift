@@ -59,7 +59,7 @@ struct ProfileView<ViewModel: ProfileViewModelType>: View {
                 .font(FontFamily.NotoSans.medium.swiftUIFont(fixedSize: 16))
 
             NavigationLink(
-                destination: UpdateProfileView(),
+                destination: UpdateCurrentUserView(),
                 label: {
                     ProfileItemView(imageName: "pencil.slash", title: "Edit Account")
                 }

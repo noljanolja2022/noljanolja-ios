@@ -1,5 +1,5 @@
 //
-//  UpdateProfileViewModel.swift
+//  UpdateCurrentUserViewModel.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 04/03/2023.
@@ -11,18 +11,18 @@ import Foundation
 import SwiftUINavigation
 import UIKit
 
-// MARK: - UpdateProfileViewModelDelegate
+// MARK: - UpdateCurrentUserViewModelDelegate
 
-protocol UpdateProfileViewModelDelegate: AnyObject {
-    func didUpdateProfile()
+protocol UpdateCurrentUserViewModelDelegate: AnyObject {
+    func didUpdateCurrentUser()
 }
 
-// MARK: - UpdateProfileViewModelType
+// MARK: - UpdateCurrentUserViewModelType
 
-protocol UpdateProfileViewModelType:
-    ViewModelType where State == UpdateProfileViewModel.State, Action == UpdateProfileViewModel.Action {}
+protocol UpdateCurrentUserViewModelType:
+    ViewModelType where State == UpdateCurrentUserViewModel.State, Action == UpdateCurrentUserViewModel.Action {}
 
-extension UpdateProfileViewModel {
+extension UpdateCurrentUserViewModel {
     struct State {
         var image: UIImage?
         var name = ""
@@ -42,20 +42,20 @@ extension UpdateProfileViewModel {
     enum Action {
         case openAvatarActionSheet
         case openGenderActionSheet
-        case updateProfile
+        case updateCurrentUser
     }
 }
 
-// MARK: - UpdateProfileViewModel
+// MARK: - UpdateCurrentUserViewModel
 
-final class UpdateProfileViewModel: UpdateProfileViewModelType {
+final class UpdateCurrentUserViewModel: UpdateCurrentUserViewModelType {
     // MARK: State
 
     @Published var state: State
 
     // MARK: Dependencies
 
-    private weak var delegate: UpdateProfileViewModelDelegate?
+    private weak var delegate: UpdateCurrentUserViewModelDelegate?
 
     // MARK: Action
 
@@ -64,7 +64,7 @@ final class UpdateProfileViewModel: UpdateProfileViewModelType {
     private var cancellables = Set<AnyCancellable>()
 
     init(state: State = State(),
-         delegate: UpdateProfileViewModelDelegate? = nil) {
+         delegate: UpdateCurrentUserViewModelDelegate? = nil) {
         self.state = state
         self.delegate = delegate
 
@@ -77,8 +77,8 @@ final class UpdateProfileViewModel: UpdateProfileViewModelType {
             state.actionSheetType = .avatar
         case .openGenderActionSheet:
             state.actionSheetType = .gender
-        case .updateProfile:
-            delegate?.didUpdateProfile()
+        case .updateCurrentUser:
+            delegate?.didUpdateCurrentUser()
         }
     }
 

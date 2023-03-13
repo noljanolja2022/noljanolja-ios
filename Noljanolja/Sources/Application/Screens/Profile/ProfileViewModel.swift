@@ -41,7 +41,7 @@ final class ProfileViewModel: ProfileViewModelType {
 
     // MARK: Dependencies
 
-    private let profileService: ProfileServiceType
+    private let userService: UserServiceType
     private weak var delegate: ProfileViewModelDelegate?
 
     // MARK: Action
@@ -53,10 +53,10 @@ final class ProfileViewModel: ProfileViewModelType {
     private var cancellables = Set<AnyCancellable>()
 
     init(state: State = State(),
-         profileService: ProfileServiceType = ProfileService.default,
+         userService: UserServiceType = UserService.default,
          delegate: ProfileViewModelDelegate? = nil) {
         self.state = state
-        self.profileService = profileService
+        self.userService = userService
         self.delegate = delegate
 
         configure()
@@ -75,7 +75,7 @@ final class ProfileViewModel: ProfileViewModelType {
                 guard let self else {
                     return Empty<User, Error>().eraseToAnyPublisher()
                 }
-                return self.profileService.getProfileIfNeeded()
+                return self.userService.getCurrentUserIfNeeded()
             }
             .sink(receiveValue: { [weak self] result in
                 switch result {

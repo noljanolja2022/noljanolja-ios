@@ -7,6 +7,16 @@
 
 import Foundation
 
+// MARK: - GenderType
+
+enum GenderType: String, Codable {
+    case male = "MALE"
+    case female = "FEMALE"
+    case other = "OTHER"
+}
+
+// MARK: - User
+
 struct User: Equatable, Codable {
     let id: String
     let name: String?
@@ -16,7 +26,7 @@ struct User: Equatable, Codable {
     let isEmailVerified: Bool
     let pushToken: String?
     let dob: String?
-    let gender: String?
+    let gender: GenderType?
 
     var isSetup: Bool {
         !(name ?? "").isEmpty
@@ -44,7 +54,7 @@ struct User: Equatable, Codable {
         self.isEmailVerified = try container.decodeIfPresent(Bool.self, forKey: .isEmailVerified) ?? false
         self.pushToken = try container.decodeIfPresent(String.self, forKey: .pushToken)
         self.dob = try container.decodeIfPresent(String.self, forKey: .dob)
-        self.gender = try container.decodeIfPresent(String.self, forKey: .gender)
+        self.gender = try container.decodeIfPresent(GenderType.self, forKey: .gender)
     }
 
     init(id: String,
@@ -55,7 +65,7 @@ struct User: Equatable, Codable {
          isEmailVerified: Bool,
          pushToken: String?,
          dob: String?,
-         gender: String?) {
+         gender: GenderType?) {
         self.id = id
         self.name = name
         self.avatar = avatar

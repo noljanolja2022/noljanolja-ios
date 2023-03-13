@@ -29,9 +29,9 @@ struct LaunchRootView<ViewModel: LaunchRootViewModelType>: View {
                     delegate: viewModel
                 )
             )
-        case .updateProfile:
-            UpdateProfileView(
-                viewModel: UpdateProfileViewModel(
+        case .updateCurrentUser:
+            UpdateCurrentUserView(
+                viewModel: UpdateCurrentUserViewModel(
                     delegate: viewModel
                 )
             )

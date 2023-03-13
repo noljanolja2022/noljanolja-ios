@@ -1,5 +1,5 @@
 //
-//  UpdateProfileView.swift
+//  UpdateCurrentUserView.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 04/03/2023.
@@ -11,9 +11,9 @@ import PhotosUI
 import SwiftUI
 import SwiftUINavigation
 
-// MARK: - UpdateProfileView
+// MARK: - UpdateCurrentUserView
 
-struct UpdateProfileView<ViewModel: UpdateProfileViewModelType>: View {
+struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModelType>: View {
     // MARK: Dependencies
 
     @StateObject private var viewModel: ViewModel
@@ -23,7 +23,7 @@ struct UpdateProfileView<ViewModel: UpdateProfileViewModelType>: View {
     @State private var imageSourceType: ImagePickerView.SourceType? = nil
     @State private var isDatePickerShown = false
 
-    init(viewModel: ViewModel = UpdateProfileViewModel()) {
+    init(viewModel: ViewModel = UpdateCurrentUserViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
@@ -140,7 +140,7 @@ struct UpdateProfileView<ViewModel: UpdateProfileViewModelType>: View {
 
             Button(
                 "OK",
-                action: { viewModel.send(.updateProfile) }
+                action: { viewModel.send(.updateCurrentUser) }
             )
             .buttonStyle(PrimaryButtonStyle())
             .shadow(
@@ -232,10 +232,10 @@ struct UpdateProfileView<ViewModel: UpdateProfileViewModelType>: View {
     }
 }
 
-// MARK: - UpdateProfileView_Previews
+// MARK: - UpdateCurrentUserView_Previews
 
-struct UpdateProfileView_Previews: PreviewProvider {
+struct UpdateCurrentUserView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateProfileView()
+        UpdateCurrentUserView()
     }
 }

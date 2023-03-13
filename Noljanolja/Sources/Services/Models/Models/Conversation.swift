@@ -32,7 +32,7 @@ struct Conversation: Equatable, Codable {
         self.title = try container.decodeIfPresent(String.self, forKey: .title)
         self.creator = try container.decode(User.self, forKey: .creator)
         self.type = try container.decode(ConversationType.self, forKey: .type)
-        self.messages = try container.decode([Message].self, forKey: .messages)
+        self.messages = try container.decodeIfPresent([Message].self, forKey: .messages) ?? []
         self.participants = try container.decode([User].self, forKey: .participants)
         if let createdAtString = try container.decodeIfPresent(String.self, forKey: .createdAt),
            let createdAt = createdAtString.date(withFormats: NetworkConfigs.Format.apiDateFormats) {

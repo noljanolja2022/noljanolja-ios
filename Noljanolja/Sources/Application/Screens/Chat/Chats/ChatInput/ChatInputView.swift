@@ -140,7 +140,7 @@ struct ChatInputView_Previews: PreviewProvider {
                             isEmailVerified: false,
                             pushToken: "pushToken",
                             dob: "dob",
-                            gender: "Male"
+                            gender: .male
                         ),
                         type: .single,
                         messages: [],

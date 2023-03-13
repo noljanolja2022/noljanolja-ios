@@ -21,7 +21,7 @@
 		CF00D1732995457600505702 /* ProgressHUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D1722995457600505702 /* ProgressHUDView.swift */; };
 		CF08A85F29B5A17A00D6CE5F /* ContactListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF08A85D29B5A17A00D6CE5F /* ContactListView.swift */; };
 		CF08A86029B5A17A00D6CE5F /* ContactListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF08A85E29B5A17A00D6CE5F /* ContactListViewModel.swift */; };
-		CF08A86229B5A26600D6CE5F /* LocalContactAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF08A86129B5A26600D6CE5F /* LocalContactAPI.swift */; };
+		CF08A86229B5A26600D6CE5F /* ContactAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF08A86129B5A26600D6CE5F /* ContactAPI.swift */; };
 		CF08A86829B5E66F00D6CE5F /* ContactItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF08A86729B5E66F00D6CE5F /* ContactItemView.swift */; };
 		CF0E8845298D4E09000DAE4A /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = CF0E8844298D4E09000DAE4A /* FirebaseCrashlytics */; };
 		CF0EA30629AA02120014A7DE /* AuthWithPhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0EA30429AA02120014A7DE /* AuthWithPhoneView.swift */; };
@@ -51,8 +51,8 @@
 		CF15501029939A350053E86D /* TabLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF15500F29939A350053E86D /* TabLayout.swift */; };
 		CF1550232993B5C90053E86D /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1550212993B5C90053E86D /* TabBarView.swift */; };
 		CF1550242993B5C90053E86D /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1550222993B5C90053E86D /* TabBarItem.swift */; };
-		CF18898229B347E500701583 /* UpdateProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF18898029B347E500701583 /* UpdateProfileView.swift */; };
-		CF18898329B347E500701583 /* UpdateProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF18898129B347E500701583 /* UpdateProfileViewModel.swift */; };
+		CF18898229B347E500701583 /* UpdateCurrentUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF18898029B347E500701583 /* UpdateCurrentUserView.swift */; };
+		CF18898329B347E500701583 /* UpdateCurrentUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF18898129B347E500701583 /* UpdateCurrentUserViewModel.swift */; };
 		CF18898629B349AE00701583 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CF18898529B349AE00701583 /* Kingfisher */; };
 		CF1B624829B9B55F00DE53E6 /* ConversationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1B624729B9B55F00DE53E6 /* ConversationAPI.swift */; };
 		CF1B624A29B9B8A100DE53E6 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1B624929B9B8A100DE53E6 /* Conversation.swift */; };
@@ -62,7 +62,7 @@
 		CF1B625229B9BED800DE53E6 /* StorableMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1B625129B9BED800DE53E6 /* StorableMessage.swift */; };
 		CF1B625429B9CE0800DE53E6 /* StorableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1B625329B9CE0800DE53E6 /* StorableModel.swift */; };
 		CF1B625629B9D3BF00DE53E6 /* ConversationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1B625529B9D3BF00DE53E6 /* ConversationService.swift */; };
-		CF1BD1FD29ACEAA000778786 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1BD1FC29ACEAA000778786 /* ProfileService.swift */; };
+		CF1BD1FD29ACEAA000778786 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1BD1FC29ACEAA000778786 /* UserService.swift */; };
 		CF1BD20529ACF5F200778786 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1BD20429ACF5F200778786 /* LoadingView.swift */; };
 		CF1BD20B29ACF67D00778786 /* StateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1BD20A29ACF67D00778786 /* StateView.swift */; };
 		CF1EEE2D29AE355E004F570A /* NibOwnerLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1EEE2C29AE355E004F570A /* NibOwnerLoadable.swift */; };
@@ -86,6 +86,7 @@
 		CF28A1B029B5066A0003C204 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF28A1AE29B5066A0003C204 /* SettingViewModel.swift */; };
 		CF31ADB029B37D240002900B /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF31ADAF29B37D240002900B /* ImagePickerView.swift */; };
 		CF3282ED299E3758006A459B /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3282EC299E3758006A459B /* UIApplication+Extension.swift */; };
+		CF398DD829BF89430015DB18 /* UpdateCurrentUserParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF398DD729BF89430015DB18 /* UpdateCurrentUserParam.swift */; };
 		CF3CE18529B79FD50054BBEF /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3CE18429B79FD50054BBEF /* UserDefaults.swift */; };
 		CF43BF73299274D900FD3180 /* FirebaseAuth+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF43BF72299274D900FD3180 /* FirebaseAuth+Combine.swift */; };
 		CF4DE2DC29B3B6A7006E75E5 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC0F29935C2D00D78213 /* AuthView.swift */; };
@@ -110,7 +111,6 @@
 		CF4DE2EF29B3B6A7006E75E5 /* TermDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF17471A299CBCB1001B93E8 /* TermDetailViewModel.swift */; };
 		CF4DE2F029B3B6A7006E75E5 /* AuthPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0A38E299E79EF00E904B0 /* AuthPopupView.swift */; };
 		CF4DE2F129B3B6A7006E75E5 /* SignUpNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709E629962CD100B64216 /* SignUpNavigationViewModel.swift */; };
-		CF52AB5F29B8D3B900C9C90C /* ContactAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF52AB5E29B8D3B900C9C90C /* ContactAPI.swift */; };
 		CF52AB6129B8D6BE00C9C90C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF52AB6029B8D6BE00C9C90C /* User.swift */; };
 		CF52AB6429B8D85000C9C90C /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF52AB6329B8D85000C9C90C /* ContactService.swift */; };
 		CF52AB6829B8D93D00C9C90C /* StorableUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF52AB6729B8D93D00C9C90C /* StorableUser.swift */; };
@@ -200,7 +200,7 @@
 		CFFD70CC298AC5F800D4F5A2 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD70C3298AC5F800D4F5A2 /* Api.swift */; };
 		CFFD70D0298AC7A900D4F5A2 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = CFFD70CF298AC7A900D4F5A2 /* CombineMoya */; };
 		CFFD70D3298AC89000D4F5A2 /* NetworkConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD70D2298AC89000D4F5A2 /* NetworkConfigs.swift */; };
-		CFFD70D5298AC92500D4F5A2 /* ProfileAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD70D4298AC92500D4F5A2 /* ProfileAPI.swift */; };
+		CFFD70D5298AC92500D4F5A2 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD70D4298AC92500D4F5A2 /* UserAPI.swift */; };
 		CFFD70D9298ACAF600D4F5A2 /* BaseTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD70D8298ACAF600D4F5A2 /* BaseTargetType.swift */; };
 		CFFD718D298AD38C00D4F5A2 /* ColorAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD718C298AD38C00D4F5A2 /* ColorAssets.xcassets */; };
 /* End PBXBuildFile section */
@@ -242,7 +242,7 @@
 		CF00D1722995457600505702 /* ProgressHUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHUDView.swift; sourceTree = "<group>"; };
 		CF08A85D29B5A17A00D6CE5F /* ContactListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListView.swift; sourceTree = "<group>"; };
 		CF08A85E29B5A17A00D6CE5F /* ContactListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListViewModel.swift; sourceTree = "<group>"; };
-		CF08A86129B5A26600D6CE5F /* LocalContactAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalContactAPI.swift; sourceTree = "<group>"; };
+		CF08A86129B5A26600D6CE5F /* ContactAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactAPI.swift; sourceTree = "<group>"; };
 		CF08A86729B5E66F00D6CE5F /* ContactItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactItemView.swift; sourceTree = "<group>"; };
 		CF0EA30429AA02120014A7DE /* AuthWithPhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthWithPhoneView.swift; sourceTree = "<group>"; };
 		CF0EA30529AA02120014A7DE /* AuthWithPhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthWithPhoneViewModel.swift; sourceTree = "<group>"; };
@@ -281,8 +281,8 @@
 		CF17471A299CBCB1001B93E8 /* TermDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermDetailViewModel.swift; sourceTree = "<group>"; };
 		CF17471E299CBFDE001B93E8 /* EmailVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationView.swift; sourceTree = "<group>"; };
 		CF17471F299CBFDE001B93E8 /* EmailVerificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailVerificationViewModel.swift; sourceTree = "<group>"; };
-		CF18898029B347E500701583 /* UpdateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileView.swift; sourceTree = "<group>"; };
-		CF18898129B347E500701583 /* UpdateProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileViewModel.swift; sourceTree = "<group>"; };
+		CF18898029B347E500701583 /* UpdateCurrentUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCurrentUserView.swift; sourceTree = "<group>"; };
+		CF18898129B347E500701583 /* UpdateCurrentUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCurrentUserViewModel.swift; sourceTree = "<group>"; };
 		CF1B624729B9B55F00DE53E6 /* ConversationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationAPI.swift; sourceTree = "<group>"; };
 		CF1B624929B9B8A100DE53E6 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		CF1B624B29B9B92B00DE53E6 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -291,7 +291,7 @@
 		CF1B625129B9BED800DE53E6 /* StorableMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorableMessage.swift; sourceTree = "<group>"; };
 		CF1B625329B9CE0800DE53E6 /* StorableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorableModel.swift; sourceTree = "<group>"; };
 		CF1B625529B9D3BF00DE53E6 /* ConversationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationService.swift; sourceTree = "<group>"; };
-		CF1BD1FC29ACEAA000778786 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
+		CF1BD1FC29ACEAA000778786 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		CF1BD20429ACF5F200778786 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		CF1BD20A29ACF67D00778786 /* StateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateView.swift; sourceTree = "<group>"; };
 		CF1EEE2C29AE355E004F570A /* NibOwnerLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibOwnerLoadable.swift; sourceTree = "<group>"; };
@@ -315,9 +315,9 @@
 		CF28A1AE29B5066A0003C204 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		CF31ADAF29B37D240002900B /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		CF3282EC299E3758006A459B /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
+		CF398DD729BF89430015DB18 /* UpdateCurrentUserParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCurrentUserParam.swift; sourceTree = "<group>"; };
 		CF3CE18429B79FD50054BBEF /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		CF43BF72299274D900FD3180 /* FirebaseAuth+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseAuth+Combine.swift"; sourceTree = "<group>"; };
-		CF52AB5E29B8D3B900C9C90C /* ContactAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactAPI.swift; sourceTree = "<group>"; };
 		CF52AB6029B8D6BE00C9C90C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CF52AB6329B8D85000C9C90C /* ContactService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
 		CF52AB6729B8D93D00C9C90C /* StorableUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorableUser.swift; sourceTree = "<group>"; };
@@ -410,7 +410,7 @@
 		CFFD70C2298AC5F800D4F5A2 /* ApiProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiProvider.swift; sourceTree = "<group>"; };
 		CFFD70C3298AC5F800D4F5A2 /* Api.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		CFFD70D2298AC89000D4F5A2 /* NetworkConfigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfigs.swift; sourceTree = "<group>"; };
-		CFFD70D4298AC92500D4F5A2 /* ProfileAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAPI.swift; sourceTree = "<group>"; };
+		CFFD70D4298AC92500D4F5A2 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		CFFD70D8298ACAF600D4F5A2 /* BaseTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTargetType.swift; sourceTree = "<group>"; };
 		CFFD718C298AD38C00D4F5A2 /* ColorAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorAssets.xcassets; sourceTree = "<group>"; };
 		F53231636127B61B7E5B0B97 /* Pods-NoljanoljaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoljanoljaTests.release.xcconfig"; path = "Target Support Files/Pods-NoljanoljaTests/Pods-NoljanoljaTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -722,13 +722,13 @@
 			path = EmailVerification;
 			sourceTree = "<group>";
 		};
-		CF18897E29B3471300701583 /* UpdateProfile */ = {
+		CF18897E29B3471300701583 /* UpdateCurrentUser */ = {
 			isa = PBXGroup;
 			children = (
-				CF18898029B347E500701583 /* UpdateProfileView.swift */,
-				CF18898129B347E500701583 /* UpdateProfileViewModel.swift */,
+				CF18898029B347E500701583 /* UpdateCurrentUserView.swift */,
+				CF18898129B347E500701583 /* UpdateCurrentUserViewModel.swift */,
 			);
-			path = UpdateProfile;
+			path = UpdateCurrentUser;
 			sourceTree = "<group>";
 		};
 		CF18897F29B3471E00701583 /* Profile */ = {
@@ -884,6 +884,14 @@
 				CF3282EC299E3758006A459B /* UIApplication+Extension.swift */,
 			);
 			path = UIKit;
+			sourceTree = "<group>";
+		};
+		CF398DD629BF891C0015DB18 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				CF398DD729BF89430015DB18 /* UpdateCurrentUserParam.swift */,
+			);
+			path = Requests;
 			sourceTree = "<group>";
 		};
 		CF4DE2DB29B3B605006E75E5 /* ScreensUnused */ = {
@@ -1333,6 +1341,7 @@
 		CFFD70AD298AC1B400D4F5A2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CF398DD629BF891C0015DB18 /* Requests */,
 				CFBCE41629B98A4E000D6F73 /* Erros */,
 				CF52AB6629B8D91200C9C90C /* StorableModels */,
 				CF52AB6529B8D90D00C9C90C /* Models */,
@@ -1344,7 +1353,7 @@
 			isa = PBXGroup;
 			children = (
 				CF14F267298CF87E00BC2066 /* AuthService.swift */,
-				CF1BD1FC29ACEAA000778786 /* ProfileService.swift */,
+				CF1BD1FC29ACEAA000778786 /* UserService.swift */,
 				CF3CE18429B79FD50054BBEF /* UserDefaults.swift */,
 				CF52AB6329B8D85000C9C90C /* ContactService.swift */,
 				CF1B625529B9D3BF00DE53E6 /* ConversationService.swift */,
@@ -1409,7 +1418,7 @@
 				CF18897F29B3471E00701583 /* Profile */,
 				CF6ABC1A29935D5800D78213 /* Root */,
 				CF28A1AC29B506550003C204 /* Setting */,
-				CF18897E29B3471300701583 /* UpdateProfile */,
+				CF18897E29B3471300701583 /* UpdateCurrentUser */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -1470,9 +1479,8 @@
 			isa = PBXGroup;
 			children = (
 				CFE09252298DF67D00F197F0 /* Auth */,
-				CF52AB5E29B8D3B900C9C90C /* ContactAPI.swift */,
-				CF08A86129B5A26600D6CE5F /* LocalContactAPI.swift */,
-				CFFD70D4298AC92500D4F5A2 /* ProfileAPI.swift */,
+				CF08A86129B5A26600D6CE5F /* ContactAPI.swift */,
+				CFFD70D4298AC92500D4F5A2 /* UserAPI.swift */,
 				CF1B624729B9B55F00DE53E6 /* ConversationAPI.swift */,
 				CF11B1D929BB65DD002E8151 /* ConversationDetailAPI.swift */,
 			);
@@ -1838,7 +1846,7 @@
 				CF1B625629B9D3BF00DE53E6 /* ConversationService.swift in Sources */,
 				CF11B1D829BB65B4002E8151 /* ConversationDetailService.swift in Sources */,
 				CF74A1A729B586EF00419342 /* StatefullView.swift in Sources */,
-				CF08A86229B5A26600D6CE5F /* LocalContactAPI.swift in Sources */,
+				CF08A86229B5A26600D6CE5F /* ContactAPI.swift in Sources */,
 				CF43BF73299274D900FD3180 /* FirebaseAuth+Combine.swift in Sources */,
 				CFFD70C5298AC5F800D4F5A2 /* RequestTimeoutPlugin.swift in Sources */,
 				CF1550232993B5C90053E86D /* TabBarView.swift in Sources */,
@@ -1854,7 +1862,6 @@
 				CF4DE2DD29B3B6A7006E75E5 /* AuthViewModel.swift in Sources */,
 				CFE0925F298EACF200F197F0 /* GoogleAuthAPI.swift in Sources */,
 				CFECC12E29B4D6D500E20B58 /* LaunchView.swift in Sources */,
-				CF52AB5F29B8D3B900C9C90C /* ContactAPI.swift in Sources */,
 				CFFD70D3298AC89000D4F5A2 /* NetworkConfigs.swift in Sources */,
 				CF14F249298C331C00BC2066 /* Localizable.swift in Sources */,
 				CFFB059529BF1261000D65EE /* MessageContentModelType.swift in Sources */,
@@ -1880,7 +1887,7 @@
 				CF11B1DC29BB668D002E8151 /* ConversationDetailStore.swift in Sources */,
 				CF1550242993B5C90053E86D /* TabBarItem.swift in Sources */,
 				CF3282ED299E3758006A459B /* UIApplication+Extension.swift in Sources */,
-				CF18898229B347E500701583 /* UpdateProfileView.swift in Sources */,
+				CF18898229B347E500701583 /* UpdateCurrentUserView.swift in Sources */,
 				CF00D1572994174600505702 /* FontAssets.swift in Sources */,
 				CF1B624E29B9BC7F00DE53E6 /* ConversationStore.swift in Sources */,
 				CF74A19D29B581AD00419342 /* ConversationListView.swift in Sources */,
@@ -1907,7 +1914,7 @@
 				CF14F24A298C331D00BC2066 /* ColorAssets.swift in Sources */,
 				CFE09341299007E400F197F0 /* Publisher+ResultTranforming.swift in Sources */,
 				CFD5424829BF7A520053C5B1 /* ChatItemView.swift in Sources */,
-				CFFD70D5298AC92500D4F5A2 /* ProfileAPI.swift in Sources */,
+				CFFD70D5298AC92500D4F5A2 /* UserAPI.swift in Sources */,
 				CFE09254298DF69600F197F0 /* NaverAuthAPI.swift in Sources */,
 				CFD5424C29BF7A520053C5B1 /* MessageView+CornerRadius.swift in Sources */,
 				CF4DE2ED29B3B6A7006E75E5 /* EmailVerificationView.swift in Sources */,
@@ -1916,6 +1923,7 @@
 				CF28A19A29B4D8D70003C204 /* LaunchRootView.swift in Sources */,
 				CF28A19B29B4D8D70003C204 /* LaunchRootViewModel.swift in Sources */,
 				CF4DE2E529B3B6A7006E75E5 /* ForgotPasswordViewModel.swift in Sources */,
+				CF398DD829BF89430015DB18 /* UpdateCurrentUserParam.swift in Sources */,
 				CF74A19E29B581AD00419342 /* ConversationListModel.swift in Sources */,
 				CFF1F7A529B7371600B25DD2 /* ChatViewModel.swift in Sources */,
 				CFFB059029BF0F20000D65EE /* ChatItemModelType.swift in Sources */,
@@ -1924,7 +1932,7 @@
 				CFD5424B29BF7A520053C5B1 /* MessageContentView.swift in Sources */,
 				CF0EA31529AA4D450014A7DE /* PhoneVerificationCodeViewModel.swift in Sources */,
 				CF4DE2E629B3B6A7006E75E5 /* SignInView.swift in Sources */,
-				CF1BD1FD29ACEAA000778786 /* ProfileService.swift in Sources */,
+				CF1BD1FD29ACEAA000778786 /* UserService.swift in Sources */,
 				CF08A86829B5E66F00D6CE5F /* ContactItemView.swift in Sources */,
 				CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */,
 				CF28A1A329B4FE410003C204 /* MainView.swift in Sources */,
@@ -1962,7 +1970,7 @@
 				CFE09265298EB92D00F197F0 /* AppleAuthAPI.swift in Sources */,
 				CF4DE2DF29B3B6A7006E75E5 /* SignUpView.swift in Sources */,
 				CF0EA31A29AA56E90014A7DE /* Binding+LimitString.swift in Sources */,
-				CF18898329B347E500701583 /* UpdateProfileViewModel.swift in Sources */,
+				CF18898329B347E500701583 /* UpdateCurrentUserViewModel.swift in Sources */,
 				CF52AB6129B8D6BE00C9C90C /* User.swift in Sources */,
 				CFFD70C4298AC5F800D4F5A2 /* NetworkLoggerPluggin.swift in Sources */,
 				CFA3304929BE3AB9008D7449 /* String+Date.swift in Sources */,

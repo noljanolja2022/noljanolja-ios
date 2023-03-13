@@ -29,7 +29,7 @@ class StorableUser: Object, StorableModel {
             isEmailVerified: isEmailVerified,
             pushToken: pushToken,
             dob: dob,
-            gender: gender
+            gender: gender.flatMap { GenderType(rawValue: $0) }
         )
     }
 
@@ -42,6 +42,6 @@ class StorableUser: Object, StorableModel {
         self.email = model.email
         self.isEmailVerified = model.isEmailVerified
         self.dob = model.dob
-        self.gender = model.gender
+        self.gender = model.gender?.rawValue
     }
 }

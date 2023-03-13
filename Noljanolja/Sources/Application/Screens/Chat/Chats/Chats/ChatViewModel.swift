@@ -41,7 +41,7 @@ final class ChatViewModel: ChatViewModelType {
 
     // MARK: Dependencies
 
-    private let profileService: ProfileServiceType
+    private let userService: UserServiceType
     private let conversationDetailService: ConversationDetailServiceType
     private weak var delegate: ChatViewModelDelegate?
 
@@ -59,11 +59,11 @@ final class ChatViewModel: ChatViewModelType {
     private var cancellables = Set<AnyCancellable>()
 
     init(state: State,
-         profileService: ProfileServiceType = ProfileService.default,
+         userService: UserServiceType = UserService.default,
          conversationDetailService: ConversationDetailServiceType = ConversationDetailService.default,
          delegate: ChatViewModelDelegate? = nil) {
         self.state = state
-        self.profileService = profileService
+        self.userService = userService
         self.conversationDetailService = conversationDetailService
         self.delegate = delegate
 
@@ -89,8 +89,8 @@ final class ChatViewModel: ChatViewModelType {
             })
             .store(in: &cancellables)
 
-        profileService
-            .getProfileIfNeeded()
+        userService
+            .getCurrentUserIfNeeded()
             .sink(
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] in self?.currentUserSubject.send($0) }

@@ -19,14 +19,14 @@ protocol LaunchRootViewModelDelegate: AnyObject {
 // MARK: - LaunchRootViewModelType
 
 protocol LaunchRootViewModelType: LaunchViewModelDelegate,
-    UpdateProfileViewModelDelegate,
+    UpdateCurrentUserViewModelDelegate,
     ViewModelStateGetOnlyType where State == LaunchRootViewModel.State, Action == LaunchRootViewModel.Action {}
 
 extension LaunchRootViewModel {
     struct State {
         enum ContentType {
             case launch
-            case updateProfile
+            case updateCurrentUser
         }
 
         var contentType: ContentType = .launch
@@ -72,8 +72,8 @@ extension LaunchRootViewModel: LaunchViewModelDelegate {
         delegate?.navigateToAuth()
     }
 
-    func navigateToUpdateProfile() {
-        state.contentType = .updateProfile
+    func navigateToUpdateCurrentUser() {
+        state.contentType = .updateCurrentUser
     }
 
     func navigateToMain() {
@@ -81,10 +81,10 @@ extension LaunchRootViewModel: LaunchViewModelDelegate {
     }
 }
 
-// MARK: UpdateProfileViewModelDelegate
+// MARK: UpdateCurrentUserViewModelDelegate
 
-extension LaunchRootViewModel: UpdateProfileViewModelDelegate {
-    func didUpdateProfile() {
+extension LaunchRootViewModel: UpdateCurrentUserViewModelDelegate {
+    func didUpdateCurrentUser() {
         delegate?.navigateToMain()
     }
 }
