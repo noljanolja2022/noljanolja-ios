@@ -58,7 +58,7 @@ final class PhoneVerificationCodeViewModel: PhoneVerificationCodeViewModelType {
     // MARK: Dependencies
 
     private var verificationID: String
-    private let authServices: AuthServicesType
+    private let authService: AuthServiceType
     private let profileService: ProfileServiceType
     private weak var delegate: PhoneVerificationCodeViewModelDelegate?
 
@@ -75,12 +75,12 @@ final class PhoneVerificationCodeViewModel: PhoneVerificationCodeViewModelType {
 
     init(state: State,
          verificationID: String,
-         authServices: AuthServicesType = AuthServices.default,
+         authService: AuthServiceType = AuthService.default,
          profileService: ProfileServiceType = ProfileService.default,
          delegate: PhoneVerificationCodeViewModelDelegate? = nil) {
         self.state = state
         self.verificationID = verificationID
-        self.authServices = authServices
+        self.authService = authService
         self.profileService = profileService
         self.delegate = delegate
 
@@ -104,7 +104,7 @@ final class PhoneVerificationCodeViewModel: PhoneVerificationCodeViewModelType {
             .flatMapLatestToResult { [weak self] _ -> AnyPublisher<String, Error> in
                 guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
                 logger.info("Send verification code to phone: \(self.state.fullPhoneNumber)")
-                return self.authServices
+                return self.authService
                     .sendPhoneVerificationCode(self.state.fullPhoneNumber, languageCode: self.state.country.code)
             }
             .sink(receiveValue: { [weak self] result in
@@ -127,26 +127,24 @@ final class PhoneVerificationCodeViewModel: PhoneVerificationCodeViewModelType {
             .store(in: &cancellables)
 
         verifyTrigger
-            .print("OKOKOKOKOK - trigger")
             .handleEvents(receiveOutput: { [weak self] _ in self?.state.isProgressHUDShowing = true })
-            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<ProfileModel, Error> in
+            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<User, Error> in
                 guard let self else {
-                    return Empty<ProfileModel, Error>().eraseToAnyPublisher()
+                    return Empty<User, Error>().eraseToAnyPublisher()
                 }
-                return self.authServices
+                return self.authService
                     .verificationCode(verificationID: self.verificationID, verificationCode: self.state.verificationCode)
                     .flatMap { _ in
                         self.profileService.getProfile()
                     }
                     .eraseToAnyPublisher()
             }
-            .print("OKOKOKOKOK - era")
             .sink(receiveValue: { [weak self] result in
                 self?.state.isProgressHUDShowing = false
                 switch result {
-                case let .success(profileModel):
+                case let .success(user):
                     logger.info("Verify verification code successful")
-                    if profileModel.isSetup {
+                    if user.isSetup {
                         self?.delegate?.navigateToMain()
                     } else {
                         self?.delegate?.navigateToUpdateProfile()

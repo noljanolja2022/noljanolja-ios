@@ -24,7 +24,7 @@ struct SelectCountryView<ViewModel: SelectCountryViewModelType>: View {
     }
 
     var body: some View {
-        content
+        buildContentView()
             .onAppear { viewModel.send(.loadData) }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -45,14 +45,14 @@ struct SelectCountryView<ViewModel: SelectCountryViewModelType>: View {
             }
     }
 
-    var content: some View {
+    private func buildContentView() -> some View {
         VStack(spacing: 0) {
-            search
-            countries
+            buildSearchView()
+            buildCountriesView()
         }
     }
 
-    var search: some View {
+    private func buildSearchView() -> some View {
         HStack(spacing: 8) {
             HStack(spacing: 8) {
                 Image(systemName: "magnifyingglass")
@@ -87,8 +87,8 @@ struct SelectCountryView<ViewModel: SelectCountryViewModelType>: View {
         .padding(.horizontal, 16)
     }
 
-    var countries: some View {
-        List {
+    private func buildCountriesView() -> some View {
+        ListView {
             ForEach(viewModel.state.countries) { country in
                 Button(
                     action: {

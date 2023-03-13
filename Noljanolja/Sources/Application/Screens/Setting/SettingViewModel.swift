@@ -37,7 +37,7 @@ final class SettingViewModel: SettingViewModelType {
 
     // MARK: Dependencies
 
-    private let authService: AuthServicesType
+    private let authService: AuthServiceType
     private weak var delegate: SettingViewModelDelegate?
 
     // MARK: Action
@@ -49,7 +49,7 @@ final class SettingViewModel: SettingViewModelType {
     private var cancellables = Set<AnyCancellable>()
 
     init(state: State = State(),
-         authService: AuthServicesType = AuthServices.default,
+         authService: AuthServiceType = AuthService.default,
          delegate: SettingViewModelDelegate? = nil) {
         self.state = state
         self.authService = authService

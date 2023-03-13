@@ -27,8 +27,8 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
 
     var body: some View {
         ZStack {
-            content
-            navigationLinks
+            buildContentView()
+            buildNavigationLinks()
         }
         .onChange(of: viewModel.state.isProgressHUDShowing) {
             progressHUBState.isLoading = $0
@@ -54,17 +54,17 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
         }
     }
 
-    private var content: some View {
+    private func buildContentView() -> some View {
         ScrollView {
             VStack(spacing: 12) {
-                signInWithPhone
-                signInWithSNSContent
+                buildPhoneSignInView()
+                buildSNSSignInView()
             }
             .padding(16)
         }
     }
 
-    private var signInWithPhone: some View {
+    private func buildPhoneSignInView() -> some View {
         VStack(spacing: 32) {
             Text("What's the phone number for this device?")
                 .font(FontFamily.NotoSans.bold.swiftUIFont(size: 16))
@@ -119,7 +119,7 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
         }
     }
 
-    private var signInWithSNSContent: some View {
+    private func buildSNSSignInView() -> some View {
         VStack(spacing: 12) {
             HStack {
                 Rectangle()
@@ -143,7 +143,7 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
         }
     }
 
-    private var navigationLinks: some View {
+    private func buildNavigationLinks() -> some View {
         NavigationLink(
             unwrapping: $viewModel.state.verificationID,
             onNavigate: { _ in },

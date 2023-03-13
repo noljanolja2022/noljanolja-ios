@@ -35,7 +35,7 @@ final class EmailVerificationViewModel: EmailVerificationViewModelType {
     // MARK: Dependencies
 
     private weak var delegate: EmailVerificationViewModelDelegate?
-    private let authServices: AuthServicesType
+    private let authService: AuthServiceType
 
     // MARK: State
 
@@ -53,9 +53,9 @@ final class EmailVerificationViewModel: EmailVerificationViewModelType {
     private var cancellables = Set<AnyCancellable>()
 
     init(delegate: EmailVerificationViewModelDelegate? = nil,
-         authServices: AuthServicesType = AuthServices.default) {
+         authService: AuthServiceType = AuthService.default) {
         self.delegate = delegate
-        self.authServices = authServices
+        self.authService = authService
         
         configure()
     }
@@ -65,7 +65,7 @@ final class EmailVerificationViewModel: EmailVerificationViewModelType {
             .handleEvents(receiveOutput: { [weak self] _ in self?.isShowingProgressHUD = true })
             .flatMap { [weak self] _ -> AnyPublisher<Result<Void, Error>, Never> in
                 guard let self else { return Empty<Result<Void, Error>, Never>().eraseToAnyPublisher() }
-                return self.authServices
+                return self.authService
                     .sendEmailVerification()
                     .mapToResult()
             }
@@ -84,7 +84,7 @@ final class EmailVerificationViewModel: EmailVerificationViewModelType {
             .handleEvents(receiveOutput: { [weak self] _ in self?.isShowingProgressHUD = true })
             .flatMap { [weak self] _ -> AnyPublisher<Result<String, Error>, Never> in
                 guard let self else { return Empty<Result<String, Error>, Never>().eraseToAnyPublisher() }
-                return self.authServices
+                return self.authService
                     .verifyEmail()
                     .mapToResult()
             }

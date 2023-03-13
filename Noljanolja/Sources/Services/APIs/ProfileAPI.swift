@@ -22,7 +22,7 @@ private enum ProfileAPITargets {
 // MARK: - ProfileAPIType
 
 protocol ProfileAPIType {
-    func getProfile() -> AnyPublisher<ProfileModel, Error>
+    func getProfile() -> AnyPublisher<User, Error>
 }
 
 // MARK: - ProfileAPI
@@ -30,7 +30,7 @@ protocol ProfileAPIType {
 final class ProfileAPI: ProfileAPIType {
     private let api: ApiType = Api.default
 
-    func getProfile() -> AnyPublisher<ProfileModel, Error> {
+    func getProfile() -> AnyPublisher<User, Error> {
         api.request(
             target: ProfileAPITargets.GetProfile(),
             atKeyPath: "data"

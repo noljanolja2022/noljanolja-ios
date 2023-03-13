@@ -17,71 +17,144 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
 
     // MARK: State
 
-    init(viewModel: ViewModel = ConversationListViewModel()) {
+    @Binding private var isContactListShown: Bool
+
+    init(viewModel: ViewModel = ConversationListViewModel(),
+         isContactListShown: Binding<Bool>) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        self._isContactListShown = isContactListShown
     }
 
     var body: some View {
-        bodyView
+        buildBodyView()
             .onAppear { viewModel.send(.loadData) }
     }
 
-    var bodyView: some View {
+    private func buildBodyView() -> some View {
         ZStack(alignment: .bottomTrailing) {
-            if viewModel.state.conversationModels.isEmpty {
-                emptyView
-            } else {
-                contentView
-            }
+            VStack(spacing: 0) {
+                ZStack {
+                    SearchView(placeholder: "Search friend...", text: .constant(""))
+                        .padding(.horizontal, 16)
 
-            newChatView
+                    Button(
+                        action: { isContactListShown = true },
+                        label: {
+                            Text("")
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        }
+                    )
+                }
+                .frame(height: 36)
+
+                buildContentView()
+                    .padding(.top, 12)
+                    .statefull(
+                        state: $viewModel.state.viewState,
+                        isEmpty: { viewModel.state.conversations.isEmpty },
+                        loading: buildLoadingView,
+                        empty: buildEmptyView,
+                        error: buildErrorView
+                    )
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+            .padding(.top, 12)
+            
+            buildNavigationLinkViews()
         }
     }
 
-    var contentView: some View {
-        List {
-            ForEach(viewModel.state.conversationModels, id: \.id) { conversationModel in
-                ConversationItemView(
-                    avatar: conversationModel.avatar,
-                    name: conversationModel.name,
-                    lastMessage: conversationModel.lastMessage
+    private func buildContentView() -> some View {
+        ListView {
+            ForEach(viewModel.state.conversations, id: \.id) { conversation in
+                ConversationItemView(model: conversation)
+                    .background(Color.white)
+                    .onTapGesture { viewModel.send(.openChat(conversation)) }
+            }
+        }
+    }
+
+    private func buildLoadingView() -> some View {
+        LoadingView()
+    }
+
+    private func buildEmptyView() -> some View {
+        ZStack {
+            GeometryReader { geometry in
+                ZStack(alignment: .bottom) {
+                    ZStack {}
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    ImageAssets.icAppMascot.swiftUIImage
+                        .scaledToFill()
+                        .frame(width: geometry.size.width, height: geometry.size.height / 2)
+                        .offset(y: 100)
+                }
+            }
+            .clipped()
+
+            VStack(spacing: 10) {
+                Text("Select contact to chat now")
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
+
+                Button(
+                    action: { isContactListShown = true },
+                    label: {
+                        HStack(spacing: 8) {
+                            Image(systemName: "plus")
+                                .resizable()
+                                .frame(width: 16, height: 16)
+                            Text("New chat")
+                                .font(.system(size: 14, weight: .bold))
+                        }
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 12)
+                    }
                 )
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                .background(ColorAssets.primaryYellowMain.swiftUIColor)
+                .cornerRadius(10)
             }
-            .listRowInsets(EdgeInsets())
         }
-        .listStyle(PlainListStyle())
     }
 
-    var emptyView: some View {
-        Text("No conversations found")
+    private func buildErrorView() -> some View {
+        Text("Error")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
-    var newChatView: some View {
-        NavigationLink(
-            destination: {
-                ContactListView()
-            },
-            label: {
-                HStack(spacing: 12) {
-                    Image(systemName: "plus.message")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 28, height: 28)
+    private func buildNavigationLinkViews() -> some View {
+        ZStack {
+            NavigationLink(
+                isActive: $isContactListShown,
+                destination: {
+                    ContactListView(
+                        viewModel: ContactListViewModel(
+                            delegate: viewModel
+                        )
+                    )
+                },
+                label: { EmptyView() }
+            )
 
-                    if viewModel.state.conversationModels.isEmpty {
-                        Text("New Chat")
-                            .font(.system(size: 16).bold())
+            NavigationLink(
+                unwrapping: $viewModel.state.navigationLinkItem,
+                onNavigate: { _ in },
+                destination: { item in
+                    switch item.wrappedValue {
+                    case let .chat(conversation):
+                        ChatView(
+                            viewModel: ChatViewModel(
+                                state: ChatViewModel.State(
+                                    conversation: conversation
+                                )
+                            )
+                        )
                     }
-                }
-                .padding(12)
-                .background(Color.green.opacity(0.5))
-                .cornerRadius(20)
-                .shadow(color: Color.black.opacity(0.3), radius: 8, y: 8)
-            }
-        )
-        .foregroundColor(Color.black)
-        .padding(16)
+                },
+                label: { EmptyView() }
+            )
+        }
     }
 }
 
@@ -89,6 +162,6 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
 
 struct ConversationListView_Previews: PreviewProvider {
     static var previews: some View {
-        ConversationListView()
+        ConversationListView(isContactListShown: .constant(false))
     }
 }

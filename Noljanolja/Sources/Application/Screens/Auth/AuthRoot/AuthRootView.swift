@@ -24,12 +24,12 @@ struct AuthRootView<ViewModel: AuthRootViewModelType>: View {
     }
 
     var body: some View {
-        content
+        buildContentView()
             .progressHUB(isActive: $progressHUBState.isLoading)
             .environmentObject(progressHUBState)
     }
 
-    var content: some View {
+    private func buildContentView() -> some View {
         ZStack {
             switch viewModel.state.contentType {
             case .terms:

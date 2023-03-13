@@ -17,90 +17,64 @@ struct ContactListView<ViewModel: ContactListViewModelType>: View {
     @StateObject private var viewModel: ViewModel
 
     // MARK: State
-    
-    @Environment(\.presentationMode) private var presentationMode
 
+    @EnvironmentObject private var progressHUBState: ProgressHUBState
+    
     init(viewModel: ViewModel = ContactListViewModel()) {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
-        buildContentView()
-            .statefull(
-                state: $viewModel.state.viewState,
-                isEmpty: { viewModel.state.contactModels.isEmpty },
-                loading: buildLoadingView,
-                empty: buildEmptyView,
-                error: buildErrorView
-            )
-            .onAppear {
-                viewModel.send(.loadData)
+        buildBodyView()
+            .onChange(of: viewModel.state.isProgressHUDShowing) {
+                progressHUBState.isLoading = $0
             }
+            .onAppear { viewModel.send(.loadData) }
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(
-                        action: { presentationMode.wrappedValue.dismiss() },
-                        label: {
-                            Image(systemName: "xmark")
-                        }
-                    )
-                    .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
-                }
                 ToolbarItem(placement: .principal) {
-                    Text("Select country")
-                        .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
-                        .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
+                    Text("Select Contact")
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             }
+    }
+
+    private func buildBodyView() -> some View {
+        VStack(spacing: 16) {
+            SearchView(placeholder: "Search friend...", text: $viewModel.state.searchString)
+                .padding(.horizontal, 16)
+            buildContentView()
+                .statefull(
+                    state: $viewModel.state.viewState,
+                    isEmpty: { viewModel.state.users.isEmpty },
+                    loading: buildLoadingView,
+                    empty: buildEmptyView,
+                    error: buildErrorView
+                )
+        }
+        .padding(.top, 12)
     }
 
     private func buildContentView() -> some View {
-        VStack {
-            HStack(spacing: 8) {
-                HStack(spacing: 8) {
-                    Image(systemName: "magnifyingglass")
-                        .resizable()
-                        .frame(width: 22, height: 22)
-                        .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
-                    TextField("Search", text: $viewModel.state.searchString)
-                        .keyboardType(.phonePad)
-                        .textFieldStyle(FullSizeTappableTextFieldStyle())
-                        .frame(height: 32)
-                        .font(FontFamily.NotoSans.medium.swiftUIFont(size: 16))
-                    if !viewModel.state.searchString.isEmpty {
-                        Button(
-                            action: {
-                                viewModel.state.searchString = ""
-                            },
-                            label: {
-                                Image(systemName: "xmark.circle.fill")
-                                    .resizable()
-                                    .frame(width: 20, height: 20)
-                                    .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
-                            }
-                        )
-                    }
-                }
-                .padding(.leading, 12)
-                .padding(.trailing, 8)
-                .frame(height: 44)
-                .background(ColorAssets.gray.swiftUIColor)
-                .cornerRadius(12)
+        ListView {
+            ForEach(viewModel.state.users, id: \.id) { user in
+                ContactItemView(name: user.name)
+                    .background(Color.white)
+                    .onTapGesture { viewModel.send(.createConversation(user)) }
             }
-            .padding(.horizontal, 16)
-
-            List {
-                ForEach(viewModel.state.contactModels, id: \.id) {
-                    ContactItemView(image: $0.image, name: $0.name)
-                }
-                .listRowInsets(EdgeInsets())
-            }
-            .listStyle(PlainListStyle())
+            .listRowInsets(EdgeInsets())
         }
+        .listStyle(PlainListStyle())
+    }
+
+    private func buildEmptyView() -> some View {
+        Text("Can't found friend")
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     private func buildLoadingView() -> some View {
-        Text("Loading...")
+        LoadingView()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     private func buildErrorView() -> some View {
@@ -123,24 +97,22 @@ struct ContactListView<ViewModel: ContactListViewModelType>: View {
                         },
                         label: {
                             Text("Accept")
-                                .font(.system(size: 16).bold())
-                                .frame(maxWidth: .infinity)
-                                .frame(height: 52)
+                                .font(.system(size: 16, weight: .bold))
+                                .frame(height: 40)
+                                .padding(.horizontal, 24)
                         }
                     )
-                    .foregroundColor(.white)
-                    .background(Color.blue)
-                    .cornerRadius(26)
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    .background(ColorAssets.primaryYellowMain.swiftUIColor)
+                    .cornerRadius(10)
                 }
                 .padding(16)
             } else {
                 Text("Error")
+                    .font(.system(size: 16, weight: .bold))
             }
         }
-    }
-
-    private func buildEmptyView() -> some View {
-        Text("Empty")
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 

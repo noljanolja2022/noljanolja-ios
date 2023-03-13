@@ -7,6 +7,7 @@
 //
 
 import Combine
+import Foundation
 
 // MARK: - LaunchViewModelDelegate
 
@@ -41,7 +42,8 @@ final class LaunchViewModel: LaunchViewModelType {
 
     // MARK: Dependencies
 
-    private let authServices: AuthServicesType
+    private var userDefaults: UserDefaultsType
+    private let authService: AuthServiceType
     private let profileService: ProfileServiceType
     private weak var delegate: LaunchViewModelDelegate?
 
@@ -54,11 +56,13 @@ final class LaunchViewModel: LaunchViewModelType {
     private var cancellables = Set<AnyCancellable>()
 
     init(state: State = State(),
-         authServices: AuthServicesType = AuthServices.default,
+         userDefaults: UserDefaultsType = UserDefaults.standard,
+         authService: AuthServiceType = AuthService.default,
          profileService: ProfileServiceType = ProfileService.default,
          delegate: LaunchViewModelDelegate? = nil) {
         self.state = state
-        self.authServices = authServices
+        self.userDefaults = userDefaults
+        self.authService = authService
         self.profileService = profileService
         self.delegate = delegate
 
@@ -76,20 +80,32 @@ final class LaunchViewModel: LaunchViewModelType {
 
     private func configure() {
         loadDataTrigger
-            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<ProfileModel, Error> in
+            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<User, Error> in
                 guard let self else {
-                    return Empty<ProfileModel, Error>().eraseToAnyPublisher()
+                    return Empty<User, Error>().eraseToAnyPublisher()
                 }
-                return self.authServices.getIDTokenResult()
+                let trigger: AnyPublisher<Void, Error> = {
+                    logger.debug("First launch app: \(self.userDefaults.isFirstLaunch)")
+                    if self.userDefaults.isFirstLaunch {
+                        self.userDefaults.isFirstLaunch = false
+                        return self.authService.signOut()
+                    } else {
+                        return Just(())
+                            .setFailureType(to: Error.self)
+                            .eraseToAnyPublisher()
+                    }
+                }()
+                return trigger
+                    .flatMap { _ in self.authService.getIDTokenResult() }
                     .flatMap { _ in self.profileService.getProfile() }
                     .eraseToAnyPublisher()
             }
             .sink(receiveValue: { [weak self] result in
                 switch result {
-                case let .success(profileModel):
+                case let .success(user):
                     logger.info("Get pre data successful")
-                    if profileModel.isSetup {
-                        self?.delegate?.navigateToAuth()
+                    if user.isSetup {
+                        self?.delegate?.navigateToMain()
                     } else {
                         self?.delegate?.navigateToUpdateProfile()
                     }

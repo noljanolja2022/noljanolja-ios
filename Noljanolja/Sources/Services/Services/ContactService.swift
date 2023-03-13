@@ -2,33 +2,18 @@
 //  ContactService.swift
 //  Noljanolja
 //
-//  Created by Nguyen The Trinh on 06/03/2023.
+//  Created by Nguyen The Trinh on 08/03/2023.
 //
 
 import Combine
-import Contacts
 import Foundation
 
 // MARK: - ContactServiceType
 
 protocol ContactServiceType {
+    func getAuthorizationStatus() -> AnyPublisher<Void, Error>
     func requestContactPermission() -> AnyPublisher<Bool, Error>
-    func getContacts() -> AnyPublisher<[ContactModel], Error>
-}
-
-// MARK: - ContactsError
-
-enum ContactsError: Error {
-    case permissionNotDetermined
-    case permissionDenied
-    case unknown
-
-    var isPermissionError: Bool {
-        switch self {
-        case .permissionNotDetermined, .permissionDenied: return true
-        case .unknown: return false
-        }
-    }
+    func getContacts() -> AnyPublisher<[User], Error>
 }
 
 // MARK: - ContactService
@@ -36,82 +21,49 @@ enum ContactsError: Error {
 final class ContactService: ContactServiceType {
     static let `default` = ContactService()
 
-    private lazy var store = CNContactStore()
+    private let localContactAPI: LocalContactAPIType
+    private let contactAPI: ContactAPIType
+    private let contactStore: ContactStoreType
 
-    private init() {}
+    private init(localContactAPI: LocalContactAPIType = LocalContactAPI.default,
+                 contactAPI: ContactAPIType = ContactAPI.default,
+                 contactStore: ContactStoreType = ContactStore.default) {
+        self.localContactAPI = localContactAPI
+        self.contactAPI = contactAPI
+        self.contactStore = contactStore
+    }
+
+    func getAuthorizationStatus() -> AnyPublisher<Void, Error> {
+        localContactAPI.getAuthorizationStatus()
+    }
 
     func requestContactPermission() -> AnyPublisher<Bool, Error> {
-        Future { [weak self] promise in
-            guard let self else {
-                promise(.failure(ContactsError.unknown))
-                return
-            }
-            self.store.requestAccess(for: .contacts) { isGranted, _ in
-                promise(.success(isGranted))
-            }
-        }
-        .eraseToAnyPublisher()
+        localContactAPI.requestContactPermission()
     }
 
-    func getContacts() -> AnyPublisher<[ContactModel], Error> {
-        getAuthorizationStatus()
-            .flatMap { [weak self] _ -> AnyPublisher<[ContactModel], Error> in
+    func getContacts() -> AnyPublisher<[User], Error> {
+        let remoteContacts = localContactAPI
+            .getContacts()
+            .map { $0.filter { !$0.phones.isEmpty } }
+            .flatMap { [weak self] contacts -> AnyPublisher<[User], Error> in
                 guard let self else {
-                    return Fail<[ContactModel], Error>(error: ContactsError.unknown).eraseToAnyPublisher()
+                    return Empty<[User], Error>().eraseToAnyPublisher()
                 }
-                return self.fetchContacts()
+                return self.contactAPI
+                    .syncContacts(contacts)
             }
+            .handleEvents(receiveOutput: { [weak self] in
+                self?.contactStore.saveContact($0)
+            })
+
+        return remoteContacts
             .eraseToAnyPublisher()
-    }
 
-    private func getAuthorizationStatus() -> AnyPublisher<Void, Error> {
-        Future { promise in
-            switch CNContactStore.authorizationStatus(for: .contacts) {
-            case .authorized, .restricted:
-                promise(.success(()))
-            case .notDetermined:
-                promise(.failure(ContactsError.permissionNotDetermined))
-            case .denied:
-                promise(.failure(ContactsError.permissionDenied))
-            @unknown default:
-                promise(.failure(ContactsError.unknown))
-            }
-        }
-        .eraseToAnyPublisher()
-    }
-
-    private func fetchContacts() -> AnyPublisher<[ContactModel], Error> {
-        Future { [weak self] promise in
-            guard let self else {
-                promise(.failure(ContactsError.unknown))
-                return
-            }
-
-            do {
-                let containers = try self.store.containers(matching: nil)
-                var allContacts = [CNContact]()
-                containers
-                    .forEach {
-                        let predicate = CNContact.predicateForContactsInContainer(withIdentifier: $0.identifier)
-                        let keys = [
-                            CNContactFormatter.descriptorForRequiredKeys(for: .fullName),
-                            CNContactPhoneNumbersKey as CNKeyDescriptor,
-                            CNContactImageDataKey as CNKeyDescriptor,
-                            CNContactThumbnailImageDataKey as CNKeyDescriptor
-                        ]
-                        do {
-                            let contacts = try self.store.unifiedContacts(matching: predicate, keysToFetch: keys)
-                            allContacts.append(contentsOf: contacts)
-                        } catch {
-                            promise(.failure(error))
-                            return
-                        }
-                    }
-                promise(.success(allContacts.map { ContactModel($0) }))
-            } catch {
-                promise(.failure(error))
-            }
-        }
-        .eraseToAnyPublisher()
+//        let localContacts = contactStore.observeContacts()
+//            .filter { !$0.isEmpty }
+//
+//        return Publishers.Merge(remoteContacts, localContacts)
+//            .removeDuplicates()
+//            .eraseToAnyPublisher()
     }
 }

@@ -23,7 +23,7 @@ struct TermOfServiceView<ViewModel: TermOfServiceViewModelType>: View {
     }
 
     var body: some View {
-        content
+        buildContentView()
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(false)
             .toolbar {
@@ -48,41 +48,15 @@ struct TermOfServiceView<ViewModel: TermOfServiceViewModelType>: View {
             .alert(item: $viewModel.state.alertState) { Alert($0) { _ in } }
     }
 
-    private var content: some View {
+    private func buildContentView() -> some View {
         VStack {
-            allTermItems
-            allTermItem
-            action
+            buildTermItemsView()
+            buildAllTermView()
+            buildActionView()
         }
     }
 
-    private var action: some View {
-        Button(
-            "Agree and Continue",
-            action: { viewModel.send(.tapContinueButton) }
-        )
-        .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.state.isAllTermChecked))
-        .disabled(!viewModel.state.isAllTermChecked)
-        .shadow(
-            color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
-        )
-        .padding(16)
-    }
-
-    private var allTermItem: some View {
-        TermOfServiceItemView(
-            selected: Binding<Bool>(
-                get: { viewModel.state.isAllTermChecked },
-                set: { viewModel.send(.checkAllTermItems(checked: $0)) }
-            ),
-            title: "I have read and agreed to all terms and conditions",
-            titleLineLimit: nil,
-            idArrowIconHidden: true
-        )
-        .padding(16)
-    }
-
-    private var allTermItems: some View {
+    private func buildTermItemsView() -> some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
                 ForEach(TermOfServiceSectionType.allCases) { sectionType in
@@ -114,6 +88,32 @@ struct TermOfServiceView<ViewModel: TermOfServiceViewModelType>: View {
             }
             .padding(16)
         }
+    }
+
+    private func buildAllTermView() -> some View {
+        TermOfServiceItemView(
+            selected: Binding<Bool>(
+                get: { viewModel.state.isAllTermChecked },
+                set: { viewModel.send(.checkAllTermItems(checked: $0)) }
+            ),
+            title: "I have read and agreed to all terms and conditions",
+            titleLineLimit: nil,
+            idArrowIconHidden: true
+        )
+        .padding(16)
+    }
+
+    private func buildActionView() -> some View {
+        Button(
+            "Agree and Continue",
+            action: { viewModel.send(.tapContinueButton) }
+        )
+        .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.state.isAllTermChecked))
+        .disabled(!viewModel.state.isAllTermChecked)
+        .shadow(
+            color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
+        )
+        .padding(16)
     }
 }
 

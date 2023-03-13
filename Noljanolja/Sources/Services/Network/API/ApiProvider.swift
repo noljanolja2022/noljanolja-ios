@@ -16,6 +16,7 @@ final class ApiProvider: MoyaProvider<MultiTarget> {
             NetworkLoggerPlugin.verboseAndCurl,
             DisableLocalCachePlugin(),
             RequestTimeoutPlugin(),
+            DeviceIdentityPlugin(),
             AuthPluggin()
         ]
     }()

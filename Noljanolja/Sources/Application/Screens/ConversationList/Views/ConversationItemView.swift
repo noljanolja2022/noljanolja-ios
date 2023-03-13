@@ -11,33 +11,40 @@ import SwiftUI
 // MARK: - ConversationItemView
 
 struct ConversationItemView: View {
-    var avatar: String?
-    var name: String?
-    var lastMessage: String?
+    var model: ConversationItemModel
 
     var body: some View {
-        HStack(spacing: 16) {
-            KFImage(URL(string: avatar ?? ""))
+        HStack(alignment: .top, spacing: 16) {
+            KFImage(URL(string: model.image ?? ""))
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 52, height: 52)
-                .background(Color.gray)
-                .cornerRadius(20)
+                .frame(width: 40, height: 40)
+                .background(ColorAssets.neutralLightGrey.swiftUIColor)
+                .cornerRadius(14)
 
             VStack(alignment: .leading, spacing: 8) {
-                Text(name ?? "")
+                Text(model.title ?? "")
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(Font.system(size: 16).bold())
-                    .foregroundColor(.black)
-                Text(lastMessage ?? "")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(Font.system(size: 14))
-                    .foregroundColor(.gray)
+                    .font(Font.system(size: 16, weight: .medium))
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                if let lastMessage = model.lastMessage, !lastMessage.isEmpty {
+                    Text(lastMessage)
+                        .lineLimit(2)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(Font.system(size: 14, weight: .regular))
+                        .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
+                }
             }
             .frame(maxWidth: .infinity)
+
+            Text(model.date ?? "")
+                .lineLimit(1)
+                .frame(height: 40)
+                .font(Font.system(size: 12, weight: .regular))
+                .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
         }
         .frame(maxWidth: .infinity)
-        .padding(.vertical, 8)
+        .padding(.vertical, 10)
         .padding(.horizontal, 16)
     }
 }
@@ -47,9 +54,13 @@ struct ConversationItemView: View {
 struct ConversationItemView_Previews: PreviewProvider {
     static var previews: some View {
         ConversationItemView(
-            avatar: "https://upload.wikimedia.org/wikipedia/en/8/86/Avatar_Aang.png",
-            name: "ToRing",
-            lastMessage: "Hi, everyone"
+            model: ConversationItemModel(
+                id: 0,
+                image: "https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg",
+                title: "Title",
+                lastMessage: "Last message\nLast message\nLast message",
+                date: "06:12"
+            )
         )
     }
 }

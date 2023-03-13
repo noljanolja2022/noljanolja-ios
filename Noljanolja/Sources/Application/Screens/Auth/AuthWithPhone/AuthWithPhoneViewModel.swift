@@ -55,7 +55,7 @@ final class AuthWithPhoneViewModel: AuthWithPhoneViewModelType {
 
     // MARK: Dependencies
 
-    private let authServices: AuthServicesType
+    private let authService: AuthServiceType
     private weak var delegate: AuthWithPhoneViewModelDelegate?
 
     // MARK: Action
@@ -68,10 +68,10 @@ final class AuthWithPhoneViewModel: AuthWithPhoneViewModelType {
     private var cancellables = Set<AnyCancellable>()
 
     init(state: State = State(),
-         authServices: AuthServicesType = AuthServices.default,
+         authService: AuthServiceType = AuthService.default,
          delegate: AuthWithPhoneViewModelDelegate? = nil) {
         self.state = state
-        self.authServices = authServices
+        self.authService = authService
         self.delegate = delegate
 
         configure()
@@ -99,7 +99,7 @@ final class AuthWithPhoneViewModel: AuthWithPhoneViewModelType {
             .flatMapLatestToResult { [weak self] _ -> AnyPublisher<String, Error> in
                 guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
                 logger.info("Send verification code to phone: \(self.state.fullPhoneNumber)")
-                return self.authServices
+                return self.authService
                     .sendPhoneVerificationCode(self.state.fullPhoneNumber, languageCode: self.state.country.code)
             }
             .sink(receiveValue: { [weak self] result in
@@ -124,7 +124,7 @@ final class AuthWithPhoneViewModel: AuthWithPhoneViewModelType {
             .handleEvents(receiveOutput: { [weak self] _ in self?.state.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] _ -> AnyPublisher<String, Error> in
                 guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
-                return self.authServices
+                return self.authService
                     .signInWithGoogle()
             }
             .sink(receiveValue: { [weak self] result in

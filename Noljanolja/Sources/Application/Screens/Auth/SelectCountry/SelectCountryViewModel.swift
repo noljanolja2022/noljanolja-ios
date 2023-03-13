@@ -71,7 +71,7 @@ final class SelectCountryViewModel: SelectCountryViewModelType {
         $state
             .map { $0.searchString }
             .removeDuplicates()
-            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
+            .debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
             .map { text in
                 Country.countries
                     .filter {

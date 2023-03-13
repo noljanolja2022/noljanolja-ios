@@ -39,14 +39,14 @@ struct TabBarView: View {
 
     var body: some View {
         ZStack {
-            background
+            buildBackgroundView()
                 .ignoresSafeArea()
-            content
+            buildContentView()
         }
         .frame(height: height)
     }
 
-    private var content: some View {
+    private func buildContentView() -> some View {
         ZStack {
             HStack(alignment: .center, spacing: 0) {
                 ForEach(items.indices, id: \.self) { index in
@@ -90,7 +90,7 @@ struct TabBarView: View {
         .frame(height: height)
     }
 
-    private var background: some View {
+    private func buildBackgroundView() -> some View {
         GeometryReader { geometry in
             Path { path in
                 let centerX = geometry.size.width / 2
