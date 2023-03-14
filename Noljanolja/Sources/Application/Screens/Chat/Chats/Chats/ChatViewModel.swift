@@ -89,14 +89,6 @@ final class ChatViewModel: ChatViewModelType {
             })
             .store(in: &cancellables)
 
-        userService
-            .getCurrentUserIfNeeded()
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.currentUserSubject.send($0) }
-            )
-            .store(in: &cancellables)
-
         loadDataTrigger
             .first()
             .handleEvents(receiveOutput: { [weak self] in self?.state.viewState = .loading })
@@ -116,6 +108,11 @@ final class ChatViewModel: ChatViewModelType {
                     self?.state.viewState = .error
                 }
             })
+            .store(in: &cancellables)
+
+        userService
+            .currentUserPublisher
+            .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
             .store(in: &cancellables)
     }
 }

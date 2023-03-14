@@ -87,12 +87,14 @@ struct ChatView_Previews: PreviewProvider {
                             id: "id",
                             name: "name",
                             avatar: "avatar",
-                            phone: "1234567890",
+                            pushToken: "pushToken", phone: "1234567890",
                             email: "email@gmail.com",
                             isEmailVerified: false,
-                            pushToken: "pushToken",
-                            dob: "dob",
-                            gender: .male
+                            dob: Date(),
+                            gender: .male,
+                            preferences: nil,
+                            createdAt: Date(),
+                            updatedAt: Date()
                         ),
                         type: .single,
                         messages: [],

@@ -20,8 +20,8 @@ private enum UserAPITargets {
 
     struct UpdateCurrentUser: BaseAuthTargetType {
         var path: String { "v1/users/me" }
-        let method: Moya.Method = .get
-        var task: Task { .requestPlain }
+        let method: Moya.Method = .put
+        var task: Task { .requestParameters(parameters: param.dictionary, encoding: JSONEncoding.default) }
 
         let param: UpdateCurrentUserParam
     }
@@ -43,7 +43,7 @@ private enum UserAPITargets {
 
 protocol UserAPIType {
     func getCurrentUser() -> AnyPublisher<User, Error>
-    func updateCurrentUser() -> AnyPublisher<User, Error>
+    func updateCurrentUser(_ param: UpdateCurrentUserParam) -> AnyPublisher<User, Error>
     func syncContacts(_ contacts: [Contact]) -> AnyPublisher<[User], Error>
 }
 
@@ -65,9 +65,9 @@ final class UserAPI: UserAPIType {
         )
     }
 
-    func updateCurrentUser() -> AnyPublisher<User, Error> {
+    func updateCurrentUser(_ param: UpdateCurrentUserParam) -> AnyPublisher<User, Error> {
         api.request(
-            target: UserAPITargets.GetCurrentUser(),
+            target: UserAPITargets.UpdateCurrentUser(param: param),
             atKeyPath: "data"
         )
     }

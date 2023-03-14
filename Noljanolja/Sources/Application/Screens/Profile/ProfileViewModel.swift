@@ -70,12 +70,15 @@ final class ProfileViewModel: ProfileViewModelType {
 
     private func configure() {
         loadDataTrigger
+            .first()
             .handleEvents(receiveOutput: { [weak self] in self?.state.viewState = .loading })
             .flatMapLatestToResult { [weak self] in
                 guard let self else {
                     return Empty<User, Error>().eraseToAnyPublisher()
                 }
-                return self.userService.getCurrentUserIfNeeded()
+                return self.userService.currentUserPublisher
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
             }
             .sink(receiveValue: { [weak self] result in
                 switch result {

@@ -8,9 +8,9 @@
 import Foundation
 import SwiftUI
 
-// MARK: - FullSizeTappableTextFieldStyle
+// MARK: - TappableTextFieldStyle
 
-struct FullSizeTappableTextFieldStyle: TextFieldStyle {
+struct TappableTextFieldStyle: TextFieldStyle {
     func _body(configuration: TextField<Self._Label>) -> some View {
         var privateTextField: UITextField?
 

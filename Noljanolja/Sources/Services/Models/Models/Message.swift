@@ -36,21 +36,6 @@ struct Message: Equatable, Codable {
         case createdAt
     }
 
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.decode(Int.self, forKey: .id)
-        self.conversationID = try container.decode(Int.self, forKey: .conversationID)
-        self.message = try container.decodeIfPresent(String.self, forKey: .message)
-        self.type = try container.decode(MessageType.self, forKey: .type)
-        self.sender = try container.decode(User.self, forKey: .sender)
-        if let createdAtString = try container.decodeIfPresent(String.self, forKey: .createdAt),
-           let createdAt = createdAtString.date(withFormats: NetworkConfigs.Format.apiDateFormats) {
-            self.createdAt = createdAt
-        } else {
-            throw NetworkError.mapping("\(Swift.type(of: type)) at key createdAt")
-        }
-    }
-
     init(id: Int,
          conversationID: Int,
          message: String?,
@@ -63,5 +48,20 @@ struct Message: Equatable, Codable {
         self.type = type
         self.sender = sender
         self.createdAt = createdAt
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(Int.self, forKey: .id)
+        self.conversationID = try container.decode(Int.self, forKey: .conversationID)
+        self.message = try container.decodeIfPresent(String.self, forKey: .message)
+        self.type = try container.decode(MessageType.self, forKey: .type)
+        self.sender = try container.decode(User.self, forKey: .sender)
+        if let createdAtString = try container.decodeIfPresent(String.self, forKey: .createdAt),
+           let createdAt = createdAtString.date(withFormats: NetworkConfigs.Format.apiFullDateFormats) {
+            self.createdAt = createdAt
+        } else {
+            throw NetworkError.mapping("\(Swift.type(of: type)) at key createdAt")
+        }
     }
 }

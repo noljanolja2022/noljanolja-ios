@@ -34,8 +34,12 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
         ZStack(alignment: .bottomTrailing) {
             VStack(spacing: 0) {
                 ZStack {
-                    SearchView(placeholder: "Search friend...", text: .constant(""))
-                        .padding(.horizontal, 16)
+                    SearchView(
+                        placeholder: "Search friend...",
+                        text: .constant(""),
+                        isUserInteractionEnabled: false
+                    )
+                    .padding(.horizontal, 16)
 
                     Button(
                         action: { isContactListShown = true },

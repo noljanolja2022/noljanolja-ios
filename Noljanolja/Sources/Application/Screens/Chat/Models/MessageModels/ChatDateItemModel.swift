@@ -11,7 +11,7 @@ struct ChatDateItemModel: Equatable, Identifiable {
     let date: Date
 
     var id: String {
-        date.string(withFormat: NetworkConfigs.Format.apiDateFormat)
+        date.string(withFormat: NetworkConfigs.Format.apiFullDateFormat)
     }
 
     var displayDateString: String {

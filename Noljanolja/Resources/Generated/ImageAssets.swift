@@ -26,6 +26,7 @@ internal enum ImageAssets {
   internal static let icAppMascot = ImageAsset(name: "ic_app_mascot")
   internal static let icApple = ImageAsset(name: "ic_apple")
   internal static let icArrowRight = ImageAsset(name: "ic_arrow_right")
+  internal static let icAvatarPlaceholder = ImageAsset(name: "ic_avatar_placeholder")
   internal static let icBack = ImageAsset(name: "ic_back")
   internal static let icBicycle = ImageAsset(name: "ic_bicycle")
   internal static let icCelebrationFill = SymbolAsset(name: "ic_celebration_fill")
@@ -59,6 +60,7 @@ internal enum ImageAssets {
     icAppMascot,
     icApple,
     icArrowRight,
+    icAvatarPlaceholder,
     icBack,
     icBicycle,
     icCheckCircle,

@@ -104,14 +104,6 @@ final class ConversationListViewModel: ConversationListViewModelType {
             })
             .store(in: &cancellables)
 
-        userService
-            .getCurrentUserIfNeeded()
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.currentUserSubject.send($0) }
-            )
-            .store(in: &cancellables)
-
         loadDataTrigger
             .first()
             .handleEvents(receiveOutput: { [weak self] in self?.state.viewState = .loading })
@@ -140,6 +132,11 @@ final class ConversationListViewModel: ConversationListViewModelType {
                 conversations.first(where: { $0.id == conversationItemModel.id })
             }
             .sink(receiveValue: { [weak self] in self?.state.navigationLinkItem = .chat($0) })
+            .store(in: &cancellables)
+
+        userService
+            .currentUserPublisher
+            .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
             .store(in: &cancellables)
     }
 }

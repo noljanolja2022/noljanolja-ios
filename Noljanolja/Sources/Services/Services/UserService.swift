@@ -12,8 +12,10 @@ import Foundation
 // MARK: - UserServiceType
 
 protocol UserServiceType {
+    var currentUserPublisher: AnyPublisher<User, Never> { get }
+
     func getCurrentUser() -> AnyPublisher<User, Error>
-    func getCurrentUserIfNeeded() -> AnyPublisher<User, Error>
+    func updateCurrentUser(_ param: UpdateCurrentUserParam) -> AnyPublisher<User, Error>
 }
 
 // MARK: - UserService
@@ -25,7 +27,15 @@ final class UserService: UserServiceType {
 
     private let userAPI: UserAPIType
 
-    // MARK: Date
+    // MARK: Type
+
+    var currentUserPublisher: AnyPublisher<User, Never> {
+        currentUserSubject
+            .compactMap { $0 }
+            .eraseToAnyPublisher()
+    }
+
+    // MARK: Private
 
     private let currentUserSubject = CurrentValueSubject<User?, Never>(nil)
 
@@ -40,18 +50,11 @@ final class UserService: UserServiceType {
             .eraseToAnyPublisher()
     }
 
-    func getCurrentUserIfNeeded() -> AnyPublisher<User, Error> {
-        currentUserSubject.eraseToAnyPublisher()
-            .flatMap { [weak self] user in
-                guard let self else {
-                    return Empty<User, Error>().eraseToAnyPublisher()
-                }
-                if let user {
-                    return Just(user).setFailureType(to: Error.self).eraseToAnyPublisher()
-                } else {
-                    return self.getCurrentUser()
-                }
-            }
+    func updateCurrentUser(_ param: UpdateCurrentUserParam) -> AnyPublisher<User, Error> {
+        userAPI
+            .updateCurrentUser(param)
+            .handleEvents(receiveOutput: { [weak self] in self?.currentUserSubject.send($0) })
+            .eraseToAnyPublisher()
             .eraseToAnyPublisher()
     }
 }

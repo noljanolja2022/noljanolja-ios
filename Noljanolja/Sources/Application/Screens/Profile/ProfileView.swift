@@ -24,6 +24,7 @@ struct ProfileView<ViewModel: ProfileViewModelType>: View {
 
     var body: some View {
         buildContentView()
+            .onAppear { viewModel.send(.loadData) }
     }
 
     private func buildContentView() -> some View {
@@ -48,15 +49,17 @@ struct ProfileView<ViewModel: ProfileViewModelType>: View {
             }
             .frame(maxWidth: .infinity)
 
-            KFImage(URL(string: viewModel.state.user?.avatar ?? ""))
-                .resizable()
-                .scaledToFill()
-                .frame(width: 140, height: 140)
-                .background(Color.gray.opacity(0.5))
-                .cornerRadius(52)
+            KFImage(URL(string: viewModel.state.user?.avatar ?? "")).placeholder {
+                ImageAssets.icAvatarPlaceholder.swiftUIImage
+            }
+            .resizable()
+            .scaledToFill()
+            .frame(width: 112, height: 112)
+            .background(Color.white)
+            .cornerRadius(56)
 
             Text(viewModel.state.user?.name ?? "")
-                .font(FontFamily.NotoSans.medium.swiftUIFont(fixedSize: 16))
+                .font(.system(size: 16, weight: .bold))
 
             NavigationLink(
                 destination: UpdateCurrentUserView(),

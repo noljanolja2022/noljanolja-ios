@@ -85,7 +85,7 @@ struct ResetPasswordView: View {
         VStack(spacing: 0) {
             TextField(L10n.Auth.Email.placeholder, text: $viewModel.email)
                 .keyboardType(.emailAddress)
-                .textFieldStyle(FullSizeTappableTextFieldStyle())
+                .textFieldStyle(TappableTextFieldStyle())
                 .setAuthTextFieldStyle()
                 .overlayBorder(
                     color: viewModel.emailErrorMessage == nil

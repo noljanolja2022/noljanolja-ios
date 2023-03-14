@@ -17,7 +17,7 @@ struct ChatDateItemView: View {
             .frame(maxWidth: .infinity, alignment: .center)
             .padding(.vertical, 36)
             .font(.system(size: 11, weight: .medium))
-            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
     }
 }
 
