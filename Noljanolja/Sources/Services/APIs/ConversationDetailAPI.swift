@@ -18,13 +18,13 @@ enum ConversationDetailAPITargets {
         var task: Task { .requestParameters(parameters: parameters, encoding: URLEncoding.default) }
 
         let conversationID: Int
-        let beforeMessageID: String?
-        let afterMessageID: String?
+        let beforeMessageID: Int?
+        let afterMessageID: Int?
 
         var parameters: [String: Any] {
             [
-                "beforeMessageID": beforeMessageID,
-                "afterMessageID": afterMessageID
+                "beforeMessageId": beforeMessageID,
+                "afterMessageId": afterMessageID
             ]
             .compactMapValues { $0 }
         }
@@ -49,8 +49,8 @@ enum ConversationDetailAPITargets {
 
 protocol ConversationDetailAPIType {
     func getMessages(conversationID: Int,
-                     beforeMessageID: String?,
-                     afterMessageID: String?) -> AnyPublisher<[Message], Error>
+                     beforeMessageID: Int?,
+                     afterMessageID: Int?) -> AnyPublisher<[Message], Error>
     func sendMessage(conversationID: Int,
                      message: String,
                      type: MessageType) -> AnyPublisher<Message, Error>
@@ -58,8 +58,8 @@ protocol ConversationDetailAPIType {
 
 extension ConversationDetailAPIType {
     func getMessages(conversationID: Int,
-                     beforeMessageID: String? = nil,
-                     afterMessageID: String? = nil) -> AnyPublisher<[Message], Error> {
+                     beforeMessageID: Int? = nil,
+                     afterMessageID: Int? = nil) -> AnyPublisher<[Message], Error> {
         getMessages(
             conversationID: conversationID,
             beforeMessageID: beforeMessageID,
@@ -80,8 +80,8 @@ final class ConversationDetailAPI: ConversationDetailAPIType {
     }
 
     func getMessages(conversationID: Int,
-                     beforeMessageID: String?,
-                     afterMessageID: String?) -> AnyPublisher<[Message], Error> {
+                     beforeMessageID: Int?,
+                     afterMessageID: Int?) -> AnyPublisher<[Message], Error> {
         api.request(
             target: ConversationDetailAPITargets.GetMessages(
                 conversationID: conversationID,

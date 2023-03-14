@@ -48,11 +48,24 @@ struct ChatView<ViewModel: ChatViewModelType>: View {
 
     private func buildContentView() -> some View {
         ListView {
-            ForEach(viewModel.state.chatItems, id: \.id) { chatItem in
+            ForEach(Array(viewModel.state.chatItems.enumerated()), id: \.offset) { index, chatItem in
                 ChatItemView(chatItem: chatItem)
+                    .onAppear {
+                        guard index == viewModel.state.chatItems.count - 10 else { return }
+                        viewModel.send(.loadMoreData)
+                    }
             }
             .listRowInsets(EdgeInsets())
             .scaleEffect(x: 1, y: -1, anchor: .center)
+
+            StatefullFooterView(
+                state: $viewModel.state.footerViewState,
+                errorView: ErrorFooterView(
+                    action: { viewModel.send(.loadMoreData) }
+                )
+            )
+            .scaleEffect(x: 1, y: -1, anchor: .center)
+            .frame(height: 44)
         }
         .listStyle(PlainListStyle())
         .scaleEffect(x: 1, y: -1, anchor: .center)
