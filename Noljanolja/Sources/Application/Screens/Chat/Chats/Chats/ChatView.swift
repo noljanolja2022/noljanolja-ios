@@ -51,7 +51,7 @@ struct ChatView<ViewModel: ChatViewModelType>: View {
             ForEach(Array(viewModel.state.chatItems.enumerated()), id: \.offset) { index, chatItem in
                 ChatItemView(chatItem: chatItem)
                     .onAppear {
-                        guard index == viewModel.state.chatItems.count - 10 else { return }
+                        guard index == viewModel.state.chatItems.count - 1 else { return }
                         viewModel.send(.loadMoreData)
                     }
             }
