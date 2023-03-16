@@ -12,8 +12,8 @@ import Foundation
 
 protocol ConversationDetailServiceType {
     func getMessages(conversationID: Int,
-                     beforeMessageID: String?,
-                     afterMessageID: String?) -> AnyPublisher<[Message], Error>
+                     beforeMessageID: Int?,
+                     afterMessageID: Int?) -> AnyPublisher<[Message], Error>
     func sendMessage(conversationID: Int,
                      message: String,
                      type: MessageType) -> AnyPublisher<Message, Error>
@@ -21,8 +21,8 @@ protocol ConversationDetailServiceType {
 
 extension ConversationDetailServiceType {
     func getMessages(conversationID: Int,
-                     beforeMessageID: String? = nil,
-                     afterMessageID: String? = nil) -> AnyPublisher<[Message], Error> {
+                     beforeMessageID: Int? = nil,
+                     afterMessageID: Int? = nil) -> AnyPublisher<[Message], Error> {
         getMessages(conversationID: conversationID, beforeMessageID: beforeMessageID, afterMessageID: afterMessageID)
     }
 }
@@ -42,8 +42,8 @@ final class ConversationDetailService: ConversationDetailServiceType {
     }
 
     func getMessages(conversationID: Int,
-                     beforeMessageID: String?,
-                     afterMessageID: String?) -> AnyPublisher<[Message], Error> {
+                     beforeMessageID: Int?,
+                     afterMessageID: Int?) -> AnyPublisher<[Message], Error> {
         let remoteMessages = conversationDetailAPI
             .getMessages(
                 conversationID: conversationID,

@@ -21,35 +21,35 @@ protocol ContactServiceType {
 final class ContactService: ContactServiceType {
     static let `default` = ContactService()
 
-    private let localContactAPI: LocalContactAPIType
     private let contactAPI: ContactAPIType
+    private let userAPI: UserAPIType
     private let contactStore: ContactStoreType
 
-    private init(localContactAPI: LocalContactAPIType = LocalContactAPI.default,
-                 contactAPI: ContactAPIType = ContactAPI.default,
+    private init(contactAPI: ContactAPIType = ContactAPI.default,
+                 userAPI: UserAPIType = UserAPI.default,
                  contactStore: ContactStoreType = ContactStore.default) {
-        self.localContactAPI = localContactAPI
         self.contactAPI = contactAPI
+        self.userAPI = userAPI
         self.contactStore = contactStore
     }
 
     func getAuthorizationStatus() -> AnyPublisher<Void, Error> {
-        localContactAPI.getAuthorizationStatus()
+        contactAPI.getAuthorizationStatus()
     }
 
     func requestContactPermission() -> AnyPublisher<Bool, Error> {
-        localContactAPI.requestContactPermission()
+        contactAPI.requestContactPermission()
     }
 
     func getContacts() -> AnyPublisher<[User], Error> {
-        let remoteContacts = localContactAPI
+        let remoteContacts = contactAPI
             .getContacts()
             .map { $0.filter { !$0.phones.isEmpty } }
             .flatMap { [weak self] contacts -> AnyPublisher<[User], Error> in
                 guard let self else {
                     return Empty<[User], Error>().eraseToAnyPublisher()
                 }
-                return self.contactAPI
+                return self.userAPI
                     .syncContacts(contacts)
             }
             .handleEvents(receiveOutput: { [weak self] in

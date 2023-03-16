@@ -13,6 +13,7 @@ import SwiftUIX
 struct SearchView: View {
     var placeholder = ""
     @Binding var text: String
+    var isUserInteractionEnabled = true
 
     var body: some View {
         HStack(spacing: 8) {
@@ -21,21 +22,15 @@ struct SearchView: View {
                 .frame(width: 16, height: 16)
                 .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
             TextField(placeholder, text: $text)
-                .keyboardType(.phonePad)
-                .textFieldStyle(FullSizeTappableTextFieldStyle())
-                .frame(height: 32)
+                .textFieldStyle(TappableTextFieldStyle())
+                .keyboardType(.default)
                 .font(.system(size: 17))
-            if !text.isEmpty {
-                Button(
-                    action: { text = "" },
-                    label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
-                    }
-                )
-            }
+                .frame(maxWidth: .infinity)
+                .introspectTextField { textField in
+                    textField.returnKeyType = .search
+                    textField.clearButtonMode = .whileEditing
+                    textField.isUserInteractionEnabled = isUserInteractionEnabled
+                }
         }
         .padding(.horizontal, 8)
         .frame(height: 36)
@@ -48,6 +43,6 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView(text: .constant(""))
+        SearchView(placeholder: "Search", text: .constant(""))
     }
 }

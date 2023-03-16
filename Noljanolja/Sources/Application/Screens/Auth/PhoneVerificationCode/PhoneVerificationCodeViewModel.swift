@@ -14,7 +14,7 @@ import SwiftUINavigation
 
 protocol PhoneVerificationCodeViewModelDelegate: AnyObject {
     func navigateToMain()
-    func navigateToUpdateProfile()
+    func navigateToUpdateCurrentUser()
 }
 
 // MARK: - PhoneVerificationCodeViewModelType
@@ -59,7 +59,7 @@ final class PhoneVerificationCodeViewModel: PhoneVerificationCodeViewModelType {
 
     private var verificationID: String
     private let authService: AuthServiceType
-    private let profileService: ProfileServiceType
+    private let userService: UserServiceType
     private weak var delegate: PhoneVerificationCodeViewModelDelegate?
 
     // MARK: Action
@@ -76,12 +76,12 @@ final class PhoneVerificationCodeViewModel: PhoneVerificationCodeViewModelType {
     init(state: State,
          verificationID: String,
          authService: AuthServiceType = AuthService.default,
-         profileService: ProfileServiceType = ProfileService.default,
+         userService: UserServiceType = UserService.default,
          delegate: PhoneVerificationCodeViewModelDelegate? = nil) {
         self.state = state
         self.verificationID = verificationID
         self.authService = authService
-        self.profileService = profileService
+        self.userService = userService
         self.delegate = delegate
 
         configure()
@@ -135,7 +135,7 @@ final class PhoneVerificationCodeViewModel: PhoneVerificationCodeViewModelType {
                 return self.authService
                     .verificationCode(verificationID: self.verificationID, verificationCode: self.state.verificationCode)
                     .flatMap { _ in
-                        self.profileService.getProfile()
+                        self.userService.getCurrentUser()
                     }
                     .eraseToAnyPublisher()
             }
@@ -147,7 +147,7 @@ final class PhoneVerificationCodeViewModel: PhoneVerificationCodeViewModelType {
                     if user.isSetup {
                         self?.delegate?.navigateToMain()
                     } else {
-                        self?.delegate?.navigateToUpdateProfile()
+                        self?.delegate?.navigateToUpdateCurrentUser()
                     }
                 case let .failure(error):
                     logger.error("Verify verification code code failed: \(error.localizedDescription)")

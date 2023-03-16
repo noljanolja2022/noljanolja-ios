@@ -19,7 +19,7 @@ protocol AuthRootViewModelDelegate: AnyObject {
 
 protocol AuthRootViewModelType: TermOfServiceViewModelDelegate,
     AuthWithPhoneViewModelDelegate,
-    UpdateProfileViewModelDelegate,
+    UpdateCurrentUserViewModelDelegate,
     ViewModelType where State == AuthRootViewModel.State, Action == AuthRootViewModel.Action {}
 
 extension AuthRootViewModel {
@@ -27,7 +27,7 @@ extension AuthRootViewModel {
         enum ContentType {
             case terms
             case auth
-            case updateProfile
+            case updateCurrentUser
         }
 
         var contentType: ContentType = .terms
@@ -81,15 +81,15 @@ extension AuthRootViewModel: AuthWithPhoneViewModelDelegate {
         delegate?.navigateToMain()
     }
 
-    func navigateToUpdateProfile() {
-        state.contentType = .updateProfile
+    func navigateToUpdateCurrentUser() {
+        state.contentType = .updateCurrentUser
     }
 }
 
-// MARK: UpdateProfileViewModelDelegate
+// MARK: UpdateCurrentUserViewModelDelegate
 
-extension AuthRootViewModel: UpdateProfileViewModelDelegate {
-    func didUpdateProfile() {
+extension AuthRootViewModel: UpdateCurrentUserViewModelDelegate {
+    func didUpdateCurrentUser() {
         delegate?.navigateToMain()
     }
 }

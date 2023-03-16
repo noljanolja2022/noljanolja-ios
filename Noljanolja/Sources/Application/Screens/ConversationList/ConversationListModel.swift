@@ -48,7 +48,7 @@ final class ConversationListViewModel: ConversationListViewModelType {
 
     // MARK: Dependencies
 
-    private let profileService: ProfileServiceType
+    private let userService: UserServiceType
     private let conversationService: ConversationServiceType
     private weak var delegate: ConversationListViewModelDelegate?
 
@@ -67,11 +67,11 @@ final class ConversationListViewModel: ConversationListViewModelType {
     private var cancellables = Set<AnyCancellable>()
 
     init(state: State = State(),
-         profileService: ProfileServiceType = ProfileService.default,
+         userService: UserServiceType = UserService.default,
          conversationService: ConversationServiceType = ConversationService.default,
          delegate: ConversationListViewModelDelegate? = nil) {
         self.state = state
-        self.profileService = profileService
+        self.userService = userService
         self.conversationService = conversationService
         self.delegate = delegate
 
@@ -104,14 +104,6 @@ final class ConversationListViewModel: ConversationListViewModelType {
             })
             .store(in: &cancellables)
 
-        profileService
-            .getProfileIfNeeded()
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.currentUserSubject.send($0) }
-            )
-            .store(in: &cancellables)
-
         loadDataTrigger
             .first()
             .handleEvents(receiveOutput: { [weak self] in self?.state.viewState = .loading })
@@ -140,6 +132,11 @@ final class ConversationListViewModel: ConversationListViewModelType {
                 conversations.first(where: { $0.id == conversationItemModel.id })
             }
             .sink(receiveValue: { [weak self] in self?.state.navigationLinkItem = .chat($0) })
+            .store(in: &cancellables)
+
+        userService
+            .currentUserPublisher
+            .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
             .store(in: &cancellables)
     }
 }

@@ -61,7 +61,7 @@ struct SelectCountryView<ViewModel: SelectCountryViewModelType>: View {
                     .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
                 TextField("Search", text: $viewModel.state.searchString)
                     .keyboardType(.phonePad)
-                    .textFieldStyle(FullSizeTappableTextFieldStyle())
+                    .textFieldStyle(TappableTextFieldStyle())
                     .frame(height: 32)
                     .font(FontFamily.NotoSans.medium.swiftUIFont(size: 16))
                 if !viewModel.state.searchString.isEmpty {

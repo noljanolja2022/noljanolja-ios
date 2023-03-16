@@ -15,9 +15,9 @@ struct ChatDateItemView: View {
     var body: some View {
         Text(dateItemModel.displayDateString)
             .frame(maxWidth: .infinity, alignment: .center)
-            .padding(.vertical, 36)
+            .padding(.vertical, 16)
             .font(.system(size: 11, weight: .medium))
-            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
     }
 }
 

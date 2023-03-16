@@ -13,7 +13,7 @@ import SwiftUINavigation
 
 protocol AuthWithPhoneViewModelDelegate: AnyObject {
     func navigateToMain()
-    func navigateToUpdateProfile()
+    func navigateToUpdateCurrentUser()
 }
 
 // MARK: - AuthWithPhoneViewModelType
@@ -160,7 +160,7 @@ extension AuthWithPhoneViewModel: PhoneVerificationCodeViewModelDelegate {
         delegate?.navigateToMain()
     }
 
-    func navigateToUpdateProfile() {
-        delegate?.navigateToUpdateProfile()
+    func navigateToUpdateCurrentUser() {
+        delegate?.navigateToUpdateCurrentUser()
     }
 }

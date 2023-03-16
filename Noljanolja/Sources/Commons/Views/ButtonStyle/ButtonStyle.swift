@@ -49,7 +49,7 @@ extension CustomButtonStyle {
             .foregroundColor(
                 isEnabled ? enabledForegroundColor : disabledForegroundColor
             )
-            .cornerRadius(8)
+            .cornerRadius(5)
             .overlayBorder(
                 color: isEnabled ? enabledBorderColor : disabledBorderColor, lineWidth: 1
             )
@@ -62,10 +62,10 @@ extension CustomButtonStyle {
 
 struct PrimaryButtonStyle: CustomButtonStyle {
     let isEnabled: Bool
-    let enabledForegroundColor: Color = ColorAssets.white.swiftUIColor
-    let disabledForegroundColor: Color = ColorAssets.forcegroundSecondary.swiftUIColor
-    let enabledBackgroundColor: Color = ColorAssets.highlightPrimary.swiftUIColor
-    let disabledBackgroundColor: Color = ColorAssets.gray.swiftUIColor
+    let enabledForegroundColor: Color = ColorAssets.neutralDarkGrey.swiftUIColor
+    let disabledForegroundColor: Color = ColorAssets.neutralDeepGrey.swiftUIColor
+    let enabledBackgroundColor: Color = ColorAssets.primaryYellowMain.swiftUIColor
+    let disabledBackgroundColor: Color = ColorAssets.neutralGrey.swiftUIColor
     let enabledBorderColor = Color.clear
     let disabledBorderColor = Color.clear
 

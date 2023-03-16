@@ -24,11 +24,15 @@ extension ChatViewModel {
 
         var chatItems = [ChatItemModelType]()
         var error: Error?
+
         var viewState = ViewState.content
+        var footerViewState = StatefullFooterViewState.loading
     }
 
     enum Action {
         case loadData
+        case reloadData
+        case loadMoreData
     }
 }
 
@@ -41,29 +45,31 @@ final class ChatViewModel: ChatViewModelType {
 
     // MARK: Dependencies
 
-    private let profileService: ProfileServiceType
+    private let userService: UserServiceType
     private let conversationDetailService: ConversationDetailServiceType
     private weak var delegate: ChatViewModelDelegate?
 
     // MARK: Action
 
     private let loadDataTrigger = PassthroughSubject<Void, Never>()
+    private let loadMoreDataTrigger = PassthroughSubject<Void, Never>()
+    private let reloadDataTrigger = PassthroughSubject<Void, Never>()
 
     // MARK: Data
 
     private let currentUserSubject = PassthroughSubject<User, Never>()
-    private let messagesSubject = PassthroughSubject<[Message], Never>()
+    private let messagesSubject = CurrentValueSubject<[Message], Never>([])
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
     init(state: State,
-         profileService: ProfileServiceType = ProfileService.default,
+         userService: UserServiceType = UserService.default,
          conversationDetailService: ConversationDetailServiceType = ConversationDetailService.default,
          delegate: ChatViewModelDelegate? = nil) {
         self.state = state
-        self.profileService = profileService
+        self.userService = userService
         self.conversationDetailService = conversationDetailService
         self.delegate = delegate
 
@@ -74,6 +80,10 @@ final class ChatViewModel: ChatViewModelType {
         switch action {
         case .loadData:
             loadDataTrigger.send()
+        case .reloadData:
+            reloadDataTrigger.send()
+        case .loadMoreData:
+            loadMoreDataTrigger.send()
         }
     }
 
@@ -85,37 +95,54 @@ final class ChatViewModel: ChatViewModelType {
             }
             .sink(receiveValue: { [weak self] in
                 self?.state.chatItems = $0
-                self?.state.viewState = .content
             })
             .store(in: &cancellables)
 
-        profileService
-            .getProfileIfNeeded()
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] in self?.currentUserSubject.send($0) }
-            )
-            .store(in: &cancellables)
+        let getMessagesTrigger = Publishers.Merge3(
+            loadDataTrigger
+                .first()
+                .map { _ -> Message? in nil },
+            reloadDataTrigger
+                .map { _ -> Message? in nil },
+            loadMoreDataTrigger
+                .filter { [weak self] in self?.state.footerViewState != .noMoreData }
+                .withLatestFrom(messagesSubject) { $1.last }
+        )
 
-        loadDataTrigger
-            .first()
-            .handleEvents(receiveOutput: { [weak self] in self?.state.viewState = .loading })
-            .flatMapLatestToResult { [weak self] in
+        getMessagesTrigger
+            .handleEvents(receiveOutput: { [weak self] _ in
+                self?.state.viewState = .loading
+                self?.state.footerViewState = .loading
+            })
+            .flatMapLatestToResult { [weak self] lastMessage in
                 guard let self else {
                     return Empty<[Message], Error>().eraseToAnyPublisher()
                 }
                 return self.conversationDetailService
-                    .getMessages(conversationID: self.state.conversation.id)
+                    .getMessages(
+                        conversationID: self.state.conversation.id,
+                        beforeMessageID: lastMessage?.id
+                    )
             }
             .sink(receiveValue: { [weak self] result in
                 switch result {
                 case let .success(messages):
-                    self?.messagesSubject.send(messages)
+                    let currentMesages = self?.messagesSubject.value ?? []
+                    let newMessages = currentMesages + messages
+                    self?.messagesSubject.send(newMessages)
+                    self?.state.viewState = .content
+                    self?.state.footerViewState = messages.isEmpty ? .noMoreData : .loading
                 case let .failure(error):
                     self?.state.error = error
                     self?.state.viewState = .error
+                    self?.state.footerViewState = .error
                 }
             })
+            .store(in: &cancellables)
+
+        userService
+            .currentUserPublisher
+            .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
             .store(in: &cancellables)
     }
 }

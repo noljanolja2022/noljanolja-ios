@@ -23,7 +23,7 @@ struct CodeView: View {
     var body: some View {
         ZStack {
             TextField("", text: $text.max(maxLength))
-                .textFieldStyle(FullSizeTappableTextFieldStyle())
+                .textFieldStyle(TappableTextFieldStyle())
                 .keyboardType(.numberPad)
             GeometryReader { geometry in
                 HStack(spacing: 12) {

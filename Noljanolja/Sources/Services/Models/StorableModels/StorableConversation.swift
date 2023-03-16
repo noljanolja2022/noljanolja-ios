@@ -21,8 +21,7 @@ final class StorableConversation: Object, StorableModel {
     var model: Conversation? {
         guard let creator = creator?.model,
               let type = type.flatMap({ ConversationType(rawValue: $0) }),
-              let createdAt,
-              let updatedAt else {
+              let createdAt else {
             return nil
         }
         return Conversation(

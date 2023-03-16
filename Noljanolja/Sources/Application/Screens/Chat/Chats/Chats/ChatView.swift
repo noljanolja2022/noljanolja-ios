@@ -48,11 +48,24 @@ struct ChatView<ViewModel: ChatViewModelType>: View {
 
     private func buildContentView() -> some View {
         ListView {
-            ForEach(viewModel.state.chatItems, id: \.id) { chatItem in
+            ForEach(Array(viewModel.state.chatItems.enumerated()), id: \.offset) { index, chatItem in
                 ChatItemView(chatItem: chatItem)
+                    .onAppear {
+                        guard index == viewModel.state.chatItems.count - 1 else { return }
+                        viewModel.send(.loadMoreData)
+                    }
             }
             .listRowInsets(EdgeInsets())
             .scaleEffect(x: 1, y: -1, anchor: .center)
+
+            StatefullFooterView(
+                state: $viewModel.state.footerViewState,
+                errorView: ErrorFooterView(
+                    action: { viewModel.send(.loadMoreData) }
+                )
+            )
+            .scaleEffect(x: 1, y: -1, anchor: .center)
+            .frame(height: 44)
         }
         .listStyle(PlainListStyle())
         .scaleEffect(x: 1, y: -1, anchor: .center)
@@ -87,12 +100,14 @@ struct ChatView_Previews: PreviewProvider {
                             id: "id",
                             name: "name",
                             avatar: "avatar",
-                            phone: "1234567890",
+                            pushToken: "pushToken", phone: "1234567890",
                             email: "email@gmail.com",
                             isEmailVerified: false,
-                            pushToken: "pushToken",
-                            dob: "dob",
-                            gender: "Male"
+                            dob: Date(),
+                            gender: .male,
+                            preferences: nil,
+                            createdAt: Date(),
+                            updatedAt: Date()
                         ),
                         type: .single,
                         messages: [],

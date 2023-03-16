@@ -97,7 +97,7 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
                             .font(FontFamily.NotoSans.medium.swiftUIFont(size: 16))
                         TextField("", text: $viewModel.state.phoneNumber)
                             .keyboardType(.phonePad)
-                            .textFieldStyle(FullSizeTappableTextFieldStyle())
+                            .textFieldStyle(TappableTextFieldStyle())
                             .frame(height: 32)
                     }
                     .font(FontFamily.NotoSans.medium.swiftUIFont(size: 16))
