@@ -21,7 +21,7 @@ extension AuthStore: AuthRepo {
 // MARK: - ConversationSocketServiceType
 
 protocol ConversationSocketServiceType {
-    func streamConversations()
+    func register()
 }
 
 // MARK: - ConversationSocketService
@@ -43,11 +43,11 @@ final class ConversationSocketService: ConversationSocketServiceType {
         self.conversationDetailStore = conversationDetailStore
     }
 
-    func streamConversations() {
-        let streamConversations = conversationSocket.streamConversations()
-        let streamConversationsPublisher = createPublisher(for: streamConversations)
+    func register() {
+        let conversationsStream = conversationSocket.streamConversations()
+        let conversationsStreamPublisher = createPublisher(for: conversationsStream)
 
-        streamConversationsPublisher
+        conversationsStreamPublisher
             .compactMap { string in
                 let data = string.data(using: .utf8)
                 return data.flatMap { Conversation(from: $0) }

@@ -142,7 +142,7 @@ final class ConversationListViewModel: ConversationListViewModelType {
             .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
             .store(in: &cancellables)
 
-        conversationSocketService.streamConversations()
+        conversationSocketService.register()
     }
 }
 

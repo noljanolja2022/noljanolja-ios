@@ -130,6 +130,14 @@
 		CF74A19E29B581AD00419342 /* ConversationListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF74A19C29B581AD00419342 /* ConversationListModel.swift */; };
 		CF74A1A529B5831800419342 /* ConversationItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF74A1A429B5831800419342 /* ConversationItemView.swift */; };
 		CF74A1A729B586EF00419342 /* StatefullView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF74A1A629B586EF00419342 /* StatefullView.swift */; };
+		CF775BBC29C6250E00E82183 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF775BBB29C6250E00E82183 /* AppDelegate.swift */; };
+		CF775BBE29C625C900E82183 /* NotificationAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF775BBD29C625C900E82183 /* NotificationAppDelegate.swift */; };
+		CF775BC029C6269200E82183 /* AuthAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF775BBF29C6269200E82183 /* AuthAppDelegate.swift */; };
+		CF775BC229C6287F00E82183 /* AppDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF775BC129C6287F00E82183 /* AppDelegateProtocol.swift */; };
+		CF775BC429C62B3000E82183 /* FrameworkAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF775BC329C62B3000E82183 /* FrameworkAppDelegate.swift */; };
+		CF775BC629C62CF400E82183 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = CF775BC529C62CF400E82183 /* FirebaseMessaging */; };
+		CF775BC829C62EB200E82183 /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF775BC729C62EB200E82183 /* NotificationAPI.swift */; };
+		CF775BCA29C630B800E82183 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF775BC929C630B800E82183 /* NotificationService.swift */; };
 		CF8633FD29B8F2F50091BF5D /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8633FC29B8F2F50091BF5D /* Contact.swift */; };
 		CF8633FF29B8F6020091BF5D /* Encodable+Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8633FE29B8F6020091BF5D /* Encodable+Encode.swift */; };
 		CF88ABCD299F2E7400D8AB67 /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = CF88ABCC299F2E7400D8AB67 /* SwiftUINavigation */; };
@@ -344,6 +352,13 @@
 		CF74A19C29B581AD00419342 /* ConversationListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListModel.swift; sourceTree = "<group>"; };
 		CF74A1A429B5831800419342 /* ConversationItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationItemView.swift; sourceTree = "<group>"; };
 		CF74A1A629B586EF00419342 /* StatefullView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatefullView.swift; sourceTree = "<group>"; };
+		CF775BBB29C6250E00E82183 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CF775BBD29C625C900E82183 /* NotificationAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAppDelegate.swift; sourceTree = "<group>"; };
+		CF775BBF29C6269200E82183 /* AuthAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAppDelegate.swift; sourceTree = "<group>"; };
+		CF775BC129C6287F00E82183 /* AppDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateProtocol.swift; sourceTree = "<group>"; };
+		CF775BC329C62B3000E82183 /* FrameworkAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameworkAppDelegate.swift; sourceTree = "<group>"; };
+		CF775BC729C62EB200E82183 /* NotificationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAPI.swift; sourceTree = "<group>"; };
+		CF775BC929C630B800E82183 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		CF8633FC29B8F2F50091BF5D /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		CF8633FE29B8F6020091BF5D /* Encodable+Encode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Encode.swift"; sourceTree = "<group>"; };
 		CFA3304629BE3352008D7449 /* String+Phone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Phone.swift"; sourceTree = "<group>"; };
@@ -451,6 +466,7 @@
 				CF88ABCD299F2E7400D8AB67 /* SwiftUINavigation in Frameworks */,
 				CF10C7F129C21FAE0020924D /* KMPNativeCoroutinesCombine in Frameworks */,
 				CF62EF8D29B254DD00D6B688 /* _SwiftUINavigationState in Frameworks */,
+				CF775BC629C62CF400E82183 /* FirebaseMessaging in Frameworks */,
 				CFE09257298DF78700F197F0 /* SwiftyBeaver in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1049,6 +1065,18 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		CF775BBA29C624F800E82183 /* AppDelegates */ = {
+			isa = PBXGroup;
+			children = (
+				CF775BBB29C6250E00E82183 /* AppDelegate.swift */,
+				CF775BC129C6287F00E82183 /* AppDelegateProtocol.swift */,
+				CF775BBF29C6269200E82183 /* AuthAppDelegate.swift */,
+				CF775BBD29C625C900E82183 /* NotificationAppDelegate.swift */,
+				CF775BC329C62B3000E82183 /* FrameworkAppDelegate.swift */,
+			);
+			path = AppDelegates;
+			sourceTree = "<group>";
+		};
 		CFBC6EFE29C02977000509EC /* SearchView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1380,6 +1408,7 @@
 				CF1B625529B9D3BF00DE53E6 /* ConversationService.swift */,
 				CF11B1D729BB65B4002E8151 /* ConversationDetailService.swift */,
 				CF10C7ED29C21CDB0020924D /* ConversationSocketService.swift */,
+				CF775BC929C630B800E82183 /* NotificationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1448,6 +1477,7 @@
 		CFFD70B6298AC43B00D4F5A2 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				CF775BBA29C624F800E82183 /* AppDelegates */,
 				CF14F25A298CE46100BC2066 /* Info.plist */,
 				CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */,
 			);
@@ -1505,6 +1535,7 @@
 				CFFD70D4298AC92500D4F5A2 /* UserAPI.swift */,
 				CF1B624729B9B55F00DE53E6 /* ConversationAPI.swift */,
 				CF11B1D929BB65DD002E8151 /* ConversationDetailAPI.swift */,
+				CF775BC729C62EB200E82183 /* NotificationAPI.swift */,
 			);
 			path = APIs;
 			sourceTree = "<group>";
@@ -1559,6 +1590,7 @@
 				CF52AB7229B8E3B700C9C90C /* RealmSwift */,
 				CF9779DB29BE2FC600D1CAB0 /* PhoneNumberKit */,
 				CF10C7F029C21FAE0020924D /* KMPNativeCoroutinesCombine */,
+				CF775BC529C62CF400E82183 /* FirebaseMessaging */,
 			);
 			productName = Noljanolja;
 			productReference = CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */;
@@ -1892,6 +1924,8 @@
 				CFFB059529BF1261000D65EE /* MessageContentModelType.swift in Sources */,
 				CF11B1D529BB32F0002E8151 /* ListView.swift in Sources */,
 				CF0EA30D29AA0F010014A7DE /* SelectCountryView.swift in Sources */,
+				CF775BBE29C625C900E82183 /* NotificationAppDelegate.swift in Sources */,
+				CF775BC429C62B3000E82183 /* FrameworkAppDelegate.swift in Sources */,
 				CF1EEE3729AE3FA8004F570A /* TermOfServiceItemView.swift in Sources */,
 				CF08A86029B5A17A00D6CE5F /* ContactListViewModel.swift in Sources */,
 				CF52AB6429B8D85000C9C90C /* ContactService.swift in Sources */,
@@ -1900,6 +1934,7 @@
 				CFFD70C9298AC5F800D4F5A2 /* TargetType+RawTarget.swift in Sources */,
 				CF28A1AF29B5066A0003C204 /* SettingView.swift in Sources */,
 				CF4DE2F129B3B6A7006E75E5 /* SignUpNavigationViewModel.swift in Sources */,
+				CF775BCA29C630B800E82183 /* NotificationService.swift in Sources */,
 				CFFD70C8298AC5F800D4F5A2 /* BaseAuthTargetType.swift in Sources */,
 				CF1B625229B9BED800DE53E6 /* StorableMessage.swift in Sources */,
 				CF1EEE3329AE3F81004F570A /* TermOfServiceView.swift in Sources */,
@@ -1948,8 +1983,10 @@
 				CF28A19A29B4D8D70003C204 /* LaunchRootView.swift in Sources */,
 				CF28A19B29B4D8D70003C204 /* LaunchRootViewModel.swift in Sources */,
 				CF4DE2E529B3B6A7006E75E5 /* ForgotPasswordViewModel.swift in Sources */,
+				CF775BC229C6287F00E82183 /* AppDelegateProtocol.swift in Sources */,
 				CF398DD829BF89430015DB18 /* UpdateCurrentUserParam.swift in Sources */,
 				CF74A19E29B581AD00419342 /* ConversationListModel.swift in Sources */,
+				CF775BBC29C6250E00E82183 /* AppDelegate.swift in Sources */,
 				CFF1F7A529B7371600B25DD2 /* ChatViewModel.swift in Sources */,
 				CFFB059029BF0F20000D65EE /* ChatItemModelType.swift in Sources */,
 				CF6ABC2029935D7B00D78213 /* RootViewModel.swift in Sources */,
@@ -1969,6 +2006,7 @@
 				CFBCE41829B98A65000D6F73 /* CommonError.swift in Sources */,
 				CF4DE2E829B3B6A7006E75E5 /* SignUpStepView.swift in Sources */,
 				CF00D1692994E0A700505702 /* TextField+ErrorMessage.swift in Sources */,
+				CF775BC829C62EB200E82183 /* NotificationAPI.swift in Sources */,
 				CF28A1A729B4FFC50003C204 /* ProfileView.swift in Sources */,
 				CF4DE2DE29B3B6A7006E75E5 /* SignUpNavigationView.swift in Sources */,
 				CF745A5A2998E5EA008177E5 /* TappableTextFieldStyle.swift in Sources */,
@@ -1982,6 +2020,7 @@
 				CF11B1CE29BAF4E5002E8151 /* ConversationItemViewModel.swift in Sources */,
 				CFC709E32996276C00B64216 /* RoundedLinearProgressViewStyle.swift in Sources */,
 				CF00D16F2994FC9E00505702 /* String+Validation.swift in Sources */,
+				CF775BC029C6269200E82183 /* AuthAppDelegate.swift in Sources */,
 				CFD83DCD29973A5F00B9A6BB /* AuthNavigationView.swift in Sources */,
 				CFE48BC3299207DA0062C903 /* AuthStore.swift in Sources */,
 				CF28A19F29B4E9CF0003C204 /* AuthRootView.swift in Sources */,
@@ -2531,6 +2570,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CF6ABC212993617F00D78213 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
+		};
+		CF775BC529C62CF400E82183 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF14F24B298CC11600BC2066 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 		CF88ABCC299F2E7400D8AB67 /* SwiftUINavigation */ = {
 			isa = XCSwiftPackageProductDependency;
