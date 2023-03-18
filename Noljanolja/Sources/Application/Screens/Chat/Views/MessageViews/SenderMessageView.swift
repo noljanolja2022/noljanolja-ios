@@ -14,7 +14,7 @@ struct SenderMessageItemView: View {
 
     var body: some View {
         HStack(alignment: .bottom, spacing: 4) {
-            Spacer(minLength: UIScreen.main.bounds.width / 6)
+            Spacer(minLength: 32)
             
             Text(messageItemModel.date.string(withFormat: "HH:mm"))
                 .font(.system(size: 11, weight: .medium))

@@ -91,6 +91,7 @@ final class ContactListViewModel: ContactListViewModelType {
 
     private func configure() {
         loadDataTrigger
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.state.viewState = .loading })
             .flatMapLatestToResult { [weak self] _ -> AnyPublisher<[User], Error> in
                 guard let self else {

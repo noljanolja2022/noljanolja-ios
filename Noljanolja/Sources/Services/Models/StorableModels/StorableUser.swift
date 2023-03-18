@@ -40,7 +40,10 @@ final class StorableUser: Object, StorableModel {
     @Persisted var updatedAt: Date?
 
     var model: User? {
-        User(
+        guard let createdAt, let updatedAt else {
+            return nil
+        }
+        return User(
             id: id,
             name: name,
             avatar: avatar,
@@ -48,7 +51,7 @@ final class StorableUser: Object, StorableModel {
             phone: phone,
             email: email,
             isEmailVerified: isEmailVerified,
-            dob: Date(),
+            dob: dob,
             gender: gender.flatMap { GenderType(rawValue: $0) },
             preferences: preferences?.model,
             createdAt: createdAt,

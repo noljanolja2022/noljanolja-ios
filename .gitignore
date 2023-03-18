@@ -95,3 +95,7 @@ iOSInjectionProject/
 XeCo/XeCo/.natrium
 XeCo/XeCo/XeCo/Configs/Firebase/GoogleService-Info.plist
 XeCo/XeCo/XeCo/Resources/Sources/ImageAssets.xcassets/AppIcon.appiconset/1024.png
+
+local.properties
+.idea
+.gradle

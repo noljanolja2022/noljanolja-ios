@@ -11,6 +11,7 @@ import Foundation
 // MARK: - ConversationDetailServiceType
 
 protocol ConversationDetailServiceType {
+    func getLocalMessages(conversationID: Int) -> AnyPublisher<[Message], Error>
     func getMessages(conversationID: Int,
                      beforeMessageID: Int?,
                      afterMessageID: Int?) -> AnyPublisher<[Message], Error>
@@ -41,10 +42,17 @@ final class ConversationDetailService: ConversationDetailServiceType {
         self.conversationDetailStore = conversationDetailStore
     }
 
+    func getLocalMessages(conversationID: Int) -> AnyPublisher<[Message], Error> {
+        conversationDetailStore
+            .observeMessages(conversationID: conversationID)
+            .map { $0.sorted { $0.createdAt > $1.createdAt } }
+            .eraseToAnyPublisher()
+    }
+
     func getMessages(conversationID: Int,
                      beforeMessageID: Int?,
                      afterMessageID: Int?) -> AnyPublisher<[Message], Error> {
-        let remoteMessages = conversationDetailAPI
+        conversationDetailAPI
             .getMessages(
                 conversationID: conversationID,
                 beforeMessageID: beforeMessageID,
@@ -53,18 +61,7 @@ final class ConversationDetailService: ConversationDetailServiceType {
             .handleEvents(receiveOutput: { [weak self] in
                 self?.conversationDetailStore.saveMessages($0)
             })
-
-        return remoteMessages
             .eraseToAnyPublisher()
-
-//        let localMessages = conversationDetailStore
-//            .observeMessages(conversationID: conversationID)
-//            .filter { !$0.isEmpty }
-//            .map { $0.sorted { $0.createdAt > $1.createdAt } }
-//
-//        return Publishers.Merge(remoteMessages, localMessages)
-//            .removeDuplicates()
-//            .eraseToAnyPublisher()
     }
 
     func sendMessage(conversationID: Int,

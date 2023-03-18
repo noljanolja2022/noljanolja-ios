@@ -7,6 +7,7 @@ target 'Noljanolja' do
 
   # Pods for Noljanolja
   pod 'naveridlogin-sdk-ios', '4.1.5'
+  pod 'shared', :path => './shared'
 
   target 'NoljanoljaTests' do
     inherit! :search_paths

@@ -21,21 +21,26 @@ protocol ConversationDetailStoreType {
 final class ConversationDetailStore: ConversationDetailStoreType {
     static let `default` = ConversationDetailStore()
 
-    private let realm: Realm
+    private lazy var realmManager: RealmManagerType = RealmManager(
+        configuration: {
+            var config = Realm.Configuration.defaultConfiguration
+            config.fileURL!.deleteLastPathComponent()
+            config.fileURL!.appendPathComponent("conversation_detail")
+            config.fileURL!.appendPathExtension("realm")
+            return config
+        }(),
+        queue: DispatchQueue(label: "realm.conversation_detail", qos: .default)
+    )
 
-    private init(realm: Realm = Realm.default) {
-        self.realm = realm
-    }
+    private init() {}
 
     func saveMessages(_ messages: [Message]) {
-        try? realm.write {
-            let storableMessages = messages.map { StorableMessage($0) }
-            realm.add(storableMessages, update: .modified)
-        }
+        let storableMessages = messages.map { StorableMessage($0) }
+        realmManager.add(storableMessages, update: .all)
     }
 
     func observeMessages(conversationID: Int) -> AnyPublisher<[Message], Error> {
-        realm.objects(StorableMessage.self)
+        realmManager.objects(StorableMessage.self)
             .where { $0.conversationID == conversationID }
             .collectionPublisher
             .map { messages -> [Message] in messages.compactMap { $0.model } }

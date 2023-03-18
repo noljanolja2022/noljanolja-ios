@@ -42,6 +42,9 @@ final class ContactService: ContactServiceType {
     }
 
     func getContacts() -> AnyPublisher<[User], Error> {
+        let localContacts = contactStore.observeContacts()
+            .filter { !$0.isEmpty }
+
         let remoteContacts = contactAPI
             .getContacts()
             .map { $0.filter { !$0.phones.isEmpty } }
@@ -56,14 +59,8 @@ final class ContactService: ContactServiceType {
                 self?.contactStore.saveContact($0)
             })
 
-        return remoteContacts
+        return Publishers.Merge(localContacts, remoteContacts)
+            .removeDuplicates()
             .eraseToAnyPublisher()
-
-//        let localContacts = contactStore.observeContacts()
-//            .filter { !$0.isEmpty }
-//
-//        return Publishers.Merge(remoteContacts, localContacts)
-//            .removeDuplicates()
-//            .eraseToAnyPublisher()
     }
 }

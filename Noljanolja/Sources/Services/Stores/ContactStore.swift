@@ -21,21 +21,26 @@ protocol ContactStoreType {
 final class ContactStore: ContactStoreType {
     static let `default` = ContactStore()
 
-    private let realm: Realm
+    private lazy var realmManager: RealmManagerType = RealmManager(
+        configuration: {
+            var config = Realm.Configuration.defaultConfiguration
+            config.fileURL!.deleteLastPathComponent()
+            config.fileURL!.appendPathComponent("contact")
+            config.fileURL!.appendPathExtension("realm")
+            return config
+        }(),
+        queue: DispatchQueue(label: "realm.contact", qos: .default)
+    )
 
-    private init(realm: Realm = Realm.default) {
-        self.realm = realm
-    }
+    private init() {}
 
     func saveContact(_ users: [User]) {
-        try? realm.write {
-            let storableContacts = users.map { StorableUser($0) }
-            realm.add(storableContacts, update: .modified)
-        }
+        let storableContacts = users.map { StorableUser($0) }
+        realmManager.add(storableContacts, update: .modified)
     }
 
     func observeContacts() -> AnyPublisher<[User], Error> {
-        realm.objects(StorableUser.self)
+        realmManager.objects(StorableUser.self)
             .collectionPublisher
             .freeze()
             .map { users -> [User] in users.compactMap { $0.model } }
