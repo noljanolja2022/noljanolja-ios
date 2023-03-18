@@ -34,8 +34,8 @@ struct User: Equatable, Codable {
     let dob: Date?
     let gender: GenderType?
     let preferences: UserPreferences?
-    let createdAt: Date?
-    let updatedAt: Date?
+    let createdAt: Date
+    let updatedAt: Date
 
     var isSetup: Bool {
         !(name ?? "").isEmpty
@@ -51,8 +51,8 @@ struct User: Equatable, Codable {
          dob: Date?,
          gender: GenderType?,
          preferences: UserPreferences?,
-         createdAt: Date?,
-         updatedAt: Date?) {
+         createdAt: Date,
+         updatedAt: Date) {
         self.id = id
         self.name = name
         self.avatar = avatar
@@ -83,10 +83,18 @@ struct User: Equatable, Codable {
         self.gender = try container.decodeIfPresent(GenderType.self, forKey: .gender)
         self.preferences = try container.decodeIfPresent(UserPreferences.self, forKey: .preferences)
 
-        let createdAtString = try container.decodeIfPresent(String.self, forKey: .createdAt)
-        self.createdAt = createdAtString.flatMap { $0.date(withFormats: NetworkConfigs.Format.apiFullDateFormats) }
+        if let createdAtString = try container.decodeIfPresent(String.self, forKey: .createdAt),
+           let createdAt = createdAtString.date(withFormats: NetworkConfigs.Format.apiFullDateFormats) {
+            self.createdAt = createdAt
+        } else {
+            throw NetworkError.mapping("\(String(describing: Swift.type(of: self))) at key createdAt")
+        }
 
-        let updatedAtString = try container.decodeIfPresent(String.self, forKey: .updatedAt)
-        self.updatedAt = updatedAtString.flatMap { $0.date(withFormats: NetworkConfigs.Format.apiFullDateFormats) }
+        if let updatedAtString = try container.decodeIfPresent(String.self, forKey: .updatedAt),
+           let updatedAt = updatedAtString.date(withFormats: NetworkConfigs.Format.apiFullDateFormats) {
+            self.updatedAt = updatedAt
+        } else {
+            throw NetworkError.mapping("\(String(describing: Swift.type(of: self))) at key updatedAt")
+        }
     }
 }

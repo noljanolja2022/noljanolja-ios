@@ -50,6 +50,7 @@ final class ConversationListViewModel: ConversationListViewModelType {
 
     private let userService: UserServiceType
     private let conversationService: ConversationServiceType
+    private let conversationSocketService: ConversationSocketServiceType
     private weak var delegate: ConversationListViewModelDelegate?
 
     // MARK: Action
@@ -69,10 +70,12 @@ final class ConversationListViewModel: ConversationListViewModelType {
     init(state: State = State(),
          userService: UserServiceType = UserService.default,
          conversationService: ConversationServiceType = ConversationService.default,
+         conversationSocketService: ConversationSocketServiceType = ConversationSocketService.default,
          delegate: ConversationListViewModelDelegate? = nil) {
         self.state = state
         self.userService = userService
         self.conversationService = conversationService
+        self.conversationSocketService = conversationSocketService
         self.delegate = delegate
 
         configure()
@@ -138,6 +141,8 @@ final class ConversationListViewModel: ConversationListViewModelType {
             .currentUserPublisher
             .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
             .store(in: &cancellables)
+
+        conversationSocketService.streamConversations()
     }
 }
 

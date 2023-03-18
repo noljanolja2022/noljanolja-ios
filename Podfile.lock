@@ -1,16 +1,23 @@
 PODS:
   - naveridlogin-sdk-ios (4.1.5)
+  - shared (1.0)
 
 DEPENDENCIES:
   - naveridlogin-sdk-ios (= 4.1.5)
+  - shared (from `./shared`)
 
 SPEC REPOS:
   trunk:
     - naveridlogin-sdk-ios
 
+EXTERNAL SOURCES:
+  shared:
+    :path: "./shared"
+
 SPEC CHECKSUMS:
   naveridlogin-sdk-ios: 4351fe7162cd6b8b6dbb37bd7cc205304fa1d889
+  shared: 39716697cdb03064a2a5d4da9d9d75c8ca73d2e7
 
-PODFILE CHECKSUM: 8b1073eb51c85f8d1ef422c24031854c6ac8cf33
+PODFILE CHECKSUM: 63d34dcff8602353d18e7f352d9198637dcdd0e2
 
 COCOAPODS: 1.12.0

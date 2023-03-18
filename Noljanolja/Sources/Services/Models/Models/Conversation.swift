@@ -24,7 +24,7 @@ struct Conversation: Equatable, Codable {
     let messages: [Message]
     let participants: [User]
     let createdAt: Date
-    let updatedAt: Date?
+    let updatedAt: Date
 
     init(id: Int,
          title: String?,
@@ -33,7 +33,7 @@ struct Conversation: Equatable, Codable {
          messages: [Message],
          participants: [User],
          createdAt: Date,
-         updatedAt: Date?) {
+         updatedAt: Date) {
         self.id = id
         self.title = title
         self.creator = creator
@@ -60,7 +60,11 @@ struct Conversation: Equatable, Codable {
             throw NetworkError.mapping("\(String(describing: Swift.type(of: self))) at key createdAt")
         }
 
-        let updatedAtString = try container.decodeIfPresent(String.self, forKey: .updatedAt)
-        self.updatedAt = updatedAtString.flatMap { $0.date(withFormats: NetworkConfigs.Format.apiFullDateFormats) }
+        if let updatedAtString = try container.decodeIfPresent(String.self, forKey: .updatedAt),
+           let updatedAt = updatedAtString.date(withFormats: NetworkConfigs.Format.apiFullDateFormats) {
+            self.updatedAt = updatedAt
+        } else {
+            throw NetworkError.mapping("\(String(describing: Swift.type(of: self))) at key updatedAt")
+        }
     }
 }

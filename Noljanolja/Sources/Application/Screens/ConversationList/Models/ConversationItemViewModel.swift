@@ -26,7 +26,7 @@ struct ConversationItemModel: Equatable {
         let firstOtherUser = conversation.participants.filter { $0.id != currentUser.id }.first
         self.id = conversation.id
         self.image = firstOtherUser?.avatar
-        self.lastMessage = conversation.messages.last?.message
+        self.lastMessage = conversation.messages.first?.message
         self.date = conversation.messages.last?.createdAt.string(withFormat: "HH:mm")
         switch conversation.type {
         case .single:

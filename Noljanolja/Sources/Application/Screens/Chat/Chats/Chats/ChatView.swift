@@ -50,10 +50,7 @@ struct ChatView<ViewModel: ChatViewModelType>: View {
         ListView {
             ForEach(Array(viewModel.state.chatItems.enumerated()), id: \.offset) { index, chatItem in
                 ChatItemView(chatItem: chatItem)
-                    .onAppear {
-                        guard index == viewModel.state.chatItems.count - 1 else { return }
-                        viewModel.send(.loadMoreData)
-                    }
+                    .onAppear { viewModel.send(.loadMoreData(index)) }
             }
             .listRowInsets(EdgeInsets())
             .scaleEffect(x: 1, y: -1, anchor: .center)
@@ -61,7 +58,13 @@ struct ChatView<ViewModel: ChatViewModelType>: View {
             StatefullFooterView(
                 state: $viewModel.state.footerViewState,
                 errorView: ErrorFooterView(
-                    action: { viewModel.send(.loadMoreData) }
+                    action: {
+                        viewModel.send(
+                            .loadMoreData(
+                                viewModel.state.chatItems.count - 1
+                            )
+                        )
+                    }
                 )
             )
             .scaleEffect(x: 1, y: -1, anchor: .center)

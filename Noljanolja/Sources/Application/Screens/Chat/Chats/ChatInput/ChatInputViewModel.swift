@@ -69,6 +69,8 @@ final class ChatInputViewModel: ChatInputViewModelType {
 
     private func configure() {
         sendPlaintextMessage
+            .filter { !$0.trimmed.isEmpty }
+            .handleEvents(receiveOutput: { [weak self] _ in self?.state.text = "" })
             .flatMapLatestToResult { [weak self] message in
                 guard let self else {
                     return Empty<Message, Error>().eraseToAnyPublisher()

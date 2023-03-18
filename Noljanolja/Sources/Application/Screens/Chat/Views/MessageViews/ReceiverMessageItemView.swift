@@ -41,7 +41,7 @@ struct ReceiverMessageItemView: View {
                     : 0
             )
 
-            Spacer(minLength: UIScreen.main.bounds.width / 6)
+            Spacer(minLength: 32)
         }
         .padding(
             .leading,
