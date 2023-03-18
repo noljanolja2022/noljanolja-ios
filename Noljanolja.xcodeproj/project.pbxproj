@@ -2241,6 +2241,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Noljanolja/Sources/Application/App/Info.plist;
+				INFOPLIST_KEY_NSContactsUsageDescription = "To help you message friends and family on Noja Noja, allow Noja Noja access to your contacts";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
@@ -2272,6 +2273,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Noljanolja/Sources/Application/App/Info.plist;
+				INFOPLIST_KEY_NSContactsUsageDescription = "To help you message friends and family on Noja Noja, allow Noja Noja access to your contacts";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";

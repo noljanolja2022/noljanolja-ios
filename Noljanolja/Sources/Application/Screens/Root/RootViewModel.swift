@@ -36,7 +36,9 @@ extension RootViewModel {
         var contentType: ContentType = .launch
     }
 
-    enum Action {}
+    enum Action {
+        case requestNotificationPermission
+    }
 }
 
 // MARK: - RootViewModel
@@ -48,23 +50,42 @@ final class RootViewModel: RootViewModelType {
 
     // MARK: Dependencies
 
+    private let notificationService: NotificationServiceType
     private weak var delegate: RootViewModelDelegate?
+
+    // MARK: Action
+
+    private let requestNotificationPermissionTrigger = PassthroughSubject<Void, Never>()
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
     init(state: State = State(),
+         notificationService: NotificationServiceType = NotificationService.default,
          delegate: RootViewModelDelegate? = nil) {
         self.state = state
+        self.notificationService = notificationService
         self.delegate = delegate
 
         configure()
     }
 
-    func send(_: Action) {}
+    func send(_ action: Action) {
+        switch action {
+        case .requestNotificationPermission:
+            requestNotificationPermissionTrigger.send(())
+        }
+    }
 
-    private func configure() {}
+    private func configure() {
+        requestNotificationPermissionTrigger
+            .first()
+            .sink(receiveValue: { [weak self] in
+                self?.notificationService.requestPermission()
+            })
+            .store(in: &cancellables)
+    }
 }
 
 // MARK: Delegate
