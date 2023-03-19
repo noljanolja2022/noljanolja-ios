@@ -49,7 +49,8 @@ final class ChatViewModel: ChatViewModelType {
     // MARK: Dependencies
 
     private let userService: UserServiceType
-    private let conversationDetailService: ConversationDetailServiceType
+    private let conversationService: ConversationServiceType
+    private let messageService: MessageServiceType
     private weak var delegate: ChatViewModelDelegate?
 
     // MARK: Action
@@ -72,11 +73,13 @@ final class ChatViewModel: ChatViewModelType {
 
     init(state: State,
          userService: UserServiceType = UserService.default,
-         conversationDetailService: ConversationDetailServiceType = ConversationDetailService.default,
+         conversationService: ConversationServiceType = ConversationService.default,
+         messageService: MessageServiceType = MessageService.default,
          delegate: ChatViewModelDelegate? = nil) {
         self.state = state
         self.userService = userService
-        self.conversationDetailService = conversationDetailService
+        self.conversationService = conversationService
+        self.messageService = messageService
         self.delegate = delegate
 
         configure()
@@ -141,7 +144,7 @@ final class ChatViewModel: ChatViewModelType {
                 guard let self else {
                     return Empty<[Message], Error>().eraseToAnyPublisher()
                 }
-                return self.conversationDetailService
+                return self.messageService
                     .getMessages(
                         conversationID: self.state.conversationID,
                         beforeMessageID: lastMessage?.id,
@@ -174,7 +177,7 @@ final class ChatViewModel: ChatViewModelType {
                 guard let self else {
                     return Empty<[Message], Error>().eraseToAnyPublisher()
                 }
-                return self.conversationDetailService
+                return self.messageService
                     .getLocalMessages(conversationID: self.state.conversationID)
                     .eraseToAnyPublisher()
             }
@@ -216,7 +219,7 @@ final class ChatViewModel: ChatViewModelType {
                 guard let self else {
                     return Empty<Conversation, Error>().eraseToAnyPublisher()
                 }
-                return self.conversationDetailService
+                return self.conversationService
                     .getConversation(conversationID: self.state.conversationID)
             }
             .sink(receiveValue: { [weak self] result in

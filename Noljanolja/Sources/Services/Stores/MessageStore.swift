@@ -1,5 +1,5 @@
 //
-//  ConversationDetailStore.swift
+//  MessageStore.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 10/03/2023.
@@ -9,17 +9,17 @@ import Combine
 import Foundation
 import RealmSwift
 
-// MARK: - ConversationDetailStoreType
+// MARK: - MessageStoreType
 
-protocol ConversationDetailStoreType {
+protocol MessageStoreType {
     func saveMessages(_ messages: [Message])
     func observeMessages(conversationID: Int) -> AnyPublisher<[Message], Error>
 }
 
-// MARK: - ConversationDetailStore
+// MARK: - MessageStore
 
-final class ConversationDetailStore: ConversationDetailStoreType {
-    static let `default` = ConversationDetailStore()
+final class MessageStore: MessageStoreType {
+    static let `default` = MessageStore()
 
     private lazy var realmManager: RealmManagerType = RealmManager(
         configuration: {

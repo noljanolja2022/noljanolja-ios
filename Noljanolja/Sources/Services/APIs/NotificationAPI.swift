@@ -11,7 +11,7 @@ import Moya
 
 // MARK: - NotificationAPITargets
 
-enum NotificationAPITargets {
+private enum NotificationAPITargets {
     struct SendPushToken: BaseAuthTargetType {
         var path: String { "v1/push-token" }
         var method: Moya.Method { .post }
