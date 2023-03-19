@@ -150,7 +150,7 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
                         ChatView(
                             viewModel: ChatViewModel(
                                 state: ChatViewModel.State(
-                                    conversation: conversation
+                                    conversationID: conversation.id
                                 )
                             )
                         )

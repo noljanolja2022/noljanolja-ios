@@ -12,6 +12,14 @@ import Moya
 // MARK: - ConversationDetailAPITargets
 
 enum ConversationDetailAPITargets {
+    struct GetConversation: BaseAuthTargetType {
+        var path: String { "v1/conversations/\(conversationID)" }
+        let method: Moya.Method = .get
+        var task: Task { .requestPlain }
+
+        let conversationID: Int
+    }
+
     struct GetMessages: BaseAuthTargetType {
         var path: String { "v1/conversations/\(conversationID)/messages" }
         let method: Moya.Method = .get
@@ -48,6 +56,7 @@ enum ConversationDetailAPITargets {
 // MARK: - ConversationDetailAPIType
 
 protocol ConversationDetailAPIType {
+    func getConversation(conversationID: Int) -> AnyPublisher<Conversation, Error>
     func getMessages(conversationID: Int,
                      beforeMessageID: Int?,
                      afterMessageID: Int?) -> AnyPublisher<[Message], Error>
@@ -77,6 +86,13 @@ final class ConversationDetailAPI: ConversationDetailAPIType {
 
     private init(api: ApiType = Api.default) {
         self.api = api
+    }
+
+    func getConversation(conversationID: Int) -> AnyPublisher<Conversation, Error> {
+        api.request(
+            target: ConversationDetailAPITargets.GetConversation(conversationID: conversationID),
+            atKeyPath: "data"
+        )
     }
 
     func getMessages(conversationID: Int,

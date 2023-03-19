@@ -23,7 +23,13 @@ struct ChatView<ViewModel: ChatViewModelType>: View {
 
     var body: some View {
         buildBodyView()
-            .navigationBarTitle(viewModel.state.conversation.id.string)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text(viewModel.state.title)
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                }
+            }
     }
 
     private func buildBodyView() -> some View {
@@ -40,7 +46,9 @@ struct ChatView<ViewModel: ChatViewModelType>: View {
                 .onAppear { viewModel.send(.loadData) }
             ChatInputView(
                 viewModel: ChatInputViewModel(
-                    state: ChatInputViewModel.State(conversation: viewModel.state.conversation)
+                    state: ChatInputViewModel.State(
+                        conversationID: viewModel.state.conversationID
+                    )
                 )
             )
         }
@@ -96,28 +104,7 @@ struct ChatView_Previews: PreviewProvider {
         ChatView(
             viewModel: ChatViewModel(
                 state: ChatViewModel.State(
-                    conversation: Conversation(
-                        id: 0,
-                        title: "title",
-                        creator: User(
-                            id: "id",
-                            name: "name",
-                            avatar: "avatar",
-                            pushToken: "pushToken", phone: "1234567890",
-                            email: "email@gmail.com",
-                            isEmailVerified: false,
-                            dob: Date(),
-                            gender: .male,
-                            preferences: nil,
-                            createdAt: Date(),
-                            updatedAt: Date()
-                        ),
-                        type: .single,
-                        messages: [],
-                        participants: [],
-                        createdAt: Date(),
-                        updatedAt: Date()
-                    )
+                    conversationID: 0
                 )
             )
         )

@@ -23,16 +23,10 @@ struct ConversationItemModel: Equatable {
     }
 
     init(currentUser: User, conversation: Conversation) {
-        let firstOtherUser = conversation.participants.filter { $0.id != currentUser.id }.first
         self.id = conversation.id
-        self.image = firstOtherUser?.avatar
+        self.image = conversation.avatar(currentUser)
         self.lastMessage = conversation.messages.first?.message
         self.date = conversation.messages.last?.createdAt.string(withFormat: "HH:mm")
-        switch conversation.type {
-        case .single:
-            self.title = firstOtherUser?.name
-        case .group:
-            self.title = conversation.title
-        }
+        self.title = conversation.displayTitle(currentUser)
     }
 }

@@ -20,7 +20,9 @@ protocol ChatViewModelType:
 
 extension ChatViewModel {
     struct State {
-        let conversation: Conversation
+        let conversationID: Int
+
+        var title = ""
 
         var chatItems = [ChatItemModelType]()
         var error: Error?
@@ -60,6 +62,7 @@ final class ChatViewModel: ChatViewModelType {
 
     // MARK: Data
 
+    private let conversationSubject = PassthroughSubject<Conversation, Never>()
     private let currentUserSubject = PassthroughSubject<User, Never>()
     private let messagesSubject = CurrentValueSubject<[Message], Never>([])
 
@@ -91,6 +94,15 @@ final class ChatViewModel: ChatViewModelType {
     }
 
     private func configure() {
+        Publishers.CombineLatest(currentUserSubject, conversationSubject)
+            .map { currentUser, conversation in
+                conversation.displayTitle(currentUser) ?? ""
+            }
+            .sink(receiveValue: { [weak self] in
+                self?.state.title = $0
+            })
+            .store(in: &cancellables)
+
         Publishers.CombineLatest(currentUserSubject, messagesSubject)
             .map { currentUser, messages in
                 MessageItemModelBuilder(currentUser: currentUser, messages: messages)
@@ -131,7 +143,7 @@ final class ChatViewModel: ChatViewModelType {
                 }
                 return self.conversationDetailService
                     .getMessages(
-                        conversationID: self.state.conversation.id,
+                        conversationID: self.state.conversationID,
                         beforeMessageID: lastMessage?.id,
                         afterMessageID: firstMessage?.id
                     )
@@ -148,7 +160,7 @@ final class ChatViewModel: ChatViewModelType {
             .sink(receiveValue: { [weak self] result in
                 switch result {
                 case let .success(messages):
-                    break
+                    self?.state.viewState = .content
                 case let .failure(error):
                     self?.state.error = error
                     self?.state.viewState = .error
@@ -163,7 +175,7 @@ final class ChatViewModel: ChatViewModelType {
                     return Empty<[Message], Error>().eraseToAnyPublisher()
                 }
                 return self.conversationDetailService
-                    .getLocalMessages(conversationID: self.state.conversation.id)
+                    .getLocalMessages(conversationID: self.state.conversationID)
                     .eraseToAnyPublisher()
             }
             .sink(receiveValue: { [weak self] result in
@@ -194,6 +206,25 @@ final class ChatViewModel: ChatViewModelType {
                     self.loadPreviousDataTrigger.send()
                 } else if index == 0 {
                     self.loadNextDataTrigger.send()
+                }
+            })
+            .store(in: &cancellables)
+
+        loadDataTrigger
+            .first()
+            .flatMapLatestToResult { [weak self] _ in
+                guard let self else {
+                    return Empty<Conversation, Error>().eraseToAnyPublisher()
+                }
+                return self.conversationDetailService
+                    .getConversation(conversationID: self.state.conversationID)
+            }
+            .sink(receiveValue: { [weak self] result in
+                switch result {
+                case let .success(conversation):
+                    self?.conversationSubject.send(conversation)
+                case let .failure(error):
+                    return
                 }
             })
             .store(in: &cancellables)

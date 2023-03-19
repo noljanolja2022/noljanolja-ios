@@ -11,6 +11,7 @@ import Foundation
 // MARK: - ConversationDetailServiceType
 
 protocol ConversationDetailServiceType {
+    func getConversation(conversationID: Int) -> AnyPublisher<Conversation, Error>
     func getLocalMessages(conversationID: Int) -> AnyPublisher<[Message], Error>
     func getMessages(conversationID: Int,
                      beforeMessageID: Int?,
@@ -34,12 +35,22 @@ final class ConversationDetailService: ConversationDetailServiceType {
     static let `default` = ConversationDetailService()
 
     private let conversationDetailAPI: ConversationDetailAPIType
+    private let conversationStore: ConversationStoreType
     private let conversationDetailStore: ConversationDetailStoreType
 
     private init(conversationDetailAPI: ConversationDetailAPIType = ConversationDetailAPI.default,
+                 conversationStore: ConversationStoreType = ConversationStore.default,
                  conversationDetailStore: ConversationDetailStoreType = ConversationDetailStore.default) {
         self.conversationDetailAPI = conversationDetailAPI
+        self.conversationStore = conversationStore
         self.conversationDetailStore = conversationDetailStore
+    }
+
+    func getConversation(conversationID: Int) -> AnyPublisher<Conversation, Error> {
+        let localConversation = conversationStore.observeConversation(conversationID: conversationID)
+        let remoteConversation = conversationDetailAPI.getConversation(conversationID: conversationID)
+        return Publishers.Merge(localConversation, remoteConversation)
+            .eraseToAnyPublisher()
     }
 
     func getLocalMessages(conversationID: Int) -> AnyPublisher<[Message], Error> {

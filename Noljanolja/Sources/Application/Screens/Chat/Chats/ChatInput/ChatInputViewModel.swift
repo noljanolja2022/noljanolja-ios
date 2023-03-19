@@ -20,7 +20,7 @@ protocol ChatInputViewModelType:
 
 extension ChatInputViewModel {
     struct State {
-        let conversation: Conversation
+        let conversationID: Int
 
         var text = ""
     }
@@ -77,7 +77,7 @@ final class ChatInputViewModel: ChatInputViewModelType {
                 }
                 return self.conversationDetailService
                     .sendMessage(
-                        conversationID: self.state.conversation.id,
+                        conversationID: self.state.conversationID,
                         message: message,
                         type: .plaintext
                     )
