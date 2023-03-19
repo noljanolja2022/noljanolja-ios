@@ -43,7 +43,19 @@ final class NotificationAppDelegate: NSObject, AppDelegateProtocol {
 
 // MARK: UNUserNotificationCenterDelegate
 
-extension NotificationAppDelegate: UNUserNotificationCenterDelegate {}
+extension NotificationAppDelegate: UNUserNotificationCenterDelegate {
+      func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                  willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
+        let userInfo = notification.request.content.userInfo
+          return [.banner, .list, .badge, .sound]
+      }
+
+      func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                  didReceive response: UNNotificationResponse) async {
+        let userInfo = response.notification.request.content.userInfo
+        print(userInfo)
+      }
+}
 
 // MARK: MessagingDelegate
 

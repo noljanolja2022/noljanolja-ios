@@ -79,7 +79,7 @@ struct ChatView<ViewModel: ChatViewModelType>: View {
     }
 
     private func buildEmptyView() -> some View {
-        Text("No conversations found")
+        Text("Empty")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
