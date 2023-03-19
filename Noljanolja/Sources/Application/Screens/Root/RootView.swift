@@ -26,6 +26,7 @@ struct RootView<ViewModel: RootViewModelType>: View {
 
     var body: some View {
         buildContentView()
+            .onAppear { viewModel.send(.requestNotificationPermission) }
             .progressHUB(isActive: $progressHUBState.isLoading)
             .environmentObject(progressHUBState)
     }
