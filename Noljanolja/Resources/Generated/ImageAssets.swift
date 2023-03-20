@@ -50,7 +50,6 @@ internal enum ImageAssets {
   internal static let icShop = ImageAsset(name: "ic_shop")
   internal static let icStoreFill = SymbolAsset(name: "ic_store_fill")
   internal static let icWallet = ImageAsset(name: "ic_wallet")
-  internal static let icWelcomeText = ImageAsset(name: "ic_welcome_text")
   internal static let logo = ImageAsset(name: "logo")
 
   // swiftlint:disable trailing_comma
@@ -79,7 +78,6 @@ internal enum ImageAssets {
     icServiceGuide,
     icShop,
     icWallet,
-    icWelcomeText,
     logo,
   ]
   @available(*, deprecated, message: "All values properties are now deprecated")
