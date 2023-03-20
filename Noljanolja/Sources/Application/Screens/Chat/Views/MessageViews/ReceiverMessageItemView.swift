@@ -81,7 +81,8 @@ struct ReceiverMessageItemView_Previews: PreviewProvider {
                 content: .plaintext(TextMessageContentModel(
                     isSenderMessage: true,
                     message: "Hello, world"
-                ))
+                )),
+                status: .received
             )
         )
     }

@@ -43,6 +43,15 @@ private enum MessageAPITargets {
         let message: String
         let type: MessageType
     }
+
+    struct SeenMessage: BaseAuthTargetType {
+        var path: String { "v1/conversations/\(conversationID)/messages/\(messageID)/seen" }
+        let method: Moya.Method = .post
+        var task: Task { .requestPlain }
+
+        let conversationID: Int
+        let messageID: Int
+    }
 }
 
 // MARK: - MessageAPIType
@@ -54,6 +63,7 @@ protocol MessageAPIType {
     func sendMessage(conversationID: Int,
                      message: String,
                      type: MessageType) -> AnyPublisher<Message, Error>
+    func seenMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error>
 }
 
 extension MessageAPIType {
@@ -102,6 +112,12 @@ final class MessageAPI: MessageAPIType {
                 type: type
             ),
             atKeyPath: "data"
+        )
+    }
+
+    func seenMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error> {
+        api.request(
+            target: MessageAPITargets.SeenMessage(conversationID: conversationID, messageID: messageID)
         )
     }
 }

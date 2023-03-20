@@ -33,6 +33,7 @@ extension ChatViewModel {
     }
 
     enum Action {
+        case isAppear(Bool)
         case loadData
         case reloadData
         case loadMoreData(Int)
@@ -60,9 +61,11 @@ final class ChatViewModel: ChatViewModelType {
     private let loadPreviousDataTrigger = PassthroughSubject<Void, Never>()
     private let loadNextDataTrigger = PassthroughSubject<Void, Never>()
     private let reloadDataTrigger = PassthroughSubject<Void, Never>()
+    private let seenTrigger = PassthroughSubject<Int, Never>()
 
     // MARK: Data
 
+    private let isAppearSubject = PassthroughSubject<Bool, Never>()
     private let conversationSubject = PassthroughSubject<Conversation, Never>()
     private let currentUserSubject = PassthroughSubject<User, Never>()
     private let messagesSubject = CurrentValueSubject<[Message], Never>([])
@@ -87,6 +90,8 @@ final class ChatViewModel: ChatViewModelType {
 
     func send(_ action: Action) {
         switch action {
+        case let .isAppear(isAppear):
+            isAppearSubject.send(isAppear)
         case .loadData:
             loadDataTrigger.send()
         case .reloadData:
@@ -106,9 +111,14 @@ final class ChatViewModel: ChatViewModelType {
             })
             .store(in: &cancellables)
 
-        Publishers.CombineLatest(currentUserSubject, messagesSubject)
-            .map { currentUser, messages in
-                MessageItemModelBuilder(currentUser: currentUser, messages: messages)
+        Publishers
+            .CombineLatest3(
+                currentUserSubject.removeDuplicates(),
+                conversationSubject.removeDuplicates(),
+                messagesSubject.removeDuplicates()
+            )
+            .map { currentUser, conversation, messages in
+                MessageItemModelBuilder(currentUser: currentUser, conversation: conversation, messages: messages)
                     .build()
             }
             .sink(receiveValue: { [weak self] in
@@ -195,12 +205,6 @@ final class ChatViewModel: ChatViewModelType {
             })
             .store(in: &cancellables)
 
-        messagesSubject
-            .dropFirst()
-            .first()
-            .sink(receiveValue: { [weak self] _ in self?.loadNextDataTrigger.send() })
-            .store(in: &cancellables)
-
         loadMoreDataTrigger
             .sink(receiveValue: { [weak self] index in
                 guard let self else { return }
@@ -230,6 +234,40 @@ final class ChatViewModel: ChatViewModelType {
                     return
                 }
             })
+            .store(in: &cancellables)
+
+        messagesSubject
+            .dropFirst()
+            .first()
+            .sink(receiveValue: { [weak self] _ in
+                self?.loadNextDataTrigger.send()
+            })
+            .store(in: &cancellables)
+
+        Publishers
+            .CombineLatest3(
+                currentUserSubject.removeDuplicates(),
+                messagesSubject.removeDuplicates(),
+                isAppearSubject.removeDuplicates()
+            )
+            .sink(receiveValue: { [weak self] currentUser, messages, isAppear in
+                guard let message = messages.first(where: { $0.sender.id != currentUser.id }),
+                      !message.seenBy.contains(currentUser.id),
+                      isAppear else {
+                    return
+                }
+                self?.seenTrigger.send(message.id)
+            })
+            .store(in: &cancellables)
+
+        seenTrigger
+            .flatMapLatestToResult { [weak self] messageID in
+                guard let self else {
+                    return Empty<Void, Error>().eraseToAnyPublisher()
+                }
+                return self.messageService.seenMessage(conversationID: self.state.conversationID, messageID: messageID)
+            }
+            .sink(receiveValue: { _ in })
             .store(in: &cancellables)
 
         userService

@@ -21,6 +21,12 @@ extension ChatMessageItemModel {
         case middle
         case last
     }
+
+    enum StatusType: Equatable {
+        case none
+        case received
+        case seen([User])
+    }
 }
 
 // MARK: - ChatMessageItemModel
@@ -32,22 +38,28 @@ struct ChatMessageItemModel: Equatable {
     let date: Date
     let content: ContentType
     let positionType: PositionType
+    let status: StatusType
 
     init(id: Int,
          isSenderMessage: Bool,
          avatar: String?,
          date: Date,
          content: ContentType,
-         positionType: PositionType = .middle) {
+         positionType: PositionType = .middle,
+         status: StatusType) {
         self.id = id
         self.isSenderMessage = isSenderMessage
         self.avatar = avatar
         self.date = date
         self.content = content
         self.positionType = positionType
+        self.status = status
     }
 
-    init(currentUser: User, message: Message, positionType: PositionType) {
+    init(currentUser: User,
+         message: Message,
+         positionType: PositionType,
+         status: StatusType) {
         self.id = message.id
         self.isSenderMessage = currentUser.id == message.sender.id
         self.avatar = message.sender.avatar
@@ -62,5 +74,6 @@ struct ChatMessageItemModel: Equatable {
             )
         }
         self.positionType = positionType
+        self.status = status
     }
 }

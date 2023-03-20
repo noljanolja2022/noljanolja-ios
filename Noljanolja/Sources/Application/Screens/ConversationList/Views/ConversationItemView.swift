@@ -27,8 +27,8 @@ struct ConversationItemView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(Font.system(size: 16, weight: .medium))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                if let lastMessage = model.lastMessage, !lastMessage.isEmpty {
-                    Text(lastMessage)
+                if let message = model.lastMessage?.message, !message.isEmpty {
+                    Text(message)
                         .lineLimit(2)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .font(Font.system(size: 14, weight: .regular))
@@ -37,11 +37,19 @@ struct ConversationItemView: View {
             }
             .frame(maxWidth: .infinity)
 
-            Text(model.date ?? "")
-                .lineLimit(1)
-                .frame(height: 40)
-                .font(Font.system(size: 12, weight: .regular))
-                .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
+            VStack(alignment: .trailing, spacing: 2) {
+                Text(model.date ?? "")
+                    .lineLimit(1)
+                    .font(Font.system(size: 12, weight: .regular))
+                    .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
+                if !model.isSeen {
+                    Text("")
+                        .frame(width: 6, height: 6)
+                        .background(Color(hexadecimal: "BA1B1B"))
+                        .cornerRadius(3)
+                }
+            }
+            .padding(.top, 12)
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 10)
@@ -58,8 +66,30 @@ struct ConversationItemView_Previews: PreviewProvider {
                 id: 0,
                 image: "https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg",
                 title: "Title",
-                lastMessage: "Last message\nLast message\nLast message",
-                date: "06:12"
+                lastMessage: Message(
+                    id: 0,
+                    conversationID: 0,
+                    message: "Last message\nLast message\nLast message",
+                    type: .plaintext,
+                    sender: User(
+                        id: "",
+                        name: "name",
+                        avatar: "",
+                        pushToken: "",
+                        phone: "",
+                        email: "",
+                        isEmailVerified: false,
+                        dob: nil,
+                        gender: .male,
+                        preferences: nil,
+                        createdAt: Date(),
+                        updatedAt: Date()
+                    ),
+                    seenBy: [],
+                    createdAt: Date()
+                ),
+                date: "06:12",
+                isSeen: false
             )
         )
     }

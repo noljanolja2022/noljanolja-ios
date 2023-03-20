@@ -18,6 +18,7 @@ protocol MessageServiceType {
     func sendMessage(conversationID: Int,
                      message: String,
                      type: MessageType) -> AnyPublisher<Message, Error>
+    func seenMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error>
 }
 
 extension MessageServiceType {
@@ -78,5 +79,10 @@ final class MessageService: MessageServiceType {
                 self?.messageStore.saveMessages([$0])
             })
             .eraseToAnyPublisher()
+    }
+
+    func seenMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error> {
+        messageAPI
+            .seenMessage(conversationID: conversationID, messageID: messageID)
     }
 }

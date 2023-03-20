@@ -22,6 +22,7 @@ struct SenderMessageItemView: View {
 
             MessageContentView(messageContent: messageItemModel.content)
                 .senderMessageCornerRadius(messageItemModel.positionType)
+            MessageStatusView(status: messageItemModel.status)
         }
         .padding(.horizontal, 16)
         .padding(
@@ -54,7 +55,8 @@ struct SenderMessageItemView_Previews: PreviewProvider {
                 content: .plaintext(TextMessageContentModel(
                     isSenderMessage: true,
                     message: "Hello, world"
-                ))
+                )),
+                status: .received
             )
         )
     }

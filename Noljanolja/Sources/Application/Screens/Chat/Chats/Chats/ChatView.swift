@@ -43,7 +43,13 @@ struct ChatView<ViewModel: ChatViewModelType>: View {
                     error: buildErrorView
                 )
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .onAppear { viewModel.send(.loadData) }
+                .onAppear {
+                    viewModel.send(.loadData)
+                    viewModel.send(.isAppear(true))
+                }
+                .onDisappear {
+                    viewModel.send(.isAppear(false))
+                }
             ChatInputView(
                 viewModel: ChatInputViewModel(
                     state: ChatInputViewModel.State(
