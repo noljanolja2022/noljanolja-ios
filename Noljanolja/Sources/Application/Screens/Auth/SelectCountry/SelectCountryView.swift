@@ -35,18 +35,18 @@ struct SelectCountryView<ViewModel: SelectCountryViewModelType>: View {
                             Image(systemName: "xmark")
                         }
                     )
-                    .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
                 ToolbarItem(placement: .principal) {
                     Text("Select country")
-                        .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
-                        .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
+                        .font(.system(size: 18, weight: .bold))
+                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             }
     }
 
     private func buildContentView() -> some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 8) {
             buildSearchView()
             buildCountriesView()
         }
@@ -58,12 +58,12 @@ struct SelectCountryView<ViewModel: SelectCountryViewModelType>: View {
                 Image(systemName: "magnifyingglass")
                     .resizable()
                     .frame(width: 22, height: 22)
-                    .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
+                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                 TextField("Search", text: $viewModel.state.searchString)
                     .keyboardType(.phonePad)
                     .textFieldStyle(TappableTextFieldStyle())
                     .frame(height: 32)
-                    .font(FontFamily.NotoSans.medium.swiftUIFont(size: 16))
+                    .font(.system(size: 16))
                 if !viewModel.state.searchString.isEmpty {
                     Button(
                         action: {
@@ -73,7 +73,7 @@ struct SelectCountryView<ViewModel: SelectCountryViewModelType>: View {
                             Image(systemName: "xmark.circle.fill")
                                 .resizable()
                                 .frame(width: 20, height: 20)
-                                .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
+                                .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                         }
                     )
                 }
@@ -97,21 +97,22 @@ struct SelectCountryView<ViewModel: SelectCountryViewModelType>: View {
                     },
                     label: {
                         Text(country.name)
-                            .font(FontFamily.NotoSans.medium.swiftUIFont(size: 16))
+                            .font(.system(size: 16))
                             .frame(height: 52)
                             .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal, 16)
                     }
                 )
+                .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                 .background(
                     viewModel.state.selectedCountry == country
-                        ? ColorAssets.gray.swiftUIColor
+                        ? ColorAssets.neutralLightGrey.swiftUIColor
                         : Color.clear
                 )
             }
             .listRowInsets(EdgeInsets())
         }
         .listStyle(.plain)
-        .padding(.horizontal, 16)
     }
 }
 
