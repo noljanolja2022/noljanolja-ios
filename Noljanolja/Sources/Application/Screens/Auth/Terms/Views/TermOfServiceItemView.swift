@@ -13,22 +13,26 @@ struct TermOfServiceItemView: View {
     @Binding var selected: Bool
     var title = ""
     var titleLineLimit: Int? = 1
-    var foregroundColor: Color? = ColorAssets.forcegroundSecondary.swiftUIColor
-    var checkedForegroundColor: Color? = ColorAssets.highlightPrimary.swiftUIColor
+    var foregroundColor: Color? = ColorAssets.neutralDeepGrey.swiftUIColor
+    var checkedForegroundColor: Color? = ColorAssets.primaryYellowMain.swiftUIColor
     var idArrowIconHidden = false
     var action: (() -> Void)?
 
     var body: some View {
-        HStack(alignment: .center, spacing: 8) {
+        HStack(alignment: .center, spacing: 12) {
             Button(
                 action: { selected = !selected },
                 label: {
-                    ImageAssets.icCheckCircle.swiftUIImage
-                        .resizable()
-                        .renderingMode(.template)
+                    if selected {
+                        ImageAssets.icChecked.swiftUIImage
+                            .resizable()
+                    } else {
+                        ImageAssets.icUnchecked.swiftUIImage
+                            .resizable()
+                    }
                 }
             )
-            .frame(width: 32, height: 32)
+            .frame(width: 22, height: 22)
             .foregroundColor(
                 selected ? checkedForegroundColor : foregroundColor
             )
@@ -40,15 +44,15 @@ struct TermOfServiceItemView: View {
                             .frame(alignment: .leading)
                             .multilineTextAlignment(.leading)
                             .lineLimit(titleLineLimit)
-                            .font(FontFamily.NotoSans.medium.swiftUIFont(size: 14))
-                            .foregroundColor(ColorAssets.forcegroundSecondary.swiftUIColor)
+                            .font(.system(size: 16))
+                            .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                         Spacer(minLength: 4)
 
                         if !idArrowIconHidden {
                             ImageAssets.icArrowRight.swiftUIImage
                                 .resizable()
                                 .frame(width: 24, height: 24)
-                                .foregroundColor(ColorAssets.forcegroundSecondary.swiftUIColor)
+                                .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                         }
                     }
                 }

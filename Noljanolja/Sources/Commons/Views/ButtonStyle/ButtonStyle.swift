@@ -119,7 +119,7 @@ struct PlainButtonStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(FontFamily.NotoSans.regular.swiftUIFont(size: 16))
+            .font(.system(size: 14, weight: .medium))
             .foregroundColor(
                 isEnabled ? enabledForegroundColor : disabledForegroundColor
             )
