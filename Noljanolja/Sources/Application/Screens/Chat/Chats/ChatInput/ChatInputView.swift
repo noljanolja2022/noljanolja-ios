@@ -22,10 +22,12 @@ struct ChatInputView<ViewModel: ChatInputViewModelType>: View {
 
     init(viewModel: ViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
+
+        UITextView.appearance().backgroundColor = .clear
     }
 
     var body: some View {
-        HStack(spacing: 10) {
+        HStack(alignment: .bottom, spacing: 10) {
             buildMediaInputsView()
             buildTextInputView()
             buildSendView()
@@ -41,79 +43,94 @@ struct ChatInputView<ViewModel: ChatInputViewModelType>: View {
                     Button(
                         action: {},
                         label: {
-                            Image(systemName: "plus.circle.fill")
+                            ImageAssets.icAddCircle.swiftUIImage
                                 .resizable()
-                                .scaledToFit()
+                                .scaledToFill()
                                 .frame(width: 24, height: 24)
                         }
                     )
                     Button(
                         action: {},
                         label: {
-                            Image(systemName: "camera.fill")
+                            ImageAssets.icCamera.swiftUIImage
                                 .resizable()
-                                .scaledToFit()
+                                .scaledToFill()
                                 .frame(width: 24, height: 24)
                         }
                     )
                     Button(
                         action: {},
                         label: {
-                            Image(systemName: "photo.fill")
+                            ImageAssets.icPhoto.swiftUIImage
                                 .resizable()
-                                .scaledToFit()
+                                .scaledToFill()
                                 .frame(width: 24, height: 24)
                         }
                     )
                     Button(
                         action: {},
                         label: {
-                            Image(systemName: "mic.fill")
+                            ImageAssets.icKeyboardVoice.swiftUIImage
                                 .resizable()
-                                .scaledToFit()
+                                .scaledToFill()
                                 .frame(width: 24, height: 24)
                         }
                     )
                 }
-                .transition(.leadCrossDissolve)
             } else {
                 Button(
-                    action: { endEditing() },
+                    action: {
+                        withAnimation {
+                            isMediaInputHidden = false
+                        }
+                    },
                     label: {
                         Image(systemName: "chevron.right")
                             .resizable()
                             .scaledToFit()
+                            .padding(4)
                             .frame(width: 24, height: 24)
                     }
                 )
-                .transition(.opacity)
             }
         }
+        .frame(height: 40)
         .foregroundColor(ColorAssets.primaryYellow3.swiftUIColor)
     }
 
     private func buildTextInputView() -> some View {
-        TextField(
-            "Aa",
-            text: $viewModel.state.text,
-            onEditingChanged: { isEditing in
-                withAnimation { isMediaInputHidden = isEditing }
+        ZStack(alignment: .center) {
+            if viewModel.state.text.isEmpty {
+                Text("Aa")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
+                    .padding(.horizontal, 10)
             }
-        )
-        .padding(.horizontal, 8)
-        .padding(.vertical, 12)
-        .background(ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.6))
-        .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
+            TextEditor(text: $viewModel.state.text)
+                .textEditorBackgroundColor(.clear)
+                .frame(minHeight: 32)
+                .frame(maxHeight: 58)
+                .padding(4)
+                .fixedSize(horizontal: false, vertical: true)
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+        }
+        .font(.system(size: 14))
+        .background(ColorAssets.neutralLightGrey.swiftUIColor.opacity(0.6))
         .cornerRadius(8)
+        .onChange(of: viewModel.state.text) { _ in
+            withAnimation {
+                isMediaInputHidden = true
+            }
+        }
     }
 
     private func buildSendView() -> some View {
         Button(
             action: { viewModel.send(.sendPlaintextMessage) },
             label: {
-                Image(systemName: "arrowtriangle.right.circle.fill")
+                ImageAssets.icSend.swiftUIImage
                     .resizable()
-                    .scaledToFit()
+                    .scaledToFill()
                     .frame(width: 32, height: 32)
             }
         )

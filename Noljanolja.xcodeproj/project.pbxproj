@@ -42,6 +42,7 @@
 		CF11B1DA29BB65DD002E8151 /* MessageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF11B1D929BB65DD002E8151 /* MessageAPI.swift */; };
 		CF11B1DC29BB668D002E8151 /* MessageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF11B1DB29BB668D002E8151 /* MessageStore.swift */; };
 		CF12604629B78AAF00B5373B /* DeviceIdentityPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF12604529B78AAF00B5373B /* DeviceIdentityPlugin.swift */; };
+		CF1307FC29C8C96900EED044 /* TextEditor+WrapContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1307FB29C8C96900EED044 /* TextEditor+WrapContent.swift */; };
 		CF14F248298C331C00BC2066 /* ImageAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F245298C331C00BC2066 /* ImageAssets.swift */; };
 		CF14F249298C331C00BC2066 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F246298C331C00BC2066 /* Localizable.swift */; };
 		CF14F24A298C331D00BC2066 /* ColorAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F247298C331C00BC2066 /* ColorAssets.swift */; };
@@ -275,6 +276,7 @@
 		CF11B1D929BB65DD002E8151 /* MessageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAPI.swift; sourceTree = "<group>"; };
 		CF11B1DB29BB668D002E8151 /* MessageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStore.swift; sourceTree = "<group>"; };
 		CF12604529B78AAF00B5373B /* DeviceIdentityPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceIdentityPlugin.swift; sourceTree = "<group>"; };
+		CF1307FB29C8C96900EED044 /* TextEditor+WrapContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextEditor+WrapContent.swift"; sourceTree = "<group>"; };
 		CF14F23C298C30B600BC2066 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		CF14F241298C31C200BC2066 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		CF14F242298C31C200BC2066 /* .swiftformat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftformat; sourceTree = "<group>"; };
@@ -534,6 +536,7 @@
 				CF0EA30829AA088B0014A7DE /* View+Border.swift */,
 				CF0EA31929AA56E90014A7DE /* Binding+LimitString.swift */,
 				CFBC6EFF29C054B0000509EC /* View+EditView.swift */,
+				CF1307FB29C8C96900EED044 /* TextEditor+WrapContent.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -1936,6 +1939,7 @@
 				CF11B1D529BB32F0002E8151 /* ListView.swift in Sources */,
 				CF0EA30D29AA0F010014A7DE /* SelectCountryView.swift in Sources */,
 				CF775BBE29C625C900E82183 /* NotificationAppDelegate.swift in Sources */,
+				CF1307FC29C8C96900EED044 /* TextEditor+WrapContent.swift in Sources */,
 				CF7A64FA29C750D2007C545D /* MessageStatusView.swift in Sources */,
 				CF775BC429C62B3000E82183 /* FrameworkAppDelegate.swift in Sources */,
 				CF1EEE3729AE3FA8004F570A /* TermOfServiceItemView.swift in Sources */,
