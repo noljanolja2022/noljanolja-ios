@@ -38,9 +38,9 @@
 		CF10C7F129C21FAE0020924D /* KMPNativeCoroutinesCombine in Frameworks */ = {isa = PBXBuildFile; productRef = CF10C7F029C21FAE0020924D /* KMPNativeCoroutinesCombine */; };
 		CF11B1CE29BAF4E5002E8151 /* ConversationItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF11B1CD29BAF4E5002E8151 /* ConversationItemViewModel.swift */; };
 		CF11B1D529BB32F0002E8151 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF11B1D429BB32F0002E8151 /* ListView.swift */; };
-		CF11B1D829BB65B4002E8151 /* ConversationDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF11B1D729BB65B4002E8151 /* ConversationDetailService.swift */; };
-		CF11B1DA29BB65DD002E8151 /* ConversationDetailAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF11B1D929BB65DD002E8151 /* ConversationDetailAPI.swift */; };
-		CF11B1DC29BB668D002E8151 /* ConversationDetailStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF11B1DB29BB668D002E8151 /* ConversationDetailStore.swift */; };
+		CF11B1D829BB65B4002E8151 /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF11B1D729BB65B4002E8151 /* MessageService.swift */; };
+		CF11B1DA29BB65DD002E8151 /* MessageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF11B1D929BB65DD002E8151 /* MessageAPI.swift */; };
+		CF11B1DC29BB668D002E8151 /* MessageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF11B1DB29BB668D002E8151 /* MessageStore.swift */; };
 		CF12604629B78AAF00B5373B /* DeviceIdentityPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF12604529B78AAF00B5373B /* DeviceIdentityPlugin.swift */; };
 		CF14F248298C331C00BC2066 /* ImageAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F245298C331C00BC2066 /* ImageAssets.swift */; };
 		CF14F249298C331C00BC2066 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F246298C331C00BC2066 /* Localizable.swift */; };
@@ -138,6 +138,7 @@
 		CF775BC629C62CF400E82183 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = CF775BC529C62CF400E82183 /* FirebaseMessaging */; };
 		CF775BC829C62EB200E82183 /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF775BC729C62EB200E82183 /* NotificationAPI.swift */; };
 		CF775BCA29C630B800E82183 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF775BC929C630B800E82183 /* NotificationService.swift */; };
+		CF7A64FA29C750D2007C545D /* MessageStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A64F929C750D2007C545D /* MessageStatusView.swift */; };
 		CF8633FD29B8F2F50091BF5D /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8633FC29B8F2F50091BF5D /* Contact.swift */; };
 		CF8633FF29B8F6020091BF5D /* Encodable+Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8633FE29B8F6020091BF5D /* Encodable+Encode.swift */; };
 		CF88ABCD299F2E7400D8AB67 /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = CF88ABCC299F2E7400D8AB67 /* SwiftUINavigation */; };
@@ -270,9 +271,9 @@
 		CF10C7ED29C21CDB0020924D /* ConversationSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationSocketService.swift; sourceTree = "<group>"; };
 		CF11B1CD29BAF4E5002E8151 /* ConversationItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationItemViewModel.swift; sourceTree = "<group>"; };
 		CF11B1D429BB32F0002E8151 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
-		CF11B1D729BB65B4002E8151 /* ConversationDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDetailService.swift; sourceTree = "<group>"; };
-		CF11B1D929BB65DD002E8151 /* ConversationDetailAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDetailAPI.swift; sourceTree = "<group>"; };
-		CF11B1DB29BB668D002E8151 /* ConversationDetailStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDetailStore.swift; sourceTree = "<group>"; };
+		CF11B1D729BB65B4002E8151 /* MessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
+		CF11B1D929BB65DD002E8151 /* MessageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAPI.swift; sourceTree = "<group>"; };
+		CF11B1DB29BB668D002E8151 /* MessageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStore.swift; sourceTree = "<group>"; };
 		CF12604529B78AAF00B5373B /* DeviceIdentityPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceIdentityPlugin.swift; sourceTree = "<group>"; };
 		CF14F23C298C30B600BC2066 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		CF14F241298C31C200BC2066 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
@@ -359,6 +360,7 @@
 		CF775BC329C62B3000E82183 /* FrameworkAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameworkAppDelegate.swift; sourceTree = "<group>"; };
 		CF775BC729C62EB200E82183 /* NotificationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAPI.swift; sourceTree = "<group>"; };
 		CF775BC929C630B800E82183 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		CF7A64F929C750D2007C545D /* MessageStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStatusView.swift; sourceTree = "<group>"; };
 		CF8633FC29B8F2F50091BF5D /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		CF8633FE29B8F6020091BF5D /* Encodable+Encode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Encode.swift"; sourceTree = "<group>"; };
 		CFA3304629BE3352008D7449 /* String+Phone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Phone.swift"; sourceTree = "<group>"; };
@@ -948,7 +950,7 @@
 				CF52AB6F29B8DE4000C9C90C /* ContactStore.swift */,
 				CF52AB7B29B8EE1A00C9C90C /* Realm+Init.swift */,
 				CF1B624D29B9BC7F00DE53E6 /* ConversationStore.swift */,
-				CF11B1DB29BB668D002E8151 /* ConversationDetailStore.swift */,
+				CF11B1DB29BB668D002E8151 /* MessageStore.swift */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -1077,6 +1079,14 @@
 			path = AppDelegates;
 			sourceTree = "<group>";
 		};
+		CF7A64FB29C750E2007C545D /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				CF7A64F929C750D2007C545D /* MessageStatusView.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		CFBC6EFE29C02977000509EC /* SearchView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1124,6 +1134,7 @@
 		CFD5423C29BF7A520053C5B1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CF7A64FB29C750E2007C545D /* Other */,
 				CFD5423D29BF7A520053C5B1 /* ChatItemViews */,
 				CFD5424129BF7A520053C5B1 /* MessageViews */,
 			);
@@ -1406,7 +1417,7 @@
 				CF3CE18429B79FD50054BBEF /* UserDefaults.swift */,
 				CF52AB6329B8D85000C9C90C /* ContactService.swift */,
 				CF1B625529B9D3BF00DE53E6 /* ConversationService.swift */,
-				CF11B1D729BB65B4002E8151 /* ConversationDetailService.swift */,
+				CF11B1D729BB65B4002E8151 /* MessageService.swift */,
 				CF10C7ED29C21CDB0020924D /* ConversationSocketService.swift */,
 				CF775BC929C630B800E82183 /* NotificationService.swift */,
 			);
@@ -1534,7 +1545,7 @@
 				CF08A86129B5A26600D6CE5F /* ContactAPI.swift */,
 				CFFD70D4298AC92500D4F5A2 /* UserAPI.swift */,
 				CF1B624729B9B55F00DE53E6 /* ConversationAPI.swift */,
-				CF11B1D929BB65DD002E8151 /* ConversationDetailAPI.swift */,
+				CF11B1D929BB65DD002E8151 /* MessageAPI.swift */,
 				CF775BC729C62EB200E82183 /* NotificationAPI.swift */,
 			);
 			path = APIs;
@@ -1900,7 +1911,7 @@
 				CFD83DD029974E4E00B9A6BB /* Navigation+Extension.swift in Sources */,
 				CF0EA31029AA3DD30014A7DE /* CountryModel.swift in Sources */,
 				CF1B625629B9D3BF00DE53E6 /* ConversationService.swift in Sources */,
-				CF11B1D829BB65B4002E8151 /* ConversationDetailService.swift in Sources */,
+				CF11B1D829BB65B4002E8151 /* MessageService.swift in Sources */,
 				CF10C7EE29C21CDB0020924D /* ConversationSocketService.swift in Sources */,
 				CF74A1A729B586EF00419342 /* StatefullView.swift in Sources */,
 				CF08A86229B5A26600D6CE5F /* ContactAPI.swift in Sources */,
@@ -1925,6 +1936,7 @@
 				CF11B1D529BB32F0002E8151 /* ListView.swift in Sources */,
 				CF0EA30D29AA0F010014A7DE /* SelectCountryView.swift in Sources */,
 				CF775BBE29C625C900E82183 /* NotificationAppDelegate.swift in Sources */,
+				CF7A64FA29C750D2007C545D /* MessageStatusView.swift in Sources */,
 				CF775BC429C62B3000E82183 /* FrameworkAppDelegate.swift in Sources */,
 				CF1EEE3729AE3FA8004F570A /* TermOfServiceItemView.swift in Sources */,
 				CF08A86029B5A17A00D6CE5F /* ContactListViewModel.swift in Sources */,
@@ -1944,7 +1956,7 @@
 				CFC709E02996051800B64216 /* View+Progress.swift in Sources */,
 				CF0EA30729AA02120014A7DE /* AuthWithPhoneViewModel.swift in Sources */,
 				CF8633FF29B8F6020091BF5D /* Encodable+Encode.swift in Sources */,
-				CF11B1DC29BB668D002E8151 /* ConversationDetailStore.swift in Sources */,
+				CF11B1DC29BB668D002E8151 /* MessageStore.swift in Sources */,
 				CF1550242993B5C90053E86D /* TabBarItem.swift in Sources */,
 				CF3282ED299E3758006A459B /* UIApplication+Extension.swift in Sources */,
 				CF18898229B347E500701583 /* UpdateCurrentUserView.swift in Sources */,
@@ -2052,7 +2064,7 @@
 				CF4DE2E029B3B6A7006E75E5 /* SignUpViewModel.swift in Sources */,
 				CF4DE2E229B3B6A7006E75E5 /* EmailVerificationViewModel.swift in Sources */,
 				CF1EEE3A29AE438C004F570A /* TermOfServiceItemType.swift in Sources */,
-				CF11B1DA29BB65DD002E8151 /* ConversationDetailAPI.swift in Sources */,
+				CF11B1DA29BB65DD002E8151 /* MessageAPI.swift in Sources */,
 				CF4DE2EC29B3B6A7006E75E5 /* TermItemView.swift in Sources */,
 				CF14F248298C331C00BC2066 /* ImageAssets.swift in Sources */,
 				CF52AB6829B8D93D00C9C90C /* StorableUser.swift in Sources */,

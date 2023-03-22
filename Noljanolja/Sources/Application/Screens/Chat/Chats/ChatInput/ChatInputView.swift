@@ -128,28 +128,7 @@ struct ChatInputView_Previews: PreviewProvider {
         ChatInputView(
             viewModel: ChatInputViewModel(
                 state: ChatInputViewModel.State(
-                    conversation: Conversation(
-                        id: 0,
-                        title: "title",
-                        creator: User(
-                            id: "id",
-                            name: "name",
-                            avatar: "avatar",
-                            pushToken: "pushToken", phone: "1234567890",
-                            email: "email@gmail.com",
-                            isEmailVerified: false,
-                            dob: Date(),
-                            gender: .male,
-                            preferences: nil,
-                            createdAt: Date(),
-                            updatedAt: Date()
-                        ),
-                        type: .single,
-                        messages: [],
-                        participants: [],
-                        createdAt: Date(),
-                        updatedAt: Date()
-                    )
+                    conversationID: 0
                 )
             )
         )

@@ -26,44 +26,49 @@ struct TermOfServiceView<ViewModel: TermOfServiceViewModelType>: View {
         buildContentView()
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(false)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("Verification")
-                        .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
-                        .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(
-                        action: { viewModel.send(.openHelpAlert) },
-                        label: {
-                            ImageAssets.icQuestionmarkCircle.swiftUIImage
-                                .resizable()
-                                .frame(width: 24, height: 24)
-                                .padding(12)
-                        }
-                    )
-                    .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
-                }
-            }
             .alert(item: $viewModel.state.alertState) { Alert($0) { _ in } }
     }
 
     private func buildContentView() -> some View {
-        VStack {
-            buildTermItemsView()
-            buildAllTermView()
-            buildActionView()
+        VStack(spacing: 0) {
+            buildHeaderView()
+            VStack(spacing: 0) {
+                buildTermItemsView()
+                buildActionView()
+            }
+            .background(ColorAssets.white.swiftUIColor)
+            .cornerRadius(40, corners: [.topLeft, .topRight])
         }
+        .ignoresSafeArea(edges: [.bottom])
+        .background(ColorAssets.primaryYellowMain.swiftUIColor.ignoresSafeArea(edges: [.top]))
+    }
+
+    private func buildHeaderView() -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            ImageAssets.logo.swiftUIImage
+                .resizable()
+                .scaledToFill()
+                .frame(width: 66, height: 62)
+            Text("Login")
+                .font(.system(size: 32, weight: .bold))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.top, 12)
+            Text("Welcome to Noja Noja. Follow these steps to be our member.")
+                .font(.system(size: 14))
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .padding(16)
     }
 
     private func buildTermItemsView() -> some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: 32) {
                 ForEach(TermOfServiceSectionType.allCases) { sectionType in
-                    Text(sectionType.title)
-                        .frame(height: 32, alignment: .leading)
-                        .font(FontFamily.NotoSans.medium.swiftUIFont(size: 12))
+                    Text(sectionType.title.uppercased())
+                        .frame(alignment: .leading)
+                        .font(.system(size: 14, weight: .medium))
                         .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
+                        .padding(.top, 32)
 
                     ForEach(
                         TermOfServiceItemType.allCases
@@ -79,10 +84,6 @@ struct TermOfServiceView<ViewModel: TermOfServiceViewModelType>: View {
                             ),
                             title: itemType.title
                         )
-
-                        Divider()
-                            .background(ColorAssets.gray.swiftUIColor)
-                            .frame(height: 1)
                     }
                 }
             }
@@ -90,30 +91,34 @@ struct TermOfServiceView<ViewModel: TermOfServiceViewModelType>: View {
         }
     }
 
-    private func buildAllTermView() -> some View {
-        TermOfServiceItemView(
-            selected: Binding<Bool>(
-                get: { viewModel.state.isAllTermChecked },
-                set: { viewModel.send(.checkAllTermItems(checked: $0)) }
-            ),
-            title: "I have read and agreed to all terms and conditions",
-            titleLineLimit: nil,
-            idArrowIconHidden: true
-        )
-        .padding(16)
-    }
-
     private func buildActionView() -> some View {
-        Button(
-            "Agree and Continue",
-            action: { viewModel.send(.tapContinueButton) }
-        )
-        .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.state.isAllTermChecked))
-        .disabled(!viewModel.state.isAllTermChecked)
-        .shadow(
-            color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
-        )
-        .padding(16)
+        VStack(spacing: 16) {
+            TermOfServiceItemView(
+                selected: Binding<Bool>(
+                    get: { viewModel.state.isAllTermChecked },
+                    set: { viewModel.send(.checkAllTermItems(checked: $0)) }
+                ),
+                title: "I have read and agreed to all terms and conditions",
+                titleLineLimit: nil,
+                idArrowIconHidden: true
+            )
+
+            Button(
+                "Agree and Continue",
+                action: { viewModel.send(.tapContinueButton) }
+            )
+            .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.state.isAllTermChecked))
+            .disabled(!viewModel.state.isAllTermChecked)
+            .frame(height: 48)
+
+            Text("")
+                .frame(
+                    height: UIApplication.shared.rootKeyWindow?.safeAreaInsets.bottom ?? 0
+                )
+        }
+        .padding(.top, 16)
+        .padding(.horizontal, 16)
+        .background(ColorAssets.neutralLightGrey.swiftUIColor)
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  ConversationDetailService.swift
+//  MessageService.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 10/03/2023.
@@ -8,9 +8,9 @@
 import Combine
 import Foundation
 
-// MARK: - ConversationDetailServiceType
+// MARK: - MessageServiceType
 
-protocol ConversationDetailServiceType {
+protocol MessageServiceType {
     func getLocalMessages(conversationID: Int) -> AnyPublisher<[Message], Error>
     func getMessages(conversationID: Int,
                      beforeMessageID: Int?,
@@ -18,9 +18,10 @@ protocol ConversationDetailServiceType {
     func sendMessage(conversationID: Int,
                      message: String,
                      type: MessageType) -> AnyPublisher<Message, Error>
+    func seenMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error>
 }
 
-extension ConversationDetailServiceType {
+extension MessageServiceType {
     func getMessages(conversationID: Int,
                      beforeMessageID: Int? = nil,
                      afterMessageID: Int? = nil) -> AnyPublisher<[Message], Error> {
@@ -28,22 +29,23 @@ extension ConversationDetailServiceType {
     }
 }
 
-// MARK: - ConversationDetailService
+// MARK: - MessageService
 
-final class ConversationDetailService: ConversationDetailServiceType {
-    static let `default` = ConversationDetailService()
+final class MessageService: MessageServiceType {
+    static let `default` = MessageService()
 
-    private let conversationDetailAPI: ConversationDetailAPIType
-    private let conversationDetailStore: ConversationDetailStoreType
+    private let messageAPI: MessageAPIType
+    private let messageStore: MessageStoreType
 
-    private init(conversationDetailAPI: ConversationDetailAPIType = ConversationDetailAPI.default,
-                 conversationDetailStore: ConversationDetailStoreType = ConversationDetailStore.default) {
-        self.conversationDetailAPI = conversationDetailAPI
-        self.conversationDetailStore = conversationDetailStore
+    private init(messageAPI: MessageAPIType = MessageAPI.default,
+                 conversationStore: ConversationStoreType = ConversationStore.default,
+                 messageStore: MessageStoreType = MessageStore.default) {
+        self.messageAPI = messageAPI
+        self.messageStore = messageStore
     }
 
     func getLocalMessages(conversationID: Int) -> AnyPublisher<[Message], Error> {
-        conversationDetailStore
+        messageStore
             .observeMessages(conversationID: conversationID)
             .map { $0.sorted { $0.createdAt > $1.createdAt } }
             .eraseToAnyPublisher()
@@ -52,14 +54,14 @@ final class ConversationDetailService: ConversationDetailServiceType {
     func getMessages(conversationID: Int,
                      beforeMessageID: Int?,
                      afterMessageID: Int?) -> AnyPublisher<[Message], Error> {
-        conversationDetailAPI
+        messageAPI
             .getMessages(
                 conversationID: conversationID,
                 beforeMessageID: beforeMessageID,
                 afterMessageID: afterMessageID
             )
             .handleEvents(receiveOutput: { [weak self] in
-                self?.conversationDetailStore.saveMessages($0)
+                self?.messageStore.saveMessages($0)
             })
             .eraseToAnyPublisher()
     }
@@ -67,15 +69,20 @@ final class ConversationDetailService: ConversationDetailServiceType {
     func sendMessage(conversationID: Int,
                      message: String,
                      type: MessageType) -> AnyPublisher<Message, Error> {
-        conversationDetailAPI
+        messageAPI
             .sendMessage(
                 conversationID: conversationID,
                 message: message,
                 type: type
             )
             .handleEvents(receiveOutput: { [weak self] in
-                self?.conversationDetailStore.saveMessages([$0])
+                self?.messageStore.saveMessages([$0])
             })
             .eraseToAnyPublisher()
+    }
+
+    func seenMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error> {
+        messageAPI
+            .seenMessage(conversationID: conversationID, messageID: messageID)
     }
 }

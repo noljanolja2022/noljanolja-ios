@@ -1,5 +1,5 @@
 //
-//  ConversationDetailAPI.swift
+//  MessageAPI.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 10/03/2023.
@@ -9,9 +9,9 @@ import Combine
 import Foundation
 import Moya
 
-// MARK: - ConversationDetailAPITargets
+// MARK: - MessageAPITargets
 
-enum ConversationDetailAPITargets {
+private enum MessageAPITargets {
     struct GetMessages: BaseAuthTargetType {
         var path: String { "v1/conversations/\(conversationID)/messages" }
         let method: Moya.Method = .get
@@ -43,20 +43,30 @@ enum ConversationDetailAPITargets {
         let message: String
         let type: MessageType
     }
+
+    struct SeenMessage: BaseAuthTargetType {
+        var path: String { "v1/conversations/\(conversationID)/messages/\(messageID)/seen" }
+        let method: Moya.Method = .post
+        var task: Task { .requestPlain }
+
+        let conversationID: Int
+        let messageID: Int
+    }
 }
 
-// MARK: - ConversationDetailAPIType
+// MARK: - MessageAPIType
 
-protocol ConversationDetailAPIType {
+protocol MessageAPIType {
     func getMessages(conversationID: Int,
                      beforeMessageID: Int?,
                      afterMessageID: Int?) -> AnyPublisher<[Message], Error>
     func sendMessage(conversationID: Int,
                      message: String,
                      type: MessageType) -> AnyPublisher<Message, Error>
+    func seenMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error>
 }
 
-extension ConversationDetailAPIType {
+extension MessageAPIType {
     func getMessages(conversationID: Int,
                      beforeMessageID: Int? = nil,
                      afterMessageID: Int? = nil) -> AnyPublisher<[Message], Error> {
@@ -68,10 +78,10 @@ extension ConversationDetailAPIType {
     }
 }
 
-// MARK: - ConversationDetailAPI
+// MARK: - MessageAPI
 
-final class ConversationDetailAPI: ConversationDetailAPIType {
-    static let `default` = ConversationDetailAPI()
+final class MessageAPI: MessageAPIType {
+    static let `default` = MessageAPI()
 
     private let api: ApiType
 
@@ -83,7 +93,7 @@ final class ConversationDetailAPI: ConversationDetailAPIType {
                      beforeMessageID: Int?,
                      afterMessageID: Int?) -> AnyPublisher<[Message], Error> {
         api.request(
-            target: ConversationDetailAPITargets.GetMessages(
+            target: MessageAPITargets.GetMessages(
                 conversationID: conversationID,
                 beforeMessageID: beforeMessageID,
                 afterMessageID: afterMessageID
@@ -96,12 +106,18 @@ final class ConversationDetailAPI: ConversationDetailAPIType {
                      message: String,
                      type: MessageType) -> AnyPublisher<Message, Error> {
         api.request(
-            target: ConversationDetailAPITargets.SendMessage(
+            target: MessageAPITargets.SendMessage(
                 conversationID: conversationID,
                 message: message,
                 type: type
             ),
             atKeyPath: "data"
+        )
+    }
+
+    func seenMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error> {
+        api.request(
+            target: MessageAPITargets.SeenMessage(conversationID: conversationID, messageID: messageID)
         )
     }
 }

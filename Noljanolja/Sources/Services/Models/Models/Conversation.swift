@@ -26,6 +26,21 @@ struct Conversation: Equatable, Codable {
     let createdAt: Date
     let updatedAt: Date
 
+    func displayTitle(_ currentUser: User) -> String? {
+        switch type {
+        case .single:
+            let firstParticipant = participants.filter { $0.id != currentUser.id }.first
+            return firstParticipant?.name
+        case .group:
+            return title
+        }
+    }
+
+    func avatar(_ currentUser: User) -> String? {
+        let firstParticipant = participants.filter { $0.id != currentUser.id }.first
+        return firstParticipant?.avatar
+    }
+
     init(id: Int,
          title: String?,
          creator: User,

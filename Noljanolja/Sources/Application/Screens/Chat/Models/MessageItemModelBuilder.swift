@@ -10,10 +10,12 @@ import SwiftUI
 
 final class MessageItemModelBuilder {
     private let currentUser: User
+    private let conversation: Conversation
     private let messages: [Message]
 
-    init(currentUser: User, messages: [Message]) {
+    init(currentUser: User, conversation: Conversation, messages: [Message]) {
         self.currentUser = currentUser
+        self.conversation = conversation
         self.messages = messages
     }
 
@@ -25,9 +27,17 @@ final class MessageItemModelBuilder {
             let afterMessage = messages[safe: index - 1]
 
             let positionType = buildPositionType(beforceMessage: beforceMessage, message: message, afterMessage: afterMessage)
+            let statusType = buildStatusType(message: message)
 
             messageItemTypes.append(
-                .item(ChatMessageItemModel(currentUser: currentUser, message: message, positionType: positionType))
+                .item(
+                    ChatMessageItemModel(
+                        currentUser: currentUser,
+                        message: message,
+                        positionType: positionType,
+                        status: statusType
+                    )
+                )
             )
 
             let isFirstMessageByDate = beforceMessage
@@ -64,6 +74,24 @@ final class MessageItemModelBuilder {
             return .last
         } else {
             return .middle
+        }
+    }
+
+    private func buildStatusType(message: Message) -> ChatMessageItemModel.StatusType {
+        let currentUser = currentUser
+        let lastSenderMessage = messages.first(where: { $0.sender.id == currentUser.id })
+        let lastSenderSeenMessage = messages
+            .first(where: { message in
+                message.sender.id == currentUser.id
+                    && !message.seenBy.filter { $0 != currentUser.id }.isEmpty
+            })
+        if message.id == lastSenderSeenMessage?.id {
+            let users = conversation.participants.filter { $0.id != currentUser.id }
+            return .seen(users)
+        } else if message.id == lastSenderMessage?.id {
+            return .received
+        } else {
+            return .none
         }
     }
 }

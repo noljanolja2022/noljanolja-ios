@@ -38,7 +38,8 @@ struct ChatItemView_Previews: PreviewProvider {
                             isSenderMessage: true,
                             message: "Test message"
                         )
-                    )
+                    ),
+                    status: .received
                 )
             )
         )

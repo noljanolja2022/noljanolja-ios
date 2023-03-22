@@ -20,7 +20,7 @@ protocol ChatInputViewModelType:
 
 extension ChatInputViewModel {
     struct State {
-        let conversation: Conversation
+        let conversationID: Int
 
         var text = ""
     }
@@ -39,7 +39,7 @@ final class ChatInputViewModel: ChatInputViewModelType {
 
     // MARK: Dependencies
 
-    private let conversationDetailService: ConversationDetailServiceType
+    private let messageService: MessageServiceType
     private weak var delegate: ChatInputViewModelDelegate?
 
     // MARK: Action
@@ -51,10 +51,10 @@ final class ChatInputViewModel: ChatInputViewModelType {
     private var cancellables = Set<AnyCancellable>()
 
     init(state: State,
-         conversationDetailService: ConversationDetailServiceType = ConversationDetailService.default,
+         messageService: MessageServiceType = MessageService.default,
          delegate: ChatInputViewModelDelegate? = nil) {
         self.state = state
-        self.conversationDetailService = conversationDetailService
+        self.messageService = messageService
         self.delegate = delegate
 
         configure()
@@ -75,9 +75,9 @@ final class ChatInputViewModel: ChatInputViewModelType {
                 guard let self else {
                     return Empty<Message, Error>().eraseToAnyPublisher()
                 }
-                return self.conversationDetailService
+                return self.messageService
                     .sendMessage(
-                        conversationID: self.state.conversation.id,
+                        conversationID: self.state.conversationID,
                         message: message,
                         type: .plaintext
                     )

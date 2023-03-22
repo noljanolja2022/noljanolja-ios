@@ -11,6 +11,7 @@ import Foundation
 // MARK: - ConversationServiceType
 
 protocol ConversationServiceType {
+    func getConversation(conversationID: Int) -> AnyPublisher<Conversation, Error>
     func getConversations() -> AnyPublisher<[Conversation], Error>
     func createConversation(title: String,
                             type: ConversationType,
@@ -29,6 +30,13 @@ final class ConversationService: ConversationServiceType {
                  conversationStore: ConversationStoreType = ConversationStore.default) {
         self.conversationAPI = conversationAPI
         self.conversationStore = conversationStore
+    }
+
+    func getConversation(conversationID: Int) -> AnyPublisher<Conversation, Error> {
+        let localConversation = conversationStore.observeConversation(conversationID: conversationID)
+        let remoteConversation = conversationAPI.getConversation(conversationID: conversationID)
+        return Publishers.Merge(localConversation, remoteConversation)
+            .eraseToAnyPublisher()
     }
 
     func getConversations() -> AnyPublisher<[Conversation], Error> {

@@ -31,16 +31,16 @@ final class ConversationSocketService: ConversationSocketServiceType {
     
     private let conversationSocket: ConversationSocket
     private let conversationStore: ConversationStoreType
-    private let conversationDetailStore: ConversationDetailStoreType
+    private let messageStore: MessageStoreType
 
     private var cancellables = Set<AnyCancellable>()
 
     private init(authRepo: AuthRepo = AuthStore.default,
                  conversationStore: ConversationStoreType = ConversationStore.default,
-                 conversationDetailStore: ConversationDetailStoreType = ConversationDetailStore.default) {
+                 messageStore: MessageStoreType = MessageStore.default) {
         self.conversationSocket = ConversationSocket(rsocketUrl: "ws://34.64.110.104/rsocket", authRepo: AuthStore.default)
         self.conversationStore = conversationStore
-        self.conversationDetailStore = conversationDetailStore
+        self.messageStore = messageStore
     }
 
     func register() {
@@ -57,7 +57,7 @@ final class ConversationSocketService: ConversationSocketServiceType {
                 receiveCompletion: { _ in },
                 receiveValue: { [weak self] conversation in
                     self?.conversationStore.saveConversations([conversation])
-                    self?.conversationDetailStore.saveMessages(conversation.messages)
+                    self?.messageStore.saveMessages(conversation.messages)
                 }
             )
             .store(in: &cancellables)

@@ -51,6 +51,7 @@ struct ProfileView<ViewModel: ProfileViewModelType>: View {
 
             KFImage(URL(string: viewModel.state.user?.avatar ?? "")).placeholder {
                 ImageAssets.icAvatarPlaceholder.swiftUIImage
+                    .resizable()
             }
             .resizable()
             .scaledToFill()

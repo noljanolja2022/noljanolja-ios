@@ -30,29 +30,25 @@ extension TermOfServiceSectionType: Identifiable {
 // MARK: - TermOfServiceItemType
 
 enum TermOfServiceItemType: Int, CaseIterable {
+    case termOfService
     case minAge
-    case termsAndConditions
-    case comprehensiveTermsAndConditions
-    case collectionPersonalInformation
-    case collectionInformation
-    case collectionProfileInformation
+    case personalInfo
+    case marketingInfo
 
     var title: String {
         switch self {
-        case .minAge: return "I'm 14 years old older"
-        case .termsAndConditions: return "Terms and Conditions"
-        case .comprehensiveTermsAndConditions: return "Comprehensive Terms and Conditions"
-        case .collectionPersonalInformation: return "Collection and Use of Personal Information"
-        case .collectionInformation: return "Consent to the collection  and use of information"
-        case .collectionProfileInformation: return "Collection and Use of Profile Information"
+        case .termOfService: return "Subscribe Terms of Service"
+        case .minAge: return "I’m 14 years old or older."
+        case .personalInfo: return "Collection and Use of Personal Information"
+        case .marketingInfo: return "Consent to receive marketing information"
         }
     }
 
     var sectionType: TermOfServiceSectionType {
         switch self {
-        case .minAge, .termsAndConditions, .comprehensiveTermsAndConditions, .collectionPersonalInformation:
+        case .termOfService, .minAge, .personalInfo:
             return .compulsory
-        case .collectionInformation, .collectionProfileInformation:
+        case .marketingInfo:
             return .optional
         }
     }

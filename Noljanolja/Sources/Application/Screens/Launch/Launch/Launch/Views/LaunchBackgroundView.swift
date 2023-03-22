@@ -9,9 +9,15 @@ import Foundation
 import SwiftUI
 
 struct LaunchBackgroundView: UIViewRepresentable {
+    @Binding var isButtonHidden: Bool
+    var buttonAction: (() -> Void)?
+
     func makeUIView(context: Context) -> UILaunchBackgroundView {
         UILaunchBackgroundView()
     }
 
-    func updateUIView(_ uiView: UILaunchBackgroundView, context: Context) {}
+    func updateUIView(_ uiView: UILaunchBackgroundView, context: Context) {
+        uiView.isButtonHidden = isButtonHidden
+        uiView.buttonAction = buttonAction
+    }
 }

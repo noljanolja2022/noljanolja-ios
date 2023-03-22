@@ -20,7 +20,7 @@ protocol LaunchViewModelDelegate: AnyObject {
 // MARK: - LaunchViewModelType
 
 protocol LaunchViewModelType:
-    ViewModelStateGetOnlyType where State == LaunchViewModel.State, Action == LaunchViewModel.Action {}
+    ViewModelType where State == LaunchViewModel.State, Action == LaunchViewModel.Action {}
 
 extension LaunchViewModel {
     struct State {

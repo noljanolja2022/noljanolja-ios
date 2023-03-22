@@ -25,6 +25,7 @@ struct Message: Equatable, Codable {
     let message: String?
     let type: MessageType
     let sender: User
+    let seenBy: [String]
     let createdAt: Date
 
     enum CodingKeys: String, CodingKey {
@@ -33,6 +34,7 @@ struct Message: Equatable, Codable {
         case message
         case type
         case sender
+        case seenBy
         case createdAt
     }
 
@@ -41,12 +43,14 @@ struct Message: Equatable, Codable {
          message: String?,
          type: MessageType,
          sender: User,
+         seenBy: [String],
          createdAt: Date) {
         self.id = id
         self.conversationID = conversationID
         self.message = message
         self.type = type
         self.sender = sender
+        self.seenBy = seenBy
         self.createdAt = createdAt
     }
 
@@ -57,6 +61,7 @@ struct Message: Equatable, Codable {
         self.message = try container.decodeIfPresent(String.self, forKey: .message)
         self.type = try container.decode(MessageType.self, forKey: .type)
         self.sender = try container.decode(User.self, forKey: .sender)
+        self.seenBy = try container.decodeIfPresent([String].self, forKey: .seenBy) ?? []
         if let createdAtString = try container.decodeIfPresent(String.self, forKey: .createdAt),
            let createdAt = createdAtString.date(withFormats: NetworkConfigs.Format.apiFullDateFormats) {
             self.createdAt = createdAt

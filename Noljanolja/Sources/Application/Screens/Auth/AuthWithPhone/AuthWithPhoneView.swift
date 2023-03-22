@@ -27,7 +27,7 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
 
     var body: some View {
         ZStack {
-            buildContentView()
+            buildBodyView()
             buildNavigationLinks()
         }
         .onChange(of: viewModel.state.isProgressHUDShowing) {
@@ -54,69 +54,107 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
         }
     }
 
+    private func buildBodyView() -> some View {
+        VStack(spacing: 0) {
+            ImageAssets.logo.swiftUIImage
+                .resizable()
+                .scaledToFill()
+                .frame(width: 126, height: 114)
+                .padding(32)
+
+            buildContentView()
+                .background(ColorAssets.white.swiftUIColor)
+                .cornerRadius(40, corners: [.topLeft, .topRight])
+        }
+        .background(ColorAssets.primaryYellowMain.swiftUIColor.ignoresSafeArea(edges: .top))
+    }
+
     private func buildContentView() -> some View {
-        ScrollView {
-            VStack(spacing: 12) {
-                buildPhoneSignInView()
-                buildSNSSignInView()
+        VStack {
+            ScrollView {
+                VStack(spacing: 32) {
+                    buildContentHeaderView()
+                    buildPhoneView()
+                    Spacer()
+                }
+                .padding(.horizontal, 16)
+                .padding(.top, 32)
+                .padding(.bottom, 16)
             }
-            .padding(16)
+
+            buildActionView()
         }
     }
 
-    private func buildPhoneSignInView() -> some View {
-        VStack(spacing: 32) {
-            Text("What's the phone number for this device?")
-                .font(FontFamily.NotoSans.bold.swiftUIFont(size: 16))
+    private func buildContentHeaderView() -> some View {
+        VStack(spacing: 4) {
+            Text("Log in")
+                .font(.system(size: 32, weight: .bold))
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
-            HStack(spacing: 12) {
-                Button(
-                    action: { isSelectCountryShown = true },
-                    label: {
-                        VStack(spacing: 4) {
-                            Text("Contry")
-                                .font(FontFamily.NotoSans.medium.swiftUIFont(size: 16))
-                                .foregroundColor(ColorAssets.forcegroundSecondary.swiftUIColor)
-                            Text(viewModel.state.country.name)
-                                .font(FontFamily.NotoSans.medium.swiftUIFont(size: 16))
-                                .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
-                                .frame(height: 32)
-                        }
-                        .frame(minWidth: 96, maxHeight: .infinity)
-                        .padding(12)
-                        .background(ColorAssets.gray.swiftUIColor)
-                        .cornerRadius(12)
-                    }
-                )
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Phone Number")
-                        .font(FontFamily.NotoSans.medium.swiftUIFont(size: 16))
-                        .foregroundColor(ColorAssets.forcegroundSecondary.swiftUIColor)
-                    HStack(spacing: 4) {
-                        Text("+\(viewModel.state.country.phoneCode)")
-                            .font(FontFamily.NotoSans.medium.swiftUIFont(size: 16))
-                        TextField("", text: $viewModel.state.phoneNumber)
-                            .keyboardType(.phonePad)
-                            .textFieldStyle(TappableTextFieldStyle())
-                            .frame(height: 32)
-                    }
-                    .font(FontFamily.NotoSans.medium.swiftUIFont(size: 16))
-                }
-                .padding(12)
-                .background(ColorAssets.gray.swiftUIColor)
-                .cornerRadius(12)
-            }
-
-            Button(
-                L10n.Auth.SignIn.title,
-                action: { viewModel.send(.showConfirmPhoneAlert) }
-            )
-            .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.state.isSignInButtonEnabled))
-            .disabled(!viewModel.state.isSignInButtonEnabled)
-            .shadow(
-                color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
-            )
+            Text("Welcome to Nolja Nolja. Please enter your Phone number to join continue.")
+                .font(.system(size: 14))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .multilineTextAlignment(.leading)
+                .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
         }
+    }
+
+    private func buildPhoneView() -> some View {
+        HStack(spacing: 12) {
+            Button(
+                action: { isSelectCountryShown = true },
+                label: {
+                    VStack {
+                        HStack(spacing: 8) {
+                            Text(viewModel.state.country.getFlagEmoji())
+                                .font(.system(size: 24))
+                                .frame(width: 30, height: 24)
+                                .background(ColorAssets.neutralLightGrey.swiftUIColor)
+                                .cornerRadius(3)
+                            Text("+\(viewModel.state.country.phoneCode)")
+                                .font(.system(size: 16))
+                                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                        }
+                        .frame(maxHeight: .infinity)
+
+                        Divider()
+                            .frame(height: 1)
+                            .overlay(ColorAssets.neutralGrey.swiftUIColor)
+                    }
+                }
+            )
+            .frame(width: 88)
+
+            VStack {
+                TextField("", text: $viewModel.state.phoneNumber)
+                    .keyboardType(.phonePad)
+                    .textFieldStyle(TappableTextFieldStyle())
+                    .font(.system(size: 16))
+                    .frame(maxHeight: .infinity)
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    .introspectTextField { textField in
+                        textField.becomeFirstResponder()
+                    }
+
+                Divider()
+                    .frame(height: 1)
+                    .overlay(ColorAssets.neutralGrey.swiftUIColor)
+            }
+            .frame(maxHeight: .infinity)
+        }
+        .frame(height: 36)
+    }
+
+    private func buildActionView() -> some View {
+        Button(
+            "Continue".uppercased(),
+            action: { viewModel.send(.showConfirmPhoneAlert) }
+        )
+        .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.state.isSignInButtonEnabled))
+        .disabled(!viewModel.state.isSignInButtonEnabled)
+        .frame(height: 48)
+        .padding(16)
     }
 
     private func buildSNSSignInView() -> some View {
