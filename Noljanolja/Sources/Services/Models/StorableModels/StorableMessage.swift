@@ -15,6 +15,7 @@ final class StorableMessage: Object, StorableModel {
     @Persisted var type: String?
     @Persisted var sender: StorableUser?
     @Persisted var seenBy = List<String>()
+    @Persisted var attachments = List<StorableAttachment>()
     @Persisted var createdAt: Date?
     
     var model: Message? {
@@ -31,6 +32,7 @@ final class StorableMessage: Object, StorableModel {
             type: type,
             sender: sender,
             seenBy: seenBy.map { $0 },
+            attachments: attachments.compactMap { $0.model },
             createdAt: createdAt
         )
     }
@@ -43,9 +45,14 @@ final class StorableMessage: Object, StorableModel {
         self.type = model.type.rawValue
         self.sender = StorableUser(model.sender)
         self.seenBy = {
-            let seenByList = List<String>()
-            seenByList.append(objectsIn: model.seenBy)
-            return seenByList
+            let list = List<String>()
+            list.append(objectsIn: model.seenBy)
+            return list
+        }()
+        self.attachments = {
+            let list = List<StorableAttachment>()
+            list.append(objectsIn: model.attachments.map { StorableAttachment($0) })
+            return list
         }()
         self.createdAt = model.createdAt
     }

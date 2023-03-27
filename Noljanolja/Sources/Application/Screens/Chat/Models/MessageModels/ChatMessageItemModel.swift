@@ -13,6 +13,8 @@ import UIKit
 extension ChatMessageItemModel {
     enum ContentType: Equatable {
         case plaintext(TextMessageContentModel)
+        case photo(PhotoMessageContentModel)
+        case sticker(StickerMessageContentModel)
     }
 
     enum PositionType {
@@ -36,7 +38,7 @@ struct ChatMessageItemModel: Equatable {
     let isSenderMessage: Bool
     let avatar: String?
     let date: Date
-    let content: ContentType
+    let content: ContentType?
     let positionType: PositionType
     let status: StatusType
 
@@ -44,7 +46,7 @@ struct ChatMessageItemModel: Equatable {
          isSenderMessage: Bool,
          avatar: String?,
          date: Date,
-         content: ContentType,
+         content: ContentType?,
          positionType: PositionType = .middle,
          status: StatusType) {
         self.id = id
@@ -65,13 +67,29 @@ struct ChatMessageItemModel: Equatable {
         self.avatar = message.sender.avatar
         self.date = message.createdAt
         switch message.type {
-        default:
+        case .plaintext:
             self.content = .plaintext(
                 TextMessageContentModel(
                     currentUser: currentUser,
                     message: message
                 )
             )
+        case .photo:
+            self.content = .photo(
+                PhotoMessageContentModel(
+                    currentUser: currentUser,
+                    message: message
+                )
+            )
+        case .sticker:
+            self.content = .sticker(
+                StickerMessageContentModel(
+                    currentUser: currentUser,
+                    message: message
+                )
+            )
+        case .gif, .document:
+            self.content = nil
         }
         self.positionType = positionType
         self.status = status

@@ -26,14 +26,4 @@ extension UIApplication {
                 .first { $0.isKeyWindow }
         }
     }
-
-    func endEditing() {
-        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
-}
-
-extension View {
-    func endEditing() {
-        UIApplication.shared.endEditing()
-    }
 }

@@ -122,7 +122,7 @@ final class ConversationListViewModel: ConversationListViewModelType {
                     logger.info("Get conversations successful")
                     self?.conversationsSubject.send(conversations)
                 case let .failure(error):
-                    logger.info("Get conversations failed - \(error.localizedDescription)")
+                    logger.error("Get conversations failed - \(error.localizedDescription)")
                     self?.state.error = error
                     self?.state.viewState = .error
                 }

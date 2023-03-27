@@ -44,16 +44,14 @@ final class StorableConversation: Object, StorableModel {
         self.creator = StorableUser(model.creator)
         self.type = model.type.rawValue
         self.messages = {
-            let messagesList = List<StorableMessage>()
-            let storableMessages = model.messages.map { StorableMessage($0) }
-            messagesList.append(objectsIn: storableMessages)
-            return messagesList
+            let list = List<StorableMessage>()
+            list.append(objectsIn: model.messages.map { StorableMessage($0) })
+            return list
         }()
         self.participants = {
-            let participantsList = List<StorableUser>()
-            let storableParticipants = model.participants.map { StorableUser($0) }
-            participantsList.append(objectsIn: storableParticipants)
-            return participantsList
+            let list = List<StorableUser>()
+            list.append(objectsIn: model.participants.map { StorableUser($0) })
+            return list
         }()
         self.createdAt = model.createdAt
         self.updatedAt = model.updatedAt

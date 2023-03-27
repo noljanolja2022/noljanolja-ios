@@ -13,10 +13,14 @@ struct ChatMessageItemView: View {
     var messageItemModel: ChatMessageItemModel
 
     var body: some View {
-        if messageItemModel.isSenderMessage {
-            SenderMessageItemView(messageItemModel: messageItemModel)
+        if messageItemModel.content == nil {
+            EmptyView()
         } else {
-            ReceiverMessageItemView(messageItemModel: messageItemModel)
+            if messageItemModel.isSenderMessage {
+                SenderMessageItemView(messageItemModel: messageItemModel)
+            } else {
+                ReceiverMessageItemView(messageItemModel: messageItemModel)
+            }
         }
     }
 }

@@ -53,6 +53,7 @@ protocol ConversationAPIType {
     func createConversation(title: String,
                             type: ConversationType,
                             participants: [User]) -> AnyPublisher<Conversation, Error>
+    func getAttachmentURL(conversationID: Int, attachmentID: Int) -> String
 }
 
 // MARK: - ConversationAPI
@@ -87,5 +88,9 @@ final class ConversationAPI: ConversationAPIType {
             target: ConversationAPITargets.CreateConversation(title: title, type: type, participants: participants),
             atKeyPath: "data"
         )
+    }
+
+    func getAttachmentURL(conversationID: Int, attachmentID: Int) -> String {
+        NetworkConfigs.baseUrl + "/v1/conversations/\(conversationID)/attachments/\(attachmentID)"
     }
 }

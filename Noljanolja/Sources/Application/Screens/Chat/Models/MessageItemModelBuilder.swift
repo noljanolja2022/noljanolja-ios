@@ -22,33 +22,36 @@ final class MessageItemModelBuilder {
     func build() -> [ChatItemModelType] {
         var messageItemTypes = [ChatItemModelType]()
 
-        messages.enumerated().forEach { index, message in
-            let beforceMessage = messages[safe: index + 1]
-            let afterMessage = messages[safe: index - 1]
+        messages
+            .filter { $0.type.isSupported }
+            .enumerated()
+            .forEach { index, message in
+                let beforceMessage = messages[safe: index + 1]
+                let afterMessage = messages[safe: index - 1]
 
-            let positionType = buildPositionType(beforceMessage: beforceMessage, message: message, afterMessage: afterMessage)
-            let statusType = buildStatusType(message: message)
+                let positionType = buildPositionType(beforceMessage: beforceMessage, message: message, afterMessage: afterMessage)
+                let statusType = buildStatusType(message: message)
 
-            messageItemTypes.append(
-                .item(
-                    ChatMessageItemModel(
-                        currentUser: currentUser,
-                        message: message,
-                        positionType: positionType,
-                        status: statusType
+                messageItemTypes.append(
+                    .item(
+                        ChatMessageItemModel(
+                            currentUser: currentUser,
+                            message: message,
+                            positionType: positionType,
+                            status: statusType
+                        )
                     )
                 )
-            )
 
-            let isFirstMessageByDate = beforceMessage
-                .flatMap { !Calendar.current.isDate(message.createdAt, equalTo: $0.createdAt, toGranularity: .day) } ?? true
+                let isFirstMessageByDate = beforceMessage
+                    .flatMap { !Calendar.current.isDate(message.createdAt, equalTo: $0.createdAt, toGranularity: .day) } ?? true
 
-            if isFirstMessageByDate {
-                messageItemTypes.append(
-                    .date(ChatDateItemModel(message: message))
-                )
+                if isFirstMessageByDate {
+                    messageItemTypes.append(
+                        .date(ChatDateItemModel(message: message))
+                    )
+                }
             }
-        }
 
         return messageItemTypes
     }

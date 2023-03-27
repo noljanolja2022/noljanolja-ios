@@ -6,6 +6,7 @@
 //
 //
 
+import Kingfisher
 import SwiftUI
 
 // MARK: - ChatView
@@ -52,9 +53,7 @@ struct ChatView<ViewModel: ChatViewModelType>: View {
                 }
             ChatInputView(
                 viewModel: ChatInputViewModel(
-                    state: ChatInputViewModel.State(
-                        conversationID: viewModel.state.conversationID
-                    )
+                    conversationID: viewModel.state.conversationID
                 )
             )
         }

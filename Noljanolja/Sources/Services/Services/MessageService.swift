@@ -15,9 +15,7 @@ protocol MessageServiceType {
     func getMessages(conversationID: Int,
                      beforeMessageID: Int?,
                      afterMessageID: Int?) -> AnyPublisher<[Message], Error>
-    func sendMessage(conversationID: Int,
-                     message: String,
-                     type: MessageType) -> AnyPublisher<Message, Error>
+    func sendMessage(conversationID: Int, param: SendMessageParam) -> AnyPublisher<Message, Error>
     func seenMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error>
 }
 
@@ -36,12 +34,15 @@ final class MessageService: MessageServiceType {
 
     private let messageAPI: MessageAPIType
     private let messageStore: MessageStoreType
+    private let photoAssetAPI: PhotoAssetAPI
 
     private init(messageAPI: MessageAPIType = MessageAPI.default,
                  conversationStore: ConversationStoreType = ConversationStore.default,
-                 messageStore: MessageStoreType = MessageStore.default) {
+                 messageStore: MessageStoreType = MessageStore.default,
+                 photoAssetAPI: PhotoAssetAPI = PhotoAssetAPI.default) {
         self.messageAPI = messageAPI
         self.messageStore = messageStore
+        self.photoAssetAPI = photoAssetAPI
     }
 
     func getLocalMessages(conversationID: Int) -> AnyPublisher<[Message], Error> {
@@ -66,15 +67,57 @@ final class MessageService: MessageServiceType {
             .eraseToAnyPublisher()
     }
 
-    func sendMessage(conversationID: Int,
-                     message: String,
-                     type: MessageType) -> AnyPublisher<Message, Error> {
-        messageAPI
-            .sendMessage(
-                conversationID: conversationID,
-                message: message,
-                type: type
-            )
+    func sendMessage(conversationID: Int, param: SendMessageParam) -> AnyPublisher<Message, Error> {
+        var message: String? {
+            switch param.type {
+            case .plaintext:
+                return param.message
+            case .sticker:
+                if let sticker = param.sticker {
+                    return "\(sticker.0.id)/\(sticker.1.imageFile)"
+                } else {
+                    return nil
+                }
+            case .photo, .document, .gif:
+                return nil
+            }
+        }
+
+        let attachmentsPublisher: AnyPublisher<[AttachmentParam]?, Error> = {
+            if let photos = param.photos {
+                return photoAssetAPI
+                    .requestImage(photos)
+                    .map { photoModels -> [AttachmentParam]? in
+                        photoModels?.map { photoModel -> AttachmentParam in
+                            AttachmentParam(
+                                id: photoModel.id,
+                                name: photoModel.id,
+                                data: photoModel.image.jpegData(compressionQuality: 0.5)
+                            )
+                        }
+                    }
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
+            } else {
+                return Just(nil)
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
+            }
+        }()
+
+        return attachmentsPublisher
+            .flatMapLatest { [weak self] attachments -> AnyPublisher<Message, Error> in
+                guard let self else {
+                    return Empty<Message, Error>().eraseToAnyPublisher()
+                }
+                return self.messageAPI
+                    .sendMessage(
+                        conversationID: conversationID,
+                        type: param.type,
+                        message: message,
+                        attachments: attachments
+                    )
+            }
             .handleEvents(receiveOutput: { [weak self] in
                 self?.messageStore.saveMessages([$0])
             })

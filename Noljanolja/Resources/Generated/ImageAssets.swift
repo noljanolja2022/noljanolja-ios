@@ -38,6 +38,7 @@ internal enum ImageAssets {
   internal static let icChecked = ImageAsset(name: "ic_checked")
   internal static let icClose = ImageAsset(name: "ic_close")
   internal static let icCustomerServiceCenter = ImageAsset(name: "ic_customer_service_center")
+  internal static let icEmoji = ImageAsset(name: "ic_emoji")
   internal static let icGoogle = ImageAsset(name: "ic_google")
   internal static let icGroupAdd = ImageAsset(name: "ic_group_add")
   internal static let icHome = ImageAsset(name: "ic_home")
@@ -76,6 +77,7 @@ internal enum ImageAssets {
     icChecked,
     icClose,
     icCustomerServiceCenter,
+    icEmoji,
     icGoogle,
     icGroupAdd,
     icHome,
