@@ -7,6 +7,7 @@
 //
 
 import Kingfisher
+import SDWebImageSwiftUI
 import SwiftUI
 
 // MARK: - ChatStickerPacksInputView
@@ -41,7 +42,7 @@ struct ChatStickerPacksInputView<ViewModel: ChatStickerPacksInputViewModelType>:
         ScrollView(.horizontal) {
             LazyHStack(spacing: 24) {
                 ForEach(Array(viewModel.stickerPacks.enumerated()), id: \.offset) { offset, stickerPack in
-                    KFImage(stickerPack.getImageURL())
+                    WebImage(url: stickerPack.getImageURL())
                         .resizable()
                         .aspectRatio(1, contentMode: .fit)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)

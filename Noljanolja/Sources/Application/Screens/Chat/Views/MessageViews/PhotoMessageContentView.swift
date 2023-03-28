@@ -6,6 +6,7 @@
 //
 
 import Kingfisher
+import SDWebImageSwiftUI
 import SwiftUI
 
 // MARK: - PhotoMessageContentView
@@ -43,14 +44,21 @@ struct PhotoMessageContentView: View {
                     ForEach(photos, id: \.self) { photo in
                         GeometryReader { geometry in
                             if let photo {
-                                KFImage(URL(string: photo))
-                                    .downsampling(size: geometry.size)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: geometry.size.width, height: geometry.size.height)
-                                    .clipped()
-                                    .contentShape(Rectangle())
-                                    .background(ColorAssets.neutralLightGrey.swiftUIColor)
+                                WebImage(
+                                    url: URL(string: photo),
+                                    context: [
+                                        .imageTransformer: SDImageResizingTransformer(
+                                            size: geometry.size,
+                                            scaleMode: .fill
+                                        )
+                                    ]
+                                )
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: geometry.size.width, height: geometry.size.height)
+                                .clipped()
+                                .contentShape(Rectangle())
+                                .background(ColorAssets.neutralLightGrey.swiftUIColor)
                             } else {
                                 Text("")
                             }

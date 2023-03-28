@@ -6,6 +6,7 @@
 //
 
 import Kingfisher
+import SDWebImageSwiftUI
 import SwiftUI
 
 // MARK: - ReceiverMessageItemView
@@ -17,7 +18,7 @@ struct ReceiverMessageItemView: View {
         HStack(alignment: .top, spacing: 4) {
             if messageItemModel.positionType == .all
                 || messageItemModel.positionType == .first {
-                KFImage(URL(string: messageItemModel.avatar ?? ""))
+                WebImage(url: URL(string: messageItemModel.avatar ?? ""))
                     .resizable()
                     .scaledToFill()
                     .frame(width: 32, height: 32)
