@@ -21,10 +21,13 @@ struct MessageContentView: View {
         switch messageContent {
         case let .plaintext(model):
             TextMessageContentView(contentItemModel: model)
+                .background(.red)
         case let .photo(model):
             PhotoMessageContentView(contentItemModel: model)
+                .background(.green)
         case let .sticker(model):
             StickerMessageContentView(contentItemModel: model)
+                .background(.blue)
         case .none:
             EmptyView()
         }

@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-final class StorableStickerPack: Object, StorableModel {
+final class StorableStickerPack: Object {
     @Persisted(primaryKey: true) var id: Int
     @Persisted var name: String?
     @Persisted var publisher: String?

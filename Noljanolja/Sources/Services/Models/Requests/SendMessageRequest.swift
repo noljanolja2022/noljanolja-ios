@@ -7,16 +7,19 @@
 
 import Foundation
 
-struct SendMessageParam {
+struct SendMessageRequest {
+    let conversationID: Int
     let type: MessageType
     let message: String?
     let photos: [PhotoAsset]?
     let sticker: (StickerPack, Sticker)?
 
-    init(type: MessageType,
+    init(conversationID: Int,
+         type: MessageType,
          message: String? = nil,
          photos: [PhotoAsset]? = nil,
          sticker: (StickerPack, Sticker)? = nil) {
+        self.conversationID = conversationID
         self.type = type
         self.message = message
         self.photos = photos

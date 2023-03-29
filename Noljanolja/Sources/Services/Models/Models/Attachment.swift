@@ -8,8 +8,8 @@
 import Foundation
 
 struct Attachment: Equatable, Codable {
-    let id: Int
-    let messageID: Int
+    let id: String
+    let messageID: Int?
     let name: String?
     let originalName: String?
     let size: Double?
@@ -28,8 +28,8 @@ struct Attachment: Equatable, Codable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.decode(Int.self, forKey: .id)
-        self.messageID = try container.decode(Int.self, forKey: .messageID)
+        self.id = String(try container.decode(Int.self, forKey: .id))
+        self.messageID = try container.decodeIfPresent(Int.self, forKey: .messageID)
         self.name = try container.decodeIfPresent(String.self, forKey: .name)
         self.originalName = try container.decodeIfPresent(String.self, forKey: .originalName)
         self.size = try container.decodeIfPresent(Double.self, forKey: .size)
@@ -37,7 +37,7 @@ struct Attachment: Equatable, Codable {
         self.md5 = try container.decodeIfPresent(String.self, forKey: .md5)
     }
 
-    init(id: Int, messageID: Int, name: String?, originalName: String?, size: Double?, type: String?, md5: String?) {
+    init(id: String, messageID: Int?, name: String?, originalName: String?, size: Double?, type: String?, md5: String?) {
         self.id = id
         self.messageID = messageID
         self.name = name
@@ -45,5 +45,9 @@ struct Attachment: Equatable, Codable {
         self.size = size
         self.type = type
         self.md5 = md5
+    }
+
+    func getPhotoURL(conversationID: Int) -> URL? {
+        MessageService.default.getPhotoURL(conversationID: conversationID, attachmentId: id, fileName: originalName)
     }
 }

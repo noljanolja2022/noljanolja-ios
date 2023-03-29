@@ -63,24 +63,29 @@ final class ChatInputViewModel: ChatInputViewModelType {
     }
 
     private func configure() {
+        let conversationID = conversationID
+
         let sendPublisher = Publishers.Merge3(
             sendTextSubject
                 .map { [weak self] in
-                    SendMessageParam(
+                    SendMessageRequest(
+                        conversationID: conversationID,
                         type: .plaintext,
                         message: self?.text
                     )
                 },
             sendPhotoSubject
                 .map { [weak self] in
-                    SendMessageParam(
+                    SendMessageRequest(
+                        conversationID: conversationID,
                         type: .photo,
                         photos: self?.photoAssets
                     )
                 },
             sendStickerSubject
                 .map {
-                    SendMessageParam(
+                    SendMessageRequest(
+                        conversationID: conversationID,
                         type: .sticker,
                         sticker: $0
                     )
@@ -88,12 +93,12 @@ final class ChatInputViewModel: ChatInputViewModelType {
         )
         
         sendPublisher
-            .flatMapToResult { [weak self] param in
+            .flatMapToResult { [weak self] request in
                 guard let self else {
                     return Empty<Message, Error>().eraseToAnyPublisher()
                 }
                 return self.messageService
-                    .sendMessage(conversationID: self.conversationID, param: param)
+                    .sendMessage(request: request)
             }
             .sink { [weak self] result in
                 switch result {

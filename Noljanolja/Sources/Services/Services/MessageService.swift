@@ -15,8 +15,10 @@ protocol MessageServiceType {
     func getMessages(conversationID: Int,
                      beforeMessageID: Int?,
                      afterMessageID: Int?) -> AnyPublisher<[Message], Error>
-    func sendMessage(conversationID: Int, param: SendMessageParam) -> AnyPublisher<Message, Error>
+    func sendMessage(request: SendMessageRequest) -> AnyPublisher<Message, Error>
     func seenMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error>
+
+    func getPhotoURL(conversationID: Int, attachmentId: String, fileName: String?) -> URL?
 }
 
 extension MessageServiceType {
@@ -32,14 +34,17 @@ extension MessageServiceType {
 final class MessageService: MessageServiceType {
     static let `default` = MessageService()
 
+    private let userService: UserServiceType
     private let messageAPI: MessageAPIType
     private let messageStore: MessageStoreType
     private let photoAssetAPI: PhotoAssetAPI
 
-    private init(messageAPI: MessageAPIType = MessageAPI.default,
+    private init(userService: UserServiceType = UserService.default,
+                 messageAPI: MessageAPIType = MessageAPI.default,
                  conversationStore: ConversationStoreType = ConversationStore.default,
                  messageStore: MessageStoreType = MessageStore.default,
                  photoAssetAPI: PhotoAssetAPI = PhotoAssetAPI.default) {
+        self.userService = userService
         self.messageAPI = messageAPI
         self.messageStore = messageStore
         self.photoAssetAPI = photoAssetAPI
@@ -67,13 +72,13 @@ final class MessageService: MessageServiceType {
             .eraseToAnyPublisher()
     }
 
-    func sendMessage(conversationID: Int, param: SendMessageParam) -> AnyPublisher<Message, Error> {
+    func sendMessage(request: SendMessageRequest) -> AnyPublisher<Message, Error> {
         var message: String? {
-            switch param.type {
+            switch request.type {
             case .plaintext:
-                return param.message
+                return request.message
             case .sticker:
-                if let sticker = param.sticker {
+                if let sticker = request.sticker {
                     return "\(sticker.0.id)/\(sticker.1.imageFile)"
                 } else {
                     return nil
@@ -84,17 +89,28 @@ final class MessageService: MessageServiceType {
         }
 
         let attachmentsPublisher: AnyPublisher<[AttachmentParam]?, Error> = {
-            if let photos = param.photos {
+            if let photos = request.photos {
                 return photoAssetAPI
                     .requestImage(photos)
-                    .map { photoModels -> [AttachmentParam]? in
-                        photoModels?.map { photoModel -> AttachmentParam in
-                            AttachmentParam(
-                                id: photoModel.id,
-                                name: photoModel.id,
+                    .map { [weak self] photoModels -> [AttachmentParam]? in
+                        let attachmentParams = photoModels?.map { photoModel -> AttachmentParam in
+                            let id = UUID().uuidString
+                            return AttachmentParam(
+                                id: id,
+                                name: "\(id).png",
                                 data: photoModel.image.jpegData(compressionQuality: 0.5)
                             )
                         }
+                        attachmentParams?.forEach { [weak self] in
+                            guard let data = $0.data else { return }
+                            try? self?.messageStore
+                                .savePhoto(
+                                    conversationID: request.conversationID,
+                                    fileName: $0.name,
+                                    data: data
+                                )
+                        }
+                        return attachmentParams
                     }
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
@@ -106,17 +122,26 @@ final class MessageService: MessageServiceType {
         }()
 
         return attachmentsPublisher
-            .flatMapLatest { [weak self] attachments -> AnyPublisher<Message, Error> in
+            .withLatestFrom(userService.currentUserPublisher.setFailureType(to: Error.self)) { ($0, $1) }
+            .map { attachments, currentUser in
+                SendMessageParam(
+                    currentUser: currentUser,
+                    localID: UUID().uuidString,
+                    conversationID: request.conversationID,
+                    type: request.type,
+                    message: message,
+                    attachments: attachments
+                )
+            }
+            .handleEvents(receiveOutput: { [weak self] in
+                self?.messageStore.saveMessageParams([$0])
+            })
+            .flatMapLatest { [weak self] param -> AnyPublisher<Message, Error> in
                 guard let self else {
                     return Empty<Message, Error>().eraseToAnyPublisher()
                 }
                 return self.messageAPI
-                    .sendMessage(
-                        conversationID: conversationID,
-                        type: param.type,
-                        message: message,
-                        attachments: attachments
-                    )
+                    .sendMessage(param: param)
             }
             .handleEvents(receiveOutput: { [weak self] in
                 self?.messageStore.saveMessages([$0])
@@ -127,5 +152,13 @@ final class MessageService: MessageServiceType {
     func seenMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error> {
         messageAPI
             .seenMessage(conversationID: conversationID, messageID: messageID)
+    }
+
+    func getPhotoURL(conversationID: Int, attachmentId: String, fileName: String?) -> URL? {
+        let localStickerURL = fileName.flatMap {
+            messageStore.getPhotoURL(conversationID: conversationID, fileName: $0)
+        }
+        let remoteStickerURL = messageAPI.getPhotoURL(conversationId: conversationID, attachmentId: attachmentId)
+        return localStickerURL ?? remoteStickerURL
     }
 }

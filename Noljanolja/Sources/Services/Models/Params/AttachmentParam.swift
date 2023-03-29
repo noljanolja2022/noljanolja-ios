@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AttachmentParam {
+struct AttachmentParam: Equatable {
     let id: String
     let name: String
     let data: Data?

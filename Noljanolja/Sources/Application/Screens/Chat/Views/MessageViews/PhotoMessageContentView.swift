@@ -15,37 +15,39 @@ struct PhotoMessageContentView: View {
     var contentItemModel: PhotoMessageContentModel
 
     var body: some View {
-        let photosList: [[String?]] = {
+        let photosList: [[URL?]] = {
             if contentItemModel.photos.count < 3 {
                 return [contentItemModel.photos]
             }
-            var photosList = [[String?]]()
-            var photos = [String?]()
+            var photosList = [[URL?]]()
+            var photos = [URL?]()
             contentItemModel.photos.forEach { photo in
                 photos.append(photo)
 
                 if photos.count == 3 {
                     photosList.append(photos)
-                    photos = [String]()
+                    photos = [URL]()
                 }
             }
             if !photos.isEmpty {
                 let remainCount = 3 - photos.count
-                let remainItems = [String?](repeating: nil, count: remainCount)
+                let remainItems = [URL?](repeating: nil, count: remainCount)
                 photos.append(contentsOf: remainItems)
                 photosList.append(photos)
             }
             return photosList
         }()
 
-        return VStack(spacing: 4) {
+        let aa = print("AAAAA", photosList)
+
+        VStack(spacing: 4) {
             ForEach(Array(photosList.enumerated()), id: \.offset) { _, photos in
                 HStack(spacing: 4) {
-                    ForEach(photos, id: \.self) { photo in
+                    ForEach(Array(photos.enumerated()), id: \.offset) { _, url in
                         GeometryReader { geometry in
-                            if let photo {
+                            if let url {
                                 WebImage(
-                                    url: URL(string: photo),
+                                    url: url,
                                     context: [
                                         .imageTransformer: SDImageResizingTransformer(
                                             size: geometry.size,

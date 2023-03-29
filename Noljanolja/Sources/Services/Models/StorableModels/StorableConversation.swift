@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-final class StorableConversation: Object, StorableModel {
+final class StorableConversation: Object {
     @Persisted(primaryKey: true) var id: Int
     @Persisted var title: String?
     @Persisted var creator: StorableUser?
@@ -45,7 +45,7 @@ final class StorableConversation: Object, StorableModel {
         self.type = model.type.rawValue
         self.messages = {
             let list = List<StorableMessage>()
-            list.append(objectsIn: model.messages.map { StorableMessage($0) })
+            list.append(objectsIn: model.messages.map { StorableMessage(primaryKey: String(model.id), model: $0) })
             return list
         }()
         self.participants = {

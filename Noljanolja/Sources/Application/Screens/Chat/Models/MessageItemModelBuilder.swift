@@ -82,16 +82,18 @@ final class MessageItemModelBuilder {
 
     private func buildStatusType(message: Message) -> ChatMessageItemModel.StatusType {
         let currentUser = currentUser
-        let lastSenderMessage = messages.first(where: { $0.sender.id == currentUser.id })
+        let lastSenderSentMessage = messages.first(where: { $0.id != nil && $0.sender.id == currentUser.id })
         let lastSenderSeenMessage = messages
             .first(where: { message in
                 message.sender.id == currentUser.id
                     && !message.seenBy.filter { $0 != currentUser.id }.isEmpty
             })
-        if message.id == lastSenderSeenMessage?.id {
+        if message.id == nil {
+            return .sending
+        } else if message.id == lastSenderSeenMessage?.id {
             let users = conversation.participants.filter { $0.id != currentUser.id }
             return .seen(users)
-        } else if message.id == lastSenderMessage?.id {
+        } else if message.id == lastSenderSentMessage?.id {
             return .received
         } else {
             return .none

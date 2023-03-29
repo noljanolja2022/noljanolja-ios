@@ -32,34 +32,35 @@ private enum MessageAPITargets {
     }
 
     struct SendMessage: BaseAuthTargetType {
-        var path: String { "v1/conversations/\(conversationID)/messages" }
+        var path: String { "v1/conversations/\(param.conversationID)/messages" }
         let method: Moya.Method = .post
         var task: Task {
             var multipartFormDatas = [MultipartFormData?]()
 
-            if let data = type.rawValue.data(using: .utf8) {
+            if let data = param.type.rawValue.data(using: .utf8) {
                 multipartFormDatas.append(MultipartFormData(provider: .data(data), name: "type"))
             }
 
-            if let data = message?.data(using: .utf8) {
+            if let data = param.message?.data(using: .utf8) {
                 multipartFormDatas.append(MultipartFormData(provider: .data(data), name: "message"))
             }
 
-            attachments?.forEach { attachment in
+            param.attachments?.forEach { attachment in
                 if let data = attachment.data {
                     multipartFormDatas.append(
-                        MultipartFormData(provider: .data(data), name: "attachments", fileName: "\(attachment.name).jpeg", mimeType: "image/jpeg")
+                        MultipartFormData(provider: .data(data), name: "attachments", fileName: attachment.name, mimeType: "image/jpeg")
                     )
                 }
+            }
+
+            if let data = param.localID.data(using: .utf8) {
+                multipartFormDatas.append(MultipartFormData(provider: .data(data), name: "localId"))
             }
 
             return .uploadMultipart(multipartFormDatas.compactMap { $0 })
         }
 
-        let conversationID: Int
-        let type: MessageType
-        let message: String?
-        let attachments: [AttachmentParam]?
+        let param: SendMessageParam
     }
 
     struct SeenMessage: BaseAuthTargetType {
@@ -78,11 +79,10 @@ protocol MessageAPIType {
     func getMessages(conversationID: Int,
                      beforeMessageID: Int?,
                      afterMessageID: Int?) -> AnyPublisher<[Message], Error>
-    func sendMessage(conversationID: Int,
-                     type: MessageType,
-                     message: String?,
-                     attachments: [AttachmentParam]?) -> AnyPublisher<Message, Error>
+    func sendMessage(param: SendMessageParam) -> AnyPublisher<Message, Error>
     func seenMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error>
+
+    func getPhotoURL(conversationId: Int, attachmentId: String) -> URL?
 }
 
 extension MessageAPIType {
@@ -121,17 +121,9 @@ final class MessageAPI: MessageAPIType {
         )
     }
 
-    func sendMessage(conversationID: Int,
-                     type: MessageType,
-                     message: String?,
-                     attachments: [AttachmentParam]?) -> AnyPublisher<Message, Error> {
+    func sendMessage(param: SendMessageParam) -> AnyPublisher<Message, Error> {
         api.request(
-            target: MessageAPITargets.SendMessage(
-                conversationID: conversationID,
-                type: type,
-                message: message,
-                attachments: attachments
-            ),
+            target: MessageAPITargets.SendMessage(param: param),
             atKeyPath: "data"
         )
     }
@@ -140,5 +132,10 @@ final class MessageAPI: MessageAPIType {
         api.request(
             target: MessageAPITargets.SeenMessage(conversationID: conversationID, messageID: messageID)
         )
+    }
+
+    func getPhotoURL(conversationId: Int, attachmentId: String) -> URL? {
+        let string = NetworkConfigs.baseUrl + "/v1/conversations/\(conversationId)/attachments/\(attachmentId)"
+        return URL(string: string)
     }
 }

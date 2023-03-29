@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-final class StorableSticker: Object, StorableModel {
+final class StorableSticker: Object {
     @Persisted(primaryKey: true) var imageFile: String
     @Persisted var emojis = List<String>()
 

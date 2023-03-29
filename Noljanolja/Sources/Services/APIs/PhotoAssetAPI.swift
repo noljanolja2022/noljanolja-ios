@@ -24,6 +24,7 @@ final class PhotoAssetAPI {
     func requestImage(_ assets: [PhotoAsset]) -> AnyPublisher<[PhotoModel]?, Never> {
         AnyPublisher<[PhotoModel]?, Never> { subscriber in
             var photoModels = [PhotoModel?](repeating: nil, count: assets.count)
+            var count = 0
 
             let options = PHImageRequestOptions()
             options.deliveryMode = .highQualityFormat
@@ -43,8 +44,9 @@ final class PhotoAssetAPI {
                             } else {
                                 photoModels.append(photoModel)
                             }
+                            count += 1
 
-                            if photoModels.count == assets.count {
+                            if count == assets.count {
                                 subscriber.send(photoModels.compactMap { $0 })
                             }
                         }

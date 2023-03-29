@@ -76,6 +76,7 @@ struct ConversationItemView_Previews: PreviewProvider {
                 title: "Title",
                 lastMessage: Message(
                     id: 0,
+                    localID: nil,
                     conversationID: 0,
                     message: "Last message\nLast message\nLast message",
                     type: .plaintext,

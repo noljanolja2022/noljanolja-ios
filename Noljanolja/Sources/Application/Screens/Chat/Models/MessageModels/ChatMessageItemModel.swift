@@ -26,6 +26,7 @@ extension ChatMessageItemModel {
 
     enum StatusType: Equatable {
         case none
+        case sending
         case received
         case seen([User])
     }
@@ -34,7 +35,7 @@ extension ChatMessageItemModel {
 // MARK: - ChatMessageItemModel
 
 struct ChatMessageItemModel: Equatable {
-    let id: Int
+    let id: Int?
     let isSenderMessage: Bool
     let avatar: String?
     let date: Date

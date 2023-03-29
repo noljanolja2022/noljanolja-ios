@@ -11,16 +11,16 @@ import Foundation
 
 struct PhotoMessageContentModel: Equatable, MessageContentModelType {
     let isSenderMessage: Bool
-    let photos: [String]
+    let photos: [URL?]
 
     init(currentUser: User, message: Message) {
-        self.isSenderMessage = currentUser.id == message.sender.id
+        self.isSenderMessage = message.sender.id == currentUser.id
         self.photos = message.attachments.map { attachment in
-            ConversationAPI.default.getAttachmentURL(conversationID: message.conversationID, attachmentID: attachment.id)
+            attachment.getPhotoURL(conversationID: message.conversationID)
         }
     }
 
-    init(isSenderMessage: Bool, photos: [String]) {
+    init(isSenderMessage: Bool, photos: [URL?]) {
         self.isSenderMessage = isSenderMessage
         self.photos = photos
     }

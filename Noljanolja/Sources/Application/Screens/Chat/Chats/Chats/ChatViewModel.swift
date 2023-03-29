@@ -251,12 +251,13 @@ final class ChatViewModel: ChatViewModelType {
                 isAppearSubject.removeDuplicates()
             )
             .sink(receiveValue: { [weak self] currentUser, messages, isAppear in
-                guard let message = messages.first(where: { $0.sender.id != currentUser.id }),
+                guard let message = messages.first(where: { $0.id != nil && $0.sender.id != currentUser.id }),
                       !message.seenBy.contains(currentUser.id),
+                      let messageID = message.id,
                       isAppear else {
                     return
                 }
-                self?.seenTrigger.send(message.id)
+                self?.seenTrigger.send(messageID)
             })
             .store(in: &cancellables)
 

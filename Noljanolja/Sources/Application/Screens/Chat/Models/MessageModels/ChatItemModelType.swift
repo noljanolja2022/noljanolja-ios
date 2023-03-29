@@ -11,10 +11,10 @@ enum ChatItemModelType: Equatable, Identifiable {
     case date(ChatDateItemModel)
     case item(ChatMessageItemModel)
 
-    var id: String {
+    var id: String? {
         switch self {
         case let .date(dateItemModel): return dateItemModel.id
-        case let .item(messageItemModel): return String(messageItemModel.id)
+        case let .item(messageItemModel): return messageItemModel.id.flatMap { String($0) }
         }
     }
 }
