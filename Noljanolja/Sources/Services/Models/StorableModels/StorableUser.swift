@@ -10,7 +10,7 @@ import RealmSwift
 
 // MARK: - StorableUserPreferences
 
-final class StorableUserPreferences: Object, StorableModel {
+final class StorableUserPreferences: Object {
     @Persisted var collectAndUsePersonalInfo: Bool?
 
     var model: UserPreferences? {
@@ -25,7 +25,7 @@ final class StorableUserPreferences: Object, StorableModel {
 
 // MARK: - StorableUser
 
-final class StorableUser: Object, StorableModel {
+final class StorableUser: Object {
     @Persisted(primaryKey: true) var id: String
     @Persisted var name: String?
     @Persisted var avatar: String?

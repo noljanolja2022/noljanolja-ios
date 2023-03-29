@@ -27,7 +27,15 @@ struct ConversationItemView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(Font.system(size: 16, weight: .medium))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                if let message = model.lastMessage?.message, !message.isEmpty {
+                let message: String? = {
+                    switch model.lastMessage?.type {
+                    case .plaintext: return model.lastMessage?.message
+                    case .photo: return "Photo"
+                    case .sticker: return "Sticker"
+                    case .gif, .document, .none: return nil
+                    }
+                }()
+                if let message, !message.isEmpty {
                     Text(message)
                         .lineLimit(2)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -68,6 +76,7 @@ struct ConversationItemView_Previews: PreviewProvider {
                 title: "Title",
                 lastMessage: Message(
                     id: 0,
+                    localID: nil,
                     conversationID: 0,
                     message: "Last message\nLast message\nLast message",
                     type: .plaintext,
@@ -86,6 +95,7 @@ struct ConversationItemView_Previews: PreviewProvider {
                         updatedAt: Date()
                     ),
                     seenBy: [],
+                    attachments: [],
                     createdAt: Date()
                 ),
                 date: "06:12",

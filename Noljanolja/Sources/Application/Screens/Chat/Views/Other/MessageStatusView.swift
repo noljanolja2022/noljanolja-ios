@@ -18,6 +18,10 @@ struct MessageStatusView: View {
             switch status {
             case .none:
                 EmptyView()
+            case .sending:
+                Text("")
+                    .frame(width: 10, height: 10)
+                    .overlayBorder(color: ColorAssets.neutralDarkGrey.swiftUIColor, cornerRadius: 5, lineWidth: 1)
             case .received:
                 Image(systemName: "checkmark.circle.fill")
                     .resizable()

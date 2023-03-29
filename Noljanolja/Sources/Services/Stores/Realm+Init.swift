@@ -41,6 +41,8 @@ protocol RealmManagerType {
     func create<T: Object>(_ type: T.Type, value: Any, update: Realm.UpdatePolicy)
 
     func objects<Element: RealmFetchable>(_ type: Element.Type) -> Results<Element>
+    func objects<Element: RealmFetchable>(_ type: Element.Type, predicate: NSPredicate) -> Results<Element>
+    func objects<Element: RealmFetchable>(_ type: Element.Type, isIncluded: (Query<Element>) -> Query<Bool>) -> Results<Element>
     func object<Element: Object, KeyType>(ofType type: Element.Type, forPrimaryKey key: KeyType) -> Element?
 
     func delete(_ object: Object)
@@ -152,6 +154,14 @@ extension RealmManager {
 extension RealmManager {
     func objects<Element: RealmFetchable>(_ type: Element.Type) -> Results<Element> {
         realm.objects(type)
+    }
+
+    func objects<Element: RealmFetchable>(_ type: Element.Type, predicate: NSPredicate) -> Results<Element> {
+        realm.objects(type).filter(predicate)
+    }
+
+    func objects<Element: RealmFetchable>(_ type: Element.Type, isIncluded: (Query<Element>) -> Query<Bool>) -> Results<Element> {
+        realm.objects(type).where(isIncluded)
     }
 
     func object<Element: Object>(ofType type: Element.Type, forPrimaryKey key: some Any) -> Element? {

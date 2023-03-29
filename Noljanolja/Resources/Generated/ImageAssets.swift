@@ -23,12 +23,14 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum ImageAssets {
   internal static let bgSplash = ImageAsset(name: "bg_splash")
+  internal static let icAddCircle = ImageAsset(name: "ic_add_circle")
   internal static let icAppMascot = ImageAsset(name: "ic_app_mascot")
   internal static let icApple = ImageAsset(name: "ic_apple")
   internal static let icArrowRight = ImageAsset(name: "ic_arrow_right")
   internal static let icAvatarPlaceholder = ImageAsset(name: "ic_avatar_placeholder")
   internal static let icBack = ImageAsset(name: "ic_back")
   internal static let icBicycle = ImageAsset(name: "ic_bicycle")
+  internal static let icCamera = ImageAsset(name: "ic_camera")
   internal static let icCelebrationFill = SymbolAsset(name: "ic_celebration_fill")
   internal static let icChatFill = SymbolAsset(name: "ic_chat_fill")
   internal static let icCheckCircle = ImageAsset(name: "ic_check_circle")
@@ -36,17 +38,21 @@ internal enum ImageAssets {
   internal static let icChecked = ImageAsset(name: "ic_checked")
   internal static let icClose = ImageAsset(name: "ic_close")
   internal static let icCustomerServiceCenter = ImageAsset(name: "ic_customer_service_center")
+  internal static let icEmoji = ImageAsset(name: "ic_emoji")
   internal static let icGoogle = ImageAsset(name: "ic_google")
   internal static let icGroupAdd = ImageAsset(name: "ic_group_add")
   internal static let icHome = ImageAsset(name: "ic_home")
   internal static let icKakao = ImageAsset(name: "ic_kakao")
+  internal static let icKeyboardVoice = ImageAsset(name: "ic_keyboard_voice")
   internal static let icMenu = ImageAsset(name: "ic_menu")
   internal static let icNaver = ImageAsset(name: "ic_naver")
   internal static let icPersonFill = SymbolAsset(name: "ic_person_fill")
+  internal static let icPhoto = ImageAsset(name: "ic_photo")
   internal static let icPlayCircleFill = SymbolAsset(name: "ic_play_circle_fill")
   internal static let icPpyy = ImageAsset(name: "ic_ppyy")
   internal static let icProfile = ImageAsset(name: "ic_profile")
   internal static let icQuestionmarkCircle = ImageAsset(name: "ic_questionmark_circle")
+  internal static let icSend = ImageAsset(name: "ic_send")
   internal static let icServiceGuide = ImageAsset(name: "ic_service_guide")
   internal static let icShop = ImageAsset(name: "ic_shop")
   internal static let icStoreFill = SymbolAsset(name: "ic_store_fill")
@@ -58,26 +64,32 @@ internal enum ImageAssets {
   @available(*, deprecated, message: "All values properties are now deprecated")
   internal static let allImages: [ImageAsset] = [
     bgSplash,
+    icAddCircle,
     icAppMascot,
     icApple,
     icArrowRight,
     icAvatarPlaceholder,
     icBack,
     icBicycle,
+    icCamera,
     icCheckCircle,
     icCheckCircleHightlight,
     icChecked,
     icClose,
     icCustomerServiceCenter,
+    icEmoji,
     icGoogle,
     icGroupAdd,
     icHome,
     icKakao,
+    icKeyboardVoice,
     icMenu,
     icNaver,
+    icPhoto,
     icPpyy,
     icProfile,
     icQuestionmarkCircle,
+    icSend,
     icServiceGuide,
     icShop,
     icUnchecked,

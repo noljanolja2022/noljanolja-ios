@@ -57,5 +57,7 @@
 		<string>processing</string>
 		<string>remote-notification</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photo Library Usage Description</string>
 </dict>
 </plist>
