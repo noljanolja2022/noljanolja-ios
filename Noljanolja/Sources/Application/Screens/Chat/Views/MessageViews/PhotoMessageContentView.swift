@@ -38,8 +38,6 @@ struct PhotoMessageContentView: View {
             return photosList
         }()
 
-        let aa = print("AAAAA", photosList)
-
         VStack(spacing: 4) {
             ForEach(Array(photosList.enumerated()), id: \.offset) { _, photos in
                 HStack(spacing: 4) {
