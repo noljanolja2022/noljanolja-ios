@@ -8,6 +8,7 @@
 
 import Combine
 import Foundation
+import UIKit
 
 // MARK: - ChatInputViewModelDelegate
 
@@ -16,9 +17,12 @@ protocol ChatInputViewModelDelegate: AnyObject {}
 // MARK: - ChatInputViewModelType
 
 protocol ChatInputViewModelType: ObservableObject {
+    // MARK: State
+
     // MARK: Action
 
     var sendTextSubject: PassthroughSubject<String, Never> { get }
+    var sendImagesSubject: PassthroughSubject<[UIImage], Never> { get }
     var sendPhotosSubject: PassthroughSubject<[PhotoAsset], Never> { get }
     var sendStickerSubject: PassthroughSubject<(StickerPack, Sticker), Never> { get }
 }
@@ -37,6 +41,7 @@ final class ChatInputViewModel: ChatInputViewModelType {
     // MARK: Action
 
     let sendTextSubject = PassthroughSubject<String, Never>()
+    let sendImagesSubject = PassthroughSubject<[UIImage], Never>()
     let sendPhotosSubject = PassthroughSubject<[PhotoAsset], Never>()
     let sendStickerSubject = PassthroughSubject<(StickerPack, Sticker), Never>()
 
@@ -57,7 +62,7 @@ final class ChatInputViewModel: ChatInputViewModelType {
     private func configure() {
         let conversationID = conversationID
 
-        let sendPublisher = Publishers.Merge3(
+        let sendPublisher = Publishers.Merge4(
             sendTextSubject
                 .map {
                     SendMessageRequest(
@@ -66,12 +71,20 @@ final class ChatInputViewModel: ChatInputViewModelType {
                         message: $0
                     )
                 },
+            sendImagesSubject
+                .map {
+                    SendMessageRequest(
+                        conversationID: conversationID,
+                        type: .photo,
+                        attachments: .images($0)
+                    )
+                },
             sendPhotosSubject
                 .map {
                     SendMessageRequest(
                         conversationID: conversationID,
                         type: .photo,
-                        photos: $0
+                        attachments: .photos($0)
                     )
                 },
             sendStickerSubject

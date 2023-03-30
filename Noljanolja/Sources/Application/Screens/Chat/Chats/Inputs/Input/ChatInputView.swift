@@ -22,9 +22,32 @@ struct ChatInputView<ViewModel: ChatInputViewModelType>: View {
     @State private var text = ""
     @State private var isMediaInputHidden = false
     @State private var mediaType: ChatMediaInputType?
+    @State var image: UIImage?
+    @State var isCameraShown = false
 
     var body: some View {
         buildBodyView()
+            .fullScreenCover(
+                isPresented: $isCameraShown,
+                onDismiss: {
+                    guard let image else { return }
+                    viewModel.sendImagesSubject.send([image])
+                },
+                content: {
+                    ImagePickerView(
+                        selection: $image,
+                        sourceType: {
+                            #if targetEnvironment(simulator)
+                                return .photoLibrary
+                            #else
+                                return .camera
+                            #endif
+                        }(),
+                        allowsEditing: true
+                    )
+                    .introspectViewController { $0.view.backgroundColor = .black }
+                }
+            )
     }
 
     private func buildBodyView() -> some View {
@@ -65,7 +88,9 @@ struct ChatInputView<ViewModel: ChatInputViewModelType>: View {
                         }
                     )
                     Button(
-                        action: {},
+                        action: {
+                            isCameraShown = true
+                        },
                         label: {
                             ImageAssets.icCamera.swiftUIImage
                                 .resizable()
