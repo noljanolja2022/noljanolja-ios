@@ -15,8 +15,7 @@ struct ChatMediaInputView<ViewModel: ChatMediaInputViewModelType>: View {
 
     @StateObject var viewModel: ViewModel
     @Binding var type: ChatMediaInputType?
-    @Binding var photoAssets: [PhotoAsset]
-    var sendPhotoAction: (() -> Void)?
+    var sendPhotoAction: (([PhotoAsset]) -> Void)?
     var sendStickerAction: ((StickerPack, Sticker) -> Void)?
 
     // MARK: State
@@ -26,8 +25,7 @@ struct ChatMediaInputView<ViewModel: ChatMediaInputViewModelType>: View {
         case .photo:
             ChatPhotoInputView(
                 viewModel: ChatPhotoInputViewModel(),
-                photoAssets: $photoAssets,
-                sendAction: { sendPhotoAction?() }
+                sendAction: { sendPhotoAction?($0) }
             )
         case .sticker:
             ChatStickerPacksInputView(
@@ -46,8 +44,7 @@ struct ChatMediaInputView_Previews: PreviewProvider {
     static var previews: some View {
         ChatMediaInputView(
             viewModel: ChatMediaInputViewModel(),
-            type: .constant(.sticker),
-            photoAssets: Binding<[PhotoAsset]>(get: { [] }, set: { _ in })
+            type: .constant(.sticker)
         )
     }
 }

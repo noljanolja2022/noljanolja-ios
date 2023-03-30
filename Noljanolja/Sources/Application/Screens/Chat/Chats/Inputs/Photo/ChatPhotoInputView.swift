@@ -14,8 +14,8 @@ struct ChatPhotoInputView<ViewModel: ChatPhotoInputViewModelType>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
-    @Binding var photoAssets: [PhotoAsset]
-    var sendAction: (() -> Void)?
+    @State private var photoAssets = [PhotoAsset]()
+    var sendAction: (([PhotoAsset]) -> Void)?
 
     var body: some View {
         buildBodyView()
@@ -44,7 +44,10 @@ struct ChatPhotoInputView<ViewModel: ChatPhotoInputViewModelType>: View {
 
             if !photoAssets.isEmpty {
                 Button(
-                    action: { sendAction?() },
+                    action: {
+                        sendAction?(photoAssets)
+                        photoAssets = []
+                    },
                     label: {
                         Text("Send")
                             .frame(maxWidth: .infinity)
@@ -93,11 +96,7 @@ struct ChatPhotoInputView<ViewModel: ChatPhotoInputViewModelType>: View {
 struct ChatPhotoInputView_Previews: PreviewProvider {
     static var previews: some View {
         ChatPhotoInputView(
-            viewModel: ChatPhotoInputViewModel(),
-            photoAssets: Binding<[PhotoAsset]>(
-                get: { [] },
-                set: { _ in }
-            )
+            viewModel: ChatPhotoInputViewModel()
         )
     }
 }

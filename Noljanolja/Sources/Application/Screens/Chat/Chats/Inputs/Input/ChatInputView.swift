@@ -19,6 +19,7 @@ struct ChatInputView<ViewModel: ChatInputViewModelType>: View {
     // MARK: State
 
     @ObservedObject private var keyboard = Keyboard.main
+    @State private var text = ""
     @State private var isMediaInputHidden = false
     @State private var mediaType: ChatMediaInputType?
 
@@ -33,8 +34,7 @@ struct ChatInputView<ViewModel: ChatInputViewModelType>: View {
             ChatMediaInputView(
                 viewModel: ChatMediaInputViewModel(),
                 type: $mediaType,
-                photoAssets: $viewModel.photoAssets,
-                sendPhotoAction: { viewModel.sendPhotoSubject.send() },
+                sendPhotoAction: { viewModel.sendPhotosSubject.send($0) },
                 sendStickerAction: { viewModel.sendStickerSubject.send(($0, $1)) }
             )
             .height(300)
@@ -78,7 +78,6 @@ struct ChatInputView<ViewModel: ChatInputViewModelType>: View {
                             keyboard.dismiss()
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                                 withAnimation {
-                                    viewModel.photoAssets = []
                                     mediaType = .photo
                                 }
                             }
@@ -124,13 +123,13 @@ struct ChatInputView<ViewModel: ChatInputViewModelType>: View {
     private func buildTextInputView() -> some View {
         HStack(alignment: .bottom) {
             ZStack(alignment: .center) {
-                if viewModel.text.isEmpty {
+                if text.isEmpty {
                     Text("Aa")
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
                         .padding(.horizontal, 10)
                 }
-                TextEditor(text: $viewModel.text)
+                TextEditor(text: $text)
                     .textEditorBackgroundColor(.clear)
                     .frame(minHeight: 32)
                     .frame(maxHeight: 58)
@@ -161,7 +160,7 @@ struct ChatInputView<ViewModel: ChatInputViewModelType>: View {
         }
         .background(ColorAssets.neutralLightGrey.swiftUIColor.opacity(0.6))
         .cornerRadius(8)
-        .onChange(of: viewModel.text) { _ in
+        .onChange(of: text) { _ in
             withAnimation {
                 isMediaInputHidden = true
             }
@@ -177,7 +176,10 @@ struct ChatInputView<ViewModel: ChatInputViewModelType>: View {
 
     private func buildSendView() -> some View {
         Button(
-            action: { viewModel.sendTextSubject.send() },
+            action: {
+                viewModel.sendTextSubject.send(text)
+                text = ""
+            },
             label: {
                 ImageAssets.icSend.swiftUIImage
                     .resizable()

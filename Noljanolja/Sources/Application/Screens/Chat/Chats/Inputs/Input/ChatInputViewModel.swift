@@ -16,15 +16,10 @@ protocol ChatInputViewModelDelegate: AnyObject {}
 // MARK: - ChatInputViewModelType
 
 protocol ChatInputViewModelType: ObservableObject {
-    // MARK: State
-
-    var text: String { get set }
-    var photoAssets: [PhotoAsset] { get set }
-
     // MARK: Action
 
-    var sendTextSubject: PassthroughSubject<Void, Never> { get }
-    var sendPhotoSubject: PassthroughSubject<Void, Never> { get }
+    var sendTextSubject: PassthroughSubject<String, Never> { get }
+    var sendPhotosSubject: PassthroughSubject<[PhotoAsset], Never> { get }
     var sendStickerSubject: PassthroughSubject<(StickerPack, Sticker), Never> { get }
 }
 
@@ -32,9 +27,6 @@ protocol ChatInputViewModelType: ObservableObject {
 
 final class ChatInputViewModel: ChatInputViewModelType {
     // MARK: State
-
-    @Published var text = ""
-    @Published var photoAssets = [PhotoAsset]()
 
     // MARK: Dependencies
 
@@ -44,8 +36,8 @@ final class ChatInputViewModel: ChatInputViewModelType {
 
     // MARK: Action
 
-    let sendTextSubject = PassthroughSubject<Void, Never>()
-    let sendPhotoSubject = PassthroughSubject<Void, Never>()
+    let sendTextSubject = PassthroughSubject<String, Never>()
+    let sendPhotosSubject = PassthroughSubject<[PhotoAsset], Never>()
     let sendStickerSubject = PassthroughSubject<(StickerPack, Sticker), Never>()
 
     // MARK: Private
@@ -67,19 +59,19 @@ final class ChatInputViewModel: ChatInputViewModelType {
 
         let sendPublisher = Publishers.Merge3(
             sendTextSubject
-                .map { [weak self] in
+                .map {
                     SendMessageRequest(
                         conversationID: conversationID,
                         type: .plaintext,
-                        message: self?.text
+                        message: $0
                     )
                 },
-            sendPhotoSubject
-                .map { [weak self] in
+            sendPhotosSubject
+                .map {
                     SendMessageRequest(
                         conversationID: conversationID,
                         type: .photo,
-                        photos: self?.photoAssets
+                        photos: $0
                     )
                 },
             sendStickerSubject
@@ -100,20 +92,7 @@ final class ChatInputViewModel: ChatInputViewModelType {
                 return self.messageService
                     .sendMessage(request: request)
             }
-            .sink { [weak self] result in
-                switch result {
-                case let .success(message):
-                    switch message.type {
-                    case .plaintext:
-                        self?.text = ""
-                    case .photo:
-                        self?.photoAssets = []
-                    case .sticker, .gif, .document:
-                        break
-                    }
-                case .failure:
-                    break
-                }
+            .sink { result in
                 print(result)
             }
             .store(in: &cancellables)
