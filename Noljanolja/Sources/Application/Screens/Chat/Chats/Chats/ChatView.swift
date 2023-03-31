@@ -83,7 +83,6 @@ struct ChatView<ViewModel: ChatViewModelType>: View {
             .scaleEffect(x: 1, y: -1, anchor: .center)
             .frame(height: 44)
         }
-        .listStyle(PlainListStyle())
         .scaleEffect(x: 1, y: -1, anchor: .center)
     }
 

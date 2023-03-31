@@ -25,6 +25,27 @@ private enum UserAPITargets {
 
         let param: UpdateCurrentUserParam
     }
+
+    struct FindUsers: BaseAuthTargetType {
+        var path: String { "v1/users" }
+        let method: Moya.Method = .get
+        var task: Task { .requestParameters(parameters: param, encoding: URLEncoding.default) }
+
+        let phoneNumber: String
+
+        var param: [String: Any] {
+            ["phoneNumber": phoneNumber]
+        }
+    }
+
+    struct GetContacts: BaseAuthTargetType {
+        var path: String { "v1/users/me/contacts" }
+        let method: Moya.Method = .get
+        var task: Task { .requestPlain }
+
+        let page: Int
+        let pageSize: Int
+    }
     
     struct SyncContacts: BaseAuthTargetType {
         var path: String { "v1/users/me/contacts" }
@@ -44,6 +65,9 @@ private enum UserAPITargets {
 protocol UserAPIType {
     func getCurrentUser() -> AnyPublisher<User, Error>
     func updateCurrentUser(_ param: UpdateCurrentUserParam) -> AnyPublisher<User, Error>
+
+    func findUsers(phoneNumber: String) -> AnyPublisher<[User], Error>
+    func getContact(page: Int, pageSize: Int) -> AnyPublisher<[User], Error>
     func syncContacts(_ contacts: [Contact]) -> AnyPublisher<[User], Error>
 }
 
@@ -68,6 +92,20 @@ final class UserAPI: UserAPIType {
     func updateCurrentUser(_ param: UpdateCurrentUserParam) -> AnyPublisher<User, Error> {
         api.request(
             target: UserAPITargets.UpdateCurrentUser(param: param),
+            atKeyPath: "data"
+        )
+    }
+
+    func findUsers(phoneNumber: String) -> AnyPublisher<[User], Error> {
+        api.request(
+            target: UserAPITargets.FindUsers(phoneNumber: phoneNumber),
+            atKeyPath: "data"
+        )
+    }
+
+    func getContact(page: Int, pageSize: Int) -> AnyPublisher<[User], Error> {
+        api.request(
+            target: UserAPITargets.GetContacts(page: page, pageSize: pageSize),
             atKeyPath: "data"
         )
     }

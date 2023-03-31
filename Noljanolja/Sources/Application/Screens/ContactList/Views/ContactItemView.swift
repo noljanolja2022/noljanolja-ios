@@ -5,25 +5,42 @@
 //  Created by Nguyen The Trinh on 06/03/2023.
 //
 
+import SDWebImageSwiftUI
 import SwiftUI
 
 // MARK: - ContactItemView
 
 struct ContactItemView: View {
-    var image: UIImage?
-    var name: String?
+    var user: User
+    var isSelected: Bool?
 
     var body: some View {
-        VStack {
-            Text(name ?? "")
-                .height(48)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .font(.system(size: 16))
+        HStack {
+            WebImage(url: URL(string: user.avatar))
+                .frame(width: 40, height: 40)
+                .scaledToFill()
+                .background(ColorAssets.neutralGrey.swiftUIColor)
+                .cornerRadius(14)
 
-            Divider()
-                .background(ColorAssets.neutralLightGrey.swiftUIColor)
+            Text(user.name ?? "")
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                .font(.system(size: 16, weight: .medium))
+
+            switch isSelected {
+            case .some(true):
+                ImageAssets.icCircleChecked.swiftUIImage
+                    .resizable()
+                    .frame(width: 24, height: 24)
+            case .some(false):
+                ImageAssets.icCircleUnchecked.swiftUIImage
+                    .resizable()
+                    .frame(width: 24, height: 24)
+            case .none:
+                EmptyView()
+            }
         }
-        .padding(.horizontal, 16)
+        .padding(16)
+        .background(.white)
     }
 }
 
@@ -32,7 +49,20 @@ struct ContactItemView: View {
 struct ContactItemView_Previews: PreviewProvider {
     static var previews: some View {
         ContactItemView(
-            name: "Hola"
+            user: User(
+                id: "",
+                name: nil,
+                avatar: nil,
+                pushToken: nil,
+                phone: nil,
+                email: nil,
+                isEmailVerified: false,
+                dob: nil,
+                gender: nil,
+                preferences: nil,
+                createdAt: Date(),
+                updatedAt: Date()
+            )
         )
     }
 }

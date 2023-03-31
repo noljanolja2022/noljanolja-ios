@@ -22,8 +22,8 @@ struct ChatInputView<ViewModel: ChatInputViewModelType>: View {
     @State private var text = ""
     @State private var isMediaInputHidden = false
     @State private var mediaType: ChatMediaInputType?
-    @State var image: UIImage?
-    @State var isCameraShown = false
+    @State private var image: UIImage?
+    @State private var isCameraShown = false
 
     var body: some View {
         buildBodyView()

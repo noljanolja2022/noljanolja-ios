@@ -13,8 +13,7 @@ import Foundation
 protocol ConversationServiceType {
     func getConversation(conversationID: Int) -> AnyPublisher<Conversation, Error>
     func getConversations() -> AnyPublisher<[Conversation], Error>
-    func createConversation(title: String,
-                            type: ConversationType,
+    func createConversation(type: ConversationType,
                             participants: [User]) -> AnyPublisher<Conversation, Error>
 }
 
@@ -71,9 +70,8 @@ final class ConversationService: ConversationServiceType {
             .eraseToAnyPublisher()
     }
 
-    func createConversation(title: String,
-                            type: ConversationType,
+    func createConversation(type: ConversationType,
                             participants: [User]) -> AnyPublisher<Conversation, Error> {
-        conversationAPI.createConversation(title: title, type: type, participants: participants)
+        conversationAPI.createConversation(title: "", type: type, participants: participants)
     }
 }

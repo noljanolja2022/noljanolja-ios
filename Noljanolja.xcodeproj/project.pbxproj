@@ -1696,12 +1696,12 @@
 			children = (
 				CFE09252298DF67D00F197F0 /* Auth */,
 				CF08A86129B5A26600D6CE5F /* ContactAPI.swift */,
-				CFFD70D4298AC92500D4F5A2 /* UserAPI.swift */,
 				CF1B624729B9B55F00DE53E6 /* ConversationAPI.swift */,
+				CF54FA1D29D011960092E2C6 /* MediaAPI.swift */,
 				CF11B1D929BB65DD002E8151 /* MessageAPI.swift */,
 				CF775BC729C62EB200E82183 /* NotificationAPI.swift */,
 				CF131EB229CF32C400054719 /* PhotoAssetAPI.swift */,
-				CF54FA1D29D011960092E2C6 /* MediaAPI.swift */,
+				CFFD70D4298AC92500D4F5A2 /* UserAPI.swift */,
 			);
 			path = APIs;
 			sourceTree = "<group>";

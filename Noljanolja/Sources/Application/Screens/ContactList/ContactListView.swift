@@ -6,65 +6,121 @@
 //
 //
 
+import SDWebImageSwiftUI
 import SwiftUI
 import SwiftUINavigation
 
 // MARK: - ContactListView
 
-struct ContactListView<ViewModel: ContactListViewModelType>: View {
+struct ContactListView<ViewModel: ContactListViewModel>: View {
     // MARK: Dependencies
 
-    @StateObject private var viewModel: ViewModel
+    @StateObject var viewModel: ViewModel
+    var createConversationType: ConversationType
 
     // MARK: State
 
     @EnvironmentObject private var progressHUBState: ProgressHUBState
-    
-    init(viewModel: ViewModel = ContactListViewModel()) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
 
     var body: some View {
         buildBodyView()
-            .onChange(of: viewModel.state.isProgressHUDShowing) {
+            .onChange(of: viewModel.isProgressHUDShowing) {
                 progressHUBState.isLoading = $0
             }
-            .onAppear { viewModel.send(.loadData) }
+            .onAppear { viewModel.loadDataTrigger.send() }
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("Select Contact")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Agree") {
+                        viewModel.createConversationTrigger.send(createConversationType)
+                    }
+                    .font(.system(size: 16))
+                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
+                }
             }
     }
 
     private func buildBodyView() -> some View {
         VStack(spacing: 16) {
-            SearchView(placeholder: "Search friend...", text: $viewModel.state.searchString)
+            SearchView(placeholder: "Search by name/Phone number", text: $viewModel.searchString)
                 .padding(.horizontal, 16)
+            buildSelectedUsers()
             buildContentView()
-                .statefull(
-                    state: $viewModel.state.viewState,
-                    isEmpty: { viewModel.state.users.isEmpty },
-                    loading: buildLoadingView,
-                    empty: buildEmptyView,
-                    error: buildErrorView
-                )
         }
+        .statefull(
+            state: $viewModel.viewState,
+            isEmpty: { viewModel.users.isEmpty },
+            loading: buildLoadingView,
+            empty: buildEmptyView,
+            error: buildErrorView
+        )
         .padding(.top, 12)
+    }
+
+    @ViewBuilder
+    private func buildSelectedUsers() -> some View {
+        if createConversationType == .group, !viewModel.selectedUsers.isEmpty {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 16) {
+                    ForEach(viewModel.selectedUsers, id: \.id) { user in
+                        ZStack(alignment: .topTrailing) {
+                            WebImage(url: URL(string: user.avatar))
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 50, height: 50)
+                                .background(ColorAssets.neutralGrey.swiftUIColor)
+                                .cornerRadius(14)
+                                .padding(.trailing, 6)
+                            Button(
+                                action: {
+                                    viewModel.selectUserSubject.send((createConversationType, user))
+                                },
+                                label: {
+                                    ImageAssets.icClose.swiftUIImage
+                                        .resizable()
+                                        .padding(6)
+                                        .frame(width: 20, height: 20)
+                                        .foregroundColor(ColorAssets.white.swiftUIColor)
+                                        .background(ColorAssets.neutralDarkGrey.swiftUIColor)
+                                        .cornerRadius(10)
+                                }
+                            )
+                        }
+                    }
+                }
+                .padding(.horizontal, 16)
+                .frame(maxWidth: .infinity)
+            }
+            .frame(height: 50)
+        } else {
+            EmptyView()
+        }
     }
 
     private func buildContentView() -> some View {
         ListView {
-            ForEach(viewModel.state.users, id: \.id) { user in
-                ContactItemView(name: user.name)
-                    .background(Color.white)
-                    .onTapGesture { viewModel.send(.createConversation(user)) }
+            Text("Friends")
+                .font(Font.system(size: 16, weight: .bold))
+                .padding(.horizontal, 16)
+            ForEach(viewModel.users, id: \.id) { user in
+                ContactItemView(
+                    user: user,
+                    isSelected: {
+                        switch createConversationType {
+                        case .single: return nil
+                        case .group: return viewModel.selectedUsers.contains(user)
+                        }
+                    }()
+                )
+                .onTapGesture {
+                    viewModel.selectUserSubject.send((createConversationType, user))
+                }
             }
-            .listRowInsets(EdgeInsets())
         }
-        .listStyle(PlainListStyle())
     }
 
     private func buildEmptyView() -> some View {
@@ -78,7 +134,7 @@ struct ContactListView<ViewModel: ContactListViewModelType>: View {
     }
 
     private func buildErrorView() -> some View {
-        IfLet($viewModel.state.error) {
+        IfLet($viewModel.error) {
             if let contactsError = $0.wrappedValue as? ContactsError,
                contactsError.isPermissionError {
                 VStack(spacing: 16) {
@@ -90,9 +146,10 @@ struct ContactListView<ViewModel: ContactListViewModelType>: View {
                     Button(
                         action: {
                             if contactsError == .permissionNotDetermined {
-                                viewModel.send(.requestContactsPermission)
+                                viewModel.requestContactsPermissionTrigger.send()
                             } else {
-                                viewModel.send(.openAppSetting)
+                                guard let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) else { return }
+                                UIApplication.shared.open(url, options: [:], completionHandler: nil)
                             }
                         },
                         label: {
@@ -120,6 +177,9 @@ struct ContactListView<ViewModel: ContactListViewModelType>: View {
 
 struct ContactListView_Previews: PreviewProvider {
     static var previews: some View {
-        ContactListView()
+        ContactListView(
+            viewModel: ContactListViewModel(),
+            createConversationType: .single
+        )
     }
 }
