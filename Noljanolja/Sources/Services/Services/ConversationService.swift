@@ -56,8 +56,8 @@ final class ConversationService: ConversationServiceType {
             })
 
         return Publishers.Merge(localConversations, remoteConversations)
-            .map {
-                $0
+            .map { conversations in
+                conversations
                     .map {
                         Conversation(
                             id: $0.id,
@@ -90,6 +90,7 @@ final class ConversationService: ConversationServiceType {
 
     func createConversation(type: ConversationType,
                             participants: [User]) -> AnyPublisher<Conversation, Error> {
-        conversationAPI.createConversation(title: "", type: type, participants: participants)
+        conversationAPI
+            .createConversation(title: "", type: type, participants: participants)
     }
 }

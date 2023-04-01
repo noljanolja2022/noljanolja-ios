@@ -66,8 +66,8 @@ final class ContactService: ContactServiceType {
             })
 
         return Publishers.Merge(localContacts, remoteContacts)
-            .removeDuplicates()
             .map { $0.sorted { $0.name ?? "" < $1.name ?? "" } }
+            .removeDuplicates()
             .eraseToAnyPublisher()
     }
 }

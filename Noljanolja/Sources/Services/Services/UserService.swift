@@ -56,6 +56,5 @@ final class UserService: UserServiceType {
             .updateCurrentUser(param)
             .handleEvents(receiveOutput: { [weak self] in self?.currentUserSubject.send($0) })
             .eraseToAnyPublisher()
-            .eraseToAnyPublisher()
     }
 }

@@ -6,6 +6,7 @@
 //
 //
 
+import Lottie
 import SwiftUI
 
 // MARK: - MainView
@@ -78,7 +79,7 @@ struct MainView<ViewModel: MainViewModelType>: View {
                 Text("Chat")
             }
 
-            Text("Events")
+            LottieView(animation: LottieAnimation.named(LottieAssets.underConstruction.name))
                 .tag(ViewModel.State.Tab.events)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .tabItem {
@@ -90,7 +91,7 @@ struct MainView<ViewModel: MainViewModelType>: View {
                     Text("Events")
                 }
 
-            Text("Content")
+            LottieView(animation: LottieAnimation.named(LottieAssets.underConstruction.name))
                 .tag(ViewModel.State.Tab.content)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .tabItem {
@@ -98,11 +99,11 @@ struct MainView<ViewModel: MainViewModelType>: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 32, height: 32)
-
+            
                     Text("Content")
                 }
             
-            Text("Shop")
+            LottieView(animation: LottieAnimation.named(LottieAssets.underConstruction.name))
                 .tag(ViewModel.State.Tab.shop)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .tabItem {
@@ -113,7 +114,6 @@ struct MainView<ViewModel: MainViewModelType>: View {
 
                     Text("Shop")
                 }
-                .background(.red)
 
             ProfileView(
                 viewModel: ProfileViewModel(
