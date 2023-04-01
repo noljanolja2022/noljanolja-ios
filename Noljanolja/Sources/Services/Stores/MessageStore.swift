@@ -8,6 +8,7 @@
 import Combine
 import Foundation
 import RealmSwift
+import SwifterSwift
 
 // MARK: - MessageStoreType
 
@@ -29,11 +30,11 @@ final class MessageStore: MessageStoreType {
         configuration: {
             var config = Realm.Configuration.defaultConfiguration
             config.fileURL!.deleteLastPathComponent()
-            config.fileURL!.appendPathComponent("conversation_detail")
+            config.fileURL!.appendPathComponent("messages")
             config.fileURL!.appendPathExtension("realm")
             return config
         }(),
-        queue: DispatchQueue(label: "realm.conversation_detail", qos: .default)
+        queue: DispatchQueue(label: "realm.messages", qos: .default)
     )
 
     private init() {}
@@ -42,7 +43,8 @@ final class MessageStore: MessageStoreType {
         let storableMessages = messages.map { message in
             let storedMessage = realmManager
                 .objects(StorableMessage.self) {
-                    $0.id == message.id || $0.localID == message.localID
+                    ($0.id != nil && $0.id == message.id)
+                        || ($0.localID != nil && $0.localID != "" && $0.localID == message.localID)
                 }
                 .first
             return StorableMessage(primaryKey: storedMessage?.primaryKey, model: message)

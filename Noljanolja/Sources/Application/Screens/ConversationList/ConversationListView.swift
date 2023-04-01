@@ -146,9 +146,7 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
                     case let .chat(conversation):
                         ChatView(
                             viewModel: ChatViewModel(
-                                state: ChatViewModel.State(
-                                    conversationID: conversation.id
-                                )
+                                conversationID: conversation.id
                             )
                         )
                     }

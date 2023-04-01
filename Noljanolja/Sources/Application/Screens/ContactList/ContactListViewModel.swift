@@ -32,6 +32,7 @@ final class ContactListViewModel: ObservableObject {
     // MARK: Action
 
     let loadDataTrigger = PassthroughSubject<Void, Never>()
+    let reloadDataTrigger = PassthroughSubject<Void, Never>()
     let requestContactsPermissionTrigger = PassthroughSubject<Void, Never>()
     let selectUserSubject = PassthroughSubject<(ConversationType, User), Never>()
     let createConversationTrigger = PassthroughSubject<ConversationType, Never>()
@@ -58,38 +59,40 @@ final class ContactListViewModel: ObservableObject {
     }
 
     private func configure() {
-        loadDataTrigger
-            .first()
-            .receive(on: DispatchQueue.main)
-            .handleEvents(receiveOutput: { [weak self] _ in self?.viewState = .loading })
-            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<[User], Error> in
-                guard let self else {
-                    return Empty<[User], Error>().eraseToAnyPublisher()
-                }
-                return self.contactService
-                    .getAuthorizationStatus()
-                    .flatMap { [weak self] _ -> AnyPublisher<[User], Error> in
-                        guard let self else {
-                            return Empty<[User], Error>().eraseToAnyPublisher()
-                        }
-                        return self.contactService.getContacts(page: 1, pageSize: 100)
-                    }
-                    .eraseToAnyPublisher()
+        Publishers.Merge(
+            loadDataTrigger.first(),
+            reloadDataTrigger
+        )
+        .receive(on: DispatchQueue.main)
+        .handleEvents(receiveOutput: { [weak self] _ in self?.viewState = .loading })
+        .flatMapLatestToResult { [weak self] _ -> AnyPublisher<[User], Error> in
+            guard let self else {
+                return Empty<[User], Error>().eraseToAnyPublisher()
             }
-            .sink(receiveValue: { result in
-                switch result {
-                case let .success(users):
-                    logger.info("Get contacts successful")
-                    self.allUsers = users
-                    self.users = users
-                    self.viewState = .content
-                case let .failure(error):
-                    logger.error("Get contacts failed: \(error.localizedDescription)")
-                    self.error = error
-                    self.viewState = .error
+            return self.contactService
+                .getAuthorizationStatus()
+                .flatMap { [weak self] _ -> AnyPublisher<[User], Error> in
+                    guard let self else {
+                        return Empty<[User], Error>().eraseToAnyPublisher()
+                    }
+                    return self.contactService.getContacts(page: 1, pageSize: 100)
                 }
-            })
-            .store(in: &cancellables)
+                .eraseToAnyPublisher()
+        }
+        .sink(receiveValue: { result in
+            switch result {
+            case let .success(users):
+                logger.info("Get contacts successful")
+                self.allUsers = users
+                self.users = users
+                self.viewState = .content
+            case let .failure(error):
+                logger.error("Get contacts failed: \(error.localizedDescription)")
+                self.error = error
+                self.viewState = .error
+            }
+        })
+        .store(in: &cancellables)
 
         requestContactsPermissionTrigger
             .flatMapLatestToResult { [weak self] _ -> AnyPublisher<Bool, Error> in
@@ -101,7 +104,7 @@ final class ContactListViewModel: ObservableObject {
             .sink(receiveValue: { [weak self] result in
                 switch result {
                 case .success:
-                    logger.error("Request contact permission successful")
+                    logger.info("Request contact permission successful")
                     self?.loadDataTrigger.send()
                 case let .failure(error):
                     logger.error("Request contact permission failed: \(error.localizedDescription)")

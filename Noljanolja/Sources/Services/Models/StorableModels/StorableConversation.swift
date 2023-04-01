@@ -45,7 +45,11 @@ final class StorableConversation: Object {
         self.type = model.type.rawValue
         self.messages = {
             let list = List<StorableMessage>()
-            list.append(objectsIn: model.messages.map { StorableMessage(primaryKey: String(model.id), model: $0) })
+            list.append(
+                objectsIn: model.messages.map {
+                    StorableMessage(primaryKey: $0.id.flatMap { String($0) }, model: $0)
+                }
+            )
             return list
         }()
         self.participants = {

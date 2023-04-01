@@ -32,6 +32,7 @@ final class UserService: UserServiceType {
     var currentUserPublisher: AnyPublisher<User, Never> {
         currentUserSubject
             .compactMap { $0 }
+            .removeDuplicates()
             .eraseToAnyPublisher()
     }
 

@@ -180,9 +180,7 @@ struct MainView<ViewModel: MainViewModelType>: View {
                 .frame(maxWidth: .infinity)
                 .padding(24)
                 .background(ColorAssets.primaryYellowMain.swiftUIColor)
-                .onTapGesture {
-                    print("OKOKOKOKOK")
-                }
+                .onTapGesture {}
 
                 Text("")
                     .frame(maxWidth: .infinity, maxHeight: .infinity)

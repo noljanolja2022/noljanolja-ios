@@ -27,7 +27,7 @@ struct ListView<Content: View>: View {
             .listSectionSeparator(.hidden)
         } else {
             ScrollView {
-                LazyVStack {
+                LazyVStack(spacing: 0) {
                     content()
                 }
             }

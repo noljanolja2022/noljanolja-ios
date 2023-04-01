@@ -32,9 +32,15 @@ final class ConversationService: ConversationServiceType {
     }
 
     func getConversation(conversationID: Int) -> AnyPublisher<Conversation, Error> {
-        let localConversation = conversationStore.observeConversation(conversationID: conversationID)
-        let remoteConversation = conversationAPI.getConversation(conversationID: conversationID)
+        let localConversation = conversationStore
+            .observeConversation(conversationID: conversationID)
+        let remoteConversation = conversationAPI
+            .getConversation(conversationID: conversationID)
+            .handleEvents(receiveOutput: { [weak self] in
+                self?.conversationStore.saveConversations([$0])
+            })
         return Publishers.Merge(localConversation, remoteConversation)
+            .removeDuplicates()
             .eraseToAnyPublisher()
     }
 
@@ -43,20 +49,19 @@ final class ConversationService: ConversationServiceType {
             .observeConversations()
             .filter { !$0.isEmpty }
             .map {
-                $0
-                    .map {
-                        Conversation(
-                            id: $0.id,
-                            title: $0.title,
-                            creator: $0.creator,
-                            type: $0.type,
-                            messages: $0.messages.sorted { $0.createdAt > $1.createdAt },
-                            participants: $0.participants,
-                            createdAt: $0.createdAt,
-                            updatedAt: $0.updatedAt
-                        )
-                    }
-                    .sorted { $0.updatedAt > $1.updatedAt }
+                $0.map {
+                    Conversation(
+                        id: $0.id,
+                        title: $0.title,
+                        creator: $0.creator,
+                        type: $0.type,
+                        messages: $0.messages.sorted { $0.createdAt > $1.createdAt },
+                        participants: $0.participants,
+                        createdAt: $0.createdAt,
+                        updatedAt: $0.updatedAt
+                    )
+                }
+                .sorted { $0.updatedAt > $1.updatedAt }
             }
 
         let remoteConversations = conversationAPI

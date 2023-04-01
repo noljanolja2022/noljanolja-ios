@@ -29,10 +29,16 @@ struct Conversation: Equatable, Codable {
     func displayTitle(_ currentUser: User) -> String? {
         switch type {
         case .single:
-            let firstParticipant = participants.filter { $0.id != currentUser.id }.first
-            return firstParticipant?.name
+            return participants
+                .filter { $0.id != currentUser.id }
+                .first?
+                .name
         case .group:
-            return title
+            return participants
+                .filter { $0.id != currentUser.id }
+                .compactMap { $0.name }
+                .filter { !$0.isEmpty }
+                .joined(separator: ", ")
         }
     }
 
