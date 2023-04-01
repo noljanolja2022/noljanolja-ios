@@ -48,21 +48,6 @@ final class ConversationService: ConversationServiceType {
         let localConversations = conversationStore
             .observeConversations()
             .filter { !$0.isEmpty }
-            .map {
-                $0.map {
-                    Conversation(
-                        id: $0.id,
-                        title: $0.title,
-                        creator: $0.creator,
-                        type: $0.type,
-                        messages: $0.messages.sorted { $0.createdAt > $1.createdAt },
-                        participants: $0.participants,
-                        createdAt: $0.createdAt,
-                        updatedAt: $0.updatedAt
-                    )
-                }
-                .sorted { $0.updatedAt > $1.updatedAt }
-            }
 
         let remoteConversations = conversationAPI
             .getConversations()
@@ -71,6 +56,34 @@ final class ConversationService: ConversationServiceType {
             })
 
         return Publishers.Merge(localConversations, remoteConversations)
+            .map {
+                $0
+                    .map {
+                        Conversation(
+                            id: $0.id,
+                            title: $0.title,
+                            creator: $0.creator,
+                            type: $0.type,
+                            messages: $0.messages.sorted { $0.createdAt > $1.createdAt },
+                            participants: $0.participants,
+                            createdAt: $0.createdAt,
+                            updatedAt: $0.updatedAt
+                        )
+                    }
+                    .sorted { lhs, rhs in
+                        let lhsLastMessage = lhs.messages.first
+                        let rhsLastMessage = rhs.messages.first
+                        if let lhsLastMessage, let rhsLastMessage {
+                            return lhsLastMessage.createdAt > rhsLastMessage.createdAt
+                        } else if lhsLastMessage != nil {
+                            return true
+                        } else if rhsLastMessage != nil {
+                            return false
+                        } else {
+                            return false
+                        }
+                    }
+            }
             .removeDuplicates()
             .eraseToAnyPublisher()
     }

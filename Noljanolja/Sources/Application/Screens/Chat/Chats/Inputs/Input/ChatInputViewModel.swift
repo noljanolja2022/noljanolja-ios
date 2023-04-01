@@ -64,6 +64,7 @@ final class ChatInputViewModel: ChatInputViewModelType {
 
         let sendPublisher = Publishers.Merge4(
             sendTextSubject
+                .filter { !$0.isEmpty }
                 .map {
                     SendMessageRequest(
                         conversationID: conversationID,
