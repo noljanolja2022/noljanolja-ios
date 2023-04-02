@@ -27,7 +27,8 @@ struct ContactListView<ViewModel: ContactListViewModel>: View {
             .onChange(of: viewModel.isProgressHUDShowing) {
                 progressHUBState.isLoading = $0
             }
-            .onAppear { viewModel.loadDataTrigger.send() }
+            .onAppear { viewModel.isAppearSubject.send(true) }
+            .onDisappear { viewModel.isAppearSubject.send(false) }
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("Select Contact")
@@ -35,11 +36,22 @@ struct ContactListView<ViewModel: ContactListViewModel>: View {
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Agree") {
-                        viewModel.createConversationTrigger.send(createConversationType)
+                    ZStack {
+                        switch createConversationType {
+                        case .single:
+                            EmptyView()
+                        case .group:
+                            Button("Agree") {
+                                viewModel.createConversationSubject.send(createConversationType)
+                            }
+                            .font(.system(size: 16))
+                            .foregroundColor(
+                                viewModel.isCreateConversationEnabled
+                                    ? ColorAssets.neutralDeepGrey.swiftUIColor
+                                    : ColorAssets.neutralDarkGrey.swiftUIColor)
+                            .disabled(viewModel.isCreateConversationEnabled)
+                        }
                     }
-                    .font(.system(size: 16))
-                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                 }
             }
     }
@@ -146,7 +158,7 @@ struct ContactListView<ViewModel: ContactListViewModel>: View {
                     Button(
                         action: {
                             if contactsError == .permissionNotDetermined {
-                                viewModel.requestContactsPermissionTrigger.send()
+                                viewModel.requestPermissionSubject.send()
                             } else {
                                 guard let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) else { return }
                                 UIApplication.shared.open(url, options: [:], completionHandler: nil)

@@ -29,3 +29,9 @@ public protocol ViewModelStateGetOnlyType<State, Action>: ObservableObject {
 
     func send(_ action: Action)
 }
+
+// MARK: - ViewModel
+
+public class ViewModel: ObservableObject {
+    public let isAppearSubject = CurrentValueSubject<Bool, Never>(false)
+}
