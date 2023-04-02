@@ -8,6 +8,8 @@
 import Foundation
 import Moya
 
+// MARK: - ApiProvider
+
 final class ApiProvider: MoyaProvider<MultiTarget> {
     static let `default` = ApiProvider()
 
@@ -25,7 +27,7 @@ final class ApiProvider: MoyaProvider<MultiTarget> {
                   requestClosure: @escaping RequestClosure = MoyaProvider<MultiTarget>.defaultRequestMapping,
                   stubClosure: @escaping StubClosure = MoyaProvider.neverStub,
                   callbackQueue: DispatchQueue? = nil,
-                  session: Session = MoyaProvider<Target>.defaultAlamofireSession(),
+                  session: Session = Session(interceptor: RefreshTokenInterceptor()),
                   plugins: [PluginType] = defaultPlugins,
                   trackInflights: Bool = false) {
         super.init(

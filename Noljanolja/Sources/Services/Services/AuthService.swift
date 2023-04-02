@@ -196,8 +196,8 @@ final class AuthService: NSObject, AuthServiceType {
                 .eraseToAnyPublisher()
         }
 
-        guard user.providerData.first(where: { $0.providerID == "password" }) == nil ||
-            user.isEmailVerified else {
+        guard user.providerData.first(where: { $0.providerID == "password" }) == nil
+            || user.isEmailVerified else {
             return Fail<String, Error>(error: FirebaseAuthError.emailNotVerified)
                 .eraseToAnyPublisher()
         }
