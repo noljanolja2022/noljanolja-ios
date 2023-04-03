@@ -8,6 +8,7 @@
 
 import SwiftUI
 import SwiftUINavigation
+import SwiftUIX
 
 // MARK: - AuthWithPhoneView
 
@@ -26,8 +27,42 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
     }
 
     var body: some View {
+        buildBodyView()
+            .hideNavigationBar()
+            .onChange(of: viewModel.state.isProgressHUDShowing) {
+                progressHUBState.isLoading = $0
+            }
+            .fullScreenCover(isPresented: $isSelectCountryShown) {
+                NavigationView {
+                    SelectCountryView(
+                        viewModel: SelectCountryViewModel(
+                            state: SelectCountryViewModel.State(
+                                selectedCountry: viewModel.state.country
+                            ),
+                            delegate: viewModel
+                        )
+                    )
+                }
+            }
+            .alert(item: $viewModel.state.alertState) {
+                Alert($0) { action in
+                    if let action, action {
+                        viewModel.send(.sendVerificationCode)
+                    }
+                }
+            }
+    }
+
+    private func buildBodyView() -> some View {
         ZStack {
-            buildBodyView()
+            VStack(spacing: 0) {
+                buildHeaderView()
+                buildContentView()
+            }
+            .background(
+                ColorAssets.primaryYellowMain.swiftUIColor
+                    .ignoresSafeArea(edges: .top)
+            )
             buildNavigationLinks()
         }
         .onChange(of: viewModel.state.isProgressHUDShowing) {
@@ -44,6 +79,7 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
                     )
                 )
             }
+            .accentColor(ColorAssets.neutralDarkGrey.swiftUIColor)
         }
         .alert(item: $viewModel.state.alertState) {
             Alert($0) { action in
@@ -54,19 +90,12 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
         }
     }
 
-    private func buildBodyView() -> some View {
-        VStack(spacing: 0) {
-            ImageAssets.logo.swiftUIImage
-                .resizable()
-                .scaledToFill()
-                .frame(width: 126, height: 114)
-                .padding(32)
-
-            buildContentView()
-                .background(ColorAssets.white.swiftUIColor)
-                .cornerRadius(40, corners: [.topLeft, .topRight])
-        }
-        .background(ColorAssets.primaryYellowMain.swiftUIColor.ignoresSafeArea(edges: .top))
+    private func buildHeaderView() -> some View {
+        ImageAssets.logo.swiftUIImage
+            .resizable()
+            .scaledToFill()
+            .frame(width: 126, height: 114)
+            .padding(32)
     }
 
     private func buildContentView() -> some View {
@@ -84,6 +113,8 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
 
             buildActionView()
         }
+        .background(ColorAssets.white.swiftUIColor)
+        .cornerRadius(40, corners: [.topLeft, .topRight])
     }
 
     private func buildContentHeaderView() -> some View {
@@ -155,30 +186,6 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
         .disabled(!viewModel.state.isSignInButtonEnabled)
         .frame(height: 48)
         .padding(16)
-    }
-
-    private func buildSNSSignInView() -> some View {
-        VStack(spacing: 12) {
-            HStack {
-                Rectangle()
-                    .frame(height: 1)
-                    .overlay(ColorAssets.forcegroundTertiary.swiftUIColor)
-                Text(L10n.Auth.SignInWithSns.title)
-                    .font(FontFamily.NotoSans.regular.swiftUIFont(size: 12))
-                    .foregroundColor(ColorAssets.forcegroundSecondary.swiftUIColor)
-                Rectangle()
-                    .frame(height: 1)
-                    .overlay(ColorAssets.forcegroundTertiary.swiftUIColor)
-            }
-            .padding(.vertical, 24)
-
-            Button(
-                action: { viewModel.send(.signInWithGoogle) },
-                label: { ImageAssets.icGoogle.swiftUIImage.resizable() }
-            )
-            .frame(width: 42, height: 42)
-            .cornerRadius(21)
-        }
     }
 
     private func buildNavigationLinks() -> some View {

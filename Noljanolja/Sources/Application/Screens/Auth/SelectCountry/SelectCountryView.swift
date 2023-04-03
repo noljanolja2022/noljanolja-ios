@@ -46,7 +46,7 @@ struct SelectCountryView<ViewModel: SelectCountryViewModelType>: View {
     }
 
     private func buildContentView() -> some View {
-        VStack(spacing: 8) {
+        VStack(spacing: 0) {
             buildSearchView()
             buildCountriesView()
         }
@@ -85,6 +85,7 @@ struct SelectCountryView<ViewModel: SelectCountryViewModelType>: View {
             .cornerRadius(12)
         }
         .padding(.horizontal, 16)
+        .padding(.vertical, 8)
     }
 
     private func buildCountriesView() -> some View {
