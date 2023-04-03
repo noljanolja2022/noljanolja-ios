@@ -162,6 +162,8 @@
 		CF775BC829C62EB200E82183 /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF775BC729C62EB200E82183 /* NotificationAPI.swift */; };
 		CF775BCA29C630B800E82183 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF775BC929C630B800E82183 /* NotificationService.swift */; };
 		CF7A64FA29C750D2007C545D /* MessageStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7A64F929C750D2007C545D /* MessageStatusView.swift */; };
+		CF7F576129D9F6610079C53D /* TermOfServiceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F575F29D9F6610079C53D /* TermOfServiceDetailView.swift */; };
+		CF7F576229D9F6610079C53D /* TermOfServiceDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F576029D9F6610079C53D /* TermOfServiceDetailViewModel.swift */; };
 		CF8633FD29B8F2F50091BF5D /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8633FC29B8F2F50091BF5D /* Contact.swift */; };
 		CF8633FF29B8F6020091BF5D /* Encodable+Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8633FE29B8F6020091BF5D /* Encodable+Encode.swift */; };
 		CF8737DF29CB525B0018237B /* ChatMediaInputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8737DE29CB525B0018237B /* ChatMediaInputType.swift */; };
@@ -419,6 +421,8 @@
 		CF775BC729C62EB200E82183 /* NotificationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAPI.swift; sourceTree = "<group>"; };
 		CF775BC929C630B800E82183 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		CF7A64F929C750D2007C545D /* MessageStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStatusView.swift; sourceTree = "<group>"; };
+		CF7F575F29D9F6610079C53D /* TermOfServiceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermOfServiceDetailView.swift; sourceTree = "<group>"; };
+		CF7F576029D9F6610079C53D /* TermOfServiceDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermOfServiceDetailViewModel.swift; sourceTree = "<group>"; };
 		CF8633FC29B8F2F50091BF5D /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		CF8633FE29B8F6020091BF5D /* Encodable+Encode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Encode.swift"; sourceTree = "<group>"; };
 		CF8737DE29CB525B0018237B /* ChatMediaInputType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMediaInputType.swift; sourceTree = "<group>"; };
@@ -875,9 +879,8 @@
 			isa = PBXGroup;
 			children = (
 				CF1EEE3829AE436E004F570A /* Models */,
-				CF1EEE3529AE3F85004F570A /* Views */,
-				CF1EEE3129AE3F81004F570A /* TermOfServiceView.swift */,
-				CF1EEE3229AE3F81004F570A /* TermOfServiceViewModel.swift */,
+				CF7F575E29D9F61D0079C53D /* TermDetail */,
+				CF7F575D29D9F5FB0079C53D /* Terms */,
 			);
 			path = Terms;
 			sourceTree = "<group>";
@@ -1204,6 +1207,25 @@
 				CF7A64F929C750D2007C545D /* MessageStatusView.swift */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		CF7F575D29D9F5FB0079C53D /* Terms */ = {
+			isa = PBXGroup;
+			children = (
+				CF1EEE3529AE3F85004F570A /* Views */,
+				CF1EEE3129AE3F81004F570A /* TermOfServiceView.swift */,
+				CF1EEE3229AE3F81004F570A /* TermOfServiceViewModel.swift */,
+			);
+			path = Terms;
+			sourceTree = "<group>";
+		};
+		CF7F575E29D9F61D0079C53D /* TermDetail */ = {
+			isa = PBXGroup;
+			children = (
+				CF7F575F29D9F6610079C53D /* TermOfServiceDetailView.swift */,
+				CF7F576029D9F6610079C53D /* TermOfServiceDetailViewModel.swift */,
+			);
+			path = TermDetail;
 			sourceTree = "<group>";
 		};
 		CF8737D229CB51840018237B /* Photo */ = {
@@ -2114,6 +2136,7 @@
 				CF43BF73299274D900FD3180 /* FirebaseAuth+Combine.swift in Sources */,
 				CFFD70C5298AC5F800D4F5A2 /* RequestTimeoutPlugin.swift in Sources */,
 				CF1550232993B5C90053E86D /* TabBarView.swift in Sources */,
+				CF7F576229D9F6610079C53D /* TermOfServiceDetailViewModel.swift in Sources */,
 				CFA3304D29BEB674008D7449 /* SearchView.swift in Sources */,
 				CF0EA31829AA4D6D0014A7DE /* CodeView.swift in Sources */,
 				CFECC13029B4D6D500E20B58 /* UILaunchBackgroundView.swift in Sources */,
@@ -2183,6 +2206,7 @@
 				CF12604629B78AAF00B5373B /* DeviceIdentityPlugin.swift in Sources */,
 				CF446B9029D8AB0D00ED66BF /* LottieAssets.swift in Sources */,
 				CFFB059329BF1253000D65EE /* TextMessageContentModel.swift in Sources */,
+				CF7F576129D9F6610079C53D /* TermOfServiceDetailView.swift in Sources */,
 				CFCD10AB29D350C900C5DAFF /* SendMessageParam.swift in Sources */,
 				CF1EEE3429AE3F81004F570A /* TermOfServiceViewModel.swift in Sources */,
 				CFF1F7A429B7371600B25DD2 /* ChatView.swift in Sources */,
