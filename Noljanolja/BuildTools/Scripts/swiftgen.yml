@@ -10,6 +10,7 @@ strings:
           allValues: true
           publicAccess: false
 
+
 xcassets:
   - inputs: ColorAssets.xcassets
     outputs:
@@ -19,6 +20,7 @@ xcassets:
           enumName: ColorAssets
           allValues: true
           publicAccess: false
+
   - inputs: ImageAssets.xcassets
     outputs:
       - templateName: swift5
@@ -27,12 +29,23 @@ xcassets:
           enumName: ImageAssets
           allValues: true
           publicAccess: false
+
+  - inputs: LottieAssets.xcassets
+    outputs:
+      - templateName: swift5
+        output: LottieAssets.swift
+        params:
+          enumName: LottieAssets
+          allValues: true
+          publicAccess: false
+
+
 fonts:
-  inputs: Fonts
-  outputs:
-    templateName: swift5
-    output: FontAssets.swift
-    params:
-      fontAliasName: FontAssets
-      allValues: true
-      publicAccess: true
+  - inputs: Fonts
+    outputs:
+      - templateName: swift5
+        output: FontAssets.swift
+        params:
+          fontAliasName: FontAssets
+          allValues: true
+          publicAccess: true

@@ -36,11 +36,14 @@ internal enum ImageAssets {
   internal static let icCheckCircle = ImageAsset(name: "ic_check_circle")
   internal static let icCheckCircleHightlight = ImageAsset(name: "ic_check_circle_hightlight")
   internal static let icChecked = ImageAsset(name: "ic_checked")
+  internal static let icCircleChecked = ImageAsset(name: "ic_circle_checked")
+  internal static let icCircleUnchecked = ImageAsset(name: "ic_circle_unchecked")
   internal static let icClose = ImageAsset(name: "ic_close")
   internal static let icCustomerServiceCenter = ImageAsset(name: "ic_customer_service_center")
   internal static let icEmoji = ImageAsset(name: "ic_emoji")
   internal static let icGoogle = ImageAsset(name: "ic_google")
   internal static let icGroupAdd = ImageAsset(name: "ic_group_add")
+  internal static let icGroupChat = ImageAsset(name: "ic_group_chat")
   internal static let icHome = ImageAsset(name: "ic_home")
   internal static let icKakao = ImageAsset(name: "ic_kakao")
   internal static let icKeyboardVoice = ImageAsset(name: "ic_keyboard_voice")
@@ -55,6 +58,7 @@ internal enum ImageAssets {
   internal static let icSend = ImageAsset(name: "ic_send")
   internal static let icServiceGuide = ImageAsset(name: "ic_service_guide")
   internal static let icShop = ImageAsset(name: "ic_shop")
+  internal static let icSingleChat = ImageAsset(name: "ic_single_chat")
   internal static let icStoreFill = SymbolAsset(name: "ic_store_fill")
   internal static let icUnchecked = ImageAsset(name: "ic_unchecked")
   internal static let icWallet = ImageAsset(name: "ic_wallet")
@@ -75,11 +79,14 @@ internal enum ImageAssets {
     icCheckCircle,
     icCheckCircleHightlight,
     icChecked,
+    icCircleChecked,
+    icCircleUnchecked,
     icClose,
     icCustomerServiceCenter,
     icEmoji,
     icGoogle,
     icGroupAdd,
+    icGroupChat,
     icHome,
     icKakao,
     icKeyboardVoice,
@@ -92,6 +99,7 @@ internal enum ImageAssets {
     icSend,
     icServiceGuide,
     icShop,
+    icSingleChat,
     icUnchecked,
     icWallet,
     logo,

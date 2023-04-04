@@ -8,25 +8,32 @@
 
 import SwiftUI
 import SwiftUINavigation
+import SwiftUIX
 
 // MARK: - TermOfServiceView
 
-struct TermOfServiceView<ViewModel: TermOfServiceViewModelType>: View {
+struct TermOfServiceView<ViewModel: TermOfServiceViewModel>: View {
     // MARK: Dependencies
 
-    @StateObject private var viewModel: ViewModel
+    @StateObject var viewModel: ViewModel
 
     // MARK: State
 
-    init(viewModel: ViewModel = TermOfServiceViewModel()) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
+    @State private var selectedTermType: TermOfServiceItemType?
 
     var body: some View {
         buildContentView()
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarBackButtonHidden(false)
-            .alert(item: $viewModel.state.alertState) { Alert($0) { _ in } }
+            .hideNavigationBar()
+            .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
+            .fullScreenCover(
+                unwrapping: $selectedTermType,
+                content: { selectedTermType in
+                    TermOfServiceDetailView(
+                        viewModel: TermOfServiceDetailViewModel(),
+                        termType: selectedTermType.wrappedValue
+                    )
+                }
+            )
     }
 
     private func buildContentView() -> some View {
@@ -36,10 +43,10 @@ struct TermOfServiceView<ViewModel: TermOfServiceViewModelType>: View {
                 buildTermItemsView()
                 buildActionView()
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(ColorAssets.white.swiftUIColor)
             .cornerRadius(40, corners: [.topLeft, .topRight])
         }
-        .ignoresSafeArea(edges: [.bottom])
         .background(ColorAssets.primaryYellowMain.swiftUIColor.ignoresSafeArea(edges: [.top]))
     }
 
@@ -79,10 +86,13 @@ struct TermOfServiceView<ViewModel: TermOfServiceViewModelType>: View {
                     ) { itemType in
                         TermOfServiceItemView(
                             selected: Binding<Bool>(
-                                get: { viewModel.state.termItemCheckeds[itemType] ?? false },
-                                set: { viewModel.send(.checkTermItem(itemType: itemType, checked: $0)) }
+                                get: { viewModel.termItemCheckeds[itemType] ?? false },
+                                set: {
+                                    viewModel.termItemCheckeds[itemType] = $0
+                                }
                             ),
-                            title: itemType.title
+                            title: itemType.title,
+                            action: { selectedTermType = itemType }
                         )
                     }
                 }
@@ -92,33 +102,14 @@ struct TermOfServiceView<ViewModel: TermOfServiceViewModelType>: View {
     }
 
     private func buildActionView() -> some View {
-        VStack(spacing: 16) {
-            TermOfServiceItemView(
-                selected: Binding<Bool>(
-                    get: { viewModel.state.isAllTermChecked },
-                    set: { viewModel.send(.checkAllTermItems(checked: $0)) }
-                ),
-                title: "I have read and agreed to all terms and conditions",
-                titleLineLimit: nil,
-                idArrowIconHidden: true
-            )
-
-            Button(
-                "Agree and Continue",
-                action: { viewModel.send(.tapContinueButton) }
-            )
-            .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.state.isAllTermChecked))
-            .disabled(!viewModel.state.isAllTermChecked)
-            .frame(height: 48)
-
-            Text("")
-                .frame(
-                    height: UIApplication.shared.rootKeyWindow?.safeAreaInsets.bottom ?? 0
-                )
-        }
-        .padding(.top, 16)
-        .padding(.horizontal, 16)
-        .background(ColorAssets.neutralLightGrey.swiftUIColor)
+        Button(
+            "NEXT",
+            action: { viewModel.actionSubject.send() }
+        )
+        .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.isAllTermChecked))
+        .disabled(!viewModel.isAllTermChecked)
+        .frame(height: 48)
+        .padding(16)
     }
 }
 
@@ -127,7 +118,9 @@ struct TermOfServiceView<ViewModel: TermOfServiceViewModelType>: View {
 struct TermOfServiceView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            TermOfServiceView()
+            TermOfServiceView(
+                viewModel: TermOfServiceViewModel()
+            )
         }
     }
 }

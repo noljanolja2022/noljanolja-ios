@@ -13,73 +13,57 @@ import Foundation
 
 protocol ChatViewModelDelegate: AnyObject {}
 
-// MARK: - ChatViewModelType
-
-protocol ChatViewModelType:
-    ViewModelType where State == ChatViewModel.State, Action == ChatViewModel.Action {}
-
-extension ChatViewModel {
-    struct State {
-        let conversationID: Int
-
-        var title = ""
-
-        var chatItems = [ChatItemModelType]()
-        var error: Error?
-
-        var viewState = ViewState.content
-        var footerViewState = StatefullFooterViewState.loading
-        var headerViewState = StatefullFooterViewState.loading
-    }
-
-    enum Action {
-        case isAppear(Bool)
-        case loadData
-        case reloadData
-        case loadMoreData(Int)
-    }
-}
-
 // MARK: - ChatViewModel
 
-final class ChatViewModel: ChatViewModelType {
+final class ChatViewModel: ObservableObject {
     // MARK: State
 
-    @Published var state: State
+    @Published var title = ""
 
-    // MARK: Dependencies
+    @Published var chatItems = [ChatItemModelType]()
+    @Published var error: Error?
 
-    private let userService: UserServiceType
-    private let conversationService: ConversationServiceType
-    private let messageService: MessageServiceType
-    private weak var delegate: ChatViewModelDelegate?
+    @Published var viewState = ViewState.loading
+    @Published var footerViewState = StatefullFooterViewState.loading
+    @Published var headerViewState = StatefullFooterViewState.loading
+
+    let isAppearSubject = CurrentValueSubject<Bool, Never>(false)
 
     // MARK: Action
 
-    private let loadDataTrigger = PassthroughSubject<Void, Never>()
-    private let loadMoreDataTrigger = PassthroughSubject<Int, Never>()
+    let loadLocalDataTrigger = PassthroughSubject<Void, Never>()
+    let loadMoreDataTrigger = PassthroughSubject<Int, Never>()
+
     private let loadPreviousDataTrigger = PassthroughSubject<Void, Never>()
     private let loadNextDataTrigger = PassthroughSubject<Void, Never>()
     private let reloadDataTrigger = PassthroughSubject<Void, Never>()
     private let seenTrigger = PassthroughSubject<Int, Never>()
 
+    // MARK: Dependencies
+
+    let conversationID: Int
+    
+    private let userService: UserServiceType
+    private let conversationService: ConversationServiceType
+    private let messageService: MessageServiceType
+    private weak var delegate: ChatViewModelDelegate?
+
     // MARK: Data
 
-    private let isAppearSubject = PassthroughSubject<Bool, Never>()
-    private let conversationSubject = PassthroughSubject<Conversation, Never>()
-    private let currentUserSubject = PassthroughSubject<User, Never>()
+    private let conversationSubject = CurrentValueSubject<Conversation?, Never>(nil)
+    private let currentUserSubject = CurrentValueSubject<User?, Never>(nil)
     private let messagesSubject = CurrentValueSubject<[Message], Never>([])
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(state: State,
+    init(conversationID: Int,
          userService: UserServiceType = UserService.default,
          conversationService: ConversationServiceType = ConversationService.default,
          messageService: MessageServiceType = MessageService.default,
          delegate: ChatViewModelDelegate? = nil) {
-        self.state = state
+        self.conversationID = conversationID
         self.userService = userService
         self.conversationService = conversationService
         self.messageService = messageService
@@ -88,67 +72,78 @@ final class ChatViewModel: ChatViewModelType {
         configure()
     }
 
-    func send(_ action: Action) {
-        switch action {
-        case let .isAppear(isAppear):
-            isAppearSubject.send(isAppear)
-        case .loadData:
-            loadDataTrigger.send()
-        case .reloadData:
-            reloadDataTrigger.send()
-        case let .loadMoreData(index):
-            loadMoreDataTrigger.send(index)
-        }
+    private func configure() {
+        configureBindData()
+        configureSeenMessage()
+        configureLoadData()
     }
 
-    private func configure() {
-        Publishers.CombineLatest(currentUserSubject, conversationSubject)
-            .map { currentUser, conversation in
-                conversation.displayTitle(currentUser) ?? ""
-            }
-            .sink(receiveValue: { [weak self] in
-                self?.state.title = $0
-            })
-            .store(in: &cancellables)
+    private func configureBindData() {
+        Publishers.CombineLatest(
+            currentUserSubject.compactMap { $0 }.removeDuplicates(),
+            conversationSubject.compactMap { $0 }.removeDuplicates()
+        )
+        .map { currentUser, conversation in
+            conversation.displayTitle(currentUser) ?? ""
+        }
+        .removeDuplicates()
+        .receive(on: DispatchQueue.main)
+        .sink(receiveValue: { [weak self] in self?.title = $0 })
+        .store(in: &cancellables)
 
         Publishers
             .CombineLatest3(
-                currentUserSubject.removeDuplicates(),
-                conversationSubject.removeDuplicates(),
-                messagesSubject.removeDuplicates()
+                currentUserSubject
+                    .compactMap { $0 }
+                    .removeDuplicates(),
+                conversationSubject
+                    .compactMap { $0 }
+                    .removeDuplicates(),
+                messagesSubject
+                    .compactMap { $0 }
+                    .filter { !$0.isEmpty }
+                    .removeDuplicates()
             )
             .map { currentUser, conversation, messages in
-                MessageItemModelBuilder(currentUser: currentUser, conversation: conversation, messages: messages)
-                    .build()
+                MessageItemModelBuilder(
+                    currentUser: currentUser,
+                    conversation: conversation,
+                    messages: messages
+                )
+                .build()
             }
             .sink(receiveValue: { [weak self] in
-                self?.state.chatItems = $0
-                self?.state.viewState = .content
+                self?.chatItems = $0
+                self?.viewState = .content
             })
             .store(in: &cancellables)
+    }
+
+    private func configureLoadData() {
+        // MARK: Load remote messages
 
         let getMessagesTrigger = Publishers.Merge3(
             reloadDataTrigger
                 .map { _ -> (Message?, Message?) in (nil, nil) },
             loadPreviousDataTrigger
-                .filter { [weak self] in self?.state.footerViewState != .noMoreData }
+                .filter { [weak self] in self?.footerViewState != .noMoreData }
                 .withLatestFrom(messagesSubject)
                 .map { messages -> (Message?, Message?) in (messages.last, nil) }
                 .handleEvents(receiveOutput: { [weak self] _ in
-                    self?.state.footerViewState = .loading
+                    self?.footerViewState = .loading
                 }),
             loadNextDataTrigger
-                .filter { [weak self] in self?.state.headerViewState != .noMoreData }
+                .filter { [weak self] in self?.headerViewState != .noMoreData }
                 .withLatestFrom(messagesSubject)
                 .map { messages -> (Message?, Message?) in (nil, messages.first) }
                 .handleEvents(receiveOutput: { [weak self] _ in
-                    self?.state.headerViewState = .loading
+                    self?.headerViewState = .loading
                 })
         )
 
         getMessagesTrigger
             .handleEvents(receiveOutput: { [weak self] _ in
-                self?.state.viewState = .loading
+                self?.viewState = .loading
             })
             .flatMapToResult { [weak self] lastMessage, firstMessage in
                 guard let self else {
@@ -156,16 +151,16 @@ final class ChatViewModel: ChatViewModelType {
                 }
                 return self.messageService
                     .getMessages(
-                        conversationID: self.state.conversationID,
+                        conversationID: self.conversationID,
                         beforeMessageID: lastMessage?.id,
                         afterMessageID: firstMessage?.id
                     )
                     .handleEvents(receiveOutput: { [weak self] messages in
                         if lastMessage != nil {
-                            self?.state.footerViewState = messages.isEmpty ? .noMoreData : .loading
+                            self?.footerViewState = messages.isEmpty ? .noMoreData : .loading
                         }
                         if firstMessage != nil {
-                            self?.state.headerViewState = messages.isEmpty ? .noMoreData : .loading
+                            self?.headerViewState = messages.isEmpty ? .noMoreData : .loading
                         }
                     })
                     .eraseToAnyPublisher()
@@ -173,34 +168,10 @@ final class ChatViewModel: ChatViewModelType {
             .sink(receiveValue: { [weak self] result in
                 switch result {
                 case let .success(messages):
-                    self?.state.viewState = .content
+                    self?.viewState = .content
                 case let .failure(error):
-                    self?.state.error = error
-                    self?.state.viewState = .error
-                }
-            })
-            .store(in: &cancellables)
-
-        loadDataTrigger
-            .first()
-            .flatMapLatestToResult { [weak self] _ in
-                guard let self else {
-                    return Empty<[Message], Error>().eraseToAnyPublisher()
-                }
-                return self.messageService
-                    .getLocalMessages(conversationID: self.state.conversationID)
-                    .eraseToAnyPublisher()
-            }
-            .sink(receiveValue: { [weak self] result in
-                switch result {
-                case let .success(messages):
-                    logger.info("Get local messages successfull")
-                    self?.messagesSubject.send(messages)
-                    if messages.isEmpty {
-                        self?.reloadDataTrigger.send()
-                    }
-                case let .failure(error):
-                    logger.error("Get local messages failed: \(error.localizedDescription)")
+                    self?.error = error
+                    self?.viewState = .error
                 }
             })
             .store(in: &cancellables)
@@ -208,8 +179,9 @@ final class ChatViewModel: ChatViewModelType {
         loadMoreDataTrigger
             .sink(receiveValue: { [weak self] index in
                 guard let self else { return }
-                if (self.state.chatItems.count > 10 && index == self.state.chatItems.count - 10)
-                    || (self.state.chatItems.count < 10 && index == self.state.chatItems.count - 1) {
+                let chekingCount = 20
+                if (self.chatItems.count > chekingCount && index == self.chatItems.count - chekingCount)
+                    || (self.chatItems.count < chekingCount && index == self.chatItems.count - 1) {
                     self.loadPreviousDataTrigger.send()
                 } else if index == 0 {
                     self.loadNextDataTrigger.send()
@@ -217,14 +189,46 @@ final class ChatViewModel: ChatViewModelType {
             })
             .store(in: &cancellables)
 
-        loadDataTrigger
+        messagesSubject
+            .first()
+            .sink(receiveValue: { [weak self] messages in
+                self?.loadNextDataTrigger.send()
+                if messages.isEmpty {
+                    self?.reloadDataTrigger.send()
+                }
+            })
+            .store(in: &cancellables)
+
+        // MARK: Load local messages
+
+        loadLocalDataTrigger
+            .first()
+            .flatMapLatestToResult { [weak self] _ in
+                guard let self else {
+                    return Empty<[Message], Error>().eraseToAnyPublisher()
+                }
+                return self.messageService
+                    .getLocalMessages(conversationID: self.conversationID)
+            }
+            .sink(receiveValue: { [weak self] result in
+                switch result {
+                case let .success(messages):
+                    logger.info("Get local messages successfull")
+                    self?.messagesSubject.send(messages)
+                case let .failure(error):
+                    logger.error("Get local messages failed: \(error.localizedDescription)")
+                }
+            })
+            .store(in: &cancellables)
+
+        loadLocalDataTrigger
             .first()
             .flatMapLatestToResult { [weak self] _ in
                 guard let self else {
                     return Empty<Conversation, Error>().eraseToAnyPublisher()
                 }
                 return self.conversationService
-                    .getConversation(conversationID: self.state.conversationID)
+                    .getConversation(conversationID: self.conversationID)
             }
             .sink(receiveValue: { [weak self] result in
                 switch result {
@@ -236,21 +240,20 @@ final class ChatViewModel: ChatViewModelType {
             })
             .store(in: &cancellables)
 
-        messagesSubject
-            .dropFirst()
-            .first()
-            .sink(receiveValue: { [weak self] _ in
-                self?.loadNextDataTrigger.send()
-            })
+        userService
+            .currentUserPublisher
+            .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
             .store(in: &cancellables)
+    }
 
+    private func configureSeenMessage() {
         Publishers
             .CombineLatest3(
-                currentUserSubject.removeDuplicates(),
-                messagesSubject.removeDuplicates(),
-                isAppearSubject.removeDuplicates()
+                currentUserSubject.compactMap { $0 }.removeDuplicates(),
+                messagesSubject.compactMap { $0 }.removeDuplicates(),
+                isAppearSubject.compactMap { $0 }.removeDuplicates()
             )
-            .sink(receiveValue: { [weak self] currentUser, messages, isAppear in
+            .sink(receiveValue: { [weak self] (currentUser: User, messages: [Message], isAppear: Bool) in
                 guard let message = messages.first(where: { $0.id != nil && $0.sender.id != currentUser.id }),
                       !message.seenBy.contains(currentUser.id),
                       let messageID = message.id,
@@ -266,14 +269,9 @@ final class ChatViewModel: ChatViewModelType {
                 guard let self else {
                     return Empty<Void, Error>().eraseToAnyPublisher()
                 }
-                return self.messageService.seenMessage(conversationID: self.state.conversationID, messageID: messageID)
+                return self.messageService.seenMessage(conversationID: self.conversationID, messageID: messageID)
             }
             .sink(receiveValue: { _ in })
-            .store(in: &cancellables)
-
-        userService
-            .currentUserPublisher
-            .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
             .store(in: &cancellables)
     }
 }

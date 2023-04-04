@@ -54,6 +54,7 @@ final class MessageService: MessageServiceType {
         messageStore
             .observeMessages(conversationID: conversationID)
             .map { $0.sorted { $0.createdAt > $1.createdAt } }
+            .removeDuplicates()
             .eraseToAnyPublisher()
     }
 
@@ -88,38 +89,18 @@ final class MessageService: MessageServiceType {
             }
         }
 
-        let attachmentsPublisher: AnyPublisher<[AttachmentParam]?, Error> = {
-            if let photos = request.photos {
-                return photoAssetAPI
-                    .requestImage(photos)
-                    .map { [weak self] photoModels -> [AttachmentParam]? in
-                        let attachmentParams = photoModels?.map { photoModel -> AttachmentParam in
-                            let id = UUID().uuidString
-                            return AttachmentParam(
-                                id: id,
-                                name: "\(id).png",
-                                data: photoModel.image.jpegData(compressionQuality: 0.5)
-                            )
-                        }
-                        attachmentParams?.forEach { [weak self] in
-                            guard let data = $0.data else { return }
-                            try? self?.messageStore
-                                .savePhoto(
-                                    conversationID: request.conversationID,
-                                    fileName: $0.name,
-                                    data: data
-                                )
-                        }
-                        return attachmentParams
-                    }
-                    .setFailureType(to: Error.self)
-                    .eraseToAnyPublisher()
-            } else {
-                return Just(nil)
-                    .setFailureType(to: Error.self)
-                    .eraseToAnyPublisher()
-            }
-        }()
+        let attachmentsPublisher = buildAttachmentTrigger(request.attachments)
+            .handleEvents(receiveOutput: {
+                $0?.forEach { [weak self] in
+                    guard let data = $0.data else { return }
+                    try? self?.messageStore
+                        .savePhoto(
+                            conversationID: request.conversationID,
+                            fileName: $0.name,
+                            data: data
+                        )
+                }
+            })
 
         return attachmentsPublisher
             .withLatestFrom(userService.currentUserPublisher.setFailureType(to: Error.self)) { ($0, $1) }
@@ -160,5 +141,55 @@ final class MessageService: MessageServiceType {
         }
         let remoteStickerURL = messageAPI.getPhotoURL(conversationId: conversationID, attachmentId: attachmentId)
         return localStickerURL ?? remoteStickerURL
+    }
+}
+
+extension MessageService {
+    private func buildAttachmentTrigger(_ attachment: AttachmentsRequest?) -> AnyPublisher<[AttachmentParam]?, Error> {
+        switch attachment {
+        case let .images(images):
+            if let images {
+                let params = images.map { image in
+                    let id = UUID().uuidString
+                    return AttachmentParam(
+                        id: id,
+                        name: "\(id).png",
+                        data: image.pngData()
+                    )
+                }
+                return Just(params)
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
+            } else {
+                return Just(nil)
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
+            }
+        case let .photos(photos):
+            if let photos {
+                return photoAssetAPI
+                    .requestImage(photos)
+                    .map { photoModels -> [AttachmentParam]? in
+                        photoModels?.map { photoModel -> AttachmentParam in
+                            let id = UUID().uuidString
+                            return AttachmentParam(
+                                id: id,
+                                name: "\(id).png",
+                                data: photoModel.image.jpegData(compressionQuality: 0.5)
+                            )
+                        }
+                    }
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
+            } else {
+                return Just(nil)
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
+            }
+        case .none:
+            return Just(nil)
+                .setFailureType(to: Error.self)
+                .eraseToAnyPublisher()
+        }
     }
 }

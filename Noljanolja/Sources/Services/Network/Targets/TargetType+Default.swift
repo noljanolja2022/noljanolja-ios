@@ -13,19 +13,7 @@ extension TargetType {
         nil
     }
 
-    var urlParameters: [String: Any]? {
-        nil
-    }
-
-    var parameterEncoding: ParameterEncoding {
-        JSONEncoding.default
-    }
-
-    var sampleData: Data {
-        Data()
-    }
-
-    var validate: Bool {
-        false
+    var validationType: ValidationType {
+        .successCodes
     }
 }

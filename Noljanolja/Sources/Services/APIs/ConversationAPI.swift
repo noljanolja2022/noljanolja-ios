@@ -29,19 +29,32 @@ private enum ConversationAPITargets {
     struct CreateConversation: BaseAuthTargetType {
         var path: String { "v1/conversations" }
         let method: Moya.Method = .post
-        var task: Task { .requestParameters(parameters: parameters, encoding: JSONEncoding.default) }
+
+        var task: Task {
+            var multipartFormDatas = [MultipartFormData?]()
+
+            if let data = title.data(using: .utf8) {
+                multipartFormDatas.append(MultipartFormData(provider: .data(data), name: "title"))
+            }
+
+            participants.forEach { user in
+                if let data = user.id.data(using: .utf8) {
+                    multipartFormDatas.append(
+                        MultipartFormData(provider: .data(data), name: "participantIds")
+                    )
+                }
+            }
+
+            if let data = type.rawValue.data(using: .utf8) {
+                multipartFormDatas.append(MultipartFormData(provider: .data(data), name: "type"))
+            }
+
+            return .uploadMultipart(multipartFormDatas.compactMap { $0 })
+        }
 
         let title: String
         let type: ConversationType
         let participants: [User]
-
-        var parameters: [String: Any] {
-            [
-                "title": title,
-                "type": type.rawValue,
-                "participantIds": participants.map { $0.id }
-            ]
-        }
     }
 }
 

@@ -13,8 +13,7 @@ import Foundation
 protocol ConversationServiceType {
     func getConversation(conversationID: Int) -> AnyPublisher<Conversation, Error>
     func getConversations() -> AnyPublisher<[Conversation], Error>
-    func createConversation(title: String,
-                            type: ConversationType,
+    func createConversation(type: ConversationType,
                             participants: [User]) -> AnyPublisher<Conversation, Error>
 }
 
@@ -33,9 +32,15 @@ final class ConversationService: ConversationServiceType {
     }
 
     func getConversation(conversationID: Int) -> AnyPublisher<Conversation, Error> {
-        let localConversation = conversationStore.observeConversation(conversationID: conversationID)
-        let remoteConversation = conversationAPI.getConversation(conversationID: conversationID)
+        let localConversation = conversationStore
+            .observeConversation(conversationID: conversationID)
+        let remoteConversation = conversationAPI
+            .getConversation(conversationID: conversationID)
+            .handleEvents(receiveOutput: { [weak self] in
+                self?.conversationStore.saveConversations([$0])
+            })
         return Publishers.Merge(localConversation, remoteConversation)
+            .removeDuplicates()
             .eraseToAnyPublisher()
     }
 
@@ -43,8 +48,16 @@ final class ConversationService: ConversationServiceType {
         let localConversations = conversationStore
             .observeConversations()
             .filter { !$0.isEmpty }
-            .map {
-                $0
+
+        let remoteConversations = conversationAPI
+            .getConversations()
+            .handleEvents(receiveOutput: { [weak self] in
+                self?.conversationStore.saveConversations($0)
+            })
+
+        return Publishers.Merge(localConversations, remoteConversations)
+            .map { conversations in
+                conversations
                     .map {
                         Conversation(
                             id: $0.id,
@@ -57,23 +70,27 @@ final class ConversationService: ConversationServiceType {
                             updatedAt: $0.updatedAt
                         )
                     }
-                    .sorted { $0.updatedAt > $1.updatedAt }
+                    .sorted { lhs, rhs in
+                        let lhsLastMessage = lhs.messages.first
+                        let rhsLastMessage = rhs.messages.first
+                        if let lhsLastMessage, let rhsLastMessage {
+                            return lhsLastMessage.createdAt > rhsLastMessage.createdAt
+                        } else if lhsLastMessage != nil {
+                            return true
+                        } else if rhsLastMessage != nil {
+                            return false
+                        } else {
+                            return false
+                        }
+                    }
             }
-
-        let remoteConversations = conversationAPI
-            .getConversations()
-            .handleEvents(receiveOutput: { [weak self] in
-                self?.conversationStore.saveConversations($0)
-            })
-
-        return Publishers.Merge(localConversations, remoteConversations)
             .removeDuplicates()
             .eraseToAnyPublisher()
     }
 
-    func createConversation(title: String,
-                            type: ConversationType,
+    func createConversation(type: ConversationType,
                             participants: [User]) -> AnyPublisher<Conversation, Error> {
-        conversationAPI.createConversation(title: title, type: type, participants: participants)
+        conversationAPI
+            .createConversation(title: "", type: type, participants: participants)
     }
 }

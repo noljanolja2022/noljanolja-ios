@@ -32,6 +32,7 @@ final class UserService: UserServiceType {
     var currentUserPublisher: AnyPublisher<User, Never> {
         currentUserSubject
             .compactMap { $0 }
+            .removeDuplicates()
             .eraseToAnyPublisher()
     }
 
@@ -54,7 +55,6 @@ final class UserService: UserServiceType {
         userAPI
             .updateCurrentUser(param)
             .handleEvents(receiveOutput: { [weak self] in self?.currentUserSubject.send($0) })
-            .eraseToAnyPublisher()
             .eraseToAnyPublisher()
     }
 }

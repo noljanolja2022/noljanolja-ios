@@ -57,7 +57,7 @@ struct RootView<ViewModel: RootViewModelType>: View {
                 .introspectNavigationController { navigationController in
                     navigationController.configure(
                         backgroundColor: ColorAssets.highlightPrimary.color,
-                        foregroundColor: ColorAssets.forcegroundPrimary.color
+                        foregroundColor: ColorAssets.neutralDarkGrey.color
                     )
                 }
             }

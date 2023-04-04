@@ -13,21 +13,16 @@ import SwiftUI
 struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
     // MARK: Dependencies
 
-    @StateObject private var viewModel: ViewModel
+    @StateObject var viewModel: ViewModel
+    @Binding var isCreateChatShown: Bool
+    @Binding var createConversationType: ConversationType?
 
     // MARK: State
-
-    @Binding private var isContactListShown: Bool
-
-    init(viewModel: ViewModel = ConversationListViewModel(),
-         isContactListShown: Binding<Bool>) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-        self._isContactListShown = isContactListShown
-    }
 
     var body: some View {
         buildBodyView()
             .onAppear { viewModel.send(.loadData) }
+            .clipped()
     }
 
     private func buildBodyView() -> some View {
@@ -42,7 +37,7 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
                     .padding(.horizontal, 16)
 
                     Button(
-                        action: { isContactListShown = true },
+                        action: { isCreateChatShown = true },
                         label: {
                             Text("")
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -102,7 +97,7 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
                     .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
 
                 Button(
-                    action: { isContactListShown = true },
+                    action: { isCreateChatShown = true },
                     label: {
                         HStack(spacing: 8) {
                             Image(systemName: "plus")
@@ -130,12 +125,14 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
     private func buildNavigationLinkViews() -> some View {
         ZStack {
             NavigationLink(
-                isActive: $isContactListShown,
-                destination: {
+                unwrapping: $createConversationType,
+                onNavigate: { _ in },
+                destination: { createConversationType in
                     ContactListView(
                         viewModel: ContactListViewModel(
                             delegate: viewModel
-                        )
+                        ),
+                        createConversationType: createConversationType.wrappedValue
                     )
                 },
                 label: { EmptyView() }
@@ -149,9 +146,7 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
                     case let .chat(conversation):
                         ChatView(
                             viewModel: ChatViewModel(
-                                state: ChatViewModel.State(
-                                    conversationID: conversation.id
-                                )
+                                conversationID: conversation.id
                             )
                         )
                     }
@@ -166,6 +161,10 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
 
 struct ConversationListView_Previews: PreviewProvider {
     static var previews: some View {
-        ConversationListView(isContactListShown: .constant(false))
+        ConversationListView(
+            viewModel: ConversationListViewModel(),
+            isCreateChatShown: .constant(false),
+            createConversationType: .constant(.single)
+        )
     }
 }

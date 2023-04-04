@@ -11,22 +11,16 @@ import SwiftUI
 
 // MARK: - ChatView
 
-struct ChatView<ViewModel: ChatViewModelType>: View {
+struct ChatView<ViewModel: ChatViewModel>: View {
     // MARK: Dependencies
 
-    @StateObject private var viewModel: ViewModel
-
-    // MARK: State
-
-    init(viewModel: ViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
+    @StateObject var viewModel: ViewModel
 
     var body: some View {
         buildBodyView()
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text(viewModel.state.title)
+                    Text(viewModel.title)
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
@@ -37,23 +31,23 @@ struct ChatView<ViewModel: ChatViewModelType>: View {
         VStack(spacing: 0) {
             buildContentView()
                 .statefull(
-                    state: $viewModel.state.viewState,
-                    isEmpty: { viewModel.state.chatItems.isEmpty },
+                    state: $viewModel.viewState,
+                    isEmpty: { viewModel.chatItems.isEmpty },
                     loading: buildLoadingView,
                     empty: buildEmptyView,
                     error: buildErrorView
                 )
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .onAppear {
-                    viewModel.send(.loadData)
-                    viewModel.send(.isAppear(true))
+                    viewModel.isAppearSubject.send(true)
+                    viewModel.loadLocalDataTrigger.send()
                 }
                 .onDisappear {
-                    viewModel.send(.isAppear(false))
+                    viewModel.isAppearSubject.send(false)
                 }
             ChatInputView(
                 viewModel: ChatInputViewModel(
-                    conversationID: viewModel.state.conversationID
+                    conversationID: viewModel.conversationID
                 )
             )
         }
@@ -61,29 +55,13 @@ struct ChatView<ViewModel: ChatViewModelType>: View {
 
     private func buildContentView() -> some View {
         ListView {
-            ForEach(Array(viewModel.state.chatItems.enumerated()), id: \.offset) { index, chatItem in
+            ForEach(Array(viewModel.chatItems.enumerated()), id: \.offset) { index, chatItem in
                 ChatItemView(chatItem: chatItem)
-                    .onAppear { viewModel.send(.loadMoreData(index)) }
+                    .onAppear { viewModel.loadMoreDataTrigger.send(index) }
             }
             .listRowInsets(EdgeInsets())
             .scaleEffect(x: 1, y: -1, anchor: .center)
-
-            StatefullFooterView(
-                state: $viewModel.state.footerViewState,
-                errorView: ErrorFooterView(
-                    action: {
-                        viewModel.send(
-                            .loadMoreData(
-                                viewModel.state.chatItems.count - 1
-                            )
-                        )
-                    }
-                )
-            )
-            .scaleEffect(x: 1, y: -1, anchor: .center)
-            .frame(height: 44)
         }
-        .listStyle(PlainListStyle())
         .scaleEffect(x: 1, y: -1, anchor: .center)
     }
 
@@ -92,12 +70,12 @@ struct ChatView<ViewModel: ChatViewModelType>: View {
     }
 
     private func buildEmptyView() -> some View {
-        Text("Empty")
+        Text("")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     private func buildErrorView() -> some View {
-        Text("Error")
+        Text("")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
@@ -108,9 +86,7 @@ struct ChatView_Previews: PreviewProvider {
     static var previews: some View {
         ChatView(
             viewModel: ChatViewModel(
-                state: ChatViewModel.State(
-                    conversationID: 0
-                )
+                conversationID: 0
             )
         )
     }
