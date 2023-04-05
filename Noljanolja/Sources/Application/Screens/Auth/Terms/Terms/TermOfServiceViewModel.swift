@@ -29,7 +29,10 @@ final class TermOfServiceViewModel: ViewModel {
     @Published var termItemCheckeds = Dictionary(uniqueKeysWithValues: TermOfServiceItemType.allCases.map { ($0, false) })
     var isAllTermChecked: Bool {
         get {
-            termItemCheckeds.map { $0.value }.reduce(true) { $0 && $1 }
+            termItemCheckeds
+                .filter { $0.key.sectionType == .compulsory }
+                .map { $0.value }
+                .reduce(true) { $0 && $1 }
         }
         set {
             termItemCheckeds = Dictionary(uniqueKeysWithValues: TermOfServiceItemType.allCases.map { ($0, newValue) })
@@ -52,23 +55,6 @@ final class TermOfServiceViewModel: ViewModel {
 
         configure()
     }
-
-//    func send(_ action: Action) {
-//        switch action {
-//        case .openHelpAlert:
-//            state.alertState = AlertState(
-//                title: TextState(""),
-//                message: TextState("You may choose to agree to ther terms individually.\nYou may use ther service even if you don't agree to the optional terms and coditions"),
-//                dismissButton: .cancel(TextState("OK"))
-//            )
-//        case let .checkTermItem(itemType, checked):
-//            state.termItemCheckeds[itemType] = checked
-//        case let .checkAllTermItems(checked):
-//            state.isAllTermChecked = checked
-//        case .tapContinueButton:
-//            delegate?.navigateToAuth()
-//        }
-//    }
 
     private func configure() {
         actionSubject

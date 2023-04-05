@@ -7,25 +7,23 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 // MARK: - SelectCountryView
 
-struct SelectCountryView<ViewModel: SelectCountryViewModelType>: View {
+struct SelectCountryView<ViewModel: SelectCountryViewModel>: View {
     // MARK: Dependencies
 
-    @StateObject private var viewModel: ViewModel
+    @StateObject var viewModel: ViewModel
 
     // MARK: State
 
     @Environment(\.presentationMode) private var presentationMode
 
-    init(viewModel: ViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
-
     var body: some View {
         buildContentView()
-            .onAppear { viewModel.send(.loadData) }
+            .onAppear { viewModel.isAppearSubject.send(true) }
+            .onDisappear { viewModel.isAppearSubject.send(false) }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -38,7 +36,7 @@ struct SelectCountryView<ViewModel: SelectCountryViewModelType>: View {
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
                 ToolbarItem(placement: .principal) {
-                    Text("Select country")
+                    Text("Select Countries/Regions")
                         .font(.system(size: 18, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
@@ -54,59 +52,62 @@ struct SelectCountryView<ViewModel: SelectCountryViewModelType>: View {
 
     private func buildSearchView() -> some View {
         HStack(spacing: 8) {
-            HStack(spacing: 8) {
-                Image(systemName: "magnifyingglass")
-                    .resizable()
-                    .frame(width: 22, height: 22)
-                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
-                TextField("Search", text: $viewModel.state.searchString)
-                    .keyboardType(.phonePad)
-                    .textFieldStyle(TappableTextFieldStyle())
-                    .frame(height: 32)
-                    .font(.system(size: 16))
-                if !viewModel.state.searchString.isEmpty {
-                    Button(
-                        action: {
-                            viewModel.state.searchString = ""
-                        },
-                        label: {
-                            Image(systemName: "xmark.circle.fill")
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
-                        }
-                    )
-                }
+            Image(systemName: "magnifyingglass")
+                .resizable()
+                .frame(width: 22, height: 22)
+                .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
+            TextField("Search", text: $viewModel.searchString)
+                .keyboardType(.phonePad)
+                .textFieldStyle(TappableTextFieldStyle())
+                .frame(height: 32)
+                .font(.system(size: 16))
+            if !viewModel.searchString.isEmpty {
+                Button(
+                    action: {
+                        viewModel.searchString = ""
+                    },
+                    label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .resizable()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
+                    }
+                )
             }
-            .padding(.leading, 12)
-            .padding(.trailing, 8)
-            .frame(height: 44)
-            .background(ColorAssets.gray.swiftUIColor)
-            .cornerRadius(12)
         }
+        .padding(.leading, 12)
+        .padding(.trailing, 8)
+        .frame(height: 44)
+        .background(ColorAssets.gray.swiftUIColor)
+        .cornerRadius(12)
         .padding(.horizontal, 16)
-        .padding(.vertical, 8)
+        .padding(.trailing, 8)
     }
 
     private func buildCountriesView() -> some View {
         ListView {
-            ForEach(viewModel.state.countries) { country in
+            ForEach(viewModel.countries) { country in
                 Button(
                     action: {
-                        viewModel.send(.selectCountry(country))
+                        viewModel.selectedCountry = country
                         presentationMode.wrappedValue.dismiss()
                     },
                     label: {
-                        Text(country.name)
-                            .font(.system(size: 16))
-                            .frame(height: 52)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal, 16)
+                        VStack(spacing: 0) {
+                            Text(country.name)
+                                .font(.system(size: 16))
+                                .frame(height: 52)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            Divider()
+                                .frame(height: 1)
+                                .overlay(ColorAssets.neutralLightGrey.swiftUIColor)
+                        }
+                        .padding(.horizontal, 16)
                     }
                 )
                 .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                 .background(
-                    viewModel.state.selectedCountry == country
+                    viewModel.selectedCountry == country
                         ? ColorAssets.neutralLightGrey.swiftUIColor
                         : Color.clear
                 )
@@ -124,7 +125,7 @@ struct SelectCountryView_Previews: PreviewProvider {
         NavigationView {
             SelectCountryView(
                 viewModel: SelectCountryViewModel(
-                    state: SelectCountryViewModel.State(selectedCountry: .default)
+                    selectedCountry: CountryAPI().getDefaultCountry()
                 )
             )
         }

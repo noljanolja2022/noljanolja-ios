@@ -170,6 +170,7 @@
 		CFD5424D29BF7A520053C5B1 /* SenderMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD5424529BF7A520053C5B1 /* SenderMessageView.swift */; };
 		CFD5424E29BF7A520053C5B1 /* TextMessageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD5424629BF7A520053C5B1 /* TextMessageContentView.swift */; };
 		CFD83DD029974E4E00B9A6BB /* Navigation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD83DCF29974E4E00B9A6BB /* Navigation+Extension.swift */; };
+		CFDA463E29DC8CCB00E6A877 /* CountryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDA463D29DC8CCB00E6A877 /* CountryAPI.swift */; };
 		CFDCA37929964501003C2C77 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDCA37829964501003C2C77 /* ButtonStyle.swift */; };
 		CFDCC33C29CCC2D000E8F18C /* PhotoMessageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDCC33B29CCC2D000E8F18C /* PhotoMessageContentView.swift */; };
 		CFDCC33E29CCC33700E8F18C /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDCC33D29CCC33700E8F18C /* Attachment.swift */; };
@@ -405,6 +406,7 @@
 		CFD5424529BF7A520053C5B1 /* SenderMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SenderMessageView.swift; sourceTree = "<group>"; };
 		CFD5424629BF7A520053C5B1 /* TextMessageContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextMessageContentView.swift; sourceTree = "<group>"; };
 		CFD83DCF29974E4E00B9A6BB /* Navigation+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Navigation+Extension.swift"; sourceTree = "<group>"; };
+		CFDA463D29DC8CCB00E6A877 /* CountryAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryAPI.swift; sourceTree = "<group>"; };
 		CFDCA37829964501003C2C77 /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		CFDCC33B29CCC2D000E8F18C /* PhotoMessageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoMessageContentView.swift; sourceTree = "<group>"; };
 		CFDCC33D29CCC33700E8F18C /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
@@ -1512,6 +1514,7 @@
 				CF775BC729C62EB200E82183 /* NotificationAPI.swift */,
 				CF131EB229CF32C400054719 /* PhotoAssetAPI.swift */,
 				CFFD70D4298AC92500D4F5A2 /* UserAPI.swift */,
+				CFDA463D29DC8CCB00E6A877 /* CountryAPI.swift */,
 			);
 			path = APIs;
 			sourceTree = "<group>";
@@ -1972,6 +1975,7 @@
 				CFD5424829BF7A520053C5B1 /* ChatItemView.swift in Sources */,
 				CFFD70D5298AC92500D4F5A2 /* UserAPI.swift in Sources */,
 				CF8737F029CB66ED0018237B /* PhotoAsset.swift in Sources */,
+				CFDA463E29DC8CCB00E6A877 /* CountryAPI.swift in Sources */,
 				CFE09254298DF69600F197F0 /* NaverAuthAPI.swift in Sources */,
 				CFD5424C29BF7A520053C5B1 /* MessageView+CornerRadius.swift in Sources */,
 				CF8737E329CB539F0018237B /* ChatMediaInputViewModel.swift in Sources */,

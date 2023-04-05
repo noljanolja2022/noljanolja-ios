@@ -89,7 +89,7 @@ struct PhoneVerificationCodeView_Previews: PreviewProvider {
         PhoneVerificationCodeView(
             viewModel: PhoneVerificationCodeViewModel(
                 state: PhoneVerificationCodeViewModel.State(
-                    country: .default,
+                    country: CountryAPI().getDefaultCountry(),
                     phoneNumber: "12345678"
                 ),
                 verificationID: ""

@@ -15,16 +15,12 @@ import SwiftUIX
 struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
     // MARK: Dependencies
 
-    @StateObject private var viewModel: ViewModel
+    @StateObject var viewModel: ViewModel
 
     // MARK: State
 
-    @State private var isSelectCountryShown = false
     @EnvironmentObject private var progressHUBState: ProgressHUBState
-
-    init(viewModel: ViewModel = AuthWithPhoneViewModel()) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
+    @State private var isSelectCountryShown = false
 
     var body: some View {
         buildBodyView()
@@ -36,9 +32,7 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
                 NavigationView {
                     SelectCountryView(
                         viewModel: SelectCountryViewModel(
-                            state: SelectCountryViewModel.State(
-                                selectedCountry: viewModel.state.country
-                            ),
+                            selectedCountry: viewModel.state.country,
                             delegate: viewModel
                         )
                     )
@@ -64,29 +58,6 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
                     .ignoresSafeArea(edges: .top)
             )
             buildNavigationLinks()
-        }
-        .onChange(of: viewModel.state.isProgressHUDShowing) {
-            progressHUBState.isLoading = $0
-        }
-        .fullScreenCover(isPresented: $isSelectCountryShown) {
-            NavigationView {
-                SelectCountryView(
-                    viewModel: SelectCountryViewModel(
-                        state: SelectCountryViewModel.State(
-                            selectedCountry: viewModel.state.country
-                        ),
-                        delegate: viewModel
-                    )
-                )
-            }
-            .accentColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-        }
-        .alert(item: $viewModel.state.alertState) {
-            Alert($0) { action in
-                if let action, action {
-                    viewModel.send(.sendVerificationCode)
-                }
-            }
         }
     }
 
@@ -214,7 +185,7 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
 struct AuthWithPhoneView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            AuthWithPhoneView()
+            AuthWithPhoneView(viewModel: AuthWithPhoneViewModel())
         }
     }
 }

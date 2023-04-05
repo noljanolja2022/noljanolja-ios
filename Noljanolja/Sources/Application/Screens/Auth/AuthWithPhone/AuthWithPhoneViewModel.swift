@@ -25,7 +25,7 @@ protocol AuthWithPhoneViewModelType: SelectCountryViewModelDelegate,
 extension AuthWithPhoneViewModel {
     struct State {
         var phoneNumber = ""
-        var country = Country.default
+        var country = CountryAPI().getDefaultCountry()
         var fullPhoneNumber: String {
             "+\(country.phoneCode)\(phoneNumber)"
         }
@@ -42,7 +42,6 @@ extension AuthWithPhoneViewModel {
     enum Action {
         case showConfirmPhoneAlert
         case sendVerificationCode
-        case signInWithGoogle
     }
 }
 
@@ -61,7 +60,6 @@ final class AuthWithPhoneViewModel: AuthWithPhoneViewModelType {
     // MARK: Action
 
     private let sendVerificationCodeTrigger = PassthroughSubject<Void, Never>()
-    private let signInWithGoogleTrigger = PassthroughSubject<Void, Never>()
 
     // MARK: Private
 
@@ -88,8 +86,6 @@ final class AuthWithPhoneViewModel: AuthWithPhoneViewModelType {
             )
         case .sendVerificationCode:
             sendVerificationCodeTrigger.send()
-        case .signInWithGoogle:
-            signInWithGoogleTrigger.send()
         }
     }
 
@@ -112,29 +108,6 @@ final class AuthWithPhoneViewModel: AuthWithPhoneViewModelType {
                 case let .failure(error):
                     logger.error("Send verification code failed: \(error.localizedDescription)")
                     self.state.alertState = AlertState(
-                        title: TextState("Error"),
-                        message: TextState(L10n.Common.Error.message),
-                        dismissButton: .cancel(TextState("OK"))
-                    )
-                }
-            })
-            .store(in: &cancellables)
-
-        signInWithGoogleTrigger
-            .handleEvents(receiveOutput: { [weak self] _ in self?.state.isProgressHUDShowing = true })
-            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<String, Error> in
-                guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
-                return self.authService
-                    .signInWithGoogle()
-            }
-            .sink(receiveValue: { [weak self] result in
-                self?.state.isProgressHUDShowing = false
-                switch result {
-                case let .success(idToken):
-                    logger.info("Signed in with Google successful - Token: \(idToken)")
-                case let .failure(error):
-                    logger.error("Sign in with Google failed: \(error.localizedDescription)")
-                    self?.state.alertState = AlertState(
                         title: TextState("Error"),
                         message: TextState(L10n.Common.Error.message),
                         dismissButton: .cancel(TextState("OK"))

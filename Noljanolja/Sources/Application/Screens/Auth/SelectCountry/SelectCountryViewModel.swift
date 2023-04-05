@@ -15,65 +15,52 @@ protocol SelectCountryViewModelDelegate: AnyObject {
     func didSelectCountry(_ country: Country)
 }
 
-// MARK: - SelectCountryViewModelType
-
-protocol SelectCountryViewModelType:
-    ViewModelType where State == SelectCountryViewModel.State, Action == SelectCountryViewModel.Action {}
-
-extension SelectCountryViewModel {
-    struct State {
-        var searchString = ""
-        var selectedCountry: Country
-        var countries = [Country]()
-    }
-
-    enum Action {
-        case loadData
-        case selectCountry(Country)
-    }
-}
-
 // MARK: - SelectCountryViewModel
 
-final class SelectCountryViewModel: SelectCountryViewModelType {
+final class SelectCountryViewModel: ViewModel {
     // MARK: State
 
-    @Published var state: State
-
-    // MARK: Dependencies
-
-    private weak var delegate: SelectCountryViewModelDelegate?
+    @Published var searchString = ""
+    @Published var selectedCountry: Country
+    @Published var countries = [Country]()
 
     // MARK: Action
 
+    // MARK: Dependencies
+
+    private let countryAPI: CountryAPIType
+    private weak var delegate: SelectCountryViewModelDelegate?
+
     // MARK: Private
+
+    private let loadDataSubject = PassthroughSubject<Void, Never>()
+
+    private let allCountries = CurrentValueSubject<[Country], Never>([])
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(state: State,
+    init(selectedCountry: Country,
+         countryAPI: CountryAPIType = CountryAPI(),
          delegate: SelectCountryViewModelDelegate? = nil) {
-        self.state = state
+        self.selectedCountry = selectedCountry
+        self.countryAPI = countryAPI
         self.delegate = delegate
+        super.init()
 
         configure()
     }
 
-    func send(_ action: Action) {
-        switch action {
-        case .loadData:
-            state.countries = Country.countries.sorted(by: \.name)
-        case let .selectCountry(country):
-            delegate?.didSelectCountry(country)
-        }
-    }
-
     private func configure() {
-        $state
-            .map { $0.searchString }
+        allCountries
+            .sink(receiveValue: { [weak self] in self?.countries = $0 })
+            .store(in: &cancellables)
+
+        $searchString
             .removeDuplicates()
             .debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
-            .map { text in
-                Country.countries
+            .withLatestFrom(allCountries) { ($0, $1) }
+            .map { text, countries in
+                countries
                     .filter {
                         guard !text.isEmpty else { return true }
                         return $0.code.lowercased().contains(text.lowercased())
@@ -82,7 +69,38 @@ final class SelectCountryViewModel: SelectCountryViewModelType {
                     }
                     .sorted(by: \.name)
             }
-            .sink(receiveValue: { [weak self] in self?.state.countries = $0 })
+            .sink(receiveValue: { [weak self] in self?.countries = $0 })
+            .store(in: &cancellables)
+
+        loadDataSubject
+            .flatMapLatestToResult { [weak self] in
+                guard let self else {
+                    return Empty<[Country], Error>().eraseToAnyPublisher()
+                }
+                return self.countryAPI.getCountries()
+            }
+            .sink { [weak self] result in
+                switch result {
+                case let .success(countries):
+                    self?.allCountries.send(countries)
+                case let .failure(error):
+                    break
+                }
+            }
+            .store(in: &cancellables)
+
+        $selectedCountry
+            .dropFirst()
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                self?.delegate?.didSelectCountry($0)
+            })
+            .store(in: &cancellables)
+
+        isAppearSubject
+            .filter { $0 }
+            .first()
+            .sink(receiveValue: { [weak self] _ in self?.loadDataSubject.send() })
             .store(in: &cancellables)
     }
 }

@@ -14,7 +14,7 @@ struct TermOfServiceItemView: View {
     var title = ""
     var titleLineLimit: Int? = 1
     var foregroundColor: Color? = ColorAssets.neutralDeepGrey.swiftUIColor
-    var checkedForegroundColor: Color? = ColorAssets.primaryYellowMain.swiftUIColor
+    var checkedForegroundColor: Color? = ColorAssets.primaryYellow2.swiftUIColor
     var idArrowIconHidden = false
     var action: (() -> Void)?
 
