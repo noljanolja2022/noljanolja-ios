@@ -1,5 +1,5 @@
 //
-//  TermOfServiceDetailView.swift
+//  TermDetailView.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 03/04/2023.
@@ -8,13 +8,13 @@
 
 import SwiftUI
 
-// MARK: - TermOfServiceDetailView
+// MARK: - TermDetailView
 
-struct TermOfServiceDetailView<ViewModel: TermOfServiceDetailViewModel>: View {
+struct TermDetailView<ViewModel: TermDetailViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
-    var termType: TermOfServiceItemType
+    var termType: TermItemType
 
     // MARK: State
 
@@ -89,12 +89,12 @@ struct TermOfServiceDetailView<ViewModel: TermOfServiceDetailViewModel>: View {
     }
 }
 
-// MARK: - TermOfServiceDetailView_Previews
+// MARK: - TermDetailView_Previews
 
-struct TermOfServiceDetailView_Previews: PreviewProvider {
+struct TermDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        TermOfServiceDetailView(
-            viewModel: TermOfServiceDetailViewModel(),
+        TermDetailView(
+            viewModel: TermDetailViewModel(),
             termType: .marketingInfo
         )
     }

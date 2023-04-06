@@ -1,5 +1,5 @@
 //
-//  AuthWithPhoneView.swift
+//  AuthView.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 25/02/2023.
@@ -10,9 +10,9 @@ import SwiftUI
 import SwiftUINavigation
 import SwiftUIX
 
-// MARK: - AuthWithPhoneView
+// MARK: - AuthView
 
-struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
+struct AuthView<ViewModel: AuthViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
@@ -25,24 +25,25 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
     var body: some View {
         buildBodyView()
             .hideNavigationBar()
-            .onChange(of: viewModel.state.isProgressHUDShowing) {
+            .onChange(of: viewModel.isProgressHUDShowing) {
                 progressHUBState.isLoading = $0
             }
             .fullScreenCover(isPresented: $isSelectCountryShown) {
                 NavigationView {
                     SelectCountryView(
                         viewModel: SelectCountryViewModel(
-                            selectedCountry: viewModel.state.country,
+                            selectedCountry: viewModel.country,
                             delegate: viewModel
                         )
                     )
                 }
             }
-            .alert(item: $viewModel.state.alertState) {
+            .alert(item: $viewModel.alertState) {
                 Alert($0) { action in
-                    if let action, action {
-                        viewModel.send(.sendVerificationCode)
-                    }
+                    guard let action, action else { return }
+                    viewModel.sendPhoneVerificationCodeSubject.send(
+                        (viewModel.country.code, viewModel.formattedPhoneNumber)
+                    )
                 }
             }
     }
@@ -109,12 +110,12 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
                 label: {
                     VStack {
                         HStack(spacing: 8) {
-                            Text(viewModel.state.country.getFlagEmoji())
+                            Text(viewModel.country.getFlagEmoji())
                                 .font(.system(size: 24))
                                 .frame(width: 30, height: 24)
                                 .background(ColorAssets.neutralLightGrey.swiftUIColor)
                                 .cornerRadius(3)
-                            Text("+\(viewModel.state.country.phoneCode)")
+                            Text("+\(viewModel.country.phoneCode)")
                                 .font(.system(size: 16))
                                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                         }
@@ -129,7 +130,7 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
             .frame(width: 88)
 
             VStack {
-                TextField("", text: $viewModel.state.phoneNumber)
+                TextField("", text: $viewModel.phoneNumberText)
                     .keyboardType(.phonePad)
                     .textFieldStyle(TappableTextFieldStyle())
                     .font(.system(size: 16))
@@ -151,24 +152,28 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
     private func buildActionView() -> some View {
         Button(
             "Continue".uppercased(),
-            action: { viewModel.send(.showConfirmPhoneAlert) }
+            action: {
+                viewModel.confirmPhoneAlertSubject.send(
+                    viewModel.formattedPhoneNumber
+                )
+            }
         )
-        .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.state.isSignInButtonEnabled))
-        .disabled(!viewModel.state.isSignInButtonEnabled)
+        .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.isActionButtonEnabled))
+        .disabled(!viewModel.isActionButtonEnabled)
         .frame(height: 48)
         .padding(16)
     }
 
     private func buildNavigationLinks() -> some View {
         NavigationLink(
-            unwrapping: $viewModel.state.verificationID,
+            unwrapping: $viewModel.verificationID,
             onNavigate: { _ in },
             destination: { verificationID in
-                PhoneVerificationCodeView(
-                    viewModel: PhoneVerificationCodeViewModel(
-                        state: PhoneVerificationCodeViewModel.State(
-                            country: viewModel.state.country,
-                            phoneNumber: viewModel.state.phoneNumber
+                AuthVerificationView(
+                    viewModel: AuthVerificationViewModel(
+                        state: AuthVerificationViewModel.State(
+                            country: viewModel.country,
+                            phoneNumber: viewModel.phoneNumberText
                         ),
                         verificationID: verificationID.wrappedValue,
                         delegate: viewModel
@@ -180,12 +185,12 @@ struct AuthWithPhoneView<ViewModel: AuthWithPhoneViewModelType>: View {
     }
 }
 
-// MARK: - AuthWithPhoneView_Previews
+// MARK: - AuthView_Previews
 
-struct AuthWithPhoneView_Previews: PreviewProvider {
+struct AuthView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            AuthWithPhoneView(viewModel: AuthWithPhoneViewModel())
+            AuthView(viewModel: AuthViewModel())
         }
     }
 }

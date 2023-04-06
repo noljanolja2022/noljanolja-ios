@@ -1,5 +1,5 @@
 //
-//  TermOfServiceViewModel.swift
+//  TermViewModel.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 28/02/2023.
@@ -10,23 +10,23 @@ import _SwiftUINavigationState
 import Combine
 import Foundation
 
-// MARK: - TermOfServiceViewModelDelegate
+// MARK: - TermViewModelDelegate
 
-protocol TermOfServiceViewModelDelegate: AnyObject {
+protocol TermViewModelDelegate: AnyObject {
     func navigateToAuth()
 }
 
-// MARK: - TermOfServiceViewModel
+// MARK: - TermViewModel
 
-final class TermOfServiceViewModel: ViewModel {
+final class TermViewModel: ViewModel {
     // MARK: Dependencies
 
-    private weak var delegate: TermOfServiceViewModelDelegate?
+    private weak var delegate: TermViewModelDelegate?
 
     // MARK: State
 
-    @Published var termItems = TermOfServiceItemType.allCases
-    @Published var termItemCheckeds = Dictionary(uniqueKeysWithValues: TermOfServiceItemType.allCases.map { ($0, false) })
+    @Published var termItems = TermItemType.allCases
+    @Published var termItemCheckeds = Dictionary(uniqueKeysWithValues: TermItemType.allCases.map { ($0, false) })
     var isAllTermChecked: Bool {
         get {
             termItemCheckeds
@@ -35,7 +35,7 @@ final class TermOfServiceViewModel: ViewModel {
                 .reduce(true) { $0 && $1 }
         }
         set {
-            termItemCheckeds = Dictionary(uniqueKeysWithValues: TermOfServiceItemType.allCases.map { ($0, newValue) })
+            termItemCheckeds = Dictionary(uniqueKeysWithValues: TermItemType.allCases.map { ($0, newValue) })
         }
     }
 
@@ -49,7 +49,7 @@ final class TermOfServiceViewModel: ViewModel {
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(delegate: TermOfServiceViewModelDelegate? = nil) {
+    init(delegate: TermViewModelDelegate? = nil) {
         self.delegate = delegate
         super.init()
 

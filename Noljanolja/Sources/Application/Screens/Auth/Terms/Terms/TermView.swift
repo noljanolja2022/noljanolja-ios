@@ -1,5 +1,5 @@
 //
-//  TermOfServiceView.swift
+//  TermView.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 28/02/2023.
@@ -10,16 +10,16 @@ import SwiftUI
 import SwiftUINavigation
 import SwiftUIX
 
-// MARK: - TermOfServiceView
+// MARK: - TermView
 
-struct TermOfServiceView<ViewModel: TermOfServiceViewModel>: View {
+struct TermView<ViewModel: TermViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
 
     // MARK: State
 
-    @State private var selectedTermType: TermOfServiceItemType?
+    @State private var selectedTermType: TermItemType?
 
     var body: some View {
         buildContentView()
@@ -28,8 +28,8 @@ struct TermOfServiceView<ViewModel: TermOfServiceViewModel>: View {
             .fullScreenCover(
                 unwrapping: $selectedTermType,
                 content: { selectedTermType in
-                    TermOfServiceDetailView(
-                        viewModel: TermOfServiceDetailViewModel(),
+                    TermDetailView(
+                        viewModel: TermDetailViewModel(),
                         termType: selectedTermType.wrappedValue
                     )
                 }
@@ -70,7 +70,7 @@ struct TermOfServiceView<ViewModel: TermOfServiceViewModel>: View {
     private func buildTermItemsView() -> some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 32) {
-                ForEach(TermOfServiceSectionType.allCases) { sectionType in
+                ForEach(TermSectionType.allCases) { sectionType in
                     Text(sectionType.title.uppercased())
                         .frame(alignment: .leading)
                         .font(.system(size: 14, weight: .medium))
@@ -78,13 +78,13 @@ struct TermOfServiceView<ViewModel: TermOfServiceViewModel>: View {
                         .padding(.top, 32)
 
                     ForEach(
-                        TermOfServiceItemType.allCases
+                        TermItemType.allCases
                             .filter {
                                 $0.sectionType == sectionType
                             }
                             .sorted { $0.rawValue < $1.rawValue }
                     ) { itemType in
-                        TermOfServiceItemView(
+                        TermItemView(
                             selected: Binding<Bool>(
                                 get: { viewModel.termItemCheckeds[itemType] ?? false },
                                 set: {
@@ -113,13 +113,13 @@ struct TermOfServiceView<ViewModel: TermOfServiceViewModel>: View {
     }
 }
 
-// MARK: - TermOfServiceView_Previews
+// MARK: - TermView_Previews
 
-struct TermOfServiceView_Previews: PreviewProvider {
+struct TermView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            TermOfServiceView(
-                viewModel: TermOfServiceViewModel()
+            TermView(
+                viewModel: TermViewModel()
             )
         }
     }

@@ -1,5 +1,5 @@
 //
-//  TermOfServiceItemView.swift
+//  TermItemView.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 28/02/2023.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-// MARK: - TermOfServiceItemView
+// MARK: - TermItemView
 
-struct TermOfServiceItemView: View {
+struct TermItemView: View {
     @Binding var selected: Bool
     var title = ""
     var titleLineLimit: Int? = 1
@@ -62,11 +62,11 @@ struct TermOfServiceItemView: View {
     }
 }
 
-// MARK: - TermOfServiceItemView_Previews
+// MARK: - TermItemView_Previews
 
-struct TermOfServiceItemView_Previews: PreviewProvider {
+struct TermItemView_Previews: PreviewProvider {
     static var previews: some View {
-        TermOfServiceItemView(
+        TermItemView(
             selected: .constant(false),
             title: "I'm 14 years old older"
         )

@@ -1,5 +1,5 @@
 //
-//  PhoneVerificationCodeViewModel.swift
+//  AuthVerificationViewModel.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 25/02/2023.
@@ -10,19 +10,19 @@ import Combine
 import Foundation
 import SwiftUINavigation
 
-// MARK: - PhoneVerificationCodeViewModelDelegate
+// MARK: - AuthVerificationViewModelDelegate
 
-protocol PhoneVerificationCodeViewModelDelegate: AnyObject {
+protocol AuthVerificationViewModelDelegate: AnyObject {
     func navigateToMain()
     func navigateToUpdateCurrentUser()
 }
 
-// MARK: - PhoneVerificationCodeViewModelType
+// MARK: - AuthVerificationViewModelType
 
-protocol PhoneVerificationCodeViewModelType:
-    ViewModelType where State == PhoneVerificationCodeViewModel.State, Action == PhoneVerificationCodeViewModel.Action {}
+protocol AuthVerificationViewModelType:
+    ViewModelType where State == AuthVerificationViewModel.State, Action == AuthVerificationViewModel.Action {}
 
-extension PhoneVerificationCodeViewModel {
+extension AuthVerificationViewModel {
     struct State {
         fileprivate let country: Country
         fileprivate let phoneNumber: String
@@ -48,9 +48,9 @@ extension PhoneVerificationCodeViewModel {
     }
 }
 
-// MARK: - PhoneVerificationCodeViewModel
+// MARK: - AuthVerificationViewModel
 
-final class PhoneVerificationCodeViewModel: PhoneVerificationCodeViewModelType {
+final class AuthVerificationViewModel: AuthVerificationViewModelType {
     // MARK: State
 
     @Published var state: State
@@ -60,7 +60,7 @@ final class PhoneVerificationCodeViewModel: PhoneVerificationCodeViewModelType {
     private var verificationID: String
     private let authService: AuthServiceType
     private let userService: UserServiceType
-    private weak var delegate: PhoneVerificationCodeViewModelDelegate?
+    private weak var delegate: AuthVerificationViewModelDelegate?
 
     // MARK: Action
 
@@ -77,7 +77,7 @@ final class PhoneVerificationCodeViewModel: PhoneVerificationCodeViewModelType {
          verificationID: String,
          authService: AuthServiceType = AuthService.default,
          userService: UserServiceType = UserService.default,
-         delegate: PhoneVerificationCodeViewModelDelegate? = nil) {
+         delegate: AuthVerificationViewModelDelegate? = nil) {
         self.state = state
         self.verificationID = verificationID
         self.authService = authService

@@ -1,5 +1,5 @@
 //
-//  PhoneVerificationCodeView.swift
+//  AuthVerificationView.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 25/02/2023.
@@ -8,9 +8,9 @@
 
 import SwiftUI
 
-// MARK: - PhoneVerificationCodeView
+// MARK: - AuthVerificationView
 
-struct PhoneVerificationCodeView<ViewModel: PhoneVerificationCodeViewModelType>: View {
+struct AuthVerificationView<ViewModel: AuthVerificationViewModelType>: View {
     // MARK: Dependencies
 
     @StateObject private var viewModel: ViewModel
@@ -82,13 +82,13 @@ struct PhoneVerificationCodeView<ViewModel: PhoneVerificationCodeViewModelType>:
     }
 }
 
-// MARK: - PhoneVerificationCodeView_Previews
+// MARK: - AuthVerificationView_Previews
 
-struct PhoneVerificationCodeView_Previews: PreviewProvider {
+struct AuthVerificationView_Previews: PreviewProvider {
     static var previews: some View {
-        PhoneVerificationCodeView(
-            viewModel: PhoneVerificationCodeViewModel(
-                state: PhoneVerificationCodeViewModel.State(
+        AuthVerificationView(
+            viewModel: AuthVerificationViewModel(
+                state: AuthVerificationViewModel.State(
                     country: CountryAPI().getDefaultCountry(),
                     phoneNumber: "12345678"
                 ),

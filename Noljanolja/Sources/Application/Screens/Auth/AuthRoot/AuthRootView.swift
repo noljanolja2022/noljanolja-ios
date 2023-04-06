@@ -34,16 +34,16 @@ struct AuthRootView<ViewModel: AuthRootViewModelType>: View {
             switch viewModel.state.contentType {
             case .terms:
                 NavigationView {
-                    TermOfServiceView(
-                        viewModel: TermOfServiceViewModel(
+                    TermView(
+                        viewModel: TermViewModel(
                             delegate: viewModel
                         )
                     )
                 }
             case .auth:
                 NavigationView {
-                    AuthWithPhoneView(
-                        viewModel: AuthWithPhoneViewModel(
+                    AuthView(
+                        viewModel: AuthViewModel(
                             delegate: viewModel
                         )
                     )

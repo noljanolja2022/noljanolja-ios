@@ -1,5 +1,5 @@
 //
-//  TermOfServiceItemType.swift
+//  TermItemType.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 28/02/2023.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-// MARK: - TermOfServiceSectionType
+// MARK: - TermSectionType
 
-enum TermOfServiceSectionType: Int, CaseIterable {
+enum TermSectionType: Int, CaseIterable {
     case compulsory
     case optional
 
@@ -23,13 +23,13 @@ enum TermOfServiceSectionType: Int, CaseIterable {
 
 // MARK: Identifiable
 
-extension TermOfServiceSectionType: Identifiable {
+extension TermSectionType: Identifiable {
     var id: Int { rawValue }
 }
 
-// MARK: - TermOfServiceItemType
+// MARK: - TermItemType
 
-enum TermOfServiceItemType: Int, CaseIterable {
+enum TermItemType: Int, CaseIterable {
     case termOfService
     case minAge
     case personalInfo
@@ -44,7 +44,7 @@ enum TermOfServiceItemType: Int, CaseIterable {
         }
     }
 
-    var sectionType: TermOfServiceSectionType {
+    var sectionType: TermSectionType {
         switch self {
         case .termOfService, .minAge, .personalInfo:
             return .compulsory
@@ -56,6 +56,6 @@ enum TermOfServiceItemType: Int, CaseIterable {
 
 // MARK: Identifiable
 
-extension TermOfServiceItemType: Identifiable {
+extension TermItemType: Identifiable {
     var id: Int { rawValue }
 }

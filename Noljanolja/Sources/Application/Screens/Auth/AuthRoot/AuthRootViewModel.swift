@@ -17,8 +17,8 @@ protocol AuthRootViewModelDelegate: AnyObject {
 
 // MARK: - AuthRootViewModelType
 
-protocol AuthRootViewModelType: TermOfServiceViewModelDelegate,
-    AuthWithPhoneViewModelDelegate,
+protocol AuthRootViewModelType: TermViewModelDelegate,
+    AuthViewModelDelegate,
     UpdateCurrentUserViewModelDelegate,
     ViewModelType where State == AuthRootViewModel.State, Action == AuthRootViewModel.Action {}
 
@@ -66,17 +66,17 @@ final class AuthRootViewModel: AuthRootViewModelType {
     private func configure() {}
 }
 
-// MARK: TermOfServiceViewModelDelegate
+// MARK: TermViewModelDelegate
 
-extension AuthRootViewModel: TermOfServiceViewModelDelegate {
+extension AuthRootViewModel: TermViewModelDelegate {
     func navigateToAuth() {
         state.contentType = .auth
     }
 }
 
-// MARK: AuthWithPhoneViewModelDelegate
+// MARK: AuthViewModelDelegate
 
-extension AuthRootViewModel: AuthWithPhoneViewModelDelegate {
+extension AuthRootViewModel: AuthViewModelDelegate {
     func navigateToMain() {
         delegate?.navigateToMain()
     }
