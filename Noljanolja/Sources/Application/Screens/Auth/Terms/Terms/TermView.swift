@@ -74,7 +74,7 @@ struct TermView<ViewModel: TermViewModel>: View {
                     Text(sectionType.title.uppercased())
                         .frame(alignment: .leading)
                         .font(.system(size: 14, weight: .medium))
-                        .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
+                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                         .padding(.top, 32)
 
                     ForEach(

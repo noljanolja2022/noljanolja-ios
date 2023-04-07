@@ -22,7 +22,7 @@ struct ProfileItemView: View {
             VStack(spacing: 0) {
                 HStack(spacing: 16) {
                     Text(title)
-                        .font(FontFamily.NotoSans.medium.swiftUIFont(fixedSize: 16))
+                        .font(.system(size: 16, weight: .medium))
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                     Image(systemName: "chevron.right")
                         .resizable()

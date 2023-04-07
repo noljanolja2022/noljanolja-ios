@@ -22,7 +22,7 @@ struct ProgressHUDView: View {
                 .scaleEffect(2)
                 .frame(width: 80, height: 80)
                 .progressViewStyle(CircularProgressViewStyle(tint: ColorAssets.black.swiftUIColor))
-                .background(ColorAssets.gray.swiftUIColor)
+                .background(ColorAssets.neutralLightGrey.swiftUIColor)
                 .cornerRadius(8)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

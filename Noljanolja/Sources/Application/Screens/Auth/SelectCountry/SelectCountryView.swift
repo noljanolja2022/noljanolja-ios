@@ -78,7 +78,7 @@ struct SelectCountryView<ViewModel: SelectCountryViewModel>: View {
         .padding(.leading, 12)
         .padding(.trailing, 8)
         .frame(height: 36)
-        .background(ColorAssets.gray.swiftUIColor)
+        .background(ColorAssets.neutralLightGrey.swiftUIColor)
         .cornerRadius(12)
         .padding(.horizontal, 16)
         .padding(.trailing, 8)

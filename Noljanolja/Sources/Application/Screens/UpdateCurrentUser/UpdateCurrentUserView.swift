@@ -267,13 +267,13 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModelType>: View {
                     )
                     Spacer()
                     Text("Date of Birth")
-                        .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
+                        .font(.system(size: 18, weight: .bold))
                     Spacer()
                     Spacer()
                         .frame(width: 44, height: 44)
                 }
                 .frame(height: 44)
-                .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
                 Divider()
                     .background(Color.gray)

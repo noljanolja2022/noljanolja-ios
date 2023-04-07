@@ -11,10 +11,6 @@
 		8353A88CBCF1CAFD239985BE /* Pods_NoljanoljaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD0295CC3C0D04548A9867CB /* Pods_NoljanoljaTests.framework */; };
 		AEDBBDE12EEA3CADCA87D4F2 /* Pods_Noljanolja.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB5BA5AC93BBFAA68677C79 /* Pods_Noljanolja.framework */; };
 		CF00D14E299407EB00505702 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CF00D150299407EB00505702 /* Localizable.strings */; };
-		CF00D1572994174600505702 /* FontAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D1562994174600505702 /* FontAssets.swift */; };
-		CF00D15C29941DF700505702 /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF00D15B29941DF700505702 /* NotoSans-Regular.ttf */; };
-		CF00D15F2994208000505702 /* NotoSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF00D15E29941ECB00505702 /* NotoSans-Medium.ttf */; };
-		CF00D1602994208200505702 /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF00D15D29941ECB00505702 /* NotoSans-Bold.ttf */; };
 		CF00D163299423FB00505702 /* View+EdgeCornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D162299423FB00505702 /* View+EdgeCornerRadius.swift */; };
 		CF00D1692994E0A700505702 /* TextField+ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D1682994E0A700505702 /* TextField+ErrorMessage.swift */; };
 		CF00D1732995457600505702 /* ProgressHUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D1722995457600505702 /* ProgressHUDView.swift */; };
@@ -258,10 +254,6 @@
 		AD0295CC3C0D04548A9867CB /* Pods_NoljanoljaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoljanoljaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF00D14F299407EB00505702 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CF00D151299407EF00505702 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
-		CF00D1562994174600505702 /* FontAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontAssets.swift; sourceTree = "<group>"; };
-		CF00D15B29941DF700505702 /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.ttf"; sourceTree = "<group>"; };
-		CF00D15D29941ECB00505702 /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
-		CF00D15E29941ECB00505702 /* NotoSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Medium.ttf"; sourceTree = "<group>"; };
 		CF00D162299423FB00505702 /* View+EdgeCornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+EdgeCornerRadius.swift"; sourceTree = "<group>"; };
 		CF00D1682994E0A700505702 /* TextField+ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+ErrorMessage.swift"; sourceTree = "<group>"; };
 		CF00D1722995457600505702 /* ProgressHUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHUDView.swift; sourceTree = "<group>"; };
@@ -527,16 +519,6 @@
 				F53231636127B61B7E5B0B97 /* Pods-NoljanoljaTests.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		CF00D152299416BC00505702 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				CF00D15D29941ECB00505702 /* NotoSans-Bold.ttf */,
-				CF00D15E29941ECB00505702 /* NotoSans-Medium.ttf */,
-				CF00D15B29941DF700505702 /* NotoSans-Regular.ttf */,
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 		CF00D158299417F400505702 /* Combines */ = {
@@ -1403,7 +1385,6 @@
 			isa = PBXGroup;
 			children = (
 				CFFD718C298AD38C00D4F5A2 /* ColorAssets.xcassets */,
-				CF00D152299416BC00505702 /* Fonts */,
 				CFFD7085298ABA0100D4F5A2 /* ImageAssets.xcassets */,
 				CF446B8D29D8A97700ED66BF /* LottieAssets.xcassets */,
 				CF00D150299407EB00505702 /* Localizable.strings */,
@@ -1415,7 +1396,6 @@
 			isa = PBXGroup;
 			children = (
 				CF14F247298C331C00BC2066 /* ColorAssets.swift */,
-				CF00D1562994174600505702 /* FontAssets.swift */,
 				CF14F245298C331C00BC2066 /* ImageAssets.swift */,
 				CF14F246298C331C00BC2066 /* Localizable.swift */,
 				CF446B8F29D8AB0D00ED66BF /* LottieAssets.swift */,
@@ -1688,7 +1668,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF00D15C29941DF700505702 /* NotoSans-Regular.ttf in Resources */,
 				CFFD7089298ABA0100D4F5A2 /* Preview Assets.xcassets in Resources */,
 				CF00D14E299407EB00505702 /* Localizable.strings in Resources */,
 				CFFD718D298AD38C00D4F5A2 /* ColorAssets.xcassets in Resources */,
@@ -1696,9 +1675,7 @@
 				CFFD7086298ABA0100D4F5A2 /* ImageAssets.xcassets in Resources */,
 				CF14F25E298CE68600BC2066 /* GoogleService-Info.plist in Resources */,
 				CF446B8E29D8A97700ED66BF /* LottieAssets.xcassets in Resources */,
-				CF00D1602994208200505702 /* NotoSans-Bold.ttf in Resources */,
 				CFECC13229B4D6D500E20B58 /* Launch Screen.storyboard in Resources */,
-				CF00D15F2994208000505702 /* NotoSans-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1947,7 +1924,6 @@
 				CF3282ED299E3758006A459B /* UIApplication+Extension.swift in Sources */,
 				CF131EB529CF32F100054719 /* PhotoModel.swift in Sources */,
 				CF18898229B347E500701583 /* UpdateCurrentUserView.swift in Sources */,
-				CF00D1572994174600505702 /* FontAssets.swift in Sources */,
 				CF1B624E29B9BC7F00DE53E6 /* ConversationStore.swift in Sources */,
 				CF74A19D29B581AD00419342 /* ConversationListView.swift in Sources */,
 				CFFB058E29BF04BD000D65EE /* ChatDateItemModel.swift in Sources */,

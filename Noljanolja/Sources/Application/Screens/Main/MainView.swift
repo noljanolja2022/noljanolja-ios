@@ -38,7 +38,7 @@ struct MainView<ViewModel: MainViewModelType>: View {
         .toolbar {
             ToolbarItem(placement: .principal) {
                 Text(viewModel.state.selectedTab.rawValue)
-                    .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
+                    .font(.system(size: 18, weight: .bold))
             }
 
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -54,7 +54,7 @@ struct MainView<ViewModel: MainViewModelType>: View {
                                 .padding(12)
                         }
                     )
-                    .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 default:
                     EmptyView()
                 }
@@ -198,8 +198,8 @@ struct MainView_Previews: PreviewProvider {
         }
         .introspectNavigationController { navigationController in
             navigationController.configure(
-                backgroundColor: ColorAssets.highlightPrimary.color,
-                foregroundColor: ColorAssets.forcegroundPrimary.color
+                backgroundColor: ColorAssets.primaryYellowMain.color,
+                foregroundColor: ColorAssets.neutralDarkGrey.color
             )
         }
     }

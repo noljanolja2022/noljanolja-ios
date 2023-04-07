@@ -94,12 +94,12 @@ struct AuthView<ViewModel: AuthViewModel>: View {
             Text("Log in")
                 .font(.system(size: 32, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             Text("Welcome to Nolja Nolja. Please enter your Phone number to join continue.")
                 .font(.system(size: 14))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
-                .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
         }
     }
 
