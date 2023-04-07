@@ -42,7 +42,7 @@ extension CustomButtonStyle {
         configuration.label
             .frame(height: 48)
             .frame(maxWidth: .infinity)
-            .font(FontFamily.NotoSans.bold.swiftUIFont(size: 16))
+            .font(.system(size: 16, weight: .bold))
             .background(
                 isEnabled ? enabledBackgroundColor : disabledBackgroundColor
             )

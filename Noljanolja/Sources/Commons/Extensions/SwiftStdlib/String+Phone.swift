@@ -9,9 +9,9 @@ import Foundation
 import PhoneNumberKit
 
 extension String {
-    var formattedPhone: String? {
+    func formatPhone(type: PhoneNumberFormat = .e164) -> String? {
         let phoneNumberKit = PhoneNumberKit()
         let phoneNumber = try? phoneNumberKit.parse(self, ignoreType: true)
-        return phoneNumber.flatMap { phoneNumberKit.format($0, toType: .e164) }
+        return phoneNumber.flatMap { phoneNumberKit.format($0, toType: type) }
     }
 }

@@ -25,6 +25,6 @@ struct Contact: Codable {
     init(_ contact: CNContact) {
         self.name = CNContactFormatter.string(from: contact, style: .fullName) ?? ""
         self.emails = contact.emailAddresses.map { String($0.value) }
-        self.phones = contact.phoneNumbers.compactMap { $0.value.stringValue.formattedPhone }
+        self.phones = contact.phoneNumbers.compactMap { $0.value.stringValue.formatPhone() }
     }
 }

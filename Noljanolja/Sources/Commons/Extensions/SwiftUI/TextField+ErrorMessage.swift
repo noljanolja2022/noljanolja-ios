@@ -23,7 +23,7 @@ struct ErrorViewModifier: ViewModifier {
                     .padding(.horizontal, 24)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(ColorAssets.red.swiftUIColor)
-                    .font(FontFamily.NotoSans.medium.swiftUIFont(size: 14))
+                    .font(.system(size: 14))
             }
         }
     }

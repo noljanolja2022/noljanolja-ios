@@ -42,7 +42,7 @@ struct AuthView<ViewModel: AuthViewModel>: View {
                 Alert($0) { action in
                     guard let action, action else { return }
                     viewModel.sendPhoneVerificationCodeSubject.send(
-                        (viewModel.country.code, viewModel.formattedPhoneNumber)
+                        (viewModel.country.phoneCode, viewModel.phoneNumber?.formatPhone())
                     )
                 }
             }
@@ -154,12 +154,16 @@ struct AuthView<ViewModel: AuthViewModel>: View {
             "Continue".uppercased(),
             action: {
                 viewModel.confirmPhoneAlertSubject.send(
-                    viewModel.formattedPhoneNumber
+                    viewModel.phoneNumber?.formatPhone(type: .international)
                 )
             }
         )
-        .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.isActionButtonEnabled))
-        .disabled(!viewModel.isActionButtonEnabled)
+        .buttonStyle(
+            PrimaryButtonStyle(
+                isEnabled: !viewModel.phoneNumberText.isEmpty
+            )
+        )
+        .disabled(viewModel.phoneNumberText.isEmpty)
         .frame(height: 48)
         .padding(16)
     }
@@ -171,10 +175,8 @@ struct AuthView<ViewModel: AuthViewModel>: View {
             destination: { verificationID in
                 AuthVerificationView(
                     viewModel: AuthVerificationViewModel(
-                        state: AuthVerificationViewModel.State(
-                            country: viewModel.country,
-                            phoneNumber: viewModel.phoneNumberText
-                        ),
+                        country: viewModel.country,
+                        phoneNumberText: viewModel.phoneNumberText,
                         verificationID: verificationID.wrappedValue,
                         delegate: viewModel
                     )

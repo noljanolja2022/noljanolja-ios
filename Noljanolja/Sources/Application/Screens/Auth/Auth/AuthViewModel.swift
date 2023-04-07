@@ -28,12 +28,8 @@ final class AuthViewModel: ViewModel {
 
     var verificationID: String?
 
-    var formattedPhoneNumber: String? {
-        "+\(country.phoneCode)\(phoneNumberText)".formattedPhone
-    }
-
-    var isActionButtonEnabled: Bool {
-        !(formattedPhoneNumber ?? "").isEmpty
+    var phoneNumber: String? {
+        "+\(country.phoneCode)\(phoneNumberText)"
     }
 
     // MARK: Action

@@ -7,67 +7,77 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 // MARK: - AuthVerificationView
 
-struct AuthVerificationView<ViewModel: AuthVerificationViewModelType>: View {
+struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
     // MARK: Dependencies
 
-    @StateObject private var viewModel: ViewModel
+    @StateObject var viewModel: ViewModel
 
     // MARK: State
 
     @Environment(\.presentationMode) private var presentationMode
     @EnvironmentObject private var progressHUBState: ProgressHUBState
-
-    init(viewModel: ViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
+    @State private var isFocused = false
 
     var body: some View {
+        buildBodyView()
+    }
+
+    private func buildBodyView() -> some View {
         VStack(spacing: 0) {
             buildContentView()
             Spacer()
             buildActionView()
                 .padding(16)
         }
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                Text("Verification")
-                    .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
-            }
-        }
-        .onChange(of: viewModel.state.isProgressHUDShowing) {
+        .hideNavigationBar()
+        .onChange(of: viewModel.isProgressHUDShowing) {
             progressHUBState.isLoading = $0
         }
-        .alert(item: $viewModel.state.alertState) { Alert($0) { _ in } }
+        .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
     }
 
     private func buildContentView() -> some View {
-        VStack(spacing: 16) {
-            Text("We've sent a text message with your verification code to \(viewModel.state.fullPhoneNumber)")
-                .font(FontFamily.NotoSans.medium.swiftUIFont(size: 16))
-                .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .multilineTextAlignment(.leading)
-            CodeView(text: $viewModel.state.verificationCode) {
-                viewModel.send(.verifyCode)
+        VStack(spacing: 36) {
+            VStack(spacing: 16) {
+                Text("Enter verification code")
+                    .font(.system(size: 24))
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                Text("We’ve sent a text message with your verification code to  \(viewModel.phoneNumber.formatPhone() ?? "")")
+                    .font(.system(size: 16))
+                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .multilineTextAlignment(.center)
             }
-            HStack {
-                Spacer()
-                if viewModel.state.countdownResendCodeTime != 0 {
-                    Text("Resend code in \(viewModel.state.countdownResendCodeTime) seconds")
-                } else {
-                    Button("Resend code") {
-                        viewModel.send(.resendCode)
+
+            VStack(spacing: 24) {
+                CodeView(
+                    text: $viewModel.verificationCode,
+                    isFocused: $isFocused,
+                    action: {
+                        viewModel.verifySubject.send()
+                    }
+                )
+                ZStack {
+                    if viewModel.countdownResendCodeTime != 0 {
+                        Text("Resend code in \(viewModel.countdownResendCodeTime) seconds")
+                    } else {
+                        Button("Resend code") {
+                            viewModel.resendCodeSubject.send(
+                                (viewModel.country.phoneCode, viewModel.phoneNumberText)
+                            )
+                        }
                     }
                 }
+                .font(.system(size: 12))
+                .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
             }
-            .font(FontFamily.NotoSans.medium.swiftUIFont(size: 14))
-            .foregroundColor(ColorAssets.forcegroundSecondary.swiftUIColor)
         }
-        .padding(16)
+        .padding(.horizontal, 32)
+        .padding(.vertical, 32)
     }
 
     private func buildActionView() -> some View {
@@ -88,10 +98,8 @@ struct AuthVerificationView_Previews: PreviewProvider {
     static var previews: some View {
         AuthVerificationView(
             viewModel: AuthVerificationViewModel(
-                state: AuthVerificationViewModel.State(
-                    country: CountryAPI().getDefaultCountry(),
-                    phoneNumber: "12345678"
-                ),
+                country: CountryAPI().getDefaultCountry(),
+                phoneNumberText: "123456789",
                 verificationID: ""
             )
         )

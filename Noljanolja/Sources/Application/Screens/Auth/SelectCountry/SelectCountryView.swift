@@ -44,7 +44,7 @@ struct SelectCountryView<ViewModel: SelectCountryViewModel>: View {
     }
 
     private func buildContentView() -> some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 8) {
             buildSearchView()
             buildCountriesView()
         }
@@ -54,12 +54,12 @@ struct SelectCountryView<ViewModel: SelectCountryViewModel>: View {
         HStack(spacing: 8) {
             Image(systemName: "magnifyingglass")
                 .resizable()
-                .frame(width: 22, height: 22)
+                .frame(width: 16, height: 16)
                 .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
             TextField("Search", text: $viewModel.searchString)
                 .keyboardType(.phonePad)
                 .textFieldStyle(TappableTextFieldStyle())
-                .frame(height: 32)
+                .frame(maxHeight: .infinity)
                 .font(.system(size: 16))
             if !viewModel.searchString.isEmpty {
                 Button(
@@ -77,7 +77,7 @@ struct SelectCountryView<ViewModel: SelectCountryViewModel>: View {
         }
         .padding(.leading, 12)
         .padding(.trailing, 8)
-        .frame(height: 44)
+        .frame(height: 36)
         .background(ColorAssets.gray.swiftUIColor)
         .cornerRadius(12)
         .padding(.horizontal, 16)
