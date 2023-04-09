@@ -44,6 +44,7 @@ struct ChatStickerPacksInputView<ViewModel: ChatStickerPacksInputViewModelType>:
                 ForEach(Array(viewModel.stickerPacks.enumerated()), id: \.offset) { offset, stickerPack in
                     WebImage(url: stickerPack.getImageURL())
                         .resizable()
+                        .indicator(.activity)
                         .aspectRatio(1, contentMode: .fit)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .padding(4)

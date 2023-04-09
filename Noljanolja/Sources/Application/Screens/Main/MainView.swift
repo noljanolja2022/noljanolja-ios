@@ -39,6 +39,8 @@ struct MainView<ViewModel: MainViewModelType>: View {
             ToolbarItem(placement: .principal) {
                 Text(viewModel.state.selectedTab.rawValue)
                     .font(.system(size: 18, weight: .bold))
+                    .frame(minWidth: 120)
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }
 
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -99,10 +101,10 @@ struct MainView<ViewModel: MainViewModelType>: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 32, height: 32)
-            
+
                     Text("Content")
                 }
-            
+
             LottieView(animation: LottieAnimation.named(LottieAssets.underConstruction.name))
                 .tag(ViewModel.State.Tab.shop)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -126,7 +128,7 @@ struct MainView<ViewModel: MainViewModelType>: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 32, height: 32)
-                
+
                 Text("Chat")
             }
         }

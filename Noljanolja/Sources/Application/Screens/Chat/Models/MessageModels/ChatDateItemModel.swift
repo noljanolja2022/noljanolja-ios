@@ -15,7 +15,7 @@ struct ChatDateItemModel: Equatable, Identifiable {
     }
 
     var displayDateString: String {
-        date.relativeString("EEEE, dd MMM, yyyy")
+        date.relativeFormatForMessage()
     }
 
     init(date: Date) {

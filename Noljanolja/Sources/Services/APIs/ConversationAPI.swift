@@ -12,20 +12,6 @@ import Moya
 // MARK: - ConversationAPITargets
 
 private enum ConversationAPITargets {
-    struct GetConversation: BaseAuthTargetType {
-        var path: String { "v1/conversations/\(conversationID)" }
-        let method: Moya.Method = .get
-        var task: Task { .requestPlain }
-
-        let conversationID: Int
-    }
-
-    struct GetConversations: BaseAuthTargetType {
-        var path: String { "v1/conversations" }
-        let method: Moya.Method = .get
-        var task: Task { .requestPlain }
-    }
-
     struct CreateConversation: BaseAuthTargetType {
         var path: String { "v1/conversations" }
         let method: Moya.Method = .post
@@ -56,16 +42,69 @@ private enum ConversationAPITargets {
         let type: ConversationType
         let participants: [User]
     }
+
+    struct GetConversations: BaseAuthTargetType {
+        var path: String { "v1/conversations" }
+        let method: Moya.Method = .get
+        var task: Task { .requestPlain }
+    }
+
+    struct GetConversation: BaseAuthTargetType {
+        var path: String { "v1/conversations/\(conversationID)" }
+        let method: Moya.Method = .get
+        var task: Task { .requestPlain }
+
+        let conversationID: Int
+    }
+
+    struct UpdateConversation: BaseAuthTargetType {
+        var path: String { "v1/conversations/\(conversationID)" }
+        let method: Moya.Method = .put
+        var task: Task { .uploadMultipart(multipartFormDatas) }
+
+        let conversationID: Int
+        let title: String?
+        let participants: [User]?
+        let image: Data?
+
+        var multipartFormDatas: [MultipartFormData] {
+            var multipartFormDatas = [MultipartFormData?]()
+
+            if let data = title?.data(using: .utf8) {
+                multipartFormDatas.append(MultipartFormData(provider: .data(data), name: "title"))
+            }
+
+            participants?.forEach { participant in
+                if let data = participant.id.data(using: .utf8) {
+                    multipartFormDatas.append(
+                        MultipartFormData(provider: .data(data), name: "participantIds")
+                    )
+                }
+            }
+
+            if let data = image {
+                multipartFormDatas.append(MultipartFormData(provider: .data(data), name: "image"))
+            }
+
+            return multipartFormDatas.compactMap { $0 }
+        }
+    }
 }
 
 // MARK: - ConversationAPIType
 
 protocol ConversationAPIType {
-    func getConversation(conversationID: Int) -> AnyPublisher<Conversation, Error>
-    func getConversations() -> AnyPublisher<[Conversation], Error>
     func createConversation(title: String,
                             type: ConversationType,
                             participants: [User]) -> AnyPublisher<Conversation, Error>
+
+    func getConversation(conversationID: Int) -> AnyPublisher<Conversation, Error>
+    func getConversations() -> AnyPublisher<[Conversation], Error>
+
+    func updateConversation(conversationID: Int,
+                            title: String?,
+                            participants: [User]?,
+                            image: Data?) -> AnyPublisher<Conversation, Error>
 }
 
 // MARK: - ConversationAPI
@@ -79,9 +118,11 @@ final class ConversationAPI: ConversationAPIType {
         self.api = api
     }
 
-    func getConversation(conversationID: Int) -> AnyPublisher<Conversation, Error> {
+    func createConversation(title: String,
+                            type: ConversationType,
+                            participants: [User]) -> AnyPublisher<Conversation, Error> {
         api.request(
-            target: ConversationAPITargets.GetConversation(conversationID: conversationID),
+            target: ConversationAPITargets.CreateConversation(title: title, type: type, participants: participants),
             atKeyPath: "data"
         )
     }
@@ -93,11 +134,25 @@ final class ConversationAPI: ConversationAPIType {
         )
     }
 
-    func createConversation(title: String,
-                            type: ConversationType,
-                            participants: [User]) -> AnyPublisher<Conversation, Error> {
+    func getConversation(conversationID: Int) -> AnyPublisher<Conversation, Error> {
         api.request(
-            target: ConversationAPITargets.CreateConversation(title: title, type: type, participants: participants),
+            target: ConversationAPITargets.GetConversation(conversationID: conversationID),
+            atKeyPath: "data"
+        )
+    }
+
+    func updateConversation(conversationID: Int,
+                            title: String?,
+                            participants: [User]?,
+                            image: Data?) -> AnyPublisher<Conversation, Error> {
+        api.request(
+            target: ConversationAPITargets.UpdateConversation(
+                conversationID: conversationID,
+                title: title,
+                participants:
+                participants,
+                image: image
+            ),
             atKeyPath: "data"
         )
     }

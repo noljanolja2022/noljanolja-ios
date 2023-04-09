@@ -14,37 +14,20 @@ import Foundation
 
 protocol ConversationListViewModelDelegate: AnyObject {}
 
-// MARK: - ConversationListViewModelType
-
-protocol ConversationListViewModelType:
-    ContactListViewModelDelegate,
-    ViewModelType where State == ConversationListViewModel.State, Action == ConversationListViewModel.Action {}
-
-extension ConversationListViewModel {
-    struct State {
-        enum NavigationLinkItem {
-            case chat(Conversation)
-        }
-
-        var conversations = [ConversationItemModel]()
-        var error: Error?
-        var viewState = ViewState.content
-
-        var navigationLinkItem: NavigationLinkItem?
-    }
-
-    enum Action {
-        case loadData
-        case openChat(ConversationItemModel)
-    }
-}
-
 // MARK: - ConversationListViewModel
 
-final class ConversationListViewModel: ConversationListViewModelType {
+final class ConversationListViewModel: ViewModel {
     // MARK: State
 
-    @Published var state: State
+    @Published var conversations = [ConversationItemModel]()
+    @Published var error: Error?
+    @Published var viewState = ViewState.content
+
+    @Published var navigationType: ConversationListNavigationType?
+
+    // MARK: Action
+
+    let openChatTrigger = PassthroughSubject<ConversationItemModel, Never>()
 
     // MARK: Dependencies
 
@@ -53,41 +36,24 @@ final class ConversationListViewModel: ConversationListViewModelType {
     private let conversationSocketService: ConversationSocketServiceType
     private weak var delegate: ConversationListViewModelDelegate?
 
-    // MARK: Action
-
-    private let loadDataTrigger = PassthroughSubject<Void, Never>()
-    private let openChatTrigger = PassthroughSubject<ConversationItemModel, Never>()
-
-    // MARK: Data
+    // MARK: Private
 
     private let currentUserSubject = PassthroughSubject<User, Never>()
     private let conversationsSubject = PassthroughSubject<[Conversation], Never>()
 
-    // MARK: Private
-
     private var cancellables = Set<AnyCancellable>()
 
-    init(state: State = State(),
-         userService: UserServiceType = UserService.default,
+    init(userService: UserServiceType = UserService.default,
          conversationService: ConversationServiceType = ConversationService.default,
          conversationSocketService: ConversationSocketServiceType = ConversationSocketService.default,
          delegate: ConversationListViewModelDelegate? = nil) {
-        self.state = state
         self.userService = userService
         self.conversationService = conversationService
         self.conversationSocketService = conversationSocketService
         self.delegate = delegate
+        super.init()
 
         configure()
-    }
-
-    func send(_ action: Action) {
-        switch action {
-        case .loadData:
-            loadDataTrigger.send()
-        case let .openChat(conversation):
-            openChatTrigger.send(conversation)
-        }
     }
 
     private func configure() {
@@ -102,29 +68,31 @@ final class ConversationListViewModel: ConversationListViewModelType {
                     }
             }
             .sink(receiveValue: { [weak self] in
-                self?.state.conversations = $0
-                self?.state.viewState = .content
+                self?.conversations = $0
+                self?.viewState = .content
             })
             .store(in: &cancellables)
 
-        loadDataTrigger
+        isAppearSubject
+            .filter { $0 }
             .first()
-            .handleEvents(receiveOutput: { [weak self] in self?.state.viewState = .loading })
-            .flatMapLatestToResult { [weak self] in
+            .handleEvents(receiveOutput: { [weak self] _ in self?.viewState = .loading })
+            .flatMapLatestToResult { [weak self] _ in
                 guard let self else {
                     return Empty<[Conversation], Error>().eraseToAnyPublisher()
                 }
                 return self.conversationService.getConversations()
             }
             .sink(receiveValue: { [weak self] result in
+                guard let self else { return }
                 switch result {
                 case let .success(conversations):
                     logger.info("Get conversations successful")
-                    self?.conversationsSubject.send(conversations)
+                    self.conversationsSubject.send(conversations)
                 case let .failure(error):
                     logger.error("Get conversations failed - \(error.localizedDescription)")
-                    self?.state.error = error
-                    self?.state.viewState = .error
+                    self.error = error
+                    self.viewState = .error
                 }
             })
             .store(in: &cancellables)
@@ -134,7 +102,7 @@ final class ConversationListViewModel: ConversationListViewModelType {
             .compactMap { conversationItemModel, conversations in
                 conversations.first(where: { $0.id == conversationItemModel.id })
             }
-            .sink(receiveValue: { [weak self] in self?.state.navigationLinkItem = .chat($0) })
+            .sink(receiveValue: { [weak self] in self?.navigationType = .chat($0) })
             .store(in: &cancellables)
 
         userService
@@ -146,10 +114,10 @@ final class ConversationListViewModel: ConversationListViewModelType {
     }
 }
 
-// MARK: ContactListViewModelDelegate
+// MARK: CreateConversationContactListViewModelDelegate
 
-extension ConversationListViewModel: ContactListViewModelDelegate {
+extension ConversationListViewModel: CreateConversationContactListViewModelDelegate {
     func didCreateConversation(_ conversation: Conversation) {
-        state.navigationLinkItem = .chat(conversation)
+        navigationType = .chat(conversation)
     }
 }

@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - ConversationListView
 
-struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
+struct ConversationListView<ViewModel: ConversationListViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
@@ -21,7 +21,8 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
 
     var body: some View {
         buildBodyView()
-            .onAppear { viewModel.send(.loadData) }
+            .onAppear { viewModel.isAppearSubject.send(true) }
+            .onDisappear { viewModel.isAppearSubject.send(false) }
             .clipped()
     }
 
@@ -49,8 +50,8 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
                 buildContentView()
                     .padding(.top, 12)
                     .statefull(
-                        state: $viewModel.state.viewState,
-                        isEmpty: { viewModel.state.conversations.isEmpty },
+                        state: $viewModel.viewState,
+                        isEmpty: { viewModel.conversations.isEmpty },
                         loading: buildLoadingView,
                         empty: buildEmptyView,
                         error: buildErrorView
@@ -65,10 +66,10 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
 
     private func buildContentView() -> some View {
         ListView {
-            ForEach(viewModel.state.conversations, id: \.id) { conversation in
+            ForEach(viewModel.conversations, id: \.id) { conversation in
                 ConversationItemView(model: conversation)
                     .background(Color.white)
-                    .onTapGesture { viewModel.send(.openChat(conversation)) }
+                    .onTapGesture { viewModel.openChatTrigger.send(conversation) }
             }
         }
     }
@@ -128,8 +129,8 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
                 unwrapping: $createConversationType,
                 onNavigate: { _ in },
                 destination: { createConversationType in
-                    ContactListView(
-                        viewModel: ContactListViewModel(
+                    CreateConversationContactListView(
+                        viewModel: CreateConversationContactListViewModel(
                             delegate: viewModel
                         ),
                         createConversationType: createConversationType.wrappedValue
@@ -139,7 +140,7 @@ struct ConversationListView<ViewModel: ConversationListViewModelType>: View {
             )
 
             NavigationLink(
-                unwrapping: $viewModel.state.navigationLinkItem,
+                unwrapping: $viewModel.navigationType,
                 onNavigate: { _ in },
                 destination: { item in
                     switch item.wrappedValue {

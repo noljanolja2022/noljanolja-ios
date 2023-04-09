@@ -54,6 +54,7 @@ struct RootView<ViewModel: RootViewModelType>: View {
                         )
                     )
                 }
+                .accentColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 .introspectNavigationController { navigationController in
                     navigationController.configure(
                         backgroundColor: ColorAssets.primaryYellowMain.color,

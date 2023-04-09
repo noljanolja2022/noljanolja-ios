@@ -17,14 +17,35 @@ struct ChatView<ViewModel: ChatViewModel>: View {
     @StateObject var viewModel: ViewModel
 
     var body: some View {
-        buildBodyView()
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text(viewModel.title)
-                        .font(.system(size: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+        ZStack {
+            buildBodyView()
+            buildNavigationLinks()
+        }
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(viewModel.title)
+                    .lineLimit(1)
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                if viewModel.isChatSettingEnabled {
+                    Button(
+                        action: {
+                            viewModel.openChatSettingSubject.send()
+                        },
+                        label: {
+                            ImageAssets.icMenu.swiftUIImage
+                                .padding(10)
+                                .frame(width: 44, height: 44)
+                        }
+                    )
+                } else {
+                    Spacer()
+                        .frame(width: 44, height: 44)
                 }
             }
+        }
     }
 
     private func buildBodyView() -> some View {
@@ -59,7 +80,6 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                 ChatItemView(chatItem: chatItem)
                     .onAppear { viewModel.loadMoreDataTrigger.send(index) }
             }
-            .listRowInsets(EdgeInsets())
             .scaleEffect(x: 1, y: -1, anchor: .center)
         }
         .scaleEffect(x: 1, y: -1, anchor: .center)
@@ -77,6 +97,27 @@ struct ChatView<ViewModel: ChatViewModel>: View {
     private func buildErrorView() -> some View {
         Text("")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    @ViewBuilder
+    private func buildNavigationLinks() -> some View {
+        ZStack {
+            NavigationLink(
+                unwrapping: $viewModel.navigationType,
+                onNavigate: { _ in },
+                destination: {
+                    switch $0.wrappedValue {
+                    case let .chatSetting(conversation):
+                        ChatSettingView(
+                            viewModel: ChatSettingViewModel(
+                                conversation: conversation
+                            )
+                        )
+                    }
+                },
+                label: { EmptyView() }
+            )
+        }
     }
 }
 

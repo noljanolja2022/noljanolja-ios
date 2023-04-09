@@ -15,10 +15,11 @@ protocol ChatViewModelDelegate: AnyObject {}
 
 // MARK: - ChatViewModel
 
-final class ChatViewModel: ObservableObject {
+final class ChatViewModel: ViewModel {
     // MARK: State
 
     @Published var title = ""
+    @Published var isChatSettingEnabled = false
 
     @Published var chatItems = [ChatItemModelType]()
     @Published var error: Error?
@@ -27,17 +28,13 @@ final class ChatViewModel: ObservableObject {
     @Published var footerViewState = StatefullFooterViewState.loading
     @Published var headerViewState = StatefullFooterViewState.loading
 
-    let isAppearSubject = CurrentValueSubject<Bool, Never>(false)
+    @Published var navigationType: ChatNavigationType?
 
     // MARK: Action
 
     let loadLocalDataTrigger = PassthroughSubject<Void, Never>()
     let loadMoreDataTrigger = PassthroughSubject<Int, Never>()
-
-    private let loadPreviousDataTrigger = PassthroughSubject<Void, Never>()
-    private let loadNextDataTrigger = PassthroughSubject<Void, Never>()
-    private let reloadDataTrigger = PassthroughSubject<Void, Never>()
-    private let seenTrigger = PassthroughSubject<Int, Never>()
+    let openChatSettingSubject = PassthroughSubject<Void, Never>()
 
     // MARK: Dependencies
 
@@ -48,13 +45,16 @@ final class ChatViewModel: ObservableObject {
     private let messageService: MessageServiceType
     private weak var delegate: ChatViewModelDelegate?
 
-    // MARK: Data
+    // MARK: Private
+
+    private let loadPreviousDataTrigger = PassthroughSubject<Void, Never>()
+    private let loadNextDataTrigger = PassthroughSubject<Void, Never>()
+    private let reloadDataTrigger = PassthroughSubject<Void, Never>()
+    private let seenTrigger = PassthroughSubject<Int, Never>()
 
     private let conversationSubject = CurrentValueSubject<Conversation?, Never>(nil)
     private let currentUserSubject = CurrentValueSubject<User?, Never>(nil)
     private let messagesSubject = CurrentValueSubject<[Message], Never>([])
-
-    // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -68,6 +68,7 @@ final class ChatViewModel: ObservableObject {
         self.conversationService = conversationService
         self.messageService = messageService
         self.delegate = delegate
+        super.init()
 
         configure()
     }
@@ -76,6 +77,7 @@ final class ChatViewModel: ObservableObject {
         configureBindData()
         configureSeenMessage()
         configureLoadData()
+        configureActions()
     }
 
     private func configureBindData() {
@@ -116,6 +118,17 @@ final class ChatViewModel: ObservableObject {
                 self?.chatItems = $0
                 self?.viewState = .content
             })
+            .store(in: &cancellables)
+
+        conversationSubject
+            .sink { [weak self] in
+                switch $0?.type {
+                case .single, .unknown, .none:
+                    self?.isChatSettingEnabled = false
+                case .group:
+                    self?.isChatSettingEnabled = true
+                }
+            }
             .store(in: &cancellables)
     }
 
@@ -272,6 +285,17 @@ final class ChatViewModel: ObservableObject {
                 return self.messageService.seenMessage(conversationID: self.conversationID, messageID: messageID)
             }
             .sink(receiveValue: { _ in })
+            .store(in: &cancellables)
+    }
+
+    private func configureActions() {
+        openChatSettingSubject
+            .withLatestFrom(conversationSubject)
+            .compactMap { $0 }
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                self?.navigationType = .chatSetting($0)
+            })
             .store(in: &cancellables)
     }
 }

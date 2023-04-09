@@ -12,6 +12,7 @@ import Foundation
 enum ConversationType: String, Codable {
     case single = "SINGLE"
     case group = "GROUP"
+    case unknown = "UNKOWN"
 }
 
 // MARK: - Conversation
@@ -20,6 +21,7 @@ struct Conversation: Equatable, Codable {
     let id: Int
     let title: String?
     let creator: User
+    let admin: User
     let type: ConversationType
     let messages: [Message]
     let participants: [User]
@@ -34,11 +36,17 @@ struct Conversation: Equatable, Codable {
                 .first?
                 .name
         case .group:
-            return participants
-                .filter { $0.id != currentUser.id }
-                .compactMap { $0.name }
-                .filter { !$0.isEmpty }
-                .joined(separator: ", ")
+            if let title, !title.trimmed.isEmpty {
+                return title
+            } else {
+                return participants
+                    .filter { $0.id != currentUser.id }
+                    .compactMap { $0.name }
+                    .filter { !$0.isEmpty }
+                    .joined(separator: ", ")
+            }
+        case .unknown:
+            return ""
         }
     }
 
@@ -50,6 +58,7 @@ struct Conversation: Equatable, Codable {
     init(id: Int,
          title: String?,
          creator: User,
+         admin: User,
          type: ConversationType,
          messages: [Message],
          participants: [User],
@@ -58,6 +67,7 @@ struct Conversation: Equatable, Codable {
         self.id = id
         self.title = title
         self.creator = creator
+        self.admin = admin
         self.type = type
         self.messages = messages
         self.participants = participants
@@ -70,6 +80,7 @@ struct Conversation: Equatable, Codable {
         self.id = try container.decode(Int.self, forKey: .id)
         self.title = try container.decodeIfPresent(String.self, forKey: .title)
         self.creator = try container.decode(User.self, forKey: .creator)
+        self.admin = try container.decode(User.self, forKey: .admin)
         self.type = try container.decode(ConversationType.self, forKey: .type)
         self.messages = try container.decodeIfPresent([Message].self, forKey: .messages) ?? []
         self.participants = try container.decode([User].self, forKey: .participants)

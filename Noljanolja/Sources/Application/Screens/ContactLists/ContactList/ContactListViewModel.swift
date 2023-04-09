@@ -2,19 +2,16 @@
 //  ContactListViewModel.swift
 //  Noljanolja
 //
-//  Created by Nguyen The Trinh on 06/03/2023.
+//  Created by Nguyen The Trinh on 08/04/2023.
 //
 //
 
 import Combine
 import Foundation
-import UIKit
 
 // MARK: - ContactListViewModelDelegate
 
-protocol ContactListViewModelDelegate: AnyObject {
-    func didCreateConversation(_ conversation: Conversation)
-}
+protocol ContactListViewModelDelegate: AnyObject {}
 
 // MARK: - ContactListViewModel
 
@@ -25,21 +22,19 @@ final class ContactListViewModel: ViewModel {
     @Published var users = [User]()
     @Published var error: Error?
 
-    @Published var isProgressHUDShowing = false
     @Published var viewState = ViewState.loading
 
-    @Published var selectedUsers = [User]()
     @Published var isCreateConversationEnabled = false
 
     // MARK: Action
 
     let requestPermissionSubject = PassthroughSubject<Void, Never>()
-    let selectUserSubject = PassthroughSubject<(ConversationType, User), Never>()
-    let createConversationSubject = PassthroughSubject<ConversationType, Never>()
 
     // MARK: Dependencies
 
+    var isMultiSelectionEnabled: Bool
     private let contactService: ContactServiceType
+    private let contactListUseCase: ContactListUseCase
     private let conversationService: ConversationServiceType
     private weak var delegate: ContactListViewModelDelegate?
 
@@ -48,13 +43,17 @@ final class ContactListViewModel: ViewModel {
     private let loadDataSubject = PassthroughSubject<Void, Never>()
 
     private var allUsers = [User]()
-    
+
     private var cancellables = Set<AnyCancellable>()
 
-    init(contactService: ContactServiceType = ContactService.default,
+    init(isMultiSelectionEnabled: Bool,
+         contactService: ContactServiceType = ContactService.default,
+         contactListUseCase: ContactListUseCase,
          conversationService: ConversationServiceType = ConversationService.default,
          delegate: ContactListViewModelDelegate? = nil) {
+        self.isMultiSelectionEnabled = isMultiSelectionEnabled
         self.contactService = contactService
+        self.contactListUseCase = contactListUseCase
         self.conversationService = conversationService
         self.delegate = delegate
         super.init()
@@ -64,7 +63,7 @@ final class ContactListViewModel: ViewModel {
 
     private func configure() {
         configureLoadData()
-        configureCreateConversation()
+        configureActions()
     }
 
     private func configureLoadData() {
@@ -81,7 +80,7 @@ final class ContactListViewModel: ViewModel {
                         guard let self else {
                             return Empty<[User], Error>().eraseToAnyPublisher()
                         }
-                        return self.contactService.getContacts(page: 1, pageSize: 100)
+                        return self.contactListUseCase.getContacts(page: 1, pageSize: 1000)
                     }
                     .eraseToAnyPublisher()
             }
@@ -125,7 +124,9 @@ final class ContactListViewModel: ViewModel {
             .mapToVoid().first()
             .sink(receiveValue: { [weak self] in self?.loadDataSubject.send() })
             .store(in: &cancellables)
+    }
 
+    private func configureActions() {
         $searchString
             .removeDuplicates()
             .debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
@@ -139,48 +140,6 @@ final class ContactListViewModel: ViewModel {
                     }
             }
             .sink(receiveValue: { [weak self] in self?.users = $0 })
-            .store(in: &cancellables)
-    }
-
-    private func configureCreateConversation() {
-        selectUserSubject
-            .sink(receiveValue: { [weak self] createConversationType, user in
-                guard let self else { return }
-                switch createConversationType {
-                case .single:
-                    self.selectedUsers = [user]
-                    self.createConversationSubject.send(createConversationType)
-                case .group:
-                    if let user = self.selectedUsers.first(where: { $0.id == user.id }) {
-                        self.selectedUsers = self.selectedUsers.removeAll(user)
-                    } else {
-                        self.selectedUsers.append(user)
-                    }
-                    self.isCreateConversationEnabled = self.selectedUsers.isEmpty
-                }
-            })
-            .store(in: &cancellables)
-
-        createConversationSubject
-            .withLatestFrom($selectedUsers.filter { !$0.isEmpty }) { ($0, $1) }
-            .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
-            .flatMapLatestToResult { [weak self] createConversationType, users -> AnyPublisher<Conversation, Error> in
-                guard let self else {
-                    return Empty<Conversation, Error>().eraseToAnyPublisher()
-                }
-                return self.conversationService
-                    .createConversation(type: createConversationType, participants: users)
-            }
-            .sink(receiveValue: { [weak self] result in
-                self?.isProgressHUDShowing = false
-                switch result {
-                case let .success(conversation):
-                    logger.info("Create conversation successful - conversation id: \(conversation.id)")
-                    self?.delegate?.didCreateConversation(conversation)
-                case let .failure(error):
-                    logger.error("Create conversation failed: \(error.localizedDescription)")
-                }
-            })
             .store(in: &cancellables)
     }
 }

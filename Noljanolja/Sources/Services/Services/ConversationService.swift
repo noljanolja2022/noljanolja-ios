@@ -13,8 +13,32 @@ import Foundation
 protocol ConversationServiceType {
     func getConversation(conversationID: Int) -> AnyPublisher<Conversation, Error>
     func getConversations() -> AnyPublisher<[Conversation], Error>
+
     func createConversation(type: ConversationType,
                             participants: [User]) -> AnyPublisher<Conversation, Error>
+
+    func updateConversation(conversationID: Int,
+                            title: String?,
+                            participants: [User]?,
+                            image: Data?) -> AnyPublisher<Conversation, Error>
+
+    func addParticipant(conversationID: Int, participants: [User]) -> AnyPublisher<Conversation, Error>
+    func removeParticipant(conversationID: Int, participants: [User]) -> AnyPublisher<Conversation, Error>
+    func assignAdmin(conversationID: Int, admin: User) -> AnyPublisher<Conversation, Error>
+}
+
+extension ConversationServiceType {
+    func updateConversation(conversationID: Int,
+                            title: String? = nil,
+                            participants: [User]? = nil,
+                            image: Data? = nil) -> AnyPublisher<Conversation, Error> {
+        updateConversation(
+            conversationID: conversationID,
+            title: title,
+            participants: participants,
+            image: image
+        )
+    }
 }
 
 // MARK: - ConversationService
@@ -23,21 +47,27 @@ final class ConversationService: ConversationServiceType {
     static let `default` = ConversationService()
 
     private let conversationAPI: ConversationAPIType
+    private let conversationParticipantAPI: ConversationParticipantAPIType
     private let conversationStore: ConversationStoreType
+    private let conversationDetailStore: ConversationDetailStoreType
 
     private init(conversationAPI: ConversationAPIType = ConversationAPI.default,
-                 conversationStore: ConversationStoreType = ConversationStore.default) {
+                 conversationParticipantAPI: ConversationParticipantAPIType = ConversationParticipantAPI.default,
+                 conversationStore: ConversationStoreType = ConversationStore.default,
+                 conversationDetailStore: ConversationDetailStoreType = ConversationDetailStore.default) {
         self.conversationAPI = conversationAPI
+        self.conversationParticipantAPI = conversationParticipantAPI
         self.conversationStore = conversationStore
+        self.conversationDetailStore = conversationDetailStore
     }
 
     func getConversation(conversationID: Int) -> AnyPublisher<Conversation, Error> {
-        let localConversation = conversationStore
-            .observeConversation(conversationID: conversationID)
+        let localConversation = conversationDetailStore
+            .observeConversationDetail(conversationID: conversationID)
         let remoteConversation = conversationAPI
             .getConversation(conversationID: conversationID)
             .handleEvents(receiveOutput: { [weak self] in
-                self?.conversationStore.saveConversations([$0])
+                self?.conversationDetailStore.saveConversationDetails([$0])
             })
         return Publishers.Merge(localConversation, remoteConversation)
             .removeDuplicates()
@@ -63,6 +93,7 @@ final class ConversationService: ConversationServiceType {
                             id: $0.id,
                             title: $0.title,
                             creator: $0.creator,
+                            admin: $0.admin,
                             type: $0.type,
                             messages: $0.messages.sorted { $0.createdAt > $1.createdAt },
                             participants: $0.participants,
@@ -92,5 +123,61 @@ final class ConversationService: ConversationServiceType {
                             participants: [User]) -> AnyPublisher<Conversation, Error> {
         conversationAPI
             .createConversation(title: "", type: type, participants: participants)
+    }
+
+    func updateConversation(conversationID: Int,
+                            title: String?,
+                            participants: [User]?,
+                            image: Data?) -> AnyPublisher<Conversation, Error> {
+        conversationAPI
+            .updateConversation(
+                conversationID: conversationID,
+                title: title,
+                participants: participants,
+                image: image
+            )
+            .handleEvents(receiveOutput: { [weak self] in
+                self?.conversationDetailStore.saveConversationDetails([$0])
+            })
+            .eraseToAnyPublisher()
+    }
+
+    func addParticipant(conversationID: Int, participants: [User]) -> AnyPublisher<Conversation, Error> {
+        conversationParticipantAPI
+            .addParticipant(conversationID: conversationID, participants: participants)
+            .flatMap { [weak self] in
+                guard let self else { return Empty<Conversation, Error>().eraseToAnyPublisher() }
+                return self.conversationAPI.getConversation(conversationID: conversationID)
+            }
+            .handleEvents(receiveOutput: { [weak self] in
+                self?.conversationDetailStore.saveConversationDetails([$0])
+            })
+            .eraseToAnyPublisher()
+    }
+
+    func removeParticipant(conversationID: Int, participants: [User]) -> AnyPublisher<Conversation, Error> {
+        conversationParticipantAPI
+            .removeParticipant(conversationID: conversationID, participants: participants)
+            .flatMap { [weak self] in
+                guard let self else { return Empty<Conversation, Error>().eraseToAnyPublisher() }
+                return self.conversationAPI.getConversation(conversationID: conversationID)
+            }
+            .handleEvents(receiveOutput: { [weak self] in
+                self?.conversationDetailStore.saveConversationDetails([$0])
+            })
+            .eraseToAnyPublisher()
+    }
+
+    func assignAdmin(conversationID: Int, admin: User) -> AnyPublisher<Conversation, Error> {
+        conversationParticipantAPI
+            .assignAdmin(conversationID: conversationID, admin: admin)
+            .flatMap { [weak self] in
+                guard let self else { return Empty<Conversation, Error>().eraseToAnyPublisher() }
+                return self.conversationAPI.getConversation(conversationID: conversationID)
+            }
+            .handleEvents(receiveOutput: { [weak self] in
+                self?.conversationDetailStore.saveConversationDetails([$0])
+            })
+            .eraseToAnyPublisher()
     }
 }

@@ -112,9 +112,7 @@ struct SelectCountryView<ViewModel: SelectCountryViewModel>: View {
                         : Color.clear
                 )
             }
-            .listRowInsets(EdgeInsets())
         }
-        .listStyle(.plain)
     }
 }
 

@@ -13,6 +13,7 @@ enum GenderType: String, Codable, CaseIterable {
     case male = "MALE"
     case female = "FEMALE"
     case other = "OTHER"
+    case unknown = "UNKOWN"
 }
 
 // MARK: - UserPreferences

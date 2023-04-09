@@ -33,7 +33,7 @@ struct ConversationItemModel: Equatable {
         self.id = conversation.id
         self.image = conversation.avatar(currentUser)
         self.lastMessage = conversation.messages.first
-        self.date = conversation.messages.first?.createdAt.string(withFormat: "HH:mm")
+        self.date = conversation.messages.first?.createdAt.relativeFormatForConversation()
         self.title = conversation.displayTitle(currentUser)
         self.isSeen = {
             let lastReceiverMessage = conversation.messages.first(where: { $0.sender.id != currentUser.id })

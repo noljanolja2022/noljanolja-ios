@@ -15,12 +15,13 @@ enum MessageType: String, Codable {
     case gif = "GIF"
     case photo = "PHOTO"
     case document = "DOCUMENT"
+    case unknown = "UNKOWN"
 
     var isSupported: Bool {
         switch self {
         case .plaintext, .photo, .sticker:
             return true
-        case .gif, .document:
+        case .gif, .document, .unknown:
             return false
         }
     }
@@ -77,7 +78,7 @@ struct Message: Equatable, Codable {
         self.localID = try container.decodeIfPresent(String.self, forKey: .localID)
         self.conversationID = try container.decode(Int.self, forKey: .conversationID)
         self.message = try container.decodeIfPresent(String.self, forKey: .message)
-        self.type = try container.decode(MessageType.self, forKey: .type)
+        self.type = (try? container.decode(MessageType.self, forKey: .type)) ?? .unknown
         self.sender = try container.decode(User.self, forKey: .sender)
         self.seenBy = try container.decodeIfPresent([String].self, forKey: .seenBy) ?? []
         self.attachments = try container.decodeIfPresent([Attachment].self, forKey: .attachments) ?? []

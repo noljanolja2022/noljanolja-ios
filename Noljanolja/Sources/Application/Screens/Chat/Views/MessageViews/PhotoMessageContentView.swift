@@ -54,6 +54,7 @@ struct PhotoMessageContentView: View {
                                     ]
                                 )
                                 .resizable()
+                                .indicator(.activity)
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: geometry.size.width, height: geometry.size.height)
                                 .clipped()

@@ -32,7 +32,7 @@ struct ConversationItemView: View {
                     case .plaintext: return model.lastMessage?.message
                     case .photo: return "Photo"
                     case .sticker: return "Sticker"
-                    case .gif, .document, .none: return nil
+                    case .gif, .document, .unknown, .none: return nil
                     }
                 }()
                 if let message, !message.isEmpty {
@@ -43,7 +43,7 @@ struct ConversationItemView: View {
                         .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
                 }
             }
-            .frame(maxWidth: .infinity)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
 
             VStack(alignment: .trailing, spacing: 2) {
                 Text(model.date ?? "")

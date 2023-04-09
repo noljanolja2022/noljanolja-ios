@@ -12,6 +12,7 @@ final class StorableConversation: Object {
     @Persisted(primaryKey: true) var id: Int
     @Persisted var title: String?
     @Persisted var creator: StorableUser?
+    @Persisted var admin: StorableUser?
     @Persisted var type: String?
     @Persisted var messages = List<StorableMessage>()
     @Persisted var participants = List<StorableUser>()
@@ -20,6 +21,7 @@ final class StorableConversation: Object {
 
     var model: Conversation? {
         guard let creator = creator?.model,
+              let admin = admin?.model,
               let type = type.flatMap({ ConversationType(rawValue: $0) }),
               let createdAt,
               let updatedAt else {
@@ -29,6 +31,7 @@ final class StorableConversation: Object {
             id: id,
             title: title,
             creator: creator,
+            admin: admin,
             type: type,
             messages: messages.compactMap { $0.model },
             participants: participants.compactMap { $0.model },
@@ -42,6 +45,7 @@ final class StorableConversation: Object {
         self.id = model.id
         self.title = model.title
         self.creator = StorableUser(model.creator)
+        self.admin = StorableUser(model.admin)
         self.type = model.type.rawValue
         self.messages = {
             let list = List<StorableMessage>()

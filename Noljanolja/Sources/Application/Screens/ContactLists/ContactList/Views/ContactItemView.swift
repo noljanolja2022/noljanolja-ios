@@ -17,6 +17,8 @@ struct ContactItemView: View {
     var body: some View {
         HStack {
             WebImage(url: URL(string: user.avatar))
+                .resizable()
+                .indicator(.activity)
                 .frame(width: 40, height: 40)
                 .scaledToFill()
                 .background(ColorAssets.neutralGrey.swiftUIColor)

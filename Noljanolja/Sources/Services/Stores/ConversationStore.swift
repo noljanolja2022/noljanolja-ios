@@ -13,8 +13,10 @@ import RealmSwift
 
 protocol ConversationStoreType {
     func saveConversations(_ conversations: [Conversation])
+    
     func observeConversations() -> AnyPublisher<[Conversation], Error>
-    func observeConversation(conversationID: Int) -> AnyPublisher<Conversation, Error>
+
+    func removeConversation(conversationID: Int)
 }
 
 // MARK: - ConversationStore
@@ -22,16 +24,19 @@ protocol ConversationStoreType {
 final class ConversationStore: ConversationStoreType {
     static let `default` = ConversationStore()
 
-    private lazy var realmManager: RealmManagerType = RealmManager(
-        configuration: {
-            var config = Realm.Configuration.defaultConfiguration
-            config.fileURL!.deleteLastPathComponent()
-            config.fileURL!.appendPathComponent("conversation")
-            config.fileURL!.appendPathExtension("realm")
-            return config
-        }(),
-        queue: DispatchQueue(label: "realm.conversation", qos: .default)
-    )
+    private lazy var realmManager: RealmManagerType = {
+        let id = "conversation"
+        return RealmManager(
+            configuration: {
+                var config = Realm.Configuration.defaultConfiguration
+                config.fileURL!.deleteLastPathComponent()
+                config.fileURL!.appendPathComponent(id)
+                config.fileURL!.appendPathExtension("realm")
+                return config
+            }(),
+            queue: DispatchQueue(label: "realm.\(id)", qos: .default)
+        )
+    }()
 
     private init() {}
 
@@ -48,11 +53,10 @@ final class ConversationStore: ConversationStoreType {
             .eraseToAnyPublisher()
     }
 
-    func observeConversation(conversationID: Int) -> AnyPublisher<Conversation, Error> {
-        realmManager.object(ofType: StorableConversation.self, forPrimaryKey: conversationID)
-            .publisher
-            .compactMap { $0.model }
-            .setFailureType(to: Error.self)
-            .eraseToAnyPublisher()
+    func removeConversation(conversationID: Int) {
+        guard let conversation = realmManager.object(ofType: StorableConversation.self, forPrimaryKey: conversationID) else {
+            return
+        }
+        realmManager.delete(conversation)
     }
 }

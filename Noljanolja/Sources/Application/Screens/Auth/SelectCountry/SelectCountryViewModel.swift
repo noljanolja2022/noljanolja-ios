@@ -57,7 +57,7 @@ final class SelectCountryViewModel: ViewModel {
 
         $searchString
             .removeDuplicates()
-            .debounce(for: .milliseconds(300), scheduler: DispatchQueue.main)
+            .debounce(for: .milliseconds(100), scheduler: DispatchQueue.main)
             .withLatestFrom(allCountries) { ($0, $1) }
             .map { text, countries in
                 countries

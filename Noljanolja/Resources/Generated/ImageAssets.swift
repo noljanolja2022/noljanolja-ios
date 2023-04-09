@@ -23,6 +23,7 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum ImageAssets {
   internal static let bgSplash = ImageAsset(name: "bg_splash")
+  internal static let icAdd = ImageAsset(name: "ic_add")
   internal static let icAddCircle = ImageAsset(name: "ic_add_circle")
   internal static let icAppMascot = ImageAsset(name: "ic_app_mascot")
   internal static let icArrowRight = ImageAsset(name: "ic_arrow_right")
@@ -34,10 +35,12 @@ internal enum ImageAssets {
   internal static let icCircleChecked = ImageAsset(name: "ic_circle_checked")
   internal static let icCircleUnchecked = ImageAsset(name: "ic_circle_unchecked")
   internal static let icClose = ImageAsset(name: "ic_close")
+  internal static let icEdit = ImageAsset(name: "ic_edit")
   internal static let icEmoji = ImageAsset(name: "ic_emoji")
   internal static let icGroupAdd = ImageAsset(name: "ic_group_add")
   internal static let icGroupChat = ImageAsset(name: "ic_group_chat")
   internal static let icKeyboardVoice = ImageAsset(name: "ic_keyboard_voice")
+  internal static let icMenu = ImageAsset(name: "ic_menu")
   internal static let icPhoto = ImageAsset(name: "ic_photo")
   internal static let icPpyy = ImageAsset(name: "ic_ppyy")
   internal static let icSend = ImageAsset(name: "ic_send")
@@ -49,6 +52,7 @@ internal enum ImageAssets {
   @available(*, deprecated, message: "All values properties are now deprecated")
   internal static let allImages: [ImageAsset] = [
     bgSplash,
+    icAdd,
     icAddCircle,
     icAppMascot,
     icArrowRight,
@@ -60,10 +64,12 @@ internal enum ImageAssets {
     icCircleChecked,
     icCircleUnchecked,
     icClose,
+    icEdit,
     icEmoji,
     icGroupAdd,
     icGroupChat,
     icKeyboardVoice,
+    icMenu,
     icPhoto,
     icPpyy,
     icSend,

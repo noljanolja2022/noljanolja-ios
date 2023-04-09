@@ -17,7 +17,7 @@ extension ChatMessageItemModel {
         case sticker(StickerMessageContentModel)
     }
 
-    enum PositionType {
+    enum PositionType: Equatable {
         case all
         case first
         case middle
@@ -89,7 +89,7 @@ struct ChatMessageItemModel: Equatable {
                     message: message
                 )
             )
-        case .gif, .document:
+        case .gif, .document, .unknown:
             self.content = nil
         }
         self.positionType = positionType
