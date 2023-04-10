@@ -14,10 +14,12 @@ extension UINavigationController {
         delegate = self
     }
 
-    func configure(backgroundColor: UIColor, foregroundColor: UIColor) {
+    @discardableResult
+    func configure(backgroundColor: UIColor, foregroundColor: UIColor) -> UINavigationBarAppearance {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = backgroundColor
+        appearance.shadowColor = .clear
 
         appearance.titleTextAttributes = [.foregroundColor: foregroundColor]
 
@@ -39,6 +41,8 @@ extension UINavigationController {
         if #available(iOS 15.0, *) {
             navigationBar.compactScrollEdgeAppearance = appearance
         }
+
+        return appearance
     }
 }
 

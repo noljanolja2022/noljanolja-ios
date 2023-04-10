@@ -54,6 +54,7 @@ struct RootView<ViewModel: RootViewModelType>: View {
                         )
                     )
                 }
+                .navigationViewStyle(StackNavigationViewStyle())
                 .accentColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 .introspectNavigationController { navigationController in
                     navigationController.configure(

@@ -53,7 +53,11 @@ final class MessageService: MessageServiceType {
     func getLocalMessages(conversationID: Int) -> AnyPublisher<[Message], Error> {
         messageStore
             .observeMessages(conversationID: conversationID)
-            .map { $0.sorted { $0.createdAt > $1.createdAt } }
+            .map {
+                $0
+                    .filter { $0.type.isSupported }
+                    .sorted { $0.createdAt > $1.createdAt }
+            }
             .removeDuplicates()
             .eraseToAnyPublisher()
     }

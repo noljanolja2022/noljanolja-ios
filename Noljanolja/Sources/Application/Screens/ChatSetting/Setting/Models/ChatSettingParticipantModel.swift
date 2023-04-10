@@ -42,7 +42,7 @@ struct ChatSettingParticipantModel: Equatable {
 
     var chatSettingUserDetailActions: [ChatSettingUserDetailAction] {
         if currentUser?.id != user.id, currentUser?.id == admin?.id {
-            return [.makeAdmin, .removeUser]
+            return [.assignAdmin, .removeParticipant]
         } else {
             return []
         }

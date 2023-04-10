@@ -96,6 +96,10 @@
 		CF446B8E29D8A97700ED66BF /* LottieAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF446B8D29D8A97700ED66BF /* LottieAssets.xcassets */; };
 		CF446B9029D8AB0D00ED66BF /* LottieAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF446B8F29D8AB0D00ED66BF /* LottieAssets.swift */; };
 		CF446B9329D8AE2F00ED66BF /* RefreshTokenInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF446B9229D8AE2F00ED66BF /* RefreshTokenInterceptor.swift */; };
+		CF4A6EF129E3C0D000CB75E5 /* CreateConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6EEF29E3C0D000CB75E5 /* CreateConversationView.swift */; };
+		CF4A6EF229E3C0D000CB75E5 /* CreateConversationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6EF029E3C0D000CB75E5 /* CreateConversationViewModel.swift */; };
+		CF4A6EF429E3C45A00CB75E5 /* MainNavigationTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6EF329E3C45A00CB75E5 /* MainNavigationTypes.swift */; };
+		CF4A6F0629E41FFA00CB75E5 /* MainToolBarActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6F0529E41FFA00CB75E5 /* MainToolBarActionType.swift */; };
 		CF52AB6129B8D6BE00C9C90C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF52AB6029B8D6BE00C9C90C /* User.swift */; };
 		CF52AB6429B8D85000C9C90C /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF52AB6329B8D85000C9C90C /* ContactService.swift */; };
 		CF52AB6829B8D93D00C9C90C /* StorableUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF52AB6729B8D93D00C9C90C /* StorableUser.swift */; };
@@ -153,7 +157,7 @@
 		CFAD27AD29E2B9B000947BC3 /* ChatSettingUpdateTitleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAD27AB29E2B9B000947BC3 /* ChatSettingUpdateTitleViewModel.swift */; };
 		CFAD27B129E2DAE400947BC3 /* ConversationDetailStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAD27B029E2DAE400947BC3 /* ConversationDetailStore.swift */; };
 		CFAD27B329E3003000947BC3 /* ChatNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAD27B229E3003000947BC3 /* ChatNavigations.swift */; };
-		CFAD27B529E300BF00947BC3 /* ConversationListNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAD27B429E300BF00947BC3 /* ConversationListNavigations.swift */; };
+		CFAD27B529E300BF00947BC3 /* ConversationListNavigationTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAD27B429E300BF00947BC3 /* ConversationListNavigationTypes.swift */; };
 		CFB2A89D29D1F0A2008D1689 /* StorableStickerPack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB2A89C29D1F0A2008D1689 /* StorableStickerPack.swift */; };
 		CFB2A89F29D1F31A008D1689 /* StorableSticker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB2A89E29D1F31A008D1689 /* StorableSticker.swift */; };
 		CFB2F6A529E0754A00191AA3 /* ChatSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB2F6A329E0754A00191AA3 /* ChatSettingView.swift */; };
@@ -360,6 +364,10 @@
 		CF446B8D29D8A97700ED66BF /* LottieAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LottieAssets.xcassets; sourceTree = "<group>"; };
 		CF446B8F29D8AB0D00ED66BF /* LottieAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAssets.swift; sourceTree = "<group>"; };
 		CF446B9229D8AE2F00ED66BF /* RefreshTokenInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenInterceptor.swift; sourceTree = "<group>"; };
+		CF4A6EEF29E3C0D000CB75E5 /* CreateConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateConversationView.swift; sourceTree = "<group>"; };
+		CF4A6EF029E3C0D000CB75E5 /* CreateConversationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateConversationViewModel.swift; sourceTree = "<group>"; };
+		CF4A6EF329E3C45A00CB75E5 /* MainNavigationTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationTypes.swift; sourceTree = "<group>"; };
+		CF4A6F0529E41FFA00CB75E5 /* MainToolBarActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainToolBarActionType.swift; sourceTree = "<group>"; };
 		CF52AB6029B8D6BE00C9C90C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CF52AB6329B8D85000C9C90C /* ContactService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
 		CF52AB6729B8D93D00C9C90C /* StorableUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorableUser.swift; sourceTree = "<group>"; };
@@ -410,7 +418,7 @@
 		CFAD27AB29E2B9B000947BC3 /* ChatSettingUpdateTitleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSettingUpdateTitleViewModel.swift; sourceTree = "<group>"; };
 		CFAD27B029E2DAE400947BC3 /* ConversationDetailStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDetailStore.swift; sourceTree = "<group>"; };
 		CFAD27B229E3003000947BC3 /* ChatNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNavigations.swift; sourceTree = "<group>"; };
-		CFAD27B429E300BF00947BC3 /* ConversationListNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListNavigations.swift; sourceTree = "<group>"; };
+		CFAD27B429E300BF00947BC3 /* ConversationListNavigationTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationListNavigationTypes.swift; sourceTree = "<group>"; };
 		CFB2A89C29D1F0A2008D1689 /* StorableStickerPack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorableStickerPack.swift; sourceTree = "<group>"; };
 		CFB2A89E29D1F31A008D1689 /* StorableSticker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorableSticker.swift; sourceTree = "<group>"; };
 		CFB2F6A329E0754A00191AA3 /* ChatSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSettingView.swift; sourceTree = "<group>"; };
@@ -949,6 +957,23 @@
 			path = Interceptors;
 			sourceTree = "<group>";
 		};
+		CF4A6EEE29E3C09C00CB75E5 /* CreateConversation */ = {
+			isa = PBXGroup;
+			children = (
+				CF4A6EEF29E3C0D000CB75E5 /* CreateConversationView.swift */,
+				CF4A6EF029E3C0D000CB75E5 /* CreateConversationViewModel.swift */,
+			);
+			path = CreateConversation;
+			sourceTree = "<group>";
+		};
+		CF4A6F0429E41FEA00CB75E5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CF4A6F0529E41FFA00CB75E5 /* MainToolBarActionType.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		CF4DE2F229B3B762006E75E5 /* Launch */ = {
 			isa = PBXGroup;
 			children = (
@@ -1037,7 +1062,7 @@
 				CF74A1A329B5830000419342 /* Views */,
 				CF74A19B29B581AD00419342 /* ConversationListView.swift */,
 				CF74A19C29B581AD00419342 /* ConversationListModel.swift */,
-				CFAD27B429E300BF00947BC3 /* ConversationListNavigations.swift */,
+				CFAD27B429E300BF00947BC3 /* ConversationListNavigationTypes.swift */,
 			);
 			path = ConversationList;
 			sourceTree = "<group>";
@@ -1402,6 +1427,7 @@
 		CFF1F7A129B7370600B25DD2 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				CF4A6EEE29E3C09C00CB75E5 /* CreateConversation */,
 				CF28567629BA405C00593FA5 /* Chats */,
 				CF28566A29BA2ED900593FA5 /* Models */,
 				CFD5423C29BF7A520053C5B1 /* Views */,
@@ -1433,8 +1459,10 @@
 		CFFC5B6329A7ACD8002B3381 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				CF4A6F0429E41FEA00CB75E5 /* Models */,
 				CF28A1A129B4FE410003C204 /* MainView.swift */,
 				CF28A1A229B4FE410003C204 /* MainViewModel.swift */,
+				CF4A6EF329E3C45A00CB75E5 /* MainNavigationTypes.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -2047,6 +2075,7 @@
 				CF1B625629B9D3BF00DE53E6 /* ConversationService.swift in Sources */,
 				CF446B9329D8AE2F00ED66BF /* RefreshTokenInterceptor.swift in Sources */,
 				CF11B1D829BB65B4002E8151 /* MessageService.swift in Sources */,
+				CF4A6EF229E3C0D000CB75E5 /* CreateConversationViewModel.swift in Sources */,
 				CF10C7EE29C21CDB0020924D /* ConversationSocketService.swift in Sources */,
 				CF74A1A729B586EF00419342 /* StatefullView.swift in Sources */,
 				CF08A86229B5A26600D6CE5F /* ContactAPI.swift in Sources */,
@@ -2058,13 +2087,14 @@
 				CFECC13029B4D6D500E20B58 /* UILaunchBackgroundView.swift in Sources */,
 				CF131EB329CF32C400054719 /* PhotoAssetAPI.swift in Sources */,
 				CF1B625029B9BCC200DE53E6 /* StorableConversation.swift in Sources */,
+				CF4A6EF129E3C0D000CB75E5 /* CreateConversationView.swift in Sources */,
 				CF28A1A029B4E9CF0003C204 /* AuthRootViewModel.swift in Sources */,
 				CF28A1B029B5066A0003C204 /* SettingViewModel.swift in Sources */,
 				CFB2A89F29D1F31A008D1689 /* StorableSticker.swift in Sources */,
 				CFECC12F29B4D6D500E20B58 /* LaunchBackgroundView.swift in Sources */,
 				CF54FA2429D0187B0092E2C6 /* MediaStore.swift in Sources */,
 				CF0EA30929AA088B0014A7DE /* View+Border.swift in Sources */,
-				CFAD27B529E300BF00947BC3 /* ConversationListNavigations.swift in Sources */,
+				CFAD27B529E300BF00947BC3 /* ConversationListNavigationTypes.swift in Sources */,
 				CFD5424D29BF7A520053C5B1 /* SenderMessageView.swift in Sources */,
 				CF8737F329CB6A700018237B /* ChatPhotoInputView.swift in Sources */,
 				CF446B8229D89B2100ED66BF /* LottieView.swift in Sources */,
@@ -2082,6 +2112,7 @@
 				CFAD27B329E3003000947BC3 /* ChatNavigations.swift in Sources */,
 				CF775BC429C62B3000E82183 /* FrameworkAppDelegate.swift in Sources */,
 				CF1EEE3729AE3FA8004F570A /* TermItemView.swift in Sources */,
+				CF4A6F0629E41FFA00CB75E5 /* MainToolBarActionType.swift in Sources */,
 				CF08A86029B5A17A00D6CE5F /* CreateConversationContactListViewModel.swift in Sources */,
 				CF52AB6429B8D85000C9C90C /* ContactService.swift in Sources */,
 				CFB2F6D229E1CA3800191AA3 /* CreateConversationContactListUseCase.swift in Sources */,
@@ -2230,6 +2261,7 @@
 				CFDCC33C29CCC2D000E8F18C /* PhotoMessageContentView.swift in Sources */,
 				CF1BD20B29ACF67D00778786 /* StateView.swift in Sources */,
 				CFB2F6B029E093BD00191AA3 /* ChatSettingParticipantItemView.swift in Sources */,
+				CF4A6EF429E3C45A00CB75E5 /* MainNavigationTypes.swift in Sources */,
 				CF0CC9FF29D155DD0027D2C1 /* StickerMessageContentView.swift in Sources */,
 				CF28566C29BA2EF100593FA5 /* ChatMessageItemModel.swift in Sources */,
 				CFAD27AD29E2B9B000947BC3 /* ChatSettingUpdateTitleViewModel.swift in Sources */,

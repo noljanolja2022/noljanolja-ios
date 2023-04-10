@@ -127,5 +127,6 @@ struct SelectCountryView_Previews: PreviewProvider {
                 )
             )
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }

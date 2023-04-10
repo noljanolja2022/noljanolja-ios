@@ -8,20 +8,20 @@
 import Foundation
 
 enum ChatSettingUserDetailAction: CaseIterable, Equatable {
-    case makeAdmin
-    case removeUser
+    case assignAdmin
+    case removeParticipant
 
     var title: String {
         switch self {
-        case .makeAdmin: return "Make admin"
-        case .removeUser: return "Remove user"
+        case .assignAdmin: return "Make admin"
+        case .removeParticipant: return "Remove user"
         }
     }
 
     var color: ColorAsset {
         switch self {
-        case .makeAdmin: return ColorAssets.neutralDarkGrey
-        case .removeUser: return ColorAssets.red
+        case .assignAdmin: return ColorAssets.neutralDarkGrey
+        case .removeParticipant: return ColorAssets.red
         }
     }
 }

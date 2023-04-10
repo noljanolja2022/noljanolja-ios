@@ -39,6 +39,8 @@ struct ChatSettingParticipantDetailView<ViewModel: ChatSettingParticipantDetailV
             buildContentView()
         }
         .edgesIgnoringSafeArea(.bottom)
+        .onAppear { viewModel.isAppearSubject.send(true) }
+        .onDisappear { viewModel.isAppearSubject.send(false) }
     }
 
     private func buildContentView() -> some View {

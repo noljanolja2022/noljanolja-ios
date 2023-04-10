@@ -40,6 +40,7 @@ struct AuthRootView<ViewModel: AuthRootViewModelType>: View {
                         )
                     )
                 }
+                .navigationViewStyle(StackNavigationViewStyle())
             case .auth:
                 NavigationView {
                     AuthView(
@@ -48,6 +49,7 @@ struct AuthRootView<ViewModel: AuthRootViewModelType>: View {
                         )
                     )
                 }
+                .navigationViewStyle(StackNavigationViewStyle())
             case .updateCurrentUser:
                 UpdateCurrentUserView(
                     viewModel: UpdateCurrentUserViewModel(

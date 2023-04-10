@@ -32,7 +32,6 @@ final class ChatViewModel: ViewModel {
 
     // MARK: Action
 
-    let loadLocalDataTrigger = PassthroughSubject<Void, Never>()
     let loadMoreDataTrigger = PassthroughSubject<Int, Never>()
     let openChatSettingSubject = PassthroughSubject<Void, Never>()
 
@@ -214,7 +213,8 @@ final class ChatViewModel: ViewModel {
 
         // MARK: Load local messages
 
-        loadLocalDataTrigger
+        isAppearSubject
+            .filter { $0 }
             .first()
             .flatMapLatestToResult { [weak self] _ in
                 guard let self else {
@@ -234,7 +234,8 @@ final class ChatViewModel: ViewModel {
             })
             .store(in: &cancellables)
 
-        loadLocalDataTrigger
+        isAppearSubject
+            .filter { $0 }
             .first()
             .flatMapLatestToResult { [weak self] _ in
                 guard let self else {

@@ -23,7 +23,17 @@ final class ConversationListViewModel: ViewModel {
     @Published var error: Error?
     @Published var viewState = ViewState.content
 
+    // MARK: Navigations
+
     @Published var navigationType: ConversationListNavigationType?
+    @Published var fullScreenCoverType: ConversationListFullScreenCoverType? {
+        willSet {
+            guard newValue != nil else { return }
+            isPresentingSubject.send(true)
+        }
+    }
+
+    let isPresentingSubject = CurrentValueSubject<Bool, Never>(false)
 
     // MARK: Action
 
@@ -37,6 +47,8 @@ final class ConversationListViewModel: ViewModel {
     private weak var delegate: ConversationListViewModelDelegate?
 
     // MARK: Private
+
+    private let navigationTypeAction = PassthroughSubject<ConversationListNavigationType?, Never>()
 
     private let currentUserSubject = PassthroughSubject<User, Never>()
     private let conversationsSubject = PassthroughSubject<[Conversation], Never>()
@@ -57,6 +69,12 @@ final class ConversationListViewModel: ViewModel {
     }
 
     private func configure() {
+        configureBindData()
+        configureLoadData()
+        configureActions()
+    }
+
+    private func configureBindData() {
         Publishers.CombineLatest(currentUserSubject, conversationsSubject)
             .map { currentUser, conversations in
                 conversations
@@ -72,7 +90,9 @@ final class ConversationListViewModel: ViewModel {
                 self?.viewState = .content
             })
             .store(in: &cancellables)
+    }
 
+    private func configureLoadData() {
         isAppearSubject
             .filter { $0 }
             .first()
@@ -97,6 +117,15 @@ final class ConversationListViewModel: ViewModel {
             })
             .store(in: &cancellables)
 
+        userService
+            .currentUserPublisher
+            .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
+            .store(in: &cancellables)
+
+        conversationSocketService.register()
+    }
+
+    private func configureActions() {
         openChatTrigger
             .withLatestFrom(conversationsSubject) { ($0, $1) }
             .compactMap { conversationItemModel, conversations in
@@ -105,12 +134,26 @@ final class ConversationListViewModel: ViewModel {
             .sink(receiveValue: { [weak self] in self?.navigationType = .chat($0) })
             .store(in: &cancellables)
 
-        userService
-            .currentUserPublisher
-            .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
+        navigationTypeAction
+            .flatMapLatestToResult { [weak self] navigationType in
+                guard let self else {
+                    return Empty<ConversationListNavigationType?, Never>().eraseToAnyPublisher()
+                }
+                return self.isPresentingSubject
+                    .filter { !$0 }
+                    .first()
+                    .map { _ in navigationType }
+                    .eraseToAnyPublisher()
+            }
+            .sink { [weak self] result in
+                switch result {
+                case let .success(navigationType):
+                    self?.navigationType = navigationType
+                case .failure:
+                    break
+                }
+            }
             .store(in: &cancellables)
-
-        conversationSocketService.register()
     }
 }
 
@@ -119,5 +162,14 @@ final class ConversationListViewModel: ViewModel {
 extension ConversationListViewModel: CreateConversationContactListViewModelDelegate {
     func didCreateConversation(_ conversation: Conversation) {
         navigationType = .chat(conversation)
+    }
+}
+
+// MARK: CreateConversationViewModelDelegate
+
+extension ConversationListViewModel: CreateConversationViewModelDelegate {
+    func didSelectType(type: ConversationType) {
+        fullScreenCoverType = nil
+        navigationTypeAction.send(.contactList(type))
     }
 }

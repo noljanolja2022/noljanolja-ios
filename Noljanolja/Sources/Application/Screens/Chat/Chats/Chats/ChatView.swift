@@ -59,13 +59,8 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                     error: buildErrorView
                 )
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .onAppear {
-                    viewModel.isAppearSubject.send(true)
-                    viewModel.loadLocalDataTrigger.send()
-                }
-                .onDisappear {
-                    viewModel.isAppearSubject.send(false)
-                }
+                .onAppear { viewModel.isAppearSubject.send(true) }
+                .onDisappear { viewModel.isAppearSubject.send(false) }
             ChatInputView(
                 viewModel: ChatInputViewModel(
                     conversationID: viewModel.conversationID

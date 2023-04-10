@@ -122,5 +122,6 @@ struct TermView_Previews: PreviewProvider {
                 viewModel: TermViewModel()
             )
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }

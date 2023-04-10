@@ -15,6 +15,10 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
 
     @StateObject var viewModel: ViewModel
 
+    // MARK: State
+
+    @StateObject private var progressHUBState = ProgressHUBState()
+
     var body: some View {
         buildBodyView()
     }
@@ -26,12 +30,18 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
         }
         .onAppear { viewModel.isAppearSubject.send(true) }
         .onDisappear { viewModel.isAppearSubject.send(false) }
+        .onChange(of: viewModel.isProgressHUDShowing) {
+            progressHUBState.isLoading = $0
+        }
+        .progressHUB(isActive: $progressHUBState.isLoading)
+        .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
         .fullScreenCover(unwrapping: $viewModel.fullScreenCoverType) {
             switch $0.wrappedValue {
-            case let .userDetail(participantModel):
+            case let .participantDetail(participantModel):
                 ChatSettingParticipantDetailView(
                     viewModel: ChatSettingParticipantDetailViewModel(
-                        participantModel: participantModel
+                        participantModel: participantModel,
+                        delegate: viewModel
                     )
                 )
                 .introspectViewController {
@@ -43,14 +53,8 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
 
     private func buildContentView() -> some View {
         ScrollView {
-            VStack(spacing: 0) {
+            VStack(spacing: 2) {
                 buildMemberView()
-                Text("")
-                    .frame(height: 2)
-                    .frame(maxWidth: .infinity)
-                    .background(ColorAssets.neutralLightGrey.swiftUIColor)
-                    .padding(.vertical, 4)
-                    .background(ColorAssets.white.swiftUIColor)
                 buildSettingView()
                 buildLeaveView()
             }
@@ -89,23 +93,30 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
                 .onTapGesture {
                     let actions = participantModel.chatSettingUserDetailActions
                     guard !actions.isEmpty else { return }
-                    viewModel.fullScreenCoverType = .userDetail(participantModel)
+                    viewModel.fullScreenCoverType = .participantDetail(participantModel)
                 }
             }
         }
+        .padding(.bottom, 4)
         .background(ColorAssets.white.swiftUIColor)
     }
 
+    @ViewBuilder
     private func buildSettingView() -> some View {
-        VStack(spacing: 0) {
-            Text("Settings")
-                .font(.system(size: 16, weight: .bold))
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.vertical, 10)
-                .padding(.horizontal, 16)
-            buildSettingItemView(with: .updateTitle)
+        if !viewModel.settingItems.isEmpty {
+            VStack(spacing: 0) {
+                Text("Settings")
+                    .font(.system(size: 16, weight: .bold))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.vertical, 10)
+                    .padding(.horizontal, 16)
+                ForEach(viewModel.settingItems, id: \.self) { item in
+                    buildSettingItemView(with: item)
+                }
+            }
+            .padding(.top, 4)
+            .background(ColorAssets.white.swiftUIColor)
         }
-        .background(ColorAssets.white.swiftUIColor)
     }
 
     private func buildSettingItemView(with itemModel: ChatSettingItemModel) -> some View {

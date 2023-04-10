@@ -28,6 +28,7 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
 
     var body: some View {
         buildBodyView()
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("Select Contact")

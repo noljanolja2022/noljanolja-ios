@@ -17,5 +17,5 @@ enum ChatSettingNavigationType: Equatable {
 // MARK: - ChatSettingFullScreenCoverType
 
 enum ChatSettingFullScreenCoverType: Equatable {
-    case userDetail(ChatSettingParticipantModel)
+    case participantDetail(ChatSettingParticipantModel)
 }

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ic_group_add.png",
+      "filename" : "ic_add_chat.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ic_group_add@2x.png",
+      "filename" : "ic_add_chat@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ic_group_add@3x.png",
+      "filename" : "ic_add_chat@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

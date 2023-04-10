@@ -12,7 +12,7 @@ import Foundation
 // MARK: - ChatSettingParticipantDetailViewModelDelegate
 
 protocol ChatSettingParticipantDetailViewModelDelegate: AnyObject {
-    func didSelectAction(_ action: ChatSettingUserDetailAction)
+    func didSelectAction(user: User, action: ChatSettingUserDetailAction)
 }
 
 // MARK: - ChatSettingParticipantDetailViewModel
@@ -45,8 +45,12 @@ final class ChatSettingParticipantDetailViewModel: ViewModel {
     private func configure() {
         actionSubject
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] in
-                self?.delegate?.didSelectAction($0)
+            .sink(receiveValue: { [weak self] action in
+                guard let self else { return }
+                self.delegate?.didSelectAction(
+                    user: self.participantModel.user,
+                    action: action
+                )
             })
             .store(in: &cancellables)
     }

@@ -37,6 +37,7 @@ struct AuthView<ViewModel: AuthViewModel>: View {
                         )
                     )
                 }
+                .navigationViewStyle(StackNavigationViewStyle())
             }
             .alert(item: $viewModel.alertState) {
                 Alert($0) { action in
@@ -194,5 +195,6 @@ struct AuthView_Previews: PreviewProvider {
         NavigationView {
             AuthView(viewModel: AuthViewModel())
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }

@@ -6,6 +6,7 @@
 //
 //
 
+import Combine
 import SwiftUI
 
 // MARK: - ConversationListView
@@ -14,57 +15,89 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
-    @Binding var isCreateChatShown: Bool
-    @Binding var createConversationType: ConversationType?
+    let toolBarAction: AnyPublisher<MainToolBarActionType?, Never>
 
     // MARK: State
 
     var body: some View {
         buildBodyView()
-            .onAppear { viewModel.isAppearSubject.send(true) }
-            .onDisappear { viewModel.isAppearSubject.send(false) }
-            .clipped()
     }
 
+    @ViewBuilder
     private func buildBodyView() -> some View {
         ZStack(alignment: .bottomTrailing) {
-            VStack(spacing: 0) {
-                ZStack {
-                    SearchView(
-                        placeholder: "Search friend...",
-                        text: .constant(""),
-                        isUserInteractionEnabled: false
-                    )
-                    .padding(.horizontal, 16)
-
-                    Button(
-                        action: { isCreateChatShown = true },
-                        label: {
-                            Text("")
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        }
-                    )
-                }
-                .frame(height: 36)
-
-                buildContentView()
-                    .padding(.top, 12)
-                    .statefull(
-                        state: $viewModel.viewState,
-                        isEmpty: { viewModel.conversations.isEmpty },
-                        loading: buildLoadingView,
-                        empty: buildEmptyView,
-                        error: buildErrorView
-                    )
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-            }
-            .padding(.top, 12)
-            
-            buildNavigationLinkViews()
+            buildContentView()
+            buildNavigationLink()
         }
+        .clipped()
+        .onAppear { viewModel.isAppearSubject.send(true) }
+        .onDisappear { viewModel.isAppearSubject.send(false) }
+        .onReceive(toolBarAction) {
+            switch $0 {
+            case .createConversation:
+                viewModel.fullScreenCoverType = .createConversation
+            case .none:
+                break
+            }
+        }
+        .onChange(of: viewModel.fullScreenCoverType) { fullScreenCoverType in
+            if let fullScreenCoverType {
+                UIView.setAnimationsEnabled(
+                    fullScreenCoverType.isAnimationsEnabled
+                )
+            }
+        }
+        .fullScreenCover(
+            unwrapping: $viewModel.fullScreenCoverType,
+            onDismiss: {
+                viewModel.isPresentingSubject.send(false)
+            },
+            content: {
+                buildFullScreenCoverDestinationView($0)
+                    .onDisappear {
+                        UIView.setAnimationsEnabled(true)
+                    }
+            }
+        )
     }
 
     private func buildContentView() -> some View {
+        VStack(spacing: 0) {
+            ZStack {
+                SearchView(
+                    placeholder: "Search friend...",
+                    text: .constant(""),
+                    isUserInteractionEnabled: false
+                )
+                .padding(.horizontal, 16)
+
+                Button(
+                    action: {
+                        viewModel.fullScreenCoverType = .createConversation
+                    },
+                    label: {
+                        Text("")
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    }
+                )
+            }
+            .frame(height: 36)
+
+            buildListView()
+                .padding(.top, 12)
+                .statefull(
+                    state: $viewModel.viewState,
+                    isEmpty: { viewModel.conversations.isEmpty },
+                    loading: buildLoadingView,
+                    empty: buildEmptyView,
+                    error: buildErrorView
+                )
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+        .padding(.top, 12)
+    }
+
+    private func buildListView() -> some View {
         ListView {
             ForEach(viewModel.conversations, id: \.id) { conversation in
                 ConversationItemView(model: conversation)
@@ -79,43 +112,7 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
     }
 
     private func buildEmptyView() -> some View {
-        ZStack {
-            GeometryReader { geometry in
-                ZStack(alignment: .bottom) {
-                    ZStack {}
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                    ImageAssets.icAppMascot.swiftUIImage
-                        .scaledToFill()
-                        .frame(width: geometry.size.width, height: geometry.size.height / 2)
-                        .offset(y: 100)
-                }
-            }
-            .clipped()
-
-            VStack(spacing: 10) {
-                Text("Select contact to chat now")
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
-
-                Button(
-                    action: { isCreateChatShown = true },
-                    label: {
-                        HStack(spacing: 8) {
-                            Image(systemName: "plus")
-                                .resizable()
-                                .frame(width: 16, height: 16)
-                            Text("New chat")
-                                .font(.system(size: 14, weight: .bold))
-                        }
-                        .padding(.horizontal, 24)
-                        .padding(.vertical, 12)
-                    }
-                )
-                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                .background(ColorAssets.primaryYellowMain.swiftUIColor)
-                .cornerRadius(10)
-            }
-        }
+        EmptyView()
     }
 
     private func buildErrorView() -> some View {
@@ -123,37 +120,59 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
-    private func buildNavigationLinkViews() -> some View {
-        ZStack {
-            NavigationLink(
-                unwrapping: $createConversationType,
-                onNavigate: { _ in },
-                destination: { createConversationType in
+    private func buildNavigationLink() -> some View {
+        NavigationLink(
+            unwrapping: $viewModel.navigationType,
+            onNavigate: { _ in },
+            destination: { item in
+                switch item.wrappedValue {
+                case let .chat(conversation):
+                    ChatView(
+                        viewModel: ChatViewModel(
+                            conversationID: conversation.id
+                        )
+                    )
+                case let .contactList(conversationType):
                     CreateConversationContactListView(
                         viewModel: CreateConversationContactListViewModel(
                             delegate: viewModel
                         ),
-                        createConversationType: createConversationType.wrappedValue
+                        createConversationType: conversationType
                     )
-                },
-                label: { EmptyView() }
-            )
+                }
+            },
+            label: {
+                EmptyView()
+            }
+        )
+    }
 
-            NavigationLink(
-                unwrapping: $viewModel.navigationType,
-                onNavigate: { _ in },
-                destination: { item in
-                    switch item.wrappedValue {
-                    case let .chat(conversation):
-                        ChatView(
-                            viewModel: ChatViewModel(
-                                conversationID: conversation.id
-                            )
-                        )
-                    }
-                },
-                label: { EmptyView() }
-            )
+    @ViewBuilder
+    private func buildFullScreenCoverDestinationView(
+        _ type: Binding<ConversationListFullScreenCoverType>
+    ) -> some View {
+        switch type.wrappedValue {
+        case .createConversation:
+            NavigationView {
+                CreateConversationView(
+                    viewModel: CreateConversationViewModel(
+                        delegate: viewModel
+                    )
+                )
+                .introspectViewController {
+                    $0.view.backgroundColor = .clear
+                }
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
+            .accentColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            .introspectNavigationController { navigationController in
+                navigationController.configure(
+                    backgroundColor: ColorAssets.white.color,
+                    foregroundColor: ColorAssets.neutralDarkGrey.color
+                )
+                navigationController.view.backgroundColor = .clear
+                navigationController.parent?.view.backgroundColor = .clear
+            }
         }
     }
 }
@@ -164,8 +183,7 @@ struct ConversationListView_Previews: PreviewProvider {
     static var previews: some View {
         ConversationListView(
             viewModel: ConversationListViewModel(),
-            isCreateChatShown: .constant(false),
-            createConversationType: .constant(.single)
+            toolBarAction: Just<MainToolBarActionType?>(nil).eraseToAnyPublisher()
         )
     }
 }

@@ -82,7 +82,6 @@ final class ChatSettingUpdateTitleViewModel: ViewModel {
                         dismissButton: .cancel(TextState("OK"))
                     )
                 }
-
             })
             .store(in: &cancellables)
     }

@@ -54,10 +54,9 @@ final class ConversationDetailStore: ConversationDetailStoreType {
     }
 
     func observeConversationDetail(conversationID: Int) -> AnyPublisher<Conversation, Error> {
-        realmManager.object(ofType: StorableConversation.self, forPrimaryKey: conversationID)
-            .publisher
-            .compactMap { $0.model }
-            .setFailureType(to: Error.self)
+        realmManager.objects(StorableConversation.self) { $0.id == conversationID }
+            .collectionPublisher
+            .compactMap { conversations -> Conversation? in conversations.first.flatMap { $0.model } }
             .eraseToAnyPublisher()
     }
 
