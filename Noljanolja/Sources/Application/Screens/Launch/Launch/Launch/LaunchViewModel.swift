@@ -104,7 +104,7 @@ final class LaunchViewModel: LaunchViewModelType {
                 switch result {
                 case let .success(user):
                     logger.info("Get pre data successful")
-                    if user.isSetup {
+                    if user.isSettedUp {
                         self?.delegate?.navigateToMain()
                     } else {
                         self?.delegate?.navigateToUpdateCurrentUser()

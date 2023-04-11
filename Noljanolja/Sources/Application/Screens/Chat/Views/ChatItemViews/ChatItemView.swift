@@ -14,34 +14,12 @@ struct ChatItemView: View {
 
     var body: some View {
         switch chatItem {
-        case let .date(dateItemModel):
-            ChatDateItemView(dateItemModel: dateItemModel)
-        case let .item(messageItemModel):
-            ChatMessageItemView(messageItemModel: messageItemModel)
+        case let .date(model):
+            ChatDateItemView(model: model)
+        case let .item(model):
+            ChatMessageItemView(model: model)
+        case let .event(model):
+            ChatEventItemView(model: model)
         }
-    }
-}
-
-// MARK: - ChatItemView_Previews
-
-struct ChatItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        ChatItemView(
-            chatItem: .item(
-                ChatMessageItemModel(
-                    id: 0,
-                    isSenderMessage: true,
-                    avatar: "https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg",
-                    date: Date(),
-                    content: .plaintext(
-                        TextMessageContentModel(
-                            isSenderMessage: true,
-                            message: "Test message"
-                        )
-                    ),
-                    status: .received
-                )
-            )
-        )
     }
 }

@@ -11,7 +11,7 @@ import SwiftUI
 // MARK: - MessageStatusView
 
 struct MessageStatusView: View {
-    var status: ChatMessageItemModel.StatusType
+    var status: MessageChatItemModel.StatusType
 
     var body: some View {
         ZStack {
@@ -41,13 +41,5 @@ struct MessageStatusView: View {
         }
         .frame(width: 12, height: 12)
         .cornerRadius(6)
-    }
-}
-
-// MARK: - MessageStatusView_Previews
-
-struct MessageStatusView_Previews: PreviewProvider {
-    static var previews: some View {
-        MessageStatusView(status: .received)
     }
 }

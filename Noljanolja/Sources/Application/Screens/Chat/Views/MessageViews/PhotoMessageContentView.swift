@@ -96,13 +96,3 @@ struct PhotoMessageContentView: View {
     //        .frame(maxWidth: .infinity)
     //    }
 }
-
-// MARK: - PhotoMessageContentView_Previews
-
-struct PhotoMessageContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        PhotoMessageContentView(
-            contentItemModel: PhotoMessageContentModel(isSenderMessage: true, photos: [])
-        )
-    }
-}

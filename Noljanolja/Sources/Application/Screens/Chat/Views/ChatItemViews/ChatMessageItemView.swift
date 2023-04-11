@@ -10,37 +10,17 @@ import SwiftUI
 // MARK: - ChatMessageItemView
 
 struct ChatMessageItemView: View {
-    var messageItemModel: ChatMessageItemModel
+    var model: MessageChatItemModel
 
     var body: some View {
-        if messageItemModel.content == nil {
+        if model.content == nil {
             EmptyView()
         } else {
-            if messageItemModel.isSenderMessage {
-                SenderMessageItemView(messageItemModel: messageItemModel)
+            if model.isSenderMessage {
+                SenderMessageItemView(model: model)
             } else {
-                ReceiverMessageItemView(messageItemModel: messageItemModel)
+                ReceiverMessageView(model: model)
             }
         }
-    }
-}
-
-// MARK: - ChatMessageItemView_Previews
-
-struct ChatMessageItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        ChatMessageItemView(
-            messageItemModel: ChatMessageItemModel(
-                id: 0,
-                isSenderMessage: true,
-                avatar: "https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg",
-                date: Date(),
-                content: .plaintext(TextMessageContentModel(
-                    isSenderMessage: true,
-                    message: "Hello, world"
-                )),
-                status: .received
-            )
-        )
     }
 }

@@ -7,14 +7,8 @@
 
 import Foundation
 
-enum ChatItemModelType: Equatable, Identifiable {
-    case date(ChatDateItemModel)
-    case item(ChatMessageItemModel)
-
-    var id: String? {
-        switch self {
-        case let .date(dateItemModel): return dateItemModel.id
-        case let .item(messageItemModel): return messageItemModel.id.flatMap { String($0) }
-        }
-    }
+enum ChatItemModelType: Equatable {
+    case date(DateChatItemModel)
+    case item(MessageChatItemModel)
+    case event(EventChatItemModel)
 }

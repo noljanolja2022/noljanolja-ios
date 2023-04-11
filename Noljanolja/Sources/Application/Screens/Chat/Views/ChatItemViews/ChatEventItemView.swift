@@ -1,16 +1,16 @@
 //
-//  ChatDateItemView.swift
+//  ChatEventItemView.swift
 //  Noljanolja
 //
-//  Created by Nguyen The Trinh on 13/03/2023.
+//  Created by Nguyen The Trinh on 10/04/2023.
 //
 
 import SwiftUI
 
-// MARK: - ChatDateItemView
+// MARK: - ChatEventItemView
 
-struct ChatDateItemView: View {
-    let model: DateChatItemModel
+struct ChatEventItemView: View {
+    let model: EventChatItemModel
 
     var body: some View {
         Text(model.message)
@@ -21,6 +21,6 @@ struct ChatDateItemView: View {
             .background(ColorAssets.neutralGrey.swiftUIColor)
             .cornerRadius(13)
             .frame(maxWidth: .infinity, alignment: .center)
-            .padding(.vertical, 16)
+            .padding(.vertical, 4)
     }
 }

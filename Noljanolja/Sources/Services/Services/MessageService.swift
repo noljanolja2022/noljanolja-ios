@@ -54,9 +54,7 @@ final class MessageService: MessageServiceType {
         messageStore
             .observeMessages(conversationID: conversationID)
             .map {
-                $0
-                    .filter { $0.type.isSupported }
-                    .sorted { $0.createdAt > $1.createdAt }
+                $0.sorted { $0.createdAt > $1.createdAt }
             }
             .removeDuplicates()
             .eraseToAnyPublisher()
@@ -88,7 +86,7 @@ final class MessageService: MessageServiceType {
                 } else {
                     return nil
                 }
-            case .photo, .document, .gif, .unknown:
+            case .photo, .eventUpdated, .eventJoined, .eventLeft, .unknown:
                 return nil
             }
         }

@@ -29,16 +29,3 @@ struct TextMessageContentView: View {
             )
     }
 }
-
-// MARK: - TextMessageContentView_Previews
-
-struct TextMessageContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        TextMessageContentView(
-            contentItemModel: TextMessageContentModel(
-                isSenderMessage: true,
-                message: "Hello, world"
-            )
-        )
-    }
-}

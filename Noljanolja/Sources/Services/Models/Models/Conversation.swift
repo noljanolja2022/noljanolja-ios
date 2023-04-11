@@ -28,33 +28,6 @@ struct Conversation: Equatable, Codable {
     let createdAt: Date
     let updatedAt: Date
 
-    func displayTitle(_ currentUser: User) -> String? {
-        switch type {
-        case .single:
-            return participants
-                .filter { $0.id != currentUser.id }
-                .first?
-                .name
-        case .group:
-            if let title, !title.trimmed.isEmpty {
-                return title
-            } else {
-                return participants
-                    .filter { $0.id != currentUser.id }
-                    .compactMap { $0.name }
-                    .filter { !$0.isEmpty }
-                    .joined(separator: ", ")
-            }
-        case .unknown:
-            return ""
-        }
-    }
-
-    func avatar(_ currentUser: User) -> String? {
-        let firstParticipant = participants.filter { $0.id != currentUser.id }.first
-        return firstParticipant?.avatar
-    }
-
     init(id: Int,
          title: String?,
          creator: User,
@@ -97,6 +70,60 @@ struct Conversation: Equatable, Codable {
             self.updatedAt = updatedAt
         } else {
             throw NetworkError.mapping("\(String(describing: Swift.type(of: self))) at key updatedAt")
+        }
+    }
+}
+
+extension Conversation {
+    func getDisplayTitleForDetail(currentUser: User) -> String? {
+        switch type {
+        case .single:
+            return participants
+                .filter { $0.id != currentUser.id }
+                .first?
+                .name
+        case .group:
+            if let title, !title.trimmed.isEmpty {
+                return title
+            } else {
+                return participants.getDisplayName(currentUser: currentUser)
+            }
+        case .unknown:
+            return nil
+        }
+    }
+
+    func getDisplayTitleForItem(currentUser: User) -> String? {
+        switch type {
+        case .single:
+            return participants
+                .filter { $0.id != currentUser.id }
+                .first?
+                .name
+        case .group:
+            if let title, !title.trimmed.isEmpty {
+                return title
+            } else {
+                return participants
+                    .sorted(currentUser: currentUser)
+                    .compactMap { $0.getDisplayName(currentUser: currentUser)?.trimmed }
+                    .filter { !$0.isEmpty }
+                    .joined(separator: ", ")
+            }
+        case .unknown:
+            return nil
+        }
+    }
+
+    func getAvatar(currentUser: User) -> String? {
+        switch type {
+        case .single:
+            return participants
+                .filter { $0.id != currentUser.id }
+                .first?
+                .avatar
+        case .group, .unknown:
+            return nil
         }
     }
 }

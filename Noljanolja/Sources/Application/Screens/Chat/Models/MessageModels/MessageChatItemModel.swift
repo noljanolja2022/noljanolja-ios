@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - MessageItemModel.ContentType
 
-extension ChatMessageItemModel {
+extension MessageChatItemModel {
     enum ContentType: Equatable {
         case plaintext(TextMessageContentModel)
         case photo(PhotoMessageContentModel)
@@ -32,10 +32,9 @@ extension ChatMessageItemModel {
     }
 }
 
-// MARK: - ChatMessageItemModel
+// MARK: - MessageChatItemModel
 
-struct ChatMessageItemModel: Equatable {
-    let id: Int?
+struct MessageChatItemModel: Equatable {
     let isSenderMessage: Bool
     let avatar: String?
     let date: Date
@@ -43,27 +42,10 @@ struct ChatMessageItemModel: Equatable {
     let positionType: PositionType
     let status: StatusType
 
-    init(id: Int,
-         isSenderMessage: Bool,
-         avatar: String?,
-         date: Date,
-         content: ContentType?,
-         positionType: PositionType = .middle,
-         status: StatusType) {
-        self.id = id
-        self.isSenderMessage = isSenderMessage
-        self.avatar = avatar
-        self.date = date
-        self.content = content
-        self.positionType = positionType
-        self.status = status
-    }
-
-    init(currentUser: User,
-         message: Message,
-         positionType: PositionType,
-         status: StatusType) {
-        self.id = message.id
+    init?(currentUser: User,
+          message: Message,
+          positionType: PositionType,
+          status: StatusType) {
         self.isSenderMessage = currentUser.id == message.sender.id
         self.avatar = message.sender.avatar
         self.date = message.createdAt
@@ -89,8 +71,8 @@ struct ChatMessageItemModel: Equatable {
                     message: message
                 )
             )
-        case .gif, .document, .unknown:
-            self.content = nil
+        case .eventUpdated, .eventJoined, .eventLeft, .unknown:
+            return nil
         }
         self.positionType = positionType
         self.status = status

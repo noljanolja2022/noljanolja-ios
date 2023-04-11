@@ -32,8 +32,14 @@ final class ChatViewModel: ViewModel {
 
     // MARK: Action
 
+    let closeAction = PassthroughSubject<Void, Never>()
     let loadMoreDataTrigger = PassthroughSubject<Int, Never>()
     let openChatSettingSubject = PassthroughSubject<Void, Never>()
+
+    private let loadPreviousDataTrigger = PassthroughSubject<Void, Never>()
+    private let loadNextDataTrigger = PassthroughSubject<Void, Never>()
+    private let reloadDataTrigger = PassthroughSubject<Void, Never>()
+    private let seenTrigger = PassthroughSubject<Int, Never>()
 
     // MARK: Dependencies
 
@@ -45,11 +51,6 @@ final class ChatViewModel: ViewModel {
     private weak var delegate: ChatViewModelDelegate?
 
     // MARK: Private
-
-    private let loadPreviousDataTrigger = PassthroughSubject<Void, Never>()
-    private let loadNextDataTrigger = PassthroughSubject<Void, Never>()
-    private let reloadDataTrigger = PassthroughSubject<Void, Never>()
-    private let seenTrigger = PassthroughSubject<Int, Never>()
 
     private let conversationSubject = CurrentValueSubject<Conversation?, Never>(nil)
     private let currentUserSubject = CurrentValueSubject<User?, Never>(nil)
@@ -85,7 +86,7 @@ final class ChatViewModel: ViewModel {
             conversationSubject.compactMap { $0 }.removeDuplicates()
         )
         .map { currentUser, conversation in
-            conversation.displayTitle(currentUser) ?? ""
+            conversation.getDisplayTitleForDetail(currentUser: currentUser) ?? ""
         }
         .removeDuplicates()
         .receive(on: DispatchQueue.main)
@@ -139,14 +140,14 @@ final class ChatViewModel: ViewModel {
                 .map { _ -> (Message?, Message?) in (nil, nil) },
             loadPreviousDataTrigger
                 .filter { [weak self] in self?.footerViewState != .noMoreData }
-                .withLatestFrom(messagesSubject)
+                .withLatestFrom(messagesSubject.filter { !$0.isEmpty })
                 .map { messages -> (Message?, Message?) in (messages.last, nil) }
                 .handleEvents(receiveOutput: { [weak self] _ in
                     self?.footerViewState = .loading
                 }),
             loadNextDataTrigger
                 .filter { [weak self] in self?.headerViewState != .noMoreData }
-                .withLatestFrom(messagesSubject)
+                .withLatestFrom(messagesSubject.filter { !$0.isEmpty })
                 .map { messages -> (Message?, Message?) in (nil, messages.first) }
                 .handleEvents(receiveOutput: { [weak self] _ in
                     self?.headerViewState = .loading
@@ -202,12 +203,11 @@ final class ChatViewModel: ViewModel {
             .store(in: &cancellables)
 
         messagesSubject
+            .dropFirst()
             .first()
-            .sink(receiveValue: { [weak self] messages in
-                self?.loadNextDataTrigger.send()
-                if messages.isEmpty {
-                    self?.reloadDataTrigger.send()
-                }
+            .filter { $0.isEmpty }
+            .sink(receiveValue: { [weak self] _ in
+                self?.reloadDataTrigger.send()
             })
             .store(in: &cancellables)
 
@@ -227,6 +227,7 @@ final class ChatViewModel: ViewModel {
                 switch result {
                 case let .success(messages):
                     logger.info("Get local messages successfull")
+                    let messages = messages.filter { $0.type.isSupported }
                     self?.messagesSubject.send(messages)
                 case let .failure(error):
                     logger.error("Get local messages failed: \(error.localizedDescription)")
@@ -298,5 +299,13 @@ final class ChatViewModel: ViewModel {
                 self?.navigationType = .chatSetting($0)
             })
             .store(in: &cancellables)
+    }
+}
+
+// MARK: ChatSettingViewModelDelegate
+
+extension ChatViewModel: ChatSettingViewModelDelegate {
+    func didLeaveGroupChat() {
+        closeAction.send()
     }
 }

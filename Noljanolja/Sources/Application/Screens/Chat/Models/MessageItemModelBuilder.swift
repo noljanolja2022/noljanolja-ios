@@ -22,43 +22,44 @@ final class MessageItemModelBuilder {
     func build() -> [ChatItemModelType] {
         var messageItemTypes = [ChatItemModelType]()
 
-        messages
-            .filter { $0.type.isSupported }
-            .enumerated()
-            .forEach { index, message in
-                let beforceMessage = messages[safe: index + 1]
-                let afterMessage = messages[safe: index - 1]
+        for (index, message) in messages.enumerated() {
+            let beforceMessage = messages[safe: index + 1]
+            let afterMessage = messages[safe: index - 1]
 
-                let positionType = buildPositionType(beforceMessage: beforceMessage, message: message, afterMessage: afterMessage)
-                let statusType = buildStatusType(message: message)
+            let positionType = buildPositionType(beforceMessage: beforceMessage, message: message, afterMessage: afterMessage)
+            let statusType = buildStatusType(message: message)
 
-                messageItemTypes.append(
-                    .item(
-                        ChatMessageItemModel(
-                            currentUser: currentUser,
-                            message: message,
-                            positionType: positionType,
-                            status: statusType
-                        )
-                    )
-                )
-
-                let isFirstMessageByDate = beforceMessage
-                    .flatMap { !Calendar.current.isDate(message.createdAt, equalTo: $0.createdAt, toGranularity: .day) } ?? true
-
-                if isFirstMessageByDate {
-                    messageItemTypes.append(
-                        .date(ChatDateItemModel(message: message))
-                    )
-                }
+            let messageChatItemModel = MessageChatItemModel(
+                currentUser: currentUser,
+                message: message,
+                positionType: positionType,
+                status: statusType
+            )
+            messageChatItemModel.flatMap {
+                messageItemTypes.append(.item($0))
             }
+
+            let eventChatItemModel = EventChatItemModel(currentUser: currentUser, message: message)
+            eventChatItemModel.flatMap {
+                messageItemTypes.append(.event($0))
+            }
+
+            let isFirstMessageByDate = beforceMessage
+                .flatMap { !Calendar.current.isDate(message.createdAt, equalTo: $0.createdAt, toGranularity: .day) } ?? true
+
+            if isFirstMessageByDate {
+                messageItemTypes.append(
+                    .date(DateChatItemModel(message: message))
+                )
+            }
+        }
 
         return messageItemTypes
     }
 
     private func buildPositionType(beforceMessage: Message?,
                                    message: Message,
-                                   afterMessage: Message?) -> ChatMessageItemModel.PositionType {
+                                   afterMessage: Message?) -> MessageChatItemModel.PositionType {
         let isFirstMessageByDate = beforceMessage
             .flatMap { !Calendar.current.isDate(message.createdAt, equalTo: $0.createdAt, toGranularity: .day) } ?? true
         let isLastMessageByDate = afterMessage
@@ -80,7 +81,7 @@ final class MessageItemModelBuilder {
         }
     }
 
-    private func buildStatusType(message: Message) -> ChatMessageItemModel.StatusType {
+    private func buildStatusType(message: Message) -> MessageChatItemModel.StatusType {
         let currentUser = currentUser
         let lastSenderSentMessage = messages.first(where: { $0.id != nil && $0.sender.id == currentUser.id })
         let lastSenderSeenMessage = messages

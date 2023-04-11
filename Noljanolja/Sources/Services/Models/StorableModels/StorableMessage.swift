@@ -16,6 +16,8 @@ final class StorableMessage: Object {
     @Persisted var message: String?
     @Persisted var type: String?
     @Persisted var sender: StorableUser?
+    @Persisted var leftParticipants: List<StorableUser>
+    @Persisted var joinParticipants: List<StorableUser>
     @Persisted var seenBy = List<String>()
     @Persisted var attachments = List<StorableAttachment>()
     @Persisted var createdAt: Date?
@@ -34,6 +36,8 @@ final class StorableMessage: Object {
             message: message,
             type: type,
             sender: sender,
+            leftParticipants: leftParticipants.compactMap { $0.model },
+            joinParticipants: joinParticipants.compactMap { $0.model },
             seenBy: seenBy.map { $0 },
             attachments: attachments.compactMap { $0.model },
             createdAt: createdAt
@@ -49,6 +53,16 @@ final class StorableMessage: Object {
         self.message = model.message
         self.type = model.type.rawValue
         self.sender = StorableUser(model.sender)
+        self.leftParticipants = {
+            let list = List<StorableUser>()
+            list.append(objectsIn: model.leftParticipants.map { StorableUser($0) })
+            return list
+        }()
+        self.joinParticipants = {
+            let list = List<StorableUser>()
+            list.append(objectsIn: model.joinParticipants.map { StorableUser($0) })
+            return list
+        }()
         self.seenBy = {
             let list = List<String>()
             list.append(objectsIn: model.seenBy)
@@ -71,6 +85,8 @@ final class StorableMessage: Object {
         self.message = param.message
         self.type = param.type.rawValue
         self.sender = StorableUser(param.currentUser)
+        self.leftParticipants = List<StorableUser>()
+        self.joinParticipants = List<StorableUser>()
         self.seenBy = List<String>()
         self.attachments = {
             let list = List<StorableAttachment>()

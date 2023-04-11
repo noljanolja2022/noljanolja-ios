@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - MessageContentView
 
 struct MessageContentView: View {
-    var messageContent: ChatMessageItemModel.ContentType?
+    var messageContent: MessageChatItemModel.ContentType?
 
     var body: some View {
         buildBody()
@@ -28,18 +28,5 @@ struct MessageContentView: View {
         case .none:
             EmptyView()
         }
-    }
-}
-
-// MARK: - MessageContentView_Previews
-
-struct MessageContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        MessageContentView(
-            messageContent: .plaintext(TextMessageContentModel(
-                isSenderMessage: true,
-                message: "Hello, world"
-            ))
-        )
     }
 }

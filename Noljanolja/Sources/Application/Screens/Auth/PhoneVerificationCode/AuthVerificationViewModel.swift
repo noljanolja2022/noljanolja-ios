@@ -117,7 +117,7 @@ final class AuthVerificationViewModel: ViewModel {
                 switch result {
                 case let .success(user):
                     logger.info("Verify verification code successful")
-                    if user.isSetup {
+                    if user.isSettedUp {
                         self?.delegate?.navigateToMain()
                     } else {
                         self?.delegate?.navigateToUpdateCurrentUser()

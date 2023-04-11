@@ -24,16 +24,3 @@ struct StickerMessageContentView: View {
         .frame(width: 95, height: 95)
     }
 }
-
-// MARK: - StickerMessageContentView_Previews
-
-struct StickerMessageContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        StickerMessageContentView(
-            contentItemModel: StickerMessageContentModel(
-                isSenderMessage: true,
-                sticker: nil
-            )
-        )
-    }
-}

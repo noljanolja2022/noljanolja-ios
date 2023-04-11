@@ -12,7 +12,9 @@ import Foundation
 
 // MARK: - ChatSettingViewModelDelegate
 
-protocol ChatSettingViewModelDelegate: AnyObject {}
+protocol ChatSettingViewModelDelegate: AnyObject {
+    func didLeaveGroupChat()
+}
 
 // MARK: - ChatSettingViewModel
 
@@ -26,12 +28,17 @@ final class ChatSettingViewModel: ViewModel {
     @Published var isProgressHUDShowing = false
     @Published var alertState: AlertState<Void>?
 
-    // MARK: Action
-
-    // MARK: Navigation
+    // MARK: Navigations
 
     @Published var navigationType: ChatSettingNavigationType?
     @Published var fullScreenCoverType: ChatSettingFullScreenCoverType?
+
+    // MARK: Action
+
+    let closeAction = PassthroughSubject<Void, Never>()
+    let leaveAction = PassthroughSubject<Void, Never>()
+    let assignAdminAction = PassthroughSubject<User, Never>()
+    let removeParticipantAction = PassthroughSubject<User, Never>()
 
     // MARK: Dependencies
 
@@ -42,9 +49,6 @@ final class ChatSettingViewModel: ViewModel {
     private weak var delegate: ChatSettingViewModelDelegate?
 
     // MARK: Private
-
-    private let assignAdminAction = PassthroughSubject<User, Never>()
-    private let removeParticipantAction = PassthroughSubject<User, Never>()
 
     private let currentUserSubject = CurrentValueSubject<User?, Never>(nil)
 
@@ -74,8 +78,8 @@ final class ChatSettingViewModel: ViewModel {
             conversationSubject.removeDuplicates(),
             currentUserSubject.removeDuplicates()
         )
-        .sink { [weak self] conversation, user in
-            if conversation.admin.id == user?.id {
+        .sink { [weak self] conversation, currentUser in
+            if conversation.admin.id == currentUser?.id {
                 self?.settingItems = [.updateTitle]
             } else {
                 self?.settingItems = []
@@ -87,23 +91,36 @@ final class ChatSettingViewModel: ViewModel {
     private func configureLoadData() {
         Publishers.CombineLatest(
             conversationSubject.removeDuplicates(),
-            currentUserSubject.removeDuplicates()
+            currentUserSubject.compactMap { $0 }.removeDuplicates()
         )
-        .sink { [weak self] conversation, currentUser in
-            let models = conversation.participants
+        .sink { [weak self] (conversation: Conversation, currentUser: User) in
+            let adminAndCurrentParticipants = conversation.participants
+                .filter {
+                    $0.id == conversation.admin.id
+                        && $0.id == currentUser.id
+                }
+            let adminParticipants = conversation.participants
+                .filter {
+                    $0.id == conversation.admin.id
+                        && $0.id != currentUser.id
+                }
+            let currentParticipants = conversation.participants
+                .filter {
+                    $0.id != conversation.admin.id
+                        && $0.id == currentUser.id
+                }
+            let otherParticipants = conversation.participants
+                .filter {
+                    $0.id != conversation.admin.id
+                        && $0.id != currentUser.id
+                }
+                .sorted(currentUser: currentUser)
+
+            self?.isAddParticipantsEnabled = conversation.admin.id == currentUser.id
+            self?.participantModels = (adminAndCurrentParticipants + adminParticipants + currentParticipants + otherParticipants)
                 .map { user in
                     ChatSettingParticipantModel(user: user, currentUser: currentUser, admin: conversation.admin)
                 }
-
-            let adminAndCurrentUserModels = models.filter { $0.isAdmin && $0.isCurrentUser }
-            let adminModels = models.filter { $0.isAdmin && !$0.isCurrentUser }
-            let currentModels = models.filter { !$0.isAdmin && $0.isCurrentUser }
-            let otherUser = models
-                .filter { !$0.isAdmin && !$0.isCurrentUser }
-                .sorted(by: { $0.user.name ?? "" < $1.user.name ?? "" })
-
-            self?.isAddParticipantsEnabled = conversation.creator.id == currentUser?.id
-            self?.participantModels = adminAndCurrentUserModels + adminModels + currentModels + otherUser
         }
         .store(in: &cancellables)
 
@@ -181,6 +198,36 @@ final class ChatSettingViewModel: ViewModel {
                     logger.info("Remove participant successful")
                 case let .failure(error):
                     logger.error("Remove participant failed: \(error.localizedDescription)")
+                    self.alertState = AlertState(
+                        title: TextState("Error"),
+                        message: TextState(L10n.Common.Error.message),
+                        dismissButton: .cancel(TextState("OK"))
+                    )
+                }
+            }
+            .store(in: &cancellables)
+
+        leaveAction
+            .withLatestFrom(currentUserSubject)
+            .compactMap { $0 }
+            .withLatestFrom(conversationSubject) { ($1, $0) }
+            .flatMapLatestToResult { [weak self] conversation, currentUser in
+                guard let self else {
+                    return Empty<Conversation, Error>().eraseToAnyPublisher()
+                }
+                return self.conversationService
+                    .removeParticipant(conversationID: conversation.id, participants: [currentUser])
+            }
+            .sink { [weak self] result in
+                guard let self else { return }
+                self.isProgressHUDShowing = false
+                switch result {
+                case .success:
+                    logger.info("Leave successful")
+                    self.closeAction.send()
+                    self.delegate?.didLeaveGroupChat()
+                case let .failure(error):
+                    logger.error("Leave failed: \(error.localizedDescription)")
                     self.alertState = AlertState(
                         title: TextState("Error"),
                         message: TextState(L10n.Common.Error.message),

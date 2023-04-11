@@ -19,12 +19,13 @@ protocol ConversationListViewModelDelegate: AnyObject {}
 final class ConversationListViewModel: ViewModel {
     // MARK: State
 
+    @Published var viewState = ViewState.content
     @Published var conversations = [ConversationItemModel]()
     @Published var error: Error?
-    @Published var viewState = ViewState.content
 
     // MARK: Navigations
 
+    let isPresentingSubject = CurrentValueSubject<Bool, Never>(false)
     @Published var navigationType: ConversationListNavigationType?
     @Published var fullScreenCoverType: ConversationListFullScreenCoverType? {
         willSet {
@@ -33,11 +34,11 @@ final class ConversationListViewModel: ViewModel {
         }
     }
 
-    let isPresentingSubject = CurrentValueSubject<Bool, Never>(false)
-
     // MARK: Action
 
     let openChatTrigger = PassthroughSubject<ConversationItemModel, Never>()
+    
+    private let navigationTypeAction = PassthroughSubject<ConversationListNavigationType?, Never>()
 
     // MARK: Dependencies
 
@@ -47,8 +48,6 @@ final class ConversationListViewModel: ViewModel {
     private weak var delegate: ConversationListViewModelDelegate?
 
     // MARK: Private
-
-    private let navigationTypeAction = PassthroughSubject<ConversationListNavigationType?, Never>()
 
     private let currentUserSubject = PassthroughSubject<User, Never>()
     private let conversationsSubject = PassthroughSubject<[Conversation], Never>()

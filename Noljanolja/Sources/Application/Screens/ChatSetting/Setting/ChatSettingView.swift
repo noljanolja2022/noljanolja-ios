@@ -17,6 +17,7 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
 
     // MARK: State
 
+    @Environment(\.presentationMode) private var presentationMode
     @StateObject private var progressHUBState = ProgressHUBState()
 
     var body: some View {
@@ -34,6 +35,9 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
             progressHUBState.isLoading = $0
         }
         .progressHUB(isActive: $progressHUBState.isLoading)
+        .onReceive(viewModel.closeAction) {
+            presentationMode.wrappedValue.dismiss()
+        }
         .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
         .fullScreenCover(unwrapping: $viewModel.fullScreenCoverType) {
             switch $0.wrappedValue {
@@ -135,12 +139,14 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
 
     private func buildLeaveView() -> some View {
         Button(
-            action: {},
+            action: {
+                viewModel.leaveAction.send()
+            },
             label: {
                 Text("LEAVE CHAT ROOM")
                     .font(.system(size: 14, weight: .bold))
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .padding(10)
+                    .padding(12)
                     .foregroundColor(ColorAssets.red.swiftUIColor)
                     .background(ColorAssets.white.swiftUIColor)
                     .cornerRadius(4)

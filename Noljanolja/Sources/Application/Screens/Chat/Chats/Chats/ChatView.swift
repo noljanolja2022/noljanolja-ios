@@ -16,6 +16,10 @@ struct ChatView<ViewModel: ChatViewModel>: View {
 
     @StateObject var viewModel: ViewModel
 
+    // MARK: State
+
+    @Environment(\.presentationMode) private var presentationMode
+
     var body: some View {
         ZStack {
             buildBodyView()
@@ -46,6 +50,9 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                 }
             }
         }
+        .onReceive(viewModel.closeAction) {
+            presentationMode.wrappedValue.dismiss()
+        }
     }
 
     private func buildBodyView() -> some View {
@@ -70,12 +77,14 @@ struct ChatView<ViewModel: ChatViewModel>: View {
     }
 
     private func buildContentView() -> some View {
-        ListView {
-            ForEach(Array(viewModel.chatItems.enumerated()), id: \.offset) { index, chatItem in
-                ChatItemView(chatItem: chatItem)
-                    .onAppear { viewModel.loadMoreDataTrigger.send(index) }
+        ScrollView {
+            LazyVStack(spacing: 0) {
+                ForEach(Array(viewModel.chatItems.enumerated()), id: \.offset) { index, chatItem in
+                    ChatItemView(chatItem: chatItem)
+                        .onAppear { viewModel.loadMoreDataTrigger.send(index) }
+                }
+                .scaleEffect(x: 1, y: -1, anchor: .center)
             }
-            .scaleEffect(x: 1, y: -1, anchor: .center)
         }
         .scaleEffect(x: 1, y: -1, anchor: .center)
     }
@@ -105,7 +114,8 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                     case let .chatSetting(conversation):
                         ChatSettingView(
                             viewModel: ChatSettingViewModel(
-                                conversation: conversation
+                                conversation: conversation,
+                                delegate: viewModel
                             )
                         )
                     }
