@@ -20,14 +20,14 @@ struct EventChatItemModel: Equatable {
             let title = ""
             self.message = [senderName, action, title].compactMap { $0 }.joined(separator: " ")
         case .eventJoined:
-            let participantNames = message.joinParticipants.getDisplayName(currentUser: currentUser)
-            let action = "have left the conversation"
-            self.message = [participantNames, action].compactMap { $0 }.joined(separator: " ")
-        case .eventLeft:
             let senderName = message.sender.getDisplayName(currentUser: currentUser)
             let action = "has invited"
-            let participantNames = message.leftParticipants.getDisplayName(currentUser: currentUser)
+            let participantNames = message.joinParticipants.getDisplayName(currentUser: currentUser)
             self.message = [senderName, action, participantNames].compactMap { $0 }.joined(separator: " ")
+        case .eventLeft:
+            let participantNames = message.leftParticipants.getDisplayName(currentUser: currentUser)
+            let action = "have left the conversation"
+            self.message = [participantNames, action].compactMap { $0 }.joined(separator: " ")
         }
     }
 }

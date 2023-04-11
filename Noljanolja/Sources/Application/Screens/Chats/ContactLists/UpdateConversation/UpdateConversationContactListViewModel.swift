@@ -1,8 +1,8 @@
 //
-//  ChatSettingUpdateTitleViewModel.swift
+//  UpdateConversationContactListViewModel.swift
 //  Noljanolja
 //
-//  Created by Nguyen The Trinh on 09/04/2023.
+//  Created by Nguyen The Trinh on 08/04/2023.
 //
 //
 
@@ -10,31 +10,29 @@ import _SwiftUINavigationState
 import Combine
 import Foundation
 
-// MARK: - ChatSettingUpdateTitleViewModelDelegate
+// MARK: - UpdateConversationContactListViewModelDelegate
 
-protocol ChatSettingUpdateTitleViewModelDelegate: AnyObject {
-    func didUpdateTitle()
-}
+protocol UpdateConversationContactListViewModelDelegate: AnyObject {}
 
-// MARK: - ChatSettingUpdateTitleViewModel
+// MARK: - UpdateConversationContactListViewModel
 
-final class ChatSettingUpdateTitleViewModel: ViewModel {
+final class UpdateConversationContactListViewModel: ViewModel {
     // MARK: State
 
-    @Published var title = ""
     @Published var isProgressHUDShowing = false
     @Published var alertState: AlertState<Void>?
 
     // MARK: Action
 
-    let actionSubject = PassthroughSubject<Void, Never>()
+    let actionSubject = PassthroughSubject<[User], Never>()
     let closeSubject = PassthroughSubject<Void, Never>()
 
     // MARK: Dependencies
 
     let conversation: Conversation
+    
     private let conversationService: ConversationServiceType
-    private weak var delegate: ChatSettingUpdateTitleViewModelDelegate?
+    private weak var delegate: UpdateConversationContactListViewModelDelegate?
 
     // MARK: Private
 
@@ -42,7 +40,7 @@ final class ChatSettingUpdateTitleViewModel: ViewModel {
 
     init(conversation: Conversation,
          conversationService: ConversationServiceType = ConversationService.default,
-         delegate: ChatSettingUpdateTitleViewModelDelegate? = nil) {
+         delegate: UpdateConversationContactListViewModelDelegate? = nil) {
         self.conversation = conversation
         self.conversationService = conversationService
         self.delegate = delegate
@@ -52,30 +50,29 @@ final class ChatSettingUpdateTitleViewModel: ViewModel {
     }
 
     private func configure() {
-        title = conversation.title ?? ""
+        configureUpdateConversation()
+    }
 
+    private func configureUpdateConversation() {
         actionSubject
+            .filter { !$0.isEmpty }
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
-            .flatMapLatestToResult { [weak self] in
+            .flatMapLatestToResult { [weak self] users -> AnyPublisher<Conversation, Error> in
                 guard let self else {
                     return Empty<Conversation, Error>().eraseToAnyPublisher()
                 }
                 return self.conversationService
-                    .updateConversation(
-                        conversationID: self.conversation.id,
-                        title: self.title
-                    )
+                    .addParticipant(conversationID: self.conversation.id, participants: users)
             }
-            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
                 guard let self else { return }
                 self.isProgressHUDShowing = false
                 switch result {
                 case .success:
-                    logger.info("Update conversation title successful")
-                    self.closeSubject.send(())
+                    logger.info("Add participants successful")
+                    self.closeSubject.send()
                 case let .failure(error):
-                    logger.error("Update conversation title failed: \(error.localizedDescription)")
+                    logger.error("Add participants failed: \(error.localizedDescription)")
                     self.alertState = AlertState(
                         title: TextState("Error"),
                         message: TextState(L10n.Common.Error.message),

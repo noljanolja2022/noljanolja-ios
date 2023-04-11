@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - ChatSettingItemView
 
 struct ChatSettingItemView: View {
-    let itemModel: ChatSettingItemModel
+    let itemModel: ChatSettingItemModelType
 
     var body: some View {
         HStack(spacing: 12) {

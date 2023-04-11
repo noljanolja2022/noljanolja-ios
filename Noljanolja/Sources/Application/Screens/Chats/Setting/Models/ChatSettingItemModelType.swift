@@ -1,5 +1,5 @@
 //
-//  ChatSettingItemModel.swift
+//  ChatSettingItemModelType.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 08/04/2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ChatSettingItemModel: Equatable {
+enum ChatSettingItemModelType: Equatable {
     case updateTitle
 
     var image: String {

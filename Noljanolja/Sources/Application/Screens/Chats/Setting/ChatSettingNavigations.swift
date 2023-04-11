@@ -11,7 +11,7 @@ import Foundation
 
 enum ChatSettingNavigationType: Equatable {
     case contactList
-    case settingItem(ChatSettingItemModel)
+    case settingItem(ChatSettingItemModelType)
 }
 
 // MARK: - ChatSettingFullScreenCoverType

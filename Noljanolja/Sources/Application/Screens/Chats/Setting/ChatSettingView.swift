@@ -42,8 +42,8 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
         .fullScreenCover(unwrapping: $viewModel.fullScreenCoverType) {
             switch $0.wrappedValue {
             case let .participantDetail(participantModel):
-                ChatSettingParticipantDetailView(
-                    viewModel: ChatSettingParticipantDetailViewModel(
+                ParticipantDetailActionView(
+                    viewModel: ParticipantDetailActionViewModel(
                         participantModel: participantModel,
                         delegate: viewModel
                     )
@@ -95,7 +95,7 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
                 .padding(.horizontal, 16)
                 .background(ColorAssets.white.swiftUIColor)
                 .onTapGesture {
-                    let actions = participantModel.chatSettingUserDetailActions
+                    let actions = participantModel.participantDetailActions
                     guard !actions.isEmpty else { return }
                     viewModel.fullScreenCoverType = .participantDetail(participantModel)
                 }
@@ -123,7 +123,7 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
         }
     }
 
-    private func buildSettingItemView(with itemModel: ChatSettingItemModel) -> some View {
+    private func buildSettingItemView(with itemModel: ChatSettingItemModelType) -> some View {
         VStack(spacing: 0) {
             ChatSettingItemView(itemModel: itemModel)
                 .padding(.vertical, 10)
@@ -182,8 +182,8 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
         case let .settingItem(settingItemModel):
             switch settingItemModel {
             case .updateTitle:
-                ChatSettingUpdateTitleView(
-                    viewModel: ChatSettingUpdateTitleViewModel(
+                ConversationTitleView(
+                    viewModel: ConversationTitleViewModel(
                         conversation: viewModel.conversationSubject.value
                     )
                 )

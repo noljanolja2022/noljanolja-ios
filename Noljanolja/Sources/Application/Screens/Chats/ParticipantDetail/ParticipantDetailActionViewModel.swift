@@ -1,5 +1,5 @@
 //
-//  ChatSettingParticipantDetailViewModel.swift
+//  ParticipantDetailActionViewModel.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 09/04/2023.
@@ -9,32 +9,32 @@
 import Combine
 import Foundation
 
-// MARK: - ChatSettingParticipantDetailViewModelDelegate
+// MARK: - ParticipantDetailActionViewModelDelegate
 
-protocol ChatSettingParticipantDetailViewModelDelegate: AnyObject {
-    func didSelectAction(user: User, action: ChatSettingUserDetailAction)
+protocol ParticipantDetailActionViewModelDelegate: AnyObject {
+    func didSelectAction(user: User, action: ParticipantDetailAction)
 }
 
-// MARK: - ChatSettingParticipantDetailViewModel
+// MARK: - ParticipantDetailActionViewModel
 
-final class ChatSettingParticipantDetailViewModel: ViewModel {
+final class ParticipantDetailActionViewModel: ViewModel {
     // MARK: State
 
     // MARK: Action
 
-    let actionSubject = PassthroughSubject<ChatSettingUserDetailAction, Never>()
+    let actionSubject = PassthroughSubject<ParticipantDetailAction, Never>()
 
     // MARK: Dependencies
 
     let participantModel: ChatSettingParticipantModel
-    private weak var delegate: ChatSettingParticipantDetailViewModelDelegate?
+    private weak var delegate: ParticipantDetailActionViewModelDelegate?
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
     init(participantModel: ChatSettingParticipantModel,
-         delegate: ChatSettingParticipantDetailViewModelDelegate? = nil) {
+         delegate: ParticipantDetailActionViewModelDelegate? = nil) {
         self.participantModel = participantModel
         self.delegate = delegate
         super.init()

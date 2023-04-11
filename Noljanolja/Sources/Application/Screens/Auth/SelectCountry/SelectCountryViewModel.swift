@@ -83,7 +83,7 @@ final class SelectCountryViewModel: ViewModel {
                 switch result {
                 case let .success(countries):
                     self?.allCountries.send(countries)
-                case let .failure(error):
+                case .failure:
                     break
                 }
             }

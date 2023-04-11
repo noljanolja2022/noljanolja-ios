@@ -23,7 +23,7 @@ final class ChatSettingViewModel: ViewModel {
     
     @Published var isAddParticipantsEnabled = false
     @Published var participantModels = [ChatSettingParticipantModel]()
-    @Published var settingItems = [ChatSettingItemModel]()
+    @Published var settingItems = [ChatSettingItemModelType]()
 
     @Published var isProgressHUDShowing = false
     @Published var alertState: AlertState<Void>?
@@ -239,10 +239,10 @@ final class ChatSettingViewModel: ViewModel {
     }
 }
 
-// MARK: ChatSettingParticipantDetailViewModelDelegate
+// MARK: ParticipantDetailActionViewModelDelegate
 
-extension ChatSettingViewModel: ChatSettingParticipantDetailViewModelDelegate {
-    func didSelectAction(user: User, action: ChatSettingUserDetailAction) {
+extension ChatSettingViewModel: ParticipantDetailActionViewModelDelegate {
+    func didSelectAction(user: User, action: ParticipantDetailAction) {
         switch action {
         case .assignAdmin: assignAdminAction.send(user)
         case .removeParticipant: removeParticipantAction.send(user)

@@ -9,9 +9,9 @@
 import SDWebImageSwiftUI
 import SwiftUI
 
-// MARK: - ChatSettingParticipantDetailView
+// MARK: - ParticipantDetailActionView
 
-struct ChatSettingParticipantDetailView<ViewModel: ChatSettingParticipantDetailViewModel>: View {
+struct ParticipantDetailActionView<ViewModel: ParticipantDetailActionViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
@@ -58,7 +58,7 @@ struct ChatSettingParticipantDetailView<ViewModel: ChatSettingParticipantDetailV
             }
             .padding(16)
 
-            ForEach(viewModel.participantModel.chatSettingUserDetailActions, id: \.self) { action in
+            ForEach(viewModel.participantModel.participantDetailActions, id: \.self) { action in
                 Button(
                     action: {
                         self.viewModel.actionSubject.send(action)
@@ -88,12 +88,12 @@ struct ChatSettingParticipantDetailView<ViewModel: ChatSettingParticipantDetailV
     }
 }
 
-// MARK: - ChatSettingParticipantDetailView_Previews
+// MARK: - ParticipantDetailActionView_Previews
 
-struct ChatSettingParticipantDetailView_Previews: PreviewProvider {
+struct ParticipantDetailActionView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatSettingParticipantDetailView(
-            viewModel: ChatSettingParticipantDetailViewModel(
+        ParticipantDetailActionView(
+            viewModel: ParticipantDetailActionViewModel(
                 participantModel: ChatSettingParticipantModel(
                     user: User(
                         id: "",

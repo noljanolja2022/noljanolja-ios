@@ -1,5 +1,5 @@
 //
-//  ChatSettingUpdateTitleView.swift
+//  ConversationTitleView.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 09/04/2023.
@@ -9,9 +9,9 @@
 import SwiftUI
 import SwiftUIX
 
-// MARK: - ChatSettingUpdateTitleView
+// MARK: - ConversationTitleView
 
-struct ChatSettingUpdateTitleView<ViewModel: ChatSettingUpdateTitleViewModel>: View {
+struct ConversationTitleView<ViewModel: ConversationTitleViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
@@ -68,12 +68,12 @@ struct ChatSettingUpdateTitleView<ViewModel: ChatSettingUpdateTitleViewModel>: V
     }
 }
 
-// MARK: - ChatSettingUpdateTitleView_Previews
+// MARK: - ConversationTitleView_Previews
 
-struct ChatSettingUpdateTitleView_Previews: PreviewProvider {
+struct ConversationTitleView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatSettingUpdateTitleView(
-            viewModel: ChatSettingUpdateTitleViewModel(
+        ConversationTitleView(
+            viewModel: ConversationTitleViewModel(
                 conversation: Conversation(
                     id: 0,
                     title: nil,
