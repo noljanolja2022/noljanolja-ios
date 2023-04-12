@@ -81,8 +81,9 @@ final class ConversationService: ConversationServiceType {
 
         let remoteConversations = conversationAPI
             .getConversations()
-            .handleEvents(receiveOutput: { [weak self] in
-                self?.conversationStore.saveConversations($0)
+            .handleEvents(receiveOutput: { [weak self] conversations in
+                self?.conversationStore.saveConversations(conversations)
+                self?.conversationStore.removeConversation(notIn: conversations)
             })
 
         return Publishers.Merge(localConversations, remoteConversations)
@@ -111,7 +112,7 @@ final class ConversationService: ConversationServiceType {
                         } else if rhsLastMessage != nil {
                             return false
                         } else {
-                            return false
+                            return lhs.createdAt > rhs.createdAt
                         }
                     }
             }

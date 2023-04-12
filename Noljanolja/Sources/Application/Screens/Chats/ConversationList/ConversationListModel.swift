@@ -25,7 +25,6 @@ final class ConversationListViewModel: ViewModel {
 
     // MARK: Navigations
 
-    let isPresentingSubject = CurrentValueSubject<Bool, Never>(false)
     @Published var navigationType: ConversationListNavigationType?
     @Published var fullScreenCoverType: ConversationListFullScreenCoverType? {
         willSet {
@@ -34,11 +33,12 @@ final class ConversationListViewModel: ViewModel {
         }
     }
 
+    let isPresentingSubject = CurrentValueSubject<Bool, Never>(false)
+
     // MARK: Action
 
-    let openChatTrigger = PassthroughSubject<ConversationItemModel, Never>()
-    
-    private let navigationTypeAction = PassthroughSubject<ConversationListNavigationType?, Never>()
+    let openChatAction = PassthroughSubject<ConversationItemModel, Never>()
+    let navigationTypeAction = PassthroughSubject<ConversationListNavigationType?, Never>()
 
     // MARK: Dependencies
 
@@ -70,6 +70,7 @@ final class ConversationListViewModel: ViewModel {
     private func configure() {
         configureBindData()
         configureLoadData()
+        configureSocket()
         configureActions()
     }
 
@@ -120,12 +121,26 @@ final class ConversationListViewModel: ViewModel {
             .currentUserPublisher
             .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
             .store(in: &cancellables)
+    }
 
+    private func configureSocket() {
         conversationSocketService.register()
+
+        conversationSocketService
+            .getConversationStream()
+            .sink(receiveValue: { result in
+                switch result {
+                case let .success(conversation):
+                    print("AAAAA", conversation)
+                case let .failure(error):
+                    print("AAAAA", error.localizedDescription)
+                }
+            })
+            .store(in: &cancellables)
     }
 
     private func configureActions() {
-        openChatTrigger
+        openChatAction
             .withLatestFrom(conversationsSubject) { ($0, $1) }
             .compactMap { conversationItemModel, conversations in
                 conversations.first(where: { $0.id == conversationItemModel.id })

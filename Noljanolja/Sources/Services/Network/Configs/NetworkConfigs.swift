@@ -8,7 +8,10 @@
 import Foundation
 
 enum NetworkConfigs {
-    static let baseUrl = "http://34.64.110.104/api"
+    enum BaseUrl {
+        static let baseUrl = "http://34.64.110.104/api"
+        static let socketBaseUrl = "ws://34.64.110.104/rsocket"
+    }
 
     enum Format {
         static let apiDateFormat = "yyyy-MM-dd"

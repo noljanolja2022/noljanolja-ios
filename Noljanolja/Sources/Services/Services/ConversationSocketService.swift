@@ -2,64 +2,103 @@
 //  ConversationSocketService.swift
 //  Noljanolja
 //
-//  Created by Nguyen The Trinh on 15/03/2023.
+//  Created by Nguyen The Trinh on 11/04/2023.
 //
 
 import Combine
 import Foundation
-import KMPNativeCoroutinesCombine
-import shared
-
-// MARK: - AuthStore + AuthRepo
-
-extension AuthStore: AuthRepo {
-    func getAuthToken() async throws -> String? {
-        getToken()
-    }
-}
 
 // MARK: - ConversationSocketServiceType
 
 protocol ConversationSocketServiceType {
     func register()
+    func getConversationStream() -> AnyPublisher<Result<Conversation, Error>, Never>
+    func getConversationStream(id: Int) -> AnyPublisher<Result<Conversation, Error>, Never>
 }
 
 // MARK: - ConversationSocketService
 
 final class ConversationSocketService: ConversationSocketServiceType {
     static let `default` = ConversationSocketService()
-    
-    private let conversationSocket: ConversationSocket
+
+    private let userService: UserServiceType
+    private let socketAPI: ConversationSocketAPIType
     private let conversationStore: ConversationStoreType
+    private let conversationDetailStore: ConversationDetailStoreType
     private let messageStore: MessageStoreType
 
-    private var cancellables = Set<AnyCancellable>()
-
-    private init(authRepo: AuthRepo = AuthStore.default,
-                 conversationStore: ConversationStoreType = ConversationStore.default,
-                 messageStore: MessageStoreType = MessageStore.default) {
-        self.conversationSocket = ConversationSocket(rsocketUrl: "ws://34.64.110.104/rsocket", authRepo: AuthStore.default)
+    init(userService: UserServiceType = UserService.default,
+         socketAPI: ConversationSocketAPIType = ConversationSocketAPI.default,
+         conversationStore: ConversationStoreType = ConversationStore.default,
+         conversationDetailStore: ConversationDetailStoreType = ConversationDetailStore.default,
+         messageStore: MessageStoreType = MessageStore.default) {
+        self.userService = userService
+        self.socketAPI = socketAPI
         self.conversationStore = conversationStore
+        self.conversationDetailStore = conversationDetailStore
         self.messageStore = messageStore
     }
 
     func register() {
-        let conversationsStream = conversationSocket.streamConversations()
-        let conversationsStreamPublisher = createPublisher(for: conversationsStream)
+        socketAPI.register()
+    }
 
-        conversationsStreamPublisher
-            .compactMap { string in
-                let data = string.data(using: .utf8)
-                return data.flatMap { Conversation(from: $0) }
-            }
-            .receive(on: DispatchQueue.main)
-            .sink(
-                receiveCompletion: { _ in },
-                receiveValue: { [weak self] conversation in
-                    self?.conversationStore.saveConversations([conversation])
-                    self?.messageStore.saveMessages(conversation.messages)
+    private func getStream() -> AnyPublisher<Result<Conversation, Error>, Never> {
+        socketAPI.getStream()
+            .withLatestFrom(userService.currentUserPublisher) { ($0, $1) }
+            .handleEvents(receiveOutput: { [weak self] result, currentUser in
+                guard let self else { return }
+                switch result {
+                case let .success(conversation):
+                    let lastMessage = conversation.messages.sorted { $0.createdAt > $1.createdAt }.first
+                    switch lastMessage?.type {
+                    case .eventLeft:
+                        if lastMessage?.leftParticipants.map({ $0.id }).contains(currentUser.id) ?? false {
+                            self.conversationStore
+                                .removeConversation(conversationID: conversation.id)
+                            self.conversationDetailStore
+                                .removeConversationDetail(conversationID: conversation.id)
+                        } else {
+                            self.conversationStore.saveConversations([conversation])
+                            self.conversationDetailStore.saveConversationDetails([conversation])
+                        }
+                    case .plaintext, .photo, .sticker, .eventUpdated, .eventJoined, .unknown, .none:
+                        self.conversationStore.saveConversations([conversation])
+                        self.conversationDetailStore.saveConversationDetails([conversation])
+                    }
+                case .failure:
+                    return
                 }
-            )
-            .store(in: &cancellables)
+            })
+            .map { result, _ in result }
+            .eraseToAnyPublisher()
+    }
+
+    func getConversationStream() -> AnyPublisher<Result<Conversation, Error>, Never> {
+        getStream()
+            .eraseToAnyPublisher()
+    }
+
+    func getConversationStream(id: Int) -> AnyPublisher<Result<Conversation, Error>, Never> {
+        getStream()
+            .filter { result in
+                switch result {
+                case let .success(conversation):
+                    return conversation.id == id
+                case .failure:
+                    return false
+                }
+            }
+            .handleEvents(receiveOutput: { [weak self] result in
+                switch result {
+                case let .success(conversation):
+                    let sortedMessages = conversation.messages.sorted { $0.createdAt > $1.createdAt }
+                    guard let lastMessage = sortedMessages.first else { return }
+                    self?.messageStore.saveMessages([lastMessage])
+                case .failure:
+                    break
+                }
+            })
+            .eraseToAnyPublisher()
     }
 }

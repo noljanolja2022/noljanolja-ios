@@ -50,4 +50,8 @@ final class StorableAttachment: Object {
         self.type = nil
         self.md5 = nil
     }
+
+    override static func primaryKey() -> String? {
+        "id"
+    }
 }

@@ -57,7 +57,6 @@ struct SelectCountryView<ViewModel: SelectCountryViewModel>: View {
                 .frame(width: 16, height: 16)
                 .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
             TextField("Search", text: $viewModel.searchString)
-                .keyboardType(.phonePad)
                 .textFieldStyle(TappableTextFieldStyle())
                 .frame(maxHeight: .infinity)
                 .font(.system(size: 16))

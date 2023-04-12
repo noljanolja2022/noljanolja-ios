@@ -17,6 +17,7 @@ protocol ConversationStoreType {
     func observeConversations() -> AnyPublisher<[Conversation], Error>
 
     func removeConversation(conversationID: Int)
+    func removeConversation(notIn conversations: [Conversation])
 }
 
 // MARK: - ConversationStore
@@ -29,9 +30,9 @@ final class ConversationStore: ConversationStoreType {
         return RealmManager(
             configuration: {
                 var config = Realm.Configuration.defaultConfiguration
-                config.fileURL!.deleteLastPathComponent()
-                config.fileURL!.appendPathComponent(id)
-                config.fileURL!.appendPathExtension("realm")
+                config.fileURL?.deleteLastPathComponent()
+                config.fileURL?.appendPathComponent(id)
+                config.fileURL?.appendPathExtension("realm")
                 return config
             }(),
             queue: DispatchQueue(label: "realm.\(id)", qos: .default)
@@ -58,5 +59,12 @@ final class ConversationStore: ConversationStoreType {
             return
         }
         realmManager.delete(conversation)
+    }
+
+    func removeConversation(notIn conversations: [Conversation]) {
+        let objects = realmManager.objects(StorableConversation.self) { conversation in
+            !conversation.id.in(conversations.map { $0.id })
+        }
+        realmManager.delete(objects)
     }
 }

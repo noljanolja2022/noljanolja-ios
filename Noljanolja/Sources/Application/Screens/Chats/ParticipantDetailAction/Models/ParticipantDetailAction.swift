@@ -7,12 +7,14 @@
 
 import Foundation
 
-enum ParticipantDetailAction: CaseIterable, Equatable {
+enum ParticipantDetailActionType: CaseIterable, Equatable {
+    case chat
     case assignAdmin
     case removeParticipant
 
     var title: String {
         switch self {
+        case .chat: return "Chat"
         case .assignAdmin: return "Make admin"
         case .removeParticipant: return "Remove user"
         }
@@ -20,7 +22,7 @@ enum ParticipantDetailAction: CaseIterable, Equatable {
 
     var color: ColorAsset {
         switch self {
-        case .assignAdmin: return ColorAssets.neutralDarkGrey
+        case .chat, .assignAdmin: return ColorAssets.neutralDarkGrey
         case .removeParticipant: return ColorAssets.red
         }
     }

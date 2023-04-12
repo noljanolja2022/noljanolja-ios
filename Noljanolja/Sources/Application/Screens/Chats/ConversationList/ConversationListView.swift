@@ -102,7 +102,9 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
             ForEach(viewModel.conversations, id: \.id) { conversation in
                 ConversationItemView(model: conversation)
                     .background(Color.white)
-                    .onTapGesture { viewModel.openChatTrigger.send(conversation) }
+                    .onTapGesture {
+                        viewModel.openChatAction.send(conversation)
+                    }
             }
         }
     }
@@ -145,6 +147,7 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
                 EmptyView()
             }
         )
+        .isDetailLink(false)
     }
 
     @ViewBuilder

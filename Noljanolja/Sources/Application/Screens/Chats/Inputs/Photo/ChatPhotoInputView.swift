@@ -60,6 +60,7 @@ struct ChatPhotoInputView<ViewModel: ChatPhotoInputViewModelType>: View {
                 .background(ColorAssets.primaryYellowMain.swiftUIColor)
                 .cornerRadius(8)
                 .padding(.horizontal, 16)
+                .padding(.vertical, 8)
             }
         }
     }

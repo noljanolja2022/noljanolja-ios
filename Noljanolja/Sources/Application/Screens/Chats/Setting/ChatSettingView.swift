@@ -6,6 +6,7 @@
 //
 //
 
+import _SwiftUINavigationState
 import SwiftUI
 
 // MARK: - ChatSettingView
@@ -38,21 +39,38 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
         .onReceive(viewModel.closeAction) {
             presentationMode.wrappedValue.dismiss()
         }
-        .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
-        .fullScreenCover(unwrapping: $viewModel.fullScreenCoverType) {
-            switch $0.wrappedValue {
-            case let .participantDetail(participantModel):
-                ParticipantDetailActionView(
-                    viewModel: ParticipantDetailActionViewModel(
-                        participantModel: participantModel,
-                        delegate: viewModel
-                    )
-                )
-                .introspectViewController {
-                    $0.view.backgroundColor = .clear
+        .alert(item: $viewModel.alertState) {
+            Alert($0) { action in
+                switch action {
+                case let .removeParticipant(user):
+                    viewModel.removeParticipantAction.send(user)
+                case .leave:
+                    viewModel.leaveAction.send()
+                case .none:
+                    break
                 }
             }
         }
+        .fullScreenCover(
+            unwrapping: $viewModel.fullScreenCoverType,
+            onDismiss: {
+                viewModel.isPresentingSubject.send(false)
+            },
+            content: {
+                switch $0.wrappedValue {
+                case let .participantDetail(participantModel):
+                    ParticipantDetailActionView(
+                        viewModel: ParticipantDetailActionViewModel(
+                            participantModel: participantModel,
+                            delegate: viewModel
+                        )
+                    )
+                    .introspectViewController {
+                        $0.view.backgroundColor = .clear
+                    }
+                }
+            }
+        )
     }
 
     private func buildContentView() -> some View {
@@ -95,7 +113,7 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
                 .padding(.horizontal, 16)
                 .background(ColorAssets.white.swiftUIColor)
                 .onTapGesture {
-                    let actions = participantModel.participantDetailActions
+                    let actions = participantModel.actionTypes
                     guard !actions.isEmpty else { return }
                     viewModel.fullScreenCoverType = .participantDetail(participantModel)
                 }
@@ -140,7 +158,12 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
     private func buildLeaveView() -> some View {
         Button(
             action: {
-                viewModel.leaveAction.send()
+                viewModel.alertState = AlertState(
+                    title: TextState("Are you sure to leave this chat?"),
+                    message: TextState("If you leave, all the chat and chat history will be deleted."),
+                    primaryButton: .destructive(TextState("DISGREE")),
+                    secondaryButton: .default(TextState("AGREE"), action: .send(.leave))
+                )
             },
             label: {
                 Text("LEAVE CHAT ROOM")
@@ -158,14 +181,13 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
 
     @ViewBuilder
     private func buildNavigationLinks() -> some View {
-        ZStack {
-            NavigationLink(
-                unwrapping: $viewModel.navigationType,
-                onNavigate: { _ in },
-                destination: { buildNavigationDestinationView($0) },
-                label: { EmptyView() }
-            )
-        }
+        NavigationLink(
+            unwrapping: $viewModel.navigationType,
+            onNavigate: { _ in },
+            destination: { buildNavigationDestinationView($0) },
+            label: { EmptyView() }
+        )
+        .isDetailLink(false)
     }
 
     @ViewBuilder

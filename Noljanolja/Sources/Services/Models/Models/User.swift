@@ -102,7 +102,7 @@ extension User {
     }
 
     func getDisplayName(currentUser: User) -> String? {
-        id == currentUser.id ? "You" : name
+        name // id == currentUser.id ? "You" : name
     }
 }
 

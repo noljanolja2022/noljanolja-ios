@@ -122,6 +122,7 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                 },
                 label: { EmptyView() }
             )
+            .isDetailLink(false)
         }
     }
 }

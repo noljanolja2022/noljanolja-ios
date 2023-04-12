@@ -26,7 +26,7 @@ struct EventChatItemModel: Equatable {
             self.message = [senderName, action, participantNames].compactMap { $0 }.joined(separator: " ")
         case .eventLeft:
             let participantNames = message.leftParticipants.getDisplayName(currentUser: currentUser)
-            let action = "have left the conversation"
+            let action = "has left the conversation"
             self.message = [participantNames, action].compactMap { $0 }.joined(separator: " ")
         }
     }

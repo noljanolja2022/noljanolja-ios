@@ -74,4 +74,8 @@ final class StorableUser: Object {
         self.createdAt = model.createdAt
         self.updatedAt = model.updatedAt
     }
+
+    override static func primaryKey() -> String? {
+        "id"
+    }
 }

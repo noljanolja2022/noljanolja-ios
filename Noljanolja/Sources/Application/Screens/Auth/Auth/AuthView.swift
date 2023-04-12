@@ -185,6 +185,7 @@ struct AuthView<ViewModel: AuthViewModel>: View {
             },
             label: { EmptyView() }
         )
+        .isDetailLink(false)
     }
 }
 

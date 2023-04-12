@@ -28,6 +28,8 @@ final class ChatViewModel: ViewModel {
     @Published var footerViewState = StatefullFooterViewState.loading
     @Published var headerViewState = StatefullFooterViewState.loading
 
+    // MARK: Navigations
+
     @Published var navigationType: ChatNavigationType?
 
     // MARK: Action
@@ -48,6 +50,7 @@ final class ChatViewModel: ViewModel {
     private let userService: UserServiceType
     private let conversationService: ConversationServiceType
     private let messageService: MessageServiceType
+    private let conversationSocketService: ConversationSocketServiceType
     private weak var delegate: ChatViewModelDelegate?
 
     // MARK: Private
@@ -62,11 +65,13 @@ final class ChatViewModel: ViewModel {
          userService: UserServiceType = UserService.default,
          conversationService: ConversationServiceType = ConversationService.default,
          messageService: MessageServiceType = MessageService.default,
+         conversationSocketService: ConversationSocketServiceType = ConversationSocketService.default,
          delegate: ChatViewModelDelegate? = nil) {
         self.conversationID = conversationID
         self.userService = userService
         self.conversationService = conversationService
         self.messageService = messageService
+        self.conversationSocketService = conversationSocketService
         self.delegate = delegate
         super.init()
 
@@ -77,6 +82,7 @@ final class ChatViewModel: ViewModel {
         configureBindData()
         configureSeenMessage()
         configureLoadData()
+        configureSocket()
         configureActions()
     }
 
@@ -180,7 +186,7 @@ final class ChatViewModel: ViewModel {
             }
             .sink(receiveValue: { [weak self] result in
                 switch result {
-                case let .success(messages):
+                case .success:
                     self?.viewState = .content
                 case let .failure(error):
                     self?.error = error
@@ -249,7 +255,7 @@ final class ChatViewModel: ViewModel {
                 switch result {
                 case let .success(conversation):
                     self?.conversationSubject.send(conversation)
-                case let .failure(error):
+                case .failure:
                     return
                 }
             })
@@ -258,6 +264,34 @@ final class ChatViewModel: ViewModel {
         userService
             .currentUserPublisher
             .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
+            .store(in: &cancellables)
+    }
+
+    private func configureSocket() {
+        conversationSocketService.register()
+
+        conversationSocketService
+            .getConversationStream(id: conversationID)
+            .withLatestFrom(currentUserSubject.compactMap { $0 }) { ($0, $1) }
+            .sink(receiveValue: { [weak self] result, currentUser in
+                guard let self else { return }
+                switch result {
+                case let .success(conversation):
+                    print("BBBBB", conversation)
+                    let lastMessage = conversation.messages.sorted { $0.createdAt > $1.createdAt }.first
+                    switch lastMessage?.type {
+                    case .eventLeft:
+                        if lastMessage?.leftParticipants.map({ $0.id }).contains(currentUser.id) ?? false {
+                            self.closeAction.send()
+                            self.navigationType = nil
+                        }
+                    case .plaintext, .photo, .sticker, .eventUpdated, .eventJoined, .unknown, .none:
+                        break
+                    }
+                case let .failure(error):
+                    print("BBBBB", error.localizedDescription)
+                }
+            })
             .store(in: &cancellables)
     }
 

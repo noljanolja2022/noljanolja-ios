@@ -26,16 +26,28 @@ final class ChatSettingViewModel: ViewModel {
     @Published var settingItems = [ChatSettingItemModelType]()
 
     @Published var isProgressHUDShowing = false
-    @Published var alertState: AlertState<Void>?
+    @Published var alertState: AlertState<ChatSettingAlertActionType>? {
+        didSet {
+            isPresentingSubject.send(alertState != nil)
+        }
+    }
 
     // MARK: Navigations
 
     @Published var navigationType: ChatSettingNavigationType?
-    @Published var fullScreenCoverType: ChatSettingFullScreenCoverType?
+    @Published var fullScreenCoverType: ChatSettingFullScreenCoverType? {
+        willSet {
+            guard newValue != nil else { return }
+            isPresentingSubject.send(true)
+        }
+    }
+
+    let isPresentingSubject = CurrentValueSubject<Bool, Never>(false)
 
     // MARK: Action
 
     let closeAction = PassthroughSubject<Void, Never>()
+    let alertStateAction = PassthroughSubject<AlertState<ChatSettingAlertActionType>, Never>()
     let leaveAction = PassthroughSubject<Void, Never>()
     let assignAdminAction = PassthroughSubject<User, Never>()
     let removeParticipantAction = PassthroughSubject<User, Never>()
@@ -71,6 +83,7 @@ final class ChatSettingViewModel: ViewModel {
         configureBindData()
         configureLoadData()
         configureActions()
+        configurePresentation()
     }
 
     private func configureBindData() {
@@ -237,15 +250,44 @@ final class ChatSettingViewModel: ViewModel {
             }
             .store(in: &cancellables)
     }
+
+    private func configurePresentation() {
+        alertStateAction
+            .flatMapLatest { [weak self] alertState -> AnyPublisher<AlertState<ChatSettingAlertActionType>, Never> in
+                guard let self else {
+                    return Empty<AlertState<ChatSettingAlertActionType>, Never>()
+                        .eraseToAnyPublisher()
+                }
+                return self.isPresentingSubject
+                    .filter { !$0 }
+                    .first()
+                    .mapToValue(alertState)
+                    .eraseToAnyPublisher()
+            }
+            .sink { [weak self] in
+                self?.alertState = $0
+            }
+            .store(in: &cancellables)
+    }
 }
 
 // MARK: ParticipantDetailActionViewModelDelegate
 
 extension ChatSettingViewModel: ParticipantDetailActionViewModelDelegate {
-    func didSelectAction(user: User, action: ParticipantDetailAction) {
+    func didSelectAction(user: User, action: ParticipantDetailActionType) {
         switch action {
-        case .assignAdmin: assignAdminAction.send(user)
-        case .removeParticipant: removeParticipantAction.send(user)
+        case .chat:
+            break
+        case .assignAdmin:
+            assignAdminAction.send(user)
+        case .removeParticipant:
+            let alertState = AlertState<ChatSettingAlertActionType>(
+                title: TextState("Are you sure to remove this user?"),
+                message: TextState("This user will be enable removed from this chat."),
+                primaryButton: .destructive(TextState("DISGREE")),
+                secondaryButton: .default(TextState("AGREE"), action: .send(.removeParticipant(user)))
+            )
+            alertStateAction.send(alertState)
         }
     }
 }

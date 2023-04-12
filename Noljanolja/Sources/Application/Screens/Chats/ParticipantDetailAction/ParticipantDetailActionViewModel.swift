@@ -12,7 +12,7 @@ import Foundation
 // MARK: - ParticipantDetailActionViewModelDelegate
 
 protocol ParticipantDetailActionViewModelDelegate: AnyObject {
-    func didSelectAction(user: User, action: ParticipantDetailAction)
+    func didSelectAction(user: User, action: ParticipantDetailActionType)
 }
 
 // MARK: - ParticipantDetailActionViewModel
@@ -22,7 +22,7 @@ final class ParticipantDetailActionViewModel: ViewModel {
 
     // MARK: Action
 
-    let actionSubject = PassthroughSubject<ParticipantDetailAction, Never>()
+    let action = PassthroughSubject<ParticipantDetailActionType, Never>()
 
     // MARK: Dependencies
 
@@ -43,7 +43,7 @@ final class ParticipantDetailActionViewModel: ViewModel {
     }
 
     private func configure() {
-        actionSubject
+        action
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] action in
                 guard let self else { return }

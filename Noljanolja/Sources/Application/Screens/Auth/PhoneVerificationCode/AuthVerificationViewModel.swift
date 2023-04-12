@@ -123,7 +123,7 @@ final class AuthVerificationViewModel: ViewModel {
                         self?.delegate?.navigateToUpdateCurrentUser()
                     }
                 case let .failure(error):
-                    logger.error("Verify verification code code failed: \(error.localizedDescription)")
+                    logger.error("Verify verification code failed: \(error.localizedDescription)")
                     self?.alertState = AlertState(
                         title: TextState("Error"),
                         message: TextState(L10n.Common.Error.message),

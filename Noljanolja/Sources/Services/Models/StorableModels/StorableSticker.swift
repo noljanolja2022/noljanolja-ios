@@ -25,4 +25,8 @@ final class StorableSticker: Object {
             return list
         }()
     }
+
+    override static func primaryKey() -> String? {
+        "imageFile"
+    }
 }

@@ -58,11 +58,11 @@ struct ParticipantDetailActionView<ViewModel: ParticipantDetailActionViewModel>:
             }
             .padding(16)
 
-            ForEach(viewModel.participantModel.participantDetailActions, id: \.self) { action in
+            ForEach(viewModel.participantModel.actionTypes, id: \.self) { action in
                 Button(
                     action: {
-                        self.viewModel.actionSubject.send(action)
                         presentationMode.wrappedValue.dismiss()
+                        viewModel.action.send(action)
                     },
                     label: {
                         Text(action.title)

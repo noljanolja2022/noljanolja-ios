@@ -97,4 +97,8 @@ final class StorableMessage: Object {
         }()
         self.createdAt = Date()
     }
+
+    override static func primaryKey() -> String? {
+        "primaryKey"
+    }
 }
