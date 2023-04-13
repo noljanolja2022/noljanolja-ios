@@ -6,6 +6,7 @@
 //
 
 import Kingfisher
+import SDWebImageSwiftUI
 import SwiftUI
 
 // MARK: - ConversationItemView
@@ -15,27 +16,34 @@ struct ConversationItemView: View {
 
     var body: some View {
         HStack(alignment: .top, spacing: 16) {
-            KFImage(URL(string: model.image ?? ""))
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 40, height: 40)
-                .background(ColorAssets.neutralLightGrey.swiftUIColor)
-                .cornerRadius(14)
+            WebImage(
+                url: URL(string: model.image ?? ""),
+                context: [
+                    .imageTransformer: SDImageResizingTransformer(
+                        size: CGSize(width: 40, height: 40),
+                        scaleMode: .fill
+                    )
+                ]
+            )
+            .placeholder {
+                Image(systemName: model.imagePlaceholder)
+                    .resizable()
+                    .scaledToFit()
+                    .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
+                    .padding(4)
+            }
+            .resizable()
+            .frame(width: 40, height: 40)
+            .background(ColorAssets.neutralLightGrey.swiftUIColor)
+            .cornerRadius(14)
 
             VStack(alignment: .leading, spacing: 8) {
                 Text(model.title ?? "")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(Font.system(size: 16, weight: .medium))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                let message: String? = {
-                    switch model.lastMessage?.type {
-                    case .plaintext: return model.lastMessage?.message
-                    case .photo: return "Photo"
-                    case .sticker: return "Sticker"
-                    case .eventUpdated, .eventJoined, .eventLeft, .unknown, .none: return nil
-                    }
-                }()
-                if let message, !message.isEmpty {
+
+                if let message = model.message, !message.isEmpty {
                     Text(message)
                         .lineLimit(2)
                         .frame(maxWidth: .infinity, alignment: .leading)

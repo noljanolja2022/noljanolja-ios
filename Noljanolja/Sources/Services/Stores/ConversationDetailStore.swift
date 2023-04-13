@@ -54,10 +54,13 @@ final class ConversationDetailStore: ConversationDetailStoreType {
     }
 
     func observeConversationDetail(conversationID: Int) -> AnyPublisher<Conversation, Error> {
-        realmManager.objects(StorableConversation.self) { $0.id == conversationID }
-            .collectionPublisher
-            .compactMap { conversations -> Conversation? in conversations.first.flatMap { $0.model } }
-            .eraseToAnyPublisher()
+        realmManager.objects(
+            StorableConversation.self,
+            isIncluded: { $0.id == conversationID }
+        )
+        .collectionPublisher
+        .compactMap { conversations -> Conversation? in conversations.first.flatMap { $0.model } }
+        .eraseToAnyPublisher()
     }
 
     func removeConversationDetail(conversationID: Int) {

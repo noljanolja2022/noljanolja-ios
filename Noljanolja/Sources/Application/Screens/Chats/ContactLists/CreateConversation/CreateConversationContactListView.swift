@@ -42,7 +42,7 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
                             EmptyView()
                         case .group:
                             Button("Agree") {
-                                viewModel.createConversationSubject.send(
+                                viewModel.createConversationAction.send(
                                     (createConversationType, selectedUsers)
                                 )
                             }
@@ -81,7 +81,7 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
             selectUserAction: { _ in
                 switch createConversationType {
                 case .single:
-                    viewModel.createConversationSubject.send(
+                    viewModel.createConversationAction.send(
                         (createConversationType, selectedUsers)
                     )
                 case .group, .unknown:

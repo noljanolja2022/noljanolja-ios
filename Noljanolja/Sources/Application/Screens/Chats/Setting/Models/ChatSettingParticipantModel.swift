@@ -17,7 +17,7 @@ struct ChatSettingParticipantModel: Equatable {
     }
 
     var displayName: String? {
-        if user == currentUser {
+        if user.id == currentUser?.id {
             return "You"
         } else {
             return user.name

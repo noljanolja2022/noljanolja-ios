@@ -11,8 +11,8 @@ import Foundation
 // MARK: - ConversationServiceType
 
 protocol ConversationServiceType {
-    func getConversation(conversationID: Int) -> AnyPublisher<Conversation, Error>
     func getConversations() -> AnyPublisher<[Conversation], Error>
+    func getConversation(conversationID: Int) -> AnyPublisher<Conversation, Error>
 
     func createConversation(type: ConversationType,
                             participants: [User]) -> AnyPublisher<Conversation, Error>
@@ -50,28 +50,18 @@ final class ConversationService: ConversationServiceType {
     private let conversationParticipantAPI: ConversationParticipantAPIType
     private let conversationStore: ConversationStoreType
     private let conversationDetailStore: ConversationDetailStoreType
+    private let userService: UserServiceType
 
     private init(conversationAPI: ConversationAPIType = ConversationAPI.default,
                  conversationParticipantAPI: ConversationParticipantAPIType = ConversationParticipantAPI.default,
                  conversationStore: ConversationStoreType = ConversationStore.default,
-                 conversationDetailStore: ConversationDetailStoreType = ConversationDetailStore.default) {
+                 conversationDetailStore: ConversationDetailStoreType = ConversationDetailStore.default,
+                 userService: UserServiceType = UserService.default) {
         self.conversationAPI = conversationAPI
         self.conversationParticipantAPI = conversationParticipantAPI
         self.conversationStore = conversationStore
         self.conversationDetailStore = conversationDetailStore
-    }
-
-    func getConversation(conversationID: Int) -> AnyPublisher<Conversation, Error> {
-        let localConversation = conversationDetailStore
-            .observeConversationDetail(conversationID: conversationID)
-        let remoteConversation = conversationAPI
-            .getConversation(conversationID: conversationID)
-            .handleEvents(receiveOutput: { [weak self] in
-                self?.conversationDetailStore.saveConversationDetails([$0])
-            })
-        return Publishers.Merge(localConversation, remoteConversation)
-            .removeDuplicates()
-            .eraseToAnyPublisher()
+        self.userService = userService
     }
 
     func getConversations() -> AnyPublisher<[Conversation], Error> {
@@ -102,6 +92,7 @@ final class ConversationService: ConversationServiceType {
                             updatedAt: $0.updatedAt
                         )
                     }
+                    //                    .sorted { $0.updatedAt > $1.updatedAt }
                     .sorted { lhs, rhs in
                         let lhsLastMessage = lhs.messages.first
                         let rhsLastMessage = rhs.messages.first
@@ -120,10 +111,38 @@ final class ConversationService: ConversationServiceType {
             .eraseToAnyPublisher()
     }
 
+    func getConversation(conversationID: Int) -> AnyPublisher<Conversation, Error> {
+        let localConversation = conversationDetailStore
+            .observeConversationDetail(conversationID: conversationID)
+        let remoteConversation = conversationAPI
+            .getConversation(conversationID: conversationID)
+            .handleEvents(receiveOutput: { [weak self] in
+                self?.conversationDetailStore.saveConversationDetails([$0])
+            })
+        return Publishers.Merge(localConversation, remoteConversation)
+            .removeDuplicates()
+            .eraseToAnyPublisher()
+    }
+
     func createConversation(type: ConversationType,
                             participants: [User]) -> AnyPublisher<Conversation, Error> {
-        conversationAPI
-            .createConversation(title: "", type: type, participants: participants)
+        if participants.count == 1,
+           let currentUser = userService.currentUser,
+           let conversation = conversationStore.getConversations(
+               type: .single,
+               participants: participants + [currentUser]
+           ).first {
+            return Just(conversation)
+                .setFailureType(to: Error.self)
+                .eraseToAnyPublisher()
+        } else {
+            return conversationAPI
+                .createConversation(title: "", type: type, participants: participants)
+                .handleEvents(receiveOutput: { [weak self] in
+                    self?.conversationDetailStore.saveConversationDetails([$0])
+                })
+                .eraseToAnyPublisher()
+        }
     }
 
     func updateConversation(conversationID: Int,

@@ -101,8 +101,8 @@ extension User {
         !(name ?? "").isEmpty
     }
 
-    func getDisplayName(currentUser: User) -> String? {
-        name // id == currentUser.id ? "You" : name
+    func getDisplayName(currentUser: User) -> String {
+        id == currentUser.id ? "You" : (name ?? "")
     }
 }
 
@@ -123,7 +123,7 @@ extension [User] {
         }
     }
 
-    func getDisplayName(currentUser: User) -> String? {
+    func getDisplayName(currentUser: User) -> String {
         let displayNames = sorted(currentUser: currentUser)
             .compactMap {
                 $0.getDisplayName(currentUser: currentUser)
@@ -134,7 +134,7 @@ extension [User] {
         case 0:
             return "Nobody"
         case 1:
-            return displayNames.first
+            return displayNames.first ?? ""
         case 2:
             return displayNames.joined(separator: " and ")
         default:

@@ -19,8 +19,8 @@ struct ContactItemView: View {
             WebImage(url: URL(string: user.avatar))
                 .resizable()
                 .indicator(.activity)
-                .frame(width: 40, height: 40)
                 .scaledToFill()
+                .frame(width: 40, height: 40)
                 .background(ColorAssets.neutralGrey.swiftUIColor)
                 .cornerRadius(14)
 

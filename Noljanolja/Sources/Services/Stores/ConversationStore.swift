@@ -13,7 +13,8 @@ import RealmSwift
 
 protocol ConversationStoreType {
     func saveConversations(_ conversations: [Conversation])
-    
+
+    func getConversations(type: ConversationType, participants: [User]) -> [Conversation]
     func observeConversations() -> AnyPublisher<[Conversation], Error>
 
     func removeConversation(conversationID: Int)
@@ -47,6 +48,17 @@ final class ConversationStore: ConversationStoreType {
         realmManager.add(storableConversations, update: .all)
     }
 
+    func getConversations(type: ConversationType, participants: [User]) -> [Conversation] {
+        realmManager.objects(StorableConversation.self)
+            .compactMap { $0.model }
+            .filter { conversation in
+                let conversationParticipantIDs = Set(conversation.participants.map { $0.id })
+                let participantIDs = Set(participants.map { $0.id })
+                return conversation.type == type
+                    && conversationParticipantIDs == participantIDs
+            }
+    }
+
     func observeConversations() -> AnyPublisher<[Conversation], Error> {
         realmManager.objects(StorableConversation.self)
             .collectionPublisher
@@ -62,9 +74,12 @@ final class ConversationStore: ConversationStoreType {
     }
 
     func removeConversation(notIn conversations: [Conversation]) {
-        let objects = realmManager.objects(StorableConversation.self) { conversation in
-            !conversation.id.in(conversations.map { $0.id })
-        }
+        let objects = realmManager.objects(
+            StorableConversation.self,
+            isIncluded: { conversation in
+                !conversation.id.in(conversations.map { $0.id })
+            }
+        )
         realmManager.delete(objects)
     }
 }

@@ -106,7 +106,7 @@ extension Conversation {
             } else {
                 return participants
                     .sorted(currentUser: currentUser)
-                    .compactMap { $0.getDisplayName(currentUser: currentUser)?.trimmed }
+                    .compactMap { $0.getDisplayName(currentUser: currentUser).trimmed }
                     .filter { !$0.isEmpty }
                     .joined(separator: ", ")
             }

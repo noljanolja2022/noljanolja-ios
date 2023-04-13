@@ -25,7 +25,7 @@ final class CreateConversationContactListViewModel: ViewModel {
     
     // MARK: Action
 
-    let createConversationSubject = PassthroughSubject<(ConversationType, [User]), Never>()
+    let createConversationAction = PassthroughSubject<(ConversationType, [User]), Never>()
 
     // MARK: Dependencies
 
@@ -50,7 +50,7 @@ final class CreateConversationContactListViewModel: ViewModel {
     }
 
     private func configureCreateConversation() {
-        createConversationSubject
+        createConversationAction
             .filter { !$0.1.isEmpty }
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] createConversationType, users -> AnyPublisher<Conversation, Error> in

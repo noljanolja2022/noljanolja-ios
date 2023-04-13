@@ -10,16 +10,47 @@ import Foundation
 struct ConversationItemModel: Equatable {
     let id: Int
     let image: String?
+    let imagePlaceholder: String
     let title: String?
-    let lastMessage: Message?
+    let message: String?
     let date: String?
     let isSeen: Bool
 
     init(currentUser: User, conversation: Conversation) {
         self.id = conversation.id
         self.image = conversation.getAvatar(currentUser: currentUser)
-        self.lastMessage = conversation.messages.first
-        self.date = conversation.messages.first?.createdAt.relativeFormatForConversation()
+        self.imagePlaceholder = {
+            switch conversation.type {
+            case .single: return "person.circle.fill"
+            case .group: return "person.2.circle.fill"
+            case .unknown: return "message.fill"
+            }
+        }()
+        self.message = {
+            guard let lastMessage = conversation.messages.first else {
+                let creatorName = conversation.creator.getDisplayName(currentUser: currentUser)
+                return "\(creatorName) created conversation"
+            }
+
+            let subject = lastMessage.sender.getDisplayName(currentUser: currentUser)
+            let verb = lastMessage.sender.id == currentUser.id ? "sent" : "received"
+            switch lastMessage.type {
+            case .plaintext:
+                return lastMessage.message
+            case .photo:
+                return [subject, verb, "photo"].joined(separator: " ")
+            case .sticker:
+                return [subject, verb, "sticker"].joined(separator: " ")
+            case .eventUpdated, .eventJoined, .eventLeft:
+                return "Conversation has changed"
+            case .unknown:
+                return ""
+            }
+        }()
+        self.date = {
+            let date = conversation.messages.first?.createdAt ?? conversation.updatedAt
+            return date.relativeFormatForConversation()
+        }()
         self.title = conversation.getDisplayTitleForItem(currentUser: currentUser)
         self.isSeen = {
             let lastReceiverMessage = conversation.messages.first(where: { $0.sender.id != currentUser.id })

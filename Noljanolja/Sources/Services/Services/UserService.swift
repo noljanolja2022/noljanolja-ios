@@ -12,6 +12,7 @@ import Foundation
 // MARK: - UserServiceType
 
 protocol UserServiceType {
+    var currentUser: User? { get }
     var currentUserPublisher: AnyPublisher<User, Never> { get }
 
     func getCurrentUser() -> AnyPublisher<User, Error>
@@ -28,6 +29,10 @@ final class UserService: UserServiceType {
     private let userAPI: UserAPIType
 
     // MARK: Type
+
+    var currentUser: User? {
+        currentUserSubject.value
+    }
 
     var currentUserPublisher: AnyPublisher<User, Never> {
         currentUserSubject
