@@ -226,6 +226,7 @@
 		CFECC13129B4D6D500E20B58 /* UILaunchBackgroundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFECC12B29B4D6D400E20B58 /* UILaunchBackgroundView.xib */; };
 		CFECC13229B4D6D500E20B58 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFECC12C29B4D6D400E20B58 /* Launch Screen.storyboard */; };
 		CFECC13329B4D6D500E20B58 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFECC12D29B4D6D500E20B58 /* LaunchViewModel.swift */; };
+		CFF0C1EB29E85DEB007B4B98 /* AuthNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF0C1EA29E85DEB007B4B98 /* AuthNavigations.swift */; };
 		CFF1F79A29B6E7FE00B25DD2 /* CombineExt in Frameworks */ = {isa = PBXBuildFile; productRef = CFF1F79929B6E7FE00B25DD2 /* CombineExt */; };
 		CFF1F7A429B7371600B25DD2 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF1F7A229B7371600B25DD2 /* ChatView.swift */; };
 		CFF1F7A529B7371600B25DD2 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF1F7A329B7371600B25DD2 /* ChatViewModel.swift */; };
@@ -485,6 +486,7 @@
 		CFECC12B29B4D6D400E20B58 /* UILaunchBackgroundView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UILaunchBackgroundView.xib; sourceTree = "<group>"; };
 		CFECC12C29B4D6D400E20B58 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "Noljanolja/Sources/Application/Screens/Launch/Launch/Launch/Launch Screen.storyboard"; sourceTree = SOURCE_ROOT; };
 		CFECC12D29B4D6D500E20B58 /* LaunchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LaunchViewModel.swift; path = Noljanolja/Sources/Application/Screens/Launch/Launch/Launch/LaunchViewModel.swift; sourceTree = SOURCE_ROOT; };
+		CFF0C1EA29E85DEB007B4B98 /* AuthNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNavigations.swift; sourceTree = "<group>"; };
 		CFF1F7A229B7371600B25DD2 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		CFF1F7A329B7371600B25DD2 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		CFFB058B29BF0487000D65EE /* MessageItemModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageItemModelBuilder.swift; sourceTree = "<group>"; };
@@ -664,6 +666,7 @@
 			children = (
 				CF0EA30429AA02120014A7DE /* AuthView.swift */,
 				CF0EA30529AA02120014A7DE /* AuthViewModel.swift */,
+				CFF0C1EA29E85DEB007B4B98 /* AuthNavigations.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -677,14 +680,14 @@
 			path = SelectCountry;
 			sourceTree = "<group>";
 		};
-		CF0EA31129AA4CC50014A7DE /* PhoneVerificationCode */ = {
+		CF0EA31129AA4CC50014A7DE /* AuthVerification */ = {
 			isa = PBXGroup;
 			children = (
 				CF0EA31629AA4D610014A7DE /* Views */,
 				CF0EA31229AA4D450014A7DE /* AuthVerificationView.swift */,
 				CF0EA31329AA4D450014A7DE /* AuthVerificationViewModel.swift */,
 			);
-			path = PhoneVerificationCode;
+			path = AuthVerification;
 			sourceTree = "<group>";
 		};
 		CF0EA31629AA4D610014A7DE /* Views */ = {
@@ -841,7 +844,7 @@
 			children = (
 				CF28A19C29B4E9BE0003C204 /* AuthRoot */,
 				CF0EA30329A9FF120014A7DE /* Auth */,
-				CF0EA31129AA4CC50014A7DE /* PhoneVerificationCode */,
+				CF0EA31129AA4CC50014A7DE /* AuthVerification */,
 				CF0EA30A29AA0EE00014A7DE /* SelectCountry */,
 				CF1EEE3029AE3F68004F570A /* Terms */,
 			);
@@ -2214,6 +2217,7 @@
 				CF28A1A729B4FFC50003C204 /* ProfileView.swift in Sources */,
 				CF745A5A2998E5EA008177E5 /* TappableTextFieldStyle.swift in Sources */,
 				CFBC6F0029C054B0000509EC /* View+EditView.swift in Sources */,
+				CFF0C1EB29E85DEB007B4B98 /* AuthNavigations.swift in Sources */,
 				CF0EA30629AA02120014A7DE /* AuthView.swift in Sources */,
 				CF0EA31429AA4D450014A7DE /* AuthVerificationView.swift in Sources */,
 				CF0EA30E29AA0F010014A7DE /* SelectCountryViewModel.swift in Sources */,

@@ -20,47 +20,45 @@ struct AuthView<ViewModel: AuthViewModel>: View {
     // MARK: State
 
     @EnvironmentObject private var progressHUBState: ProgressHUBState
-    @State private var isSelectCountryShown = false
 
     var body: some View {
         buildBodyView()
-            .hideNavigationBar()
-            .onChange(of: viewModel.isProgressHUDShowing) {
-                progressHUBState.isLoading = $0
-            }
-            .fullScreenCover(isPresented: $isSelectCountryShown) {
-                NavigationView {
-                    SelectCountryView(
-                        viewModel: SelectCountryViewModel(
-                            selectedCountry: viewModel.country,
-                            delegate: viewModel
-                        )
-                    )
-                }
-                .navigationViewStyle(StackNavigationViewStyle())
-            }
-            .alert(item: $viewModel.alertState) {
-                Alert($0) { action in
-                    guard let action, action else { return }
-                    viewModel.sendPhoneVerificationCodeSubject.send(
-                        (viewModel.country.phoneCode, viewModel.phoneNumber?.formatPhone())
-                    )
-                }
-            }
     }
 
     private func buildBodyView() -> some View {
         ZStack {
-            VStack(spacing: 0) {
-                buildHeaderView()
-                buildContentView()
-            }
-            .background(
-                ColorAssets.primaryYellowMain.swiftUIColor
-                    .ignoresSafeArea(edges: .top)
-            )
-            buildNavigationLinks()
+            buildContentView()
+            buildNavigationLink()
         }
+        .hideNavigationBar()
+        .onChange(of: viewModel.isProgressHUDShowing) {
+            progressHUBState.isLoading = $0
+        }
+        .alert(item: $viewModel.alertState) {
+            Alert($0) { action in
+                guard let action, action else { return }
+                viewModel.sendVerificationCodeAction.send(
+                    (viewModel.country.phoneCode, viewModel.phoneNumber?.formatPhone())
+                )
+            }
+        }
+        .fullScreenCover(
+            unwrapping: $viewModel.fullScreenCoverType,
+            content: {
+                buildFullScreenCoverDestinationView($0)
+            }
+        )
+    }
+
+    private func buildContentView() -> some View {
+        VStack(spacing: 0) {
+            buildHeaderView()
+            buildAuthView()
+        }
+        .background(
+            ColorAssets.primaryYellowMain.swiftUIColor
+                .ignoresSafeArea(edges: .top)
+        )
     }
 
     private func buildHeaderView() -> some View {
@@ -71,26 +69,23 @@ struct AuthView<ViewModel: AuthViewModel>: View {
             .padding(32)
     }
 
-    private func buildContentView() -> some View {
-        VStack {
+    private func buildAuthView() -> some View {
+        VStack(spacing: 8) {
             ScrollView {
-                VStack(spacing: 32) {
-                    buildContentHeaderView()
+                VStack(spacing: 24) {
+                    buildAuthHeaderView()
                     buildPhoneView()
-                    Spacer()
                 }
                 .padding(.horizontal, 16)
-                .padding(.top, 32)
-                .padding(.bottom, 16)
+                .padding(.top, 28)
             }
-
             buildActionView()
         }
         .background(ColorAssets.white.swiftUIColor)
         .cornerRadius(40, corners: [.topLeft, .topRight])
     }
 
-    private func buildContentHeaderView() -> some View {
+    private func buildAuthHeaderView() -> some View {
         VStack(spacing: 4) {
             Text("Log in")
                 .font(.system(size: 32, weight: .bold))
@@ -107,7 +102,9 @@ struct AuthView<ViewModel: AuthViewModel>: View {
     private func buildPhoneView() -> some View {
         HStack(spacing: 12) {
             Button(
-                action: { isSelectCountryShown = true },
+                action: {
+                    viewModel.fullScreenCoverType = .selectCountry
+                },
                 label: {
                     VStack {
                         HStack(spacing: 8) {
@@ -154,8 +151,14 @@ struct AuthView<ViewModel: AuthViewModel>: View {
         Button(
             "Continue".uppercased(),
             action: {
-                viewModel.confirmPhoneAlertSubject.send(
-                    viewModel.phoneNumber?.formatPhone(type: .international)
+                guard let title = viewModel.phoneNumber?.formatPhone(type: .international) else {
+                    return
+                }
+                viewModel.alertState = AlertState(
+                    title: TextState(title),
+                    message: TextState("You will receive a code to verify to this phone number via text message."),
+                    primaryButton: .destructive(TextState("Cancel")),
+                    secondaryButton: .default(TextState("Confirm"), action: .send(true))
                 )
             }
         )
@@ -166,10 +169,11 @@ struct AuthView<ViewModel: AuthViewModel>: View {
         )
         .disabled(viewModel.phoneNumberText.isEmpty)
         .frame(height: 48)
-        .padding(16)
+        .padding(.horizontal, 16)
+        .padding(.bottom, 16)
     }
 
-    private func buildNavigationLinks() -> some View {
+    private func buildNavigationLink() -> some View {
         NavigationLink(
             unwrapping: $viewModel.verificationID,
             onNavigate: { _ in },
@@ -186,6 +190,24 @@ struct AuthView<ViewModel: AuthViewModel>: View {
             label: { EmptyView() }
         )
         .isDetailLink(false)
+    }
+
+    @ViewBuilder
+    private func buildFullScreenCoverDestinationView(
+        _ type: Binding<AuthFullScreenCoverType>
+    ) -> some View {
+        switch type.wrappedValue {
+        case .selectCountry:
+            NavigationView {
+                SelectCountryView(
+                    viewModel: SelectCountryViewModel(
+                        selectedCountry: viewModel.country,
+                        delegate: viewModel
+                    )
+                )
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
+        }
     }
 }
 

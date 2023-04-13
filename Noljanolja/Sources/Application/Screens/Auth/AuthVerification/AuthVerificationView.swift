@@ -27,20 +27,23 @@ struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
     }
 
     private func buildBodyView() -> some View {
-        VStack(spacing: 0) {
-            buildContentView()
-            Spacer()
-            buildActionView()
-                .padding(16)
-        }
-        .hideNavigationBar()
-        .onChange(of: viewModel.isProgressHUDShowing) {
-            progressHUBState.isLoading = $0
-        }
-        .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
+        buildContentView()
+            .hideNavigationBar()
+            .onChange(of: viewModel.isProgressHUDShowing) {
+                progressHUBState.isLoading = $0
+            }
+            .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
     }
 
     private func buildContentView() -> some View {
+        VStack(spacing: 0) {
+            buildMainView()
+            Spacer()
+            buildActionView()
+        }
+    }
+
+    private func buildMainView() -> some View {
         VStack(spacing: 36) {
             VStack(spacing: 16) {
                 Text("Enter verification code")
@@ -58,22 +61,25 @@ struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
                     text: $viewModel.verificationCode,
                     isFocused: $isFocused,
                     action: {
-                        viewModel.verifySubject.send()
+                        viewModel.verifyAction.send()
                     }
                 )
                 ZStack {
                     if viewModel.countdownResendCodeTime != 0 {
                         Text("Resend code in \(viewModel.countdownResendCodeTime) seconds")
+                            .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                     } else {
                         Button("Resend code") {
-                            viewModel.resendCodeSubject.send(
+                            viewModel.resendCodeAction.send(
                                 (viewModel.country.phoneCode, viewModel.phoneNumberText)
                             )
                         }
+                        .foregroundColor(ColorAssets.primaryYellow3.swiftUIColor)
                     }
                 }
                 .font(.system(size: 12))
-                .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
+                .padding(.vertical, 8)
+                .padding(.horizontal, 32)
             }
         }
         .padding(.horizontal, 32)
@@ -89,6 +95,7 @@ struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
         .shadow(
             color: ColorAssets.black.swiftUIColor.opacity(0.12), radius: 2, y: 1
         )
+        .padding(16)
     }
 }
 

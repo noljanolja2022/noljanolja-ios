@@ -221,15 +221,12 @@ final class ChatSettingViewModel: ViewModel {
             .store(in: &cancellables)
 
         leaveAction
-            .withLatestFrom(currentUserSubject)
-            .compactMap { $0 }
-            .withLatestFrom(conversationSubject) { ($1, $0) }
-            .flatMapLatestToResult { [weak self] conversation, currentUser in
+            .withLatestFrom(conversationSubject)
+            .flatMapLatestToResult { [weak self] conversation in
                 guard let self else {
                     return Empty<Conversation, Error>().eraseToAnyPublisher()
                 }
-                return self.conversationService
-                    .removeParticipant(conversationID: conversation.id, participants: [currentUser])
+                return self.conversationService.leave(conversationID: conversation.id)
             }
             .sink { [weak self] result in
                 guard let self else { return }

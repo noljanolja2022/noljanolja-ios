@@ -25,6 +25,7 @@ protocol ConversationServiceType {
     func addParticipant(conversationID: Int, participants: [User]) -> AnyPublisher<Conversation, Error>
     func removeParticipant(conversationID: Int, participants: [User]) -> AnyPublisher<Conversation, Error>
     func assignAdmin(conversationID: Int, admin: User) -> AnyPublisher<Conversation, Error>
+    func leave(conversationID: Int) -> AnyPublisher<Conversation, Error>
 }
 
 extension ConversationServiceType {
@@ -199,5 +200,13 @@ final class ConversationService: ConversationServiceType {
                 self?.conversationDetailStore.saveConversationDetails([$0])
             })
             .eraseToAnyPublisher()
+    }
+
+    func leave(conversationID: Int) -> AnyPublisher<Conversation, Error> {
+        guard let currentUser = userService.currentUser else {
+            return Fail<Conversation, Error>(error: CommonError.currentUserNotFound)
+                .eraseToAnyPublisher()
+        }
+        return removeParticipant(conversationID: conversationID, participants: [currentUser])
     }
 }

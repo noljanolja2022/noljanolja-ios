@@ -32,10 +32,13 @@ final class AuthViewModel: ViewModel {
         "+\(country.phoneCode)\(phoneNumberText)"
     }
 
+    // MARK: Navigations
+
+    @Published var fullScreenCoverType: AuthFullScreenCoverType?
+
     // MARK: Action
 
-    let confirmPhoneAlertSubject = PassthroughSubject<String?, Never>()
-    let sendPhoneVerificationCodeSubject = PassthroughSubject<(String, String?), Never>()
+    let sendVerificationCodeAction = PassthroughSubject<(String, String?), Never>()
 
     // MARK: Dependencies
 
@@ -56,19 +59,7 @@ final class AuthViewModel: ViewModel {
     }
 
     private func configure() {
-        confirmPhoneAlertSubject
-            .compactMap { $0 }
-            .sink(receiveValue: { [weak self] in
-                self?.alertState = AlertState(
-                    title: TextState($0),
-                    message: TextState("You will receive a code to verify to this phone number via text message."),
-                    primaryButton: .destructive(TextState("Cancel")),
-                    secondaryButton: .default(TextState("Confirm"), action: .send(true))
-                )
-            })
-            .store(in: &cancellables)
-
-        sendPhoneVerificationCodeSubject
+        sendVerificationCodeAction
             .compactMap { countryCode, phoneNumber in phoneNumber.flatMap { (countryCode, $0) } }
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] countryCode, phoneNumber -> AnyPublisher<String, Error> in

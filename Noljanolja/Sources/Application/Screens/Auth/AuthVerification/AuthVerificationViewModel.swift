@@ -33,8 +33,8 @@ final class AuthVerificationViewModel: ViewModel {
 
     // MARK: Action
 
-    let resendCodeSubject = PassthroughSubject<(String, String?), Never>()
-    let verifySubject = PassthroughSubject<Void, Never>()
+    let resendCodeAction = PassthroughSubject<(String, String?), Never>()
+    let verifyAction = PassthroughSubject<Void, Never>()
 
     // MARK: Dependencies
 
@@ -71,7 +71,7 @@ final class AuthVerificationViewModel: ViewModel {
     }
 
     private func configure() {
-        resendCodeSubject
+        resendCodeAction
             .compactMap { countryCode, phoneNumber in phoneNumber.flatMap { (countryCode, $0) } }
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] countryCode, phoneNumber -> AnyPublisher<String, Error> in
@@ -99,7 +99,7 @@ final class AuthVerificationViewModel: ViewModel {
             })
             .store(in: &cancellables)
 
-        verifySubject
+        verifyAction
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] _ -> AnyPublisher<User, Error> in
                 guard let self else {
