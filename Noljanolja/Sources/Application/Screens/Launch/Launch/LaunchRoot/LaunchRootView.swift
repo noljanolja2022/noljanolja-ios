@@ -10,19 +10,18 @@ import SwiftUI
 
 // MARK: - LaunchRootView
 
-struct LaunchRootView<ViewModel: LaunchRootViewModelType>: View {
+struct LaunchRootView<ViewModel: LaunchRootViewModel>: View {
     // MARK: Dependencies
 
-    @StateObject private var viewModel: ViewModel
-
-    // MARK: State
-
-    init(viewModel: ViewModel = LaunchRootViewModel()) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
+    @StateObject var viewModel: ViewModel
 
     var body: some View {
-        switch viewModel.state.contentType {
+        buildBodyView()
+    }
+
+    @ViewBuilder
+    private func buildBodyView() -> some View {
+        switch viewModel.contentType {
         case .launch:
             LaunchView(
                 viewModel: LaunchViewModel(
@@ -43,6 +42,6 @@ struct LaunchRootView<ViewModel: LaunchRootViewModelType>: View {
 
 struct LaunchRootView_Previews: PreviewProvider {
     static var previews: some View {
-        LaunchRootView()
+        LaunchRootView(viewModel: LaunchRootViewModel())
     }
 }

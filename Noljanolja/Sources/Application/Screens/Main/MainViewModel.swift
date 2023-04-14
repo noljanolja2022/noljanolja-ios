@@ -15,53 +15,29 @@ protocol MainViewModelDelegate: AnyObject {
     func didSignOut()
 }
 
-// MARK: - MainViewModelType
-
-protocol MainViewModelType: ProfileViewModelDelegate,
-    ViewModelType where State == MainViewModel.State, Action == MainViewModel.Action {}
-
-extension MainViewModel {
-    struct State {
-        enum Tab: String {
-            case chat = "Chat"
-            case events = "Events"
-            case content = "Content"
-            case shop = "Shop"
-            case profile = "Profile"
-        }
-
-        var selectedTab = Tab.chat
-    }
-
-    enum Action {}
-}
-
 // MARK: - MainViewModel
 
-final class MainViewModel: MainViewModelType {
+final class MainViewModel: ViewModel {
     // MARK: State
 
-    @Published var state: State
+    @Published var selectedTab = MainTabType.chat
+
+    // MARK: Action
 
     // MARK: Dependencies
 
     private weak var delegate: MainViewModelDelegate?
 
-    // MARK: Action
-
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(state: State = State(),
-         delegate: MainViewModelDelegate? = nil) {
-        self.state = state
+    init(delegate: MainViewModelDelegate? = nil) {
         self.delegate = delegate
+        super.init()
 
         configure()
     }
-
-    func send(_: Action) {}
 
     private func configure() {}
 }

@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+enum MainTabType: String, Equatable {
+    case chat = "Chat"
+    case events = "Events"
+    case content = "Content"
+    case shop = "Shop"
+    case profile = "Profile"
+}

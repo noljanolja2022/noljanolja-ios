@@ -15,53 +15,29 @@ protocol AuthRootViewModelDelegate: AnyObject {
     func navigateToMain()
 }
 
-// MARK: - AuthRootViewModelType
-
-protocol AuthRootViewModelType: TermViewModelDelegate,
-    AuthViewModelDelegate,
-    UpdateCurrentUserViewModelDelegate,
-    ViewModelType where State == AuthRootViewModel.State, Action == AuthRootViewModel.Action {}
-
-extension AuthRootViewModel {
-    struct State {
-        enum ContentType {
-            case terms
-            case auth
-            case updateCurrentUser
-        }
-
-        var contentType: ContentType = .terms
-    }
-
-    enum Action {}
-}
-
 // MARK: - AuthRootViewModel
 
-final class AuthRootViewModel: AuthRootViewModelType {
+final class AuthRootViewModel: ViewModel {
     // MARK: State
 
-    @Published var state: State
+    @Published var contentType: AuthRootBodyType = .terms
+
+    // MARK: Action
 
     // MARK: Dependencies
 
     private weak var delegate: AuthRootViewModelDelegate?
 
-    // MARK: Action
-
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(state: State = State(),
-         delegate: AuthRootViewModelDelegate? = nil) {
-        self.state = state
+    init(delegate: AuthRootViewModelDelegate? = nil) {
         self.delegate = delegate
+        super.init()
 
         configure()
     }
-
-    func send(_: Action) {}
 
     private func configure() {}
 }
@@ -70,7 +46,7 @@ final class AuthRootViewModel: AuthRootViewModelType {
 
 extension AuthRootViewModel: TermViewModelDelegate {
     func navigateToAuth() {
-        state.contentType = .auth
+        contentType = .auth
     }
 }
 
@@ -82,7 +58,7 @@ extension AuthRootViewModel: AuthViewModelDelegate {
     }
 
     func navigateToUpdateCurrentUser() {
-        state.contentType = .updateCurrentUser
+        contentType = .updateCurrentUser
     }
 }
 

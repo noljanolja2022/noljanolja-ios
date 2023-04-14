@@ -13,74 +13,37 @@ import Foundation
 
 protocol RootViewModelDelegate: AnyObject {}
 
-// MARK: - RootViewModelType
-
-private typealias SubViewModelDelegates = LaunchRootViewModelDelegate & AuthRootViewModelDelegate
-
-// MARK: - RootViewModelType
-
-protocol RootViewModelType: LaunchRootViewModelDelegate,
-    AuthRootViewModelDelegate,
-    MainViewModelDelegate,
-    ViewModelType where State == RootViewModel.State, Action == RootViewModel.Action {}
-
 // MARK: - RootViewModel
 
-extension RootViewModel {
-    struct State {
-        enum ContentType {
-            case launch
-            case auth
-            case main
-        }
-
-        var contentType: ContentType = .launch
-    }
-
-    enum Action {
-        case requestNotificationPermission
-    }
-}
-
-// MARK: - RootViewModel
-
-final class RootViewModel: RootViewModelType {
+final class RootViewModel: ViewModel {
     // MARK: State
 
-    @Published var state: State
+    @Published var contentType: RootBodyType = .launch
+
+    // MARK: Action
+
+    private let requestNotificationPermissionAction = PassthroughSubject<Void, Never>()
 
     // MARK: Dependencies
 
     private let notificationService: NotificationServiceType
     private weak var delegate: RootViewModelDelegate?
 
-    // MARK: Action
-
-    private let requestNotificationPermissionTrigger = PassthroughSubject<Void, Never>()
-
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(state: State = State(),
-         notificationService: NotificationServiceType = NotificationService.default,
+    init(notificationService: NotificationServiceType = NotificationService.default,
          delegate: RootViewModelDelegate? = nil) {
-        self.state = state
         self.notificationService = notificationService
         self.delegate = delegate
+        super.init()
 
         configure()
     }
 
-    func send(_ action: Action) {
-        switch action {
-        case .requestNotificationPermission:
-            requestNotificationPermissionTrigger.send(())
-        }
-    }
-
     private func configure() {
-        requestNotificationPermissionTrigger
+        requestNotificationPermissionAction
             .first()
             .sink(receiveValue: { [weak self] in
                 self?.notificationService.requestPermission()
@@ -93,7 +56,7 @@ final class RootViewModel: RootViewModelType {
 
 extension RootViewModel {
     func navigateToMain() {
-        state.contentType = .main
+        contentType = .main
     }
 }
 
@@ -101,7 +64,7 @@ extension RootViewModel {
 
 extension RootViewModel: LaunchRootViewModelDelegate {
     func navigateToAuth() {
-        state.contentType = .auth
+        contentType = .auth
     }
 }
 
@@ -113,6 +76,6 @@ extension RootViewModel: AuthRootViewModelDelegate {}
 
 extension RootViewModel: MainViewModelDelegate {
     func didSignOut() {
-        state.contentType = .auth
+        contentType = .auth
     }
 }

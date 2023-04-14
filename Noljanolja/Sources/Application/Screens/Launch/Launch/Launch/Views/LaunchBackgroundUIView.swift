@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-@IBDesignable final class UILaunchBackgroundView: UIView, NibOwnerLoadable {
+@IBDesignable final class LaunchBackgroundUIView: UIView, NibOwnerLoadable {
     @IBOutlet private var button: UIButton!
     var buttonAction: (() -> Void)?
 

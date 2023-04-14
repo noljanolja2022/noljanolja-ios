@@ -12,11 +12,11 @@ struct LaunchBackgroundView: UIViewRepresentable {
     @Binding var isButtonHidden: Bool
     var buttonAction: (() -> Void)?
 
-    func makeUIView(context: Context) -> UILaunchBackgroundView {
-        UILaunchBackgroundView()
+    func makeUIView(context: Context) -> LaunchBackgroundUIView {
+        LaunchBackgroundUIView()
     }
 
-    func updateUIView(_ uiView: UILaunchBackgroundView, context: Context) {
+    func updateUIView(_ uiView: LaunchBackgroundUIView, context: Context) {
         uiView.isButtonHidden = isButtonHidden
         uiView.buttonAction = buttonAction
     }

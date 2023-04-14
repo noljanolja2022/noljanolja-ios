@@ -10,28 +10,27 @@ import SwiftUI
 
 // MARK: - LaunchView
 
-struct LaunchView<ViewModel: LaunchViewModelType>: View {
+struct LaunchView<ViewModel: LaunchViewModel>: View {
     // MARK: Dependencies
 
-    @StateObject private var viewModel: ViewModel
-
-    init(viewModel: ViewModel = LaunchViewModel()) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
+    @StateObject var viewModel: ViewModel
 
     var body: some View {
+        buildBodyView()
+    }
+
+    private func buildBodyView() -> some View {
         buildContentView()
-            .onAppear { viewModel.send(.loadData) }
+            .onAppear { viewModel.isAppearSubject.send(true) }
+            .onDisappear { viewModel.isAppearSubject.send(false) }
     }
 
     private func buildContentView() -> some View {
-        ZStack(alignment: .bottom) {
-            LaunchBackgroundView(
-                isButtonHidden: $viewModel.state.isContinueButtonHidden,
-                buttonAction: { viewModel.send(.didTapContinueButton) }
-            )
-            .ignoresSafeArea()
-        }
+        LaunchBackgroundView(
+            isButtonHidden: $viewModel.isContinueButtonHidden,
+            buttonAction: { viewModel.navigateToAuthAction.send() }
+        )
+        .ignoresSafeArea()
     }
 }
 
@@ -39,6 +38,6 @@ struct LaunchView<ViewModel: LaunchViewModelType>: View {
 
 struct LaunchView_Previews: PreviewProvider {
     static var previews: some View {
-        LaunchView()
+        LaunchView(viewModel: LaunchViewModel())
     }
 }

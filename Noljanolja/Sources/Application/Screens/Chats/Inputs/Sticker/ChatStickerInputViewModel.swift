@@ -81,7 +81,7 @@ final class ChatStickerInputViewModel: ChatStickerInputViewModelType {
                 switch result {
                 case .success:
                     self?.reloadDataSubject.send()
-                case let .failure(error):
+                case .failure:
                     self?.viewState = .error
                 }
             })

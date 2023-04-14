@@ -11,57 +11,57 @@ import UIKit
 
 // MARK: - RootView
 
-struct RootView<ViewModel: RootViewModelType>: View {
+struct RootView<ViewModel: RootViewModel>: View {
     // MARK: Dependencies
     
-    @StateObject private var viewModel: ViewModel
+    @StateObject var viewModel: ViewModel
 
     // MARK: State
 
     @StateObject private var progressHUBState = ProgressHUBState()
 
-    init(viewModel: ViewModel = RootViewModel()) {
-        _viewModel = StateObject(wrappedValue: viewModel)
+    var body: some View {
+        buildBodyView()
     }
 
-    var body: some View {
+    private func buildBodyView() -> some View {
         buildContentView()
-            .onAppear { viewModel.send(.requestNotificationPermission) }
+            .onAppear { viewModel.isAppearSubject.send(true) }
+            .onDisappear { viewModel.isAppearSubject.send(false) }
             .progressHUB(isActive: $progressHUBState.isLoading)
             .environmentObject(progressHUBState)
     }
 
+    @ViewBuilder
     private func buildContentView() -> some View {
-        ZStack {
-            switch viewModel.state.contentType {
-            case .launch:
-                LaunchRootView(
-                    viewModel: LaunchRootViewModel(
+        switch viewModel.contentType {
+        case .launch:
+            LaunchRootView(
+                viewModel: LaunchRootViewModel(
+                    delegate: viewModel
+                )
+            )
+        case .auth:
+            AuthRootView(
+                viewModel: AuthRootViewModel(
+                    delegate: viewModel
+                )
+            )
+        case .main:
+            NavigationView {
+                MainView(
+                    viewModel: MainViewModel(
                         delegate: viewModel
                     )
                 )
-            case .auth:
-                AuthRootView(
-                    viewModel: AuthRootViewModel(
-                        delegate: viewModel
-                    )
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
+            .accentColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            .introspectNavigationController { navigationController in
+                navigationController.configure(
+                    backgroundColor: ColorAssets.primaryYellowMain.color,
+                    foregroundColor: ColorAssets.neutralDarkGrey.color
                 )
-            case .main:
-                NavigationView {
-                    MainView(
-                        viewModel: MainViewModel(
-                            delegate: viewModel
-                        )
-                    )
-                }
-                .navigationViewStyle(StackNavigationViewStyle())
-                .accentColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                .introspectNavigationController { navigationController in
-                    navigationController.configure(
-                        backgroundColor: ColorAssets.primaryYellowMain.color,
-                        foregroundColor: ColorAssets.neutralDarkGrey.color
-                    )
-                }
             }
         }
     }
@@ -71,6 +71,6 @@ struct RootView<ViewModel: RootViewModelType>: View {
 
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {
-        RootView()
+        RootView(viewModel: RootViewModel())
     }
 }

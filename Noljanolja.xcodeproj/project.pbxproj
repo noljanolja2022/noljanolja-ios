@@ -222,8 +222,8 @@
 		CFE9D2E2298D6C1500D936DA /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = CFE9D2E1298D6C1500D936DA /* KakaoSDKUser */; };
 		CFECC12E29B4D6D500E20B58 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFECC12729B4D6D400E20B58 /* LaunchView.swift */; };
 		CFECC12F29B4D6D500E20B58 /* LaunchBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFECC12929B4D6D400E20B58 /* LaunchBackgroundView.swift */; };
-		CFECC13029B4D6D500E20B58 /* UILaunchBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFECC12A29B4D6D400E20B58 /* UILaunchBackgroundView.swift */; };
-		CFECC13129B4D6D500E20B58 /* UILaunchBackgroundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFECC12B29B4D6D400E20B58 /* UILaunchBackgroundView.xib */; };
+		CFECC13029B4D6D500E20B58 /* LaunchBackgroundUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFECC12A29B4D6D400E20B58 /* LaunchBackgroundUIView.swift */; };
+		CFECC13129B4D6D500E20B58 /* LaunchBackgroundUIView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFECC12B29B4D6D400E20B58 /* LaunchBackgroundUIView.xib */; };
 		CFECC13229B4D6D500E20B58 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFECC12C29B4D6D400E20B58 /* Launch Screen.storyboard */; };
 		CFECC13329B4D6D500E20B58 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFECC12D29B4D6D500E20B58 /* LaunchViewModel.swift */; };
 		CFF0C1EB29E85DEB007B4B98 /* AuthNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF0C1EA29E85DEB007B4B98 /* AuthNavigations.swift */; };
@@ -237,6 +237,9 @@
 		CFFB059329BF1253000D65EE /* TextMessageContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFB059229BF1253000D65EE /* TextMessageContentModel.swift */; };
 		CFFB059529BF1261000D65EE /* MessageContentModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFB059429BF1261000D65EE /* MessageContentModelType.swift */; };
 		CFFB05A229BF739D000D65EE /* Date+RelativeString.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFB05A129BF739D000D65EE /* Date+RelativeString.swift */; };
+		CFFC6C6929E992910024ADA3 /* LaunchRootNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFC6C6829E992910024ADA3 /* LaunchRootNavigations.swift */; };
+		CFFC6C6B29E994120024ADA3 /* RootNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFC6C6A29E994120024ADA3 /* RootNavigations.swift */; };
+		CFFC6C6D29E996270024ADA3 /* AuthRootNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFC6C6C29E996270024ADA3 /* AuthRootNavigations.swift */; };
 		CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */; };
 		CFFD7086298ABA0100D4F5A2 /* ImageAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7085298ABA0100D4F5A2 /* ImageAssets.xcassets */; };
 		CFFD7089298ABA0100D4F5A2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7088298ABA0100D4F5A2 /* Preview Assets.xcassets */; };
@@ -482,8 +485,8 @@
 		CFE5FF6D29E721A000DCE8EA /* ChatSettingAlertActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSettingAlertActionType.swift; sourceTree = "<group>"; };
 		CFECC12729B4D6D400E20B58 /* LaunchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LaunchView.swift; path = Noljanolja/Sources/Application/Screens/Launch/Launch/Launch/LaunchView.swift; sourceTree = SOURCE_ROOT; };
 		CFECC12929B4D6D400E20B58 /* LaunchBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchBackgroundView.swift; sourceTree = "<group>"; };
-		CFECC12A29B4D6D400E20B58 /* UILaunchBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILaunchBackgroundView.swift; sourceTree = "<group>"; };
-		CFECC12B29B4D6D400E20B58 /* UILaunchBackgroundView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UILaunchBackgroundView.xib; sourceTree = "<group>"; };
+		CFECC12A29B4D6D400E20B58 /* LaunchBackgroundUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchBackgroundUIView.swift; sourceTree = "<group>"; };
+		CFECC12B29B4D6D400E20B58 /* LaunchBackgroundUIView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchBackgroundUIView.xib; sourceTree = "<group>"; };
 		CFECC12C29B4D6D400E20B58 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "Noljanolja/Sources/Application/Screens/Launch/Launch/Launch/Launch Screen.storyboard"; sourceTree = SOURCE_ROOT; };
 		CFECC12D29B4D6D500E20B58 /* LaunchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LaunchViewModel.swift; path = Noljanolja/Sources/Application/Screens/Launch/Launch/Launch/LaunchViewModel.swift; sourceTree = SOURCE_ROOT; };
 		CFF0C1EA29E85DEB007B4B98 /* AuthNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNavigations.swift; sourceTree = "<group>"; };
@@ -495,6 +498,9 @@
 		CFFB059229BF1253000D65EE /* TextMessageContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextMessageContentModel.swift; sourceTree = "<group>"; };
 		CFFB059429BF1261000D65EE /* MessageContentModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentModelType.swift; sourceTree = "<group>"; };
 		CFFB05A129BF739D000D65EE /* Date+RelativeString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+RelativeString.swift"; sourceTree = "<group>"; };
+		CFFC6C6829E992910024ADA3 /* LaunchRootNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchRootNavigations.swift; sourceTree = "<group>"; };
+		CFFC6C6A29E994120024ADA3 /* RootNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavigations.swift; sourceTree = "<group>"; };
+		CFFC6C6C29E996270024ADA3 /* AuthRootNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRootNavigations.swift; sourceTree = "<group>"; };
 		CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Noljanolja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoljanoljaApp.swift; sourceTree = "<group>"; };
 		CFFD7085298ABA0100D4F5A2 /* ImageAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImageAssets.xcassets; sourceTree = "<group>"; };
@@ -839,7 +845,7 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		CF1EEE3B29AE5107004F570A /* Auth */ = {
+		CF1EEE3B29AE5107004F570A /* Auths */ = {
 			isa = PBXGroup;
 			children = (
 				CF28A19C29B4E9BE0003C204 /* AuthRoot */,
@@ -848,7 +854,7 @@
 				CF0EA30A29AA0EE00014A7DE /* SelectCountry */,
 				CF1EEE3029AE3F68004F570A /* Terms */,
 			);
-			path = Auth;
+			path = Auths;
 			sourceTree = "<group>";
 		};
 		CF28566A29BA2ED900593FA5 /* Models */ = {
@@ -861,7 +867,7 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		CF28567729BA407200593FA5 /* Chats */ = {
+		CF28567729BA407200593FA5 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
 				CFD5423C29BF7A520053C5B1 /* Views */,
@@ -870,7 +876,7 @@
 				CFF1F7A329B7371600B25DD2 /* ChatViewModel.swift */,
 				CFAD27B229E3003000947BC3 /* ChatNavigations.swift */,
 			);
-			path = Chats;
+			path = Chat;
 			sourceTree = "<group>";
 		};
 		CF28567829BA407E00593FA5 /* Inputs */ = {
@@ -889,6 +895,7 @@
 			children = (
 				CF28A19829B4D8D70003C204 /* LaunchRootView.swift */,
 				CF28A19929B4D8D70003C204 /* LaunchRootViewModel.swift */,
+				CFFC6C6829E992910024ADA3 /* LaunchRootNavigations.swift */,
 			);
 			path = LaunchRoot;
 			sourceTree = "<group>";
@@ -898,6 +905,7 @@
 			children = (
 				CF28A19D29B4E9CF0003C204 /* AuthRootView.swift */,
 				CF28A19E29B4E9CF0003C204 /* AuthRootViewModel.swift */,
+				CFFC6C6C29E996270024ADA3 /* AuthRootNavigations.swift */,
 			);
 			path = AuthRoot;
 			sourceTree = "<group>";
@@ -1055,6 +1063,7 @@
 			children = (
 				CF6ABC1D29935D7B00D78213 /* RootView.swift */,
 				CF6ABC1E29935D7B00D78213 /* RootViewModel.swift */,
+				CFFC6C6A29E994120024ADA3 /* RootNavigations.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -1313,7 +1322,7 @@
 		CFCFFA3529E5B9DA002B7FB6 /* Chats */ = {
 			isa = PBXGroup;
 			children = (
-				CF28567729BA407200593FA5 /* Chats */,
+				CF28567729BA407200593FA5 /* Chat */,
 				CF08A85C29B5A16A00D6CE5F /* ContactLists */,
 				CF74A19A29B5818500419342 /* ConversationList */,
 				CF4A6EEE29E3C09C00CB75E5 /* CreateConversation */,
@@ -1417,8 +1426,8 @@
 			isa = PBXGroup;
 			children = (
 				CFECC12929B4D6D400E20B58 /* LaunchBackgroundView.swift */,
-				CFECC12A29B4D6D400E20B58 /* UILaunchBackgroundView.swift */,
-				CFECC12B29B4D6D400E20B58 /* UILaunchBackgroundView.xib */,
+				CFECC12A29B4D6D400E20B58 /* LaunchBackgroundUIView.swift */,
+				CFECC12B29B4D6D400E20B58 /* LaunchBackgroundUIView.xib */,
 			);
 			name = Views;
 			path = Noljanolja/Sources/Application/Screens/Launch/Launch/Launch/Views;
@@ -1622,7 +1631,7 @@
 			isa = PBXGroup;
 			children = (
 				CFCFFA3529E5B9DA002B7FB6 /* Chats */,
-				CF1EEE3B29AE5107004F570A /* Auth */,
+				CF1EEE3B29AE5107004F570A /* Auths */,
 				CF4DE2F229B3B762006E75E5 /* Launch */,
 				CFFC5B6329A7ACD8002B3381 /* Main */,
 				CF18897F29B3471E00701583 /* Profile */,
@@ -1877,7 +1886,7 @@
 				CFFD7089298ABA0100D4F5A2 /* Preview Assets.xcassets in Resources */,
 				CF00D14E299407EB00505702 /* Localizable.strings in Resources */,
 				CFFD718D298AD38C00D4F5A2 /* ColorAssets.xcassets in Resources */,
-				CFECC13129B4D6D500E20B58 /* UILaunchBackgroundView.xib in Resources */,
+				CFECC13129B4D6D500E20B58 /* LaunchBackgroundUIView.xib in Resources */,
 				CFFD7086298ABA0100D4F5A2 /* ImageAssets.xcassets in Resources */,
 				CF14F25E298CE68600BC2066 /* GoogleService-Info.plist in Resources */,
 				CF446B8E29D8A97700ED66BF /* LottieAssets.xcassets in Resources */,
@@ -2084,7 +2093,7 @@
 				CF7F576229D9F6610079C53D /* TermDetailViewModel.swift in Sources */,
 				CFA3304D29BEB674008D7449 /* SearchView.swift in Sources */,
 				CF0EA31829AA4D6D0014A7DE /* CodeView.swift in Sources */,
-				CFECC13029B4D6D500E20B58 /* UILaunchBackgroundView.swift in Sources */,
+				CFECC13029B4D6D500E20B58 /* LaunchBackgroundUIView.swift in Sources */,
 				CF131EB329CF32C400054719 /* PhotoAssetAPI.swift in Sources */,
 				CF1B625029B9BCC200DE53E6 /* StorableConversation.swift in Sources */,
 				CF4A6EF129E3C0D000CB75E5 /* CreateConversationView.swift in Sources */,
@@ -2119,6 +2128,7 @@
 				CF54FA2F29D0221B0092E2C6 /* ChatStickerPacksInputViewModel.swift in Sources */,
 				CFD5424729BF7A520053C5B1 /* ChatDateItemView.swift in Sources */,
 				CF14F268298CF87E00BC2066 /* AuthService.swift in Sources */,
+				CFFC6C6B29E994120024ADA3 /* RootNavigations.swift in Sources */,
 				CFFD70C9298AC5F800D4F5A2 /* TargetType+RawTarget.swift in Sources */,
 				CF28A1AF29B5066A0003C204 /* SettingView.swift in Sources */,
 				CFFDAA1329E45C9D002FDD91 /* ChatEventItemModel.swift in Sources */,
@@ -2143,6 +2153,7 @@
 				CFFB058E29BF04BD000D65EE /* DateChatItemModel.swift in Sources */,
 				CF54FA1E29D011960092E2C6 /* MediaAPI.swift in Sources */,
 				CFECC13329B4D6D500E20B58 /* LaunchViewModel.swift in Sources */,
+				CFFC6C6929E992910024ADA3 /* LaunchRootNavigations.swift in Sources */,
 				CFFD70C6298AC5F800D4F5A2 /* AuthPluggin.swift in Sources */,
 				CFE0926B298FE73000F197F0 /* CloudFunctionAuthAPI.swift in Sources */,
 				CFFD70CC298AC5F800D4F5A2 /* Api.swift in Sources */,
@@ -2260,6 +2271,7 @@
 				CF11B1DA29BB65DD002E8151 /* MessageAPI.swift in Sources */,
 				CF14F248298C331C00BC2066 /* ImageAssets.swift in Sources */,
 				CF54FA2E29D0221B0092E2C6 /* ChatStickerPacksInputView.swift in Sources */,
+				CFFC6C6D29E996270024ADA3 /* AuthRootNavigations.swift in Sources */,
 				CF52AB6829B8D93D00C9C90C /* StorableUser.swift in Sources */,
 				CFDCC34029CCC3F400E8F18C /* StorableAttachment.swift in Sources */,
 				CFDCC33C29CCC2D000E8F18C /* PhotoMessageContentView.swift in Sources */,

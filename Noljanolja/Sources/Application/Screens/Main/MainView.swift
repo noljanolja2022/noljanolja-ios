@@ -15,15 +15,11 @@ import SwiftUI
 struct MainView<ViewModel: MainViewModel>: View {
     // MARK: Dependencies
 
-    @StateObject private var viewModel: ViewModel
+    @StateObject var viewModel: ViewModel
 
     // MARK: Private
 
     private let toolBarActionSubject = PassthroughSubject<MainToolBarActionType?, Never>()
-
-    init(viewModel: ViewModel = MainViewModel()) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
 
     var body: some View {
         buildBodyView()
@@ -40,14 +36,14 @@ struct MainView<ViewModel: MainViewModel>: View {
     @ToolbarContentBuilder
     private func buildToolBarContent() -> some ToolbarContent {
         ToolbarItem(placement: .principal) {
-            Text(viewModel.state.selectedTab.rawValue)
+            Text(viewModel.selectedTab.rawValue)
                 .font(.system(size: 18, weight: .bold))
                 .frame(minWidth: 120)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
         }
 
         ToolbarItem(placement: .navigationBarTrailing) {
-            switch viewModel.state.selectedTab {
+            switch viewModel.selectedTab {
             case .chat:
                 Button(
                     action: {
@@ -69,12 +65,12 @@ struct MainView<ViewModel: MainViewModel>: View {
     }
 
     private func buildContentView() -> some View {
-        TabView(selection: $viewModel.state.selectedTab) {
+        TabView(selection: $viewModel.selectedTab) {
             ConversationListView(
                 viewModel: ConversationListViewModel(),
                 toolBarAction: toolBarActionSubject.eraseToAnyPublisher()
             )
-            .tag(ViewModel.State.Tab.chat)
+            .tag(MainTabType.chat)
             .tabItem {
                 Image(systemName: "message.fill")
                     .resizable()
@@ -85,7 +81,7 @@ struct MainView<ViewModel: MainViewModel>: View {
             }
 
             LottieView(animation: LottieAnimation.named(LottieAssets.underConstruction.name))
-                .tag(ViewModel.State.Tab.events)
+                .tag(MainTabType.events)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .tabItem {
                     Image(systemName: "calendar")
@@ -97,7 +93,7 @@ struct MainView<ViewModel: MainViewModel>: View {
                 }
 
             LottieView(animation: LottieAnimation.named(LottieAssets.underConstruction.name))
-                .tag(ViewModel.State.Tab.content)
+                .tag(MainTabType.content)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .tabItem {
                     Image(systemName: "play.circle.fill")
@@ -109,7 +105,7 @@ struct MainView<ViewModel: MainViewModel>: View {
                 }
 
             LottieView(animation: LottieAnimation.named(LottieAssets.underConstruction.name))
-                .tag(ViewModel.State.Tab.shop)
+                .tag(MainTabType.shop)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .tabItem {
                     Image(systemName: "cart.fill")
@@ -125,7 +121,7 @@ struct MainView<ViewModel: MainViewModel>: View {
                     delegate: viewModel
                 )
             )
-            .tag(ViewModel.State.Tab.profile)
+            .tag(MainTabType.profile)
             .tabItem {
                 Image(systemName: "person.fill")
                     .resizable()
@@ -144,7 +140,7 @@ struct MainView<ViewModel: MainViewModel>: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            MainView()
+            MainView(viewModel: MainViewModel())
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .introspectNavigationController { navigationController in
