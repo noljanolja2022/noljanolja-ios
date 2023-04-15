@@ -26,6 +26,20 @@ private enum UserAPITargets {
         let param: UpdateCurrentUserParam
     }
 
+    struct UpdateCurrentUserAvatar: BaseAuthTargetType {
+        var path: String { "v1/users/me" }
+        let method: Moya.Method = .post
+        var task: Task {
+            var multipartFormDatas = [MultipartFormData?]()
+            if let data = image {
+                multipartFormDatas.append(MultipartFormData(provider: .data(data), name: "avatar"))
+            }
+            return .uploadMultipart(multipartFormDatas.compactMap { $0 })
+        }
+
+        let image: Data?
+    }
+
     struct FindUsers: BaseAuthTargetType {
         var path: String { "v1/users" }
         let method: Moya.Method = .get
@@ -65,6 +79,7 @@ private enum UserAPITargets {
 protocol UserAPIType {
     func getCurrentUser() -> AnyPublisher<User, Error>
     func updateCurrentUser(_ param: UpdateCurrentUserParam) -> AnyPublisher<User, Error>
+    func updateCurrentUserAvatar(_ image: Data?) -> AnyPublisher<Void, Error>
 
     func findUsers(phoneNumber: String) -> AnyPublisher<[User], Error>
     func getContact(page: Int, pageSize: Int) -> AnyPublisher<[User], Error>
@@ -93,6 +108,12 @@ final class UserAPI: UserAPIType {
         api.request(
             target: UserAPITargets.UpdateCurrentUser(param: param),
             atKeyPath: "data"
+        )
+    }
+
+    func updateCurrentUserAvatar(_ image: Data?) -> AnyPublisher<Void, Error> {
+        api.request(
+            target: UserAPITargets.UpdateCurrentUserAvatar(image: image)
         )
     }
 

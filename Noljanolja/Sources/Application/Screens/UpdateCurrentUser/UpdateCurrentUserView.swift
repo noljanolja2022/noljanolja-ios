@@ -10,28 +10,26 @@ import Kingfisher
 import PhotosUI
 import SwiftUI
 import SwiftUINavigation
+import SwiftUIX
 
 // MARK: - UpdateCurrentUserView
 
-struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModelType>: View {
+struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
     // MARK: Dependencies
-
-    @StateObject private var viewModel: ViewModel
-
+    
+    @StateObject var viewModel: ViewModel
+    
     // MARK: State
-
+    
     private let nameMaxLength = 20
-
     @State private var isNameEditing = false
-    @State private var imageSourceType: ImagePickerView.SourceType? = nil
-    @State private var isDatePickerShown = false
     @EnvironmentObject private var progressHUBState: ProgressHUBState
-
-    init(viewModel: ViewModel = UpdateCurrentUserViewModel()) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
-
+    
     var body: some View {
+        buildBodyView()
+    }
+    
+    private func buildBodyView() -> some View {
         buildContentView()
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -40,44 +38,48 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModelType>: View {
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             }
-            .onChange(of: viewModel.state.isProgressHUDShowing) {
+            .onChange(of: viewModel.isProgressHUDShowing) {
                 progressHUBState.isLoading = $0
             }
-            .alert(item: $viewModel.state.alertState) { Alert($0) { _ in } }
-            .actionSheet(item: $viewModel.state.actionSheetType) {
-                buildActionSheet($0)
+            .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
+            .actionSheet(item: $viewModel.actionSheetType) {
+                buildActionSheetDestinationView($0)
             }
-            .popover(item: $imageSourceType) { buildImagePicker($0) }
-            .popover(isPresented: $isDatePickerShown) { buildDatePickerView() }
+            .fullScreenCover(
+                unwrapping: $viewModel.fullScreenCoverType,
+                content: {
+                    buildFullScreenCoverDestinationView($0)
+                }
+            )
     }
-
+    
     private func buildContentView() -> some View {
         VStack(spacing: 52) {
             buildAvatarView()
-
+            
             VStack(spacing: 20) {
                 buildNameView()
                 buildDOBAndGenderView()
             }
-
+            
             buildActionView()
-
+            
             Spacer()
         }
         .padding(16)
         .padding(.top, 24)
     }
-
+    
     private func buildAvatarView() -> some View {
         ZStack(alignment: .bottomTrailing) {
             IfLet(
-                $viewModel.state.image,
+                $viewModel.image,
                 then: {
                     Image(uiImage: $0.wrappedValue)
                         .resizable()
                 },
                 else: {
-                    KFImage(URL(string: viewModel.state.avatar))
+                    KFImage(URL(string: viewModel.avatar))
                         .placeholder {
                             ImageAssets.icAvatarPlaceholder.swiftUIImage
                         }
@@ -88,11 +90,13 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModelType>: View {
             .frame(width: 112, height: 112)
             .background(Color.white)
             .cornerRadius(56)
-
+            
             Button(
-                action: { viewModel.send(.openAvatarActionSheet) },
+                action: {
+                    viewModel.actionSheetType = .avatar
+                },
                 label: {
-                    Image(systemName: "camera.fill")
+                    ImageAssets.icCamera.swiftUIImage
                         .resizable()
                         .scaledToFit()
                         .padding(6)
@@ -104,7 +108,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModelType>: View {
             )
         }
     }
-
+    
     private func buildNameView() -> some View {
         VStack(spacing: 0) {
             Text("Name")
@@ -115,10 +119,10 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModelType>: View {
                         : ColorAssets.neutralDeepGrey.swiftUIColor
                 )
                 .frame(maxWidth: .infinity, alignment: .leading)
-
+            
             TextField(
                 "Name",
-                text: $viewModel.state.name.max(nameMaxLength),
+                text: $viewModel.name.max(nameMaxLength),
                 isEditing: $isNameEditing
             )
             .textFieldStyle(TappableTextFieldStyle())
@@ -126,7 +130,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModelType>: View {
             .frame(height: 38)
             .padding(0)
             .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-
+            
             Divider()
                 .frame(height: 2)
                 .overlay(
@@ -134,11 +138,11 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModelType>: View {
                         ? ColorAssets.primaryYellow3.swiftUIColor
                         : ColorAssets.neutralDeepGrey.swiftUIColor
                 )
-
+            
             HStack(spacing: 0) {
                 Text("Required")
                 Spacer()
-                Text("\(viewModel.state.name?.count ?? 0)/\(nameMaxLength)")
+                Text("\(viewModel.name?.count ?? 0)/\(nameMaxLength)")
             }
             .font(.system(size: 12))
             .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
@@ -146,170 +150,139 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModelType>: View {
             .padding(.horizontal, 12)
         }
     }
-
+    
     private func buildDOBAndGenderView() -> some View {
         HStack(spacing: 16) {
             Button(
-                action: { isDatePickerShown = true },
+                action: {
+                    viewModel.fullScreenCoverType = .datePicker
+                },
                 label: {
-                    VStack {
-                        HStack(spacing: 16) {
-                            Text(
-                                viewModel.state.dob?.string(withFormat: "dd/MM/yyyy")
-                                    ?? "Day of Birth"
-                            )
-                            .font(.system(size: 16))
-                            .foregroundColor(
-                                isDatePickerShown
-                                    ? ColorAssets.primaryYellow3.swiftUIColor
-                                    : viewModel.state.dob != nil
-                                    ? ColorAssets.neutralDarkGrey.swiftUIColor
-                                    : ColorAssets.neutralDeepGrey.swiftUIColor
-                            )
-
-                            Spacer()
-
-                            Image(systemName: "arrowtriangle.down.fill")
-                                .resizable()
-                                .frame(width: 10, height: 5)
-                                .scaledToFill()
-                        }
-                        .foregroundColor(
-                            viewModel.state.dob != nil
-                                ? ColorAssets.neutralDarkGrey.swiftUIColor
-                                : ColorAssets.neutralDeepGrey.swiftUIColor
-                        )
-                        .frame(height: 38)
-                        .padding(.horizontal, 16)
-
-                        Divider()
-                            .frame(height: 2)
-                            .overlay(
-                                isDatePickerShown
-                                    ? ColorAssets.primaryYellow3.swiftUIColor
-                                    : viewModel.state.dob != nil
-                                    ? ColorAssets.neutralDarkGrey.swiftUIColor
-                                    : ColorAssets.neutralDeepGrey.swiftUIColor
-                            )
-                    }
+                    buildDateOfBirth()
                 }
             )
-
+            
             Button(
-                action: { viewModel.send(.openGenderActionSheet) },
+                action: {
+                    viewModel.actionSheetType = .gender
+                },
                 label: {
-                    VStack {
-                        HStack(spacing: 16) {
-                            Text(
-                                viewModel.state.gender?.rawValue.lowercased().capitalized
-                                    ?? "Gender"
-                            )
-                            .font(.system(size: 16))
-                            .foregroundColor(
-                                viewModel.state.actionSheetType == .gender
-                                    ? ColorAssets.primaryYellow3.swiftUIColor
-                                    : viewModel.state.gender != nil
-                                    ? ColorAssets.neutralDarkGrey.swiftUIColor
-                                    : ColorAssets.neutralDeepGrey.swiftUIColor
-                            )
-
-                            Spacer()
-
-                            Image(systemName: "arrowtriangle.down.fill")
-                                .resizable()
-                                .frame(width: 10, height: 5)
-                                .scaledToFill()
-                        }
-                        .foregroundColor(
-                            viewModel.state.dob != nil
-                                ? ColorAssets.neutralDarkGrey.swiftUIColor
-                                : ColorAssets.neutralDeepGrey.swiftUIColor
-                        )
-                        .frame(height: 38)
-                        .padding(.horizontal, 16)
-
-                        Divider()
-                            .frame(height: 2)
-                            .overlay(
-                                viewModel.state.actionSheetType == .gender
-                                    ? ColorAssets.primaryYellow3.swiftUIColor
-                                    : viewModel.state.gender != nil
-                                    ? ColorAssets.neutralDarkGrey.swiftUIColor
-                                    : ColorAssets.neutralDeepGrey.swiftUIColor
-                            )
-                    }
+                    buildGenderView()
                 }
             )
         }
     }
-
+    
+    private func buildDateOfBirth() -> some View {
+        VStack {
+            HStack(spacing: 16) {
+                Text(
+                    viewModel.dob?.string(withFormat: "dd/MM/yyyy")
+                        ?? "Day of Birth"
+                )
+                .font(.system(size: 16))
+                .foregroundColor(
+                    viewModel.fullScreenCoverType == .datePicker
+                        ? ColorAssets.primaryYellow3.swiftUIColor
+                        : viewModel.dob != nil
+                        ? ColorAssets.neutralDarkGrey.swiftUIColor
+                        : ColorAssets.neutralDeepGrey.swiftUIColor
+                )
+                
+                Spacer()
+                
+                Image(systemName: "arrowtriangle.down.fill")
+                    .resizable()
+                    .frame(width: 10, height: 5)
+                    .scaledToFill()
+            }
+            .foregroundColor(
+                viewModel.dob != nil
+                    ? ColorAssets.neutralDarkGrey.swiftUIColor
+                    : ColorAssets.neutralDeepGrey.swiftUIColor
+            )
+            .frame(height: 38)
+            .padding(.horizontal, 16)
+            
+            Divider()
+                .frame(height: 2)
+                .overlay(
+                    viewModel.fullScreenCoverType == .datePicker
+                        ? ColorAssets.primaryYellow3.swiftUIColor
+                        : viewModel.dob != nil
+                        ? ColorAssets.neutralDarkGrey.swiftUIColor
+                        : ColorAssets.neutralDeepGrey.swiftUIColor
+                )
+        }
+    }
+    
+    private func buildGenderView() -> some View {
+        VStack {
+            HStack(spacing: 16) {
+                Text(
+                    viewModel.gender?.rawValue.lowercased().capitalized
+                        ?? "Gender"
+                )
+                .font(.system(size: 16))
+                .foregroundColor(
+                    viewModel.actionSheetType == .gender
+                        ? ColorAssets.primaryYellow3.swiftUIColor
+                        : viewModel.gender != nil
+                        ? ColorAssets.neutralDarkGrey.swiftUIColor
+                        : ColorAssets.neutralDeepGrey.swiftUIColor
+                )
+                
+                Spacer()
+                
+                Image(systemName: "arrowtriangle.down.fill")
+                    .resizable()
+                    .frame(width: 10, height: 5)
+                    .scaledToFill()
+            }
+            .foregroundColor(
+                viewModel.dob != nil
+                    ? ColorAssets.neutralDarkGrey.swiftUIColor
+                    : ColorAssets.neutralDeepGrey.swiftUIColor
+            )
+            .frame(height: 38)
+            .padding(.horizontal, 16)
+            
+            Divider()
+                .frame(height: 2)
+                .overlay(
+                    viewModel.actionSheetType == .gender
+                        ? ColorAssets.primaryYellow3.swiftUIColor
+                        : viewModel.gender != nil
+                        ? ColorAssets.neutralDarkGrey.swiftUIColor
+                        : ColorAssets.neutralDeepGrey.swiftUIColor
+                )
+        }
+    }
+    
     private func buildActionView() -> some View {
         Button(
             "OK",
-            action: { viewModel.send(.updateCurrentUser) }
+            action: {
+                viewModel.validateUpdateCurrentUserAction.send()
+            }
         )
         .buttonStyle(PrimaryButtonStyle())
     }
 
-    private func buildDatePickerView() -> some View {
-        VStack(spacing: 0) {
-            Spacer()
-            VStack(spacing: 0) {
-                HStack(spacing: 0) {
-                    Button(
-                        action: { isDatePickerShown = false },
-                        label: {
-                            Image(systemName: "xmark")
-                                .resizable()
-                                .padding(12)
-                                .frame(width: 44, height: 44)
-                        }
-                    )
-                    Spacer()
-                    Text("Date of Birth")
-                        .font(.system(size: 18, weight: .bold))
-                    Spacer()
-                    Spacer()
-                        .frame(width: 44, height: 44)
-                }
-                .frame(height: 44)
-                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-
-                Divider()
-                    .background(Color.gray)
-
-                DatePicker(
-                    "",
-                    selection: Binding<Date>(
-                        get: { viewModel.state.dob ?? Date() },
-                        set: {
-                            viewModel.state.dob = $0
-                            isDatePickerShown = false
-                        }
-                    ),
-                    in: ...Date(),
-                    displayedComponents: .date
-                )
-                .datePickerStyle(GraphicalDatePickerStyle())
-                .frame(width: .none)
-            }
-            .background(Color.white.ignoresSafeArea())
-            .cornerRadius(16, corners: [.topLeft, .topRight])
-        }
-        .background(Color.black.opacity(0.3).ignoresSafeArea())
-        .introspectViewController { viewController in
-            viewController.view.backgroundColor = .clear
-        }
-    }
-
-    func buildActionSheet(_ type: ViewModel.State.ActionSheetType) -> ActionSheet {
+    private func buildActionSheetDestinationView(
+        _ type: UpdateCurrentUserActionSheetType
+    ) -> ActionSheet {
         switch type {
         case .avatar:
             return ActionSheet(
                 title: Text("Set Avatar"),
                 buttons: [
-                    .default(Text("Open Camera")) { imageSourceType = .camera },
-                    .default(Text("Select Photo")) { imageSourceType = .photoLibrary },
+                    .default(Text("Open Camera")) {
+                        viewModel.fullScreenCoverType = .imagePickerView(.camera)
+                    },
+                    .default(Text("Select Photo")) {
+                        viewModel.fullScreenCoverType = .imagePickerView(.photoLibrary)
+                    },
                     .cancel(Text("Cancel"))
                 ]
             )
@@ -317,17 +290,80 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModelType>: View {
             return ActionSheet(
                 title: Text("Gender"),
                 buttons: [
-                    .default(Text("Male")) { viewModel.state.gender = .male },
-                    .default(Text("Female")) { viewModel.state.gender = .female },
-                    .default(Text("Other")) { viewModel.state.gender = .other },
+                    .default(Text("Male")) { viewModel.gender = .male },
+                    .default(Text("Female")) { viewModel.gender = .female },
+                    .default(Text("Other")) { viewModel.gender = .other },
                     .cancel(Text("Cancel"))
                 ]
             )
         }
     }
 
-    func buildImagePicker(_ sourceType: ImagePickerView.SourceType) -> some View {
-        ImagePickerView(selection: $viewModel.state.image, sourceType: sourceType)
+    @ViewBuilder
+    private func buildFullScreenCoverDestinationView(
+        _ type: Binding<UpdateCurrentUserFullScreenCoverType>
+    ) -> some View {
+        switch type.wrappedValue {
+        case let .imagePickerView(sourceType):
+            ImagePicker(image: $viewModel.image)
+                .sourceType(sourceType)
+                .allowsEditing(true)
+                .introspectViewController {
+                    switch sourceType {
+                    case .photoLibrary, .savedPhotosAlbum:
+                        break
+                    case .camera:
+                        $0.view.backgroundColor = .black
+                    @unknown default:
+                        break
+                    }
+                }
+        case .datePicker:
+            buildDatePickerView()
+        }
+    }
+
+    private func buildDatePickerView() -> some View {
+        BottomSheet {
+            VStack(spacing: 12) {
+                NavigationBarView(
+                    leadingView: {
+                        Button(
+                            action: {
+                                viewModel.fullScreenCoverType = nil
+                            },
+                            label: {
+                                Image(systemName: "xmark")
+                                    .resizable()
+                                    .frame(maxHeight: .infinity)
+                                    .aspectRatio(CGSize(width: 1, height: 1), contentMode: .fit)
+                                    .padding(16)
+                            }
+                        )
+                    },
+                    centerView: {
+                        Text("Date of birth")
+                            .font(.system(size: 18, weight: .bold))
+                    }
+                )
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                .frame(height: 50)
+
+                DatePicker(
+                    "",
+                    selection: Binding<Date>(
+                        get: { viewModel.dob ?? Date() },
+                        set: {
+                            viewModel.dob = $0
+                            viewModel.fullScreenCoverType = nil
+                        }
+                    ),
+                    in: ...Date(),
+                    displayedComponents: .date
+                )
+                .datePickerStyle(GraphicalDatePickerStyle())
+            }
+        }
     }
 }
 
@@ -335,6 +371,6 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModelType>: View {
 
 struct UpdateCurrentUserView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateCurrentUserView()
+        UpdateCurrentUserView(viewModel: UpdateCurrentUserViewModel())
     }
 }

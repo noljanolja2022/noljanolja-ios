@@ -64,7 +64,9 @@ struct ProfileView<ViewModel: ProfileViewModelType>: View {
                 .font(.system(size: 16, weight: .bold))
 
             NavigationLink(
-                destination: UpdateCurrentUserView(),
+                destination: UpdateCurrentUserView(
+                    viewModel: UpdateCurrentUserViewModel()
+                ),
                 label: {
                     ProfileItemView(imageName: "pencil.slash", title: "Edit Account")
                 }

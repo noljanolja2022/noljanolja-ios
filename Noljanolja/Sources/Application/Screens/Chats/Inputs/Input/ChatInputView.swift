@@ -34,18 +34,16 @@ struct ChatInputView<ViewModel: ChatInputViewModelType>: View {
                     viewModel.sendImagesSubject.send([image])
                 },
                 content: {
-                    ImagePickerView(
-                        selection: $image,
-                        sourceType: {
+                    ImagePicker(image: $image)
+                        .sourceType({
                             #if targetEnvironment(simulator)
                                 return .photoLibrary
                             #else
                                 return .camera
                             #endif
-                        }(),
-                        allowsEditing: true
-                    )
-                    .introspectViewController { $0.view.backgroundColor = .black }
+                        }())
+                        .allowsEditing(true)
+                        .introspectViewController { $0.view.backgroundColor = .black }
                 }
             )
     }

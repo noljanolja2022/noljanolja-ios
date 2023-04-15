@@ -192,9 +192,9 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
 
     @ViewBuilder
     private func buildNavigationDestinationView(
-        _ navigationType: Binding<ChatSettingNavigationType>
+        _ type: Binding<ChatSettingNavigationType>
     ) -> some View {
-        switch navigationType.wrappedValue {
+        switch type.wrappedValue {
         case .contactList:
             UpdateConversationContactListView(
                 viewModel: UpdateConversationContactListViewModel(
