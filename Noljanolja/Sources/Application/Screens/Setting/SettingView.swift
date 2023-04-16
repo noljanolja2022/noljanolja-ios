@@ -23,6 +23,7 @@ struct SettingView<ViewModel: SettingViewModelType>: View {
 
     var body: some View {
         buildContentView()
+            .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("Setting")

@@ -25,6 +25,7 @@ struct ChatView<ViewModel: ChatViewModel>: View {
             buildBodyView()
             buildNavigationLinks()
         }
+        .navigationBarTitle("", displayMode: .inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
                 Text(viewModel.title)

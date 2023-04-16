@@ -32,7 +32,9 @@ private enum UserAPITargets {
         var task: Task {
             var multipartFormDatas = [MultipartFormData?]()
             if let data = image {
-                multipartFormDatas.append(MultipartFormData(provider: .data(data), name: "avatar"))
+                multipartFormDatas.append(
+                    MultipartFormData(provider: .data(data), name: "avatar", fileName: "avatar", mimeType: "image/jpeg")
+                )
             }
             return .uploadMultipart(multipartFormDatas.compactMap { $0 })
         }

@@ -11,7 +11,7 @@ import UIKit
 extension UINavigationController {
     override open func viewDidLoad() {
         super.viewDidLoad()
-        delegate = self
+//        delegate = self
     }
 
     @discardableResult

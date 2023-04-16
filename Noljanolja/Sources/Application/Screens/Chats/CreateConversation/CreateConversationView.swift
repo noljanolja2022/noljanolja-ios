@@ -26,7 +26,7 @@ struct CreateConversationView<ViewModel: CreateConversationViewModel>: View {
     @ViewBuilder
     private func buildBodyView() -> some View {
         buildContentView()
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(

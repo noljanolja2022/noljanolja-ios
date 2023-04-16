@@ -26,6 +26,7 @@ struct UpdateConversationContactListView<ViewModel: UpdateConversationContactLis
 
     var body: some View {
         buildBodyView()
+            .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("Select Contact")

@@ -27,6 +27,7 @@ struct ConversationTitleView<ViewModel: ConversationTitleViewModel>: View {
 
     private func buildBodyView() -> some View {
         buildContentView()
+            .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("Change title")

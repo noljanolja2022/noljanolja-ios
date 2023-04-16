@@ -27,10 +27,12 @@ struct MainView<ViewModel: MainViewModel>: View {
 
     private func buildBodyView() -> some View {
         buildContentView()
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 buildToolBarContent()
             }
+            .onAppear { viewModel.isAppearSubject.send(true) }
+            .onDisappear { viewModel.isAppearSubject.send(false) }
     }
 
     @ToolbarContentBuilder
