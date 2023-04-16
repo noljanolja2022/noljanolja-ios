@@ -34,7 +34,7 @@ final class FrameworkAppDelegate: NSObject, AppDelegateProtocol {
 
         let requestModifier: (URLRequest) -> URLRequest? = { request -> URLRequest? in
             var request = request
-            let baseUrl = URL(string: NetworkConfigs.baseUrl)
+            let baseUrl = URL(string: NetworkConfigs.BaseUrl.baseUrl)
             if request.url?.host == baseUrl?.host {
                 if let token = AuthStore.default.getToken() {
                     request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")

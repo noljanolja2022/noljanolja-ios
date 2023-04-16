@@ -23,11 +23,12 @@ struct SettingView<ViewModel: SettingViewModelType>: View {
 
     var body: some View {
         buildContentView()
+            .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("Setting")
-                        .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
-                        .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
+                        .font(.system(size: 18, weight: .medium))
+                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             }
     }
@@ -37,7 +38,7 @@ struct SettingView<ViewModel: SettingViewModelType>: View {
             VStack(spacing: 0) {
                 Section {
                     Text("Account")
-                        .font(FontFamily.NotoSans.medium.swiftUIFont(fixedSize: 16))
+                        .font(.system(size: 16, weight: .medium))
                         .frame(height: 64)
                         .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -61,7 +62,7 @@ struct SettingView<ViewModel: SettingViewModelType>: View {
 
                 Section {
                     Text("Coustomer Care")
-                        .font(FontFamily.NotoSans.medium.swiftUIFont(fixedSize: 16))
+                        .font(.system(size: 16, weight: .medium))
                         .frame(height: 52)
                         .frame(maxWidth: .infinity, alignment: .leading)
 

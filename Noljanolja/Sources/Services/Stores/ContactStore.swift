@@ -20,17 +20,20 @@ protocol ContactStoreType {
 
 final class ContactStore: ContactStoreType {
     static let `default` = ContactStore()
-
-    private lazy var realmManager: RealmManagerType = RealmManager(
-        configuration: {
-            var config = Realm.Configuration.defaultConfiguration
-            config.fileURL!.deleteLastPathComponent()
-            config.fileURL!.appendPathComponent("contact")
-            config.fileURL!.appendPathExtension("realm")
-            return config
-        }(),
-        queue: DispatchQueue(label: "realm.contact", qos: .default)
-    )
+    
+    private lazy var realmManager: RealmManagerType = {
+        let id = "contact"
+        return RealmManager(
+            configuration: {
+                var config = Realm.Configuration.defaultConfiguration
+                config.fileURL?.deleteLastPathComponent()
+                config.fileURL?.appendPathComponent(id)
+                config.fileURL?.appendPathExtension("realm")
+                return config
+            }(),
+            queue: DispatchQueue(label: "realm.\(id)", qos: .default)
+        )
+    }()
 
     private init() {}
 

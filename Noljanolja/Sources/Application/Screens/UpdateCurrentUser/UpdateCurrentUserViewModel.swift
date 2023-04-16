@@ -17,100 +17,90 @@ protocol UpdateCurrentUserViewModelDelegate: AnyObject {
     func didUpdateCurrentUser()
 }
 
-// MARK: - UpdateCurrentUserViewModelType
-
-protocol UpdateCurrentUserViewModelType:
-    ViewModelType where State == UpdateCurrentUserViewModel.State, Action == UpdateCurrentUserViewModel.Action {}
-
-extension UpdateCurrentUserViewModel {
-    struct State {
-        enum ActionSheetType: Int, Identifiable {
-            case avatar
-            case gender
-
-            var id: Int { rawValue }
-        }
-
-        var image: UIImage?
-        var avatar: String?
-        var name: String?
-        var dob: Date?
-        var gender: GenderType?
-
-        var actionSheetType: ActionSheetType?
-
-        var isProgressHUDShowing = false
-        var alertState: AlertState<Void>?
-    }
-
-    enum Action {
-        case openAvatarActionSheet
-        case openGenderActionSheet
-        case updateCurrentUser
-    }
-}
-
 // MARK: - UpdateCurrentUserViewModel
 
-final class UpdateCurrentUserViewModel: UpdateCurrentUserViewModelType {
+final class UpdateCurrentUserViewModel: ViewModel {
     // MARK: State
 
-    @Published var state: State
+    @Published var image: UIImage?
+    @Published var avatar: String?
+    @Published var name: String?
+    @Published var dob: Date?
+    @Published var gender: GenderType?
+
+    @Published var isProgressHUDShowing = false
+    @Published var alertState: AlertState<Void>?
+
+    // MARK: Navigation
+
+    @Published var actionSheetType: UpdateCurrentUserActionSheetType?
+    @Published var fullScreenCoverType: UpdateCurrentUserFullScreenCoverType?
+
+    // MARK: Action
+
+    let validateUpdateCurrentUserAction = PassthroughSubject<Void, Never>()
+    let updateCurrentUserAction = PassthroughSubject<UpdateCurrentUserParam, Never>()
 
     // MARK: Dependencies
 
     private let userService: UserServiceType
     private weak var delegate: UpdateCurrentUserViewModelDelegate?
 
-    // MARK: Action
-
-    private let validateUpdateCurrentUserTrigger = PassthroughSubject<Void, Never>()
-    private let updateCurrentUserTrigger = PassthroughSubject<UpdateCurrentUserParam, Never>()
-
-    // MARK: Data
+    // MARK: Private
 
     private let currentUserSubject = PassthroughSubject<User, Never>()
 
-    // MARK: Private
-
     private var cancellables = Set<AnyCancellable>()
 
-    init(state: State = State(),
-         userService: UserServiceType = UserService.default,
+    init(userService: UserServiceType = UserService.default,
          delegate: UpdateCurrentUserViewModelDelegate? = nil) {
-        self.state = state
         self.userService = userService
         self.delegate = delegate
+        super.init()
 
         configure()
-    }
-
-    func send(_ action: Action) {
-        switch action {
-        case .openAvatarActionSheet:
-            state.actionSheetType = .avatar
-        case .openGenderActionSheet:
-            state.actionSheetType = .gender
-        case .updateCurrentUser:
-            validateUpdateCurrentUserTrigger.send()
-        }
     }
 
     private func configure() {
         currentUserSubject
             .sink(receiveValue: { [weak self] user in
-                self?.state.avatar = user.avatar
-                self?.state.name = user.name
-                self?.state.dob = user.dob
-                self?.state.gender = user.gender
+                self?.avatar = user.avatar
+                self?.name = user.name
+                self?.dob = user.dob
+                self?.gender = user.gender
             })
             .store(in: &cancellables)
 
-        validateUpdateCurrentUserTrigger
+        $image
+            .compactMap { $0?.pngData() }
+            .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
+            .flatMapLatestToResult { [weak self] imageData in
+                guard let self else {
+                    return Empty<User, Error>().eraseToAnyPublisher()
+                }
+                return self.userService.updateCurrentUserAvatar(imageData)
+            }
+            .sink(receiveValue: { [weak self] result in
+                guard let self else { return }
+                self.isProgressHUDShowing = false
+                switch result {
+                case .success:
+                    return
+                case .failure:
+                    self.alertState = AlertState(
+                        title: TextState("Error"),
+                        message: TextState(L10n.Common.Error.message),
+                        dismissButton: .cancel(TextState("OK"))
+                    )
+                }
+            })
+            .store(in: &cancellables)
+
+        validateUpdateCurrentUserAction
             .withLatestFrom(currentUserSubject)
             .sink(receiveValue: { [weak self] _ in
-                guard let name = self?.state.name, !name.isEmpty else {
-                    self?.state.alertState = AlertState(
+                guard let name = self?.name, !name.isEmpty else {
+                    self?.alertState = AlertState(
                         title: TextState("Error"),
                         message: TextState("Please enter all fields"),
                         dismissButton: .cancel(TextState("OK"))
@@ -120,24 +110,34 @@ final class UpdateCurrentUserViewModel: UpdateCurrentUserViewModelType {
 
                 let param = UpdateCurrentUserParam(
                     name: name.trimmed,
-                    gender: self?.state.gender,
-                    dob: self?.state.dob
+                    gender: self?.gender,
+                    dob: self?.dob
                 )
-                self?.updateCurrentUserTrigger.send(param)
+                self?.updateCurrentUserAction.send(param)
             })
             .store(in: &cancellables)
 
-        updateCurrentUserTrigger
-            .handleEvents(receiveOutput: { [weak self] _ in self?.state.isProgressHUDShowing = true })
+        updateCurrentUserAction
+            .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] param in
                 guard let self else {
                     return Empty<User, Error>().eraseToAnyPublisher()
                 }
                 return self.userService.updateCurrentUser(param)
             }
-            .sink(receiveValue: { [weak self] _ in
-                self?.state.isProgressHUDShowing = false
-                self?.delegate?.didUpdateCurrentUser()
+            .sink(receiveValue: { [weak self] result in
+                guard let self else { return }
+                self.isProgressHUDShowing = false
+                switch result {
+                case .success:
+                    self.delegate?.didUpdateCurrentUser()
+                case .failure:
+                    self.alertState = AlertState(
+                        title: TextState("Error"),
+                        message: TextState(L10n.Common.Error.message),
+                        dismissButton: .cancel(TextState("OK"))
+                    )
+                }
             })
             .store(in: &cancellables)
 

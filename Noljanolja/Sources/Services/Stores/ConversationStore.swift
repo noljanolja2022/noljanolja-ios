@@ -13,8 +13,12 @@ import RealmSwift
 
 protocol ConversationStoreType {
     func saveConversations(_ conversations: [Conversation])
+
+    func getConversations(type: ConversationType, participants: [User]) -> [Conversation]
     func observeConversations() -> AnyPublisher<[Conversation], Error>
-    func observeConversation(conversationID: Int) -> AnyPublisher<Conversation, Error>
+
+    func removeConversation(conversationID: Int)
+    func removeConversation(notIn conversations: [Conversation])
 }
 
 // MARK: - ConversationStore
@@ -22,16 +26,19 @@ protocol ConversationStoreType {
 final class ConversationStore: ConversationStoreType {
     static let `default` = ConversationStore()
 
-    private lazy var realmManager: RealmManagerType = RealmManager(
-        configuration: {
-            var config = Realm.Configuration.defaultConfiguration
-            config.fileURL!.deleteLastPathComponent()
-            config.fileURL!.appendPathComponent("conversation")
-            config.fileURL!.appendPathExtension("realm")
-            return config
-        }(),
-        queue: DispatchQueue(label: "realm.conversation", qos: .default)
-    )
+    private lazy var realmManager: RealmManagerType = {
+        let id = "conversation"
+        return RealmManager(
+            configuration: {
+                var config = Realm.Configuration.defaultConfiguration
+                config.fileURL?.deleteLastPathComponent()
+                config.fileURL?.appendPathComponent(id)
+                config.fileURL?.appendPathExtension("realm")
+                return config
+            }(),
+            queue: DispatchQueue(label: "realm.\(id)", qos: .default)
+        )
+    }()
 
     private init() {}
 
@@ -41,6 +48,17 @@ final class ConversationStore: ConversationStoreType {
         realmManager.add(storableConversations, update: .all)
     }
 
+    func getConversations(type: ConversationType, participants: [User]) -> [Conversation] {
+        realmManager.objects(StorableConversation.self)
+            .compactMap { $0.model }
+            .filter { conversation in
+                let conversationParticipantIDs = Set(conversation.participants.map { $0.id })
+                let participantIDs = Set(participants.map { $0.id })
+                return conversation.type == type
+                    && conversationParticipantIDs == participantIDs
+            }
+    }
+
     func observeConversations() -> AnyPublisher<[Conversation], Error> {
         realmManager.objects(StorableConversation.self)
             .collectionPublisher
@@ -48,11 +66,20 @@ final class ConversationStore: ConversationStoreType {
             .eraseToAnyPublisher()
     }
 
-    func observeConversation(conversationID: Int) -> AnyPublisher<Conversation, Error> {
-        realmManager.object(ofType: StorableConversation.self, forPrimaryKey: conversationID)
-            .publisher
-            .compactMap { $0.model }
-            .setFailureType(to: Error.self)
-            .eraseToAnyPublisher()
+    func removeConversation(conversationID: Int) {
+        guard let conversation = realmManager.object(ofType: StorableConversation.self, forPrimaryKey: conversationID) else {
+            return
+        }
+        realmManager.delete(conversation)
+    }
+
+    func removeConversation(notIn conversations: [Conversation]) {
+        let objects = realmManager.objects(
+            StorableConversation.self,
+            isIncluded: { conversation in
+                !conversation.id.in(conversations.map { $0.id })
+            }
+        )
+        realmManager.delete(objects)
     }
 }

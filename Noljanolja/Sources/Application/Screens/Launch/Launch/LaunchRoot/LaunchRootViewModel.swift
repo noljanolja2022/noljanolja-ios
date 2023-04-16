@@ -16,31 +16,12 @@ protocol LaunchRootViewModelDelegate: AnyObject {
     func navigateToMain()
 }
 
-// MARK: - LaunchRootViewModelType
-
-protocol LaunchRootViewModelType: LaunchViewModelDelegate,
-    UpdateCurrentUserViewModelDelegate,
-    ViewModelStateGetOnlyType where State == LaunchRootViewModel.State, Action == LaunchRootViewModel.Action {}
-
-extension LaunchRootViewModel {
-    struct State {
-        enum ContentType {
-            case launch
-            case updateCurrentUser
-        }
-
-        var contentType: ContentType = .launch
-    }
-
-    enum Action {}
-}
-
 // MARK: - LaunchRootViewModel
 
-final class LaunchRootViewModel: LaunchRootViewModelType {
+final class LaunchRootViewModel: ViewModel {
     // MARK: State
 
-    @Published var state: State
+    @Published var contentType: LaunchRootBodyType = .launch
 
     // MARK: Dependencies
 
@@ -52,15 +33,12 @@ final class LaunchRootViewModel: LaunchRootViewModelType {
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(state: State = State(),
-         delegate: LaunchRootViewModelDelegate? = nil) {
-        self.state = state
+    init(delegate: LaunchRootViewModelDelegate? = nil) {
         self.delegate = delegate
+        super.init()
 
         configure()
     }
-
-    func send(_: Action) {}
 
     private func configure() {}
 }
@@ -73,7 +51,7 @@ extension LaunchRootViewModel: LaunchViewModelDelegate {
     }
 
     func navigateToUpdateCurrentUser() {
-        state.contentType = .updateCurrentUser
+        contentType = .updateCurrentUser
     }
 
     func navigateToMain() {

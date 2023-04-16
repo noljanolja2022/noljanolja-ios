@@ -42,7 +42,7 @@ extension CustomButtonStyle {
         configuration.label
             .frame(height: 48)
             .frame(maxWidth: .infinity)
-            .font(FontFamily.NotoSans.bold.swiftUIFont(size: 16))
+            .font(.system(size: 16, weight: .bold))
             .background(
                 isEnabled ? enabledBackgroundColor : disabledBackgroundColor
             )
@@ -79,9 +79,9 @@ struct PrimaryButtonStyle: CustomButtonStyle {
 struct SecondaryButtonStyle: CustomButtonStyle {
     let isEnabled: Bool
     let enabledForegroundColor: Color = ColorAssets.white.swiftUIColor
-    let disabledForegroundColor: Color = ColorAssets.forcegroundSecondary.swiftUIColor
+    let disabledForegroundColor: Color = ColorAssets.neutralGrey.swiftUIColor
     let enabledBackgroundColor: Color = ColorAssets.black.swiftUIColor
-    let disabledBackgroundColor: Color = ColorAssets.gray.swiftUIColor
+    let disabledBackgroundColor: Color = ColorAssets.neutralLightGrey.swiftUIColor
     let enabledBorderColor = Color.clear
     let disabledBorderColor = Color.clear
 
@@ -95,11 +95,11 @@ struct SecondaryButtonStyle: CustomButtonStyle {
 struct ThridyButtonStyle: CustomButtonStyle {
     let isEnabled: Bool
     let enabledForegroundColor: Color = ColorAssets.black.swiftUIColor
-    let disabledForegroundColor: Color = ColorAssets.forcegroundSecondary.swiftUIColor
+    let disabledForegroundColor: Color = ColorAssets.neutralGrey.swiftUIColor
     let enabledBackgroundColor: Color = ColorAssets.white.swiftUIColor
-    let disabledBackgroundColor: Color = ColorAssets.gray.swiftUIColor
+    let disabledBackgroundColor: Color = ColorAssets.neutralGrey.swiftUIColor
     let enabledBorderColor: Color = ColorAssets.black.swiftUIColor
-    let disabledBorderColor: Color = ColorAssets.forcegroundSecondary.swiftUIColor
+    let disabledBorderColor: Color = ColorAssets.neutralGrey.swiftUIColor
 
     init(isEnabled: Bool = true) {
         self.isEnabled = isEnabled
@@ -111,7 +111,7 @@ struct ThridyButtonStyle: CustomButtonStyle {
 struct PlainButtonStyle: ButtonStyle {
     let isEnabled: Bool
     let enabledForegroundColor: Color = ColorAssets.white.swiftUIColor
-    let disabledForegroundColor: Color = ColorAssets.gray.swiftUIColor
+    let disabledForegroundColor: Color = ColorAssets.neutralGrey.swiftUIColor
 
     init(isEnabled: Bool = true) {
         self.isEnabled = isEnabled

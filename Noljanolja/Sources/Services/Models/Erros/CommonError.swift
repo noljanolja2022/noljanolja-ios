@@ -10,6 +10,7 @@ import Foundation
 // MARK: - CommonError
 
 enum CommonError: Error {
+    case currentUserNotFound
     case unknown
 }
 

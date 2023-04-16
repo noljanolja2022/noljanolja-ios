@@ -14,7 +14,7 @@ protocol BaseTargetType: TargetType {}
 
 extension BaseTargetType {
     var baseURL: URL {
-        guard let url = URL(string: NetworkConfigs.baseUrl) else {
+        guard let url = URL(string: NetworkConfigs.BaseUrl.baseUrl) else {
             fatalError("Cannot parse endpoint url")
         }
         return url

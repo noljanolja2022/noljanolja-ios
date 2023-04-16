@@ -32,9 +32,9 @@ final class MediaStore: MediaStoreType {
     private lazy var realmManager: RealmManagerType = RealmManager(
         configuration: {
             var config = Realm.Configuration.defaultConfiguration
-            config.fileURL!.deleteLastPathComponent()
-            config.fileURL!.appendPathComponent("media")
-            config.fileURL!.appendPathExtension("realm")
+            config.fileURL?.deleteLastPathComponent()
+            config.fileURL?.appendPathComponent("media")
+            config.fileURL?.appendPathExtension("realm")
             return config
         }(),
         queue: DispatchQueue(label: "realm.media", qos: .default)

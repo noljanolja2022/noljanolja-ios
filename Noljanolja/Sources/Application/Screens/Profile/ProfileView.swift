@@ -46,6 +46,7 @@ struct ProfileView<ViewModel: ProfileViewModelType>: View {
                             .foregroundColor(.black)
                     }
                 )
+                .isDetailLink(false)
             }
             .frame(maxWidth: .infinity)
 
@@ -63,11 +64,14 @@ struct ProfileView<ViewModel: ProfileViewModelType>: View {
                 .font(.system(size: 16, weight: .bold))
 
             NavigationLink(
-                destination: UpdateCurrentUserView(),
+                destination: UpdateCurrentUserView(
+                    viewModel: UpdateCurrentUserViewModel()
+                ),
                 label: {
                     ProfileItemView(imageName: "pencil.slash", title: "Edit Account")
                 }
             )
+            .isDetailLink(false)
 
             Spacer()
         }

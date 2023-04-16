@@ -14,7 +14,7 @@ import SwifterSwift
 
 protocol MessageStoreType {
     func saveMessages(_ messages: [Message])
-    func saveMessageParams(_ params: [SendMessageParam])
+    func saveMessageParameters(_ parameters: [SendMessageParam])
     func observeMessages(conversationID: Int) -> AnyPublisher<[Message], Error>
     
     func savePhoto(conversationID: Int, fileName: String, data: Data) throws
@@ -26,16 +26,19 @@ protocol MessageStoreType {
 final class MessageStore: MessageStoreType {
     static let `default` = MessageStore()
 
-    private lazy var realmManager: RealmManagerType = RealmManager(
-        configuration: {
-            var config = Realm.Configuration.defaultConfiguration
-            config.fileURL!.deleteLastPathComponent()
-            config.fileURL!.appendPathComponent("messages")
-            config.fileURL!.appendPathExtension("realm")
-            return config
-        }(),
-        queue: DispatchQueue(label: "realm.messages", qos: .default)
-    )
+    private lazy var realmManager: RealmManagerType = {
+        let id = "messages"
+        return RealmManager(
+            configuration: {
+                var config = Realm.Configuration.defaultConfiguration
+                config.fileURL?.deleteLastPathComponent()
+                config.fileURL?.appendPathComponent(id)
+                config.fileURL?.appendPathExtension("realm")
+                return config
+            }(),
+            queue: DispatchQueue(label: "realm.\(id)", qos: .default)
+        )
+    }()
 
     private init() {}
 
@@ -52,8 +55,8 @@ final class MessageStore: MessageStoreType {
         realmManager.add(storableMessages, update: .all)
     }
 
-    func saveMessageParams(_ params: [SendMessageParam]) {
-        let storableMessages = params.map { StorableMessage(param: $0) }
+    func saveMessageParameters(_ parameters: [SendMessageParam]) {
+        let storableMessages = parameters.map { StorableMessage(param: $0) }
         realmManager.add(storableMessages, update: .all)
     }
 

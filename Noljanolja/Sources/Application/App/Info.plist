@@ -38,12 +38,6 @@
 		<string>naversearchapp</string>
 		<string>naversearchthirdlogin</string>
 	</array>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Resources/Sources/Fonts/NotoSans-Bold.ttf</string>
-		<string>Resources/Sources/Fonts/NotoSans-Regular.ttf</string>
-		<string>Resources/Sources/Fonts/NotoSans-Medium.ttf</string>
-	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

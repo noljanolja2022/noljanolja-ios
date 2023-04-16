@@ -6,70 +6,73 @@
 //
 //
 
+import Combine
 import Lottie
 import SwiftUI
 
 // MARK: - MainView
 
-struct MainView<ViewModel: MainViewModelType>: View {
+struct MainView<ViewModel: MainViewModel>: View {
     // MARK: Dependencies
 
-    @StateObject private var viewModel: ViewModel
+    @StateObject var viewModel: ViewModel
 
-    // MARK: State
+    // MARK: Private
 
-    @State private var isCreateChatShown = false
-    @State private var createConversationType: ConversationType?
-
-    init(viewModel: ViewModel = MainViewModel()) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
+    private let toolBarActionSubject = PassthroughSubject<MainToolBarActionType?, Never>()
 
     var body: some View {
         buildBodyView()
     }
 
     private func buildBodyView() -> some View {
-        ZStack {
-            buildContentView()
-            buildTopView()
-        }
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                Text(viewModel.state.selectedTab.rawValue)
-                    .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
+        buildContentView()
+            .navigationBarTitle("", displayMode: .inline)
+            .toolbar {
+                buildToolBarContent()
             }
+            .onAppear { viewModel.isAppearSubject.send(true) }
+            .onDisappear { viewModel.isAppearSubject.send(false) }
+    }
 
-            ToolbarItem(placement: .navigationBarTrailing) {
-                switch viewModel.state.selectedTab {
-                case .chat:
-                    Button(
-                        action: { isCreateChatShown.toggle() },
-                        label: {
-                            ImageAssets.icGroupAdd.swiftUIImage
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 24, height: 24)
-                                .padding(12)
-                        }
-                    )
-                    .foregroundColor(ColorAssets.forcegroundPrimary.swiftUIColor)
-                default:
-                    EmptyView()
-                }
+    @ToolbarContentBuilder
+    private func buildToolBarContent() -> some ToolbarContent {
+        ToolbarItem(placement: .principal) {
+            Text(viewModel.selectedTab.rawValue)
+                .font(.system(size: 18, weight: .bold))
+                .frame(minWidth: 120)
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+        }
+
+        ToolbarItem(placement: .navigationBarTrailing) {
+            switch viewModel.selectedTab {
+            case .chat:
+                Button(
+                    action: {
+                        toolBarActionSubject.send(.createConversation)
+                    },
+                    label: {
+                        ImageAssets.icAddChat.swiftUIImage
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 24, height: 24)
+                            .padding(12)
+                    }
+                )
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            default:
+                EmptyView()
             }
         }
     }
 
     private func buildContentView() -> some View {
-        TabView(selection: $viewModel.state.selectedTab) {
+        TabView(selection: $viewModel.selectedTab) {
             ConversationListView(
                 viewModel: ConversationListViewModel(),
-                isCreateChatShown: $isCreateChatShown,
-                createConversationType: $createConversationType
+                toolBarAction: toolBarActionSubject.eraseToAnyPublisher()
             )
-            .tag(ViewModel.State.Tab.chat)
+            .tag(MainTabType.chat)
             .tabItem {
                 Image(systemName: "message.fill")
                     .resizable()
@@ -80,7 +83,7 @@ struct MainView<ViewModel: MainViewModelType>: View {
             }
 
             LottieView(animation: LottieAnimation.named(LottieAssets.underConstruction.name))
-                .tag(ViewModel.State.Tab.events)
+                .tag(MainTabType.events)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .tabItem {
                     Image(systemName: "calendar")
@@ -92,19 +95,19 @@ struct MainView<ViewModel: MainViewModelType>: View {
                 }
 
             LottieView(animation: LottieAnimation.named(LottieAssets.underConstruction.name))
-                .tag(ViewModel.State.Tab.content)
+                .tag(MainTabType.content)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .tabItem {
                     Image(systemName: "play.circle.fill")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 32, height: 32)
-            
+
                     Text("Content")
                 }
-            
+
             LottieView(animation: LottieAnimation.named(LottieAssets.underConstruction.name))
-                .tag(ViewModel.State.Tab.shop)
+                .tag(MainTabType.shop)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .tabItem {
                     Image(systemName: "cart.fill")
@@ -120,72 +123,17 @@ struct MainView<ViewModel: MainViewModelType>: View {
                     delegate: viewModel
                 )
             )
-            .tag(ViewModel.State.Tab.profile)
+            .tag(MainTabType.profile)
             .tabItem {
                 Image(systemName: "person.fill")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 32, height: 32)
-                
+
                 Text("Chat")
             }
         }
         .accentColor(Color.orange)
-    }
-
-    @ViewBuilder
-    private func buildTopView() -> some View {
-        if isCreateChatShown {
-            ZStack(alignment: .top) {
-                HStack {
-                    Button(
-                        action: {
-                            createConversationType = .single
-                            isCreateChatShown = false
-                        },
-                        label: {
-                            VStack {
-                                ImageAssets.icSingleChat.swiftUIImage
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 16, height: 24)
-
-                                Text("Normal Chat")
-                                    .font(.system(size: 14))
-                            }
-                            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                            .frame(maxWidth: .infinity)
-                        }
-                    )
-                    Button(
-                        action: {
-                            createConversationType = .group
-                            isCreateChatShown = false
-                        },
-                        label: {
-                            VStack {
-                                ImageAssets.icGroupChat.swiftUIImage
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 20, height: 24)
-
-                                Text("Group Chat")
-                                    .font(.system(size: 14))
-                            }
-                            .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
-                            .frame(maxWidth: .infinity)
-                        }
-                    )
-                }
-                .frame(maxWidth: .infinity)
-                .padding(24)
-                .background(ColorAssets.primaryYellowMain.swiftUIColor)
-                .onTapGesture {}
-
-                Text("")
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-            }
-        }
     }
 }
 
@@ -194,12 +142,13 @@ struct MainView<ViewModel: MainViewModelType>: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            MainView()
+            MainView(viewModel: MainViewModel())
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .introspectNavigationController { navigationController in
             navigationController.configure(
-                backgroundColor: ColorAssets.highlightPrimary.color,
-                foregroundColor: ColorAssets.forcegroundPrimary.color
+                backgroundColor: ColorAssets.primaryYellowMain.color,
+                foregroundColor: ColorAssets.neutralDarkGrey.color
             )
         }
     }

@@ -135,7 +135,7 @@ final class MessageAPI: MessageAPIType {
     }
 
     func getPhotoURL(conversationId: Int, attachmentId: String) -> URL? {
-        let string = NetworkConfigs.baseUrl + "/v1/conversations/\(conversationId)/attachments/\(attachmentId)"
+        let string = NetworkConfigs.BaseUrl.baseUrl + "/v1/conversations/\(conversationId)/attachments/\(attachmentId)"
         return URL(string: string)
     }
 }

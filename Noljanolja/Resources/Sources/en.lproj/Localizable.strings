@@ -3,49 +3,6 @@
 "common.ok" = "OK";
 "common.next" = "Next";
 "common.previous" = "Previous";
-"common.close" = "Close";
 "common.success.title" = "Success";
 "common.error.title" = "Error";
 "common.error.message" = "Error! An error occurred. Please try again later.";
-
-"auth.sign_in.title" = "Log in";
-"auth.join_the_membership.title" = "Join the membership";
-
-"auth.email.placeholder" = "Please enter your email";
-"auth.password.placeholder" = "Please enter password";
-"auth.confirm_password.placeholder" = "Please confirm password";
-"auth.forgot_password.title" = "Forgot your password?";
-"auth.sign_in_with_sns.title" = "Log in with SNS";
-
-"auth.reset_password.title" = "Reset password";
-"auth.reset_password.success.title" = "Reset password link to your email has been sent";
-"auth.reset_password.success.description" = "Reset password link has been sent to your email. Follow this link to reset your password";
-"auth.reset_password.retry.title" = "Resend reset password link";
-
-"auth.sign_up.title" = "Create account";
-"auth.sign_up.step1.title" = "STEP.1";
-"auth.sign_up.step1.description" = "You need to agree to the terms and conditions before signing up";
-"auth.sign_up.step2.title" = "STEP.2";
-"auth.sign_up.step2.description" = "Sign up with email and password";
-"auth.sign_up.step3.title" = "STEP.3";
-"auth.sign_up.step3.description" = "Verification link has been sent to your email. Please check your email and follow it to continue";
-
-"validation.email.error.invalid" = "Please enter a valid email";
-
-"validation.password.error.invalid_length" = "The password must be 8-12 characters";
-"validation.password.error.letter_required" = "The password must have at least one letter";
-"validation.password.error.digit_required" = "The password must have at least one digit";
-"validation.password.error.special_characters_required" = "The password must have at least one special character (~!@#%^&*()-_=+)";
-"validation.password.error.not_match" = "Those passwords didn’t match. Try again";
-
-"my_page" = "My page";
-"my_page.hello" = "Hello %@!";
-"my_page.service_guide" = "Service guide";
-"my_page.customer_service_center" = "Customer service center";
-
-"my_info" = "My Info";
-"my_info.edit_member_information" = "Edit member information";
-"my_info.change_password" = "Change Password";
-"my_info.exchange_account_management" = "Exchange account management";
-"my_info.setting" = "Setting";
-"my_info.log_out" = "Log out";

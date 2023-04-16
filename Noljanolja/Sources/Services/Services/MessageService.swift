@@ -53,7 +53,9 @@ final class MessageService: MessageServiceType {
     func getLocalMessages(conversationID: Int) -> AnyPublisher<[Message], Error> {
         messageStore
             .observeMessages(conversationID: conversationID)
-            .map { $0.sorted { $0.createdAt > $1.createdAt } }
+            .map {
+                $0.sorted { $0.createdAt > $1.createdAt }
+            }
             .removeDuplicates()
             .eraseToAnyPublisher()
     }
@@ -84,7 +86,7 @@ final class MessageService: MessageServiceType {
                 } else {
                     return nil
                 }
-            case .photo, .document, .gif:
+            case .photo, .eventUpdated, .eventJoined, .eventLeft, .unknown:
                 return nil
             }
         }
@@ -115,7 +117,7 @@ final class MessageService: MessageServiceType {
                 )
             }
             .handleEvents(receiveOutput: { [weak self] in
-                self?.messageStore.saveMessageParams([$0])
+                self?.messageStore.saveMessageParameters([$0])
             })
             .flatMapLatest { [weak self] param -> AnyPublisher<Message, Error> in
                 guard let self else {
@@ -149,7 +151,7 @@ extension MessageService {
         switch attachment {
         case let .images(images):
             if let images {
-                let params = images.map { image in
+                let parameters = images.map { image in
                     let id = UUID().uuidString
                     return AttachmentParam(
                         id: id,
@@ -157,7 +159,7 @@ extension MessageService {
                         data: image.pngData()
                     )
                 }
-                return Just(params)
+                return Just(parameters)
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
             } else {

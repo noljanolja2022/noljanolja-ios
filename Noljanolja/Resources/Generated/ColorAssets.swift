@@ -22,20 +22,16 @@ internal typealias AssetColorTypeAlias = ColorAsset.Color
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum ColorAssets {
+  internal static let background = ColorAsset(name: "Background")
+  internal static let black = ColorAsset(name: "Black")
+  internal static let green = ColorAsset(name: "Green")
+  internal static let red = ColorAsset(name: "Red")
+  internal static let white = ColorAsset(name: "White")
   internal static let neutralDarkGrey = ColorAsset(name: "NeutralDarkGrey")
   internal static let neutralDeepGrey = ColorAsset(name: "NeutralDeepGrey")
   internal static let neutralGrey = ColorAsset(name: "NeutralGrey")
   internal static let neutralLight = ColorAsset(name: "NeutralLight")
   internal static let neutralLightGrey = ColorAsset(name: "NeutralLightGrey")
-  internal static let background = ColorAsset(name: "Background")
-  internal static let black = ColorAsset(name: "Black")
-  internal static let forcegroundPrimary = ColorAsset(name: "Forceground Primary")
-  internal static let forcegroundSecondary = ColorAsset(name: "Forceground Secondary")
-  internal static let forcegroundTertiary = ColorAsset(name: "Forceground tertiary")
-  internal static let gray = ColorAsset(name: "Gray")
-  internal static let highlightPrimary = ColorAsset(name: "Highlight Primary")
-  internal static let red = ColorAsset(name: "Red")
-  internal static let white = ColorAsset(name: "White")
   internal static let primaryYellow0 = ColorAsset(name: "PrimaryYellow0")
   internal static let primaryYellow1 = ColorAsset(name: "PrimaryYellow1")
   internal static let primaryYellow2 = ColorAsset(name: "PrimaryYellow2")
@@ -46,20 +42,16 @@ internal enum ColorAssets {
   // swiftlint:disable trailing_comma
   @available(*, deprecated, message: "All values properties are now deprecated")
   internal static let allColors: [ColorAsset] = [
+    background,
+    black,
+    green,
+    red,
+    white,
     neutralDarkGrey,
     neutralDeepGrey,
     neutralGrey,
     neutralLight,
     neutralLightGrey,
-    background,
-    black,
-    forcegroundPrimary,
-    forcegroundSecondary,
-    forcegroundTertiary,
-    gray,
-    highlightPrimary,
-    red,
-    white,
     primaryYellow0,
     primaryYellow1,
     primaryYellow2,

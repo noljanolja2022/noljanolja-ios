@@ -68,12 +68,12 @@ final class MediaAPI: MediaAPIType {
     }
 
     func getStickerURL(stickerPackID: Int, stickerFile: String) -> URL? {
-        let string = NetworkConfigs.baseUrl + "/v1/media/sticker-packs/\(stickerPackID)/\(stickerFile)"
+        let string = NetworkConfigs.BaseUrl.baseUrl + "/v1/media/sticker-packs/\(stickerPackID)/\(stickerFile)"
         return URL(string: string)
     }
 
     func getStickerURL(stickerPath: String) -> URL? {
-        let string = NetworkConfigs.baseUrl + "/v1/media/sticker-packs/\(stickerPath)"
+        let string = NetworkConfigs.BaseUrl.baseUrl + "/v1/media/sticker-packs/\(stickerPath)"
         return URL(string: string)
     }
 }

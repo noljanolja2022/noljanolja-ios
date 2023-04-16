@@ -13,6 +13,7 @@ enum GenderType: String, Codable, CaseIterable {
     case male = "MALE"
     case female = "FEMALE"
     case other = "OTHER"
+    case unknown = "UNKOWN"
 }
 
 // MARK: - UserPreferences
@@ -36,10 +37,6 @@ struct User: Equatable, Codable {
     let preferences: UserPreferences?
     let createdAt: Date
     let updatedAt: Date
-
-    var isSetup: Bool {
-        !(name ?? "").isEmpty
-    }
 
     init(id: String,
          name: String?,
@@ -95,6 +92,55 @@ struct User: Equatable, Codable {
             self.updatedAt = updatedAt
         } else {
             throw NetworkError.mapping("\(String(describing: Swift.type(of: self))) at key updatedAt")
+        }
+    }
+}
+
+extension User {
+    var isSettedUp: Bool {
+        !(name ?? "").isEmpty
+    }
+
+    func getDisplayName(currentUser: User) -> String {
+        id == currentUser.id ? "You" : (name ?? "")
+    }
+}
+
+extension [User] {
+    func sorted(currentUser: User) -> Self {
+        sorted { lhs, rhs in
+            if lhs.id == currentUser.id {
+                return true
+            } else if rhs.id == currentUser.id {
+                return false
+            } else if (lhs.name?.trimmed ?? "").isEmpty {
+                return false
+            } else if (rhs.name?.trimmed ?? "").isEmpty {
+                return true
+            } else {
+                return lhs.name?.lowercased() ?? "" < rhs.name?.lowercased() ?? ""
+            }
+        }
+    }
+
+    func getDisplayName(currentUser: User) -> String {
+        let displayNames = sorted(currentUser: currentUser)
+            .compactMap {
+                $0.getDisplayName(currentUser: currentUser)
+            }
+            .filter { !$0.isEmpty }
+
+        switch count {
+        case 0:
+            return "Nobody"
+        case 1:
+            return displayNames.first ?? ""
+        case 2:
+            return displayNames.joined(separator: " and ")
+        default:
+            return [displayNames.first, "\(count - 1) others"]
+                .compactMap { $0 }
+                .joined(separator: " and ")
         }
     }
 }

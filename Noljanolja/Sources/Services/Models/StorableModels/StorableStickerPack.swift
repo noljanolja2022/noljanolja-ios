@@ -40,4 +40,8 @@ final class StorableStickerPack: Object {
             return list
         }()
     }
+
+    override static func primaryKey() -> String? {
+        "id"
+    }
 }
