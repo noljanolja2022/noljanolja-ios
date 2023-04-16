@@ -84,7 +84,7 @@ struct ParticipantDetailActionView<ViewModel: ParticipantDetailActionViewModel>:
             ColorAssets.white.swiftUIColor
                 .edgesIgnoringSafeArea(.bottom)
         )
-        .cornerRadius(24, corners: [.topLeft, .topRight])
+        .cornerRadius([.topLeading, .topTrailing], 24)
     }
 }
 

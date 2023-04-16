@@ -22,7 +22,6 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum ImageAssets {
-  internal static let bgSplash = ImageAsset(name: "bg_splash")
   internal static let icAdd = ImageAsset(name: "ic_add")
   internal static let icAddChat = ImageAsset(name: "ic_add_chat")
   internal static let icAddCircle = ImageAsset(name: "ic_add_circle")
@@ -47,11 +46,12 @@ internal enum ImageAssets {
   internal static let icSingleChat = ImageAsset(name: "ic_single_chat")
   internal static let icUnchecked = ImageAsset(name: "ic_unchecked")
   internal static let logo = ImageAsset(name: "logo")
+  internal static let icSplashMultiCoin = ImageAsset(name: "ic_splash_multi_coin")
+  internal static let icSplashSingleCoin = ImageAsset(name: "ic_splash_single_coin")
 
   // swiftlint:disable trailing_comma
   @available(*, deprecated, message: "All values properties are now deprecated")
   internal static let allImages: [ImageAsset] = [
-    bgSplash,
     icAdd,
     icAddChat,
     icAddCircle,
@@ -76,6 +76,8 @@ internal enum ImageAssets {
     icSingleChat,
     icUnchecked,
     logo,
+    icSplashMultiCoin,
+    icSplashSingleCoin,
   ]
   // swiftlint:enable trailing_comma
 }

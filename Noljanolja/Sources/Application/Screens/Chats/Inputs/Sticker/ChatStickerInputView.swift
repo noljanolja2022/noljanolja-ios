@@ -108,7 +108,7 @@ struct ChatStickerInputView<ViewModel: ChatStickerInputViewModelType>: View {
             .font(.system(size: 16, weight: .bold))
             .padding(.horizontal, 32)
             .padding(.vertical, 12)
-            .background(ColorAssets.primaryYellowMain.swiftUIColor)
+            .background(ColorAssets.primaryMain.swiftUIColor)
             .cornerRadius(8)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -10,14 +10,14 @@ import SwiftUI
 
 extension View {
     func receiverMessageCornerRadius(_ position: MessageChatItemModel.PositionType) -> some View {
-        cornerRadius(18, corners: [.topRight, .bottomRight])
-            .cornerRadius(position == .middle || position == .last ? 6 : 18, corners: [.topLeft])
-            .cornerRadius(position == .middle || position == .first ? 6 : 18, corners: [.bottomLeft])
+        cornerRadius([.topTrailing, .bottomTrailing], 18)
+            .cornerRadius([.topLeading], position == .middle || position == .last ? 6 : 18)
+            .cornerRadius([.bottomLeading], position == .middle || position == .first ? 6 : 18)
     }
 
     func senderMessageCornerRadius(_ position: MessageChatItemModel.PositionType) -> some View {
-        cornerRadius(18, corners: [.topLeft, .bottomLeft])
-            .cornerRadius(position == .middle || position == .last ? 6 : 18, corners: [.topRight])
-            .cornerRadius(position == .middle || position == .first ? 6 : 18, corners: [.bottomRight])
+        cornerRadius([.topLeading, .bottomLeading], 18)
+            .cornerRadius([.topTrailing], position == .middle || position == .last ? 6 : 18)
+            .cornerRadius([.bottomTrailing], position == .middle || position == .first ? 6 : 18)
     }
 }

@@ -18,7 +18,7 @@ struct ChatInputView<ViewModel: ChatInputViewModelType>: View {
 
     // MARK: State
 
-    @ObservedObject private var keyboard = Keyboard.main
+    @StateObject private var keyboard = Keyboard.main
     @State private var text = ""
     @State private var isMediaInputHidden = false
     @State private var mediaType: ChatMediaInputType?
@@ -140,7 +140,7 @@ struct ChatInputView<ViewModel: ChatInputViewModelType>: View {
             }
         }
         .frame(height: 40)
-        .foregroundColor(ColorAssets.primaryYellow3.swiftUIColor)
+        .foregroundColor(ColorAssets.primaryDark.swiftUIColor)
     }
 
     private func buildTextInputView() -> some View {
@@ -176,7 +176,7 @@ struct ChatInputView<ViewModel: ChatInputViewModelType>: View {
                         .resizable()
                         .scaledToFill()
                         .frame(width: 24, height: 24)
-                        .foregroundColor(ColorAssets.primaryYellow4.swiftUIColor)
+                        .foregroundColor(ColorAssets.primaryDark.swiftUIColor)
                 }
             )
             .padding(9)
@@ -210,7 +210,7 @@ struct ChatInputView<ViewModel: ChatInputViewModelType>: View {
                     .frame(width: 32, height: 32)
             }
         )
-        .foregroundColor(ColorAssets.primaryYellow3.swiftUIColor)
+        .foregroundColor(ColorAssets.primaryDark.swiftUIColor)
     }
 }
 

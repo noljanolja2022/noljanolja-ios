@@ -220,8 +220,7 @@ final class ChatViewModel: ViewModel {
         // MARK: Load local messages
 
         isAppearSubject
-            .filter { $0 }
-            .first()
+            .first(where: { $0 })
             .flatMapLatestToResult { [weak self] _ in
                 guard let self else {
                     return Empty<[Message], Error>().eraseToAnyPublisher()
@@ -242,8 +241,7 @@ final class ChatViewModel: ViewModel {
             .store(in: &cancellables)
 
         isAppearSubject
-            .filter { $0 }
-            .first()
+            .first(where: { $0 })
             .flatMapLatestToResult { [weak self] _ in
                 guard let self else {
                     return Empty<Conversation, Error>().eraseToAnyPublisher()

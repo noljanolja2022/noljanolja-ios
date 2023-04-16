@@ -45,9 +45,9 @@ struct TermView<ViewModel: TermViewModel>: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(ColorAssets.white.swiftUIColor)
-            .cornerRadius(40, corners: [.topLeft, .topRight])
+            .cornerRadius([.topLeading, .topTrailing], 40)
         }
-        .background(ColorAssets.primaryYellowMain.swiftUIColor.ignoresSafeArea(edges: [.top]))
+        .background(ColorAssets.primaryLight.swiftUIColor.ignoresSafeArea(edges: [.top]))
     }
 
     private func buildHeaderView() -> some View {

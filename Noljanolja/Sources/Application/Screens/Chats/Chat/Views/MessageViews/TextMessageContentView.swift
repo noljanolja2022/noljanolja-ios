@@ -20,7 +20,7 @@ struct TextMessageContentView: View {
             .background(
                 contentItemModel.isSenderMessage
                     ? ColorAssets.neutralDarkGrey.swiftUIColor
-                    : ColorAssets.primaryYellow0.swiftUIColor
+                    : ColorAssets.primaryLight.swiftUIColor
             )
             .foregroundColor(
                 contentItemModel.isSenderMessage

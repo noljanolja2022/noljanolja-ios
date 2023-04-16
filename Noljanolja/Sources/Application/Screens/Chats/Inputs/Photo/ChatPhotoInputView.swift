@@ -57,7 +57,7 @@ struct ChatPhotoInputView<ViewModel: ChatPhotoInputViewModelType>: View {
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
                 .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
-                .background(ColorAssets.primaryYellowMain.swiftUIColor)
+                .background(ColorAssets.primaryMain.swiftUIColor)
                 .cornerRadius(8)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
@@ -85,7 +85,7 @@ struct ChatPhotoInputView<ViewModel: ChatPhotoInputViewModelType>: View {
             .font(.system(size: 16, weight: .bold))
             .padding(.horizontal, 32)
             .padding(.vertical, 12)
-            .background(ColorAssets.primaryYellowMain.swiftUIColor)
+            .background(ColorAssets.primaryMain.swiftUIColor)
             .cornerRadius(8)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

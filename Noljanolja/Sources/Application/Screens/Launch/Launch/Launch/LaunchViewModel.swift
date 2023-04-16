@@ -54,8 +54,7 @@ final class LaunchViewModel: ViewModel {
 
     private func configure() {
         isAppearSubject
-            .filter { $0 }
-            .first()
+            .first(where: { $0 })
             .flatMapLatestToResult { [weak self] _ -> AnyPublisher<User, Error> in
                 guard let self else {
                     return Empty<User, Error>().eraseToAnyPublisher()

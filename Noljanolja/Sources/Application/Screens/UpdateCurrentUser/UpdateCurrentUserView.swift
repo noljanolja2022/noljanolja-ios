@@ -20,7 +20,8 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
     @StateObject var viewModel: ViewModel
     
     // MARK: State
-    
+
+    @StateObject private var keyboard = Keyboard.main
     private let nameMaxLength = 20
     @State private var isNameEditing = false
     @EnvironmentObject private var progressHUBState: ProgressHUBState
@@ -118,7 +119,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                 .font(.system(size: 12))
                 .foregroundColor(
                     isNameEditing
-                        ? ColorAssets.primaryYellow3.swiftUIColor
+                        ? ColorAssets.primaryMain.swiftUIColor
                         : ColorAssets.neutralDeepGrey.swiftUIColor
                 )
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -138,7 +139,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                 .frame(height: 2)
                 .overlay(
                     isNameEditing
-                        ? ColorAssets.primaryYellow3.swiftUIColor
+                        ? ColorAssets.primaryMain.swiftUIColor
                         : ColorAssets.neutralDeepGrey.swiftUIColor
                 )
             
@@ -158,6 +159,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
         HStack(spacing: 16) {
             Button(
                 action: {
+                    keyboard.dismiss()
                     viewModel.fullScreenCoverType = .datePicker
                 },
                 label: {
@@ -186,7 +188,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                 .font(.system(size: 16))
                 .foregroundColor(
                     viewModel.fullScreenCoverType == .datePicker
-                        ? ColorAssets.primaryYellow3.swiftUIColor
+                        ? ColorAssets.primaryMain.swiftUIColor
                         : viewModel.dob != nil
                         ? ColorAssets.neutralDarkGrey.swiftUIColor
                         : ColorAssets.neutralDeepGrey.swiftUIColor
@@ -211,7 +213,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                 .frame(height: 2)
                 .overlay(
                     viewModel.fullScreenCoverType == .datePicker
-                        ? ColorAssets.primaryYellow3.swiftUIColor
+                        ? ColorAssets.primaryMain.swiftUIColor
                         : viewModel.dob != nil
                         ? ColorAssets.neutralDarkGrey.swiftUIColor
                         : ColorAssets.neutralDeepGrey.swiftUIColor
@@ -229,7 +231,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                 .font(.system(size: 16))
                 .foregroundColor(
                     viewModel.actionSheetType == .gender
-                        ? ColorAssets.primaryYellow3.swiftUIColor
+                        ? ColorAssets.primaryMain.swiftUIColor
                         : viewModel.gender != nil
                         ? ColorAssets.neutralDarkGrey.swiftUIColor
                         : ColorAssets.neutralDeepGrey.swiftUIColor
@@ -254,7 +256,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                 .frame(height: 2)
                 .overlay(
                     viewModel.actionSheetType == .gender
-                        ? ColorAssets.primaryYellow3.swiftUIColor
+                        ? ColorAssets.primaryMain.swiftUIColor
                         : viewModel.gender != nil
                         ? ColorAssets.neutralDarkGrey.swiftUIColor
                         : ColorAssets.neutralDeepGrey.swiftUIColor
@@ -281,9 +283,11 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                 title: Text("Set Avatar"),
                 buttons: [
                     .default(Text("Open Camera")) {
+                        keyboard.dismiss()
                         viewModel.fullScreenCoverType = .imagePickerView(.camera)
                     },
                     .default(Text("Select Photo")) {
+                        keyboard.dismiss()
                         viewModel.fullScreenCoverType = .imagePickerView(.photoLibrary)
                     },
                     .cancel(Text("Cancel"))

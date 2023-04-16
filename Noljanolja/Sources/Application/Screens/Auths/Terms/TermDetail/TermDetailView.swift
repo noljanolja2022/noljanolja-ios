@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 // MARK: - TermDetailView
 
@@ -31,7 +32,7 @@ struct TermDetailView<ViewModel: TermDetailViewModel>: View {
             buildContentView()
         }
         .background(
-            ColorAssets.primaryYellowMain.swiftUIColor.edgesIgnoringSafeArea(.top)
+            ColorAssets.primaryMain.swiftUIColor.edgesIgnoringSafeArea(.top)
         )
     }
 
@@ -85,7 +86,7 @@ struct TermDetailView<ViewModel: TermDetailViewModel>: View {
             .padding(.horizontal, 16)
         }
         .background(ColorAssets.white.swiftUIColor.ignoresSafeArea())
-        .cornerRadius(40, corners: [.topLeft, .topRight])
+        .cornerRadius([.topLeading, .topTrailing], 40)
     }
 }
 

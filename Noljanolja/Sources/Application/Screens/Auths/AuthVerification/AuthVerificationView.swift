@@ -74,7 +74,7 @@ struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
                                 (viewModel.country.phoneCode, viewModel.phoneNumberText)
                             )
                         }
-                        .foregroundColor(ColorAssets.primaryYellow3.swiftUIColor)
+                        .foregroundColor(ColorAssets.primaryMain.swiftUIColor)
                     }
                 }
                 .font(.system(size: 12))

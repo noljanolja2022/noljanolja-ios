@@ -147,7 +147,7 @@ struct MainView_Previews: PreviewProvider {
         .navigationViewStyle(StackNavigationViewStyle())
         .introspectNavigationController { navigationController in
             navigationController.configure(
-                backgroundColor: ColorAssets.primaryYellowMain.color,
+                backgroundColor: ColorAssets.primaryMain.color,
                 foregroundColor: ColorAssets.neutralDarkGrey.color
             )
         }
