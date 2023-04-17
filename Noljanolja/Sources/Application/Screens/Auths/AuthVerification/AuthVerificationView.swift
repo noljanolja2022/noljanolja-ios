@@ -19,6 +19,9 @@ struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
     // MARK: State
 
     @Environment(\.presentationMode) private var presentationMode
+
+    @EnvironmentObject private var progressHUBState: ProgressHUBState
+
     @State private var isFocused = false
 
     var body: some View {
@@ -28,7 +31,9 @@ struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
     private func buildBodyView() -> some View {
         buildContentView()
             .hideNavigationBar()
-            .progressHUB(isActive: $viewModel.isProgressHUDShowing)
+            .onChange(of: viewModel.isProgressHUDShowing) {
+                progressHUBState.isLoading = $0
+            }
             .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
     }
 

@@ -169,7 +169,7 @@ struct ProfileView<ViewModel: ProfileViewModel>: View {
                         Button(
                             action: {},
                             label: {
-                                Text("View History".uppercased())
+                                Text("Exchange money".uppercased())
                                     .font(.system(size: 14, weight: .medium))
                                     .frame(maxWidth: .infinity)
                                     .padding(.vertical, 12)

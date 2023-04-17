@@ -21,8 +21,12 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
     
     // MARK: State
 
+    @EnvironmentObject private var progressHUBState: ProgressHUBState
+
     @StateObject private var keyboard = Keyboard.main
+
     @State private var isNameEditing = false
+    
     private let nameMaxLength = 20
 
     var body: some View {
@@ -41,7 +45,9 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
             }
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
-            .progressHUB(isActive: $viewModel.isProgressHUDShowing)
+            .onChange(of: viewModel.isProgressHUDShowing) {
+                progressHUBState.isLoading = $0
+            }
             .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
             .actionSheet(item: $viewModel.actionSheetType) {
                 buildActionSheetDestinationView($0)

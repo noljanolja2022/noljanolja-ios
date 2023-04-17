@@ -33,7 +33,7 @@ struct ConversationItemModel: Equatable {
             }
 
             let subject = lastMessage.sender.getDisplayName(currentUser: currentUser)
-            let verb = lastMessage.sender.id == currentUser.id ? "sent" : "received"
+            let verb = "sent"
             switch lastMessage.type {
             case .plaintext:
                 return lastMessage.message
