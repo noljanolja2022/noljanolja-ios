@@ -19,6 +19,8 @@ protocol MessageStoreType {
     
     func savePhoto(conversationID: Int, fileName: String, data: Data) throws
     func getPhotoURL(conversationID: Int, fileName: String) -> URL?
+
+    func deleteAll()
 }
 
 // MARK: - MessageStore
@@ -66,6 +68,10 @@ final class MessageStore: MessageStoreType {
             .collectionPublisher
             .map { messages -> [Message] in messages.compactMap { $0.model } }
             .eraseToAnyPublisher()
+    }
+
+    func deleteAll() {
+        realmManager.deleteAll()
     }
 
     func savePhoto(conversationID: Int, fileName: String, data: Data) throws {

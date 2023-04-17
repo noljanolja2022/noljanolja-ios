@@ -17,10 +17,6 @@ struct AuthView<ViewModel: AuthViewModel>: View {
 
     @StateObject var viewModel: ViewModel
 
-    // MARK: State
-
-    @EnvironmentObject private var progressHUBState: ProgressHUBState
-
     var body: some View {
         buildBodyView()
     }
@@ -31,9 +27,7 @@ struct AuthView<ViewModel: AuthViewModel>: View {
             buildNavigationLink()
         }
         .hideNavigationBar()
-        .onChange(of: viewModel.isProgressHUDShowing) {
-            progressHUBState.isLoading = $0
-        }
+        .progressHUB(isActive: $viewModel.isProgressHUDShowing)
         .alert(item: $viewModel.alertState) {
             Alert($0) { action in
                 guard let action, action else { return }

@@ -137,7 +137,7 @@ final class ChatSettingViewModel: ViewModel {
         }
         .store(in: &cancellables)
 
-        userService.currentUserPublisher
+        userService.getCurrentUserPublisher()
             .sink(receiveValue: { [weak self] in
                 self?.currentUserSubject.send($0)
             })

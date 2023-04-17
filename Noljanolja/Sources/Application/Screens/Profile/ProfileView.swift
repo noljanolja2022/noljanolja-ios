@@ -198,7 +198,9 @@ struct ProfileView<ViewModel: ProfileViewModel>: View {
 
     private func buildLogOutView() -> some View {
         Button(
-            action: {},
+            action: {
+                viewModel.signOutAction.send()
+            },
             label: {
                 Text("LOG OUT")
                     .font(.system(size: 16, weight: .bold))

@@ -19,7 +19,6 @@ struct ConversationTitleView<ViewModel: ConversationTitleViewModel>: View {
     // MARK: State
 
     @Environment(\.presentationMode) private var presentationMode
-    @StateObject private var progressHUBState = ProgressHUBState()
 
     var body: some View {
         buildBodyView()
@@ -36,13 +35,10 @@ struct ConversationTitleView<ViewModel: ConversationTitleViewModel>: View {
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             }
+            .progressHUB(isActive: $viewModel.isProgressHUDShowing)
             .onReceive(viewModel.closeSubject) {
                 presentationMode.wrappedValue.dismiss()
             }
-            .onChange(of: viewModel.isProgressHUDShowing) {
-                progressHUBState.isLoading = $0
-            }
-            .progressHUB(isActive: $progressHUBState.isLoading)
             .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
     }
 

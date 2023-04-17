@@ -51,18 +51,18 @@ final class ConversationService: ConversationServiceType {
     private let conversationParticipantAPI: ConversationParticipantAPIType
     private let conversationStore: ConversationStoreType
     private let conversationDetailStore: ConversationDetailStoreType
-    private let userService: UserServiceType
+    private let userStore: UserStoreType
 
     private init(conversationAPI: ConversationAPIType = ConversationAPI.default,
                  conversationParticipantAPI: ConversationParticipantAPIType = ConversationParticipantAPI.default,
                  conversationStore: ConversationStoreType = ConversationStore.default,
                  conversationDetailStore: ConversationDetailStoreType = ConversationDetailStore.default,
-                 userService: UserServiceType = UserService.default) {
+                 userStore: UserStoreType = UserStore.default) {
         self.conversationAPI = conversationAPI
         self.conversationParticipantAPI = conversationParticipantAPI
         self.conversationStore = conversationStore
         self.conversationDetailStore = conversationDetailStore
-        self.userService = userService
+        self.userStore = userStore
     }
 
     func getConversations() -> AnyPublisher<[Conversation], Error> {
@@ -128,7 +128,7 @@ final class ConversationService: ConversationServiceType {
     func createConversation(type: ConversationType,
                             participants: [User]) -> AnyPublisher<Conversation, Error> {
         if participants.count == 1,
-           let currentUser = userService.currentUser,
+           let currentUser = userStore.getCurrentUser(),
            let conversation = conversationStore.getConversations(
                type: .single,
                participants: participants + [currentUser]
@@ -203,7 +203,7 @@ final class ConversationService: ConversationServiceType {
     }
 
     func leave(conversationID: Int) -> AnyPublisher<Conversation, Error> {
-        guard let currentUser = userService.currentUser else {
+        guard let currentUser = userStore.getCurrentUser() else {
             return Fail<Conversation, Error>(error: CommonError.currentUserNotFound)
                 .eraseToAnyPublisher()
         }

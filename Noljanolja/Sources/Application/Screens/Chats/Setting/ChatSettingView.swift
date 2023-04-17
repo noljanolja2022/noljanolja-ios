@@ -19,7 +19,6 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
     // MARK: State
 
     @Environment(\.presentationMode) private var presentationMode
-    @StateObject private var progressHUBState = ProgressHUBState()
 
     var body: some View {
         buildBodyView()
@@ -33,10 +32,7 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
         .navigationBarTitle("", displayMode: .inline)
         .onAppear { viewModel.isAppearSubject.send(true) }
         .onDisappear { viewModel.isAppearSubject.send(false) }
-        .onChange(of: viewModel.isProgressHUDShowing) {
-            progressHUBState.isLoading = $0
-        }
-        .progressHUB(isActive: $progressHUBState.isLoading)
+        .progressHUB(isActive: $viewModel.isProgressHUDShowing)
         .onReceive(viewModel.closeAction) {
             presentationMode.wrappedValue.dismiss()
         }

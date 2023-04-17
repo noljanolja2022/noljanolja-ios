@@ -22,7 +22,7 @@ final class NotificationService: NotificationServiceType {
     static let `default` = NotificationService()
 
     private lazy var userNotificationCenter = UNUserNotificationCenter.current()
-    private let userService: UserServiceType
+    private let userStore: UserStoreType
     private let notificationAPI: NotificationAPIType
 
     private let currentUserSubject = PassthroughSubject<User, Never>()
@@ -30,9 +30,9 @@ final class NotificationService: NotificationServiceType {
 
     private var cancellables = Set<AnyCancellable>()
 
-    private init(userService: UserServiceType = UserService.default,
+    private init(userStore: UserStoreType = UserStore.default,
                  notificationAPI: NotificationAPIType = NotificationAPI.default) {
-        self.userService = userService
+        self.userStore = userStore
         self.notificationAPI = notificationAPI
 
         configure()
@@ -54,7 +54,7 @@ final class NotificationService: NotificationServiceType {
             .sink(receiveValue: { _ in })
             .store(in: &cancellables)
 
-        userService.currentUserPublisher
+        userStore.getCurrentUserPublisher()
             .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
             .store(in: &cancellables)
     }

@@ -18,7 +18,6 @@ struct UpdateConversationContactListView<ViewModel: UpdateConversationContactLis
     // MARK: State
 
     @Environment(\.presentationMode) private var presentationMode
-    @StateObject private var progressHUBState = ProgressHUBState()
     @State private var selectedUsers = [User]()
     private var isCreateConversationEnabled: Bool {
         !selectedUsers.isEmpty
@@ -50,13 +49,11 @@ struct UpdateConversationContactListView<ViewModel: UpdateConversationContactLis
             }
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
+            .progressHUB(isActive: $viewModel.isProgressHUDShowing)
             .onReceive(viewModel.closeSubject) {
                 presentationMode.wrappedValue.dismiss()
             }
-            .onChange(of: viewModel.isProgressHUDShowing) {
-                progressHUBState.isLoading = $0
-            }
-            .progressHUB(isActive: $progressHUBState.isLoading)
+            .progressHUB(isActive: $viewModel.isProgressHUDShowing)
             .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
     }
 

@@ -260,7 +260,7 @@ final class ChatViewModel: ViewModel {
             .store(in: &cancellables)
 
         userService
-            .currentUserPublisher
+            .getCurrentUserPublisher()
             .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
             .store(in: &cancellables)
     }
