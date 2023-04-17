@@ -15,83 +15,40 @@ protocol ProfileViewModelDelegate: AnyObject {
     func didSignOut()
 }
 
-// MARK: - ProfileViewModelType
-
-protocol ProfileViewModelType: SettingViewModelDelegate,
-    ViewModelType where State == ProfileViewModel.State, Action == ProfileViewModel.Action {}
-
-extension ProfileViewModel {
-    struct State {
-        var user: User?
-        var error: Error?
-        var viewState: ViewState = .content
-    }
-
-    enum Action {
-        case loadData
-    }
-}
-
 // MARK: - ProfileViewModel
 
-final class ProfileViewModel: ProfileViewModelType {
+final class ProfileViewModel: ViewModel {
     // MARK: State
 
-    @Published var state: State
+    @Published var user: User?
+
+    // MARK: Navigations
+
+    @Published var navigationType: ProfileNavigationType?
+
+    // MARK: Action
 
     // MARK: Dependencies
 
     private let userService: UserServiceType
     private weak var delegate: ProfileViewModelDelegate?
 
-    // MARK: Action
-
-    private let loadDataTrigger = PassthroughSubject<Void, Never>()
-
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(state: State = State(),
-         userService: UserServiceType = UserService.default,
+    init(userService: UserServiceType = UserService.default,
          delegate: ProfileViewModelDelegate? = nil) {
-        self.state = state
         self.userService = userService
         self.delegate = delegate
+        super.init()
 
         configure()
     }
 
-    func send(_ action: Action) {
-        switch action {
-        case .loadData: loadDataTrigger.send()
-        }
-    }
-
     private func configure() {
-        loadDataTrigger
-            .first()
-            .handleEvents(receiveOutput: { [weak self] in self?.state.viewState = .loading })
-            .flatMapLatestToResult { [weak self] in
-                guard let self else {
-                    return Empty<User, Error>().eraseToAnyPublisher()
-                }
-                return self.userService.currentUserPublisher
-                    .setFailureType(to: Error.self)
-                    .eraseToAnyPublisher()
-            }
-            .sink(receiveValue: { [weak self] result in
-                switch result {
-                case let .success(user):
-                    logger.info("Get profile successful")
-                    self?.state.user = user
-                    self?.state.viewState = .content
-                case let .failure(error):
-                    logger.error("Get profile successful")
-                    self?.state.error = error
-                    self?.state.viewState = .error
-                }
-            })
+        userService.currentUserPublisher
+            .sink(receiveValue: { [weak self] in self?.user = $0 })
             .store(in: &cancellables)
     }
 }

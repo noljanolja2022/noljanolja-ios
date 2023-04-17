@@ -22,7 +22,7 @@ struct SettingView<ViewModel: SettingViewModel>: View {
     private func buildBodyView() -> some View {
         ZStack {
             buildContentView()
-            buildNavigationLinkView()
+            buildNavigationLinks()
         }
         .navigationBarTitle("", displayMode: .inline)
         .toolbar {
@@ -111,7 +111,7 @@ struct SettingView<ViewModel: SettingViewModel>: View {
         }
     }
     
-    private func buildNavigationLinkView() -> some View {
+    private func buildNavigationLinks() -> some View {
         NavigationLink(
             unwrapping: $viewModel.navigationType,
             onNavigate: { _ in },

@@ -198,6 +198,7 @@
 		CFD83DD029974E4E00B9A6BB /* Navigation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD83DCF29974E4E00B9A6BB /* Navigation+Extension.swift */; };
 		CFDA463E29DC8CCB00E6A877 /* CountryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDA463D29DC8CCB00E6A877 /* CountryAPI.swift */; };
 		CFDBA9A629E9BD18000FA9B5 /* UpdateCurrentUserNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDBA9A529E9BD18000FA9B5 /* UpdateCurrentUserNavigations.swift */; };
+		CFDC637229EC7A83002F4BFC /* ProfileNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDC637129EC7A83002F4BFC /* ProfileNavigations.swift */; };
 		CFDCA37929964501003C2C77 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDCA37829964501003C2C77 /* ButtonStyle.swift */; };
 		CFDCC33C29CCC2D000E8F18C /* PhotoMessageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDCC33B29CCC2D000E8F18C /* PhotoMessageContentView.swift */; };
 		CFDCC33E29CCC33700E8F18C /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDCC33D29CCC33700E8F18C /* Attachment.swift */; };
@@ -470,6 +471,7 @@
 		CFD83DCF29974E4E00B9A6BB /* Navigation+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Navigation+Extension.swift"; sourceTree = "<group>"; };
 		CFDA463D29DC8CCB00E6A877 /* CountryAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryAPI.swift; sourceTree = "<group>"; };
 		CFDBA9A529E9BD18000FA9B5 /* UpdateCurrentUserNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCurrentUserNavigations.swift; sourceTree = "<group>"; };
+		CFDC637129EC7A83002F4BFC /* ProfileNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNavigations.swift; sourceTree = "<group>"; };
 		CFDCA37829964501003C2C77 /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		CFDCC33B29CCC2D000E8F18C /* PhotoMessageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoMessageContentView.swift; sourceTree = "<group>"; };
 		CFDCC33D29CCC33700E8F18C /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
@@ -802,6 +804,7 @@
 				CF28A1A929B500DF0003C204 /* ProfileItemView */,
 				CF28A1A529B4FFC50003C204 /* ProfileView.swift */,
 				CF28A1A629B4FFC50003C204 /* ProfileViewModel.swift */,
+				CFDC637129EC7A83002F4BFC /* ProfileNavigations.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -2290,6 +2293,7 @@
 				CFCFFA3729E5C82A002B7FB6 /* ConversationSocketService.swift in Sources */,
 				CFFD70C4298AC5F800D4F5A2 /* NetworkLoggerPluggin.swift in Sources */,
 				CFA3304929BE3AB9008D7449 /* String+Date.swift in Sources */,
+				CFDC637229EC7A83002F4BFC /* ProfileNavigations.swift in Sources */,
 				CF28A1A829B4FFC50003C204 /* ProfileViewModel.swift in Sources */,
 				CF62EF8B29B23E0000D6B688 /* ViewModelType.swift in Sources */,
 				CFE0925D298DFDCB00F197F0 /* KakaoAuthAPI.swift in Sources */,

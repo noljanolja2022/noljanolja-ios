@@ -39,10 +39,15 @@ internal enum ImageAssets {
   internal static let icEmoji = ImageAsset(name: "ic_emoji")
   internal static let icGroupChat = ImageAsset(name: "ic_group_chat")
   internal static let icKeyboardVoice = ImageAsset(name: "ic_keyboard_voice")
+  internal static let icKing = ImageAsset(name: "ic_king")
   internal static let icMenu = ImageAsset(name: "ic_menu")
   internal static let icPhoto = ImageAsset(name: "ic_photo")
+  internal static let icPoint = ImageAsset(name: "ic_point")
+  internal static let icPointAccumulated = ImageAsset(name: "ic_point_accumulated")
+  internal static let icPointReload = ImageAsset(name: "ic_point_reload")
   internal static let icPpyy = ImageAsset(name: "ic_ppyy")
   internal static let icSend = ImageAsset(name: "ic_send")
+  internal static let icSetting = ImageAsset(name: "ic_setting")
   internal static let icSingleChat = ImageAsset(name: "ic_single_chat")
   internal static let icUnchecked = ImageAsset(name: "ic_unchecked")
   internal static let logo = ImageAsset(name: "logo")
@@ -69,10 +74,15 @@ internal enum ImageAssets {
     icEmoji,
     icGroupChat,
     icKeyboardVoice,
+    icKing,
     icMenu,
     icPhoto,
+    icPoint,
+    icPointAccumulated,
+    icPointReload,
     icPpyy,
     icSend,
+    icSetting,
     icSingleChat,
     icUnchecked,
     logo,

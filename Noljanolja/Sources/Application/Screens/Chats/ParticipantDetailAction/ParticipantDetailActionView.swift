@@ -49,6 +49,7 @@ struct ParticipantDetailActionView<ViewModel: ParticipantDetailActionViewModel>:
                 WebImage(url: URL(string: viewModel.participantModel.user.avatar))
                     .resizable()
                     .indicator(.activity)
+                    .scaledToFill()
                     .frame(width: 40, height: 40)
                     .background(ColorAssets.neutralLightGrey.swiftUIColor)
                     .cornerRadius(14)
