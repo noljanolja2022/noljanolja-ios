@@ -31,10 +31,12 @@ final class ChatViewModel: ViewModel {
     // MARK: Navigations
 
     @Published var navigationType: ChatNavigationType?
+    @Published var fullScreenCoverType: ChatFullScreenCoverType?
 
     // MARK: Action
 
     let closeAction = PassthroughSubject<Void, Never>()
+    let chatItemAction = PassthroughSubject<ChatItemActionType, Never>()
     let loadMoreDataTrigger = PassthroughSubject<Int, Never>()
     let openChatSettingSubject = PassthroughSubject<Void, Never>()
 
@@ -323,6 +325,18 @@ final class ChatViewModel: ViewModel {
     }
 
     private func configureActions() {
+        chatItemAction
+            .sink { [weak self] actionType in
+                guard let self else { return }
+                switch actionType {
+                case let .openURL(urlString):
+                    guard let url = URL(string: urlString),
+                          url.scheme == "https" || url.scheme == "http" else { return }
+                    self.fullScreenCoverType = .openUrl(url)
+                }
+            }
+            .store(in: &cancellables)
+
         openChatSettingSubject
             .withLatestFrom(conversationSubject)
             .compactMap { $0 }

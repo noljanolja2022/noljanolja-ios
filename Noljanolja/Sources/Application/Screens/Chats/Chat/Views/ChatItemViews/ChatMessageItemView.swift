@@ -11,15 +11,22 @@ import SwiftUI
 
 struct ChatMessageItemView: View {
     var model: MessageChatItemModel
+    var action: ((ChatItemActionType) -> Void)?
 
     var body: some View {
         if model.content == nil {
             EmptyView()
         } else {
             if model.isSenderMessage {
-                SenderMessageItemView(model: model)
+                SenderMessageItemView(
+                    model: model,
+                    action: action
+                )
             } else {
-                ReceiverMessageView(model: model)
+                ReceiverMessageView(
+                    model: model,
+                    action: action
+                )
             }
         }
     }

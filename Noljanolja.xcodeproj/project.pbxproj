@@ -186,6 +186,7 @@
 		CFBC6F0029C054B0000509EC /* View+EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC6EFF29C054B0000509EC /* View+EditView.swift */; };
 		CFBC6F0229C0CF44000509EC /* StatefullFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC6F0129C0CF44000509EC /* StatefullFooterView.swift */; };
 		CFBCE41829B98A65000D6F73 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBCE41729B98A65000D6F73 /* CommonError.swift */; };
+		CFC4B17129F0471800F577CC /* ChatItemActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC4B17029F0471800F577CC /* ChatItemActionType.swift */; };
 		CFC709E02996051800B64216 /* View+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709DF2996051800B64216 /* View+Progress.swift */; };
 		CFCD10AB29D350C900C5DAFF /* SendMessageParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCD10AA29D350C900C5DAFF /* SendMessageParam.swift */; };
 		CFCFFA3729E5C82A002B7FB6 /* ConversationSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCFFA3629E5C82A002B7FB6 /* ConversationSocketService.swift */; };
@@ -461,6 +462,7 @@
 		CFBC6EFF29C054B0000509EC /* View+EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+EditView.swift"; sourceTree = "<group>"; };
 		CFBC6F0129C0CF44000509EC /* StatefullFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatefullFooterView.swift; sourceTree = "<group>"; };
 		CFBCE41729B98A65000D6F73 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
+		CFC4B17029F0471800F577CC /* ChatItemActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatItemActionType.swift; sourceTree = "<group>"; };
 		CFC709DF2996051800B64216 /* View+Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Progress.swift"; sourceTree = "<group>"; };
 		CFCD10AA29D350C900C5DAFF /* SendMessageParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageParam.swift; sourceTree = "<group>"; };
 		CFCFFA3629E5C82A002B7FB6 /* ConversationSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationSocketService.swift; sourceTree = "<group>"; };
@@ -875,6 +877,7 @@
 		CF28566A29BA2ED900593FA5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CFC4B16F29F046F200F577CC /* Actions */,
 				CFFB059629BF1356000D65EE /* MessageModels */,
 				CFFB059129BF123F000D65EE /* MessageContentModels */,
 				CFFB058B29BF0487000D65EE /* MessageItemModelBuilder.swift */,
@@ -1335,6 +1338,14 @@
 				CFBCE41729B98A65000D6F73 /* CommonError.swift */,
 			);
 			path = Erros;
+			sourceTree = "<group>";
+		};
+		CFC4B16F29F046F200F577CC /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				CFC4B17029F0471800F577CC /* ChatItemActionType.swift */,
+			);
+			path = Actions;
 			sourceTree = "<group>";
 		};
 		CFC709E12996211E00B64216 /* ProgressView */ = {
@@ -2272,6 +2283,7 @@
 				CF00D1692994E0A700505702 /* TextField+ErrorMessage.swift in Sources */,
 				CF775BC829C62EB200E82183 /* NotificationAPI.swift in Sources */,
 				CF28A1A729B4FFC50003C204 /* ProfileView.swift in Sources */,
+				CFC4B17129F0471800F577CC /* ChatItemActionType.swift in Sources */,
 				CF745A5A2998E5EA008177E5 /* TappableTextFieldStyle.swift in Sources */,
 				CFBC6F0029C054B0000509EC /* View+EditView.swift in Sources */,
 				CFF0C1EB29E85DEB007B4B98 /* AuthNavigations.swift in Sources */,

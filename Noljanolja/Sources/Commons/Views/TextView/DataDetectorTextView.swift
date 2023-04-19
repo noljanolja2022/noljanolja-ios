@@ -25,6 +25,8 @@ struct DataDetectorTextView: UIViewRepresentable {
         textView.delegate = context.coordinator
         textView.backgroundColor = .clear
 
+        textView.clipsToBounds = false
+        textView.textContainerInset = .zero
         textView.textContainer.lineFragmentPadding = 0
         textView.setContentHuggingPriority(.required, for: .horizontal)
         textView.setContentHuggingPriority(.defaultLow, for: .vertical)
