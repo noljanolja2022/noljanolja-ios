@@ -15,18 +15,12 @@ struct AuthRootView<ViewModel: AuthRootViewModel>: View {
 
     @StateObject var viewModel: ViewModel
 
-    // MARK: State
-
-    @StateObject private var progressHUBState = ProgressHUBState()
-
     var body: some View {
         buildBodyView()
     }
 
     private func buildBodyView() -> some View {
         buildContentView()
-            .progressHUB(isActive: $progressHUBState.isLoading)
-            .environmentObject(progressHUBState)
     }
 
     @ViewBuilder

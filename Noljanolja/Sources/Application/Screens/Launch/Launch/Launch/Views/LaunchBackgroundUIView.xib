@@ -26,16 +26,32 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I2P-8C-BQo" userLabel="Background View">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_splash" translatesAutoresizingMaskIntoConstraints="NO" id="i7Q-dp-I1U">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_splash_single_coin" translatesAutoresizingMaskIntoConstraints="NO" id="PfR-O9-ncW">
+                                    <rect key="frame" x="234.66666666666666" y="245" width="41.999999999999972" height="32"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="42" id="XC7-wl-AZl"/>
+                                        <constraint firstAttribute="height" constant="32" id="thD-eN-045"/>
+                                    </constraints>
+                                </imageView>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_splash_multi_coin" translatesAutoresizingMaskIntoConstraints="NO" id="i7Q-dp-I1U">
+                                    <rect key="frame" x="0.0" y="603.33333333333337" width="393" height="248.66666666666663"/>
+                                </imageView>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_ppyy" translatesAutoresizingMaskIntoConstraints="NO" id="7Ry-eO-M3E">
+                                    <rect key="frame" x="176.66666666666666" y="787" width="40" height="27"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="40" id="bbd-1D-9Ui"/>
+                                        <constraint firstAttribute="height" priority="14" constant="32" id="dfN-CN-eIf"/>
+                                    </constraints>
                                 </imageView>
                             </subviews>
+                            <viewLayoutGuide key="safeArea" id="qkz-3Q-ODy"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="i7Q-dp-I1U" secondAttribute="bottom" id="IEr-or-7Dy"/>
+                                <constraint firstItem="7Ry-eO-M3E" firstAttribute="centerX" secondItem="I2P-8C-BQo" secondAttribute="centerX" id="VMT-2p-LmD"/>
                                 <constraint firstItem="i7Q-dp-I1U" firstAttribute="leading" secondItem="I2P-8C-BQo" secondAttribute="leading" id="Yte-uM-SRI"/>
+                                <constraint firstItem="qkz-3Q-ODy" firstAttribute="bottom" secondItem="7Ry-eO-M3E" secondAttribute="bottom" constant="4" id="ZJ4-oW-HoL"/>
                                 <constraint firstAttribute="trailing" secondItem="i7Q-dp-I1U" secondAttribute="trailing" id="dLs-5w-1Pq"/>
-                                <constraint firstItem="i7Q-dp-I1U" firstAttribute="top" secondItem="I2P-8C-BQo" secondAttribute="top" id="pLk-Ti-bME"/>
                             </constraints>
                         </view>
                         <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="zor-gi-yn7">
@@ -60,13 +76,13 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g3X-WT-i1j">
                                             <rect key="frame" x="0.0" y="82.333333333333371" width="333.66666666666669" height="48"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rcG-Ly-hdZ">
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rcG-Ly-hdZ">
                                                     <rect key="frame" x="0.0" y="0.0" width="333.66666666666669" height="48"/>
-                                                    <color key="backgroundColor" name="NeutralDarkGrey"/>
+                                                    <color key="backgroundColor" name="PrimaryMain"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" title="EXPLORE NOW">
-                                                        <color key="titleColor" name="PrimaryYellowMain"/>
+                                                        <color key="titleColor" name="NeutralDarkGrey"/>
                                                     </state>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layerCornerRadius">
@@ -99,7 +115,10 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstItem="zor-gi-yn7" firstAttribute="centerY" secondItem="6VM-E4-WKc" secondAttribute="centerY" id="09r-fM-jd6"/>
+                        <constraint firstItem="i7Q-dp-I1U" firstAttribute="top" secondItem="g3X-WT-i1j" secondAttribute="bottom" constant="12" id="5iT-yy-Wgy"/>
+                        <constraint firstItem="jth-wS-cLp" firstAttribute="trailing" secondItem="PfR-O9-ncW" secondAttribute="trailing" multiplier="1.05" id="EOE-n4-iQr"/>
                         <constraint firstItem="I2P-8C-BQo" firstAttribute="top" secondItem="6VM-E4-WKc" secondAttribute="top" id="T3P-v6-vZQ"/>
+                        <constraint firstItem="jth-wS-cLp" firstAttribute="top" secondItem="PfR-O9-ncW" secondAttribute="centerY" id="WaB-1R-jbr"/>
                         <constraint firstItem="zor-gi-yn7" firstAttribute="leading" secondItem="6VM-E4-WKc" secondAttribute="leading" constant="16" id="los-6M-NOg"/>
                         <constraint firstAttribute="bottom" secondItem="I2P-8C-BQo" secondAttribute="bottom" id="mWC-uu-Tom"/>
                         <constraint firstItem="zor-gi-yn7" firstAttribute="centerX" secondItem="6VM-E4-WKc" secondAttribute="centerX" id="ndv-Bg-XYF"/>
@@ -120,13 +139,15 @@
         </view>
     </objects>
     <resources>
-        <image name="bg_splash" width="360" height="800"/>
+        <image name="ic_ppyy" width="68" height="27"/>
+        <image name="ic_splash_multi_coin" width="141.33332824707031" height="212"/>
+        <image name="ic_splash_single_coin" width="43" height="32.666667938232422"/>
         <image name="logo" width="188.66667175292969" height="176"/>
         <namedColor name="NeutralDarkGrey">
             <color red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="PrimaryYellowMain">
-            <color red="0.97254901960784312" green="0.87450980392156863" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="PrimaryMain">
+            <color red="0.54509803921568623" green="0.78823529411764703" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

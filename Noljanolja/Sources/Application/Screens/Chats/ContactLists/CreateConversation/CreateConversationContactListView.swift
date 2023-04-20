@@ -21,7 +21,9 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
     // MARK: State
 
     @EnvironmentObject private var progressHUBState: ProgressHUBState
+    
     @State private var selectedUsers = [User]()
+
     private var isCreateConversationEnabled: Bool {
         !selectedUsers.isEmpty
     }

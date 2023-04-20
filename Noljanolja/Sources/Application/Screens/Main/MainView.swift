@@ -31,6 +31,14 @@ struct MainView<ViewModel: MainViewModel>: View {
             .toolbar {
                 buildToolBarContent()
             }
+            .navigationBarHidden({
+                switch viewModel.selectedTab {
+                case .chat, .events, .content, .shop:
+                    return false
+                case .profile:
+                    return true
+                }
+            }())
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
     }
@@ -147,7 +155,7 @@ struct MainView_Previews: PreviewProvider {
         .navigationViewStyle(StackNavigationViewStyle())
         .introspectNavigationController { navigationController in
             navigationController.configure(
-                backgroundColor: ColorAssets.primaryYellowMain.color,
+                backgroundColor: ColorAssets.primaryMain.color,
                 foregroundColor: ColorAssets.neutralDarkGrey.color
             )
         }

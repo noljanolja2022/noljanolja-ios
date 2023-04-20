@@ -98,8 +98,7 @@ final class SelectCountryViewModel: ViewModel {
             .store(in: &cancellables)
 
         isAppearSubject
-            .filter { $0 }
-            .first()
+            .first(where: { $0 })
             .sink(receiveValue: { [weak self] _ in self?.loadDataSubject.send() })
             .store(in: &cancellables)
     }

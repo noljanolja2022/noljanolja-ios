@@ -11,21 +11,49 @@ import SwiftUI
 
 struct TextMessageContentView: View {
     var contentItemModel: TextMessageContentModel
+    var action: ((ChatItemActionType) -> Void)?
 
     var body: some View {
-        Text(contentItemModel.message ?? "")
+        ZStack {
+            Text(contentItemModel.message ?? "")
+                .font(.system(size: 14, weight: .regular))
+                .background(.clear)
+                .foregroundColor(.clear)
+            DataDetectorTextView(
+                text: .constant(contentItemModel.message ?? ""),
+                dataAction: {
+                    action?(.openURL($0))
+                }
+            )
             .font(.system(size: 14, weight: .regular))
-            .padding(.vertical, 12)
-            .padding(.horizontal, 16)
-            .background(
-                contentItemModel.isSenderMessage
-                    ? ColorAssets.neutralDarkGrey.swiftUIColor
-                    : ColorAssets.primaryYellow0.swiftUIColor
-            )
+            .dataDetectorTypes(.link)
+            .isEditable(false)
+            .isScrollEnabled(false)
             .foregroundColor(
-                contentItemModel.isSenderMessage
-                    ? ColorAssets.neutralLight.swiftUIColor
-                    : ColorAssets.neutralDarkGrey.swiftUIColor
+                ColorAssets.primaryDark.swiftUIColor
             )
+        }
+        .padding(.vertical, 12)
+        .padding(.horizontal, 16)
+        .background(
+            contentItemModel.isSenderMessage
+                ? Color(hexadecimal: "B8EB42")
+                : ColorAssets.neutralLightGrey.swiftUIColor
+        )
+    }
+}
+
+// MARK: - TextMessageContentView_Previews
+
+struct TextMessageContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ZStack {
+            TextMessageContentView(
+                contentItemModel: TextMessageContentModel(
+                    isSenderMessage: true,
+                    message: "hello, www.google.com"
+                )
+            )
+        }
     }
 }

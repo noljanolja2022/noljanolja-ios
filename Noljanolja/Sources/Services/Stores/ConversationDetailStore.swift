@@ -18,6 +18,8 @@ protocol ConversationDetailStoreType {
     func observeConversationDetail(conversationID: Int) -> AnyPublisher<Conversation, Error>
 
     func removeConversationDetail(conversationID: Int)
+
+    func deleteAll()
 }
 
 // MARK: - ConversationDetailStore
@@ -68,5 +70,9 @@ final class ConversationDetailStore: ConversationDetailStoreType {
             return
         }
         realmManager.delete(conversation)
+    }
+
+    func deleteAll() {
+        realmManager.deleteAll()
     }
 }

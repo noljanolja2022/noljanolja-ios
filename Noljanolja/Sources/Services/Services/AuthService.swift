@@ -46,6 +46,10 @@ final class AuthService: NSObject, AuthServiceType {
     private lazy var cloudFunctionAuthAPI = CloudFunctionAuthAPI()
     private lazy var firebaseAuth = Auth.auth()
     private lazy var authStore = AuthStore.default
+    private lazy var contactStore: ContactStoreType = ContactStore.default
+    private lazy var conversationStore: ConversationStoreType = ConversationStore.default
+    private lazy var conversationDetailStore: ConversationDetailStoreType = ConversationDetailStore.default
+    private lazy var messageStore: MessageStoreType = MessageStore.default
 
     lazy var isAuthenticated = CurrentValueSubject<Bool, Never>(authStore.getToken() != nil)
 
@@ -224,8 +228,13 @@ final class AuthService: NSObject, AuthServiceType {
                 .eraseToAnyPublisher()
         }
         .handleEvents(receiveOutput: { [weak self] in
-            self?.authStore.clearToken()
-            self?.isAuthenticated.send(false)
+            guard let self else { return }
+            self.authStore.clearToken()
+            self.contactStore.deleteAll()
+            self.conversationStore.deleteAll()
+            self.conversationDetailStore.deleteAll()
+            self.messageStore.deleteAll()
+            self.isAuthenticated.send(false)
         })
         .eraseToAnyPublisher()
     }

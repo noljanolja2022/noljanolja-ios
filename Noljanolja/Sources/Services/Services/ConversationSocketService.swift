@@ -21,18 +21,18 @@ protocol ConversationSocketServiceType {
 final class ConversationSocketService: ConversationSocketServiceType {
     static let `default` = ConversationSocketService()
 
-    private let userService: UserServiceType
+    private let userStore: UserStoreType
     private let socketAPI: ConversationSocketAPIType
     private let conversationStore: ConversationStoreType
     private let conversationDetailStore: ConversationDetailStoreType
     private let messageStore: MessageStoreType
 
-    init(userService: UserServiceType = UserService.default,
+    init(userStore: UserStoreType = UserStore.default,
          socketAPI: ConversationSocketAPIType = ConversationSocketAPI.default,
          conversationStore: ConversationStoreType = ConversationStore.default,
          conversationDetailStore: ConversationDetailStoreType = ConversationDetailStore.default,
          messageStore: MessageStoreType = MessageStore.default) {
-        self.userService = userService
+        self.userStore = userStore
         self.socketAPI = socketAPI
         self.conversationStore = conversationStore
         self.conversationDetailStore = conversationDetailStore
@@ -45,7 +45,7 @@ final class ConversationSocketService: ConversationSocketServiceType {
 
     private func getStream() -> AnyPublisher<Result<Conversation, Error>, Never> {
         socketAPI.getStream()
-            .withLatestFrom(userService.currentUserPublisher) { ($0, $1) }
+            .withLatestFrom(userStore.getCurrentUserPublisher()) { ($0, $1) }
             .handleEvents(receiveOutput: { [weak self] result, currentUser in
                 guard let self else { return }
                 switch result {

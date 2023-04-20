@@ -40,7 +40,7 @@ extension Date {
         if let relativeFormatted = relativeFormatForChat() {
             return relativeFormatted
         } else {
-            dateFormatter.dateFormat = "dd/MM/yyyy"
+            dateFormatter.dateFormat = "EEEE, yyyy, MMMM dd"
             return dateFormatter.string(from: self)
         }
     }

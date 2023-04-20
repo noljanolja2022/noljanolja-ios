@@ -13,23 +13,9 @@ import Foundation
 
 protocol ChatStickerPacksInputViewModelDelegate: AnyObject {}
 
-// MARK: - ChatStickerPacksInputViewModelType
-
-protocol ChatStickerPacksInputViewModelType: ObservableObject {
-    // MARK: State
-
-    var stickerPacks: [StickerPack] { get set }
-    var viewState: ViewState { get set }
-    var error: Error? { get set }
-
-    // MARK: Action
-
-    var loadSubject: PassthroughSubject<Void, Never> { get }
-}
-
 // MARK: - ChatStickerPacksInputViewModel
 
-final class ChatStickerPacksInputViewModel: ChatStickerPacksInputViewModelType {
+final class ChatStickerPacksInputViewModel: ViewModel {
     // MARK: State
 
     @Published var stickerPacks = [StickerPack]()
@@ -37,8 +23,6 @@ final class ChatStickerPacksInputViewModel: ChatStickerPacksInputViewModelType {
     @Published var error: Error?
 
     // MARK: Action
-
-    let loadSubject = PassthroughSubject<Void, Never>()
 
     // MARK: Dependencies
 
@@ -53,14 +37,15 @@ final class ChatStickerPacksInputViewModel: ChatStickerPacksInputViewModelType {
          delegate: ChatStickerPacksInputViewModelDelegate? = nil) {
         self.mediaService = mediaService
         self.delegate = delegate
+        super.init()
 
         configure()
     }
 
     private func configure() {
-        loadSubject
-            .first()
-            .handleEvents(receiveOutput: { [weak self] in self?.viewState = .loading })
+        isAppearSubject
+            .first(where: { $0 })
+            .handleEvents(receiveOutput: { [weak self] _ in self?.viewState = .loading })
             .flatMapToResult { [weak self] _ -> AnyPublisher<[StickerPack], Error> in
                 guard let self else {
                     return Empty<[StickerPack], Error>().eraseToAnyPublisher()

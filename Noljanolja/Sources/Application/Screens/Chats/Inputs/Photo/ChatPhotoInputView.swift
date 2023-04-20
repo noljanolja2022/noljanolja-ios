@@ -10,32 +10,32 @@ import SwiftUI
 
 // MARK: - ChatPhotoInputView
 
-struct ChatPhotoInputView<ViewModel: ChatPhotoInputViewModelType>: View {
+struct ChatPhotoInputView<ViewModel: ChatPhotoInputViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
-    @State private var photoAssets = [PhotoAsset]()
     var sendAction: (([PhotoAsset]) -> Void)?
+
+    // MARK: State
+
+    @State private var photoAssets = [PhotoAsset]()
 
     var body: some View {
         buildBodyView()
     }
 
     private func buildBodyView() -> some View {
-        VStack(spacing: 0) {
-            buildContentView()
-                .statefull(
-                    state: $viewModel.viewState,
-                    isEmpty: { viewModel.viewState != .content },
-                    loading: buildLoadingView,
-                    empty: buildEmptyView,
-                    error: buildErrorView
-                )
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .onAppear {
-                    viewModel.loadDataSubject.send()
-                }
-        }
+        buildContentView()
+            .statefull(
+                state: $viewModel.viewState,
+                isEmpty: { viewModel.viewState != .content },
+                loading: buildLoadingView,
+                empty: buildEmptyView,
+                error: buildErrorView
+            )
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .onAppear { viewModel.isAppearSubject.send(true) }
+            .onDisappear { viewModel.isAppearSubject.send(false) }
     }
 
     private func buildContentView() -> some View {
@@ -57,7 +57,7 @@ struct ChatPhotoInputView<ViewModel: ChatPhotoInputViewModelType>: View {
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 16)
                 .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
-                .background(ColorAssets.primaryYellowMain.swiftUIColor)
+                .background(ColorAssets.primaryMain.swiftUIColor)
                 .cornerRadius(8)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
@@ -85,7 +85,7 @@ struct ChatPhotoInputView<ViewModel: ChatPhotoInputViewModelType>: View {
             .font(.system(size: 16, weight: .bold))
             .padding(.horizontal, 32)
             .padding(.vertical, 12)
-            .background(ColorAssets.primaryYellowMain.swiftUIColor)
+            .background(ColorAssets.primaryMain.swiftUIColor)
             .cornerRadius(8)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -13,6 +13,7 @@ import SwiftUI
 
 struct ReceiverMessageView: View {
     var model: MessageChatItemModel
+    var action: ((ChatItemActionType) -> Void)?
 
     var body: some View {
         HStack(alignment: .top, spacing: 4) {
@@ -27,8 +28,11 @@ struct ReceiverMessageView: View {
             }
 
             HStack(alignment: .bottom, spacing: 4) {
-                MessageContentView(messageContent: model.content)
-                    .receiverMessageCornerRadius(model.positionType)
+                MessageContentView(
+                    messageContent: model.content,
+                    action: action
+                )
+                .receiverMessageCornerRadius(model.positionType)
 
                 Text(model.date.string(withFormat: "HH:mm"))
                     .font(.system(size: 11, weight: .medium))

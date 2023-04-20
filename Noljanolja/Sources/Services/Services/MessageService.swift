@@ -34,17 +34,17 @@ extension MessageServiceType {
 final class MessageService: MessageServiceType {
     static let `default` = MessageService()
 
-    private let userService: UserServiceType
+    private let userStore: UserStoreType
     private let messageAPI: MessageAPIType
     private let messageStore: MessageStoreType
     private let photoAssetAPI: PhotoAssetAPI
 
-    private init(userService: UserServiceType = UserService.default,
+    private init(userStore: UserStoreType = UserStore.default,
                  messageAPI: MessageAPIType = MessageAPI.default,
                  conversationStore: ConversationStoreType = ConversationStore.default,
                  messageStore: MessageStoreType = MessageStore.default,
                  photoAssetAPI: PhotoAssetAPI = PhotoAssetAPI.default) {
-        self.userService = userService
+        self.userStore = userStore
         self.messageAPI = messageAPI
         self.messageStore = messageStore
         self.photoAssetAPI = photoAssetAPI
@@ -105,7 +105,11 @@ final class MessageService: MessageServiceType {
             })
 
         return attachmentsPublisher
-            .withLatestFrom(userService.currentUserPublisher.setFailureType(to: Error.self)) { ($0, $1) }
+            .withLatestFrom(
+                userStore
+                    .getCurrentUserPublisher()
+                    .setFailureType(to: Error.self)
+            ) { ($0, $1) }
             .map { attachments, currentUser in
                 SendMessageParam(
                     currentUser: currentUser,

@@ -11,6 +11,7 @@ import SwiftUI
 
 struct SenderMessageItemView: View {
     var model: MessageChatItemModel
+    var action: ((ChatItemActionType) -> Void)?
 
     var body: some View {
         HStack(alignment: .bottom, spacing: 4) {
@@ -20,8 +21,11 @@ struct SenderMessageItemView: View {
                 .font(.system(size: 11, weight: .medium))
                 .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
 
-            MessageContentView(messageContent: model.content)
-                .senderMessageCornerRadius(model.positionType)
+            MessageContentView(
+                messageContent: model.content,
+                action: action
+            )
+            .senderMessageCornerRadius(model.positionType)
             MessageStatusView(status: model.status)
         }
         .padding(.horizontal, 16)

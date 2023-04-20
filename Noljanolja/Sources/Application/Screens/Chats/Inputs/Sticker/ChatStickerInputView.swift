@@ -12,7 +12,7 @@ import SwiftUI
 
 // MARK: - ChatStickerInputView
 
-struct ChatStickerInputView<ViewModel: ChatStickerInputViewModelType>: View {
+struct ChatStickerInputView<ViewModel: ChatStickerInputViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
@@ -37,9 +37,8 @@ struct ChatStickerInputView<ViewModel: ChatStickerInputViewModelType>: View {
                     error: buildErrorView
                 )
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .onAppear {
-                    viewModel.loadDataSubject.send()
-                }
+                .onAppear { viewModel.isAppearSubject.send(true) }
+                .onDisappear { viewModel.isAppearSubject.send(false) }
         }
     }
 
@@ -50,46 +49,50 @@ struct ChatStickerInputView<ViewModel: ChatStickerInputViewModelType>: View {
                 spacing: 20
             ) {
                 ForEach(viewModel.stickerPack.stickers, id: \.imageFile) { sticker in
-                    ZStack {
-                        if animatedSelectedSticker == sticker {
-                            AnimatedImage(
-                                url: sticker.getImageURL(viewModel.stickerPack.id),
-                                isAnimating: .constant(true)
-                            )
-                            .resizable()
-                            .indicator(.activity)
-                            .scaledToFit()
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        } else {
-                            WebImage(
-                                url: sticker.getImageURL(viewModel.stickerPack.id),
-                                isAnimating: .constant(false)
-                            )
-                            .resizable()
-                            .indicator(.activity)
-                            .scaledToFit()
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        }
-                    }
-                    .onTapGesture {
-                        selectedAction?(viewModel.stickerPack, sticker)
-                    }
-                    .gesture(
-                        LongPressGesture(minimumDuration: 0.5)
-                            .sequenced(
-                                before: DragGesture(minimumDistance: 0)
-                            )
-                            .onChanged { _ in
-                                animatedSelectedSticker = sticker
-                            }
-                            .onEnded { _ in
-                                animatedSelectedSticker = nil
-                            }
-                    )
+                    buildItem(sticker)
                 }
             }
             .padding(.horizontal, 16)
         }
+    }
+
+    private func buildItem(_ sticker: Sticker) -> some View {
+        ZStack {
+            if animatedSelectedSticker == sticker {
+                AnimatedImage(
+                    url: sticker.getImageURL(viewModel.stickerPack.id),
+                    isAnimating: .constant(true)
+                )
+                .resizable()
+                .indicator(.activity)
+                .scaledToFit()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                WebImage(
+                    url: sticker.getImageURL(viewModel.stickerPack.id),
+                    isAnimating: .constant(false)
+                )
+                .resizable()
+                .indicator(.activity)
+                .scaledToFit()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+        }
+        .onTapGesture {
+            selectedAction?(viewModel.stickerPack, sticker)
+        }
+        .gesture(
+            LongPressGesture(minimumDuration: 0.5)
+                .sequenced(
+                    before: DragGesture(minimumDistance: 0)
+                )
+                .onChanged { _ in
+                    animatedSelectedSticker = sticker
+                }
+                .onEnded { _ in
+                    animatedSelectedSticker = nil
+                }
+        )
     }
 
     private func buildLoadingView() -> some View {
@@ -108,7 +111,7 @@ struct ChatStickerInputView<ViewModel: ChatStickerInputViewModelType>: View {
             .font(.system(size: 16, weight: .bold))
             .padding(.horizontal, 32)
             .padding(.vertical, 12)
-            .background(ColorAssets.primaryYellowMain.swiftUIColor)
+            .background(ColorAssets.primaryMain.swiftUIColor)
             .cornerRadius(8)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

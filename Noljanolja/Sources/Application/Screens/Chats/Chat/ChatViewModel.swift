@@ -31,10 +31,12 @@ final class ChatViewModel: ViewModel {
     // MARK: Navigations
 
     @Published var navigationType: ChatNavigationType?
+    @Published var fullScreenCoverType: ChatFullScreenCoverType?
 
     // MARK: Action
 
     let closeAction = PassthroughSubject<Void, Never>()
+    let chatItemAction = PassthroughSubject<ChatItemActionType, Never>()
     let loadMoreDataTrigger = PassthroughSubject<Int, Never>()
     let openChatSettingSubject = PassthroughSubject<Void, Never>()
 
@@ -220,8 +222,7 @@ final class ChatViewModel: ViewModel {
         // MARK: Load local messages
 
         isAppearSubject
-            .filter { $0 }
-            .first()
+            .first(where: { $0 })
             .flatMapLatestToResult { [weak self] _ in
                 guard let self else {
                     return Empty<[Message], Error>().eraseToAnyPublisher()
@@ -242,8 +243,7 @@ final class ChatViewModel: ViewModel {
             .store(in: &cancellables)
 
         isAppearSubject
-            .filter { $0 }
-            .first()
+            .first(where: { $0 })
             .flatMapLatestToResult { [weak self] _ in
                 guard let self else {
                     return Empty<Conversation, Error>().eraseToAnyPublisher()
@@ -262,7 +262,7 @@ final class ChatViewModel: ViewModel {
             .store(in: &cancellables)
 
         userService
-            .currentUserPublisher
+            .getCurrentUserPublisher()
             .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
             .store(in: &cancellables)
     }
@@ -325,6 +325,18 @@ final class ChatViewModel: ViewModel {
     }
 
     private func configureActions() {
+        chatItemAction
+            .sink { [weak self] actionType in
+                guard let self else { return }
+                switch actionType {
+                case let .openURL(urlString):
+                    guard let url = URL(string: urlString),
+                          url.scheme == "https" || url.scheme == "http" else { return }
+                    self.fullScreenCoverType = .openUrl(url)
+                }
+            }
+            .store(in: &cancellables)
+
         openChatSettingSubject
             .withLatestFrom(conversationSubject)
             .compactMap { $0 }

@@ -8,6 +8,7 @@
 
 import Kingfisher
 import SwiftUI
+import SwiftUIX
 
 // MARK: - ChatView
 
@@ -54,6 +55,12 @@ struct ChatView<ViewModel: ChatViewModel>: View {
         .onReceive(viewModel.closeAction) {
             presentationMode.wrappedValue.dismiss()
         }
+        .fullScreenCover(
+            unwrapping: $viewModel.fullScreenCoverType,
+            content: {
+                buildFullScreenCoverDestinationView($0)
+            }
+        )
     }
 
     private func buildBodyView() -> some View {
@@ -81,8 +88,13 @@ struct ChatView<ViewModel: ChatViewModel>: View {
         ScrollView {
             LazyVStack(spacing: 0) {
                 ForEach(Array(viewModel.chatItems.enumerated()), id: \.offset) { index, chatItem in
-                    ChatItemView(chatItem: chatItem)
-                        .onAppear { viewModel.loadMoreDataTrigger.send(index) }
+                    ChatItemView(
+                        chatItem: chatItem,
+                        action: {
+                            viewModel.chatItemAction.send($0)
+                        }
+                    )
+                    .onAppear { viewModel.loadMoreDataTrigger.send(index) }
                 }
                 .scaleEffect(x: 1, y: -1, anchor: .center)
             }
@@ -124,6 +136,16 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                 label: { EmptyView() }
             )
             .isDetailLink(false)
+        }
+    }
+
+    @ViewBuilder
+    private func buildFullScreenCoverDestinationView(
+        _ type: Binding<ChatFullScreenCoverType>
+    ) -> some View {
+        switch type.wrappedValue {
+        case let .openUrl(url):
+            SafariView(url: url)
         }
     }
 }

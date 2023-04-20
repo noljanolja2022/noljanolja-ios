@@ -11,70 +11,72 @@ import Foundation
 
 // MARK: - SettingViewModelDelegate
 
-protocol SettingViewModelDelegate: AnyObject {
-    func didSignOut()
-}
-
-// MARK: - SettingViewModelType
-
-protocol SettingViewModelType:
-    ViewModelType where State == SettingViewModel.State, Action == SettingViewModel.Action {}
-
-extension SettingViewModel {
-    struct State {}
-
-    enum Action {
-        case signOut
-    }
-}
+protocol SettingViewModelDelegate: AnyObject {}
 
 // MARK: - SettingViewModel
 
-final class SettingViewModel: SettingViewModelType {
+final class SettingViewModel: ViewModel {
     // MARK: State
 
-    @Published var state: State
+    @Published var name = ""
+    @Published var phoneNumber = ""
+    @Published var appVersion = ""
 
-    // MARK: Dependencies
+    // MARK: Navigations
 
-    private let authService: AuthServiceType
-    private weak var delegate: SettingViewModelDelegate?
+    @Published var navigationType: SettingNavigationType?
 
     // MARK: Action
 
-    private let signOutTrigger = PassthroughSubject<Void, Never>()
+    // MARK: Dependencies
+
+    private let userService: UserServiceType
+    private weak var delegate: SettingViewModelDelegate?
 
     // MARK: Private
 
+    private let currentUserSubject = CurrentValueSubject<User?, Never>(nil)
     private var cancellables = Set<AnyCancellable>()
 
-    init(state: State = State(),
-         authService: AuthServiceType = AuthService.default,
+    init(userService: UserServiceType = UserService.default,
          delegate: SettingViewModelDelegate? = nil) {
-        self.state = state
-        self.authService = authService
+        self.userService = userService
         self.delegate = delegate
+        super.init()
 
         configure()
     }
 
-    func send(_ action: Action) {
-        switch action {
-        case .signOut:
-            signOutTrigger.send()
-        }
-    }
-
     private func configure() {
-        signOutTrigger
-            .flatMapLatestToResult { [weak self] in
-                guard let self else {
-                    return Empty<Void, Error>().eraseToAnyPublisher()
-                }
-                return self.authService.signOut()
-            }
-            .sink(receiveValue: { [weak self] _ in
-                self?.delegate?.didSignOut()
+        appVersion = {
+            let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+            return appVersion ?? ""
+        }()
+
+        currentUserSubject
+            .compactMap { $0 }
+            .sink(receiveValue: { [weak self] user in
+                self?.name = user.name ?? ""
+                self?.phoneNumber = user.phone
+                    .flatMap {
+                        $0.formatPhone()
+                    }
+                    .flatMap { string in
+                        let maxLength = 4
+                        if string.count > maxLength {
+                            let hiddenString = Array(repeating: "*", count: string.count - maxLength).joined()
+                            let shownString = string[string.index(string.endIndex, offsetBy: -4)...]
+                            return hiddenString + shownString
+                        } else {
+                            return Array(repeating: "*", count: string.count).joined()
+                        }
+                    } ?? ""
+            })
+            .store(in: &cancellables)
+
+        userService.getCurrentUserPublisher()
+            .sink(receiveValue: { [weak self] in
+                self?.currentUserSubject.send($0)
             })
             .store(in: &cancellables)
     }

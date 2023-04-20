@@ -13,14 +13,11 @@ import UIKit
 struct BottomSheet<Content: View>: View {
     @Environment(\.presentationMode) private var presentationMode
 
-    @State var isContentHidden = true
-
     private let content: Content
 
     public init(@ViewBuilder content: () -> Content) {
         self.content = content()
-
-        UIView.setAnimationsEnabled(false)
+//        UIView.setAnimationsEnabled(false)
     }
 
     var body: some View {
@@ -32,14 +29,9 @@ struct BottomSheet<Content: View>: View {
             buildBackgroundView()
             buildContentView()
         }
-        .onAppear {
-            withAnimation(.easeInOut(duration: 0.3)) {
-                isContentHidden = false
-            }
-        }
-        .onDisappear {
-            UIView.setAnimationsEnabled(true)
-        }
+//        .onDisappear {
+//            UIView.setAnimationsEnabled(true)
+//        }
         .introspectViewController {
             $0.view.backgroundColor = .clear
         }
@@ -57,16 +49,8 @@ struct BottomSheet<Content: View>: View {
 
     @ViewBuilder
     private func buildContentView() -> some View {
-        if !isContentHidden {
-            content
-                .background(.white)
-                .cornerRadius([.topLeading, .topTrailing], 24)
-                .transition(
-                    .asymmetric(
-                        insertion: .move(edge: .bottom),
-                        removal: .move(edge: .top)
-                    )
-                )
-        }
+        content
+            .background(.white)
+            .cornerRadius([.topLeading, .topTrailing], 24)
     }
 }

@@ -19,7 +19,9 @@ struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
     // MARK: State
 
     @Environment(\.presentationMode) private var presentationMode
+
     @EnvironmentObject private var progressHUBState: ProgressHUBState
+
     @State private var isFocused = false
 
     var body: some View {
@@ -74,7 +76,7 @@ struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
                                 (viewModel.country.phoneCode, viewModel.phoneNumberText)
                             )
                         }
-                        .foregroundColor(ColorAssets.primaryYellow3.swiftUIColor)
+                        .foregroundColor(ColorAssets.primaryMain.swiftUIColor)
                     }
                 }
                 .font(.system(size: 12))

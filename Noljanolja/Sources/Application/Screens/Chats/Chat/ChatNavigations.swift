@@ -7,6 +7,14 @@
 
 import Foundation
 
+// MARK: - ChatNavigationType
+
 enum ChatNavigationType: Equatable {
     case chatSetting(Conversation)
+}
+
+// MARK: - ChatFullScreenCoverType
+
+enum ChatFullScreenCoverType: Equatable {
+    case openUrl(URL)
 }

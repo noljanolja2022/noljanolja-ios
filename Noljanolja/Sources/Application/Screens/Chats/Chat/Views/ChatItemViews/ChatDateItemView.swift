@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - ChatDateItemView
 
 struct ChatDateItemView: View {
-    let model: DateChatItemModel
+    let model: ChatDateItemModel
 
     var body: some View {
         Text(model.message)
@@ -18,8 +18,8 @@ struct ChatDateItemView: View {
             .frame(height: 26)
             .padding(.horizontal, 12)
             .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
-            .background(ColorAssets.neutralGrey.swiftUIColor)
-            .cornerRadius(13)
+            .background(ColorAssets.neutralBlueGrey.swiftUIColor)
+            .cornerRadius(6)
             .frame(maxWidth: .infinity, alignment: .center)
             .padding(.vertical, 16)
     }

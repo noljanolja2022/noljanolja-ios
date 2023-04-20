@@ -15,28 +15,14 @@ import UIKit
 
 protocol ChatPhotoInputViewModelDelegate: AnyObject {}
 
-// MARK: - ChatPhotoInputViewModelType
-
-protocol ChatPhotoInputViewModelType: ObservableObject {
-    // MARK: State
-
-    var viewState: ViewState { get set }
-
-    // MARK: Action
-
-    var loadDataSubject: PassthroughSubject<Void, Never> { get }
-}
-
 // MARK: - ChatPhotoInputViewModel
 
-final class ChatPhotoInputViewModel: ChatPhotoInputViewModelType {
+final class ChatPhotoInputViewModel: ViewModel {
     // MARK: State
 
     @Published var viewState = ViewState.loading
 
     // MARK: Action
-
-    let loadDataSubject = PassthroughSubject<Void, Never>()
 
     // MARK: Dependencies
 
@@ -48,14 +34,15 @@ final class ChatPhotoInputViewModel: ChatPhotoInputViewModelType {
 
     init(delegate: ChatPhotoInputViewModelDelegate? = nil) {
         self.delegate = delegate
+        super.init()
 
         configure()
     }
 
     private func configure() {
-        loadDataSubject
-            .first()
-            .sink { [weak self] in self?.checkPermissionState() }
+        isAppearSubject
+            .filter { $0 }
+            .sink { [weak self] _ in self?.checkPermissionState() }
             .store(in: &cancellables)
     }
 

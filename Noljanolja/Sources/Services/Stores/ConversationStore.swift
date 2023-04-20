@@ -19,6 +19,8 @@ protocol ConversationStoreType {
 
     func removeConversation(conversationID: Int)
     func removeConversation(notIn conversations: [Conversation])
+
+    func deleteAll()
 }
 
 // MARK: - ConversationStore
@@ -81,5 +83,9 @@ final class ConversationStore: ConversationStoreType {
             }
         )
         realmManager.delete(objects)
+    }
+
+    func deleteAll() {
+        realmManager.deleteAll()
     }
 }

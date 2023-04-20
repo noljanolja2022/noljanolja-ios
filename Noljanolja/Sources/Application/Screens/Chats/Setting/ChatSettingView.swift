@@ -19,7 +19,8 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
     // MARK: State
 
     @Environment(\.presentationMode) private var presentationMode
-    @StateObject private var progressHUBState = ProgressHUBState()
+    
+    @EnvironmentObject private var progressHUBState: ProgressHUBState
 
     var body: some View {
         buildBodyView()
@@ -36,7 +37,6 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
         .onChange(of: viewModel.isProgressHUDShowing) {
             progressHUBState.isLoading = $0
         }
-        .progressHUB(isActive: $progressHUBState.isLoading)
         .onReceive(viewModel.closeAction) {
             presentationMode.wrappedValue.dismiss()
         }

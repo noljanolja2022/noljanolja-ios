@@ -14,6 +14,7 @@ import RealmSwift
 protocol ContactStoreType {
     func saveContact(_ users: [User])
     func observeContacts() -> AnyPublisher<[User], Error>
+    func deleteAll()
 }
 
 // MARK: - ContactStore
@@ -48,5 +49,9 @@ final class ContactStore: ContactStoreType {
             .freeze()
             .map { users -> [User] in users.compactMap { $0.model } }
             .eraseToAnyPublisher()
+    }
+
+    func deleteAll() {
+        realmManager.deleteAll()
     }
 }

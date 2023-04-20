@@ -56,7 +56,7 @@ struct AuthView<ViewModel: AuthViewModel>: View {
             buildAuthView()
         }
         .background(
-            ColorAssets.primaryYellowMain.swiftUIColor
+            ColorAssets.primaryLight.swiftUIColor
                 .ignoresSafeArea(edges: .top)
         )
     }
@@ -82,7 +82,7 @@ struct AuthView<ViewModel: AuthViewModel>: View {
             buildActionView()
         }
         .background(ColorAssets.white.swiftUIColor)
-        .cornerRadius(40, corners: [.topLeft, .topRight])
+        .cornerRadius([.topLeading, .topTrailing], 40)
     }
 
     private func buildAuthHeaderView() -> some View {

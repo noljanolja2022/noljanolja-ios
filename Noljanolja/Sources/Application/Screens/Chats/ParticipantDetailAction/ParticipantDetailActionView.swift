@@ -49,6 +49,7 @@ struct ParticipantDetailActionView<ViewModel: ParticipantDetailActionViewModel>:
                 WebImage(url: URL(string: viewModel.participantModel.user.avatar))
                     .resizable()
                     .indicator(.activity)
+                    .scaledToFill()
                     .frame(width: 40, height: 40)
                     .background(ColorAssets.neutralLightGrey.swiftUIColor)
                     .cornerRadius(14)
@@ -84,7 +85,7 @@ struct ParticipantDetailActionView<ViewModel: ParticipantDetailActionViewModel>:
             ColorAssets.white.swiftUIColor
                 .edgesIgnoringSafeArea(.bottom)
         )
-        .cornerRadius(24, corners: [.topLeft, .topRight])
+        .cornerRadius([.topLeading, .topTrailing], 24)
     }
 }
 

@@ -18,6 +18,7 @@ struct ChatSettingParticipantItemView: View {
             WebImage(url: URL(string: model.avatar))
                 .resizable()
                 .indicator(.activity)
+                .scaledToFill()
                 .frame(width: 40, height: 40)
                 .background(ColorAssets.neutralLightGrey.swiftUIColor)
                 .cornerRadius(14)

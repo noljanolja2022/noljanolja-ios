@@ -94,8 +94,7 @@ final class ConversationListViewModel: ViewModel {
 
     private func configureLoadData() {
         isAppearSubject
-            .filter { $0 }
-            .first()
+            .first(where: { $0 })
             .handleEvents(receiveOutput: { [weak self] _ in self?.viewState = .loading })
             .flatMapLatestToResult { [weak self] _ in
                 guard let self else {
@@ -118,7 +117,7 @@ final class ConversationListViewModel: ViewModel {
             .store(in: &cancellables)
 
         userService
-            .currentUserPublisher
+            .getCurrentUserPublisher()
             .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
             .store(in: &cancellables)
     }
