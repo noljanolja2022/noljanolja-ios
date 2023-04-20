@@ -12,7 +12,7 @@ import SwiftUI
 
 // MARK: - ChatStickerPacksInputView
 
-struct ChatStickerPacksInputView<ViewModel: ChatStickerPacksInputViewModelType>: View {
+struct ChatStickerPacksInputView<ViewModel: ChatStickerPacksInputViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
@@ -28,7 +28,8 @@ struct ChatStickerPacksInputView<ViewModel: ChatStickerPacksInputViewModelType>:
 
     private func buildBodyView() -> some View {
         buildContentView()
-            .onAppear { viewModel.loadSubject.send() }
+            .onAppear { viewModel.isAppearSubject.send(true) }
+            .onDisappear { viewModel.isAppearSubject.send(false) }
     }
 
     private func buildContentView() -> some View {

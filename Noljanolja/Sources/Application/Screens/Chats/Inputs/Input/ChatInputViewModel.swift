@@ -14,36 +14,23 @@ import UIKit
 
 protocol ChatInputViewModelDelegate: AnyObject {}
 
-// MARK: - ChatInputViewModelType
+// MARK: - ChatInputViewModel
 
-protocol ChatInputViewModelType: ObservableObject {
+final class ChatInputViewModel: ViewModel {
     // MARK: State
 
     // MARK: Action
 
-    var sendTextSubject: PassthroughSubject<String, Never> { get }
-    var sendImagesSubject: PassthroughSubject<[UIImage], Never> { get }
-    var sendPhotosSubject: PassthroughSubject<[PhotoAsset], Never> { get }
-    var sendStickerSubject: PassthroughSubject<(StickerPack, Sticker), Never> { get }
-}
-
-// MARK: - ChatInputViewModel
-
-final class ChatInputViewModel: ChatInputViewModelType {
-    // MARK: State
+    let sendTextAction = PassthroughSubject<String, Never>()
+    let sendImagesAction = PassthroughSubject<[UIImage], Never>()
+    let sendPhotosAction = PassthroughSubject<[PhotoAsset], Never>()
+    let sendStickerAction = PassthroughSubject<(StickerPack, Sticker), Never>()
 
     // MARK: Dependencies
 
     private let conversationID: Int
     private let messageService: MessageServiceType
     private weak var delegate: ChatInputViewModelDelegate?
-
-    // MARK: Action
-
-    let sendTextSubject = PassthroughSubject<String, Never>()
-    let sendImagesSubject = PassthroughSubject<[UIImage], Never>()
-    let sendPhotosSubject = PassthroughSubject<[PhotoAsset], Never>()
-    let sendStickerSubject = PassthroughSubject<(StickerPack, Sticker), Never>()
 
     // MARK: Private
 
@@ -55,6 +42,7 @@ final class ChatInputViewModel: ChatInputViewModelType {
         self.conversationID = conversationID
         self.messageService = messageService
         self.delegate = delegate
+        super.init()
 
         configure()
     }
@@ -63,7 +51,7 @@ final class ChatInputViewModel: ChatInputViewModelType {
         let conversationID = conversationID
 
         let sendPublisher = Publishers.Merge4(
-            sendTextSubject
+            sendTextAction
                 .filter { !$0.isEmpty }
                 .map {
                     SendMessageRequest(
@@ -72,7 +60,7 @@ final class ChatInputViewModel: ChatInputViewModelType {
                         message: $0
                     )
                 },
-            sendImagesSubject
+            sendImagesAction
                 .map {
                     SendMessageRequest(
                         conversationID: conversationID,
@@ -80,7 +68,7 @@ final class ChatInputViewModel: ChatInputViewModelType {
                         attachments: .images($0)
                     )
                 },
-            sendPhotosSubject
+            sendPhotosAction
                 .map {
                     SendMessageRequest(
                         conversationID: conversationID,
@@ -88,7 +76,7 @@ final class ChatInputViewModel: ChatInputViewModelType {
                         attachments: .photos($0)
                     )
                 },
-            sendStickerSubject
+            sendStickerAction
                 .map {
                     SendMessageRequest(
                         conversationID: conversationID,
@@ -110,5 +98,13 @@ final class ChatInputViewModel: ChatInputViewModelType {
                 print(result)
             }
             .store(in: &cancellables)
+    }
+}
+
+// MARK: ChatInputExpandViewModelDelegate
+
+extension ChatInputViewModel: ChatInputExpandViewModelDelegate {
+    func didSelectImages(_ images: [UIImage]) {
+        sendImagesAction.send(images)
     }
 }

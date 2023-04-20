@@ -103,7 +103,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                     viewModel.actionSheetType = .avatar
                 },
                 label: {
-                    ImageAssets.icCamera.swiftUIImage
+                    ImageAssets.icCameraFill.swiftUIImage
                         .resizable()
                         .scaledToFit()
                         .padding(6)

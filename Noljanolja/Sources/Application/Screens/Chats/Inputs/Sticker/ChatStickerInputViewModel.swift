@@ -13,23 +13,9 @@ import Foundation
 
 protocol ChatStickerInputViewModelDelegate: AnyObject {}
 
-// MARK: - ChatStickerInputViewModelType
-
-protocol ChatStickerInputViewModelType: ObservableObject {
-    // MARK: State
-
-    var stickerPack: StickerPack { get set }
-    var viewState: ViewState { get set }
-
-    // MARK: Action
-
-    var loadDataSubject: PassthroughSubject<Void, Never> { get }
-    var downloadDataSubject: PassthroughSubject<Void, Never> { get }
-}
-
 // MARK: - ChatStickerInputViewModel
 
-final class ChatStickerInputViewModel: ChatStickerInputViewModelType {
+final class ChatStickerInputViewModel: ViewModel {
     // MARK: State
 
     @Published var stickerPack: StickerPack
@@ -37,10 +23,8 @@ final class ChatStickerInputViewModel: ChatStickerInputViewModelType {
 
     // MARK: Action
 
-    let loadDataSubject = PassthroughSubject<Void, Never>()
     let downloadDataSubject = PassthroughSubject<Void, Never>()
-
-    private let reloadDataSubject = PassthroughSubject<Void, Never>()
+    let reloadDataSubject = PassthroughSubject<Void, Never>()
 
     // MARK: Dependencies
 
@@ -57,13 +41,14 @@ final class ChatStickerInputViewModel: ChatStickerInputViewModelType {
         self.stickerPack = stickerPack
         self.mediaService = mediaService
         self.delegate = delegate
+        super.init()
 
         configure()
     }
 
     private func configure() {
         Publishers.Merge(
-            loadDataSubject.first(),
+            isAppearSubject.first(where: { $0 }).mapToVoid(),
             reloadDataSubject
         )
         .sink(receiveValue: { [weak self] in self?.checkLocalStickerPack() })

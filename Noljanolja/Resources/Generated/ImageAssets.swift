@@ -24,32 +24,31 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 internal enum ImageAssets {
   internal static let icAdd = ImageAsset(name: "ic_add")
   internal static let icAddChat = ImageAsset(name: "ic_add_chat")
-  internal static let icAddCircle = ImageAsset(name: "ic_add_circle")
   internal static let icAppMascot = ImageAsset(name: "ic_app_mascot")
   internal static let icArrowRight = ImageAsset(name: "ic_arrow_right")
   internal static let icAvatarPlaceholder = ImageAsset(name: "ic_avatar_placeholder")
   internal static let icBack = ImageAsset(name: "ic_back")
-  internal static let icCamera = ImageAsset(name: "ic_camera")
-  internal static let icCheckCircle = ImageAsset(name: "ic_check_circle")
-  internal static let icChecked = ImageAsset(name: "ic_checked")
+  internal static let icCameraFill = ImageAsset(name: "ic_camera_fill")
+  internal static let icCameraOutline = ImageAsset(name: "ic_camera_outline")
   internal static let icCircleChecked = ImageAsset(name: "ic_circle_checked")
   internal static let icCircleUnchecked = ImageAsset(name: "ic_circle_unchecked")
   internal static let icClose = ImageAsset(name: "ic_close")
   internal static let icEdit = ImageAsset(name: "ic_edit")
   internal static let icEmoji = ImageAsset(name: "ic_emoji")
   internal static let icGroupChat = ImageAsset(name: "ic_group_chat")
-  internal static let icKeyboardVoice = ImageAsset(name: "ic_keyboard_voice")
+  internal static let icKeyboard = ImageAsset(name: "ic_keyboard")
   internal static let icKing = ImageAsset(name: "ic_king")
   internal static let icMenu = ImageAsset(name: "ic_menu")
-  internal static let icPhoto = ImageAsset(name: "ic_photo")
+  internal static let icPhotoOutline = ImageAsset(name: "ic_photo_outline")
   internal static let icPoint = ImageAsset(name: "ic_point")
   internal static let icPointAccumulated = ImageAsset(name: "ic_point_accumulated")
   internal static let icPointReload = ImageAsset(name: "ic_point_reload")
   internal static let icPpyy = ImageAsset(name: "ic_ppyy")
+  internal static let icRoundedChecked = ImageAsset(name: "ic_rounded_checked")
+  internal static let icRoundedUnchecked = ImageAsset(name: "ic_rounded_unchecked")
   internal static let icSend = ImageAsset(name: "ic_send")
   internal static let icSetting = ImageAsset(name: "ic_setting")
   internal static let icSingleChat = ImageAsset(name: "ic_single_chat")
-  internal static let icUnchecked = ImageAsset(name: "ic_unchecked")
   internal static let logo = ImageAsset(name: "logo")
   internal static let icSplashMultiCoin = ImageAsset(name: "ic_splash_multi_coin")
   internal static let icSplashSingleCoin = ImageAsset(name: "ic_splash_single_coin")
@@ -59,32 +58,31 @@ internal enum ImageAssets {
   internal static let allImages: [ImageAsset] = [
     icAdd,
     icAddChat,
-    icAddCircle,
     icAppMascot,
     icArrowRight,
     icAvatarPlaceholder,
     icBack,
-    icCamera,
-    icCheckCircle,
-    icChecked,
+    icCameraFill,
+    icCameraOutline,
     icCircleChecked,
     icCircleUnchecked,
     icClose,
     icEdit,
     icEmoji,
     icGroupChat,
-    icKeyboardVoice,
+    icKeyboard,
     icKing,
     icMenu,
-    icPhoto,
+    icPhotoOutline,
     icPoint,
     icPointAccumulated,
     icPointReload,
     icPpyy,
+    icRoundedChecked,
+    icRoundedUnchecked,
     icSend,
     icSetting,
     icSingleChat,
-    icUnchecked,
     logo,
     icSplashMultiCoin,
     icSplashSingleCoin,

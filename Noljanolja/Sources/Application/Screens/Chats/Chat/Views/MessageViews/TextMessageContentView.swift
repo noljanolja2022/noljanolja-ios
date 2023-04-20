@@ -30,17 +30,15 @@ struct TextMessageContentView: View {
             .isEditable(false)
             .isScrollEnabled(false)
             .foregroundColor(
-                contentItemModel.isSenderMessage
-                    ? ColorAssets.neutralLight.swiftUIColor
-                    : ColorAssets.neutralDarkGrey.swiftUIColor
+                ColorAssets.primaryDark.swiftUIColor
             )
         }
         .padding(.vertical, 12)
         .padding(.horizontal, 16)
         .background(
             contentItemModel.isSenderMessage
-                ? ColorAssets.neutralDarkGrey.swiftUIColor
-                : ColorAssets.primaryLight.swiftUIColor
+                ? Color(hexadecimal: "B8EB42")
+                : ColorAssets.neutralLightGrey.swiftUIColor
         )
     }
 }

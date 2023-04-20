@@ -18,8 +18,8 @@ struct ChatEventItemView: View {
             .frame(height: 26)
             .padding(.horizontal, 12)
             .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
-            .background(ColorAssets.neutralGrey.swiftUIColor)
-            .cornerRadius(13)
+            .background(ColorAssets.neutralBlueGrey.swiftUIColor)
+            .cornerRadius(5)
             .frame(maxWidth: .infinity, alignment: .center)
             .padding(.vertical, 4)
     }

@@ -49,7 +49,7 @@ final class MessageItemModelBuilder {
 
             if isFirstMessageByDate {
                 messageItemTypes.append(
-                    .date(DateChatItemModel(message: message))
+                    .date(ChatDateItemModel(message: message))
                 )
             }
         }

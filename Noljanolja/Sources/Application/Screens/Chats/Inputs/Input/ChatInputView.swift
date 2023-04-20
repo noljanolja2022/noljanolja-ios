@@ -11,7 +11,7 @@ import SwiftUIX
 
 // MARK: - ChatInputView
 
-struct ChatInputView<ViewModel: ChatInputViewModelType>: View {
+struct ChatInputView<ViewModel: ChatInputViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
@@ -20,197 +20,141 @@ struct ChatInputView<ViewModel: ChatInputViewModelType>: View {
 
     @StateObject private var keyboard = Keyboard.main
     @State private var text = ""
-    @State private var isMediaInputHidden = false
-    @State private var mediaType: ChatMediaInputType?
-    @State private var image: UIImage?
-    @State private var isCameraShown = false
+    @State private var expandType: ChatInputExpandType?
+
+    private let inputItemSize: CGFloat = 36
 
     var body: some View {
         buildBodyView()
-            .fullScreenCover(
-                isPresented: $isCameraShown,
-                onDismiss: {
-                    guard let image else { return }
-                    viewModel.sendImagesSubject.send([image])
-                },
-                content: {
-                    ImagePicker(image: $image)
-                        .sourceType({
-                            #if targetEnvironment(simulator)
-                                return .photoLibrary
-                            #else
-                                return .camera
-                            #endif
-                        }())
-                        .allowsEditing(true)
-                        .introspectViewController { $0.view.backgroundColor = .black }
-                }
-            )
     }
 
     private func buildBodyView() -> some View {
         VStack(spacing: 0) {
-            buildInputsView()
-
-            ChatMediaInputView(
-                viewModel: ChatMediaInputViewModel(),
-                type: $mediaType,
-                sendPhotoAction: { viewModel.sendPhotosSubject.send($0) },
-                sendStickerAction: { viewModel.sendStickerSubject.send(($0, $1)) }
-            )
-            .height(300)
+            buildContentView()
+            buildExpandView()
+        }
+        .onChange(of: keyboard.isActive) { isActive in
+            guard isActive else { return }
+            expandType = nil
         }
     }
 
-    private func buildInputsView() -> some View {
-        HStack(spacing: 10) {
-            buildMediaInputsView()
-            buildTextInputView()
-            buildSendView()
-        }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 4)
-    }
-
-    private func buildMediaInputsView() -> some View {
-        HStack(spacing: 10) {
-            if !isMediaInputHidden {
-                HStack(spacing: 10) {
-                    Button(
-                        action: {},
-                        label: {
-                            ImageAssets.icAddCircle.swiftUIImage
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 24, height: 24)
-                        }
-                    )
-                    Button(
-                        action: {
-                            isCameraShown = true
-                        },
-                        label: {
-                            ImageAssets.icCamera.swiftUIImage
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 24, height: 24)
-                        }
-                    )
-                    Button(
-                        action: {
-                            keyboard.dismiss()
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                withAnimation {
-                                    mediaType = .photo
-                                }
-                            }
-                        },
-                        label: {
-                            ImageAssets.icPhoto.swiftUIImage
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 24, height: 24)
-                        }
-                    )
-                    Button(
-                        action: {},
-                        label: {
-                            ImageAssets.icKeyboardVoice.swiftUIImage
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 24, height: 24)
-                        }
-                    )
-                }
-            } else {
-                Button(
-                    action: {
-                        withAnimation {
-                            isMediaInputHidden = false
-                        }
-                    },
-                    label: {
-                        Image(systemName: "chevron.right")
-                            .resizable()
-                            .scaledToFit()
-                            .padding(4)
-                            .frame(width: 24, height: 24)
-                    }
-                )
-            }
-        }
-        .frame(height: 40)
-        .foregroundColor(ColorAssets.primaryDark.swiftUIColor)
-    }
-
-    private func buildTextInputView() -> some View {
-        HStack(alignment: .bottom) {
-            ZStack(alignment: .center) {
-                if text.isEmpty {
-                    Text("Aa")
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
-                        .padding(.horizontal, 10)
-                }
-                TextEditor(text: $text)
-                    .textEditorBackgroundColor(.clear)
-                    .frame(minHeight: 32)
-                    .frame(maxHeight: 58)
-                    .padding(4)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            }
-            .font(.system(size: 14))
-
+    private func buildContentView() -> some View {
+        HStack(alignment: .bottom, spacing: 4) {
             Button(
                 action: {
-                    keyboard.dismiss()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        withAnimation {
-                            mediaType = .sticker
+                    withAnimation {
+                        keyboard.dismiss()
+                        DispatchQueue.main.asyncAfter(
+                            deadline: .now() + (keyboard.isActive ? 0.3 : 0)
+                        ) {
+                            withAnimation {
+                                expandType = .menu
+                            }
                         }
                     }
                 },
                 label: {
-                    ImageAssets.icEmoji.swiftUIImage
+                    ImageAssets.icAdd.swiftUIImage
                         .resizable()
-                        .scaledToFill()
-                        .frame(width: 24, height: 24)
-                        .foregroundColor(ColorAssets.primaryDark.swiftUIColor)
+                        .scaledToFit()
+                        .padding(4)
+                        .frame(width: inputItemSize, height: inputItemSize)
+                        .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                 }
             )
-            .padding(9)
+
+            buildMainView()
         }
-        .background(ColorAssets.neutralLightGrey.swiftUIColor.opacity(0.6))
-        .cornerRadius(8)
-        .onChange(of: text) { _ in
-            withAnimation {
-                isMediaInputHidden = true
+        .padding(.leading, 8)
+        .padding(.trailing, 12)
+        .padding(.vertical, 4)
+    }
+
+    private func buildMainView() -> some View {
+        HStack(alignment: .bottom, spacing: 0) {
+            buildTextInputView()
+            buildKeyboardAndStickerView()
+            buildSendView()
+        }
+        .background(ColorAssets.neutralLightGrey.swiftUIColor)
+        .cornerRadius(18)
+    }
+
+    private func buildTextInputView() -> some View {
+        ZStack(alignment: .center) {
+            if text.isEmpty {
+                Text("Aa")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
+                    .padding(.horizontal, 6)
             }
+            TextEditor(text: $text)
+                .textEditorBackgroundColor(.clear)
+                .padding(.vertical, 1)
+                .frame(minHeight: inputItemSize)
+                .frame(maxHeight: 64)
+                .fixedSize(horizontal: false, vertical: true)
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
         }
-        .onChange(of: keyboard.isActive) { isActive in
-            guard isActive else { return }
-            withAnimation {
-                isMediaInputHidden = true
-                mediaType = nil
+        .font(.system(size: 14))
+        .padding(.horizontal, 8)
+    }
+
+    @ViewBuilder
+    private func buildKeyboardAndStickerView() -> some View {
+        Button(
+            action: {
+                keyboard.dismiss()
+                DispatchQueue.main.asyncAfter(
+                    deadline: .now() + (keyboard.isActive ? 0.3 : 0)
+                ) {
+                    withAnimation {
+                        expandType = expandType == .sticker ? nil : .sticker
+                    }
+                }
+            },
+            label: {
+                ImageAssets.icEmoji.swiftUIImage
+                    .resizable()
+                    .scaledToFit()
+                    .padding(8)
+                    .frame(width: inputItemSize, height: inputItemSize)
+                    .foregroundColor(ColorAssets.primaryDark.swiftUIColor)
             }
-        }
+        )
     }
 
     private func buildSendView() -> some View {
         Button(
             action: {
-                viewModel.sendTextSubject.send(text)
+                viewModel.sendTextAction.send(text)
                 text = ""
             },
             label: {
                 ImageAssets.icSend.swiftUIImage
                     .resizable()
-                    .scaledToFill()
-                    .frame(width: 32, height: 32)
+                    .scaledToFit()
+                    .frame(width: inputItemSize, height: inputItemSize)
             }
         )
-        .foregroundColor(ColorAssets.primaryDark.swiftUIColor)
+        .foregroundColor(
+            text.isEmpty
+                ? ColorAssets.neutralDeepGrey.swiftUIColor
+                : ColorAssets.primaryMain.swiftUIColor
+        )
+    }
+
+    private func buildExpandView() -> some View {
+        ChatInputExpandView(
+            viewModel: ChatInputExpandViewModel(
+                delegate: viewModel
+            ),
+            expandType: $expandType,
+            sendPhotoAction: { viewModel.sendPhotosAction.send($0) },
+            sendStickerAction: { viewModel.sendStickerAction.send(($0, $1)) }
+        )
+        .height(300)
     }
 }
 
