@@ -20,7 +20,7 @@ struct ConversationItemView: View {
                 url: URL(string: model.image ?? ""),
                 context: [
                     .imageTransformer: SDImageResizingTransformer(
-                        size: CGSize(width: 40, height: 40),
+                        size: CGSize(width: 40 * 3, height: 40 * 3),
                         scaleMode: .fill
                     )
                 ]

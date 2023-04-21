@@ -15,13 +15,21 @@ struct ChatSettingParticipantItemView: View {
 
     var body: some View {
         HStack(spacing: 16) {
-            WebImage(url: URL(string: model.avatar))
-                .resizable()
-                .indicator(.activity)
-                .scaledToFill()
-                .frame(width: 40, height: 40)
-                .background(ColorAssets.neutralLightGrey.swiftUIColor)
-                .cornerRadius(14)
+            WebImage(
+                url: URL(string: model.avatar),
+                context: [
+                    .imageTransformer: SDImageResizingTransformer(
+                        size: CGSize(width: 40 * 3, height: 40 * 3),
+                        scaleMode: .fill
+                    )
+                ]
+            )
+            .resizable()
+            .indicator(.activity)
+            .scaledToFill()
+            .frame(width: 40, height: 40)
+            .background(ColorAssets.neutralLightGrey.swiftUIColor)
+            .cornerRadius(14)
             VStack(spacing: 0) {
                 if let displayName = model.displayName {
                     Text(displayName)

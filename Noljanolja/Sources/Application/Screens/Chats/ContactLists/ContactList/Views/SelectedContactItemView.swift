@@ -16,14 +16,22 @@ struct SelectedContactItemView: View {
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
-            WebImage(url: URL(string: user.avatar))
-                .resizable()
-                .indicator(.activity)
-                .scaledToFill()
-                .frame(width: 50, height: 50)
-                .background(ColorAssets.neutralGrey.swiftUIColor)
-                .cornerRadius(14)
-                .padding(.trailing, 6)
+            WebImage(
+                url: URL(string: user.avatar),
+                context: [
+                    .imageTransformer: SDImageResizingTransformer(
+                        size: CGSize(width: 50 * 3, height: 50 * 3),
+                        scaleMode: .fill
+                    )
+                ]
+            )
+            .resizable()
+            .indicator(.activity)
+            .scaledToFill()
+            .frame(width: 50, height: 50)
+            .background(ColorAssets.neutralGrey.swiftUIColor)
+            .cornerRadius(14)
+            .padding(.trailing, 6)
             Button(
                 action: {
                     action?()

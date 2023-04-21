@@ -43,21 +43,29 @@ struct ChatStickerPacksInputView<ViewModel: ChatStickerPacksInputViewModel>: Vie
         ScrollView(.horizontal) {
             LazyHStack(spacing: 24) {
                 ForEach(Array(viewModel.stickerPacks.enumerated()), id: \.offset) { offset, stickerPack in
-                    WebImage(url: stickerPack.getImageURL())
-                        .resizable()
-                        .indicator(.activity)
-                        .aspectRatio(1, contentMode: .fit)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .padding(4)
-                        .background(
-                            selectedStickerPackIndex == offset
-                                ? ColorAssets.neutralLightGrey.swiftUIColor
-                                : Color.clear
-                        )
-                        .cornerRadius(4)
-                        .onTapGesture {
-                            selectedStickerPackIndex = offset
-                        }
+                    WebImage(
+                        url: stickerPack.getImageURL(),
+                        context: [
+                            .imageTransformer: SDImageResizingTransformer(
+                                size: CGSize(width: 36 * 3, height: 36 * 3),
+                                scaleMode: .fill
+                            )
+                        ]
+                    )
+                    .resizable()
+                    .indicator(.activity)
+                    .aspectRatio(1, contentMode: .fit)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .padding(4)
+                    .background(
+                        selectedStickerPackIndex == offset
+                            ? ColorAssets.neutralLightGrey.swiftUIColor
+                            : Color.clear
+                    )
+                    .cornerRadius(4)
+                    .onTapGesture {
+                        selectedStickerPackIndex = offset
+                    }
                 }
             }
         }

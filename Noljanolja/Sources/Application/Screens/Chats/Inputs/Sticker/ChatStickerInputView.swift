@@ -70,6 +70,12 @@ struct ChatStickerInputView<ViewModel: ChatStickerInputViewModel>: View {
             } else {
                 WebImage(
                     url: sticker.getImageURL(viewModel.stickerPack.id),
+                    context: [
+                        .imageTransformer: SDImageResizingTransformer(
+                            size: CGSize(width: 160, height: 160),
+                            scaleMode: .fill
+                        )
+                    ],
                     isAnimating: .constant(false)
                 )
                 .resizable()

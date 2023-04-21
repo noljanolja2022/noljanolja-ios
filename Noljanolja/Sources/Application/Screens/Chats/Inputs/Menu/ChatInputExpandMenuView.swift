@@ -67,6 +67,7 @@ struct ChatInputExpandMenuView<ViewModel: ChatInputExpandMenuViewModel>: View {
                         .scaledToFit()
                         .padding(8)
                         .frame(width: 48, height: 48)
+                        .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
                         .background(Color(hexadecimal: model.colorHexString))
                         .cornerRadius(16)
                     Text(model.title)

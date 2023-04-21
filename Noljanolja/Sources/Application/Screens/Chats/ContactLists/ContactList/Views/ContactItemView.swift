@@ -16,13 +16,21 @@ struct ContactItemView: View {
 
     var body: some View {
         HStack {
-            WebImage(url: URL(string: user.avatar))
-                .resizable()
-                .indicator(.activity)
-                .scaledToFill()
-                .frame(width: 40, height: 40)
-                .background(ColorAssets.neutralGrey.swiftUIColor)
-                .cornerRadius(14)
+            WebImage(
+                url: URL(string: user.avatar),
+                context: [
+                    .imageTransformer: SDImageResizingTransformer(
+                        size: CGSize(width: 40 * 3, height: 40 * 3),
+                        scaleMode: .fill
+                    )
+                ]
+            )
+            .resizable()
+            .indicator(.activity)
+            .scaledToFill()
+            .frame(width: 40, height: 40)
+            .background(ColorAssets.neutralGrey.swiftUIColor)
+            .cornerRadius(14)
 
             Text(user.name ?? "")
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)

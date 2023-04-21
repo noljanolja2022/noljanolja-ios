@@ -19,12 +19,20 @@ struct ReceiverMessageView: View {
         HStack(alignment: .top, spacing: 4) {
             if model.positionType == .all
                 || model.positionType == .first {
-                WebImage(url: URL(string: model.avatar ?? ""))
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 32, height: 32)
-                    .background(ColorAssets.neutralGrey.swiftUIColor)
-                    .cornerRadius(12)
+                WebImage(
+                    url: URL(string: model.avatar ?? ""),
+                    context: [
+                        .imageTransformer: SDImageResizingTransformer(
+                            size: CGSize(width: 32 * 3, height: 32 * 3),
+                            scaleMode: .fill
+                        )
+                    ]
+                )
+                .resizable()
+                .scaledToFill()
+                .frame(width: 32, height: 32)
+                .background(ColorAssets.neutralGrey.swiftUIColor)
+                .cornerRadius(12)
             }
 
             HStack(alignment: .bottom, spacing: 4) {

@@ -97,7 +97,7 @@ struct Message: Equatable, Codable {
            let createdAt = createdAtString.date(withFormats: NetworkConfigs.Format.apiFullDateFormats) {
             self.createdAt = createdAt
         } else {
-            throw NetworkError.mapping("\(Swift.type(of: type)) at key createdAt")
+            throw NetworkError.mapping("\(Swift.type(of: self)) at key createdAt")
         }
     }
 
