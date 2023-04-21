@@ -20,10 +20,13 @@ struct VideosView<ViewModel: VideosViewModel>: View {
     }
 
     private func buildBodyView() -> some View {
-        buildContentView()
-            .clipped()
-            .onAppear { viewModel.isAppearSubject.send(true) }
-            .onDisappear { viewModel.isAppearSubject.send(false) }
+        ZStack {
+            buildContentView()
+            buildNavigationLink()
+        }
+        .clipped()
+        .onAppear { viewModel.isAppearSubject.send(true) }
+        .onDisappear { viewModel.isAppearSubject.send(false) }
     }
 
     private func buildContentView() -> some View {
@@ -53,22 +56,47 @@ struct VideosView<ViewModel: VideosViewModel>: View {
     @ViewBuilder
     private func buildHighlightView() -> some View {
         if !viewModel.model.highlightVideos.isEmpty {
-            HighlightVideoView(videos: viewModel.model.highlightVideos)
+            HighlightVideoView(
+                videos: viewModel.model.highlightVideos,
+                selectAction: {
+                    viewModel.navigationType = .videoDetail($0)
+                }
+            )
         }
     }
 
     @ViewBuilder
     private func buildWatchingView() -> some View {
         if !viewModel.model.highlightVideos.isEmpty {
-            WatchingVideoView(videos: viewModel.model.highlightVideos)
+            WatchingVideoView(
+                videos: viewModel.model.highlightVideos,
+                selectAction: {
+                    viewModel.navigationType = .videoDetail($0)
+                }
+            )
         }
     }
 
     @ViewBuilder
     private func buildTrendingView() -> some View {
         if !viewModel.model.trendingVideos.isEmpty {
-            TrendingVideoView(videos: viewModel.model.trendingVideos)
+            TrendingVideoView(
+                videos: viewModel.model.trendingVideos,
+                selectAction: {
+                    viewModel.navigationType = .videoDetail($0)
+                }
+            )
         }
+    }
+
+    @ViewBuilder
+    private func buildNavigationLink() -> some View {
+        NavigationLink(
+            unwrapping: $viewModel.navigationType,
+            onNavigate: { _ in },
+            destination: { buildNavigationDestinationView($0) },
+            label: {}
+        )
     }
 
     private func buildLoadingView() -> some View {
@@ -83,6 +111,20 @@ struct VideosView<ViewModel: VideosViewModel>: View {
     private func buildErrorView() -> some View {
         Text("")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    @ViewBuilder
+    private func buildNavigationDestinationView(
+        _ type: Binding<VideosNavigationType>
+    ) -> some View {
+        switch type.wrappedValue {
+        case let .videoDetail(video):
+            VideoDetailView(
+                viewModel: VideoDetailViewModel(
+                    videoId: video.id
+                )
+            )
+        }
     }
 }
 

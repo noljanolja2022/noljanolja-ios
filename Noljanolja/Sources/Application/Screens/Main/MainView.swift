@@ -38,7 +38,7 @@ struct MainView<ViewModel: MainViewModel>: View {
     private func buildToolBarContent() -> some ToolbarContent {
         ToolbarItem(placement: .principal) {
             Text(viewModel.selectedTab.navigationBarTitle)
-                .font(.system(size: 18, weight: .bold))
+                .font(.system(size: 16, weight: .bold))
                 .frame(minWidth: 120)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
         }

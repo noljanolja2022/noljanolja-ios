@@ -21,6 +21,10 @@ final class VideosViewModel: ViewModel {
     @Published var viewState = ViewState.loading
     @Published var model = VideosModel()
 
+    // MARK: Navigations
+
+    @Published var navigationType: VideosNavigationType?
+
     // MARK: Action
 
     let loadMoreTrendingVideos = PassthroughSubject<Int, Never>()

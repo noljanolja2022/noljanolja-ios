@@ -11,6 +11,7 @@ import SwiftUI
 
 struct WatchingVideoView: View {
     var videos: [Video]
+    var selectAction: ((Video) -> Void)?
 
     var body: some View {
         buildBodyView()
@@ -33,6 +34,7 @@ struct WatchingVideoView: View {
             HStack(alignment: .top, spacing: 12) {
                 ForEach(videos, id: \.id) { video in
                     WatchingVideoItemView(video: video)
+                        .onTapGesture { selectAction?(video) }
                 }
             }
             .padding(.horizontal, 16)

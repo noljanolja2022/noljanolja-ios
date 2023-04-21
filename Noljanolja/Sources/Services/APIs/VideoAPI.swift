@@ -49,6 +49,55 @@ private enum VideoAPITargets {
             return parameters.compactMapValues { $0 }
         }
     }
+
+    struct GetVideoDetail: BaseAuthTargetType {
+        var path: String { "v1/media/videos/\(videoId)" }
+        let method: Moya.Method = .get
+        var task: Task { .requestPlain }
+
+        let videoId: String
+    }
+
+    struct GetVideoComments: BaseAuthTargetType {
+        var path: String { "v1/media/videos/\(videoId)/comments" }
+        let method: Moya.Method = .get
+        var task: Task { .requestParameters(parameters: parameters, encoding: URLEncoding.default) }
+
+        let videoId: String
+        let beforeCommentId: Int?
+        let limit: Int?
+
+        var parameters: [String: Any] {
+            let parameters: [String: Any?] = [
+                "beforeCommentId": beforeCommentId,
+                "limit": limit
+            ]
+            return parameters.compactMapValues { $0 }
+        }
+    }
+
+    struct PostVideoComments: BaseAuthTargetType {
+        var path: String { "v1/media/videos/\(videoId)/comments" }
+        let method: Moya.Method = .post
+        var task: Task { .requestParameters(parameters: parameters, encoding: JSONEncoding.default) }
+
+        let videoId: String
+        let comment: String
+
+        var parameters: [String: Any] {
+            [
+                "comment": comment
+            ]
+        }
+    }
+
+    struct LikeVideo: BaseAuthTargetType {
+        var path: String { "v1/media/videos/\(videoId)/likes" }
+        let method: Moya.Method = .post
+        var task: Task { .requestParameters(parameters: [:], encoding: JSONEncoding.default) }
+
+        let videoId: String
+    }
 }
 
 // MARK: - VideoAPIType
@@ -56,6 +105,11 @@ private enum VideoAPITargets {
 protocol VideoAPIType {
     func getVideos(page: Int, pageSize: Int?, isHighlighted: Bool?, categoryId: String?) -> AnyPublisher<[Video], Error>
     func getTrendingVideos(duration: VideoTrendingDurationType, limit: Int?) -> AnyPublisher<[Video], Error>
+
+    func getVideoDetail(id: String) -> AnyPublisher<Video, Error>
+    func getVideoComments(videoId: String, beforeCommentId: Int?, limit: Int?) -> AnyPublisher<[VideoComment], Error>
+    func postVideoComment(videoId: String, comment: String) -> AnyPublisher<VideoComment, Error>
+    func likeVideo(videoId: String) -> AnyPublisher<Void, Error>
 }
 
 extension VideoAPIType {
@@ -65,6 +119,10 @@ extension VideoAPIType {
 
     func getTrendingVideos(duration: VideoTrendingDurationType, limit: Int? = nil) -> AnyPublisher<[Video], Error> {
         getTrendingVideos(duration: duration, limit: limit)
+    }
+
+    func getVideoComments(videoId: String, beforeCommentId: Int? = nil, limit: Int? = 20) -> AnyPublisher<[VideoComment], Error> {
+        getVideoComments(videoId: videoId, beforeCommentId: beforeCommentId, limit: limit)
     }
 }
 
@@ -95,6 +153,40 @@ final class VideoAPI: VideoAPIType {
         api.request(
             target: VideoAPITargets.GetTrendingVideos(duration: duration, limit: limit),
             atKeyPath: "data"
+        )
+    }
+
+    func getVideoDetail(id: String) -> AnyPublisher<Video, Error> {
+        api.request(
+            target: VideoAPITargets.GetVideoDetail(videoId: id),
+            atKeyPath: "data"
+        )
+    }
+
+    func getVideoComments(videoId: String, beforeCommentId: Int?, limit: Int?) -> AnyPublisher<[VideoComment], Error> {
+        api.request(
+            target: VideoAPITargets.GetVideoComments(
+                videoId: videoId,
+                beforeCommentId: beforeCommentId,
+                limit: limit
+            ),
+            atKeyPath: "data"
+        )
+    }
+
+    func postVideoComment(videoId: String, comment: String) -> AnyPublisher<VideoComment, Error> {
+        api.request(
+            target: VideoAPITargets.PostVideoComments(
+                videoId: videoId,
+                comment: comment
+            ),
+            atKeyPath: "data"
+        )
+    }
+
+    func likeVideo(videoId: String) -> AnyPublisher<Void, Error> {
+        api.request(
+            target: VideoAPITargets.LikeVideo(videoId: videoId)
         )
     }
 }

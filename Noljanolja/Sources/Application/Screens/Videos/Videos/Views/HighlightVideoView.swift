@@ -12,6 +12,7 @@ import SwiftUIX
 
 struct HighlightVideoView: View {
     var videos: [Video]
+    var selectAction: ((Video) -> Void)?
 
     @State private var selectedIndex = 0
 
@@ -26,6 +27,7 @@ struct HighlightVideoView: View {
                     let video = videos[index]
                     HighlightVideoItemView(video: video)
                         .tag(index)
+                        .onTapGesture { selectAction?(video) }
                 }
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
