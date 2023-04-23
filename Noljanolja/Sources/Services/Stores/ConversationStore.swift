@@ -65,6 +65,7 @@ final class ConversationStore: ConversationStoreType {
         realmManager.objects(StorableConversation.self)
             .collectionPublisher
             .map { conversations -> [Conversation] in conversations.compactMap { $0.model } }
+            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
 

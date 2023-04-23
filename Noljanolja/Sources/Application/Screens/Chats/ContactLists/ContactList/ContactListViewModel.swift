@@ -68,7 +68,6 @@ final class ContactListViewModel: ViewModel {
 
     private func configureLoadData() {
         loadDataSubject
-            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.viewState = .loading })
             .flatMapLatestToResult { [weak self] _ -> AnyPublisher<[User], Error> in
                 guard let self else {
