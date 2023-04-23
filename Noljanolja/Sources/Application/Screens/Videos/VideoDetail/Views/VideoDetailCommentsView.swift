@@ -52,9 +52,11 @@ struct VideoDetailCommentsView: View {
     }
 
     private func buildContentView() -> some View {
-        LazyVStack(spacing: 4) {
-            ForEach(comments.indices, id: \.self) { _ in
-                VideoDetailCommentView()
+        LazyVStack(spacing: 0) {
+            ForEach(comments.indices, id: \.self) { index in
+                VideoDetailCommentView(
+                    comment: comments[index]
+                )
             }
         }
     }

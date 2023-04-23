@@ -21,7 +21,6 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
 
     private func buildBodyView() -> some View {
         buildMainView()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .navigationBarTitle("", displayMode: .inline)
@@ -35,32 +34,60 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
     }
 
     private func buildMainView() -> some View {
-        buildContentView()
-            .statefull(
-                state: $viewModel.viewState,
-                isEmpty: { viewModel.video == nil },
-                loading: buildLoadingView,
-                empty: buildEmptyView,
-                error: buildErrorView
-            )
+        VStack(spacing: 0) {
+            buildPlayerView()
+            buildContentView()
+            buildInputView()
+        }
+        .statefull(
+            state: $viewModel.viewState,
+            isEmpty: { viewModel.video == nil },
+            loading: buildLoadingView,
+            empty: buildEmptyView,
+            error: buildErrorView
+        )
     }
 
+    @ViewBuilder
+    private func buildPlayerView() -> some View {
+        if let video = viewModel.video {
+            VideoDetailPlayerView(video: video)
+        }
+    }
+
+    @ViewBuilder
     private func buildContentView() -> some View {
-        ScrollView {
-            LazyVStack(spacing: 4) {
-                if let video = viewModel.video {
-                    VideoDetailPlayerView(video: video)
-                    VideoDetailInformationView(video: video)
+        let commentViewId = "comment_view"
+        ScrollViewReader { value in
+            ScrollView {
+                LazyVStack(spacing: 4) {
+                    if let video = viewModel.video {
+                        VideoDetailInformationView(video: video)
+                    }
+
+                    Divider()
+                        .frame(height: 2)
+                        .overlay(ColorAssets.neutralLightGrey.swiftUIColor)
+                        .padding(.vertical, 4)
+
+                    VideoDetailCommentsView(comments: viewModel.comments)
+                        .id(commentViewId)
                 }
-
-                Divider()
-                    .frame(height: 2)
-                    .overlay(ColorAssets.neutralLightGrey.swiftUIColor)
-                    .padding(.vertical, 4)
-
-                VideoDetailCommentsView(comments: viewModel.comments)
+                .padding(.top, 12)
+            }
+            .onReceive(viewModel.scrollToTopAction) {
+                value.scrollTo(commentViewId, anchor: .top)
             }
         }
+    }
+
+    private func buildInputView() -> some View {
+        VideoDetailInputView(
+            viewModel: VideoDetailInputViewModel(
+                videoId: viewModel.videoId,
+                delegate: viewModel
+            )
+        )
     }
 
     private func buildLoadingView() -> some View {

@@ -32,7 +32,7 @@ struct HighlightVideoView: View {
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             .frame(maxWidth: .infinity)
-            .aspectRatio(CGSize(width: 2, height: 1), contentMode: .fill)
+            .aspectRatio(2, contentMode: .fill)
 
             PageControl(
                 numberOfPages: videos.count,

@@ -120,7 +120,7 @@ struct ProfileView<ViewModel: ProfileViewModel>: View {
                 }
                 .padding(16)
                 .frame(maxWidth: .infinity)
-                .aspectRatio(CGSize(width: 3, height: 1), contentMode: .fit)
+                .aspectRatio(3, contentMode: .fit)
                 .overlay(
                     RoundedRectangle(cornerSize: CGSize(width: 16, height: 16))
                         .stroke(Color.yellow, style: StrokeStyle(lineWidth: 2, dash: [8]))

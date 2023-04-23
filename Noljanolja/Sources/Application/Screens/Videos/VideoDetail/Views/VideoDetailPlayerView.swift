@@ -30,7 +30,6 @@ struct VideoDetailPlayerView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(ColorAssets.neutralLightGrey.swiftUIColor)
         }
-        .frame(maxWidth: .infinity)
-        .aspectRatio(CGSize(width: 9, height: 5), contentMode: .fill)
+        .aspectRatio(9 / 5, contentMode: .fit)
     }
 }

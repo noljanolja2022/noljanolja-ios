@@ -55,7 +55,7 @@ struct SwiftUIView_Previews: PreviewProvider {
                     Image(systemName: "xmark")
                         .resizable()
                         .padding(12)
-                        .aspectRatio(CGSize(width: 50, height: 50), contentMode: .fit)
+                        .aspectRatio(1, contentMode: .fit)
 
                     Text("Back back")
                         .font(.system(size: 18, weight: .bold))
@@ -70,7 +70,7 @@ struct SwiftUIView_Previews: PreviewProvider {
                     Image(systemName: "trash")
                         .resizable()
                         .padding(12)
-                        .aspectRatio(CGSize(width: 50, height: 50), contentMode: .fit)
+                        .aspectRatio(1, contentMode: .fit)
                 }
             }
         )

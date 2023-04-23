@@ -24,9 +24,11 @@ final class VideoDetailViewModel: ViewModel {
 
     // MARK: Action
 
+    let scrollToTopAction = PassthroughSubject<Void, Never>()
+
     // MARK: Dependencies
 
-    private let videoId: String
+    let videoId: String
     private let videoAPI: VideoAPIType
     private weak var delegate: VideoDetailViewModelDelegate?
 
@@ -71,5 +73,14 @@ final class VideoDetailViewModel: ViewModel {
                 }
             }
             .store(in: &cancellables)
+    }
+}
+
+// MARK: VideoDetailInputViewModelDelegate
+
+extension VideoDetailViewModel: VideoDetailInputViewModelDelegate {
+    func didCommentSuccess(_ comment: VideoComment) {
+        comments.insert(comment, at: 0)
+        scrollToTopAction.send()
     }
 }

@@ -37,7 +37,7 @@ struct TrendingVideoItemView: View {
                 .cornerRadius(12)
             }
             .frame(maxWidth: .infinity)
-            .aspectRatio(CGSize(width: 9, height: 5), contentMode: .fill)
+            .aspectRatio(9 / 5, contentMode: .fill)
 
             buildContentView()
         }
