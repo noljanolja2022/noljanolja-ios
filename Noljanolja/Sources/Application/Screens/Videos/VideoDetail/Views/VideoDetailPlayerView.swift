@@ -21,15 +21,17 @@ struct VideoDetailPlayerView: View {
                             width: geometry.size.width * 3,
                             height: geometry.size.height * 3
                         ),
-                        scaleMode: .fill
+                        scaleMode: .aspectFill
                     )
                 ]
             )
             .resizable()
             .indicator(.activity)
+            .aspectRatio(contentMode: .fill)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(ColorAssets.neutralLightGrey.swiftUIColor)
         }
+        .frame(maxWidth: .infinity)
         .aspectRatio(9 / 5, contentMode: .fit)
     }
 }

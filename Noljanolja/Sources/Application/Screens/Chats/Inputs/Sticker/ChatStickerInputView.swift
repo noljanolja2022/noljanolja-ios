@@ -73,7 +73,7 @@ struct ChatStickerInputView<ViewModel: ChatStickerInputViewModel>: View {
                     context: [
                         .imageTransformer: SDImageResizingTransformer(
                             size: CGSize(width: 160, height: 160),
-                            scaleMode: .fill
+                            scaleMode: .aspectFill
                         )
                     ],
                     isAnimating: .constant(false)

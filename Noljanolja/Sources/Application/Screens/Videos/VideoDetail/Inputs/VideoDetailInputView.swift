@@ -49,7 +49,7 @@ struct VideoDetailInputView<ViewModel: VideoDetailInputViewModel>: View {
             context: [
                 .imageTransformer: SDImageResizingTransformer(
                     size: CGSize(width: 64 * 3, height: 64 * 3),
-                    scaleMode: .fill
+                    scaleMode: .aspectFill
                 )
             ]
         )

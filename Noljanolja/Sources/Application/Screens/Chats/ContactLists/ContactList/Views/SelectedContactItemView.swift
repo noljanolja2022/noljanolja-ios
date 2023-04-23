@@ -21,7 +21,7 @@ struct SelectedContactItemView: View {
                 context: [
                     .imageTransformer: SDImageResizingTransformer(
                         size: CGSize(width: 50 * 3, height: 50 * 3),
-                        scaleMode: .fill
+                        scaleMode: .aspectFill
                     )
                 ]
             )

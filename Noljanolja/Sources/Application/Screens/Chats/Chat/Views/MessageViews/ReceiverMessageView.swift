@@ -24,7 +24,7 @@ struct ReceiverMessageView: View {
                     context: [
                         .imageTransformer: SDImageResizingTransformer(
                             size: CGSize(width: 32 * 3, height: 32 * 3),
-                            scaleMode: .fill
+                            scaleMode: .aspectFill
                         )
                     ]
                 )

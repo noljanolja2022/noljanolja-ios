@@ -48,7 +48,7 @@ struct ChatStickerPacksInputView<ViewModel: ChatStickerPacksInputViewModel>: Vie
                         context: [
                             .imageTransformer: SDImageResizingTransformer(
                                 size: CGSize(width: 36 * 3, height: 36 * 3),
-                                scaleMode: .fill
+                                scaleMode: .aspectFill
                             )
                         ]
                     )

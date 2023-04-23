@@ -51,7 +51,7 @@ struct ParticipantDetailActionView<ViewModel: ParticipantDetailActionViewModel>:
                     context: [
                         .imageTransformer: SDImageResizingTransformer(
                             size: CGSize(width: 40 * 3, height: 40 * 3),
-                            scaleMode: .fill
+                            scaleMode: .aspectFill
                         )
                     ]
                 )

@@ -32,7 +32,7 @@ struct VideoDetailCommentView: View {
                 context: [
                     .imageTransformer: SDImageResizingTransformer(
                         size: CGSize(width: 24 * 3, height: 24 * 3),
-                        scaleMode: .fill
+                        scaleMode: .aspectFill
                     )
                 ]
             )

@@ -26,7 +26,7 @@ struct TrendingVideoItemView: View {
                                 width: geometry.size.width * 3,
                                 height: geometry.size.height * 3
                             ),
-                            scaleMode: .fill
+                            scaleMode: .aspectFill
                         )
                     ]
                 )
