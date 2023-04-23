@@ -9,6 +9,7 @@ import SwiftUI
 
 struct VideoDetailInformationView: View {
     var video: Video
+    var commentCount: Int?
 
     var body: some View {
         buildBodyView()
@@ -76,7 +77,7 @@ struct VideoDetailInformationView: View {
                     .font(.system(size: 12, weight: .medium))
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
 
-                if let commentCount = video.commentCount?.formatted() {
+                if let commentCount = commentCount?.formatted() {
                     Text(commentCount)
                         .font(.system(size: 14, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)

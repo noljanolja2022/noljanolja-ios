@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 // MARK: - VideoDetailCommentsView
 
 struct VideoDetailCommentsView: View {
     var comments: [VideoComment]
+    @Binding var footterViewState: StatefullFooterViewState
+    var loadMoreAction: (() -> Void)?
 
     var body: some View {
         buildBodyView()
@@ -58,6 +61,11 @@ struct VideoDetailCommentsView: View {
                     comment: comments[index]
                 )
             }
+            
+            if footterViewState == .loading {
+                ActivityIndicator()
+                    .onAppear { loadMoreAction?() }
+            }
         }
     }
 }
@@ -66,6 +74,9 @@ struct VideoDetailCommentsView: View {
 
 struct VideoDetailCommentsView_Previews: PreviewProvider {
     static var previews: some View {
-        VideoDetailCommentsView(comments: [])
+        VideoDetailCommentsView(
+            comments: [],
+            footterViewState: .constant(.loading)
+        )
     }
 }

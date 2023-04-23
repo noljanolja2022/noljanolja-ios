@@ -20,10 +20,13 @@ final class VideoDetailViewModel: ViewModel {
 
     @Published var video: Video?
     @Published var comments = [VideoComment]()
+    @Published var commentCount: Int?
     @Published var viewState = ViewState.loading
+    @Published var footerViewState = StatefullFooterViewState.loading
 
     // MARK: Action
 
+    let loadMoreAction = PassthroughSubject<Void, Never>()
     let scrollToTopAction = PassthroughSubject<Void, Never>()
 
     // MARK: Dependencies
@@ -34,6 +37,7 @@ final class VideoDetailViewModel: ViewModel {
 
     // MARK: Private
 
+    private var pageSize = 20
     private var cancellables = Set<AnyCancellable>()
 
     init(videoId: String,
@@ -67,9 +71,41 @@ final class VideoDetailViewModel: ViewModel {
                 case let .success(video):
                     self.video = video
                     self.comments = video.comments
+                    self.commentCount = video.commentCount
                     self.viewState = .content
                 case .failure:
                     self.viewState = .error
+                }
+            }
+            .store(in: &cancellables)
+
+        loadMoreAction
+            .filter { [weak self] in
+                guard let self else { return false }
+                return self.viewState != .loading && self.footerViewState != .noMoreData
+            }
+            .flatMapLatestToResult { [weak self] in
+                guard let self else {
+                    return Empty<[VideoComment], Error>().eraseToAnyPublisher()
+                }
+                return self.videoAPI.getVideoComments(
+                    videoId: self.videoId,
+                    beforeCommentId: self.comments.last?.id,
+                    limit: self.pageSize
+                )
+            }
+            .sink { [weak self] result in
+                guard let self else { return }
+                switch result {
+                case let .success(comments):
+                    self.comments.append(contentsOf: comments)
+                    if comments.count < self.pageSize {
+                        self.footerViewState = .noMoreData
+                    } else {
+                        self.footerViewState = .loading
+                    }
+                case .failure:
+                    break
                 }
             }
             .store(in: &cancellables)
@@ -81,6 +117,7 @@ final class VideoDetailViewModel: ViewModel {
 extension VideoDetailViewModel: VideoDetailInputViewModelDelegate {
     func didCommentSuccess(_ comment: VideoComment) {
         comments.insert(comment, at: 0)
+        commentCount = commentCount.flatMap { $0 + 1 }
         scrollToTopAction.send()
     }
 }

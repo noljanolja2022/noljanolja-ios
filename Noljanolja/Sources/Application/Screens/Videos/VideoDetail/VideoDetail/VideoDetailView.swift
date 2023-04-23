@@ -57,12 +57,16 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
 
     @ViewBuilder
     private func buildContentView() -> some View {
-        let commentViewId = "comment_view"
-        ScrollViewReader { value in
+        let topViewId = "top_view"
+        ScrollViewReader { scrollView in
             ScrollView {
                 LazyVStack(spacing: 4) {
                     if let video = viewModel.video {
-                        VideoDetailInformationView(video: video)
+                        VideoDetailInformationView(
+                            video: video,
+                            commentCount: viewModel.commentCount
+                        )
+                        .id(topViewId)
                     }
 
                     Divider()
@@ -70,13 +74,20 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
                         .overlay(ColorAssets.neutralLightGrey.swiftUIColor)
                         .padding(.vertical, 4)
 
-                    VideoDetailCommentsView(comments: viewModel.comments)
-                        .id(commentViewId)
+                    VideoDetailCommentsView(
+                        comments: viewModel.comments,
+                        footterViewState: $viewModel.footerViewState,
+                        loadMoreAction: {
+                            viewModel.loadMoreAction.send()
+                        }
+                    )
                 }
                 .padding(.top, 12)
             }
             .onReceive(viewModel.scrollToTopAction) {
-                value.scrollTo(commentViewId, anchor: .top)
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    scrollView.scrollTo(topViewId, anchor: .top)
+                }
             }
         }
     }
