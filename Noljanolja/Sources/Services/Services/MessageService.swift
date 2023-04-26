@@ -69,6 +69,7 @@ final class MessageService: MessageServiceType {
                 beforeMessageID: beforeMessageID,
                 afterMessageID: afterMessageID
             )
+            .receive(on: DispatchQueue.main) // NOTED: Do on serial queue to wait write then read
             .handleEvents(receiveOutput: { [weak self] in
                 self?.messageStore.saveMessages($0)
             })
@@ -120,6 +121,7 @@ final class MessageService: MessageServiceType {
                     attachments: attachments
                 )
             }
+            .receive(on: DispatchQueue.main) // NOTED: Do on serial queue to wait write then read
             .handleEvents(receiveOutput: { [weak self] in
                 self?.messageStore.saveMessageParameters([$0])
             })
@@ -130,6 +132,7 @@ final class MessageService: MessageServiceType {
                 return self.messageAPI
                     .sendMessage(param: param)
             }
+            .receive(on: DispatchQueue.main) // NOTED: Do on serial queue to wait write then read
             .handleEvents(receiveOutput: { [weak self] in
                 self?.messageStore.saveMessages([$0])
             })

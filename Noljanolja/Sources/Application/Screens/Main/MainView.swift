@@ -28,17 +28,8 @@ struct MainView<ViewModel: MainViewModel>: View {
     private func buildBodyView() -> some View {
         buildContentView()
             .navigationBarTitle("", displayMode: .inline)
-            .toolbar {
-                buildToolBarContent()
-            }
-            .navigationBarHidden({
-                switch viewModel.selectedTab {
-                case .chat, .events, .content, .shop:
-                    return false
-                case .profile:
-                    return true
-                }
-            }())
+            .toolbar { buildToolBarContent() }
+            .navigationBarHidden(viewModel.selectedTab.isNavigationBarHidden)
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
     }
@@ -46,8 +37,8 @@ struct MainView<ViewModel: MainViewModel>: View {
     @ToolbarContentBuilder
     private func buildToolBarContent() -> some ToolbarContent {
         ToolbarItem(placement: .principal) {
-            Text(viewModel.selectedTab.rawValue)
-                .font(.system(size: 18, weight: .bold))
+            Text(viewModel.selectedTab.navigationBarTitle)
+                .font(.system(size: 16, weight: .bold))
                 .frame(minWidth: 120)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
         }
@@ -82,66 +73,81 @@ struct MainView<ViewModel: MainViewModel>: View {
             )
             .tag(MainTabType.chat)
             .tabItem {
-                Image(systemName: "message.fill")
+                Image(MainTabType.chat.imageName)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 32, height: 32)
 
-                Text("Chat")
+                Text(MainTabType.chat.tabBarTitle)
+                    .font(.system(size: 10))
             }
 
-            LottieView(animation: LottieAnimation.named(LottieAssets.underConstruction.name))
-                .tag(MainTabType.events)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .tabItem {
-                    Image(systemName: "calendar")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 32, height: 32)
+            VideosView(
+                viewModel: VideosViewModel()
+            )
+            .tag(MainTabType.watch)
+            .tabItem {
+                Image(MainTabType.watch.imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 32, height: 32)
 
-                    Text("Events")
-                }
-
-            LottieView(animation: LottieAnimation.named(LottieAssets.underConstruction.name))
-                .tag(MainTabType.content)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .tabItem {
-                    Image(systemName: "play.circle.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 32, height: 32)
-
-                    Text("Content")
-                }
-
-            LottieView(animation: LottieAnimation.named(LottieAssets.underConstruction.name))
-                .tag(MainTabType.shop)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .tabItem {
-                    Image(systemName: "cart.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 32, height: 32)
-
-                    Text("Shop")
-                }
+                Text(MainTabType.watch.tabBarTitle)
+                    .font(.system(size: 10))
+            }
 
             ProfileView(
                 viewModel: ProfileViewModel(
                     delegate: viewModel
                 )
             )
-            .tag(MainTabType.profile)
+            .tag(MainTabType.wallet)
             .tabItem {
-                Image(systemName: "person.fill")
+                Image(MainTabType.wallet.imageName)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 32, height: 32)
 
-                Text("Chat")
+                Text(MainTabType.wallet.tabBarTitle)
+                    .font(.system(size: 10))
+            }
+
+            LottieView(
+                animation: LottieAnimation.named(
+                    LottieAssets.underConstruction.name
+                )
+            )
+            .tag(MainTabType.shop)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .tag(MainTabType.shop)
+            .tabItem {
+                Image(MainTabType.shop.imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 32, height: 32)
+
+                Text(MainTabType.shop.tabBarTitle)
+                    .font(.system(size: 10))
+            }
+
+            LottieView(
+                animation: LottieAnimation.named(
+                    LottieAssets.underConstruction.name
+                )
+            )
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .tag(MainTabType.news)
+            .tabItem {
+                Image(MainTabType.news.imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 32, height: 32)
+
+                Text(MainTabType.news.tabBarTitle)
+                    .font(.system(size: 10))
             }
         }
-        .accentColor(Color.orange)
+        .accentColor(ColorAssets.primaryMain.swiftUIColor)
     }
 }
 

@@ -48,8 +48,11 @@ struct PhotoMessageContentView: View {
                                     url: url,
                                     context: [
                                         .imageTransformer: SDImageResizingTransformer(
-                                            size: geometry.size,
-                                            scaleMode: .fill
+                                            size: CGSize(
+                                                width: geometry.size.width * 3,
+                                                height: geometry.size.height * 3
+                                            ),
+                                            scaleMode: .aspectFill
                                         )
                                     ]
                                 )

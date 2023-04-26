@@ -8,17 +8,10 @@
 import Foundation
 
 extension Date {
-    private func relativeFormatForChat() -> String? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "en-US")
-
-        dateFormatter.dateStyle = .full
-        dateFormatter.doesRelativeDateFormatting = true
-        let relative = dateFormatter.string(from: self)
-        dateFormatter.doesRelativeDateFormatting = false
-        let absolute = dateFormatter.string(from: self)
-
-        return relative != absolute ? relative : nil
+    func relative(to date: Date = Date()) -> String? {
+        let formatter = RelativeDateTimeFormatter()
+        formatter.unitsStyle = .full
+        return formatter.localizedString(for: self, relativeTo: date)
     }
 
     func relativeFormatForConversation() -> String {
@@ -43,5 +36,20 @@ extension Date {
             dateFormatter.dateFormat = "EEEE, yyyy, MMMM dd"
             return dateFormatter.string(from: self)
         }
+    }
+}
+
+extension Date {
+    private func relativeFormatForChat() -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en-US")
+
+        dateFormatter.dateStyle = .full
+        dateFormatter.doesRelativeDateFormatting = true
+        let relative = dateFormatter.string(from: self)
+        dateFormatter.doesRelativeDateFormatting = false
+        let absolute = dateFormatter.string(from: self)
+
+        return relative != absolute ? relative : nil
     }
 }

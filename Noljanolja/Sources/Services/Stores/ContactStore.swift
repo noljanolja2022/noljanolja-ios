@@ -48,6 +48,7 @@ final class ContactStore: ContactStoreType {
             .collectionPublisher
             .freeze()
             .map { users -> [User] in users.compactMap { $0.model } }
+            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
 

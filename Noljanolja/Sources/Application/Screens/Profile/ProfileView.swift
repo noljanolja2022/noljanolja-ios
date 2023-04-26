@@ -41,13 +41,21 @@ struct ProfileView<ViewModel: ProfileViewModel>: View {
 
     private func buildHeader() -> some View {
         HStack(spacing: 24) {
-            WebImage(url: URL(string: viewModel.user?.avatar))
-                .resizable()
-                .indicator(.activity)
-                .scaledToFill()
-                .frame(width: 64, height: 64)
-                .background(ColorAssets.neutralLightGrey.swiftUIColor)
-                .cornerRadius(32)
+            WebImage(
+                url: URL(string: viewModel.user?.avatar),
+                context: [
+                    .imageTransformer: SDImageResizingTransformer(
+                        size: CGSize(width: 64 * 3, height: 64 * 3),
+                        scaleMode: .aspectFill
+                    )
+                ]
+            )
+            .resizable()
+            .indicator(.activity)
+            .scaledToFill()
+            .frame(width: 64, height: 64)
+            .background(ColorAssets.neutralLightGrey.swiftUIColor)
+            .cornerRadius(32)
 
             VStack(alignment: .leading, spacing: 8) {
                 Text(viewModel.user?.name ?? "")
@@ -112,7 +120,7 @@ struct ProfileView<ViewModel: ProfileViewModel>: View {
                 }
                 .padding(16)
                 .frame(maxWidth: .infinity)
-                .aspectRatio(CGSize(width: 3, height: 1), contentMode: .fit)
+                .aspectRatio(3, contentMode: .fit)
                 .overlay(
                     RoundedRectangle(cornerSize: CGSize(width: 16, height: 16))
                         .stroke(Color.yellow, style: StrokeStyle(lineWidth: 2, dash: [8]))

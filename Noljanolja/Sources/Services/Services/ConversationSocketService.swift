@@ -89,6 +89,7 @@ final class ConversationSocketService: ConversationSocketServiceType {
                     return false
                 }
             }
+            .receive(on: DispatchQueue.main) // NOTED: Do on serial queue to wait write then read
             .handleEvents(receiveOutput: { [weak self] result in
                 switch result {
                 case let .success(conversation):

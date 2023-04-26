@@ -346,7 +346,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                                 Image(systemName: "xmark")
                                     .resizable()
                                     .frame(maxHeight: .infinity)
-                                    .aspectRatio(CGSize(width: 1, height: 1), contentMode: .fit)
+                                    .aspectRatio(1, contentMode: .fit)
                                     .padding(16)
                             }
                         )

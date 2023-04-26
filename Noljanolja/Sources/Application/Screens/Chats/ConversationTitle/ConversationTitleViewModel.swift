@@ -66,7 +66,6 @@ final class ConversationTitleViewModel: ViewModel {
                         title: self.title
                     )
             }
-            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
                 guard let self else { return }
                 self.isProgressHUDShowing = false

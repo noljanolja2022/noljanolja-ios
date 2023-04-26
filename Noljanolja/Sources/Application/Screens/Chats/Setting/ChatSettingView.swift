@@ -159,12 +159,7 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
     private func buildLeaveView() -> some View {
         Button(
             action: {
-                viewModel.alertState = AlertState(
-                    title: TextState("Are you sure to leave this chat?"),
-                    message: TextState("If you leave, all the chat and chat history will be deleted."),
-                    primaryButton: .destructive(TextState("DISGREE")),
-                    secondaryButton: .default(TextState("AGREE"), action: .send(.leave))
-                )
+                viewModel.checkLeaveAction.send()
             },
             label: {
                 Text("LEAVE CHAT ROOM")

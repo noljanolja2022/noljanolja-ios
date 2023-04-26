@@ -78,8 +78,8 @@ final class RealmManager: RealmManagerType {
     private let queueBuilder: () -> DispatchQueue
 
     private lazy var configuration: Realm.Configuration = configurationBuilder()
-
     private lazy var queue: DispatchQueue = queueBuilder()
+    private lazy var concurrentQueue = DispatchQueue.global(qos: .default)
 
     private var realm: Realm {
         Realm.createRealm(configuration: configuration)

@@ -9,11 +9,6 @@ import Foundation
 import UIKit
 
 extension UINavigationController {
-    override open func viewDidLoad() {
-        super.viewDidLoad()
-//        delegate = self
-    }
-
     @discardableResult
     func configure(backgroundColor: UIColor, foregroundColor: UIColor) -> UINavigationBarAppearance {
         let appearance = UINavigationBarAppearance()
@@ -43,13 +38,5 @@ extension UINavigationController {
         }
 
         return appearance
-    }
-}
-
-// MARK: - UINavigationController + UINavigationControllerDelegate
-
-extension UINavigationController: UINavigationControllerDelegate {
-    public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        viewController.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
 }

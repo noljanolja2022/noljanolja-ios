@@ -67,6 +67,7 @@ final class MessageStore: MessageStoreType {
             .where { $0.conversationID == conversationID }
             .collectionPublisher
             .map { messages -> [Message] in messages.compactMap { $0.model } }
+            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
 

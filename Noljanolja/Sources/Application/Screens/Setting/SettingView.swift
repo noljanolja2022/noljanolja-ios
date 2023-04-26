@@ -28,7 +28,7 @@ struct SettingView<ViewModel: SettingViewModel>: View {
         .toolbar {
             ToolbarItem(placement: .principal) {
                 Text("Setting")
-                    .font(.system(size: 18, weight: .medium))
+                    .font(.system(size: 16, weight: .bold))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }
         }

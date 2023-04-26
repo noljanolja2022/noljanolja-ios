@@ -62,6 +62,7 @@ final class ConversationDetailStore: ConversationDetailStoreType {
         )
         .collectionPublisher
         .compactMap { conversations -> Conversation? in conversations.first.flatMap { $0.model } }
+        .receive(on: DispatchQueue.main)
         .eraseToAnyPublisher()
     }
 

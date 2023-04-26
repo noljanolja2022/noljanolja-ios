@@ -35,7 +35,7 @@ struct SelectCountryView<ViewModel: SelectCountryViewModel>: View {
                 }
                 ToolbarItem(placement: .principal) {
                     Text("Select Countries/Regions")
-                        .font(.system(size: 18, weight: .bold))
+                        .font(.system(size: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             }

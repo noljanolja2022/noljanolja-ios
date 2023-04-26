@@ -1,14 +1,17 @@
 PODS:
   - naveridlogin-sdk-ios (4.1.5)
   - shared (1.0)
+  - youtube-ios-player-helper (1.0.2)
 
 DEPENDENCIES:
   - naveridlogin-sdk-ios (= 4.1.5)
   - shared (from `./shared`)
+  - youtube-ios-player-helper (= 1.0.2)
 
 SPEC REPOS:
   trunk:
     - naveridlogin-sdk-ios
+    - youtube-ios-player-helper
 
 EXTERNAL SOURCES:
   shared:
@@ -17,7 +20,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   naveridlogin-sdk-ios: 4351fe7162cd6b8b6dbb37bd7cc205304fa1d889
   shared: 39716697cdb03064a2a5d4da9d9d75c8ca73d2e7
+  youtube-ios-player-helper: 40b96e52c22445f0fdc43731cefa32c67075ff81
 
-PODFILE CHECKSUM: 63d34dcff8602353d18e7f352d9198637dcdd0e2
+PODFILE CHECKSUM: a2fc88994d05f49de6698583ee2ed9246604f8e2
 
 COCOAPODS: 1.12.0

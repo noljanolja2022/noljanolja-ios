@@ -41,7 +41,7 @@ struct CreateConversationView<ViewModel: CreateConversationViewModel>: View {
                 }
                 ToolbarItem(placement: .principal) {
                     Text("Start Chatting")
-                        .font(.system(size: 18, weight: .bold))
+                        .font(.system(size: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             }

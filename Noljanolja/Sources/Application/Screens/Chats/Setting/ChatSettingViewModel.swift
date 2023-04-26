@@ -48,6 +48,7 @@ final class ChatSettingViewModel: ViewModel {
 
     let closeAction = PassthroughSubject<Void, Never>()
     let alertStateAction = PassthroughSubject<AlertState<ChatSettingAlertActionType>, Never>()
+    let checkLeaveAction = PassthroughSubject<Void, Never>()
     let leaveAction = PassthroughSubject<Void, Never>()
     let assignAdminAction = PassthroughSubject<User, Never>()
     let removeParticipantAction = PassthroughSubject<User, Never>()
@@ -216,6 +217,33 @@ final class ChatSettingViewModel: ViewModel {
                         dismissButton: .cancel(TextState("OK"))
                     )
                 }
+            }
+            .store(in: &cancellables)
+
+        let (confirmLeaveAction, leaveAlertAction) = checkLeaveAction
+            .withLatestFrom(Publishers.CombineLatest(conversationSubject, currentUserSubject))
+            .partition { conversation, currentUser in
+                conversation.admin.id != currentUser?.id
+            }
+
+        confirmLeaveAction
+            .sink { [weak self] _ in
+                self?.alertState = AlertState(
+                    title: TextState("Are you sure to leave this chat?"),
+                    message: TextState("If you leave, all the chat and chat history will be deleted."),
+                    primaryButton: .destructive(TextState("DISGREE")),
+                    secondaryButton: .default(TextState("AGREE"), action: .send(.leave))
+                )
+            }
+            .store(in: &cancellables)
+
+        leaveAlertAction
+            .sink { [weak self] _ in
+                self?.alertState = AlertState(
+                    title: TextState("Alert"),
+                    message: TextState("Please assign another one to admin first"),
+                    dismissButton: .cancel(TextState("OK"))
+                )
             }
             .store(in: &cancellables)
 

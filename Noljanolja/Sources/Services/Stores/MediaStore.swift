@@ -51,6 +51,7 @@ final class MediaStore: MediaStoreType {
         realmManager.objects(StorableStickerPack.self)
             .collectionPublisher
             .map { stickerPacks -> [StickerPack] in stickerPacks.compactMap { $0.model } }
+            .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
 

@@ -45,11 +45,11 @@ private enum UserAPITargets {
     struct FindUsers: BaseAuthTargetType {
         var path: String { "v1/users" }
         let method: Moya.Method = .get
-        var task: Task { .requestParameters(parameters: param, encoding: URLEncoding.default) }
+        var task: Task { .requestParameters(parameters: parameters, encoding: URLEncoding.default) }
 
         let phoneNumber: String
 
-        var param: [String: Any] {
+        var parameters: [String: Any] {
             ["phoneNumber": phoneNumber]
         }
     }
