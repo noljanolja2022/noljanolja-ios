@@ -70,7 +70,7 @@ struct VideoDetailInformationView: View {
             .padding(.vertical, 8)
             .background(ColorAssets.white.swiftUIColor)
             .cornerRadius(12)
-            .shadow(color: ColorAssets.neutralLightGrey.swiftUIColor, radius: 2, x: 0, y: 4)
+            .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 2)
 
             VStack(spacing: 8) {
                 Text("Comment")
@@ -87,7 +87,7 @@ struct VideoDetailInformationView: View {
             .padding(.vertical, 8)
             .background(ColorAssets.white.swiftUIColor)
             .cornerRadius(12)
-            .shadow(color: ColorAssets.neutralLightGrey.swiftUIColor, radius: 2, x: 0, y: 4)
+            .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 2)
 
             VStack(spacing: 8) {
                 Text("Reward")
@@ -102,7 +102,7 @@ struct VideoDetailInformationView: View {
             .padding(.vertical, 8)
             .background(ColorAssets.white.swiftUIColor)
             .cornerRadius(12)
-            .shadow(color: ColorAssets.neutralLightGrey.swiftUIColor, radius: 2, x: 0, y: 4)
+            .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 2)
         }
     }
 }

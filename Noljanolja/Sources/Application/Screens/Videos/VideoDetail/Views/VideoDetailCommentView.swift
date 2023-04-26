@@ -22,7 +22,7 @@ struct VideoDetailCommentView: View {
             buildHeaderView()
             buildContentView()
         }
-        .padding(.vertical, 12)
+        .padding(.top, 12)
     }
 
     private func buildHeaderView() -> some View {
@@ -66,20 +66,23 @@ struct VideoDetailCommentView: View {
             }
             .frame(width: 24)
 
-            Text(comment.comment ?? "")
-                .multilineTextAlignment(.leading)
-                .font(.system(size: 12))
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                .padding(12)
-                .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
-                .background(ColorAssets.white.swiftUIColor)
-                .cornerRadius(8)
-                .shadow(
-                    color: ColorAssets.neutralGrey.swiftUIColor,
-                    radius: 4,
-                    x: 0,
-                    y: 4
-                )
+            VStack(spacing: 8) {
+                Text(comment.comment ?? "")
+                    .multilineTextAlignment(.leading)
+                    .font(.system(size: 12))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                    .padding(12)
+                    .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
+                    .background(ColorAssets.white.swiftUIColor)
+                    .cornerRadius(8)
+                    .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 2)
+
+                Divider()
+                    .frame(height: 1)
+                    .frame(maxHeight: .infinity)
+                    .overlay(ColorAssets.neutralGrey.swiftUIColor)
+            }
+            .padding(.bottom, 12)
         }
     }
 }

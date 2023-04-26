@@ -72,7 +72,13 @@ final class VideoDetailViewModel: ViewModel {
                     self.video = video
                     self.comments = video.comments
                     self.commentCount = video.commentCount
+                    
                     self.viewState = .content
+                    if video.comments.count < self.pageSize {
+                        self.footerViewState = .noMoreData
+                    } else {
+                        self.footerViewState = .loading
+                    }
                 case .failure:
                     self.viewState = .error
                 }
