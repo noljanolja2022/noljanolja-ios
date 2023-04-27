@@ -15,6 +15,7 @@ import NaverThirdPartyLogin
 import UIKit
 
 final class AppDelegate: NSObject, UIApplicationDelegate {
+    var window: UIWindow?
     private lazy var appDelegates: [AppDelegateProtocol] = [FrameworkAppDelegate(), AuthAppDelegate(), NotificationAppDelegate()]
 
     func application(_ application: UIApplication,

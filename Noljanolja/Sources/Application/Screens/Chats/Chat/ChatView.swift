@@ -148,6 +148,24 @@ struct ChatView<ViewModel: ChatViewModel>: View {
         switch type.wrappedValue {
         case let .openUrl(url):
             SafariView(url: url)
+        case let .openImageDetail(url):
+            NavigationView {
+                ImageDetailView(
+                    viewModel: ImageDetailViewModel(
+                        imageUrl: url
+                    )
+                )
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
+            .accentColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            .introspectNavigationController { navigationController in
+                navigationController.configure(
+                    backgroundColor: ColorAssets.white.color,
+                    foregroundColor: ColorAssets.neutralDarkGrey.color
+                )
+                navigationController.view.backgroundColor = .clear
+                navigationController.parent?.view.backgroundColor = .clear
+            }
         }
     }
 }

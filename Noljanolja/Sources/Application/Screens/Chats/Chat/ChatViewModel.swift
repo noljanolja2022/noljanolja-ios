@@ -333,6 +333,9 @@ final class ChatViewModel: ViewModel {
                     guard let url = URL(string: urlString),
                           url.scheme == "https" || url.scheme == "http" else { return }
                     self.fullScreenCoverType = .openUrl(url)
+                case let .openImageDetail(url):
+                    guard let url else { return }
+                    self.fullScreenCoverType = .openImageDetail(url)
                 }
             }
             .store(in: &cancellables)

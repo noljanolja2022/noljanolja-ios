@@ -13,8 +13,14 @@ import SwiftUI
 
 struct PhotoMessageContentView: View {
     var contentItemModel: PhotoMessageContentModel
+    var action: ((ChatItemActionType) -> Void)?
 
     var body: some View {
+        buildBodyView()
+    }
+
+    @ViewBuilder
+    private func buildBodyView() -> some View {
         let photosList: [[URL?]] = {
             if contentItemModel.photos.count < 3 {
                 return [contentItemModel.photos]
@@ -42,37 +48,44 @@ struct PhotoMessageContentView: View {
             ForEach(Array(photosList.enumerated()), id: \.offset) { _, photos in
                 HStack(spacing: 4) {
                     ForEach(Array(photos.enumerated()), id: \.offset) { _, url in
-                        GeometryReader { geometry in
-                            if let url {
-                                WebImage(
-                                    url: url,
-                                    context: [
-                                        .imageTransformer: SDImageResizingTransformer(
-                                            size: CGSize(
-                                                width: geometry.size.width * 3,
-                                                height: geometry.size.height * 3
-                                            ),
-                                            scaleMode: .aspectFill
-                                        )
-                                    ]
-                                )
-                                .resizable()
-                                .indicator(.activity)
-                                .scaledToFill()
-                                .frame(width: geometry.size.width, height: geometry.size.height)
-                                .clipped()
-                                .contentShape(Rectangle())
-                                .background(ColorAssets.neutralLightGrey.swiftUIColor)
-                            } else {
-                                Text("")
-                            }
-                        }
-                        .aspectRatio(1, contentMode: .fill)
+                        buildItem(url)
                     }
                 }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private func buildItem(_ url: URL?) -> some View {
+        GeometryReader { geometry in
+            if let url {
+                WebImage(
+                    url: url,
+                    context: [
+                        .imageTransformer: SDImageResizingTransformer(
+                            size: CGSize(
+                                width: geometry.size.width * 3,
+                                height: geometry.size.height * 3
+                            ),
+                            scaleMode: .aspectFill
+                        )
+                    ]
+                )
+                .resizable()
+                .indicator(.activity)
+                .scaledToFill()
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .clipped()
+                .contentShape(Rectangle())
+                .background(ColorAssets.neutralLightGrey.swiftUIColor)
+            } else {
+                Text("")
+            }
+        }
+        .aspectRatio(1, contentMode: .fill)
+        .onTapGesture {
+            action?(.openImageDetail(url))
+        }
     }
 
     //    var body: some View {
