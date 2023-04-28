@@ -37,15 +37,6 @@
       }
     },
     {
-      "identity" : "brightroom",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/FluidGroup/Brightroom",
-      "state" : {
-        "revision" : "dd7757c12b4059341c8c96bd22c80de90724c8f0",
-        "version" : "2.9.0"
-      }
-    },
-    {
       "identity" : "combineext",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/CombineCommunity/CombineExt",
@@ -288,15 +279,6 @@
       }
     },
     {
-      "identity" : "swift-atomics",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-atomics.git",
-      "state" : {
-        "revision" : "6c89474e62719ddcc1e9614989fff2f68208fe10",
-        "version" : "1.1.0"
-      }
-    },
-    {
       "identity" : "swift-case-paths",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-case-paths",
@@ -369,24 +351,6 @@
       }
     },
     {
-      "identity" : "transitionpatch",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/FluidGroup/TransitionPatch.git",
-      "state" : {
-        "revision" : "88aac5305fe568ef62f73a3cf19f0b8392ffb52c",
-        "version" : "1.0.5"
-      }
-    },
-    {
-      "identity" : "verge",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/VergeGroup/Verge.git",
-      "state" : {
-        "revision" : "4e5938313601f8522c1146b5fbaaa0aada6820b6",
-        "version" : "10.1.1"
-      }
-    },
-    {
       "identity" : "xctest-dynamic-overlay",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/xctest-dynamic-overlay",
@@ -411,15 +375,6 @@
       "state" : {
         "revision" : "67fa55813b9e7b3b9acee9c0ae501def28746d76",
         "version" : "2.1.2"
-      }
-    },
-    {
-      "identity" : "zlimageeditor",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/longitachi/ZLImageEditor",
-      "state" : {
-        "revision" : "77961125e829e527a3849e5d4d755e5afd002a20",
-        "version" : "1.1.7"
       }
     }
   ],

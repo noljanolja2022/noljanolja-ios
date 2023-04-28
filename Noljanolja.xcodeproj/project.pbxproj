@@ -210,10 +210,6 @@
 		CFC4EFCE29FAC71200DBD831 /* ImageDetailNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC4EFCD29FAC71200DBD831 /* ImageDetailNavigations.swift */; };
 		CFC4EFD129FAC7E400DBD831 /* ImageEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC4EFCF29FAC7E400DBD831 /* ImageEditorView.swift */; };
 		CFC4EFD229FAC7E400DBD831 /* ImageEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC4EFD029FAC7E400DBD831 /* ImageEditorViewModel.swift */; };
-		CFC4EFD429FACC1000DBD831 /* ClassicImageEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC4EFD329FACC1000DBD831 /* ClassicImageEditView.swift */; };
-		CFC4EFD729FAE28300DBD831 /* ZLImageEditor in Frameworks */ = {isa = PBXBuildFile; productRef = CFC4EFD629FAE28300DBD831 /* ZLImageEditor */; };
-		CFC4EFDA29FAE2CB00DBD831 /* ZLImageEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC4EFD929FAE2CB00DBD831 /* ZLImageEditorView.swift */; };
-		CFC4F07A29FAFC8B00DBD831 /* ImglyImageEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC4F07929FAFC8B00DBD831 /* ImglyImageEditorView.swift */; };
 		CFC709E02996051800B64216 /* View+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709DF2996051800B64216 /* View+Progress.swift */; };
 		CFCD10AB29D350C900C5DAFF /* SendMessageParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCD10AA29D350C900C5DAFF /* SendMessageParam.swift */; };
 		CFCFFA3729E5C82A002B7FB6 /* ConversationSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCFFA3629E5C82A002B7FB6 /* ConversationSocketService.swift */; };
@@ -312,8 +308,6 @@
 		CFFD718D298AD38C00D4F5A2 /* ColorAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD718C298AD38C00D4F5A2 /* ColorAssets.xcassets */; };
 		CFFDAA1329E45C9D002FDD91 /* ChatEventItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFDAA1229E45C9D002FDD91 /* ChatEventItemModel.swift */; };
 		CFFDAA1529E4673E002FDD91 /* ChatEventItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFDAA1429E4673E002FDD91 /* ChatEventItemView.swift */; };
-		CFFF0F2729F983B80029F466 /* BrightroomEngine in Frameworks */ = {isa = PBXBuildFile; productRef = CFFF0F2629F983B80029F466 /* BrightroomEngine */; };
-		CFFF0F2929F983B80029F466 /* BrightroomUI in Frameworks */ = {isa = PBXBuildFile; productRef = CFFF0F2829F983B80029F466 /* BrightroomUI */; };
 		CFFF0F2F29F987230029F466 /* ImageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFF0F2D29F987230029F466 /* ImageDetailView.swift */; };
 		CFFF0F3029F987230029F466 /* ImageDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFF0F2E29F987230029F466 /* ImageDetailViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -532,9 +526,6 @@
 		CFC4EFCD29FAC71200DBD831 /* ImageDetailNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailNavigations.swift; sourceTree = "<group>"; };
 		CFC4EFCF29FAC7E400DBD831 /* ImageEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditorView.swift; sourceTree = "<group>"; };
 		CFC4EFD029FAC7E400DBD831 /* ImageEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditorViewModel.swift; sourceTree = "<group>"; };
-		CFC4EFD329FACC1000DBD831 /* ClassicImageEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassicImageEditView.swift; sourceTree = "<group>"; };
-		CFC4EFD929FAE2CB00DBD831 /* ZLImageEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZLImageEditorView.swift; sourceTree = "<group>"; };
-		CFC4F07929FAFC8B00DBD831 /* ImglyImageEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImglyImageEditorView.swift; sourceTree = "<group>"; };
 		CFC709DF2996051800B64216 /* View+Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Progress.swift"; sourceTree = "<group>"; };
 		CFCD10AA29D350C900C5DAFF /* SendMessageParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageParam.swift; sourceTree = "<group>"; };
 		CFCFFA3629E5C82A002B7FB6 /* ConversationSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationSocketService.swift; sourceTree = "<group>"; };
@@ -640,7 +631,6 @@
 			files = (
 				CF52AB7329B8E3B700C9C90C /* RealmSwift in Frameworks */,
 				CF9779DC29BE2FC600D1CAB0 /* PhoneNumberKit in Frameworks */,
-				CFFF0F2929F983B80029F466 /* BrightroomUI in Frameworks */,
 				CF18378729F6F4F500DDC15C /* YouTubePlayerKit in Frameworks */,
 				CFF1F79A29B6E7FE00B25DD2 /* CombineExt in Frameworks */,
 				CFE9D2E0298D6C1500D936DA /* KakaoSDKAuth in Frameworks */,
@@ -661,13 +651,11 @@
 				CFFD70D0298AC7A900D4F5A2 /* CombineMoya in Frameworks */,
 				AEDBBDE12EEA3CADCA87D4F2 /* Pods_Noljanolja.framework in Frameworks */,
 				CF88ABCD299F2E7400D8AB67 /* SwiftUINavigation in Frameworks */,
-				CFC4EFD729FAE28300DBD831 /* ZLImageEditor in Frameworks */,
 				CF54FA2929D01F8A0092E2C6 /* Zip in Frameworks */,
 				CF10C7F129C21FAE0020924D /* KMPNativeCoroutinesCombine in Frameworks */,
 				CF62EF8D29B254DD00D6B688 /* _SwiftUINavigationState in Frameworks */,
 				CF775BC629C62CF400E82183 /* FirebaseMessaging in Frameworks */,
 				CFE09257298DF78700F197F0 /* SwiftyBeaver in Frameworks */,
-				CFFF0F2729F983B80029F466 /* BrightroomEngine in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1530,9 +1518,6 @@
 		CFC4EFD829FAE2B600DBD831 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CFC4EFD329FACC1000DBD831 /* ClassicImageEditView.swift */,
-				CFC4EFD929FAE2CB00DBD831 /* ZLImageEditorView.swift */,
-				CFC4F07929FAFC8B00DBD831 /* ImglyImageEditorView.swift */,
 				CF59758B29FBA3E10068EC88 /* AnyImageEditorView.swift */,
 			);
 			path = Views;
@@ -2088,9 +2073,6 @@
 				CF076D5629D0C0130013B6F9 /* SDWebImageWebPCoder */,
 				CF446B8429D89C3000ED66BF /* Lottie */,
 				CF18378629F6F4F500DDC15C /* YouTubePlayerKit */,
-				CFFF0F2629F983B80029F466 /* BrightroomEngine */,
-				CFFF0F2829F983B80029F466 /* BrightroomUI */,
-				CFC4EFD629FAE28300DBD831 /* ZLImageEditor */,
 			);
 			productName = Noljanolja;
 			productReference = CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */;
@@ -2189,8 +2171,6 @@
 				CF076D5529D0C0120013B6F9 /* XCRemoteSwiftPackageReference "SDWebImageWebPCoder" */,
 				CF446B8329D89C3000ED66BF /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				CF18378529F6F4F500DDC15C /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */,
-				CFFF0F2529F983B80029F466 /* XCRemoteSwiftPackageReference "Brightroom" */,
-				CFC4EFD529FAE28300DBD831 /* XCRemoteSwiftPackageReference "ZLImageEditor" */,
 			);
 			productRefGroup = CFFD707F298AB9FF00D4F5A2 /* Products */;
 			projectDirPath = "";
@@ -2428,7 +2408,6 @@
 				CF1B625029B9BCC200DE53E6 /* StorableConversation.swift in Sources */,
 				CF4A6EF129E3C0D000CB75E5 /* CreateConversationView.swift in Sources */,
 				CF28A1A029B4E9CF0003C204 /* AuthRootViewModel.swift in Sources */,
-				CFC4EFD429FACC1000DBD831 /* ClassicImageEditView.swift in Sources */,
 				CFC4B17529F0745B00F577CC /* ChatInputExpandMenuViewModel.swift in Sources */,
 				CF28A1B029B5066A0003C204 /* SettingViewModel.swift in Sources */,
 				CFB2A89F29D1F31A008D1689 /* StorableSticker.swift in Sources */,
@@ -2465,7 +2444,6 @@
 				CF54FA2F29D0221B0092E2C6 /* ChatStickerPacksInputViewModel.swift in Sources */,
 				CFD5424729BF7A520053C5B1 /* ChatDateItemView.swift in Sources */,
 				CF14F268298CF87E00BC2066 /* AuthService.swift in Sources */,
-				CFC4F07A29FAFC8B00DBD831 /* ImglyImageEditorView.swift in Sources */,
 				CFFC6C6B29E994120024ADA3 /* RootNavigations.swift in Sources */,
 				CFFD70C9298AC5F800D4F5A2 /* TargetType+RawTarget.swift in Sources */,
 				CFED124A29F323CD000B320B /* VideoDetailCommentsView.swift in Sources */,
@@ -2645,7 +2623,6 @@
 				CFDCC34029CCC3F400E8F18C /* StorableAttachment.swift in Sources */,
 				CFED122829F2D0D5000B320B /* VideosModel.swift in Sources */,
 				CFED123629F2EB80000B320B /* TrendingVideoItemView.swift in Sources */,
-				CFC4EFDA29FAE2CB00DBD831 /* ZLImageEditorView.swift in Sources */,
 				CFDCC33C29CCC2D000E8F18C /* PhotoMessageContentView.swift in Sources */,
 				CF1BD20B29ACF67D00778786 /* StateView.swift in Sources */,
 				CFB2F6B029E093BD00191AA3 /* ChatSettingParticipantItemView.swift in Sources */,
@@ -3105,14 +3082,6 @@
 				version = 3.5.7;
 			};
 		};
-		CFC4EFD529FAE28300DBD831 /* XCRemoteSwiftPackageReference "ZLImageEditor" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/longitachi/ZLImageEditor";
-			requirement = {
-				kind = exactVersion;
-				version = 1.1.7;
-			};
-		};
 		CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver.git";
@@ -3175,14 +3144,6 @@
 			requirement = {
 				kind = exactVersion;
 				version = 15.0.3;
-			};
-		};
-		CFFF0F2529F983B80029F466 /* XCRemoteSwiftPackageReference "Brightroom" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/FluidGroup/Brightroom";
-			requirement = {
-				kind = exactVersion;
-				version = 2.9.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -3268,11 +3229,6 @@
 			package = CF9779DA29BE2FC600D1CAB0 /* XCRemoteSwiftPackageReference "PhoneNumberKit" */;
 			productName = PhoneNumberKit;
 		};
-		CFC4EFD629FAE28300DBD831 /* ZLImageEditor */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CFC4EFD529FAE28300DBD831 /* XCRemoteSwiftPackageReference "ZLImageEditor" */;
-			productName = ZLImageEditor;
-		};
 		CFE09256298DF78700F197F0 /* SwiftyBeaver */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
@@ -3322,16 +3278,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CFFD70CE298AC7A900D4F5A2 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = CombineMoya;
-		};
-		CFFF0F2629F983B80029F466 /* BrightroomEngine */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CFFF0F2529F983B80029F466 /* XCRemoteSwiftPackageReference "Brightroom" */;
-			productName = BrightroomEngine;
-		};
-		CFFF0F2829F983B80029F466 /* BrightroomUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CFFF0F2529F983B80029F466 /* XCRemoteSwiftPackageReference "Brightroom" */;
-			productName = BrightroomUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

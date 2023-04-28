@@ -6,7 +6,6 @@ target 'Noljanolja' do
   use_frameworks!
 
   # Pods for Noljanolja
-  pod 'PhotoEditorSDK'
   pod 'AnyImageKit'
   pod 'naveridlogin-sdk-ios', '4.1.5'
   pod 'shared', :path => './shared'
