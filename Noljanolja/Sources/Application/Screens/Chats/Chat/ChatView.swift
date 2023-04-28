@@ -22,8 +22,12 @@ struct ChatView<ViewModel: ChatViewModel>: View {
     @Environment(\.presentationMode) private var presentationMode
 
     var body: some View {
+        buildBodyView()
+    }
+
+    func buildBodyView() -> some View {
         ZStack {
-            buildBodyView()
+            buildMainView()
             buildNavigationLinks()
         }
         .navigationBarTitle("", displayMode: .inline)
@@ -52,6 +56,7 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                 }
             }
         }
+        .configure(backgroundColor: .green, foregroundColor: .white)
         .onAppear { viewModel.isAppearSubject.send(true) }
         .onDisappear { viewModel.isAppearSubject.send(false) }
         .onReceive(viewModel.closeAction) {
@@ -65,7 +70,7 @@ struct ChatView<ViewModel: ChatViewModel>: View {
         )
     }
 
-    private func buildBodyView() -> some View {
+    private func buildMainView() -> some View {
         VStack(spacing: 0) {
             buildContentView()
                 .statefull(

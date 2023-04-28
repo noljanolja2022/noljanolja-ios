@@ -30,6 +30,7 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
             buildNavigationLink()
         }
         .clipped()
+//        .configure(backgroundColor: .blue, foregroundColor: .white)
         .onAppear { viewModel.isAppearSubject.send(true) }
         .onDisappear { viewModel.isAppearSubject.send(false) }
         .onReceive(toolBarAction) {
@@ -62,39 +63,16 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
     }
 
     private func buildContentView() -> some View {
-        VStack(spacing: 0) {
-            ZStack {
-                SearchView(
-                    placeholder: "Search friend...",
-                    text: .constant(""),
-                    isUserInteractionEnabled: false
-                )
-                .padding(.horizontal, 16)
-
-                Button(
-                    action: {
-                        viewModel.fullScreenCoverType = .createConversation
-                    },
-                    label: {
-                        Text("")
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    }
-                )
-            }
-            .frame(height: 36)
-
-            buildListView()
-                .padding(.top, 12)
-                .statefull(
-                    state: $viewModel.viewState,
-                    isEmpty: { viewModel.conversations.isEmpty },
-                    loading: buildLoadingView,
-                    empty: buildEmptyView,
-                    error: buildErrorView
-                )
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-        }
-        .padding(.top, 12)
+        buildListView()
+            .padding(.top, 12)
+            .statefull(
+                state: $viewModel.viewState,
+                isEmpty: { viewModel.conversations.isEmpty },
+                loading: buildLoadingView,
+                empty: buildEmptyView,
+                error: buildErrorView
+            )
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     private func buildListView() -> some View {

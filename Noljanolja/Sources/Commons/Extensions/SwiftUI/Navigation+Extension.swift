@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import UIKit
 
 extension UINavigationController {
@@ -38,5 +39,56 @@ extension UINavigationController {
         }
 
         return appearance
+    }
+
+    func update(backgroundColor: UIColor, foregroundColor: UIColor) {
+        navigationBar.standardAppearance.backgroundColor = backgroundColor
+        navigationBar.scrollEdgeAppearance?.backgroundColor = backgroundColor
+        navigationBar.compactAppearance?.backgroundColor = backgroundColor
+
+        navigationBar.standardAppearance.backgroundColor = backgroundColor
+        navigationBar.scrollEdgeAppearance?.backgroundColor = backgroundColor
+        navigationBar.compactAppearance?.backgroundColor = backgroundColor
+
+        if #available(iOS 15.0, *) {
+            navigationBar.compactScrollEdgeAppearance?.backgroundColor = backgroundColor
+        }
+    }
+}
+
+// MARK: - NavigationConfigurationViewModifier
+
+struct NavigationConfigurationViewModifier: ViewModifier {
+    @State var backgroundColor: Color
+    @State var foregroundColor: Color
+
+    func body(content: Content) -> some View {
+        content
+            .introspectViewController { viewController in
+                guard let backgroundColor = backgroundColor.toUIColor(),
+                      let foregroundColor = foregroundColor.toUIColor() else {
+                    return
+                }
+                viewController.navigationController?.update(
+                    backgroundColor: backgroundColor,
+                    foregroundColor: foregroundColor
+                )
+            }
+            .onAppear {
+                backgroundColor = backgroundColor
+                foregroundColor = backgroundColor
+            }
+    }
+}
+
+extension View {
+    @discardableResult
+    func configure(backgroundColor: Color, foregroundColor: Color) -> some View {
+        modifier(
+            NavigationConfigurationViewModifier(
+                backgroundColor: backgroundColor,
+                foregroundColor: foregroundColor
+            )
+        )
     }
 }
