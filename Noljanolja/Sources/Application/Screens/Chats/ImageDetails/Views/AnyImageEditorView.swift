@@ -26,9 +26,11 @@ struct AnyImageEditorView: UIViewControllerRepresentable {
     }
 
     func makeUIViewController(context: Context) -> UIViewControllerType {
-        ImageEditorController(
+        var options = EditorPhotoOptionsInfo()
+        options.toolOptions = [.crop, .text, .brush, .mosaic]
+        return ImageEditorController(
             photo: image,
-            options: EditorPhotoOptionsInfo(),
+            options: options,
             delegate: context.coordinator
         )
     }

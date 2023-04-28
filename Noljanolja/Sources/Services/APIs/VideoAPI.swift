@@ -33,6 +33,12 @@ private enum VideoAPITargets {
         }
     }
 
+    struct WatchingVideos: BaseAuthTargetType {
+        var path: String { "v1/media/videos/watching" }
+        let method: Moya.Method = .get
+        var task: Task { .requestPlain }
+    }
+
     struct GetTrendingVideos: BaseAuthTargetType {
         var path: String { "v1/media/videos/trending" }
         let method: Moya.Method = .get
@@ -104,6 +110,7 @@ private enum VideoAPITargets {
 
 protocol VideoAPIType {
     func getVideos(page: Int, pageSize: Int?, isHighlighted: Bool?, categoryId: String?) -> AnyPublisher<[Video], Error>
+    func getWatchingVideos() -> AnyPublisher<[Video], Error>
     func getTrendingVideos(duration: VideoTrendingDurationType, limit: Int?) -> AnyPublisher<[Video], Error>
 
     func getVideoDetail(id: String) -> AnyPublisher<Video, Error>
@@ -145,6 +152,13 @@ final class VideoAPI: VideoAPIType {
                 isHighlighted: isHighlighted,
                 categoryId: categoryId
             ),
+            atKeyPath: "data"
+        )
+    }
+
+    func getWatchingVideos() -> AnyPublisher<[Video], Error> {
+        api.request(
+            target: VideoAPITargets.WatchingVideos(),
             atKeyPath: "data"
         )
     }
