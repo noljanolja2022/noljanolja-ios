@@ -10,13 +10,14 @@ import _SwiftUINavigationState
 import Combine
 import Foundation
 import SDWebImage
-import SVProgressHUD
 
 // MARK: - ImageDetailViewModelDelegate
 
 // import SVProgressHUD
 
-protocol ImageDetailViewModelDelegate: AnyObject {}
+protocol ImageDetailViewModelDelegate: AnyObject {
+    func sendImage(_ image: UIImage)
+}
 
 // MARK: - ImageDetailViewModel
 
@@ -61,6 +62,7 @@ final class ImageDetailViewModel: ViewModel {
             .flatMapLatestToResult {
                 SDWebImageManager.shared.loadImagePublisher(with: imageUrl, progress: nil)
             }
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 guard let self else { return }
                 self.isProgressHUDShowing = false
@@ -96,6 +98,22 @@ final class ImageDetailViewModel: ViewModel {
                 }
             }
             .store(in: &cancellables)
+    }
+}
+
+// MARK: ImageEditorViewModelDelegate
+
+extension ImageDetailViewModel: ImageEditorViewModelDelegate {
+    func finishEditing(_ image: UIImage) {
+        fullScreenCoverType = .editerResult(image)
+    }
+}
+
+// MARK: ImageEditorResultViewModelDelegate
+
+extension ImageDetailViewModel: ImageEditorResultViewModelDelegate {
+    func sendImage(_ image: UIImage) {
+        delegate?.sendImage(image)
     }
 }
 

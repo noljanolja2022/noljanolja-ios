@@ -16,11 +16,11 @@ import SwiftUIX
 public struct ClassicImageEditView: UIViewControllerRepresentable {
     public typealias UIViewControllerType = ClassicImageEditViewController
 
-    @Environment(\.presentationManager) var presentationManager
+    private let image: AppKitOrUIKitImage
 
-    let image: Binding<AppKitOrUIKitImage>
-
-    var onCancel: (() -> Void)?
+    init(image: AppKitOrUIKitImage) {
+        self.image = image
+    }
 
     public func makeUIViewController(context: Context) -> UIViewControllerType {
         var options = ClassicImageEditOptions.default
@@ -28,7 +28,7 @@ public struct ClassicImageEditView: UIViewControllerRepresentable {
 
         return ClassicImageEditViewController(
             imageProvider: ImageProvider(
-                image: image.wrappedValue
+                image: image
             ),
             options: options
         )
@@ -48,60 +48,5 @@ public struct ClassicImageEditView: UIViewControllerRepresentable {
 
     public func makeCoordinator() -> Coordinator {
         .init(base: self)
-    }
-}
-
-// MARK: - API
-
-public extension ClassicImageEditView {
-    init(image: Binding<AppKitOrUIKitImage>,
-         onCancel: (() -> Void)? = nil) {
-        self.image = image
-        self.onCancel = onCancel
-    }
-}
-
-// MARK: - ClassicImageEditNoPresetRootControl
-
-/// A view that disabled preset and edit selection button.
-/// It displays the edit panel directly.
-
-class ClassicImageEditNoPresetRootControl: ClassicImageEditRootControlBase {
-    private let containerView = UIView()
-
-    public let editMenuControl: ClassicImageEditEditMenuControlBase
-
-    // MARK: - Initializers
-
-    public required init(viewModel: ClassicImageEditViewModel,
-                         editMenuControl: ClassicImageEditEditMenuControlBase,
-                         presetListControl: ClassicImageEditPresetListControlBase) {
-        self.editMenuControl = editMenuControl
-
-        super.init(
-            viewModel: viewModel,
-            editMenuControl: editMenuControl,
-            presetListControl: presetListControl
-        )
-
-        backgroundColor = ClassicImageEditStyle.default.control.backgroundColor
-
-        layout: do {
-            addSubview(containerView)
-
-            containerView.translatesAutoresizingMaskIntoConstraints = false
-
-            NSLayoutConstraint.activate([
-                containerView.topAnchor.constraint(equalTo: containerView.superview!.topAnchor),
-                containerView.leftAnchor.constraint(equalTo: containerView.superview!.leftAnchor),
-                containerView.rightAnchor.constraint(equalTo: containerView.superview!.rightAnchor),
-                containerView.bottomAnchor.constraint(equalTo: containerView.superview!.bottomAnchor),
-                containerView.heightAnchor.constraint(equalToConstant: 50)
-            ])
-
-            editMenuControl.frame = containerView.bounds
-            editMenuControl.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            containerView.addSubview(editMenuControl)
-        }
     }
 }

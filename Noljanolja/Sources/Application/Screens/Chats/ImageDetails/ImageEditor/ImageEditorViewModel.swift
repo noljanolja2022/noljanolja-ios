@@ -12,7 +12,9 @@ import UIKit
 
 // MARK: - ImageEditorViewModelDelegate
 
-protocol ImageEditorViewModelDelegate: AnyObject {}
+protocol ImageEditorViewModelDelegate: AnyObject {
+    func finishEditing(_ image: UIImage)
+}
 
 // MARK: - ImageEditorViewModel
 
@@ -20,6 +22,8 @@ final class ImageEditorViewModel: ViewModel {
     // MARK: State
 
     // MARK: Action
+
+    let finishEditingAction = PassthroughSubject<UIImage, Never>()
 
     // MARK: Dependencies
 
@@ -39,5 +43,12 @@ final class ImageEditorViewModel: ViewModel {
         configure()
     }
 
-    private func configure() {}
+    private func configure() {
+        finishEditingAction
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                self?.delegate?.finishEditing($0)
+            }
+            .store(in: &cancellables)
+    }
 }

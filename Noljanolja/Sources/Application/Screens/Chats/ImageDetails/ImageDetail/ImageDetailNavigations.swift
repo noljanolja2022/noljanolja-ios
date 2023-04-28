@@ -10,4 +10,5 @@ import UIKit
 
 enum ImageDetailFullScreenCoverType {
     case edit(UIImage)
+    case editerResult(UIImage)
 }

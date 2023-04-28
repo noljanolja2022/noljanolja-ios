@@ -78,7 +78,8 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             ChatInputView(
                 viewModel: ChatInputViewModel(
-                    conversationID: viewModel.conversationID
+                    conversationID: viewModel.conversationID,
+                    sendAction: viewModel.sendAction
                 )
             )
         }
@@ -96,7 +97,7 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                             viewModel.chatItemAction.send($0)
                         }
                     )
-                    .onAppear { viewModel.loadMoreDataTrigger.send(index) }
+                    .onAppear { viewModel.loadMoreDataAction.send(index) }
                 }
                 .scaleEffect(x: 1, y: -1, anchor: .center)
             }
@@ -152,7 +153,8 @@ struct ChatView<ViewModel: ChatViewModel>: View {
             NavigationView {
                 ImageDetailView(
                     viewModel: ImageDetailViewModel(
-                        imageUrl: url
+                        imageUrl: url,
+                        delegate: viewModel
                     )
                 )
             }

@@ -1,27 +1,54 @@
 PODS:
+  - AnyImageKit (0.15.1):
+    - AnyImageKit/Capture (= 0.15.1)
+    - AnyImageKit/Core (= 0.15.1)
+    - AnyImageKit/Editor (= 0.15.1)
+    - AnyImageKit/Picker (= 0.15.1)
+  - AnyImageKit/Capture (0.15.1):
+    - AnyImageKit/Core
+  - AnyImageKit/Core (0.15.1):
+    - Kingfisher
+    - SnapKit
+  - AnyImageKit/Editor (0.15.1):
+    - AnyImageKit/Core
+  - AnyImageKit/Picker (0.15.1):
+    - AnyImageKit/Core
+  - imglyKit (11.5.1)
+  - Kingfisher (7.6.2)
   - naveridlogin-sdk-ios (4.1.5)
+  - PhotoEditorSDK (11.5.1):
+    - imglyKit (= 11.5.1)
   - shared (1.0)
-  - SVProgressHUD (2.2.5)
+  - SnapKit (5.6.0)
 
 DEPENDENCIES:
+  - AnyImageKit
   - naveridlogin-sdk-ios (= 4.1.5)
+  - PhotoEditorSDK
   - shared (from `./shared`)
-  - SVProgressHUD
 
 SPEC REPOS:
   trunk:
+    - AnyImageKit
+    - imglyKit
+    - Kingfisher
     - naveridlogin-sdk-ios
-    - SVProgressHUD
+    - PhotoEditorSDK
+    - SnapKit
 
 EXTERNAL SOURCES:
   shared:
     :path: "./shared"
 
 SPEC CHECKSUMS:
+  AnyImageKit: 2f1ad09414e52313d8914df52869909ea2b71019
+  imglyKit: b1b3b827799a50b090433ca7c61f90b078944898
+  Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
   naveridlogin-sdk-ios: 4351fe7162cd6b8b6dbb37bd7cc205304fa1d889
+  PhotoEditorSDK: fba52a9e3fc61c493ae5d2c3b44606eb7bf7bf43
   shared: 39716697cdb03064a2a5d4da9d9d75c8ca73d2e7
-  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: 456879c94d21b5a2bd30acc55dc45dfd791b510b
+PODFILE CHECKSUM: 91a0994229d6d1200221b052ec65e38d0ff3bb4b
 
 COCOAPODS: 1.12.0

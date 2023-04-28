@@ -24,11 +24,13 @@ struct ImageEditorView<ViewModel: ImageEditorViewModel>: View {
     }
 
     private func buildBodyView() -> some View {
-        ZLImageEditorView(
-            image: .constant(viewModel.image),
-            onCancel: nil
+        AnyImageEditorView(
+            image: viewModel.image,
+            finishEditingAction: { image in
+                guard let image else { return }
+                viewModel.finishEditingAction.send(image)
+            }
         )
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(
@@ -44,6 +46,9 @@ struct ImageEditorView<ViewModel: ImageEditorViewModel>: View {
         }
         .onAppear { viewModel.isAppearSubject.send(true) }
         .onDisappear { viewModel.isAppearSubject.send(false) }
+        .introspectViewController {
+            $0.view.backgroundColor = .black
+        }
     }
 }
 

@@ -163,7 +163,7 @@ extension MessageService {
                     return AttachmentParam(
                         id: id,
                         name: "\(id).png",
-                        data: image.pngData()
+                        data: image.jpegData(compressionQuality: 0.5)
                     )
                 }
                 return Just(parameters)

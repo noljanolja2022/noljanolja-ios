@@ -108,10 +108,18 @@ struct ImageDetailView<ViewModel: ImageDetailViewModel>: View {
     ) -> some View {
         switch type.wrappedValue {
         case let .edit(image):
+            ImageEditorView(
+                viewModel: ImageEditorViewModel(
+                    image: image,
+                    delegate: viewModel
+                )
+            )
+        case let .editerResult(image):
             NavigationView {
-                ImageEditorView(
-                    viewModel: ImageEditorViewModel(
-                        image: image
+                ImageEditorResultView(
+                    viewModel: ImageEditorResultViewModel(
+                        image: image,
+                        delegate: viewModel
                     )
                 )
             }
