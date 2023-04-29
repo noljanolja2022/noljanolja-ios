@@ -27,7 +27,7 @@ struct ChatSettingAddParticipantView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.primaryMain.swiftUIColor)
         }
-        .background(ColorAssets.white.swiftUIColor)
+        .background(ColorAssets.neutralLight.swiftUIColor)
     }
 }
 

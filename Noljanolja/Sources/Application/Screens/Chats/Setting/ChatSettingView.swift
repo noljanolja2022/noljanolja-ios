@@ -112,7 +112,7 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
                 )
                 .padding(.vertical, 10)
                 .padding(.horizontal, 16)
-                .background(ColorAssets.white.swiftUIColor)
+                .background(ColorAssets.neutralLight.swiftUIColor)
                 .onTapGesture {
                     let actions = participantModel.actionTypes
                     guard !actions.isEmpty else { return }
@@ -121,7 +121,7 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
             }
         }
         .padding(.bottom, 4)
-        .background(ColorAssets.white.swiftUIColor)
+        .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
     @ViewBuilder
@@ -138,7 +138,7 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
                 }
             }
             .padding(.top, 4)
-            .background(ColorAssets.white.swiftUIColor)
+            .background(ColorAssets.neutralLight.swiftUIColor)
         }
     }
 
@@ -167,7 +167,7 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding(12)
                     .foregroundColor(ColorAssets.red.swiftUIColor)
-                    .background(ColorAssets.white.swiftUIColor)
+                    .background(ColorAssets.neutralLight.swiftUIColor)
                     .cornerRadius(4)
             }
         )

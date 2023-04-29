@@ -49,6 +49,7 @@ struct ImageEditorView<ViewModel: ImageEditorViewModel>: View {
         .introspectViewController {
             $0.view.backgroundColor = .black
         }
+        .ignoresSafeArea()
     }
 }
 

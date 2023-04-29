@@ -27,6 +27,15 @@ struct AnyImageEditorView: UIViewControllerRepresentable {
 
     func makeUIViewController(context: Context) -> UIViewControllerType {
         var options = EditorPhotoOptionsInfo()
+        options.theme[icon: .returnBackButton] = ImageAssets.icClose.image
+            .withTintColor(ColorAssets.neutralLight.color, renderingMode: .alwaysOriginal)
+        options.theme.configurationButton(for: .done) { button in
+            button.layerCornerRadius = 8
+            button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
+            button.setTitleColor(ColorAssets.neutralLight.color, for: .normal)
+            button.setTitleColor(ColorAssets.neutralLightGrey.color, for: .highlighted)
+            button.backgroundColor = ColorAssets.primaryMain.color
+        }
         options.toolOptions = [.crop, .text, .brush, .mosaic]
         return ImageEditorController(
             photo: image,

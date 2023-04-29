@@ -113,7 +113,7 @@ struct CreateConversationView<ViewModel: CreateConversationViewModel>: View {
         }
         .frame(maxWidth: .infinity)
         .padding(24)
-        .background(ColorAssets.white.swiftUIColor)
+        .background(ColorAssets.neutralLight.swiftUIColor)
     }
 }
 

@@ -85,7 +85,7 @@ struct TermDetailView<ViewModel: TermDetailViewModel>: View {
             }
             .padding(.horizontal, 16)
         }
-        .background(ColorAssets.white.swiftUIColor.ignoresSafeArea())
+        .background(ColorAssets.neutralLight.swiftUIColor.ignoresSafeArea())
         .cornerRadius([.topLeading, .topTrailing], 40)
     }
 }

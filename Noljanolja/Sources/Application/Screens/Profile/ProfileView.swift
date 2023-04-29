@@ -97,7 +97,7 @@ struct ProfileView<ViewModel: ProfileViewModel>: View {
         }
         .frame(maxWidth: .infinity)
         .padding(16)
-        .background(ColorAssets.white.swiftUIColor)
+        .background(ColorAssets.neutralLight.swiftUIColor)
         .cornerRadius([.bottomLeading, .bottomTrailing], 24)
     }
 
@@ -158,7 +158,7 @@ struct ProfileView<ViewModel: ProfileViewModel>: View {
                     .padding(.vertical, 16)
                     .padding(.horizontal, 12)
                     .frame(maxWidth: .infinity)
-                    .background(ColorAssets.white.swiftUIColor)
+                    .background(ColorAssets.neutralLight.swiftUIColor)
                     .cornerRadius(12)
 
                     VStack(spacing: 12) {
@@ -192,7 +192,7 @@ struct ProfileView<ViewModel: ProfileViewModel>: View {
                     .padding(.vertical, 16)
                     .padding(.horizontal, 12)
                     .frame(maxWidth: .infinity)
-                    .background(ColorAssets.white.swiftUIColor)
+                    .background(ColorAssets.neutralLight.swiftUIColor)
                     .cornerRadius(12)
                 }
 
@@ -215,7 +215,7 @@ struct ProfileView<ViewModel: ProfileViewModel>: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding(12)
                     .foregroundColor(ColorAssets.primaryDark.swiftUIColor)
-                    .background(ColorAssets.white.swiftUIColor)
+                    .background(ColorAssets.neutralLight.swiftUIColor)
                     .cornerRadius(4)
             }
         )

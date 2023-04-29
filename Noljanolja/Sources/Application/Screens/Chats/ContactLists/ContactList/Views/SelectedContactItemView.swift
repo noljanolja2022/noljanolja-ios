@@ -41,7 +41,7 @@ struct SelectedContactItemView: View {
                         .resizable()
                         .padding(6)
                         .frame(width: 20, height: 20)
-                        .foregroundColor(ColorAssets.white.swiftUIColor)
+                        .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
                         .background(ColorAssets.neutralDarkGrey.swiftUIColor)
                         .cornerRadius(10)
                 }

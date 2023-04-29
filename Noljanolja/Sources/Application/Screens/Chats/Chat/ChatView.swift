@@ -56,7 +56,6 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                 }
             }
         }
-        .configure(backgroundColor: .green, foregroundColor: .white)
         .onAppear { viewModel.isAppearSubject.send(true) }
         .onDisappear { viewModel.isAppearSubject.send(false) }
         .onReceive(viewModel.closeAction) {

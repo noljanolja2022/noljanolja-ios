@@ -30,7 +30,6 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
             buildNavigationLink()
         }
         .clipped()
-//        .configure(backgroundColor: .blue, foregroundColor: .white)
         .onAppear { viewModel.isAppearSubject.send(true) }
         .onDisappear { viewModel.isAppearSubject.send(false) }
         .onReceive(toolBarAction) {
@@ -64,7 +63,6 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
 
     private func buildContentView() -> some View {
         buildListView()
-            .padding(.top, 12)
             .statefull(
                 state: $viewModel.viewState,
                 isEmpty: { viewModel.conversations.isEmpty },
