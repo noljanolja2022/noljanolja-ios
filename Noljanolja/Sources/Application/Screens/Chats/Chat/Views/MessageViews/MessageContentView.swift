@@ -26,7 +26,10 @@ struct MessageContentView: View {
                 action: action
             )
         case let .photo(model):
-            PhotoMessageContentView(contentItemModel: model)
+            PhotoMessageContentView(
+                contentItemModel: model,
+                action: action
+            )
         case let .sticker(model):
             StickerMessageContentView(contentItemModel: model)
         case .none:

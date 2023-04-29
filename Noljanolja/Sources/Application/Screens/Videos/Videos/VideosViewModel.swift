@@ -79,7 +79,8 @@ final class VideosViewModel: ViewModel {
         let highlightVideos = videoAPI
             .getVideos(page: 1, pageSize: pageSize, isHighlighted: true)
             .mapToResult()
-        let watchingVideos = CurrentValueSubject<[Video], Error>([])
+        let watchingVideos = videoAPI
+            .getWatchingVideos()
             .mapToResult()
         let trendingVideos = videoAPI
             .getTrendingVideos(duration: .day, limit: pageSize)

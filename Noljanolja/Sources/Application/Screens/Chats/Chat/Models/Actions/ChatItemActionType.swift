@@ -9,4 +9,5 @@ import Foundation
 
 enum ChatItemActionType: Equatable {
     case openURL(String)
+    case openImageDetail(URL?)
 }

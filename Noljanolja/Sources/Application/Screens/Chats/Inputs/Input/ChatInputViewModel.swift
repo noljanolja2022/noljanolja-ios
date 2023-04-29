@@ -21,14 +21,14 @@ final class ChatInputViewModel: ViewModel {
 
     // MARK: Action
 
-    let sendTextAction = PassthroughSubject<String, Never>()
-    let sendImagesAction = PassthroughSubject<[UIImage], Never>()
-    let sendPhotosAction = PassthroughSubject<[PhotoAsset], Never>()
-    let sendStickerAction = PassthroughSubject<(StickerPack, Sticker), Never>()
+    var sendAction: PassthroughSubject<SendMessageType, Never> {
+        privateSendAction
+    }
 
     // MARK: Dependencies
 
     private let conversationID: Int
+    private let privateSendAction: PassthroughSubject<SendMessageType, Never>
     private let messageService: MessageServiceType
     private weak var delegate: ChatInputViewModelDelegate?
 
@@ -37,9 +37,11 @@ final class ChatInputViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(conversationID: Int,
+         sendAction: PassthroughSubject<SendMessageType, Never>,
          messageService: MessageServiceType = MessageService.default,
          delegate: ChatInputViewModelDelegate? = nil) {
         self.conversationID = conversationID
+        self.privateSendAction = sendAction
         self.messageService = messageService
         self.delegate = delegate
         super.init()
@@ -50,43 +52,35 @@ final class ChatInputViewModel: ViewModel {
     private func configure() {
         let conversationID = conversationID
 
-        let sendPublisher = Publishers.Merge4(
-            sendTextAction
-                .filter { !$0.isEmpty }
-                .map {
-                    SendMessageRequest(
+        sendAction
+            .map { sendMessageType in
+                switch sendMessageType {
+                case let .text(message):
+                    return SendMessageRequest(
                         conversationID: conversationID,
                         type: .plaintext,
-                        message: $0
+                        message: message
                     )
-                },
-            sendImagesAction
-                .map {
-                    SendMessageRequest(
+                case let .images(images):
+                    return SendMessageRequest(
                         conversationID: conversationID,
                         type: .photo,
-                        attachments: .images($0)
+                        attachments: .images(images)
                     )
-                },
-            sendPhotosAction
-                .map {
-                    SendMessageRequest(
+                case let .photoAssets(photos):
+                    return SendMessageRequest(
                         conversationID: conversationID,
                         type: .photo,
-                        attachments: .photos($0)
+                        attachments: .photos(photos)
                     )
-                },
-            sendStickerAction
-                .map {
-                    SendMessageRequest(
+                case let .sticker(stickerPack, sticker):
+                    return SendMessageRequest(
                         conversationID: conversationID,
                         type: .sticker,
-                        sticker: $0
+                        sticker: (stickerPack, sticker)
                     )
                 }
-        )
-        
-        sendPublisher
+            }
             .flatMapToResult { [weak self] request in
                 guard let self else {
                     return Empty<Message, Error>().eraseToAnyPublisher()
@@ -105,6 +99,6 @@ final class ChatInputViewModel: ViewModel {
 
 extension ChatInputViewModel: ChatInputExpandViewModelDelegate {
     func didSelectImages(_ images: [UIImage]) {
-        sendImagesAction.send(images)
+        sendAction.send(.images(images))
     }
 }

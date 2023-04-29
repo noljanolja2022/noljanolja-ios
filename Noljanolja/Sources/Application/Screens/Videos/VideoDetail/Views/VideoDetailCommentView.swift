@@ -73,7 +73,7 @@ struct VideoDetailCommentView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                     .padding(12)
                     .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
-                    .background(ColorAssets.white.swiftUIColor)
+                    .background(ColorAssets.neutralLight.swiftUIColor)
                     .cornerRadius(8)
                     .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 2)
 

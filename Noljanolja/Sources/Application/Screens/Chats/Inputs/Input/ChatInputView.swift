@@ -128,7 +128,7 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
     private func buildSendView() -> some View {
         Button(
             action: {
-                viewModel.sendTextAction.send(text)
+                viewModel.sendAction.send(.text(text))
                 text = ""
             },
             label: {
@@ -151,8 +151,12 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
                 delegate: viewModel
             ),
             expandType: $expandType,
-            sendPhotoAction: { viewModel.sendPhotosAction.send($0) },
-            sendStickerAction: { viewModel.sendStickerAction.send(($0, $1)) }
+            sendPhotoAction: {
+                viewModel.sendAction.send(.photoAssets($0))
+            },
+            sendStickerAction: {
+                viewModel.sendAction.send(.sticker($0, $1))
+            }
         )
         .height(300)
     }
@@ -160,11 +164,16 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
 
 // MARK: - ChatInputView_Previews
 
+import Combine
+
+// MARK: - ChatInputView_Previews
+
 struct ChatInputView_Previews: PreviewProvider {
     static var previews: some View {
         ChatInputView(
             viewModel: ChatInputViewModel(
-                conversationID: 0
+                conversationID: 0,
+                sendAction: PassthroughSubject<SendMessageType, Never>()
             )
         )
     }

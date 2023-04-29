@@ -17,4 +17,5 @@ enum ChatNavigationType: Equatable {
 
 enum ChatFullScreenCoverType: Equatable {
     case openUrl(URL)
+    case openImageDetail(URL)
 }

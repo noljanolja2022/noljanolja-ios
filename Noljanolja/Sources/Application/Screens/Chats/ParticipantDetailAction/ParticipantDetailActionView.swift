@@ -90,7 +90,7 @@ struct ParticipantDetailActionView<ViewModel: ParticipantDetailActionViewModel>:
         }
         .frame(maxWidth: .infinity)
         .background(
-            ColorAssets.white.swiftUIColor
+            ColorAssets.neutralLight.swiftUIColor
                 .edgesIgnoringSafeArea(.bottom)
         )
         .cornerRadius([.topLeading, .topTrailing], 24)

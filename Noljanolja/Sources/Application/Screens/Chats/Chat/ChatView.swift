@@ -22,8 +22,12 @@ struct ChatView<ViewModel: ChatViewModel>: View {
     @Environment(\.presentationMode) private var presentationMode
 
     var body: some View {
+        buildBodyView()
+    }
+
+    func buildBodyView() -> some View {
         ZStack {
-            buildBodyView()
+            buildMainView()
             buildNavigationLinks()
         }
         .navigationBarTitle("", displayMode: .inline)
@@ -65,7 +69,7 @@ struct ChatView<ViewModel: ChatViewModel>: View {
         )
     }
 
-    private func buildBodyView() -> some View {
+    private func buildMainView() -> some View {
         VStack(spacing: 0) {
             buildContentView()
                 .statefull(
@@ -78,7 +82,8 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             ChatInputView(
                 viewModel: ChatInputViewModel(
-                    conversationID: viewModel.conversationID
+                    conversationID: viewModel.conversationID,
+                    sendAction: viewModel.sendAction
                 )
             )
         }
@@ -96,7 +101,7 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                             viewModel.chatItemAction.send($0)
                         }
                     )
-                    .onAppear { viewModel.loadMoreDataTrigger.send(index) }
+                    .onAppear { viewModel.loadMoreDataAction.send(index) }
                 }
                 .scaleEffect(x: 1, y: -1, anchor: .center)
             }
@@ -148,6 +153,25 @@ struct ChatView<ViewModel: ChatViewModel>: View {
         switch type.wrappedValue {
         case let .openUrl(url):
             SafariView(url: url)
+        case let .openImageDetail(url):
+            NavigationView {
+                ImageDetailView(
+                    viewModel: ImageDetailViewModel(
+                        imageUrl: url,
+                        delegate: viewModel
+                    )
+                )
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
+            .accentColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            .introspectNavigationController { navigationController in
+                navigationController.configure(
+                    backgroundColor: ColorAssets.white.color,
+                    foregroundColor: ColorAssets.neutralDarkGrey.color
+                )
+                navigationController.view.backgroundColor = .clear
+                navigationController.parent?.view.backgroundColor = .clear
+            }
         }
     }
 }

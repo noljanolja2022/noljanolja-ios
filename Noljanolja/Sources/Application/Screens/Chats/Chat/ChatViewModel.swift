@@ -8,6 +8,7 @@
 
 import Combine
 import Foundation
+import UIKit
 
 // MARK: - ChatViewModelDelegate
 
@@ -35,9 +36,11 @@ final class ChatViewModel: ViewModel {
 
     // MARK: Action
 
+    let sendAction = PassthroughSubject<SendMessageType, Never>()
+
     let closeAction = PassthroughSubject<Void, Never>()
     let chatItemAction = PassthroughSubject<ChatItemActionType, Never>()
-    let loadMoreDataTrigger = PassthroughSubject<Int, Never>()
+    let loadMoreDataAction = PassthroughSubject<Int, Never>()
     let openChatSettingSubject = PassthroughSubject<Void, Never>()
 
     private let loadPreviousDataTrigger = PassthroughSubject<Void, Never>()
@@ -197,7 +200,7 @@ final class ChatViewModel: ViewModel {
             })
             .store(in: &cancellables)
 
-        loadMoreDataTrigger
+        loadMoreDataAction
             .sink(receiveValue: { [weak self] index in
                 guard let self else { return }
                 let chekingCount = 20
@@ -333,6 +336,9 @@ final class ChatViewModel: ViewModel {
                     guard let url = URL(string: urlString),
                           url.scheme == "https" || url.scheme == "http" else { return }
                     self.fullScreenCoverType = .openUrl(url)
+                case let .openImageDetail(url):
+                    guard let url else { return }
+                    self.fullScreenCoverType = .openImageDetail(url)
                 }
             }
             .store(in: &cancellables)
@@ -353,5 +359,13 @@ final class ChatViewModel: ViewModel {
 extension ChatViewModel: ChatSettingViewModelDelegate {
     func didLeaveGroupChat() {
         closeAction.send()
+    }
+}
+
+// MARK: ImageDetailViewModelDelegate
+
+extension ChatViewModel: ImageDetailViewModelDelegate {
+    func sendImage(_ image: UIImage) {
+        sendAction.send(.images([image]))
     }
 }

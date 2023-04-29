@@ -68,7 +68,7 @@ struct VideoDetailInformationView: View {
             }
             .frame(minWidth: 0, maxWidth: .infinity)
             .padding(.vertical, 8)
-            .background(ColorAssets.white.swiftUIColor)
+            .background(ColorAssets.neutralLight.swiftUIColor)
             .cornerRadius(12)
             .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 2)
 
@@ -85,7 +85,7 @@ struct VideoDetailInformationView: View {
             }
             .frame(minWidth: 0, maxWidth: .infinity)
             .padding(.vertical, 8)
-            .background(ColorAssets.white.swiftUIColor)
+            .background(ColorAssets.neutralLight.swiftUIColor)
             .cornerRadius(12)
             .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 2)
 
@@ -100,7 +100,7 @@ struct VideoDetailInformationView: View {
             }
             .frame(minWidth: 0, maxWidth: .infinity)
             .padding(.vertical, 8)
-            .background(ColorAssets.white.swiftUIColor)
+            .background(ColorAssets.neutralLight.swiftUIColor)
             .cornerRadius(12)
             .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 2)
         }

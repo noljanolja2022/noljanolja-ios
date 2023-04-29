@@ -44,7 +44,7 @@ struct TermView<ViewModel: TermViewModel>: View {
                 buildActionView()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(ColorAssets.white.swiftUIColor)
+            .background(ColorAssets.neutralLight.swiftUIColor)
             .cornerRadius([.topLeading, .topTrailing], 40)
         }
         .background(ColorAssets.primaryLight.swiftUIColor.ignoresSafeArea(edges: [.top]))

@@ -36,11 +36,27 @@ struct MainView<ViewModel: MainViewModel>: View {
 
     @ToolbarContentBuilder
     private func buildToolBarContent() -> some ToolbarContent {
+        ToolbarItem(placement: .navigationBarLeading) {
+            switch viewModel.selectedTab {
+            case .chat:
+                Text(viewModel.selectedTab.navigationBarTitle)
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            case .watch, .wallet, .shop, .news:
+                EmptyView()
+            }
+        }
+
         ToolbarItem(placement: .principal) {
-            Text(viewModel.selectedTab.navigationBarTitle)
-                .font(.system(size: 16, weight: .bold))
-                .frame(minWidth: 120)
-                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            switch viewModel.selectedTab {
+            case .chat:
+                EmptyView()
+            case .watch, .wallet, .shop, .news:
+                Text(viewModel.selectedTab.navigationBarTitle)
+                    .font(.system(size: 16, weight: .bold))
+                    .frame(minWidth: 120)
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            }
         }
 
         ToolbarItem(placement: .navigationBarTrailing) {
@@ -59,7 +75,7 @@ struct MainView<ViewModel: MainViewModel>: View {
                     }
                 )
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            default:
+            case .watch, .wallet, .shop, .news:
                 EmptyView()
             }
         }

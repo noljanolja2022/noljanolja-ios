@@ -23,7 +23,7 @@ struct ChatSettingItemView: View {
             ImageAssets.icArrowRight.swiftUIImage
                 .frame(width: 24, height: 24)
         }
-        .background(ColorAssets.white.swiftUIColor)
+        .background(ColorAssets.neutralLight.swiftUIColor)
     }
 }
 

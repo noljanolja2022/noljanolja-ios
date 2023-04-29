@@ -69,7 +69,7 @@ struct VideosView<ViewModel: VideosViewModel>: View {
     private func buildWatchingView() -> some View {
         if !viewModel.model.highlightVideos.isEmpty {
             WatchingVideoView(
-                videos: viewModel.model.trendingVideos,
+                videos: viewModel.model.watchingVideos,
                 selectAction: {
                     viewModel.navigationType = .videoDetail($0)
                 }

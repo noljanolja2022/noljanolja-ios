@@ -81,7 +81,7 @@ struct AuthView<ViewModel: AuthViewModel>: View {
             }
             buildActionView()
         }
-        .background(ColorAssets.white.swiftUIColor)
+        .background(ColorAssets.neutralLight.swiftUIColor)
         .cornerRadius([.topLeading, .topTrailing], 40)
     }
 
