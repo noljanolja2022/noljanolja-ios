@@ -9,29 +9,25 @@ import io.rsocket.kotlin.metadata.metadata
 import io.rsocket.kotlin.metadata.security.BearerAuthMetadata
 import io.rsocket.kotlin.payload.buildPayload
 import io.rsocket.kotlin.payload.data
-import kotlinx.coroutines.flow.*
 
 @OptIn(ExperimentalMetadataApi::class)
-class ConversationSocket(
+class VideoSocket(
     rsocketUrl: String,
     authRepo: AuthRepo,
 ) : BaseSocket(rsocketUrl, authRepo) {
     @NativeCoroutines
-    fun streamConversations(): Flow<String> = flow {
+    suspend fun trackVideoProgress(data: String) {
         socketClient.rSocket(rsocketUrl)
-            .requestStream(
+            .fireAndForget(
                 buildPayload {
-                    data("""{ "data": "hello world" }""")
+                    data(data)
                     metadata(
                         CompositeMetadata(
-                            RoutingMetadata("v1/conversations"),
+                            RoutingMetadata("v1/videos"),
                             BearerAuthMetadata("Bearer ${authRepo.getAuthToken()}")
                         )
                     )
                 }
             )
-            .map { it.data.readText() }
-            .onEach { emit(it) }
-            .collect()
     }
 }
