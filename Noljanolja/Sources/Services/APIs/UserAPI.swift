@@ -21,7 +21,7 @@ private enum UserAPITargets {
     struct UpdateCurrentUser: BaseAuthTargetType {
         var path: String { "v1/users/me" }
         let method: Moya.Method = .put
-        var task: Task { .requestParameters(parameters: param.dictionary, encoding: JSONEncoding.default) }
+        var task: Task { .requestParameters(parameters: param.json, encoding: JSONEncoding.default) }
 
         let param: UpdateCurrentUserParam
     }
@@ -71,7 +71,7 @@ private enum UserAPITargets {
         let contacts: [Contact]
 
         var parameters: [String: Any] {
-            ["contacts": contacts.map { $0.dictionary }]
+            ["contacts": contacts.map { $0.json }]
         }
     }
 }
