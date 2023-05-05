@@ -3,17 +3,17 @@ package com.noljanolja.shared
 import io.ktor.client.*
 import io.ktor.client.engine.*
 import io.ktor.client.plugins.websocket.*
-import io.rsocket.kotlin.ExperimentalMetadataApi
+import io.rsocket.kotlin.RSocketLoggingApi
 import io.rsocket.kotlin.core.RSocketConnector
 import io.rsocket.kotlin.core.WellKnownMimeType
 import io.rsocket.kotlin.keepalive.KeepAlive
 import io.rsocket.kotlin.ktor.client.RSocketSupport
+import io.rsocket.kotlin.logging.LoggingLevel
+import io.rsocket.kotlin.logging.PrintLogger
 import io.rsocket.kotlin.payload.PayloadMimeType
 import io.rsocket.kotlin.payload.buildPayload
 import io.rsocket.kotlin.payload.data
-import kotlinx.coroutines.flow.*
 
-@OptIn(ExperimentalMetadataApi::class)
 abstract class BaseSocket(
     protected val rsocketUrl: String,
     protected val authRepo: AuthRepo,
@@ -21,6 +21,7 @@ abstract class BaseSocket(
     protected val socketClient: HttpClient = defaultRSocketClient()
 }
 
+@OptIn(RSocketLoggingApi::class)
 private fun defaultRSocketClient() = HttpClient(httpClientEngine()) {
     install(WebSockets)
     install(RSocketSupport) {
@@ -38,6 +39,7 @@ private fun defaultRSocketClient() = HttpClient(httpClientEngine()) {
                 }
             }
             reconnectable { _, attempt -> attempt <= 3 }
+            loggerFactory = PrintLogger.withLevel(LoggingLevel.DEBUG)
         }
     }
 }
