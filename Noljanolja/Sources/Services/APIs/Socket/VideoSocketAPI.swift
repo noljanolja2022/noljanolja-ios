@@ -23,6 +23,8 @@ final class VideoSocketAPI: VideoSocketAPIType {
 
     private let socket: VideoSocket
 
+    private var cancellable: AnyCancellable?
+
     private init(rsocketUrl: String = NetworkConfigs.BaseUrl.socketBaseUrl,
                  authRepo: AuthRepo = AuthStore.default) {
         self.socket = VideoSocket(
@@ -32,6 +34,11 @@ final class VideoSocketAPI: VideoSocketAPIType {
     }
 
     func trackVideoProgress(data: String) {
-        socket.trackVideoProgress(data: data)
+        let future = createFuture(for: socket.trackVideoProgress(data: data))
+        cancellable = future
+            .sink(
+                receiveCompletion: { _ in },
+                receiveValue: { _ in }
+            )
     }
 }

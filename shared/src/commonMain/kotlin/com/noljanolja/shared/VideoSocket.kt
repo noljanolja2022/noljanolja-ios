@@ -17,6 +17,7 @@ class VideoSocket(
 ) : BaseSocket(rsocketUrl, authRepo) {
     @NativeCoroutines
     suspend fun trackVideoProgress(data: String) {
+        println("KMP: VideoSocket.trackVideoProgress")
         socketClient.rSocket(rsocketUrl)
             .fireAndForget(
                 buildPayload {

@@ -18,6 +18,7 @@ class ConversationSocket(
 ) : BaseSocket(rsocketUrl, authRepo) {
     @NativeCoroutines
     fun streamConversations(): Flow<String> = flow {
+        println("KMP: ConversationSocket.streamConversations")
         socketClient.rSocket(rsocketUrl)
             .requestStream(
                 buildPayload {
