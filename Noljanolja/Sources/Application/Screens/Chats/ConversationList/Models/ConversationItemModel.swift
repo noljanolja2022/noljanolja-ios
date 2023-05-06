@@ -21,9 +21,9 @@ struct ConversationItemModel: Equatable {
         self.image = conversation.getAvatar(currentUser: currentUser)
         self.imagePlaceholder = {
             switch conversation.type {
-            case .single: return "person.circle.fill"
-            case .group: return "person.2.circle.fill"
-            case .unknown: return "message.fill"
+            case .single: return ImageAssets.icPlaceholderSingleChat.name
+            case .group: return ImageAssets.icPlaceholderGroupChat.name
+            case .unknown: return ImageAssets.icPlaceholderGroupChat.name
             }
         }()
         self.message = {

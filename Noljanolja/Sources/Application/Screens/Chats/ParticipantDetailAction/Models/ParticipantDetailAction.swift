@@ -23,7 +23,7 @@ enum ParticipantDetailActionType: CaseIterable, Equatable {
     var color: ColorAsset {
         switch self {
         case .chat, .assignAdmin: return ColorAssets.neutralDarkGrey
-        case .removeParticipant: return ColorAssets.red
+        case .removeParticipant: return ColorAssets.systemRed100
         }
     }
 }

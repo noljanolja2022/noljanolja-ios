@@ -74,7 +74,7 @@
 		CF1EEE3429AE3F81004F570A /* TermViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1EEE3229AE3F81004F570A /* TermViewModel.swift */; };
 		CF1EEE3729AE3FA8004F570A /* TermItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1EEE3629AE3FA8004F570A /* TermItemView.swift */; };
 		CF1EEE3A29AE438C004F570A /* TermItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1EEE3929AE438C004F570A /* TermItemType.swift */; };
-		CF28566C29BA2EF100593FA5 /* MessageChatItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF28566B29BA2EF100593FA5 /* MessageChatItemModel.swift */; };
+		CF28566C29BA2EF100593FA5 /* ChatMessageItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF28566B29BA2EF100593FA5 /* ChatMessageItemModel.swift */; };
 		CF28567B29BA408F00593FA5 /* ChatInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF28567929BA408F00593FA5 /* ChatInputView.swift */; };
 		CF28567C29BA408F00593FA5 /* ChatInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF28567A29BA408F00593FA5 /* ChatInputViewModel.swift */; };
 		CF28A19A29B4D8D70003C204 /* LaunchRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF28A19829B4D8D70003C204 /* LaunchRootView.swift */; };
@@ -405,7 +405,7 @@
 		CF1EEE3229AE3F81004F570A /* TermViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermViewModel.swift; sourceTree = "<group>"; };
 		CF1EEE3629AE3FA8004F570A /* TermItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermItemView.swift; sourceTree = "<group>"; };
 		CF1EEE3929AE438C004F570A /* TermItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermItemType.swift; sourceTree = "<group>"; };
-		CF28566B29BA2EF100593FA5 /* MessageChatItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageChatItemModel.swift; sourceTree = "<group>"; };
+		CF28566B29BA2EF100593FA5 /* ChatMessageItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageItemModel.swift; sourceTree = "<group>"; };
 		CF28567929BA408F00593FA5 /* ChatInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInputView.swift; sourceTree = "<group>"; };
 		CF28567A29BA408F00593FA5 /* ChatInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInputViewModel.swift; sourceTree = "<group>"; };
 		CF28A19829B4D8D70003C204 /* LaunchRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchRootView.swift; sourceTree = "<group>"; };
@@ -995,7 +995,7 @@
 			isa = PBXGroup;
 			children = (
 				CFC4B16F29F046F200F577CC /* Actions */,
-				CFFB059629BF1356000D65EE /* MessageModels */,
+				CFFB059629BF1356000D65EE /* ChatItemModels */,
 				CFFB059129BF123F000D65EE /* MessageContentModels */,
 				CFFB058B29BF0487000D65EE /* MessageItemModelBuilder.swift */,
 			);
@@ -1771,15 +1771,15 @@
 			path = MessageContentModels;
 			sourceTree = "<group>";
 		};
-		CFFB059629BF1356000D65EE /* MessageModels */ = {
+		CFFB059629BF1356000D65EE /* ChatItemModels */ = {
 			isa = PBXGroup;
 			children = (
 				CFFB058D29BF04BD000D65EE /* ChatDateItemModel.swift */,
-				CF28566B29BA2EF100593FA5 /* MessageChatItemModel.swift */,
-				CFFB058F29BF0F20000D65EE /* ChatItemModelType.swift */,
 				CFFDAA1229E45C9D002FDD91 /* ChatEventItemModel.swift */,
+				CFFB058F29BF0F20000D65EE /* ChatItemModelType.swift */,
+				CF28566B29BA2EF100593FA5 /* ChatMessageItemModel.swift */,
 			);
-			path = MessageModels;
+			path = ChatItemModels;
 			sourceTree = "<group>";
 		};
 		CFFC5B6329A7ACD8002B3381 /* Main */ = {
@@ -2682,7 +2682,7 @@
 				CFD0951A2A02A944004BF047 /* AuthStore+AuthRepo.swift in Sources */,
 				CFED123829F2EF54000B320B /* Number+Format.swift in Sources */,
 				CFB0A82129F1B6FD00298546 /* Video.swift in Sources */,
-				CF28566C29BA2EF100593FA5 /* MessageChatItemModel.swift in Sources */,
+				CF28566C29BA2EF100593FA5 /* ChatMessageItemModel.swift in Sources */,
 				CFAD27AD29E2B9B000947BC3 /* ConversationTitleViewModel.swift in Sources */,
 				CFE09263298EB69700F197F0 /* FirebaseUser+Combine.swift in Sources */,
 				CF28567B29BA408F00593FA5 /* ChatInputView.swift in Sources */,

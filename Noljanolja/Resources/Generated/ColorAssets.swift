@@ -22,17 +22,28 @@ internal typealias AssetColorTypeAlias = ColorAsset.Color
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum ColorAssets {
-  internal static let background = ColorAsset(name: "Background")
-  internal static let black = ColorAsset(name: "Black")
-  internal static let green = ColorAsset(name: "Green")
-  internal static let red = ColorAsset(name: "Red")
-  internal static let white = ColorAsset(name: "White")
-  internal static let neutralBlueGrey = ColorAsset(name: "NeutralBlueGrey")
-  internal static let neutralDarkGrey = ColorAsset(name: "NeutralDarkGrey")
-  internal static let neutralDeepGrey = ColorAsset(name: "NeutralDeepGrey")
-  internal static let neutralGrey = ColorAsset(name: "NeutralGrey")
-  internal static let neutralLight = ColorAsset(name: "NeutralLight")
-  internal static let neutralLightGrey = ColorAsset(name: "NeutralLightGrey")
+  internal static let neutralBlueGreyDeep = ColorAsset(name: "Neutral Blue Grey Deep")
+  internal static let neutralBlueGrey = ColorAsset(name: "Neutral Blue Grey")
+  internal static let neutralDarkGrey = ColorAsset(name: "Neutral Dark Grey")
+  internal static let neutralDeepGrey = ColorAsset(name: "Neutral Deep Grey")
+  internal static let neutralDeeperGrey = ColorAsset(name: "Neutral Deeper Grey")
+  internal static let neutralGrey = ColorAsset(name: "Neutral Grey")
+  internal static let neutralLightGrey = ColorAsset(name: "Neutral Light Grey")
+  internal static let neutralLight = ColorAsset(name: "Neutral Light")
+  internal static let primaryGreen100 = ColorAsset(name: "Primary Green 100")
+  internal static let primaryGreen200 = ColorAsset(name: "Primary Green 200")
+  internal static let primaryGreen300 = ColorAsset(name: "Primary Green 300")
+  internal static let primaryGreen400 = ColorAsset(name: "Primary Green 400")
+  internal static let primaryGreen50 = ColorAsset(name: "Primary Green 50")
+  internal static let secondaryYellow100 = ColorAsset(name: "Secondary Yellow 100")
+  internal static let secondaryYellow200 = ColorAsset(name: "Secondary Yellow 200")
+  internal static let secondaryYellow300 = ColorAsset(name: "Secondary Yellow 300")
+  internal static let secondaryYellow400 = ColorAsset(name: "Secondary Yellow 400")
+  internal static let secondaryYellow50 = ColorAsset(name: "Secondary Yellow 50")
+  internal static let secondaryYellow500 = ColorAsset(name: "Secondary Yellow 500")
+  internal static let systemGreen = ColorAsset(name: "System Green")
+  internal static let systemRed100 = ColorAsset(name: "System Red 100")
+  internal static let systemRed50 = ColorAsset(name: "System Red 50")
   internal static let primaryDark = ColorAsset(name: "PrimaryDark")
   internal static let primaryDeep = ColorAsset(name: "PrimaryDeep")
   internal static let primaryLight = ColorAsset(name: "PrimaryLight")
@@ -41,17 +52,28 @@ internal enum ColorAssets {
   // swiftlint:disable trailing_comma
   @available(*, deprecated, message: "All values properties are now deprecated")
   internal static let allColors: [ColorAsset] = [
-    background,
-    black,
-    green,
-    red,
-    white,
+    neutralBlueGreyDeep,
     neutralBlueGrey,
     neutralDarkGrey,
     neutralDeepGrey,
+    neutralDeeperGrey,
     neutralGrey,
-    neutralLight,
     neutralLightGrey,
+    neutralLight,
+    primaryGreen100,
+    primaryGreen200,
+    primaryGreen300,
+    primaryGreen400,
+    primaryGreen50,
+    secondaryYellow100,
+    secondaryYellow200,
+    secondaryYellow300,
+    secondaryYellow400,
+    secondaryYellow50,
+    secondaryYellow500,
+    systemGreen,
+    systemRed100,
+    systemRed50,
     primaryDark,
     primaryDeep,
     primaryLight,

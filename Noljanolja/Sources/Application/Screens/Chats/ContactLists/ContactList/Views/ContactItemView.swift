@@ -15,7 +15,7 @@ struct ContactItemView: View {
     var isSelected: Bool?
 
     var body: some View {
-        HStack {
+        HStack(spacing: 12) {
             WebImage(
                 url: URL(string: user.avatar),
                 context: [

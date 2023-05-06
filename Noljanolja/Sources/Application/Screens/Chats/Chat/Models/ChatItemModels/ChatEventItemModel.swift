@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct EventChatItemModel: Equatable {
+struct ChatEventItemModel: Equatable {
     let message: String
 
     init?(currentUser: User, message: Message) {

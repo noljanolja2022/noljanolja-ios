@@ -12,7 +12,7 @@ import SwiftUI
 // MARK: - ReceiverMessageView
 
 struct ReceiverMessageView: View {
-    var model: MessageChatItemModel
+    var model: ChatMessageItemModel
     var action: ((ChatItemActionType) -> Void)?
 
     var body: some View {

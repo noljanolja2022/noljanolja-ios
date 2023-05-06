@@ -14,13 +14,13 @@ struct ChatDateItemView: View {
 
     var body: some View {
         Text(model.message)
-            .font(.system(size: 11, weight: .medium))
+            .font(.system(size: 14, weight: .medium))
             .frame(height: 26)
             .padding(.horizontal, 12)
             .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
             .background(ColorAssets.neutralBlueGrey.swiftUIColor)
             .cornerRadius(6)
             .frame(maxWidth: .infinity, alignment: .center)
-            .padding(.vertical, 16)
+            .padding(.top, 12)
     }
 }

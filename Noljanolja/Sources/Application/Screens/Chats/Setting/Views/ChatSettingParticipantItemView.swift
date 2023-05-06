@@ -51,7 +51,7 @@ struct ChatSettingParticipantItemView: View {
                     .frame(height: 26)
                     .padding(.horizontal, 12)
                     .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
-                    .background(ColorAssets.green.swiftUIColor)
+                    .background(ColorAssets.systemGreen.swiftUIColor)
                     .cornerRadius(13)
             }
         }

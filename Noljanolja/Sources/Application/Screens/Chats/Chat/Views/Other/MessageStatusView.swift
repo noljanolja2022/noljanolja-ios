@@ -11,7 +11,7 @@ import SwiftUI
 // MARK: - MessageStatusView
 
 struct MessageStatusView: View {
-    var status: MessageChatItemModel.StatusType
+    var status: ChatMessageItemModel.StatusType
 
     var body: some View {
         ZStack {

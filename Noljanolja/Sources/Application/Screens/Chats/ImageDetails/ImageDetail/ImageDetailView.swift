@@ -127,7 +127,7 @@ struct ImageDetailView<ViewModel: ImageDetailViewModel>: View {
             .accentColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             .introspectNavigationController { navigationController in
                 navigationController.configure(
-                    backgroundColor: ColorAssets.white.color,
+                    backgroundColor: ColorAssets.neutralLight.color,
                     foregroundColor: ColorAssets.neutralDarkGrey.color
                 )
                 navigationController.view.backgroundColor = .clear

@@ -166,7 +166,7 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
                     .font(.system(size: 14, weight: .bold))
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding(12)
-                    .foregroundColor(ColorAssets.red.swiftUIColor)
+                    .foregroundColor(ColorAssets.systemRed100.swiftUIColor)
                     .background(ColorAssets.neutralLight.swiftUIColor)
                     .cornerRadius(4)
             }

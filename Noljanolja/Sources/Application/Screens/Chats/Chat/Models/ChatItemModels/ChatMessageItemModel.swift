@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - MessageItemModel.ContentType
 
-extension MessageChatItemModel {
+extension ChatMessageItemModel {
     enum ContentType: Equatable {
         case plaintext(TextMessageContentModel)
         case photo(PhotoMessageContentModel)
@@ -32,9 +32,9 @@ extension MessageChatItemModel {
     }
 }
 
-// MARK: - MessageChatItemModel
+// MARK: - ChatMessageItemModel
 
-struct MessageChatItemModel: Equatable {
+struct ChatMessageItemModel: Equatable {
     let isSenderMessage: Bool
     let avatar: String?
     let date: Date
