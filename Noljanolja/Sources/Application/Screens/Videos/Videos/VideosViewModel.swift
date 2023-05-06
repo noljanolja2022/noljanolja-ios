@@ -36,6 +36,10 @@ final class VideosViewModel: ViewModel {
 
     // MARK: Private
 
+    let highlightVideosSubject = CurrentValueSubject<[Video], Never>([])
+    let watchingVideosSubject = CurrentValueSubject<[Video], Never>([])
+    let trendingVideosSubject = CurrentValueSubject<[Video], Never>([])
+
     private let pageSize = 20
     private var cancellables = Set<AnyCancellable>()
 
@@ -49,7 +53,24 @@ final class VideosViewModel: ViewModel {
     }
 
     private func configure() {
+        configureBindData()
         configureLoadData()
+    }
+
+    private func configureBindData() {
+        Publishers.CombineLatest3(
+            highlightVideosSubject.removeDuplicates(),
+            watchingVideosSubject.removeDuplicates(),
+            trendingVideosSubject.removeDuplicates()
+        )
+        .sink(receiveValue: { highlightVideos, watchingVideos, trendingVideos in
+            self.model = VideosModel(
+                highlightVideos: highlightVideos,
+                watchingVideos: watchingVideos,
+                trendingVideos: trendingVideos
+            )
+        })
+        .store(in: &cancellables)
     }
 
     private func configureLoadData() {
@@ -66,10 +87,31 @@ final class VideosViewModel: ViewModel {
                 guard let self else { return }
                 switch result {
                 case let .success(model):
-                    self.model = model
+                    self.highlightVideosSubject.send(model.highlightVideos)
+                    self.watchingVideosSubject.send(model.watchingVideos)
+                    self.trendingVideosSubject.send(model.trendingVideos)
                     self.viewState = .content
                 case .failure:
                     self.viewState = .error
+                }
+            }
+            .store(in: &cancellables)
+
+        isAppearSubject
+            .dropFirst()
+            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<[Video], Error> in
+                guard let self else {
+                    return Empty<[Video], Error>().eraseToAnyPublisher()
+                }
+                return self.videoAPI.getWatchingVideos()
+            }
+            .sink { [weak self] result in
+                guard let self else { return }
+                switch result {
+                case let .success(model):
+                    self.watchingVideosSubject.send(model)
+                case .failure:
+                    break
                 }
             }
             .store(in: &cancellables)
