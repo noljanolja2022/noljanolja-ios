@@ -51,7 +51,11 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
     @ViewBuilder
     private func buildPlayerView() -> some View {
         if let video = viewModel.video {
-            VideoDetailPlayerView(video: video)
+            VideoDetailPlayerView(
+                viewModel: VideoDetailPlayerViewModel(
+                    video: video
+                )
+            )
         }
     }
 

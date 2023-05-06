@@ -10,14 +10,6 @@ import Foundation
 import KMPNativeCoroutinesCombine
 import shared
 
-// MARK: - AuthStore + AuthRepo
-
-extension AuthStore: AuthRepo {
-    func getAuthToken() async throws -> String? {
-        getToken()
-    }
-}
-
 // MARK: - ConversationSocketAPIType
 
 protocol ConversationSocketAPIType {
@@ -36,10 +28,11 @@ final class ConversationSocketAPI: ConversationSocketAPIType {
 
     private var cancellables = Set<AnyCancellable>()
 
-    private init(authRepo: AuthRepo = AuthStore.default) {
+    private init(rsocketUrl: String = NetworkConfigs.BaseUrl.socketBaseUrl,
+                 authRepo: AuthRepo = AuthStore.default) {
         self.socket = ConversationSocket(
-            rsocketUrl: NetworkConfigs.BaseUrl.socketBaseUrl,
-            authRepo: AuthStore.default
+            rsocketUrl: rsocketUrl,
+            authRepo: authRepo
         )
     }
 

@@ -39,17 +39,15 @@ final class NotificationService: NotificationServiceType {
     }
 
     private func configure() {
-        Publishers
-            .CombineLatest(
-                currentUserSubject.removeDuplicates(),
-                pushTokenSubject.removeDuplicates()
-            )
-            .flatMapLatestToResult { [weak self] user, token in
+        pushTokenSubject
+            .removeDuplicates()
+            .filter { !$0.trimmed.isEmpty }
+            .flatMapLatestToResult { [weak self] token in
                 guard let self else {
                     return Empty<Void, Error>().eraseToAnyPublisher()
                 }
                 return self.notificationAPI
-                    .sendPushToken(userId: user.id, deviceToken: token)
+                    .sendPushToken(deviceToken: token)
             }
             .sink(receiveValue: { _ in })
             .store(in: &cancellables)

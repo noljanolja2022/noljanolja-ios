@@ -145,7 +145,6 @@
 		CF7F576229D9F6610079C53D /* TermDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7F576029D9F6610079C53D /* TermDetailViewModel.swift */; };
 		CF82C30E29EAA00300EAD36C /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF82C30D29EAA00300EAD36C /* BottomSheet.swift */; };
 		CF8633FD29B8F2F50091BF5D /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8633FC29B8F2F50091BF5D /* Contact.swift */; };
-		CF8633FF29B8F6020091BF5D /* Encodable+Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8633FE29B8F6020091BF5D /* Encodable+Encode.swift */; };
 		CF8737DF29CB525B0018237B /* ChatMediaInputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8737DE29CB525B0018237B /* ChatMediaInputType.swift */; };
 		CF8737E229CB539F0018237B /* ChatInputExpandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8737E029CB539F0018237B /* ChatInputExpandView.swift */; };
 		CF8737E329CB539F0018237B /* ChatInputExpandViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8737E129CB539F0018237B /* ChatInputExpandViewModel.swift */; };
@@ -213,6 +212,15 @@
 		CFC709E02996051800B64216 /* View+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709DF2996051800B64216 /* View+Progress.swift */; };
 		CFCD10AB29D350C900C5DAFF /* SendMessageParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCD10AA29D350C900C5DAFF /* SendMessageParam.swift */; };
 		CFCFFA3729E5C82A002B7FB6 /* ConversationSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCFFA3629E5C82A002B7FB6 /* ConversationSocketService.swift */; };
+		CFD095172A02A87F004BF047 /* VideoSocketAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD095162A02A87F004BF047 /* VideoSocketAPI.swift */; };
+		CFD0951A2A02A944004BF047 /* AuthStore+AuthRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD095192A02A944004BF047 /* AuthStore+AuthRepo.swift */; };
+		CFD095222A02AE49004BF047 /* VideoDetailPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD095202A02AE49004BF047 /* VideoDetailPlayerView.swift */; };
+		CFD095232A02AE49004BF047 /* VideoDetailPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD095212A02AE49004BF047 /* VideoDetailPlayerViewModel.swift */; };
+		CFD095252A02B2E3004BF047 /* TrackVideoParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD095242A02B2E3004BF047 /* TrackVideoParam.swift */; };
+		CFD095272A02B643004BF047 /* VideoProgressEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD095262A02B643004BF047 /* VideoProgressEventType.swift */; };
+		CFD0952A2A02B99C004BF047 /* VideoState+Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD095292A02B99C004BF047 /* VideoState+Event.swift */; };
+		CFD0952D2A02BDE8004BF047 /* Encodable+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD0952B2A02BDE8004BF047 /* Encodable+JSON.swift */; };
+		CFD0952E2A02BDE8004BF047 /* Dictionary+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD0952C2A02BDE8004BF047 /* Dictionary+JSON.swift */; };
 		CFD5424729BF7A520053C5B1 /* ChatDateItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD5423E29BF7A520053C5B1 /* ChatDateItemView.swift */; };
 		CFD5424829BF7A520053C5B1 /* ChatItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD5423F29BF7A520053C5B1 /* ChatItemView.swift */; };
 		CFD5424929BF7A520053C5B1 /* ChatMessageItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD5424029BF7A520053C5B1 /* ChatMessageItemView.swift */; };
@@ -268,7 +276,6 @@
 		CFED123E29F31D05000B320B /* VideoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFED123C29F31D05000B320B /* VideoDetailView.swift */; };
 		CFED123F29F31D05000B320B /* VideoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFED123D29F31D05000B320B /* VideoDetailViewModel.swift */; };
 		CFED124129F31D12000B320B /* VideosNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFED124029F31D12000B320B /* VideosNavigations.swift */; };
-		CFED124629F32116000B320B /* VideoDetailPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFED124529F32116000B320B /* VideoDetailPlayerView.swift */; };
 		CFED124829F32159000B320B /* VideoDetailInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFED124729F32159000B320B /* VideoDetailInformationView.swift */; };
 		CFED124A29F323CD000B320B /* VideoDetailCommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFED124929F323CD000B320B /* VideoDetailCommentsView.swift */; };
 		CFED124C29F32587000B320B /* VideoDetailCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFED124B29F32587000B320B /* VideoDetailCommentView.swift */; };
@@ -463,7 +470,6 @@
 		CF7F576029D9F6610079C53D /* TermDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermDetailViewModel.swift; sourceTree = "<group>"; };
 		CF82C30D29EAA00300EAD36C /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
 		CF8633FC29B8F2F50091BF5D /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
-		CF8633FE29B8F6020091BF5D /* Encodable+Encode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Encodable+Encode.swift"; sourceTree = "<group>"; };
 		CF8737DE29CB525B0018237B /* ChatMediaInputType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMediaInputType.swift; sourceTree = "<group>"; };
 		CF8737E029CB539F0018237B /* ChatInputExpandView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInputExpandView.swift; sourceTree = "<group>"; };
 		CF8737E129CB539F0018237B /* ChatInputExpandViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInputExpandViewModel.swift; sourceTree = "<group>"; };
@@ -529,6 +535,15 @@
 		CFC709DF2996051800B64216 /* View+Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Progress.swift"; sourceTree = "<group>"; };
 		CFCD10AA29D350C900C5DAFF /* SendMessageParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageParam.swift; sourceTree = "<group>"; };
 		CFCFFA3629E5C82A002B7FB6 /* ConversationSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationSocketService.swift; sourceTree = "<group>"; };
+		CFD095162A02A87F004BF047 /* VideoSocketAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSocketAPI.swift; sourceTree = "<group>"; };
+		CFD095192A02A944004BF047 /* AuthStore+AuthRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthStore+AuthRepo.swift"; sourceTree = "<group>"; };
+		CFD095202A02AE49004BF047 /* VideoDetailPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailPlayerView.swift; sourceTree = "<group>"; };
+		CFD095212A02AE49004BF047 /* VideoDetailPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailPlayerViewModel.swift; sourceTree = "<group>"; };
+		CFD095242A02B2E3004BF047 /* TrackVideoParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackVideoParam.swift; sourceTree = "<group>"; };
+		CFD095262A02B643004BF047 /* VideoProgressEventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoProgressEventType.swift; sourceTree = "<group>"; };
+		CFD095292A02B99C004BF047 /* VideoState+Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoState+Event.swift"; sourceTree = "<group>"; };
+		CFD0952B2A02BDE8004BF047 /* Encodable+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Encodable+JSON.swift"; sourceTree = "<group>"; };
+		CFD0952C2A02BDE8004BF047 /* Dictionary+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+JSON.swift"; sourceTree = "<group>"; };
 		CFD5423E29BF7A520053C5B1 /* ChatDateItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDateItemView.swift; sourceTree = "<group>"; };
 		CFD5423F29BF7A520053C5B1 /* ChatItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatItemView.swift; sourceTree = "<group>"; };
 		CFD5424029BF7A520053C5B1 /* ChatMessageItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageItemView.swift; sourceTree = "<group>"; };
@@ -578,7 +593,6 @@
 		CFED123C29F31D05000B320B /* VideoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailView.swift; sourceTree = "<group>"; };
 		CFED123D29F31D05000B320B /* VideoDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailViewModel.swift; sourceTree = "<group>"; };
 		CFED124029F31D12000B320B /* VideosNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosNavigations.swift; sourceTree = "<group>"; };
-		CFED124529F32116000B320B /* VideoDetailPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailPlayerView.swift; sourceTree = "<group>"; };
 		CFED124729F32159000B320B /* VideoDetailInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailInformationView.swift; sourceTree = "<group>"; };
 		CFED124929F323CD000B320B /* VideoDetailCommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailCommentsView.swift; sourceTree = "<group>"; };
 		CFED124B29F32587000B320B /* VideoDetailCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailCommentView.swift; sourceTree = "<group>"; };
@@ -743,12 +757,13 @@
 		CF00D16D2994FC3600505702 /* SwiftStdlib */ = {
 			isa = PBXGroup;
 			children = (
-				CF8633FE29B8F6020091BF5D /* Encodable+Encode.swift */,
-				CFA3304629BE3352008D7449 /* String+Phone.swift */,
-				CFA3304829BE3AB9008D7449 /* String+Date.swift */,
 				CFFB05A129BF739D000D65EE /* Date+RelativeString.swift */,
-				CFED122929F2D7C6000B320B /* Result+Extension.swift */,
+				CFD0952C2A02BDE8004BF047 /* Dictionary+JSON.swift */,
+				CFD0952B2A02BDE8004BF047 /* Encodable+JSON.swift */,
 				CFED123729F2EF54000B320B /* Number+Format.swift */,
+				CFED122929F2D7C6000B320B /* Result+Extension.swift */,
+				CFA3304829BE3AB9008D7449 /* String+Date.swift */,
+				CFA3304629BE3352008D7449 /* String+Phone.swift */,
 			);
 			path = SwiftStdlib;
 			sourceTree = "<group>";
@@ -1065,6 +1080,7 @@
 				CF398DD729BF89430015DB18 /* UpdateCurrentUserParam.swift */,
 				CF131EAE29CEFCA400054719 /* AttachmentParam.swift */,
 				CFCD10AA29D350C900C5DAFF /* SendMessageParam.swift */,
+				CFD095242A02B2E3004BF047 /* TrackVideoParam.swift */,
 			);
 			path = Params;
 			sourceTree = "<group>";
@@ -1145,6 +1161,7 @@
 				CFB0A82629F1B8EC00298546 /* VideoChannel.swift */,
 				CFB0A82829F1B95A00298546 /* VideoCategory.swift */,
 				CFB0A82C29F1BD3800298546 /* VideoTrendingDurationType.swift */,
+				CFD095262A02B643004BF047 /* VideoProgressEventType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1555,6 +1572,34 @@
 			path = Chats;
 			sourceTree = "<group>";
 		};
+		CFD095182A02A936004BF047 /* Socket */ = {
+			isa = PBXGroup;
+			children = (
+				CF10C7ED29C21CDB0020924D /* ConversationSocketAPI.swift */,
+				CFD095162A02A87F004BF047 /* VideoSocketAPI.swift */,
+				CFD095192A02A944004BF047 /* AuthStore+AuthRepo.swift */,
+			);
+			path = Socket;
+			sourceTree = "<group>";
+		};
+		CFD0951B2A02AE0F004BF047 /* PlayerView */ = {
+			isa = PBXGroup;
+			children = (
+				CFD095282A02B98F004BF047 /* Models */,
+				CFD095202A02AE49004BF047 /* VideoDetailPlayerView.swift */,
+				CFD095212A02AE49004BF047 /* VideoDetailPlayerViewModel.swift */,
+			);
+			path = PlayerView;
+			sourceTree = "<group>";
+		};
+		CFD095282A02B98F004BF047 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CFD095292A02B99C004BF047 /* VideoState+Event.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		CFD5423C29BF7A520053C5B1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -1697,6 +1742,7 @@
 		CFED123B29F31CF5000B320B /* VideoDetail */ = {
 			isa = PBXGroup;
 			children = (
+				CFD0951B2A02AE0F004BF047 /* PlayerView */,
 				CF0052C629F46054003900B5 /* Inputs */,
 				CF0052CB29F465D6003900B5 /* VideoDetail */,
 				CFED124229F320E3000B320B /* Views */,
@@ -1707,7 +1753,6 @@
 		CFED124229F320E3000B320B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CFED124529F32116000B320B /* VideoDetailPlayerView.swift */,
 				CFED124729F32159000B320B /* VideoDetailInformationView.swift */,
 				CFED124929F323CD000B320B /* VideoDetailCommentsView.swift */,
 				CFED124B29F32587000B320B /* VideoDetailCommentView.swift */,
@@ -1971,11 +2016,11 @@
 		CFFD70CD298AC5FD00D4F5A2 /* APIs */ = {
 			isa = PBXGroup;
 			children = (
+				CFD095182A02A936004BF047 /* Socket */,
 				CFE09252298DF67D00F197F0 /* Auth */,
 				CF08A86129B5A26600D6CE5F /* ContactAPI.swift */,
 				CF1B624729B9B55F00DE53E6 /* ConversationAPI.swift */,
 				CFB2F6BD29E1274500191AA3 /* ConversationParticipantAPI.swift */,
-				CF10C7ED29C21CDB0020924D /* ConversationSocketAPI.swift */,
 				CFDA463D29DC8CCB00E6A877 /* CountryAPI.swift */,
 				CF54FA1D29D011960092E2C6 /* MediaAPI.swift */,
 				CF11B1D929BB65DD002E8151 /* MessageAPI.swift */,
@@ -2384,8 +2429,10 @@
 				CF54FA3329D023A50092E2C6 /* ChatStickerInputViewModel.swift in Sources */,
 				CFFDAA1529E4673E002FDD91 /* ChatEventItemView.swift in Sources */,
 				CFD83DD029974E4E00B9A6BB /* Navigation+Extension.swift in Sources */,
+				CFD0952E2A02BDE8004BF047 /* Dictionary+JSON.swift in Sources */,
 				CF0EA31029AA3DD30014A7DE /* Country.swift in Sources */,
 				CF1B625629B9D3BF00DE53E6 /* ConversationService.swift in Sources */,
+				CFD095272A02B643004BF047 /* VideoProgressEventType.swift in Sources */,
 				CF446B9329D8AE2F00ED66BF /* RefreshTokenInterceptor.swift in Sources */,
 				CFB0A81E29F1B5D100298546 /* VideosView.swift in Sources */,
 				CF11B1D829BB65B4002E8151 /* MessageService.swift in Sources */,
@@ -2429,6 +2476,7 @@
 				CF11B1D529BB32F0002E8151 /* ListView.swift in Sources */,
 				CF0EA30D29AA0F010014A7DE /* SelectCountryView.swift in Sources */,
 				CF8737E229CB539F0018237B /* ChatInputExpandView.swift in Sources */,
+				CFD095232A02AE49004BF047 /* VideoDetailPlayerViewModel.swift in Sources */,
 				CF775BBE29C625C900E82183 /* NotificationAppDelegate.swift in Sources */,
 				CF1307FC29C8C96900EED044 /* TextEditor+Background.swift in Sources */,
 				CF7A64FA29C750D2007C545D /* MessageStatusView.swift in Sources */,
@@ -2447,6 +2495,7 @@
 				CFFC6C6B29E994120024ADA3 /* RootNavigations.swift in Sources */,
 				CFFD70C9298AC5F800D4F5A2 /* TargetType+RawTarget.swift in Sources */,
 				CFED124A29F323CD000B320B /* VideoDetailCommentsView.swift in Sources */,
+				CFD0952A2A02B99C004BF047 /* VideoState+Event.swift in Sources */,
 				CF28A1AF29B5066A0003C204 /* SettingView.swift in Sources */,
 				CFFDAA1329E45C9D002FDD91 /* ChatEventItemModel.swift in Sources */,
 				CF0CCA0129D156380027D2C1 /* StickerMessageContentModel.swift in Sources */,
@@ -2462,9 +2511,7 @@
 				CF00D1732995457600505702 /* ProgressHUDView.swift in Sources */,
 				CFC709E02996051800B64216 /* View+Progress.swift in Sources */,
 				CF0EA30729AA02120014A7DE /* AuthViewModel.swift in Sources */,
-				CF8633FF29B8F6020091BF5D /* Encodable+Encode.swift in Sources */,
 				CF11B1DC29BB668D002E8151 /* MessageStore.swift in Sources */,
-				CFED124629F32116000B320B /* VideoDetailPlayerView.swift in Sources */,
 				CF3282ED299E3758006A459B /* UIApplication+Extension.swift in Sources */,
 				CF131EB529CF32F100054719 /* PhotoModel.swift in Sources */,
 				CF59759029FBAF630068EC88 /* ImageEditorResultView.swift in Sources */,
@@ -2476,6 +2523,7 @@
 				CF54FA1E29D011960092E2C6 /* MediaAPI.swift in Sources */,
 				CFECC13329B4D6D500E20B58 /* LaunchViewModel.swift in Sources */,
 				CFFC6C6929E992910024ADA3 /* LaunchRootNavigations.swift in Sources */,
+				CFD095172A02A87F004BF047 /* VideoSocketAPI.swift in Sources */,
 				CFFD70C6298AC5F800D4F5A2 /* AuthPluggin.swift in Sources */,
 				CFED122A29F2D7C6000B320B /* Result+Extension.swift in Sources */,
 				CFE0926B298FE73000F197F0 /* CloudFunctionAuthAPI.swift in Sources */,
@@ -2514,6 +2562,7 @@
 				CFFD70D5298AC92500D4F5A2 /* UserAPI.swift in Sources */,
 				CFB2F6AC29E08BF100191AA3 /* ChatSettingItemModelType.swift in Sources */,
 				CFB2F6A629E0754A00191AA3 /* ChatSettingViewModel.swift in Sources */,
+				CFD095222A02AE49004BF047 /* VideoDetailPlayerView.swift in Sources */,
 				CF8737F029CB66ED0018237B /* PhotoAsset.swift in Sources */,
 				CFDA463E29DC8CCB00E6A877 /* CountryAPI.swift in Sources */,
 				CFED123029F2E698000B320B /* WatchingVideoView.swift in Sources */,
@@ -2530,6 +2579,7 @@
 				CF8737EE29CB5F730018237B /* PhotoPickerItemView.swift in Sources */,
 				CFB2F6D029E1C9F400191AA3 /* ContactListViewModel.swift in Sources */,
 				CFB2F6C729E19E9700191AA3 /* ContactListUseCase.swift in Sources */,
+				CFD095252A02B2E3004BF047 /* TrackVideoParam.swift in Sources */,
 				CFB0A82D29F1BD3800298546 /* VideoTrendingDurationType.swift in Sources */,
 				CF775BC229C6287F00E82183 /* AppDelegateProtocol.swift in Sources */,
 				CF0052C929F46074003900B5 /* VideoDetailInputView.swift in Sources */,
@@ -2595,6 +2645,7 @@
 				CFBC6F0229C0CF44000509EC /* StatefullFooterView.swift in Sources */,
 				CFB2F6BE29E1274500191AA3 /* ConversationParticipantAPI.swift in Sources */,
 				CFE0925B298DF7AF00F197F0 /* Logger+SwiftyBeaver.swift in Sources */,
+				CFD0952D2A02BDE8004BF047 /* Encodable+JSON.swift in Sources */,
 				CFE9695029EC48CE00441903 /* SettingItemView.swift in Sources */,
 				CFE09265298EB92D00F197F0 /* AppleAuthAPI.swift in Sources */,
 				CF0EA31A29AA56E90014A7DE /* Binding+LimitString.swift in Sources */,
@@ -2628,6 +2679,7 @@
 				CFB2F6B029E093BD00191AA3 /* ChatSettingParticipantItemView.swift in Sources */,
 				CF4A6EF429E3C45A00CB75E5 /* MainNavigationTypes.swift in Sources */,
 				CF0CC9FF29D155DD0027D2C1 /* StickerMessageContentView.swift in Sources */,
+				CFD0951A2A02A944004BF047 /* AuthStore+AuthRepo.swift in Sources */,
 				CFED123829F2EF54000B320B /* Number+Format.swift in Sources */,
 				CFB0A82129F1B6FD00298546 /* Video.swift in Sources */,
 				CF28566C29BA2EF100593FA5 /* MessageChatItemModel.swift in Sources */,

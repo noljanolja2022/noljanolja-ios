@@ -13,7 +13,7 @@ import Moya
 
 private enum NotificationAPITargets {
     struct SendPushToken: BaseAuthTargetType {
-        var path: String { "v1/push-token" }
+        var path: String { "v1/push-tokens" }
         var method: Moya.Method { .post }
         var task: Task {
             .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
@@ -21,13 +21,11 @@ private enum NotificationAPITargets {
 
         var parameters: [String: Any] {
             [
-                "userId": "string",
-                "deviceToken": "string",
+                "deviceToken": deviceToken,
                 "deviceType": "iOS"
             ]
         }
 
-        let userId: String
         let deviceToken: String
     }
 }
@@ -35,7 +33,7 @@ private enum NotificationAPITargets {
 // MARK: - NotificationAPIType
 
 protocol NotificationAPIType {
-    func sendPushToken(userId: String, deviceToken: String) -> AnyPublisher<Void, Error>
+    func sendPushToken(deviceToken: String) -> AnyPublisher<Void, Error>
 }
 
 // MARK: - NotificationAPI
@@ -49,10 +47,9 @@ final class NotificationAPI: NotificationAPIType {
         self.api = api
     }
 
-    func sendPushToken(userId: String, deviceToken: String) -> AnyPublisher<Void, Error> {
+    func sendPushToken(deviceToken: String) -> AnyPublisher<Void, Error> {
         api.request(
             target: NotificationAPITargets.SendPushToken(
-                userId: userId,
                 deviceToken: deviceToken
             )
         )
