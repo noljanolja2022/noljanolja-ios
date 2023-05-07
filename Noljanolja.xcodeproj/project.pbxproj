@@ -1265,6 +1265,17 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
+		CF7C87012A07E575000D63EA /* MessageContentViews */ = {
+			isa = PBXGroup;
+			children = (
+				CFD5424329BF7A520053C5B1 /* MessageContentView.swift */,
+				CFDCC33B29CCC2D000E8F18C /* PhotoMessageContentView.swift */,
+				CF0CC9FE29D155DD0027D2C1 /* StickerMessageContentView.swift */,
+				CFD5424629BF7A520053C5B1 /* TextMessageContentView.swift */,
+			);
+			path = MessageContentViews;
+			sourceTree = "<group>";
+		};
 		CF7F575D29D9F5FB0079C53D /* Terms */ = {
 			isa = PBXGroup;
 			children = (
@@ -1603,9 +1614,10 @@
 		CFD5423C29BF7A520053C5B1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CF7A64FB29C750E2007C545D /* Other */,
 				CFD5423D29BF7A520053C5B1 /* ChatItemViews */,
+				CF7C87012A07E575000D63EA /* MessageContentViews */,
 				CFD5424129BF7A520053C5B1 /* MessageViews */,
+				CF7A64FB29C750E2007C545D /* Other */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1624,13 +1636,9 @@
 		CFD5424129BF7A520053C5B1 /* MessageViews */ = {
 			isa = PBXGroup;
 			children = (
-				CFD5424329BF7A520053C5B1 /* MessageContentView.swift */,
 				CFD5424429BF7A520053C5B1 /* MessageView+CornerRadius.swift */,
-				CFDCC33B29CCC2D000E8F18C /* PhotoMessageContentView.swift */,
 				CFD5424229BF7A520053C5B1 /* ReceiverMessageView.swift */,
 				CFD5424529BF7A520053C5B1 /* SenderMessageView.swift */,
-				CF0CC9FE29D155DD0027D2C1 /* StickerMessageContentView.swift */,
-				CFD5424629BF7A520053C5B1 /* TextMessageContentView.swift */,
 			);
 			path = MessageViews;
 			sourceTree = "<group>";

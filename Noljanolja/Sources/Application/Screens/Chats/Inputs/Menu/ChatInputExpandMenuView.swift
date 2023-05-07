@@ -58,6 +58,8 @@ struct ChatInputExpandMenuView<ViewModel: ChatInputExpandMenuViewModel>: View {
                     expandType = .images
                 case .camera:
                     viewModel.fullScreenCoverType = .camera
+                case .events, .wallet, .location, .voice, .contact, .file:
+                    break
                 }
             },
             label: {
@@ -68,7 +70,7 @@ struct ChatInputExpandMenuView<ViewModel: ChatInputExpandMenuViewModel>: View {
                         .padding(8)
                         .frame(width: 48, height: 48)
                         .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
-                        .background(Color(hexadecimal: model.colorHexString))
+                        .background(Color(hexadecimal: model.backgroundColor))
                         .cornerRadius(16)
                     Text(model.title)
                         .font(.system(size: 14))

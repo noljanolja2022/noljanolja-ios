@@ -67,7 +67,7 @@ struct MainView<ViewModel: MainViewModel>: View {
                         toolBarActionSubject.send(.createConversation)
                     },
                     label: {
-                        ImageAssets.icAddChat.swiftUIImage
+                        ImageAssets.icChatNew.swiftUIImage
                             .resizable()
                             .scaledToFit()
                             .frame(width: 24, height: 24)

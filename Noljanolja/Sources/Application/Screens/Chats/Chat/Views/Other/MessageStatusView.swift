@@ -19,7 +19,7 @@ struct MessageStatusView: View {
             case .none:
                 EmptyView()
             case .sending:
-                Text("")
+                Spacer()
                     .frame(width: 10, height: 10)
                     .overlayBorder(color: ColorAssets.neutralDarkGrey.swiftUIColor, cornerRadius: 5, lineWidth: 1)
             case .received:

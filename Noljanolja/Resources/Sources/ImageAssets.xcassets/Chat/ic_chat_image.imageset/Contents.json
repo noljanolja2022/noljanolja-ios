@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ic_camera_outline.png",
+      "filename" : "ic_chat_image.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ic_camera_outline@2x.png",
+      "filename" : "ic_chat_image@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ic_camera_outline@3x.png",
+      "filename" : "ic_chat_image@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
@@ -19,8 +19,5 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
-  },
-  "properties" : {
-    "template-rendering-intent" : "template"
   }
 }

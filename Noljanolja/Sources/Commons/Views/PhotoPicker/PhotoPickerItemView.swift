@@ -46,7 +46,7 @@ struct PhotoPickerItemView: View {
                             .cornerRadius(12)
                     },
                     else: {
-                        Text("")
+                        Spacer()
                             .frame(width: 24, height: 24)
                     }
                 )

@@ -17,7 +17,7 @@ struct TappableTextFieldStyle: TextFieldStyle {
         return ZStack(alignment: .center) {
             Button(
                 action: { privateTextField?.becomeFirstResponder() },
-                label: { Text("").frame(maxWidth: .infinity, maxHeight: .infinity) }
+                label: { Spacer().frame(maxWidth: .infinity, maxHeight: .infinity) }
             )
 
             configuration

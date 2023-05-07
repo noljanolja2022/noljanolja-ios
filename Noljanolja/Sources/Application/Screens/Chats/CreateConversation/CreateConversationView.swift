@@ -80,7 +80,7 @@ struct CreateConversationView<ViewModel: CreateConversationViewModel>: View {
                 },
                 label: {
                     HStack(spacing: 12) {
-                        ImageAssets.icSingleChat.swiftUIImage
+                        ImageAssets.icChatNewSingle.swiftUIImage
                             .resizable()
                             .scaledToFit()
                             .frame(width: 16, height: 21)
@@ -101,7 +101,7 @@ struct CreateConversationView<ViewModel: CreateConversationViewModel>: View {
                 },
                 label: {
                     HStack(spacing: 12) {
-                        ImageAssets.icGroupChat.swiftUIImage
+                        ImageAssets.icChatNewGroup.swiftUIImage
                             .resizable()
                             .scaledToFit()
                             .frame(width: 21, height: 21)

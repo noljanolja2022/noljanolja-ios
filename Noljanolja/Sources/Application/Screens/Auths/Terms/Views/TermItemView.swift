@@ -24,10 +24,10 @@ struct TermItemView: View {
                 action: { selected = !selected },
                 label: {
                     if selected {
-                        ImageAssets.icRoundedChecked.swiftUIImage
+                        ImageAssets.icCheckboxRoundedChecked.swiftUIImage
                             .resizable()
                     } else {
-                        ImageAssets.icRoundedUnchecked.swiftUIImage
+                        ImageAssets.icCheckboxRoundedUnchecked.swiftUIImage
                             .resizable()
                     }
                 }

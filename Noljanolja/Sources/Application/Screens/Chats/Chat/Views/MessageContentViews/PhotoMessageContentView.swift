@@ -79,7 +79,7 @@ struct PhotoMessageContentView: View {
                 .contentShape(Rectangle())
                 .background(ColorAssets.neutralLightGrey.swiftUIColor)
             } else {
-                Text("")
+                Spacer()
             }
         }
         .aspectRatio(1, contentMode: .fill)

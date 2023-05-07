@@ -38,11 +38,11 @@ struct ContactItemView: View {
 
             switch isSelected {
             case .some(true):
-                ImageAssets.icCircleChecked.swiftUIImage
+                ImageAssets.icCheckboxCircleChecked.swiftUIImage
                     .resizable()
                     .frame(width: 24, height: 24)
             case .some(false):
-                ImageAssets.icCircleUnchecked.swiftUIImage
+                ImageAssets.icCheckboxCircleUnchecked.swiftUIImage
                     .resizable()
                     .frame(width: 24, height: 24)
             case .none:

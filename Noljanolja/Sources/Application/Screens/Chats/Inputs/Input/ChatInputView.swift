@@ -29,46 +29,50 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
     }
 
     private func buildBodyView() -> some View {
-        VStack(spacing: 0) {
-            buildContentView()
-            buildExpandView()
-        }
-        .onChange(of: keyboard.isActive) { isActive in
-            guard isActive else { return }
-            expandType = nil
-        }
+        buildContentView()
+            .onChange(of: keyboard.isActive) { isActive in
+                guard isActive else { return }
+                setExpandType(nil, isAnimated: false)
+            }
     }
 
     private func buildContentView() -> some View {
-        HStack(alignment: .bottom, spacing: 4) {
-            Button(
-                action: {
-                    withAnimation {
-                        keyboard.dismiss()
-                        DispatchQueue.main.asyncAfter(
-                            deadline: .now() + (keyboard.isActive ? 0.3 : 0)
-                        ) {
-                            withAnimation {
-                                expandType = .menu
-                            }
-                        }
-                    }
-                },
-                label: {
-                    ImageAssets.icAdd.swiftUIImage
-                        .resizable()
-                        .scaledToFit()
-                        .padding(4)
-                        .frame(width: inputItemSize, height: inputItemSize)
-                        .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
-                }
-            )
+        VStack(spacing: 0) {
+            buildTopView()
+            buildBottomView()
+        }
+    }
 
+    private func buildTopView() -> some View {
+        HStack(alignment: .bottom, spacing: 4) {
+            buildExpandView()
             buildMainView()
         }
         .padding(.leading, 8)
         .padding(.trailing, 12)
         .padding(.vertical, 4)
+    }
+
+    private func buildExpandView() -> some View {
+        Button(
+            action: {
+                withAnimation {
+                    keyboard.dismiss()
+                    setExpandType(expandType == nil ? .menu : nil)
+                }
+            },
+            label: {
+                ImageAssets.icAdd.swiftUIImage
+                    .resizable()
+                    .scaledToFit()
+                    .padding(4)
+                    .frame(width: inputItemSize, height: inputItemSize)
+                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
+            }
+        )
+        .rotationEffect(
+            .radians(expandType == nil ? 0 : Double.pi / 4)
+        )
     }
 
     private func buildMainView() -> some View {
@@ -106,16 +110,10 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
         Button(
             action: {
                 keyboard.dismiss()
-                DispatchQueue.main.asyncAfter(
-                    deadline: .now() + (keyboard.isActive ? 0.3 : 0)
-                ) {
-                    withAnimation {
-                        expandType = expandType == .sticker ? nil : .sticker
-                    }
-                }
+                setExpandType(expandType == .sticker ? nil : .sticker)
             },
             label: {
-                ImageAssets.icEmoji.swiftUIImage
+                ImageAssets.icChatEmoji.swiftUIImage
                     .resizable()
                     .scaledToFit()
                     .padding(8)
@@ -145,7 +143,7 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
         )
     }
 
-    private func buildExpandView() -> some View {
+    private func buildBottomView() -> some View {
         ChatInputExpandView(
             viewModel: ChatInputExpandViewModel(
                 delegate: viewModel
@@ -158,7 +156,23 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
                 viewModel.sendAction.send(.sticker($0, $1))
             }
         )
-        .height(300)
+        .height(UIScreen.main.bounds.width * 0.6)
+    }
+}
+
+extension ChatInputView {
+    private func setExpandType(_ expandType: ChatInputExpandType?,
+                               isAnimated: Bool = true) {
+        if isAnimated {
+            withAnimation(
+                after: .milliseconds(keyboard.isActive ? 300 : 0),
+                body: {
+                    self.expandType = expandType
+                }
+            )
+        } else {
+            self.expandType = expandType
+        }
     }
 }
 
@@ -170,11 +184,17 @@ import Combine
 
 struct ChatInputView_Previews: PreviewProvider {
     static var previews: some View {
-        ChatInputView(
-            viewModel: ChatInputViewModel(
-                conversationID: 0,
-                sendAction: PassthroughSubject<SendMessageType, Never>()
+        VStack {
+            Spacer()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(.green)
+
+            ChatInputView(
+                viewModel: ChatInputViewModel(
+                    conversationID: 0,
+                    sendAction: PassthroughSubject<SendMessageType, Never>()
+                )
             )
-        )
+        }
     }
 }

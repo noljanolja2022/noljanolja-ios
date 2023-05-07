@@ -60,7 +60,7 @@ struct ConversationItemView: View {
                     .font(Font.system(size: 12, weight: .regular))
                     .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
                 if !model.isSeen {
-                    Text("")
+                    Spacer()
                         .frame(width: 6, height: 6)
                         .background(Color(hexadecimal: "BA1B1B"))
                         .cornerRadius(3)
