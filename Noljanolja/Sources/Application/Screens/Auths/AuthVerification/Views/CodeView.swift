@@ -53,7 +53,7 @@ struct CodeView: View {
         let digit = text[safe: index].flatMap { String($0) } ?? ""
         let color: Color = {
             guard text.count < maxLength else {
-                return ColorAssets.primaryMain.swiftUIColor
+                return ColorAssets.primaryGreen200.swiftUIColor
             }
             if index < text.count {
                 return ColorAssets.neutralDarkGrey.swiftUIColor

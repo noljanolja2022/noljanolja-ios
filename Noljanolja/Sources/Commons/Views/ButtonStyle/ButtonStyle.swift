@@ -64,7 +64,7 @@ struct PrimaryButtonStyle: CustomButtonStyle {
     let isEnabled: Bool
     let enabledForegroundColor: Color = ColorAssets.neutralDarkGrey.swiftUIColor
     let disabledForegroundColor: Color = ColorAssets.neutralDeepGrey.swiftUIColor
-    let enabledBackgroundColor: Color = ColorAssets.primaryMain.swiftUIColor
+    let enabledBackgroundColor: Color = ColorAssets.primaryGreen200.swiftUIColor
     let disabledBackgroundColor: Color = ColorAssets.neutralGrey.swiftUIColor
     let enabledBorderColor = Color.clear
     let disabledBorderColor = Color.clear

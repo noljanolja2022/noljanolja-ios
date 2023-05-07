@@ -122,7 +122,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                 .font(.system(size: 12))
                 .foregroundColor(
                     isNameEditing
-                        ? ColorAssets.primaryMain.swiftUIColor
+                        ? ColorAssets.primaryGreen200.swiftUIColor
                         : ColorAssets.neutralDeepGrey.swiftUIColor
                 )
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -142,7 +142,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                 .frame(height: 2)
                 .overlay(
                     isNameEditing
-                        ? ColorAssets.primaryMain.swiftUIColor
+                        ? ColorAssets.primaryGreen200.swiftUIColor
                         : ColorAssets.neutralDeepGrey.swiftUIColor
                 )
             
@@ -191,7 +191,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                 .font(.system(size: 16))
                 .foregroundColor(
                     viewModel.fullScreenCoverType == .datePicker
-                        ? ColorAssets.primaryMain.swiftUIColor
+                        ? ColorAssets.primaryGreen200.swiftUIColor
                         : viewModel.dob != nil
                         ? ColorAssets.neutralDarkGrey.swiftUIColor
                         : ColorAssets.neutralDeepGrey.swiftUIColor
@@ -216,7 +216,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                 .frame(height: 2)
                 .overlay(
                     viewModel.fullScreenCoverType == .datePicker
-                        ? ColorAssets.primaryMain.swiftUIColor
+                        ? ColorAssets.primaryGreen200.swiftUIColor
                         : viewModel.dob != nil
                         ? ColorAssets.neutralDarkGrey.swiftUIColor
                         : ColorAssets.neutralDeepGrey.swiftUIColor
@@ -234,7 +234,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                 .font(.system(size: 16))
                 .foregroundColor(
                     viewModel.actionSheetType == .gender
-                        ? ColorAssets.primaryMain.swiftUIColor
+                        ? ColorAssets.primaryGreen200.swiftUIColor
                         : viewModel.gender != nil
                         ? ColorAssets.neutralDarkGrey.swiftUIColor
                         : ColorAssets.neutralDeepGrey.swiftUIColor
@@ -259,7 +259,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                 .frame(height: 2)
                 .overlay(
                     viewModel.actionSheetType == .gender
-                        ? ColorAssets.primaryMain.swiftUIColor
+                        ? ColorAssets.primaryGreen200.swiftUIColor
                         : viewModel.gender != nil
                         ? ColorAssets.neutralDarkGrey.swiftUIColor
                         : ColorAssets.neutralDeepGrey.swiftUIColor

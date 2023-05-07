@@ -14,20 +14,16 @@ struct ChatMessageItemView: View {
     var action: ((ChatItemActionType) -> Void)?
 
     var body: some View {
-        if model.content == nil {
-            EmptyView()
+        if model.isSenderMessage {
+            SenderMessageItemView(
+                model: model,
+                action: action
+            )
         } else {
-            if model.isSenderMessage {
-                SenderMessageItemView(
-                    model: model,
-                    action: action
-                )
-            } else {
-                ReceiverMessageView(
-                    model: model,
-                    action: action
-                )
-            }
+            ReceiverMessageView(
+                model: model,
+                action: action
+            )
         }
     }
 }

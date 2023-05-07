@@ -34,7 +34,7 @@ struct AnyImageEditorView: UIViewControllerRepresentable {
             button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
             button.setTitleColor(ColorAssets.neutralLight.color, for: .normal)
             button.setTitleColor(ColorAssets.neutralLightGrey.color, for: .highlighted)
-            button.backgroundColor = ColorAssets.primaryMain.color
+            button.backgroundColor = ColorAssets.primaryGreen200.color
         }
         options.toolOptions = [.crop, .text, .brush, .mosaic]
         return ImageEditorController(

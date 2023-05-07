@@ -38,7 +38,7 @@ struct ChatMessageItemModel: Equatable {
     let isSenderMessage: Bool
     let avatar: String?
     let date: Date
-    let content: ContentType?
+    let content: ContentType
     let positionType: PositionType
     let status: StatusType
 

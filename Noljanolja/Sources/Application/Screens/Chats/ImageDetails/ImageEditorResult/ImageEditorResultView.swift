@@ -93,7 +93,7 @@ struct ImageEditorResultView<ViewModel: ImageEditorResultViewModel>: View {
                         .font(.system(size: 16, weight: .bold))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
-                        .background(ColorAssets.primaryMain.swiftUIColor)
+                        .background(ColorAssets.primaryGreen200.swiftUIColor)
                         .cornerRadius(8)
                 }
             )

@@ -32,7 +32,7 @@ struct TermDetailView<ViewModel: TermDetailViewModel>: View {
             buildContentView()
         }
         .background(
-            ColorAssets.primaryMain.swiftUIColor.edgesIgnoringSafeArea(.top)
+            ColorAssets.primaryGreen200.swiftUIColor.edgesIgnoringSafeArea(.top)
         )
     }
 

@@ -30,7 +30,7 @@ struct TextMessageContentView: View {
             .isEditable(false)
             .isScrollEnabled(false)
             .foregroundColor(
-                ColorAssets.primaryDark.swiftUIColor
+                ColorAssets.primaryGreen400.swiftUIColor
             )
         }
         .padding(.vertical, 12)

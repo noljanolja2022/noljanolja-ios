@@ -163,7 +163,7 @@ struct MainView<ViewModel: MainViewModel>: View {
                     .font(.system(size: 10))
             }
         }
-        .accentColor(ColorAssets.primaryMain.swiftUIColor)
+        .accentColor(ColorAssets.primaryGreen200.swiftUIColor)
     }
 }
 
@@ -177,7 +177,7 @@ struct MainView_Previews: PreviewProvider {
         .navigationViewStyle(StackNavigationViewStyle())
         .introspectNavigationController { navigationController in
             navigationController.configure(
-                backgroundColor: ColorAssets.primaryMain.color,
+                backgroundColor: ColorAssets.primaryGreen200.color,
                 foregroundColor: ColorAssets.neutralDarkGrey.color
             )
         }

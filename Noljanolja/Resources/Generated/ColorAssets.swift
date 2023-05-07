@@ -44,10 +44,6 @@ internal enum ColorAssets {
   internal static let systemGreen = ColorAsset(name: "System Green")
   internal static let systemRed100 = ColorAsset(name: "System Red 100")
   internal static let systemRed50 = ColorAsset(name: "System Red 50")
-  internal static let primaryDark = ColorAsset(name: "PrimaryDark")
-  internal static let primaryDeep = ColorAsset(name: "PrimaryDeep")
-  internal static let primaryLight = ColorAsset(name: "PrimaryLight")
-  internal static let primaryMain = ColorAsset(name: "PrimaryMain")
 
   // swiftlint:disable trailing_comma
   @available(*, deprecated, message: "All values properties are now deprecated")
@@ -74,10 +70,6 @@ internal enum ColorAssets {
     systemGreen,
     systemRed100,
     systemRed50,
-    primaryDark,
-    primaryDeep,
-    primaryLight,
-    primaryMain,
   ]
   // swiftlint:enable trailing_comma
 }

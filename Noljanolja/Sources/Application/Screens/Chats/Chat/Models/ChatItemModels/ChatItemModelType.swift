@@ -12,4 +12,3 @@ enum ChatItemModelType: Equatable {
     case event(ChatEventItemModel)
     case item(ChatMessageItemModel)
 }
-

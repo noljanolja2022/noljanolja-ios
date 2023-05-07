@@ -140,7 +140,7 @@ struct ContactListView<ViewModel: ContactListViewModel>: View {
                     }
                 )
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                .background(ColorAssets.primaryMain.swiftUIColor)
+                .background(ColorAssets.primaryGreen200.swiftUIColor)
                 .cornerRadius(10)
             }
             .padding(16)

@@ -16,7 +16,7 @@ struct ChatSettingAddParticipantView: View {
                 .resizable()
                 .padding(6)
                 .frame(width: 40, height: 40)
-                .foregroundColor(ColorAssets.primaryMain.swiftUIColor)
+                .foregroundColor(ColorAssets.primaryGreen200.swiftUIColor)
                 .overlayBorder(
                     color: ColorAssets.neutralLightGrey.swiftUIColor,
                     cornerRadius: 14,
@@ -25,7 +25,7 @@ struct ChatSettingAddParticipantView: View {
             Text("Add member")
                 .font(.system(size: 16, weight: .medium))
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .foregroundColor(ColorAssets.primaryMain.swiftUIColor)
+                .foregroundColor(ColorAssets.primaryGreen200.swiftUIColor)
         }
         .background(ColorAssets.neutralLight.swiftUIColor)
     }

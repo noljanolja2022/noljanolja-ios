@@ -14,7 +14,7 @@ struct TermItemView: View {
     var title = ""
     var titleLineLimit: Int? = 1
     var foregroundColor: Color? = ColorAssets.neutralDeepGrey.swiftUIColor
-    var checkedForegroundColor: Color? = ColorAssets.primaryMain.swiftUIColor
+    var checkedForegroundColor: Color? = ColorAssets.primaryGreen200.swiftUIColor
     var idArrowIconHidden = false
     var action: (() -> Void)?
 

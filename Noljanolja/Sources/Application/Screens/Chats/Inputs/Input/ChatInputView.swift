@@ -120,7 +120,7 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
                     .scaledToFit()
                     .padding(8)
                     .frame(width: inputItemSize, height: inputItemSize)
-                    .foregroundColor(ColorAssets.primaryDark.swiftUIColor)
+                    .foregroundColor(ColorAssets.primaryGreen400.swiftUIColor)
             }
         )
     }
@@ -141,7 +141,7 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
         .foregroundColor(
             text.isEmpty
                 ? ColorAssets.neutralDeepGrey.swiftUIColor
-                : ColorAssets.primaryMain.swiftUIColor
+                : ColorAssets.primaryGreen200.swiftUIColor
         )
     }
 
