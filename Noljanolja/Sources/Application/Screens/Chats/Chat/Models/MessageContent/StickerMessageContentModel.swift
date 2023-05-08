@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - TextMessageContentModel
 
-struct StickerMessageContentModel: Equatable, MessageContentModelType {
+struct StickerMessageContentModel: Equatable {
     let isSenderMessage: Bool
     let sticker: URL?
 

@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-// MARK: - ChatMessageItemView
+// MARK: - NormalMessageView
 
-struct ChatMessageItemView: View {
-    var model: ChatMessageItemModel
+struct NormalMessageView: View {
+    var model: NormalMessageModel
     var action: ((ChatItemActionType) -> Void)?
 
     var body: some View {

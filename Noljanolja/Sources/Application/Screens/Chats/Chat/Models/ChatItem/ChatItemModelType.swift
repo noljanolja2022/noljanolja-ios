@@ -8,7 +8,6 @@
 import Foundation
 
 enum ChatItemModelType: Equatable {
-    case date(ChatDateItemModel)
-    case event(ChatEventItemModel)
-    case item(ChatMessageItemModel)
+    case date(DateChatItemModel)
+    case message(MessageChatItemModel)
 }

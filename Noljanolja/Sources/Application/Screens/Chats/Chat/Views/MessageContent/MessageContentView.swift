@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - MessageContentView
 
 struct MessageContentView: View {
-    var messageContent: ChatMessageItemModel.ContentType?
+    var model: NormalMessageModel.ContentType?
     var action: ((ChatItemActionType) -> Void)?
 
     var body: some View {
@@ -19,19 +19,21 @@ struct MessageContentView: View {
 
     @ViewBuilder
     private func buildBody() -> some View {
-        switch messageContent {
+        switch model {
         case let .plaintext(model):
             TextMessageContentView(
-                contentItemModel: model,
+                model: model,
                 action: action
             )
         case let .photo(model):
             PhotoMessageContentView(
-                contentItemModel: model,
+                model: model,
                 action: action
             )
         case let .sticker(model):
-            StickerMessageContentView(contentItemModel: model)
+            StickerMessageContentView(
+                contentItemModel: model
+            )
         case .none:
             EmptyView()
         }

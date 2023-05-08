@@ -1,5 +1,5 @@
 //
-//  EventMessageItemModel.swift
+//  EventMessageModel.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 10/04/2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ChatEventItemModel: Equatable {
+struct EventMessageModel: Equatable {
     let message: String
 
     init?(currentUser: User, message: Message) {

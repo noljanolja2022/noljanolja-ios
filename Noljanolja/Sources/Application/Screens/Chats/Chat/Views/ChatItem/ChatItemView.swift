@@ -16,14 +16,9 @@ struct ChatItemView: View {
     var body: some View {
         switch chatItem {
         case let .date(model):
-            ChatDateItemView(model: model)
-        case let .event(model):
-            ChatEventItemView(model: model)
-        case let .item(model):
-            ChatMessageItemView(
-                model: model,
-                action: action
-            )
+            DateChatItemView(model: model)
+        case let .message(model):
+            MessageChatItemView(model: model)
         }
     }
 }

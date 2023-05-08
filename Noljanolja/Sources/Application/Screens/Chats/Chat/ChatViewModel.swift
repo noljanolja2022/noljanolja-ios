@@ -118,7 +118,7 @@ final class ChatViewModel: ViewModel {
                     .removeDuplicates()
             )
             .map { currentUser, conversation, messages in
-                MessageItemModelBuilder(
+                ChatItemModelBuilder(
                     currentUser: currentUser,
                     conversation: conversation,
                     messages: messages

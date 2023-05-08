@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ChatDateItemModel: Equatable {
+struct DateChatItemModel: Equatable {
     let message: String
 
     init(message: Message) {

@@ -1,5 +1,5 @@
 //
-//  MessageItemModelBuilder.swift
+//  ChatItemModelBuilder.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 13/03/2023.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-final class MessageItemModelBuilder {
+final class ChatItemModelBuilder {
     private let currentUser: User
     private let conversation: Conversation
     private let messages: [Message]
@@ -29,19 +29,16 @@ final class MessageItemModelBuilder {
             let positionType = buildPositionType(beforceMessage: beforceMessage, message: message, afterMessage: afterMessage)
             let statusType = buildStatusType(message: message)
 
-            let messageChatItemModel = ChatMessageItemModel(
+            let messageModel = MessageChatItemModel(
                 currentUser: currentUser,
+                conversation: conversation,
                 message: message,
+                seenByUsers: [],
                 positionType: positionType,
                 status: statusType
             )
-            messageChatItemModel.flatMap {
-                messageItemTypes.append(.item($0))
-            }
-
-            let eventChatItemModel = ChatEventItemModel(currentUser: currentUser, message: message)
-            eventChatItemModel.flatMap {
-                messageItemTypes.append(.event($0))
+            messageModel.flatMap {
+                messageItemTypes.append(.message($0))
             }
 
             let isFirstMessageByDate = beforceMessage
@@ -49,7 +46,7 @@ final class MessageItemModelBuilder {
 
             if isFirstMessageByDate {
                 messageItemTypes.append(
-                    .date(ChatDateItemModel(message: message))
+                    .date(DateChatItemModel(message: message))
                 )
             }
         }
@@ -59,7 +56,7 @@ final class MessageItemModelBuilder {
 
     private func buildPositionType(beforceMessage: Message?,
                                    message: Message,
-                                   afterMessage: Message?) -> ChatMessageItemModel.PositionType {
+                                   afterMessage: Message?) -> NormalMessageModel.PositionType {
         let isFirstMessageByDate = beforceMessage
             .flatMap { !Calendar.current.isDate(message.createdAt, equalTo: $0.createdAt, toGranularity: .day) } ?? true
         let isLastMessageByDate = afterMessage
@@ -81,7 +78,7 @@ final class MessageItemModelBuilder {
         }
     }
 
-    private func buildStatusType(message: Message) -> ChatMessageItemModel.StatusType {
+    private func buildStatusType(message: Message) -> NormalMessageModel.StatusType {
         let currentUser = currentUser
         let lastSenderSentMessage = messages.first(where: { $0.id != nil && $0.sender.id == currentUser.id })
         let lastSenderSeenMessage = messages
