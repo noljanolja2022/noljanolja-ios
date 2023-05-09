@@ -16,11 +16,12 @@ struct NormalMessageModel: Equatable {
     let senderName: String
     let content: ContentType
     let seenUsers: [User]
-    let positionType: PositionType
     let status: StatusType
 
     let senderAvatarVisibility: VisibilityType
     let senderNameVisibility: VisibilityType
+
+    let topPadding: CGFloat
 
     init?(currentUser: User,
           conversation: Conversation,
@@ -31,36 +32,6 @@ struct NormalMessageModel: Equatable {
         self.isSendByCurrentUser = currentUser.id == message.sender.id
         self.senderAvatar = message.sender.avatar ?? ""
         self.senderName = message.sender.name ?? ""
-        self.senderAvatarVisibility = {
-            if message.sender.id == currentUser.id {
-                switch conversation.type {
-                case .group: return .invisible
-                case .single, .unknown: return .gone
-                }
-            } else {
-                switch conversation.type {
-                case .group:
-                    switch positionType {
-                    case .all, .first: return .visible
-                    case .middle, .last: return .invisible
-                    }
-                case .single, .unknown: return .gone
-                }
-            }
-        }()
-        self.senderNameVisibility = {
-            guard message.sender.id != currentUser.id else {
-                return .gone
-            }
-            switch conversation.type {
-            case .group:
-                switch positionType {
-                case .all, .first: return .visible
-                case .middle, .last: return .gone
-                }
-            case .single, .unknown: return .gone
-            }
-        }()
 
         let backgroundColor = {
             if message.sender.id == currentUser.id {
@@ -101,8 +72,34 @@ struct NormalMessageModel: Equatable {
             return nil
         }
         self.seenUsers = seenUsers
-        self.positionType = positionType
         self.status = status
+        self.senderAvatarVisibility = {
+            if message.sender.id == currentUser.id {
+                switch conversation.type {
+                case .group: return .invisible
+                case .single, .unknown: return .gone
+                }
+            } else {
+                switch conversation.type {
+                case .group:
+                    return positionType.contains(.first) ? .visible : .invisible
+                case .single, .unknown:
+                    return .gone
+                }
+            }
+        }()
+        self.senderNameVisibility = {
+            guard message.sender.id != currentUser.id else {
+                return .gone
+            }
+            switch conversation.type {
+            case .group:
+                return positionType.contains(.first) ? .visible : .gone
+            case .single, .unknown:
+                return .gone
+            }
+        }()
+        self.topPadding = positionType.contains(.first) ? 16 : 4
     }
 }
 
@@ -115,11 +112,12 @@ extension NormalMessageModel {
         case sticker(StickerMessageContentModel)
     }
 
-    enum PositionType: Equatable {
-        case all
-        case first
-        case middle
-        case last
+    struct PositionType: OptionSet {
+        let rawValue: UInt8
+
+        static let first = PositionType(rawValue: 1 << 0)
+        static let middle = PositionType(rawValue: 1 << 1)
+        static let last = PositionType(rawValue: 1 << 2)
     }
 
     enum StatusType: Equatable {

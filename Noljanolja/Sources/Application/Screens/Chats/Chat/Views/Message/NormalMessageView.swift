@@ -25,15 +25,7 @@ struct NormalMessageView: View {
             buildContentView()
         }
         .padding(.horizontal, 16)
-        .padding(
-            .top,
-            { () -> CGFloat in
-                switch model.positionType {
-                case .all, .first: return 16
-                case .middle, .last: return 4
-                }
-            }()
-        )
+        .padding(.top, model.topPadding)
     }
 
     @ViewBuilder

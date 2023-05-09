@@ -68,13 +68,13 @@ final class ChatItemModelBuilder {
 
         if (isFirstMessageByDate && isLastMessageByDate)
             || (isFirstMessageBySender && isLastMessageBySender) {
-            return .all
+            return [.first, .last]
         } else if isFirstMessageByDate || isFirstMessageBySender {
-            return .first
+            return [.first]
         } else if isLastMessageByDate || isLastMessageBySender {
-            return .last
+            return [.last]
         } else {
-            return .middle
+            return [.middle]
         }
     }
 
