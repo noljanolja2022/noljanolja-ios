@@ -58,6 +58,7 @@ internal enum ImageAssets {
   internal static let icPointAccumulated = ImageAsset(name: "ic_point_accumulated")
   internal static let icPointReload = ImageAsset(name: "ic_point_reload")
   internal static let icSetting = ImageAsset(name: "ic_setting")
+  internal static let icShare = ImageAsset(name: "ic_share")
   internal static let logo = ImageAsset(name: "logo")
   internal static let icPpyy = ImageAsset(name: "ic_ppyy")
   internal static let icSplashMultiCoin = ImageAsset(name: "ic_splash_multi_coin")
@@ -107,6 +108,7 @@ internal enum ImageAssets {
     icPointAccumulated,
     icPointReload,
     icSetting,
+    icShare,
     logo,
     icPpyy,
     icSplashMultiCoin,

@@ -8,12 +8,13 @@
 import Kingfisher
 import SDWebImageSwiftUI
 import SwiftUI
+import SwiftUIX
 
 // MARK: - PhotoMessageContentView
 
 struct PhotoMessageContentView: View {
-    var model: PhotoMessageContentModel
-    var action: ((ChatItemActionType) -> Void)?
+    let model: PhotoMessageContentModel
+    let action: ((ChatItemActionType) -> Void)?
 
     var body: some View {
         buildBodyView()
@@ -21,6 +22,32 @@ struct PhotoMessageContentView: View {
 
     @ViewBuilder
     private func buildBodyView() -> some View {
+        HStack(spacing: 8) {
+            buildShareView()
+                .environment(\.layoutDirection, .leftToRight)
+            buildContentView()
+                .environment(\.layoutDirection, .leftToRight)
+        }
+        .padding(.leading, -36)
+        .environment(\.layoutDirection, model.isSendByCurrentUser ? .leftToRight : .rightToLeft)
+    }
+
+    @ViewBuilder
+    private func buildShareView() -> some View {
+        Button(
+            action: {},
+            label: {
+                ImageAssets.icShare.swiftUIImage
+                    .padding(4)
+                    .frame(width: 28, height: 28)
+                    .background(ColorAssets.neutralGrey.swiftUIColor)
+                    .cornerRadius(14)
+            }
+        )
+        .visible(!model.isShareHidden)
+    }
+
+    private func buildContentView() -> some View {
         VStack(spacing: 4) {
             ForEach(model.photoLists.indices, id: \.self) { row in
                 HStack(spacing: 4) {
@@ -31,13 +58,16 @@ struct PhotoMessageContentView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(4)
+        .background(Color(model.backgroundColor))
+        .cornerRadius(12)
     }
 
     private func buildItem(_ url: URL?) -> some View {
         PhotoMessageContentItemView(
             url: url,
             createdAt: model.createdAt,
-            seenByType: model.seenByType
+            isSeen: model.isSeen
         )
         .onTapGesture {
             action?(.openImageDetail(url))
@@ -50,33 +80,40 @@ struct PhotoMessageContentView: View {
 struct PhotoMessageContentItemView: View {
     var url: URL?
     let createdAt: Date
-    let seenByType: SeenByType?
+    let isSeen: Bool
 
     var body: some View {
         buildBodyView()
     }
 
+    @ViewBuilder
     private func buildBodyView() -> some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .bottomTrailing) {
-                buildImageView(size: geometry.size)
-                buildInfoView()
-            }
-            .cornerRadius(12)
+        if let url {
+            buildContentView(url: url)
+        } else {
+            Spacer()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .aspectRatio(1, contentMode: .fill)
+    }
+
+    private func buildContentView(url: URL) -> some View {
+        ZStack(alignment: .bottomTrailing) {
+            buildImageView(url: url)
+            buildInfoView()
+        }
+        .cornerRadius(10)
     }
 
     @ViewBuilder
-    private func buildImageView(size: CGSize) -> some View {
-        if let url {
+    private func buildImageView(url: URL) -> some View {
+        GeometryReader { geometry in
             WebImage(
                 url: url,
                 context: [
                     .imageTransformer: SDImageResizingTransformer(
                         size: CGSize(
-                            width: size.width * 3,
-                            height: size.height * 3
+                            width: geometry.size.width * 3,
+                            height: geometry.size.height * 3
                         ),
                         scaleMode: .aspectFill
                     )
@@ -85,31 +122,24 @@ struct PhotoMessageContentItemView: View {
             .resizable()
             .indicator(.activity)
             .scaledToFill()
-            .frame(width: size.width, height: size.height)
+            .frame(width: geometry.size.width, height: geometry.size.height)
             .clipped()
             .contentShape(Rectangle())
             .background(ColorAssets.neutralLightGrey.swiftUIColor)
-        } else {
-            Spacer()
         }
+        .aspectRatio(1, contentMode: .fill)
     }
 
     private func buildInfoView() -> some View {
         HStack(spacing: 0) {
             Spacer()
-
             MessageCreatedDateTimeView(model: createdAt)
                 .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
-
-            switch seenByType {
-            case .single:
-                MessageSeenByView(seenByType: seenByType)
-            case .group, .unknown, .none:
-                EmptyView()
-            }
+            SingleChatSeenView(isSeen: isSeen)
+                .foregroundColor(ColorAssets.primaryGreen200.swiftUIColor)
         }
         .padding(.vertical, 8)
-        .padding(.horizontal, 8)
+        .padding(.horizontal, isSeen ? 0 : 8)
         .background(
             LinearGradient(
                 gradient: Gradient(colors: [.clear, ColorAssets.neutralDarkGrey.swiftUIColor]),

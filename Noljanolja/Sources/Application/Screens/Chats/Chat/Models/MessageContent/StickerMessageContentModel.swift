@@ -10,16 +10,13 @@ import Foundation
 // MARK: - TextMessageContentModel
 
 struct StickerMessageContentModel: Equatable {
-    let isSenderMessage: Bool
     let sticker: URL?
+    let createdAt: Date
+    let isSeen: Bool
 
-    init(currentUser: User, message: Message) {
-        self.isSenderMessage = currentUser.id == message.sender.id
+    init(currentUser: User, message: Message, seenUsers: [User]) {
         self.sticker = message.getStickerURL()
-    }
-
-    init(isSenderMessage: Bool, sticker: URL?) {
-        self.isSenderMessage = isSenderMessage
-        self.sticker = sticker
+        self.createdAt = message.createdAt
+        self.isSeen = !seenUsers.isEmpty
     }
 }

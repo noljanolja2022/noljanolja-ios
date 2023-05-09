@@ -19,34 +19,29 @@ struct MessageCreatedDateTimeView: View {
     }
 }
 
-// MARK: - MessageSeenByView
+// MARK: - SingleChatSeenView
 
-struct MessageSeenByView: View {
-    let seenByType: SeenByType?
+struct SingleChatSeenView: View {
+    let isSeen: Bool
 
     var body: some View {
-        if let seenByType {
-            switch seenByType {
-            case let .single(isSeen):
-                if isSeen {
-                    ImageAssets.icChatSeen.swiftUIImage
-                        .frame(width: 16, height: 16)
-                } else {
-                    EmptyView()
-                }
-            case let .group(count):
-                if count > 0 {
-                    Text(String(count))
-                        .font(.system(size: 12, weight: .medium))
-                        .foregroundColor(ColorAssets.primaryGreen300.swiftUIColor)
-                } else {
-                    EmptyView()
-                }
-            case .unknown:
-                EmptyView()
-            }
-        } else {
-            EmptyView()
+        if isSeen {
+            ImageAssets.icChatSeen.swiftUIImage
+                .frame(width: 16, height: 16)
+        }
+    }
+}
+
+// MARK: - GroupChatSeenView
+
+struct GroupChatSeenView: View {
+    let count: Int
+
+    var body: some View {
+        if count > 0 {
+            Text(String(count))
+                .font(.system(size: 12, weight: .medium))
+                .foregroundColor(ColorAssets.primaryGreen300.swiftUIColor)
         }
     }
 }

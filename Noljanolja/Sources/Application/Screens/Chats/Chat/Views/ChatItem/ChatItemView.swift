@@ -10,15 +10,18 @@ import SwiftUI
 // MARK: - ChatItemView
 
 struct ChatItemView: View {
-    var chatItem: ChatItemModelType
-    var action: ((ChatItemActionType) -> Void)?
+    let chatItem: ChatItemModelType
+    let action: ((ChatItemActionType) -> Void)?
 
     var body: some View {
         switch chatItem {
         case let .date(model):
             DateChatItemView(model: model)
         case let .message(model):
-            MessageChatItemView(model: model)
+            MessageChatItemView(
+                model: model,
+                action: action
+            )
         }
     }
 }

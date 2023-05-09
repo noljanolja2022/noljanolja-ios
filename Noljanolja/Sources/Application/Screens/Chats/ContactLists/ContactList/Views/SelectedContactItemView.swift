@@ -11,7 +11,7 @@ import SwiftUI
 // MARK: - SelectedContactItemView
 
 struct SelectedContactItemView: View {
-    var user: User
+    let user: User
     var action: (() -> Void)?
 
     var body: some View {

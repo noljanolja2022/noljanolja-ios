@@ -33,7 +33,7 @@ final class ChatItemModelBuilder {
                 currentUser: currentUser,
                 conversation: conversation,
                 message: message,
-                seenByUsers: [],
+                seenUsers: [],
                 positionType: positionType,
                 status: statusType
             )

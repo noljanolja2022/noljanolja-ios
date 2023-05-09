@@ -10,23 +10,32 @@ import SwiftUI
 // MARK: - TextMessageContentView
 
 struct TextMessageContentView: View {
-    var model: TextMessageContentModel
-    var action: ((ChatItemActionType) -> Void)?
+    let model: TextMessageContentModel
+    let action: ((ChatItemActionType) -> Void)?
 
     var body: some View {
         buildBodyView()
     }
 
     private func buildBodyView() -> some View {
-        HStack(alignment: .bottom, spacing: 10) {
+        HStack(spacing: 8) {
+            buildGroupSeenBy()
             buildContentView()
+        }
+    }
+
+    private func buildContentView() -> some View {
+        HStack(alignment: .bottom, spacing: 10) {
+            buildTextView()
             buildInfoView()
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
+        .background(Color(model.backgroundColor))
+        .cornerRadius(12)
     }
 
-    private func buildContentView() -> some View {
+    private func buildTextView() -> some View {
         ZStack {
             Text(model.message)
                 .font(.system(size: 16, weight: .regular))
@@ -51,14 +60,29 @@ struct TextMessageContentView: View {
         HStack(spacing: 0) {
             MessageCreatedDateTimeView(model: model.createdAt)
                 .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
-            
-            switch model.seenByType {
-            case .single:
-                MessageSeenByView(seenByType: model.seenByType)
-            case .group, .unknown, .none:
-                EmptyView()
-            }
+            buildSingleSeenBy()
         }
         .padding(.bottom, -2)
+    }
+
+    @ViewBuilder
+    private func buildGroupSeenBy() -> some View {
+        switch model.seenByType {
+        case let .group(count):
+            GroupChatSeenView(count: count)
+        case .single, .unknown, .none:
+            EmptyView()
+        }
+    }
+
+    @ViewBuilder
+    private func buildSingleSeenBy() -> some View {
+        switch model.seenByType {
+        case let .single(isSeen):
+            SingleChatSeenView(isSeen: isSeen)
+                .foregroundColor(ColorAssets.primaryGreen300.swiftUIColor)
+        case .group, .unknown, .none:
+            EmptyView()
+        }
     }
 }

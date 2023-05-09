@@ -11,30 +11,62 @@ import UIKit
 // MARK: - NormalMessageModel
 
 struct NormalMessageModel: Equatable {
-    let isSenderMessage: Bool
-    let avatar: String?
+    let isSendByCurrentUser: Bool
+    let senderAvatar: String
+    let senderName: String
     let content: ContentType
-    let seenByType: SeenByType?
+    let seenUsers: [User]
     let positionType: PositionType
     let status: StatusType
+
+    let senderAvatarVisibility: VisibilityType
+    let senderNameVisibility: VisibilityType
 
     init?(currentUser: User,
           conversation: Conversation,
           message: Message,
-          seenByUsers: [User],
+          seenUsers: [User],
           positionType: PositionType,
           status: StatusType) {
-        self.isSenderMessage = currentUser.id == message.sender.id
-        self.avatar = message.sender.avatar
-
-        self.seenByType = {
-            guard message.sender.id == currentUser.id else {
-                return nil
+        self.isSendByCurrentUser = currentUser.id == message.sender.id
+        self.senderAvatar = message.sender.avatar ?? ""
+        self.senderName = message.sender.name ?? ""
+        self.senderAvatarVisibility = {
+            if message.sender.id == currentUser.id {
+                switch conversation.type {
+                case .group: return .invisible
+                case .single, .unknown: return .gone
+                }
+            } else {
+                switch conversation.type {
+                case .group:
+                    switch positionType {
+                    case .all, .first: return .visible
+                    case .middle, .last: return .invisible
+                    }
+                case .single, .unknown: return .gone
+                }
+            }
+        }()
+        self.senderNameVisibility = {
+            guard message.sender.id != currentUser.id else {
+                return .gone
             }
             switch conversation.type {
-            case .single: return .single(!seenByUsers.isEmpty)
-            case .group: return .group(seenByUsers.count)
-            case .unknown: return .unknown
+            case .group:
+                switch positionType {
+                case .all, .first: return .visible
+                case .middle, .last: return .gone
+                }
+            case .single, .unknown: return .gone
+            }
+        }()
+
+        let backgroundColor = {
+            if message.sender.id == currentUser.id {
+                return ColorAssets.primaryGreen50.name
+            } else {
+                return ColorAssets.neutralLightGrey.name
             }
         }()
         switch message.type {
@@ -44,7 +76,8 @@ struct NormalMessageModel: Equatable {
                     currentUser: currentUser,
                     conversation: conversation,
                     message: message,
-                    seenByType: seenByType
+                    seenUsers: seenUsers,
+                    backgroundColor: backgroundColor
                 )
             )
         case .photo:
@@ -52,19 +85,22 @@ struct NormalMessageModel: Equatable {
                 PhotoMessageContentModel(
                     currentUser: currentUser,
                     message: message,
-                    seenByType: seenByType
+                    seenUsers: seenUsers,
+                    backgroundColor: backgroundColor
                 )
             )
         case .sticker:
             self.content = .sticker(
                 StickerMessageContentModel(
                     currentUser: currentUser,
-                    message: message
+                    message: message,
+                    seenUsers: seenUsers
                 )
             )
         case .eventUpdated, .eventJoined, .eventLeft, .unknown:
             return nil
         }
+        self.seenUsers = seenUsers
         self.positionType = positionType
         self.status = status
     }

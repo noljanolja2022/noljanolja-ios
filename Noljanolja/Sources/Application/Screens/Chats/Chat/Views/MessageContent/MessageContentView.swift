@@ -10,8 +10,8 @@ import SwiftUI
 // MARK: - MessageContentView
 
 struct MessageContentView: View {
-    var model: NormalMessageModel.ContentType?
-    var action: ((ChatItemActionType) -> Void)?
+    let model: NormalMessageModel.ContentType?
+    let action: ((ChatItemActionType) -> Void)?
 
     var body: some View {
         buildBody()
@@ -32,7 +32,7 @@ struct MessageContentView: View {
             )
         case let .sticker(model):
             StickerMessageContentView(
-                contentItemModel: model
+                model: model
             )
         case .none:
             EmptyView()
