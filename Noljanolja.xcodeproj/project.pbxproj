@@ -158,6 +158,8 @@
 		CF8737F429CB6A700018237B /* ChatPhotoInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8737F229CB6A700018237B /* ChatPhotoInputViewModel.swift */; };
 		CF876C3929EAB2F200C8C9B0 /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF876C3829EAB2F200C8C9B0 /* NavigationBarView.swift */; };
 		CF88ABCD299F2E7400D8AB67 /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = CF88ABCC299F2E7400D8AB67 /* SwiftUINavigation */; };
+		CF8A02962A0B981800A01B21 /* TabItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8A02952A0B981800A01B21 /* TabItemView.swift */; };
+		CF8A02982A0BA35600A01B21 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8A02972A0BA35600A01B21 /* CustomTabView.swift */; };
 		CF9779DC29BE2FC600D1CAB0 /* PhoneNumberKit in Frameworks */ = {isa = PBXBuildFile; productRef = CF9779DB29BE2FC600D1CAB0 /* PhoneNumberKit */; };
 		CFA3304729BE3352008D7449 /* String+Phone.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA3304629BE3352008D7449 /* String+Phone.swift */; };
 		CFA3304929BE3AB9008D7449 /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA3304829BE3AB9008D7449 /* String+Date.swift */; };
@@ -482,6 +484,8 @@
 		CF8737F129CB6A700018237B /* ChatPhotoInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPhotoInputView.swift; sourceTree = "<group>"; };
 		CF8737F229CB6A700018237B /* ChatPhotoInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPhotoInputViewModel.swift; sourceTree = "<group>"; };
 		CF876C3829EAB2F200C8C9B0 /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
+		CF8A02952A0B981800A01B21 /* TabItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemView.swift; sourceTree = "<group>"; };
+		CF8A02972A0BA35600A01B21 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		CFA3304629BE3352008D7449 /* String+Phone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Phone.swift"; sourceTree = "<group>"; };
 		CFA3304829BE3AB9008D7449 /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
 		CFA3304C29BEB674008D7449 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -1377,6 +1381,15 @@
 			path = NavigationBarView;
 			sourceTree = "<group>";
 		};
+		CF8A02922A0B97C400A01B21 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CF8A02952A0B981800A01B21 /* TabItemView.swift */,
+				CF8A02972A0BA35600A01B21 /* CustomTabView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		CFA5BD2A29EEFB7E00251176 /* TextView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1809,6 +1822,7 @@
 		CFFC5B6329A7ACD8002B3381 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				CF8A02922A0B97C400A01B21 /* Views */,
 				CF4A6F0429E41FEA00CB75E5 /* Models */,
 				CF28A1A129B4FE410003C204 /* MainView.swift */,
 				CF28A1A229B4FE410003C204 /* MainViewModel.swift */,
@@ -2448,6 +2462,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF8A02962A0B981800A01B21 /* TabItemView.swift in Sources */,
 				CFA3304729BE3352008D7449 /* String+Phone.swift in Sources */,
 				CFD5424E29BF7A520053C5B1 /* TextMessageContentView.swift in Sources */,
 				CF54FA3329D023A50092E2C6 /* ChatStickerInputViewModel.swift in Sources */,
@@ -2481,6 +2496,7 @@
 				CF4A6EF129E3C0D000CB75E5 /* CreateConversationView.swift in Sources */,
 				CF28A1A029B4E9CF0003C204 /* AuthRootViewModel.swift in Sources */,
 				CFC4B17529F0745B00F577CC /* ChatInputExpandMenuViewModel.swift in Sources */,
+				CF8A02982A0BA35600A01B21 /* CustomTabView.swift in Sources */,
 				CF28A1B029B5066A0003C204 /* SettingViewModel.swift in Sources */,
 				CFB2A89F29D1F31A008D1689 /* StorableSticker.swift in Sources */,
 				CFECC12F29B4D6D500E20B58 /* LaunchBackgroundView.swift in Sources */,

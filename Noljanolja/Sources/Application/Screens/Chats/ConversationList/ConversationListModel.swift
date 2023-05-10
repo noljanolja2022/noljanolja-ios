@@ -12,7 +12,9 @@ import Foundation
 
 // MARK: - ConversationListViewModelDelegate
 
-protocol ConversationListViewModelDelegate: AnyObject {}
+protocol ConversationListViewModelDelegate: AnyObject {
+    func conversationListViewModel(hasUnseenConversations: Bool)
+}
 
 // MARK: - ConversationListViewModel
 
@@ -85,9 +87,12 @@ final class ConversationListViewModel: ViewModel {
                         )
                     }
             }
-            .sink(receiveValue: { [weak self] in
-                self?.conversations = $0
+            .sink(receiveValue: { [weak self] conversationItemModels in
+                self?.conversations = conversationItemModels
                 self?.viewState = .content
+                self?.delegate?.conversationListViewModel(
+                    hasUnseenConversations: !conversationItemModels.filter { !$0.isSeen }.isEmpty
+                )
             })
             .store(in: &cancellables)
     }

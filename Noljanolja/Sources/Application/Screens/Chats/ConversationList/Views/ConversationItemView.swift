@@ -62,7 +62,7 @@ struct ConversationItemView: View {
                 if !model.isSeen {
                     Spacer()
                         .frame(width: 6, height: 6)
-                        .background(Color(hexadecimal: "BA1B1B"))
+                        .background(ColorAssets.systemRed100.swiftUIColor)
                         .cornerRadius(3)
                 }
             }
