@@ -18,7 +18,7 @@ struct StickerMessageContentView: View {
     }
 
     private func buildBodyView() -> some View {
-        VStack(alignment: .trailing, spacing: 2) {
+        ZStack(alignment: .bottomTrailing) {
             buildStickerView()
             buildInfoView()
         }

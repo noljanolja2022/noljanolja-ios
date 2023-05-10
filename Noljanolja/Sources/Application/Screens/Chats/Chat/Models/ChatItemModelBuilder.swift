@@ -39,7 +39,12 @@ final class ChatItemModelBuilder {
                             return result
                         }
                     }
-                return buildStatusType(message: message, index: index, seenUserLastIndexes: seenUserLastIndexes)
+                return buildStatusType(
+                    currentUser: currentUser,
+                    message: message,
+                    index: index,
+                    seenUserLastIndexes: seenUserLastIndexes
+                )
             }()
 
             let messageModel = MessageChatItemModel(
@@ -53,10 +58,9 @@ final class ChatItemModelBuilder {
                 messageItemTypes.append(.message($0))
             }
 
-            let isFirstMessageByDate = beforceMessage
-                .flatMap { !Calendar.current.isDate(message.createdAt, equalTo: $0.createdAt, toGranularity: .day) } ?? true
-
-            if isFirstMessageByDate {
+            let isSameDateWithBeforceMessage = beforceMessage
+                .flatMap { Calendar.current.isDate(message.createdAt, equalTo: $0.createdAt, toGranularity: .day) } ?? false
+            if !isSameDateWithBeforceMessage {
                 messageItemTypes.append(
                     .date(DateChatItemModel(message: message))
                 )
@@ -98,9 +102,15 @@ final class ChatItemModelBuilder {
         }
     }
 
-    private func buildStatusType(message: Message, index: Int, seenUserLastIndexes: [String: Int]) -> NormalMessageModel.StatusType {
+    private func buildStatusType(currentUser: User,
+                                 message: Message,
+                                 index: Int,
+                                 seenUserLastIndexes: [String: Int]) -> NormalMessageModel.StatusType {
         let seenUsers = conversation.participants
             .filter { user in
+                guard user.id != currentUser.id else {
+                    return false
+                }
                 if let seenUserLastIndex = seenUserLastIndexes[user.id] {
                     return index >= seenUserLastIndex
                 } else {
