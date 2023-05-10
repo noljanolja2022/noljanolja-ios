@@ -25,9 +25,22 @@ final class ChatItemModelBuilder {
         for (index, message) in messages.enumerated() {
             let beforceMessage = messages[safe: index + 1]
             let afterMessage = messages[safe: index - 1]
-
             let positionType = buildPositionType(beforceMessage: beforceMessage, message: message, afterMessage: afterMessage)
-            let statusType = buildStatusType(index: index, message: message)
+
+            let statusType: NormalMessageModel.StatusType = {
+                let seenUserLastIndexes = conversation.participants
+                    .reduce([String: Int]()) { result, user -> [String: Int] in
+                        let index = messages.firstIndex { message in
+                            message.seenBy.contains(user.id)
+                        }
+                        if let index {
+                            return result.merging([user.id: index], uniquingKeysWith: { $1 })
+                        } else {
+                            return result
+                        }
+                    }
+                return buildStatusType(message: message, index: index, seenUserLastIndexes: seenUserLastIndexes)
+            }()
 
             let messageModel = MessageChatItemModel(
                 currentUser: currentUser,
@@ -56,40 +69,36 @@ final class ChatItemModelBuilder {
     private func buildPositionType(beforceMessage: Message?,
                                    message: Message,
                                    afterMessage: Message?) -> NormalMessageModel.PositionType {
-        let isFirstMessageByDate = beforceMessage
-            .flatMap { !Calendar.current.isDate(message.createdAt, equalTo: $0.createdAt, toGranularity: .day) } ?? true
-        let isLastMessageByDate = afterMessage
-            .flatMap { !Calendar.current.isDate(message.createdAt, equalTo: $0.createdAt, toGranularity: .day) } ?? true
-        let isFirstMessageBySender = beforceMessage
-            .flatMap { message.sender.id != $0.sender.id } ?? true
-        let isLastMessageBySender = afterMessage
-            .flatMap { message.sender.id != $0.sender.id } ?? true
+        let isSameSessionByTypeWithBeforceMessage = message.type.isSessionEnabled == beforceMessage?.type.isSessionEnabled
+        let isSameSessionByTypeWithAfterMessage = message.type.isSessionEnabled == afterMessage?.type.isSessionEnabled
 
-        if (isFirstMessageByDate && isLastMessageByDate)
-            || (isFirstMessageBySender && isLastMessageBySender) {
+        let isSameDateWithBeforceMessage = beforceMessage
+            .flatMap { Calendar.current.isDate(message.createdAt, equalTo: $0.createdAt, toGranularity: .day) } ?? false
+        let isSameDateWithAfterMessage = afterMessage
+            .flatMap { Calendar.current.isDate(message.createdAt, equalTo: $0.createdAt, toGranularity: .day) } ?? false
+
+        let isSameSenderWithBeforceMessage = message.sender.id == beforceMessage?.sender.id
+        let isSameSenderWithAfterMessage = message.sender.id == afterMessage?.sender.id
+
+        let isSameSessionWithBeforceMessage = !isSameSessionByTypeWithBeforceMessage
+            || !isSameDateWithBeforceMessage
+            || !isSameSenderWithBeforceMessage
+        let isSameSessionWithAfterMessage = !isSameSessionByTypeWithAfterMessage
+            || !isSameDateWithAfterMessage
+            || !isSameSenderWithAfterMessage
+
+        if isSameSessionWithBeforceMessage, isSameSessionWithAfterMessage {
             return [.first, .last]
-        } else if isFirstMessageByDate || isFirstMessageBySender {
+        } else if isSameSessionWithBeforceMessage {
             return [.first]
-        } else if isLastMessageByDate || isLastMessageBySender {
+        } else if isSameSessionWithAfterMessage {
             return [.last]
         } else {
             return [.middle]
         }
     }
 
-    private func buildStatusType(index: Int, message: Message) -> NormalMessageModel.StatusType {
-        let seenUserLastIndexes = conversation.participants
-            .reduce([String: Int]()) { result, user -> [String: Int] in
-                let index = messages.firstIndex { message in
-                    message.seenBy.contains(user.id)
-                }
-                if let index {
-                    return result.merging([user.id: index], uniquingKeysWith: { $1 })
-                } else {
-                    return result
-                }
-            }
-
+    private func buildStatusType(message: Message, index: Int, seenUserLastIndexes: [String: Int]) -> NormalMessageModel.StatusType {
         let seenUsers = conversation.participants
             .filter { user in
                 if let seenUserLastIndex = seenUserLastIndexes[user.id] {
