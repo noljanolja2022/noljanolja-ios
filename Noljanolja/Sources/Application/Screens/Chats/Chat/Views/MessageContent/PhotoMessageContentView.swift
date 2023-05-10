@@ -67,7 +67,7 @@ struct PhotoMessageContentView: View {
         PhotoMessageContentItemView(
             url: url,
             createdAt: model.createdAt,
-            isSeen: model.isSeen
+            status: model.status
         )
         .onTapGesture {
             action?(.openImageDetail(url))
@@ -80,7 +80,7 @@ struct PhotoMessageContentView: View {
 struct PhotoMessageContentItemView: View {
     var url: URL?
     let createdAt: Date
-    let isSeen: Bool
+    let status: MessageStatusModel.StatusType
 
     var body: some View {
         buildBodyView()
@@ -135,11 +135,19 @@ struct PhotoMessageContentItemView: View {
             Spacer()
             MessageCreatedDateTimeView(model: createdAt)
                 .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
-            SingleChatSeenView(isSeen: isSeen)
+            MessageStatusView(model: status)
                 .foregroundColor(ColorAssets.primaryGreen200.swiftUIColor)
         }
         .padding(.vertical, 8)
-        .padding(.horizontal, isSeen ? 0 : 8)
+        .padding(
+            .horizontal,
+            {
+                switch status {
+                case .none, .sending, .sent: return 8
+                case .seen: return 0
+                }
+            }()
+        )
         .background(
             LinearGradient(
                 gradient: Gradient(colors: [.clear, ColorAssets.neutralDarkGrey.swiftUIColor]),

@@ -18,7 +18,7 @@ struct StickerMessageContentView: View {
     }
 
     private func buildBodyView() -> some View {
-        ZStack(alignment: .bottomTrailing) {
+        VStack(alignment: .trailing, spacing: 2) {
             buildStickerView()
             buildInfoView()
         }
@@ -39,7 +39,7 @@ struct StickerMessageContentView: View {
         HStack(spacing: 0) {
             MessageCreatedDateTimeView(model: model.createdAt)
                 .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
-            SingleChatSeenView(isSeen: model.isSeen)
+            MessageStatusView(model: model.status)
                 .foregroundColor(ColorAssets.primaryGreen300.swiftUIColor)
         }
     }

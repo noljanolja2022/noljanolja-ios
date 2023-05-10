@@ -12,24 +12,35 @@ import Foundation
 struct TextMessageContentModel: Equatable {
     let message: String
     let createdAt: Date
-    let seenByType: SeenByType?
+    let status: MessageStatusModel.StatusType
     let backgroundColor: String
 
     init(currentUser: User,
          conversation: Conversation,
          message: Message,
-         seenUsers: [User],
+         status: NormalMessageModel.StatusType,
          backgroundColor: String) {
         self.message = message.message ?? ""
         self.createdAt = message.createdAt
-        self.seenByType = {
+        self.status = {
             guard message.sender.id == currentUser.id else {
-                return nil
+                return .none
             }
-            switch conversation.type {
-            case .single: return .single(!seenUsers.isEmpty)
-            case .group: return .group(seenUsers.count)
-            case .unknown: return .unknown
+            switch status {
+            case .none:
+                return .none
+            case .sending:
+                return .sending
+            case .sent:
+                return .sent
+            case let .seen(users):
+                return .seen({
+                    switch conversation.type {
+                    case .single: return .single(!users.isEmpty)
+                    case .group: return .group(users.count)
+                    case .unknown: return .none
+                    }
+                }())
             }
         }()
         self.backgroundColor = backgroundColor

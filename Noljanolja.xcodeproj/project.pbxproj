@@ -223,7 +223,7 @@
 		CFD0952A2A02B99C004BF047 /* VideoState+Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD095292A02B99C004BF047 /* VideoState+Event.swift */; };
 		CFD0952D2A02BDE8004BF047 /* Encodable+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD0952B2A02BDE8004BF047 /* Encodable+JSON.swift */; };
 		CFD0952E2A02BDE8004BF047 /* Dictionary+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD0952C2A02BDE8004BF047 /* Dictionary+JSON.swift */; };
-		CFD271D92A0949C20030719E /* SeenByType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD271D82A0949C20030719E /* SeenByType.swift */; };
+		CFD271D92A0949C20030719E /* MessageStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD271D82A0949C20030719E /* MessageStatusModel.swift */; };
 		CFD5424729BF7A520053C5B1 /* DateChatItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD5423E29BF7A520053C5B1 /* DateChatItemView.swift */; };
 		CFD5424829BF7A520053C5B1 /* ChatItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD5423F29BF7A520053C5B1 /* ChatItemView.swift */; };
 		CFD5424929BF7A520053C5B1 /* NormalMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD5424029BF7A520053C5B1 /* NormalMessageView.swift */; };
@@ -546,7 +546,7 @@
 		CFD095292A02B99C004BF047 /* VideoState+Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoState+Event.swift"; sourceTree = "<group>"; };
 		CFD0952B2A02BDE8004BF047 /* Encodable+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Encodable+JSON.swift"; sourceTree = "<group>"; };
 		CFD0952C2A02BDE8004BF047 /* Dictionary+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+JSON.swift"; sourceTree = "<group>"; };
-		CFD271D82A0949C20030719E /* SeenByType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeenByType.swift; sourceTree = "<group>"; };
+		CFD271D82A0949C20030719E /* MessageStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStatusModel.swift; sourceTree = "<group>"; };
 		CFD5423E29BF7A520053C5B1 /* DateChatItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateChatItemView.swift; sourceTree = "<group>"; };
 		CFD5423F29BF7A520053C5B1 /* ChatItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatItemView.swift; sourceTree = "<group>"; };
 		CFD5424029BF7A520053C5B1 /* NormalMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalMessageView.swift; sourceTree = "<group>"; };
@@ -1291,7 +1291,7 @@
 		CF7C895E2A082A63000D63EA /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				CFD271D82A0949C20030719E /* SeenByType.swift */,
+				CFD271D82A0949C20030719E /* MessageStatusModel.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -2639,7 +2639,7 @@
 				CFBC6F0029C054B0000509EC /* View+EditView.swift in Sources */,
 				CFF0C1EB29E85DEB007B4B98 /* AuthNavigations.swift in Sources */,
 				CF0EA30629AA02120014A7DE /* AuthView.swift in Sources */,
-				CFD271D92A0949C20030719E /* SeenByType.swift in Sources */,
+				CFD271D92A0949C20030719E /* MessageStatusModel.swift in Sources */,
 				CF0EA31429AA4D450014A7DE /* AuthVerificationView.swift in Sources */,
 				CF0EA30E29AA0F010014A7DE /* SelectCountryViewModel.swift in Sources */,
 				CFB0A82329F1B7CC00298546 /* VideoComment.swift in Sources */,

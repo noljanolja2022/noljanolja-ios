@@ -18,8 +18,8 @@ struct TextMessageContentView: View {
     }
 
     private func buildBodyView() -> some View {
-        HStack(spacing: 8) {
-            buildGroupSeenBy()
+        HStack(alignment: .bottom, spacing: 4) {
+            buildGroupChatStatusView()
             buildContentView()
         }
     }
@@ -60,28 +60,37 @@ struct TextMessageContentView: View {
         HStack(spacing: 0) {
             MessageCreatedDateTimeView(model: model.createdAt)
                 .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
-            buildSingleSeenBy()
+            buildSingleChatStatusView()
         }
         .padding(.bottom, -2)
     }
 
     @ViewBuilder
-    private func buildGroupSeenBy() -> some View {
-        switch model.seenByType {
-        case let .group(count):
-            GroupChatSeenView(count: count)
-        case .single, .unknown, .none:
+    private func buildGroupChatStatusView() -> some View {
+        switch model.status {
+        case let .seen(seenType):
+            switch seenType {
+            case .group:
+                MessageStatusView(model: model.status)
+            case .single, .none:
+                EmptyView()
+            }
+        case .none, .sending, .sent:
             EmptyView()
         }
     }
 
     @ViewBuilder
-    private func buildSingleSeenBy() -> some View {
-        switch model.seenByType {
-        case let .single(isSeen):
-            SingleChatSeenView(isSeen: isSeen)
-                .foregroundColor(ColorAssets.primaryGreen300.swiftUIColor)
-        case .group, .unknown, .none:
+    private func buildSingleChatStatusView() -> some View {
+        switch model.status {
+        case let .seen(seenType):
+            switch seenType {
+            case .single:
+                MessageStatusView(model: model.status)
+            case .group, .none:
+                EmptyView()
+            }
+        case .none, .sending, .sent:
             EmptyView()
         }
     }

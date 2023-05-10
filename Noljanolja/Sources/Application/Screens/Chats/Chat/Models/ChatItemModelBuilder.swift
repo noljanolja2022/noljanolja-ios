@@ -27,13 +27,12 @@ final class ChatItemModelBuilder {
             let afterMessage = messages[safe: index - 1]
 
             let positionType = buildPositionType(beforceMessage: beforceMessage, message: message, afterMessage: afterMessage)
-            let statusType = buildStatusType(message: message)
+            let statusType = buildStatusType(index: index, message: message)
 
             let messageModel = MessageChatItemModel(
                 currentUser: currentUser,
                 conversation: conversation,
                 message: message,
-                seenUsers: [],
                 positionType: positionType,
                 status: statusType
             )
@@ -78,21 +77,34 @@ final class ChatItemModelBuilder {
         }
     }
 
-    private func buildStatusType(message: Message) -> NormalMessageModel.StatusType {
-        let currentUser = currentUser
-        let lastSenderSentMessage = messages.first(where: { $0.id != nil && $0.sender.id == currentUser.id })
-        let lastSenderSeenMessage = messages
-            .first(where: { message in
-                message.sender.id == currentUser.id
-                    && !message.seenBy.filter { $0 != currentUser.id }.isEmpty
-            })
-        if message.id == nil {
+    private func buildStatusType(index: Int, message: Message) -> NormalMessageModel.StatusType {
+        let seenUserLastIndexes = conversation.participants
+            .reduce([String: Int]()) { result, user -> [String: Int] in
+                let index = messages.firstIndex { message in
+                    message.seenBy.contains(user.id)
+                }
+                if let index {
+                    return result.merging([user.id: index], uniquingKeysWith: { $1 })
+                } else {
+                    return result
+                }
+            }
+
+        let seenUsers = conversation.participants
+            .filter { user in
+                if let seenUserLastIndex = seenUserLastIndexes[user.id] {
+                    return index >= seenUserLastIndex
+                } else {
+                    return false
+                }
+            }
+
+        if !seenUsers.isEmpty {
+            return .seen(seenUsers)
+        } else if message.id != nil {
+            return .sent
+        } else if message.id == nil {
             return .sending
-        } else if message.id == lastSenderSeenMessage?.id {
-            let users = conversation.participants.filter { $0.id != currentUser.id }
-            return .seen(users)
-        } else if message.id == lastSenderSentMessage?.id {
-            return .received
         } else {
             return .none
         }

@@ -12,11 +12,21 @@ import Foundation
 struct StickerMessageContentModel: Equatable {
     let sticker: URL?
     let createdAt: Date
-    let isSeen: Bool
+    let status: MessageStatusModel.StatusType
 
-    init(currentUser: User, message: Message, seenUsers: [User]) {
+    init(currentUser: User,
+         message: Message,
+         status: NormalMessageModel.StatusType) {
         self.sticker = message.getStickerURL()
         self.createdAt = message.createdAt
-        self.isSeen = !seenUsers.isEmpty
+        self.status = {
+            guard message.sender.id == currentUser.id else {
+                return .none
+            }
+            switch status {
+            case .none, .sending, .sent: return .none
+            case let .seen(users): return .seen(.single(!users.isEmpty))
+            }
+        }()
     }
 }

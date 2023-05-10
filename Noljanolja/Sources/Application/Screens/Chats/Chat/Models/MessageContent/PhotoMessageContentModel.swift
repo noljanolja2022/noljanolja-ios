@@ -13,13 +13,13 @@ struct PhotoMessageContentModel: Equatable {
     let isSendByCurrentUser: Bool
     let photoLists: [[URL?]]
     let createdAt: Date
-    let isSeen: Bool
+    let status: MessageStatusModel.StatusType
     let isShareHidden: Bool
     let backgroundColor: String
 
     init(currentUser: User,
          message: Message,
-         seenUsers: [User],
+         status: NormalMessageModel.StatusType,
          backgroundColor: String) {
         self.isSendByCurrentUser = currentUser.id == message.sender.id
         self.photoLists = {
@@ -44,7 +44,15 @@ struct PhotoMessageContentModel: Equatable {
             return photoLists
         }()
         self.createdAt = message.createdAt
-        self.isSeen = !seenUsers.isEmpty
+        self.status = {
+            guard message.sender.id == currentUser.id else {
+                return .none
+            }
+            switch status {
+            case .none, .sending, .sent: return .none
+            case let .seen(users): return .seen(.single(!users.isEmpty))
+            }
+        }()
         self.isShareHidden = message.sender.id != currentUser.id
         self.backgroundColor = backgroundColor
     }

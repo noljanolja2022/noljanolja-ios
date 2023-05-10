@@ -15,7 +15,6 @@ struct NormalMessageModel: Equatable {
     let senderAvatar: String
     let senderName: String
     let content: ContentType
-    let seenUsers: [User]
     let status: StatusType
 
     let senderAvatarVisibility: VisibilityType
@@ -26,7 +25,6 @@ struct NormalMessageModel: Equatable {
     init?(currentUser: User,
           conversation: Conversation,
           message: Message,
-          seenUsers: [User],
           positionType: PositionType,
           status: StatusType) {
         self.isSendByCurrentUser = currentUser.id == message.sender.id
@@ -47,7 +45,7 @@ struct NormalMessageModel: Equatable {
                     currentUser: currentUser,
                     conversation: conversation,
                     message: message,
-                    seenUsers: seenUsers,
+                    status: status,
                     backgroundColor: backgroundColor
                 )
             )
@@ -56,7 +54,7 @@ struct NormalMessageModel: Equatable {
                 PhotoMessageContentModel(
                     currentUser: currentUser,
                     message: message,
-                    seenUsers: seenUsers,
+                    status: status,
                     backgroundColor: backgroundColor
                 )
             )
@@ -65,14 +63,14 @@ struct NormalMessageModel: Equatable {
                 StickerMessageContentModel(
                     currentUser: currentUser,
                     message: message,
-                    seenUsers: seenUsers
+                    status: status
                 )
             )
         case .eventUpdated, .eventJoined, .eventLeft, .unknown:
             return nil
         }
-        self.seenUsers = seenUsers
         self.status = status
+        
         self.senderAvatarVisibility = {
             if message.sender.id == currentUser.id {
                 switch conversation.type {
@@ -123,7 +121,7 @@ extension NormalMessageModel {
     enum StatusType: Equatable {
         case none
         case sending
-        case received
+        case sent
         case seen([User])
     }
 }
