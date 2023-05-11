@@ -42,7 +42,7 @@ struct PhotoPickerItemView: View {
                             .font(.system(size: 12, weight: .medium))
                             .frame(width: 24, height: 24)
                             .foregroundColor(.darkGray)
-                            .background(.white)
+                            .background(ColorAssets.primaryGreen100.swiftUIColor)
                             .cornerRadius(12)
                     },
                     else: {

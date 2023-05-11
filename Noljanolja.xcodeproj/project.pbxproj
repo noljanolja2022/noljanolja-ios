@@ -3171,7 +3171,7 @@
 			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
 			requirement = {
 				kind = exactVersion;
-				version = 0.1.4;
+				version = 0.2.3;
 			};
 		};
 		CF88ABCB299F2E7400D8AB67 /* XCRemoteSwiftPackageReference "swiftui-navigation" */ = {

@@ -9,12 +9,20 @@
 import SwiftUI
 import SwiftUIX
 
+// MARK: - ChatInputUIViews
+
+final class ChatInputUIViews {
+    fileprivate var textView: UITextView?
+}
+
 // MARK: - ChatInputView
 
 struct ChatInputView<ViewModel: ChatInputViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
+
+    private let uiViews = ChatInputUIViews()
 
     // MARK: State
 
@@ -50,15 +58,22 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
         }
         .padding(.leading, 8)
         .padding(.trailing, 12)
-        .padding(.vertical, 4)
+        .padding(.vertical, 8)
     }
 
     private func buildExpandView() -> some View {
         Button(
             action: {
-                withAnimation {
-                    keyboard.dismiss()
-                    setExpandType(expandType == nil ? .menu : nil)
+                keyboard.dismiss()
+                switch expandType {
+                case .none:
+                    setExpandType(.menu)
+                case .menu, .sticker:
+                    setExpandType(nil) {
+                        uiViews.textView?.becomeFirstResponder()
+                    }
+                case .images:
+                    setExpandType(.menu)
                 }
             },
             label: {
@@ -76,13 +91,21 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
     }
 
     private func buildMainView() -> some View {
-        HStack(alignment: .bottom, spacing: 0) {
-            buildTextInputView()
-            buildKeyboardAndStickerView()
-            buildSendView()
+        ZStack {
+            // Phải tách view, Không dùng được cornerRadius trực tiếp cho view
+            // Vì không thể dùng func introspectTextView được
+            Spacer()
+                .alignmentGuide(.top, computeValue: { $0[.top] })
+                .alignmentGuide(.bottom, computeValue: { $0[.bottom] })
+                .background(ColorAssets.neutralLightGrey.swiftUIColor)
+                .cornerRadius(18)
+            
+            HStack(alignment: .bottom, spacing: 0) {
+                buildTextInputView()
+                buildKeyboardAndStickerView()
+                buildSendView()
+            }
         }
-        .background(ColorAssets.neutralLightGrey.swiftUIColor)
-        .cornerRadius(18)
     }
 
     private func buildTextInputView() -> some View {
@@ -100,6 +123,9 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
                 .frame(maxHeight: 64)
                 .fixedSize(horizontal: false, vertical: true)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                .introspectTextView {
+                    uiViews.textView = $0
+                }
         }
         .font(.system(size: 14))
         .padding(.horizontal, 8)
@@ -162,16 +188,24 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
 
 extension ChatInputView {
     private func setExpandType(_ expandType: ChatInputExpandType?,
-                               isAnimated: Bool = true) {
+                               isAnimated: Bool = true,
+                               completion: (() -> Void)? = nil) {
         if isAnimated {
+            let milliseconds = keyboard.isActive ? 300 : 0
             withAnimation(
-                after: .milliseconds(keyboard.isActive ? 300 : 0),
+                after: .milliseconds(milliseconds),
                 body: {
                     self.expandType = expandType
                 }
             )
+            DispatchQueue.main.asyncAfter(
+                deadline: .now() + TimeInterval(milliseconds / 1_000) + 0.1
+            ) {
+                completion?()
+            }
         } else {
             self.expandType = expandType
+            completion?()
         }
     }
 }
