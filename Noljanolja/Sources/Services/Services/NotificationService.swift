@@ -12,7 +12,6 @@ import UserNotifications
 // MARK: - NotificationServiceType
 
 protocol NotificationServiceType {
-    func requestPermission()
     func sendPushToken(token: String)
 }
 
@@ -21,7 +20,6 @@ protocol NotificationServiceType {
 final class NotificationService: NotificationServiceType {
     static let `default` = NotificationService()
 
-    private lazy var userNotificationCenter = UNUserNotificationCenter.current()
     private let userStore: UserStoreType
     private let notificationAPI: NotificationAPIType
 
@@ -55,11 +53,6 @@ final class NotificationService: NotificationServiceType {
         userStore.getCurrentUserPublisher()
             .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
             .store(in: &cancellables)
-    }
-
-    func requestPermission() {
-        userNotificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in
-        }
     }
 
     func sendPushToken(token: String) {

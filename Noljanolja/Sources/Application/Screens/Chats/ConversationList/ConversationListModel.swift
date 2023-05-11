@@ -9,6 +9,7 @@
 import Combine
 import CombineExt
 import Foundation
+import UserNotifications
 
 // MARK: - ConversationListViewModelDelegate
 
@@ -44,6 +45,7 @@ final class ConversationListViewModel: ViewModel {
 
     // MARK: Dependencies
 
+    private let userNotificationCenter = UNUserNotificationCenter.current()
     private let userService: UserServiceType
     private let conversationService: ConversationServiceType
     private let conversationSocketService: ConversationSocketServiceType
@@ -71,6 +73,7 @@ final class ConversationListViewModel: ViewModel {
 
     private func configure() {
         configureBindData()
+        configureNotificationPermission()
         configureLoadData()
         configureSocket()
         configureActions()
@@ -94,6 +97,31 @@ final class ConversationListViewModel: ViewModel {
                     hasUnseenConversations: !conversationItemModels.filter { !$0.isSeen }.isEmpty
                 )
             })
+            .store(in: &cancellables)
+    }
+
+    private func configureNotificationPermission() {
+        isAppearSubject
+            .filter { $0 }
+            .first()
+            .sink { [weak self] _ in
+                guard let self else { return }
+                self.userNotificationCenter.getNotificationSettings { [weak self] notificationSettings in
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self else { return }
+                        switch notificationSettings.authorizationStatus {
+                        case .notDetermined:
+                            self.userNotificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in }
+                        case .denied:
+                            self.fullScreenCoverType = .notificationSetting
+                        case .authorized, .provisional, .ephemeral:
+                            break
+                        @unknown default:
+                            break
+                        }
+                    }
+                }
+            }
             .store(in: &cancellables)
     }
 

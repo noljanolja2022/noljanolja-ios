@@ -54,6 +54,7 @@ internal enum ImageAssets {
   internal static let icKing = ImageAsset(name: "ic_king")
   internal static let icMenu = ImageAsset(name: "ic_menu")
   internal static let icMore = ImageAsset(name: "ic_more")
+  internal static let icNotifications = ImageAsset(name: "ic_notifications")
   internal static let icPoint = ImageAsset(name: "ic_point")
   internal static let icPointAccumulated = ImageAsset(name: "ic_point_accumulated")
   internal static let icPointReload = ImageAsset(name: "ic_point_reload")
@@ -104,6 +105,7 @@ internal enum ImageAssets {
     icKing,
     icMenu,
     icMore,
+    icNotifications,
     icPoint,
     icPointAccumulated,
     icPointReload,

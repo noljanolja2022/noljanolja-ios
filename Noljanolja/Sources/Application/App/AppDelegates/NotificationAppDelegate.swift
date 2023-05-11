@@ -22,11 +22,6 @@ final class NotificationAppDelegate: NSObject, AppDelegateProtocol {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         // Register for remote notifications
         UNUserNotificationCenter.current().delegate = self
-        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(
-            options: authOptions,
-            completionHandler: { _, _ in }
-        )
         application.registerForRemoteNotifications()
 
         // Set the messaging delegate

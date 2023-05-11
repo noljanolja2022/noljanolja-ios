@@ -22,34 +22,22 @@ final class RootViewModel: ViewModel {
 
     // MARK: Action
 
-    private let requestNotificationPermissionAction = PassthroughSubject<Void, Never>()
-
     // MARK: Dependencies
 
-    private let notificationService: NotificationServiceType
     private weak var delegate: RootViewModelDelegate?
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(notificationService: NotificationServiceType = NotificationService.default,
-         delegate: RootViewModelDelegate? = nil) {
-        self.notificationService = notificationService
+    init(delegate: RootViewModelDelegate? = nil) {
         self.delegate = delegate
         super.init()
 
         configure()
     }
 
-    private func configure() {
-        requestNotificationPermissionAction
-            .first()
-            .sink(receiveValue: { [weak self] in
-                self?.notificationService.requestPermission()
-            })
-            .store(in: &cancellables)
-    }
+    private func configure() {}
 }
 
 // MARK: Delegate

@@ -49,9 +49,7 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
         }
         .fullScreenCover(
             unwrapping: $viewModel.fullScreenCoverType,
-            onDismiss: {
-                viewModel.isPresentingSubject.send(false)
-            },
+            onDismiss: {},
             content: {
                 buildFullScreenCoverDestinationView($0)
                     .onDisappear {
@@ -151,6 +149,13 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
                 )
                 navigationController.view.backgroundColor = .clear
                 navigationController.parent?.view.backgroundColor = .clear
+            }
+        case .notificationSetting:
+            NotificationSettingView(
+                viewModel: NotificationSettingViewModel()
+            )
+            .introspectViewController { viewController in
+                viewController.view.backgroundColor = .clear
             }
         }
     }

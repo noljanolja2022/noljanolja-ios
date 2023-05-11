@@ -59,6 +59,8 @@
 		CF18898229B347E500701583 /* UpdateCurrentUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF18898029B347E500701583 /* UpdateCurrentUserView.swift */; };
 		CF18898329B347E500701583 /* UpdateCurrentUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF18898129B347E500701583 /* UpdateCurrentUserViewModel.swift */; };
 		CF18898629B349AE00701583 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CF18898529B349AE00701583 /* Kingfisher */; };
+		CF1A9A0A2A0D362F0004CCD8 /* NotificationSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1A9A082A0D362F0004CCD8 /* NotificationSettingView.swift */; };
+		CF1A9A0B2A0D362F0004CCD8 /* NotificationSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1A9A092A0D362F0004CCD8 /* NotificationSettingViewModel.swift */; };
 		CF1B624829B9B55F00DE53E6 /* ConversationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1B624729B9B55F00DE53E6 /* ConversationAPI.swift */; };
 		CF1B624A29B9B8A100DE53E6 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1B624929B9B8A100DE53E6 /* Conversation.swift */; };
 		CF1B624C29B9B92B00DE53E6 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1B624B29B9B92B00DE53E6 /* Message.swift */; };
@@ -392,6 +394,8 @@
 		CF14F267298CF87E00BC2066 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		CF18898029B347E500701583 /* UpdateCurrentUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCurrentUserView.swift; sourceTree = "<group>"; };
 		CF18898129B347E500701583 /* UpdateCurrentUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCurrentUserViewModel.swift; sourceTree = "<group>"; };
+		CF1A9A082A0D362F0004CCD8 /* NotificationSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingView.swift; sourceTree = "<group>"; };
+		CF1A9A092A0D362F0004CCD8 /* NotificationSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingViewModel.swift; sourceTree = "<group>"; };
 		CF1B624729B9B55F00DE53E6 /* ConversationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationAPI.swift; sourceTree = "<group>"; };
 		CF1B624929B9B8A100DE53E6 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		CF1B624B29B9B92B00DE53E6 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -936,6 +940,15 @@
 				CFDC637129EC7A83002F4BFC /* ProfileNavigations.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		CF1A9A072A0D36140004CCD8 /* NotificationSetting */ = {
+			isa = PBXGroup;
+			children = (
+				CF1A9A082A0D362F0004CCD8 /* NotificationSettingView.swift */,
+				CF1A9A092A0D362F0004CCD8 /* NotificationSettingViewModel.swift */,
+			);
+			path = NotificationSetting;
 			sourceTree = "<group>";
 		};
 		CF1BD20129ACF5CC00778786 /* StatefullView */ = {
@@ -1603,6 +1616,7 @@
 		CFCFFA3529E5B9DA002B7FB6 /* Chats */ = {
 			isa = PBXGroup;
 			children = (
+				CF1A9A072A0D36140004CCD8 /* NotificationSetting */,
 				CFFF0F2A29F986F70029F466 /* ImageDetails */,
 				CF28567729BA407200593FA5 /* Chat */,
 				CF08A85C29B5A16A00D6CE5F /* ContactLists */,
@@ -2562,6 +2576,7 @@
 				CFECC13329B4D6D500E20B58 /* LaunchViewModel.swift in Sources */,
 				CFFC6C6929E992910024ADA3 /* LaunchRootNavigations.swift in Sources */,
 				CFD095172A02A87F004BF047 /* VideoSocketAPI.swift in Sources */,
+				CF1A9A0B2A0D362F0004CCD8 /* NotificationSettingViewModel.swift in Sources */,
 				CFFD70C6298AC5F800D4F5A2 /* AuthPluggin.swift in Sources */,
 				CFED122A29F2D7C6000B320B /* Result+Extension.swift in Sources */,
 				CFE0926B298FE73000F197F0 /* CloudFunctionAuthAPI.swift in Sources */,
@@ -2634,6 +2649,7 @@
 				CF14F266298CF4E700BC2066 /* AppConfigs.swift in Sources */,
 				CFD5424B29BF7A520053C5B1 /* MessageContentView.swift in Sources */,
 				CF0EA31529AA4D450014A7DE /* AuthVerificationViewModel.swift in Sources */,
+				CF1A9A0A2A0D362F0004CCD8 /* NotificationSettingView.swift in Sources */,
 				CF1BD1FD29ACEAA000778786 /* UserService.swift in Sources */,
 				CF08A86829B5E66F00D6CE5F /* ContactItemView.swift in Sources */,
 				CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */,
