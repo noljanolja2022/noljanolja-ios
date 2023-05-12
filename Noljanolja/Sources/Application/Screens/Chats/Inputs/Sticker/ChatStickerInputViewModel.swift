@@ -11,7 +11,10 @@ import Foundation
 
 // MARK: - ChatStickerInputViewModelDelegate
 
-protocol ChatStickerInputViewModelDelegate: AnyObject {}
+protocol ChatStickerInputViewModelDelegate: AnyObject {
+    func chatStickerInputViewModel(previewSticker stickerPack: StickerPack, sticker: Sticker)
+    func chatStickerInputViewModel(sendSticker stickerPack: StickerPack, sticker: Sticker)
+}
 
 // MARK: - ChatStickerInputViewModel
 
@@ -23,8 +26,10 @@ final class ChatStickerInputViewModel: ViewModel {
 
     // MARK: Action
 
-    let downloadDataSubject = PassthroughSubject<Void, Never>()
-    let reloadDataSubject = PassthroughSubject<Void, Never>()
+    let downloadDataAction = PassthroughSubject<Void, Never>()
+    let reloadDataAction = PassthroughSubject<Void, Never>()
+    let previewStickerAction = PassthroughSubject<(StickerPack, Sticker), Never>()
+    let sendStickerAction = PassthroughSubject<(StickerPack, Sticker), Never>()
 
     // MARK: Dependencies
 
@@ -47,14 +52,26 @@ final class ChatStickerInputViewModel: ViewModel {
     }
 
     private func configure() {
+        configureLoadData()
+        configureActions()
+    }
+
+    private func configureLoadData() {
         Publishers.Merge(
             isAppearSubject.first(where: { $0 }).mapToVoid(),
-            reloadDataSubject
+            reloadDataAction
         )
-        .sink(receiveValue: { [weak self] in self?.checkLocalStickerPack() })
+        .sink(receiveValue: { [weak self] in
+            guard let self else { return }
+            if self.mediaService.getLocalStickerPackURL(id: self.stickerPack.id) != nil {
+                self.viewState = .content
+            } else {
+                self.viewState = .error
+            }
+        })
         .store(in: &cancellables)
 
-        downloadDataSubject
+        downloadDataAction
             .handleEvents(receiveOutput: { [weak self] in self?.viewState = .loading })
             .flatMapLatestToResult { [weak self] in
                 guard let self else {
@@ -65,7 +82,7 @@ final class ChatStickerInputViewModel: ViewModel {
             .sink(receiveValue: { [weak self] result in
                 switch result {
                 case .success:
-                    self?.reloadDataSubject.send()
+                    self?.reloadDataAction.send()
                 case .failure:
                     self?.viewState = .error
                 }
@@ -73,11 +90,19 @@ final class ChatStickerInputViewModel: ViewModel {
             .store(in: &cancellables)
     }
 
-    private func checkLocalStickerPack() {
-        if mediaService.getLocalStickerPackURL(id: stickerPack.id) != nil {
-            viewState = .content
-        } else {
-            viewState = .error
-        }
+    private func configureActions() {
+        previewStickerAction
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] stickerPack, sticker in
+                self?.delegate?.chatStickerInputViewModel(previewSticker: stickerPack, sticker: sticker)
+            }
+            .store(in: &cancellables)
+
+        sendStickerAction
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] stickerPack, sticker in
+                self?.delegate?.chatStickerInputViewModel(sendSticker: stickerPack, sticker: sticker)
+            }
+            .store(in: &cancellables)
     }
 }

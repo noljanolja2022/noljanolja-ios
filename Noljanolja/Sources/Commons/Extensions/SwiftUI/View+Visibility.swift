@@ -31,7 +31,7 @@ struct _VisibilityModifier: ViewModifier {
         case .visible:
             content
         case .invisible:
-            content.opacity(0)
+            content.hidden()
         case .gone:
             EmptyView()
         }

@@ -16,7 +16,6 @@ struct ChatStickerPacksInputView<ViewModel: ChatStickerPacksInputViewModel>: Vie
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
-    var selectedAction: ((StickerPack, Sticker) -> Void)?
 
     // MARK: State
 
@@ -80,9 +79,9 @@ struct ChatStickerPacksInputView<ViewModel: ChatStickerPacksInputViewModel>: Vie
             ForEach(Array(viewModel.stickerPacks.enumerated()), id: \.offset) { offset, stickerPack in
                 ChatStickerInputView(
                     viewModel: ChatStickerInputViewModel(
-                        stickerPack: stickerPack
-                    ),
-                    selectedAction: selectedAction
+                        stickerPack: stickerPack,
+                        delegate: viewModel
+                    )
                 )
                 .tag(offset)
             }

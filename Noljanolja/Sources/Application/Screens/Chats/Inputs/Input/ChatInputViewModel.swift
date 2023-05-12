@@ -19,11 +19,17 @@ protocol ChatInputViewModelDelegate: AnyObject {}
 final class ChatInputViewModel: ViewModel {
     // MARK: State
 
+    @Published var previewSticker: (StickerPack, Sticker)?
+
     // MARK: Action
 
     var sendAction: PassthroughSubject<SendMessageType, Never> {
         privateSendAction
     }
+
+    let didReceiveTextViewAction = PassthroughSubject<Void, Never>()
+
+    let isTextFirstResponderAction = PassthroughSubject<Bool, Never>()
 
     // MARK: Dependencies
 
@@ -51,6 +57,18 @@ final class ChatInputViewModel: ViewModel {
 
     private func configure() {
         let conversationID = conversationID
+
+        Publishers.CombineLatest(
+            isAppearSubject.filter { $0 }.mapToVoid(),
+            didReceiveTextViewAction
+        )
+        .first()
+        .delay(for: 0.5, scheduler: DispatchQueue.main)
+        .receive(on: DispatchQueue.main)
+        .sink { [weak self] _ in
+            self?.isTextFirstResponderAction.send(true)
+        }
+        .store(in: &cancellables)
 
         sendAction
             .map { sendMessageType in
@@ -98,7 +116,15 @@ final class ChatInputViewModel: ViewModel {
 // MARK: ChatInputExpandViewModelDelegate
 
 extension ChatInputViewModel: ChatInputExpandViewModelDelegate {
-    func didSelectImages(_ images: [UIImage]) {
+    func chatInputExpandViewModel(sendImages images: [UIImage]) {
         sendAction.send(.images(images))
+    }
+
+    func chatInputExpandViewModel(previewSticker stickerPack: StickerPack, sticker: Sticker) {
+        previewSticker = (stickerPack, sticker)
+    }
+
+    func chatInputExpandViewModel(sendSticker stickerPack: StickerPack, sticker: Sticker) {
+        sendAction.send(.sticker(stickerPack, sticker))
     }
 }

@@ -6,7 +6,9 @@
 //
 
 import Foundation
+import UIKit
 
 enum ChatInputExpandMenuFullScreenCoverType: Equatable {
     case camera
+    case imagePreview(UIImage)
 }

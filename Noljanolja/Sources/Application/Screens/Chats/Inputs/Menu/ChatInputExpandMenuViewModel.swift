@@ -13,7 +13,7 @@ import UIKit
 // MARK: - ChatInputExpandMenuViewModelDelegate
 
 protocol ChatInputExpandMenuViewModelDelegate: AnyObject {
-    func didSelectImages(_ images: [UIImage])
+    func chatInputExpandMenuViewModel(sendImages images: [UIImage])
 }
 
 // MARK: - ChatInputExpandMenuViewModel
@@ -26,8 +26,6 @@ final class ChatInputExpandMenuViewModel: ViewModel {
     @Published var fullScreenCoverType: ChatInputExpandMenuFullScreenCoverType?
 
     // MARK: Action
-
-    let sendImagesAction = PassthroughSubject<[UIImage], Never>()
 
     // MARK: Dependencies
 
@@ -44,12 +42,13 @@ final class ChatInputExpandMenuViewModel: ViewModel {
         configure()
     }
 
-    private func configure() {
-        sendImagesAction
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] images in
-                self?.delegate?.didSelectImages(images)
-            }
-            .store(in: &cancellables)
+    private func configure() {}
+}
+
+// MARK: ChatInputImagePreviewViewModelDelegate
+
+extension ChatInputExpandMenuViewModel: ChatInputImagePreviewViewModelDelegate {
+    func chatInputImagePreviewViewModel(sendImage image: UIImage) {
+        delegate?.chatInputExpandMenuViewModel(sendImages: [image])
     }
 }

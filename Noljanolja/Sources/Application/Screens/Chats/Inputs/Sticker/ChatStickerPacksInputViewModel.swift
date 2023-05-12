@@ -11,7 +11,10 @@ import Foundation
 
 // MARK: - ChatStickerPacksInputViewModelDelegate
 
-protocol ChatStickerPacksInputViewModelDelegate: AnyObject {}
+protocol ChatStickerPacksInputViewModelDelegate: AnyObject {
+    func chatStickerPacksInputViewModel(previewSticker stickerPack: StickerPack, sticker: Sticker)
+    func chatStickerPacksInputViewModel(sendSticker stickerPack: StickerPack, sticker: Sticker)
+}
 
 // MARK: - ChatStickerPacksInputViewModel
 
@@ -63,5 +66,17 @@ final class ChatStickerPacksInputViewModel: ViewModel {
                 }
             }
             .store(in: &cancellables)
+    }
+}
+
+// MARK: ChatStickerInputViewModelDelegate
+
+extension ChatStickerPacksInputViewModel: ChatStickerInputViewModelDelegate {
+    func chatStickerInputViewModel(previewSticker stickerPack: StickerPack, sticker: Sticker) {
+        delegate?.chatStickerPacksInputViewModel(previewSticker: stickerPack, sticker: sticker)
+    }
+
+    func chatStickerInputViewModel(sendSticker stickerPack: StickerPack, sticker: Sticker) {
+        delegate?.chatStickerPacksInputViewModel(sendSticker: stickerPack, sticker: sticker)
     }
 }

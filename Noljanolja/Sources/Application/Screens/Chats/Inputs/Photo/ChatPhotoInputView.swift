@@ -14,11 +14,9 @@ struct ChatPhotoInputView<ViewModel: ChatPhotoInputViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
-    var sendAction: (([PhotoAsset]) -> Void)?
+    @Binding var photoAssets: [PhotoAsset]
 
     // MARK: State
-
-    @State private var photoAssets = [PhotoAsset]()
 
     var body: some View {
         buildBodyView()
@@ -39,30 +37,7 @@ struct ChatPhotoInputView<ViewModel: ChatPhotoInputViewModel>: View {
     }
 
     private func buildContentView() -> some View {
-        ZStack(alignment: .bottom) {
-            PhotoPickerView(selectAssets: $photoAssets)
-
-            if !photoAssets.isEmpty {
-                Button(
-                    action: {
-                        sendAction?(photoAssets)
-                        photoAssets = []
-                    },
-                    label: {
-                        Text("Send")
-                            .frame(maxWidth: .infinity)
-                    }
-                )
-                .font(.system(size: 16, weight: .bold))
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 16)
-                .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
-                .background(ColorAssets.primaryGreen200.swiftUIColor)
-                .cornerRadius(8)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 8)
-            }
-        }
+        PhotoPickerView(selectAssets: $photoAssets)
     }
 
     private func buildLoadingView() -> some View {
@@ -97,7 +72,7 @@ struct ChatPhotoInputView<ViewModel: ChatPhotoInputViewModel>: View {
 struct ChatPhotoInputView_Previews: PreviewProvider {
     static var previews: some View {
         ChatPhotoInputView(
-            viewModel: ChatPhotoInputViewModel()
+            viewModel: ChatPhotoInputViewModel(), photoAssets: .constant([])
         )
     }
 }

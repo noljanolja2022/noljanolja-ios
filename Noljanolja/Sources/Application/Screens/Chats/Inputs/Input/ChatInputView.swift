@@ -6,6 +6,7 @@
 //
 //
 
+import SDWebImageSwiftUI
 import SwiftUI
 import SwiftUIX
 
@@ -29,6 +30,9 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
     @StateObject private var keyboard = Keyboard.main
     @State private var text = ""
     @State private var expandType: ChatInputExpandType?
+    @State private var photoAssets = [PhotoAsset]()
+
+    // MARK: Private
 
     private let inputItemSize: CGFloat = 36
 
@@ -38,16 +42,68 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
 
     private func buildBodyView() -> some View {
         buildContentView()
+            .onAppear { viewModel.isAppearSubject.send(true) }
+            .onDisappear { viewModel.isAppearSubject.send(false) }
             .onChange(of: keyboard.isActive) { isActive in
                 guard isActive else { return }
                 setExpandType(nil, isAnimated: false)
+            }
+            .onReceive(viewModel.isTextFirstResponderAction) {
+                if $0 {
+                    uiViews.textView?.becomeFirstResponder()
+                } else {
+                    keyboard.dismiss()
+                }
             }
     }
 
     private func buildContentView() -> some View {
         VStack(spacing: 0) {
+            buildOverlayView()
             buildTopView()
             buildBottomView()
+        }
+    }
+
+    private func buildOverlayView() -> some View {
+        Spacer()
+            .frame(maxWidth: .infinity)
+            .frame(height: 0)
+            .overlay(alignment: .bottom) {
+                buildPreviewView()
+            }
+    }
+
+    @ViewBuilder
+    private func buildPreviewView() -> some View {
+        if let (stickerPack, sticker) = viewModel.previewSticker {
+            ZStack(alignment: .topTrailing) {
+                AnimatedImage(
+                    url: sticker.getImageURL(stickerPack.id),
+                    isAnimating: .constant(true)
+                )
+                .resizable()
+                .indicator(.activity)
+                .scaledToFit()
+                .frame(width: 100, height: 100)
+                .frame(maxWidth: .infinity)
+
+                Button(
+                    action: {
+                        viewModel.previewSticker = nil
+                    },
+                    label: {
+                        ImageAssets.icClose.swiftUIImage
+                            .resizable()
+                            .padding(4)
+                            .frame(width: 24, height: 24)
+                            .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
+                    }
+                )
+            }
+            .frame(maxWidth: .infinity)
+            .padding(16)
+            .background(ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.5))
         }
     }
 
@@ -59,6 +115,11 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
         .padding(.leading, 8)
         .padding(.trailing, 12)
         .padding(.vertical, 8)
+        .background(
+            expandType != nil
+                ? ColorAssets.neutralLightGrey.swiftUIColor
+                : ColorAssets.neutralLight.swiftUIColor
+        )
     }
 
     private func buildExpandView() -> some View {
@@ -70,10 +131,13 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
                     setExpandType(.menu)
                 case .menu, .sticker:
                     setExpandType(nil) {
-                        uiViews.textView?.becomeFirstResponder()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            viewModel.isTextFirstResponderAction.send(true)
+                        }
                     }
                 case .images:
                     setExpandType(.menu)
+                    photoAssets.removeAll()
                 }
             },
             label: {
@@ -86,7 +150,7 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
             }
         )
         .rotationEffect(
-            .radians(expandType == nil ? 0 : Double.pi / 4)
+            .radians(expandType != nil ? Double.pi / 4 : 0)
         )
     }
 
@@ -95,14 +159,21 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
             // Phải tách view, Không dùng được cornerRadius trực tiếp cho view
             // Vì không thể dùng func introspectTextView được
             Spacer()
+                .alignmentGuide(.leading, computeValue: { $0[.leading] })
                 .alignmentGuide(.top, computeValue: { $0[.top] })
+                .alignmentGuide(.trailing, computeValue: { $0[.trailing] })
                 .alignmentGuide(.bottom, computeValue: { $0[.bottom] })
                 .background(ColorAssets.neutralLightGrey.swiftUIColor)
                 .cornerRadius(18)
-            
+                .hidden(expandType != nil)
+
             HStack(alignment: .bottom, spacing: 0) {
-                buildTextInputView()
-                buildKeyboardAndStickerView()
+                HStack(alignment: .bottom, spacing: 0) {
+                    buildTextInputView()
+                    buildStickerView()
+                }
+                .hidden(expandType != nil)
+
                 buildSendView()
             }
         }
@@ -125,6 +196,7 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 .introspectTextView {
                     uiViews.textView = $0
+                    viewModel.didReceiveTextViewAction.send()
                 }
         }
         .font(.system(size: 14))
@@ -132,7 +204,7 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
     }
 
     @ViewBuilder
-    private func buildKeyboardAndStickerView() -> some View {
+    private func buildStickerView() -> some View {
         Button(
             action: {
                 keyboard.dismiss()
@@ -150,10 +222,33 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
     }
 
     private func buildSendView() -> some View {
-        Button(
+        let isHidden = {
+            switch expandType {
+            case .none: return text.isEmpty
+            case .menu: return true
+            case .images: return photoAssets.isEmpty
+            case .sticker: return viewModel.previewSticker == nil
+            }
+        }()
+        let isDisabled = text.isEmpty && photoAssets.isEmpty && viewModel.previewSticker == nil
+        return Button(
             action: {
-                viewModel.sendAction.send(.text(text))
-                text = ""
+                switch expandType {
+                case .none:
+                    guard !text.isEmpty else { return }
+                    viewModel.sendAction.send(.text(text))
+                    text = ""
+                case .menu:
+                    break
+                case .images:
+                    guard !photoAssets.isEmpty else { return }
+                    viewModel.sendAction.send(.photoAssets(photoAssets))
+                    photoAssets.removeAll()
+                case .sticker:
+                    guard let (stickerPack, sticker) = viewModel.previewSticker else { return }
+                    viewModel.sendAction.send(.sticker(stickerPack, sticker))
+                    viewModel.previewSticker = nil
+                }
             },
             label: {
                 ImageAssets.icSend.swiftUIImage
@@ -163,10 +258,12 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
             }
         )
         .foregroundColor(
-            text.isEmpty
+            isDisabled
                 ? ColorAssets.neutralDeepGrey.swiftUIColor
                 : ColorAssets.primaryGreen200.swiftUIColor
         )
+        .visible(isHidden ? .gone : .visible)
+        .disabled(isDisabled)
     }
 
     private func buildBottomView() -> some View {
@@ -175,12 +272,7 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
                 delegate: viewModel
             ),
             expandType: $expandType,
-            sendPhotoAction: {
-                viewModel.sendAction.send(.photoAssets($0))
-            },
-            sendStickerAction: {
-                viewModel.sendAction.send(.sticker($0, $1))
-            }
+            photoAssets: $photoAssets
         )
         .height(UIScreen.main.bounds.width * 0.6)
     }
@@ -191,15 +283,15 @@ extension ChatInputView {
                                isAnimated: Bool = true,
                                completion: (() -> Void)? = nil) {
         if isAnimated {
-            let milliseconds = keyboard.isActive ? 300 : 0
+            let milliseconds = keyboard.isActive ? 0.3 : 0
             withAnimation(
-                after: .milliseconds(milliseconds),
+                after: .microseconds(Int(milliseconds * 1_000)),
                 body: {
                     self.expandType = expandType
                 }
             )
             DispatchQueue.main.asyncAfter(
-                deadline: .now() + TimeInterval(milliseconds / 1_000) + 0.1
+                deadline: .now() + milliseconds
             ) {
                 completion?()
             }

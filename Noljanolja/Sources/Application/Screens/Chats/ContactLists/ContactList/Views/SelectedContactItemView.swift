@@ -32,6 +32,7 @@ struct SelectedContactItemView: View {
             .background(ColorAssets.neutralGrey.swiftUIColor)
             .cornerRadius(14)
             .padding(.trailing, 6)
+
             Button(
                 action: {
                     action?()

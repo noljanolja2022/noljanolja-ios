@@ -70,7 +70,7 @@ struct ChatView<ViewModel: ChatViewModel>: View {
     }
 
     private func buildMainView() -> some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 4) {
             buildContentView()
                 .statefull(
                     state: $viewModel.viewState,
