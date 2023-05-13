@@ -41,10 +41,12 @@ struct ContactItemView: View {
                 ImageAssets.icCheckboxCircleChecked.swiftUIImage
                     .resizable()
                     .frame(width: 24, height: 24)
+                    .foregroundColor(ColorAssets.primaryGreen200.swiftUIColor)
             case .some(false):
                 ImageAssets.icCheckboxCircleUnchecked.swiftUIImage
                     .resizable()
                     .frame(width: 24, height: 24)
+                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
             case .none:
                 EmptyView()
             }

@@ -1,5 +1,5 @@
 //
-//  ConversationTitleViewModel.swift
+//  ConversationAdjustmentModel.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 09/04/2023.
@@ -9,21 +9,30 @@
 import _SwiftUINavigationState
 import Combine
 import Foundation
+import UIKit
 
-// MARK: - ConversationTitleViewModelDelegate
+// MARK: - ConversationAdjustmentModelDelegate
 
-protocol ConversationTitleViewModelDelegate: AnyObject {
+protocol ConversationAdjustmentModelDelegate: AnyObject {
     func didUpdateTitle()
 }
 
-// MARK: - ConversationTitleViewModel
+// MARK: - ConversationAdjustmentModel
 
-final class ConversationTitleViewModel: ViewModel {
+final class ConversationAdjustmentModel: ViewModel {
     // MARK: State
 
+    @Published var image: UIImage?
+    @Published var avatar: String?
     @Published var title = ""
+
     @Published var isProgressHUDShowing = false
     @Published var alertState: AlertState<Void>?
+
+    // MARK: Navigation
+
+    @Published var actionSheetType: ConversationAdjustmentActionSheetType?
+    @Published var fullScreenCoverType: ConversationAdjustmentFullScreenCoverType?
 
     // MARK: Action
 
@@ -34,7 +43,7 @@ final class ConversationTitleViewModel: ViewModel {
 
     let conversation: Conversation
     private let conversationService: ConversationServiceType
-    private weak var delegate: ConversationTitleViewModelDelegate?
+    private weak var delegate: ConversationAdjustmentModelDelegate?
 
     // MARK: Private
 
@@ -42,7 +51,7 @@ final class ConversationTitleViewModel: ViewModel {
 
     init(conversation: Conversation,
          conversationService: ConversationServiceType = ConversationService.default,
-         delegate: ConversationTitleViewModelDelegate? = nil) {
+         delegate: ConversationAdjustmentModelDelegate? = nil) {
         self.conversation = conversation
         self.conversationService = conversationService
         self.delegate = delegate

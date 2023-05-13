@@ -39,7 +39,7 @@ struct ChatStickerPacksInputView<ViewModel: ChatStickerPacksInputViewModel>: Vie
     }
 
     private func buildHeader() -> some View {
-        HStack(spacing: 16) {
+        HStack(spacing: 4) {
             buildStickerList()
             buildStoreView()
         }

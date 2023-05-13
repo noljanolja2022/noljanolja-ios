@@ -30,6 +30,7 @@ struct ChatSettingParticipantItemView: View {
             .frame(width: 40, height: 40)
             .background(ColorAssets.neutralLightGrey.swiftUIColor)
             .cornerRadius(14)
+
             VStack(spacing: 0) {
                 if let displayName = model.displayName {
                     Text(displayName)
@@ -55,30 +56,5 @@ struct ChatSettingParticipantItemView: View {
                     .cornerRadius(13)
             }
         }
-    }
-}
-
-// MARK: - ChatSettingParticipantItemView_Previews
-
-struct ChatSettingParticipantItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        ChatSettingParticipantItemView(
-            model: ChatSettingParticipantModel(
-                user: User(
-                    id: "",
-                    name: "Test",
-                    avatar: nil,
-                    pushToken: nil,
-                    phone: nil,
-                    email: nil,
-                    isEmailVerified: false,
-                    dob: nil,
-                    gender: nil,
-                    preferences: nil,
-                    createdAt: Date(),
-                    updatedAt: Date()
-                )
-            )
-        )
     }
 }

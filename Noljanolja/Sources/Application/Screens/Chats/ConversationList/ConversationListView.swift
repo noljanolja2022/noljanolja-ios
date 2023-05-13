@@ -19,6 +19,8 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
 
     // MARK: State
 
+    @EnvironmentObject private var progressHUBState: ProgressHUBState
+
     var body: some View {
         buildBodyView()
     }
@@ -32,6 +34,9 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
         .clipped()
         .onAppear { viewModel.isAppearSubject.send(true) }
         .onDisappear { viewModel.isAppearSubject.send(false) }
+        .onChange(of: viewModel.isProgressHUDShowing) {
+            progressHUBState.isLoading = $0
+        }
         .onReceive(toolBarAction) {
             switch $0 {
             case .createConversation:
@@ -49,7 +54,9 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
         }
         .fullScreenCover(
             unwrapping: $viewModel.fullScreenCoverType,
-            onDismiss: {},
+            onDismiss: {
+                viewModel.isPresentingSubject.send(false)
+            },
             content: {
                 buildFullScreenCoverDestinationView($0)
                     .onDisappear {
@@ -105,7 +112,8 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
                 case let .chat(conversation):
                     ChatView(
                         viewModel: ChatViewModel(
-                            conversationID: conversation.id
+                            conversationID: conversation.id,
+                            delegate: viewModel
                         )
                     )
                 case let .contactList(conversationType):

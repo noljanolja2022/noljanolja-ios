@@ -67,7 +67,8 @@ struct ParticipantDetailActionView<ViewModel: ParticipantDetailActionViewModel>:
             }
             .padding(16)
 
-            ForEach(viewModel.participantModel.actionTypes, id: \.self) { action in
+            ForEach(viewModel.participantModel.actionTypes.indices, id: \.self) { index in
+                let action = viewModel.participantModel.actionTypes[index]
                 Button(
                     action: {
                         presentationMode.wrappedValue.dismiss()
@@ -94,32 +95,5 @@ struct ParticipantDetailActionView<ViewModel: ParticipantDetailActionViewModel>:
                 .edgesIgnoringSafeArea(.bottom)
         )
         .cornerRadius([.topLeading, .topTrailing], 24)
-    }
-}
-
-// MARK: - ParticipantDetailActionView_Previews
-
-struct ParticipantDetailActionView_Previews: PreviewProvider {
-    static var previews: some View {
-        ParticipantDetailActionView(
-            viewModel: ParticipantDetailActionViewModel(
-                participantModel: ChatSettingParticipantModel(
-                    user: User(
-                        id: "",
-                        name: "",
-                        avatar: nil,
-                        pushToken: nil,
-                        phone: nil,
-                        email: nil,
-                        isEmailVerified: false,
-                        dob: nil,
-                        gender: nil,
-                        preferences: nil,
-                        createdAt: Date(),
-                        updatedAt: Date()
-                    )
-                )
-            )
-        )
     }
 }

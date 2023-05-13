@@ -23,12 +23,18 @@ final class ConversationListViewModel: ViewModel {
     // MARK: State
 
     @Published var viewState = ViewState.content
+    @Published var isProgressHUDShowing = false
     @Published var conversations = [ConversationItemModel]()
     @Published var error: Error?
 
     // MARK: Navigations
 
-    @Published var navigationType: ConversationListNavigationType?
+    @Published var navigationType: ConversationListNavigationType? {
+        didSet {
+            print("Noja-Debug", navigationType)
+        }
+    }
+
     @Published var fullScreenCoverType: ConversationListFullScreenCoverType? {
         willSet {
             guard newValue != nil else { return }
@@ -41,6 +47,7 @@ final class ConversationListViewModel: ViewModel {
     // MARK: Action
 
     let openChatAction = PassthroughSubject<ConversationItemModel, Never>()
+    let openChatWithUserAction = PassthroughSubject<User, Never>()
     let navigationTypeAction = PassthroughSubject<ConversationListNavigationType?, Never>()
 
     // MARK: Dependencies
@@ -160,13 +167,8 @@ final class ConversationListViewModel: ViewModel {
 
         conversationSocketService
             .getConversationStream()
-            .sink(receiveValue: { result in
-                switch result {
-                case let .success(conversation):
-                    print("AAAAA", conversation)
-                case let .failure(error):
-                    print("AAAAA", error.localizedDescription)
-                }
+            .sink(receiveValue: { _ in
+
             })
             .store(in: &cancellables)
     }
@@ -178,6 +180,32 @@ final class ConversationListViewModel: ViewModel {
                 conversations.first(where: { $0.id == conversationItemModel.id })
             }
             .sink(receiveValue: { [weak self] in self?.navigationType = .chat($0) })
+            .store(in: &cancellables)
+
+        openChatWithUserAction
+            .withLatestFrom(conversationsSubject) { ($0, $1) }
+            .compactMap { user, conversations in
+                conversations
+                    .first(where: { conversation in
+                        switch conversation.type {
+                        case .single:
+                            return conversation.participants.contains(where: { $0.id == user.id })
+                        case .group, .unknown:
+                            return false
+                        }
+                    })
+            }
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] conversation in
+                guard let self else { return }
+                self.navigationType = nil
+                self.isProgressHUDShowing = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+                    guard let self else { return }
+                    self.isProgressHUDShowing = false
+                    self.navigationType = .chat(conversation)
+                }
+            })
             .store(in: &cancellables)
 
         navigationTypeAction
@@ -217,5 +245,13 @@ extension ConversationListViewModel: CreateConversationViewModelDelegate {
     func didSelectType(type: ConversationType) {
         fullScreenCoverType = nil
         navigationTypeAction.send(.contactList(type))
+    }
+}
+
+// MARK: ChatViewModelDelegate
+
+extension ConversationListViewModel: ChatViewModelDelegate {
+    func chatViewModel(openConversation user: User) {
+        openChatWithUserAction.send(user)
     }
 }

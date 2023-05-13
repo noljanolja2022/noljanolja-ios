@@ -22,22 +22,30 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum ImageAssets {
+  internal static let icAddPerson = ImageAsset(name: "ic_add_person")
+  internal static let icChatBlock = ImageAsset(name: "ic_chat_block")
   internal static let icChatCamera = ImageAsset(name: "ic_chat_camera")
   internal static let icChatContact = ImageAsset(name: "ic_chat_contact")
+  internal static let icChatDeleteHistory = ImageAsset(name: "ic_chat_delete_history")
+  internal static let icChatEditTitle = ImageAsset(name: "ic_chat_edit_title")
   internal static let icChatEmoji = ImageAsset(name: "ic_chat_emoji")
   internal static let icChatEvent = ImageAsset(name: "ic_chat_event")
   internal static let icChatFile = ImageAsset(name: "ic_chat_file")
   internal static let icChatGif = ImageAsset(name: "ic_chat_gif")
   internal static let icChatImage = ImageAsset(name: "ic_chat_image")
   internal static let icChatLocation = ImageAsset(name: "ic_chat_location")
+  internal static let icChatMedia = ImageAsset(name: "ic_chat_media")
   internal static let icChatNew = ImageAsset(name: "ic_chat_new")
   internal static let icChatNewGroup = ImageAsset(name: "ic_chat_new_group")
   internal static let icChatNewSingle = ImageAsset(name: "ic_chat_new_single")
+  internal static let icChatOffNotification = ImageAsset(name: "ic_chat_off_notification")
   internal static let icChatPlaceholderGroup = ImageAsset(name: "ic_chat_placeholder_group")
   internal static let icChatPlaceholderSingle = ImageAsset(name: "ic_chat_placeholder_single")
+  internal static let icChatSecret = ImageAsset(name: "ic_chat_secret")
   internal static let icChatSeen = ImageAsset(name: "ic_chat_seen")
   internal static let icChatStickerRecent = ImageAsset(name: "ic_chat_sticker_recent")
   internal static let icChatStickerStore = ImageAsset(name: "ic_chat_sticker_store")
+  internal static let icChatTheme = ImageAsset(name: "ic_chat_theme")
   internal static let icChatVoice = ImageAsset(name: "ic_chat_voice")
   internal static let icChatWallet = ImageAsset(name: "ic_chat_wallet")
   internal static let icSend = ImageAsset(name: "ic_send")
@@ -61,6 +69,7 @@ internal enum ImageAssets {
   internal static let icPoint = ImageAsset(name: "ic_point")
   internal static let icPointAccumulated = ImageAsset(name: "ic_point_accumulated")
   internal static let icPointReload = ImageAsset(name: "ic_point_reload")
+  internal static let icSearch = ImageAsset(name: "ic_search")
   internal static let icSetting = ImageAsset(name: "ic_setting")
   internal static let icShare = ImageAsset(name: "ic_share")
   internal static let logo = ImageAsset(name: "logo")
@@ -76,22 +85,30 @@ internal enum ImageAssets {
   // swiftlint:disable trailing_comma
   @available(*, deprecated, message: "All values properties are now deprecated")
   internal static let allImages: [ImageAsset] = [
+    icAddPerson,
+    icChatBlock,
     icChatCamera,
     icChatContact,
+    icChatDeleteHistory,
+    icChatEditTitle,
     icChatEmoji,
     icChatEvent,
     icChatFile,
     icChatGif,
     icChatImage,
     icChatLocation,
+    icChatMedia,
     icChatNew,
     icChatNewGroup,
     icChatNewSingle,
+    icChatOffNotification,
     icChatPlaceholderGroup,
     icChatPlaceholderSingle,
+    icChatSecret,
     icChatSeen,
     icChatStickerRecent,
     icChatStickerStore,
+    icChatTheme,
     icChatVoice,
     icChatWallet,
     icSend,
@@ -115,6 +132,7 @@ internal enum ImageAssets {
     icPoint,
     icPointAccumulated,
     icPointReload,
+    icSearch,
     icSetting,
     icShare,
     logo,

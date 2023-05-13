@@ -62,18 +62,49 @@ struct MainView<ViewModel: MainViewModel>: View {
         ToolbarItem(placement: .navigationBarTrailing) {
             switch viewModel.selectedTab {
             case .chat:
-                Button(
-                    action: {
-                        toolBarActionSubject.send(.createConversation)
-                    },
-                    label: {
-                        ImageAssets.icChatNew.swiftUIImage
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 24, height: 24)
-                            .padding(12)
-                    }
-                )
+                HStack(spacing: 4) {
+                    Button(
+                        action: {},
+                        label: {
+                            ImageAssets.icAddPerson.swiftUIImage
+                                .resizable()
+                                .scaledToFit()
+                                .padding(2)
+                        }
+                    )
+
+                    Button(
+                        action: {},
+                        label: {
+                            ImageAssets.icSearch.swiftUIImage
+                                .resizable()
+                                .scaledToFit()
+                                .padding(2)
+                        }
+                    )
+
+                    Button(
+                        action: {
+                            toolBarActionSubject.send(.createConversation)
+                        },
+                        label: {
+                            ImageAssets.icChatNew.swiftUIImage
+                                .resizable()
+                                .scaledToFit()
+                                .padding(4)
+                        }
+                    )
+
+                    Button(
+                        action: {},
+                        label: {
+                            ImageAssets.icSetting.swiftUIImage
+                                .resizable()
+                                .scaledToFit()
+                                .padding(4)
+                        }
+                    )
+                }
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             case .watch, .wallet, .shop, .news:
                 EmptyView()

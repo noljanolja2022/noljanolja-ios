@@ -47,12 +47,10 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                         label: {
                             ImageAssets.icMenu.swiftUIImage
                                 .padding(10)
-                                .frame(width: 44, height: 44)
                         }
                     )
                 } else {
                     Spacer()
-                        .frame(width: 44, height: 44)
                 }
             }
         }

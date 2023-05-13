@@ -13,17 +13,16 @@ import Foundation
 // MARK: - ChatSettingViewModelDelegate
 
 protocol ChatSettingViewModelDelegate: AnyObject {
-    func didLeaveGroupChat()
+    func chatSettingViewModel(openConversation user: User)
+    func chatSettingViewModelLeaveChat()
 }
 
 // MARK: - ChatSettingViewModel
 
 final class ChatSettingViewModel: ViewModel {
     // MARK: State
-    
-    @Published var isAddParticipantsEnabled = false
-    @Published var participantModels = [ChatSettingParticipantModel]()
-    @Published var settingItems = [ChatSettingItemModelType]()
+
+    @Published var contentModel: ChatSettingContentModel?
 
     @Published var isProgressHUDShowing = false
     @Published var alertState: AlertState<ChatSettingAlertActionType>? {
@@ -63,7 +62,7 @@ final class ChatSettingViewModel: ViewModel {
 
     // MARK: Private
 
-    private let currentUserSubject = CurrentValueSubject<User?, Never>(nil)
+    private let currentUserSubject = PassthroughSubject<User, Never>()
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -82,9 +81,9 @@ final class ChatSettingViewModel: ViewModel {
 
     private func configure() {
         configureBindData()
-        configureLoadData()
         configureActions()
         configurePresentation()
+        configureLoadData()
     }
 
     private func configureBindData() {
@@ -92,58 +91,17 @@ final class ChatSettingViewModel: ViewModel {
             conversationSubject.removeDuplicates(),
             currentUserSubject.removeDuplicates()
         )
-        .sink { [weak self] conversation, currentUser in
-            if conversation.admin.id == currentUser?.id {
-                self?.settingItems = [.updateTitle]
-            } else {
-                self?.settingItems = []
-            }
+        .map {
+            ChatSettingItemModelBuilder(conversation: $0, currentUser: $1).build()
+        }
+        .receive(on: DispatchQueue.main)
+        .sink { [weak self] in
+            self?.contentModel = $0
         }
         .store(in: &cancellables)
     }
 
     private func configureLoadData() {
-        Publishers.CombineLatest(
-            conversationSubject.removeDuplicates(),
-            currentUserSubject.compactMap { $0 }.removeDuplicates()
-        )
-        .sink { [weak self] (conversation: Conversation, currentUser: User) in
-            let adminAndCurrentParticipants = conversation.participants
-                .filter {
-                    $0.id == conversation.admin.id
-                        && $0.id == currentUser.id
-                }
-            let adminParticipants = conversation.participants
-                .filter {
-                    $0.id == conversation.admin.id
-                        && $0.id != currentUser.id
-                }
-            let currentParticipants = conversation.participants
-                .filter {
-                    $0.id != conversation.admin.id
-                        && $0.id == currentUser.id
-                }
-            let otherParticipants = conversation.participants
-                .filter {
-                    $0.id != conversation.admin.id
-                        && $0.id != currentUser.id
-                }
-                .sorted(currentUser: currentUser)
-
-            self?.isAddParticipantsEnabled = conversation.admin.id == currentUser.id
-            self?.participantModels = (adminAndCurrentParticipants + adminParticipants + currentParticipants + otherParticipants)
-                .map { user in
-                    ChatSettingParticipantModel(user: user, currentUser: currentUser, admin: conversation.admin)
-                }
-        }
-        .store(in: &cancellables)
-
-        userService.getCurrentUserPublisher()
-            .sink(receiveValue: { [weak self] in
-                self?.currentUserSubject.send($0)
-            })
-            .store(in: &cancellables)
-
         isAppearSubject
             .first(where: { $0 })
             .flatMapLatestToResult { [weak self] _ in
@@ -162,6 +120,12 @@ final class ChatSettingViewModel: ViewModel {
                     logger.error("Get conversation failed: \(error.localizedDescription)")
                 }
             }
+            .store(in: &cancellables)
+
+        userService.getCurrentUserPublisher()
+            .sink(receiveValue: { [weak self] in
+                self?.currentUserSubject.send($0)
+            })
             .store(in: &cancellables)
     }
 
@@ -223,7 +187,7 @@ final class ChatSettingViewModel: ViewModel {
         let (confirmLeaveAction, leaveAlertAction) = checkLeaveAction
             .withLatestFrom(Publishers.CombineLatest(conversationSubject, currentUserSubject))
             .partition { conversation, currentUser in
-                conversation.admin.id != currentUser?.id
+                conversation.admin.id != currentUser.id
             }
 
         confirmLeaveAction
@@ -262,7 +226,7 @@ final class ChatSettingViewModel: ViewModel {
                 case .success:
                     logger.info("Leave successful")
                     self.closeAction.send()
-                    self.delegate?.didLeaveGroupChat()
+                    self.delegate?.chatSettingViewModelLeaveChat()
                 case let .failure(error):
                     logger.error("Leave failed: \(error.localizedDescription)")
                     self.alertState = AlertState(
@@ -300,10 +264,12 @@ final class ChatSettingViewModel: ViewModel {
 extension ChatSettingViewModel: ParticipantDetailActionViewModelDelegate {
     func didSelectAction(user: User, action: ParticipantDetailActionType) {
         switch action {
-        case .chat:
-            break
+        case let .chat(user):
+            delegate?.chatSettingViewModel(openConversation: user)
         case .assignAdmin:
             assignAdminAction.send(user)
+        case .blockUser:
+            break
         case .removeParticipant:
             let alertState = AlertState<ChatSettingAlertActionType>(
                 title: TextState("Are you sure to remove this user?"),
