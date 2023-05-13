@@ -22,7 +22,7 @@ final class ChatItemModelBuilder {
     func build() -> [ChatItemModelType] {
         var messageItemTypes = [ChatItemModelType]()
 
-        for (index, message) in messages.enumerated() {
+        messages.enumerated().forEach { index, message in
             let beforceMessage = messages[safe: index + 1]
             let afterMessage = messages[safe: index - 1]
             let positionType = buildPositionType(beforceMessage: beforceMessage, message: message, afterMessage: afterMessage)

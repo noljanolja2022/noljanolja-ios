@@ -27,6 +27,7 @@ internal enum ImageAssets {
   internal static let icChatEmoji = ImageAsset(name: "ic_chat_emoji")
   internal static let icChatEvent = ImageAsset(name: "ic_chat_event")
   internal static let icChatFile = ImageAsset(name: "ic_chat_file")
+  internal static let icChatGif = ImageAsset(name: "ic_chat_gif")
   internal static let icChatImage = ImageAsset(name: "ic_chat_image")
   internal static let icChatLocation = ImageAsset(name: "ic_chat_location")
   internal static let icChatNew = ImageAsset(name: "ic_chat_new")
@@ -35,6 +36,8 @@ internal enum ImageAssets {
   internal static let icChatPlaceholderGroup = ImageAsset(name: "ic_chat_placeholder_group")
   internal static let icChatPlaceholderSingle = ImageAsset(name: "ic_chat_placeholder_single")
   internal static let icChatSeen = ImageAsset(name: "ic_chat_seen")
+  internal static let icChatStickerRecent = ImageAsset(name: "ic_chat_sticker_recent")
+  internal static let icChatStickerStore = ImageAsset(name: "ic_chat_sticker_store")
   internal static let icChatVoice = ImageAsset(name: "ic_chat_voice")
   internal static let icChatWallet = ImageAsset(name: "ic_chat_wallet")
   internal static let icSend = ImageAsset(name: "ic_send")
@@ -78,6 +81,7 @@ internal enum ImageAssets {
     icChatEmoji,
     icChatEvent,
     icChatFile,
+    icChatGif,
     icChatImage,
     icChatLocation,
     icChatNew,
@@ -86,6 +90,8 @@ internal enum ImageAssets {
     icChatPlaceholderGroup,
     icChatPlaceholderSingle,
     icChatSeen,
+    icChatStickerRecent,
+    icChatStickerStore,
     icChatVoice,
     icChatWallet,
     icSend,

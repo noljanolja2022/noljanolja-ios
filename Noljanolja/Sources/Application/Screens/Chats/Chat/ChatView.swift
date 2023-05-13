@@ -94,9 +94,9 @@ struct ChatView<ViewModel: ChatViewModel>: View {
     private func buildContentView() -> some View {
         ScrollView {
             LazyVStack(spacing: 0) {
-                ForEach(Array(viewModel.chatItems.enumerated()), id: \.offset) { index, chatItem in
+                ForEach(viewModel.chatItems.indices, id: \.self) { index in
                     ChatItemView(
-                        chatItem: chatItem,
+                        chatItem: viewModel.chatItems[index],
                         action: {
                             viewModel.chatItemAction.send($0)
                         }
