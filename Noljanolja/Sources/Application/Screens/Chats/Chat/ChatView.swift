@@ -69,7 +69,7 @@ struct ChatView<ViewModel: ChatViewModel>: View {
     }
 
     private func buildMainView() -> some View {
-        VStack(spacing: 4) {
+        VStack(spacing: 0) {
             buildContentView()
                 .statefull(
                     state: $viewModel.viewState,
@@ -101,34 +101,33 @@ struct ChatView<ViewModel: ChatViewModel>: View {
 
     @ViewBuilder
     private func buildQuickScrollDownView(_ scrollViewProxy: ScrollViewProxy) -> some View {
-        if scrollOffset > UIScreen.main.bounds.height / 2 {
-            Button(
-                action: {
-                    withAnimation(.easeInOut(duration: 0.3)) {
-                        scrollViewProxy.scrollTo("chat_item_0", anchor: .top)
-                    }
-                },
-                label: {
-                    ImageAssets.icArrowRight.swiftUIImage
-                        .resizable()
-                        .rotationEffect(.pi / 2)
-                        .padding(4)
-                        .frame(width: 20, height: 20)
-                        .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
-                        .background(ColorAssets.primaryGreen200.swiftUIColor)
-                        .cornerRadius(10)
-                        .padding(.vertical, 8)
-                        .padding(.leading, 8)
-                        .padding(.trailing, 20)
-                        .background(ColorAssets.neutralLight.swiftUIColor)
-                        .cornerRadius([.topLeading, .bottomLeading], 4)
-                        .overlayBorder(color: ColorAssets.primaryGreen200.swiftUIColor, cornerRadius: 4, lineWidth: 1)
-                        .padding(.trailing, -4)
-                        .shadow(color: .black.opacity(0.25), radius: 4)
+        Button(
+            action: {
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    scrollViewProxy.scrollTo("chat_item_0", anchor: .top)
                 }
-            )
-            .padding(.bottom, 32)
-        }
+            },
+            label: {
+                ImageAssets.icArrowRight.swiftUIImage
+                    .resizable()
+                    .rotationEffect(.pi / 2)
+                    .padding(4)
+                    .frame(width: 20, height: 20)
+                    .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
+                    .background(ColorAssets.primaryGreen200.swiftUIColor)
+                    .cornerRadius(10)
+                    .padding(.vertical, 8)
+                    .padding(.leading, 8)
+                    .padding(.trailing, 20)
+                    .background(ColorAssets.neutralLight.swiftUIColor)
+                    .cornerRadius([.topLeading, .bottomLeading], 4)
+                    .overlayBorder(color: ColorAssets.primaryGreen200.swiftUIColor, cornerRadius: 4, lineWidth: 1)
+                    .padding(.trailing, -4)
+                    .shadow(color: .black.opacity(0.25), radius: 4)
+            }
+        )
+        .padding(.bottom, 32)
+        .hidden(scrollOffset < UIScreen.main.bounds.height / 2)
     }
 
     private func buildChatView() -> some View {
@@ -146,6 +145,7 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                 }
                 .scaleEffect(x: 1, y: -1, anchor: .center)
             }
+            .padding(.top, 4)
         }
         .scaleEffect(x: 1, y: -1, anchor: .center)
     }
