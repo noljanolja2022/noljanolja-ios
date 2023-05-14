@@ -13,7 +13,9 @@ import UIKit
 // MARK: - ChatInputExpandViewModelDelegate
 
 protocol ChatInputExpandViewModelDelegate: AnyObject {
-    func didSelectImages(_ images: [UIImage])
+    func chatInputExpandViewModel(sendImages images: [UIImage])
+    func chatInputExpandViewModel(previewSticker stickerPack: StickerPack, sticker: Sticker)
+    func chatInputExpandViewModel(sendSticker stickerPack: StickerPack, sticker: Sticker)
 }
 
 // MARK: - ChatInputExpandViewModel
@@ -44,7 +46,19 @@ final class ChatInputExpandViewModel: ViewModel {
 // MARK: ChatInputExpandMenuViewModelDelegate
 
 extension ChatInputExpandViewModel: ChatInputExpandMenuViewModelDelegate {
-    func didSelectImages(_ images: [UIImage]) {
-        delegate?.didSelectImages(images)
+    func chatInputExpandMenuViewModel(sendImages images: [UIImage]) {
+        delegate?.chatInputExpandViewModel(sendImages: images)
+    }
+}
+
+// MARK: ChatStickerPacksInputViewModelDelegate
+
+extension ChatInputExpandViewModel: ChatStickerPacksInputViewModelDelegate {
+    func chatStickerPacksInputViewModel(previewSticker stickerPack: StickerPack, sticker: Sticker) {
+        delegate?.chatInputExpandViewModel(previewSticker: stickerPack, sticker: sticker)
+    }
+
+    func chatStickerPacksInputViewModel(sendSticker stickerPack: StickerPack, sticker: Sticker) {
+        delegate?.chatInputExpandViewModel(sendSticker: stickerPack, sticker: sticker)
     }
 }

@@ -73,23 +73,26 @@ struct CreateConversationView<ViewModel: CreateConversationViewModel>: View {
 
     @ViewBuilder
     private func buildMainView() -> some View {
-        HStack {
+        HStack(spacing: 12) {
             Button(
                 action: {
                     viewModel.conversationTypeAction.send(.single)
                 },
                 label: {
-                    VStack {
-                        ImageAssets.icSingleChat.swiftUIImage
+                    HStack(spacing: 12) {
+                        ImageAssets.icChatNewSingle.swiftUIImage
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 16, height: 24)
+                            .frame(width: 16, height: 21)
 
                         Text("Normal Chat")
                             .font(.system(size: 14))
                     }
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    .frame(height: 40)
                     .frame(maxWidth: .infinity)
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    .background(ColorAssets.primaryGreen100.swiftUIColor)
+                    .cornerRadius(10)
                 }
             )
             Button(
@@ -97,22 +100,25 @@ struct CreateConversationView<ViewModel: CreateConversationViewModel>: View {
                     viewModel.conversationTypeAction.send(.group)
                 },
                 label: {
-                    VStack {
-                        ImageAssets.icGroupChat.swiftUIImage
+                    HStack(spacing: 12) {
+                        ImageAssets.icChatNewGroup.swiftUIImage
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 20, height: 24)
+                            .frame(width: 21, height: 21)
 
                         Text("Group Chat")
                             .font(.system(size: 14))
                     }
-                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
+                    .frame(height: 40)
                     .frame(maxWidth: .infinity)
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    .background(ColorAssets.secondaryYellow300.swiftUIColor)
+                    .cornerRadius(10)
                 }
             )
         }
         .frame(maxWidth: .infinity)
-        .padding(24)
+        .padding(16)
         .background(ColorAssets.neutralLight.swiftUIColor)
     }
 }

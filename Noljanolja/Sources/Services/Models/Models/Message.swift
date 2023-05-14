@@ -26,6 +26,15 @@ enum MessageType: String, Codable {
             return false
         }
     }
+
+    var isSessionEnabled: Bool {
+        switch self {
+        case .plaintext, .photo, .sticker:
+            return true
+        case .eventUpdated, .eventJoined, .eventLeft, .unknown:
+            return false
+        }
+    }
 }
 
 // MARK: - Message

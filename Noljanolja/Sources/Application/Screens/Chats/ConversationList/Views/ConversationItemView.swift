@@ -26,19 +26,19 @@ struct ConversationItemView: View {
                 ]
             )
             .placeholder {
-                Image(systemName: model.imagePlaceholder)
+                Image(model.imagePlaceholder)
                     .resizable()
                     .scaledToFit()
-                    .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
-                    .padding(4)
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    .padding(12)
             }
             .resizable()
             .scaledToFill()
             .frame(width: 40, height: 40)
-            .background(ColorAssets.neutralLightGrey.swiftUIColor)
+            .background(ColorAssets.primaryGreen100.swiftUIColor)
             .cornerRadius(14)
 
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text(model.title ?? "")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .font(Font.system(size: 16, weight: .medium))
@@ -48,7 +48,7 @@ struct ConversationItemView: View {
                     Text(message)
                         .lineLimit(2)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .font(Font.system(size: 14, weight: .regular))
+                        .font(Font.system(size: 14))
                         .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
                 }
             }
@@ -60,9 +60,9 @@ struct ConversationItemView: View {
                     .font(Font.system(size: 12, weight: .regular))
                     .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
                 if !model.isSeen {
-                    Text("")
+                    Spacer()
                         .frame(width: 6, height: 6)
-                        .background(Color(hexadecimal: "BA1B1B"))
+                        .background(ColorAssets.systemRed100.swiftUIColor)
                         .cornerRadius(3)
                 }
             }

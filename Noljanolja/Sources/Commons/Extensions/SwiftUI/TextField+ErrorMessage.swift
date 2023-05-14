@@ -22,7 +22,7 @@ struct ErrorViewModifier: ViewModifier {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 24)
                     .multilineTextAlignment(.leading)
-                    .foregroundColor(ColorAssets.red.swiftUIColor)
+                    .foregroundColor(ColorAssets.systemRed100.swiftUIColor)
                     .font(.system(size: 14))
             }
         }

@@ -15,9 +15,7 @@ struct ChatInputExpandView<ViewModel: ChatInputExpandViewModel>: View {
 
     @StateObject var viewModel: ViewModel
     @Binding var expandType: ChatInputExpandType?
-    
-    var sendPhotoAction: (([PhotoAsset]) -> Void)?
-    var sendStickerAction: ((StickerPack, Sticker) -> Void)?
+    @Binding var photoAssets: [PhotoAsset]
 
     // MARK: State
 
@@ -32,13 +30,14 @@ struct ChatInputExpandView<ViewModel: ChatInputExpandViewModel>: View {
             )
         case .sticker:
             ChatStickerPacksInputView(
-                viewModel: ChatStickerPacksInputViewModel(),
-                selectedAction: sendStickerAction
+                viewModel: ChatStickerPacksInputViewModel(
+                    delegate: viewModel
+                )
             )
         case .images:
             ChatPhotoInputView(
                 viewModel: ChatPhotoInputViewModel(),
-                sendAction: { sendPhotoAction?($0) }
+                photoAssets: $photoAssets
             )
         case .none:
             EmptyView()
@@ -52,7 +51,8 @@ struct ChatInputExpandView_Previews: PreviewProvider {
     static var previews: some View {
         ChatInputExpandView(
             viewModel: ChatInputExpandViewModel(),
-            expandType: .constant(.sticker)
+            expandType: .constant(.sticker),
+            photoAssets: .constant([])
         )
     }
 }

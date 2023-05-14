@@ -12,7 +12,9 @@ import UIKit
 
 // MARK: - ChatViewModelDelegate
 
-protocol ChatViewModelDelegate: AnyObject {}
+protocol ChatViewModelDelegate: AnyObject {
+    func chatViewModel(openConversation user: User)
+}
 
 // MARK: - ChatViewModel
 
@@ -118,7 +120,7 @@ final class ChatViewModel: ViewModel {
                     .removeDuplicates()
             )
             .map { currentUser, conversation, messages in
-                MessageItemModelBuilder(
+                ChatItemModelBuilder(
                     currentUser: currentUser,
                     conversation: conversation,
                     messages: messages
@@ -134,10 +136,10 @@ final class ChatViewModel: ViewModel {
         conversationSubject
             .sink { [weak self] in
                 switch $0?.type {
-                case .single, .unknown, .none:
-                    self?.isChatSettingEnabled = false
-                case .group:
+                case .single, .group:
                     self?.isChatSettingEnabled = true
+                case .unknown, .none:
+                    self?.isChatSettingEnabled = false
                 }
             }
             .store(in: &cancellables)
@@ -280,7 +282,6 @@ final class ChatViewModel: ViewModel {
                 guard let self else { return }
                 switch result {
                 case let .success(conversation):
-                    print("BBBBB", conversation)
                     let lastMessage = conversation.messages.sorted { $0.createdAt > $1.createdAt }.first
                     switch lastMessage?.type {
                     case .eventLeft:
@@ -292,7 +293,7 @@ final class ChatViewModel: ViewModel {
                         break
                     }
                 case let .failure(error):
-                    print("BBBBB", error.localizedDescription)
+                    break
                 }
             })
             .store(in: &cancellables)
@@ -357,7 +358,11 @@ final class ChatViewModel: ViewModel {
 // MARK: ChatSettingViewModelDelegate
 
 extension ChatViewModel: ChatSettingViewModelDelegate {
-    func didLeaveGroupChat() {
+    func chatSettingViewModel(openConversation user: User) {
+        delegate?.chatViewModel(openConversation: user)
+    }
+
+    func chatSettingViewModelLeaveChat() {
         closeAction.send()
     }
 }

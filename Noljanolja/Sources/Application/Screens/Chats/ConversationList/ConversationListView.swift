@@ -19,6 +19,8 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
 
     // MARK: State
 
+    @EnvironmentObject private var progressHUBState: ProgressHUBState
+
     var body: some View {
         buildBodyView()
     }
@@ -32,6 +34,9 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
         .clipped()
         .onAppear { viewModel.isAppearSubject.send(true) }
         .onDisappear { viewModel.isAppearSubject.send(false) }
+        .onChange(of: viewModel.isProgressHUDShowing) {
+            progressHUBState.isLoading = $0
+        }
         .onReceive(toolBarAction) {
             switch $0 {
             case .createConversation:
@@ -107,7 +112,8 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
                 case let .chat(conversation):
                     ChatView(
                         viewModel: ChatViewModel(
-                            conversationID: conversation.id
+                            conversationID: conversation.id,
+                            delegate: viewModel
                         )
                     )
                 case let .contactList(conversationType):
@@ -146,11 +152,18 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
             .accentColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             .introspectNavigationController { navigationController in
                 navigationController.configure(
-                    backgroundColor: ColorAssets.white.color,
+                    backgroundColor: ColorAssets.neutralLight.color,
                     foregroundColor: ColorAssets.neutralDarkGrey.color
                 )
                 navigationController.view.backgroundColor = .clear
                 navigationController.parent?.view.backgroundColor = .clear
+            }
+        case .notificationSetting:
+            NotificationSettingView(
+                viewModel: NotificationSettingViewModel()
+            )
+            .introspectViewController { viewController in
+                viewController.view.backgroundColor = .clear
             }
         }
     }

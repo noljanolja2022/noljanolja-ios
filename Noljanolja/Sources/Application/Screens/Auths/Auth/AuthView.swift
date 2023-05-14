@@ -56,7 +56,7 @@ struct AuthView<ViewModel: AuthViewModel>: View {
             buildAuthView()
         }
         .background(
-            ColorAssets.primaryLight.swiftUIColor
+            ColorAssets.primaryGreen100.swiftUIColor
                 .ignoresSafeArea(edges: .top)
         )
     }

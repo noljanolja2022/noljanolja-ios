@@ -22,6 +22,58 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum ImageAssets {
+  internal static let icAddPerson = ImageAsset(name: "ic_add_person")
+  internal static let icChatBlock = ImageAsset(name: "ic_chat_block")
+  internal static let icChatCamera = ImageAsset(name: "ic_chat_camera")
+  internal static let icChatContact = ImageAsset(name: "ic_chat_contact")
+  internal static let icChatDeleteHistory = ImageAsset(name: "ic_chat_delete_history")
+  internal static let icChatEditTitle = ImageAsset(name: "ic_chat_edit_title")
+  internal static let icChatEmoji = ImageAsset(name: "ic_chat_emoji")
+  internal static let icChatEvent = ImageAsset(name: "ic_chat_event")
+  internal static let icChatFile = ImageAsset(name: "ic_chat_file")
+  internal static let icChatGif = ImageAsset(name: "ic_chat_gif")
+  internal static let icChatImage = ImageAsset(name: "ic_chat_image")
+  internal static let icChatLocation = ImageAsset(name: "ic_chat_location")
+  internal static let icChatMedia = ImageAsset(name: "ic_chat_media")
+  internal static let icChatNew = ImageAsset(name: "ic_chat_new")
+  internal static let icChatNewGroup = ImageAsset(name: "ic_chat_new_group")
+  internal static let icChatNewSingle = ImageAsset(name: "ic_chat_new_single")
+  internal static let icChatOffNotification = ImageAsset(name: "ic_chat_off_notification")
+  internal static let icChatPlaceholderGroup = ImageAsset(name: "ic_chat_placeholder_group")
+  internal static let icChatPlaceholderSingle = ImageAsset(name: "ic_chat_placeholder_single")
+  internal static let icChatSecret = ImageAsset(name: "ic_chat_secret")
+  internal static let icChatSeen = ImageAsset(name: "ic_chat_seen")
+  internal static let icChatStickerRecent = ImageAsset(name: "ic_chat_sticker_recent")
+  internal static let icChatStickerStore = ImageAsset(name: "ic_chat_sticker_store")
+  internal static let icChatTheme = ImageAsset(name: "ic_chat_theme")
+  internal static let icChatVoice = ImageAsset(name: "ic_chat_voice")
+  internal static let icChatWallet = ImageAsset(name: "ic_chat_wallet")
+  internal static let icSend = ImageAsset(name: "ic_send")
+  internal static let icCheckboxCircleChecked = ImageAsset(name: "ic_checkbox_circle_checked")
+  internal static let icCheckboxCircleUnchecked = ImageAsset(name: "ic_checkbox_circle_unchecked")
+  internal static let icCheckboxRoundedChecked = ImageAsset(name: "ic_checkbox_rounded_checked")
+  internal static let icCheckboxRoundedUnchecked = ImageAsset(name: "ic_checkbox_rounded_unchecked")
+  internal static let icAdd = ImageAsset(name: "ic_add")
+  internal static let icAppMascot = ImageAsset(name: "ic_app_mascot")
+  internal static let icArrowRight = ImageAsset(name: "ic_arrow_right")
+  internal static let icAvatarPlaceholder = ImageAsset(name: "ic_avatar_placeholder")
+  internal static let icBack = ImageAsset(name: "ic_back")
+  internal static let icCameraFill = ImageAsset(name: "ic_camera_fill")
+  internal static let icClose = ImageAsset(name: "ic_close")
+  internal static let icDownload = ImageAsset(name: "ic_download")
+  internal static let icEdit = ImageAsset(name: "ic_edit")
+  internal static let icKing = ImageAsset(name: "ic_king")
+  internal static let icMenu = ImageAsset(name: "ic_menu")
+  internal static let icMore = ImageAsset(name: "ic_more")
+  internal static let icNotifications = ImageAsset(name: "ic_notifications")
+  internal static let icPoint = ImageAsset(name: "ic_point")
+  internal static let icPointAccumulated = ImageAsset(name: "ic_point_accumulated")
+  internal static let icPointReload = ImageAsset(name: "ic_point_reload")
+  internal static let icSearch = ImageAsset(name: "ic_search")
+  internal static let icSetting = ImageAsset(name: "ic_setting")
+  internal static let icShare = ImageAsset(name: "ic_share")
+  internal static let logo = ImageAsset(name: "logo")
+  internal static let icPpyy = ImageAsset(name: "ic_ppyy")
   internal static let icSplashMultiCoin = ImageAsset(name: "ic_splash_multi_coin")
   internal static let icSplashSingleCoin = ImageAsset(name: "ic_splash_single_coin")
   internal static let icChat = ImageAsset(name: "ic_chat")
@@ -29,40 +81,62 @@ internal enum ImageAssets {
   internal static let icShop = ImageAsset(name: "ic_shop")
   internal static let icVideo = ImageAsset(name: "ic_video")
   internal static let icWallet = ImageAsset(name: "ic_wallet")
-  internal static let icAdd = ImageAsset(name: "ic_add")
-  internal static let icAddChat = ImageAsset(name: "ic_add_chat")
-  internal static let icAppMascot = ImageAsset(name: "ic_app_mascot")
-  internal static let icArrowRight = ImageAsset(name: "ic_arrow_right")
-  internal static let icAvatarPlaceholder = ImageAsset(name: "ic_avatar_placeholder")
-  internal static let icBack = ImageAsset(name: "ic_back")
-  internal static let icCameraFill = ImageAsset(name: "ic_camera_fill")
-  internal static let icCameraOutline = ImageAsset(name: "ic_camera_outline")
-  internal static let icCircleChecked = ImageAsset(name: "ic_circle_checked")
-  internal static let icCircleUnchecked = ImageAsset(name: "ic_circle_unchecked")
-  internal static let icClose = ImageAsset(name: "ic_close")
-  internal static let icDownload = ImageAsset(name: "ic_download")
-  internal static let icEdit = ImageAsset(name: "ic_edit")
-  internal static let icEmoji = ImageAsset(name: "ic_emoji")
-  internal static let icGroupChat = ImageAsset(name: "ic_group_chat")
-  internal static let icKeyboard = ImageAsset(name: "ic_keyboard")
-  internal static let icKing = ImageAsset(name: "ic_king")
-  internal static let icMenu = ImageAsset(name: "ic_menu")
-  internal static let icMore = ImageAsset(name: "ic_more")
-  internal static let icPhotoOutline = ImageAsset(name: "ic_photo_outline")
-  internal static let icPoint = ImageAsset(name: "ic_point")
-  internal static let icPointAccumulated = ImageAsset(name: "ic_point_accumulated")
-  internal static let icPointReload = ImageAsset(name: "ic_point_reload")
-  internal static let icPpyy = ImageAsset(name: "ic_ppyy")
-  internal static let icRoundedChecked = ImageAsset(name: "ic_rounded_checked")
-  internal static let icRoundedUnchecked = ImageAsset(name: "ic_rounded_unchecked")
-  internal static let icSend = ImageAsset(name: "ic_send")
-  internal static let icSetting = ImageAsset(name: "ic_setting")
-  internal static let icSingleChat = ImageAsset(name: "ic_single_chat")
-  internal static let logo = ImageAsset(name: "logo")
 
   // swiftlint:disable trailing_comma
   @available(*, deprecated, message: "All values properties are now deprecated")
   internal static let allImages: [ImageAsset] = [
+    icAddPerson,
+    icChatBlock,
+    icChatCamera,
+    icChatContact,
+    icChatDeleteHistory,
+    icChatEditTitle,
+    icChatEmoji,
+    icChatEvent,
+    icChatFile,
+    icChatGif,
+    icChatImage,
+    icChatLocation,
+    icChatMedia,
+    icChatNew,
+    icChatNewGroup,
+    icChatNewSingle,
+    icChatOffNotification,
+    icChatPlaceholderGroup,
+    icChatPlaceholderSingle,
+    icChatSecret,
+    icChatSeen,
+    icChatStickerRecent,
+    icChatStickerStore,
+    icChatTheme,
+    icChatVoice,
+    icChatWallet,
+    icSend,
+    icCheckboxCircleChecked,
+    icCheckboxCircleUnchecked,
+    icCheckboxRoundedChecked,
+    icCheckboxRoundedUnchecked,
+    icAdd,
+    icAppMascot,
+    icArrowRight,
+    icAvatarPlaceholder,
+    icBack,
+    icCameraFill,
+    icClose,
+    icDownload,
+    icEdit,
+    icKing,
+    icMenu,
+    icMore,
+    icNotifications,
+    icPoint,
+    icPointAccumulated,
+    icPointReload,
+    icSearch,
+    icSetting,
+    icShare,
+    logo,
+    icPpyy,
     icSplashMultiCoin,
     icSplashSingleCoin,
     icChat,
@@ -70,36 +144,6 @@ internal enum ImageAssets {
     icShop,
     icVideo,
     icWallet,
-    icAdd,
-    icAddChat,
-    icAppMascot,
-    icArrowRight,
-    icAvatarPlaceholder,
-    icBack,
-    icCameraFill,
-    icCameraOutline,
-    icCircleChecked,
-    icCircleUnchecked,
-    icClose,
-    icDownload,
-    icEdit,
-    icEmoji,
-    icGroupChat,
-    icKeyboard,
-    icKing,
-    icMenu,
-    icMore,
-    icPhotoOutline,
-    icPoint,
-    icPointAccumulated,
-    icPointReload,
-    icPpyy,
-    icRoundedChecked,
-    icRoundedUnchecked,
-    icSend,
-    icSetting,
-    icSingleChat,
-    logo,
   ]
   // swiftlint:enable trailing_comma
 }

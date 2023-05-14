@@ -62,18 +62,49 @@ struct MainView<ViewModel: MainViewModel>: View {
         ToolbarItem(placement: .navigationBarTrailing) {
             switch viewModel.selectedTab {
             case .chat:
-                Button(
-                    action: {
-                        toolBarActionSubject.send(.createConversation)
-                    },
-                    label: {
-                        ImageAssets.icAddChat.swiftUIImage
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 24, height: 24)
-                            .padding(12)
-                    }
-                )
+                HStack(spacing: 4) {
+                    Button(
+                        action: {},
+                        label: {
+                            ImageAssets.icAddPerson.swiftUIImage
+                                .resizable()
+                                .scaledToFit()
+                                .padding(2)
+                        }
+                    )
+
+                    Button(
+                        action: {},
+                        label: {
+                            ImageAssets.icSearch.swiftUIImage
+                                .resizable()
+                                .scaledToFit()
+                                .padding(2)
+                        }
+                    )
+
+                    Button(
+                        action: {
+                            toolBarActionSubject.send(.createConversation)
+                        },
+                        label: {
+                            ImageAssets.icChatNew.swiftUIImage
+                                .resizable()
+                                .scaledToFit()
+                                .padding(4)
+                        }
+                    )
+
+                    Button(
+                        action: {},
+                        label: {
+                            ImageAssets.icSetting.swiftUIImage
+                                .resizable()
+                                .scaledToFit()
+                                .padding(4)
+                        }
+                    )
+                }
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             case .watch, .wallet, .shop, .news:
                 EmptyView()
@@ -82,88 +113,110 @@ struct MainView<ViewModel: MainViewModel>: View {
     }
 
     private func buildContentView() -> some View {
-        TabView(selection: $viewModel.selectedTab) {
-            ConversationListView(
-                viewModel: ConversationListViewModel(),
-                toolBarAction: toolBarActionSubject.eraseToAnyPublisher()
+        CustomTabView(
+            selection: $viewModel.selectedTab,
+            content: buildTabView,
+            tabItem: buildTabItemView
+        )
+    }
+
+    @ViewBuilder
+    private func buildTabView() -> some View {
+        ConversationListView(
+            viewModel: ConversationListViewModel(
+                delegate: viewModel
+            ),
+            toolBarAction: toolBarActionSubject.eraseToAnyPublisher()
+        )
+        .tag(MainTabType.chat)
+
+        VideosView(
+            viewModel: VideosViewModel()
+        )
+        .tag(MainTabType.watch)
+
+        ProfileView(
+            viewModel: ProfileViewModel(
+                delegate: viewModel
             )
-            .tag(MainTabType.chat)
-            .tabItem {
-                Image(MainTabType.chat.imageName)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 32, height: 32)
+        )
+        .tag(MainTabType.wallet)
 
-                Text(MainTabType.chat.tabBarTitle)
-                    .font(.system(size: 10))
-            }
-
-            VideosView(
-                viewModel: VideosViewModel()
+        LottieView(
+            animation: LottieAnimation.named(
+                LottieAssets.underConstruction.name
             )
-            .tag(MainTabType.watch)
-            .tabItem {
-                Image(MainTabType.watch.imageName)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 32, height: 32)
+        )
+        .tag(MainTabType.shop)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .tag(MainTabType.shop)
 
-                Text(MainTabType.watch.tabBarTitle)
-                    .font(.system(size: 10))
-            }
-
-            ProfileView(
-                viewModel: ProfileViewModel(
-                    delegate: viewModel
-                )
+        LottieView(
+            animation: LottieAnimation.named(
+                LottieAssets.underConstruction.name
             )
-            .tag(MainTabType.wallet)
-            .tabItem {
-                Image(MainTabType.wallet.imageName)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 32, height: 32)
+        )
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .tag(MainTabType.news)
+    }
 
-                Text(MainTabType.wallet.tabBarTitle)
-                    .font(.system(size: 10))
-            }
+    @ViewBuilder
+    private func buildTabItemView() -> some View {
+        TabItemView(
+            imageName: MainTabType.chat.imageName,
+            title: MainTabType.chat.tabBarTitle,
+            hasNew: viewModel.tabNews[.chat] ?? false,
+            action: { viewModel.selectedTab = .chat }
+        )
+        .foregroundColor(
+            viewModel.selectedTab == MainTabType.chat
+                ? ColorAssets.primaryGreen200.swiftUIColor
+                : ColorAssets.neutralGrey.swiftUIColor
+        )
 
-            LottieView(
-                animation: LottieAnimation.named(
-                    LottieAssets.underConstruction.name
-                )
-            )
-            .tag(MainTabType.shop)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .tag(MainTabType.shop)
-            .tabItem {
-                Image(MainTabType.shop.imageName)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 32, height: 32)
+        TabItemView(
+            imageName: MainTabType.watch.imageName,
+            title: MainTabType.watch.tabBarTitle,
+            action: { viewModel.selectedTab = .watch }
+        )
+        .foregroundColor(
+            viewModel.selectedTab == MainTabType.watch
+                ? ColorAssets.primaryGreen200.swiftUIColor
+                : ColorAssets.neutralGrey.swiftUIColor
+        )
 
-                Text(MainTabType.shop.tabBarTitle)
-                    .font(.system(size: 10))
-            }
+        TabItemView(
+            imageName: MainTabType.wallet.imageName,
+            title: MainTabType.wallet.tabBarTitle,
+            action: { viewModel.selectedTab = .wallet }
+        )
+        .foregroundColor(
+            viewModel.selectedTab == MainTabType.wallet
+                ? ColorAssets.primaryGreen200.swiftUIColor
+                : ColorAssets.neutralGrey.swiftUIColor
+        )
 
-            LottieView(
-                animation: LottieAnimation.named(
-                    LottieAssets.underConstruction.name
-                )
-            )
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .tag(MainTabType.news)
-            .tabItem {
-                Image(MainTabType.news.imageName)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 32, height: 32)
+        TabItemView(
+            imageName: MainTabType.shop.imageName,
+            title: MainTabType.shop.tabBarTitle,
+            action: { viewModel.selectedTab = .shop }
+        )
+        .foregroundColor(
+            viewModel.selectedTab == MainTabType.shop
+                ? ColorAssets.primaryGreen200.swiftUIColor
+                : ColorAssets.neutralGrey.swiftUIColor
+        )
 
-                Text(MainTabType.news.tabBarTitle)
-                    .font(.system(size: 10))
-            }
-        }
-        .accentColor(ColorAssets.primaryMain.swiftUIColor)
+        TabItemView(
+            imageName: MainTabType.news.imageName,
+            title: MainTabType.news.tabBarTitle,
+            action: { viewModel.selectedTab = .news }
+        )
+        .foregroundColor(
+            viewModel.selectedTab == MainTabType.news
+                ? ColorAssets.primaryGreen200.swiftUIColor
+                : ColorAssets.neutralGrey.swiftUIColor
+        )
     }
 }
 
@@ -177,7 +230,7 @@ struct MainView_Previews: PreviewProvider {
         .navigationViewStyle(StackNavigationViewStyle())
         .introspectNavigationController { navigationController in
             navigationController.configure(
-                backgroundColor: ColorAssets.primaryMain.color,
+                backgroundColor: ColorAssets.primaryGreen200.color,
                 foregroundColor: ColorAssets.neutralDarkGrey.color
             )
         }

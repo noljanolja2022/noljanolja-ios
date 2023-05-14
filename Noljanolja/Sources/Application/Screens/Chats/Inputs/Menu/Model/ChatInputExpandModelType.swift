@@ -6,24 +6,41 @@
 //
 
 import Foundation
+import SwiftUI
 
 enum ChatInputExpandModelType: CaseIterable, Equatable {
     case image
     case camera
+    case events
+    case wallet
+    case location
+    case voice
+    case contact
+    case file
 
     var imageName: String {
         switch self {
-        case .image:
-            return ImageAssets.icPhotoOutline.name
-        case .camera:
-            return ImageAssets.icCameraOutline.name
+        case .image: return ImageAssets.icChatImage.name
+        case .camera: return ImageAssets.icChatCamera.name
+        case .events: return ImageAssets.icChatEvent.name
+        case .wallet: return ImageAssets.icChatWallet.name
+        case .location: return ImageAssets.icChatLocation.name
+        case .voice: return ImageAssets.icChatVoice.name
+        case .contact: return ImageAssets.icChatContact.name
+        case .file: return ImageAssets.icChatFile.name
         }
     }
 
-    var colorHexString: String {
+    var backgroundColor: String {
         switch self {
         case .image: return "86D558"
         case .camera: return "6892DE"
+        case .events: return "39C65A"
+        case .wallet: return "F8DF00"
+        case .location: return "52B49D"
+        case .voice: return "FB9E65"
+        case .contact: return "6595F5"
+        case .file: return "D47DE6"
         }
     }
 
@@ -31,6 +48,12 @@ enum ChatInputExpandModelType: CaseIterable, Equatable {
         switch self {
         case .image: return "Album"
         case .camera: return "Camera"
+        case .events: return "Events"
+        case .wallet: return "Wallet"
+        case .location: return "Location"
+        case .voice: return "VoiceChat"
+        case .contact: return "Contact"
+        case .file: return "Files"
         }
     }
 }

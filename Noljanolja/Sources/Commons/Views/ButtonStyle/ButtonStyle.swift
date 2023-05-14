@@ -64,7 +64,7 @@ struct PrimaryButtonStyle: CustomButtonStyle {
     let isEnabled: Bool
     let enabledForegroundColor: Color = ColorAssets.neutralDarkGrey.swiftUIColor
     let disabledForegroundColor: Color = ColorAssets.neutralDeepGrey.swiftUIColor
-    let enabledBackgroundColor: Color = ColorAssets.primaryMain.swiftUIColor
+    let enabledBackgroundColor: Color = ColorAssets.primaryGreen200.swiftUIColor
     let disabledBackgroundColor: Color = ColorAssets.neutralGrey.swiftUIColor
     let enabledBorderColor = Color.clear
     let disabledBorderColor = Color.clear
@@ -80,7 +80,7 @@ struct SecondaryButtonStyle: CustomButtonStyle {
     let isEnabled: Bool
     let enabledForegroundColor: Color = ColorAssets.neutralLight.swiftUIColor
     let disabledForegroundColor: Color = ColorAssets.neutralGrey.swiftUIColor
-    let enabledBackgroundColor: Color = ColorAssets.black.swiftUIColor
+    let enabledBackgroundColor: Color = ColorAssets.neutralDarkGrey.swiftUIColor
     let disabledBackgroundColor: Color = ColorAssets.neutralLightGrey.swiftUIColor
     let enabledBorderColor = Color.clear
     let disabledBorderColor = Color.clear
@@ -94,11 +94,11 @@ struct SecondaryButtonStyle: CustomButtonStyle {
 
 struct ThridyButtonStyle: CustomButtonStyle {
     let isEnabled: Bool
-    let enabledForegroundColor: Color = ColorAssets.black.swiftUIColor
+    let enabledForegroundColor: Color = ColorAssets.neutralDarkGrey.swiftUIColor
     let disabledForegroundColor: Color = ColorAssets.neutralGrey.swiftUIColor
     let enabledBackgroundColor: Color = ColorAssets.neutralLight.swiftUIColor
     let disabledBackgroundColor: Color = ColorAssets.neutralGrey.swiftUIColor
-    let enabledBorderColor: Color = ColorAssets.black.swiftUIColor
+    let enabledBorderColor: Color = ColorAssets.neutralDarkGrey.swiftUIColor
     let disabledBorderColor: Color = ColorAssets.neutralGrey.swiftUIColor
 
     init(isEnabled: Bool = true) {

@@ -36,7 +36,7 @@ struct ProfileView<ViewModel: ProfileViewModel>: View {
             buildMainView()
             buildLogOutView()
         }
-        .background(ColorAssets.primaryMain.swiftUIColor)
+        .background(ColorAssets.primaryGreen200.swiftUIColor)
     }
 
     private func buildHeader() -> some View {
@@ -149,7 +149,7 @@ struct ProfileView<ViewModel: ProfileViewModel>: View {
                                     .padding(.vertical, 12)
                                     .padding(.horizontal, 8)
                                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                                    .background(ColorAssets.primaryMain.swiftUIColor)
+                                    .background(ColorAssets.primaryGreen200.swiftUIColor)
                                     .cornerRadius(4)
                             }
                         )
@@ -183,7 +183,7 @@ struct ProfileView<ViewModel: ProfileViewModel>: View {
                                     .padding(.vertical, 12)
                                     .padding(.horizontal, 8)
                                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                                    .background(ColorAssets.primaryMain.swiftUIColor)
+                                    .background(ColorAssets.primaryGreen200.swiftUIColor)
                                     .cornerRadius(4)
                             }
                         )
@@ -214,7 +214,7 @@ struct ProfileView<ViewModel: ProfileViewModel>: View {
                     .font(.system(size: 16, weight: .bold))
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding(12)
-                    .foregroundColor(ColorAssets.primaryDark.swiftUIColor)
+                    .foregroundColor(ColorAssets.primaryGreen400.swiftUIColor)
                     .background(ColorAssets.neutralLight.swiftUIColor)
                     .cornerRadius(4)
             }

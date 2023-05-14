@@ -17,11 +17,13 @@ struct ChatSettingItemView: View {
             Image(itemModel.image)
                 .scaledToFit()
                 .frame(width: 24, height: 24)
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             Text(itemModel.title)
                 .font(.system(size: 13))
                 .frame(maxWidth: .infinity, alignment: .leading)
             ImageAssets.icArrowRight.swiftUIImage
-                .frame(width: 24, height: 24)
+                .frame(width: 20, height: 20)
+                .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
         }
         .background(ColorAssets.neutralLight.swiftUIColor)
     }
@@ -32,7 +34,7 @@ struct ChatSettingItemView: View {
 struct ChatSettingItemView_Previews: PreviewProvider {
     static var previews: some View {
         ChatSettingItemView(
-            itemModel: .updateTitle
+            itemModel: .adjustment
         )
     }
 }

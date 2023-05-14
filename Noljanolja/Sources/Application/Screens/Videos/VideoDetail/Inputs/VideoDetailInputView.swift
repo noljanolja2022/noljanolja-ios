@@ -100,7 +100,7 @@ struct VideoDetailInputView<ViewModel: VideoDetailInputViewModel>: View {
         .foregroundColor(
             text.isEmpty
                 ? ColorAssets.neutralDeepGrey.swiftUIColor
-                : ColorAssets.primaryMain.swiftUIColor
+                : ColorAssets.primaryGreen200.swiftUIColor
         )
     }
 }

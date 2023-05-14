@@ -42,7 +42,8 @@ struct ChatInputExpandMenuView<ViewModel: ChatInputExpandMenuViewModel>: View {
             unwrapping: $viewModel.fullScreenCoverType,
             onDismiss: {
                 guard let image else { return }
-                viewModel.sendImagesAction.send([image])
+                viewModel.fullScreenCoverType = .imagePreview(image)
+                self.image = nil
             },
             content: {
                 buildFullScreenCoverDestinationView($0)
@@ -58,6 +59,8 @@ struct ChatInputExpandMenuView<ViewModel: ChatInputExpandMenuViewModel>: View {
                     expandType = .images
                 case .camera:
                     viewModel.fullScreenCoverType = .camera
+                case .events, .wallet, .location, .voice, .contact, .file:
+                    break
                 }
             },
             label: {
@@ -68,7 +71,7 @@ struct ChatInputExpandMenuView<ViewModel: ChatInputExpandMenuViewModel>: View {
                         .padding(8)
                         .frame(width: 48, height: 48)
                         .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
-                        .background(Color(hexadecimal: model.colorHexString))
+                        .background(Color(hexadecimal: model.backgroundColor))
                         .cornerRadius(16)
                     Text(model.title)
                         .font(.system(size: 14))
@@ -92,8 +95,16 @@ struct ChatInputExpandMenuView<ViewModel: ChatInputExpandMenuViewModel>: View {
                         return .camera
                     #endif
                 }())
-                .allowsEditing(true)
+                .allowsEditing(false)
                 .introspectViewController { $0.view.backgroundColor = .black }
+        case let .imagePreview(image):
+            ChatInputImagePreviewView(
+                viewModel: ChatInputImagePreviewViewModel(
+                    image: image,
+                    delegate: viewModel
+                )
+            )
+            .introspectViewController { $0.view.backgroundColor = .black }
         }
     }
 }

@@ -110,12 +110,12 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
     }
 
     private func buildEmptyView() -> some View {
-        Text("")
+        Spacer()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     private func buildErrorView() -> some View {
-        Text("")
+        Spacer()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

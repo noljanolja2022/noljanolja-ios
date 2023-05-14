@@ -20,6 +20,7 @@ struct ChatView<ViewModel: ChatViewModel>: View {
     // MARK: State
 
     @Environment(\.presentationMode) private var presentationMode
+    @State var scrollOffset = CGFloat.zero
 
     var body: some View {
         buildBodyView()
@@ -47,12 +48,10 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                         label: {
                             ImageAssets.icMenu.swiftUIImage
                                 .padding(10)
-                                .frame(width: 44, height: 44)
                         }
                     )
                 } else {
                     Spacer()
-                        .frame(width: 44, height: 44)
                 }
             }
         }
@@ -92,19 +91,61 @@ struct ChatView<ViewModel: ChatViewModel>: View {
     }
 
     private func buildContentView() -> some View {
-        ScrollView {
+        ScrollViewReader { proxy in
+            ZStack(alignment: .bottomTrailing) {
+                buildChatView()
+                buildQuickScrollDownView(proxy)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func buildQuickScrollDownView(_ scrollViewProxy: ScrollViewProxy) -> some View {
+        Button(
+            action: {
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    scrollViewProxy.scrollTo("chat_item_0", anchor: .top)
+                }
+            },
+            label: {
+                ImageAssets.icArrowRight.swiftUIImage
+                    .resizable()
+                    .rotationEffect(.pi / 2)
+                    .padding(4)
+                    .frame(width: 20, height: 20)
+                    .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
+                    .background(ColorAssets.primaryGreen200.swiftUIColor)
+                    .cornerRadius(10)
+                    .padding(.vertical, 8)
+                    .padding(.leading, 8)
+                    .padding(.trailing, 20)
+                    .background(ColorAssets.neutralLight.swiftUIColor)
+                    .cornerRadius([.topLeading, .bottomLeading], 4)
+                    .overlayBorder(color: ColorAssets.primaryGreen200.swiftUIColor, cornerRadius: 4, lineWidth: 1)
+                    .padding(.trailing, -4)
+                    .shadow(color: .black.opacity(0.25), radius: 4)
+            }
+        )
+        .padding(.bottom, 32)
+        .hidden(scrollOffset < UIScreen.main.bounds.height / 2)
+    }
+
+    private func buildChatView() -> some View {
+        ChatScrollView(scrollOffset: $scrollOffset) {
             LazyVStack(spacing: 0) {
-                ForEach(Array(viewModel.chatItems.enumerated()), id: \.offset) { index, chatItem in
+                ForEach(viewModel.chatItems.indices, id: \.self) { index in
                     ChatItemView(
-                        chatItem: chatItem,
+                        chatItem: viewModel.chatItems[index],
                         action: {
                             viewModel.chatItemAction.send($0)
                         }
                     )
                     .onAppear { viewModel.loadMoreDataAction.send(index) }
+                    .id("chat_item_\(index)")
                 }
                 .scaleEffect(x: 1, y: -1, anchor: .center)
             }
+            .padding(.top, 4)
         }
         .scaleEffect(x: 1, y: -1, anchor: .center)
     }
@@ -114,12 +155,12 @@ struct ChatView<ViewModel: ChatViewModel>: View {
     }
 
     private func buildEmptyView() -> some View {
-        Text("")
+        Spacer()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     private func buildErrorView() -> some View {
-        Text("")
+        Spacer()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
@@ -166,7 +207,7 @@ struct ChatView<ViewModel: ChatViewModel>: View {
             .accentColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             .introspectNavigationController { navigationController in
                 navigationController.configure(
-                    backgroundColor: ColorAssets.white.color,
+                    backgroundColor: ColorAssets.neutralLight.color,
                     foregroundColor: ColorAssets.neutralDarkGrey.color
                 )
                 navigationController.view.backgroundColor = .clear

@@ -21,6 +21,7 @@ final class MainViewModel: ViewModel {
     // MARK: State
 
     @Published var selectedTab = MainTabType.chat
+    @Published var tabNews = [MainTabType: Bool]()
 
     // MARK: Action
 
@@ -40,6 +41,14 @@ final class MainViewModel: ViewModel {
     }
 
     private func configure() {}
+}
+
+// MARK: ConversationListViewModelDelegate
+
+extension MainViewModel: ConversationListViewModelDelegate {
+    func conversationListViewModel(hasUnseenConversations: Bool) {
+        tabNews[.chat] = hasUnseenConversations
+    }
 }
 
 // MARK: ProfileViewModelDelegate

@@ -39,7 +39,7 @@ struct HighlightVideoView: View {
                 currentPage: $selectedIndex
             )
             .pageIndicatorTintColor(ColorAssets.neutralGrey.swiftUIColor)
-            .currentPageIndicatorTintColor(ColorAssets.primaryMain.swiftUIColor)
+            .currentPageIndicatorTintColor(ColorAssets.primaryGreen200.swiftUIColor)
         }
     }
 }

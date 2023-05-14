@@ -24,16 +24,20 @@ struct ContactListView<ViewModel: ContactListViewModel>: View {
 
     @ViewBuilder
     private func buildBodyView() -> some View {
-        buildContentView()
-            .onAppear { viewModel.isAppearSubject.send(true) }
-            .onDisappear { viewModel.isAppearSubject.send(false) }
+        VStack(spacing: 0) {
+            SearchView(placeholder: "Search by name/Phone number", text: $viewModel.searchString)
+                .padding(.horizontal, 16)
+                .padding(.top, 12)
+                .padding(.bottom, 20)
+            buildContentView()
+        }
+        .onAppear { viewModel.isAppearSubject.send(true) }
+        .onDisappear { viewModel.isAppearSubject.send(false) }
     }
 
     @ViewBuilder
     private func buildContentView() -> some View {
         VStack(spacing: 16) {
-            SearchView(placeholder: "Search by name/Phone number", text: $viewModel.searchString)
-                .padding(.horizontal, 16)
             buildSelectedUsersView()
             buildListView()
         }
@@ -44,7 +48,6 @@ struct ContactListView<ViewModel: ContactListViewModel>: View {
             empty: buildEmptyView,
             error: buildErrorView
         )
-        .padding(.top, 12)
     }
 
     @ViewBuilder
@@ -71,23 +74,27 @@ struct ContactListView<ViewModel: ContactListViewModel>: View {
     @ViewBuilder
     private func buildListView() -> some View {
         ListView {
-            Text("Friends")
-                .font(Font.system(size: 16, weight: .bold))
-                .padding(.horizontal, 16)
-            ForEach(viewModel.users, id: \.id) { user in
-                ContactItemView(
-                    user: user,
-                    isSelected: {
-                        if viewModel.isMultiSelectionEnabled {
-                            return selectedUsers.contains(user)
-                        } else {
-                            return nil
-                        }
-                    }()
-                )
-                .onTapGesture {
-                    selectUser(user)
-                    selectUserAction?(user)
+            VStack(spacing: 0) {
+                Text("Friends in your directory")
+                    .font(Font.system(size: 16, weight: .semibold))
+                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
+                    .padding(.horizontal, 16)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                ForEach(viewModel.users, id: \.id) { user in
+                    ContactItemView(
+                        user: user,
+                        isSelected: {
+                            if viewModel.isMultiSelectionEnabled {
+                                return selectedUsers.contains(user)
+                            } else {
+                                return nil
+                            }
+                        }()
+                    )
+                    .onTapGesture {
+                        selectUser(user)
+                        selectUserAction?(user)
+                    }
                 }
             }
         }
@@ -133,7 +140,7 @@ struct ContactListView<ViewModel: ContactListViewModel>: View {
                     }
                 )
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                .background(ColorAssets.primaryMain.swiftUIColor)
+                .background(ColorAssets.primaryGreen200.swiftUIColor)
                 .cornerRadius(10)
             }
             .padding(16)

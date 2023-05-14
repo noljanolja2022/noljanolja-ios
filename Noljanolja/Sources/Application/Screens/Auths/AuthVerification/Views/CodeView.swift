@@ -21,11 +21,14 @@ struct CodeView: View {
 
     var body: some View {
         ZStack {
-            CocoaTextField(text: $text.max(maxLength), label: { Text("") })
-                .keyboardType(.numberPad)
-                .focused($isFocused)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(.red)
+            CocoaTextField(
+                text: $text.max(maxLength),
+                label: { Text("") }
+            )
+            .keyboardType(.numberPad)
+            .focused($isFocused)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(.red)
 
             HStack(spacing: 12) {
                 ForEach(0..<maxLength, id: \.self) { index in
@@ -53,7 +56,7 @@ struct CodeView: View {
         let digit = text[safe: index].flatMap { String($0) } ?? ""
         let color: Color = {
             guard text.count < maxLength else {
-                return ColorAssets.primaryMain.swiftUIColor
+                return ColorAssets.primaryGreen200.swiftUIColor
             }
             if index < text.count {
                 return ColorAssets.neutralDarkGrey.swiftUIColor
@@ -66,7 +69,7 @@ struct CodeView: View {
                 .font(.system(size: 28, weight: .medium))
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .foregroundColor(color)
-            Text("")
+            Spacer()
                 .frame(height: 2)
                 .frame(maxWidth: .infinity)
                 .background(color)

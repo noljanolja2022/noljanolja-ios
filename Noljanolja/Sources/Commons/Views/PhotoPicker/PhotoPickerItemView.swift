@@ -41,16 +41,25 @@ struct PhotoPickerItemView: View {
                         Text("\(selectedIndex.wrappedValue + 1)")
                             .font(.system(size: 12, weight: .medium))
                             .frame(width: 24, height: 24)
-                            .foregroundColor(.darkGray)
-                            .background(.white)
+                            .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
+                            .background(ColorAssets.primaryGreen100.swiftUIColor)
                             .cornerRadius(12)
+                            .overlayBorder(
+                                color: ColorAssets.primaryGreen100.swiftUIColor,
+                                cornerRadius: 12,
+                                lineWidth: 2
+                            )
                     },
                     else: {
-                        Text("")
+                        Spacer()
                             .frame(width: 24, height: 24)
+                            .overlayBorder(
+                                color: ColorAssets.neutralLightGrey.swiftUIColor,
+                                cornerRadius: 12,
+                                lineWidth: 2
+                            )
                     }
                 )
-                .overlayBorder(color: .white, cornerRadius: 12, lineWidth: 2)
                 .offset(x: -8, y: 8)
             }
             .onAppear {

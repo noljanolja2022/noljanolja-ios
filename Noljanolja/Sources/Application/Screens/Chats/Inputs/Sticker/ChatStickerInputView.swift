@@ -16,7 +16,6 @@ struct ChatStickerInputView<ViewModel: ChatStickerInputViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
-    var selectedAction: ((StickerPack, Sticker) -> Void)?
 
     // MARK: State
 
@@ -84,8 +83,11 @@ struct ChatStickerInputView<ViewModel: ChatStickerInputViewModel>: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
+        .onTapGesture(count: 2) {
+            viewModel.sendStickerAction.send((viewModel.stickerPack, sticker))
+        }
         .onTapGesture {
-            selectedAction?(viewModel.stickerPack, sticker)
+            viewModel.previewStickerAction.send((viewModel.stickerPack, sticker))
         }
         .gesture(
             LongPressGesture(minimumDuration: 0.5)
@@ -112,12 +114,12 @@ struct ChatStickerInputView<ViewModel: ChatStickerInputViewModel>: View {
     private func buildErrorView() -> some View {
         VStack(spacing: 16) {
             Button("Download") {
-                viewModel.downloadDataSubject.send()
+                viewModel.downloadDataAction.send()
             }
             .font(.system(size: 16, weight: .bold))
             .padding(.horizontal, 32)
             .padding(.vertical, 12)
-            .background(ColorAssets.primaryMain.swiftUIColor)
+            .background(ColorAssets.primaryGreen200.swiftUIColor)
             .cornerRadius(8)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -15,7 +15,7 @@ struct ContactItemView: View {
     var isSelected: Bool?
 
     var body: some View {
-        HStack {
+        HStack(spacing: 12) {
             WebImage(
                 url: URL(string: user.avatar),
                 context: [
@@ -38,13 +38,15 @@ struct ContactItemView: View {
 
             switch isSelected {
             case .some(true):
-                ImageAssets.icCircleChecked.swiftUIImage
+                ImageAssets.icCheckboxCircleChecked.swiftUIImage
                     .resizable()
                     .frame(width: 24, height: 24)
+                    .foregroundColor(ColorAssets.primaryGreen200.swiftUIColor)
             case .some(false):
-                ImageAssets.icCircleUnchecked.swiftUIImage
+                ImageAssets.icCheckboxCircleUnchecked.swiftUIImage
                     .resizable()
                     .frame(width: 24, height: 24)
+                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
             case .none:
                 EmptyView()
             }

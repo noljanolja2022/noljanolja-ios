@@ -29,50 +29,7 @@ struct ImageDetailView<ViewModel: ImageDetailViewModel>: View {
 
     private func buildBodyView() -> some View {
         buildContentView()
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(
-                        action: {
-                            presentationMode.wrappedValue.dismiss()
-                        },
-                        label: {
-                            Image(systemName: "xmark")
-                        }
-                    )
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    HStack(spacing: 8) {
-                        Button(
-                            action: {
-                                viewModel.downloadImageAction.send()
-                            },
-                            label: {
-                                ImageAssets.icDownload.swiftUIImage
-                            }
-                        )
-                        Button(
-                            action: {
-                                isMoreMenuVisible = !isMoreMenuVisible
-                            },
-                            label: {
-                                ImageAssets.icMore.swiftUIImage
-                            }
-                        )
-                        .editMenu(isVisible: $isMoreMenuVisible) {
-                            [
-                                EditMenuItem(
-                                    "Edit",
-                                    action: {
-                                        viewModel.editImageAction.send()
-                                    }
-                                )
-                            ]
-                        }
-                    }
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
-            }
+            .toolbar { buildToolBarContent() }
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .progressHUB(isActive: $progressHUBState.isLoading)
@@ -102,6 +59,52 @@ struct ImageDetailView<ViewModel: ImageDetailViewModel>: View {
         .padding(16)
     }
 
+    @ToolbarContentBuilder
+    private func buildToolBarContent() -> some ToolbarContent {
+        ToolbarItem(placement: .navigationBarLeading) {
+            Button(
+                action: {
+                    presentationMode.wrappedValue.dismiss()
+                },
+                label: {
+                    Image(systemName: "xmark")
+                }
+            )
+            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+        }
+        ToolbarItem(placement: .navigationBarTrailing) {
+            HStack(spacing: 8) {
+                Button(
+                    action: {
+                        viewModel.downloadImageAction.send()
+                    },
+                    label: {
+                        ImageAssets.icDownload.swiftUIImage
+                    }
+                )
+                Button(
+                    action: {
+                        isMoreMenuVisible = !isMoreMenuVisible
+                    },
+                    label: {
+                        ImageAssets.icMore.swiftUIImage
+                    }
+                )
+                .editMenu(isVisible: $isMoreMenuVisible) {
+                    [
+                        EditMenuItem(
+                            "Edit",
+                            action: {
+                                viewModel.editImageAction.send()
+                            }
+                        )
+                    ]
+                }
+            }
+            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+        }
+    }
+
     @ViewBuilder
     private func buildFullScreenCoverDestinationView(
         _ type: Binding<ImageDetailFullScreenCoverType>
@@ -127,7 +130,7 @@ struct ImageDetailView<ViewModel: ImageDetailViewModel>: View {
             .accentColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             .introspectNavigationController { navigationController in
                 navigationController.configure(
-                    backgroundColor: ColorAssets.white.color,
+                    backgroundColor: ColorAssets.neutralLight.color,
                     foregroundColor: ColorAssets.neutralDarkGrey.color
                 )
                 navigationController.view.backgroundColor = .clear
