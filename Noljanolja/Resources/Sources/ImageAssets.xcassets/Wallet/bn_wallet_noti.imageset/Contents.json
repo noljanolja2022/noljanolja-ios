@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ic_reload_point.png",
+      "filename" : "bn_wallet_noti.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ic_reload_point@2x.png",
+      "filename" : "bn_wallet_noti@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ic_reload_point@3x.png",
+      "filename" : "bn_wallet_noti@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

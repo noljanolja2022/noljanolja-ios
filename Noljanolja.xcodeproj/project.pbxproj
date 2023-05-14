@@ -87,9 +87,8 @@
 		CF28A1A029B4E9CF0003C204 /* AuthRootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF28A19E29B4E9CF0003C204 /* AuthRootViewModel.swift */; };
 		CF28A1A329B4FE410003C204 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF28A1A129B4FE410003C204 /* MainView.swift */; };
 		CF28A1A429B4FE410003C204 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF28A1A229B4FE410003C204 /* MainViewModel.swift */; };
-		CF28A1A729B4FFC50003C204 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF28A1A529B4FFC50003C204 /* ProfileView.swift */; };
-		CF28A1A829B4FFC50003C204 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF28A1A629B4FFC50003C204 /* ProfileViewModel.swift */; };
-		CF28A1AB29B500F60003C204 /* ProfileItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF28A1AA29B500F60003C204 /* ProfileItemView.swift */; };
+		CF28A1A729B4FFC50003C204 /* WalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF28A1A529B4FFC50003C204 /* WalletView.swift */; };
+		CF28A1A829B4FFC50003C204 /* WalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF28A1A629B4FFC50003C204 /* WalletViewModel.swift */; };
 		CF28A1AF29B5066A0003C204 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF28A1AD29B5066A0003C204 /* SettingView.swift */; };
 		CF28A1B029B5066A0003C204 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF28A1AE29B5066A0003C204 /* SettingViewModel.swift */; };
 		CF3282ED299E3758006A459B /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3282EC299E3758006A459B /* UIApplication+Extension.swift */; };
@@ -132,6 +131,17 @@
 		CF615C362A0FD4DB00CAF9C5 /* ChatSettingContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF615C352A0FD4DB00CAF9C5 /* ChatSettingContentModel.swift */; };
 		CF615C392A0FEB5B00CAF9C5 /* ConversationAdjustmentNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF615C382A0FEB5B00CAF9C5 /* ConversationAdjustmentNavigations.swift */; };
 		CF615C3C2A109A9300CAF9C5 /* ChatScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF615C3B2A109A9300CAF9C5 /* ChatScrollView.swift */; };
+		CF615C3E2A10AC5800CAF9C5 /* LoyaltyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF615C3D2A10AC5800CAF9C5 /* LoyaltyAPI.swift */; };
+		CF615C402A10ACC300CAF9C5 /* LoyaltyMemberInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF615C3F2A10ACC300CAF9C5 /* LoyaltyMemberInfo.swift */; };
+		CF615C422A10B7E900CAF9C5 /* WalletMemberTierView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF615C412A10B7E800CAF9C5 /* WalletMemberTierView.swift */; };
+		CF615C452A10BDFC00CAF9C5 /* LoyaltyTierModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF615C442A10BDFC00CAF9C5 /* LoyaltyTierModelType.swift */; };
+		CF615C472A11415F00CAF9C5 /* WalletMyPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF615C462A11415F00CAF9C5 /* WalletMyPointView.swift */; };
+		CF615C492A11436200CAF9C5 /* WalletModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF615C482A11436200CAF9C5 /* WalletModel.swift */; };
+		CF615C4B2A1144ED00CAF9C5 /* WalletUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF615C4A2A1144ED00CAF9C5 /* WalletUserInfoView.swift */; };
+		CF615C4D2A11452600CAF9C5 /* WalletUserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF615C4C2A11452600CAF9C5 /* WalletUserInfoModel.swift */; };
+		CF615C4F2A11481200CAF9C5 /* WalletPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF615C4E2A11481200CAF9C5 /* WalletPointView.swift */; };
+		CF615C512A11488400CAF9C5 /* WalletPointModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF615C502A11488400CAF9C5 /* WalletPointModel.swift */; };
+		CF615C532A1159FB00CAF9C5 /* WalletNotiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF615C522A1159FB00CAF9C5 /* WalletNotiView.swift */; };
 		CF62EF8B29B23E0000D6B688 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF62EF8A29B23E0000D6B688 /* ViewModelType.swift */; };
 		CF62EF8D29B254DD00D6B688 /* _SwiftUINavigationState in Frameworks */ = {isa = PBXBuildFile; productRef = CF62EF8C29B254DD00D6B688 /* _SwiftUINavigationState */; };
 		CF6ABC1F29935D7B00D78213 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC1D29935D7B00D78213 /* RootView.swift */; };
@@ -242,7 +252,7 @@
 		CFD83DD029974E4E00B9A6BB /* Navigation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD83DCF29974E4E00B9A6BB /* Navigation+Extension.swift */; };
 		CFDA463E29DC8CCB00E6A877 /* CountryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDA463D29DC8CCB00E6A877 /* CountryAPI.swift */; };
 		CFDBA9A629E9BD18000FA9B5 /* UpdateCurrentUserNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDBA9A529E9BD18000FA9B5 /* UpdateCurrentUserNavigations.swift */; };
-		CFDC637229EC7A83002F4BFC /* ProfileNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDC637129EC7A83002F4BFC /* ProfileNavigations.swift */; };
+		CFDC637229EC7A83002F4BFC /* WalletNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDC637129EC7A83002F4BFC /* WalletNavigations.swift */; };
 		CFDCA37929964501003C2C77 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDCA37829964501003C2C77 /* ButtonStyle.swift */; };
 		CFDCC33C29CCC2D000E8F18C /* PhotoMessageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDCC33B29CCC2D000E8F18C /* PhotoMessageContentView.swift */; };
 		CFDCC33E29CCC33700E8F18C /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDCC33D29CCC33700E8F18C /* Attachment.swift */; };
@@ -428,9 +438,8 @@
 		CF28A19E29B4E9CF0003C204 /* AuthRootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRootViewModel.swift; sourceTree = "<group>"; };
 		CF28A1A129B4FE410003C204 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		CF28A1A229B4FE410003C204 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
-		CF28A1A529B4FFC50003C204 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		CF28A1A629B4FFC50003C204 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
-		CF28A1AA29B500F60003C204 /* ProfileItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileItemView.swift; sourceTree = "<group>"; };
+		CF28A1A529B4FFC50003C204 /* WalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletView.swift; sourceTree = "<group>"; };
+		CF28A1A629B4FFC50003C204 /* WalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewModel.swift; sourceTree = "<group>"; };
 		CF28A1AD29B5066A0003C204 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		CF28A1AE29B5066A0003C204 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		CF3282EC299E3758006A459B /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
@@ -470,6 +479,17 @@
 		CF615C352A0FD4DB00CAF9C5 /* ChatSettingContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSettingContentModel.swift; sourceTree = "<group>"; };
 		CF615C382A0FEB5B00CAF9C5 /* ConversationAdjustmentNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationAdjustmentNavigations.swift; sourceTree = "<group>"; };
 		CF615C3B2A109A9300CAF9C5 /* ChatScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScrollView.swift; sourceTree = "<group>"; };
+		CF615C3D2A10AC5800CAF9C5 /* LoyaltyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoyaltyAPI.swift; sourceTree = "<group>"; };
+		CF615C3F2A10ACC300CAF9C5 /* LoyaltyMemberInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoyaltyMemberInfo.swift; sourceTree = "<group>"; };
+		CF615C412A10B7E800CAF9C5 /* WalletMemberTierView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletMemberTierView.swift; sourceTree = "<group>"; };
+		CF615C442A10BDFC00CAF9C5 /* LoyaltyTierModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoyaltyTierModelType.swift; sourceTree = "<group>"; };
+		CF615C462A11415F00CAF9C5 /* WalletMyPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletMyPointView.swift; sourceTree = "<group>"; };
+		CF615C482A11436200CAF9C5 /* WalletModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletModel.swift; sourceTree = "<group>"; };
+		CF615C4A2A1144ED00CAF9C5 /* WalletUserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletUserInfoView.swift; sourceTree = "<group>"; };
+		CF615C4C2A11452600CAF9C5 /* WalletUserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletUserInfoModel.swift; sourceTree = "<group>"; };
+		CF615C4E2A11481200CAF9C5 /* WalletPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletPointView.swift; sourceTree = "<group>"; };
+		CF615C502A11488400CAF9C5 /* WalletPointModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletPointModel.swift; sourceTree = "<group>"; };
+		CF615C522A1159FB00CAF9C5 /* WalletNotiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletNotiView.swift; sourceTree = "<group>"; };
 		CF62EF8A29B23E0000D6B688 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		CF6ABC1D29935D7B00D78213 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		CF6ABC1E29935D7B00D78213 /* RootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
@@ -575,7 +595,7 @@
 		CFD83DCF29974E4E00B9A6BB /* Navigation+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Navigation+Extension.swift"; sourceTree = "<group>"; };
 		CFDA463D29DC8CCB00E6A877 /* CountryAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryAPI.swift; sourceTree = "<group>"; };
 		CFDBA9A529E9BD18000FA9B5 /* UpdateCurrentUserNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCurrentUserNavigations.swift; sourceTree = "<group>"; };
-		CFDC637129EC7A83002F4BFC /* ProfileNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNavigations.swift; sourceTree = "<group>"; };
+		CFDC637129EC7A83002F4BFC /* WalletNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletNavigations.swift; sourceTree = "<group>"; };
 		CFDCA37829964501003C2C77 /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		CFDCC33B29CCC2D000E8F18C /* PhotoMessageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoMessageContentView.swift; sourceTree = "<group>"; };
 		CFDCC33D29CCC33700E8F18C /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
@@ -943,15 +963,16 @@
 			path = UpdateCurrentUser;
 			sourceTree = "<group>";
 		};
-		CF18897F29B3471E00701583 /* Profile */ = {
+		CF18897F29B3471E00701583 /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
-				CF28A1A929B500DF0003C204 /* ProfileItemView */,
-				CF28A1A529B4FFC50003C204 /* ProfileView.swift */,
-				CF28A1A629B4FFC50003C204 /* ProfileViewModel.swift */,
-				CFDC637129EC7A83002F4BFC /* ProfileNavigations.swift */,
+				CF615C432A10BDEF00CAF9C5 /* Model */,
+				CF28A1A929B500DF0003C204 /* Views */,
+				CF28A1A529B4FFC50003C204 /* WalletView.swift */,
+				CF28A1A629B4FFC50003C204 /* WalletViewModel.swift */,
+				CFDC637129EC7A83002F4BFC /* WalletNavigations.swift */,
 			);
-			path = Profile;
+			path = Wallet;
 			sourceTree = "<group>";
 		};
 		CF1A9A072A0D36140004CCD8 /* NotificationSetting */ = {
@@ -1089,12 +1110,16 @@
 			path = AuthRoot;
 			sourceTree = "<group>";
 		};
-		CF28A1A929B500DF0003C204 /* ProfileItemView */ = {
+		CF28A1A929B500DF0003C204 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CF28A1AA29B500F60003C204 /* ProfileItemView.swift */,
+				CF615C412A10B7E800CAF9C5 /* WalletMemberTierView.swift */,
+				CF615C462A11415F00CAF9C5 /* WalletMyPointView.swift */,
+				CF615C4A2A1144ED00CAF9C5 /* WalletUserInfoView.swift */,
+				CF615C4E2A11481200CAF9C5 /* WalletPointView.swift */,
+				CF615C522A1159FB00CAF9C5 /* WalletNotiView.swift */,
 			);
-			path = ProfileItemView;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		CF28A1AC29B506550003C204 /* Setting */ = {
@@ -1204,6 +1229,7 @@
 				CFB0A82829F1B95A00298546 /* VideoCategory.swift */,
 				CFB0A82C29F1BD3800298546 /* VideoTrendingDurationType.swift */,
 				CFD095262A02B643004BF047 /* VideoProgressEventType.swift */,
+				CF615C3F2A10ACC300CAF9C5 /* LoyaltyMemberInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1272,6 +1298,17 @@
 				CF615C3B2A109A9300CAF9C5 /* ChatScrollView.swift */,
 			);
 			path = ChatScrollView;
+			sourceTree = "<group>";
+		};
+		CF615C432A10BDEF00CAF9C5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CF615C442A10BDFC00CAF9C5 /* LoyaltyTierModelType.swift */,
+				CF615C482A11436200CAF9C5 /* WalletModel.swift */,
+				CF615C4C2A11452600CAF9C5 /* WalletUserInfoModel.swift */,
+				CF615C502A11488400CAF9C5 /* WalletPointModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		CF62EF8929B23DF200D6B688 /* ViewModel */ = {
@@ -2045,7 +2082,7 @@
 				CF1EEE3B29AE5107004F570A /* Auths */,
 				CF4DE2F229B3B762006E75E5 /* Launch */,
 				CFFC5B6329A7ACD8002B3381 /* Main */,
-				CF18897F29B3471E00701583 /* Profile */,
+				CF18897F29B3471E00701583 /* Wallet */,
 				CF6ABC1A29935D5800D78213 /* Root */,
 				CF28A1AC29B506550003C204 /* Setting */,
 				CF18897E29B3471300701583 /* UpdateCurrentUser */,
@@ -2122,6 +2159,7 @@
 				CF131EB229CF32C400054719 /* PhotoAssetAPI.swift */,
 				CFFD70D4298AC92500D4F5A2 /* UserAPI.swift */,
 				CFB0A82A29F1BB5800298546 /* VideoAPI.swift */,
+				CF615C3D2A10AC5800CAF9C5 /* LoyaltyAPI.swift */,
 			);
 			path = APIs;
 			sourceTree = "<group>";
@@ -2558,6 +2596,7 @@
 				CFECC12F29B4D6D500E20B58 /* LaunchBackgroundView.swift in Sources */,
 				CFB0A81329F1960100298546 /* ChatInputExpandMenuNavigations.swift in Sources */,
 				CF54FA2429D0187B0092E2C6 /* MediaStore.swift in Sources */,
+				CF615C492A11436200CAF9C5 /* WalletModel.swift in Sources */,
 				CF0EA30929AA088B0014A7DE /* View+Border.swift in Sources */,
 				CFAD27B529E300BF00947BC3 /* ConversationListNavigations.swift in Sources */,
 				CF8737F329CB6A700018237B /* ChatPhotoInputView.swift in Sources */,
@@ -2573,10 +2612,12 @@
 				CF8737E229CB539F0018237B /* ChatInputExpandView.swift in Sources */,
 				CFD095232A02AE49004BF047 /* VideoDetailPlayerViewModel.swift in Sources */,
 				CF775BBE29C625C900E82183 /* NotificationAppDelegate.swift in Sources */,
+				CF615C512A11488400CAF9C5 /* WalletPointModel.swift in Sources */,
 				CF1307FC29C8C96900EED044 /* TextEditor+Background.swift in Sources */,
 				CFAD27B329E3003000947BC3 /* ChatNavigations.swift in Sources */,
 				CFB0A82529F1B81400298546 /* VideoCommenter.swift in Sources */,
 				CFFF0F3029F987230029F466 /* ImageDetailViewModel.swift in Sources */,
+				CF615C472A11415F00CAF9C5 /* WalletMyPointView.swift in Sources */,
 				CF775BC429C62B3000E82183 /* FrameworkAppDelegate.swift in Sources */,
 				CF1EEE3729AE3FA8004F570A /* TermItemView.swift in Sources */,
 				CF4A6F0629E41FFA00CB75E5 /* MainToolBarActionType.swift in Sources */,
@@ -2590,8 +2631,10 @@
 				CFFD70C9298AC5F800D4F5A2 /* TargetType+RawTarget.swift in Sources */,
 				CF615C392A0FEB5B00CAF9C5 /* ConversationAdjustmentNavigations.swift in Sources */,
 				CFED124A29F323CD000B320B /* VideoDetailCommentsView.swift in Sources */,
+				CF615C532A1159FB00CAF9C5 /* WalletNotiView.swift in Sources */,
 				CFD0952A2A02B99C004BF047 /* VideoState+Event.swift in Sources */,
 				CF28A1AF29B5066A0003C204 /* SettingView.swift in Sources */,
+				CF615C422A10B7E900CAF9C5 /* WalletMemberTierView.swift in Sources */,
 				CFFDAA1329E45C9D002FDD91 /* EventMessageModel.swift in Sources */,
 				CF0CCA0129D156380027D2C1 /* StickerMessageContentModel.swift in Sources */,
 				CFB0A81F29F1B5D100298546 /* VideosViewModel.swift in Sources */,
@@ -2667,11 +2710,13 @@
 				CFED123029F2E698000B320B /* WatchingVideoView.swift in Sources */,
 				CFE09254298DF69600F197F0 /* NaverAuthAPI.swift in Sources */,
 				CFBC275D29E27896008E0F92 /* ParticipantDetailActionView.swift in Sources */,
+				CF615C4B2A1144ED00CAF9C5 /* WalletUserInfoView.swift in Sources */,
 				CF8737E329CB539F0018237B /* ChatInputExpandViewModel.swift in Sources */,
 				CFC4EFD129FAC7E400DBD831 /* ImageEditorView.swift in Sources */,
 				CFFB05A229BF739D000D65EE /* Date+RelativeString.swift in Sources */,
 				CF28A19A29B4D8D70003C204 /* LaunchRootView.swift in Sources */,
 				CFDCC34229CCC55F00E8F18C /* PhotoMessageContentModel.swift in Sources */,
+				CF615C4F2A11481200CAF9C5 /* WalletPointView.swift in Sources */,
 				CF28A19B29B4D8D70003C204 /* LaunchRootViewModel.swift in Sources */,
 				CF8737EE29CB5F730018237B /* PhotoPickerItemView.swift in Sources */,
 				CFB2F6D029E1C9F400191AA3 /* ContactListViewModel.swift in Sources */,
@@ -2710,7 +2755,7 @@
 				CFBCE41829B98A65000D6F73 /* CommonError.swift in Sources */,
 				CF00D1692994E0A700505702 /* TextField+ErrorMessage.swift in Sources */,
 				CF775BC829C62EB200E82183 /* NotificationAPI.swift in Sources */,
-				CF28A1A729B4FFC50003C204 /* ProfileView.swift in Sources */,
+				CF28A1A729B4FFC50003C204 /* WalletView.swift in Sources */,
 				CF615C3C2A109A9300CAF9C5 /* ChatScrollView.swift in Sources */,
 				CFED123E29F31D05000B320B /* VideoDetailView.swift in Sources */,
 				CFC4B17129F0471800F577CC /* ChatItemActionType.swift in Sources */,
@@ -2740,7 +2785,6 @@
 				CFB2F6DA29E1CD0B00191AA3 /* UpdateConversationContactListUseCase.swift in Sources */,
 				CF6ABC1F29935D7B00D78213 /* RootView.swift in Sources */,
 				CF1B624C29B9B92B00DE53E6 /* Message.swift in Sources */,
-				CF28A1AB29B500F60003C204 /* ProfileItemView.swift in Sources */,
 				CF59758C29FBA3E10068EC88 /* AnyImageEditorView.swift in Sources */,
 				CFA5BD2C29EEFB9000251176 /* DataDetectorTextView.swift in Sources */,
 				CFE0933E298FFC5B00F197F0 /* AuthError.swift in Sources */,
@@ -2752,16 +2796,19 @@
 				CFE09265298EB92D00F197F0 /* AppleAuthAPI.swift in Sources */,
 				CF0EA31A29AA56E90014A7DE /* Binding+LimitString.swift in Sources */,
 				CF18898329B347E500701583 /* UpdateCurrentUserViewModel.swift in Sources */,
+				CF615C3E2A10AC5800CAF9C5 /* LoyaltyAPI.swift in Sources */,
 				CF52AB6129B8D6BE00C9C90C /* User.swift in Sources */,
 				CFCFFA3729E5C82A002B7FB6 /* ConversationSocketService.swift in Sources */,
 				CFFD70C4298AC5F800D4F5A2 /* NetworkLoggerPluggin.swift in Sources */,
 				CFA3304929BE3AB9008D7449 /* String+Date.swift in Sources */,
-				CFDC637229EC7A83002F4BFC /* ProfileNavigations.swift in Sources */,
-				CF28A1A829B4FFC50003C204 /* ProfileViewModel.swift in Sources */,
+				CFDC637229EC7A83002F4BFC /* WalletNavigations.swift in Sources */,
+				CF615C402A10ACC300CAF9C5 /* LoyaltyMemberInfo.swift in Sources */,
+				CF28A1A829B4FFC50003C204 /* WalletViewModel.swift in Sources */,
 				CF62EF8B29B23E0000D6B688 /* ViewModelType.swift in Sources */,
 				CFE0925D298DFDCB00F197F0 /* KakaoAuthAPI.swift in Sources */,
 				CF74A1A529B5831800419342 /* ConversationItemView.swift in Sources */,
 				CFFD70CA298AC5F800D4F5A2 /* TargetType+Default.swift in Sources */,
+				CF615C4D2A11452600CAF9C5 /* WalletUserInfoModel.swift in Sources */,
 				CF59759129FBAF630068EC88 /* ImageEditorResultViewModel.swift in Sources */,
 				CFFF0F2F29F987230029F466 /* ImageDetailView.swift in Sources */,
 				CF52AB7029B8DE4000C9C90C /* ContactStore.swift in Sources */,
@@ -2775,6 +2822,7 @@
 				CF52AB6829B8D93D00C9C90C /* StorableUser.swift in Sources */,
 				CFDCC34029CCC3F400E8F18C /* StorableAttachment.swift in Sources */,
 				CFED122829F2D0D5000B320B /* VideosModel.swift in Sources */,
+				CF615C452A10BDFC00CAF9C5 /* LoyaltyTierModelType.swift in Sources */,
 				CFED123629F2EB80000B320B /* TrendingVideoItemView.swift in Sources */,
 				CF615C342A0FD04C00CAF9C5 /* ChatSettingItemModelBuilder.swift in Sources */,
 				CFDCC33C29CCC2D000E8F18C /* PhotoMessageContentView.swift in Sources */,

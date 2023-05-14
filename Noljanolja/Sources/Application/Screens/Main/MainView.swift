@@ -98,7 +98,7 @@ struct MainView<ViewModel: MainViewModel>: View {
                     Button(
                         action: {},
                         label: {
-                            ImageAssets.icSetting.swiftUIImage
+                            ImageAssets.icSettingOutline.swiftUIImage
                                 .resizable()
                                 .scaledToFit()
                                 .padding(4)
@@ -135,8 +135,8 @@ struct MainView<ViewModel: MainViewModel>: View {
         )
         .tag(MainTabType.watch)
 
-        ProfileView(
-            viewModel: ProfileViewModel(
+        WalletView(
+            viewModel: WalletViewModel(
                 delegate: viewModel
             )
         )

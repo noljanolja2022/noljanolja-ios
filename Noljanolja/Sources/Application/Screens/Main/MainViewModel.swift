@@ -51,9 +51,9 @@ extension MainViewModel: ConversationListViewModelDelegate {
     }
 }
 
-// MARK: ProfileViewModelDelegate
+// MARK: WalletViewModelDelegate
 
-extension MainViewModel: ProfileViewModelDelegate {
+extension MainViewModel: WalletViewModelDelegate {
     func didSignOut() {
         delegate?.didSignOut()
     }

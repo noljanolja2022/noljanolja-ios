@@ -36,7 +36,7 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
     private func buildMainView() -> some View {
         VStack(spacing: 0) {
             buildPlayerView()
-            buildContentView()
+            buildScrollView()
             buildInputView()
         }
         .statefull(
@@ -60,7 +60,7 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
     }
 
     @ViewBuilder
-    private func buildContentView() -> some View {
+    private func buildScrollView() -> some View {
         let topViewId = "top_view"
         ScrollViewReader { scrollView in
             ScrollView {

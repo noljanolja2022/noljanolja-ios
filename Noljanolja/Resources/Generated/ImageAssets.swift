@@ -67,10 +67,9 @@ internal enum ImageAssets {
   internal static let icMore = ImageAsset(name: "ic_more")
   internal static let icNotifications = ImageAsset(name: "ic_notifications")
   internal static let icPoint = ImageAsset(name: "ic_point")
-  internal static let icPointAccumulated = ImageAsset(name: "ic_point_accumulated")
-  internal static let icPointReload = ImageAsset(name: "ic_point_reload")
   internal static let icSearch = ImageAsset(name: "ic_search")
-  internal static let icSetting = ImageAsset(name: "ic_setting")
+  internal static let icSettingFill = ImageAsset(name: "ic_setting_fill")
+  internal static let icSettingOutline = ImageAsset(name: "ic_setting_outline")
   internal static let icShare = ImageAsset(name: "ic_share")
   internal static let logo = ImageAsset(name: "logo")
   internal static let icPpyy = ImageAsset(name: "ic_ppyy")
@@ -81,6 +80,7 @@ internal enum ImageAssets {
   internal static let icShop = ImageAsset(name: "ic_shop")
   internal static let icVideo = ImageAsset(name: "ic_video")
   internal static let icWallet = ImageAsset(name: "ic_wallet")
+  internal static let bnWalletNoti = ImageAsset(name: "bn_wallet_noti")
 
   // swiftlint:disable trailing_comma
   @available(*, deprecated, message: "All values properties are now deprecated")
@@ -130,10 +130,9 @@ internal enum ImageAssets {
     icMore,
     icNotifications,
     icPoint,
-    icPointAccumulated,
-    icPointReload,
     icSearch,
-    icSetting,
+    icSettingFill,
+    icSettingOutline,
     icShare,
     logo,
     icPpyy,
@@ -144,6 +143,7 @@ internal enum ImageAssets {
     icShop,
     icVideo,
     icWallet,
+    bnWalletNoti,
   ]
   // swiftlint:enable trailing_comma
 }
