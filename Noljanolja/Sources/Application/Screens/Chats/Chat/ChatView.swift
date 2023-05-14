@@ -20,6 +20,7 @@ struct ChatView<ViewModel: ChatViewModel>: View {
     // MARK: State
 
     @Environment(\.presentationMode) private var presentationMode
+    @State var scrollOffset = CGFloat.zero
 
     var body: some View {
         buildBodyView()
@@ -90,7 +91,48 @@ struct ChatView<ViewModel: ChatViewModel>: View {
     }
 
     private func buildContentView() -> some View {
-        ScrollView {
+        ScrollViewReader { proxy in
+            ZStack(alignment: .bottomTrailing) {
+                buildChatView()
+                buildQuickScrollDownView(proxy)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func buildQuickScrollDownView(_ scrollViewProxy: ScrollViewProxy) -> some View {
+        if scrollOffset > UIScreen.main.bounds.height / 2 {
+            Button(
+                action: {
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        scrollViewProxy.scrollTo("chat_item_0", anchor: .top)
+                    }
+                },
+                label: {
+                    ImageAssets.icArrowRight.swiftUIImage
+                        .resizable()
+                        .rotationEffect(.pi / 2)
+                        .padding(4)
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
+                        .background(ColorAssets.primaryGreen200.swiftUIColor)
+                        .cornerRadius(10)
+                        .padding(.vertical, 8)
+                        .padding(.leading, 8)
+                        .padding(.trailing, 20)
+                        .background(ColorAssets.neutralLight.swiftUIColor)
+                        .cornerRadius([.topLeading, .bottomLeading], 4)
+                        .overlayBorder(color: ColorAssets.primaryGreen200.swiftUIColor, cornerRadius: 4, lineWidth: 1)
+                        .padding(.trailing, -4)
+                        .shadow(color: .black.opacity(0.25), radius: 4)
+                }
+            )
+            .padding(.bottom, 32)
+        }
+    }
+
+    private func buildChatView() -> some View {
+        ChatScrollView(scrollOffset: $scrollOffset) {
             LazyVStack(spacing: 0) {
                 ForEach(viewModel.chatItems.indices, id: \.self) { index in
                     ChatItemView(
@@ -100,6 +142,7 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                         }
                     )
                     .onAppear { viewModel.loadMoreDataAction.send(index) }
+                    .id("chat_item_\(index)")
                 }
                 .scaleEffect(x: 1, y: -1, anchor: .center)
             }

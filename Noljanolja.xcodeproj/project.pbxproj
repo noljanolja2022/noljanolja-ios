@@ -131,6 +131,7 @@
 		CF615C342A0FD04C00CAF9C5 /* ChatSettingItemModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF615C332A0FD04C00CAF9C5 /* ChatSettingItemModelBuilder.swift */; };
 		CF615C362A0FD4DB00CAF9C5 /* ChatSettingContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF615C352A0FD4DB00CAF9C5 /* ChatSettingContentModel.swift */; };
 		CF615C392A0FEB5B00CAF9C5 /* ConversationAdjustmentNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF615C382A0FEB5B00CAF9C5 /* ConversationAdjustmentNavigations.swift */; };
+		CF615C3C2A109A9300CAF9C5 /* ChatScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF615C3B2A109A9300CAF9C5 /* ChatScrollView.swift */; };
 		CF62EF8B29B23E0000D6B688 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF62EF8A29B23E0000D6B688 /* ViewModelType.swift */; };
 		CF62EF8D29B254DD00D6B688 /* _SwiftUINavigationState in Frameworks */ = {isa = PBXBuildFile; productRef = CF62EF8C29B254DD00D6B688 /* _SwiftUINavigationState */; };
 		CF6ABC1F29935D7B00D78213 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC1D29935D7B00D78213 /* RootView.swift */; };
@@ -468,6 +469,7 @@
 		CF615C332A0FD04C00CAF9C5 /* ChatSettingItemModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSettingItemModelBuilder.swift; sourceTree = "<group>"; };
 		CF615C352A0FD4DB00CAF9C5 /* ChatSettingContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatSettingContentModel.swift; sourceTree = "<group>"; };
 		CF615C382A0FEB5B00CAF9C5 /* ConversationAdjustmentNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationAdjustmentNavigations.swift; sourceTree = "<group>"; };
+		CF615C3B2A109A9300CAF9C5 /* ChatScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScrollView.swift; sourceTree = "<group>"; };
 		CF62EF8A29B23E0000D6B688 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		CF6ABC1D29935D7B00D78213 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		CF6ABC1E29935D7B00D78213 /* RootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
@@ -1264,6 +1266,14 @@
 			path = Builder;
 			sourceTree = "<group>";
 		};
+		CF615C3A2A109A8000CAF9C5 /* ChatScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				CF615C3B2A109A9300CAF9C5 /* ChatScrollView.swift */,
+			);
+			path = ChatScrollView;
+			sourceTree = "<group>";
+		};
 		CF62EF8929B23DF200D6B688 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1692,6 +1702,7 @@
 		CFD5423C29BF7A520053C5B1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CF615C3A2A109A8000CAF9C5 /* ChatScrollView */,
 				CFD5423D29BF7A520053C5B1 /* ChatItem */,
 				CF7C87012A07E575000D63EA /* MessageContent */,
 				CFD5424129BF7A520053C5B1 /* Message */,
@@ -2700,6 +2711,7 @@
 				CF00D1692994E0A700505702 /* TextField+ErrorMessage.swift in Sources */,
 				CF775BC829C62EB200E82183 /* NotificationAPI.swift in Sources */,
 				CF28A1A729B4FFC50003C204 /* ProfileView.swift in Sources */,
+				CF615C3C2A109A9300CAF9C5 /* ChatScrollView.swift in Sources */,
 				CFED123E29F31D05000B320B /* VideoDetailView.swift in Sources */,
 				CFC4B17129F0471800F577CC /* ChatItemActionType.swift in Sources */,
 				CF745A5A2998E5EA008177E5 /* TappableTextFieldStyle.swift in Sources */,
