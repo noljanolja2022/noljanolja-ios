@@ -9,4 +9,6 @@ import Foundation
 
 enum SettingNavigationType: Equatable {
     case updateCurrentUser
+    case sourceLicense
+    case faq
 }

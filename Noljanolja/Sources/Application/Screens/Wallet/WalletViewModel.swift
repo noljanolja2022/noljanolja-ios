@@ -13,7 +13,7 @@ import Foundation
 // MARK: - WalletViewModelDelegate
 
 protocol WalletViewModelDelegate: AnyObject {
-    func didSignOut()
+    func walletViewModelSignOut()
 }
 
 // MARK: - WalletViewModel
@@ -32,12 +32,9 @@ final class WalletViewModel: ViewModel {
 
     // MARK: Action
 
-    let signOutAction = PassthroughSubject<Void, Never>()
-
     // MARK: Dependencies
 
     private let userService: UserServiceType
-    private let authService: AuthServiceType
     private let loyaltyAPI: LoyaltyAPIType
     private weak var delegate: WalletViewModelDelegate?
 
@@ -48,11 +45,9 @@ final class WalletViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(userService: UserServiceType = UserService.default,
-         authService: AuthServiceType = AuthService.default,
          loyaltyAPI: LoyaltyAPIType = LoyaltyAPI.default,
          delegate: WalletViewModelDelegate? = nil) {
         self.userService = userService
-        self.authService = authService
         self.loyaltyAPI = loyaltyAPI
         self.delegate = delegate
         super.init()
@@ -104,33 +99,13 @@ final class WalletViewModel: ViewModel {
             .store(in: &cancellables)
     }
 
-    private func configureActions() {
-        signOutAction
-            .handleEvents(receiveOutput: { [weak self] in self?.isProgressHUDShowing = true })
-            .flatMapLatestToResult { [weak self] in
-                guard let self else {
-                    return Empty<Void, Error>().eraseToAnyPublisher()
-                }
-                return self.authService.signOut()
-            }
-            .sink { [weak self] result in
-                guard let self else { return }
-                self.isProgressHUDShowing = false
-                switch result {
-                case .success:
-                    self.delegate?.didSignOut()
-                case .failure:
-                    break
-                }
-            }
-            .store(in: &cancellables)
-    }
+    private func configureActions() {}
 }
 
-// MARK: SettingViewModelDelegate
+// MARK: ProfileSettingViewModelDelegate
 
-extension WalletViewModel: SettingViewModelDelegate {
-    func didSignOut() {
-        delegate?.didSignOut()
+extension WalletViewModel: ProfileSettingViewModelDelegate {
+    func settingViewModelSignOut() {
+        delegate?.walletViewModelSignOut()
     }
 }

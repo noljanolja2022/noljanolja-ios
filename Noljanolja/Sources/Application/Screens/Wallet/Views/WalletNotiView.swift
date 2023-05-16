@@ -41,7 +41,8 @@ struct WalletNotiView: View {
                 )
             }
         }
-        .padding(16)
+        .padding(.horizontal, 16)
+        .padding(.bottom, 16)
         .background(
             ColorAssets.neutralLight.swiftUIColor
                 .cornerRadius(12)

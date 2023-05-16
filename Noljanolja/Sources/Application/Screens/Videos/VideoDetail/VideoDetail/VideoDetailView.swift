@@ -21,8 +21,6 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
 
     private func buildBodyView() -> some View {
         buildMainView()
-            .onAppear { viewModel.isAppearSubject.send(true) }
-            .onDisappear { viewModel.isAppearSubject.send(false) }
             .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -31,6 +29,8 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             }
+            .onAppear { viewModel.isAppearSubject.send(true) }
+            .onDisappear { viewModel.isAppearSubject.send(false) }
     }
 
     private func buildMainView() -> some View {

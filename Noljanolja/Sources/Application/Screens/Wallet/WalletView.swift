@@ -45,10 +45,9 @@ struct WalletView<ViewModel: WalletViewModel>: View {
     @ViewBuilder
     private func buildContentView() -> some View {
         if let model = viewModel.model {
-            VStack(spacing: 8) {
+            VStack(spacing: 12) {
                 buildUserInfoView(model)
                 buildDetailMemberInfoView(model)
-                buildLogOutView()
             }
             .background(ColorAssets.primaryGreen200.swiftUIColor)
         }
@@ -65,7 +64,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
 
     private func buildDetailMemberInfoView(_ model: WalletModel) -> some View {
         ScrollView {
-            VStack(spacing: 24) {
+            VStack(spacing: 12) {
                 WalletMyPointView(point: model.point)
                     .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
 
@@ -91,32 +90,10 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                 .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
 
                 WalletNotiView()
-
-                Spacer()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .padding(.vertical, 16)
             .padding(.horizontal, 16)
+            .padding(.bottom, 16)
         }
-    }
-
-    private func buildLogOutView() -> some View {
-        Button(
-            action: {
-                viewModel.signOutAction.send()
-            },
-            label: {
-                Text("LOG OUT")
-                    .font(.system(size: 16, weight: .bold))
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .padding(12)
-                    .foregroundColor(ColorAssets.primaryGreen400.swiftUIColor)
-                    .background(ColorAssets.neutralLight.swiftUIColor)
-                    .cornerRadius(4)
-            }
-        )
-        .frame(height: 48)
-        .padding(16)
     }
 
     private func buildLoadingView() -> some View {
@@ -152,8 +129,10 @@ struct WalletView<ViewModel: WalletViewModel>: View {
     ) -> some View {
         switch type.wrappedValue {
         case .setting:
-            SettingView(
-                viewModel: SettingViewModel()
+            ProfileSettingView(
+                viewModel: ProfileSettingViewModel(
+                    delegate: viewModel
+                )
             )
         }
     }

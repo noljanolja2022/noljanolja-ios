@@ -12,7 +12,7 @@ import Foundation
 // MARK: - MainViewModelDelegate
 
 protocol MainViewModelDelegate: AnyObject {
-    func didSignOut()
+    func mainViewModelSignOut()
 }
 
 // MARK: - MainViewModel
@@ -54,7 +54,7 @@ extension MainViewModel: ConversationListViewModelDelegate {
 // MARK: WalletViewModelDelegate
 
 extension MainViewModel: WalletViewModelDelegate {
-    func didSignOut() {
-        delegate?.didSignOut()
+    func walletViewModelSignOut() {
+        delegate?.mainViewModelSignOut()
     }
 }

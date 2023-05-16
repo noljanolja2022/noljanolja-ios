@@ -22,6 +22,8 @@ protocol MediaStoreType {
     func getStickerPackURL(id: Int) -> URL?
     func getStickerURL(stickerPackID: Int, stickerFile: String) -> URL?
     func getStickerURL(stickerPath: String) -> URL?
+
+    func deleteAll()
 }
 
 // MARK: - MediaStore
@@ -99,6 +101,12 @@ final class MediaStore: MediaStoreType {
         } else {
             return nil
         }
+    }
+
+    func deleteAll() {
+        realmManager.deleteAll()
+
+        try? FileManager.default.removeItem(at: generateStickerPacksURL())
     }
 }
 

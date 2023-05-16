@@ -63,7 +63,7 @@ extension RootViewModel: AuthRootViewModelDelegate {}
 // MARK: MainViewModelDelegate
 
 extension RootViewModel: MainViewModelDelegate {
-    func didSignOut() {
+    func mainViewModelSignOut() {
         contentType = .auth
     }
 }
