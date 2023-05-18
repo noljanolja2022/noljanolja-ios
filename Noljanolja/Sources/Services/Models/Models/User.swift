@@ -84,14 +84,26 @@ struct User: Equatable, Codable {
            let createdAt = createdAtString.date(withFormats: NetworkConfigs.Format.apiFullDateFormats) {
             self.createdAt = createdAt
         } else {
-            throw NetworkError.mapping("\(String(describing: Swift.type(of: self))) at key createdAt")
+            throw DecodingError.valueNotFound(
+                String.self,
+                DecodingError.Context(
+                    codingPath: container.codingPath + [CodingKeys.createdAt],
+                    debugDescription: ""
+                )
+            )
         }
 
         if let updatedAtString = try container.decodeIfPresent(String.self, forKey: .updatedAt),
            let updatedAt = updatedAtString.date(withFormats: NetworkConfigs.Format.apiFullDateFormats) {
             self.updatedAt = updatedAt
         } else {
-            throw NetworkError.mapping("\(String(describing: Swift.type(of: self))) at key updatedAt")
+            throw DecodingError.valueNotFound(
+                String.self,
+                DecodingError.Context(
+                    codingPath: container.codingPath + [CodingKeys.updatedAt],
+                    debugDescription: ""
+                )
+            )
         }
     }
 }

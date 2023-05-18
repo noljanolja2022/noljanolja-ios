@@ -34,8 +34,6 @@ struct SearchView: View {
         }
         .padding(.horizontal, 8)
         .frame(height: 36)
-        .background(ColorAssets.neutralLightGrey.swiftUIColor)
-        .cornerRadius(10)
     }
 }
 

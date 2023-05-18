@@ -50,7 +50,13 @@ struct Video: Equatable, Codable {
            let publishedAt = publishedAtString.date(withFormats: NetworkConfigs.Format.apiFullDateFormats) {
             self.publishedAt = publishedAt
         } else {
-            throw NetworkError.mapping("\(Swift.type(of: self)) at key publishedAt")
+            throw DecodingError.valueNotFound(
+                String.self,
+                DecodingError.Context(
+                    codingPath: container.codingPath + [CodingKeys.publishedAt],
+                    debugDescription: ""
+                )
+            )
         }
         self.title = try container.decodeIfPresent(String.self, forKey: .title)
         self.thumbnail = try container.decodeIfPresent(String.self, forKey: .thumbnail)

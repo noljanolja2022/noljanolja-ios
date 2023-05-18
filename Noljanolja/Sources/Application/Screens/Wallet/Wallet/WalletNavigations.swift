@@ -9,4 +9,5 @@ import Foundation
 
 enum WalletNavigationType {
     case setting
+    case transactionHistory
 }

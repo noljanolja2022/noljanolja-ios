@@ -25,7 +25,8 @@ struct ContactListView<ViewModel: ContactListViewModel>: View {
     @ViewBuilder
     private func buildBodyView() -> some View {
         VStack(spacing: 0) {
-            SearchView(placeholder: "Search by name/Phone number", text: $viewModel.searchString)
+            SearchView(placeholder: "Search by name/Phone number", text: $viewModel.searchString).background(ColorAssets.neutralLightGrey.swiftUIColor)
+                .cornerRadius(10)
                 .padding(.horizontal, 16)
                 .padding(.top, 12)
                 .padding(.bottom, 20)

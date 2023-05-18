@@ -91,7 +91,19 @@
 		CF28A1A829B4FFC50003C204 /* WalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF28A1A629B4FFC50003C204 /* WalletViewModel.swift */; };
 		CF28A1AF29B5066A0003C204 /* ProfileSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF28A1AD29B5066A0003C204 /* ProfileSettingView.swift */; };
 		CF28A1B029B5066A0003C204 /* ProfileSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF28A1AE29B5066A0003C204 /* ProfileSettingViewModel.swift */; };
+		CF2A84C72A169B770016FD83 /* TransactionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2A84C52A169B770016FD83 /* TransactionDetailView.swift */; };
+		CF2A84C82A169B770016FD83 /* TransactionDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2A84C62A169B770016FD83 /* TransactionDetailViewModel.swift */; };
 		CF30B1872A13D1D000C43A54 /* DeleteCacheUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF30B1862A13D1D000C43A54 /* DeleteCacheUseCase.swift */; };
+		CF30B18C2A13E78E00C43A54 /* TransactionHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF30B18A2A13E78E00C43A54 /* TransactionHistoryView.swift */; };
+		CF30B18D2A13E78E00C43A54 /* TransactionHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF30B18B2A13E78E00C43A54 /* TransactionHistoryViewModel.swift */; };
+		CF30B1902A13E7B500C43A54 /* TransactionHistoryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF30B18F2A13E7B500C43A54 /* TransactionHistoryItemView.swift */; };
+		CF30B1932A13E8BE00C43A54 /* TransactionHistoryItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF30B1922A13E8BE00C43A54 /* TransactionHistoryItemModel.swift */; };
+		CF30B1952A13E9AC00C43A54 /* TransactionHistoryFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF30B1942A13E9AC00C43A54 /* TransactionHistoryFilterView.swift */; };
+		CF30B1972A13EA0600C43A54 /* TransactionHistoryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF30B1962A13EA0600C43A54 /* TransactionHistoryHeaderView.swift */; };
+		CF30B1992A13EA4200C43A54 /* TransactionHistoryHeaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF30B1982A13EA4200C43A54 /* TransactionHistoryHeaderModel.swift */; };
+		CF30B19B2A13ECEB00C43A54 /* TransactionFilterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF30B19A2A13ECEB00C43A54 /* TransactionFilterType.swift */; };
+		CF30B19D2A13F03E00C43A54 /* TransactionHistoryNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF30B19C2A13F03E00C43A54 /* TransactionHistoryNavigations.swift */; };
+		CF30B19F2A13F2AF00C43A54 /* TransactionHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF30B19E2A13F2AF00C43A54 /* TransactionHistoryModel.swift */; };
 		CF3282ED299E3758006A459B /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3282EC299E3758006A459B /* UIApplication+Extension.swift */; };
 		CF398DD829BF89430015DB18 /* UpdateCurrentUserParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF398DD729BF89430015DB18 /* UpdateCurrentUserParam.swift */; };
 		CF3CE18529B79FD50054BBEF /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3CE18429B79FD50054BBEF /* UserDefaults.swift */; };
@@ -260,6 +272,8 @@
 		CFD5424929BF7A520053C5B1 /* NormalMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD5424029BF7A520053C5B1 /* NormalMessageView.swift */; };
 		CFD5424B29BF7A520053C5B1 /* MessageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD5424329BF7A520053C5B1 /* MessageContentView.swift */; };
 		CFD5424E29BF7A520053C5B1 /* TextMessageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD5424629BF7A520053C5B1 /* TextMessageContentView.swift */; };
+		CFD778472A14D07D00F20527 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD778462A14D07C00F20527 /* Transaction.swift */; };
+		CFD7784A2A14D91F00F20527 /* TransactionHistoryModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD778492A14D91F00F20527 /* TransactionHistoryModelBuilder.swift */; };
 		CFD83DD029974E4E00B9A6BB /* Navigation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD83DCF29974E4E00B9A6BB /* Navigation+Extension.swift */; };
 		CFDA463E29DC8CCB00E6A877 /* CountryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDA463D29DC8CCB00E6A877 /* CountryAPI.swift */; };
 		CFDBA9A629E9BD18000FA9B5 /* UpdateCurrentUserNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDBA9A529E9BD18000FA9B5 /* UpdateCurrentUserNavigations.swift */; };
@@ -453,7 +467,19 @@
 		CF28A1A629B4FFC50003C204 /* WalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewModel.swift; sourceTree = "<group>"; };
 		CF28A1AD29B5066A0003C204 /* ProfileSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingView.swift; sourceTree = "<group>"; };
 		CF28A1AE29B5066A0003C204 /* ProfileSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewModel.swift; sourceTree = "<group>"; };
+		CF2A84C52A169B770016FD83 /* TransactionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailView.swift; sourceTree = "<group>"; };
+		CF2A84C62A169B770016FD83 /* TransactionDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewModel.swift; sourceTree = "<group>"; };
 		CF30B1862A13D1D000C43A54 /* DeleteCacheUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCacheUseCase.swift; sourceTree = "<group>"; };
+		CF30B18A2A13E78E00C43A54 /* TransactionHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryView.swift; sourceTree = "<group>"; };
+		CF30B18B2A13E78E00C43A54 /* TransactionHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryViewModel.swift; sourceTree = "<group>"; };
+		CF30B18F2A13E7B500C43A54 /* TransactionHistoryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryItemView.swift; sourceTree = "<group>"; };
+		CF30B1922A13E8BE00C43A54 /* TransactionHistoryItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryItemModel.swift; sourceTree = "<group>"; };
+		CF30B1942A13E9AC00C43A54 /* TransactionHistoryFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryFilterView.swift; sourceTree = "<group>"; };
+		CF30B1962A13EA0600C43A54 /* TransactionHistoryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryHeaderView.swift; sourceTree = "<group>"; };
+		CF30B1982A13EA4200C43A54 /* TransactionHistoryHeaderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryHeaderModel.swift; sourceTree = "<group>"; };
+		CF30B19A2A13ECEB00C43A54 /* TransactionFilterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFilterType.swift; sourceTree = "<group>"; };
+		CF30B19C2A13F03E00C43A54 /* TransactionHistoryNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryNavigations.swift; sourceTree = "<group>"; };
+		CF30B19E2A13F2AF00C43A54 /* TransactionHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryModel.swift; sourceTree = "<group>"; };
 		CF3282EC299E3758006A459B /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		CF398DD729BF89430015DB18 /* UpdateCurrentUserParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCurrentUserParam.swift; sourceTree = "<group>"; };
 		CF3CE18429B79FD50054BBEF /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
@@ -614,6 +640,8 @@
 		CFD5424029BF7A520053C5B1 /* NormalMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NormalMessageView.swift; sourceTree = "<group>"; };
 		CFD5424329BF7A520053C5B1 /* MessageContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageContentView.swift; sourceTree = "<group>"; };
 		CFD5424629BF7A520053C5B1 /* TextMessageContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextMessageContentView.swift; sourceTree = "<group>"; };
+		CFD778462A14D07C00F20527 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		CFD778492A14D91F00F20527 /* TransactionHistoryModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryModelBuilder.swift; sourceTree = "<group>"; };
 		CFD83DCF29974E4E00B9A6BB /* Navigation+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Navigation+Extension.swift"; sourceTree = "<group>"; };
 		CFDA463D29DC8CCB00E6A877 /* CountryAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryAPI.swift; sourceTree = "<group>"; };
 		CFDBA9A529E9BD18000FA9B5 /* UpdateCurrentUserNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCurrentUserNavigations.swift; sourceTree = "<group>"; };
@@ -988,11 +1016,9 @@
 		CF18897F29B3471E00701583 /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
-				CF615C432A10BDEF00CAF9C5 /* Model */,
-				CF28A1A929B500DF0003C204 /* Views */,
-				CF28A1A529B4FFC50003C204 /* WalletView.swift */,
-				CF28A1A629B4FFC50003C204 /* WalletViewModel.swift */,
-				CFDC637129EC7A83002F4BFC /* WalletNavigations.swift */,
+				CF2A84C42A169B3A0016FD83 /* TransactionDetail */,
+				CF30B1892A13E6CD00C43A54 /* TransactionHistory */,
+				CF30B1882A13E6C000C43A54 /* Wallet */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -1155,6 +1181,60 @@
 			path = ProfileSetting;
 			sourceTree = "<group>";
 		};
+		CF2A84C42A169B3A0016FD83 /* TransactionDetail */ = {
+			isa = PBXGroup;
+			children = (
+				CF2A84C52A169B770016FD83 /* TransactionDetailView.swift */,
+				CF2A84C62A169B770016FD83 /* TransactionDetailViewModel.swift */,
+			);
+			path = TransactionDetail;
+			sourceTree = "<group>";
+		};
+		CF30B1882A13E6C000C43A54 /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				CF615C432A10BDEF00CAF9C5 /* Model */,
+				CF28A1A929B500DF0003C204 /* Views */,
+				CF28A1A529B4FFC50003C204 /* WalletView.swift */,
+				CF28A1A629B4FFC50003C204 /* WalletViewModel.swift */,
+				CFDC637129EC7A83002F4BFC /* WalletNavigations.swift */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+		CF30B1892A13E6CD00C43A54 /* TransactionHistory */ = {
+			isa = PBXGroup;
+			children = (
+				CFD778482A14D8FD00F20527 /* Builders */,
+				CF30B1912A13E8B000C43A54 /* Models */,
+				CF30B18E2A13E79A00C43A54 /* Views */,
+				CF30B18A2A13E78E00C43A54 /* TransactionHistoryView.swift */,
+				CF30B18B2A13E78E00C43A54 /* TransactionHistoryViewModel.swift */,
+				CF30B19C2A13F03E00C43A54 /* TransactionHistoryNavigations.swift */,
+			);
+			path = TransactionHistory;
+			sourceTree = "<group>";
+		};
+		CF30B18E2A13E79A00C43A54 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CF30B18F2A13E7B500C43A54 /* TransactionHistoryItemView.swift */,
+				CF30B1942A13E9AC00C43A54 /* TransactionHistoryFilterView.swift */,
+				CF30B1962A13EA0600C43A54 /* TransactionHistoryHeaderView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CF30B1912A13E8B000C43A54 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CF30B1922A13E8BE00C43A54 /* TransactionHistoryItemModel.swift */,
+				CF30B1982A13EA4200C43A54 /* TransactionHistoryHeaderModel.swift */,
+				CF30B19E2A13F2AF00C43A54 /* TransactionHistoryModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		CF3282EB299E3746006A459B /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -1252,6 +1332,8 @@
 				CFB0A82C29F1BD3800298546 /* VideoTrendingDurationType.swift */,
 				CFD095262A02B643004BF047 /* VideoProgressEventType.swift */,
 				CF615C3F2A10ACC300CAF9C5 /* LoyaltyMemberInfo.swift */,
+				CF30B19A2A13ECEB00C43A54 /* TransactionFilterType.swift */,
+				CFD778462A14D07C00F20527 /* Transaction.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1862,6 +1944,14 @@
 				CFD5424029BF7A520053C5B1 /* NormalMessageView.swift */,
 			);
 			path = Message;
+			sourceTree = "<group>";
+		};
+		CFD778482A14D8FD00F20527 /* Builders */ = {
+			isa = PBXGroup;
+			children = (
+				CFD778492A14D91F00F20527 /* TransactionHistoryModelBuilder.swift */,
+			);
+			path = Builders;
 			sourceTree = "<group>";
 		};
 		CFDCA377299644E7003C2C77 /* ButtonStyle */ = {
@@ -2676,6 +2766,7 @@
 				CFED124829F32159000B320B /* VideoDetailInformationView.swift in Sources */,
 				CFFD70C5298AC5F800D4F5A2 /* RequestTimeoutPlugin.swift in Sources */,
 				CFE9695229EC4EDA00441903 /* ProfileSettingNavigations.swift in Sources */,
+				CF30B1932A13E8BE00C43A54 /* TransactionHistoryItemModel.swift in Sources */,
 				CF7F576229D9F6610079C53D /* TermDetailViewModel.swift in Sources */,
 				CFB0A82729F1B8EC00298546 /* VideoChannel.swift in Sources */,
 				CFA3304D29BEB674008D7449 /* SearchView.swift in Sources */,
@@ -2689,11 +2780,15 @@
 				CF28A1A029B4E9CF0003C204 /* AuthRootViewModel.swift in Sources */,
 				CFC4B17529F0745B00F577CC /* ChatInputExpandMenuViewModel.swift in Sources */,
 				CF8A02982A0BA35600A01B21 /* CustomTabView.swift in Sources */,
+				CF2A84C82A169B770016FD83 /* TransactionDetailViewModel.swift in Sources */,
 				CF28A1B029B5066A0003C204 /* ProfileSettingViewModel.swift in Sources */,
 				CFB2A89F29D1F31A008D1689 /* StorableSticker.swift in Sources */,
+				CF30B18C2A13E78E00C43A54 /* TransactionHistoryView.swift in Sources */,
 				CFECC12F29B4D6D500E20B58 /* LaunchBackgroundView.swift in Sources */,
+				CF30B19D2A13F03E00C43A54 /* TransactionHistoryNavigations.swift in Sources */,
 				CFB0A81329F1960100298546 /* ChatInputExpandMenuNavigations.swift in Sources */,
 				CF54FA2429D0187B0092E2C6 /* MediaStore.swift in Sources */,
+				CF30B19B2A13ECEB00C43A54 /* TransactionFilterType.swift in Sources */,
 				CF615C492A11436200CAF9C5 /* WalletModel.swift in Sources */,
 				CF0EA30929AA088B0014A7DE /* View+Border.swift in Sources */,
 				CFAD27B529E300BF00947BC3 /* ConversationListNavigations.swift in Sources */,
@@ -2710,6 +2805,7 @@
 				CF0EA30D29AA0F010014A7DE /* SelectCountryView.swift in Sources */,
 				CF8737E229CB539F0018237B /* ChatInputExpandView.swift in Sources */,
 				CFD095232A02AE49004BF047 /* VideoDetailPlayerViewModel.swift in Sources */,
+				CF30B1972A13EA0600C43A54 /* TransactionHistoryHeaderView.swift in Sources */,
 				CF775BBE29C625C900E82183 /* NotificationAppDelegate.swift in Sources */,
 				CF615C512A11488400CAF9C5 /* WalletPointModel.swift in Sources */,
 				CF1307FC29C8C96900EED044 /* TextEditor+Background.swift in Sources */,
@@ -2762,17 +2858,21 @@
 				CFAC6BBC2A1237F1004AD4A5 /* SourceLicenseNavigations.swift in Sources */,
 				CFECC13329B4D6D500E20B58 /* LaunchViewModel.swift in Sources */,
 				CFAC6BB32A123021004AD4A5 /* ProfileSettingAlertActionType.swift in Sources */,
+				CF30B1992A13EA4200C43A54 /* TransactionHistoryHeaderModel.swift in Sources */,
 				CFFC6C6929E992910024ADA3 /* LaunchRootNavigations.swift in Sources */,
+				CF30B18D2A13E78E00C43A54 /* TransactionHistoryViewModel.swift in Sources */,
 				CFD095172A02A87F004BF047 /* VideoSocketAPI.swift in Sources */,
 				CF1A9A0B2A0D362F0004CCD8 /* NotificationSettingViewModel.swift in Sources */,
 				CFFD70C6298AC5F800D4F5A2 /* AuthPluggin.swift in Sources */,
 				CFED122A29F2D7C6000B320B /* Result+Extension.swift in Sources */,
 				CFAC6BCB2A124074004AD4A5 /* FAQItemView.swift in Sources */,
+				CFD778472A14D07D00F20527 /* Transaction.swift in Sources */,
 				CFE0926B298FE73000F197F0 /* CloudFunctionAuthAPI.swift in Sources */,
 				CF615B6B2A0E90F500CAF9C5 /* ChatInputImagePreviewView.swift in Sources */,
 				CFFD70CC298AC5F800D4F5A2 /* Api.swift in Sources */,
 				CF12604629B78AAF00B5373B /* DeviceIdentityPlugin.swift in Sources */,
 				CF446B9029D8AB0D00ED66BF /* LottieAssets.swift in Sources */,
+				CF30B1902A13E7B500C43A54 /* TransactionHistoryItemView.swift in Sources */,
 				CFDBA9A629E9BD18000FA9B5 /* UpdateCurrentUserNavigations.swift in Sources */,
 				CF82C30E29EAA00300EAD36C /* BottomSheet.swift in Sources */,
 				CFC4B17429F0745B00F577CC /* ChatInputExpandMenuView.swift in Sources */,
@@ -2798,6 +2898,7 @@
 				CFB2F6D629E1CB6400191AA3 /* UpdateConversationContactListView.swift in Sources */,
 				CF08A85F29B5A17A00D6CE5F /* CreateConversationContactListView.swift in Sources */,
 				CF1B624A29B9B8A100DE53E6 /* Conversation.swift in Sources */,
+				CF30B19F2A13F2AF00C43A54 /* TransactionHistoryModel.swift in Sources */,
 				CF3CE18529B79FD50054BBEF /* UserDefaults.swift in Sources */,
 				CF52AB7C29B8EE1A00C9C90C /* Realm+Init.swift in Sources */,
 				CF14F24A298C331D00BC2066 /* ColorAssets.swift in Sources */,
@@ -2892,6 +2993,7 @@
 				CF6ABC1F29935D7B00D78213 /* RootView.swift in Sources */,
 				CF1B624C29B9B92B00DE53E6 /* Message.swift in Sources */,
 				CF59758C29FBA3E10068EC88 /* AnyImageEditorView.swift in Sources */,
+				CFD7784A2A14D91F00F20527 /* TransactionHistoryModelBuilder.swift in Sources */,
 				CFA5BD2C29EEFB9000251176 /* DataDetectorTextView.swift in Sources */,
 				CFE0933E298FFC5B00F197F0 /* AuthError.swift in Sources */,
 				CFBC6F0229C0CF44000509EC /* StatefullFooterView.swift in Sources */,
@@ -2936,6 +3038,7 @@
 				CF1BD20B29ACF67D00778786 /* StateView.swift in Sources */,
 				CFB2F6B029E093BD00191AA3 /* ChatSettingParticipantItemView.swift in Sources */,
 				CF4A6EF429E3C45A00CB75E5 /* MainNavigationTypes.swift in Sources */,
+				CF2A84C72A169B770016FD83 /* TransactionDetailView.swift in Sources */,
 				CF0CC9FF29D155DD0027D2C1 /* StickerMessageContentView.swift in Sources */,
 				CFD0951A2A02A944004BF047 /* AuthStore+AuthRepo.swift in Sources */,
 				CFED123829F2EF54000B320B /* Number+Format.swift in Sources */,
@@ -2943,6 +3046,7 @@
 				CFB0A82129F1B6FD00298546 /* Video.swift in Sources */,
 				CF28566C29BA2EF100593FA5 /* NormalMessageModel.swift in Sources */,
 				CFAD27AD29E2B9B000947BC3 /* ConversationAdjustmentViewModel.swift in Sources */,
+				CF30B1952A13E9AC00C43A54 /* TransactionHistoryFilterView.swift in Sources */,
 				CFE09263298EB69700F197F0 /* FirebaseUser+Combine.swift in Sources */,
 				CF28567B29BA408F00593FA5 /* ChatInputView.swift in Sources */,
 				CF131EAF29CEFCA400054719 /* AttachmentParam.swift in Sources */,

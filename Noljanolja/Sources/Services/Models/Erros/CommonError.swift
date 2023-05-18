@@ -13,9 +13,3 @@ enum CommonError: Error {
     case currentUserNotFound
     case unknown
 }
-
-// MARK: - NetworkError
-
-enum NetworkError: Error {
-    case mapping(String)
-}

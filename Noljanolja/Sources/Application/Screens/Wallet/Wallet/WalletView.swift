@@ -75,7 +75,10 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                             point: 14_000,
                             actionTitle: "View history"
                         ),
-                        pointColor: ColorAssets.neutralDarkGrey.swiftUIColor
+                        pointColor: ColorAssets.neutralDarkGrey.swiftUIColor,
+                        action: {
+                            viewModel.navigationType = .transactionHistory
+                        }
                     )
 
                     WalletPointView(
@@ -133,6 +136,10 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                 viewModel: ProfileSettingViewModel(
                     delegate: viewModel
                 )
+            )
+        case .transactionHistory:
+            TransactionHistoryView(
+                viewModel: TransactionHistoryViewModel()
             )
         }
     }
