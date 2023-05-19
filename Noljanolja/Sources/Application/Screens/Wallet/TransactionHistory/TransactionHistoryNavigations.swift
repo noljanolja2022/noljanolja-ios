@@ -8,5 +8,6 @@
 import Foundation
 
 enum TransactionHistoryNavigationType {
+    case transactionDetail(Transaction)
     case dashboard
 }

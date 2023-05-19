@@ -330,6 +330,7 @@
 		CFF1F7A529B7371600B25DD2 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF1F7A329B7371600B25DD2 /* ChatViewModel.swift */; };
 		CFF1F7AB29B737F400B25DD2 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = CFF1F7AA29B737F400B25DD2 /* SwiftUIX */; };
 		CFF467A02A0A45E50018FFAA /* View+Visibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF4679F2A0A45E50018FFAA /* View+Visibility.swift */; };
+		CFF520F32A17C17200F29A4E /* TransactionDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF520F22A17C17200F29A4E /* TransactionDetailModel.swift */; };
 		CFFB058C29BF0487000D65EE /* ChatItemModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFB058B29BF0487000D65EE /* ChatItemModelBuilder.swift */; };
 		CFFB058E29BF04BD000D65EE /* DateChatItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFB058D29BF04BD000D65EE /* DateChatItemModel.swift */; };
 		CFFB059029BF0F20000D65EE /* ChatItemModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFB058F29BF0F20000D65EE /* ChatItemModelType.swift */; };
@@ -690,6 +691,7 @@
 		CFF1F7A229B7371600B25DD2 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		CFF1F7A329B7371600B25DD2 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		CFF4679F2A0A45E50018FFAA /* View+Visibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Visibility.swift"; sourceTree = "<group>"; };
+		CFF520F22A17C17200F29A4E /* TransactionDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailModel.swift; sourceTree = "<group>"; };
 		CFFB058B29BF0487000D65EE /* ChatItemModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatItemModelBuilder.swift; sourceTree = "<group>"; };
 		CFFB058D29BF04BD000D65EE /* DateChatItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateChatItemModel.swift; sourceTree = "<group>"; };
 		CFFB058F29BF0F20000D65EE /* ChatItemModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatItemModelType.swift; sourceTree = "<group>"; };
@@ -1184,6 +1186,7 @@
 		CF2A84C42A169B3A0016FD83 /* TransactionDetail */ = {
 			isa = PBXGroup;
 			children = (
+				CFF520F12A17C16500F29A4E /* Models */,
 				CF2A84C52A169B770016FD83 /* TransactionDetailView.swift */,
 				CF2A84C62A169B770016FD83 /* TransactionDetailViewModel.swift */,
 			);
@@ -2079,6 +2082,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		CFF520F12A17C16500F29A4E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CFF520F22A17C17200F29A4E /* TransactionDetailModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		CFFB059129BF123F000D65EE /* MessageContent */ = {
 			isa = PBXGroup;
 			children = (
@@ -2928,6 +2939,7 @@
 				CFB2F6C729E19E9700191AA3 /* ContactListUseCase.swift in Sources */,
 				CFD095252A02B2E3004BF047 /* TrackVideoParam.swift in Sources */,
 				CFB0A82D29F1BD3800298546 /* VideoTrendingDurationType.swift in Sources */,
+				CFF520F32A17C17200F29A4E /* TransactionDetailModel.swift in Sources */,
 				CF775BC229C6287F00E82183 /* AppDelegateProtocol.swift in Sources */,
 				CF0052C929F46074003900B5 /* VideoDetailInputView.swift in Sources */,
 				CFDCC33E29CCC33700E8F18C /* Attachment.swift in Sources */,

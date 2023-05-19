@@ -102,6 +102,9 @@ struct TransactionHistoryView<ViewModel: TransactionHistoryViewModel>: View {
                                     ? ColorAssets.secondaryYellow50.swiftUIColor
                                     : .clear
                             )
+                            .onTapGesture {
+                                viewModel.transactionDetailAction.send(item.id)
+                            }
                     }
                 }
             }
@@ -148,6 +151,12 @@ struct TransactionHistoryView<ViewModel: TransactionHistoryViewModel>: View {
         _ type: Binding<TransactionHistoryNavigationType>
     ) -> some View {
         switch type.wrappedValue {
+        case let .transactionDetail(transaction):
+            TransactionDetailView(
+                viewModel: TransactionDetailViewModel(
+                    transaction: transaction
+                )
+            )
         case .dashboard:
             EmptyView()
         }

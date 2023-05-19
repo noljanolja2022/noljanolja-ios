@@ -31,6 +31,7 @@ final class TransactionHistoryViewModel: ViewModel {
     // MARK: Action
 
     let loadMoreAction = PassthroughSubject<Void, Never>()
+    let transactionDetailAction = PassthroughSubject<String, Never>()
 
     // MARK: Dependencies
 
@@ -54,6 +55,7 @@ final class TransactionHistoryViewModel: ViewModel {
 
     private func configure() {
         configureBindData()
+        configureActions()
         configureLoadData()
     }
 
@@ -64,6 +66,19 @@ final class TransactionHistoryViewModel: ViewModel {
             }
             .sink(receiveValue: { [weak self] in
                 self?.model = $0
+            })
+            .store(in: &cancellables)
+    }
+
+    private func configureActions() {
+        transactionDetailAction
+            .withLatestFrom(transationsSubject) { ($0, $1) }
+            .compactMap { selectedId, transactions in
+                transactions.first { $0.id == selectedId }
+            }
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                self?.navigationType = .transactionDetail($0)
             })
             .store(in: &cancellables)
     }

@@ -18,6 +18,8 @@ protocol TransactionDetailViewModelDelegate: AnyObject {}
 final class TransactionDetailViewModel: ViewModel {
     // MARK: State
 
+    @Published var model: TransactionDetailModel
+
     // MARK: Action
 
     // MARK: Dependencies
@@ -28,7 +30,9 @@ final class TransactionDetailViewModel: ViewModel {
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(delegate: TransactionDetailViewModelDelegate? = nil) {
+    init(transaction: Transaction,
+         delegate: TransactionDetailViewModelDelegate? = nil) {
+        self.model = TransactionDetailModel(model: transaction)
         self.delegate = delegate
         super.init()
 
