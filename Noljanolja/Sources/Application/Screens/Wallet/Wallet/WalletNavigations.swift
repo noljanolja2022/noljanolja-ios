@@ -8,6 +8,7 @@
 import Foundation
 
 enum WalletNavigationType {
+    case myRanking
     case setting
     case transactionHistory
 }

@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum LoyaltyTierModelType: Equatable {
-    case bronze
-    case silver
-    case gold
-    case diamond
+enum LoyaltyTierModelType: Int, Equatable {
+    case bronze = 0
+    case silver = 1
+    case gold = 2
+    case diamond = 3
 
     init?(tier: LoyaltyTierType?) {
         guard let tier else { return nil }
@@ -26,7 +26,7 @@ enum LoyaltyTierModelType: Equatable {
 
     var iconColor: String {
         switch self {
-        case .bronze: return ColorAssets.neutralGrey.name
+        case .bronze: return ColorAssets.systemBrown.name
         case .silver: return ColorAssets.neutralGrey.name
         case .gold: return ColorAssets.secondaryYellow200.name
         case .diamond: return ColorAssets.secondaryYellow400.name
@@ -35,8 +35,8 @@ enum LoyaltyTierModelType: Equatable {
 
     var text: String {
         switch self {
-        case .bronze: return "General Membership"
-        case .silver: return "General Membership"
+        case .bronze: return "Bronze Membership"
+        case .silver: return "Silver Membership"
         case .gold: return "Gold Membership"
         case .diamond: return "Premium Membership"
         }

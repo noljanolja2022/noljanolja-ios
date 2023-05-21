@@ -18,7 +18,7 @@ struct WalletMemberTierView: View {
     private func buildBodyView() -> some View {
         if let model {
             HStack(spacing: 8) {
-                ImageAssets.icKing.swiftUIImage
+                ImageAssets.icRank.swiftUIImage
                     .resizable()
                     .frame(width: 20, height: 15)
                     .scaledToFit()

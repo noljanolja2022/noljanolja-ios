@@ -56,6 +56,9 @@ struct WalletView<ViewModel: WalletViewModel>: View {
     private func buildUserInfoView(_ model: WalletModel) -> some View {
         WalletUserInfoView(
             model: model.userInfo,
+            tierAction: {
+                viewModel.navigationType = .myRanking
+            },
             settingAction: {
                 viewModel.navigationType = .setting
             }
@@ -131,6 +134,10 @@ struct WalletView<ViewModel: WalletViewModel>: View {
         _ type: Binding<WalletNavigationType>
     ) -> some View {
         switch type.wrappedValue {
+        case .myRanking:
+            MyRankingView(
+                viewModel: MyRankingViewModel()
+            )
         case .setting:
             ProfileSettingView(
                 viewModel: ProfileSettingViewModel(

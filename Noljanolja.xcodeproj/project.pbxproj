@@ -345,6 +345,9 @@
 		CFF521142A19174500F29A4E /* TransactionHistorySectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF521132A19174500F29A4E /* TransactionHistorySectionModel.swift */; };
 		CFF521162A19175A00F29A4E /* TransactionDashboardSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF521152A19175A00F29A4E /* TransactionDashboardSectionModel.swift */; };
 		CFF521182A19202000F29A4E /* TransactionDashboardBarChartSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF521172A19202000F29A4E /* TransactionDashboardBarChartSectionModel.swift */; };
+		CFF5211C2A1A7B5800F29A4E /* MyRankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF5211A2A1A7B5800F29A4E /* MyRankingView.swift */; };
+		CFF5211D2A1A7B5800F29A4E /* MyRankingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF5211B2A1A7B5800F29A4E /* MyRankingViewModel.swift */; };
+		CFF521202A1A7F3600F29A4E /* MyRankingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF5211F2A1A7F3600F29A4E /* MyRankingModel.swift */; };
 		CFFB058C29BF0487000D65EE /* ChatItemModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFB058B29BF0487000D65EE /* ChatItemModelBuilder.swift */; };
 		CFFB058E29BF04BD000D65EE /* DateChatItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFB058D29BF04BD000D65EE /* DateChatItemModel.swift */; };
 		CFFB059029BF0F20000D65EE /* ChatItemModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFB058F29BF0F20000D65EE /* ChatItemModelType.swift */; };
@@ -719,6 +722,9 @@
 		CFF521132A19174500F29A4E /* TransactionHistorySectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistorySectionModel.swift; sourceTree = "<group>"; };
 		CFF521152A19175A00F29A4E /* TransactionDashboardSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDashboardSectionModel.swift; sourceTree = "<group>"; };
 		CFF521172A19202000F29A4E /* TransactionDashboardBarChartSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDashboardBarChartSectionModel.swift; sourceTree = "<group>"; };
+		CFF5211A2A1A7B5800F29A4E /* MyRankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRankingView.swift; sourceTree = "<group>"; };
+		CFF5211B2A1A7B5800F29A4E /* MyRankingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRankingViewModel.swift; sourceTree = "<group>"; };
+		CFF5211F2A1A7F3600F29A4E /* MyRankingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRankingModel.swift; sourceTree = "<group>"; };
 		CFFB058B29BF0487000D65EE /* ChatItemModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatItemModelBuilder.swift; sourceTree = "<group>"; };
 		CFFB058D29BF04BD000D65EE /* DateChatItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateChatItemModel.swift; sourceTree = "<group>"; };
 		CFFB058F29BF0F20000D65EE /* ChatItemModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatItemModelType.swift; sourceTree = "<group>"; };
@@ -1046,6 +1052,7 @@
 		CF18897F29B3471E00701583 /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				CFF521192A1A7B4900F29A4E /* MyRanking */,
 				CFF520F42A17CDEE00F29A4E /* TransactionDashboard */,
 				CF2A84C42A169B3A0016FD83 /* TransactionDetail */,
 				CF30B1892A13E6CD00C43A54 /* TransactionHistory */,
@@ -2163,6 +2170,24 @@
 			path = Builders;
 			sourceTree = "<group>";
 		};
+		CFF521192A1A7B4900F29A4E /* MyRanking */ = {
+			isa = PBXGroup;
+			children = (
+				CFF5211E2A1A7F2800F29A4E /* Models */,
+				CFF5211A2A1A7B5800F29A4E /* MyRankingView.swift */,
+				CFF5211B2A1A7B5800F29A4E /* MyRankingViewModel.swift */,
+			);
+			path = MyRanking;
+			sourceTree = "<group>";
+		};
+		CFF5211E2A1A7F2800F29A4E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CFF5211F2A1A7F3600F29A4E /* MyRankingModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		CFFB059129BF123F000D65EE /* MessageContent */ = {
 			isa = PBXGroup;
 			children = (
@@ -2850,6 +2875,7 @@
 				CF08A86229B5A26600D6CE5F /* ContactAPI.swift in Sources */,
 				CF43BF73299274D900FD3180 /* FirebaseAuth+Combine.swift in Sources */,
 				CFED124129F31D12000B320B /* VideosNavigations.swift in Sources */,
+				CFF5211C2A1A7B5800F29A4E /* MyRankingView.swift in Sources */,
 				CFED124829F32159000B320B /* VideoDetailInformationView.swift in Sources */,
 				CFFD70C5298AC5F800D4F5A2 /* RequestTimeoutPlugin.swift in Sources */,
 				CFE9695229EC4EDA00441903 /* ProfileSettingNavigations.swift in Sources */,
@@ -2884,6 +2910,7 @@
 				CF0052CA29F46074003900B5 /* VideoDetailInputViewModel.swift in Sources */,
 				CFE0925F298EACF200F197F0 /* GoogleAuthAPI.swift in Sources */,
 				CFECC12E29B4D6D500E20B58 /* LaunchView.swift in Sources */,
+				CFF521202A1A7F3600F29A4E /* MyRankingModel.swift in Sources */,
 				CFFD70D3298AC89000D4F5A2 /* NetworkConfigs.swift in Sources */,
 				CFAC6BC92A124069004AD4A5 /* FAQViewModel.swift in Sources */,
 				CFF520FE2A17DB7100F29A4E /* BarChartSwiftUIView.swift in Sources */,
@@ -3107,6 +3134,7 @@
 				CFDC637229EC7A83002F4BFC /* WalletNavigations.swift in Sources */,
 				CF615C402A10ACC300CAF9C5 /* LoyaltyMemberInfo.swift in Sources */,
 				CF28A1A829B4FFC50003C204 /* WalletViewModel.swift in Sources */,
+				CFF5211D2A1A7B5800F29A4E /* MyRankingViewModel.swift in Sources */,
 				CF62EF8B29B23E0000D6B688 /* ViewModelType.swift in Sources */,
 				CFE0925D298DFDCB00F197F0 /* KakaoAuthAPI.swift in Sources */,
 				CF74A1A529B5831800419342 /* ConversationItemView.swift in Sources */,

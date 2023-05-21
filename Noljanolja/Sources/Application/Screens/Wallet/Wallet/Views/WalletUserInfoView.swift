@@ -10,6 +10,7 @@ import SwiftUI
 
 struct WalletUserInfoView: View {
     let model: WalletUserInfoModel
+    var tierAction: (() -> Void)?
     var settingAction: (() -> Void)?
 
     var body: some View {
@@ -40,12 +41,14 @@ struct WalletUserInfoView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
-                WalletMemberTierView(model: model.tierModelType)
-
-                Text("Overall Point Ranking: 12,345")
-                    .font(.system(size: 10, weight: .medium))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                Button(
+                    action: {
+                        tierAction?()
+                    },
+                    label: {
+                        WalletMemberTierView(model: model.tierModelType)
+                    }
+                )
             }
 
             VStack(spacing: 0) {
