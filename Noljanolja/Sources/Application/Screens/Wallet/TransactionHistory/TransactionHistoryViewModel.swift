@@ -18,7 +18,7 @@ protocol TransactionHistoryViewModelDelegate: AnyObject {}
 final class TransactionHistoryViewModel: ViewModel {
     // MARK: State
 
-    @Published var selectedTransactionType = TransactionFilterType.all
+    @Published var selectedTransactionType = TransactionType.all
 
     @Published var viewState = ViewState.loading
     @Published var footerState = StatefullFooterViewState.normal
@@ -42,7 +42,7 @@ final class TransactionHistoryViewModel: ViewModel {
 
     private let lastOffsetDateSubject = CurrentValueSubject<Date?, Never>(nil)
     private let transationsSubject = CurrentValueSubject<[Transaction], Never>([])
-    var cancellables = Set<AnyCancellable>()
+    private var cancellables = Set<AnyCancellable>()
 
     init(loyaltyAPI: LoyaltyAPIType = LoyaltyAPI.default,
          delegate: TransactionHistoryViewModelDelegate? = nil) {
@@ -110,8 +110,8 @@ final class TransactionHistoryViewModel: ViewModel {
                     return Empty<[Transaction], Error>().eraseToAnyPublisher()
                 }
                 return self.loyaltyAPI.getTransactionHistory(
-                    filterType: transactionType,
-                    lastOffsetDate: lastOffsetDate
+                    lastOffsetDate: lastOffsetDate,
+                    type: transactionType
                 )
             }
             .receive(on: DispatchQueue.main)

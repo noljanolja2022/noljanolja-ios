@@ -62,7 +62,7 @@ struct TransactionHistoryView<ViewModel: TransactionHistoryViewModel>: View {
     private func buildFilterView() -> some View {
         TransactionHistoryFilterView(
             selectedType: $viewModel.selectedTransactionType,
-            types: TransactionFilterType.allCases
+            types: TransactionType.allCases
         )
         .frame(height: 36)
         .padding(.horizontal, 16)
@@ -72,8 +72,12 @@ struct TransactionHistoryView<ViewModel: TransactionHistoryViewModel>: View {
     private func buildListView() -> some View {
         ScrollView {
             LazyVStack(spacing: 0) {
-                buildTransactionHistoryContentView()
-                buildStatefullFooterView()
+                if let sections = viewModel.model?.sections {
+                    ForEach(sections.indices, id: \.self) { index in
+                        buildSectionView(sections[index])
+                    }
+                    buildStatefullFooterView(sections)
+                }
             }
         }
         .statefull(
@@ -86,32 +90,33 @@ struct TransactionHistoryView<ViewModel: TransactionHistoryViewModel>: View {
     }
 
     @ViewBuilder
-    private func buildTransactionHistoryContentView() -> some View {
-        if let sections = viewModel.model?.sections {
-            ForEach(sections.indices, id: \.self) { sectionIndex in
-                LazyVStack(spacing: 0) {
-                    let section = sections[sectionIndex]
-
-                    TransactionHistoryHeaderView(model: section.header)
-
-                    ForEach(section.items.indices, id: \.self) { itemIndex in
-                        let item = section.items[itemIndex]
-                        TransactionHistoryItemView(model: item)
-                            .background(
-                                itemIndex % 2 == 0
-                                    ? ColorAssets.secondaryYellow50.swiftUIColor
-                                    : .clear
-                            )
-                            .onTapGesture {
-                                viewModel.transactionDetailAction.send(item.id)
-                            }
-                    }
+    private func buildSectionView(_ section: TransactionHistorySectionModel) -> some View {
+        LazyVStack(spacing: 0) {
+            TransactionHistoryHeaderView(model: section.header)
+                .onTapGesture {
+                    viewModel.navigationType = .dashboard(section.header.dateTime)
                 }
+
+            ForEach(section.items.indices, id: \.self) { index in
+                buildItemView(section.items[index])
+                    .background(
+                        index % 2 == 0
+                            ? ColorAssets.secondaryYellow50.swiftUIColor
+                            : .clear
+                    )
             }
         }
     }
 
-    private func buildStatefullFooterView() -> some View {
+    @ViewBuilder
+    private func buildItemView(_ item: TransactionHistoryItemModel) -> some View {
+        TransactionHistoryItemView(model: item)
+            .onTapGesture {
+                viewModel.transactionDetailAction.send(item.id)
+            }
+    }
+
+    private func buildStatefullFooterView(_: [TransactionHistorySectionModel]) -> some View {
         StatefullFooterView(state: $viewModel.footerState)
             .onAppear {
                 viewModel.loadMoreAction.send()
@@ -157,8 +162,12 @@ struct TransactionHistoryView<ViewModel: TransactionHistoryViewModel>: View {
                     transaction: transaction
                 )
             )
-        case .dashboard:
-            EmptyView()
+        case let .dashboard(date):
+            TransactionDashboardView(
+                viewModel: TransactionDashboardViewModel(
+                    monthYearDate: date
+                )
+            )
         }
     }
 }

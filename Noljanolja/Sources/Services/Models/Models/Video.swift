@@ -14,15 +14,19 @@ struct Video: Equatable, Codable {
     let title: String?
     let thumbnail: String?
     let duration: String?
-    let durationMs: Int?
-    let viewCount: Int?
-    let likeCount: Int?
-    let commentCount: Int?
-    let favoriteCount: Int?
-    let isHighlighted: Bool?
+    let durationMs: Int
+    let currentProgress: Int
+    let viewCount: Int
+    let likeCount: Int
+    let commentCount: Int
+    let favoriteCount: Int
+    let isHighlighted: Bool
     let comments: [VideoComment]
     let channel: VideoChannel?
     let category: VideoCategory?
+    let earnedPoints: Int
+    let totalPoints: Int
+    let completed: Bool
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -32,6 +36,7 @@ struct Video: Equatable, Codable {
         case thumbnail
         case duration
         case durationMs
+        case currentProgress
         case viewCount
         case likeCount
         case commentCount
@@ -40,6 +45,9 @@ struct Video: Equatable, Codable {
         case comments
         case channel
         case category
+        case earnedPoints
+        case totalPoints
+        case completed
     }
 
     init(from decoder: Decoder) throws {
@@ -61,14 +69,18 @@ struct Video: Equatable, Codable {
         self.title = try container.decodeIfPresent(String.self, forKey: .title)
         self.thumbnail = try container.decodeIfPresent(String.self, forKey: .thumbnail)
         self.duration = try container.decodeIfPresent(String.self, forKey: .duration)
-        self.durationMs = try container.decodeIfPresent(Int.self, forKey: .durationMs)
-        self.viewCount = try container.decodeIfPresent(Int.self, forKey: .viewCount)
-        self.likeCount = try container.decodeIfPresent(Int.self, forKey: .likeCount)
-        self.commentCount = try container.decodeIfPresent(Int.self, forKey: .commentCount)
-        self.favoriteCount = try container.decodeIfPresent(Int.self, forKey: .favoriteCount)
-        self.isHighlighted = try container.decodeIfPresent(Bool.self, forKey: .isHighlighted)
+        self.durationMs = try container.decodeIfPresent(Int.self, forKey: .durationMs) ?? 0
+        self.currentProgress = try container.decodeIfPresent(Int.self, forKey: .durationMs) ?? 0
+        self.viewCount = try container.decodeIfPresent(Int.self, forKey: .viewCount) ?? 0
+        self.likeCount = try container.decodeIfPresent(Int.self, forKey: .likeCount) ?? 0
+        self.commentCount = try container.decodeIfPresent(Int.self, forKey: .commentCount) ?? 0
+        self.favoriteCount = try container.decodeIfPresent(Int.self, forKey: .favoriteCount) ?? 0
+        self.isHighlighted = try container.decodeIfPresent(Bool.self, forKey: .isHighlighted) ?? false
         self.comments = try container.decodeIfPresent([VideoComment].self, forKey: .comments) ?? []
         self.channel = try container.decodeIfPresent(VideoChannel.self, forKey: .channel)
         self.category = try container.decodeIfPresent(VideoCategory.self, forKey: .category)
+        self.earnedPoints = try container.decodeIfPresent(Int.self, forKey: .earnedPoints) ?? 0
+        self.totalPoints = try container.decodeIfPresent(Int.self, forKey: .totalPoints) ?? 0
+        self.completed = try container.decodeIfPresent(Bool.self, forKey: .completed) ?? false
     }
 }

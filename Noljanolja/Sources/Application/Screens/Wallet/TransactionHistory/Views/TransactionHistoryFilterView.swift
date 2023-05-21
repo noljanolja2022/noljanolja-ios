@@ -10,8 +10,8 @@ import SwiftUI
 // MARK: - TransactionHistoryFilterView
 
 struct TransactionHistoryFilterView: View {
-    @Binding var selectedType: TransactionFilterType
-    let types: [TransactionFilterType]
+    @Binding var selectedType: TransactionType
+    let types: [TransactionType]
 
     var body: some View {
         buildBodyView()
@@ -36,7 +36,7 @@ struct TransactionHistoryFilterView: View {
 // MARK: - TransactionHistoryFilterItemView
 
 struct TransactionHistoryFilterItemView: View {
-    let type: TransactionFilterType
+    let type: TransactionType
     let isSelected: Bool
     var action: (() -> Void)?
 

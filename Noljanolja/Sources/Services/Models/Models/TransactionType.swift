@@ -1,5 +1,5 @@
 //
-//  TransactionFilterType.swift
+//  TransactionType.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 16/05/2023.
@@ -7,15 +7,15 @@
 
 import Foundation
 
-// MARK: - TransactionFilterType
+// MARK: - TransactionType
 
-enum TransactionFilterType: String, Equatable, CaseIterable {
+enum TransactionType: String, Equatable, CaseIterable {
     case all = "ALL"
     case received = "RECEIVED"
     case spent = "SPENT"
 }
 
-extension TransactionFilterType {
+extension TransactionType {
     var title: String {
         switch self {
         case .all: return "All"

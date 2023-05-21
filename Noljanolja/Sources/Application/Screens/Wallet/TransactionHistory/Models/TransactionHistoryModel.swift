@@ -12,10 +12,3 @@ import Foundation
 struct TransactionHistoryModel: Equatable {
     let sections: [TransactionHistorySectionModel]
 }
-
-// MARK: - TransactionHistorySectionModel
-
-struct TransactionHistorySectionModel: Equatable {
-    let header: TransactionHistoryHeaderModel
-    let items: [TransactionHistoryItemModel]
-}
