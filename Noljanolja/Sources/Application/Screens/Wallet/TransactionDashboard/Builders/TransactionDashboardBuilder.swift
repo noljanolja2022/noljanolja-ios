@@ -18,16 +18,16 @@ struct TransactionDashboardBuilder {
     }
 
     func buildModel() -> TransactionDashboardModel {
-        let barChartData = buildBarChartData()
+        let chartModel = buildChartModel()
         let sections = buildSections()
         return TransactionDashboardModel(
             title: monthYearDate.string(withFormat: "MMMM yyyy"),
-            barChartData: barChartData,
+            chartModel: chartModel,
             sections: sections
         )
     }
 
-    private func buildBarChartData() -> BarChartData {
+    private func buildChartModel() -> TransactionDashboardChartModel {
         let startMonthDate = Calendar.current.date(
             from: Calendar.current.dateComponents(
                 [.month, .year],
@@ -38,34 +38,30 @@ struct TransactionDashboardBuilder {
         var sections = [
             TransactionDashboardBarChartSectionModel(
                 minDate: startMonthDate,
-                maxDate: startMonthDate.flatMap {
-                    Calendar.current.date(byAdding: .day, value: 7, to: $0)
-                }
-            ),
-            TransactionDashboardBarChartSectionModel(
-                minDate: startMonthDate.flatMap {
-                    Calendar.current.date(byAdding: .day, value: 7, to: $0)
-                },
-                maxDate: startMonthDate.flatMap {
-                    Calendar.current.date(byAdding: .day, value: 14, to: $0)
-                }
-            ),
-            TransactionDashboardBarChartSectionModel(
-                minDate: startMonthDate.flatMap {
-                    Calendar.current.date(byAdding: .day, value: 14, to: $0)
-                },
-                maxDate: startMonthDate.flatMap {
-                    Calendar.current.date(byAdding: .day, value: 21, to: $0)
-                }
-            ),
-            TransactionDashboardBarChartSectionModel(
-                minDate: startMonthDate.flatMap {
-                    Calendar.current.date(byAdding: .day, value: 21, to: $0)
-                },
                 maxDate: startMonthDate
-                    .flatMap {
-                        Calendar.current.date(byAdding: .month, value: 1, to: $0)
-                    }
+                    .flatMap { Calendar.current.date(byAdding: .day, value: 7, to: $0) }
+                    .flatMap { Calendar.current.date(byAdding: .second, value: -1, to: $0) }
+            ),
+            TransactionDashboardBarChartSectionModel(
+                minDate: startMonthDate
+                    .flatMap { Calendar.current.date(byAdding: .day, value: 7, to: $0) },
+                maxDate: startMonthDate
+                    .flatMap { Calendar.current.date(byAdding: .day, value: 14, to: $0) }
+                    .flatMap { Calendar.current.date(byAdding: .second, value: -1, to: $0) }
+            ),
+            TransactionDashboardBarChartSectionModel(
+                minDate: startMonthDate
+                    .flatMap { Calendar.current.date(byAdding: .day, value: 14, to: $0) },
+                maxDate: startMonthDate
+                    .flatMap { Calendar.current.date(byAdding: .day, value: 21, to: $0) }
+                    .flatMap { Calendar.current.date(byAdding: .second, value: -1, to: $0) }
+            ),
+            TransactionDashboardBarChartSectionModel(
+                minDate: startMonthDate
+                    .flatMap { Calendar.current.date(byAdding: .day, value: 21, to: $0) },
+                maxDate: startMonthDate
+                    .flatMap { Calendar.current.date(byAdding: .month, value: 1, to: $0) }
+                    .flatMap { Calendar.current.date(byAdding: .second, value: -1, to: $0) }
             )
         ]
         .compactMap { $0 }
@@ -91,6 +87,8 @@ struct TransactionDashboardBuilder {
                 return BarChartDataEntry(x: Double(index), y: Double(sum))
             }
         )
+        chargeDataSet.highlightEnabled = false
+        chargeDataSet.drawValuesEnabled = false
         chargeDataSet.label = "Charge"
         chargeDataSet.setColor(ColorAssets.systemGreen.color)
 
@@ -106,10 +104,44 @@ struct TransactionDashboardBuilder {
                 return BarChartDataEntry(x: Double(index), y: Double(sum))
             }
         )
+        spentDataSet.highlightEnabled = false
+        spentDataSet.drawValuesEnabled = false
         spentDataSet.label = "Discharge"
         spentDataSet.setColor(ColorAssets.systemRed100.color)
 
-        return BarChartData(dataSets: [chargeDataSet, spentDataSet])
+        let data = BarChartData(dataSets: [chargeDataSet, spentDataSet])
+
+        let barWidth = 0.2
+        let barSpace = 0.0
+        let groupSpace = 0.6
+
+        data.barWidth = barWidth
+        data.groupBars(fromX: 0.0, groupSpace: groupSpace, barSpace: barSpace)
+
+        let xAxis: XAxisConfig = {
+            let xAxis = XAxisConfig()
+            xAxis.axisMaximum = data.groupWidth(groupSpace: groupSpace, barSpace: barSpace) * Double(sections.count)
+            xAxis.axisMinimum = 0
+            xAxis.drawGridLinesEnabled = false
+            xAxis.labelFont = .systemFont(ofSize: 6, weight: .medium)
+            xAxis.labelPosition = .bottom
+            xAxis.granularity = 1
+            xAxis.granularityEnabled = true
+            xAxis.valueFormatter = IndexAxisValueFormatter(
+                values: sections.map { section in
+                    let minDate = section.minDate.string(withFormat: "MMMM dd")
+                    let maxDate = section.maxDate.string(withFormat: "dd")
+                    return [minDate, maxDate].joined(separator: " - ")
+                }
+            )
+            xAxis.centerAxisLabelsEnabled = true
+            return xAxis
+        }()
+
+        return TransactionDashboardChartModel(
+            data: data,
+            xAxis: xAxis
+        )
     }
 
     private func buildSections() -> [TransactionDashboardSectionModel] {

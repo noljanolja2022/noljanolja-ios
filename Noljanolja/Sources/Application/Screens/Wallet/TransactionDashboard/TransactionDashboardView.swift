@@ -6,7 +6,9 @@
 //
 //
 
+import Charts
 import SwiftUI
+import SwiftUIX
 
 // MARK: - TransactionDashboardView
 
@@ -49,23 +51,71 @@ struct TransactionDashboardView<ViewModel: TransactionDashboardViewModel>: View 
             buildBarChartView()
             buildListView()
         }
-        .background(ColorAssets.neutralLightGrey.swiftUIColor)
+        .background(ColorAssets.neutralLightGrey.swiftUIColor.ignoresSafeArea())
     }
 
     @ViewBuilder
     private func buildBarChartView() -> some View {
         if let model = viewModel.model {
-            VStack(spacing: 8) {
+            VStack(alignment: .trailing, spacing: 12) {
                 Text(model.title)
                     .font(.system(size: 14))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                     .frame(maxWidth: .infinity, alignment: .center)
 
                 BarChartSwiftUIView(
-                    data: model.barChartData
+                    data: model.chartModel.data,
+                    config: {
+                        let config = BarChartConfig()
+                        config.isScaleEnabled = false
+                        return config
+                    }(),
+                    legend: {
+                        let legend = LegendConfig()
+                        legend.enabled = false
+                        return legend
+                    }(),
+                    xAxis: model.chartModel.xAxis,
+                    leftAxis: {
+                        let leftAxis = YAxisConfig()
+                        leftAxis.drawBottomYLabelEntryEnabled = true
+                        leftAxis.labelFont = .systemFont(ofSize: 6, weight: .medium)
+                        leftAxis.drawGridLinesEnabled = false
+                        leftAxis.valueFormatter = LargeValueFormatter()
+                        leftAxis.axisMinimum = 0
+                        return leftAxis
+                    }(),
+                    rightAxis: {
+                        let rightAxis = YAxisConfig()
+                        rightAxis.drawGridLinesEnabled = false
+                        rightAxis.drawAxisLineEnabled = false
+                        rightAxis.drawLabelsEnabled = false
+                        rightAxis.axisMinimum = 0
+                        return rightAxis
+                    }()
                 )
                 .aspectRatio(2, contentMode: .fit)
                 .background(ColorAssets.neutralLight.swiftUIColor)
+
+                VStack(alignment: .leading, spacing: 8) {
+                    ForEach(model.chartModel.data.dataSets.indices, id: \.self) { index in
+                        let dataSet = model.chartModel.data.dataSets[index]
+                        HStack(spacing: 4) {
+                            Spacer()
+                                .frame(width: 16, height: 16)
+                                .background(Color(dataSet.colors[0]))
+                                .cornerRadius(4)
+                            Text(dataSet.label ?? "")
+                                .font(.system(size: 6, weight: .medium))
+                                .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
+                                .alignmentGuide(.leading, computeValue: { $0[.leading] })
+                                .alignmentGuide(.top, computeValue: { $0[.top] })
+                                .alignmentGuide(.trailing, computeValue: { $0[.trailing] })
+                                .alignmentGuide(.bottom, computeValue: { $0[.bottom] })
+                        }
+                    }
+                }
+                .padding(.trailing, 16)
             }
             .padding(16)
             .background(ColorAssets.neutralLight.swiftUIColor)

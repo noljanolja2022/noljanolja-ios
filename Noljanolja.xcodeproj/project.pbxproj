@@ -71,6 +71,8 @@
 		CF1BD1FD29ACEAA000778786 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1BD1FC29ACEAA000778786 /* UserService.swift */; };
 		CF1BD20529ACF5F200778786 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1BD20429ACF5F200778786 /* LoadingView.swift */; };
 		CF1BD20B29ACF67D00778786 /* StateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1BD20A29ACF67D00778786 /* StateView.swift */; };
+		CF1EA57C2A1D05C9006846DF /* Legend+Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1EA57B2A1D05C9006846DF /* Legend+Config.swift */; };
+		CF1EA57E2A1D05FD006846DF /* ComponentBase+Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1EA57D2A1D05FD006846DF /* ComponentBase+Config.swift */; };
 		CF1EEE2D29AE355E004F570A /* NibOwnerLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1EEE2C29AE355E004F570A /* NibOwnerLoadable.swift */; };
 		CF1EEE3329AE3F81004F570A /* TermView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1EEE3129AE3F81004F570A /* TermView.swift */; };
 		CF1EEE3429AE3F81004F570A /* TermViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1EEE3229AE3F81004F570A /* TermViewModel.swift */; };
@@ -266,6 +268,9 @@
 		CFD0952A2A02B99C004BF047 /* VideoState+Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD095292A02B99C004BF047 /* VideoState+Event.swift */; };
 		CFD0952D2A02BDE8004BF047 /* Encodable+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD0952B2A02BDE8004BF047 /* Encodable+JSON.swift */; };
 		CFD0952E2A02BDE8004BF047 /* Dictionary+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD0952C2A02BDE8004BF047 /* Dictionary+JSON.swift */; };
+		CFD12CEC2A1C6D610095D28D /* LargeValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD12CEB2A1C6D610095D28D /* LargeValueFormatter.swift */; };
+		CFD12CF22A1C730F0095D28D /* Chart+Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD12CF12A1C730F0095D28D /* Chart+Config.swift */; };
+		CFD12CF42A1C74240095D28D /* Axis+Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD12CF32A1C74240095D28D /* Axis+Config.swift */; };
 		CFD271D92A0949C20030719E /* MessageStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD271D82A0949C20030719E /* MessageStatusModel.swift */; };
 		CFD5424729BF7A520053C5B1 /* DateChatItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD5423E29BF7A520053C5B1 /* DateChatItemView.swift */; };
 		CFD5424829BF7A520053C5B1 /* ChatItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD5423F29BF7A520053C5B1 /* ChatItemView.swift */; };
@@ -348,6 +353,7 @@
 		CFF5211C2A1A7B5800F29A4E /* MyRankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF5211A2A1A7B5800F29A4E /* MyRankingView.swift */; };
 		CFF5211D2A1A7B5800F29A4E /* MyRankingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF5211B2A1A7B5800F29A4E /* MyRankingViewModel.swift */; };
 		CFF521202A1A7F3600F29A4E /* MyRankingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF5211F2A1A7F3600F29A4E /* MyRankingModel.swift */; };
+		CFF521222A1A8E2700F29A4E /* TransactionDashboardChartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF521212A1A8E2700F29A4E /* TransactionDashboardChartModel.swift */; };
 		CFFB058C29BF0487000D65EE /* ChatItemModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFB058B29BF0487000D65EE /* ChatItemModelBuilder.swift */; };
 		CFFB058E29BF04BD000D65EE /* DateChatItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFB058D29BF04BD000D65EE /* DateChatItemModel.swift */; };
 		CFFB059029BF0F20000D65EE /* ChatItemModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFB058F29BF0F20000D65EE /* ChatItemModelType.swift */; };
@@ -465,6 +471,8 @@
 		CF1BD1FC29ACEAA000778786 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		CF1BD20429ACF5F200778786 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		CF1BD20A29ACF67D00778786 /* StateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateView.swift; sourceTree = "<group>"; };
+		CF1EA57B2A1D05C9006846DF /* Legend+Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Legend+Config.swift"; sourceTree = "<group>"; };
+		CF1EA57D2A1D05FD006846DF /* ComponentBase+Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentBase+Config.swift"; sourceTree = "<group>"; };
 		CF1EEE2C29AE355E004F570A /* NibOwnerLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibOwnerLoadable.swift; sourceTree = "<group>"; };
 		CF1EEE3129AE3F81004F570A /* TermView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermView.swift; sourceTree = "<group>"; };
 		CF1EEE3229AE3F81004F570A /* TermViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermViewModel.swift; sourceTree = "<group>"; };
@@ -652,6 +660,9 @@
 		CFD095292A02B99C004BF047 /* VideoState+Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoState+Event.swift"; sourceTree = "<group>"; };
 		CFD0952B2A02BDE8004BF047 /* Encodable+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Encodable+JSON.swift"; sourceTree = "<group>"; };
 		CFD0952C2A02BDE8004BF047 /* Dictionary+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+JSON.swift"; sourceTree = "<group>"; };
+		CFD12CEB2A1C6D610095D28D /* LargeValueFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeValueFormatter.swift; sourceTree = "<group>"; };
+		CFD12CF12A1C730F0095D28D /* Chart+Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chart+Config.swift"; sourceTree = "<group>"; };
+		CFD12CF32A1C74240095D28D /* Axis+Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Axis+Config.swift"; sourceTree = "<group>"; };
 		CFD271D82A0949C20030719E /* MessageStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStatusModel.swift; sourceTree = "<group>"; };
 		CFD5423E29BF7A520053C5B1 /* DateChatItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateChatItemView.swift; sourceTree = "<group>"; };
 		CFD5423F29BF7A520053C5B1 /* ChatItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatItemView.swift; sourceTree = "<group>"; };
@@ -725,6 +736,7 @@
 		CFF5211A2A1A7B5800F29A4E /* MyRankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRankingView.swift; sourceTree = "<group>"; };
 		CFF5211B2A1A7B5800F29A4E /* MyRankingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRankingViewModel.swift; sourceTree = "<group>"; };
 		CFF5211F2A1A7F3600F29A4E /* MyRankingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRankingModel.swift; sourceTree = "<group>"; };
+		CFF521212A1A8E2700F29A4E /* TransactionDashboardChartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDashboardChartModel.swift; sourceTree = "<group>"; };
 		CFFB058B29BF0487000D65EE /* ChatItemModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatItemModelBuilder.swift; sourceTree = "<group>"; };
 		CFFB058D29BF04BD000D65EE /* DateChatItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateChatItemModel.swift; sourceTree = "<group>"; };
 		CFFB058F29BF0F20000D65EE /* ChatItemModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatItemModelType.swift; sourceTree = "<group>"; };
@@ -1023,6 +1035,7 @@
 		CF15500D299396260053E86D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CFD12CE82A1C6CF00095D28D /* Charts */,
 				CFA5BD2A29EEFB7E00251176 /* TextView */,
 				CF876C3729EAB2E700C8C9B0 /* NavigationBarView */,
 				CF82C30C29EA9FF000EAD36C /* BottomSheet */,
@@ -1956,6 +1969,43 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		CFD12CE82A1C6CF00095D28D /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				CFD12CF02A1C6E000095D28D /* Configs */,
+				CFD12CEA2A1C6D2C0095D28D /* Formatters */,
+				CFD12CE92A1C6CFF0095D28D /* BarChart */,
+			);
+			path = Charts;
+			sourceTree = "<group>";
+		};
+		CFD12CE92A1C6CFF0095D28D /* BarChart */ = {
+			isa = PBXGroup;
+			children = (
+				CFF520FD2A17DB7100F29A4E /* BarChartSwiftUIView.swift */,
+			);
+			path = BarChart;
+			sourceTree = "<group>";
+		};
+		CFD12CEA2A1C6D2C0095D28D /* Formatters */ = {
+			isa = PBXGroup;
+			children = (
+				CFD12CEB2A1C6D610095D28D /* LargeValueFormatter.swift */,
+			);
+			path = Formatters;
+			sourceTree = "<group>";
+		};
+		CFD12CF02A1C6E000095D28D /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				CFD12CF12A1C730F0095D28D /* Chart+Config.swift */,
+				CFD12CF32A1C74240095D28D /* Axis+Config.swift */,
+				CF1EA57B2A1D05C9006846DF /* Legend+Config.swift */,
+				CF1EA57D2A1D05FD006846DF /* ComponentBase+Config.swift */,
+			);
+			path = Configs;
+			sourceTree = "<group>";
+		};
 		CFD5423C29BF7A520053C5B1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -2143,7 +2193,6 @@
 		CFF520FC2A17DB6000F29A4E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CFF520FD2A17DB7100F29A4E /* BarChartSwiftUIView.swift */,
 				CFF521082A1915A500F29A4E /* TransactionDashboardHeaderView.swift */,
 				CFF5210A2A1915AF00F29A4E /* TransactionDashboardItemView.swift */,
 			);
@@ -2157,6 +2206,7 @@
 				CFF5210C2A1915B900F29A4E /* TransactionDashboardItemModel.swift */,
 				CFF5210E2A1915DC00F29A4E /* TransactionDashboardHeaderModel.swift */,
 				CFF521152A19175A00F29A4E /* TransactionDashboardSectionModel.swift */,
+				CFF521212A1A8E2700F29A4E /* TransactionDashboardChartModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2858,6 +2908,7 @@
 				CFA3304729BE3352008D7449 /* String+Phone.swift in Sources */,
 				CFD5424E29BF7A520053C5B1 /* TextMessageContentView.swift in Sources */,
 				CF54FA3329D023A50092E2C6 /* ChatStickerInputViewModel.swift in Sources */,
+				CF1EA57E2A1D05FD006846DF /* ComponentBase+Config.swift in Sources */,
 				CFFDAA1529E4673E002FDD91 /* EventMessageView.swift in Sources */,
 				CFD83DD029974E4E00B9A6BB /* Navigation+Extension.swift in Sources */,
 				CFD0952E2A02BDE8004BF047 /* Dictionary+JSON.swift in Sources */,
@@ -2866,6 +2917,7 @@
 				CFD095272A02B643004BF047 /* VideoProgressEventType.swift in Sources */,
 				CF446B9329D8AE2F00ED66BF /* RefreshTokenInterceptor.swift in Sources */,
 				CFB0A81E29F1B5D100298546 /* VideosView.swift in Sources */,
+				CF1EA57C2A1D05C9006846DF /* Legend+Config.swift in Sources */,
 				CFAC6BBA2A1237A0004AD4A5 /* SourceLicenseViewModel.swift in Sources */,
 				CF11B1D829BB65B4002E8151 /* MessageService.swift in Sources */,
 				CF4A6EF229E3C0D000CB75E5 /* CreateConversationViewModel.swift in Sources */,
@@ -2998,6 +3050,7 @@
 				CF1EEE3429AE3F81004F570A /* TermViewModel.swift in Sources */,
 				CFF1F7A429B7371600B25DD2 /* ChatView.swift in Sources */,
 				CFED123A29F2F355000B320B /* TrendingVideoView.swift in Sources */,
+				CFD12CF22A1C730F0095D28D /* Chart+Config.swift in Sources */,
 				CFFB058C29BF0487000D65EE /* ChatItemModelBuilder.swift in Sources */,
 				CFC4B17929F074A300F577CC /* ChatInputExpandModelType.swift in Sources */,
 				CFAD27AC29E2B9B000947BC3 /* ConversationAdjustmentView.swift in Sources */,
@@ -3046,6 +3099,7 @@
 				CFB0A82D29F1BD3800298546 /* VideoTrendingDurationType.swift in Sources */,
 				CFF520F32A17C17200F29A4E /* TransactionDetailModel.swift in Sources */,
 				CF775BC229C6287F00E82183 /* AppDelegateProtocol.swift in Sources */,
+				CFD12CEC2A1C6D610095D28D /* LargeValueFormatter.swift in Sources */,
 				CF0052C929F46074003900B5 /* VideoDetailInputView.swift in Sources */,
 				CFDCC33E29CCC33700E8F18C /* Attachment.swift in Sources */,
 				CF398DD829BF89430015DB18 /* UpdateCurrentUserParam.swift in Sources */,
@@ -3056,6 +3110,7 @@
 				CFF1F7A529B7371600B25DD2 /* ChatViewModel.swift in Sources */,
 				CFFB059029BF0F20000D65EE /* ChatItemModelType.swift in Sources */,
 				CFB2F6A929E08B0700191AA3 /* ChatSettingItemView.swift in Sources */,
+				CFD12CF42A1C74240095D28D /* Axis+Config.swift in Sources */,
 				CFAC6BC02A123A15004AD4A5 /* AboutUsView.swift in Sources */,
 				CF6ABC2029935D7B00D78213 /* RootViewModel.swift in Sources */,
 				CF8737EA29CB5BAB0018237B /* PhotoPickerView.swift in Sources */,
@@ -3171,6 +3226,7 @@
 				CF28566C29BA2EF100593FA5 /* NormalMessageModel.swift in Sources */,
 				CFAD27AD29E2B9B000947BC3 /* ConversationAdjustmentViewModel.swift in Sources */,
 				CF30B1952A13E9AC00C43A54 /* TransactionHistoryFilterView.swift in Sources */,
+				CFF521222A1A8E2700F29A4E /* TransactionDashboardChartModel.swift in Sources */,
 				CFE09263298EB69700F197F0 /* FirebaseUser+Combine.swift in Sources */,
 				CF28567B29BA408F00593FA5 /* ChatInputView.swift in Sources */,
 				CF131EAF29CEFCA400054719 /* AttachmentParam.swift in Sources */,

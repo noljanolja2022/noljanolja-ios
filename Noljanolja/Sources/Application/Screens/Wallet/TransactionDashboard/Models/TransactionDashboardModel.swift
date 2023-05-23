@@ -8,8 +8,8 @@
 import Charts
 import Foundation
 
-struct TransactionDashboardModel: Equatable {
+struct TransactionDashboardModel {
     let title: String
-    let barChartData: BarChartData
+    let chartModel: TransactionDashboardChartModel
     let sections: [TransactionDashboardSectionModel]
 }
