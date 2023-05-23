@@ -22,6 +22,8 @@ enum LoyaltyTierType: String {
 struct LoyaltyMemberInfo: Equatable, Decodable {
     let memberId: String
     let point: Int
+    let accumulatedPointsToday: Int
+    let exchangeablePoints: Int
     let currentTier: LoyaltyTierType
     let currentTierMinPoint: Int
     let nextTier: LoyaltyTierType
@@ -30,6 +32,8 @@ struct LoyaltyMemberInfo: Equatable, Decodable {
     enum CodingKeys: String, CodingKey {
         case memberId
         case point
+        case accumulatedPointsToday
+        case exchangeablePoints
         case currentTier
         case currentTierMinPoint
         case nextTier
@@ -39,7 +43,9 @@ struct LoyaltyMemberInfo: Equatable, Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.memberId = try container.decode(String.self, forKey: .memberId)
-        self.point = try container.decode(Int.self, forKey: .point)
+        self.point = try container.decodeIfPresent(Int.self, forKey: .point) ?? 0
+        self.accumulatedPointsToday = try container.decodeIfPresent(Int.self, forKey: .accumulatedPointsToday) ?? 0
+        self.exchangeablePoints = try container.decodeIfPresent(Int.self, forKey: .exchangeablePoints) ?? 0
         self.currentTier = try {
             let string = try container.decode(String.self, forKey: .currentTier)
             return LoyaltyTierType(rawValue: string) ?? .unknown

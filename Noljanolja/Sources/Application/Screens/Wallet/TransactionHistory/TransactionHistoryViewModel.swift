@@ -31,7 +31,7 @@ final class TransactionHistoryViewModel: ViewModel {
     // MARK: Action
 
     let loadMoreAction = PassthroughSubject<Void, Never>()
-    let transactionDetailAction = PassthroughSubject<String, Never>()
+    let transactionDetailAction = PassthroughSubject<Int, Never>()
 
     // MARK: Dependencies
 

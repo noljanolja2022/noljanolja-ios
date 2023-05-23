@@ -22,6 +22,6 @@ struct TransactionDetailModel {
         }()
         self.pointColor = model.amount > 0 ? ColorAssets.primaryGreen200.name : ColorAssets.systemRed100.name
         self.dateTime = model.createdAt.string(withFormat: "HH:mm - MMMM dd, yyyy")
-        self.code = model.id
+        self.code = String(model.id)
     }
 }

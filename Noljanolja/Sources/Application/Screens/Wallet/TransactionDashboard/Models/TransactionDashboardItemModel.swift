@@ -8,7 +8,7 @@
 import Foundation
 
 struct TransactionDashboardItemModel: Equatable {
-    let id: String
+    let id: Int
     let title: String
     let point: String
     let pointColor: String

@@ -75,7 +75,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                     WalletPointView(
                         model: WalletPointModel(
                             title: "Accumulated\npoints for the day",
-                            point: 14_000,
+                            point: model.accumulatedPointsToday,
                             actionTitle: "View history"
                         ),
                         pointColor: ColorAssets.neutralDarkGrey.swiftUIColor,
@@ -87,7 +87,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                     WalletPointView(
                         model: WalletPointModel(
                             title: "Points that\ncan be exchanged",
-                            point: 8_500,
+                            point: model.exchangeablePoints,
                             actionTitle: "Exchange money"
                         ),
                         pointColor: ColorAssets.systemBlue.swiftUIColor

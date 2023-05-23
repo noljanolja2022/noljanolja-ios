@@ -8,7 +8,7 @@
 import Foundation
 
 struct Transaction: Equatable, Decodable {
-    let id: String
+    let id: Int
     let reason: String?
     let amount: Int
     let status: TransactionStatusType
@@ -24,7 +24,7 @@ struct Transaction: Equatable, Decodable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.id = try container.decode(String.self, forKey: .id)
+        self.id = try container.decode(Int.self, forKey: .id)
         self.reason = try container.decodeIfPresent(String.self, forKey: .reason)
         self.amount = try container.decode(Int.self, forKey: .amount)
         self.status = try container.decodeIfPresent(TransactionStatusType.self, forKey: .status) ?? .unknown

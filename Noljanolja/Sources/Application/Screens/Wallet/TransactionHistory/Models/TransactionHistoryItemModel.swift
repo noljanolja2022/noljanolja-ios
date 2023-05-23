@@ -8,7 +8,7 @@
 import Foundation
 
 struct TransactionHistoryItemModel: Equatable {
-    let id: String
+    let id: Int
     let title: String
     let dateTime: String
     let point: String
