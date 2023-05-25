@@ -58,7 +58,6 @@
 		CF18378729F6F4F500DDC15C /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = CF18378629F6F4F500DDC15C /* YouTubePlayerKit */; };
 		CF18898229B347E500701583 /* UpdateCurrentUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF18898029B347E500701583 /* UpdateCurrentUserView.swift */; };
 		CF18898329B347E500701583 /* UpdateCurrentUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF18898129B347E500701583 /* UpdateCurrentUserViewModel.swift */; };
-		CF18898629B349AE00701583 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CF18898529B349AE00701583 /* Kingfisher */; };
 		CF1A9A0A2A0D362F0004CCD8 /* NotificationSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1A9A082A0D362F0004CCD8 /* NotificationSettingView.swift */; };
 		CF1A9A0B2A0D362F0004CCD8 /* NotificationSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1A9A092A0D362F0004CCD8 /* NotificationSettingViewModel.swift */; };
 		CF1B624829B9B55F00DE53E6 /* ConversationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1B624729B9B55F00DE53E6 /* ConversationAPI.swift */; };
@@ -790,7 +789,6 @@
 				CF6ABC232993618000D78213 /* Introspect in Frameworks */,
 				CF14F24D298CC11700BC2066 /* FirebaseAnalytics in Frameworks */,
 				CFE09272298FEACD00F197F0 /* SwifterSwift in Frameworks */,
-				CF18898629B349AE00701583 /* Kingfisher in Frameworks */,
 				CF076D5729D0C0130013B6F9 /* SDWebImageWebPCoder in Frameworks */,
 				CFE9D2DD298D66F700D936DA /* GoogleSignIn in Frameworks */,
 				CFE0926D298FE75500F197F0 /* FirebaseFunctionsCombine-Community in Frameworks */,
@@ -2587,7 +2585,6 @@
 				CF6ABC222993618000D78213 /* Introspect */,
 				CF88ABCC299F2E7400D8AB67 /* SwiftUINavigation */,
 				CF62EF8C29B254DD00D6B688 /* _SwiftUINavigationState */,
-				CF18898529B349AE00701583 /* Kingfisher */,
 				CFF1F79929B6E7FE00B25DD2 /* CombineExt */,
 				CFF1F7AA29B737F400B25DD2 /* SwiftUIX */,
 				CF52AB7229B8E3B700C9C90C /* RealmSwift */,
@@ -2687,7 +2684,6 @@
 				CFE48BBF299206830062C903 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				CF6ABC212993617F00D78213 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				CF88ABCB299F2E7400D8AB67 /* XCRemoteSwiftPackageReference "swiftui-navigation" */,
-				CF18898429B349AE00701583 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				CFF1F79829B6E7FE00B25DD2 /* XCRemoteSwiftPackageReference "CombineExt" */,
 				CFF1F7A929B737F300B25DD2 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 				CF52AB7129B8E3B600C9C90C /* XCRemoteSwiftPackageReference "realm-swift" */,
@@ -3630,14 +3626,6 @@
 				version = 1.4.0;
 			};
 		};
-		CF18898429B349AE00701583 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
-			requirement = {
-				kind = exactVersion;
-				version = 7.6.2;
-			};
-		};
 		CF446B8329D89C3000ED66BF /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios";
@@ -3795,11 +3783,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CF18378529F6F4F500DDC15C /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */;
 			productName = YouTubePlayerKit;
-		};
-		CF18898529B349AE00701583 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CF18898429B349AE00701583 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
 		};
 		CF446B8429D89C3000ED66BF /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;

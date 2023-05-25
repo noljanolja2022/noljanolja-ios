@@ -11,7 +11,6 @@ import Foundation
 import GoogleSignIn
 import KakaoSDKAuth
 import KakaoSDKCommon
-import Kingfisher
 import NaverThirdPartyLogin
 import SDWebImage
 import SDWebImageWebPCoder
@@ -42,10 +41,6 @@ final class FrameworkAppDelegate: NSObject, AppDelegateProtocol {
             }
             return request
         }
-
-        KingfisherManager.shared.defaultOptions += [
-            .requestModifier(AnyModifier(modify: requestModifier))
-        ]
 
         SDWebImageDownloader.shared.requestModifier = SDWebImageDownloaderRequestModifier(block: requestModifier)
 

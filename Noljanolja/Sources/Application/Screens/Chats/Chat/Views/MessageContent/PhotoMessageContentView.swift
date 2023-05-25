@@ -5,7 +5,6 @@
 //  Created by Nguyen The Trinh on 24/03/2023.
 //
 
-import Kingfisher
 import SDWebImageSwiftUI
 import SwiftUI
 import SwiftUIX

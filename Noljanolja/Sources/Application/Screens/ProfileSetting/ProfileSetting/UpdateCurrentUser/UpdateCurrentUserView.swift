@@ -6,8 +6,8 @@
 //
 //
 
-import Kingfisher
 import PhotosUI
+import SDWebImageSwiftUI
 import SwiftUI
 import SwiftUINavigation
 import SwiftUIX
@@ -86,11 +86,10 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                         .resizable()
                 },
                 else: {
-                    KFImage(URL(string: viewModel.avatar))
-                        .placeholder {
-                            ImageAssets.icAvatarPlaceholder.swiftUIImage
-                        }
+                    WebImage(url: URL(string: viewModel.avatar))
                         .resizable()
+                        .placeholder(ImageAssets.icAvatarPlaceholder.swiftUIImage)
+                        .indicator(.activity)
                 }
             )
             .scaledToFill()
