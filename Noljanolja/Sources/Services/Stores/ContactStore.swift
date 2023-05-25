@@ -44,11 +44,19 @@ final class ContactStore: ContactStoreType {
     }
 
     func observeContacts() -> AnyPublisher<[User], Error> {
-        realmManager.objects(StorableUser.self)
-            .collectionPublisher
-            .freeze()
-            .map { users -> [User] in users.compactMap { $0.model } }
-            .receive(on: DispatchQueue.main)
+        Just(())
+            .setFailureType(to: Error.self)
+            .receive(on: DispatchQueue.main) // TODO: Can only add notification blocks from within runloops
+            .flatMapLatest { [weak self] _ -> AnyPublisher<[User], Error> in
+                guard let self else {
+                    return Empty<[User], Error>().eraseToAnyPublisher()
+                }
+                return self.realmManager.objects(StorableUser.self)
+                    .collectionPublisher
+                    .freeze()
+                    .map { users -> [User] in users.compactMap { $0.model } }
+                    .eraseToAnyPublisher()
+            }
             .eraseToAnyPublisher()
     }
 

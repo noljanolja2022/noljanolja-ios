@@ -50,10 +50,18 @@ final class MediaStore: MediaStoreType {
     }
 
     func observeStickerPacks() -> AnyPublisher<[StickerPack], Error> {
-        realmManager.objects(StorableStickerPack.self)
-            .collectionPublisher
-            .map { stickerPacks -> [StickerPack] in stickerPacks.compactMap { $0.model } }
-            .receive(on: DispatchQueue.main)
+        Just(())
+            .setFailureType(to: Error.self)
+            .receive(on: DispatchQueue.main) // TODO: Can only add notification blocks from within runloops
+            .flatMapLatest { [weak self] _ -> AnyPublisher<[StickerPack], Error> in
+                guard let self else {
+                    return Empty<[StickerPack], Error>().eraseToAnyPublisher()
+                }
+                return self.realmManager.objects(StorableStickerPack.self)
+                    .collectionPublisher
+                    .map { stickerPacks -> [StickerPack] in stickerPacks.compactMap { $0.model } }
+                    .eraseToAnyPublisher()
+            }
             .eraseToAnyPublisher()
     }
 
