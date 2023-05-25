@@ -117,10 +117,14 @@ struct TransactionHistoryView<ViewModel: TransactionHistoryViewModel>: View {
     }
 
     private func buildStatefullFooterView(_: [TransactionHistorySectionModel]) -> some View {
-        StatefullFooterView(state: $viewModel.footerState)
-            .onAppear {
-                viewModel.loadMoreAction.send()
-            }
+        StatefullFooterView(
+            state: $viewModel.footerState,
+            errorView: EmptyView(),
+            noMoreDataView: EmptyView()
+        )
+        .onAppear {
+            viewModel.loadMoreAction.send()
+        }
     }
 
     private func buildLoadingView() -> some View {

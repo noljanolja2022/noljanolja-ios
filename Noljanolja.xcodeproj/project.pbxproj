@@ -73,6 +73,7 @@
 		CF1BD20B29ACF67D00778786 /* StateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1BD20A29ACF67D00778786 /* StateView.swift */; };
 		CF1EA57C2A1D05C9006846DF /* Legend+Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1EA57B2A1D05C9006846DF /* Legend+Config.swift */; };
 		CF1EA57E2A1D05FD006846DF /* ComponentBase+Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1EA57D2A1D05FD006846DF /* ComponentBase+Config.swift */; };
+		CF1EA5862A1D32CD006846DF /* PublishedCurrentValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1EA5852A1D32CD006846DF /* PublishedCurrentValue.swift */; };
 		CF1EEE2D29AE355E004F570A /* NibOwnerLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1EEE2C29AE355E004F570A /* NibOwnerLoadable.swift */; };
 		CF1EEE3329AE3F81004F570A /* TermView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1EEE3129AE3F81004F570A /* TermView.swift */; };
 		CF1EEE3429AE3F81004F570A /* TermViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1EEE3229AE3F81004F570A /* TermViewModel.swift */; };
@@ -473,6 +474,7 @@
 		CF1BD20A29ACF67D00778786 /* StateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateView.swift; sourceTree = "<group>"; };
 		CF1EA57B2A1D05C9006846DF /* Legend+Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Legend+Config.swift"; sourceTree = "<group>"; };
 		CF1EA57D2A1D05FD006846DF /* ComponentBase+Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentBase+Config.swift"; sourceTree = "<group>"; };
+		CF1EA5852A1D32CD006846DF /* PublishedCurrentValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishedCurrentValue.swift; sourceTree = "<group>"; };
 		CF1EEE2C29AE355E004F570A /* NibOwnerLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibOwnerLoadable.swift; sourceTree = "<group>"; };
 		CF1EEE3129AE3F81004F570A /* TermView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermView.swift; sourceTree = "<group>"; };
 		CF1EEE3229AE3F81004F570A /* TermViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermViewModel.swift; sourceTree = "<group>"; };
@@ -865,6 +867,7 @@
 			isa = PBXGroup;
 			children = (
 				CFE09340299007E400F197F0 /* Publisher+ResultTranforming.swift */,
+				CF1EA5852A1D32CD006846DF /* PublishedCurrentValue.swift */,
 			);
 			path = Combines;
 			sourceTree = "<group>";
@@ -3214,6 +3217,7 @@
 				CF615C342A0FD04C00CAF9C5 /* ChatSettingItemModelBuilder.swift in Sources */,
 				CFF5210D2A1915B900F29A4E /* TransactionDashboardItemModel.swift in Sources */,
 				CFDCC33C29CCC2D000E8F18C /* PhotoMessageContentView.swift in Sources */,
+				CF1EA5862A1D32CD006846DF /* PublishedCurrentValue.swift in Sources */,
 				CF1BD20B29ACF67D00778786 /* StateView.swift in Sources */,
 				CFB2F6B029E093BD00191AA3 /* ChatSettingParticipantItemView.swift in Sources */,
 				CF4A6EF429E3C45A00CB75E5 /* MainNavigationTypes.swift in Sources */,

@@ -18,7 +18,7 @@ protocol TransactionHistoryViewModelDelegate: AnyObject {}
 final class TransactionHistoryViewModel: ViewModel {
     // MARK: State
 
-    @Published var selectedTransactionType = TransactionType.all
+    @PublishedCurrentValue var selectedTransactionType = TransactionType.all
 
     @Published var viewState = ViewState.loading
     @Published var footerState = StatefullFooterViewState.normal
@@ -64,6 +64,7 @@ final class TransactionHistoryViewModel: ViewModel {
             .map {
                 TransactionHistoryModelBuilder(models: $0).build()
             }
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in
                 self?.model = $0
             })
@@ -86,21 +87,27 @@ final class TransactionHistoryViewModel: ViewModel {
     private func configureLoadData() {
         let loadDataAction = Publishers.Merge3(
             isAppearSubject
+                .receive(on: DispatchQueue.main)
                 .first(where: { $0 })
                 .mapToVoid(),
             $selectedTransactionType
+                .receive(on: DispatchQueue.main)
                 .dropFirst()
+                .removeDuplicates()
                 .handleEvents(receiveOutput: { [weak self] _ in
                     self?.transationsSubject.send([])
+                    self?.lastOffsetDateSubject.send(nil)
                 })
                 .mapToVoid(),
             loadMoreAction
+                .receive(on: DispatchQueue.main)
                 .filter { [weak self] in self?.footerState.isLoadEnabled ?? false }
                 .mapToVoid()
         )
         .withLatestFrom(Publishers.CombineLatest($selectedTransactionType, lastOffsetDateSubject))
 
         loadDataAction
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in
                 self?.viewState = .loading
                 self?.footerState = .loading
@@ -116,15 +123,17 @@ final class TransactionHistoryViewModel: ViewModel {
             }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
+                guard let self else { return }
                 switch result {
                 case let .success(model):
-                    let newTransactions = (self?.transationsSubject.value ?? []) + model
-                    self?.transationsSubject.send(newTransactions)
-                    self?.viewState = .content
-                    self?.footerState = model.isEmpty ? .noMoreData : .normal
+                    let newTransactions = self.transationsSubject.value + model
+                    self.transationsSubject.send(newTransactions)
+                    self.lastOffsetDateSubject.send(model.last?.createdAt)
+                    self.viewState = .content
+                    self.footerState = model.isEmpty ? .noMoreData : .normal
                 case .failure:
-                    self?.viewState = .error
-                    self?.footerState = .error
+                    self.viewState = .error
+                    self.footerState = .error
                 }
             })
             .store(in: &cancellables)

@@ -28,40 +28,24 @@ struct TransactionDashboardBuilder {
     }
 
     private func buildChartModel() -> TransactionDashboardChartModel {
-        let startMonthDate = Calendar.current.date(
-            from: Calendar.current.dateComponents(
-                [.month, .year],
-                from: monthYearDate
-            )
-        )
+        let startMonthDate = monthYearDate.beginning(of: .month)
 
         var sections = [
             TransactionDashboardBarChartSectionModel(
                 minDate: startMonthDate,
-                maxDate: startMonthDate
-                    .flatMap { Calendar.current.date(byAdding: .day, value: 7, to: $0) }
-                    .flatMap { Calendar.current.date(byAdding: .second, value: -1, to: $0) }
+                maxDate: startMonthDate?.adding(.day, value: 6).end(of: .day)
             ),
             TransactionDashboardBarChartSectionModel(
-                minDate: startMonthDate
-                    .flatMap { Calendar.current.date(byAdding: .day, value: 7, to: $0) },
-                maxDate: startMonthDate
-                    .flatMap { Calendar.current.date(byAdding: .day, value: 14, to: $0) }
-                    .flatMap { Calendar.current.date(byAdding: .second, value: -1, to: $0) }
+                minDate: startMonthDate?.adding(.day, value: 7),
+                maxDate: startMonthDate?.adding(.day, value: 13).end(of: .day)
             ),
             TransactionDashboardBarChartSectionModel(
-                minDate: startMonthDate
-                    .flatMap { Calendar.current.date(byAdding: .day, value: 14, to: $0) },
-                maxDate: startMonthDate
-                    .flatMap { Calendar.current.date(byAdding: .day, value: 21, to: $0) }
-                    .flatMap { Calendar.current.date(byAdding: .second, value: -1, to: $0) }
+                minDate: startMonthDate?.adding(.day, value: 14),
+                maxDate: startMonthDate?.adding(.day, value: 20).end(of: .day)
             ),
             TransactionDashboardBarChartSectionModel(
-                minDate: startMonthDate
-                    .flatMap { Calendar.current.date(byAdding: .day, value: 21, to: $0) },
-                maxDate: startMonthDate
-                    .flatMap { Calendar.current.date(byAdding: .month, value: 1, to: $0) }
-                    .flatMap { Calendar.current.date(byAdding: .second, value: -1, to: $0) }
+                minDate: startMonthDate?.adding(.day, value: 21),
+                maxDate: startMonthDate?.end(of: .month)
             )
         ]
         .compactMap { $0 }

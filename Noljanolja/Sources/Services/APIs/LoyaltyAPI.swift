@@ -21,7 +21,7 @@ private enum LoyaltyAPITargets {
     struct GetTransactionHistory: BaseAuthTargetType {
         var path: String { "v1/loyalty/me/points" }
         let method: Moya.Method = .get
-        var task: Task { .requestParameters(parameters: parameters, encoding: URLEncoding.default) }
+        var task: Task { .requestParameters(parameters: parameters, encoding: URLEncoding.queryString) }
 
         let lastOffsetDate: Date?
         let type: TransactionType
@@ -29,9 +29,9 @@ private enum LoyaltyAPITargets {
 
         var parameters: [String: Any] {
             [
-                "lastOffsetDate": lastOffsetDate?.string(withFormat: "dd/MM/yyyy"),
+                "lastOffsetDate": lastOffsetDate?.iso8601String,
                 "type": type.rawValue,
-                "monht": monthYearDate.flatMap {
+                "month": monthYearDate.flatMap {
                     Calendar.current.dateComponents([.month], from: $0)
                 },
                 "year": monthYearDate.flatMap {
