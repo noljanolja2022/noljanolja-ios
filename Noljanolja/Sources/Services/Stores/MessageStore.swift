@@ -63,11 +63,19 @@ final class MessageStore: MessageStoreType {
     }
 
     func observeMessages(conversationID: Int) -> AnyPublisher<[Message], Error> {
-        realmManager.objects(StorableMessage.self)
-            .where { $0.conversationID == conversationID }
-            .collectionPublisher
-            .map { messages -> [Message] in messages.compactMap { $0.model } }
-            .receive(on: DispatchQueue.main)
+        Just(())
+            .setFailureType(to: Error.self)
+            .receive(on: DispatchQueue.main) // TODO: Can only add notification blocks from within runloops
+            .flatMapLatest { [weak self] _ -> AnyPublisher<[Message], Error> in
+                guard let self else {
+                    return Empty<[Message], Error>().eraseToAnyPublisher()
+                }
+                return self.realmManager.objects(StorableMessage.self)
+                    .where { $0.conversationID == conversationID }
+                    .collectionPublisher
+                    .map { messages -> [Message] in messages.compactMap { $0.model } }
+                    .eraseToAnyPublisher()
+            }
             .eraseToAnyPublisher()
     }
 

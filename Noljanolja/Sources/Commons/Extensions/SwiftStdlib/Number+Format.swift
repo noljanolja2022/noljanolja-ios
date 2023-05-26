@@ -11,7 +11,7 @@ extension Int {
     func formatted() -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
-        formatter.decimalSeparator = "."
+        formatter.decimalSeparator = ","
 
         let number = NSNumber(value: self)
         let formattedValue = formatter.string(from: number)!

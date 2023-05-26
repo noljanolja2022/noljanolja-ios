@@ -60,11 +60,9 @@ struct VideoDetailInformationView: View {
                     .font(.system(size: 12, weight: .medium))
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
 
-                if let viewCount = video.viewCount?.formatted() {
-                    Text(viewCount)
-                        .font(.system(size: 14, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
+                Text(video.viewCount.formatted())
+                    .font(.system(size: 14, weight: .bold))
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }
             .frame(minWidth: 0, maxWidth: .infinity)
             .padding(.vertical, 8)
@@ -94,7 +92,7 @@ struct VideoDetailInformationView: View {
                     .font(.system(size: 12, weight: .medium))
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
 
-                Text("90 Points")
+                Text("\(video.totalPoints.formatted()) Points")
                     .font(.system(size: 14, weight: .bold))
                     .foregroundColor(.orange)
             }

@@ -83,6 +83,7 @@ final class ContactListViewModel: ViewModel {
                     }
                     .eraseToAnyPublisher()
             }
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { result in
                 switch result {
                 case let .success(users):

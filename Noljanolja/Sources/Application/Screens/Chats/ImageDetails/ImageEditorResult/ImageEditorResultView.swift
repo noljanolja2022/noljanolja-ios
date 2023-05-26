@@ -50,14 +50,14 @@ struct ImageEditorResultView<ViewModel: ImageEditorResultViewModel>: View {
     private func buildContentView() -> some View {
         VStack(spacing: 16) {
             Spacer()
-            buildMainView()
+            buildImageView()
             Spacer()
             buildActionsView()
         }
         .padding(16)
     }
 
-    private func buildMainView() -> some View {
+    private func buildImageView() -> some View {
         GeometryReader { _ in
             Image(uiImage: viewModel.image)
                 .resizable()

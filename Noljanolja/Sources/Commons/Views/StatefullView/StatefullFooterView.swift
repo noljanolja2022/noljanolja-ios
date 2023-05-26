@@ -6,13 +6,22 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 // MARK: - StatefullFooterViewState
 
 enum StatefullFooterViewState {
+    case normal
     case loading
     case error
     case noMoreData
+
+    var isLoadEnabled: Bool {
+        switch self {
+        case .normal, .error: return true
+        case .loading, .noMoreData: return false
+        }
+    }
 }
 
 // MARK: - StatefullFooterView
@@ -36,11 +45,14 @@ struct StatefullFooterView<LoadingView, ErrorView, NoMoreDataView>: View where L
     var body: some View {
         ZStack {
             switch state {
+            case .normal: EmptyView()
             case .loading: loadingView
             case .error: errorView
             case .noMoreData: noMoreDataView
             }
         }
+        .padding(.vertical, 8)
+        .padding(.horizontal, 16)
     }
 }
 
@@ -56,8 +68,7 @@ struct StatefullFooterView_Previews: PreviewProvider {
 
 struct LoadingFooterView: View {
     var body: some View {
-        ProgressView()
-            .progressViewStyle(.circular)
+        ActivityIndicator()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

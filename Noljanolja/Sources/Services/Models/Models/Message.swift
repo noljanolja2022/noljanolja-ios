@@ -106,7 +106,13 @@ struct Message: Equatable, Codable {
            let createdAt = createdAtString.date(withFormats: NetworkConfigs.Format.apiFullDateFormats) {
             self.createdAt = createdAt
         } else {
-            throw NetworkError.mapping("\(Swift.type(of: self)) at key createdAt")
+            throw DecodingError.valueNotFound(
+                String.self,
+                DecodingError.Context(
+                    codingPath: container.codingPath + [CodingKeys.createdAt],
+                    debugDescription: ""
+                )
+            )
         }
     }
 

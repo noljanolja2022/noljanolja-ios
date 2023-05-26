@@ -13,13 +13,13 @@ struct TextMessageContentModel: Equatable {
     let message: String
     let createdAt: Date
     let status: MessageStatusModel.StatusType
-    let backgroundColor: String
+    let background: MessageContentBackgroundModel
 
     init(currentUser: User,
          conversation: Conversation,
          message: Message,
          status: NormalMessageModel.StatusType,
-         backgroundColor: String) {
+         background: MessageContentBackgroundModel) {
         self.message = message.message ?? ""
         self.createdAt = message.createdAt
         self.status = {
@@ -43,6 +43,6 @@ struct TextMessageContentModel: Equatable {
                 }())
             }
         }()
-        self.backgroundColor = backgroundColor
+        self.background = background
     }
 }

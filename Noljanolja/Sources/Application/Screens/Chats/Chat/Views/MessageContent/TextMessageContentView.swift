@@ -31,8 +31,11 @@ struct TextMessageContentView: View {
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
-        .background(Color(model.backgroundColor))
-        .cornerRadius(12)
+        .background(
+            MessageContentBackgroundView(
+                model: model.background
+            )
+        )
     }
 
     private func buildTextView() -> some View {

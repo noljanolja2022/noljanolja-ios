@@ -63,7 +63,7 @@ struct TrendingVideoItemView: View {
 
             let description = [
                 video.channel?.title,
-                (video.viewCount?.relativeFormatted()).flatMap { "\($0) Views" },
+                "\(video.viewCount.relativeFormatted()) Views",
                 video.publishedAt.relative()
             ]
             .compactMap { $0 }
