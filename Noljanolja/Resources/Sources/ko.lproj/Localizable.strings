@@ -78,6 +78,7 @@
 "common.withdrwal" = "환전하기";
 "common.yesterday" = "어제";
 "common.you" = "회원님";
+"common.welcome" = "Welcome to Noja Noja. Follow these steps to be our member.";
 "confirm.password.hint.text" = "비밀번호 확인";
 "contacts.not.found" = "등록된 친구가 없습니다";
 "contacts.start.chat" = "채팅 시작하기";
@@ -165,7 +166,6 @@
 "signup" = "회원가입";
 "splash.explore" = "지금 바로 시작하기";
 "splash.wait" = "잠시만 기다려주세요...";
-"splash.welcome" = "Welcome to Noja Noja. Follow these steps to be our member.";
 "telephone.number.service.center" = "1588-1588";
 "tos.agree.and.continue" = "동의하고 계속하기";
 "tos.compulsory" = "필수";

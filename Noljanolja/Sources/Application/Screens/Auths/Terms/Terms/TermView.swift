@@ -56,11 +56,11 @@ struct TermView<ViewModel: TermViewModel>: View {
                 .resizable()
                 .scaledToFill()
                 .frame(width: 66, height: 62)
-            Text("Login")
+            Text(L10n.Common.login)
                 .font(.system(size: 32, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 12)
-            Text("Welcome to Noja Noja. Follow these steps to be our member.")
+            Text(L10n.Common.welcome)
                 .font(.system(size: 14))
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
@@ -103,7 +103,7 @@ struct TermView<ViewModel: TermViewModel>: View {
 
     private func buildActionView() -> some View {
         Button(
-            "NEXT",
+            L10n.Common.next.uppercased(),
             action: { viewModel.actionSubject.send() }
         )
         .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.isAllTermChecked))

@@ -31,7 +31,7 @@ import UIKit
     private func configure() {
         loadNibContent()
 
-        mesageLabel.text = L10n.Splash.welcome
+        mesageLabel.text = L10n.Common.welcome
         button.setTitle(L10n.Splash.explore, for: .normal)
     }
 

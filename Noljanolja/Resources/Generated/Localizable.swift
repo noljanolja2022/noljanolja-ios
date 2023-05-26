@@ -243,6 +243,8 @@ internal enum L10n {
     internal static let verification = L10n.tr("Localizable", "common.verification", fallback: "Verification")
     /// Warning
     internal static let warning = L10n.tr("Localizable", "common.warning", fallback: "Warning")
+    /// Welcome to Noja Noja. Follow these steps to be our member.
+    internal static let welcome = L10n.tr("Localizable", "common.welcome", fallback: "Welcome to Noja Noja. Follow these steps to be our member.")
     /// Withdrawal
     internal static let withdrwal = L10n.tr("Localizable", "common.withdrwal", fallback: "Withdrawal")
     /// Yesterday
@@ -620,8 +622,6 @@ internal enum L10n {
     internal static let explore = L10n.tr("Localizable", "splash.explore", fallback: "EXPLORE NOW")
     /// Just a moment ...
     internal static let wait = L10n.tr("Localizable", "splash.wait", fallback: "Just a moment ...")
-    /// Welcome to Noja Noja. Follow these steps to be our member.
-    internal static let welcome = L10n.tr("Localizable", "splash.welcome", fallback: "Welcome to Noja Noja. Follow these steps to be our member.")
   }
   internal enum Telephone {
     internal enum Number {
