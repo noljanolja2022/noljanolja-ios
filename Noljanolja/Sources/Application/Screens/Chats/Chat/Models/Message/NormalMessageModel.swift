@@ -8,6 +8,31 @@
 import Foundation
 import UIKit
 
+// MARK: - MessageItemModel.ContentType
+
+extension NormalMessageModel {
+    enum ContentType: Equatable {
+        case plaintext(TextMessageContentModel)
+        case photo(PhotoMessageContentModel)
+        case sticker(StickerMessageContentModel)
+    }
+
+    struct PositionType: OptionSet {
+        let rawValue: UInt8
+
+        static let first = PositionType(rawValue: 1 << 0)
+        static let middle = PositionType(rawValue: 1 << 1)
+        static let last = PositionType(rawValue: 1 << 2)
+    }
+
+    enum StatusType: Equatable {
+        case none
+        case sending
+        case sent
+        case seen([User])
+    }
+}
+
 // MARK: - NormalMessageModel
 
 struct NormalMessageModel: Equatable {
@@ -31,11 +56,40 @@ struct NormalMessageModel: Equatable {
         self.senderAvatar = message.sender.avatar ?? ""
         self.senderName = message.sender.name ?? ""
 
-        let backgroundColor = {
-            if message.sender.id == currentUser.id {
-                return ColorAssets.primaryGreen50.name
+        let background: MessageContentBackgroundModel = {
+            let backgroundColor = message.sender.id == currentUser.id
+                ? ColorAssets.primaryGreen50.name
+                : ColorAssets.neutralLightGrey.name
+            let rotationAngle = message.sender.id == currentUser.id ? 0 : .pi
+
+            if message.sender.id == currentUser.id || conversation.type == .single {
+                if positionType.contains(.last) {
+                    return MessageContentBackgroundModel(
+                        type: .bubble(
+                            MessageContentBackgroundModel.BubbleBackgroundModel()
+                        ),
+                        color: backgroundColor,
+                        rotationAngle: rotationAngle
+                    )
+                } else {
+                    return MessageContentBackgroundModel(
+                        type: .cornerRadius(
+                            MessageContentBackgroundModel.CornerRadiusBackgroundModel(
+                            )
+                        ),
+                        color: backgroundColor,
+                        rotationAngle: rotationAngle
+                    )
+                }
             } else {
-                return ColorAssets.neutralLightGrey.name
+                return MessageContentBackgroundModel(
+                    type: .cornerRadius(
+                        MessageContentBackgroundModel.CornerRadiusBackgroundModel(
+                        )
+                    ),
+                    color: backgroundColor,
+                    rotationAngle: rotationAngle
+                )
             }
         }()
         switch message.type {
@@ -46,7 +100,7 @@ struct NormalMessageModel: Equatable {
                     conversation: conversation,
                     message: message,
                     status: status,
-                    backgroundColor: backgroundColor
+                    background: background
                 )
             )
         case .photo:
@@ -55,7 +109,7 @@ struct NormalMessageModel: Equatable {
                     currentUser: currentUser,
                     message: message,
                     status: status,
-                    backgroundColor: backgroundColor
+                    background: background
                 )
             )
         case .sticker:
@@ -98,30 +152,5 @@ struct NormalMessageModel: Equatable {
             }
         }()
         self.topPadding = positionType.contains(.first) ? 16 : 4
-    }
-}
-
-// MARK: - MessageItemModel.ContentType
-
-extension NormalMessageModel {
-    enum ContentType: Equatable {
-        case plaintext(TextMessageContentModel)
-        case photo(PhotoMessageContentModel)
-        case sticker(StickerMessageContentModel)
-    }
-
-    struct PositionType: OptionSet {
-        let rawValue: UInt8
-
-        static let first = PositionType(rawValue: 1 << 0)
-        static let middle = PositionType(rawValue: 1 << 1)
-        static let last = PositionType(rawValue: 1 << 2)
-    }
-
-    enum StatusType: Equatable {
-        case none
-        case sending
-        case sent
-        case seen([User])
     }
 }

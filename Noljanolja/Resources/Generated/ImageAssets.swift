@@ -24,6 +24,7 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 internal enum ImageAssets {
   internal static let icAddPerson = ImageAsset(name: "ic_add_person")
   internal static let icChatBlock = ImageAsset(name: "ic_chat_block")
+  internal static let icChatBubble = ImageAsset(name: "ic_chat_bubble")
   internal static let icChatCamera = ImageAsset(name: "ic_chat_camera")
   internal static let icChatContact = ImageAsset(name: "ic_chat_contact")
   internal static let icChatDeleteHistory = ImageAsset(name: "ic_chat_delete_history")
@@ -87,6 +88,7 @@ internal enum ImageAssets {
   internal static let allImages: [ImageAsset] = [
     icAddPerson,
     icChatBlock,
+    icChatBubble,
     icChatCamera,
     icChatContact,
     icChatDeleteHistory,

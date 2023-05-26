@@ -58,8 +58,11 @@ struct PhotoMessageContentView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(4)
-        .background(Color(model.backgroundColor))
-        .cornerRadius(12)
+        .background(
+            MessageContentBackgroundView(
+                model: model.background
+            )
+        )
     }
 
     private func buildItem(_ url: URL?) -> some View {
