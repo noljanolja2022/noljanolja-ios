@@ -149,8 +149,8 @@ final class ChatSettingViewModel: ViewModel {
                 case let .failure(error):
                     logger.error("Assign admin failed: \(error.localizedDescription)")
                     self.alertState = AlertState(
-                        title: TextState("Error"),
-                        message: TextState(L10n.Common.Error.message),
+                        title: TextState(L10n.Common.Error.title),
+                        message: TextState(L10n.Common.Error.description),
                         dismissButton: .cancel(TextState("OK"))
                     )
                 }
@@ -176,8 +176,8 @@ final class ChatSettingViewModel: ViewModel {
                 case let .failure(error):
                     logger.error("Remove participant failed: \(error.localizedDescription)")
                     self.alertState = AlertState(
-                        title: TextState("Error"),
-                        message: TextState(L10n.Common.Error.message),
+                        title: TextState(L10n.Common.Error.title),
+                        message: TextState(L10n.Common.Error.description),
                         dismissButton: .cancel(TextState("OK"))
                     )
                 }
@@ -230,8 +230,8 @@ final class ChatSettingViewModel: ViewModel {
                 case let .failure(error):
                     logger.error("Leave failed: \(error.localizedDescription)")
                     self.alertState = AlertState(
-                        title: TextState("Error"),
-                        message: TextState(L10n.Common.Error.message),
+                        title: TextState(L10n.Common.Error.title),
+                        message: TextState(L10n.Common.Error.description),
                         dismissButton: .cancel(TextState("OK"))
                     )
                 }

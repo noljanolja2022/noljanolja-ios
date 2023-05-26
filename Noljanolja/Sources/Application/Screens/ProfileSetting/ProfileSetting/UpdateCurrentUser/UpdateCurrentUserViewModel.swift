@@ -88,8 +88,8 @@ final class UpdateCurrentUserViewModel: ViewModel {
                     return
                 case .failure:
                     self.alertState = AlertState(
-                        title: TextState("Error"),
-                        message: TextState(L10n.Common.Error.message),
+                        title: TextState(L10n.Common.Error.title),
+                        message: TextState(L10n.Common.Error.description),
                         dismissButton: .cancel(TextState("OK"))
                     )
                 }
@@ -101,7 +101,7 @@ final class UpdateCurrentUserViewModel: ViewModel {
             .sink(receiveValue: { [weak self] _ in
                 guard let name = self?.name, !name.isEmpty else {
                     self?.alertState = AlertState(
-                        title: TextState("Error"),
+                        title: TextState(L10n.Common.Error.title),
                         message: TextState("Please enter all fields"),
                         dismissButton: .cancel(TextState("OK"))
                     )
@@ -133,8 +133,8 @@ final class UpdateCurrentUserViewModel: ViewModel {
                     self.delegate?.didUpdateCurrentUser()
                 case .failure:
                     self.alertState = AlertState(
-                        title: TextState("Error"),
-                        message: TextState(L10n.Common.Error.message),
+                        title: TextState(L10n.Common.Error.title),
+                        message: TextState(L10n.Common.Error.description),
                         dismissButton: .cancel(TextState("OK"))
                     )
                 }

@@ -99,7 +99,7 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
     }
 
     private func buildErrorView() -> some View {
-        Text("Error")
+        Text(L10n.Common.Error.title)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
