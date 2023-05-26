@@ -110,6 +110,7 @@
 		CF398DD829BF89430015DB18 /* UpdateCurrentUserParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF398DD729BF89430015DB18 /* UpdateCurrentUserParam.swift */; };
 		CF3A82C92A2105C9001365DF /* MessageContentBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3A82C82A2105C9001365DF /* MessageContentBackgroundView.swift */; };
 		CF3A82CC2A2105E9001365DF /* MessageContentBackgroundModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3A82CB2A2105E9001365DF /* MessageContentBackgroundModel.swift */; };
+		CF3A82E32A212B2C001365DF /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF3A82E52A212B2C001365DF /* Launch Screen.storyboard */; };
 		CF3CE18529B79FD50054BBEF /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3CE18429B79FD50054BBEF /* UserDefaults.swift */; };
 		CF43BF73299274D900FD3180 /* FirebaseAuth+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF43BF72299274D900FD3180 /* FirebaseAuth+Combine.swift */; };
 		CF446B8229D89B2100ED66BF /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF446B8129D89B2100ED66BF /* LottieView.swift */; };
@@ -314,7 +315,6 @@
 		CFECC12F29B4D6D500E20B58 /* LaunchBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFECC12929B4D6D400E20B58 /* LaunchBackgroundView.swift */; };
 		CFECC13029B4D6D500E20B58 /* LaunchBackgroundUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFECC12A29B4D6D400E20B58 /* LaunchBackgroundUIView.swift */; };
 		CFECC13129B4D6D500E20B58 /* LaunchBackgroundUIView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFECC12B29B4D6D400E20B58 /* LaunchBackgroundUIView.xib */; };
-		CFECC13229B4D6D500E20B58 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFECC12C29B4D6D400E20B58 /* Launch Screen.storyboard */; };
 		CFECC13329B4D6D500E20B58 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFECC12D29B4D6D500E20B58 /* LaunchViewModel.swift */; };
 		CFED122529F2D0B5000B320B /* HighlightVideoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFED122429F2D0B5000B320B /* HighlightVideoItemView.swift */; };
 		CFED122829F2D0D5000B320B /* VideosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFED122729F2D0D5000B320B /* VideosModel.swift */; };
@@ -513,6 +513,9 @@
 		CF398DD729BF89430015DB18 /* UpdateCurrentUserParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCurrentUserParam.swift; sourceTree = "<group>"; };
 		CF3A82C82A2105C9001365DF /* MessageContentBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentBackgroundView.swift; sourceTree = "<group>"; };
 		CF3A82CB2A2105E9001365DF /* MessageContentBackgroundModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageContentBackgroundModel.swift; sourceTree = "<group>"; };
+		CF3A82E42A212B2C001365DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Launch Screen.storyboard"; sourceTree = "<group>"; };
+		CF3A82E72A212B31001365DF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = "en.lproj/Launch Screen.strings"; sourceTree = "<group>"; };
+		CF3A82E92A212B32001365DF /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = "ko.lproj/Launch Screen.strings"; sourceTree = "<group>"; };
 		CF3CE18429B79FD50054BBEF /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		CF43BF72299274D900FD3180 /* FirebaseAuth+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseAuth+Combine.swift"; sourceTree = "<group>"; };
 		CF446B8129D89B2100ED66BF /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
@@ -703,7 +706,6 @@
 		CFECC12929B4D6D400E20B58 /* LaunchBackgroundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchBackgroundView.swift; sourceTree = "<group>"; };
 		CFECC12A29B4D6D400E20B58 /* LaunchBackgroundUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchBackgroundUIView.swift; sourceTree = "<group>"; };
 		CFECC12B29B4D6D400E20B58 /* LaunchBackgroundUIView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchBackgroundUIView.xib; sourceTree = "<group>"; };
-		CFECC12C29B4D6D400E20B58 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "Noljanolja/Sources/Application/Screens/Launch/Launch/Launch/Launch Screen.storyboard"; sourceTree = SOURCE_ROOT; };
 		CFECC12D29B4D6D500E20B58 /* LaunchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LaunchViewModel.swift; path = Noljanolja/Sources/Application/Screens/Launch/Launch/Launch/LaunchViewModel.swift; sourceTree = SOURCE_ROOT; };
 		CFED122429F2D0B5000B320B /* HighlightVideoItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightVideoItemView.swift; sourceTree = "<group>"; };
 		CFED122729F2D0D5000B320B /* VideosModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosModel.swift; sourceTree = "<group>"; };
@@ -2143,7 +2145,7 @@
 		CFECC13429B4D87B00E20B58 /* Launch */ = {
 			isa = PBXGroup;
 			children = (
-				CFECC12C29B4D6D400E20B58 /* Launch Screen.storyboard */,
+				CF3A82E52A212B2C001365DF /* Launch Screen.storyboard */,
 				CFECC12729B4D6D400E20B58 /* LaunchView.swift */,
 				CFECC12D29B4D6D500E20B58 /* LaunchViewModel.swift */,
 				CFECC12829B4D6D400E20B58 /* Views */,
@@ -2741,7 +2743,7 @@
 				CFFD7086298ABA0100D4F5A2 /* ImageAssets.xcassets in Resources */,
 				CF14F25E298CE68600BC2066 /* GoogleService-Info.plist in Resources */,
 				CF446B8E29D8A97700ED66BF /* LottieAssets.xcassets in Resources */,
-				CFECC13229B4D6D500E20B58 /* Launch Screen.storyboard in Resources */,
+				CF3A82E32A212B2C001365DF /* Launch Screen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3310,6 +3312,17 @@
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
+		};
+		CF3A82E52A212B2C001365DF /* Launch Screen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CF3A82E42A212B2C001365DF /* Base */,
+				CF3A82E72A212B31001365DF /* en */,
+				CF3A82E92A212B32001365DF /* ko */,
+			);
+			name = "Launch Screen.storyboard";
+			path = Noljanolja/Sources/Application/Screens/Launch/Launch/Launch;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXVariantGroup section */
 

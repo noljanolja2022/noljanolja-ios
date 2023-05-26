@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 @IBDesignable final class LaunchBackgroundUIView: UIView, NibOwnerLoadable {
+    @IBOutlet private var mesageLabel: UILabel!
     @IBOutlet private var button: UIButton!
     var buttonAction: (() -> Void)?
 
@@ -29,6 +30,9 @@ import UIKit
 
     private func configure() {
         loadNibContent()
+
+        mesageLabel.text = L10n.Splash.welcome
+        button.setTitle(L10n.Splash.explore, for: .normal)
     }
 
     @IBAction func didTapButton(_: Any) {

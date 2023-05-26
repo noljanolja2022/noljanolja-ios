@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LaunchBackgroundUIView" customModule="Noljanolja" customModuleProvider="target">
             <connections>
                 <outlet property="button" destination="rcG-Ly-hdZ" id="wcq-t6-9lH"/>
+                <outlet property="mesageLabel" destination="UJG-Yn-GuT" id="3FT-u6-UNI"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
