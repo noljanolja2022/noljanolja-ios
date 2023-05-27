@@ -85,8 +85,8 @@ final class ConversationAdjustmentModel: ViewModel {
                 case let .failure(error):
                     logger.error("Update conversation title failed: \(error.localizedDescription)")
                     self.alertState = AlertState(
-                        title: TextState(L10n.Common.Error.title),
-                        message: TextState(L10n.Common.Error.description),
+                        title: TextState(L10n.commonErrorTitle),
+                        message: TextState(L10n.commonErrorDescription),
                         dismissButton: .cancel(TextState("OK"))
                     )
                 }

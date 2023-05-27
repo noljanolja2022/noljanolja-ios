@@ -87,11 +87,11 @@ struct AuthView<ViewModel: AuthViewModel>: View {
 
     private func buildAuthHeaderView() -> some View {
         VStack(spacing: 4) {
-            Text(L10n.Common.login)
+            Text(L10n.commonLogin)
                 .font(.system(size: 32, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            Text(L10n.Login.Phone.description)
+            Text(L10n.loginPhoneDescription)
                 .font(.system(size: 14))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)

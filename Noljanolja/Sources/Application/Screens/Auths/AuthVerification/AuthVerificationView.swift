@@ -90,7 +90,7 @@ struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
 
     private func buildActionView() -> some View {
         Button(
-            L10n.Common.previous,
+            L10n.commonPrevious,
             action: { presentationMode.wrappedValue.dismiss() }
         )
         .buttonStyle(ThridyButtonStyle())

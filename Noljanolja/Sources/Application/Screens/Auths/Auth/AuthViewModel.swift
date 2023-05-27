@@ -78,8 +78,8 @@ final class AuthViewModel: ViewModel {
                 case let .failure(error):
                     logger.error("Send verification code failed: \(error.localizedDescription)")
                     self.alertState = AlertState(
-                        title: TextState(L10n.Common.Error.title),
-                        message: TextState(L10n.Common.Error.description),
+                        title: TextState(L10n.commonErrorTitle),
+                        message: TextState(L10n.commonErrorDescription),
                         dismissButton: .cancel(TextState("OK"))
                     )
                 }

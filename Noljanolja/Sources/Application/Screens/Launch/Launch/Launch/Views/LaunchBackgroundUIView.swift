@@ -31,8 +31,8 @@ import UIKit
     private func configure() {
         loadNibContent()
 
-        mesageLabel.text = L10n.Common.welcome
-        button.setTitle(L10n.Splash.explore, for: .normal)
+        mesageLabel.text = L10n.commonWelcome
+        button.setTitle(L10n.splashExplore, for: .normal)
     }
 
     @IBAction func didTapButton(_: Any) {

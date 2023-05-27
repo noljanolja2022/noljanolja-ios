@@ -15,8 +15,8 @@ enum TermSectionType: Int, CaseIterable {
 
     var title: String {
         switch self {
-        case .compulsory: return L10n.Tos.compulsory
-        case .optional: return L10n.Tos.optional
+        case .compulsory: return L10n.tosCompulsory
+        case .optional: return L10n.tosOptional
         }
     }
 }
@@ -37,10 +37,10 @@ enum TermItemType: Int, CaseIterable {
 
     var title: String {
         switch self {
-        case .termOfService: return L10n.Tos.Compulsory.Item.Title._1
-        case .minAge: return L10n.Tos.Compulsory.Item.Title._2
-        case .personalInfo: return L10n.Tos.Compulsory.Item.Title._3
-        case .marketingInfo: return L10n.Tos.Optional.Item.Title._1
+        case .termOfService: return L10n.tosCompulsoryItemTitle1
+        case .minAge: return L10n.tosCompulsoryItemTitle2
+        case .personalInfo: return L10n.tosCompulsoryItemTitle3
+        case .marketingInfo: return L10n.tosOptionalItemTitle1
         }
     }
 

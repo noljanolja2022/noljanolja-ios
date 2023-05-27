@@ -147,7 +147,7 @@ struct ContactListView<ViewModel: ContactListViewModel>: View {
             .padding(16)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         } else {
-            Text(L10n.Common.Error.title)
+            Text(L10n.commonErrorTitle)
                 .font(.system(size: 16, weight: .bold))
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
