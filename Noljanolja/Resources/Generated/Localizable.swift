@@ -72,21 +72,21 @@ internal enum L10n {
   internal static let chatCameraTakePhoto = L10n.tr("Localizable", "chat_camera_take_photo", fallback: "Take a photo")
   /// Aa
   internal static let chatInputHint = L10n.tr("Localizable", "chat_input_hint", fallback: "Aa")
-  /// %s has invited %s
-  internal static func chatMessageEventJoined(_ p1: UnsafePointer<CChar>, _ p2: UnsafePointer<CChar>) -> String {
-    return L10n.tr("Localizable", "chat_message_event_joined", p1, p2, fallback: "%s has invited %s")
+  /// %@ has invited %@
+  internal static func chatMessageEventJoined(_ p1: Any, _ p2: Any) -> String {
+    return L10n.tr("Localizable", "chat_message_event_joined", String(describing: p1), String(describing: p2), fallback: "%@ has invited %@")
   }
-  /// %s has left the conversation
-  internal static func chatMessageEventLeft(_ p1: UnsafePointer<CChar>) -> String {
-    return L10n.tr("Localizable", "chat_message_event_left", p1, fallback: "%s has left the conversation")
+  /// %@ has left the conversation
+  internal static func chatMessageEventLeft(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "chat_message_event_left", String(describing: p1), fallback: "%@ has left the conversation")
   }
-  /// %s has updated conversation %s
-  internal static func chatMessageEventUpdated(_ p1: UnsafePointer<CChar>, _ p2: UnsafePointer<CChar>) -> String {
-    return L10n.tr("Localizable", "chat_message_event_updated", p1, p2, fallback: "%s has updated conversation %s")
+  /// %@ has updated conversation %@
+  internal static func chatMessageEventUpdated(_ p1: Any, _ p2: Any) -> String {
+    return L10n.tr("Localizable", "chat_message_event_updated", String(describing: p1), String(describing: p2), fallback: "%@ has updated conversation %@")
   }
-  /// You has removed from conversation %s
-  internal static func chatRemovedConversation(_ p1: UnsafePointer<CChar>) -> String {
-    return L10n.tr("Localizable", "chat_removed_conversation", p1, fallback: "You has removed from conversation %s")
+  /// You has removed from conversation %@
+  internal static func chatRemovedConversation(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "chat_removed_conversation", String(describing: p1), fallback: "You has removed from conversation %@")
   }
   /// You received a file
   internal static let chatsMessageFile = L10n.tr("Localizable", "chats_message_file", fallback: "You received a file")
@@ -122,8 +122,8 @@ internal enum L10n {
   internal static let commonCancel = L10n.tr("Localizable", "common_cancel", fallback: "Cancel")
   /// Chat
   internal static let commonChat = L10n.tr("Localizable", "common_chat", fallback: "Chat")
-  /// Confirm
-  internal static let commonConfirm = L10n.tr("Localizable", "common_confirm", fallback: "Confirm")
+  /// L10n.commonConfirm
+  internal static let commonConfirm = L10n.tr("Localizable", "common_confirm", fallback: "L10n.commonConfirm")
   /// Continue
   internal static let commonContinue = L10n.tr("Localizable", "common_continue", fallback: "Continue")
   /// Copy
@@ -160,13 +160,13 @@ internal enum L10n {
   internal static let commonReload = L10n.tr("Localizable", "common_reload", fallback: "Reload")
   /// Save
   internal static let commonSave = L10n.tr("Localizable", "common_save", fallback: "Save")
-  /// Search
-  internal static let commonSearch = L10n.tr("Localizable", "common_search", fallback: "Search")
+  /// L10n.commonSearch
+  internal static let commonSearch = L10n.tr("Localizable", "common_search", fallback: "L10n.commonSearch")
   /// Setting
   internal static let commonSetting = L10n.tr("Localizable", "common_setting", fallback: "Setting")
-  /// Size %s
-  internal static func commonSize(_ p1: UnsafePointer<CChar>) -> String {
-    return L10n.tr("Localizable", "common_size", p1, fallback: "Size %s")
+  /// Size %@
+  internal static func commonSize(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "common_size", String(describing: p1), fallback: "Size %@")
   }
   /// Skip
   internal static let commonSkip = L10n.tr("Localizable", "common_skip", fallback: "Skip")
@@ -200,16 +200,16 @@ internal enum L10n {
   internal static let contactsTitleNormal = L10n.tr("Localizable", "contacts_title_normal", fallback: "Normal chat")
   /// Secret chat
   internal static let contactsTitleSecret = L10n.tr("Localizable", "contacts_title_secret", fallback: "Secret chat")
-  /// %s created conversation
-  internal static func conversationCreate(_ p1: UnsafePointer<CChar>) -> String {
-    return L10n.tr("Localizable", "conversation_create", p1, fallback: "%s created conversation")
+  /// %@ created conversation
+  internal static func conversationCreate(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "conversation_create", String(describing: p1), fallback: "%@ created conversation")
   }
   /// Add friends to chat now.
   internal static let conversationEmpty = L10n.tr("Localizable", "conversation_empty", fallback: "Add friends to chat now.")
   /// Conversation has changed
   internal static let conversationHasChanged = L10n.tr("Localizable", "conversation_has_changed", fallback: "Conversation has changed")
-  /// Search
-  internal static let countriesSearch = L10n.tr("Localizable", "countries_search", fallback: "Search")
+  /// L10n.commonSearch
+  internal static let countriesSearch = L10n.tr("Localizable", "countries_search", fallback: "L10n.commonSearch")
   /// Select countries/regions
   internal static let countriesTitle = L10n.tr("Localizable", "countries_title", fallback: "Select countries/regions")
   /// Custom service center
@@ -252,9 +252,9 @@ internal enum L10n {
   internal static let forgotPassword = L10n.tr("Localizable", "forgot_password", fallback: "Forgot your password?")
   /// Full agreement
   internal static let fullAgreement = L10n.tr("Localizable", "full_agreement", fallback: "Full agreement")
-  /// Hello %s
-  internal static func helloUser(_ p1: UnsafePointer<CChar>) -> String {
-    return L10n.tr("Localizable", "hello_user", p1, fallback: "Hello %s")
+  /// Hello %@
+  internal static func helloUser(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "hello_user", String(describing: p1), fallback: "Hello %@")
   }
   /// Chats
   internal static let homeChats = L10n.tr("Localizable", "home_chats", fallback: "Chats")
@@ -308,9 +308,9 @@ internal enum L10n {
   internal static let otpInvalidOtpTitle = L10n.tr("Localizable", "otp_invalid_otp_title", fallback: "Incorrect Code")
   /// Resend Code
   internal static let otpResendCode = L10n.tr("Localizable", "otp_resend_code", fallback: "Resend Code")
-  /// Resend code in %s seconds
-  internal static func otpResendCodeWaiting(_ p1: UnsafePointer<CChar>) -> String {
-    return L10n.tr("Localizable", "otp_resend_code_waiting", p1, fallback: "Resend code in %s seconds")
+  /// Resend code in %@ seconds
+  internal static func otpResendCodeWaiting(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "otp_resend_code_waiting", String(describing: p1), fallback: "Resend code in %@ seconds")
   }
   /// Enter verification code
   internal static let otpTitle = L10n.tr("Localizable", "otp_title", fallback: "Enter verification code")
@@ -347,9 +347,9 @@ internal enum L10n {
   internal static let serviceGuide = L10n.tr("Localizable", "service_guide", fallback: "Service Guide")
   /// Clear cache data
   internal static let settingClearCacheData = L10n.tr("Localizable", "setting_clear_cache_data", fallback: "Clear cache data")
-  /// Current version %s
-  internal static func settingCurrentVersion(_ p1: UnsafePointer<CChar>) -> String {
-    return L10n.tr("Localizable", "setting_current_version", p1, fallback: "Current version %s")
+  /// Current version %@
+  internal static func settingCurrentVersion(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "setting_current_version", String(describing: p1), fallback: "Current version %@")
   }
   /// Exchange account management
   internal static let settingExchangeAccountManagement = L10n.tr("Localizable", "setting_exchange_account_management", fallback: "Exchange account management")
@@ -408,9 +408,9 @@ internal enum L10n {
   internal static let transactionDetailTime = L10n.tr("Localizable", "transaction_detail_time", fallback: "Time")
   /// Transaction History
   internal static let transactionHistory = L10n.tr("Localizable", "transaction_history", fallback: "Transaction History")
-  /// %s point
-  internal static func transactionHistoryPoint(_ p1: UnsafePointer<CChar>) -> String {
-    return L10n.tr("Localizable", "transaction_history_point", p1, fallback: "%s point")
+  /// %@ point
+  internal static func transactionHistoryPoint(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "transaction_history_point", String(describing: p1), fallback: "%@ point")
   }
   /// Search transaction
   internal static let transactionHistorySearchHint = L10n.tr("Localizable", "transaction_history_search_hint", fallback: "Search transaction")
@@ -418,13 +418,13 @@ internal enum L10n {
   internal static let transactionReceiveType = L10n.tr("Localizable", "transaction_receive_type", fallback: "Receive")
   /// Spent
   internal static let transactionSpentType = L10n.tr("Localizable", "transaction_spent_type", fallback: "Spent")
-  /// Receive: %s
-  internal static func transactionsHistoryReceiveReason(_ p1: UnsafePointer<CChar>) -> String {
-    return L10n.tr("Localizable", "transactions_history_receive_reason", p1, fallback: "Receive: %s")
+  /// Receive: %@
+  internal static func transactionsHistoryReceiveReason(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "transactions_history_receive_reason", String(describing: p1), fallback: "Receive: %@")
   }
-  /// Spent: %s
-  internal static func transactionsHistorySpentReason(_ p1: UnsafePointer<CChar>) -> String {
-    return L10n.tr("Localizable", "transactions_history_spent_reason", p1, fallback: "Spent: %s")
+  /// Spent: %@
+  internal static func transactionsHistorySpentReason(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "transactions_history_spent_reason", String(describing: p1), fallback: "Spent: %@")
   }
   /// Set Avatar
   internal static let updateProfileAvatar = L10n.tr("Localizable", "update_profile_avatar", fallback: "Set Avatar")
@@ -488,9 +488,9 @@ internal enum L10n {
   internal static func videoDetailRewardPoint(_ p1: Int) -> String {
     return L10n.tr("Localizable", "video_detail_reward_point", p1, fallback: "%d point")
   }
-  /// %s · %s · %s
-  internal static func videoDetailShortDescription(_ p1: UnsafePointer<CChar>, _ p2: UnsafePointer<CChar>, _ p3: UnsafePointer<CChar>) -> String {
-    return L10n.tr("Localizable", "video_detail_short_description", p1, p2, p3, fallback: "%s · %s · %s")
+  /// %@ · %@ · %@
+  internal static func videoDetailShortDescription(_ p1: Any, _ p2: Any, _ p3: Any) -> String {
+    return L10n.tr("Localizable", "video_detail_short_description", String(describing: p1), String(describing: p2), String(describing: p3), fallback: "%@ · %@ · %@")
   }
   /// Views
   internal static let videoDetailViews = L10n.tr("Localizable", "video_detail_views", fallback: "Views")
@@ -498,8 +498,8 @@ internal enum L10n {
   internal static let videoListToday = L10n.tr("Localizable", "video_list_today", fallback: "Today features")
   /// Complete watching to reward Points
   internal static let videoListWatchingToGetPoint = L10n.tr("Localizable", "video_list_watching_to_get_point", fallback: "Complete watching to reward Points")
-  /// Letâ€™s get points by watching
-  internal static let videoTitle = L10n.tr("Localizable", "video_title", fallback: "Letâ€™s get points by watching")
+  /// Let's get points by watching
+  internal static let videoTitle = L10n.tr("Localizable", "video_title", fallback: "Let's get points by watching")
   /// Accumulated points for the day
   internal static let walletAccumulatedPoint = L10n.tr("Localizable", "wallet_accumulated_point", fallback: "Accumulated points for the day")
   /// Attend now
@@ -530,9 +530,9 @@ internal enum L10n {
   }
   /// Points that can be exchanged
   internal static let walletPointCanExchange = L10n.tr("Localizable", "wallet_point_can_exchange", fallback: "Points that can be exchanged")
-  /// Overall Point Ranking: %s
-  internal static func walletPointRanking(_ p1: UnsafePointer<CChar>) -> String {
-    return L10n.tr("Localizable", "wallet_point_ranking", p1, fallback: "Overall Point Ranking: %s")
+  /// Overall Point Ranking: %@
+  internal static func walletPointRanking(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "wallet_point_ranking", String(describing: p1), fallback: "Overall Point Ranking: %@")
   }
   /// Bronze Membership
   internal static let walletRankingBronze = L10n.tr("Localizable", "wallet_ranking_bronze", fallback: "Bronze Membership")

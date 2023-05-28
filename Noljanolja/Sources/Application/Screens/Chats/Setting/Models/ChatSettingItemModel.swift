@@ -49,7 +49,7 @@ enum ChatSettingItemModelType: Equatable {
         case .findMessage: return "Find message"
         case .theme: return "Theme Chat"
         case .deleteChatHistory: return "Delete chat history"
-        case .blockUser: return "Block user"
+        case .blockUser: return L10n.editChatBlockUser
         case .secret: return "Secret Chat"
         }
     }

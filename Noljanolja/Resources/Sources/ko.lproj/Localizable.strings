@@ -27,10 +27,10 @@
 "chat_camera_record_video" = "동영상 찍기";
 "chat_camera_take_photo" = "사진 찍기";
 "chat_input_hint" = "Aa";
-"chat_message_event_joined" = "%s 님이 %s 님을 채팅방에 초대하였습니다.";
-"chat_message_event_left" = "%s 님이 채팅방을 나가셨습니다.";
-"chat_message_event_updated" = "%s 님이 채팅방을 업데이트 하였습니다.";
-"chat_removed_conversation" = "채팅방 %s에서 탈퇴되었습니다.";
+"chat_message_event_joined" = "%@ 님이 %@ 님을 채팅방에 초대하였습니다.";
+"chat_message_event_left" = "%@ 님이 채팅방을 나가셨습니다.";
+"chat_message_event_updated" = "%@ 님이 채팅방을 업데이트 하였습니다.";
+"chat_removed_conversation" = "채팅방 %@에서 탈퇴되었습니다.";
 "chats_message_file" = "파일(문서)을 받았습니다.";
 "chats_message_my_file" = "파일(문서)을 보냈습니다.";
 "chats_message_my_photo" = "사진(이미지)을 보냈습니다.";
@@ -69,7 +69,7 @@
 "common_save" = "저장";
 "common_search" = "검색";
 "common_setting" = "설정";
-"common_size" = "크기 %s";
+"common_size" = "크기 %@";
 "common_skip" = "건너뛰기";
 "common_today" = "오늘";
 "common_unexpected_error" = "돌발장애";
@@ -85,7 +85,7 @@
 "contacts_title_group" = "그룹채팅";
 "contacts_title_normal" = "일반채팅";
 "contacts_title_secret" = "비밀채팅";
-"conversation_create" = "%s 님이 채팅방을 개설하였습니다.";
+"conversation_create" = "%@ 님이 채팅방을 개설하였습니다.";
 "conversation_empty" = "친구추가";
 "conversation_has_changed" = "채팅방이 변경되었습니다.";
 "countries_search" = "검색";
@@ -110,7 +110,7 @@
 "exchange_account_management" = "환전계좌 관리";
 "forgot_password" = "비밀번호 찾기";
 "full_agreement" = "전체 동의";
-"hello_user" = "안녕하세요 %s";
+"hello_user" = "안녕하세요 %@";
 "home_chats" = "채팅";
 "home_news" = "뉴스";
 "home_shop" = "쇼핑";
@@ -137,7 +137,7 @@
 "otp_invalid_otp_description" = "올바른 인증코드를 입력했는지 확인해주세요.";
 "otp_invalid_otp_title" = "유효하지 않은 인증코드";
 "otp_resend_code" = "인증코드 다시보내기";
-"otp_resend_code_waiting" = "%s 초 후에 인증코드 다시 보내기";
+"otp_resend_code_waiting" = "%@ 초 후에 인증코드 다시 보내기";
 "otp_title" = "인증코드 입력";
 "otp_verifying" = "인증 진행중입니다...";
 "password_hint_text" = "비밀번호를 입력해주세요";
@@ -154,7 +154,7 @@
 "require_verify_description" = "이메일 인증하고\n다양한 서비스를 즐겨보세요!";
 "service_guide" = "서비스 가이드";
 "setting_clear_cache_data" = "캐시데이터 지우기";
-"setting_current_version" = "현재 버전 %s";
+"setting_current_version" = "현재 버전 %@";
 "setting_exchange_account_management" = "환전계좌 관리";
 "setting_faq" = "FAQ";
 "setting_name" = "이름";
@@ -182,12 +182,12 @@
 "transaction_detail_status" = "상태";
 "transaction_detail_time" = "시간";
 "transaction_history" = "포인트 내역";
-"transaction_history_point" = "%s 포인트";
+"transaction_history_point" = "%@ 포인트";
 "transaction_history_search_hint" = "포이트 내역 검색";
 "transaction_receive_type" = "적립";
 "transaction_spent_type" = "지출";
-"transactions_history_receive_reason" = "적립: %s";
-"transactions_history_spent_reason" = "지출: %s";
+"transactions_history_receive_reason" = "적립: %@";
+"transactions_history_spent_reason" = "지출: %@";
 "update_profile_avatar" = "아바타 설정";
 "update_profile_avatar_open_camera" = "카메라";
 "update_profile_avatar_select_photo" = "갤러리";
@@ -213,7 +213,7 @@
 "video_detail_require_google_description" = "댓글을 달거나 좋아요를 누르려면 구글에 로그인하고 유튜브 접근을 허용해야 합니다.";
 "video_detail_reward" = "리워드";
 "video_detail_reward_point" = "%d 포인트";
-"video_detail_short_description" = "%s · %s · %s";
+"video_detail_short_description" = "%@ · %@ · %@";
 "video_detail_views" = "조회수";
 "video_list_today" = "오늘의 인기영상";
 "video_list_watching_to_get_point" = "시청을 완료하고 포인트를 받으세요!";
@@ -232,7 +232,7 @@
 "wallet_my_point" = "내 포인트";
 "wallet_number_friends" = "친구: %d";
 "wallet_point_can_exchange" = "환전 가능한 포인트";
-"wallet_point_ranking" = "전체 포인트 순위: %s";
+"wallet_point_ranking" = "전체 포인트 순위: %@";
 "wallet_ranking_bronze" = "브론즈 멤버십";
 "wallet_ranking_gold" = "골드 멤버십";
 "wallet_ranking_premium" = "프리미엄 멤버십";

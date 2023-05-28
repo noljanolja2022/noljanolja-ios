@@ -17,7 +17,7 @@ struct DateChatItemView: View {
             .font(.system(size: 14, weight: .medium))
             .frame(height: 26)
             .padding(.horizontal, 12)
-            .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
+            .foregroundColor(ColorAssets.neutralRawLight.swiftUIColor)
             .background(ColorAssets.neutralBlueGrey.swiftUIColor)
             .cornerRadius(6)
             .frame(maxWidth: .infinity, alignment: .center)

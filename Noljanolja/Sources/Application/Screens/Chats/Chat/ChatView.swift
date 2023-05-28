@@ -85,8 +85,6 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                 )
             )
         }
-        .onAppear { viewModel.isAppearSubject.send(true) }
-        .onDisappear { viewModel.isAppearSubject.send(false) }
     }
 
     private func buildContentView() -> some View {

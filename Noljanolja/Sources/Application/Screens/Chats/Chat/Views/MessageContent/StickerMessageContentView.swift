@@ -38,9 +38,9 @@ struct StickerMessageContentView: View {
     private func buildInfoView() -> some View {
         HStack(spacing: 0) {
             MessageCreatedDateTimeView(model: model.createdAt)
-                .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
+                .foregroundColor(ColorAssets.neutralRawDeepGrey.swiftUIColor)
             MessageStatusView(model: model.status)
-                .foregroundColor(ColorAssets.primaryGreen300.swiftUIColor)
+                .foregroundColor(ColorAssets.neutralRawDeepGrey.swiftUIColor)
         }
     }
 }

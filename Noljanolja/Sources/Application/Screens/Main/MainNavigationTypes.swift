@@ -23,21 +23,21 @@ enum MainTabType: Equatable {
 
     var navigationBarTitle: String {
         switch self {
-        case .chat: return "Chat"
-        case .watch: return "Let’s get points by watching"
-        case .wallet: return "Wallet"
-        case .shop: return "Shop"
-        case .news: return "News"
+        case .chat: return L10n.commonChat
+        case .watch: return L10n.videoTitle
+        case .wallet: return L10n.homeWallet
+        case .shop: return L10n.homeShop
+        case .news: return L10n.homeNews
         }
     }
 
     var tabBarTitle: String {
         switch self {
-        case .chat: return "Chat"
-        case .watch: return "Watch"
-        case .wallet: return "Wallet"
-        case .shop: return "Shop"
-        case .news: return "News"
+        case .chat: return L10n.commonChat
+        case .watch: return L10n.homeWatch
+        case .wallet: return L10n.homeWallet
+        case .shop: return L10n.homeShop
+        case .news: return L10n.homeNews
         }
     }
 

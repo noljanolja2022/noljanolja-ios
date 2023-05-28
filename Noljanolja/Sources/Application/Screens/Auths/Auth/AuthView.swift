@@ -56,8 +56,12 @@ struct AuthView<ViewModel: AuthViewModel>: View {
             buildAuthView()
         }
         .background(
-            ColorAssets.primaryGreen100.swiftUIColor
-                .ignoresSafeArea(edges: .top)
+            ColorAssets.neutralLight.swiftUIColor
+                .ignoresSafeArea()
+                .overlay {
+                    ColorAssets.primaryGreen200.swiftUIColor
+                        .ignoresSafeArea(edges: .top)
+                }
         )
     }
 
@@ -149,16 +153,16 @@ struct AuthView<ViewModel: AuthViewModel>: View {
 
     private func buildActionView() -> some View {
         Button(
-            "Continue".uppercased(),
+            L10n.commonContinue.uppercased(),
             action: {
                 guard let title = viewModel.phoneNumber?.formatPhone(type: .international) else {
                     return
                 }
                 viewModel.alertState = AlertState(
                     title: TextState(title),
-                    message: TextState("You will receive a code to verify to this phone number via text message."),
-                    primaryButton: .destructive(TextState("Cancel")),
-                    secondaryButton: .default(TextState("Confirm"), action: .send(true))
+                    message: TextState(L10n.loginConfirmPhoneDescription),
+                    primaryButton: .destructive(TextState(L10n.commonCancel)),
+                    secondaryButton: .default(TextState(L10n.commonConfirm), action: .send(true))
                 )
             }
         )

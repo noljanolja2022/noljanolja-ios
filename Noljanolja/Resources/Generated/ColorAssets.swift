@@ -30,6 +30,12 @@ internal enum ColorAssets {
   internal static let neutralGrey = ColorAsset(name: "Neutral Grey")
   internal static let neutralLightGrey = ColorAsset(name: "Neutral Light Grey")
   internal static let neutralLight = ColorAsset(name: "Neutral Light")
+  internal static let neutralRawDarkGrey = ColorAsset(name: "Neutral Raw Dark Grey")
+  internal static let neutralRawDeepGrey = ColorAsset(name: "Neutral Raw Deep Grey")
+  internal static let neutralRawDeeperGrey = ColorAsset(name: "Neutral Raw Deeper Grey")
+  internal static let neutralRawGrey = ColorAsset(name: "Neutral Raw Grey")
+  internal static let neutralRawLightGrey = ColorAsset(name: "Neutral Raw Light Grey")
+  internal static let neutralRawLight = ColorAsset(name: "Neutral Raw Light")
   internal static let primaryGreen100 = ColorAsset(name: "Primary Green 100")
   internal static let primaryGreen200 = ColorAsset(name: "Primary Green 200")
   internal static let primaryGreen300 = ColorAsset(name: "Primary Green 300")
@@ -59,6 +65,12 @@ internal enum ColorAssets {
     neutralGrey,
     neutralLightGrey,
     neutralLight,
+    neutralRawDarkGrey,
+    neutralRawDeepGrey,
+    neutralRawDeeperGrey,
+    neutralRawGrey,
+    neutralRawLightGrey,
+    neutralRawLight,
     primaryGreen100,
     primaryGreen200,
     primaryGreen300,

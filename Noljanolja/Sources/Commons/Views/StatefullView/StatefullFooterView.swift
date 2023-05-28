@@ -91,7 +91,7 @@ struct ErrorFooterView: View {
             action: { action?() },
             label: {
                 VStack(spacing: 4) {
-                    Text("An error occurred, please try again")
+                    Text(L10n.commonErrorDescription)
                         .font(.system(size: 14))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                     Text("Try again")

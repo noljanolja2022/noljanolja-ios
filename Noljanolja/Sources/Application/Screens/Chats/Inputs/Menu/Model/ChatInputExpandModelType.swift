@@ -49,7 +49,7 @@ enum ChatInputExpandModelType: CaseIterable, Equatable {
         case .image: return "Album"
         case .camera: return "Camera"
         case .events: return "Events"
-        case .wallet: return "Wallet"
+        case .wallet: return L10n.chatActionWallet
         case .location: return "Location"
         case .voice: return "VoiceChat"
         case .contact: return "Contact"

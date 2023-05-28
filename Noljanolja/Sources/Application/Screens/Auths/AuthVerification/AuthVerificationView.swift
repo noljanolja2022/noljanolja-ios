@@ -48,10 +48,10 @@ struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
     private func buildMainView() -> some View {
         VStack(spacing: 36) {
             VStack(spacing: 16) {
-                Text("Enter verification code")
+                Text(L10n.otpTitle)
                     .font(.system(size: 24))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                Text("We’ve sent a text message with your verification code to  \(viewModel.phoneNumber.formatPhone() ?? "")")
+                Text("\(L10n.otpDescription)  \(viewModel.phoneNumber.formatPhone() ?? "")")
                     .font(.system(size: 16))
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -68,10 +68,10 @@ struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
                 )
                 ZStack {
                     if viewModel.countdownResendCodeTime != 0 {
-                        Text("Resend code in \(viewModel.countdownResendCodeTime) seconds")
+                        Text(L10n.otpResendCodeWaiting(viewModel.countdownResendCodeTime))
                             .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                     } else {
-                        Button("Resend code") {
+                        Button(L10n.otpResendCode) {
                             viewModel.resendCodeAction.send(
                                 (viewModel.country.phoneCode, viewModel.phoneNumberText)
                             )

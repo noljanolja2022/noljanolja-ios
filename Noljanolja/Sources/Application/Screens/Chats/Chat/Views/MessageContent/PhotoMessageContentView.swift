@@ -136,9 +136,9 @@ struct PhotoMessageContentItemView: View {
         HStack(spacing: 0) {
             Spacer()
             MessageCreatedDateTimeView(model: createdAt)
-                .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
+                .foregroundColor(ColorAssets.neutralRawLightGrey.swiftUIColor)
             MessageStatusView(model: status)
-                .foregroundColor(ColorAssets.primaryGreen200.swiftUIColor)
+                .foregroundColor(ColorAssets.neutralRawLightGrey.swiftUIColor)
         }
         .padding(.vertical, 8)
         .padding(
@@ -152,7 +152,7 @@ struct PhotoMessageContentItemView: View {
         )
         .background(
             LinearGradient(
-                gradient: Gradient(colors: [.clear, ColorAssets.neutralDarkGrey.swiftUIColor]),
+                gradient: Gradient(colors: [.clear, ColorAssets.neutralRawDarkGrey.swiftUIColor]),
                 startPoint: .top,
                 endPoint: .bottom
             )

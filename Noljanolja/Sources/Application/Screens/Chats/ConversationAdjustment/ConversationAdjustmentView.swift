@@ -157,7 +157,7 @@ struct ConversationAdjustment<ViewModel: ConversationAdjustmentModel>: View {
                         keyboard.dismiss()
                         viewModel.fullScreenCoverType = .imagePickerView(.photoLibrary)
                     },
-                    .cancel(Text("Cancel"))
+                    .cancel(Text(L10n.commonCancel))
                 ]
             )
         }

@@ -292,7 +292,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                         keyboard.dismiss()
                         viewModel.fullScreenCoverType = .imagePickerView(.photoLibrary)
                     },
-                    .cancel(Text("Cancel"))
+                    .cancel(Text(L10n.commonCancel))
                 ]
             )
         case .gender:
@@ -302,7 +302,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                     .default(Text("Male")) { viewModel.gender = .male },
                     .default(Text("Female")) { viewModel.gender = .female },
                     .default(Text("Other")) { viewModel.gender = .other },
-                    .cancel(Text("Cancel"))
+                    .cancel(Text(L10n.commonCancel))
                 ]
             )
         }

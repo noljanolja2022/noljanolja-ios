@@ -34,7 +34,7 @@ struct SelectCountryView<ViewModel: SelectCountryViewModel>: View {
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
                 ToolbarItem(placement: .principal) {
-                    Text("Select Countries/Regions")
+                    Text(L10n.countriesTitle)
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
@@ -56,7 +56,7 @@ struct SelectCountryView<ViewModel: SelectCountryViewModel>: View {
                 .resizable()
                 .frame(width: 16, height: 16)
                 .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
-            TextField("Search", text: $viewModel.searchString)
+            TextField(L10n.commonSearch, text: $viewModel.searchString)
                 .textFieldStyle(TappableTextFieldStyle())
                 .frame(maxHeight: .infinity)
                 .font(.system(size: 16))

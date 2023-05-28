@@ -27,15 +27,13 @@ struct CodeView: View {
             )
             .keyboardType(.numberPad)
             .focused($isFocused)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.red)
+            .frame(width: 0, height: 0)
 
             HStack(spacing: 12) {
                 ForEach(0..<maxLength, id: \.self) { index in
                     buildDigitView(index)
                 }
             }
-            .background(Color.white)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .onTapGesture {
                 text = ""
