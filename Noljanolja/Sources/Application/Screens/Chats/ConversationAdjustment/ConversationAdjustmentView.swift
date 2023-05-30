@@ -126,7 +126,7 @@ struct ConversationAdjustment<ViewModel: ConversationAdjustmentModel>: View {
 
     private func buildTitleView() -> some View {
         VStack(spacing: 8) {
-            Text("Name of group chat")
+            Text(L10n.editChatChangeRoomAdjustmentDescription)
                 .font(.system(size: 16))
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
@@ -147,13 +147,13 @@ struct ConversationAdjustment<ViewModel: ConversationAdjustmentModel>: View {
         switch type {
         case .avatar:
             return ActionSheet(
-                title: Text("Set Avatar"),
+                title: Text(L10n.updateProfileAvatar),
                 buttons: [
-                    .default(Text("Open Camera")) {
+                    .default(Text(L10n.updateProfileAvatarOpenCamera)) {
                         keyboard.dismiss()
                         viewModel.fullScreenCoverType = .imagePickerView(.camera)
                     },
-                    .default(Text("Select Photo")) {
+                    .default(Text(L10n.updateProfileAvatarSelectPhoto)) {
                         keyboard.dismiss()
                         viewModel.fullScreenCoverType = .imagePickerView(.photoLibrary)
                     },

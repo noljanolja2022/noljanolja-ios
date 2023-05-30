@@ -25,7 +25,8 @@ struct ContactListView<ViewModel: ContactListViewModel>: View {
     @ViewBuilder
     private func buildBodyView() -> some View {
         VStack(spacing: 0) {
-            SearchView(placeholder: "Search by name/Phone number", text: $viewModel.searchString).background(ColorAssets.neutralLightGrey.swiftUIColor)
+            SearchView(placeholder: L10n.contactSearchHint, text: $viewModel.searchString)
+                .background(ColorAssets.neutralLightGrey.swiftUIColor)
                 .cornerRadius(10)
                 .padding(.horizontal, 16)
                 .padding(.top, 12)
@@ -76,7 +77,7 @@ struct ContactListView<ViewModel: ContactListViewModel>: View {
     private func buildListView() -> some View {
         ListView {
             VStack(spacing: 0) {
-                Text("Friends in your directory")
+                Text(L10n.commonFriends)
                     .font(Font.system(size: 16, weight: .semibold))
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                     .padding(.horizontal, 16)
@@ -103,7 +104,7 @@ struct ContactListView<ViewModel: ContactListViewModel>: View {
 
     @ViewBuilder
     private func buildEmptyView() -> some View {
-        Text("Can't found friends")
+        Text(L10n.contactsNotFound)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
@@ -119,9 +120,9 @@ struct ContactListView<ViewModel: ContactListViewModel>: View {
            let contactsError = error as? ContactsError,
            contactsError.isPermissionError {
             VStack(spacing: 16) {
-                Text("Permission")
+                Text(L10n.permission)
                     .font(.system(size: 20).bold())
-                Text("To help you message friends and family on Noja Noja, allow Noja Noja access to your contacts")
+                Text(L10n.permissionContactsDescription)
                     .font(.system(size: 16))
                     .multilineTextAlignment(.center)
                 Button(
@@ -134,7 +135,7 @@ struct ContactListView<ViewModel: ContactListViewModel>: View {
                         }
                     },
                     label: {
-                        Text("Accept")
+                        Text(L10n.permissionAccept)
                             .font(.system(size: 16, weight: .bold))
                             .frame(height: 40)
                             .padding(.horizontal, 24)

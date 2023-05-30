@@ -24,7 +24,7 @@ struct TransactionHistoryView<ViewModel: TransactionHistoryViewModel>: View {
             .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Transaction History")
+                    Text(L10n.transactionHistory)
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
@@ -51,7 +51,7 @@ struct TransactionHistoryView<ViewModel: TransactionHistoryViewModel>: View {
 
     private func buildSearchView() -> some View {
         SearchView(
-            placeholder: "Search transaction",
+            placeholder: L10n.transactionHistorySearchHint,
             text: .constant("")
         )
         .background(ColorAssets.neutralLightGrey.swiftUIColor)

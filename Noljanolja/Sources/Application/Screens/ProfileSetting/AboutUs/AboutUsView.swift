@@ -24,7 +24,7 @@ struct AboutUsView<ViewModel: AboutUsViewModel>: View {
             .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("About us")
+                    Text(L10n.settingAboutUsTitle)
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
@@ -37,7 +37,7 @@ struct AboutUsView<ViewModel: AboutUsViewModel>: View {
         ScrollView {
             VStack(spacing: 16) {
                 AboutUsItemView(
-                    title: "Company Name",
+                    title: L10n.settingCompanyNameTitle,
                     description: "PNP&YY Co., Ltd."
                 )
 
@@ -46,7 +46,7 @@ struct AboutUsView<ViewModel: AboutUsViewModel>: View {
                     .overlay(ColorAssets.neutralLightGrey.swiftUIColor)
 
                 AboutUsItemView(
-                    title: "Representative",
+                    title: L10n.settingRepresentativeTitle,
                     description: "Seungdae Park"
                 )
 
@@ -55,7 +55,7 @@ struct AboutUsView<ViewModel: AboutUsViewModel>: View {
                     .overlay(ColorAssets.neutralLightGrey.swiftUIColor)
 
                 AboutUsItemView(
-                    title: "Address",
+                    title: L10n.settingAddressTitle,
                     description: "Room 809, Ace Gasan Tower, 121 Digital-ro, Geumcheon-gu, Seoul"
                 )
 
@@ -64,7 +64,7 @@ struct AboutUsView<ViewModel: AboutUsViewModel>: View {
                     .overlay(ColorAssets.neutralLightGrey.swiftUIColor)
 
                 AboutUsItemView(
-                    title: "Phone call",
+                    title: L10n.settingPhoneCallTitle,
                     description: "070-7733-1193"
                 )
 
@@ -73,7 +73,7 @@ struct AboutUsView<ViewModel: AboutUsViewModel>: View {
                     .overlay(ColorAssets.neutralLightGrey.swiftUIColor)
 
                 AboutUsItemView(
-                    title: "Company Registration Number",
+                    title: L10n.settingCompanyNameTitle,
                     description: "881-86-01396"
                 )
             }

@@ -47,7 +47,7 @@ struct ChatSettingParticipantItemView: View {
             }
 
             if model.isAdmin {
-                Text("Admin")
+                Text(L10n.commonAdmin)
                     .font(.system(size: 12, weight: .bold))
                     .frame(height: 26)
                     .padding(.horizontal, 12)

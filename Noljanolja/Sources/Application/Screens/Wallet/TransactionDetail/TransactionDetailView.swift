@@ -24,7 +24,7 @@ struct TransactionDetailView<ViewModel: TransactionDetailViewModel>: View {
             .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Detail Transaction")
+                    Text(L10n.transactionDetail)
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
@@ -67,7 +67,7 @@ struct TransactionDetailView<ViewModel: TransactionDetailViewModel>: View {
     private func buildDetailView() -> some View {
         VStack(spacing: 8) {
             HStack(spacing: 8) {
-                Text("Status")
+                Text(L10n.transactionDetailStatus)
                     .font(.system(size: 14))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
@@ -81,7 +81,7 @@ struct TransactionDetailView<ViewModel: TransactionDetailViewModel>: View {
             }
 
             HStack(spacing: 8) {
-                Text("Time")
+                Text(L10n.transactionDetailTime)
                     .font(.system(size: 14))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
@@ -91,7 +91,7 @@ struct TransactionDetailView<ViewModel: TransactionDetailViewModel>: View {
             }
 
             HStack(spacing: 8) {
-                Text("Transaction code")
+                Text(L10n.transactionDetailCode)
                     .font(.system(size: 14))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)

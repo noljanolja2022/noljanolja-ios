@@ -15,6 +15,14 @@
 "edit_chat_theme_chat" = "Theme Chat";
 "edit_chat_delete_chat_history" = "Delete chat history";
 "edit_chat_secret_chat" = "Secret Chat";
+"contact_search_hint" = "Search by name/Phone number";
+"edit_chat_change_room_adjustment_description" = "Name of group chat";
+"transaction_detail_code" = "Transaction code";
+"setting_company_name_title" = "Company Name";
+"setting_representative_title" = "Representative";
+"setting_address_title" = "Address";
+"setting_phone_call_title" = "Phone call";
+"setting_company_registration_number_title" = "Company Registration Number";
 
 "common_next" = "Next";
 "common_previous" = "Previous";

@@ -49,7 +49,7 @@ struct ChatSettingParticipantModel: Equatable {
 
     var displayName: String? {
         if user.id == currentUser?.id {
-            return "You"
+            return L10n.commonYou
         } else {
             return user.name
         }

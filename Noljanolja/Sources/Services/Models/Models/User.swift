@@ -114,7 +114,7 @@ extension User {
     }
 
     func getDisplayName(currentUser: User) -> String {
-        id == currentUser.id ? "You" : (name ?? "")
+        id == currentUser.id ? L10n.commonYou : (name ?? "")
     }
 }
 

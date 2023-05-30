@@ -15,7 +15,7 @@ struct TransactionDetailModel {
     let code: String
 
     init(model: Transaction) {
-        self.type = model.amount > 0 ? "Received" : "Spent"
+        self.type = model.amount > 0 ? L10n.transactionReceiveType : L10n.transactionSpentType
         self.point = {
             let signString = model.amount > 0 ? "+" : ""
             return L10n.transactionHistoryPoint("\(signString) \(model.amount.formatted())")

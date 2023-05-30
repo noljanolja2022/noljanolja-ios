@@ -22,7 +22,7 @@ struct TransactionHistoryHeaderView: View {
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
             HStack(spacing: 0) {
-                Text("Dashboard")
+                Text(L10n.walletHistoryDashboard)
                     .font(.system(size: 14, weight: .medium))
                     .foregroundColor(ColorAssets.systemBlue.swiftUIColor)
 

@@ -24,7 +24,7 @@ struct MyRankingView<ViewModel: MyRankingViewModel>: View {
             .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("My ranking")
+                    Text(L10n.myRankingTitle)
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }

@@ -44,13 +44,13 @@ enum ChatSettingItemModelType: Equatable {
         switch self {
         case .changeNickname: return L10n.editChatChangeNickname
         case .adjustment: return L10n.editChatChangeRoomName
-        case .notification: return "Turn off notification"
-        case .media: return "Media, files, links"
-        case .findMessage: return "Find message"
-        case .theme: return "Theme Chat"
-        case .deleteChatHistory: return "Delete chat history"
+        case .notification: return L10n.editChatTurnOffNotification
+        case .media: return L10n.editChatMediaFilesLinks
+        case .findMessage: return L10n.editChatFindMessage
+        case .theme: return L10n.editChatThemeChat
+        case .deleteChatHistory: return L10n.editChatDeleteChatHistory
         case .blockUser: return L10n.editChatBlockUser
-        case .secret: return "Secret Chat"
+        case .secret: return L10n.editChatSecretChat
         }
     }
 }

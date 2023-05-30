@@ -22,8 +22,6 @@ struct EventMessageModel: Equatable {
             self.message = L10n.chatMessageEventJoined(senderName, participantNames)
         case .eventLeft:
             let participantNames = message.leftParticipants.getDisplayName(currentUser: currentUser)
-            let tobe = participantNames.count > 1 ? "have" : "has"
-            let action = "left the conversation"
             self.message = L10n.chatMessageEventLeft(participantNames)
         }
     }
