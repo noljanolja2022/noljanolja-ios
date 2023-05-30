@@ -238,11 +238,10 @@ final class ChatViewModel: ViewModel {
             .sink(receiveValue: { [weak self] result in
                 switch result {
                 case let .success(messages):
-                    logger.info("Get local messages successfull")
                     let messages = messages.filter { $0.type.isSupported }
                     self?.messagesSubject.send(messages)
-                case let .failure(error):
-                    logger.error("Get local messages failed: \(error.localizedDescription)")
+                case .failure:
+                    break
                 }
             })
             .store(in: &cancellables)

@@ -158,6 +158,8 @@ internal enum L10n {
   internal static let commonMembers = L10n.tr("Localizable", "common_members", fallback: "Members")
   /// Next
   internal static let commonNext = L10n.tr("Localizable", "common_next", fallback: "Next")
+  /// No
+  internal static let commonNo = L10n.tr("Localizable", "common_no", fallback: "No")
   /// OK
   internal static let commonOk = L10n.tr("Localizable", "common_ok", fallback: "OK")
   /// Previous
@@ -180,6 +182,8 @@ internal enum L10n {
   }
   /// Skip
   internal static let commonSkip = L10n.tr("Localizable", "common_skip", fallback: "Skip")
+  /// Success
+  internal static let commonSuccess = L10n.tr("Localizable", "common_success", fallback: "Success")
   /// Today
   internal static let commonToday = L10n.tr("Localizable", "common_today", fallback: "Today")
   /// Try again
@@ -192,6 +196,8 @@ internal enum L10n {
   internal static let commonWarning = L10n.tr("Localizable", "common_warning", fallback: "Warning")
   /// Withdrawal
   internal static let commonWithdrwal = L10n.tr("Localizable", "common_withdrwal", fallback: "Withdrawal")
+  /// Yes
+  internal static let commonYes = L10n.tr("Localizable", "common_yes", fallback: "Yes")
   /// Yesterday
   internal static let commonYesterday = L10n.tr("Localizable", "common_yesterday", fallback: "Yesterday")
   /// You
@@ -387,6 +393,8 @@ internal enum L10n {
   internal static let settingAddressTitle = L10n.tr("Localizable", "setting_address_title", fallback: "Address")
   /// Clear cache data
   internal static let settingClearCacheData = L10n.tr("Localizable", "setting_clear_cache_data", fallback: "Clear cache data")
+  /// Clear cache data completed.
+  internal static let settingClearCacheSuccessDescription = L10n.tr("Localizable", "setting_clear_cache_success_description", fallback: "Clear cache data completed.")
   /// Company Name
   internal static let settingCompanyNameTitle = L10n.tr("Localizable", "setting_company_name_title", fallback: "Company Name")
   /// Company Registration Number
@@ -417,6 +425,12 @@ internal enum L10n {
   internal static let settingPushNotification = L10n.tr("Localizable", "setting_push_notification", fallback: "App push notification")
   /// Representative
   internal static let settingRepresentativeTitle = L10n.tr("Localizable", "setting_representative_title", fallback: "Representative")
+  /// All your cache will be deleted after you do this action.
+  internal static let settingWarningClearCacheDescription = L10n.tr("Localizable", "setting_warning_clear_cache_description", fallback: "All your cache will be deleted after you do this action.")
+  /// Are you sure to clear cache data?
+  internal static let settingWarningClearCacheTitle = L10n.tr("Localizable", "setting_warning_clear_cache_title", fallback: "Are you sure to clear cache data?")
+  /// Do you want to Log out
+  internal static let settingWarningLogOutTitle = L10n.tr("Localizable", "setting_warning_log_out_title", fallback: "Do you want to Log out")
   /// Join the membership
   internal static let signup = L10n.tr("Localizable", "signup", fallback: "Join the membership")
   /// EXPLORE NOW
@@ -488,6 +502,8 @@ internal enum L10n {
   internal static let updateProfileAvatarOpenCamera = L10n.tr("Localizable", "update_profile_avatar_open_camera", fallback: "Open Camera")
   /// Select Photo
   internal static let updateProfileAvatarSelectPhoto = L10n.tr("Localizable", "update_profile_avatar_select_photo", fallback: "Select Photo")
+  /// Date of Birth
+  internal static let updateProfileDateOfBirth = L10n.tr("Localizable", "update_profile_date_of_birth", fallback: "Date of Birth")
   /// Day of Birth
   internal static let updateProfileDob = L10n.tr("Localizable", "update_profile_dob", fallback: "Day of Birth")
   /// Gender

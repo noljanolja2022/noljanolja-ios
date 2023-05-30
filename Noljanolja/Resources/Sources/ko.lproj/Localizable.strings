@@ -23,6 +23,15 @@
 "setting_address_title" = "Address";
 "setting_phone_call_title" = "Phone call";
 "setting_company_registration_number_title" = "Company Registration Number";
+"setting_warning_clear_cache_title" = "Are you sure to clear cache data?";
+"setting_warning_clear_cache_description" = "All your cache will be deleted after you do this action.";
+"setting_clear_cache_success_description" = "Clear cache data completed.";
+"setting_warning_log_out_title" = "Do you want to Log out";
+"common_ok" = "OK";
+"common_yes" = "Yes";
+"common_no" = "No";
+"common_success" = "Success";
+"update_profile_date_of_birth" = "Date of Birth";
 
 "common_next" = "다음";
 "common_previous" = "이전";

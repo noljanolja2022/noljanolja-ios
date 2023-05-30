@@ -37,7 +37,6 @@ final class KakaoAuthAPI {
                 promise(.success(()))
                 if let error {
                     promise(.failure(error))
-                    logger.error(error.localizedDescription)
                 } else {
                     promise(.success(()))
                 }

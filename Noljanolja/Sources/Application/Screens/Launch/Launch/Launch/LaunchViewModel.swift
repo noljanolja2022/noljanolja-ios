@@ -60,7 +60,6 @@ final class LaunchViewModel: ViewModel {
                     return Empty<User, Error>().eraseToAnyPublisher()
                 }
                 let trigger: AnyPublisher<Void, Error> = {
-                    logger.debug("First launch app: \(self.userDefaults.isFirstLaunch)")
                     if self.userDefaults.isFirstLaunch {
                         self.userDefaults.isFirstLaunch = false
                         return self.authService.signOut()
@@ -78,14 +77,12 @@ final class LaunchViewModel: ViewModel {
             .sink(receiveValue: { [weak self] result in
                 switch result {
                 case let .success(user):
-                    logger.info("Get pre data successful")
                     if user.isSettedUp {
                         self?.delegate?.navigateToMain()
                     } else {
                         self?.delegate?.navigateToUpdateCurrentUser()
                     }
-                case let .failure(error):
-                    logger.error("Get pre data failed - \(error.localizedDescription)")
+                case .failure:
                     self?.isContinueButtonHidden = false
                 }
             })

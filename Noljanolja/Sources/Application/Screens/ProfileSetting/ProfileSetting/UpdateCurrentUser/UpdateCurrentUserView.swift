@@ -228,7 +228,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
             HStack(spacing: 16) {
                 Text(
                     viewModel.gender?.rawValue.lowercased().capitalized
-                        ?? "Gender"
+                        ?? L10n.updateProfileGender
                 )
                 .font(.system(size: 16))
                 .foregroundColor(
@@ -282,13 +282,13 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
         switch type {
         case .avatar:
             return ActionSheet(
-                title: Text("Set Avatar"),
+                title: Text(L10n.updateProfileAvatar),
                 buttons: [
-                    .default(Text("Open Camera")) {
+                    .default(Text(L10n.updateProfileAvatarOpenCamera)) {
                         keyboard.dismiss()
                         viewModel.fullScreenCoverType = .imagePickerView(.camera)
                     },
-                    .default(Text("Select Photo")) {
+                    .default(Text(L10n.updateProfileAvatarSelectPhoto)) {
                         keyboard.dismiss()
                         viewModel.fullScreenCoverType = .imagePickerView(.photoLibrary)
                     },
@@ -297,11 +297,11 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
             )
         case .gender:
             return ActionSheet(
-                title: Text("Gender"),
+                title: Text(L10n.updateProfileGender),
                 buttons: [
-                    .default(Text("Male")) { viewModel.gender = .male },
-                    .default(Text("Female")) { viewModel.gender = .female },
-                    .default(Text("Other")) { viewModel.gender = .other },
+                    .default(Text(L10n.updateProfileGenderMale)) { viewModel.gender = .male },
+                    .default(Text(L10n.updateProfileGenderFemale)) { viewModel.gender = .female },
+                    .default(Text(L10n.updateProfileGenderOther)) { viewModel.gender = .other },
                     .cancel(Text(L10n.commonCancel))
                 ]
             )
@@ -351,7 +351,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                         )
                     },
                     centerView: {
-                        Text("Date of birth")
+                        Text(L10n.updateProfileDateOfBirth)
                             .font(.system(size: 18, weight: .bold))
                     }
                 )

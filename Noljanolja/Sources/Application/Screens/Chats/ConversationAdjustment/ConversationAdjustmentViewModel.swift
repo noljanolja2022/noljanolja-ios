@@ -80,10 +80,8 @@ final class ConversationAdjustmentModel: ViewModel {
                 self.isProgressHUDShowing = false
                 switch result {
                 case .success:
-                    logger.info("Update conversation title successful")
                     self.closeSubject.send(())
-                case let .failure(error):
-                    logger.error("Update conversation title failed: \(error.localizedDescription)")
+                case .failure:
                     self.alertState = AlertState(
                         title: TextState(L10n.commonErrorTitle),
                         message: TextState(L10n.commonErrorDescription),

@@ -114,10 +114,9 @@ final class ChatSettingViewModel: ViewModel {
             .sink { [weak self] result in
                 switch result {
                 case let .success(conversation):
-                    logger.info("Get conversation successful")
                     self?.conversationSubject.send(conversation)
-                case let .failure(error):
-                    logger.error("Get conversation failed: \(error.localizedDescription)")
+                case .failure:
+                    break
                 }
             }
             .store(in: &cancellables)
@@ -145,9 +144,8 @@ final class ChatSettingViewModel: ViewModel {
                 self.isProgressHUDShowing = false
                 switch result {
                 case .success:
-                    logger.info("Assign admin successful")
+                    break
                 case let .failure(error):
-                    logger.error("Assign admin failed: \(error.localizedDescription)")
                     self.alertState = AlertState(
                         title: TextState(L10n.commonErrorTitle),
                         message: TextState(L10n.commonErrorDescription),
@@ -172,9 +170,8 @@ final class ChatSettingViewModel: ViewModel {
                 self.isProgressHUDShowing = false
                 switch result {
                 case .success:
-                    logger.info("Remove participant successful")
+                    break
                 case let .failure(error):
-                    logger.error("Remove participant failed: \(error.localizedDescription)")
                     self.alertState = AlertState(
                         title: TextState(L10n.commonErrorTitle),
                         message: TextState(L10n.commonErrorDescription),
@@ -224,11 +221,9 @@ final class ChatSettingViewModel: ViewModel {
                 self.isProgressHUDShowing = false
                 switch result {
                 case .success:
-                    logger.info("Leave successful")
                     self.closeAction.send()
                     self.delegate?.chatSettingViewModelLeaveChat()
-                case let .failure(error):
-                    logger.error("Leave failed: \(error.localizedDescription)")
+                case .failure:
                     self.alertState = AlertState(
                         title: TextState(L10n.commonErrorTitle),
                         message: TextState(L10n.commonErrorDescription),

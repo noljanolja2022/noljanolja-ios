@@ -109,26 +109,26 @@ final class ProfileSettingViewModel: ViewModel {
             clearCacheConfirmAction
                 .map {
                     AlertState(
-                        title: TextState("Are you sure to clear cache data?"),
-                        message: TextState("All your cache will be deleted after you do this action."),
-                        primaryButton: .destructive(TextState("DISGREE")),
-                        secondaryButton: .default(TextState("AGREE"), action: .send(.clearCache))
+                        title: TextState(L10n.settingWarningClearCacheTitle),
+                        message: TextState(L10n.settingWarningClearCacheDescription),
+                        primaryButton: .destructive(TextState(L10n.commonDisagree.uppercased())),
+                        secondaryButton: .default(TextState(L10n.commonAgree.uppercased()), action: .send(.clearCache))
                     )
                 },
             clearCacheResultAction
                 .map {
                     AlertState(
-                        title: TextState("Success!"),
-                        message: TextState("Clear cache data completed."),
-                        dismissButton: .cancel(TextState("continue"))
+                        title: TextState(L10n.commonSuccess),
+                        message: TextState(L10n.settingClearCacheSuccessDescription),
+                        dismissButton: .cancel(TextState(L10n.commonContinue.uppercased()))
                     )
                 },
             signOutConfirmAction
                 .map {
                     AlertState(
-                        title: TextState("Do you want to Log out"),
-                        primaryButton: .destructive(TextState("No")),
-                        secondaryButton: .default(TextState("Yes"), action: .send(.clearCache))
+                        title: TextState(L10n.settingWarningLogOutTitle),
+                        primaryButton: .destructive(TextState(L10n.commonNo)),
+                        secondaryButton: .default(TextState(L10n.commonYes), action: .send(.clearCache))
                     )
                 }
         )

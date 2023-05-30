@@ -53,7 +53,6 @@ final class NaverAuthAPI: NSObject {
 
 extension NaverAuthAPI: NaverThirdPartyLoginConnectionDelegate {
     func oauth20ConnectionDidFinishRequestACTokenWithAuthCode() {
-        logger.info("FinishRequestACTokenWithAuthCode - \(naverLoginConnection?.accessToken ?? "")")
         if let accessToken = naverLoginConnection?.accessToken {
             successTrigger.send(accessToken)
         } else {
@@ -62,7 +61,6 @@ extension NaverAuthAPI: NaverThirdPartyLoginConnectionDelegate {
     }
 
     func oauth20ConnectionDidFinishRequestACTokenWithRefreshToken() {
-        logger.info("FinishRequestACTokenWithRefreshToken")
         if let accessToken = naverLoginConnection?.accessToken {
             successTrigger.send(accessToken)
         } else {
@@ -70,12 +68,9 @@ extension NaverAuthAPI: NaverThirdPartyLoginConnectionDelegate {
         }
     }
 
-    func oauth20ConnectionDidFinishDeleteToken() {
-        logger.info("FinishDeleteToken")
-    }
+    func oauth20ConnectionDidFinishDeleteToken() {}
 
     func oauth20Connection(_ oauthConnection: NaverThirdPartyLoginConnection!, didFailWithError error: Error!) {
-        logger.error("FailWithError - \(error.debugDescription)")
         failTrigger.send(error)
     }
 }
