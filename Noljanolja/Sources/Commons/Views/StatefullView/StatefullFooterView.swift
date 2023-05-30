@@ -94,7 +94,7 @@ struct ErrorFooterView: View {
                     Text(L10n.commonErrorDescription)
                         .font(.system(size: 14))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    Text("Try again")
+                    Text(L10n.commonTryAgain)
                         .font(.system(size: 14, weight: .bold))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }

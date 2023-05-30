@@ -1,243 +1,1013 @@
-"args_chat_selected" = "%d 선택됨";
-"auth_email_verification" = "이메일 인증";
-"auth_email_verification_complete" = "이메일 인증이 완료되었습니다!";
+"splash_welcome" = "";
+"tos_welcome" = "";
+"common_try_again" = "";
+"auth_welcome" = "";
+"permission_notification_title" = "";
+"permission_notification_description" = "";
+"common_send" = "Send";
+"common_saved" = "Saved";
+"common_edit" = "Edit";
+"edit_chat_change_nickname" = "Change nickname";
+"edit_chat_change_room_adjustment" = "Chat room adjustment";
+"edit_chat_turn_off_notification" = "Turn off notification";
+"edit_chat_media_files_links" = "Media, files, links";
+"edit_chat_find_message" = "Find message";
+"edit_chat_theme_chat" = "Theme Chat";
+"edit_chat_delete_chat_history" = "Delete chat history";
+"edit_chat_secret_chat" = "Secret Chat";
+
+"common_next" = "다음";
+"common_previous" = "이전";
+"common_verification" = "인증";
+"common_setting" = "설정";
+"common_log_out" = "로그아웃";
+"common_withdrwal" = "환전하기";
+"common_login" = "로그인";
+"common_continue" = "계속";
+"common_ok" = "확인";
+"common_cancel" = "취소";
+"common_confirm" = "확인";
+"common_skip" = "건너뛰기";
+"common_error_title" = "서비스장애";
+"common_error_description" = "일시적으로 예기치 않은 장애가 발생했습니다. 다시 시도해 주세요.";
+"common_loading" = "로딩중...";
+"common_search" = "검색";
+"common_unexpected_error" = "돌발장애";
+"common_size" = "크기 %@";
+"common_today" = "오늘";
+"common_yesterday" = "어제";
+"common_id" = "아이디";
+"args_chat_selected" = "%@ 선택됨";
+"common_friends" = "친구";
+"common_save" = "저장";
+"common_agree" = "동의";
+"common_disagree" = "거절";
+"common_members" = "회원";
+"common_you" = "회원님";
+"common_chat" = "채팅";
+"common_admin" = "어드민";
+"common_reload" = "새로고침";
+"common_copy" = "복사";
+"common_copy_success" = "클립보드로 복사";
+"common_warning" = "경고";
+"common_all" = "모두";
+"common_download" = "다운로드";
+"welcome_noljanolja" = "Welcome to 놀자놀자\nWATCH PLAY EARN";
+"splash_explore" = "지금 바로 시작하기";
+"splash_wait" = "잠시만 기다려주세요...";
+"signup" = "회원가입";
+"forgot_password" = "비밀번호 찾기";
+"email_hint_text" = "이메일을 입력해주세요";
+"password_hint_text" = "비밀번호를 입력해주세요";
+"confirm_password_hint_text" = "비밀번호 확인";
+"auth_login_with_SNS" = "SNS 로그인";
 "auth_find_email" = "이메일 찾기";
 "auth_find_password" = "비밀번호 찾기";
-"auth_forgot_title" = "비밀번호 찾기";
-"auth_identity_complete" = "회원 인증 완료!";
-"auth_login_new_password" = "임시 비밀번호로 로그인한 후에\n비밀번호를 변경해주세요.";
-"auth_login_with_SNS" = "SNS 로그인";
-"auth_need_agreement_terms" = "서비스약관에 동의해야합니다.";
-"auth_resend_password" = "임시 비밀번호 다시보내기";
+"auth_email_verification" = "이메일 인증";
+"auth_email_verification_complete" = "이메일 인증이 완료되었습니다!";
 "auth_reset_email_sended" = "임시 비밀번호를\n등록된 이메일로 전송했습니다.";
+"auth_login_new_password" = "임시 비밀번호로 로그인한 후에\n비밀번호를 변경해주세요.";
+"auth_resend_password" = "임시 비밀번호 다시보내기";
+"auth_forgot_title" = "비밀번호 찾기";
 "auth_signup_step1" = "1단계";
 "auth_signup_step2" = "2단계";
 "auth_signup_step3" = "3단계";
-"auth_signup_with_email" = "이메일로 회원가입";
 "auth_verify_email_finish" = "완료를 위해 이메일 인증을 해주세요.";
-"change_password" = "비밀번호 변경";
-"chat_action_album" = "갤러리";
-"chat_action_camera" = "카메라";
-"chat_action_contacts" = "연락처";
-"chat_action_events" = "이벤트";
-"chat_action_file" = "파일";
-"chat_action_location" = "위치";
-"chat_action_voice_chat" = "음성 채팅";
-"chat_action_wallet" = "지갑";
-"chat_camera_record_video" = "동영상 찍기";
-"chat_camera_take_photo" = "사진 찍기";
-"chat_input_hint" = "Aa";
-"chat_message_event_joined" = "%@ 님이 %@ 님을 채팅방에 초대하였습니다.";
-"chat_message_event_left" = "%@ 님이 채팅방을 나가셨습니다.";
-"chat_message_event_updated" = "%@ 님이 채팅방을 업데이트 하였습니다.";
-"chat_removed_conversation" = "채팅방 %@에서 탈퇴되었습니다.";
-"chats_message_file" = "파일(문서)을 받았습니다.";
-"chats_message_my_file" = "파일(문서)을 보냈습니다.";
-"chats_message_my_photo" = "사진(이미지)을 보냈습니다.";
-"chats_message_my_sticker" = "이모티콘을 보냈습니다.";
-"chats_message_my_unknown" = "메시지를 보냈습니다.";
-"chats_message_my_video" = "동영상을 보냈습니다.";
-"chats_message_photo" = "사진(이미지)을 받았습니다.";
-"chats_message_sticker" = "이모티콘을 받았습니다.";
-"chats_message_unknown" = "메시지를 받았습니다.";
-"chats_message_video" = "동영상을 받았습니다.";
-"chats_new_chat" = "새로운 채팅";
-"chats_title" = "채팅";
-"common_admin" = "어드민";
-"common_agree" = "동의";
-"common_all" = "모두";
-"common_cancel" = "취소";
-"common_chat" = "채팅";
-"common_confirm" = "확인";
-"common_continue" = "계속";
-"common_copy" = "복사";
-"common_copy_success" = "클립보드로 복사";
-"common_disagree" = "거절";
-"common_download" = "다운로드";
-"common_error_description" = "일시적으로 예기치 않은 장애가 발생했습니다. 다시 시도해 주세요.";
-"common_error_title" = "서비스장애";
-"common_friends" = "친구";
-"common_id" = "아이디";
-"common_loading" = "로딩중...";
-"common_log_out" = "로그아웃";
-"common_login" = "로그인";
-"common_members" = "회원";
-"common_next" = "다음";
-"common_ok" = "확인";
-"common_previous" = "이전";
-"common_reload" = "새로고침";
-"common_save" = "저장";
-"common_search" = "검색";
-"common_setting" = "설정";
-"common_size" = "크기 %@";
-"common_skip" = "건너뛰기";
-"common_today" = "오늘";
-"common_unexpected_error" = "돌발장애";
-"common_verification" = "인증";
-"common_warning" = "경고";
-"common_withdrwal" = "환전하기";
-"common_yesterday" = "어제";
-"common_you" = "회원님";
-"confirm_password_hint_text" = "비밀번호 확인";
-"contacts_not_found" = "등록된 친구가 없습니다";
-"contacts_start_chat" = "채팅 시작하기";
-"contacts_title_add_memmber" = "친구 추가";
-"contacts_title_group" = "그룹채팅";
-"contacts_title_normal" = "일반채팅";
-"contacts_title_secret" = "비밀채팅";
-"conversation_create" = "%@ 님이 채팅방을 개설하였습니다.";
-"conversation_empty" = "친구추가";
-"conversation_has_changed" = "채팅방이 변경되었습니다.";
-"countries_search" = "검색";
-"countries_title" = "국가/지역 선택";
-"custom_service_center" = "고객센터";
-"edit_chat_add_members" = "친구 추가";
-"edit_chat_block_user" = "친구 차단";
-"edit_chat_change_room_name" = "채팅방 이름 변경";
-"edit_chat_leave_chat" = "채팅방 나가기";
-"edit_chat_make_admin" = "관리자(운영자) 지정하기";
-"edit_chat_remove_user" = "친구 삭제";
-"edit_chat_warning_admin_description" = "이 친구는 이 채팅방의 관리자(운영자)로 지정됩니다.";
-"edit_chat_warning_admin_title" = "이 친구에게 정말로 관리자(운영자) 권한을 주시겠습니까?";
-"edit_chat_warning_block_description" = "";
-"edit_chat_warning_block_title" = "이 친구를 정말로 차단하시겠습니까?";
-"edit_chat_warning_leave_description" = "채팅방을 나가시면 모든 채팅 내용과 기록들이 삭제됩니다.";
-"edit_chat_warning_leave_title" = "이 채팅방을 정말로 나가시겠습니까?";
-"edit_chat_warning_remove_description" = "이 친구는 이 채팅방에서 삭제됩니다.";
-"edit_chat_warning_remove_title" = "이 친구를 정말로 삭제하시겠습니까?";
-"edit_member_infomation" = "회원정보 변경";
-"email_hint_text" = "이메일을 입력해주세요";
-"exchange_account_management" = "환전계좌 관리";
-"forgot_password" = "비밀번호 찾기";
+"auth_signup_with_email" = "이메일로 회원가입";
+"auth_need_agreement_terms" = "서비스약관에 동의해야합니다.";
+"auth_identity_complete" = "회원 인증 완료!";
+"require_login_title" = "서비스 시작하기";
+"require_login_description" = "로그인하고\n다양한 서비스를 즐겨보세요!";
+"require_login_button" = "로그인";
+"require_verify_description" = "이메일 인증하고\n다양한 서비스를 즐겨보세요!";
+"require_verify_button" = "이메일 인증";
 "full_agreement" = "전체 동의";
-"hello_user" = "안녕하세요 %@";
 "home_chats" = "채팅";
-"home_news" = "뉴스";
-"home_shop" = "쇼핑";
-"home_wallet" = "지갑";
 "home_watch" = "동영상";
-"invalid_email_format" = "유효하지 않은 이메일입니다.";
-"login_confirm_phone_description" = "문자메시지로 인증코드를 받게됩니다.";
-"login_country_input_label" = "국가";
-"login_invalid_phone_description" = "올바른 휴대폰 번호를 넣어주세요. 계정 인증을 위해 필요합니다.";
-"login_invalid_phone_title" = "유효하지 않은 번호";
+"home_wallet" = "지갑";
+"home_shop" = "쇼핑";
+"home_news" = "뉴스";
 "login_phone_description" = "Welcome to 놀자놀자. 계속 진행하기 위해 휴대폰 번호를 넣어주세요.";
+"login_country_input_label" = "국가";
 "login_phone_input_label" = "휴대폰 번호";
-"menu_announcement" = "공지사항";
-"menu_checkout_and_play" = "";
-"menu_exchange_money" = "환전하기";
-"menu_join_and_play" = "";
-"menu_play_video" = "";
-"menu_point_details" = "포인트 내역";
-"menu_title" = "메뉴";
-"my_info" = "내정보";
-"my_page" = "마이페이지";
-"my_ranking_title" = "내 순위";
+"login_invalid_phone_title" = "유효하지 않은 번호";
+"login_invalid_phone_description" = "올바른 휴대폰 번호를 넣어주세요. 계정 인증을 위해 필요합니다.";
+"login_confirm_phone_description" = "문자메시지로 인증코드를 받게됩니다.";
+"countries_title" = "국가/지역 선택";
+"countries_search" = "검색";
+"otp_title" = "인증코드 입력";
 "otp_description" = "문자메시지로 인증코드를 전송했습니다. 휴대폰번호 ";
-"otp_invalid_otp_description" = "올바른 인증코드를 입력했는지 확인해주세요.";
-"otp_invalid_otp_title" = "유효하지 않은 인증코드";
 "otp_resend_code" = "인증코드 다시보내기";
 "otp_resend_code_waiting" = "%@ 초 후에 인증코드 다시 보내기";
-"otp_title" = "인증코드 입력";
 "otp_verifying" = "인증 진행중입니다...";
-"password_hint_text" = "비밀번호를 입력해주세요";
-"permission" = "권한";
-"permission_accept" = "허용";
-"permission_access_storage_description" = "놀자놀자 앱에서 갤러리(사진)에 접근할 수 있도록 미디에 파일에 접근 권한을 허용해주세요.";
-"permission_contacts_description" = "놀자놀자 앱에서 친구와 가족에게 메시지를 보낼 수 있도록 연락처 접근 권한을 허용해주세요.";
-"permission_go_to_settings" = "설정";
-"permission_required_description" = "권한이 없으면 이 기능을 사용할 수 없습니다. 놀자놀자 앱이 필요한 권한에 접근할 수 있도록 설정버튼을 눌러주세요.";
-"require_login_button" = "로그인";
-"require_login_description" = "로그인하고\n다양한 서비스를 즐겨보세요!";
-"require_login_title" = "서비스 시작하기";
-"require_verify_button" = "이메일 인증";
-"require_verify_description" = "이메일 인증하고\n다양한 서비스를 즐겨보세요!";
+"otp_invalid_otp_title" = "유효하지 않은 인증코드";
+"otp_invalid_otp_description" = "올바른 인증코드를 입력했는지 확인해주세요.";
+"my_page" = "마이페이지";
+"hello_user" = "안녕하세요 %@";
 "service_guide" = "서비스 가이드";
-"setting_clear_cache_data" = "캐시데이터 지우기";
-"setting_current_version" = "현재 버전 %@";
-"setting_exchange_account_management" = "환전계좌 관리";
-"setting_faq" = "FAQ";
-"setting_name" = "이름";
-"setting_open_source_licence" = "오픈소스 라이센스";
-"setting_open_source_license" = "오픈소스 라이센스";
-"setting_phone_number" = "휴대폰 번호";
-"setting_push_notification" = "푸쉬 알림";
-"signup" = "회원가입";
-"splash_explore" = "지금 바로 시작하기";
-"splash_wait" = "잠시만 기다려주세요...";
+"custom_service_center" = "고객센터";
 "telephone_number_service_center" = "1588-1588";
-"tos_agree_and_continue" = "동의하고 계속하기";
+"my_info" = "내정보";
+"edit_member_infomation" = "회원정보 변경";
+"change_password" = "비밀번호 변경";
+"exchange_account_management" = "환전계좌 관리";
+"setting_push_notification" = "푸쉬 알림";
+"setting_exchange_account_management" = "환전계좌 관리";
+"setting_name" = "이름";
+"setting_phone_number" = "휴대폰 번호";
+"setting_open_source_licence" = "오픈소스 라이센스";
+"setting_faq" = "FAQ";
+"setting_clear_cache_data" = "캐시데이터 지우기";
+"setting_open_source_license" = "오픈소스 라이센스";
+"setting_current_version" = "현재 버전 %@";
+"menu_title" = "메뉴";
+"menu_announcement" = "공지사항";
+"menu_play_video" = "";
+"menu_join_and_play" = "";
+"menu_checkout_and_play" = "";
+"menu_point_details" = "포인트 내역";
+"menu_exchange_money" = "환전하기";
+"tos_title" = "서비스 약관";
+"tos_description" = "개별적으로 약관에 동의하도록 선택할 수 있습니다. \n필수항목이 아닌 선택항목은 동의하지 않아도 서비스 이용이 가능합니다.";
 "tos_compulsory" = "필수";
 "tos_compulsory_item_title_1" = "나는 만 14세 이상입니다.";
 "tos_compulsory_item_title_2" = "서비스 이용 약관";
 "tos_compulsory_item_title_3" = "포괄적인 서비스 이용 약관";
 "tos_compulsory_item_title_4" = "개인정보 수집 및 이용";
-"tos_description" = "개별적으로 약관에 동의하도록 선택할 수 있습니다. \n필수항목이 아닌 선택항목은 동의하지 않아도 서비스 이용이 가능합니다.";
 "tos_optional" = "선택";
 "tos_optional_item_title_1" = "정보 수집 및 이용에 대한 동의";
 "tos_optional_item_title_2" = "프로필 정보 수집 및 이용";
 "tos_read_and_agree" = "모든 약관을 읽었으며 이에 동의합니다.";
-"tos_title" = "서비스 약관";
-"transaction_detail" = "상세 내역";
-"transaction_detail_status" = "상태";
-"transaction_detail_time" = "시간";
-"transaction_history" = "포인트 내역";
-"transaction_history_point" = "%@ 포인트";
-"transaction_history_search_hint" = "포이트 내역 검색";
-"transaction_receive_type" = "적립";
-"transaction_spent_type" = "지출";
-"transactions_history_receive_reason" = "적립: %@";
-"transactions_history_spent_reason" = "지출: %@";
+"tos_agree_and_continue" = "동의하고 계속하기";
 "update_profile_avatar" = "아바타 설정";
 "update_profile_avatar_open_camera" = "카메라";
 "update_profile_avatar_select_photo" = "갤러리";
-"update_profile_dob" = "생일";
-"update_profile_gender" = "성별";
-"update_profile_gender_female" = "여자";
-"update_profile_gender_male" = "남자";
-"update_profile_gender_other" = "기타";
 "update_profile_name" = "이름";
 "update_profile_name_required" = "입력필요";
-"video_detail_comment" = "댓글";
-"video_detail_comment_newest" = "최신순";
-"video_detail_comment_popular" = "인기순";
-"video_detail_duration_days" = "%d 일 전";
-"video_detail_duration_hours" = "%d 시간 전";
-"video_detail_duration_just_now" = "조금전";
-"video_detail_duration_minutes" = "%d 분 전";
-"video_detail_duration_month" = "%d 개월 전";
-"video_detail_duration_year" = "%d 년 전";
-"video_detail_enter_comment" = "댓글을 입력하세요";
-"video_detail_need_youtube_account" = "회원님은 아직 등록된 유튜브 계정이 없습니다.";
-"video_detail_need_youtube_account_description" = "유튜브에 댓글을 작성하려면 유튜브 계정이 필요합니다. 유튜브 계정을 만드는 방법에 대한 가이드를 보려면 확인 버튼을 클릭해주세요.";
-"video_detail_require_google_description" = "댓글을 달거나 좋아요를 누르려면 구글에 로그인하고 유튜브 접근을 허용해야 합니다.";
-"video_detail_reward" = "리워드";
-"video_detail_reward_point" = "%d 포인트";
-"video_detail_short_description" = "%@ · %@ · %@";
-"video_detail_views" = "조회수";
-"video_list_today" = "오늘의 인기영상";
-"video_list_watching_to_get_point" = "시청을 완료하고 포인트를 받으세요!";
-"video_title" = "동영상 보고 포인트 적립하기";
-"wallet_accumulated_point" = "오늘 하루 적립 포인트";
-"wallet_attend_now" = "지금 출첵";
-"wallet_dashboard_receive" = "적립";
-"wallet_dashboard_recent_transactions" = "최근 포인트 내역";
-"wallet_dashboard_spent" = "지출";
-"wallet_dashboard_title" = "대시보드";
-"wallet_exchange_money" = "지금 사용";
-"wallet_expect_next_tier" = "다음달 예상 순위";
-"wallet_gold_member_ship" = "골드 멤버십";
-"wallet_history_dashboard" = "대시보드";
-"wallet_my_attendance" = "내 출석";
+"update_profile_dob" = "생일";
+"update_profile_gender" = "성별";
+"update_profile_gender_male" = "남자";
+"update_profile_gender_female" = "여자";
+"update_profile_gender_other" = "기타";
+"contacts_start_chat" = "채팅 시작하기";
+"contacts_title_normal" = "일반채팅";
+"contacts_title_group" = "그룹채팅";
+"contacts_title_secret" = "비밀채팅";
+"contacts_title_add_memmber" = "친구 추가";
+"contacts_not_found" = "등록된 친구가 없습니다";
+"permission" = "권한";
+"permission_contacts_description" = "놀자놀자 앱에서 친구와 가족에게 메시지를 보낼 수 있도록 연락처 접근 권한을 허용해주세요.";
+"permission_access_storage_description" = "놀자놀자 앱에서 갤러리(사진)에 접근할 수 있도록 미디에 파일에 접근 권한을 허용해주세요.";
+"permission_accept" = "허용";
+"permission_required_description" = "권한이 없으면 이 기능을 사용할 수 없습니다. 놀자놀자 앱이 필요한 권한에 접근할 수 있도록 설정버튼을 눌러주세요.";
+"permission_go_to_settings" = "설정";
+"conversation_empty" = "친구추가";
+"conversation_create" = "%@ 님이 채팅방을 개설하였습니다.";
+"conversation_has_changed" = "채팅방이 변경되었습니다.";
+"chats_title" = "채팅";
+"chats_new_chat" = "새로운 채팅";
+"chats_message_sticker" = "이모티콘을 받았습니다.";
+"chats_message_my_sticker" = "이모티콘을 보냈습니다.";
+"chats_message_photo" = "사진(이미지)을 받았습니다.";
+"chats_message_my_photo" = "사진(이미지)을 보냈습니다.";
+"chats_message_video" = "동영상을 받았습니다.";
+"chats_message_my_video" = "동영상을 보냈습니다.";
+"chats_message_file" = "파일(문서)을 받았습니다.";
+"chats_message_my_file" = "파일(문서)을 보냈습니다.";
+"chats_message_unknown" = "메시지를 받았습니다.";
+"chats_message_my_unknown" = "메시지를 보냈습니다.";
+"chat_input_hint" = "Aa";
+"chat_camera_take_photo" = "사진 찍기";
+"chat_camera_record_video" = "동영상 찍기";
+"chat_message_event_updated" = "%@ 님이 채팅방을 업데이트 하였습니다.";
+"chat_message_event_left" = "%@ 님이 채팅방을 나가셨습니다.";
+"chat_message_event_joined" = "%@ 님이 %@ 님을 채팅방에 초대하였습니다.";
+"chat_removed_conversation" = "채팅방 %@에서 탈퇴되었습니다.";
+"chat_action_album" = "갤러리";
+"chat_action_camera" = "카메라";
+"chat_action_events" = "이벤트";
+"chat_action_wallet" = "지갑";
+"chat_action_location" = "위치";
+"chat_action_contacts" = "연락처";
+"chat_action_file" = "파일";
+"chat_action_voice_chat" = "음성 채팅";
+"invalid_email_format" = "유효하지 않은 이메일입니다.";
+"edit_chat_warning_leave_title" = "이 채팅방을 정말로 나가시겠습니까?";
+"edit_chat_warning_leave_description" = "채팅방을 나가시면 모든 채팅 내용과 기록들이 삭제됩니다.";
+"edit_chat_warning_block_title" = "이 친구를 정말로 차단하시겠습니까?";
+"edit_chat_warning_block_description" = "이 친구는 나와 메시지를 보내거나 받을 수 없도록 차단됩니다.";
+"edit_chat_warning_remove_title" = "이 친구를 정말로 삭제하시겠습니까?";
+"edit_chat_warning_remove_description" = "이 친구는 이 채팅방에서 삭제됩니다.";
+"edit_chat_warning_admin_title" = "이 친구에게 정말로 관리자(운영자) 권한을 주시겠습니까?";
+"edit_chat_warning_admin_description" = "이 친구는 이 채팅방의 관리자(운영자)로 지정됩니다.";
+"edit_chat_add_members" = "친구 추가";
+"edit_chat_leave_chat" = "채팅방 나가기";
+"edit_chat_change_room_name" = "채팅방 이름 변경";
+"edit_chat_make_admin" = "관리자(운영자) 지정하기";
+"edit_chat_remove_user" = "친구 삭제";
+"edit_chat_block_user" = "친구 차단";
+"wallet_number_friends" = "친구: %@";
 "wallet_my_point" = "내 포인트";
-"wallet_number_friends" = "친구: %d";
-"wallet_point_can_exchange" = "환전 가능한 포인트";
+"wallet_gold_member_ship" = "골드 멤버십";
 "wallet_point_ranking" = "전체 포인트 순위: %@";
 "wallet_ranking_bronze" = "브론즈 멤버십";
+"wallet_ranking_silver" = "실버 멤버십";
 "wallet_ranking_gold" = "골드 멤버십";
 "wallet_ranking_premium" = "프리미엄 멤버십";
-"wallet_ranking_silver" = "실버 멤버십";
+"wallet_expect_next_tier" = "다음달 예상 순위";
+"wallet_accumulated_point" = "오늘 하루 적립 포인트";
+"wallet_point_can_exchange" = "환전 가능한 포인트";
 "wallet_view_history" = "포인트 내역";
-"welcome_noljanolja" = "Welcome to 놀자놀자\nWATCH PLAY EARN";
-"splash_welcome" = "Welcome to Noja Noja. Follow these steps to be our member.";
-"tos_welcome" = "Welcome to Nolja Nolja. Please read our terms of service carefully.";
+"wallet_exchange_money" = "지금 사용";
+"transaction_history" = "포인트 내역";
+"transaction_history_search_hint" = "포인트 내역 검색";
+"transactions_history_receive_reason" = "적립: %@";
+"transactions_history_spent_reason" = "지출: %@";
+"transaction_history_point" = "%@ 포인트";
+"wallet_history_dashboard" = "대시보드";
+"transaction_receive_type" = "적립";
+"transaction_spent_type" = "지출";
+"wallet_dashboard_title" = "대시보드";
+"wallet_dashboard_receive" = "적립";
+"wallet_dashboard_spent" = "지출";
+"wallet_dashboard_recent_transactions" = "최근 포인트 내역";
+"wallet_attend_now" = "지금 출첵";
+"wallet_my_attendance" = "내 출석";
+"transaction_detail" = "상세 내역";
+"transaction_detail_status" = "상태";
+"transaction_detail_time" = "시간";
+"my_ranking_title" = "내 순위";
+"video_title" = "동영상 보고 포인트 적립하기";
+"video_list_today" = "오늘의 인기영상";
+"video_list_watching_to_get_point" = "시청을 완료하고 포인트를 받으세요!";
+"video_detail_views" = "조회수";
+"video_detail_comment" = "댓글";
+"video_detail_reward" = "리워드";
+"video_detail_comment_popular" = "인기순";
+"video_detail_comment_newest" = "최신순";
+"video_detail_enter_comment" = "댓글을 입력하세요";
+"video_detail_short_description" = "%@ · %@ · %@";
+"video_detail_duration_year" = "%@ 년 전";
+"video_detail_duration_month" = "%@ 개월 전";
+"video_detail_duration_days" = "%@ 일 전";
+"video_detail_duration_hours" = "%@ 시간 전";
+"video_detail_duration_minutes" = "%@ 분 전";
+"video_detail_duration_just_now" = "조금전";
+"video_detail_require_google_description" = "댓글을 달거나 좋아요를 누르려면 구글에 로그인하고 유튜브 접근을 허용해야 합니다.";
+"video_detail_need_youtube_account" = "회원님은 아직 등록된 유튜브 계정이 없습니다.";
+"video_detail_need_youtube_account_description" = "유튜브에 댓글을 작성하려면 유튜브 계정이 필요합니다. 유튜브 계정을 만드는 방법에 대한 가이드를 보려면 확인 버튼을 클릭해주세요.";
+"video_detail_reward_point" = "%@ 포인트";
+"chat_new_chat_tooltip" = "새 채팅을 시작하려면 이 버튼을 누르세요.";
+"setting_faq_title" = "FAQ";
+"setting_license_title" = "오픈소스 라이센스";
+"setting_about_us_title" = "About us";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

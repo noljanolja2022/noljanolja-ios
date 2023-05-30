@@ -20,7 +20,7 @@ struct TransactionHistoryItemModel: Equatable {
         self.dateTime = model.createdAt.string(withFormat: "HH:mm - MMMM dd, yyyy")
         self.point = {
             let signString = model.amount > 0 ? "+" : ""
-            return "\(signString) \(model.amount.formatted()) Points"
+            return L10n.transactionHistoryPoint("\(signString) \(model.amount.formatted())")
         }()
         self.pointColor = model.amount > 0 ? ColorAssets.primaryGreen200.name : ColorAssets.systemRed100.name
     }

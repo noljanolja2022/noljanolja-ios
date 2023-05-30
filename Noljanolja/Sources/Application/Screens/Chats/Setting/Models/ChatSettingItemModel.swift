@@ -42,8 +42,8 @@ enum ChatSettingItemModelType: Equatable {
 
     var title: String {
         switch self {
-        case .changeNickname: return "Change nickname"
-        case .adjustment: return "Chat room adjustment"
+        case .changeNickname: return L10n.editChatChangeNickname
+        case .adjustment: return L10n.editChatChangeRoomName
         case .notification: return "Turn off notification"
         case .media: return "Media, files, links"
         case .findMessage: return "Find message"

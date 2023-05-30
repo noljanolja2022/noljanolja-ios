@@ -68,7 +68,7 @@ struct TermView<ViewModel: TermViewModel>: View {
                 .font(.system(size: 32, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 12)
-            Text(L10n.commonWelcome)
+            Text(L10n.authWelcome)
                 .font(.system(size: 14))
                 .frame(maxWidth: .infinity, alignment: .leading)
         }

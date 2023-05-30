@@ -10,9 +10,9 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
-  /// %d selected
-  internal static func argsChatSelected(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "args_chat_selected", p1, fallback: "%d selected")
+  /// %@ selected
+  internal static func argsChatSelected(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "args_chat_selected", String(describing: p1), fallback: "%@ selected")
   }
   /// Email verification
   internal static let authEmailVerification = L10n.tr("Localizable", "auth_email_verification", fallback: "Email verification")
@@ -48,6 +48,8 @@ internal enum L10n {
   internal static let authSignupWithEmail = L10n.tr("Localizable", "auth_signup_with_email", fallback: "Signup with email and password")
   /// Verify email to finish
   internal static let authVerifyEmailFinish = L10n.tr("Localizable", "auth_verify_email_finish", fallback: "Verify email to finish")
+  /// Welcome to Noja Noja. Follow these steps to be our member.
+  internal static let authWelcome = L10n.tr("Localizable", "auth_welcome", fallback: "Welcome to Noja Noja. Follow these steps to be our member.")
   /// Change Password
   internal static let changePassword = L10n.tr("Localizable", "change_password", fallback: "Change Password")
   /// Album
@@ -84,9 +86,11 @@ internal enum L10n {
   internal static func chatMessageEventUpdated(_ p1: Any, _ p2: Any) -> String {
     return L10n.tr("Localizable", "chat_message_event_updated", String(describing: p1), String(describing: p2), fallback: "%@ has updated conversation %@")
   }
-  /// You has removed from conversation %@
+  /// Please tap this button to start a new chat
+  internal static let chatNewChatTooltip = L10n.tr("Localizable", "chat_new_chat_tooltip", fallback: "Please tap this button to start a new chat")
+  /// You were removed from conversation  by %@
   internal static func chatRemovedConversation(_ p1: Any) -> String {
-    return L10n.tr("Localizable", "chat_removed_conversation", String(describing: p1), fallback: "You has removed from conversation %@")
+    return L10n.tr("Localizable", "chat_removed_conversation", String(describing: p1), fallback: "You were removed from conversation  by %@")
   }
   /// You received a file
   internal static let chatsMessageFile = L10n.tr("Localizable", "chats_message_file", fallback: "You received a file")
@@ -122,8 +126,8 @@ internal enum L10n {
   internal static let commonCancel = L10n.tr("Localizable", "common_cancel", fallback: "Cancel")
   /// Chat
   internal static let commonChat = L10n.tr("Localizable", "common_chat", fallback: "Chat")
-  /// L10n.commonConfirm
-  internal static let commonConfirm = L10n.tr("Localizable", "common_confirm", fallback: "L10n.commonConfirm")
+  /// Confirm
+  internal static let commonConfirm = L10n.tr("Localizable", "common_confirm", fallback: "Confirm")
   /// Continue
   internal static let commonContinue = L10n.tr("Localizable", "common_continue", fallback: "Continue")
   /// Copy
@@ -134,6 +138,8 @@ internal enum L10n {
   internal static let commonDisagree = L10n.tr("Localizable", "common_disagree", fallback: "Disagree")
   /// Download
   internal static let commonDownload = L10n.tr("Localizable", "common_download", fallback: "Download")
+  /// Edit
+  internal static let commonEdit = L10n.tr("Localizable", "common_edit", fallback: "Edit")
   /// An unexpected error has occurred. Please try again.
   internal static let commonErrorDescription = L10n.tr("Localizable", "common_error_description", fallback: "An unexpected error has occurred. Please try again.")
   /// Error
@@ -160,8 +166,12 @@ internal enum L10n {
   internal static let commonReload = L10n.tr("Localizable", "common_reload", fallback: "Reload")
   /// Save
   internal static let commonSave = L10n.tr("Localizable", "common_save", fallback: "Save")
-  /// L10n.commonSearch
-  internal static let commonSearch = L10n.tr("Localizable", "common_search", fallback: "L10n.commonSearch")
+  /// Saved
+  internal static let commonSaved = L10n.tr("Localizable", "common_saved", fallback: "Saved")
+  /// Search
+  internal static let commonSearch = L10n.tr("Localizable", "common_search", fallback: "Search")
+  /// Send
+  internal static let commonSend = L10n.tr("Localizable", "common_send", fallback: "Send")
   /// Setting
   internal static let commonSetting = L10n.tr("Localizable", "common_setting", fallback: "Setting")
   /// Size %@
@@ -172,14 +182,14 @@ internal enum L10n {
   internal static let commonSkip = L10n.tr("Localizable", "common_skip", fallback: "Skip")
   /// Today
   internal static let commonToday = L10n.tr("Localizable", "common_today", fallback: "Today")
+  /// Try again
+  internal static let commonTryAgain = L10n.tr("Localizable", "common_try_again", fallback: "Try again")
   /// Unexpected Error
   internal static let commonUnexpectedError = L10n.tr("Localizable", "common_unexpected_error", fallback: "Unexpected Error")
   /// Verification
   internal static let commonVerification = L10n.tr("Localizable", "common_verification", fallback: "Verification")
   /// Warning
   internal static let commonWarning = L10n.tr("Localizable", "common_warning", fallback: "Warning")
-  /// Welcome to Noja Noja. Follow these steps to be our member.
-  internal static let commonWelcome = L10n.tr("Localizable", "common_welcome", fallback: "Welcome to Noja Noja. Follow these steps to be our member.")
   /// Withdrawal
   internal static let commonWithdrwal = L10n.tr("Localizable", "common_withdrwal", fallback: "Withdrawal")
   /// Yesterday
@@ -208,8 +218,8 @@ internal enum L10n {
   internal static let conversationEmpty = L10n.tr("Localizable", "conversation_empty", fallback: "Add friends to chat now.")
   /// Conversation has changed
   internal static let conversationHasChanged = L10n.tr("Localizable", "conversation_has_changed", fallback: "Conversation has changed")
-  /// L10n.commonSearch
-  internal static let countriesSearch = L10n.tr("Localizable", "countries_search", fallback: "L10n.commonSearch")
+  /// Search
+  internal static let countriesSearch = L10n.tr("Localizable", "countries_search", fallback: "Search")
   /// Select countries/regions
   internal static let countriesTitle = L10n.tr("Localizable", "countries_title", fallback: "Select countries/regions")
   /// Custom service center
@@ -218,14 +228,30 @@ internal enum L10n {
   internal static let editChatAddMembers = L10n.tr("Localizable", "edit_chat_add_members", fallback: "Add members")
   /// Block user
   internal static let editChatBlockUser = L10n.tr("Localizable", "edit_chat_block_user", fallback: "Block user")
+  /// Change nickname
+  internal static let editChatChangeNickname = L10n.tr("Localizable", "edit_chat_change_nickname", fallback: "Change nickname")
+  /// Chat room adjustment
+  internal static let editChatChangeRoomAdjustment = L10n.tr("Localizable", "edit_chat_change_room_adjustment", fallback: "Chat room adjustment")
   /// Change Chat roomâ€™s name
   internal static let editChatChangeRoomName = L10n.tr("Localizable", "edit_chat_change_room_name", fallback: "Change Chat roomâ€™s name")
+  /// Delete chat history
+  internal static let editChatDeleteChatHistory = L10n.tr("Localizable", "edit_chat_delete_chat_history", fallback: "Delete chat history")
+  /// Find message
+  internal static let editChatFindMessage = L10n.tr("Localizable", "edit_chat_find_message", fallback: "Find message")
   /// Leave chat room
   internal static let editChatLeaveChat = L10n.tr("Localizable", "edit_chat_leave_chat", fallback: "Leave chat room")
   /// Make admin
   internal static let editChatMakeAdmin = L10n.tr("Localizable", "edit_chat_make_admin", fallback: "Make admin")
+  /// Media, files, links
+  internal static let editChatMediaFilesLinks = L10n.tr("Localizable", "edit_chat_media_files_links", fallback: "Media, files, links")
   /// Remove user
   internal static let editChatRemoveUser = L10n.tr("Localizable", "edit_chat_remove_user", fallback: "Remove user")
+  /// Secret Chat
+  internal static let editChatSecretChat = L10n.tr("Localizable", "edit_chat_secret_chat", fallback: "Secret Chat")
+  /// Theme Chat
+  internal static let editChatThemeChat = L10n.tr("Localizable", "edit_chat_theme_chat", fallback: "Theme Chat")
+  /// Turn off notification
+  internal static let editChatTurnOffNotification = L10n.tr("Localizable", "edit_chat_turn_off_notification", fallback: "Turn off notification")
   /// This user will be assigned to admin for this chat.
   internal static let editChatWarningAdminDescription = L10n.tr("Localizable", "edit_chat_warning_admin_description", fallback: "This user will be assigned to admin for this chat.")
   /// Are you sure to assign admin this user?
@@ -326,8 +352,14 @@ internal enum L10n {
   internal static let permissionAccessStorageDescription = L10n.tr("Localizable", "permission_access_storage_description", fallback: "To help you access gallery on Noljanolja, allow Noljanolja access to your media files.")
   /// To help you message friends and family on Noljanolja, allow Noljanolja access to your contacts.
   internal static let permissionContactsDescription = L10n.tr("Localizable", "permission_contacts_description", fallback: "To help you message friends and family on Noljanolja, allow Noljanolja access to your contacts.")
-  /// Settings
-  internal static let permissionGoToSettings = L10n.tr("Localizable", "permission_go_to_settings", fallback: "Settings")
+  /// Go to setting
+  internal static let permissionGoToSettings = L10n.tr("Localizable", "permission_go_to_settings", fallback: "Go to setting")
+  /// Permit Nolja Nolja to send you notification in order to
+  /// conect with your friends.
+  internal static let permissionNotificationDescription = L10n.tr("Localizable", "permission_notification_description", fallback: "Permit Nolja Nolja to send you notification in order to\nconect with your friends.")
+  /// Turn on notification
+  /// for Nolja Nolja
+  internal static let permissionNotificationTitle = L10n.tr("Localizable", "permission_notification_title", fallback: "Turn on notification\nfor Nolja Nolja")
   /// You're unable to use this feature without the required permissions. 
   /// Tap the Settings button to allow Noljanolja to access the required permission.
   internal static let permissionRequiredDescription = L10n.tr("Localizable", "permission_required_description", fallback: "You're unable to use this feature without the required permissions. \nTap the Settings button to allow Noljanolja to access the required permission.")
@@ -345,6 +377,8 @@ internal enum L10n {
   internal static let requireVerifyDescription = L10n.tr("Localizable", "require_verify_description", fallback: "Verify email to play\nUse a variety of services")
   /// Service Guide
   internal static let serviceGuide = L10n.tr("Localizable", "service_guide", fallback: "Service Guide")
+  /// About us
+  internal static let settingAboutUsTitle = L10n.tr("Localizable", "setting_about_us_title", fallback: "About us")
   /// Clear cache data
   internal static let settingClearCacheData = L10n.tr("Localizable", "setting_clear_cache_data", fallback: "Clear cache data")
   /// Current version %@
@@ -355,6 +389,10 @@ internal enum L10n {
   internal static let settingExchangeAccountManagement = L10n.tr("Localizable", "setting_exchange_account_management", fallback: "Exchange account management")
   /// FAQ
   internal static let settingFaq = L10n.tr("Localizable", "setting_faq", fallback: "FAQ")
+  /// FAQ
+  internal static let settingFaqTitle = L10n.tr("Localizable", "setting_faq_title", fallback: "FAQ")
+  /// Open source license
+  internal static let settingLicenseTitle = L10n.tr("Localizable", "setting_license_title", fallback: "Open source license")
   /// Name
   internal static let settingName = L10n.tr("Localizable", "setting_name", fallback: "Name")
   /// Open source license
@@ -371,6 +409,8 @@ internal enum L10n {
   internal static let splashExplore = L10n.tr("Localizable", "splash_explore", fallback: "EXPLORE NOW")
   /// Just a moment ...
   internal static let splashWait = L10n.tr("Localizable", "splash_wait", fallback: "Just a moment ...")
+  /// Welcome to Noja Noja. Follow these steps to be our member.
+  internal static let splashWelcome = L10n.tr("Localizable", "splash_welcome", fallback: "Welcome to Noja Noja. Follow these steps to be our member.")
   /// 1588-1588
   internal static let telephoneNumberServiceCenter = L10n.tr("Localizable", "telephone_number_service_center", fallback: "1588-1588")
   /// Agree and Continue
@@ -452,27 +492,27 @@ internal enum L10n {
   internal static let videoDetailCommentNewest = L10n.tr("Localizable", "video_detail_comment_newest", fallback: "Newest")
   /// Popular
   internal static let videoDetailCommentPopular = L10n.tr("Localizable", "video_detail_comment_popular", fallback: "Popular")
-  /// %d days ago
-  internal static func videoDetailDurationDays(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "video_detail_duration_days", p1, fallback: "%d days ago")
+  /// %@ days ago
+  internal static func videoDetailDurationDays(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "video_detail_duration_days", String(describing: p1), fallback: "%@ days ago")
   }
-  /// %d hours ago
-  internal static func videoDetailDurationHours(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "video_detail_duration_hours", p1, fallback: "%d hours ago")
+  /// %@ hours ago
+  internal static func videoDetailDurationHours(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "video_detail_duration_hours", String(describing: p1), fallback: "%@ hours ago")
   }
   /// just now
   internal static let videoDetailDurationJustNow = L10n.tr("Localizable", "video_detail_duration_just_now", fallback: "just now")
-  /// %d minutes ago
-  internal static func videoDetailDurationMinutes(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "video_detail_duration_minutes", p1, fallback: "%d minutes ago")
+  /// %@ minutes ago
+  internal static func videoDetailDurationMinutes(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "video_detail_duration_minutes", String(describing: p1), fallback: "%@ minutes ago")
   }
-  /// %d months ago
-  internal static func videoDetailDurationMonth(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "video_detail_duration_month", p1, fallback: "%d months ago")
+  /// %@ months ago
+  internal static func videoDetailDurationMonth(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "video_detail_duration_month", String(describing: p1), fallback: "%@ months ago")
   }
-  /// %d years ago
-  internal static func videoDetailDurationYear(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "video_detail_duration_year", p1, fallback: "%d years ago")
+  /// %@ years ago
+  internal static func videoDetailDurationYear(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "video_detail_duration_year", String(describing: p1), fallback: "%@ years ago")
   }
   /// Enter a comment
   internal static let videoDetailEnterComment = L10n.tr("Localizable", "video_detail_enter_comment", fallback: "Enter a comment")
@@ -484,9 +524,9 @@ internal enum L10n {
   internal static let videoDetailRequireGoogleDescription = L10n.tr("Localizable", "video_detail_require_google_description", fallback: "You need login google and accept youtube scope to comment or like")
   /// Reward
   internal static let videoDetailReward = L10n.tr("Localizable", "video_detail_reward", fallback: "Reward")
-  /// %d point
-  internal static func videoDetailRewardPoint(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "video_detail_reward_point", p1, fallback: "%d point")
+  /// %@ point
+  internal static func videoDetailRewardPoint(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "video_detail_reward_point", String(describing: p1), fallback: "%@ point")
   }
   /// %@ · %@ · %@
   internal static func videoDetailShortDescription(_ p1: Any, _ p2: Any, _ p3: Any) -> String {
@@ -498,8 +538,8 @@ internal enum L10n {
   internal static let videoListToday = L10n.tr("Localizable", "video_list_today", fallback: "Today features")
   /// Complete watching to reward Points
   internal static let videoListWatchingToGetPoint = L10n.tr("Localizable", "video_list_watching_to_get_point", fallback: "Complete watching to reward Points")
-  /// Let's get points by watching
-  internal static let videoTitle = L10n.tr("Localizable", "video_title", fallback: "Let's get points by watching")
+  /// Letâ€™s get points by watching
+  internal static let videoTitle = L10n.tr("Localizable", "video_title", fallback: "Letâ€™s get points by watching")
   /// Accumulated points for the day
   internal static let walletAccumulatedPoint = L10n.tr("Localizable", "wallet_accumulated_point", fallback: "Accumulated points for the day")
   /// Attend now
@@ -524,9 +564,9 @@ internal enum L10n {
   internal static let walletMyAttendance = L10n.tr("Localizable", "wallet_my_attendance", fallback: "My attendance")
   /// My point
   internal static let walletMyPoint = L10n.tr("Localizable", "wallet_my_point", fallback: "My point")
-  /// Friend: %d
-  internal static func walletNumberFriends(_ p1: Int) -> String {
-    return L10n.tr("Localizable", "wallet_number_friends", p1, fallback: "Friend: %d")
+  /// Friend: %@
+  internal static func walletNumberFriends(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "wallet_number_friends", String(describing: p1), fallback: "Friend: %@")
   }
   /// Points that can be exchanged
   internal static let walletPointCanExchange = L10n.tr("Localizable", "wallet_point_can_exchange", fallback: "Points that can be exchanged")

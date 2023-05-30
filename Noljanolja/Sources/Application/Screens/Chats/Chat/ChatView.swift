@@ -85,6 +85,7 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                 )
             )
         }
+        .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
     private func buildContentView() -> some View {

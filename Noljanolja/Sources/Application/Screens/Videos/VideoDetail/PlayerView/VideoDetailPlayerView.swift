@@ -27,7 +27,7 @@ struct VideoDetailPlayerView<ViewModel: VideoDetailPlayerViewModel>: View {
             case .ready:
                 EmptyView()
             case .error:
-                Text(verbatim: "YouTube player couldn't be loaded")
+                Spacer()
             }
         }
         .frame(maxWidth: .infinity)

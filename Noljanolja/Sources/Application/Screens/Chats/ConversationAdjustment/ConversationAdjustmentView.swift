@@ -63,7 +63,7 @@ struct ConversationAdjustment<ViewModel: ConversationAdjustmentModel>: View {
             Spacer()
 
             Button(
-                "SAVE",
+                L10n.commonSave.uppercased(),
                 action: { viewModel.actionSubject.send() }
             )
             .buttonStyle(PrimaryButtonStyle())

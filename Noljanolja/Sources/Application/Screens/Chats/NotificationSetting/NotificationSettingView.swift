@@ -69,13 +69,13 @@ struct NotificationSettingView<ViewModel: NotificationSettingViewModel>: View {
             }
 
             VStack(spacing: 12) {
-                Text("Turn on notification\nfor Nolja Nolja")
+                Text(L10n.permissionNotificationTitle)
                     .font(.system(size: 22, weight: .medium))
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
-                Text("Permit Nolja Nolja to send you notification in order to\nconect with your friends.")
+                Text(L10n.permissionNotificationDescription)
                     .font(.system(size: 12))
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -83,7 +83,7 @@ struct NotificationSettingView<ViewModel: NotificationSettingViewModel>: View {
             }
 
             Button(
-                "Go to setting".uppercased(),
+                L10n.permissionGoToSettings.uppercased(),
                 action: {
                     guard let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) else { return }
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
