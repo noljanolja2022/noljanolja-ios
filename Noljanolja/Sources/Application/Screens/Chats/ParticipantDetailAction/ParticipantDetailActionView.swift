@@ -26,21 +26,25 @@ struct ParticipantDetailActionView<ViewModel: ParticipantDetailActionViewModel>:
 
     private func buildBodyView() -> some View {
         ZStack(alignment: .bottom) {
-            Spacer()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(
-                    ColorAssets.neutralDarkGrey.swiftUIColor
-                        .opacity(0.4)
-                        .edgesIgnoringSafeArea(.top)
-                )
-                .onTapGesture {
-                    presentationMode.wrappedValue.dismiss()
-                }
+            buildBackgroundView()
             buildContentView()
         }
         .edgesIgnoringSafeArea(.bottom)
         .onAppear { viewModel.isAppearSubject.send(true) }
         .onDisappear { viewModel.isAppearSubject.send(false) }
+    }
+
+    private func buildBackgroundView() -> some View {
+        Spacer()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(
+                ColorAssets.neutralDarkGrey.swiftUIColor
+                    .opacity(0.4)
+                    .edgesIgnoringSafeArea(.top)
+            )
+            .onTapGesture {
+                presentationMode.wrappedValue.dismiss()
+            }
     }
 
     private func buildContentView() -> some View {

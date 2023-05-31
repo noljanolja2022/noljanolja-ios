@@ -90,7 +90,7 @@ struct CreateConversationView<ViewModel: CreateConversationViewModel>: View {
                     }
                     .frame(height: 40)
                     .frame(maxWidth: .infinity)
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
                     .background(ColorAssets.primaryGreen100.swiftUIColor)
                     .cornerRadius(10)
                 }
@@ -111,7 +111,7 @@ struct CreateConversationView<ViewModel: CreateConversationViewModel>: View {
                     }
                     .frame(height: 40)
                     .frame(maxWidth: .infinity)
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
                     .background(ColorAssets.secondaryYellow300.swiftUIColor)
                     .cornerRadius(10)
                 }
