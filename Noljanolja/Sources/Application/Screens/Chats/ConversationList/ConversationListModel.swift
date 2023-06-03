@@ -29,11 +29,7 @@ final class ConversationListViewModel: ViewModel {
 
     // MARK: Navigations
 
-    @Published var navigationType: ConversationListNavigationType? {
-        didSet {
-            print("Noja-Debug", navigationType)
-        }
-    }
+    @Published var navigationType: ConversationListNavigationType?
 
     @Published var fullScreenCoverType: ConversationListFullScreenCoverType? {
         willSet {

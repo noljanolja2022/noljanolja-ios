@@ -73,7 +73,7 @@ final class AuthViewModel: ViewModel {
                 switch result {
                 case let .success(verificationID):
                     self.verificationID = verificationID
-                case let .failure(error):
+                case .failure:
                     self.alertState = AlertState(
                         title: TextState(L10n.commonErrorTitle),
                         message: TextState(L10n.commonErrorDescription),

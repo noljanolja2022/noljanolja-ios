@@ -11,6 +11,8 @@ import SwiftUI
 // MARK: - TransactionHistoryView
 
 struct TransactionHistoryView<ViewModel: TransactionHistoryViewModel>: View {
+    @Environment(\.colorScheme) var colorScheme
+
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
@@ -98,22 +100,29 @@ struct TransactionHistoryView<ViewModel: TransactionHistoryViewModel>: View {
                 }
 
             ForEach(section.items.indices, id: \.self) { index in
-                buildItemView(section.items[index])
-                    .background(
-                        index % 2 == 0
-                            ? ColorAssets.secondaryYellow50.swiftUIColor
-                            : .clear
-                    )
+                let item = section.items[index]
+                TransactionHistoryItemView(
+                    model: item,
+                    titleColor: {
+                        if colorScheme == .light {
+                            return ColorAssets.neutralRawDarkGrey.swiftUIColor
+                        } else if index % 2 == 0 {
+                            return ColorAssets.neutralRawDarkGrey.swiftUIColor
+                        } else {
+                            return ColorAssets.neutralRawLightGrey.swiftUIColor
+                        }
+                    }()
+                )
+                .background(
+                    index % 2 == 0
+                        ? ColorAssets.secondaryYellow50.swiftUIColor
+                        : ColorAssets.neutralLight.swiftUIColor // TODO: TO enable tap item
+                )
+                .onTapGesture {
+                    viewModel.transactionDetailAction.send(item.id)
+                }
             }
         }
-    }
-
-    @ViewBuilder
-    private func buildItemView(_ item: TransactionHistoryItemModel) -> some View {
-        TransactionHistoryItemView(model: item)
-            .onTapGesture {
-                viewModel.transactionDetailAction.send(item.id)
-            }
     }
 
     private func buildStatefullFooterView(_: [TransactionHistorySectionModel]) -> some View {

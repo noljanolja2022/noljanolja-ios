@@ -291,7 +291,7 @@ final class ChatViewModel: ViewModel {
                     case .plaintext, .photo, .sticker, .eventUpdated, .eventJoined, .unknown, .none:
                         break
                     }
-                case let .failure(error):
+                case .failure:
                     break
                 }
             })

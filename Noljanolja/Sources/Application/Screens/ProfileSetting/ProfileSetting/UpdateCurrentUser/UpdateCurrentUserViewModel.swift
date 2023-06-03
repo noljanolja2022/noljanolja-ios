@@ -72,7 +72,7 @@ final class UpdateCurrentUserViewModel: ViewModel {
             .store(in: &cancellables)
 
         $image
-            .compactMap { $0?.pngData() }
+            .compactMap { $0?.jpegData(compressionQuality: 0.5) }
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] imageData in
                 guard let self else {

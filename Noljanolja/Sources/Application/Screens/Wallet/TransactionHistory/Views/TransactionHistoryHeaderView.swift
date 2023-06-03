@@ -19,7 +19,7 @@ struct TransactionHistoryHeaderView: View {
             Text(model.displayDateTime)
                 .font(.system(size: 14, weight: .medium))
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
 
             HStack(spacing: 0) {
                 Text(L10n.walletHistoryDashboard)

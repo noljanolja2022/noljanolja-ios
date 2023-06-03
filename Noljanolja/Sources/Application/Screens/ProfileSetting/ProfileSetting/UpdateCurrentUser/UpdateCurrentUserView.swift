@@ -38,7 +38,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
             .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Update Profile")
+                    Text("")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
@@ -94,7 +94,6 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
             )
             .scaledToFill()
             .frame(width: 112, height: 112)
-            .background(Color.white)
             .cornerRadius(56)
             
             Button(

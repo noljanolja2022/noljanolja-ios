@@ -100,6 +100,7 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
                 }
             }
         )
+        .background(ColorAssets.neutralLight.swiftUIColor.ignoresSafeArea())
     }
 }
 

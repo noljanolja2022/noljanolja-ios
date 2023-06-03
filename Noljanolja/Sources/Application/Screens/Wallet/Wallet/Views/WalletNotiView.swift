@@ -34,7 +34,7 @@ struct WalletNotiView: View {
                             .font(.system(size: 14, weight: .bold))
                             .height(32)
                             .padding(.horizontal, 24)
-                            .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
+                            .foregroundColor(ColorAssets.neutralRawLight.swiftUIColor)
                             .background(ColorAssets.primaryGreen300.swiftUIColor)
                             .cornerRadius(4)
                     }

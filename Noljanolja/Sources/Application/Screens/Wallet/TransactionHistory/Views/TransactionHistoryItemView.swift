@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TransactionHistoryItemView: View {
     let model: TransactionHistoryItemModel
+    let titleColor: Color
 
     var body: some View {
         buildBodyView()
@@ -20,7 +21,7 @@ struct TransactionHistoryItemView: View {
                 Text(model.title)
                     .font(.system(size: 11, weight: .medium))
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    .foregroundColor(titleColor)
                 Text(model.dateTime)
                     .font(.system(size: 8, weight: .medium))
                     .frame(maxWidth: .infinity, alignment: .leading)

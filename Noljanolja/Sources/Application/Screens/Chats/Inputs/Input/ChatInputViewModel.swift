@@ -106,9 +106,7 @@ final class ChatInputViewModel: ViewModel {
                 return self.messageService
                     .sendMessage(request: request)
             }
-            .sink { result in
-                print(result)
-            }
+            .sink { _ in }
             .store(in: &cancellables)
     }
 }

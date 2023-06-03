@@ -145,7 +145,7 @@ final class ChatSettingViewModel: ViewModel {
                 switch result {
                 case .success:
                     break
-                case let .failure(error):
+                case .failure:
                     self.alertState = AlertState(
                         title: TextState(L10n.commonErrorTitle),
                         message: TextState(L10n.commonErrorDescription),
@@ -171,7 +171,7 @@ final class ChatSettingViewModel: ViewModel {
                 switch result {
                 case .success:
                     break
-                case let .failure(error):
+                case .failure:
                     self.alertState = AlertState(
                         title: TextState(L10n.commonErrorTitle),
                         message: TextState(L10n.commonErrorDescription),

@@ -24,6 +24,12 @@ struct ContactListView<ViewModel: ContactListViewModel>: View {
 
     @ViewBuilder
     private func buildBodyView() -> some View {
+        buildMainView()
+            .onAppear { viewModel.isAppearSubject.send(true) }
+            .onDisappear { viewModel.isAppearSubject.send(false) }
+    }
+
+    private func buildMainView() -> some View {
         VStack(spacing: 0) {
             SearchView(placeholder: L10n.contactSearchHint, text: $viewModel.searchString)
                 .background(ColorAssets.neutralLightGrey.swiftUIColor)
@@ -33,8 +39,7 @@ struct ContactListView<ViewModel: ContactListViewModel>: View {
                 .padding(.bottom, 20)
             buildContentView()
         }
-        .onAppear { viewModel.isAppearSubject.send(true) }
-        .onDisappear { viewModel.isAppearSubject.send(false) }
+        .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
     @ViewBuilder
@@ -93,12 +98,14 @@ struct ContactListView<ViewModel: ContactListViewModel>: View {
                             }
                         }()
                     )
+                    .background(ColorAssets.neutralLight.swiftUIColor) // TODO: TO enable tap item
                     .onTapGesture {
                         selectUser(user)
                         selectUserAction?(user)
                     }
                 }
             }
+            .background(ColorAssets.neutralLight.swiftUIColor)
         }
     }
 
