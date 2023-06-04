@@ -37,8 +37,8 @@ extension Realm {
 protocol RealmManagerType {
     func add(_ object: Object, update: Realm.UpdatePolicy)
     func add<S: Sequence>(_ objects: S, update: Realm.UpdatePolicy) where S.Iterator.Element: Object
-    func create<T: AsymmetricObject>(_ type: T.Type, value: Any)
-    func create<T: Object>(_ type: T.Type, value: Any, update: Realm.UpdatePolicy)
+    func create<T: AsymmetricObject>(_ type: T.Type, value: [String: Any])
+    func create<T: Object>(_ type: T.Type, value: [String: Any], update: Realm.UpdatePolicy)
 
     func objects<Element: RealmFetchable>(_ type: Element.Type) -> Results<Element>
     func objects<Element: RealmFetchable>(_ type: Element.Type, predicate: NSPredicate) -> Results<Element>
@@ -62,11 +62,11 @@ extension RealmManagerType {
         add(objects, update: update)
     }
 
-    func create(_ type: (some AsymmetricObject).Type, value: Any = [:]) {
+    func create(_ type: (some AsymmetricObject).Type, value: [String: Any] = [:]) {
         create(type, value: value)
     }
 
-    func create(_ type: (some Object).Type, value: Any = [:], update: Realm.UpdatePolicy = .error) {
+    func create(_ type: (some Object).Type, value: [String: Any] = [:], update: Realm.UpdatePolicy = .error) {
         create(type, value: value, update: update)
     }
 }
@@ -138,13 +138,13 @@ extension RealmManager {
         }
     }
 
-    func create(_ type: (some AsymmetricObject).Type, value: Any = [:]) {
+    func create(_ type: (some AsymmetricObject).Type, value: [String: Any] = [:]) {
         writeAsync { realm in
             realm.create(type, value: value)
         }
     }
 
-    func create(_ type: (some Object).Type, value: Any = [:], update: Realm.UpdatePolicy = .error) {
+    func create(_ type: (some Object).Type, value: [String: Any] = [:], update: Realm.UpdatePolicy = .error) {
         writeAsync { realm in
             realm.create(type, value: value, update: update)
         }

@@ -32,13 +32,13 @@ struct UpdateConversationContactListView<ViewModel: UpdateConversationContactLis
             .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Select Contact")
+                    Text(L10n.contactsTitleAddMemmber)
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     ZStack {
-                        Button("Agree") {
+                        Button(L10n.commonAgree) {
                             viewModel.actionSubject.send(selectedUsers)
                         }
                         .font(.system(size: 16))

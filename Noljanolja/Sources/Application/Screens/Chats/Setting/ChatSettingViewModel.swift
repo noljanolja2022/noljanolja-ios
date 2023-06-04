@@ -114,10 +114,9 @@ final class ChatSettingViewModel: ViewModel {
             .sink { [weak self] result in
                 switch result {
                 case let .success(conversation):
-                    logger.info("Get conversation successful")
                     self?.conversationSubject.send(conversation)
-                case let .failure(error):
-                    logger.error("Get conversation failed: \(error.localizedDescription)")
+                case .failure:
+                    break
                 }
             }
             .store(in: &cancellables)
@@ -145,12 +144,11 @@ final class ChatSettingViewModel: ViewModel {
                 self.isProgressHUDShowing = false
                 switch result {
                 case .success:
-                    logger.info("Assign admin successful")
-                case let .failure(error):
-                    logger.error("Assign admin failed: \(error.localizedDescription)")
+                    break
+                case .failure:
                     self.alertState = AlertState(
-                        title: TextState("Error"),
-                        message: TextState(L10n.Common.Error.message),
+                        title: TextState(L10n.commonErrorTitle),
+                        message: TextState(L10n.commonErrorDescription),
                         dismissButton: .cancel(TextState("OK"))
                     )
                 }
@@ -172,12 +170,11 @@ final class ChatSettingViewModel: ViewModel {
                 self.isProgressHUDShowing = false
                 switch result {
                 case .success:
-                    logger.info("Remove participant successful")
-                case let .failure(error):
-                    logger.error("Remove participant failed: \(error.localizedDescription)")
+                    break
+                case .failure:
                     self.alertState = AlertState(
-                        title: TextState("Error"),
-                        message: TextState(L10n.Common.Error.message),
+                        title: TextState(L10n.commonErrorTitle),
+                        message: TextState(L10n.commonErrorDescription),
                         dismissButton: .cancel(TextState("OK"))
                     )
                 }
@@ -193,10 +190,10 @@ final class ChatSettingViewModel: ViewModel {
         confirmLeaveAction
             .sink { [weak self] _ in
                 self?.alertState = AlertState(
-                    title: TextState("Are you sure to leave this chat?"),
-                    message: TextState("If you leave, all the chat and chat history will be deleted."),
-                    primaryButton: .destructive(TextState("DISGREE")),
-                    secondaryButton: .default(TextState("AGREE"), action: .send(.leave))
+                    title: TextState(L10n.editChatWarningLeaveTitle),
+                    message: TextState(L10n.editChatWarningLeaveDescription),
+                    primaryButton: .destructive(TextState(L10n.commonDisagree.uppercased())),
+                    secondaryButton: .default(TextState(L10n.commonAgree.uppercased()), action: .send(.leave))
                 )
             }
             .store(in: &cancellables)
@@ -204,7 +201,7 @@ final class ChatSettingViewModel: ViewModel {
         leaveAlertAction
             .sink { [weak self] _ in
                 self?.alertState = AlertState(
-                    title: TextState("Alert"),
+                    title: TextState(""),
                     message: TextState("Please assign another one to admin first"),
                     dismissButton: .cancel(TextState("OK"))
                 )
@@ -224,14 +221,12 @@ final class ChatSettingViewModel: ViewModel {
                 self.isProgressHUDShowing = false
                 switch result {
                 case .success:
-                    logger.info("Leave successful")
                     self.closeAction.send()
                     self.delegate?.chatSettingViewModelLeaveChat()
-                case let .failure(error):
-                    logger.error("Leave failed: \(error.localizedDescription)")
+                case .failure:
                     self.alertState = AlertState(
-                        title: TextState("Error"),
-                        message: TextState(L10n.Common.Error.message),
+                        title: TextState(L10n.commonErrorTitle),
+                        message: TextState(L10n.commonErrorDescription),
                         dismissButton: .cancel(TextState("OK"))
                     )
                 }
@@ -272,10 +267,10 @@ extension ChatSettingViewModel: ParticipantDetailActionViewModelDelegate {
             break
         case .removeParticipant:
             let alertState = AlertState<ChatSettingAlertActionType>(
-                title: TextState("Are you sure to remove this user?"),
-                message: TextState("This user will be enable removed from this chat."),
-                primaryButton: .destructive(TextState("DISGREE")),
-                secondaryButton: .default(TextState("AGREE"), action: .send(.removeParticipant(user)))
+                title: TextState(L10n.editChatWarningRemoveTitle),
+                message: TextState(L10n.editChatWarningRemoveDescription),
+                primaryButton: .destructive(TextState(L10n.commonDisagree.uppercased())),
+                secondaryButton: .default(TextState(L10n.commonAgree.uppercased()), action: .send(.removeParticipant(user)))
             )
             alertStateAction.send(alertState)
         }

@@ -29,20 +29,26 @@ struct ConversationItemModel: Equatable {
         self.message = {
             guard let lastMessage = conversation.messages.first else {
                 let creatorName = conversation.creator.getDisplayName(currentUser: currentUser)
-                return "\(creatorName) created conversation"
+                return L10n.conversationCreate(creatorName)
             }
 
-            let subject = lastMessage.sender.getDisplayName(currentUser: currentUser)
-            let verb = "sent"
             switch lastMessage.type {
             case .plaintext:
                 return lastMessage.message
             case .photo:
-                return [subject, verb, "photo"].joined(separator: " ")
+                if lastMessage.sender.id == currentUser.id {
+                    return L10n.chatsMessageMyPhoto
+                } else {
+                    return L10n.chatsMessagePhoto
+                }
             case .sticker:
-                return [subject, verb, "sticker"].joined(separator: " ")
+                if lastMessage.sender.id == currentUser.id {
+                    return L10n.chatsMessageMySticker
+                } else {
+                    return L10n.chatsMessageSticker
+                }
             case .eventUpdated, .eventJoined, .eventLeft:
-                return "Conversation has changed"
+                return L10n.conversationHasChanged
             case .unknown:
                 return ""
             }

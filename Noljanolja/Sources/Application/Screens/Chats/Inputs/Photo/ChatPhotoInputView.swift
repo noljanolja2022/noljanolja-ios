@@ -50,10 +50,10 @@ struct ChatPhotoInputView<ViewModel: ChatPhotoInputViewModel>: View {
 
     private func buildErrorView() -> some View {
         VStack(spacing: 16) {
-            Text("Don't have permission. Please grant permisison")
+            Text(L10n.permissionRequiredDescription)
                 .font(.system(size: 14))
 
-            Button("Open app setting") {
+            Button(L10n.permissionGoToSettings) {
                 guard let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) else { return }
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }

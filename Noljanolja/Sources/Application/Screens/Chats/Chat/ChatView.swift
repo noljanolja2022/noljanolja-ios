@@ -85,8 +85,7 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                 )
             )
         }
-        .onAppear { viewModel.isAppearSubject.send(true) }
-        .onDisappear { viewModel.isAppearSubject.send(false) }
+        .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
     private func buildContentView() -> some View {

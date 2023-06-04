@@ -35,10 +35,10 @@ enum LoyaltyTierModelType: Int, Equatable {
 
     var text: String {
         switch self {
-        case .bronze: return "Bronze Membership"
-        case .silver: return "Silver Membership"
-        case .gold: return "Gold Membership"
-        case .diamond: return "Premium Membership"
+        case .bronze: return L10n.walletRankingBronze
+        case .silver: return L10n.walletRankingSilver
+        case .gold: return L10n.walletRankingGold
+        case .diamond: return L10n.walletRankingPremium
         }
     }
 

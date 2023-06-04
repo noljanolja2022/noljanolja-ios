@@ -112,7 +112,7 @@ struct ChatStickerInputView<ViewModel: ChatStickerInputViewModel>: View {
 
     private func buildErrorView() -> some View {
         VStack(spacing: 16) {
-            Button("Download") {
+            Button(L10n.commonDownload) {
                 viewModel.downloadDataAction.send()
             }
             .font(.system(size: 16, weight: .bold))

@@ -1,8 +1,1030 @@
-"app_name" = "Noljanolja";
+"splash_welcome" = "Welcome to Noja Noja. Follow these steps to be our member.";
+"tos_welcome" = "Welcome to Nolja Nolja. Please read our terms of service carefully.";
+"common_try_again" = "Try again";
+"auth_welcome" = "Welcome to Noja Noja. Follow these steps to be our member.";
+"permission_notification_title" = "Turn on notification\nfor Nolja Nolja";
+"permission_notification_description" = "Permit Nolja Nolja to send you notification in order to\nconect with your friends.";
+"common_send" = "Send";
+"common_saved" = "Saved";
+"common_edit" = "Edit";
+"edit_chat_change_nickname" = "Change nickname";
+"edit_chat_change_room_adjustment" = "Chat room adjustment";
+"edit_chat_turn_off_notification" = "Turn off notification";
+"edit_chat_media_files_links" = "Media, files, links";
+"edit_chat_find_message" = "Find message";
+"edit_chat_theme_chat" = "Theme Chat";
+"edit_chat_delete_chat_history" = "Delete chat history";
+"edit_chat_secret_chat" = "Secret Chat";
+"contact_search_hint" = "Search by name/Phone number";
+"edit_chat_change_room_adjustment_description" = "Name of group chat";
+"transaction_detail_code" = "Transaction code";
+"setting_company_name_title" = "Company Name";
+"setting_representative_title" = "Representative";
+"setting_address_title" = "Address";
+"setting_phone_call_title" = "Phone call";
+"setting_company_registration_number_title" = "Company Registration Number";
+"setting_warning_clear_cache_title" = "Are you sure to clear cache data?";
+"setting_warning_clear_cache_description" = "All your cache will be deleted after you do this action.";
+"setting_clear_cache_success_description" = "Clear cache data completed.";
+"setting_warning_log_out_title" = "Do you want to Log out";
+"common_ok" = "OK";
+"common_yes" = "Yes";
+"common_no" = "No";
+"common_success" = "Success";
+"update_profile_date_of_birth" = "Date of Birth";
 
-"common.ok" = "OK";
-"common.next" = "Next";
-"common.previous" = "Previous";
-"common.success.title" = "Success";
-"common.error.title" = "Error";
-"common.error.message" = "Error! An error occurred. Please try again later.";
+"common_next" = "Next";
+"common_previous" = "Previous";
+"common_verification" = "Verification";
+"common_setting" = "Setting";
+"common_log_out" = "Log out";
+"common_withdrwal" = "Withdrawal";
+"common_login" = "Log in";
+"common_continue" = "Continue";
+"common_ok" = "OK";
+"common_cancel" = "Cancel";
+"common_confirm" = "Confirm";
+"common_skip" = "Skip";
+"common_error_title" = "Error";
+"common_error_description" = "An unexpected error has occurred. Please try again.";
+"common_loading" = "Loading...";
+"common_search" = "Search";
+"common_unexpected_error" = "Unexpected Error";
+"common_size" = "Size %@";
+"common_today" = "Today";
+"common_yesterday" = "Yesterday";
+"common_id" = "Id";
+"args_chat_selected" = "%@ selected";
+"common_friends" = "Friends";
+"common_save" = "Save";
+"common_agree" = "Agree";
+"common_disagree" = "Disagree";
+"common_members" = "Members";
+"common_you" = "You";
+"common_chat" = "Chat";
+"common_admin" = "Admin";
+"common_reload" = "Reload";
+"common_copy" = "Copy";
+"common_copy_success" = "Copied in clipboard";
+"common_warning" = "Warning";
+"common_all" = "All";
+"common_download" = "Download";
+"welcome_noljanolja" = "Welcome to Noja Noja. Watch videos,play and earn.";
+"splash_explore" = "EXPLORE NOW";
+"splash_wait" = "Just a moment ...";
+"signup" = "Join the membership";
+"forgot_password" = "Forgot your password?";
+"email_hint_text" = "Please enter your email";
+"password_hint_text" = "Please enter your password";
+"confirm_password_hint_text" = "Please enter your confirm password";
+"auth_login_with_SNS" = "Login with SNS";
+"auth_find_email" = "Find Email";
+"auth_find_password" = "Find password";
+"auth_email_verification" = "Email verification";
+"auth_email_verification_complete" = "Identity verification complete!";
+"auth_reset_email_sended" = "Temporary password to your email\nhas been sent";
+"auth_login_new_password" = "Please log in with your temporary password\nand change your password.";
+"auth_resend_password" = "Resend temporary password";
+"auth_forgot_title" = "Find Password";
+"auth_signup_step1" = "Step 1";
+"auth_signup_step2" = "Step 2";
+"auth_signup_step3" = "Step 3";
+"auth_verify_email_finish" = "Verify email to finish";
+"auth_signup_with_email" = "Signup with email and password";
+"auth_need_agreement_terms" = "You need to agree to the terms and conditions before signing up";
+"auth_identity_complete" = "Identity verification complete!";
+"require_login_title" = "Let\'s Play Start the service";
+"require_login_description" = "Log in to play\nUse a variety of services!";
+"require_login_button" = "Let\'s Play Log in";
+"require_verify_description" = "Verify email to play\nUse a variety of services";
+"require_verify_button" = "Verify Email";
+"full_agreement" = "Full agreement";
+"home_chats" = "Chats";
+"home_watch" = "Watch";
+"home_wallet" = "Wallet";
+"home_shop" = "Shop";
+"home_news" = "News";
+"login_phone_description" = "Welcome to Nolja Nolja. Please enter your Phone number to join continue.";
+"login_country_input_label" = "Country";
+"login_phone_input_label" = "Phone Number";
+"login_invalid_phone_title" = "Incorrect Number";
+"login_invalid_phone_description" = "Please input the correct phone number since this number will be used to verify your account.";
+"login_confirm_phone_description" = "You will receive a code to verify to this phone number via text message.";
+"countries_title" = "Select countries/regions";
+"countries_search" = "Search";
+"otp_title" = "Enter verification code";
+"otp_description" = "We\'ve sent a text message with your verification code to";
+"otp_resend_code" = "Resend Code";
+"otp_resend_code_waiting" = "Resend code in %@ seconds";
+"otp_verifying" = "Verifying...";
+"otp_invalid_otp_title" = "Incorrect Code";
+"otp_invalid_otp_description" = "Please make sure you input the correct code received via messages.";
+"my_page" = "My Page";
+"hello_user" = "Hello %@";
+"service_guide" = "Service Guide";
+"custom_service_center" = "Custom service center";
+"telephone_number_service_center" = "1588-1588";
+"my_info" = "My Info";
+"edit_member_infomation" = "Edit member infomation";
+"change_password" = "Change Password";
+"exchange_account_management" = "Exchange Account Management";
+"setting_push_notification" = "App push notification";
+"setting_exchange_account_management" = "Exchange account management";
+"setting_name" = "Name";
+"setting_phone_number" = "Phone number";
+"setting_open_source_licence" = "Open source license";
+"setting_faq" = "FAQ";
+"setting_clear_cache_data" = "Clear cache data";
+"setting_open_source_license" = "Open source license";
+"setting_current_version" = "Current version %@";
+"menu_title" = "Menu";
+"menu_announcement" = "Announcement";
+"menu_play_video" = "Let\'s play while watching the video";
+"menu_join_and_play" = "Let\'s join and play";
+"menu_checkout_and_play" = "Check out and play";
+"menu_point_details" = "Point details";
+"menu_exchange_money" = "Exchanging money";
+"tos_title" = "Terms of service";
+"tos_description" = "You may choose to agree to the terms individually. \nYou may use the service even if you don\'t agree to the optional terms and conditions";
+"tos_compulsory" = "Compulsory";
+"tos_compulsory_item_title_1" = "I\'m 14 years old older.";
+"tos_compulsory_item_title_2" = "Terms and Conditions";
+"tos_compulsory_item_title_3" = "Comprehensive Terms and Conditions";
+"tos_compulsory_item_title_4" = "Collection and Use of Personal Information";
+"tos_optional" = "Optional";
+"tos_optional_item_title_1" = "Consent to the collection and use of information";
+"tos_optional_item_title_2" = "Collection and Use of Profile Information";
+"tos_read_and_agree" = "I have read and agreed to all terms and conditions";
+"tos_agree_and_continue" = "Agree and Continue";
+"update_profile_avatar" = "Set Avatar";
+"update_profile_avatar_open_camera" = "Open Camera";
+"update_profile_avatar_select_photo" = "Select Photo";
+"update_profile_name" = "Name";
+"update_profile_name_required" = "Required";
+"update_profile_dob" = "Day of Birth";
+"update_profile_gender" = "Gender";
+"update_profile_gender_male" = "Male";
+"update_profile_gender_female" = "Female";
+"update_profile_gender_other" = "Other";
+"contacts_start_chat" = "Start Chatting";
+"contacts_title_normal" = "Normal chat";
+"contacts_title_group" = "Group chat";
+"contacts_title_secret" = "Secret chat";
+"contacts_title_add_memmber" = "Add members";
+"contacts_not_found" = "No contacts found";
+"permission" = "Permission";
+"permission_contacts_description" = "To help you message friends and family on Noljanolja, allow Noljanolja access to your contacts.";
+"permission_access_storage_description" = "To help you access gallery on Noljanolja, allow Noljanolja access to your media files.";
+"permission_accept" = "Accept";
+"permission_required_description" = "You\'re unable to use this feature without the required permissions. \nTap the Settings button to allow Noljanolja to access the required permission.";
+"permission_go_to_settings" = "Go to setting";
+"conversation_empty" = "Add friends to chat now.";
+"conversation_create" = "%@ created conversation";
+"conversation_has_changed" = "Conversation has changed";
+"chats_title" = "Chats";
+"chats_new_chat" = "New Chat";
+"chats_message_sticker" = "You received a sticker";
+"chats_message_my_sticker" = "You sent a sticker";
+"chats_message_photo" = "You received a photo";
+"chats_message_my_photo" = "You sent a photo";
+"chats_message_video" = "You received a video";
+"chats_message_my_video" = "You sent a video";
+"chats_message_file" = "You received a file";
+"chats_message_my_file" = "You sent a file";
+"chats_message_unknown" = "You received a message";
+"chats_message_my_unknown" = "You sent a message";
+"chat_input_hint" = "Aa";
+"chat_camera_take_photo" = "Take a photo";
+"chat_camera_record_video" = "Record a video";
+"chat_message_event_updated" = "%@ has updated conversation %@";
+"chat_message_event_left" = "%@ has left the conversation";
+"chat_message_event_joined" = "%@ has invited %@";
+"chat_removed_conversation" = "You were removed from conversation  by %@";
+"chat_action_album" = "Album";
+"chat_action_camera" = "Camera";
+"chat_action_events" = "Events";
+"chat_action_wallet" = "Wallet";
+"chat_action_location" = "Location";
+"chat_action_contacts" = "Contacts";
+"chat_action_file" = "File";
+"chat_action_voice_chat" = "Voice chat";
+"invalid_email_format" = "Email is not valid";
+"edit_chat_warning_leave_title" = "Are you sure to leave this chat?";
+"edit_chat_warning_leave_description" = "If you leave, all the chat and chat history will be deleted.";
+"edit_chat_warning_block_title" = "Are you sure to block this user?";
+"edit_chat_warning_block_description" = "This user will be blocked to send or receive message with you.";
+"edit_chat_warning_remove_title" = "Are you sure to remove this user?";
+"edit_chat_warning_remove_description" = "This user will be removed from this chat.";
+"edit_chat_warning_admin_title" = "Are you sure to assign admin this user?";
+"edit_chat_warning_admin_description" = "This user will be assigned to admin for this chat.";
+"edit_chat_add_members" = "Add members";
+"edit_chat_leave_chat" = "Leave chat room";
+"edit_chat_change_room_name" = "Change Chat room's name";
+"edit_chat_make_admin" = "Make admin";
+"edit_chat_remove_user" = "Remove user";
+"edit_chat_block_user" = "Block user";
+"wallet_number_friends" = "Friend: %@";
+"wallet_my_point" = "My point";
+"wallet_gold_member_ship" = "Gold member ship";
+"wallet_point_ranking" = "Overall Point Ranking: %@";
+"wallet_ranking_bronze" = "Bronze Membership";
+"wallet_ranking_silver" = "Silver Membership";
+"wallet_ranking_gold" = "Gold Membership";
+"wallet_ranking_premium" = "Premium Membership";
+"wallet_expect_next_tier" = "Expected ranking for next month";
+"wallet_accumulated_point" = "Accumulated points for the day";
+"wallet_point_can_exchange" = "Points that can be exchanged";
+"wallet_view_history" = "View History";
+"wallet_exchange_money" = "Use now";
+"transaction_history" = "Transaction History";
+"transaction_history_search_hint" = "Search transaction";
+"transactions_history_receive_reason" = "Receive: %@";
+"transactions_history_spent_reason" = "Spent: %@";
+"transaction_history_point" = "%@ point";
+"wallet_history_dashboard" = "Dashboard";
+"transaction_receive_type" = "Receive";
+"transaction_spent_type" = "Spent";
+"wallet_dashboard_title" = "Dashboard";
+"wallet_dashboard_receive" = "Receive";
+"wallet_dashboard_spent" = "Spent";
+"wallet_dashboard_recent_transactions" = "Recent transactions";
+"wallet_attend_now" = "Attend now";
+"wallet_my_attendance" = "My attendance";
+"transaction_detail" = "Detail Transaction";
+"transaction_detail_status" = "Status";
+"transaction_detail_time" = "Time";
+"my_ranking_title" = "My ranking";
+"video_title" = "Let's get points by watching";
+"video_list_today" = "Today features";
+"video_list_watching_to_get_point" = "Complete watching to reward Points";
+"video_detail_views" = "Views";
+"video_detail_comment" = "Comments";
+"video_detail_reward" = "Reward";
+"video_detail_comment_popular" = "Popular";
+"video_detail_comment_newest" = "Newest";
+"video_detail_enter_comment" = "Enter a comment";
+"video_detail_short_description" = "%@ · %@ · %@";
+"video_detail_duration_year" = "%@ years ago";
+"video_detail_duration_month" = "%@ months ago";
+"video_detail_duration_days" = "%@ days ago";
+"video_detail_duration_hours" = "%@ hours ago";
+"video_detail_duration_minutes" = "%@ minutes ago";
+"video_detail_duration_just_now" = "just now";
+"video_detail_require_google_description" = "You need login google and accept youtube scope to comment or like";
+"video_detail_need_youtube_account" = "You don\'t have a youtube account yet.";
+"video_detail_need_youtube_account_description" = "To comment on youtube you need an account. Click OK to see the tutorial on how to create youtube.";
+"video_detail_reward_point" = "%@ point";
+"chat_new_chat_tooltip" = "Please tap this button to start a new chat";
+"setting_faq_title" = "FAQ";
+"setting_license_title" = "Open source license";
+"setting_about_us_title" = "About us";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

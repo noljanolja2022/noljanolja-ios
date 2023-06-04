@@ -30,11 +30,11 @@ struct WalletNotiView: View {
                 Button(
                     action: {},
                     label: {
-                        Text("Attend now")
+                        Text(L10n.walletAttendNow)
                             .font(.system(size: 14, weight: .bold))
                             .height(32)
                             .padding(.horizontal, 24)
-                            .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
+                            .foregroundColor(ColorAssets.neutralRawLight.swiftUIColor)
                             .background(ColorAssets.primaryGreen300.swiftUIColor)
                             .cornerRadius(4)
                     }
@@ -54,7 +54,7 @@ struct WalletNotiView: View {
     private func buildProgressView() -> some View {
         VStack(spacing: 4) {
             HStack(spacing: 8) {
-                Text("My attendance")
+                Text(L10n.walletMyAttendance)
                     .font(.system(size: 12, weight: .bold))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 

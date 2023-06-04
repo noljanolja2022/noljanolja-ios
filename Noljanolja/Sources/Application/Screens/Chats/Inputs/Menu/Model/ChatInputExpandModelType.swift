@@ -46,14 +46,14 @@ enum ChatInputExpandModelType: CaseIterable, Equatable {
 
     var title: String {
         switch self {
-        case .image: return "Album"
-        case .camera: return "Camera"
-        case .events: return "Events"
-        case .wallet: return "Wallet"
-        case .location: return "Location"
-        case .voice: return "VoiceChat"
-        case .contact: return "Contact"
-        case .file: return "Files"
+        case .image: return L10n.chatActionAlbum
+        case .camera: return L10n.chatActionCamera
+        case .events: return L10n.chatActionEvents
+        case .wallet: return L10n.chatActionWallet
+        case .location: return L10n.chatActionLocation
+        case .voice: return L10n.chatActionVoiceChat
+        case .contact: return L10n.chatActionContacts
+        case .file: return L10n.chatActionFile
         }
     }
 }

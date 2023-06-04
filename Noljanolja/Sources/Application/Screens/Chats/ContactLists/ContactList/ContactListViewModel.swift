@@ -87,12 +87,10 @@ final class ContactListViewModel: ViewModel {
             .sink(receiveValue: { result in
                 switch result {
                 case let .success(users):
-                    logger.info("Get contacts successful")
                     self.allUsers = users
                     self.users = users
                     self.viewState = .content
                 case let .failure(error):
-                    logger.error("Get contacts failed: \(error.localizedDescription)")
                     self.error = error
                     self.viewState = .error
                 }
@@ -109,10 +107,8 @@ final class ContactListViewModel: ViewModel {
             .sink(receiveValue: { [weak self] result in
                 switch result {
                 case .success:
-                    logger.info("Request contact permission successful")
                     self?.loadDataSubject.send()
                 case let .failure(error):
-                    logger.error("Request contact permission failed: \(error.localizedDescription)")
                     self?.error = error
                     self?.viewState = .error
                 }

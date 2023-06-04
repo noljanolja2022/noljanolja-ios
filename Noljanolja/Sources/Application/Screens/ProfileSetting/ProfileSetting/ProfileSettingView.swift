@@ -28,7 +28,7 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
             .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Setting")
+                    Text(L10n.commonSetting)
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
@@ -94,7 +94,7 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
     private func buildUserInfoView() -> some View {
         VStack(spacing: 0) {
             SettingItemView(
-                title: "Exchange account management",
+                title: L10n.settingExchangeAccountManagement,
                 content: {
                     ImageAssets.icArrowRight.swiftUIImage
                         .frame(width: 16, height: 16)
@@ -102,7 +102,7 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
                 }
             )
             SettingItemView(
-                title: "Name",
+                title: L10n.settingName,
                 content: {
                     HStack(spacing: 12) {
                         Text(viewModel.name)
@@ -119,7 +119,7 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
                 }
             )
             SettingItemView(
-                title: "Phone number",
+                title: L10n.settingPhoneNumber,
                 content: {
                     Text(viewModel.phoneNumber)
                         .font(.system(size: 16, weight: .bold))
@@ -132,7 +132,7 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
     private func buildPushNotiView() -> some View {
         VStack(spacing: 0) {
             SettingItemView(
-                title: "App push notification",
+                title: L10n.settingPushNotification,
                 content: {
                     Toggle("", isOn: .constant(true))
                 }
@@ -143,13 +143,13 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
     private func buildAppSettingView() -> some View {
         VStack(spacing: 0) {
             SettingItemView(
-                title: "Clear cache data",
+                title: L10n.settingClearCacheData,
                 action: {
                     viewModel.clearCacheConfirmAction.send()
                 }
             )
             SettingItemView(
-                title: "Open source license",
+                title: L10n.settingOpenSourceLicence,
                 action: {
                     viewModel.navigationType = .sourceLicense
                 }
@@ -165,13 +165,15 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
                     viewModel.navigationType = .faq
                 }
             )
-            SettingItemView(title: "Current version \(viewModel.appVersion)")
+            SettingItemView(
+                title: L10n.settingCurrentVersion(viewModel.appVersion)
+            )
         }
     }
 
     private func buildLogOutView() -> some View {
         Button(
-            "Log out".uppercased(),
+            L10n.commonLogOut.uppercased(),
             action: {
                 viewModel.signOutAction.send()
             }

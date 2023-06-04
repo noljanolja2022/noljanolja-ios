@@ -136,7 +136,7 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
 
     private func buildHeaderViewForGroupChat(_ model: GroupChatSettingHeaderModel) -> some View {
         VStack(spacing: 0) {
-            Text("Members")
+            Text(L10n.commonMembers)
                 .font(.system(size: 16, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.vertical, 10)
@@ -220,7 +220,7 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
                     viewModel.checkLeaveAction.send()
                 },
                 label: {
-                    Text("LEAVE CHAT ROOM")
+                    Text(L10n.editChatLeaveChat.uppercased())
                         .font(.system(size: 14, weight: .bold))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .padding(12)

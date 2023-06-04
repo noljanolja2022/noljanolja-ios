@@ -39,6 +39,7 @@ struct TermView<ViewModel: TermViewModel>: View {
     private func buildContentView() -> some View {
         VStack(spacing: 0) {
             buildHeaderView()
+            
             VStack(spacing: 0) {
                 buildTermItemsView()
                 buildActionView()
@@ -47,7 +48,14 @@ struct TermView<ViewModel: TermViewModel>: View {
             .background(ColorAssets.neutralLight.swiftUIColor)
             .cornerRadius([.topLeading, .topTrailing], 40)
         }
-        .background(ColorAssets.primaryGreen100.swiftUIColor.ignoresSafeArea(edges: [.top]))
+        .background(
+            ColorAssets.neutralLight.swiftUIColor
+                .ignoresSafeArea()
+                .overlay {
+                    ColorAssets.primaryGreen200.swiftUIColor
+                        .ignoresSafeArea(edges: .top)
+                }
+        )
     }
 
     private func buildHeaderView() -> some View {
@@ -56,11 +64,11 @@ struct TermView<ViewModel: TermViewModel>: View {
                 .resizable()
                 .scaledToFill()
                 .frame(width: 66, height: 62)
-            Text("Login")
+            Text(L10n.commonLogin)
                 .font(.system(size: 32, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 12)
-            Text("Welcome to Noja Noja. Follow these steps to be our member.")
+            Text(L10n.authWelcome)
                 .font(.system(size: 14))
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
@@ -103,7 +111,7 @@ struct TermView<ViewModel: TermViewModel>: View {
 
     private func buildActionView() -> some View {
         Button(
-            "NEXT",
+            L10n.commonNext.uppercased(),
             action: { viewModel.actionSubject.send() }
         )
         .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.isAllTermChecked))

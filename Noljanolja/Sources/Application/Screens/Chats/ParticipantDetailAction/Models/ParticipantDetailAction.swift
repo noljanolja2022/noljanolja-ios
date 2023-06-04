@@ -15,10 +15,10 @@ enum ParticipantDetailActionType: Equatable {
 
     var title: String {
         switch self {
-        case .chat: return "Chat"
-        case .assignAdmin: return "Make admin"
-        case .blockUser: return "Block user"
-        case .removeParticipant: return "Remove user"
+        case .chat: return L10n.commonChat
+        case .assignAdmin: return L10n.editChatMakeAdmin
+        case .blockUser: return L10n.editChatBlockUser
+        case .removeParticipant: return L10n.editChatRemoveUser
         }
     }
 

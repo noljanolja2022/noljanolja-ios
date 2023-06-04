@@ -31,9 +31,12 @@ private enum UserAPITargets {
         let method: Moya.Method = .post
         var task: Task {
             var multipartFormDatas = [MultipartFormData?]()
-            if let data = image {
+            if let fieldData = "AVATAR".data(using: .utf8), let fileData = image {
                 multipartFormDatas.append(
-                    MultipartFormData(provider: .data(data), name: "avatar", fileName: "avatar", mimeType: "image/jpeg")
+                    MultipartFormData(provider: .data(fieldData), name: "field")
+                )
+                multipartFormDatas.append(
+                    MultipartFormData(provider: .data(fileData), name: "files", fileName: "avatar", mimeType: "image/jpeg")
                 )
             }
             return .uploadMultipart(multipartFormDatas.compactMap { $0 })

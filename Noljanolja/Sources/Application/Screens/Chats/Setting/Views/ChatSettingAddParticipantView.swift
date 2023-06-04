@@ -22,7 +22,7 @@ struct ChatSettingAddParticipantView: View {
                     cornerRadius: 14,
                     lineWidth: 1
                 )
-            Text("Add member")
+            Text(L10n.editChatAddMembers)
                 .font(.system(size: 16, weight: .medium))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.primaryGreen200.swiftUIColor)

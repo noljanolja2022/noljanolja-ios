@@ -55,14 +55,14 @@ struct TextMessageContentView: View {
             .dataDetectorTypes(.link)
             .isEditable(false)
             .isScrollEnabled(false)
-            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
         }
     }
 
     private func buildInfoView() -> some View {
         HStack(spacing: 0) {
             MessageCreatedDateTimeView(model: model.createdAt)
-                .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
+                .foregroundColor(ColorAssets.neutralRawDeepGrey.swiftUIColor)
             buildSingleChatStatusView()
         }
         .padding(.bottom, -2)

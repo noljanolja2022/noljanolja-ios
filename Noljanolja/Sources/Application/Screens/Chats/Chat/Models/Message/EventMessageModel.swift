@@ -15,18 +15,14 @@ struct EventMessageModel: Equatable {
         case .plaintext, .photo, .sticker, .unknown:
             return nil
         case .eventUpdated:
-            self.message = "Conversation has changed"
+            self.message = L10n.conversationHasChanged
         case .eventJoined:
             let senderName = message.sender.getDisplayName(currentUser: currentUser)
-            let action = "has invited"
             let participantNames = message.joinParticipants.getDisplayName(currentUser: currentUser)
-            self.message = [senderName, action, participantNames].compactMap { $0 }.joined(separator: " ")
+            self.message = L10n.chatMessageEventJoined(senderName, participantNames)
         case .eventLeft:
             let participantNames = message.leftParticipants.getDisplayName(currentUser: currentUser)
-            let tobe = participantNames.count > 1 ? "have" : "has"
-            let action = "left the conversation"
-            self.message = [participantNames, tobe, action]
-                .joined(separator: " ")
+            self.message = L10n.chatMessageEventLeft(participantNames)
         }
     }
 }

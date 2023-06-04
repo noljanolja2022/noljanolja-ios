@@ -73,9 +73,9 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                 HStack(spacing: 12) {
                     WalletPointView(
                         model: WalletPointModel(
-                            title: "Accumulated\npoints for the day",
+                            title: L10n.walletAccumulatedPoint,
                             point: model.accumulatedPointsToday,
-                            actionTitle: "View history"
+                            actionTitle: L10n.walletViewHistory
                         ),
                         pointColor: ColorAssets.neutralDarkGrey.swiftUIColor,
                         action: {
@@ -85,9 +85,9 @@ struct WalletView<ViewModel: WalletViewModel>: View {
 
                     WalletPointView(
                         model: WalletPointModel(
-                            title: "Points that\ncan be exchanged",
+                            title: L10n.walletPointCanExchange,
                             point: model.exchangeablePoints,
-                            actionTitle: "Exchange money"
+                            actionTitle: L10n.walletExchangeMoney
                         ),
                         pointColor: ColorAssets.systemBlue.swiftUIColor
                     )

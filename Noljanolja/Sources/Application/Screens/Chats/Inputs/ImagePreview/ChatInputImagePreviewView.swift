@@ -81,7 +81,7 @@ struct ChatInputImagePreviewView<ViewModel: ChatInputImagePreviewViewModel>: Vie
                             .scaledToFit()
                             .frame(width: 24, height: 24)
 
-                        Text("Save")
+                        Text(L10n.commonSave)
                             .font(.system(size: 16, weight: .bold))
                     }
                     .foregroundColor(ColorAssets.primaryGreen200.swiftUIColor)
@@ -97,7 +97,7 @@ struct ChatInputImagePreviewView<ViewModel: ChatInputImagePreviewViewModel>: Vie
                 },
                 label: {
                     HStack(spacing: 8) {
-                        Text("Send")
+                        Text(L10n.commonSend)
                             .font(.system(size: 16, weight: .bold))
 
                         ImageAssets.icSend.swiftUIImage

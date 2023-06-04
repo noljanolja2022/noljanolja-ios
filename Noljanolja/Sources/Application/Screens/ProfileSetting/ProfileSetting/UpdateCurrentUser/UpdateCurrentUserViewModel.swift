@@ -72,7 +72,7 @@ final class UpdateCurrentUserViewModel: ViewModel {
             .store(in: &cancellables)
 
         $image
-            .compactMap { $0?.pngData() }
+            .compactMap { $0?.jpegData(compressionQuality: 0.5) }
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] imageData in
                 guard let self else {
@@ -88,8 +88,8 @@ final class UpdateCurrentUserViewModel: ViewModel {
                     return
                 case .failure:
                     self.alertState = AlertState(
-                        title: TextState("Error"),
-                        message: TextState(L10n.Common.Error.message),
+                        title: TextState(L10n.commonErrorTitle),
+                        message: TextState(L10n.commonErrorDescription),
                         dismissButton: .cancel(TextState("OK"))
                     )
                 }
@@ -101,7 +101,7 @@ final class UpdateCurrentUserViewModel: ViewModel {
             .sink(receiveValue: { [weak self] _ in
                 guard let name = self?.name, !name.isEmpty else {
                     self?.alertState = AlertState(
-                        title: TextState("Error"),
+                        title: TextState(L10n.commonErrorTitle),
                         message: TextState("Please enter all fields"),
                         dismissButton: .cancel(TextState("OK"))
                     )
@@ -133,8 +133,8 @@ final class UpdateCurrentUserViewModel: ViewModel {
                     self.delegate?.didUpdateCurrentUser()
                 case .failure:
                     self.alertState = AlertState(
-                        title: TextState("Error"),
-                        message: TextState(L10n.Common.Error.message),
+                        title: TextState(L10n.commonErrorTitle),
+                        message: TextState(L10n.commonErrorDescription),
                         dismissButton: .cancel(TextState("OK"))
                     )
                 }

@@ -32,7 +32,12 @@ struct TermDetailView<ViewModel: TermDetailViewModel>: View {
             buildContentView()
         }
         .background(
-            ColorAssets.primaryGreen200.swiftUIColor.edgesIgnoringSafeArea(.top)
+            ColorAssets.neutralLight.swiftUIColor
+                .ignoresSafeArea()
+                .overlay {
+                    ColorAssets.primaryGreen200.swiftUIColor
+                        .ignoresSafeArea(edges: .top)
+                }
         )
     }
 
@@ -52,11 +57,11 @@ struct TermDetailView<ViewModel: TermDetailViewModel>: View {
                 }
             )
 
-            Text("Terms of service")
+            Text(L10n.tosTitle)
                 .font(.system(size: 32, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-            Text("Welcome to Nolja Nolja. Please read our terms of service carefully.")
+            Text(L10n.tosWelcome)
                 .font(.system(size: 14))
                 .frame(maxWidth: .infinity, alignment: .leading)
         }

@@ -15,10 +15,10 @@ struct TransactionDetailModel {
     let code: String
 
     init(model: Transaction) {
-        self.type = model.amount > 0 ? "Received" : "Spent"
+        self.type = model.amount > 0 ? L10n.transactionReceiveType : L10n.transactionSpentType
         self.point = {
             let signString = model.amount > 0 ? "+" : ""
-            return "\(signString) \(model.amount.formatted()) Points"
+            return L10n.transactionHistoryPoint("\(signString) \(model.amount.formatted())")
         }()
         self.pointColor = model.amount > 0 ? ColorAssets.primaryGreen200.name : ColorAssets.systemRed100.name
         self.dateTime = model.createdAt.string(withFormat: "HH:mm - MMMM dd, yyyy")

@@ -24,7 +24,7 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
             .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Let’s get points by watching")
+                    Text(L10n.videoTitle)
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }

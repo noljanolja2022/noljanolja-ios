@@ -68,7 +68,7 @@ struct TermItemView_Previews: PreviewProvider {
     static var previews: some View {
         TermItemView(
             selected: .constant(false),
-            title: "I'm 14 years old older"
+            title: L10n.tosOptionalItemTitle1
         )
     }
 }

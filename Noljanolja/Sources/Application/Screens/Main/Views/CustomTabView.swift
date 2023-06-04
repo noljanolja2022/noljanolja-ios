@@ -38,6 +38,7 @@ struct CustomTabView<SelectionValue, Content, TabItem>: View where SelectionValu
                     .frame(maxWidth: .infinity)
             }
         }
+        .background(ColorAssets.neutralLight.swiftUIColor.ignoresSafeArea())
     }
 }
 
@@ -60,11 +61,11 @@ struct CustomTabView_Previews: PreviewProvider {
             content: {
                 TabItemView(
                     imageName: ImageAssets.icChat.name,
-                    title: "Chat"
+                    title: L10n.commonChat
                 )
                 TabItemView(
                     imageName: ImageAssets.icWallet.name,
-                    title: "Wallet"
+                    title: L10n.homeWallet
                 )
             },
             tabItem: {}

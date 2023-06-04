@@ -64,10 +64,9 @@ final class CreateConversationContactListViewModel: ViewModel {
                 self?.isProgressHUDShowing = false
                 switch result {
                 case let .success(conversation):
-                    logger.info("Create conversation successful - conversation id: \(conversation.id)")
                     self?.delegate?.didCreateConversation(conversation)
-                case let .failure(error):
-                    logger.error("Create conversation failed: \(error.localizedDescription)")
+                case .failure:
+                    break
                 }
             })
             .store(in: &cancellables)

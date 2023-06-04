@@ -59,7 +59,7 @@ struct NormalMessageModel: Equatable {
         let background: MessageContentBackgroundModel = {
             let backgroundColor = message.sender.id == currentUser.id
                 ? ColorAssets.primaryGreen50.name
-                : ColorAssets.neutralLightGrey.name
+                : ColorAssets.neutralRawLightGrey.name
             let rotationAngle = message.sender.id == currentUser.id ? 0 : .pi
 
             if message.sender.id == currentUser.id || conversation.type == .single {

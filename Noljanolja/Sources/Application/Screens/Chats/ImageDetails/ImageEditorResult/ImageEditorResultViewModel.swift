@@ -54,7 +54,7 @@ final class ImageEditorResultViewModel: ViewModel {
                 guard let self else { return }
                 UIImageWriteToSavedPhotosAlbum(self.image, nil, nil, nil)
                 self.alertState = AlertState(
-                    title: TextState("Saved"),
+                    title: TextState(L10n.commonSaved),
                     message: TextState(""),
                     dismissButton: .cancel(TextState("OK"))
                 )

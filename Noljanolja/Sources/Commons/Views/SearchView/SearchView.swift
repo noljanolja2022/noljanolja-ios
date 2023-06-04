@@ -41,6 +41,6 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView(placeholder: "Search", text: .constant(""))
+        SearchView(placeholder: L10n.commonSearch, text: .constant(""))
     }
 }

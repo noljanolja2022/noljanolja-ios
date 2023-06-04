@@ -40,7 +40,7 @@ struct CreateConversationView<ViewModel: CreateConversationViewModel>: View {
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
                 ToolbarItem(placement: .principal) {
-                    Text("Start Chatting")
+                    Text(L10n.contactsStartChat)
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
@@ -85,12 +85,12 @@ struct CreateConversationView<ViewModel: CreateConversationViewModel>: View {
                             .scaledToFit()
                             .frame(width: 16, height: 21)
 
-                        Text("Normal Chat")
+                        Text(L10n.contactsTitleNormal)
                             .font(.system(size: 14))
                     }
                     .frame(height: 40)
                     .frame(maxWidth: .infinity)
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
                     .background(ColorAssets.primaryGreen100.swiftUIColor)
                     .cornerRadius(10)
                 }
@@ -106,12 +106,12 @@ struct CreateConversationView<ViewModel: CreateConversationViewModel>: View {
                             .scaledToFit()
                             .frame(width: 21, height: 21)
 
-                        Text("Group Chat")
+                        Text(L10n.contactsTitleGroup)
                             .font(.system(size: 14))
                     }
                     .frame(height: 40)
                     .frame(maxWidth: .infinity)
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
                     .background(ColorAssets.secondaryYellow300.swiftUIColor)
                     .cornerRadius(10)
                 }

@@ -56,7 +56,7 @@ struct VideoDetailInformationView: View {
     private func buildContentView() -> some View {
         HStack(alignment: .top, spacing: 12) {
             VStack(spacing: 8) {
-                Text("Views")
+                Text(L10n.videoDetailViews)
                     .font(.system(size: 12, weight: .medium))
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
 
@@ -71,7 +71,7 @@ struct VideoDetailInformationView: View {
             .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 2)
 
             VStack(spacing: 8) {
-                Text("Comment")
+                Text(L10n.videoDetailComment)
                     .font(.system(size: 12, weight: .medium))
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
 
@@ -88,11 +88,11 @@ struct VideoDetailInformationView: View {
             .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 2)
 
             VStack(spacing: 8) {
-                Text("Reward")
+                Text(L10n.videoDetailReward)
                     .font(.system(size: 12, weight: .medium))
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
 
-                Text("\(video.totalPoints.formatted()) Points")
+                Text(L10n.videoDetailRewardPoint(video.totalPoints.formatted()))
                     .font(.system(size: 14, weight: .bold))
                     .foregroundColor(.orange)
             }

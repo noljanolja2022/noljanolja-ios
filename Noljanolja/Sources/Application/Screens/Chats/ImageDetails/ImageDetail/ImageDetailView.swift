@@ -93,7 +93,7 @@ struct ImageDetailView<ViewModel: ImageDetailViewModel>: View {
                 .editMenu(isVisible: $isMoreMenuVisible) {
                     [
                         EditMenuItem(
-                            "Edit",
+                            L10n.commonEdit,
                             action: {
                                 viewModel.editImageAction.send()
                             }

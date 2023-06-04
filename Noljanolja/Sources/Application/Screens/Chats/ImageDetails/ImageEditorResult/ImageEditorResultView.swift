@@ -75,7 +75,7 @@ struct ImageEditorResultView<ViewModel: ImageEditorResultViewModel>: View {
                     viewModel.saveAction.send()
                 },
                 label: {
-                    Text("Save")
+                    Text(L10n.commonSave)
                         .font(.system(size: 16, weight: .bold))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
@@ -89,7 +89,7 @@ struct ImageEditorResultView<ViewModel: ImageEditorResultViewModel>: View {
                     viewModel.sendAction.send()
                 },
                 label: {
-                    Text("Send")
+                    Text(L10n.commonSend)
                         .font(.system(size: 16, weight: .bold))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .foregroundColor(ColorAssets.neutralLight.swiftUIColor)

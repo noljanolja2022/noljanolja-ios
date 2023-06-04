@@ -79,13 +79,14 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
     }
 
     private func buildListView() -> some View {
-        ListView {
-            ForEach(viewModel.conversations, id: \.id) { conversation in
-                ConversationItemView(model: conversation)
-                    .background(Color.white)
-                    .onTapGesture {
-                        viewModel.openChatAction.send(conversation)
-                    }
+        ScrollView {
+            LazyVStack(spacing: 0) {
+                ForEach(viewModel.conversations, id: \.id) { conversation in
+                    ConversationItemView(model: conversation)
+                        .onTapGesture {
+                            viewModel.openChatAction.send(conversation)
+                        }
+                }
             }
         }
     }
@@ -99,7 +100,7 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
     }
 
     private func buildErrorView() -> some View {
-        Text("Error")
+        Text(L10n.commonErrorTitle)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 

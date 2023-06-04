@@ -33,8 +33,8 @@ struct ContactItemView: View {
             .cornerRadius(14)
 
             Text(user.name ?? "")
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                 .font(.system(size: 16, weight: .medium))
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
 
             switch isSelected {
             case .some(true):
@@ -52,7 +52,6 @@ struct ContactItemView: View {
             }
         }
         .padding(16)
-        .background(.white)
     }
 }
 

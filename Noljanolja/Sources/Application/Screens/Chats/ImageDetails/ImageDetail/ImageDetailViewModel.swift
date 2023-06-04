@@ -71,7 +71,7 @@ final class ImageDetailViewModel: ViewModel {
                     guard let image else { return }
                     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                     self.alertState = AlertState(
-                        title: TextState("Saved"),
+                        title: TextState(L10n.commonSaved),
                         message: TextState(""),
                         dismissButton: .cancel(TextState("OK"))
                     )

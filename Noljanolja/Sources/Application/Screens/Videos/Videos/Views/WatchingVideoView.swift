@@ -19,7 +19,7 @@ struct WatchingVideoView: View {
 
     private func buildBodyView() -> some View {
         LazyVStack(spacing: 16) {
-            Text("Complete watching to reward Points")
+            Text(L10n.videoListWatchingToGetPoint)
                 .font(.system(size: 14, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)

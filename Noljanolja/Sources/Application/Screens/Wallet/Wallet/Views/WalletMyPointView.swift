@@ -18,7 +18,7 @@ struct WalletMyPointView: View {
 
     private func buildBodyView() -> some View {
         VStack(spacing: 16) {
-            Text("My Point")
+            Text(L10n.walletMyPoint)
                 .font(.system(size: 16, weight: .medium))
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             HStack(spacing: 12) {

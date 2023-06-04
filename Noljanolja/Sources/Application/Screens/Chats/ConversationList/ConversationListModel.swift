@@ -29,11 +29,7 @@ final class ConversationListViewModel: ViewModel {
 
     // MARK: Navigations
 
-    @Published var navigationType: ConversationListNavigationType? {
-        didSet {
-            print("Noja-Debug", navigationType)
-        }
-    }
+    @Published var navigationType: ConversationListNavigationType?
 
     @Published var fullScreenCoverType: ConversationListFullScreenCoverType? {
         willSet {
@@ -146,10 +142,8 @@ final class ConversationListViewModel: ViewModel {
                 guard let self else { return }
                 switch result {
                 case let .success(conversations):
-                    logger.info("Get conversations successful")
                     self.conversationsSubject.send(conversations)
                 case let .failure(error):
-                    logger.error("Get conversations failed - \(error.localizedDescription)")
                     self.error = error
                     self.viewState = .error
                 }

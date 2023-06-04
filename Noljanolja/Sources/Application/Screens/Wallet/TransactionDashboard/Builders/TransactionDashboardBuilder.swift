@@ -73,7 +73,7 @@ struct TransactionDashboardBuilder {
         )
         chargeDataSet.highlightEnabled = false
         chargeDataSet.drawValuesEnabled = false
-        chargeDataSet.label = "Charge"
+        chargeDataSet.label = L10n.walletDashboardReceive
         chargeDataSet.setColor(ColorAssets.systemGreen.color)
 
         let spentDataSet = BarChartDataSet(
@@ -90,7 +90,7 @@ struct TransactionDashboardBuilder {
         )
         spentDataSet.highlightEnabled = false
         spentDataSet.drawValuesEnabled = false
-        spentDataSet.label = "Discharge"
+        spentDataSet.label = L10n.walletDashboardSpent
         spentDataSet.setColor(ColorAssets.systemRed100.color)
 
         let data = BarChartData(dataSets: [chargeDataSet, spentDataSet])

@@ -76,7 +76,6 @@ final class AuthVerificationViewModel: ViewModel {
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] countryCode, phoneNumber -> AnyPublisher<String, Error> in
                 guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
-                logger.info("Send verification code to phone: \(phoneNumber)")
                 return self.authService
                     .sendPhoneVerificationCode(phoneNumber, languageCode: countryCode)
             }
@@ -85,14 +84,12 @@ final class AuthVerificationViewModel: ViewModel {
                 self.isProgressHUDShowing = false
                 switch result {
                 case let .success(verificationID):
-                    logger.info("Send verification code successful - VerificationID: \(verificationID)")
                     self.verificationID = verificationID
                     self.startCountdownResendCodeTime()
-                case let .failure(error):
-                    logger.error("Send verification code failed: \(error.localizedDescription)")
+                case .failure:
                     self.alertState = AlertState(
-                        title: TextState("Error"),
-                        message: TextState(L10n.Common.Error.message),
+                        title: TextState(L10n.commonErrorTitle),
+                        message: TextState(L10n.commonErrorDescription),
                         dismissButton: .cancel(TextState("OK"))
                     )
                 }
@@ -116,17 +113,15 @@ final class AuthVerificationViewModel: ViewModel {
                 self?.isProgressHUDShowing = false
                 switch result {
                 case let .success(user):
-                    logger.info("Verify verification code successful")
                     if user.isSettedUp {
                         self?.delegate?.navigateToMain()
                     } else {
                         self?.delegate?.navigateToUpdateCurrentUser()
                     }
-                case let .failure(error):
-                    logger.error("Verify verification code failed: \(error.localizedDescription)")
+                case .failure:
                     self?.alertState = AlertState(
-                        title: TextState("Error"),
-                        message: TextState(L10n.Common.Error.message),
+                        title: TextState(L10n.commonErrorTitle),
+                        message: TextState(L10n.commonErrorDescription),
                         dismissButton: .cancel(TextState("OK"))
                     )
                 }

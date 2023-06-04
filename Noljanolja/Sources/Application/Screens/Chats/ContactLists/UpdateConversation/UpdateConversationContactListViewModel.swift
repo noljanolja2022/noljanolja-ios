@@ -69,13 +69,11 @@ final class UpdateConversationContactListViewModel: ViewModel {
                 self.isProgressHUDShowing = false
                 switch result {
                 case .success:
-                    logger.info("Add participants successful")
                     self.closeSubject.send()
-                case let .failure(error):
-                    logger.error("Add participants failed: \(error.localizedDescription)")
+                case .failure:
                     self.alertState = AlertState(
-                        title: TextState("Error"),
-                        message: TextState(L10n.Common.Error.message),
+                        title: TextState(L10n.commonErrorTitle),
+                        message: TextState(L10n.commonErrorDescription),
                         dismissButton: .cancel(TextState("OK"))
                     )
                 }

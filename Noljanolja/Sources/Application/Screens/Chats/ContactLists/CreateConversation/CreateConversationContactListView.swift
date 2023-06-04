@@ -33,9 +33,18 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
             .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Select Contact")
-                        .font(.system(size: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    Text(
+                        { () -> String in
+                            switch createConversationType {
+                            case .single, .unknown:
+                                return L10n.contactsTitleNormal
+                            case .group:
+                                return L10n.contactsTitleGroup
+                            }
+                        }()
+                    )
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     ZStack {
@@ -43,7 +52,7 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
                         case .single, .unknown:
                             EmptyView()
                         case .group:
-                            Button("Agree") {
+                            Button(L10n.commonAgree) {
                                 viewModel.createConversationAction.send(
                                     (createConversationType, selectedUsers)
                                 )
@@ -91,6 +100,7 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
                 }
             }
         )
+        .background(ColorAssets.neutralLight.swiftUIColor.ignoresSafeArea())
     }
 }
 

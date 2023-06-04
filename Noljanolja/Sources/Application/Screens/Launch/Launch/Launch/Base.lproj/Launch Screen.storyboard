@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -42,7 +42,7 @@
                                             </imageView>
                                         </subviews>
                                         <viewLayoutGuide key="safeArea" id="o57-Lv-e77"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" name="Neutral Light"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="2VR-8W-gqW" secondAttribute="trailing" id="JhQ-lg-zLE"/>
                                             <constraint firstItem="43d-ZQ-5yB" firstAttribute="centerX" secondItem="fuY-yJ-wag" secondAttribute="centerX" id="VVv-tB-udb"/>
@@ -67,7 +67,7 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Noja Noja. Follow these steps to be our member." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGX-qi-lPU">
                                                         <rect key="frame" x="32" y="0.0" width="297" height="38.333333333333336"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" name="Neutral Dark Grey"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ikf-Ve-vdq">
@@ -78,15 +78,17 @@
                                                         </constraints>
                                                     </view>
                                                 </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="ikf-Ve-vdq" firstAttribute="leading" secondItem="eaZ-ab-eBn" secondAttribute="leading" id="19z-V9-KH3"/>
                                                     <constraint firstItem="bGX-qi-lPU" firstAttribute="leading" secondItem="eaZ-ab-eBn" secondAttribute="leading" constant="32" id="4pK-zi-lRJ"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="e6d-I5-6O2" firstAttribute="centerX" secondItem="V00-F9-pIc" secondAttribute="centerX" id="5DD-4h-B6V"/>
                                     <constraint firstItem="uIO-7U-fwZ" firstAttribute="trailing" secondItem="jbP-K3-WSn" secondAttribute="trailing" multiplier="1.05" id="Inh-3L-fsy"/>
@@ -102,7 +104,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="Neutral Light"/>
                         <constraints>
                             <constraint firstItem="V00-F9-pIc" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="AQ3-Eg-MKp"/>
                             <constraint firstItem="V00-F9-pIc" firstAttribute="trailing" secondItem="Bcu-3y-fUS" secondAttribute="trailing" id="m32-px-3v8"/>
@@ -121,8 +123,11 @@
         <image name="ic_splash_multi_coin" width="141.33332824707031" height="212"/>
         <image name="ic_splash_single_coin" width="43" height="32.666667938232422"/>
         <image name="logo" width="188.66667175292969" height="176"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="Neutral Dark Grey">
+            <color red="0.094117647058823528" green="0.094117647058823528" blue="0.094117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Neutral Light">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
