@@ -75,7 +75,12 @@ struct VideoDetailCommentView: View {
                     .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
                     .background(ColorAssets.neutralLight.swiftUIColor)
                     .cornerRadius(8)
-                    .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 2)
+                    .shadow(
+                        color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.15),
+                        radius: 2,
+                        x: 0,
+                        y: 2
+                    )
 
                 Divider()
                     .frame(height: 1)

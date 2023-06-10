@@ -181,7 +181,7 @@ struct ContactListView_Previews: PreviewProvider {
         ContactListView(
             viewModel: ContactListViewModel(
                 isMultiSelectionEnabled: true,
-                contactListUseCase: CreateConversationContactListUseCase()
+                contactListUseCase: ContactListUseCaseImpl()
             ),
             selectedUsers: .constant([])
         )

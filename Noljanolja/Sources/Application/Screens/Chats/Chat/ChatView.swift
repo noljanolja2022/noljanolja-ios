@@ -121,7 +121,10 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                     .cornerRadius([.topLeading, .bottomLeading], 4)
                     .overlayBorder(color: ColorAssets.primaryGreen200.swiftUIColor, cornerRadius: 4, lineWidth: 1)
                     .padding(.trailing, -4)
-                    .shadow(color: .black.opacity(0.25), radius: 4)
+                    .shadow(
+                        color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.25),
+                        radius: 4
+                    )
             }
         )
         .padding(.bottom, 32)

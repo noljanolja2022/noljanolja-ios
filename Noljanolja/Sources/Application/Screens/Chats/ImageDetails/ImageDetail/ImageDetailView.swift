@@ -29,6 +29,7 @@ struct ImageDetailView<ViewModel: ImageDetailViewModel>: View {
 
     private func buildBodyView() -> some View {
         buildContentView()
+            .navigationBarTitle("", displayMode: .inline)
             .toolbar { buildToolBarContent() }
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }

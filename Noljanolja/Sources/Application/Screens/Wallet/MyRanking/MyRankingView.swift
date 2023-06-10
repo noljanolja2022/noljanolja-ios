@@ -122,7 +122,12 @@ struct MyRankingView<ViewModel: MyRankingViewModel>: View {
             }
         }
         .padding(.horizontal, 16)
-        .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 2)
+        .shadow(
+            color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.15),
+            radius: 2,
+            x: 0,
+            y: 2
+        )
     }
 
     private func buildTierItemView(_ model: LoyaltyTierModelType) -> some View {

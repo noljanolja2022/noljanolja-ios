@@ -86,7 +86,7 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
                     case .unknown: return false
                     }
                 }(),
-                contactListUseCase: CreateConversationContactListUseCase()
+                contactListUseCase: ContactListUseCaseImpl()
             ),
             selectedUsers: $selectedUsers,
             selectUserAction: { _ in

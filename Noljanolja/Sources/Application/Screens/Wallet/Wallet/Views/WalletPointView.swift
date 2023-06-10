@@ -47,7 +47,12 @@ struct WalletPointView: View {
                 }
             )
             .padding(.top, 12)
-            .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
+            .shadow(
+                color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.2),
+                radius: 8,
+                x: 0,
+                y: 4
+            )
         }
         .padding(.vertical, 16)
         .padding(.horizontal, 12)

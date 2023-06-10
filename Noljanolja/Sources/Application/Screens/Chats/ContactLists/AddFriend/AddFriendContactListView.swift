@@ -1,0 +1,60 @@
+//
+//  AddFriendContactListView.swift
+//  Noljanolja
+//
+//  Created by Nguyen The Trinh on 08/06/2023.
+//
+//
+
+import SwiftUI
+
+// MARK: - AddFriendContactListView
+
+struct AddFriendContactListView<ViewModel: AddFriendContactListViewModel>: View {
+    // MARK: Dependencies
+
+    @StateObject var viewModel: ViewModel
+
+    // MARK: State
+
+    @EnvironmentObject private var progressHUBState: ProgressHUBState
+
+    var body: some View {
+        buildBodyView()
+            .navigationBarTitle("", displayMode: .inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text(L10n.contactsTitleAddMemmber)
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                }
+            }
+            .onAppear { viewModel.isAppearSubject.send(true) }
+            .onDisappear { viewModel.isAppearSubject.send(false) }
+            .onChange(of: viewModel.isProgressHUDShowing) {
+                progressHUBState.isLoading = $0
+            }
+            .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
+    }
+
+    @ViewBuilder
+    private func buildBodyView() -> some View {
+        ContactListView(
+            viewModel: ContactListViewModel(
+                isMultiSelectionEnabled: false,
+                contactListUseCase: ContactListUseCaseImpl()
+            ),
+            selectedUsers: .constant([]),
+            selectUserAction: { _ in }
+        )
+        .background(ColorAssets.neutralLight.swiftUIColor.ignoresSafeArea())
+    }
+}
+
+// MARK: - AddFriendContactListView_Previews
+
+struct AddFriendContactListView_Previews: PreviewProvider {
+    static var previews: some View {
+        AddFriendContactListView(viewModel: AddFriendContactListViewModel())
+    }
+}

@@ -94,7 +94,12 @@ struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
             action: { presentationMode.wrappedValue.dismiss() }
         )
         .buttonStyle(ThridyButtonStyle())
-        .shadow(color: .black.opacity(0.15), radius: 2, x: 0, y: 2)
+        .shadow(
+            color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.15),
+            radius: 2,
+            x: 0,
+            y: 2
+        )
         .padding(16)
     }
 }

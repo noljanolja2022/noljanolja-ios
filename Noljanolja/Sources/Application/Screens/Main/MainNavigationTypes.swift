@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - MainTabType
+
 enum MainTabType: Equatable {
     case chat
     case watch
@@ -50,4 +52,10 @@ enum MainTabType: Equatable {
         case .news: return ImageAssets.icNews.name
         }
     }
+}
+
+// MARK: - MainNavigationType
+
+enum MainNavigationType {
+    case addFriends
 }

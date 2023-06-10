@@ -26,12 +26,19 @@ struct MainView<ViewModel: MainViewModel>: View {
     }
 
     private func buildBodyView() -> some View {
-        buildContentView()
+        buildMainView()
             .navigationBarTitle("", displayMode: .inline)
             .toolbar { buildToolBarContent() }
             .navigationBarHidden(viewModel.selectedTab.isNavigationBarHidden)
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
+    }
+
+    private func buildMainView() -> some View {
+        ZStack {
+            buildContentView()
+            buildNavigationLinks()
+        }
     }
 
     @ToolbarContentBuilder
@@ -64,7 +71,9 @@ struct MainView<ViewModel: MainViewModel>: View {
             case .chat:
                 HStack(spacing: 4) {
                     Button(
-                        action: {},
+                        action: {
+                            viewModel.navigationType = .addFriends
+                        },
                         label: {
                             ImageAssets.icAddPerson.swiftUIImage
                                 .resizable()
@@ -217,6 +226,33 @@ struct MainView<ViewModel: MainViewModel>: View {
                 ? ColorAssets.primaryGreen200.swiftUIColor
                 : ColorAssets.neutralGrey.swiftUIColor
         )
+    }
+
+    private func buildNavigationLinks() -> some View {
+        NavigationLink(
+            unwrapping: $viewModel.navigationType,
+            onNavigate: { _ in },
+            destination: {
+                buildNavigationDestinationView($0)
+            },
+            label: {
+                EmptyView()
+            }
+        )
+    }
+
+    @ViewBuilder
+    private func buildNavigationDestinationView(
+        _ type: Binding<MainNavigationType>
+    ) -> some View {
+        switch type.wrappedValue {
+        case .addFriends:
+            AddFriendsView(
+                viewModel: AddFriendsViewModel(
+                    delegate: viewModel
+                )
+            )
+        }
     }
 }
 

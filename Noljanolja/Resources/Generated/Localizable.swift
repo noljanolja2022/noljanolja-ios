@@ -10,6 +10,20 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
+  /// This phone number is not available.
+  internal static let addFriendPhoneNotAvailable = L10n.tr("Localizable", "add_friend_phone_not_available", fallback: "This phone number is not available.")
+  /// Scan this QR code to add me
+  internal static let addFriendsAddByContactDescription = L10n.tr("Localizable", "add_friends_add_by_contact_description", fallback: "Scan this QR code to add me")
+  /// Add by contacts
+  internal static let addFriendsAddByContactTitle = L10n.tr("Localizable", "add_friends_add_by_contact_title", fallback: "Add by contacts")
+  /// Chat now
+  internal static let addFriendsChatNow = L10n.tr("Localizable", "add_friends_chat_now", fallback: "Chat now")
+  /// Scan QR code
+  internal static let addFriendsScanQrCode = L10n.tr("Localizable", "add_friends_scan_qr_code", fallback: "Scan QR code")
+  /// Enter phone number
+  internal static let addFriendsSearchPhoneHint = L10n.tr("Localizable", "add_friends_search_phone_hint", fallback: "Enter phone number")
+  /// Add Friends
+  internal static let addFriendsTitle = L10n.tr("Localizable", "add_friends_title", fallback: "Add Friends")
   /// %@ selected
   internal static func argsChatSelected(_ p1: Any) -> String {
     return L10n.tr("Localizable", "args_chat_selected", String(describing: p1), fallback: "%@ selected")
@@ -126,6 +140,8 @@ internal enum L10n {
   internal static let commonCancel = L10n.tr("Localizable", "common_cancel", fallback: "Cancel")
   /// Chat
   internal static let commonChat = L10n.tr("Localizable", "common_chat", fallback: "Chat")
+  /// Close
+  internal static let commonClose = L10n.tr("Localizable", "common_close", fallback: "Close")
   /// Confirm
   internal static let commonConfirm = L10n.tr("Localizable", "common_confirm", fallback: "Confirm")
   /// Continue

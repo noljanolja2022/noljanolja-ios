@@ -50,10 +50,15 @@ private enum UserAPITargets {
         let method: Moya.Method = .get
         var task: Task { .requestParameters(parameters: parameters, encoding: URLEncoding.default) }
 
-        let phoneNumber: String
+        let phoneNumber: String?
+        let friendId: String?
 
         var parameters: [String: Any] {
-            ["phoneNumber": phoneNumber]
+            [
+                "phoneNumber": phoneNumber,
+                "friendId": friendId
+            ]
+            .compactMapValues { $0 }
         }
     }
 
@@ -86,7 +91,7 @@ protocol UserAPIType {
     func updateCurrentUser(_ param: UpdateCurrentUserParam) -> AnyPublisher<User, Error>
     func updateCurrentUserAvatar(_ image: Data?) -> AnyPublisher<Void, Error>
 
-    func findUsers(phoneNumber: String) -> AnyPublisher<[User], Error>
+    func findUsers(phoneNumber: String?, friendId: String?) -> AnyPublisher<[User], Error>
     func getContact(page: Int, pageSize: Int) -> AnyPublisher<[User], Error>
     func syncContacts(_ contacts: [Contact]) -> AnyPublisher<[User], Error>
 }
@@ -122,9 +127,9 @@ final class UserAPI: UserAPIType {
         )
     }
 
-    func findUsers(phoneNumber: String) -> AnyPublisher<[User], Error> {
+    func findUsers(phoneNumber: String?, friendId: String?) -> AnyPublisher<[User], Error> {
         api.request(
-            target: UserAPITargets.FindUsers(phoneNumber: phoneNumber),
+            target: UserAPITargets.FindUsers(phoneNumber: phoneNumber, friendId: friendId),
             atKeyPath: "data"
         )
     }
