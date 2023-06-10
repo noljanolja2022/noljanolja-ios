@@ -247,8 +247,8 @@ struct MainView<ViewModel: MainViewModel>: View {
     ) -> some View {
         switch type.wrappedValue {
         case .addFriends:
-            AddFriendsView(
-                viewModel: AddFriendsViewModel(
+            AddFriendsHomeView(
+                viewModel: AddFriendsHomeViewModel(
                     delegate: viewModel
                 )
             )

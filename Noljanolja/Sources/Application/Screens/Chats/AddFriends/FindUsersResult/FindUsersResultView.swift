@@ -38,7 +38,10 @@ struct FindUsersResultView<ViewModel: FindUsersResultViewModel>: View {
     }
 
     private func buildBodyView() -> some View {
-        buildMainView()
+        ZStack {
+            buildMainView()
+            buildNavigationLink()
+        }
     }
 
     private func buildMainView() -> some View {
@@ -48,8 +51,40 @@ struct FindUsersResultView<ViewModel: FindUsersResultViewModel>: View {
     private func buildContentView() -> some View {
         ListView {
             ForEach(viewModel.users.indices, id: \.self) { index in
-                FindUserResultItemView(model: viewModel.users[index])
+                let user = viewModel.users[index]
+                FindUserResultItemView(
+                    model: user,
+                    chatAction: {
+                        viewModel.addFriendAction.send(user)
+                    }
+                )
             }
+        }
+    }
+
+    @ViewBuilder
+    private func buildNavigationLink() -> some View {
+        NavigationLink(
+            unwrapping: $viewModel.navigationType,
+            onNavigate: { _ in },
+            destination: { buildNavigationDestinationView($0) },
+            label: {}
+        )
+    }
+}
+
+extension FindUsersResultView {
+    @ViewBuilder
+    private func buildNavigationDestinationView(
+        _ type: Binding<FindUsersResultNavigationType>
+    ) -> some View {
+        switch type.wrappedValue {
+        case let .chat(conversationId):
+            ChatView(
+                viewModel: ChatViewModel(
+                    conversationID: conversationId
+                )
+            )
         }
     }
 }

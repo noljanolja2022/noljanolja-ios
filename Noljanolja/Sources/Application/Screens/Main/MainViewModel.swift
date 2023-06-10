@@ -63,6 +63,6 @@ extension MainViewModel: WalletViewModelDelegate {
     }
 }
 
-// MARK: AddFriendsViewModelDelegate
+// MARK: AddFriendsHomeViewModelDelegate
 
-extension MainViewModel: AddFriendsViewModelDelegate {}
+extension MainViewModel: AddFriendsHomeViewModelDelegate {}

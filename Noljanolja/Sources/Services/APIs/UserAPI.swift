@@ -82,6 +82,18 @@ private enum UserAPITargets {
             ["contacts": contacts.map { $0.json }]
         }
     }
+
+    struct InviteUser: BaseAuthTargetType {
+        var path: String { "v1/users/me/contacts/invite" }
+        let method: Moya.Method = .post
+        var task: Task { .requestParameters(parameters: parameters, encoding: JSONEncoding.default) }
+
+        let id: String
+
+        var parameters: [String: Any] {
+            ["friendId": id]
+        }
+    }
 }
 
 // MARK: - UserAPIType
@@ -94,6 +106,7 @@ protocol UserAPIType {
     func findUsers(phoneNumber: String?, friendId: String?) -> AnyPublisher<[User], Error>
     func getContact(page: Int, pageSize: Int) -> AnyPublisher<[User], Error>
     func syncContacts(_ contacts: [Contact]) -> AnyPublisher<[User], Error>
+    func inviteUser(id: String) -> AnyPublisher<Void, Error>
 }
 
 // MARK: - UserAPI
@@ -145,6 +158,12 @@ final class UserAPI: UserAPIType {
         api.request(
             target: UserAPITargets.SyncContacts(contacts: contacts),
             atKeyPath: "data"
+        )
+    }
+
+    func inviteUser(id: String) -> AnyPublisher<Void, Error> {
+        api.request(
+            target: UserAPITargets.InviteUser(id: id)
         )
     }
 }

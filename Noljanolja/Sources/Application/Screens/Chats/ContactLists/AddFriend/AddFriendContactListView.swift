@@ -39,15 +39,48 @@ struct AddFriendContactListView<ViewModel: AddFriendContactListViewModel>: View 
 
     @ViewBuilder
     private func buildBodyView() -> some View {
+        ZStack {
+            buildMainView()
+            buildNavigationLink()
+        }
+    }
+
+    private func buildMainView() -> some View {
         ContactListView(
             viewModel: ContactListViewModel(
                 isMultiSelectionEnabled: false,
                 contactListUseCase: ContactListUseCaseImpl()
             ),
             selectedUsers: .constant([]),
-            selectUserAction: { _ in }
+            selectUserAction: { viewModel.addFriendAction.send($0) }
         )
         .background(ColorAssets.neutralLight.swiftUIColor.ignoresSafeArea())
+    }
+
+    @ViewBuilder
+    private func buildNavigationLink() -> some View {
+        NavigationLink(
+            unwrapping: $viewModel.navigationType,
+            onNavigate: { _ in },
+            destination: { buildNavigationDestinationView($0) },
+            label: {}
+        )
+    }
+}
+
+extension AddFriendContactListView {
+    @ViewBuilder
+    private func buildNavigationDestinationView(
+        _ type: Binding<AddFriendContactListNavigationType>
+    ) -> some View {
+        switch type.wrappedValue {
+        case let .chat(conversationId):
+            ChatView(
+                viewModel: ChatViewModel(
+                    conversationID: conversationId
+                )
+            )
+        }
     }
 }
 

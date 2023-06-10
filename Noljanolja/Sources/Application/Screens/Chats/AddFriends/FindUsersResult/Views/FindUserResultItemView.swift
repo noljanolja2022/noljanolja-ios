@@ -12,6 +12,7 @@ import SwiftUI
 
 struct FindUserResultItemView: View {
     let model: User
+    let chatAction: (() -> Void)?
 
     var body: some View {
         buildBodyView()
@@ -47,7 +48,9 @@ struct FindUserResultItemView: View {
             }
 
             Button(
-                action: {},
+                action: {
+                    chatAction?()
+                },
                 label: {
                     HStack(spacing: 4) {
                         ImageAssets.icChat.swiftUIImage
@@ -66,6 +69,6 @@ struct FindUserResultItemView: View {
             )
         }
         .padding(.horizontal, 16)
-        .padding(.vertical, 8)
+        .padding(.vertical, 12)
     }
 }

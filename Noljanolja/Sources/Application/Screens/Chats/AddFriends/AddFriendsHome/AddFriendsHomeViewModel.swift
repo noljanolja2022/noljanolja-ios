@@ -1,5 +1,5 @@
 //
-//  AddFriendsViewModel.swift
+//  AddFriendsHomeViewModel.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 03/06/2023.
@@ -12,13 +12,13 @@ import CoreImage.CIFilterBuiltins
 import Foundation
 import UIKit
 
-// MARK: - AddFriendsViewModelDelegate
+// MARK: - AddFriendsHomeViewModelDelegate
 
-protocol AddFriendsViewModelDelegate: AnyObject {}
+protocol AddFriendsHomeViewModelDelegate: AnyObject {}
 
-// MARK: - AddFriendsViewModel
+// MARK: - AddFriendsHomeViewModel
 
-final class AddFriendsViewModel: ViewModel {
+final class AddFriendsHomeViewModel: ViewModel {
     // MARK: State
 
     @Published var country = CountryAPI().getDefaultCountry()
@@ -44,7 +44,8 @@ final class AddFriendsViewModel: ViewModel {
     // MARK: Dependencies
 
     private let userService: UserServiceType
-    private weak var delegate: AddFriendsViewModelDelegate?
+    private let userAPI: UserAPIType
+    private weak var delegate: AddFriendsHomeViewModelDelegate?
 
     // MARK: Private
 
@@ -53,8 +54,10 @@ final class AddFriendsViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(userService: UserServiceType = UserService.default,
-         delegate: AddFriendsViewModelDelegate? = nil) {
+         userAPI: UserAPIType = UserAPI.default,
+         delegate: AddFriendsHomeViewModelDelegate? = nil) {
         self.userService = userService
+        self.userAPI = userAPI
         self.delegate = delegate
         super.init()
 
@@ -63,6 +66,7 @@ final class AddFriendsViewModel: ViewModel {
 
     private func configure() {
         configureBindData()
+        configureActions()
         configureLoadData()
     }
 
@@ -94,6 +98,43 @@ final class AddFriendsViewModel: ViewModel {
             .store(in: &cancellables)
     }
 
+    private func configureActions() {
+        searchAction
+            .handleEvents(receiveOutput: { [weak self] _ in
+                self?.isProgressHUDShowing = true
+            })
+            .flatMapLatestToResult { [weak self] in
+                guard let self else {
+                    return Empty<[User], Error>().eraseToAnyPublisher()
+                }
+                return self.userAPI.findUsers(phoneNumber: self.phoneNumber?.formatPhone(), friendId: nil)
+            }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] result in
+                guard let self else { return }
+                self.isProgressHUDShowing = false
+                switch result {
+                case let .success(model):
+                    if model.isEmpty {
+                        self.alertState = AlertState(
+                            title: TextState(L10n.commonErrorTitle),
+                            message: TextState(L10n.addFriendPhoneNotAvailable),
+                            dismissButton: .cancel(TextState(L10n.commonClose))
+                        )
+                    } else {
+                        self.navigationType = .result(model)
+                    }
+                case .failure:
+                    self.alertState = AlertState(
+                        title: TextState(L10n.commonErrorTitle),
+                        message: TextState(L10n.commonErrorDescription),
+                        dismissButton: .cancel(TextState("OK"))
+                    )
+                }
+            }
+            .store(in: &cancellables)
+    }
+
     private func configureLoadData() {
         userService.getCurrentUserPublisher()
             .sink(receiveValue: { [weak self] in
@@ -105,16 +146,8 @@ final class AddFriendsViewModel: ViewModel {
 
 // MARK: SelectCountryViewModelDelegate
 
-extension AddFriendsViewModel: SelectCountryViewModelDelegate {
+extension AddFriendsHomeViewModel: SelectCountryViewModelDelegate {
     func didSelectCountry(_ country: Country) {
         self.country = country
-    }
-}
-
-// MARK: FindUsersViewModelDelegate
-
-extension AddFriendsViewModel: FindUsersViewModelDelegate {
-    func findUsersViewModel(didFind users: [User]) {
-        navigationType = .result(users)
     }
 }

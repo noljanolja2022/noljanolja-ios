@@ -1,5 +1,5 @@
 //
-//  AddFriendsView.swift
+//  AddFriendsHomeView.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 03/06/2023.
@@ -10,9 +10,9 @@ import Combine
 import SwiftUI
 import SwiftUINavigation
 
-// MARK: - AddFriendsView
+// MARK: - AddFriendsHomeView
 
-struct AddFriendsView<ViewModel: AddFriendsViewModel>: View {
+struct AddFriendsHomeView<ViewModel: AddFriendsHomeViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
@@ -20,7 +20,6 @@ struct AddFriendsView<ViewModel: AddFriendsViewModel>: View {
     // MARK: State
 
     @EnvironmentObject private var progressHUBState: ProgressHUBState
-    @StateObject private var alertStateObject = AlertStateObject<Void>()
 
     var body: some View {
         buildBodyView()
@@ -41,11 +40,7 @@ struct AddFriendsView<ViewModel: AddFriendsViewModel>: View {
             .onChange(of: viewModel.isProgressHUDShowing) {
                 progressHUBState.isLoading = $0
             }
-            .alert(item: $alertStateObject.alertState) { Alert($0) { _ in } }
-            .onReceive(viewModel.$alertState) {
-                alertStateObject.alertState = $0
-            }
-            .environmentObject(alertStateObject)
+            .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
             .fullScreenCover(
                 unwrapping: $viewModel.fullScreenCoverType,
                 content: {
@@ -57,7 +52,6 @@ struct AddFriendsView<ViewModel: AddFriendsViewModel>: View {
     private func buildMainView() -> some View {
         ZStack {
             buildContentView()
-            buildFindUsersView()
             buildNavigationLink()
         }
     }
@@ -247,20 +241,6 @@ struct AddFriendsView<ViewModel: AddFriendsViewModel>: View {
     }
 
     @ViewBuilder
-    private func buildFindUsersView() -> some View {
-        let findUserModelTypePublisher = viewModel.searchAction
-            .map { viewModel.phoneNumber?.formatPhone() }
-            .map { FindUsersModelType.phoneNumber($0) }
-            .eraseToAnyPublisher()
-        FindUsersView(
-            viewModel: FindUsersViewModel(
-                findUserModelTypePublisher: findUserModelTypePublisher,
-                delegate: viewModel
-            )
-        )
-    }
-
-    @ViewBuilder
     private func buildNavigationLink() -> some View {
         NavigationLink(
             unwrapping: $viewModel.navigationType,
@@ -271,7 +251,7 @@ struct AddFriendsView<ViewModel: AddFriendsViewModel>: View {
     }
 }
 
-extension AddFriendsView {
+extension AddFriendsHomeView {
     @ViewBuilder
     private func buildNavigationDestinationView(
         _ type: Binding<AddFriendsNavigationType>
@@ -307,10 +287,10 @@ extension AddFriendsView {
     }
 }
 
-// MARK: - AddFriendsView_Previews
+// MARK: - AddFriendsHomeView_Previews
 
-struct AddFriendsView_Previews: PreviewProvider {
+struct AddFriendsHomeView_Previews: PreviewProvider {
     static var previews: some View {
-        AddFriendsView(viewModel: AddFriendsViewModel())
+        AddFriendsHomeView(viewModel: AddFriendsHomeViewModel())
     }
 }
