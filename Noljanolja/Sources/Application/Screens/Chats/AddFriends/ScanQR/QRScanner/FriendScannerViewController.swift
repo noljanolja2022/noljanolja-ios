@@ -9,9 +9,17 @@ import AVFoundation
 import Foundation
 import UIKit
 
-class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+// MARK: - FriendScannerViewControllerDelegate
+
+protocol FriendScannerViewControllerDelegate: AnyObject {}
+
+// MARK: - FriendScannerViewController
+
+final class FriendScannerViewController: UIViewController {
     private let captureSession = AVCaptureSession()
     var previewLayer: AVCaptureVideoPreviewLayer!
+
+    weak var delegate: FriendScannerViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +36,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         if captureSession.canAddInput(videoInput) {
             captureSession.addInput(videoInput)
         } else {
-//            failed()
+            //            failed()
             return
         }
 
@@ -40,7 +48,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             metadataOutput.metadataObjectTypes = [.qr]
         } else {
-//            failed()
+            //            failed()
             return
         }
 
@@ -55,19 +63,27 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if captureSession.isRunning == false {
-            captureSession.startRunning()
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            if self?.captureSession.isRunning == false {
+                self?.captureSession.startRunning()
+            }
         }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        if captureSession.isRunning == true {
-            captureSession.stopRunning()
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            if self?.captureSession.isRunning == true {
+                self?.captureSession.stopRunning()
+            }
         }
     }
+}
 
+// MARK: AVCaptureMetadataOutputObjectsDelegate
+
+extension FriendScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         captureSession.stopRunning()
 
@@ -83,13 +99,5 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
 
     func found(code: String) {
         print(code)
-    }
-
-    override var prefersStatusBarHidden: Bool {
-        true
-    }
-
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        .portrait
     }
 }

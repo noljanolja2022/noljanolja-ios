@@ -200,8 +200,9 @@
 		CF8A02962A0B981800A01B21 /* TabItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8A02952A0B981800A01B21 /* TabItemView.swift */; };
 		CF8A02982A0BA35600A01B21 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8A02972A0BA35600A01B21 /* CustomTabView.swift */; };
 		CF8FA6452A3219E300950D9C /* FindUserResultItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8FA6442A3219E300950D9C /* FindUserResultItemView.swift */; };
-		CF91CCFF2A2E3BD400BFC08A /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF91CCFE2A2E3BD400BFC08A /* QRScannerViewController.swift */; };
+		CF91CCFF2A2E3BD400BFC08A /* FriendScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF91CCFE2A2E3BD400BFC08A /* FriendScannerViewController.swift */; };
 		CF9779DC29BE2FC600D1CAB0 /* PhoneNumberKit in Frameworks */ = {isa = PBXBuildFile; productRef = CF9779DB29BE2FC600D1CAB0 /* PhoneNumberKit */; };
+		CF9DF0AA2A36B2D80054E105 /* UIImage+QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9DF0A92A36B2D80054E105 /* UIImage+QRCode.swift */; };
 		CFA3304729BE3352008D7449 /* String+Phone.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA3304629BE3352008D7449 /* String+Phone.swift */; };
 		CFA3304929BE3AB9008D7449 /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA3304829BE3AB9008D7449 /* String+Date.swift */; };
 		CFA3304D29BEB674008D7449 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA3304C29BEB674008D7449 /* SearchView.swift */; };
@@ -342,6 +343,10 @@
 		CFEF9BEF2A34E162001DEC32 /* AddFriendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEF9BEE2A34E162001DEC32 /* AddFriendUseCase.swift */; };
 		CFEF9BF12A34E4AC001DEC32 /* FindUsersResultNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEF9BF02A34E4AC001DEC32 /* FindUsersResultNavigations.swift */; };
 		CFEF9BF32A34E72C001DEC32 /* AddFriendContactListNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEF9BF22A34E72C001DEC32 /* AddFriendContactListNavigations.swift */; };
+		CFEF9BF62A34F424001DEC32 /* ScanQRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEF9BF42A34F424001DEC32 /* ScanQRView.swift */; };
+		CFEF9BF72A34F424001DEC32 /* ScanQRViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEF9BF52A34F424001DEC32 /* ScanQRViewModel.swift */; };
+		CFEF9BF92A34F4AB001DEC32 /* FriendScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEF9BF82A34F4AB001DEC32 /* FriendScannerView.swift */; };
+		CFEF9BFB2A34F7EA001DEC32 /* ScanQRNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEF9BFA2A34F7EA001DEC32 /* ScanQRNavigations.swift */; };
 		CFF0C1EB29E85DEB007B4B98 /* AuthNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF0C1EA29E85DEB007B4B98 /* AuthNavigations.swift */; };
 		CFF1F79A29B6E7FE00B25DD2 /* CombineExt in Frameworks */ = {isa = PBXBuildFile; productRef = CFF1F79929B6E7FE00B25DD2 /* CombineExt */; };
 		CFF1F7A429B7371600B25DD2 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF1F7A229B7371600B25DD2 /* ChatView.swift */; };
@@ -609,7 +614,8 @@
 		CF8A02952A0B981800A01B21 /* TabItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemView.swift; sourceTree = "<group>"; };
 		CF8A02972A0BA35600A01B21 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		CF8FA6442A3219E300950D9C /* FindUserResultItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserResultItemView.swift; sourceTree = "<group>"; };
-		CF91CCFE2A2E3BD400BFC08A /* QRScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerViewController.swift; sourceTree = "<group>"; };
+		CF91CCFE2A2E3BD400BFC08A /* FriendScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendScannerViewController.swift; sourceTree = "<group>"; };
+		CF9DF0A92A36B2D80054E105 /* UIImage+QRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+QRCode.swift"; sourceTree = "<group>"; };
 		CFA3304629BE3352008D7449 /* String+Phone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Phone.swift"; sourceTree = "<group>"; };
 		CFA3304829BE3AB9008D7449 /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
 		CFA3304C29BEB674008D7449 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -744,6 +750,10 @@
 		CFEF9BEE2A34E162001DEC32 /* AddFriendUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendUseCase.swift; sourceTree = "<group>"; };
 		CFEF9BF02A34E4AC001DEC32 /* FindUsersResultNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUsersResultNavigations.swift; sourceTree = "<group>"; };
 		CFEF9BF22A34E72C001DEC32 /* AddFriendContactListNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendContactListNavigations.swift; sourceTree = "<group>"; };
+		CFEF9BF42A34F424001DEC32 /* ScanQRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRView.swift; sourceTree = "<group>"; };
+		CFEF9BF52A34F424001DEC32 /* ScanQRViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRViewModel.swift; sourceTree = "<group>"; };
+		CFEF9BF82A34F4AB001DEC32 /* FriendScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendScannerView.swift; sourceTree = "<group>"; };
+		CFEF9BFA2A34F7EA001DEC32 /* ScanQRNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRNavigations.swift; sourceTree = "<group>"; };
 		CFF0C1EA29E85DEB007B4B98 /* AuthNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNavigations.swift; sourceTree = "<group>"; };
 		CFF1F7A229B7371600B25DD2 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		CFF1F7A329B7371600B25DD2 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
@@ -1323,6 +1333,7 @@
 			isa = PBXGroup;
 			children = (
 				CF3282EC299E3758006A459B /* UIApplication+Extension.swift */,
+				CF9DF0A92A36B2D80054E105 /* UIImage+QRCode.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -1712,7 +1723,8 @@
 		CF91CCFD2A2E3BBB00BFC08A /* QRScanner */ = {
 			isa = PBXGroup;
 			children = (
-				CF91CCFE2A2E3BD400BFC08A /* QRScannerViewController.swift */,
+				CF91CCFE2A2E3BD400BFC08A /* FriendScannerViewController.swift */,
+				CFEF9BF82A34F4AB001DEC32 /* FriendScannerView.swift */,
 			);
 			path = QRScanner;
 			sourceTree = "<group>";
@@ -1917,6 +1929,9 @@
 			isa = PBXGroup;
 			children = (
 				CF91CCFD2A2E3BBB00BFC08A /* QRScanner */,
+				CFEF9BF42A34F424001DEC32 /* ScanQRView.swift */,
+				CFEF9BF52A34F424001DEC32 /* ScanQRViewModel.swift */,
+				CFEF9BFA2A34F7EA001DEC32 /* ScanQRNavigations.swift */,
 			);
 			path = ScanQR;
 			sourceTree = "<group>";
@@ -3016,6 +3031,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFEF9BF72A34F424001DEC32 /* ScanQRViewModel.swift in Sources */,
 				CF8FA6452A3219E300950D9C /* FindUserResultItemView.swift in Sources */,
 				CF8A02962A0B981800A01B21 /* TabItemView.swift in Sources */,
 				CFA3304729BE3352008D7449 /* String+Phone.swift in Sources */,
@@ -3043,6 +3059,7 @@
 				CFF5211C2A1A7B5800F29A4E /* MyRankingView.swift in Sources */,
 				CFED124829F32159000B320B /* VideoDetailInformationView.swift in Sources */,
 				CFFD70C5298AC5F800D4F5A2 /* RequestTimeoutPlugin.swift in Sources */,
+				CFEF9BF62A34F424001DEC32 /* ScanQRView.swift in Sources */,
 				CFE9695229EC4EDA00441903 /* ProfileSettingNavigations.swift in Sources */,
 				CF30B1932A13E8BE00C43A54 /* TransactionHistoryItemModel.swift in Sources */,
 				CF7F576229D9F6610079C53D /* TermDetailViewModel.swift in Sources */,
@@ -3147,6 +3164,7 @@
 				CFD095172A02A87F004BF047 /* VideoSocketAPI.swift in Sources */,
 				CF1A9A0B2A0D362F0004CCD8 /* NotificationSettingViewModel.swift in Sources */,
 				CFFD70C6298AC5F800D4F5A2 /* AuthPluggin.swift in Sources */,
+				CF9DF0AA2A36B2D80054E105 /* UIImage+QRCode.swift in Sources */,
 				CFED122A29F2D7C6000B320B /* Result+Extension.swift in Sources */,
 				CFAC6BCB2A124074004AD4A5 /* FAQItemView.swift in Sources */,
 				CFD778472A14D07D00F20527 /* Transaction.swift in Sources */,
@@ -3188,6 +3206,7 @@
 				CF14F24A298C331D00BC2066 /* ColorAssets.swift in Sources */,
 				CFE09341299007E400F197F0 /* Publisher+ResultTranforming.swift in Sources */,
 				CFD5424829BF7A520053C5B1 /* ChatItemView.swift in Sources */,
+				CFEF9BF92A34F4AB001DEC32 /* FriendScannerView.swift in Sources */,
 				CFFD70D5298AC92500D4F5A2 /* UserAPI.swift in Sources */,
 				CFB2F6AC29E08BF100191AA3 /* ChatSettingItemModel.swift in Sources */,
 				CFB2F6A629E0754A00191AA3 /* ChatSettingViewModel.swift in Sources */,
@@ -3280,7 +3299,7 @@
 				CFB2F6BC29E124EB00191AA3 /* ChatSettingNavigations.swift in Sources */,
 				CFE48BC3299207DA0062C903 /* AuthStore.swift in Sources */,
 				CF28A19F29B4E9CF0003C204 /* AuthRootView.swift in Sources */,
-				CF91CCFF2A2E3BD400BFC08A /* QRScannerViewController.swift in Sources */,
+				CF91CCFF2A2E3BD400BFC08A /* FriendScannerViewController.swift in Sources */,
 				CFB2A89D29D1F0A2008D1689 /* StorableStickerPack.swift in Sources */,
 				CFFD70CB298AC5F800D4F5A2 /* ApiProvider.swift in Sources */,
 				CFB0A82929F1B95A00298546 /* VideoCategory.swift in Sources */,
@@ -3310,6 +3329,7 @@
 				CFDC637229EC7A83002F4BFC /* WalletNavigations.swift in Sources */,
 				CF615C402A10ACC300CAF9C5 /* LoyaltyMemberInfo.swift in Sources */,
 				CF28A1A829B4FFC50003C204 /* WalletViewModel.swift in Sources */,
+				CFEF9BFB2A34F7EA001DEC32 /* ScanQRNavigations.swift in Sources */,
 				CFF5211D2A1A7B5800F29A4E /* MyRankingViewModel.swift in Sources */,
 				CF62EF8B29B23E0000D6B688 /* ViewModelType.swift in Sources */,
 				CFE0925D298DFDCB00F197F0 /* KakaoAuthAPI.swift in Sources */,

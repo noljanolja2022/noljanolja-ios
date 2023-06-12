@@ -288,3 +288,4 @@
 "add_friends_add_by_contact_description" = "Scan this QR code to add me";
 "add_friends_chat_now" = "Chat now";
 "add_friend_phone_not_available" = "This phone number is not available.";
+"add_friend_scan_qr_code_title" = "Scan QR code";

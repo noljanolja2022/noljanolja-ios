@@ -12,6 +12,8 @@ import Foundation
 internal enum L10n {
   /// This phone number is not available.
   internal static let addFriendPhoneNotAvailable = L10n.tr("Localizable", "add_friend_phone_not_available", fallback: "This phone number is not available.")
+  /// Scan QR code
+  internal static let addFriendScanQrCodeTitle = L10n.tr("Localizable", "add_friend_scan_qr_code_title", fallback: "Scan QR code")
   /// Scan this QR code to add me
   internal static let addFriendsAddByContactDescription = L10n.tr("Localizable", "add_friends_add_by_contact_description", fallback: "Scan this QR code to add me")
   /// Add by contacts

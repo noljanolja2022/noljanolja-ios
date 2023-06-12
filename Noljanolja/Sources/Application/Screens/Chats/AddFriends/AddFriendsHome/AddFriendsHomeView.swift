@@ -132,7 +132,9 @@ struct AddFriendsHomeView<ViewModel: AddFriendsHomeViewModel>: View {
     private func buildActionView() -> some View {
         HStack(spacing: 12) {
             Button(
-                action: {},
+                action: {
+                    viewModel.navigationType = .scan
+                },
                 label: {
                     VStack(spacing: 12) {
                         ImageAssets.icScan.swiftUIImage
@@ -257,13 +259,17 @@ extension AddFriendsHomeView {
         _ type: Binding<AddFriendsNavigationType>
     ) -> some View {
         switch type.wrappedValue {
-        case let .result(users):
-            FindUsersResultView(
-                viewModel: FindUsersResultViewModel(users: users)
+        case .scan:
+            ScanQRView(
+                viewModel: ScanQRViewModel()
             )
         case .contactList:
             AddFriendContactListView(
                 viewModel: AddFriendContactListViewModel()
+            )
+        case let .result(users):
+            FindUsersResultView(
+                viewModel: FindUsersResultViewModel(users: users)
             )
         }
     }

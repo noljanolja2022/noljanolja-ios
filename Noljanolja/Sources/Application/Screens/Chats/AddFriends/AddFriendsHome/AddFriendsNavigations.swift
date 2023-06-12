@@ -10,6 +10,7 @@ import Foundation
 // MARK: - AddFriendsNavigationType
 
 enum AddFriendsNavigationType {
+    case scan
     case contactList
     case result([User])
 }
