@@ -273,6 +273,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
             }
         )
         .buttonStyle(PrimaryButtonStyle())
+        .font(.system(size: 16, weight: .bold))
     }
 
     private func buildActionSheetDestinationView(

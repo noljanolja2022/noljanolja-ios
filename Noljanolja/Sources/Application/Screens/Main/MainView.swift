@@ -151,10 +151,8 @@ struct MainView<ViewModel: MainViewModel>: View {
         )
         .tag(MainTabType.wallet)
 
-        LottieView(
-            animation: LottieAnimation.named(
-                LottieAssets.underConstruction.name
-            )
+        ShopHomeView(
+            viewModel: ShopHomeViewModel()
         )
         .tag(MainTabType.shop)
         .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -81,15 +81,7 @@ final class AddFriendsHomeViewModel: ViewModel {
         currentUserSubject
             .receive(on: DispatchQueue.global(qos: .background))
             .compactMap { user -> UIImage? in
-                let filter = CIFilter.qrCodeGenerator()
-                let string = "nolljanollja:id:\(user.id)"
-                guard let data = string.data(using: .utf8) else { return nil }
-                filter.message = data
-                guard let outputImage = filter.outputImage,
-                      let cgImage = CIContext().createCGImage(outputImage, from: outputImage.extent) else {
-                    return nil
-                }
-                return UIImage(cgImage: cgImage)
+                "nolljanollja:id:\(user.id)".qrCodeImage()
             }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in

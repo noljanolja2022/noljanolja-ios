@@ -87,7 +87,7 @@ struct SourceLicenseView<ViewModel: SourceLicenseViewModel>: View {
             }
         )
         .buttonStyle(PrimaryButtonStyle())
-        .frame(height: 48)
+        .font(.system(size: 16, weight: .bold))
         .padding(.horizontal, 16)
     }
 

@@ -91,7 +91,7 @@ struct NotificationSettingView<ViewModel: NotificationSettingViewModel>: View {
                 }
             )
             .buttonStyle(PrimaryButtonStyle())
-            .frame(height: 48)
+            .font(.system(size: 16, weight: .bold))
 
             Spacer()
                 .frame(

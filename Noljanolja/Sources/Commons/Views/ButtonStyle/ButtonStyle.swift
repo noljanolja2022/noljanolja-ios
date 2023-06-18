@@ -42,14 +42,13 @@ extension CustomButtonStyle {
         configuration.label
             .frame(height: 48)
             .frame(maxWidth: .infinity)
-            .font(.system(size: 16, weight: .bold))
             .background(
                 isEnabled ? enabledBackgroundColor : disabledBackgroundColor
             )
             .foregroundColor(
                 isEnabled ? enabledForegroundColor : disabledForegroundColor
             )
-            .cornerRadius(5)
+            .cornerRadius(4)
             .overlayBorder(
                 color: isEnabled ? enabledBorderColor : disabledBorderColor, lineWidth: 1
             )
@@ -62,15 +61,27 @@ extension CustomButtonStyle {
 
 struct PrimaryButtonStyle: CustomButtonStyle {
     let isEnabled: Bool
-    let enabledForegroundColor: Color = ColorAssets.neutralDarkGrey.swiftUIColor
-    let disabledForegroundColor: Color = ColorAssets.neutralDeepGrey.swiftUIColor
-    let enabledBackgroundColor: Color = ColorAssets.primaryGreen200.swiftUIColor
-    let disabledBackgroundColor: Color = ColorAssets.neutralGrey.swiftUIColor
-    let enabledBorderColor = Color.clear
-    let disabledBorderColor = Color.clear
+    let enabledForegroundColor: Color
+    let disabledForegroundColor: Color
+    let enabledBackgroundColor: Color
+    let disabledBackgroundColor: Color
+    let enabledBorderColor: Color
+    let disabledBorderColor: Color
 
-    init(isEnabled: Bool = true) {
+    init(isEnabled: Bool = true,
+         enabledForegroundColor: Color = ColorAssets.neutralDarkGrey.swiftUIColor,
+         disabledForegroundColor: Color = ColorAssets.neutralDeepGrey.swiftUIColor,
+         enabledBackgroundColor: Color = ColorAssets.primaryGreen200.swiftUIColor,
+         disabledBackgroundColor: Color = ColorAssets.neutralGrey.swiftUIColor,
+         enabledBorderColor: Color = Color.clear,
+         disabledBorderColor: Color = Color.clear) {
         self.isEnabled = isEnabled
+        self.enabledForegroundColor = enabledForegroundColor
+        self.disabledForegroundColor = disabledForegroundColor
+        self.enabledBackgroundColor = enabledBackgroundColor
+        self.disabledBackgroundColor = disabledBackgroundColor
+        self.enabledBorderColor = enabledBorderColor
+        self.disabledBorderColor = disabledBorderColor
     }
 }
 
@@ -125,5 +136,33 @@ struct PlainButtonStyle: ButtonStyle {
             )
             .opacity(configuration.isPressed ? 0.5 : 1)
             .disabled(!isEnabled)
+    }
+}
+
+// MARK: - MyCouponButtonStyle
+
+struct MyCouponButtonStyle: CustomButtonStyle {
+    let isEnabled: Bool
+    let enabledForegroundColor: Color
+    let disabledForegroundColor: Color
+    let enabledBackgroundColor: Color
+    let disabledBackgroundColor: Color
+    let enabledBorderColor: Color
+    let disabledBorderColor: Color
+
+    init(isEnabled: Bool = true,
+         enabledForegroundColor: Color = ColorAssets.neutralDarkGrey.swiftUIColor,
+         disabledForegroundColor: Color = ColorAssets.neutralDeepGrey.swiftUIColor,
+         enabledBackgroundColor: Color = ColorAssets.secondaryYellow300.swiftUIColor,
+         disabledBackgroundColor: Color = ColorAssets.secondaryYellow50.swiftUIColor,
+         enabledBorderColor: Color = Color.clear,
+         disabledBorderColor: Color = Color.clear) {
+        self.isEnabled = isEnabled
+        self.enabledForegroundColor = enabledForegroundColor
+        self.disabledForegroundColor = disabledForegroundColor
+        self.enabledBackgroundColor = enabledBackgroundColor
+        self.disabledBackgroundColor = disabledBackgroundColor
+        self.enabledBorderColor = enabledBorderColor
+        self.disabledBorderColor = disabledBorderColor
     }
 }

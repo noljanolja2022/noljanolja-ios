@@ -70,7 +70,7 @@ struct ScanQRView<ViewModel: ScanQRViewModel>: View {
             }
         )
         .buttonStyle(PrimaryButtonStyle())
-        .frame(height: 48)
+        .font(.system(size: 16, weight: .bold))
         .padding(.horizontal, 16)
         .padding(.bottom, 16)
     }

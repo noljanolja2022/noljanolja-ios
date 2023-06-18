@@ -137,7 +137,9 @@ struct WalletView<ViewModel: WalletViewModel>: View {
             }
         )
     }
+}
 
+extension WalletView {
     @ViewBuilder
     private func buildNavigationLinkDestinationView(
         _ type: Binding<WalletNavigationType>

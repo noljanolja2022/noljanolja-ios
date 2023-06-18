@@ -67,6 +67,7 @@ struct ConversationAdjustment<ViewModel: ConversationAdjustmentModel>: View {
                 action: { viewModel.actionSubject.send() }
             )
             .buttonStyle(PrimaryButtonStyle())
+            .font(.system(size: 16, weight: .bold))
         }
         .padding(16)
     }

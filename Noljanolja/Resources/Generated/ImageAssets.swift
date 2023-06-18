@@ -70,6 +70,7 @@ internal enum ImageAssets {
   internal static let icMore = ImageAsset(name: "ic_more")
   internal static let icNotifications = ImageAsset(name: "ic_notifications")
   internal static let icPoint = ImageAsset(name: "ic_point")
+  internal static let icQuestion = ImageAsset(name: "ic_question")
   internal static let icRank = ImageAsset(name: "ic_rank")
   internal static let icSearch = ImageAsset(name: "ic_search")
   internal static let icSettingFill = ImageAsset(name: "ic_setting_fill")
@@ -137,6 +138,7 @@ internal enum ImageAssets {
     icMore,
     icNotifications,
     icPoint,
+    icQuestion,
     icRank,
     icSearch,
     icSettingFill,

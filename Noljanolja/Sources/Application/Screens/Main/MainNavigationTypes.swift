@@ -18,8 +18,8 @@ enum MainTabType: Equatable {
 
     var isNavigationBarHidden: Bool {
         switch self {
-        case .chat, .watch, .shop, .news: return false
-        case .wallet: return true
+        case .chat, .watch, .news: return false
+        case .wallet, .shop: return true
         }
     }
 
