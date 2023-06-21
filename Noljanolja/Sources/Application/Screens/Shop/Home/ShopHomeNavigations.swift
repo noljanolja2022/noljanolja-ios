@@ -8,6 +8,7 @@
 import Foundation
 
 enum ShopHomeNavigationType {
+    case search
     case myCoupons
     case couponDetail(Coupon)
     case myCouponDetail(MyCoupon)

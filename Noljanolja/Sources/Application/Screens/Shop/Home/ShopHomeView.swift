@@ -20,14 +20,14 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
     }
 
     private func buildBodyView() -> some View {
-        buildMainView()
+        buildContentView()
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
     }
 
-    private func buildMainView() -> some View {
+    private func buildContentView() -> some View {
         ZStack {
-            buildContentView()
+            buildMainView()
                 .statefull(
                     state: $viewModel.viewState,
                     isEmpty: { viewModel.model.isEmpty },
@@ -40,7 +40,7 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
     }
 
     @ViewBuilder
-    private func buildContentView() -> some View {
+    private func buildMainView() -> some View {
         VStack(spacing: 4) {
             buildSearchView()
             buildScrollView()
@@ -79,6 +79,9 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
         .background(ColorAssets.neutralLight.swiftUIColor)
         .cornerRadius([.bottomLeading, .bottomTrailing], 12)
         .disabled(true)
+        .onTapGesture {
+            viewModel.navigationType = .search
+        }
     }
 
     @ViewBuilder
@@ -151,6 +154,10 @@ extension ShopHomeView {
         _ type: Binding<ShopHomeNavigationType>
     ) -> some View {
         switch type.wrappedValue {
+        case .search:
+            SearchCouponsView(
+                viewModel: SearchCouponsViewModel()
+            )
         case .myCoupons:
             MyCouponsView(
                 viewModel: MyCouponsViewModel()

@@ -44,4 +44,10 @@ struct PaginationResponse<Model: Decodable>: Decodable {
         self.data = try container.decode(Model.self, forKey: .data)
         self.pagination = try container.decode(Pagination.self, forKey: .pagination)
     }
+
+    init(data: Model,
+         pagination: Pagination) {
+        self.data = data
+        self.pagination = pagination
+    }
 }

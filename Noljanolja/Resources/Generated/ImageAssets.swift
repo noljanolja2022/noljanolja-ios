@@ -76,6 +76,7 @@ internal enum ImageAssets {
   internal static let icSettingFill = ImageAsset(name: "ic_setting_fill")
   internal static let icSettingOutline = ImageAsset(name: "ic_setting_outline")
   internal static let icShare = ImageAsset(name: "ic_share")
+  internal static let icTimeRecent = ImageAsset(name: "ic_time_recent")
   internal static let logo = ImageAsset(name: "logo")
   internal static let icPpyy = ImageAsset(name: "ic_ppyy")
   internal static let icSplashMultiCoin = ImageAsset(name: "ic_splash_multi_coin")
@@ -144,6 +145,7 @@ internal enum ImageAssets {
     icSettingFill,
     icSettingOutline,
     icShare,
+    icTimeRecent,
     logo,
     icPpyy,
     icSplashMultiCoin,

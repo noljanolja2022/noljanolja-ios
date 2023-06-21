@@ -34,16 +34,19 @@ final class MemberInfoUseCasesImpl: MemberInfoUseCases {
     func getLoyaltyMemberInfo() -> AnyPublisher<LoyaltyMemberInfo, Error> {
         loyaltyApi
             .getLoyaltyMemberInfo()
-            .flatMapLatest { [weak self] memberInfo in
+            .handleEvents(receiveOutput: { [weak self] in
+                self?.memberInfoSubject.send($0)
+            })
+            .flatMapLatest { [weak self] _ in
                 guard let self else {
                     return Empty<LoyaltyMemberInfo, Error>().eraseToAnyPublisher()
                 }
-                self.memberInfoSubject.send(memberInfo)
                 return self.memberInfoSubject
                     .compactMap { $0 }
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
             }
+            .removeDuplicates()
             .eraseToAnyPublisher()
     }
 }

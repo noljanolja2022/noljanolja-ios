@@ -40,6 +40,7 @@ private enum GiftsAPITargets {
 
         let categoryId: Int?
         let brandId: Int?
+        let name: String?
         let page: Int
         let pageSize: Int?
 
@@ -47,6 +48,7 @@ private enum GiftsAPITargets {
             let parameters: [String: Any?] = [
                 "categoryId": categoryId,
                 "brandId": brandId,
+                "name": name,
                 "page": page,
                 "pageSize": pageSize
             ]
@@ -90,7 +92,7 @@ private enum GiftsAPITargets {
 
 protocol GiftsAPIType {
     func getMyGifts(categoryId: Int?, brandId: Int?, page: Int, pageSize: Int?) -> AnyPublisher<PaginationResponse<[MyCoupon]>, Error>
-    func getGiftsInShop(categoryId: Int?, brandId: Int?, page: Int, pageSize: Int?) -> AnyPublisher<PaginationResponse<[Coupon]>, Error>
+    func getGiftsInShop(categoryId: Int?, brandId: Int?, name: String?, page: Int, pageSize: Int?) -> AnyPublisher<PaginationResponse<[Coupon]>, Error>
     func getGiftsBrands(page: Int, pageSize: Int) -> AnyPublisher<[CouponBrand], Error>
     func getGiftsCategories() -> AnyPublisher<[CouponCategory], Error>
     func buyCoupon(_ id: Int) -> AnyPublisher<MyCoupon, Error>
@@ -106,9 +108,10 @@ extension GiftsAPIType {
 
     func getGiftsInShop(categoryId: Int? = nil,
                         brandId: Int? = nil,
+                        name: String? = nil,
                         page: Int,
                         pageSize: Int? = nil) -> AnyPublisher<PaginationResponse<[Coupon]>, Error> {
-        getGiftsInShop(categoryId: categoryId, brandId: brandId, page: page, pageSize: pageSize)
+        getGiftsInShop(categoryId: categoryId, brandId: brandId, name: name, page: page, pageSize: pageSize)
     }
 }
 
@@ -134,11 +137,12 @@ final class GiftsAPI: GiftsAPIType {
         )
     }
 
-    func getGiftsInShop(categoryId: Int?, brandId: Int?, page: Int, pageSize: Int?) -> AnyPublisher<PaginationResponse<[Coupon]>, Error> {
+    func getGiftsInShop(categoryId: Int?, brandId: Int?, name: String?, page: Int, pageSize: Int?) -> AnyPublisher<PaginationResponse<[Coupon]>, Error> {
         api.request(
             target: GiftsAPITargets.GetGiftsInShop(
                 categoryId: categoryId,
                 brandId: brandId,
+                name: name,
                 page: page,
                 pageSize: pageSize
             )
