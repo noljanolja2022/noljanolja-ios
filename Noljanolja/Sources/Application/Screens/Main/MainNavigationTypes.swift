@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - MainTabType
+
 enum MainTabType: Equatable {
     case chat
     case watch
@@ -16,8 +18,8 @@ enum MainTabType: Equatable {
 
     var isNavigationBarHidden: Bool {
         switch self {
-        case .chat, .watch, .shop, .news: return false
-        case .wallet: return true
+        case .chat, .watch, .news: return false
+        case .wallet, .shop: return true
         }
     }
 
@@ -50,4 +52,10 @@ enum MainTabType: Equatable {
         case .news: return ImageAssets.icNews.name
         }
     }
+}
+
+// MARK: - MainNavigationType
+
+enum MainNavigationType {
+    case addFriends
 }

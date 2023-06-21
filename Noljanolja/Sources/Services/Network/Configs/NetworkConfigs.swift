@@ -18,4 +18,8 @@ enum NetworkConfigs {
         static let apiFullDateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         static let apiFullDateFormats = ["yyyy-MM-dd'T'HH:mm:ssZ", "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSSZ"]
     }
+
+    enum Param {
+        static let firstPage = 1
+    }
 }

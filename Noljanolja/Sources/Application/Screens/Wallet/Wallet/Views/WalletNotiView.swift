@@ -47,7 +47,12 @@ struct WalletNotiView: View {
             ColorAssets.neutralLight.swiftUIColor
                 .cornerRadius(12)
                 .padding(.top, 24)
-                .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
+                .shadow(
+                    color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.2),
+                    radius: 8,
+                    x: 0,
+                    y: 4
+                )
         )
     }
 

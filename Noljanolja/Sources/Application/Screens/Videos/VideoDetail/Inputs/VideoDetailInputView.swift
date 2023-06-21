@@ -30,6 +30,16 @@ struct VideoDetailInputView<ViewModel: VideoDetailInputViewModel>: View {
     }
 
     private func buildBodyView() -> some View {
+        buildContentView()
+            .navigationBarTitle("", displayMode: .inline)
+            .onAppear { viewModel.isAppearSubject.send(true) }
+            .onDisappear { viewModel.isAppearSubject.send(false) }
+            .onChange(of: viewModel.isProgressHUDShowing) {
+                progressHUBState.isLoading = $0
+            }
+    }
+
+    private func buildContentView() -> some View {
         HStack(alignment: .bottom, spacing: 12) {
             buildAvatarView()
             buildTextInputView()
@@ -37,9 +47,6 @@ struct VideoDetailInputView<ViewModel: VideoDetailInputViewModel>: View {
         }
         .padding(.vertical, 4)
         .padding(.horizontal, 12)
-        .onChange(of: viewModel.isProgressHUDShowing) {
-            progressHUBState.isLoading = $0
-        }
     }
 
     @ViewBuilder

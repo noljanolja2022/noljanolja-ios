@@ -23,6 +23,10 @@ final class MainViewModel: ViewModel {
     @Published var selectedTab = MainTabType.chat
     @Published var tabNews = [MainTabType: Bool]()
 
+    // MARK: Navigations
+
+    @Published var navigationType: MainNavigationType?
+
     // MARK: Action
 
     // MARK: Dependencies
@@ -58,3 +62,7 @@ extension MainViewModel: WalletViewModelDelegate {
         delegate?.mainViewModelSignOut()
     }
 }
+
+// MARK: AddFriendsHomeViewModelDelegate
+
+extension MainViewModel: AddFriendsHomeViewModelDelegate {}

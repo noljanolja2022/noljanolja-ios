@@ -22,6 +22,9 @@ internal typealias AssetImageTypeAlias = ImageAsset.Image
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 internal enum ImageAssets {
+  internal static let bnAddFriendQr = ImageAsset(name: "bn_add_friend_qr")
+  internal static let icContactCalendar = ImageAsset(name: "ic_contact_calendar")
+  internal static let icScan = ImageAsset(name: "ic_scan")
   internal static let icAddPerson = ImageAsset(name: "ic_add_person")
   internal static let icChatBlock = ImageAsset(name: "ic_chat_block")
   internal static let icChatBubble = ImageAsset(name: "ic_chat_bubble")
@@ -67,11 +70,13 @@ internal enum ImageAssets {
   internal static let icMore = ImageAsset(name: "ic_more")
   internal static let icNotifications = ImageAsset(name: "ic_notifications")
   internal static let icPoint = ImageAsset(name: "ic_point")
+  internal static let icQuestion = ImageAsset(name: "ic_question")
   internal static let icRank = ImageAsset(name: "ic_rank")
   internal static let icSearch = ImageAsset(name: "ic_search")
   internal static let icSettingFill = ImageAsset(name: "ic_setting_fill")
   internal static let icSettingOutline = ImageAsset(name: "ic_setting_outline")
   internal static let icShare = ImageAsset(name: "ic_share")
+  internal static let icTimeRecent = ImageAsset(name: "ic_time_recent")
   internal static let logo = ImageAsset(name: "logo")
   internal static let icPpyy = ImageAsset(name: "ic_ppyy")
   internal static let icSplashMultiCoin = ImageAsset(name: "ic_splash_multi_coin")
@@ -86,6 +91,9 @@ internal enum ImageAssets {
   // swiftlint:disable trailing_comma
   @available(*, deprecated, message: "All values properties are now deprecated")
   internal static let allImages: [ImageAsset] = [
+    bnAddFriendQr,
+    icContactCalendar,
+    icScan,
     icAddPerson,
     icChatBlock,
     icChatBubble,
@@ -131,11 +139,13 @@ internal enum ImageAssets {
     icMore,
     icNotifications,
     icPoint,
+    icQuestion,
     icRank,
     icSearch,
     icSettingFill,
     icSettingOutline,
     icShare,
+    icTimeRecent,
     logo,
     icPpyy,
     icSplashMultiCoin,

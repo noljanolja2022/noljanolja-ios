@@ -116,7 +116,7 @@ struct TermView<ViewModel: TermViewModel>: View {
         )
         .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.isAllTermChecked))
         .disabled(!viewModel.isAllTermChecked)
-        .frame(height: 48)
+        .font(.system(size: 16, weight: .bold))
         .padding(16)
     }
 }

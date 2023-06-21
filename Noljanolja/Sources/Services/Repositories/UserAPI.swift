@@ -50,10 +50,15 @@ private enum UserAPITargets {
         let method: Moya.Method = .get
         var task: Task { .requestParameters(parameters: parameters, encoding: URLEncoding.default) }
 
-        let phoneNumber: String
+        let phoneNumber: String?
+        let friendId: String?
 
         var parameters: [String: Any] {
-            ["phoneNumber": phoneNumber]
+            [
+                "phoneNumber": phoneNumber,
+                "friendId": friendId
+            ]
+            .compactMapValues { $0 }
         }
     }
 
@@ -77,6 +82,18 @@ private enum UserAPITargets {
             ["contacts": contacts.map { $0.json }]
         }
     }
+
+    struct InviteUser: BaseAuthTargetType {
+        var path: String { "v1/users/me/contacts/invite" }
+        let method: Moya.Method = .post
+        var task: Task { .requestParameters(parameters: parameters, encoding: JSONEncoding.default) }
+
+        let id: String
+
+        var parameters: [String: Any] {
+            ["friendId": id]
+        }
+    }
 }
 
 // MARK: - UserAPIType
@@ -86,9 +103,10 @@ protocol UserAPIType {
     func updateCurrentUser(_ param: UpdateCurrentUserParam) -> AnyPublisher<User, Error>
     func updateCurrentUserAvatar(_ image: Data?) -> AnyPublisher<Void, Error>
 
-    func findUsers(phoneNumber: String) -> AnyPublisher<[User], Error>
+    func findUsers(phoneNumber: String?, friendId: String?) -> AnyPublisher<[User], Error>
     func getContact(page: Int, pageSize: Int) -> AnyPublisher<[User], Error>
     func syncContacts(_ contacts: [Contact]) -> AnyPublisher<[User], Error>
+    func inviteUser(id: String) -> AnyPublisher<Void, Error>
 }
 
 // MARK: - UserAPI
@@ -122,9 +140,9 @@ final class UserAPI: UserAPIType {
         )
     }
 
-    func findUsers(phoneNumber: String) -> AnyPublisher<[User], Error> {
+    func findUsers(phoneNumber: String?, friendId: String?) -> AnyPublisher<[User], Error> {
         api.request(
-            target: UserAPITargets.FindUsers(phoneNumber: phoneNumber),
+            target: UserAPITargets.FindUsers(phoneNumber: phoneNumber, friendId: friendId),
             atKeyPath: "data"
         )
     }
@@ -140,6 +158,12 @@ final class UserAPI: UserAPIType {
         api.request(
             target: UserAPITargets.SyncContacts(contacts: contacts),
             atKeyPath: "data"
+        )
+    }
+
+    func inviteUser(id: String) -> AnyPublisher<Void, Error> {
+        api.request(
+            target: UserAPITargets.InviteUser(id: id)
         )
     }
 }

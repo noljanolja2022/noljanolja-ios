@@ -172,7 +172,7 @@ struct AuthView<ViewModel: AuthViewModel>: View {
             )
         )
         .disabled(viewModel.phoneNumberText.isEmpty)
-        .frame(height: 48)
+        .font(.system(size: 16, weight: .bold))
         .padding(.horizontal, 16)
         .padding(.bottom, 16)
     }

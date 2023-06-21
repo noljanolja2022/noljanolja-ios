@@ -26,7 +26,7 @@ final class MyRankingViewModel: ViewModel {
     // MARK: Dependencies
 
     private let userService: UserServiceType
-    private let loyaltyAPI: LoyaltyAPIType
+    private let memberInfoUseCase: MemberInfoUseCases
     private weak var delegate: MyRankingViewModelDelegate?
 
     // MARK: Private
@@ -36,10 +36,10 @@ final class MyRankingViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(userService: UserServiceType = UserService.default,
-         loyaltyAPI: LoyaltyAPIType = LoyaltyAPI.default,
+         memberInfoUseCase: MemberInfoUseCases = MemberInfoUseCasesImpl.default,
          delegate: MyRankingViewModelDelegate? = nil) {
         self.userService = userService
-        self.loyaltyAPI = loyaltyAPI
+        self.memberInfoUseCase = memberInfoUseCase
         self.delegate = delegate
         super.init()
 
@@ -66,7 +66,7 @@ final class MyRankingViewModel: ViewModel {
                 guard let self else {
                     return Empty<LoyaltyMemberInfo, Error>().eraseToAnyPublisher()
                 }
-                return self.loyaltyAPI.getLoyaltyMemberInfo()
+                return self.memberInfoUseCase.getLoyaltyMemberInfo()
             }
             .sink { [weak self] result in
                 guard let self else { return }

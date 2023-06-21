@@ -68,7 +68,12 @@ struct WalletView<ViewModel: WalletViewModel>: View {
         ScrollView {
             VStack(spacing: 12) {
                 WalletMyPointView(point: model.point)
-                    .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
+                    .shadow(
+                        color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.2),
+                        radius: 8,
+                        x: 0,
+                        y: 4
+                    )
 
                 HStack(spacing: 12) {
                     WalletPointView(
@@ -92,7 +97,12 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                         pointColor: ColorAssets.systemBlue.swiftUIColor
                     )
                 }
-                .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
+                .shadow(
+                    color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.2),
+                    radius: 8,
+                    x: 0,
+                    y: 4
+                )
 
                 WalletNotiView()
             }
@@ -127,7 +137,9 @@ struct WalletView<ViewModel: WalletViewModel>: View {
             }
         )
     }
+}
 
+extension WalletView {
     @ViewBuilder
     private func buildNavigationLinkDestinationView(
         _ type: Binding<WalletNavigationType>
