@@ -71,6 +71,16 @@ private enum MessageAPITargets {
         let conversationID: Int
         let messageID: Int
     }
+
+    struct ReactMessage: BaseAuthTargetType {
+        var path: String { "v1/conversations/\(conversationID)/messages/\(messageID)/reactions/\(reactionId)" }
+        let method: Moya.Method = .put
+        var task: Task { .requestPlain }
+
+        let conversationID: Int
+        let messageID: Int
+        let reactionId: Int
+    }
 }
 
 // MARK: - MessageAPIType
@@ -83,6 +93,8 @@ protocol MessageAPIType {
     func seenMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error>
 
     func getPhotoURL(conversationId: Int, attachmentId: String) -> URL?
+
+    func reactMessage(conversationID: Int, messageID: Int, reactionId: Int) -> AnyPublisher<Void, Error>
 }
 
 extension MessageAPIType {
@@ -137,5 +149,15 @@ final class MessageAPI: MessageAPIType {
     func getPhotoURL(conversationId: Int, attachmentId: String) -> URL? {
         let string = NetworkConfigs.BaseUrl.baseUrl + "/v1/conversations/\(conversationId)/attachments/\(attachmentId)"
         return URL(string: string)
+    }
+
+    func reactMessage(conversationID: Int, messageID: Int, reactionId: Int) -> AnyPublisher<Void, Error> {
+        api.request(
+            target: MessageAPITargets.ReactMessage(
+                conversationID: conversationID,
+                messageID: messageID,
+                reactionId: reactionId
+            )
+        )
     }
 }

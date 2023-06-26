@@ -8,6 +8,7 @@
 
 import Combine
 import Foundation
+import SwiftUIX
 import UIKit
 
 // MARK: - ChatViewModelDelegate
@@ -339,6 +340,18 @@ final class ChatViewModel: ViewModel {
                 case let .openImageDetail(url):
                     guard let url else { return }
                     self.fullScreenCoverType = .openImageDetail(url)
+                case let .reaction(geometryProxy, message):
+                    guard let geometryProxy else { return }
+                    if Keyboard.main.isShowing {
+                        Keyboard.main.dismiss()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            let contentRect = geometryProxy.frame(in: .global)
+                            self.fullScreenCoverType = .reaction(contentRect, message)
+                        }
+                    } else {
+                        let contentRect = geometryProxy.frame(in: .global)
+                        self.fullScreenCoverType = .reaction(contentRect, message)
+                    }
                 }
             }
             .store(in: &cancellables)

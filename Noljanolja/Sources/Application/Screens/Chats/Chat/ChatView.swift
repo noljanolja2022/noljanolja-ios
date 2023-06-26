@@ -59,6 +59,10 @@ struct ChatView<ViewModel: ChatViewModel>: View {
         .onReceive(viewModel.closeAction) {
             presentationMode.wrappedValue.dismiss()
         }
+        .onChange(of: viewModel.fullScreenCoverType) { fullScreenCoverType in
+            guard let fullScreenCoverType else { return }
+            UIView.setAnimationsEnabled(fullScreenCoverType.isAnimationsEnabled)
+        }
         .fullScreenCover(
             unwrapping: $viewModel.fullScreenCoverType,
             content: {
@@ -213,6 +217,18 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                 )
                 navigationController.view.backgroundColor = .clear
                 navigationController.parent?.view.backgroundColor = .clear
+            }
+        case let .reaction(rect, message):
+            MessageReactionView(
+                viewModel: MessageReactionViewModel(
+                    messageReactionInput: MessageReactionInput(
+                        rect: rect,
+                        message: message
+                    )
+                )
+            )
+            .onDisappear {
+                UIView.setAnimationsEnabled(true)
             }
         }
     }

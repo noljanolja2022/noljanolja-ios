@@ -64,14 +64,18 @@ internal enum ImageAssets {
   internal static let icBack = ImageAsset(name: "ic_back")
   internal static let icCameraFill = ImageAsset(name: "ic_camera_fill")
   internal static let icClose = ImageAsset(name: "ic_close")
+  internal static let icCopy = ImageAsset(name: "ic_copy")
+  internal static let icDelete = ImageAsset(name: "ic_delete")
   internal static let icDownload = ImageAsset(name: "ic_download")
   internal static let icEdit = ImageAsset(name: "ic_edit")
+  internal static let icForward = ImageAsset(name: "ic_forward")
   internal static let icMenu = ImageAsset(name: "ic_menu")
   internal static let icMore = ImageAsset(name: "ic_more")
   internal static let icNotifications = ImageAsset(name: "ic_notifications")
   internal static let icPoint = ImageAsset(name: "ic_point")
   internal static let icQuestion = ImageAsset(name: "ic_question")
   internal static let icRank = ImageAsset(name: "ic_rank")
+  internal static let icReply = ImageAsset(name: "ic_reply")
   internal static let icSearch = ImageAsset(name: "ic_search")
   internal static let icSettingFill = ImageAsset(name: "ic_setting_fill")
   internal static let icSettingOutline = ImageAsset(name: "ic_setting_outline")
@@ -133,14 +137,18 @@ internal enum ImageAssets {
     icBack,
     icCameraFill,
     icClose,
+    icCopy,
+    icDelete,
     icDownload,
     icEdit,
+    icForward,
     icMenu,
     icMore,
     icNotifications,
     icPoint,
     icQuestion,
     icRank,
+    icReply,
     icSearch,
     icSettingFill,
     icSettingOutline,
