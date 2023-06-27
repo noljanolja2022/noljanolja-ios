@@ -15,6 +15,8 @@ struct PhotoMessageContentView: View {
     let model: PhotoMessageContentModel
     let action: ((ChatItemActionType) -> Void)?
 
+    @State private var geometryProxy: GeometryProxy?
+
     var body: some View {
         buildBodyView()
     }
@@ -47,6 +49,13 @@ struct PhotoMessageContentView: View {
     }
 
     private func buildContentView() -> some View {
+        VStack(alignment: model.horizontalAlignment, spacing: 0) {
+            buildMainView()
+            buildReactionSummaryView()
+        }
+    }
+
+    private func buildMainView() -> some View {
         VStack(spacing: 4) {
             ForEach(model.photoLists.indices, id: \.self) { row in
                 HStack(spacing: 4) {
@@ -59,10 +68,33 @@ struct PhotoMessageContentView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(4)
         .background(
-            MessageContentBackgroundView(
-                model: model.background
-            )
+            GeometryReader { geometry in
+                MessageContentBackgroundView(
+                    model: model.background
+                )
+                .onAppear {
+                    geometryProxy = geometry
+                }
+            }
         )
+        .onLongPressGesture {
+            action?(.reaction(geometryProxy, model.message))
+        }
+    }
+
+    @ViewBuilder
+    private func buildReactionSummaryView() -> some View {
+        if let reactionSummaryModel = model.reactionSummaryModel {
+            MessageReactionSummaryView(model: reactionSummaryModel)
+                .frame(height: 20)
+                .padding(.vertical, 2)
+                .padding(.horizontal, 6)
+                .background(Color(model.background.color))
+                .cornerRadius(10)
+                .border(ColorAssets.neutralLight.swiftUIColor, width: 2, cornerRadius: 10)
+                .padding(.top, -10)
+                .padding(.horizontal, 12)
+        }
     }
 
     private func buildItem(_ url: URL?) -> some View {

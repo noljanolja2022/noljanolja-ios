@@ -6,21 +6,27 @@
 //
 
 import Foundation
+import SwiftUI
 
 // MARK: - TextMessageContentModel
 
 struct PhotoMessageContentModel: Equatable {
+    let message: Message
+
     let isSendByCurrentUser: Bool
     let photoLists: [[URL?]]
     let createdAt: Date
     let status: MessageStatusModel.StatusType
     let isShareHidden: Bool
     let background: MessageContentBackgroundModel
+    let reactionSummaryModel: MessageReactionSummaryModel?
+    let horizontalAlignment: HorizontalAlignment
 
     init(currentUser: User,
          message: Message,
          status: NormalMessageModel.StatusType,
          background: MessageContentBackgroundModel) {
+        self.message = message
         self.isSendByCurrentUser = currentUser.id == message.sender.id
         self.photoLists = {
             let numberItemOfRow = 2
@@ -55,5 +61,7 @@ struct PhotoMessageContentModel: Equatable {
         }()
         self.isShareHidden = message.sender.id != currentUser.id
         self.background = background
+        self.reactionSummaryModel = MessageReactionSummaryModel(message.reactions)
+        self.horizontalAlignment = message.sender.id == currentUser.id ? .trailing : .leading
     }
 }

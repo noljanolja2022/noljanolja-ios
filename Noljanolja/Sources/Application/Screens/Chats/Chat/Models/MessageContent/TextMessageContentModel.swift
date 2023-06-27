@@ -12,6 +12,7 @@ import SwiftUI
 
 struct TextMessageContentModel: Equatable {
     let message: Message
+    
     let messageString: String
     let createdAt: Date
     let status: MessageStatusModel.StatusType

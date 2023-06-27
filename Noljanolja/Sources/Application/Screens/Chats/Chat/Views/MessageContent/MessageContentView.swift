@@ -32,7 +32,8 @@ struct MessageContentView: View {
             )
         case let .sticker(model):
             StickerMessageContentView(
-                model: model
+                model: model,
+                action: action
             )
         case .none:
             EmptyView()

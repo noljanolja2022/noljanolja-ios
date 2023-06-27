@@ -28,36 +28,45 @@ struct TextMessageContentView: View {
 
     private func buildContentView() -> some View {
         VStack(alignment: model.horizontalAlignment, spacing: 0) {
-            HStack(alignment: .bottom, spacing: 10) {
-                buildTextView()
-                buildInfoView()
-            }
-            .padding(12)
-            .background(
-                GeometryReader { geometry in
-                    MessageContentBackgroundView(
-                        model: model.background
-                    )
-                    .onAppear {
-                        geometryProxy = geometry
-                    }
-                }
-            )
-            .onTapGesture {}
-            .onLongPressGesture {
-                action?(.reaction(geometryProxy, model.message))
-            }
+            buildMainView()
+            buildReactionSummaryView()
+        }
+    }
 
-            if let reactionSummaryModel = model.reactionSummaryModel {
-                MessageReactionSummaryView(model: reactionSummaryModel)
-                    .frame(height: 20)
-                    .padding(.horizontal, 6)
-                    .background(Color(model.background.color))
-                    .cornerRadius(10)
-                    .border(ColorAssets.neutralLight.swiftUIColor, width: 2, cornerRadius: 10)
-                    .padding(.top, -10)
-                    .padding(.horizontal, 12)
+    private func buildMainView() -> some View {
+        HStack(alignment: .bottom, spacing: 10) {
+            buildTextView()
+            buildInfoView()
+        }
+        .padding(12)
+        .background(
+            GeometryReader { geometry in
+                MessageContentBackgroundView(
+                    model: model.background
+                )
+                .onAppear {
+                    geometryProxy = geometry
+                }
             }
+        )
+        .onTapGesture {}
+        .onLongPressGesture {
+            action?(.reaction(geometryProxy, model.message))
+        }
+    }
+
+    @ViewBuilder
+    private func buildReactionSummaryView() -> some View {
+        if let reactionSummaryModel = model.reactionSummaryModel {
+            MessageReactionSummaryView(model: reactionSummaryModel)
+                .frame(height: 20)
+                .padding(.vertical, 2)
+                .padding(.horizontal, 6)
+                .background(Color(model.background.color))
+                .cornerRadius(10)
+                .border(ColorAssets.neutralLight.swiftUIColor, width: 2, cornerRadius: 10)
+                .padding(.top, -10)
+                .padding(.horizontal, 12)
         }
     }
 
