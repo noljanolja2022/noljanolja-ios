@@ -19,6 +19,7 @@ struct MessageReactionSummaryModel: Equatable {
             return result
         }
         self.reactIcons = Array(reactIconSet)
+            .sorted(by: { $0.id < $1.id })
         self.count = models.count
     }
 }

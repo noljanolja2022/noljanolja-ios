@@ -129,7 +129,7 @@
 		CF446B9329D8AE2F00ED66BF /* RefreshTokenInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF446B9229D8AE2F00ED66BF /* RefreshTokenInterceptor.swift */; };
 		CF4A6EF129E3C0D000CB75E5 /* CreateConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6EEF29E3C0D000CB75E5 /* CreateConversationView.swift */; };
 		CF4A6EF229E3C0D000CB75E5 /* CreateConversationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6EF029E3C0D000CB75E5 /* CreateConversationViewModel.swift */; };
-		CF4A6EF429E3C45A00CB75E5 /* MainNavigationTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6EF329E3C45A00CB75E5 /* MainNavigationTypes.swift */; };
+		CF4A6EF429E3C45A00CB75E5 /* MainNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6EF329E3C45A00CB75E5 /* MainNavigations.swift */; };
 		CF4A6F0629E41FFA00CB75E5 /* MainToolBarActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6F0529E41FFA00CB75E5 /* MainToolBarActionType.swift */; };
 		CF52AB6129B8D6BE00C9C90C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF52AB6029B8D6BE00C9C90C /* User.swift */; };
 		CF52AB6429B8D85000C9C90C /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF52AB6329B8D85000C9C90C /* ContactService.swift */; };
@@ -226,6 +226,10 @@
 		CFA924B42A49926D000918D8 /* MessageReactionUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA924B32A49926D000918D8 /* MessageReactionUseCases.swift */; };
 		CFA924B62A4998DE000918D8 /* MessageReactionSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA924B52A4998DE000918D8 /* MessageReactionSummaryView.swift */; };
 		CFA924B82A499A25000918D8 /* MessageReactionSummaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA924B72A499A25000918D8 /* MessageReactionSummaryModel.swift */; };
+		CFAA37612A4B370C0085CE88 /* BannerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAA37602A4B370C0085CE88 /* BannerRepository.swift */; };
+		CFAA37632A4B38E00085CE88 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAA37622A4B38E00085CE88 /* Banner.swift */; };
+		CFAA37672A4B44F70085CE88 /* BannersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAA37652A4B44F70085CE88 /* BannersView.swift */; };
+		CFAA37682A4B44F70085CE88 /* BannersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAA37662A4B44F70085CE88 /* BannersViewModel.swift */; };
 		CFAC6BB32A123021004AD4A5 /* ProfileSettingAlertActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAC6BB22A123021004AD4A5 /* ProfileSettingAlertActionType.swift */; };
 		CFAC6BB92A1237A0004AD4A5 /* SourceLicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAC6BB72A1237A0004AD4A5 /* SourceLicenseView.swift */; };
 		CFAC6BBA2A1237A0004AD4A5 /* SourceLicenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAC6BB82A1237A0004AD4A5 /* SourceLicenseViewModel.swift */; };
@@ -596,7 +600,7 @@
 		CF446B9229D8AE2F00ED66BF /* RefreshTokenInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenInterceptor.swift; sourceTree = "<group>"; };
 		CF4A6EEF29E3C0D000CB75E5 /* CreateConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateConversationView.swift; sourceTree = "<group>"; };
 		CF4A6EF029E3C0D000CB75E5 /* CreateConversationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateConversationViewModel.swift; sourceTree = "<group>"; };
-		CF4A6EF329E3C45A00CB75E5 /* MainNavigationTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationTypes.swift; sourceTree = "<group>"; };
+		CF4A6EF329E3C45A00CB75E5 /* MainNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigations.swift; sourceTree = "<group>"; };
 		CF4A6F0529E41FFA00CB75E5 /* MainToolBarActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainToolBarActionType.swift; sourceTree = "<group>"; };
 		CF52AB6029B8D6BE00C9C90C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CF52AB6329B8D85000C9C90C /* ContactService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
@@ -686,6 +690,10 @@
 		CFA924B32A49926D000918D8 /* MessageReactionUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageReactionUseCases.swift; sourceTree = "<group>"; };
 		CFA924B52A4998DE000918D8 /* MessageReactionSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageReactionSummaryView.swift; sourceTree = "<group>"; };
 		CFA924B72A499A25000918D8 /* MessageReactionSummaryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageReactionSummaryModel.swift; sourceTree = "<group>"; };
+		CFAA37602A4B370C0085CE88 /* BannerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerRepository.swift; sourceTree = "<group>"; };
+		CFAA37622A4B38E00085CE88 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
+		CFAA37652A4B44F70085CE88 /* BannersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannersView.swift; sourceTree = "<group>"; };
+		CFAA37662A4B44F70085CE88 /* BannersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannersViewModel.swift; sourceTree = "<group>"; };
 		CFAC6BB22A123021004AD4A5 /* ProfileSettingAlertActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingAlertActionType.swift; sourceTree = "<group>"; };
 		CFAC6BB72A1237A0004AD4A5 /* SourceLicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceLicenseView.swift; sourceTree = "<group>"; };
 		CFAC6BB82A1237A0004AD4A5 /* SourceLicenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceLicenseViewModel.swift; sourceTree = "<group>"; };
@@ -1596,6 +1604,7 @@
 				CFFB71ED2A4004A20019663C /* CouponKeyword.swift */,
 				CFF863942A435F8400EC0713 /* ReactIcon.swift */,
 				CFF863982A4362ED00EC0713 /* MessageReaction.swift */,
+				CFAA37622A4B38E00085CE88 /* Banner.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1925,6 +1934,15 @@
 				CFA5BD2B29EEFB9000251176 /* DataDetectorTextView.swift */,
 			);
 			path = TextView;
+			sourceTree = "<group>";
+		};
+		CFAA37642A4B44E50085CE88 /* Banners */ = {
+			isa = PBXGroup;
+			children = (
+				CFAA37652A4B44F70085CE88 /* BannersView.swift */,
+				CFAA37662A4B44F70085CE88 /* BannersViewModel.swift */,
+			);
+			path = Banners;
 			sourceTree = "<group>";
 		};
 		CFAC6BB12A123011004AD4A5 /* Models */ = {
@@ -2636,7 +2654,7 @@
 				CF4A6F0429E41FEA00CB75E5 /* Models */,
 				CF28A1A129B4FE410003C204 /* MainView.swift */,
 				CF28A1A229B4FE410003C204 /* MainViewModel.swift */,
-				CF4A6EF329E3C45A00CB75E5 /* MainNavigationTypes.swift */,
+				CF4A6EF329E3C45A00CB75E5 /* MainNavigations.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -2795,6 +2813,7 @@
 		CFFD70B5298AC43200D4F5A2 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				CFAA37642A4B44E50085CE88 /* Banners */,
 				CF3E0EE82A37262F009EF665 /* Shop */,
 				CFB0A81A29F1B5B200298546 /* Videos */,
 				CFCFFA3529E5B9DA002B7FB6 /* Chats */,
@@ -2880,6 +2899,7 @@
 				CF615C3D2A10AC5800CAF9C5 /* LoyaltyAPI.swift */,
 				CF3E0EFA2A37299D009EF665 /* GiftsAPI.swift */,
 				CFB3866B2A44588F001B0849 /* ReactionIconsRemoteRepository.swift */,
+				CFAA37602A4B370C0085CE88 /* BannerRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -3390,6 +3410,7 @@
 				CF0CCA0129D156380027D2C1 /* StickerMessageContentModel.swift in Sources */,
 				CF3E0EF62A3727D1009EF665 /* CouponCategory.swift in Sources */,
 				CFB0A81F29F1B5D100298546 /* VideosViewModel.swift in Sources */,
+				CFAA37672A4B44F70085CE88 /* BannersView.swift in Sources */,
 				CF775BCA29C630B800E82183 /* NotificationService.swift in Sources */,
 				CFFD70C8298AC5F800D4F5A2 /* BaseAuthTargetType.swift in Sources */,
 				CF3E0EF02A372684009EF665 /* MyCouponView.swift in Sources */,
@@ -3539,6 +3560,7 @@
 				CFF5210F2A1915DC00F29A4E /* TransactionDashboardHeaderModel.swift in Sources */,
 				CFAF84C02A380E1A005C1082 /* ShopHomeView.swift in Sources */,
 				CFD5424929BF7A520053C5B1 /* NormalMessageView.swift in Sources */,
+				CFAA37632A4B38E00085CE88 /* Banner.swift in Sources */,
 				CF220D442A090607006BF463 /* MessageChatItemView.swift in Sources */,
 				CF87A3222A2B112D009B0F30 /* AddFriendsHomeViewModel.swift in Sources */,
 				CF1B624829B9B55F00DE53E6 /* ConversationAPI.swift in Sources */,
@@ -3576,6 +3598,7 @@
 				CFAF84C12A380E1A005C1082 /* ShopHomeViewModel.swift in Sources */,
 				CFB2F6BC29E124EB00191AA3 /* ChatSettingNavigations.swift in Sources */,
 				CFE48BC3299207DA0062C903 /* AuthStore.swift in Sources */,
+				CFAA37682A4B44F70085CE88 /* BannersViewModel.swift in Sources */,
 				CF28A19F29B4E9CF0003C204 /* AuthRootView.swift in Sources */,
 				CF91CCFF2A2E3BD400BFC08A /* FriendScannerViewController.swift in Sources */,
 				CFB2A89D29D1F0A2008D1689 /* StorableStickerPack.swift in Sources */,
@@ -3609,6 +3632,7 @@
 				CFA3304929BE3AB9008D7449 /* String+Date.swift in Sources */,
 				CFF520F82A17CE0300F29A4E /* TransactionDashboardViewModel.swift in Sources */,
 				CFDC637229EC7A83002F4BFC /* WalletNavigations.swift in Sources */,
+				CFAA37612A4B370C0085CE88 /* BannerRepository.swift in Sources */,
 				CF615C402A10ACC300CAF9C5 /* LoyaltyMemberInfo.swift in Sources */,
 				CF28A1A829B4FFC50003C204 /* WalletViewModel.swift in Sources */,
 				CFF863972A435FC700EC0713 /* StorableReactIcon.swift in Sources */,
@@ -3652,7 +3676,7 @@
 				CFFB71F02A400A2B0019663C /* LocalCouponKeywordRepository.swift in Sources */,
 				CFB2F6B029E093BD00191AA3 /* ChatSettingParticipantItemView.swift in Sources */,
 				CFEF9BF12A34E4AC001DEC32 /* FindUsersResultNavigations.swift in Sources */,
-				CF4A6EF429E3C45A00CB75E5 /* MainNavigationTypes.swift in Sources */,
+				CF4A6EF429E3C45A00CB75E5 /* MainNavigations.swift in Sources */,
 				CF2A84C72A169B770016FD83 /* TransactionDetailView.swift in Sources */,
 				CF0CC9FF29D155DD0027D2C1 /* StickerMessageContentView.swift in Sources */,
 				CFD0951A2A02A944004BF047 /* AuthStore+AuthRepo.swift in Sources */,

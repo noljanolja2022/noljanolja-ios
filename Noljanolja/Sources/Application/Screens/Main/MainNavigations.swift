@@ -59,3 +59,9 @@ enum MainTabType: Equatable {
 enum MainNavigationType {
     case addFriends
 }
+
+// MARK: - MainScreenCoverType
+
+enum MainScreenCoverType: Equatable {
+    case banners([Banner])
+}
