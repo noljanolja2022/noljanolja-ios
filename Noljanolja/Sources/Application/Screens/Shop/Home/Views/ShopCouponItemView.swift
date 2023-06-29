@@ -57,19 +57,13 @@ struct ShopCouponItemView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
-            HStack(spacing: 12) {
-                Text(String(model.total))
-                    .font(.system(size: 12, weight: .medium))
-                    .strikethrough()
-                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
-                HStack(spacing: 4) {
-                    Text(String(model.price))
-                        .font(.system(size: 24, weight: .bold))
-                        .foregroundColor(ColorAssets.secondaryYellow300.swiftUIColor)
-                    Text("Points")
-                        .font(.system(size: 24))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
+            HStack(spacing: 4) {
+                Text(String(model.price))
+                    .font(.system(size: 24, weight: .bold))
+                    .foregroundColor(ColorAssets.secondaryYellow300.swiftUIColor)
+                Text("Points")
+                    .font(.system(size: 24))
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
