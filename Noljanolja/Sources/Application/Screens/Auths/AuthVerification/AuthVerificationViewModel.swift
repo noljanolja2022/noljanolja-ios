@@ -28,7 +28,7 @@ final class AuthVerificationViewModel: ViewModel {
     @Published var alertState: AlertState<Void>?
 
     var phoneNumber: String {
-        "+\(country.phoneCode)\(phoneNumberText)"
+        "\(country.prefix)\(phoneNumberText)"
     }
 
     // MARK: Action

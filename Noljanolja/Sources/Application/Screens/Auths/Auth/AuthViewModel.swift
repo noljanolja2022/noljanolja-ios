@@ -29,7 +29,7 @@ final class AuthViewModel: ViewModel {
     var verificationID: String?
 
     var phoneNumber: String? {
-        "+\(country.phoneCode)\(phoneNumberText)"
+        "\(country.prefix)\(phoneNumberText)"
     }
 
     // MARK: Navigations

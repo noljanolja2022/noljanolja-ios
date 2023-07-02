@@ -73,7 +73,7 @@ struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
                     } else {
                         Button(L10n.otpResendCode) {
                             viewModel.resendCodeAction.send(
-                                (viewModel.country.phoneCode, viewModel.phoneNumberText)
+                                (viewModel.country.prefix, viewModel.phoneNumberText)
                             )
                         }
                         .foregroundColor(ColorAssets.primaryGreen200.swiftUIColor)

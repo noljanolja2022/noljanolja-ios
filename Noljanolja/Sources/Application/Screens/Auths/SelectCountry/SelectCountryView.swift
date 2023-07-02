@@ -85,7 +85,8 @@ struct SelectCountryView<ViewModel: SelectCountryViewModel>: View {
 
     private func buildCountriesView() -> some View {
         ListView {
-            ForEach(viewModel.countries) { country in
+            ForEach(viewModel.countries.indices, id: \.self) { index in
+                let country = viewModel.countries[index]
                 Button(
                     action: {
                         viewModel.selectedCountry = country
