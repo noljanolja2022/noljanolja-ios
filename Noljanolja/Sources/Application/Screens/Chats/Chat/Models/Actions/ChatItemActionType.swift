@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import SwiftUI
 
-enum ChatItemActionType: Equatable {
+enum ChatItemActionType {
     case openURL(String)
     case openImageDetail(URL?)
+    case reaction(GeometryProxy?, Message)
 }

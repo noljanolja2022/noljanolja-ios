@@ -8,6 +8,18 @@
 import SwiftUI
 import SwiftUIX
 
+// MARK: - DataDetectorUITextView
+
+final class DataDetectorUITextView: UITextView {
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+        guard let pos = closestPosition(to: point) else { return false }
+        guard let range = tokenizer.rangeEnclosingPosition(pos, with: .character, inDirection: .layout(.left)) else { return false }
+        let startIndex = offset(from: beginningOfDocument, to: range.start)
+        let result = attributedText.attribute(.link, at: startIndex, effectiveRange: nil) != nil
+        return result
+    }
+}
+
 // MARK: - DataDetectorTextView
 
 struct DataDetectorTextView: UIViewRepresentable {
@@ -20,8 +32,8 @@ struct DataDetectorTextView: UIViewRepresentable {
     var isScrollEnabled = false
     var foregroundColor = Color.black
 
-    func makeUIView(context: Context) -> UITextView {
-        let textView = UITextView()
+    func makeUIView(context: Context) -> DataDetectorUITextView {
+        let textView = DataDetectorUITextView()
         textView.delegate = context.coordinator
         textView.backgroundColor = .clear
 
@@ -45,7 +57,7 @@ struct DataDetectorTextView: UIViewRepresentable {
         return textView
     }
 
-    func updateUIView(_ uiView: UITextView, context: Context) {
+    func updateUIView(_ uiView: DataDetectorUITextView, context: Context) {
         context.coordinator.base = self
 
         updateUIView(uiView)
@@ -55,7 +67,7 @@ struct DataDetectorTextView: UIViewRepresentable {
         .init(base: self)
     }
 
-    private func updateUIView(_ uiView: UITextView) {
+    private func updateUIView(_ uiView: DataDetectorUITextView) {
         uiView.text = text.wrappedValue
 
         uiView.linkTextAttributes = [

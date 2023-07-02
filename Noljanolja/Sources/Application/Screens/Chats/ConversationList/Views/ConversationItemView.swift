@@ -67,6 +67,7 @@ struct ConversationItemView: View {
             }
             .padding(.top, 12)
         }
+        .contentShape(Rectangle())
         .frame(maxWidth: .infinity)
         .padding(.vertical, 10)
         .padding(.horizontal, 16)

@@ -192,7 +192,8 @@ struct CouponDetailView<ViewModel: CouponDetailViewModel>: View {
                     viewModel.buyCouponAction.send()
                 }
             )
-            .buttonStyle(PrimaryButtonStyle())
+            .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.model?.isPurchasable ?? false))
+            .disabled(!(viewModel.model?.isPurchasable ?? false))
             .font(.system(size: 16, weight: .bold))
             .padding(.horizontal, 16)
         case .myCoupon, .none:

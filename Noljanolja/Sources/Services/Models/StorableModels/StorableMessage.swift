@@ -20,6 +20,7 @@ final class StorableMessage: Object {
     @Persisted var joinParticipants: List<StorableUser>
     @Persisted var seenBy = List<String>()
     @Persisted var attachments = List<StorableAttachment>()
+    @Persisted var reactions = List<StorableMessageReaction>()
     @Persisted var createdAt: Date?
     
     var model: Message? {
@@ -40,6 +41,7 @@ final class StorableMessage: Object {
             joinParticipants: joinParticipants.compactMap { $0.model },
             seenBy: seenBy.map { $0 },
             attachments: attachments.compactMap { $0.model },
+            reactions: reactions.compactMap { $0.model },
             createdAt: createdAt
         )
     }
@@ -70,7 +72,12 @@ final class StorableMessage: Object {
         }()
         self.attachments = {
             let list = List<StorableAttachment>()
-            list.append(objectsIn: model.attachments.map { StorableAttachment(model: $0) })
+            list.append(objectsIn: model.attachments.map { StorableAttachment($0) })
+            return list
+        }()
+        self.reactions = {
+            let list = List<StorableMessageReaction>()
+            list.append(objectsIn: model.reactions.map { StorableMessageReaction($0) })
             return list
         }()
         self.createdAt = model.createdAt
@@ -95,6 +102,7 @@ final class StorableMessage: Object {
             )
             return list
         }()
+        self.reactions = List<StorableMessageReaction>()
         self.createdAt = Date()
     }
 

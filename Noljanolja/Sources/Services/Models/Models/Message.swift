@@ -50,6 +50,7 @@ struct Message: Equatable, Codable {
     let joinParticipants: [User]
     let seenBy: [String]
     let attachments: [Attachment]
+    let reactions: [MessageReaction]
     let createdAt: Date
 
     enum CodingKeys: String, CodingKey {
@@ -63,6 +64,7 @@ struct Message: Equatable, Codable {
         case joinParticipants
         case seenBy
         case attachments
+        case reactions
         case createdAt
     }
 
@@ -76,6 +78,7 @@ struct Message: Equatable, Codable {
          joinParticipants: [User],
          seenBy: [String],
          attachments: [Attachment],
+         reactions: [MessageReaction],
          createdAt: Date) {
         self.id = id
         self.localID = localID
@@ -87,6 +90,7 @@ struct Message: Equatable, Codable {
         self.joinParticipants = joinParticipants
         self.seenBy = seenBy
         self.attachments = attachments
+        self.reactions = reactions
         self.createdAt = createdAt
     }
 
@@ -102,6 +106,7 @@ struct Message: Equatable, Codable {
         self.joinParticipants = try container.decodeIfPresent([User].self, forKey: .joinParticipants) ?? []
         self.seenBy = try container.decodeIfPresent([String].self, forKey: .seenBy) ?? []
         self.attachments = try container.decodeIfPresent([Attachment].self, forKey: .attachments) ?? []
+        self.reactions = try container.decodeIfPresent([MessageReaction].self, forKey: .reactions) ?? []
         if let createdAtString = try container.decodeIfPresent(String.self, forKey: .createdAt),
            let createdAt = createdAtString.date(withFormats: NetworkConfigs.Format.apiFullDateFormats) {
             self.createdAt = createdAt

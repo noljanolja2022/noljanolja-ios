@@ -20,31 +20,63 @@ protocol MainViewModelDelegate: AnyObject {
 final class MainViewModel: ViewModel {
     // MARK: State
 
+    @Published var isProgressHUDShowing = false
     @Published var selectedTab = MainTabType.chat
     @Published var tabNews = [MainTabType: Bool]()
 
     // MARK: Navigations
 
     @Published var navigationType: MainNavigationType?
+    @Published var fullScreenCoverType: MainScreenCoverType?
 
     // MARK: Action
 
     // MARK: Dependencies
 
+    private let bannerRepository: BannerRepository
     private weak var delegate: MainViewModelDelegate?
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(delegate: MainViewModelDelegate? = nil) {
+    init(bannerRepository: BannerRepository = BannerRepositoryImpl.shared,
+         delegate: MainViewModelDelegate? = nil) {
+        self.bannerRepository = bannerRepository
         self.delegate = delegate
         super.init()
 
         configure()
     }
 
-    private func configure() {}
+    private func configure() {
+        configureLoadData()
+    }
+
+    private func configureLoadData() {
+        isAppearSubject
+            .first(where: { $0 })
+            .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
+            .flatMapLatestToResult { [weak self] _ in
+                guard let self else {
+                    return Empty<PaginationResponse<[Banner]>, Error>().eraseToAnyPublisher()
+                }
+                return self.bannerRepository.getBanners()
+            }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] result in
+                guard let self else { return }
+                self.isProgressHUDShowing = false
+                switch result {
+                case let .success(model):
+                    guard !model.data.isEmpty else { return }
+                    self.fullScreenCoverType = .banners(model.data)
+                case .failure:
+                    break
+                }
+            }
+            .store(in: &cancellables)
+    }
 }
 
 // MARK: ConversationListViewModelDelegate

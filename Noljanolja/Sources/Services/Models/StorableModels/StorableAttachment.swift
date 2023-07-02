@@ -29,7 +29,7 @@ final class StorableAttachment: Object {
         )
     }
 
-    required convenience init(model: Attachment) {
+    required convenience init(_ model: Attachment) {
         self.init()
         self.id = String(model.id)
         self.messageID = model.messageID

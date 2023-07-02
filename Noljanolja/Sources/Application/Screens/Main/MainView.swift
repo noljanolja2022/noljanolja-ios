@@ -17,6 +17,10 @@ struct MainView<ViewModel: MainViewModel>: View {
 
     @StateObject var viewModel: ViewModel
 
+    // MARK: State
+
+    @EnvironmentObject private var progressHUBState: ProgressHUBState
+
     // MARK: Private
 
     private let toolBarActionSubject = PassthroughSubject<MainToolBarActionType?, Never>()
@@ -32,6 +36,15 @@ struct MainView<ViewModel: MainViewModel>: View {
             .navigationBarHidden(viewModel.selectedTab.isNavigationBarHidden)
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
+            .onChange(of: viewModel.isProgressHUDShowing) {
+                progressHUBState.isLoading = $0
+            }
+            .fullScreenCover(
+                unwrapping: $viewModel.fullScreenCoverType,
+                content: {
+                    buildFullScreenCoverDestinationView($0)
+                }
+            )
     }
 
     private func buildMainView() -> some View {
@@ -238,7 +251,9 @@ struct MainView<ViewModel: MainViewModel>: View {
             }
         )
     }
+}
 
+extension MainView {
     @ViewBuilder
     private func buildNavigationDestinationView(
         _ type: Binding<MainNavigationType>
@@ -250,6 +265,16 @@ struct MainView<ViewModel: MainViewModel>: View {
                     delegate: viewModel
                 )
             )
+        }
+    }
+
+    @ViewBuilder
+    private func buildFullScreenCoverDestinationView(
+        _ type: Binding<MainScreenCoverType>
+    ) -> some View {
+        switch type.wrappedValue {
+        case let .banners(banners):
+            BannersView(viewModel: BannersViewModel(banners: banners))
         }
     }
 }

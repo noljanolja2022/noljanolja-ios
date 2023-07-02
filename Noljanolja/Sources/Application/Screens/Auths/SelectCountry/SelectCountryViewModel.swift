@@ -64,7 +64,7 @@ final class SelectCountryViewModel: ViewModel {
                     .filter {
                         guard !text.isEmpty else { return true }
                         return $0.code.lowercased().contains(text.lowercased())
-                            || $0.phoneCode.lowercased().contains(text.lowercased())
+                            || $0.prefix.lowercased().contains(text.lowercased())
                             || $0.name.lowercased().contains(text.lowercased())
                     }
                     .sorted(by: \.name)

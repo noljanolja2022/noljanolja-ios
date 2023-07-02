@@ -117,7 +117,8 @@ struct NormalMessageModel: Equatable {
                 StickerMessageContentModel(
                     currentUser: currentUser,
                     message: message,
-                    status: status
+                    status: status,
+                    background: background
                 )
             )
         case .eventUpdated, .eventJoined, .eventLeft, .unknown:

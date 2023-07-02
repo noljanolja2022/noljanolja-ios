@@ -18,6 +18,7 @@ struct CouponDetailModel {
     let couponPrice: Int
     let myPoint: Int
     let remainingPoint: Int
+    let isPurchasable: Bool
 
     init(memberInfo: LoyaltyMemberInfo,
          couponDetailInputType: CouponDetailInputType) {
@@ -30,6 +31,7 @@ struct CouponDetailModel {
             self.couponPrice = coupon.price
             self.couponCode = nil
             self.couponCodeQRImage = nil
+            self.isPurchasable = coupon.isPurchasable
         case let .myCoupon(myCoupon):
             self.couponBrandName = myCoupon.brand?.name
             self.couponName = myCoupon.name
@@ -37,6 +39,7 @@ struct CouponDetailModel {
             self.couponPrice = 0
             self.couponCode = myCoupon.code
             self.couponCodeQRImage = myCoupon.code.qrCodeImage()
+            self.isPurchasable = false
         }
 
         self.myPoint = memberInfo.point

@@ -38,7 +38,7 @@ struct AuthView<ViewModel: AuthViewModel>: View {
             Alert($0) { action in
                 guard let action, action else { return }
                 viewModel.sendVerificationCodeAction.send(
-                    (viewModel.country.phoneCode, viewModel.phoneNumber?.formatPhone())
+                    (viewModel.country.prefix, viewModel.phoneNumber?.formatPhone())
                 )
             }
         }
@@ -112,12 +112,12 @@ struct AuthView<ViewModel: AuthViewModel>: View {
                 label: {
                     VStack {
                         HStack(spacing: 8) {
-                            Text(viewModel.country.getFlagEmoji())
+                            Text(viewModel.country.flag)
                                 .font(.system(size: 24))
                                 .frame(width: 30, height: 24)
                                 .background(ColorAssets.neutralLightGrey.swiftUIColor)
                                 .cornerRadius(3)
-                            Text("+\(viewModel.country.phoneCode)")
+                            Text(viewModel.country.prefix)
                                 .font(.system(size: 16))
                                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                         }

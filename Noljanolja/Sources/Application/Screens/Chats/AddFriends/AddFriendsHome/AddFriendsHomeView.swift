@@ -76,12 +76,12 @@ struct AddFriendsHomeView<ViewModel: AddFriendsHomeViewModel>: View {
                     },
                     label: {
                         HStack(spacing: 8) {
-                            Text(viewModel.country.getFlagEmoji())
+                            Text(viewModel.country.flag)
                                 .font(.system(size: 24))
                                 .frame(width: 30, height: 24)
                                 .background(ColorAssets.neutralLightGrey.swiftUIColor)
                                 .cornerRadius(3)
-                            Text("+\(viewModel.country.phoneCode)")
+                            Text(viewModel.country.prefix)
                                 .font(.system(size: 16))
                             ImageAssets.icArrowRight.swiftUIImage
                                 .resizable()

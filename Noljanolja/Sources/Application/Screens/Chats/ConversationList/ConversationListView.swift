@@ -46,11 +46,8 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
             }
         }
         .onChange(of: viewModel.fullScreenCoverType) { fullScreenCoverType in
-            if let fullScreenCoverType {
-                UIView.setAnimationsEnabled(
-                    fullScreenCoverType.isAnimationsEnabled
-                )
-            }
+            guard let fullScreenCoverType else { return }
+            UIView.setAnimationsEnabled(fullScreenCoverType.isAnimationsEnabled)
         }
         .fullScreenCover(
             unwrapping: $viewModel.fullScreenCoverType,
