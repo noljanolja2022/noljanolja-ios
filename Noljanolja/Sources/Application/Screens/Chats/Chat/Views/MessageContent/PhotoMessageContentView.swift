@@ -56,13 +56,11 @@ struct PhotoMessageContentView: View {
     }
 
     private func buildMainView() -> some View {
-        VStack(spacing: 4) {
-            ForEach(model.photoLists.indices, id: \.self) { row in
-                HStack(spacing: 4) {
-                    ForEach(model.photoLists[row].indices, id: \.self) { column in
-                        buildItem(model.photoLists[row][column])
-                    }
-                }
+        ZStack {
+            if model.photos.count < 4 {
+                buildSingleRowImagesView()
+            } else {
+                buildMultiRowImagesView()
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -81,6 +79,56 @@ struct PhotoMessageContentView: View {
             action?(.reaction(geometryProxy, model.message))
         }
     }
+    
+    private func buildSingleRowImagesView() -> some View {
+        HStack(spacing: 4) {
+            ForEach(model.photos.indices, id: \.self) { index in
+                buildItem(
+                    url: model.photos[index]
+                )
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+    
+    @ViewBuilder
+    private func buildMultiRowImagesView() -> some View {
+        let photoLists = model.photos
+            .reduce([[URL?]]()) { result, url in
+                var result = result
+                if let lastURLs = result.last, lastURLs.count < 2 {
+                    result[result.count - 1].append(url)
+                } else {
+                    result.append([url])
+                }
+                return result
+            }
+            .prefix(2)
+        VStack(spacing: 4) {
+            ForEach(photoLists.indices, id: \.self) { row in
+                HStack(spacing: 4) {
+                    ForEach(photoLists[row].indices, id: \.self) { column in
+                        let totalCount = model.photos.count
+                        let displayCount = photoLists.reduce(0) { $0 + $1.count }
+                        let currentIndex = row * 2 + column
+                        let remainCount = totalCount - displayCount
+                        let overlayText: String? = {
+                            if currentIndex == displayCount - 1, remainCount > 0 {
+                                return "+\(remainCount)"
+                            } else {
+                                return nil
+                            }
+                        }()
+                        buildItem(
+                            url: photoLists[row][column],
+                            overlayText: overlayText
+                        )
+                    }
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
 
     @ViewBuilder
     private func buildReactionSummaryView() -> some View {
@@ -97,97 +145,17 @@ struct PhotoMessageContentView: View {
         }
     }
 
-    private func buildItem(_ url: URL?) -> some View {
-        PhotoMessageContentItemView(
+    @ViewBuilder
+    private func buildItem(url: URL?, overlayText: String? = nil) -> some View {
+        let model = PhotoMessageContentItemModel(
             url: url,
+            overlayText: overlayText,
             createdAt: model.createdAt,
             status: model.status
         )
-        .onTapGesture {
-            action?(.openImageDetail(url))
-        }
-    }
-}
-
-// MARK: - PhotoMessageContentItemView
-
-struct PhotoMessageContentItemView: View {
-    var url: URL?
-    let createdAt: Date
-    let status: MessageStatusModel.StatusType
-
-    var body: some View {
-        buildBodyView()
-    }
-
-    @ViewBuilder
-    private func buildBodyView() -> some View {
-        if let url {
-            buildContentView(url: url)
-        } else {
-            Spacer()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-        }
-    }
-
-    private func buildContentView(url: URL) -> some View {
-        ZStack(alignment: .bottomTrailing) {
-            buildImageView(url: url)
-            buildInfoView()
-        }
-        .cornerRadius(10)
-    }
-
-    @ViewBuilder
-    private func buildImageView(url: URL) -> some View {
-        GeometryReader { geometry in
-            WebImage(
-                url: url,
-                context: [
-                    .imageTransformer: SDImageResizingTransformer(
-                        size: CGSize(
-                            width: geometry.size.width * 3,
-                            height: geometry.size.height * 3
-                        ),
-                        scaleMode: .aspectFill
-                    )
-                ]
-            )
-            .resizable()
-            .indicator(.activity)
-            .scaledToFill()
-            .frame(width: geometry.size.width, height: geometry.size.height)
-            .clipped()
-            .contentShape(Rectangle())
-            .background(ColorAssets.neutralLightGrey.swiftUIColor)
-        }
-        .aspectRatio(1, contentMode: .fill)
-    }
-
-    private func buildInfoView() -> some View {
-        HStack(spacing: 0) {
-            Spacer()
-            MessageCreatedDateTimeView(model: createdAt)
-                .foregroundColor(ColorAssets.neutralRawLightGrey.swiftUIColor)
-            MessageStatusView(model: status)
-                .foregroundColor(ColorAssets.neutralRawLightGrey.swiftUIColor)
-        }
-        .padding(.vertical, 8)
-        .padding(
-            .horizontal,
-            {
-                switch status {
-                case .none, .sending, .sent: return 8
-                case .seen: return 0
-                }
-            }()
-        )
-        .background(
-            LinearGradient(
-                gradient: Gradient(colors: [.clear, ColorAssets.neutralRawDarkGrey.swiftUIColor]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-        )
+        PhotoMessageContentItemView(model: model)
+            .onTapGesture {
+                action?(.openImages(self.model.message))
+            }
     }
 }

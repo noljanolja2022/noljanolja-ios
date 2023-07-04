@@ -168,27 +168,41 @@ struct ChatView<ViewModel: ChatViewModel>: View {
         Spacer()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
-
-    @ViewBuilder
+    
     private func buildNavigationLinks() -> some View {
-        ZStack {
-            NavigationLink(
-                unwrapping: $viewModel.navigationType,
-                onNavigate: { _ in },
-                destination: {
-                    switch $0.wrappedValue {
-                    case let .chatSetting(conversation):
-                        ChatSettingView(
-                            viewModel: ChatSettingViewModel(
-                                conversation: conversation,
-                                delegate: viewModel
-                            )
-                        )
-                    }
-                },
-                label: { EmptyView() }
+        NavigationLink(
+            unwrapping: $viewModel.navigationType,
+            onNavigate: { _ in },
+            destination: {
+                buildNavigationLinkDestinationView($0)
+            },
+            label: {
+                EmptyView()
+            }
+        )
+    }
+}
+
+extension ChatView {
+    @ViewBuilder
+    private func buildNavigationLinkDestinationView(
+        _ type: Binding<ChatNavigationType>
+    ) -> some View {
+        switch type.wrappedValue {
+        case let .chatSetting(conversation):
+            ChatSettingView(
+                viewModel: ChatSettingViewModel(
+                    conversation: conversation,
+                    delegate: viewModel
+                )
             )
-            .isDetailLink(false)
+        case let .openImages(message):
+            MessageImagesView(
+                viewModel: MessageImagesViewModel(
+                    message: message,
+                    delegate: viewModel
+                )
+            )
         }
     }
 
@@ -199,25 +213,6 @@ struct ChatView<ViewModel: ChatViewModel>: View {
         switch type.wrappedValue {
         case let .openUrl(url):
             SafariView(url: url)
-        case let .openImageDetail(url):
-            NavigationView {
-                ImageDetailView(
-                    viewModel: ImageDetailViewModel(
-                        imageUrl: url,
-                        delegate: viewModel
-                    )
-                )
-            }
-            .navigationViewStyle(StackNavigationViewStyle())
-            .accentColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            .introspectNavigationController { navigationController in
-                navigationController.configure(
-                    backgroundColor: ColorAssets.neutralLight.color,
-                    foregroundColor: ColorAssets.neutralDarkGrey.color
-                )
-                navigationController.view.backgroundColor = .clear
-                navigationController.parent?.view.backgroundColor = .clear
-            }
         case let .reaction(rect, message):
             MessageReactionView(
                 viewModel: MessageReactionViewModel(

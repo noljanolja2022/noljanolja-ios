@@ -14,19 +14,19 @@ import SwiftUIX
 
 struct ImageDetailView<ViewModel: ImageDetailViewModel>: View {
     // MARK: Dependencies
-
+    
     @StateObject var viewModel: ViewModel
-
+    
     // MARK: State
-
+    
     @Environment(\.presentationMode) private var presentationMode
     @StateObject private var progressHUBState = ProgressHUBState()
     @State private var isMoreMenuVisible = false
-
+    
     var body: some View {
         buildBodyView()
     }
-
+    
     private func buildBodyView() -> some View {
         buildContentView()
             .navigationBarTitle("", displayMode: .inline)
@@ -46,20 +46,32 @@ struct ImageDetailView<ViewModel: ImageDetailViewModel>: View {
                 }
             )
     }
-
+    
     private func buildContentView() -> some View {
-        GeometryReader { _ in
-            WebImage(url: viewModel.imageUrl)
+        TabView(selection: $viewModel.selectedIndex) {
+            ForEach(viewModel.imageUrls.indices, id: \.self) { index in
+                buildItemView(index)
+            }
+        }
+        .tabViewStyle(.page(indexDisplayMode: .never))
+    }
+    
+    private func buildItemView(_ index: Int) -> some View {
+        VStack(spacing: 8) {
+            Text("\(index + 1)/\(viewModel.imageUrls.count)")
+                .font(.system(size: 22, weight: .medium))
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            WebImage(url: viewModel.imageUrls[index])
                 .resizable()
                 .indicator(.activity)
                 .scaledToFit()
+                .frame(maxWidth: .infinity)
+                .background(ColorAssets.neutralLightGrey.swiftUIColor)
                 .cornerRadius(20)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding(16)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding(16)
     }
-
+    
     @ToolbarContentBuilder
     private func buildToolBarContent() -> some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
@@ -77,7 +89,9 @@ struct ImageDetailView<ViewModel: ImageDetailViewModel>: View {
             HStack(spacing: 8) {
                 Button(
                     action: {
-                        viewModel.downloadImageAction.send()
+                        viewModel.downloadImageAction.send(
+                            viewModel.imageUrls[viewModel.selectedIndex]
+                        )
                     },
                     label: {
                         ImageAssets.icDownload.swiftUIImage
@@ -96,7 +110,9 @@ struct ImageDetailView<ViewModel: ImageDetailViewModel>: View {
                         EditMenuItem(
                             L10n.commonEdit,
                             action: {
-                                viewModel.editImageAction.send()
+                                viewModel.editImageAction.send(
+                                    viewModel.imageUrls[viewModel.selectedIndex]
+                                )
                             }
                         )
                     ]
@@ -105,7 +121,9 @@ struct ImageDetailView<ViewModel: ImageDetailViewModel>: View {
             .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
         }
     }
+}
 
+extension ImageDetailView {
     @ViewBuilder
     private func buildFullScreenCoverDestinationView(
         _ type: Binding<ImageDetailFullScreenCoverType>
@@ -147,9 +165,9 @@ struct ImageDetailView_Previews: PreviewProvider {
     static var previews: some View {
         ImageDetailView(
             viewModel: ImageDetailViewModel(
-                imageUrl: URL(
-                    string: "https://fujifilm-x.com/wp-content/uploads/2021/01/gfx100s_sample_04_thum-1.jpg"
-                )!
+                imageUrls: [
+                    URL(string: "https://fujifilm-x.com/wp-content/uploads/2021/01/gfx100s_sample_04_thum-1.jpg")!
+                ]
             )
         )
     }

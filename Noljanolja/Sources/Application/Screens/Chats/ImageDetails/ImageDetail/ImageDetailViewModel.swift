@@ -26,6 +26,7 @@ final class ImageDetailViewModel: ViewModel {
 
     @Published var isProgressHUDShowing = false
     @Published var alertState: AlertState<Void>?
+    @Published var selectedIndex = 0
 
     // MARK: Navigation
 
@@ -33,21 +34,21 @@ final class ImageDetailViewModel: ViewModel {
 
     // MARK: Action
 
-    let downloadImageAction = PassthroughSubject<Void, Never>()
-    let editImageAction = PassthroughSubject<Void, Never>()
+    let downloadImageAction = PassthroughSubject<URL, Never>()
+    let editImageAction = PassthroughSubject<URL, Never>()
 
     // MARK: Dependencies
 
-    let imageUrl: URL
+    let imageUrls: [URL]
     private weak var delegate: ImageDetailViewModelDelegate?
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(imageUrl: URL,
+    init(imageUrls: [URL],
          delegate: ImageDetailViewModelDelegate? = nil) {
-        self.imageUrl = imageUrl
+        self.imageUrls = imageUrls
         self.delegate = delegate
         super.init()
 
@@ -55,12 +56,10 @@ final class ImageDetailViewModel: ViewModel {
     }
 
     private func configure() {
-        let imageUrl = imageUrl
-
         downloadImageAction
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult {
-                SDWebImageManager.shared.loadImagePublisher(with: imageUrl, progress: nil)
+                SDWebImageManager.shared.loadImagePublisher(with: $0, progress: nil)
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
@@ -84,7 +83,7 @@ final class ImageDetailViewModel: ViewModel {
         editImageAction
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult {
-                SDWebImageManager.shared.loadImagePublisher(with: imageUrl, progress: nil)
+                SDWebImageManager.shared.loadImagePublisher(with: $0, progress: nil)
             }
             .sink { [weak self] result in
                 guard let self else { return }

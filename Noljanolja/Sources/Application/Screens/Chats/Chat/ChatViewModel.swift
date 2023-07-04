@@ -337,9 +337,8 @@ final class ChatViewModel: ViewModel {
                     guard let url = URL(string: urlString),
                           url.scheme == "https" || url.scheme == "http" else { return }
                     self.fullScreenCoverType = .openUrl(url)
-                case let .openImageDetail(url):
-                    guard let url else { return }
-                    self.fullScreenCoverType = .openImageDetail(url)
+                case let .openImages(message):
+                    self.navigationType = .openImages(message)
                 case let .reaction(geometryProxy, message):
                     guard let geometryProxy else { return }
                     if Keyboard.main.isShowing {
@@ -379,9 +378,9 @@ extension ChatViewModel: ChatSettingViewModelDelegate {
     }
 }
 
-// MARK: ImageDetailViewModelDelegate
+// MARK: MessageImagesViewModelDelegate
 
-extension ChatViewModel: ImageDetailViewModelDelegate {
+extension ChatViewModel: MessageImagesViewModelDelegate {
     func sendImage(_ image: UIImage) {
         sendAction.send(.images([image]))
     }

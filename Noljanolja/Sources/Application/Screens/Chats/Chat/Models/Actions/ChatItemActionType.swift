@@ -10,6 +10,6 @@ import SwiftUI
 
 enum ChatItemActionType {
     case openURL(String)
-    case openImageDetail(URL?)
+    case openImages(Message)
     case reaction(GeometryProxy?, Message)
 }
