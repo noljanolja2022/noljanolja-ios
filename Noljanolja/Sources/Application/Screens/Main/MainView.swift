@@ -170,14 +170,6 @@ struct MainView<ViewModel: MainViewModel>: View {
         .tag(MainTabType.shop)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .tag(MainTabType.shop)
-
-        LottieView(
-            animation: LottieAnimation.named(
-                LottieAssets.underConstruction.name
-            )
-        )
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .tag(MainTabType.news)
     }
 
     @ViewBuilder
@@ -223,17 +215,6 @@ struct MainView<ViewModel: MainViewModel>: View {
         )
         .foregroundColor(
             viewModel.selectedTab == MainTabType.shop
-                ? ColorAssets.primaryGreen200.swiftUIColor
-                : ColorAssets.neutralGrey.swiftUIColor
-        )
-
-        TabItemView(
-            imageName: MainTabType.news.imageName,
-            title: MainTabType.news.tabBarTitle,
-            action: { viewModel.selectedTab = .news }
-        )
-        .foregroundColor(
-            viewModel.selectedTab == MainTabType.news
                 ? ColorAssets.primaryGreen200.swiftUIColor
                 : ColorAssets.neutralGrey.swiftUIColor
         )
