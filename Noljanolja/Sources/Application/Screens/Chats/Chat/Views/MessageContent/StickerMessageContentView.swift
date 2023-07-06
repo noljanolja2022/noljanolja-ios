@@ -12,7 +12,7 @@ import SwiftUI
 
 struct StickerMessageContentView: View {
     var model: StickerMessageContentModel
-    let action: ((ChatItemActionType) -> Void)?
+    let action: ((StickerMessageContentModel.ActionType) -> Void)?
 
     @State private var geometryProxy: GeometryProxy?
     
@@ -25,9 +25,12 @@ struct StickerMessageContentView: View {
     }
 
     private func buildContentView() -> some View {
-        VStack(alignment: model.horizontalAlignment, spacing: 0) {
+        VStack(
+            alignment: model.reactionsModel?.horizontalAlignment ?? .center,
+            spacing: 0
+        ) {
             buildMainView()
-            buildReactionSummaryView()
+            buildReactionView()
         }
     }
 
@@ -46,22 +49,21 @@ struct StickerMessageContentView: View {
         }
         .onTapGesture {}
         .onLongPressGesture {
-            action?(.reaction(geometryProxy, model.message))
+            action?(.openMessageActionDetail(geometryProxy))
         }
     }
 
-    @ViewBuilder
-    private func buildReactionSummaryView() -> some View {
-        if let reactionSummaryModel = model.reactionSummaryModel {
-            MessageReactionSummaryView(model: reactionSummaryModel)
-                .frame(height: 20)
-                .padding(.vertical, 2)
-                .padding(.horizontal, 6)
-                .background(Color(model.background.color))
-                .cornerRadius(10)
-                .border(ColorAssets.neutralLight.swiftUIColor, width: 2, cornerRadius: 10)
-                .padding(.horizontal, 12)
-        }
+    private func buildReactionView() -> some View {
+        MessageReactionsView(
+            model: model.reactionsModel,
+            quickTapAction: {
+                action?(.reaction($0))
+            },
+            quickLongPressAction: {
+                action?(.openMessageQuickReactionDetail($0))
+            }
+        )
+        .padding(.top, -12)
     }
 
     private func buildStickerView() -> some View {

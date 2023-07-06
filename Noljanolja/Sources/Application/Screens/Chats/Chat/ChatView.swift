@@ -142,7 +142,7 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                     ChatItemView(
                         chatItem: viewModel.chatItems[index],
                         action: {
-                            viewModel.chatItemAction.send($0)
+                            viewModel.normalMessageAction.send($0)
                         }
                     )
                     .onAppear { viewModel.loadMoreDataAction.send(index) }
@@ -211,14 +211,15 @@ extension ChatView {
         _ type: Binding<ChatFullScreenCoverType>
     ) -> some View {
         switch type.wrappedValue {
-        case let .openUrl(url):
+        case let .urlDetail(url):
             SafariView(url: url)
-        case let .reaction(rect, message):
-            MessageReactionView(
-                viewModel: MessageReactionViewModel(
-                    messageReactionInput: MessageReactionInput(
+        case let .messageActionDetail(rect, normalMessageModel):
+            MessageActionDetailView(
+                viewModel: MessageActionDetailViewModel(
+                    messageActionDetailInput: MessageActionDetailInput(
                         rect: rect,
-                        message: message
+                        message: normalMessageModel.message,
+                        normalMessageModel: normalMessageModel
                     )
                 )
             )

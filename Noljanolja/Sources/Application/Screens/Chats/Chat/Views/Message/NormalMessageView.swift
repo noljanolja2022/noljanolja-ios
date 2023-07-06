@@ -13,7 +13,7 @@ import SwiftUIX
 
 struct NormalMessageView: View {
     let model: NormalMessageModel
-    let action: ((ChatItemActionType) -> Void)?
+    let action: ((NormalMessageModel.ActionType) -> Void)?
 
     var body: some View {
         buildBodyView()
@@ -71,7 +71,20 @@ struct NormalMessageView: View {
 
             MessageContentView(
                 model: model.content,
-                action: action
+                action: {
+                    switch $0 {
+                    case let .openURL(urlString):
+                        action?(.openURL(urlString))
+                    case .openImages:
+                        action?(.openImages(model.message))
+                    case let .reaction(reactionIcon):
+                        action?(.reaction(model.message, reactionIcon))
+                    case let .openMessageQuickReactionDetail(geometryProxy):
+                        action?(.openMessageQuickReactionDetail(geometryProxy, model.message))
+                    case let .openMessageActionDetail(geometryProxy):
+                        action?(.openMessageActionDetail(geometryProxy, model))
+                    }
+                }
             )
             .environment(\.layoutDirection, .leftToRight)
         }

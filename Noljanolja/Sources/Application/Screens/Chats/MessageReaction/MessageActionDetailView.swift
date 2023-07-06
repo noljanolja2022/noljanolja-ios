@@ -1,5 +1,5 @@
 //
-//  MessageReactionView.swift
+//  MessageActionDetailView.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 22/06/2023.
@@ -8,9 +8,9 @@
 
 import SwiftUI
 
-// MARK: - MessageReactionView
+// MARK: - MessageActionDetailView
 
-struct MessageReactionView<ViewModel: MessageReactionViewModel>: View {
+struct MessageActionDetailView<ViewModel: MessageActionDetailViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
@@ -41,7 +41,7 @@ struct MessageReactionView<ViewModel: MessageReactionViewModel>: View {
 
     private func buildContentView() -> some View {
         GeometryReader { geometry in
-            let rectCenterX = (viewModel.messageReactionInput.rect.minX + viewModel.messageReactionInput.rect.maxX) / 2
+            let rectCenterX = (viewModel.messageActionDetailInput.rect.minX + viewModel.messageActionDetailInput.rect.maxX) / 2
             let horizontalAlignment: HorizontalAlignment = geometry.size.width / 2 > rectCenterX ? .leading : .trailing
 
             ZStack(alignment: horizontalAlignment == .leading ? .topLeading : .topTrailing) {
@@ -52,26 +52,26 @@ struct MessageReactionView<ViewModel: MessageReactionViewModel>: View {
                     buildReactionIconsView()
                     Spacer()
                         .frame(
-                            width: viewModel.messageReactionInput.rect.width,
-                            height: viewModel.messageReactionInput.rect.height
+                            width: viewModel.messageActionDetailInput.rect.width,
+                            height: viewModel.messageActionDetailInput.rect.height
                         )
                     buildActionsView()
                 }
                 .padding(
                     .top,
-                    viewModel.messageReactionInput.rect.origin.y - 36
+                    viewModel.messageActionDetailInput.rect.origin.y - 36
                 )
                 .padding(
                     .leading,
                     horizontalAlignment == .leading
-                        ? viewModel.messageReactionInput.rect.origin.x
+                        ? viewModel.messageActionDetailInput.rect.origin.x
                         : nil
                 )
                 .padding(
                     .trailing,
                     horizontalAlignment == .leading
                         ? nil
-                        : geometry.size.width - viewModel.messageReactionInput.rect.width - viewModel.messageReactionInput.rect.minX
+                        : geometry.size.width - viewModel.messageActionDetailInput.rect.width - viewModel.messageActionDetailInput.rect.minX
                 )
                 .onTapGesture {}
             }
@@ -87,11 +87,11 @@ struct MessageReactionView<ViewModel: MessageReactionViewModel>: View {
                         RoundedRectangle(cornerRadius: 12).fill(.white)
                     }
                     .frame(
-                        width: CGFloat(Int(viewModel.messageReactionInput.rect.width)),
-                        height: CGFloat(Int(viewModel.messageReactionInput.rect.height))
+                        width: CGFloat(Int(viewModel.messageActionDetailInput.rect.width)),
+                        height: CGFloat(Int(viewModel.messageActionDetailInput.rect.height))
                     )
-                    .padding(.leading, viewModel.messageReactionInput.rect.origin.x)
-                    .padding(.top, viewModel.messageReactionInput.rect.origin.y)
+                    .padding(.leading, viewModel.messageActionDetailInput.rect.origin.x)
+                    .padding(.top, viewModel.messageActionDetailInput.rect.origin.y)
             }
         }
         .ignoresSafeArea()
@@ -123,7 +123,7 @@ struct MessageReactionView<ViewModel: MessageReactionViewModel>: View {
 
     private func buildActionsView() -> some View {
         HStack(spacing: 4) {
-            ForEach(MessageReactionAction.allCases, id: \.self) { model in
+            ForEach(MessageActionType.allCases, id: \.self) { model in
                 Button(
                     action: {
                         viewModel.action.send(model)

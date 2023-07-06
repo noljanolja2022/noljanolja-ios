@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ChatItemView: View {
     let chatItem: ChatItemModelType
-    let action: ((ChatItemActionType) -> Void)?
+    let action: ((NormalMessageModel.ActionType) -> Void)?
 
     var body: some View {
         switch chatItem {

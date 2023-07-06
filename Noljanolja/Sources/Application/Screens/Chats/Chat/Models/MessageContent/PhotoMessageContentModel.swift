@@ -8,25 +8,33 @@
 import Foundation
 import SwiftUI
 
-// MARK: - TextMessageContentModel
+// MARK: - PhotoMessageContentModel.ActionType
+
+extension PhotoMessageContentModel {
+    enum ActionType {
+        case openImages
+        case reaction(ReactIcon)
+        case openMessageQuickReactionDetail(GeometryProxy?)
+        case openMessageActionDetail(GeometryProxy?)
+    }
+}
+
+// MARK: - PhotoMessageContentModel
 
 struct PhotoMessageContentModel: Equatable {
-    let message: Message
-
     let isSendByCurrentUser: Bool
     let photos: [URL?]
     let createdAt: Date
     let status: MessageStatusModel.StatusType
     let isShareHidden: Bool
     let background: MessageContentBackgroundModel
-    let reactionSummaryModel: MessageReactionSummaryModel?
-    let horizontalAlignment: HorizontalAlignment
+    let reactionsModel: MessageReactionsModel?
 
     init(currentUser: User,
          message: Message,
          status: NormalMessageModel.StatusType,
+         reactionsModel: MessageReactionsModel?,
          background: MessageContentBackgroundModel) {
-        self.message = message
         self.isSendByCurrentUser = currentUser.id == message.sender.id
         self.photos = message.attachments
             .map { $0.getPhotoURL(conversationID: message.conversationID) }
@@ -41,8 +49,7 @@ struct PhotoMessageContentModel: Equatable {
             }
         }()
         self.isShareHidden = message.sender.id != currentUser.id
+        self.reactionsModel = reactionsModel
         self.background = background
-        self.reactionSummaryModel = MessageReactionSummaryModel(message.reactions)
-        self.horizontalAlignment = message.sender.id == currentUser.id ? .trailing : .leading
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 import UIKit
 
 // MARK: - MessageItemModel.ContentType
@@ -31,11 +32,29 @@ extension NormalMessageModel {
         case sent
         case seen([User])
     }
+
+    enum ActionType {
+        case openURL(String)
+        case openImages(Message)
+        case reaction(Message, ReactIcon)
+        case openMessageQuickReactionDetail(GeometryProxy?, Message)
+        case openMessageActionDetail(GeometryProxy?, NormalMessageModel)
+    }
+
+    enum ContentActionType {
+        case openURL(String)
+        case openImages
+        case reaction(ReactIcon)
+        case openMessageQuickReactionDetail(GeometryProxy?)
+        case openMessageActionDetail(GeometryProxy?)
+    }
 }
 
 // MARK: - NormalMessageModel
 
 struct NormalMessageModel: Equatable {
+    let message: Message
+
     let isSendByCurrentUser: Bool
     let senderAvatar: String
     let senderName: String
@@ -49,12 +68,23 @@ struct NormalMessageModel: Equatable {
 
     init?(currentUser: User,
           conversation: Conversation,
+          reactionIcons: [ReactIcon],
           message: Message,
-          positionType: PositionType,
+          positionTypeByBlock: NormalMessageModel.PositionType,
+          positionTypeBySenderType: NormalMessageModel.PositionType,
           status: StatusType) {
+        self.message = message
+
         self.isSendByCurrentUser = currentUser.id == message.sender.id
         self.senderAvatar = message.sender.avatar ?? ""
         self.senderName = message.sender.name ?? ""
+        
+        let reactionsModel = MessageReactionsModel(
+            currentUser: currentUser,
+            reactionIcons: reactionIcons,
+            message: message,
+            positionTypeBySenderType: positionTypeBySenderType
+        )
 
         let background: MessageContentBackgroundModel = {
             let backgroundColor = message.sender.id == currentUser.id
@@ -63,7 +93,7 @@ struct NormalMessageModel: Equatable {
             let rotationAngle = message.sender.id == currentUser.id ? 0 : .pi
 
             if message.sender.id == currentUser.id || conversation.type == .single {
-                if positionType.contains(.last) {
+                if positionTypeByBlock.contains(.last) {
                     return MessageContentBackgroundModel(
                         type: .bubble(
                             MessageContentBackgroundModel.BubbleBackgroundModel()
@@ -100,6 +130,7 @@ struct NormalMessageModel: Equatable {
                     conversation: conversation,
                     message: message,
                     status: status,
+                    reactionsModel: reactionsModel,
                     background: background
                 )
             )
@@ -109,6 +140,7 @@ struct NormalMessageModel: Equatable {
                     currentUser: currentUser,
                     message: message,
                     status: status,
+                    reactionsModel: reactionsModel,
                     background: background
                 )
             )
@@ -118,6 +150,7 @@ struct NormalMessageModel: Equatable {
                     currentUser: currentUser,
                     message: message,
                     status: status,
+                    reactionsModel: reactionsModel,
                     background: background
                 )
             )
@@ -135,7 +168,7 @@ struct NormalMessageModel: Equatable {
             } else {
                 switch conversation.type {
                 case .group:
-                    return positionType.contains(.first) ? .visible : .invisible
+                    return positionTypeByBlock.contains(.first) ? .visible : .invisible
                 case .single, .unknown:
                     return .gone
                 }
@@ -147,11 +180,11 @@ struct NormalMessageModel: Equatable {
             }
             switch conversation.type {
             case .group:
-                return positionType.contains(.first) ? .visible : .gone
+                return positionTypeByBlock.contains(.first) ? .visible : .gone
             case .single, .unknown:
                 return .gone
             }
         }()
-        self.topPadding = positionType.contains(.first) ? 16 : 4
+        self.topPadding = positionTypeByBlock.contains(.first) ? 16 : 4
     }
 }

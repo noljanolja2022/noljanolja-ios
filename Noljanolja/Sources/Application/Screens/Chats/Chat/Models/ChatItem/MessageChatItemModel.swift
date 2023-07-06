@@ -13,14 +13,18 @@ enum MessageChatItemModel: Equatable {
 
     init?(currentUser: User,
           conversation: Conversation,
+          reactionIcons: [ReactIcon],
           message: Message,
-          positionType: NormalMessageModel.PositionType,
+          positionTypeByBlock: NormalMessageModel.PositionType,
+          positionTypeBySenderType: NormalMessageModel.PositionType,
           status: NormalMessageModel.StatusType) {
         if let normalModel = NormalMessageModel(
             currentUser: currentUser,
             conversation: conversation,
+            reactionIcons: reactionIcons,
             message: message,
-            positionType: positionType,
+            positionTypeByBlock: positionTypeByBlock,
+            positionTypeBySenderType: positionTypeBySenderType,
             status: status
         ) {
             self = .normal(normalModel)

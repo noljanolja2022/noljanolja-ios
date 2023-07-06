@@ -13,7 +13,7 @@ import SwiftUIX
 
 struct PhotoMessageContentView: View {
     let model: PhotoMessageContentModel
-    let action: ((ChatItemActionType) -> Void)?
+    let action: ((PhotoMessageContentModel.ActionType) -> Void)?
 
     @State private var geometryProxy: GeometryProxy?
 
@@ -49,9 +49,12 @@ struct PhotoMessageContentView: View {
     }
 
     private func buildContentView() -> some View {
-        VStack(alignment: model.horizontalAlignment, spacing: 0) {
+        VStack(
+            alignment: model.reactionsModel?.horizontalAlignment ?? .center,
+            spacing: 0
+        ) {
             buildMainView()
-            buildReactionSummaryView()
+            buildReactionView()
         }
     }
 
@@ -76,7 +79,7 @@ struct PhotoMessageContentView: View {
             }
         )
         .onLongPressGesture {
-            action?(.reaction(geometryProxy, model.message))
+            action?(.openMessageActionDetail(geometryProxy))
         }
     }
     
@@ -130,19 +133,17 @@ struct PhotoMessageContentView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
-    @ViewBuilder
-    private func buildReactionSummaryView() -> some View {
-        if let reactionSummaryModel = model.reactionSummaryModel {
-            MessageReactionSummaryView(model: reactionSummaryModel)
-                .frame(height: 20)
-                .padding(.vertical, 2)
-                .padding(.horizontal, 6)
-                .background(Color(model.background.color))
-                .cornerRadius(10)
-                .border(ColorAssets.neutralLight.swiftUIColor, width: 2, cornerRadius: 10)
-                .padding(.top, -10)
-                .padding(.horizontal, 12)
-        }
+    private func buildReactionView() -> some View {
+        MessageReactionsView(
+            model: model.reactionsModel,
+            quickTapAction: {
+                action?(.reaction($0))
+            },
+            quickLongPressAction: {
+                action?(.openMessageQuickReactionDetail($0))
+            }
+        )
+        .padding(.top, -12)
     }
 
     @ViewBuilder
@@ -155,7 +156,7 @@ struct PhotoMessageContentView: View {
         )
         PhotoMessageContentItemView(model: model)
             .onTapGesture {
-                action?(.openImages(self.model.message))
+                action?(.openImages)
             }
     }
 }

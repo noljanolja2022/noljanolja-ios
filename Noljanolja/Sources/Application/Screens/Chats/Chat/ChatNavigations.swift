@@ -18,13 +18,13 @@ enum ChatNavigationType: Equatable {
 // MARK: - ChatFullScreenCoverType
 
 enum ChatFullScreenCoverType: Equatable {
-    case openUrl(URL)
-    case reaction(CGRect, Message)
+    case urlDetail(URL)
+    case messageActionDetail(CGRect, NormalMessageModel)
 
     var isAnimationsEnabled: Bool {
         switch self {
-        case .openUrl: return true
-        case .reaction: return false
+        case .urlDetail: return true
+        case .messageActionDetail: return false
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  MessageReactionViewModel.swift
+//  MessageActionDetailViewModel.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 22/06/2023.
@@ -11,13 +11,13 @@ import Combine
 import Foundation
 import UIKit
 
-// MARK: - MessageReactionViewModelDelegate
+// MARK: - MessageActionDetailViewModelDelegate
 
-protocol MessageReactionViewModelDelegate: AnyObject {}
+protocol MessageActionDetailViewModelDelegate: AnyObject {}
 
-// MARK: - MessageReactionViewModel
+// MARK: - MessageActionDetailViewModel
 
-final class MessageReactionViewModel: ViewModel {
+final class MessageActionDetailViewModel: ViewModel {
     // MARK: State
 
     @Published var isProgressHUDShowing = false
@@ -28,24 +28,24 @@ final class MessageReactionViewModel: ViewModel {
 
     let closeAction = PassthroughSubject<Void, Never>()
     let reactionAction = PassthroughSubject<ReactIcon, Never>()
-    let action = PassthroughSubject<MessageReactionAction, Never>()
+    let action = PassthroughSubject<MessageActionType, Never>()
 
     // MARK: Dependencies
 
-    let messageReactionInput: MessageReactionInput
+    let messageActionDetailInput: MessageActionDetailInput
     private let reactionIconsUseCases: ReactionIconsUseCasesProtocol
     private let messageReactionUseCases: MessageReactionUseCases
-    private weak var delegate: MessageReactionViewModelDelegate?
+    private weak var delegate: MessageActionDetailViewModelDelegate?
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(messageReactionInput: MessageReactionInput,
+    init(messageActionDetailInput: MessageActionDetailInput,
          reactionIconsUseCases: ReactionIconsUseCasesProtocol = ReactionIconsUseCases.default,
          messageReactionUseCases: MessageReactionUseCases = MessageReactionUseCasesImpl.shared,
-         delegate: MessageReactionViewModelDelegate? = nil) {
-        self.messageReactionInput = messageReactionInput
+         delegate: MessageActionDetailViewModelDelegate? = nil) {
+        self.messageActionDetailInput = messageActionDetailInput
         self.reactionIconsUseCases = reactionIconsUseCases
         self.messageReactionUseCases = messageReactionUseCases
         self.delegate = delegate
@@ -86,12 +86,12 @@ final class MessageReactionViewModel: ViewModel {
     private func configureActions() {
         reactionAction
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
-            .flatMapLatestToResult { [weak self] reactionIcon -> AnyPublisher<Void, Error> in
+            .flatMapToResult { [weak self] reactionIcon -> AnyPublisher<Void, Error> in
                 guard let self else {
                     return Fail<Void, Error>(error: CommonError.unknown).eraseToAnyPublisher()
                 }
                 return self.messageReactionUseCases.reactMessage(
-                    message: self.messageReactionInput.message,
+                    message: self.messageActionDetailInput.message,
                     reactionId: reactionIcon.id
                 )
             }
@@ -120,9 +120,9 @@ final class MessageReactionViewModel: ViewModel {
                 case .reply, .forward, .delete:
                     break
                 case .copy:
-                    switch self.messageReactionInput.message.type {
+                    switch self.messageActionDetailInput.message.type {
                     case .plaintext:
-                        guard let message = self.messageReactionInput.message.message else { return }
+                        guard let message = self.messageActionDetailInput.message.message else { return }
                         UIPasteboard.general.string = message
                     case .photo, .sticker, .eventUpdated, .eventJoined, .eventLeft, .unknown:
                         break
