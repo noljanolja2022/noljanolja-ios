@@ -49,16 +49,6 @@ struct PhotoMessageContentView: View {
     }
 
     private func buildContentView() -> some View {
-        VStack(
-            alignment: model.reactionsModel?.horizontalAlignment ?? .center,
-            spacing: 0
-        ) {
-            buildMainView()
-            buildReactionView()
-        }
-    }
-
-    private func buildMainView() -> some View {
         ZStack {
             if model.photos.count < 4 {
                 buildSingleRowImagesView()
@@ -131,19 +121,6 @@ struct PhotoMessageContentView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-
-    private func buildReactionView() -> some View {
-        MessageReactionsView(
-            model: model.reactionsModel,
-            quickTapAction: {
-                action?(.reaction($0))
-            },
-            quickLongPressAction: {
-                action?(.openMessageQuickReactionDetail($0))
-            }
-        )
-        .padding(.top, -12)
     }
 
     @ViewBuilder

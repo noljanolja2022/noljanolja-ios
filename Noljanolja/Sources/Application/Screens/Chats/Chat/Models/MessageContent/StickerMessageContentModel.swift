@@ -24,13 +24,11 @@ struct StickerMessageContentModel: Equatable {
     let sticker: URL?
     let createdAt: Date
     let status: MessageStatusModel.StatusType
-    let reactionsModel: MessageReactionsModel?
     let background: MessageContentBackgroundModel
 
     init(currentUser: User,
          message: Message,
          status: NormalMessageModel.StatusType,
-         reactionsModel: MessageReactionsModel?,
          background: MessageContentBackgroundModel) {
         self.sticker = message.getStickerURL()
         self.createdAt = message.createdAt
@@ -43,7 +41,6 @@ struct StickerMessageContentModel: Equatable {
             case let .seen(users): return .seen(.single(!users.isEmpty))
             }
         }()
-        self.reactionsModel = reactionsModel
         self.background = background
     }
 }

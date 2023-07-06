@@ -32,7 +32,7 @@ final class MessageActionDetailViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    let messageActionDetailInput: MessageActionDetailInput
+    let input: MessageActionDetailInput
     private let reactionIconsUseCases: ReactionIconsUseCasesProtocol
     private let messageReactionUseCases: MessageReactionUseCases
     private weak var delegate: MessageActionDetailViewModelDelegate?
@@ -41,11 +41,11 @@ final class MessageActionDetailViewModel: ViewModel {
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(messageActionDetailInput: MessageActionDetailInput,
+    init(input: MessageActionDetailInput,
          reactionIconsUseCases: ReactionIconsUseCasesProtocol = ReactionIconsUseCases.default,
          messageReactionUseCases: MessageReactionUseCases = MessageReactionUseCasesImpl.shared,
          delegate: MessageActionDetailViewModelDelegate? = nil) {
-        self.messageActionDetailInput = messageActionDetailInput
+        self.input = input
         self.reactionIconsUseCases = reactionIconsUseCases
         self.messageReactionUseCases = messageReactionUseCases
         self.delegate = delegate
@@ -91,24 +91,15 @@ final class MessageActionDetailViewModel: ViewModel {
                     return Fail<Void, Error>(error: CommonError.unknown).eraseToAnyPublisher()
                 }
                 return self.messageReactionUseCases.reactMessage(
-                    message: self.messageActionDetailInput.message,
+                    message: self.input.message,
                     reactionId: reactionIcon.id
                 )
             }
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] result in
+            .sink { [weak self] _ in
                 guard let self else { return }
                 self.isProgressHUDShowing = false
-                switch result {
-                case .success:
-                    self.closeAction.send()
-                case .failure:
-                    self.alertState = AlertState(
-                        title: TextState(L10n.commonErrorTitle),
-                        message: TextState(L10n.commonErrorDescription),
-                        dismissButton: .cancel(TextState("OK"))
-                    )
-                }
+                self.closeAction.send()
             }
             .store(in: &cancellables)
 
@@ -120,9 +111,9 @@ final class MessageActionDetailViewModel: ViewModel {
                 case .reply, .forward, .delete:
                     break
                 case .copy:
-                    switch self.messageActionDetailInput.message.type {
+                    switch self.input.message.type {
                     case .plaintext:
-                        guard let message = self.messageActionDetailInput.message.message else { return }
+                        guard let message = self.input.message.message else { return }
                         UIPasteboard.general.string = message
                     case .photo, .sticker, .eventUpdated, .eventJoined, .eventLeft, .unknown:
                         break

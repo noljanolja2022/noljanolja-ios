@@ -28,12 +28,10 @@ struct PhotoMessageContentModel: Equatable {
     let status: MessageStatusModel.StatusType
     let isShareHidden: Bool
     let background: MessageContentBackgroundModel
-    let reactionsModel: MessageReactionsModel?
 
     init(currentUser: User,
          message: Message,
          status: NormalMessageModel.StatusType,
-         reactionsModel: MessageReactionsModel?,
          background: MessageContentBackgroundModel) {
         self.isSendByCurrentUser = currentUser.id == message.sender.id
         self.photos = message.attachments
@@ -49,7 +47,6 @@ struct PhotoMessageContentModel: Equatable {
             }
         }()
         self.isShareHidden = message.sender.id != currentUser.id
-        self.reactionsModel = reactionsModel
         self.background = background
     }
 }

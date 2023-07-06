@@ -11,7 +11,7 @@ import SwiftUI
 
 struct MessageContentView: View {
     let model: NormalMessageModel.ContentType?
-    let action: ((NormalMessageModel.ContentActionType) -> Void)?
+    var action: ((NormalMessageModel.ContentActionType) -> Void)?
 
     var body: some View {
         buildBody()

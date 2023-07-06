@@ -27,12 +27,24 @@ struct TextMessageContentView: View {
     }
 
     private func buildContentView() -> some View {
-        VStack(
-            alignment: model.reactionsModel?.horizontalAlignment ?? .center,
-            spacing: 0
-        ) {
-            buildMainView()
-            buildReactionView()
+        HStack(alignment: .bottom, spacing: 10) {
+            buildTextView()
+            buildInfoView()
+        }
+        .padding(12)
+        .background(
+            GeometryReader { geometry in
+                MessageContentBackgroundView(
+                    model: model.background
+                )
+                .onAppear {
+                    geometryProxy = geometry
+                }
+            }
+        )
+        .onTapGesture {}
+        .onLongPressGesture {
+            action?(.openMessageActionDetail(geometryProxy))
         }
     }
 
@@ -56,19 +68,6 @@ struct TextMessageContentView: View {
         .onLongPressGesture {
             action?(.openMessageActionDetail(geometryProxy))
         }
-    }
-    
-    private func buildReactionView() -> some View {
-        MessageReactionsView(
-            model: model.reactionsModel,
-            quickTapAction: {
-                action?(.reaction($0))
-            },
-            quickLongPressAction: {
-                action?(.openMessageQuickReactionDetail($0))
-            }
-        )
-        .padding(.top, -12)
     }
 
     private func buildTextView() -> some View {

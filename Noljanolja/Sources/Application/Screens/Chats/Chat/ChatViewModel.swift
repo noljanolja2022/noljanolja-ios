@@ -371,19 +371,29 @@ final class ChatViewModel: ViewModel {
                     self.navigationType = .openImages(message)
                 case let .reaction(message, reactionIcon):
                     reactionAction.send((message, reactionIcon))
-                case .openMessageQuickReactionDetail:
-                    break
-                case let .openMessageActionDetail(geometryProxy, normalMessageModel):
+                case let .openMessageQuickReactionDetail(message, geometryProxy):
                     guard let geometryProxy else { return }
                     if Keyboard.main.isShowing {
                         Keyboard.main.dismiss()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                             let contentRect = geometryProxy.frame(in: .global)
-                            self.fullScreenCoverType = .messageActionDetail(contentRect, normalMessageModel)
+                            self.fullScreenCoverType = .messageQuickReaction(message, contentRect)
                         }
                     } else {
                         let contentRect = geometryProxy.frame(in: .global)
-                        self.fullScreenCoverType = .messageActionDetail(contentRect, normalMessageModel)
+                        self.fullScreenCoverType = .messageQuickReaction(message, contentRect)
+                    }
+                case let .openMessageActionDetail(normalMessageModel, geometryProxy):
+                    guard let geometryProxy else { return }
+                    if Keyboard.main.isShowing {
+                        Keyboard.main.dismiss()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            let contentRect = geometryProxy.frame(in: .global)
+                            self.fullScreenCoverType = .messageActionDetail(normalMessageModel, contentRect)
+                        }
+                    } else {
+                        let contentRect = geometryProxy.frame(in: .global)
+                        self.fullScreenCoverType = .messageActionDetail(normalMessageModel, contentRect)
                     }
                 }
             }

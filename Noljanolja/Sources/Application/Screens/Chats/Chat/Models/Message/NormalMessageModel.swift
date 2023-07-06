@@ -37,8 +37,8 @@ extension NormalMessageModel {
         case openURL(String)
         case openImages(Message)
         case reaction(Message, ReactIcon)
-        case openMessageQuickReactionDetail(GeometryProxy?, Message)
-        case openMessageActionDetail(GeometryProxy?, NormalMessageModel)
+        case openMessageQuickReactionDetail(Message, GeometryProxy?)
+        case openMessageActionDetail(NormalMessageModel, GeometryProxy?)
     }
 
     enum ContentActionType {
@@ -59,6 +59,7 @@ struct NormalMessageModel: Equatable {
     let senderAvatar: String
     let senderName: String
     let content: ContentType
+    let reactionsModel: MessageReactionsModel?
     let status: StatusType
 
     let senderAvatarVisibility: VisibilityType
@@ -78,8 +79,7 @@ struct NormalMessageModel: Equatable {
         self.isSendByCurrentUser = currentUser.id == message.sender.id
         self.senderAvatar = message.sender.avatar ?? ""
         self.senderName = message.sender.name ?? ""
-        
-        let reactionsModel = MessageReactionsModel(
+        self.reactionsModel = MessageReactionsModel(
             currentUser: currentUser,
             reactionIcons: reactionIcons,
             message: message,
@@ -130,7 +130,6 @@ struct NormalMessageModel: Equatable {
                     conversation: conversation,
                     message: message,
                     status: status,
-                    reactionsModel: reactionsModel,
                     background: background
                 )
             )
@@ -140,7 +139,6 @@ struct NormalMessageModel: Equatable {
                     currentUser: currentUser,
                     message: message,
                     status: status,
-                    reactionsModel: reactionsModel,
                     background: background
                 )
             )
@@ -150,7 +148,6 @@ struct NormalMessageModel: Equatable {
                     currentUser: currentUser,
                     message: message,
                     status: status,
-                    reactionsModel: reactionsModel,
                     background: background
                 )
             )

@@ -232,6 +232,9 @@
 		CFAA37632A4B38E00085CE88 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAA37622A4B38E00085CE88 /* Banner.swift */; };
 		CFAA37672A4B44F70085CE88 /* BannersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAA37652A4B44F70085CE88 /* BannersView.swift */; };
 		CFAA37682A4B44F70085CE88 /* BannersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAA37662A4B44F70085CE88 /* BannersViewModel.swift */; };
+		CFAAEF1F2A5736AE004CE778 /* MessageQuickReactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAAEF1D2A5736AE004CE778 /* MessageQuickReactionView.swift */; };
+		CFAAEF202A5736AE004CE778 /* MessageQuickReactionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAAEF1E2A5736AE004CE778 /* MessageQuickReactionViewModel.swift */; };
+		CFAAEF232A573875004CE778 /* MessageQuickReactionInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAAEF222A573875004CE778 /* MessageQuickReactionInput.swift */; };
 		CFAC6BB32A123021004AD4A5 /* ProfileSettingAlertActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAC6BB22A123021004AD4A5 /* ProfileSettingAlertActionType.swift */; };
 		CFAC6BB92A1237A0004AD4A5 /* SourceLicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAC6BB72A1237A0004AD4A5 /* SourceLicenseView.swift */; };
 		CFAC6BBA2A1237A0004AD4A5 /* SourceLicenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAC6BB82A1237A0004AD4A5 /* SourceLicenseViewModel.swift */; };
@@ -701,6 +704,9 @@
 		CFAA37622A4B38E00085CE88 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		CFAA37652A4B44F70085CE88 /* BannersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannersView.swift; sourceTree = "<group>"; };
 		CFAA37662A4B44F70085CE88 /* BannersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannersViewModel.swift; sourceTree = "<group>"; };
+		CFAAEF1D2A5736AE004CE778 /* MessageQuickReactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageQuickReactionView.swift; sourceTree = "<group>"; };
+		CFAAEF1E2A5736AE004CE778 /* MessageQuickReactionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageQuickReactionViewModel.swift; sourceTree = "<group>"; };
+		CFAAEF222A573875004CE778 /* MessageQuickReactionInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageQuickReactionInput.swift; sourceTree = "<group>"; };
 		CFAC6BB22A123021004AD4A5 /* ProfileSettingAlertActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingAlertActionType.swift; sourceTree = "<group>"; };
 		CFAC6BB72A1237A0004AD4A5 /* SourceLicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceLicenseView.swift; sourceTree = "<group>"; };
 		CFAC6BB82A1237A0004AD4A5 /* SourceLicenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceLicenseViewModel.swift; sourceTree = "<group>"; };
@@ -1671,14 +1677,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		CF5F5E6D2A44910900D6E54B /* MessageReaction */ = {
+		CF5F5E6D2A44910900D6E54B /* MessageActionDetail */ = {
 			isa = PBXGroup;
 			children = (
 				CFA439F62A489E6500ED2860 /* Models */,
 				CF5F5E6E2A44911B00D6E54B /* MessageActionDetailView.swift */,
 				CF5F5E6F2A44911B00D6E54B /* MessageActionDetailViewModel.swift */,
 			);
-			path = MessageReaction;
+			path = MessageActionDetail;
 			sourceTree = "<group>";
 		};
 		CF615B682A0E90D800CAF9C5 /* ImagePreview */ = {
@@ -1962,6 +1968,24 @@
 				CFAA37662A4B44F70085CE88 /* BannersViewModel.swift */,
 			);
 			path = Banners;
+			sourceTree = "<group>";
+		};
+		CFAAEF1C2A573692004CE778 /* MessageQuickReaction */ = {
+			isa = PBXGroup;
+			children = (
+				CFAAEF212A573860004CE778 /* Models */,
+				CFAAEF1D2A5736AE004CE778 /* MessageQuickReactionView.swift */,
+				CFAAEF1E2A5736AE004CE778 /* MessageQuickReactionViewModel.swift */,
+			);
+			path = MessageQuickReaction;
+			sourceTree = "<group>";
+		};
+		CFAAEF212A573860004CE778 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CFAAEF222A573875004CE778 /* MessageQuickReactionInput.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		CFAC6BB12A123011004AD4A5 /* Models */ = {
@@ -2267,8 +2291,9 @@
 		CFCFFA3529E5B9DA002B7FB6 /* Chats */ = {
 			isa = PBXGroup;
 			children = (
+				CFAAEF1C2A573692004CE778 /* MessageQuickReaction */,
 				CFBF28922A52CD4400A91F1E /* MessageImages */,
-				CF5F5E6D2A44910900D6E54B /* MessageReaction */,
+				CF5F5E6D2A44910900D6E54B /* MessageActionDetail */,
 				CF87A31E2A2B1115009B0F30 /* AddFriends */,
 				CF1A9A072A0D36140004CCD8 /* NotificationSetting */,
 				CFFF0F2A29F986F70029F466 /* ImageDetails */,
@@ -3423,6 +3448,7 @@
 				CF615C392A0FEB5B00CAF9C5 /* ConversationAdjustmentNavigations.swift in Sources */,
 				CF86D2A42A38D09300447470 /* CouponDetailView.swift in Sources */,
 				CFAF9C592A3B6606003E1BD2 /* MyCouponsViewModel.swift in Sources */,
+				CFAAEF232A573875004CE778 /* MessageQuickReactionInput.swift in Sources */,
 				CFED124A29F323CD000B320B /* VideoDetailCommentsView.swift in Sources */,
 				CFF521162A19175A00F29A4E /* TransactionDashboardSectionModel.swift in Sources */,
 				CF615C532A1159FB00CAF9C5 /* WalletNotiView.swift in Sources */,
@@ -3671,6 +3697,7 @@
 				CFE0925D298DFDCB00F197F0 /* KakaoAuthAPI.swift in Sources */,
 				CF74A1A529B5831800419342 /* ConversationItemView.swift in Sources */,
 				CFFD70CA298AC5F800D4F5A2 /* TargetType+Default.swift in Sources */,
+				CFAAEF202A5736AE004CE778 /* MessageQuickReactionViewModel.swift in Sources */,
 				CF615C4D2A11452600CAF9C5 /* WalletUserInfoModel.swift in Sources */,
 				CF59759129FBAF630068EC88 /* ImageEditorResultViewModel.swift in Sources */,
 				CFC0DE492A3B1165007AB0F4 /* String+QRCode.swift in Sources */,
@@ -3728,6 +3755,7 @@
 				CFB2F6BA29E121C300191AA3 /* ChatSettingAddParticipantView.swift in Sources */,
 				CFED122E29F2E3C1000B320B /* HighlightVideoView.swift in Sources */,
 				CF1BD20529ACF5F200778786 /* LoadingView.swift in Sources */,
+				CFAAEF1F2A5736AE004CE778 /* MessageQuickReactionView.swift in Sources */,
 				CF3A82C92A2105C9001365DF /* MessageContentBackgroundView.swift in Sources */,
 				CFC4EFCE29FAC71200DBD831 /* ImageDetailNavigations.swift in Sources */,
 				CFF521142A19174500F29A4E /* TransactionHistorySectionModel.swift in Sources */,

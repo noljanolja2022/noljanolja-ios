@@ -25,14 +25,12 @@ struct TextMessageContentModel: Equatable {
     let messageString: String
     let createdAt: Date
     let status: MessageStatusModel.StatusType
-    let reactionsModel: MessageReactionsModel?
     let background: MessageContentBackgroundModel
 
     init(currentUser: User,
          conversation: Conversation,
          message: Message,
          status: NormalMessageModel.StatusType,
-         reactionsModel: MessageReactionsModel?,
          background: MessageContentBackgroundModel) {
         self.messageString = message.message ?? ""
         self.createdAt = message.createdAt
@@ -57,7 +55,6 @@ struct TextMessageContentModel: Equatable {
                 }())
             }
         }()
-        self.reactionsModel = reactionsModel
         self.background = background
     }
 }

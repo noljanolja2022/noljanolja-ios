@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct MessageActionDetailInput {
-    let rect: CGRect
     let message: Message
     let normalMessageModel: NormalMessageModel
+    let rect: CGRect
 }

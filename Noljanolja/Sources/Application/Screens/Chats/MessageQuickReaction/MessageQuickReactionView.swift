@@ -1,16 +1,16 @@
 //
-//  MessageActionDetailView.swift
+//  MessageQuickReactionView.swift
 //  Noljanolja
 //
-//  Created by Nguyen The Trinh on 22/06/2023.
+//  Created by Nguyen The Trinh on 07/07/2023.
 //
 //
 
 import SwiftUI
 
-// MARK: - MessageActionDetailView
+// MARK: MessageQuickReactionView
 
-struct MessageActionDetailView<ViewModel: MessageActionDetailViewModel>: View {
+struct MessageQuickReactionView<ViewModel: MessageQuickReactionViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
@@ -41,59 +41,35 @@ struct MessageActionDetailView<ViewModel: MessageActionDetailViewModel>: View {
 
     private func buildContentView() -> some View {
         GeometryReader { geometry in
-            let rectCenterX = (viewModel.messageActionDetailInput.rect.minX + viewModel.messageActionDetailInput.rect.maxX) / 2
+            let rectCenterX = (viewModel.input.rect.minX + viewModel.input.rect.maxX) / 2
             let horizontalAlignment: HorizontalAlignment = geometry.size.width / 2 > rectCenterX ? .leading : .trailing
 
             ZStack(alignment: horizontalAlignment == .leading ? .topLeading : .topTrailing) {
                 Spacer()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-                VStack(alignment: horizontalAlignment, spacing: 4) {
-                    buildReactionIconsView()
-                    Spacer()
-                        .frame(
-                            width: viewModel.messageActionDetailInput.rect.width,
-                            height: viewModel.messageActionDetailInput.rect.height
-                        )
-                    buildActionsView()
-                }
-                .padding(
-                    .top,
-                    viewModel.messageActionDetailInput.rect.origin.y - 36
-                )
-                .padding(
-                    .leading,
-                    horizontalAlignment == .leading
-                        ? viewModel.messageActionDetailInput.rect.origin.x
-                        : nil
-                )
-                .padding(
-                    .trailing,
-                    horizontalAlignment == .leading
-                        ? nil
-                        : geometry.size.width - viewModel.messageActionDetailInput.rect.width - viewModel.messageActionDetailInput.rect.minX
-                )
-                .onTapGesture {}
+                buildReactionIconsView()
+                    .padding(
+                        .top,
+                        viewModel.input.rect.origin.y - 36
+                    )
+                    .padding(
+                        .leading,
+                        horizontalAlignment == .leading
+                            ? viewModel.input.rect.origin.x
+                            : nil
+                    )
+                    .padding(
+                        .trailing,
+                        horizontalAlignment == .leading
+                            ? nil
+                            : geometry.size.width - viewModel.input.rect.width - viewModel.input.rect.minX
+                    )
+                    .onTapGesture {}
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .background { Color.black.opacity(0.5) }
-        .reverseMask {
-            ZStack(alignment: .topLeading) {
-                Spacer()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                Spacer()
-                    .background {
-                        RoundedRectangle(cornerRadius: 12).fill(.white)
-                    }
-                    .frame(
-                        width: CGFloat(Int(viewModel.messageActionDetailInput.rect.width)),
-                        height: CGFloat(Int(viewModel.messageActionDetailInput.rect.height))
-                    )
-                    .padding(.leading, viewModel.messageActionDetailInput.rect.origin.x)
-                    .padding(.top, viewModel.messageActionDetailInput.rect.origin.y)
-            }
-        }
         .ignoresSafeArea()
         .onTapGesture {
             presentationMode.dismiss()

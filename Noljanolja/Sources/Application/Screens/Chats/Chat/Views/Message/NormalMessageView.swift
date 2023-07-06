@@ -50,7 +50,7 @@ struct NormalMessageView: View {
     private func buildContentView() -> some View {
         VStack(alignment: .leading, spacing: 4) {
             buildSenderNameView()
-            buildMessageContentView()
+            buildMessageContentMainView()
         }
         .frame(maxWidth: .infinity)
     }
@@ -65,10 +65,21 @@ struct NormalMessageView: View {
             .visible(model.senderNameVisibility)
     }
 
-    private func buildMessageContentView() -> some View {
+    private func buildMessageContentMainView() -> some View {
         HStack(alignment: .bottom, spacing: 4) {
             Spacer(minLength: UIScreen.main.bounds.width / 5)
 
+            buildMessageContentView()
+                .environment(\.layoutDirection, .leftToRight)
+        }
+        .environment(\.layoutDirection, model.isSendByCurrentUser ? .leftToRight : .rightToLeft)
+    }
+
+    private func buildMessageContentView() -> some View {
+        VStack(
+            alignment: model.reactionsModel?.horizontalAlignment ?? .center,
+            spacing: 0
+        ) {
             MessageContentView(
                 model: model.content,
                 action: {
@@ -80,14 +91,23 @@ struct NormalMessageView: View {
                     case let .reaction(reactionIcon):
                         action?(.reaction(model.message, reactionIcon))
                     case let .openMessageQuickReactionDetail(geometryProxy):
-                        action?(.openMessageQuickReactionDetail(geometryProxy, model.message))
+                        action?(.openMessageQuickReactionDetail(model.message, geometryProxy))
                     case let .openMessageActionDetail(geometryProxy):
-                        action?(.openMessageActionDetail(geometryProxy, model))
+                        action?(.openMessageActionDetail(model, geometryProxy))
                     }
                 }
             )
-            .environment(\.layoutDirection, .leftToRight)
+
+            MessageReactionsView(
+                model: model.reactionsModel,
+                quickTapAction: {
+                    action?(.reaction(model.message, $0))
+                },
+                quickLongPressAction: {
+                    action?(.openMessageQuickReactionDetail(model.message, $0))
+                }
+            )
+            .padding(.top, -12)
         }
-        .environment(\.layoutDirection, model.isSendByCurrentUser ? .leftToRight : .rightToLeft)
     }
 }

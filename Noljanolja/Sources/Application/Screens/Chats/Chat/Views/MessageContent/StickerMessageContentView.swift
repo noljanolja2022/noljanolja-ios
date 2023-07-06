@@ -25,16 +25,6 @@ struct StickerMessageContentView: View {
     }
 
     private func buildContentView() -> some View {
-        VStack(
-            alignment: model.reactionsModel?.horizontalAlignment ?? .center,
-            spacing: 0
-        ) {
-            buildMainView()
-            buildReactionView()
-        }
-    }
-
-    private func buildMainView() -> some View {
         ZStack(alignment: .bottomTrailing) {
             buildStickerView()
             buildInfoView()
@@ -47,23 +37,11 @@ struct StickerMessageContentView: View {
                     }
             }
         }
+        .padding(.bottom, 10)
         .onTapGesture {}
         .onLongPressGesture {
             action?(.openMessageActionDetail(geometryProxy))
         }
-    }
-
-    private func buildReactionView() -> some View {
-        MessageReactionsView(
-            model: model.reactionsModel,
-            quickTapAction: {
-                action?(.reaction($0))
-            },
-            quickLongPressAction: {
-                action?(.openMessageQuickReactionDetail($0))
-            }
-        )
-        .padding(.top, -12)
     }
 
     private func buildStickerView() -> some View {

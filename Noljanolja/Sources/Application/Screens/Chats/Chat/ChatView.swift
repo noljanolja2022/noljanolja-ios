@@ -213,13 +213,25 @@ extension ChatView {
         switch type.wrappedValue {
         case let .urlDetail(url):
             SafariView(url: url)
-        case let .messageActionDetail(rect, normalMessageModel):
+        case let .messageQuickReaction(message, rect):
+            MessageQuickReactionView(
+                viewModel: MessageQuickReactionViewModel(
+                    input: MessageQuickReactionInput(
+                        message: message,
+                        rect: rect
+                    )
+                )
+            )
+            .onDisappear {
+                UIView.setAnimationsEnabled(true)
+            }
+        case let .messageActionDetail(normalMessageModel, rect):
             MessageActionDetailView(
                 viewModel: MessageActionDetailViewModel(
-                    messageActionDetailInput: MessageActionDetailInput(
-                        rect: rect,
+                    input: MessageActionDetailInput(
                         message: normalMessageModel.message,
-                        normalMessageModel: normalMessageModel
+                        normalMessageModel: normalMessageModel,
+                        rect: rect
                     )
                 )
             )
