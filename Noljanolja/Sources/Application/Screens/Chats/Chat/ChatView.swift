@@ -85,7 +85,8 @@ struct ChatView<ViewModel: ChatViewModel>: View {
             ChatInputView(
                 viewModel: ChatInputViewModel(
                     conversationID: viewModel.conversationID,
-                    sendAction: viewModel.sendAction
+                    sendAction: viewModel.sendAction,
+                    delegate: viewModel
                 )
             )
         }
@@ -98,15 +99,20 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                 buildChatView()
                 buildQuickScrollDownView(proxy)
             }
+            .onReceive(viewModel.scrollToChatItemAction) { index, anchor in
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    proxy.scrollTo("\(ChatItemModelType.viewIdPrefix)_\(index)", anchor: anchor)
+                }
+            }
         }
     }
 
     @ViewBuilder
-    private func buildQuickScrollDownView(_ scrollViewProxy: ScrollViewProxy) -> some View {
+    private func buildQuickScrollDownView(_: ScrollViewProxy) -> some View {
         Button(
             action: {
                 withAnimation(.easeInOut(duration: 0.3)) {
-                    scrollViewProxy.scrollTo("chat_item_0", anchor: .top)
+                    viewModel.scrollToChatItemAction.send((0, .top))
                 }
             },
             label: {
@@ -139,14 +145,15 @@ struct ChatView<ViewModel: ChatViewModel>: View {
         ChatScrollView(scrollOffset: $scrollOffset) {
             LazyVStack(spacing: 0) {
                 ForEach(viewModel.chatItems.indices, id: \.self) { index in
+                    let model = viewModel.chatItems[index]
                     ChatItemView(
-                        chatItem: viewModel.chatItems[index],
+                        chatItem: model,
                         action: {
-                            viewModel.normalMessageAction.send($0)
+                            viewModel.chatItemAction.send((model, $0))
                         }
                     )
                     .onAppear { viewModel.loadMoreDataAction.send(index) }
-                    .id("chat_item_\(index)")
+                    .id("\(ChatItemModelType.viewIdPrefix)_\(index)")
                 }
                 .scaleEffect(x: 1, y: -1, anchor: .center)
             }

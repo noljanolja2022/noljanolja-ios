@@ -42,10 +42,11 @@ final class ChatViewModel: ViewModel {
     let sendAction = PassthroughSubject<SendMessageType, Never>()
 
     let closeAction = PassthroughSubject<Void, Never>()
-    let normalMessageAction = PassthroughSubject<NormalMessageModel.ActionType, Never>()
+    let chatItemAction = PassthroughSubject<(ChatItemModelType, NormalMessageModel.ActionType), Never>()
     let loadMoreDataAction = PassthroughSubject<Int, Never>()
     let openChatSettingSubject = PassthroughSubject<Void, Never>()
     let reactionAction = PassthroughSubject<(Message, ReactIcon), Never>()
+    let scrollToChatItemAction = PassthroughSubject<(Int, UnitPoint), Never>()
 
     private let loadPreviousDataTrigger = PassthroughSubject<Void, Never>()
     private let loadNextDataTrigger = PassthroughSubject<Void, Never>()
@@ -359,9 +360,32 @@ final class ChatViewModel: ViewModel {
     }
 
     private func configureActions() {
-        normalMessageAction
-            .sink { [weak self] actionType in
+        chatItemAction
+            .sink { [weak self] chatItemModel, actionType in
                 guard let self else { return }
+
+                let dismissKeyboard = { (completion: @escaping () -> Void) in
+                    if Keyboard.main.isShowing {
+                        Keyboard.main.dismiss()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            completion()
+                        }
+                    } else {
+                        completion()
+                    }
+                }
+
+                let scrollToMessage = { [weak self] (completion: @escaping () -> Void) in
+                    if let self, let index = self.chatItems.firstIndex(where: { $0 == chatItemModel }) {
+                        self.scrollToChatItemAction.send((index, .center))
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            completion()
+                        }
+                    } else {
+                        completion()
+                    }
+                }
+
                 switch actionType {
                 case let .openURL(urlString):
                     guard let url = URL(string: urlString),
@@ -373,27 +397,17 @@ final class ChatViewModel: ViewModel {
                     reactionAction.send((message, reactionIcon))
                 case let .openMessageQuickReactionDetail(message, geometryProxy):
                     guard let geometryProxy else { return }
-                    if Keyboard.main.isShowing {
-                        Keyboard.main.dismiss()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            let contentRect = geometryProxy.frame(in: .global)
-                            self.fullScreenCoverType = .messageQuickReaction(message, contentRect)
-                        }
-                    } else {
+                    dismissKeyboard {
                         let contentRect = geometryProxy.frame(in: .global)
                         self.fullScreenCoverType = .messageQuickReaction(message, contentRect)
                     }
                 case let .openMessageActionDetail(normalMessageModel, geometryProxy):
                     guard let geometryProxy else { return }
-                    if Keyboard.main.isShowing {
-                        Keyboard.main.dismiss()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    dismissKeyboard {
+                        scrollToMessage {
                             let contentRect = geometryProxy.frame(in: .global)
                             self.fullScreenCoverType = .messageActionDetail(normalMessageModel, contentRect)
                         }
-                    } else {
-                        let contentRect = geometryProxy.frame(in: .global)
-                        self.fullScreenCoverType = .messageActionDetail(normalMessageModel, contentRect)
                     }
                 }
             }
@@ -424,6 +438,16 @@ final class ChatViewModel: ViewModel {
             }
             .store(in: &cancellables)
     }
+}
+
+// MARK: ChatInputViewModelDelegate
+
+extension ChatViewModel: ChatInputViewModelDelegate {
+    func chatInputViewModelWillSendMessage() {
+        scrollToChatItemAction.send((0, .top))
+    }
+
+    func chatInputViewModelDidSendMessage() {}
 }
 
 // MARK: ChatSettingViewModelDelegate

@@ -24,7 +24,7 @@ struct MessageReactionsView: View {
     }
         
     private func buildContentView(_ model: MessageReactionsModel) -> some View {
-        HStack(spacing: 4) {
+        HStack(spacing: 8) {
             buildQuickView(model)
             buildSummaryView(model)
         }
@@ -38,7 +38,7 @@ struct MessageReactionsView: View {
         if let quick = model.quick {
             GeometryReader { geometry in
                 Text(quick.code ?? "")
-                    .font(.system(size: 12))
+                    .font(.system(size: 11))
                     .saturation(model.quickSaturation)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(ColorAssets.neutralLightGrey.swiftUIColor)
