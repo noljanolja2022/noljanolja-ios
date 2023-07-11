@@ -8,24 +8,30 @@
 import Foundation
 import SwiftUI
 
+// MARK: - TextMessageContentModel.ActionType
+
+extension TextMessageContentModel {
+    enum ActionType {
+        case openURL(String)
+        case reaction(ReactIcon)
+        case openMessageQuickReactionDetail(GeometryProxy?)
+        case openMessageActionDetail(GeometryProxy?)
+    }
+}
+
 // MARK: - TextMessageContentModel
 
 struct TextMessageContentModel: Equatable {
-    let message: Message
-    
     let messageString: String
     let createdAt: Date
     let status: MessageStatusModel.StatusType
     let background: MessageContentBackgroundModel
-    let reactionSummaryModel: MessageReactionSummaryModel?
-    let horizontalAlignment: HorizontalAlignment
 
     init(currentUser: User,
          conversation: Conversation,
          message: Message,
          status: NormalMessageModel.StatusType,
          background: MessageContentBackgroundModel) {
-        self.message = message
         self.messageString = message.message ?? ""
         self.createdAt = message.createdAt
         self.status = {
@@ -50,7 +56,5 @@ struct TextMessageContentModel: Equatable {
             }
         }()
         self.background = background
-        self.reactionSummaryModel = MessageReactionSummaryModel(message.reactions)
-        self.horizontalAlignment = message.sender.id == currentUser.id ? .trailing : .leading
     }
 }

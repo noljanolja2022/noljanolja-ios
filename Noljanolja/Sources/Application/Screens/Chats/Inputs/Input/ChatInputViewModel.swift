@@ -12,7 +12,10 @@ import UIKit
 
 // MARK: - ChatInputViewModelDelegate
 
-protocol ChatInputViewModelDelegate: AnyObject {}
+protocol ChatInputViewModelDelegate: AnyObject {
+    func chatInputViewModelWillSendMessage()
+    func chatInputViewModelDidSendMessage()
+}
 
 // MARK: - ChatInputViewModel
 
@@ -99,6 +102,10 @@ final class ChatInputViewModel: ViewModel {
                     )
                 }
             }
+            .receive(on: DispatchQueue.main)
+            .handleEvents(receiveOutput: { [weak self] _ in
+                self?.delegate?.chatInputViewModelWillSendMessage()
+            })
             .flatMapToResult { [weak self] request in
                 guard let self else {
                     return Empty<Message, Error>().eraseToAnyPublisher()
@@ -106,7 +113,10 @@ final class ChatInputViewModel: ViewModel {
                 return self.messageService
                     .sendMessage(request: request)
             }
-            .sink { _ in }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.delegate?.chatInputViewModelWillSendMessage()
+            }
             .store(in: &cancellables)
     }
 }

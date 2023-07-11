@@ -12,19 +12,20 @@ import SwiftUI
 
 enum ChatNavigationType: Equatable {
     case chatSetting(Conversation)
+    case openImages(Message)
 }
 
 // MARK: - ChatFullScreenCoverType
 
 enum ChatFullScreenCoverType: Equatable {
-    case openUrl(URL)
-    case openImageDetail(URL)
-    case reaction(CGRect, Message)
+    case urlDetail(URL)
+    case messageQuickReaction(Message, CGRect)
+    case messageActionDetail(NormalMessageModel, CGRect)
 
     var isAnimationsEnabled: Bool {
         switch self {
-        case .openUrl, .openImageDetail: return true
-        case .reaction: return false
+        case .urlDetail: return true
+        case .messageQuickReaction, .messageActionDetail: return false
         }
     }
 }

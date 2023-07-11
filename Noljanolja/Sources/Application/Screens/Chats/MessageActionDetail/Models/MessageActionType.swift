@@ -1,5 +1,5 @@
 //
-//  MessageReactionAction.swift
+//  MessageActionType.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 25/06/2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MessageReactionAction: CaseIterable {
+enum MessageActionType: CaseIterable {
     case reply
     case forward
     case copy

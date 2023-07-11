@@ -13,7 +13,7 @@ import SwiftUIX
 
 struct NormalMessageView: View {
     let model: NormalMessageModel
-    let action: ((ChatItemActionType) -> Void)?
+    let action: ((NormalMessageModel.ActionType) -> Void)?
 
     var body: some View {
         buildBodyView()
@@ -50,7 +50,7 @@ struct NormalMessageView: View {
     private func buildContentView() -> some View {
         VStack(alignment: .leading, spacing: 4) {
             buildSenderNameView()
-            buildMessageContentView()
+            buildMessageContentMainView()
         }
         .frame(maxWidth: .infinity)
     }
@@ -65,16 +65,49 @@ struct NormalMessageView: View {
             .visible(model.senderNameVisibility)
     }
 
-    private func buildMessageContentView() -> some View {
+    private func buildMessageContentMainView() -> some View {
         HStack(alignment: .bottom, spacing: 4) {
             Spacer(minLength: UIScreen.main.bounds.width / 5)
 
-            MessageContentView(
-                model: model.content,
-                action: action
-            )
-            .environment(\.layoutDirection, .leftToRight)
+            buildMessageContentView()
+                .environment(\.layoutDirection, .leftToRight)
         }
         .environment(\.layoutDirection, model.isSendByCurrentUser ? .leftToRight : .rightToLeft)
+    }
+
+    private func buildMessageContentView() -> some View {
+        VStack(
+            alignment: model.reactionsModel?.horizontalAlignment ?? .center,
+            spacing: 0
+        ) {
+            MessageContentView(
+                model: model.content,
+                action: {
+                    switch $0 {
+                    case let .openURL(urlString):
+                        action?(.openURL(urlString))
+                    case .openImages:
+                        action?(.openImages(model.message))
+                    case let .reaction(reactionIcon):
+                        action?(.reaction(model.message, reactionIcon))
+                    case let .openMessageQuickReactionDetail(geometryProxy):
+                        action?(.openMessageQuickReactionDetail(model.message, geometryProxy))
+                    case let .openMessageActionDetail(geometryProxy):
+                        action?(.openMessageActionDetail(model, geometryProxy))
+                    }
+                }
+            )
+
+            MessageReactionsView(
+                model: model.reactionsModel,
+                quickTapAction: {
+                    action?(.reaction(model.message, $0))
+                },
+                quickLongPressAction: {
+                    action?(.openMessageQuickReactionDetail(model.message, $0))
+                }
+            )
+            .padding(.top, -12)
+        }
     }
 }

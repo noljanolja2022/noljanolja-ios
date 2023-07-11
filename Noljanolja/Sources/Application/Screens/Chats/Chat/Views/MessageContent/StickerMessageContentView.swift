@@ -12,7 +12,7 @@ import SwiftUI
 
 struct StickerMessageContentView: View {
     var model: StickerMessageContentModel
-    let action: ((ChatItemActionType) -> Void)?
+    let action: ((StickerMessageContentModel.ActionType) -> Void)?
 
     @State private var geometryProxy: GeometryProxy?
     
@@ -25,13 +25,6 @@ struct StickerMessageContentView: View {
     }
 
     private func buildContentView() -> some View {
-        VStack(alignment: model.horizontalAlignment, spacing: 0) {
-            buildMainView()
-            buildReactionSummaryView()
-        }
-    }
-
-    private func buildMainView() -> some View {
         ZStack(alignment: .bottomTrailing) {
             buildStickerView()
             buildInfoView()
@@ -44,23 +37,10 @@ struct StickerMessageContentView: View {
                     }
             }
         }
+        .padding(.bottom, 10)
         .onTapGesture {}
         .onLongPressGesture {
-            action?(.reaction(geometryProxy, model.message))
-        }
-    }
-
-    @ViewBuilder
-    private func buildReactionSummaryView() -> some View {
-        if let reactionSummaryModel = model.reactionSummaryModel {
-            MessageReactionSummaryView(model: reactionSummaryModel)
-                .frame(height: 20)
-                .padding(.vertical, 2)
-                .padding(.horizontal, 6)
-                .background(Color(model.background.color))
-                .cornerRadius(10)
-                .border(ColorAssets.neutralLight.swiftUIColor, width: 2, cornerRadius: 10)
-                .padding(.horizontal, 12)
+            action?(.openMessageActionDetail(geometryProxy))
         }
     }
 

@@ -8,24 +8,28 @@
 import Foundation
 import SwiftUI
 
-// MARK: - TextMessageContentModel
+// MARK: - StickerMessageContentModel.ActionType
+
+extension StickerMessageContentModel {
+    enum ActionType {
+        case reaction(ReactIcon)
+        case openMessageQuickReactionDetail(GeometryProxy?)
+        case openMessageActionDetail(GeometryProxy?)
+    }
+}
+
+// MARK: - StickerMessageContentModel
 
 struct StickerMessageContentModel: Equatable {
-    let message: Message
-
     let sticker: URL?
     let createdAt: Date
     let status: MessageStatusModel.StatusType
     let background: MessageContentBackgroundModel
-    let reactionSummaryModel: MessageReactionSummaryModel?
-    let horizontalAlignment: HorizontalAlignment
 
     init(currentUser: User,
          message: Message,
          status: NormalMessageModel.StatusType,
          background: MessageContentBackgroundModel) {
-        self.message = message
-
         self.sticker = message.getStickerURL()
         self.createdAt = message.createdAt
         self.status = {
@@ -38,7 +42,5 @@ struct StickerMessageContentModel: Equatable {
             }
         }()
         self.background = background
-        self.reactionSummaryModel = MessageReactionSummaryModel(message.reactions)
-        self.horizontalAlignment = message.sender.id == currentUser.id ? .trailing : .leading
     }
 }

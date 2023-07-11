@@ -85,7 +85,8 @@ struct ChatView<ViewModel: ChatViewModel>: View {
             ChatInputView(
                 viewModel: ChatInputViewModel(
                     conversationID: viewModel.conversationID,
-                    sendAction: viewModel.sendAction
+                    sendAction: viewModel.sendAction,
+                    delegate: viewModel
                 )
             )
         }
@@ -98,15 +99,20 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                 buildChatView()
                 buildQuickScrollDownView(proxy)
             }
+            .onReceive(viewModel.scrollToChatItemAction) { index, anchor in
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    proxy.scrollTo("\(ChatItemModelType.viewIdPrefix)_\(index)", anchor: anchor)
+                }
+            }
         }
     }
 
     @ViewBuilder
-    private func buildQuickScrollDownView(_ scrollViewProxy: ScrollViewProxy) -> some View {
+    private func buildQuickScrollDownView(_: ScrollViewProxy) -> some View {
         Button(
             action: {
                 withAnimation(.easeInOut(duration: 0.3)) {
-                    scrollViewProxy.scrollTo("chat_item_0", anchor: .top)
+                    viewModel.scrollToChatItemAction.send((0, .top))
                 }
             },
             label: {
@@ -139,14 +145,15 @@ struct ChatView<ViewModel: ChatViewModel>: View {
         ChatScrollView(scrollOffset: $scrollOffset) {
             LazyVStack(spacing: 0) {
                 ForEach(viewModel.chatItems.indices, id: \.self) { index in
+                    let model = viewModel.chatItems[index]
                     ChatItemView(
-                        chatItem: viewModel.chatItems[index],
+                        chatItem: model,
                         action: {
-                            viewModel.chatItemAction.send($0)
+                            viewModel.chatItemAction.send((model, $0))
                         }
                     )
                     .onAppear { viewModel.loadMoreDataAction.send(index) }
-                    .id("chat_item_\(index)")
+                    .id("\(ChatItemModelType.viewIdPrefix)_\(index)")
                 }
                 .scaleEffect(x: 1, y: -1, anchor: .center)
             }
@@ -168,27 +175,41 @@ struct ChatView<ViewModel: ChatViewModel>: View {
         Spacer()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
-
-    @ViewBuilder
+    
     private func buildNavigationLinks() -> some View {
-        ZStack {
-            NavigationLink(
-                unwrapping: $viewModel.navigationType,
-                onNavigate: { _ in },
-                destination: {
-                    switch $0.wrappedValue {
-                    case let .chatSetting(conversation):
-                        ChatSettingView(
-                            viewModel: ChatSettingViewModel(
-                                conversation: conversation,
-                                delegate: viewModel
-                            )
-                        )
-                    }
-                },
-                label: { EmptyView() }
+        NavigationLink(
+            unwrapping: $viewModel.navigationType,
+            onNavigate: { _ in },
+            destination: {
+                buildNavigationLinkDestinationView($0)
+            },
+            label: {
+                EmptyView()
+            }
+        )
+    }
+}
+
+extension ChatView {
+    @ViewBuilder
+    private func buildNavigationLinkDestinationView(
+        _ type: Binding<ChatNavigationType>
+    ) -> some View {
+        switch type.wrappedValue {
+        case let .chatSetting(conversation):
+            ChatSettingView(
+                viewModel: ChatSettingViewModel(
+                    conversation: conversation,
+                    delegate: viewModel
+                )
             )
-            .isDetailLink(false)
+        case let .openImages(message):
+            MessageImagesView(
+                viewModel: MessageImagesViewModel(
+                    message: message,
+                    delegate: viewModel
+                )
+            )
         }
     }
 
@@ -197,33 +218,27 @@ struct ChatView<ViewModel: ChatViewModel>: View {
         _ type: Binding<ChatFullScreenCoverType>
     ) -> some View {
         switch type.wrappedValue {
-        case let .openUrl(url):
+        case let .urlDetail(url):
             SafariView(url: url)
-        case let .openImageDetail(url):
-            NavigationView {
-                ImageDetailView(
-                    viewModel: ImageDetailViewModel(
-                        imageUrl: url,
-                        delegate: viewModel
+        case let .messageQuickReaction(message, rect):
+            MessageQuickReactionView(
+                viewModel: MessageQuickReactionViewModel(
+                    input: MessageQuickReactionInput(
+                        message: message,
+                        rect: rect
                     )
                 )
+            )
+            .onDisappear {
+                UIView.setAnimationsEnabled(true)
             }
-            .navigationViewStyle(StackNavigationViewStyle())
-            .accentColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            .introspectNavigationController { navigationController in
-                navigationController.configure(
-                    backgroundColor: ColorAssets.neutralLight.color,
-                    foregroundColor: ColorAssets.neutralDarkGrey.color
-                )
-                navigationController.view.backgroundColor = .clear
-                navigationController.parent?.view.backgroundColor = .clear
-            }
-        case let .reaction(rect, message):
-            MessageReactionView(
-                viewModel: MessageReactionViewModel(
-                    messageReactionInput: MessageReactionInput(
-                        rect: rect,
-                        message: message
+        case let .messageActionDetail(normalMessageModel, rect):
+            MessageActionDetailView(
+                viewModel: MessageActionDetailViewModel(
+                    input: MessageActionDetailInput(
+                        message: normalMessageModel.message,
+                        normalMessageModel: normalMessageModel,
+                        rect: rect
                     )
                 )
             )

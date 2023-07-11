@@ -1,16 +1,16 @@
 //
-//  MessageReactionView.swift
+//  MessageQuickReactionView.swift
 //  Noljanolja
 //
-//  Created by Nguyen The Trinh on 22/06/2023.
+//  Created by Nguyen The Trinh on 07/07/2023.
 //
 //
 
 import SwiftUI
 
-// MARK: - MessageReactionView
+// MARK: MessageQuickReactionView
 
-struct MessageReactionView<ViewModel: MessageReactionViewModel>: View {
+struct MessageQuickReactionView<ViewModel: MessageQuickReactionViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
@@ -41,59 +41,35 @@ struct MessageReactionView<ViewModel: MessageReactionViewModel>: View {
 
     private func buildContentView() -> some View {
         GeometryReader { geometry in
-            let rectCenterX = (viewModel.messageReactionInput.rect.minX + viewModel.messageReactionInput.rect.maxX) / 2
+            let rectCenterX = (viewModel.input.rect.minX + viewModel.input.rect.maxX) / 2
             let horizontalAlignment: HorizontalAlignment = geometry.size.width / 2 > rectCenterX ? .leading : .trailing
 
             ZStack(alignment: horizontalAlignment == .leading ? .topLeading : .topTrailing) {
                 Spacer()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-                VStack(alignment: horizontalAlignment, spacing: 4) {
-                    buildReactionIconsView()
-                    Spacer()
-                        .frame(
-                            width: viewModel.messageReactionInput.rect.width,
-                            height: viewModel.messageReactionInput.rect.height
-                        )
-                    buildActionsView()
-                }
-                .padding(
-                    .top,
-                    viewModel.messageReactionInput.rect.origin.y - 36
-                )
-                .padding(
-                    .leading,
-                    horizontalAlignment == .leading
-                        ? viewModel.messageReactionInput.rect.origin.x
-                        : nil
-                )
-                .padding(
-                    .trailing,
-                    horizontalAlignment == .leading
-                        ? nil
-                        : geometry.size.width - viewModel.messageReactionInput.rect.width - viewModel.messageReactionInput.rect.minX
-                )
-                .onTapGesture {}
+                buildReactionIconsView()
+                    .padding(
+                        .top,
+                        viewModel.input.rect.origin.y - 36
+                    )
+                    .padding(
+                        .leading,
+                        horizontalAlignment == .leading
+                            ? viewModel.input.rect.origin.x
+                            : nil
+                    )
+                    .padding(
+                        .trailing,
+                        horizontalAlignment == .leading
+                            ? nil
+                            : geometry.size.width - viewModel.input.rect.width - viewModel.input.rect.minX
+                    )
+                    .onTapGesture {}
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .background { Color.black.opacity(0.5) }
-        .reverseMask {
-            ZStack(alignment: .topLeading) {
-                Spacer()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                Spacer()
-                    .background {
-                        RoundedRectangle(cornerRadius: 12).fill(.white)
-                    }
-                    .frame(
-                        width: CGFloat(Int(viewModel.messageReactionInput.rect.width)),
-                        height: CGFloat(Int(viewModel.messageReactionInput.rect.height))
-                    )
-                    .padding(.leading, viewModel.messageReactionInput.rect.origin.x)
-                    .padding(.top, viewModel.messageReactionInput.rect.origin.y)
-            }
-        }
         .ignoresSafeArea()
         .onTapGesture {
             presentationMode.dismiss()
@@ -123,7 +99,7 @@ struct MessageReactionView<ViewModel: MessageReactionViewModel>: View {
 
     private func buildActionsView() -> some View {
         HStack(spacing: 4) {
-            ForEach(MessageReactionAction.allCases, id: \.self) { model in
+            ForEach(MessageActionType.allCases, id: \.self) { model in
                 Button(
                     action: {
                         viewModel.action.send(model)

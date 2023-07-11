@@ -10,4 +10,8 @@ import Foundation
 enum ChatItemModelType: Equatable {
     case date(DateChatItemModel)
     case message(MessageChatItemModel)
+
+    static var viewIdPrefix: String {
+        String(describing: Self.self)
+    }
 }

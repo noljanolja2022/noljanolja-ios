@@ -42,9 +42,11 @@ final class ChatViewModel: ViewModel {
     let sendAction = PassthroughSubject<SendMessageType, Never>()
 
     let closeAction = PassthroughSubject<Void, Never>()
-    let chatItemAction = PassthroughSubject<ChatItemActionType, Never>()
+    let chatItemAction = PassthroughSubject<(ChatItemModelType, NormalMessageModel.ActionType), Never>()
     let loadMoreDataAction = PassthroughSubject<Int, Never>()
     let openChatSettingSubject = PassthroughSubject<Void, Never>()
+    let reactionAction = PassthroughSubject<(Message, ReactIcon), Never>()
+    let scrollToChatItemAction = PassthroughSubject<(Int, UnitPoint), Never>()
 
     private let loadPreviousDataTrigger = PassthroughSubject<Void, Never>()
     private let loadNextDataTrigger = PassthroughSubject<Void, Never>()
@@ -59,12 +61,15 @@ final class ChatViewModel: ViewModel {
     private let conversationService: ConversationServiceType
     private let messageService: MessageServiceType
     private let conversationSocketService: ConversationSocketServiceType
+    private let reactionIconsUseCases: ReactionIconsUseCasesProtocol
+    private let messageReactionUseCases: MessageReactionUseCases
     private weak var delegate: ChatViewModelDelegate?
 
     // MARK: Private
 
     private let conversationSubject = CurrentValueSubject<Conversation?, Never>(nil)
     private let currentUserSubject = CurrentValueSubject<User?, Never>(nil)
+    private let reactionIconsSubject = CurrentValueSubject<[ReactIcon], Never>([])
     private let messagesSubject = CurrentValueSubject<[Message], Never>([])
 
     private var cancellables = Set<AnyCancellable>()
@@ -74,12 +79,16 @@ final class ChatViewModel: ViewModel {
          conversationService: ConversationServiceType = ConversationService.default,
          messageService: MessageServiceType = MessageService.default,
          conversationSocketService: ConversationSocketServiceType = ConversationSocketService.default,
+         reactionIconsUseCases: ReactionIconsUseCasesProtocol = ReactionIconsUseCases.default,
+         messageReactionUseCases: MessageReactionUseCases = MessageReactionUseCasesImpl.shared,
          delegate: ChatViewModelDelegate? = nil) {
         self.conversationID = conversationID
         self.userService = userService
         self.conversationService = conversationService
         self.messageService = messageService
         self.conversationSocketService = conversationSocketService
+        self.reactionIconsUseCases = reactionIconsUseCases
+        self.messageReactionUseCases = messageReactionUseCases
         self.delegate = delegate
         super.init()
 
@@ -108,22 +117,25 @@ final class ChatViewModel: ViewModel {
         .store(in: &cancellables)
 
         Publishers
-            .CombineLatest3(
+            .CombineLatest4(
                 currentUserSubject
                     .compactMap { $0 }
                     .removeDuplicates(),
                 conversationSubject
                     .compactMap { $0 }
                     .removeDuplicates(),
+                reactionIconsSubject
+                    .removeDuplicates(),
                 messagesSubject
                     .compactMap { $0 }
                     .filter { !$0.isEmpty }
                     .removeDuplicates()
             )
-            .map { currentUser, conversation, messages in
+            .map { currentUser, conversation, reactionIcons, messages in
                 ChatItemModelBuilder(
                     currentUser: currentUser,
                     conversation: conversation,
+                    reactionIcons: reactionIcons,
                     messages: messages
                 )
                 .build()
@@ -270,6 +282,25 @@ final class ChatViewModel: ViewModel {
             .getCurrentUserPublisher()
             .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
             .store(in: &cancellables)
+
+        isAppearSubject
+            .first(where: { $0 })
+            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<[ReactIcon], Error> in
+                guard let self else {
+                    return Empty<[ReactIcon], Error>().eraseToAnyPublisher()
+                }
+                return self.reactionIconsUseCases.getReactionIcons()
+            }
+            .sink { [weak self] result in
+                guard let self else { return }
+                switch result {
+                case let .success(model):
+                    self.reactionIconsSubject.send(model)
+                case .failure:
+                    break
+                }
+            }
+            .store(in: &cancellables)
     }
 
     private func configureSocket() {
@@ -330,27 +361,53 @@ final class ChatViewModel: ViewModel {
 
     private func configureActions() {
         chatItemAction
-            .sink { [weak self] actionType in
+            .sink { [weak self] chatItemModel, actionType in
                 guard let self else { return }
+
+                let dismissKeyboard = { (completion: @escaping () -> Void) in
+                    if Keyboard.main.isShowing {
+                        Keyboard.main.dismiss()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            completion()
+                        }
+                    } else {
+                        completion()
+                    }
+                }
+
+                let scrollToMessage = { [weak self] (completion: @escaping () -> Void) in
+                    if let self, let index = self.chatItems.firstIndex(where: { $0 == chatItemModel }) {
+                        self.scrollToChatItemAction.send((index, .center))
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            completion()
+                        }
+                    } else {
+                        completion()
+                    }
+                }
+
                 switch actionType {
                 case let .openURL(urlString):
                     guard let url = URL(string: urlString),
                           url.scheme == "https" || url.scheme == "http" else { return }
-                    self.fullScreenCoverType = .openUrl(url)
-                case let .openImageDetail(url):
-                    guard let url else { return }
-                    self.fullScreenCoverType = .openImageDetail(url)
-                case let .reaction(geometryProxy, message):
+                    self.fullScreenCoverType = .urlDetail(url)
+                case let .openImages(message):
+                    self.navigationType = .openImages(message)
+                case let .reaction(message, reactionIcon):
+                    reactionAction.send((message, reactionIcon))
+                case let .openMessageQuickReactionDetail(message, geometryProxy):
                     guard let geometryProxy else { return }
-                    if Keyboard.main.isShowing {
-                        Keyboard.main.dismiss()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            let contentRect = geometryProxy.frame(in: .global)
-                            self.fullScreenCoverType = .reaction(contentRect, message)
-                        }
-                    } else {
+                    dismissKeyboard {
                         let contentRect = geometryProxy.frame(in: .global)
-                        self.fullScreenCoverType = .reaction(contentRect, message)
+                        self.fullScreenCoverType = .messageQuickReaction(message, contentRect)
+                    }
+                case let .openMessageActionDetail(normalMessageModel, geometryProxy):
+                    guard let geometryProxy else { return }
+                    dismissKeyboard {
+                        scrollToMessage {
+                            let contentRect = geometryProxy.frame(in: .global)
+                            self.fullScreenCoverType = .messageActionDetail(normalMessageModel, contentRect)
+                        }
                     }
                 }
             }
@@ -364,7 +421,33 @@ final class ChatViewModel: ViewModel {
                 self?.navigationType = .chatSetting($0)
             })
             .store(in: &cancellables)
+
+        reactionAction
+            .flatMapToResult { [weak self] message, reactionIcon -> AnyPublisher<Void, Error> in
+                guard let self else {
+                    return Fail<Void, Error>(error: CommonError.unknown).eraseToAnyPublisher()
+                }
+                return self.messageReactionUseCases.reactMessage(
+                    message: message,
+                    reactionId: reactionIcon.id
+                )
+            }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self else { return }
+            }
+            .store(in: &cancellables)
     }
+}
+
+// MARK: ChatInputViewModelDelegate
+
+extension ChatViewModel: ChatInputViewModelDelegate {
+    func chatInputViewModelWillSendMessage() {
+        scrollToChatItemAction.send((0, .top))
+    }
+
+    func chatInputViewModelDidSendMessage() {}
 }
 
 // MARK: ChatSettingViewModelDelegate
@@ -379,9 +462,9 @@ extension ChatViewModel: ChatSettingViewModelDelegate {
     }
 }
 
-// MARK: ImageDetailViewModelDelegate
+// MARK: MessageImagesViewModelDelegate
 
-extension ChatViewModel: ImageDetailViewModelDelegate {
+extension ChatViewModel: MessageImagesViewModelDelegate {
     func sendImage(_ image: UIImage) {
         sendAction.send(.images([image]))
     }

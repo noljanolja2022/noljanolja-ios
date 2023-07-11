@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MessageChatItemView: View {
     let model: MessageChatItemModel
-    let action: ((ChatItemActionType) -> Void)?
+    let action: ((NormalMessageModel.ActionType) -> Void)?
 
     var body: some View {
         switch model {

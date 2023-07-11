@@ -11,11 +11,13 @@ import SwiftUI
 final class ChatItemModelBuilder {
     private let currentUser: User
     private let conversation: Conversation
+    private let reactionIcons: [ReactIcon]
     private let messages: [Message]
 
-    init(currentUser: User, conversation: Conversation, messages: [Message]) {
+    init(currentUser: User, conversation: Conversation, reactionIcons: [ReactIcon], messages: [Message]) {
         self.currentUser = currentUser
         self.conversation = conversation
+        self.reactionIcons = reactionIcons
         self.messages = messages
     }
 
@@ -25,7 +27,8 @@ final class ChatItemModelBuilder {
         messages.enumerated().forEach { index, message in
             let beforceMessage = messages[safe: index + 1]
             let afterMessage = messages[safe: index - 1]
-            let positionType = buildPositionType(beforceMessage: beforceMessage, message: message, afterMessage: afterMessage)
+            let positionTypeByBlock = buildPositionTypeByBlock(beforceMessage: beforceMessage, message: message, afterMessage: afterMessage)
+            let positionTypeBySenderType = buildPositionTypeBySenderType(message: message)
 
             let statusType: NormalMessageModel.StatusType = {
                 let seenUserLastIndexes = conversation.participants
@@ -50,8 +53,10 @@ final class ChatItemModelBuilder {
             let messageModel = MessageChatItemModel(
                 currentUser: currentUser,
                 conversation: conversation,
+                reactionIcons: reactionIcons,
                 message: message,
-                positionType: positionType,
+                positionTypeByBlock: positionTypeByBlock,
+                positionTypeBySenderType: positionTypeBySenderType,
                 status: statusType
             )
             messageModel.flatMap {
@@ -70,9 +75,9 @@ final class ChatItemModelBuilder {
         return messageItemTypes
     }
 
-    private func buildPositionType(beforceMessage: Message?,
-                                   message: Message,
-                                   afterMessage: Message?) -> NormalMessageModel.PositionType {
+    private func buildPositionTypeByBlock(beforceMessage: Message?,
+                                          message: Message,
+                                          afterMessage: Message?) -> NormalMessageModel.PositionType {
         let isSameSessionByTypeWithBeforceMessage = message.type.isSessionEnabled == beforceMessage?.type.isSessionEnabled
         let isSameSessionByTypeWithAfterMessage = message.type.isSessionEnabled == afterMessage?.type.isSessionEnabled
 
@@ -96,6 +101,31 @@ final class ChatItemModelBuilder {
         } else if isSameSessionWithBeforceMessage {
             return [.first]
         } else if isSameSessionWithAfterMessage {
+            return [.last]
+        } else {
+            return [.middle]
+        }
+    }
+
+    private func buildPositionTypeBySenderType(message: Message) -> NormalMessageModel.PositionType {
+        let sessionableMessages = messages.filter { $0.type.isSessionEnabled }
+
+        let currentUserMessages = sessionableMessages.filter { $0.sender.id == currentUser.id }
+        let lastCurrentUserMessage = currentUserMessages.first
+        let firstCurrentUserMessage = currentUserMessages.last
+
+        let otherUserMessages = sessionableMessages.filter { $0.sender.id != currentUser.id }
+        let lastOtherUserMessage = otherUserMessages.first
+        let firstOtherUserMessage = otherUserMessages.last
+
+        let isFirstMessageBySenderType = message == firstCurrentUserMessage || message == firstOtherUserMessage
+        let isLastMessageBySenderType = message == lastCurrentUserMessage || message == lastOtherUserMessage
+
+        if isFirstMessageBySenderType, isLastMessageBySenderType {
+            return [.first, .last]
+        } else if isFirstMessageBySenderType {
+            return [.first]
+        } else if isLastMessageBySenderType {
             return [.last]
         } else {
             return [.middle]
