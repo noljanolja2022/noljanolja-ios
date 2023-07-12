@@ -63,6 +63,23 @@ private enum MessageAPITargets {
         let param: SendMessageParam
     }
 
+    struct DeleteMessage: BaseAuthTargetType {
+        var path: String { "v1/conversations/\(conversationID)/messages/\(messageID)" }
+        let method: Moya.Method = .delete
+        var task: Task { .requestParameters(parameters: parameters, encoding: URLEncoding(boolEncoding: .literal)) }
+
+        let conversationID: Int
+        let messageID: Int
+        let removeForSelfOnly = false
+
+        var parameters: [String: Any] {
+            [
+                "removeForSelfOnly": removeForSelfOnly
+            ]
+            .compactMapValues { $0 }
+        }
+    }
+
     struct SeenMessage: BaseAuthTargetType {
         var path: String { "v1/conversations/\(conversationID)/messages/\(messageID)/seen" }
         let method: Moya.Method = .post
@@ -90,6 +107,8 @@ protocol MessageAPIType {
                      beforeMessageID: Int?,
                      afterMessageID: Int?) -> AnyPublisher<[Message], Error>
     func sendMessage(param: SendMessageParam) -> AnyPublisher<Message, Error>
+    func deleteMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error>
+
     func seenMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error>
 
     func getPhotoURL(conversationId: Int, attachmentId: String) -> URL?
@@ -137,6 +156,12 @@ final class MessageAPI: MessageAPIType {
         api.request(
             target: MessageAPITargets.SendMessage(param: param),
             atKeyPath: "data"
+        )
+    }
+
+    func deleteMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error> {
+        api.request(
+            target: MessageAPITargets.DeleteMessage(conversationID: conversationID, messageID: messageID)
         )
     }
 

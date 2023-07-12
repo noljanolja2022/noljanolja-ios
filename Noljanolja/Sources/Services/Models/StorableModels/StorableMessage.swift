@@ -22,6 +22,9 @@ final class StorableMessage: Object {
     @Persisted var attachments = List<StorableAttachment>()
     @Persisted var reactions = List<StorableMessageReaction>()
     @Persisted var createdAt: Date?
+    @Persisted var isDeleted: Bool
+    @Persisted var shareMessage: StorableMessage?
+    @Persisted var replyToMessage: StorableMessage?
     
     var model: Message? {
         guard let conversationID,
@@ -42,7 +45,10 @@ final class StorableMessage: Object {
             seenBy: seenBy.map { $0 },
             attachments: attachments.compactMap { $0.model },
             reactions: reactions.compactMap { $0.model },
-            createdAt: createdAt
+            createdAt: createdAt,
+            isDeleted: isDeleted,
+            shareMessage: shareMessage?.model,
+            replyToMessage: replyToMessage?.model
         )
     }
     
@@ -81,6 +87,21 @@ final class StorableMessage: Object {
             return list
         }()
         self.createdAt = model.createdAt
+        self.isDeleted = model.isDeleted
+        self.shareMessage = model.shareMessage
+            .flatMap {
+                StorableMessage(
+                    primaryKey: $0.id.flatMap { String($0) },
+                    model: $0
+                )
+            }
+        self.replyToMessage = model.replyToMessage
+            .flatMap {
+                StorableMessage(
+                    primaryKey: $0.id.flatMap { String($0) },
+                    model: $0
+                )
+            }
     }
 
     required convenience init(param: SendMessageParam) {
@@ -104,6 +125,21 @@ final class StorableMessage: Object {
         }()
         self.reactions = List<StorableMessageReaction>()
         self.createdAt = Date()
+        self.isDeleted = false
+        self.shareMessage = param.shareMessage
+            .flatMap {
+                StorableMessage(
+                    primaryKey: $0.id.flatMap { String($0) },
+                    model: $0
+                )
+            }
+        self.replyToMessage = param.replyToMessage
+            .flatMap {
+                StorableMessage(
+                    primaryKey: $0.id.flatMap { String($0) },
+                    model: $0
+                )
+            }
     }
 
     override static func primaryKey() -> String? {

@@ -31,13 +31,22 @@ final class ReactionIconsUseCases: ReactionIconsUseCasesProtocol {
     func getReactionIcons() -> AnyPublisher<[ReactIcon], Error> {
         let local = reactionIconsLocalRepository
             .observeReactIcons()
-            .filter { !$0.isEmpty }
         let remote = reactionIconsRemoteRepository
             .getReactIcons()
             .handleEvents(receiveOutput: { [weak self] in
                 self?.reactionIconsLocalRepository.saveReactIcons($0)
             })
-        return Publishers.Amb(first: local, second: remote)
+        return local
+            .flatMap { reactionIcons in
+                if reactionIcons.isEmpty {
+                    return remote
+                        .eraseToAnyPublisher()
+                } else {
+                    return Just(reactionIcons)
+                        .setFailureType(to: Error.self)
+                        .eraseToAnyPublisher()
+                }
+            }
             .eraseToAnyPublisher()
     }
 }

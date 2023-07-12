@@ -39,7 +39,7 @@ enum MessageType: String, Codable {
 
 // MARK: - Message
 
-struct Message: Equatable, Codable {
+struct Message: Equatable, Decodable {
     let id: Int?
     let localID: String?
     let conversationID: Int
@@ -52,6 +52,17 @@ struct Message: Equatable, Codable {
     let attachments: [Attachment]
     let reactions: [MessageReaction]
     let createdAt: Date
+    let isDeleted: Bool
+    var shareMessage: Message? {
+        shareMessages?.compactMap { $0 }.first
+    }
+
+    var replyToMessage: Message? {
+        replyToMessages?.compactMap { $0 }.first
+    }
+
+    private let shareMessages: [Message?]?
+    private let replyToMessages: [Message?]?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -66,6 +77,9 @@ struct Message: Equatable, Codable {
         case attachments
         case reactions
         case createdAt
+        case isDeleted
+        case shareMessage
+        case replyToMessage
     }
 
     init(id: Int?,
@@ -79,7 +93,10 @@ struct Message: Equatable, Codable {
          seenBy: [String],
          attachments: [Attachment],
          reactions: [MessageReaction],
-         createdAt: Date) {
+         createdAt: Date,
+         isDeleted: Bool,
+         shareMessage: Message?,
+         replyToMessage: Message?) {
         self.id = id
         self.localID = localID
         self.conversationID = conversationID
@@ -92,6 +109,9 @@ struct Message: Equatable, Codable {
         self.attachments = attachments
         self.reactions = reactions
         self.createdAt = createdAt
+        self.isDeleted = isDeleted
+        self.shareMessages = [shareMessage]
+        self.replyToMessages = [replyToMessage]
     }
 
     init(from decoder: Decoder) throws {
@@ -107,6 +127,7 @@ struct Message: Equatable, Codable {
         self.seenBy = try container.decodeIfPresent([String].self, forKey: .seenBy) ?? []
         self.attachments = try container.decodeIfPresent([Attachment].self, forKey: .attachments) ?? []
         self.reactions = try container.decodeIfPresent([MessageReaction].self, forKey: .reactions) ?? []
+
         if let createdAtString = try container.decodeIfPresent(String.self, forKey: .createdAt),
            let createdAt = createdAtString.date(withFormats: NetworkConfigs.Format.apiFullDateFormats) {
             self.createdAt = createdAt
@@ -119,6 +140,10 @@ struct Message: Equatable, Codable {
                 )
             )
         }
+
+        self.isDeleted = try container.decodeIfPresent(Bool.self, forKey: .isDeleted) ?? false
+        self.shareMessages = [try container.decodeIfPresent(Message.self, forKey: .shareMessage)]
+        self.replyToMessages = [try container.decodeIfPresent(Message.self, forKey: .replyToMessage)]
     }
 
     func getStickerURL() -> URL? {

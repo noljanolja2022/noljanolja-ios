@@ -12,10 +12,15 @@ import Foundation
 
 protocol MessageServiceType {
     func getLocalMessages(conversationID: Int) -> AnyPublisher<[Message], Error>
+
     func getMessages(conversationID: Int,
                      beforeMessageID: Int?,
                      afterMessageID: Int?) -> AnyPublisher<[Message], Error>
+
     func sendMessage(request: SendMessageRequest) -> AnyPublisher<Message, Error>
+
+    func deleteMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error>
+
     func seenMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error>
 
     func getPhotoURL(conversationID: Int, attachmentId: String, fileName: String?) -> URL?
@@ -54,7 +59,9 @@ final class MessageService: MessageServiceType {
         messageStore
             .observeMessages(conversationID: conversationID)
             .map {
-                $0.sorted { $0.createdAt > $1.createdAt }
+                $0
+                    .filter { !$0.isDeleted }
+                    .sorted { $0.createdAt > $1.createdAt }
             }
             .removeDuplicates()
             .eraseToAnyPublisher()
@@ -118,7 +125,9 @@ final class MessageService: MessageServiceType {
                     conversationID: request.conversationID,
                     type: request.type,
                     message: message,
-                    attachments: attachments
+                    attachments: attachments,
+                    shareMessage: request.shareMessage,
+                    replyToMessage: request.replyToMessage
                 )
             }
             .receive(on: DispatchQueue.main) // NOTED: Do on serial queue to wait write then read
@@ -135,6 +144,15 @@ final class MessageService: MessageServiceType {
             .receive(on: DispatchQueue.main) // NOTED: Do on serial queue to wait write then read
             .handleEvents(receiveOutput: { [weak self] in
                 self?.messageStore.saveMessages([$0])
+            })
+            .eraseToAnyPublisher()
+    }
+
+    func deleteMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error> {
+        messageAPI
+            .deleteMessage(conversationID: conversationID, messageID: messageID)
+            .handleEvents(receiveOutput: { [weak self] in
+                self?.messageStore.deleteMessage(conversationID: conversationID, messageID: messageID)
             })
             .eraseToAnyPublisher()
     }

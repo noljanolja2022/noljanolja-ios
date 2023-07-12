@@ -6,6 +6,7 @@
 //
 //
 
+import _SwiftUINavigationState
 import Combine
 import Foundation
 import SwiftUIX
@@ -21,6 +22,8 @@ protocol ChatViewModelDelegate: AnyObject {
 
 final class ChatViewModel: ViewModel {
     // MARK: State
+
+    @Published var alertState: AlertState<ChatAlertActionType>?
 
     @Published var title = ""
     @Published var isChatSettingEnabled = false
@@ -47,6 +50,7 @@ final class ChatViewModel: ViewModel {
     let openChatSettingSubject = PassthroughSubject<Void, Never>()
     let reactionAction = PassthroughSubject<(Message, ReactIcon), Never>()
     let scrollToChatItemAction = PassthroughSubject<(Int, UnitPoint), Never>()
+    let deleteMessageAction = PassthroughSubject<Message, Never>()
 
     private let loadPreviousDataTrigger = PassthroughSubject<Void, Never>()
     private let loadNextDataTrigger = PassthroughSubject<Void, Never>()
@@ -433,9 +437,19 @@ final class ChatViewModel: ViewModel {
                 )
             }
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                guard let self else { return }
+            .sink { _ in }
+            .store(in: &cancellables)
+
+        deleteMessageAction
+            .flatMapLatestToResult { [weak self] message -> AnyPublisher<Void, Error> in
+                guard let self, let messageId = message.id else {
+                    return Fail<Void, Error>(error: CommonError.unknown).eraseToAnyPublisher()
+                }
+                return self.messageService
+                    .deleteMessage(conversationID: message.conversationID, messageID: messageId)
             }
+            .receive(on: DispatchQueue.main)
+            .sink { _ in }
             .store(in: &cancellables)
     }
 }
@@ -467,5 +481,20 @@ extension ChatViewModel: ChatSettingViewModelDelegate {
 extension ChatViewModel: MessageImagesViewModelDelegate {
     func sendImage(_ image: UIImage) {
         sendAction.send(.images([image]))
+    }
+}
+
+// MARK: MessageActionDetailViewModelDelegate
+
+extension ChatViewModel: MessageActionDetailViewModelDelegate {
+    func messageActionDetailDelete(_ message: Message) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            self?.alertState = AlertState(
+                title: TextState("You want to delete this message?"),
+                message: TextState("This message will be deleted on your chat screen."),
+                primaryButton: .destructive(TextState(L10n.commonNo.uppercased())),
+                secondaryButton: .default(TextState(L10n.commonYes.uppercased()), action: .send(.deleteMessage(message)))
+            )
+        }
     }
 }

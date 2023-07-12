@@ -216,6 +216,7 @@
 		CF88ABCD299F2E7400D8AB67 /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = CF88ABCC299F2E7400D8AB67 /* SwiftUINavigation */; };
 		CF8A02962A0B981800A01B21 /* TabItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8A02952A0B981800A01B21 /* TabItemView.swift */; };
 		CF8A02982A0BA35600A01B21 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8A02972A0BA35600A01B21 /* CustomTabView.swift */; };
+		CF8BA79D2A5DC36F006CF850 /* ChatAlertActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8BA79C2A5DC36F006CF850 /* ChatAlertActionType.swift */; };
 		CF8FA6452A3219E300950D9C /* FindUserResultItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8FA6442A3219E300950D9C /* FindUserResultItemView.swift */; };
 		CF91CCFF2A2E3BD400BFC08A /* FriendScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF91CCFE2A2E3BD400BFC08A /* FriendScannerViewController.swift */; };
 		CF9779DC29BE2FC600D1CAB0 /* PhoneNumberKit in Frameworks */ = {isa = PBXBuildFile; productRef = CF9779DB29BE2FC600D1CAB0 /* PhoneNumberKit */; };
@@ -689,6 +690,7 @@
 		CF87A3232A2B1204009B0F30 /* AddFriendsNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsNavigations.swift; sourceTree = "<group>"; };
 		CF8A02952A0B981800A01B21 /* TabItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemView.swift; sourceTree = "<group>"; };
 		CF8A02972A0BA35600A01B21 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
+		CF8BA79C2A5DC36F006CF850 /* ChatAlertActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAlertActionType.swift; sourceTree = "<group>"; };
 		CF8FA6442A3219E300950D9C /* FindUserResultItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserResultItemView.swift; sourceTree = "<group>"; };
 		CF91CCFE2A2E3BD400BFC08A /* FriendScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendScannerViewController.swift; sourceTree = "<group>"; };
 		CF9DF0A92A36B2D80054E105 /* UIImage+QRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+QRCode.swift"; sourceTree = "<group>"; };
@@ -1805,6 +1807,7 @@
 			isa = PBXGroup;
 			children = (
 				CFD271D82A0949C20030719E /* MessageStatusModel.swift */,
+				CF8BA79C2A5DC36F006CF850 /* ChatAlertActionType.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -3496,6 +3499,7 @@
 				CFFC6C6929E992910024ADA3 /* LaunchRootNavigations.swift in Sources */,
 				CF30B18D2A13E78E00C43A54 /* TransactionHistoryViewModel.swift in Sources */,
 				CFD095172A02A87F004BF047 /* VideoSocketAPI.swift in Sources */,
+				CF8BA79D2A5DC36F006CF850 /* ChatAlertActionType.swift in Sources */,
 				CF1A9A0B2A0D362F0004CCD8 /* NotificationSettingViewModel.swift in Sources */,
 				CFFD70C6298AC5F800D4F5A2 /* AuthPluggin.swift in Sources */,
 				CF9DF0AA2A36B2D80054E105 /* UIImage+QRCode.swift in Sources */,

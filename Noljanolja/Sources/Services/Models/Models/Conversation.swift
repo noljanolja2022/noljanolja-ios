@@ -17,7 +17,7 @@ enum ConversationType: String, Codable {
 
 // MARK: - Conversation
 
-struct Conversation: Equatable, Codable {
+struct Conversation: Equatable, Decodable {
     let id: Int
     let title: String?
     let creator: User
@@ -27,6 +27,18 @@ struct Conversation: Equatable, Codable {
     let participants: [User]
     let createdAt: Date
     let updatedAt: Date
+
+    enum CodingKeys: CodingKey {
+        case id
+        case title
+        case creator
+        case admin
+        case type
+        case messages
+        case participants
+        case createdAt
+        case updatedAt
+    }
 
     init(id: Int,
          title: String?,

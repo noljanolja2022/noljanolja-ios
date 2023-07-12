@@ -63,6 +63,16 @@ struct ChatView<ViewModel: ChatViewModel>: View {
             guard let fullScreenCoverType else { return }
             UIView.setAnimationsEnabled(fullScreenCoverType.isAnimationsEnabled)
         }
+        .alert(item: $viewModel.alertState) {
+            Alert($0) { action in
+                switch action {
+                case let .deleteMessage(message):
+                    viewModel.deleteMessageAction.send(message)
+                case .none:
+                    break
+                }
+            }
+        }
         .fullScreenCover(
             unwrapping: $viewModel.fullScreenCoverType,
             content: {
@@ -239,7 +249,8 @@ extension ChatView {
                         message: normalMessageModel.message,
                         normalMessageModel: normalMessageModel,
                         rect: rect
-                    )
+                    ),
+                    delegate: viewModel
                 )
             )
             .onDisappear {

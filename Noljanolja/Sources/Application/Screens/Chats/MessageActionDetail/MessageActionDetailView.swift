@@ -109,7 +109,7 @@ struct MessageActionDetailView<ViewModel: MessageActionDetailViewModel>: View {
 
     private func buildActionsView() -> some View {
         HStack(spacing: 4) {
-            ForEach(MessageActionType.allCases, id: \.self) { model in
+            ForEach(viewModel.messageActionTypes, id: \.self) { model in
                 Button(
                     action: {
                         viewModel.action.send(model)

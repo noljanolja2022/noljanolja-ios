@@ -16,6 +16,8 @@ protocol MessageStoreType {
     func saveMessages(_ messages: [Message])
     func saveMessageParameters(_ parameters: [SendMessageParam])
     func observeMessages(conversationID: Int) -> AnyPublisher<[Message], Error>
+
+    func deleteMessage(conversationID: Int, messageID: Int)
     
     func savePhoto(conversationID: Int, fileName: String, data: Data) throws
     func getPhotoURL(conversationID: Int, fileName: String) -> URL?
@@ -77,6 +79,18 @@ final class MessageStore: MessageStoreType {
                     .eraseToAnyPublisher()
             }
             .eraseToAnyPublisher()
+    }
+
+    func deleteMessage(conversationID: Int, messageID: Int) {
+        let storableMessage = realmManager
+            .objects(StorableMessage.self) {
+                $0.conversationID == conversationID && $0.id == messageID
+            }
+            .first
+        guard let storableMessage else {
+            return
+        }
+        realmManager.delete(storableMessage)
     }
 
     func deleteAll() {

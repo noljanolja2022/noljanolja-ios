@@ -14,4 +14,6 @@ struct SendMessageParam: Equatable {
     let type: MessageType
     let message: String?
     let attachments: [AttachmentParam]?
+    let shareMessage: Message?
+    let replyToMessage: Message?
 }
