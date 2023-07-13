@@ -99,11 +99,17 @@ final class MessageActionDetailViewModel: ViewModel {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] currentUser in
                 guard let self else { return }
-                if self.input.message.sender.id == currentUser.id {
-                    self.messageActionTypes = MessageActionType.allCases
-                } else {
-                    self.messageActionTypes = [.reply, .forward, .copy]
+                var messageActionTypes: [MessageActionType] = [.reply, .forward]
+                switch self.input.message.type {
+                case .plaintext:
+                    messageActionTypes.append(.copy)
+                case .photo, .sticker, .eventUpdated, .eventJoined, .eventLeft, .unknown:
+                    break
                 }
+                if self.input.message.sender.id == currentUser.id {
+                    messageActionTypes.append(.delete)
+                }
+                self.messageActionTypes = messageActionTypes
             }
             .store(in: &cancellables)
     }

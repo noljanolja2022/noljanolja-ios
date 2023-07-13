@@ -317,8 +317,7 @@ struct ChatInputView_Previews: PreviewProvider {
 
             ChatInputView(
                 viewModel: ChatInputViewModel(
-                    conversationID: 0,
-                    sendAction: PassthroughSubject<SendMessageType, Never>()
+                    conversationID: 0
                 )
             )
         }

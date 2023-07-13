@@ -13,8 +13,7 @@ import UIKit
 // MARK: - ChatInputViewModelDelegate
 
 protocol ChatInputViewModelDelegate: AnyObject {
-    func chatInputViewModelWillSendMessage()
-    func chatInputViewModelDidSendMessage()
+    func chatInputSendMessage(_ type: SendMessageType)
 }
 
 // MARK: - ChatInputViewModel
@@ -26,18 +25,13 @@ final class ChatInputViewModel: ViewModel {
 
     // MARK: Action
 
-    var sendAction: PassthroughSubject<SendMessageType, Never> {
-        privateSendAction
-    }
-
+    let sendAction = PassthroughSubject<SendMessageType, Never>()
     let didReceiveTextViewAction = PassthroughSubject<Void, Never>()
-
     let isTextFirstResponderAction = PassthroughSubject<Bool, Never>()
 
     // MARK: Dependencies
 
     private let conversationID: Int
-    private let privateSendAction: PassthroughSubject<SendMessageType, Never>
     private let messageService: MessageServiceType
     private weak var delegate: ChatInputViewModelDelegate?
 
@@ -46,11 +40,9 @@ final class ChatInputViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(conversationID: Int,
-         sendAction: PassthroughSubject<SendMessageType, Never>,
          messageService: MessageServiceType = MessageService.default,
          delegate: ChatInputViewModelDelegate? = nil) {
         self.conversationID = conversationID
-        self.privateSendAction = sendAction
         self.messageService = messageService
         self.delegate = delegate
         super.init()
@@ -59,8 +51,6 @@ final class ChatInputViewModel: ViewModel {
     }
 
     private func configure() {
-        let conversationID = conversationID
-
         Publishers.CombineLatest(
             isAppearSubject.filter { $0 }.mapToVoid(),
             didReceiveTextViewAction
@@ -74,48 +64,9 @@ final class ChatInputViewModel: ViewModel {
         .store(in: &cancellables)
 
         sendAction
-            .map { sendMessageType in
-                switch sendMessageType {
-                case let .text(message):
-                    return SendMessageRequest(
-                        conversationID: conversationID,
-                        type: .plaintext,
-                        message: message
-                    )
-                case let .images(images):
-                    return SendMessageRequest(
-                        conversationID: conversationID,
-                        type: .photo,
-                        attachments: .images(images)
-                    )
-                case let .photoAssets(photos):
-                    return SendMessageRequest(
-                        conversationID: conversationID,
-                        type: .photo,
-                        attachments: .photos(photos)
-                    )
-                case let .sticker(stickerPack, sticker):
-                    return SendMessageRequest(
-                        conversationID: conversationID,
-                        type: .sticker,
-                        sticker: (stickerPack, sticker)
-                    )
-                }
-            }
             .receive(on: DispatchQueue.main)
-            .handleEvents(receiveOutput: { [weak self] _ in
-                self?.delegate?.chatInputViewModelWillSendMessage()
-            })
-            .flatMapToResult { [weak self] request in
-                guard let self else {
-                    return Empty<Message, Error>().eraseToAnyPublisher()
-                }
-                return self.messageService
-                    .sendMessage(request: request)
-            }
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.delegate?.chatInputViewModelWillSendMessage()
+            .sink { [weak self] in
+                self?.delegate?.chatInputSendMessage($0)
             }
             .store(in: &cancellables)
     }
@@ -125,7 +76,7 @@ final class ChatInputViewModel: ViewModel {
 
 extension ChatInputViewModel: ChatInputExpandViewModelDelegate {
     func chatInputExpandViewModel(sendImages images: [UIImage]) {
-        sendAction.send(.images(images))
+        delegate?.chatInputSendMessage(.images(images))
     }
 
     func chatInputExpandViewModel(previewSticker stickerPack: StickerPack, sticker: Sticker) {
@@ -133,6 +84,6 @@ extension ChatInputViewModel: ChatInputExpandViewModelDelegate {
     }
 
     func chatInputExpandViewModel(sendSticker stickerPack: StickerPack, sticker: Sticker) {
-        sendAction.send(.sticker(stickerPack, sticker))
+        delegate?.chatInputSendMessage(.sticker(stickerPack, sticker))
     }
 }

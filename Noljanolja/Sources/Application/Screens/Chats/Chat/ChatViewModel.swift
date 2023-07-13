@@ -42,7 +42,7 @@ final class ChatViewModel: ViewModel {
 
     // MARK: Action
 
-    let sendAction = PassthroughSubject<SendMessageType, Never>()
+    private let sendAction = PassthroughSubject<SendMessageType, Never>()
 
     let closeAction = PassthroughSubject<Void, Never>()
     let chatItemAction = PassthroughSubject<(ChatItemModelType, NormalMessageModel.ActionType), Never>()
@@ -364,6 +364,54 @@ final class ChatViewModel: ViewModel {
     }
 
     private func configureActions() {
+        let conversationID = conversationID
+
+        sendAction
+            .map { sendMessageType in
+                switch sendMessageType {
+                case let .text(message):
+                    return SendMessageRequest(
+                        conversationID: conversationID,
+                        type: .plaintext,
+                        message: message
+                    )
+                case let .images(images):
+                    return SendMessageRequest(
+                        conversationID: conversationID,
+                        type: .photo,
+                        attachments: .images(images)
+                    )
+                case let .photoAssets(photos):
+                    return SendMessageRequest(
+                        conversationID: conversationID,
+                        type: .photo,
+                        attachments: .photos(photos)
+                    )
+                case let .sticker(stickerPack, sticker):
+                    return SendMessageRequest(
+                        conversationID: conversationID,
+                        type: .sticker,
+                        sticker: (stickerPack, sticker)
+                    )
+                }
+            }
+            .receive(on: DispatchQueue.main)
+            .handleEvents(receiveOutput: { [weak self] _ in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                    self?.scrollToChatItemAction.send((0, .top))
+                }
+            })
+            .flatMapToResult { [weak self] request in
+                guard let self else {
+                    return Empty<Message, Error>().eraseToAnyPublisher()
+                }
+                return self.messageService
+                    .sendMessage(request: request)
+            }
+            .receive(on: DispatchQueue.main)
+            .sink { _ in }
+            .store(in: &cancellables)
+
         chatItemAction
             .sink { [weak self] chatItemModel, actionType in
                 guard let self else { return }
@@ -457,11 +505,9 @@ final class ChatViewModel: ViewModel {
 // MARK: ChatInputViewModelDelegate
 
 extension ChatViewModel: ChatInputViewModelDelegate {
-    func chatInputViewModelWillSendMessage() {
-        scrollToChatItemAction.send((0, .top))
+    func chatInputSendMessage(_ type: SendMessageType) {
+        sendAction.send(type)
     }
-
-    func chatInputViewModelDidSendMessage() {}
 }
 
 // MARK: ChatSettingViewModelDelegate

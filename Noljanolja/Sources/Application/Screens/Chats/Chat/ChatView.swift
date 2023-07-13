@@ -95,7 +95,6 @@ struct ChatView<ViewModel: ChatViewModel>: View {
             ChatInputView(
                 viewModel: ChatInputViewModel(
                     conversationID: viewModel.conversationID,
-                    sendAction: viewModel.sendAction,
                     delegate: viewModel
                 )
             )
