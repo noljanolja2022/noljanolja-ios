@@ -40,10 +40,7 @@ final class StorableUser: Object {
     @Persisted var updatedAt: Date?
 
     var model: User? {
-        guard let createdAt, let updatedAt else {
-            return nil
-        }
-        return User(
+        User(
             id: id,
             name: name,
             avatar: avatar,
