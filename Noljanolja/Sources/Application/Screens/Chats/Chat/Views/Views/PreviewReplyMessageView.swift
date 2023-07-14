@@ -30,7 +30,7 @@ struct PreviewReplyMessageView: View {
         }
         .padding(.top, 8)
         .padding(.bottom, 8 + cornerRadius)
-        .padding(.horizontal, 16)
+        .padding(.horizontal, 16 - cornerRadius)
         .background(background)
         .cornerRadius(cornerRadius)
         .border(ColorAssets.primaryGreen200.swiftUIColor, width: 1, cornerRadius: cornerRadius)

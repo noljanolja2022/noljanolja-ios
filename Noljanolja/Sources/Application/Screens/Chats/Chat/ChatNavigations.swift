@@ -13,6 +13,7 @@ import SwiftUI
 enum ChatNavigationType: Equatable {
     case chatSetting(Conversation)
     case openImages(Message)
+    case forwardMessage(Message)
 }
 
 // MARK: - ChatFullScreenCoverType

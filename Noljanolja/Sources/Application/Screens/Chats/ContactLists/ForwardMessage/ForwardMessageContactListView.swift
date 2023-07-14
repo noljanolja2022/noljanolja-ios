@@ -1,16 +1,16 @@
 //
-//  UpdateConversationContactListView.swift
+//  ForwardMessageContactListView.swift
 //  Noljanolja
 //
-//  Created by Nguyen The Trinh on 08/04/2023.
+//  Created by Nguyen The Trinh on 14/07/2023.
 //
 //
 
 import SwiftUI
 
-// MARK: - UpdateConversationContactListView
+// MARK: ForwardMessageContactListView
 
-struct UpdateConversationContactListView<ViewModel: UpdateConversationContactListViewModel>: View {
+struct ForwardMessageContactListView<ViewModel: ForwardMessageContactListViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
@@ -22,7 +22,7 @@ struct UpdateConversationContactListView<ViewModel: UpdateConversationContactLis
     @EnvironmentObject private var progressHUBState: ProgressHUBState
 
     @State private var selectedUsers = [User]()
-    
+
     private var isCreateConversationEnabled: Bool {
         !selectedUsers.isEmpty
     }
@@ -32,7 +32,7 @@ struct UpdateConversationContactListView<ViewModel: UpdateConversationContactLis
             .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text(L10n.contactsTitleAddMemmber)
+                    Text("Forward Message")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
@@ -67,60 +67,10 @@ struct UpdateConversationContactListView<ViewModel: UpdateConversationContactLis
         ContactListView(
             viewModel: ContactListViewModel(
                 isMultiSelectionEnabled: true,
-                contactListUseCase: UpdateConversationContactListUseCase(
-                    conversation: viewModel.conversation
-                )
+                contactListUseCase: ContactListUseCaseImpl()
             ),
             selectedUsers: $selectedUsers,
             selectUserAction: { _ in }
-        )
-    }
-}
-
-// MARK: - UpdateConversationContactListView_Previews
-
-struct UpdateConversationContactListView_Previews: PreviewProvider {
-    static var previews: some View {
-        UpdateConversationContactListView(
-            viewModel: UpdateConversationContactListViewModel(
-                conversation: Conversation(
-                    id: 0,
-                    title: nil,
-                    creator: User(
-                        id: "",
-                        name: nil,
-                        avatar: nil,
-                        pushToken: nil,
-                        phone: nil,
-                        email: nil,
-                        isEmailVerified: false,
-                        dob: nil,
-                        gender: nil,
-                        preferences: nil,
-                        createdAt: Date(),
-                        updatedAt: Date()
-                    ),
-                    admin: User(
-                        id: "",
-                        name: nil,
-                        avatar: nil,
-                        pushToken: nil,
-                        phone: nil,
-                        email: nil,
-                        isEmailVerified: false,
-                        dob: nil,
-                        gender: nil,
-                        preferences: nil,
-                        createdAt: Date(),
-                        updatedAt: Date()
-                    ),
-                    type: .single,
-                    messages: [],
-                    participants: [],
-                    createdAt: Date(),
-                    updatedAt: Date()
-                )
-            )
         )
     }
 }

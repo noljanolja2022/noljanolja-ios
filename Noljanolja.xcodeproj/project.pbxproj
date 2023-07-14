@@ -393,6 +393,9 @@
 		CFEF9BF92A34F4AB001DEC32 /* FriendScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEF9BF82A34F4AB001DEC32 /* FriendScannerView.swift */; };
 		CFEF9BFB2A34F7EA001DEC32 /* ScanQRNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEF9BFA2A34F7EA001DEC32 /* ScanQRNavigations.swift */; };
 		CFF0C1EB29E85DEB007B4B98 /* AuthNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF0C1EA29E85DEB007B4B98 /* AuthNavigations.swift */; };
+		CFF0FB382A614E29003D1401 /* ForwardMessageContactListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF0FB362A614E29003D1401 /* ForwardMessageContactListView.swift */; };
+		CFF0FB392A614E29003D1401 /* ForwardMessageContactListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF0FB372A614E29003D1401 /* ForwardMessageContactListViewModel.swift */; };
+		CFF0FB3C2A6150F4003D1401 /* ForwardMessageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF0FB3B2A6150F4003D1401 /* ForwardMessageUseCase.swift */; };
 		CFF1F79A29B6E7FE00B25DD2 /* CombineExt in Frameworks */ = {isa = PBXBuildFile; productRef = CFF1F79929B6E7FE00B25DD2 /* CombineExt */; };
 		CFF1F7A429B7371600B25DD2 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF1F7A229B7371600B25DD2 /* ChatView.swift */; };
 		CFF1F7A529B7371600B25DD2 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF1F7A329B7371600B25DD2 /* ChatViewModel.swift */; };
@@ -862,6 +865,9 @@
 		CFEF9BF82A34F4AB001DEC32 /* FriendScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendScannerView.swift; sourceTree = "<group>"; };
 		CFEF9BFA2A34F7EA001DEC32 /* ScanQRNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRNavigations.swift; sourceTree = "<group>"; };
 		CFF0C1EA29E85DEB007B4B98 /* AuthNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNavigations.swift; sourceTree = "<group>"; };
+		CFF0FB362A614E29003D1401 /* ForwardMessageContactListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwardMessageContactListView.swift; sourceTree = "<group>"; };
+		CFF0FB372A614E29003D1401 /* ForwardMessageContactListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwardMessageContactListViewModel.swift; sourceTree = "<group>"; };
+		CFF0FB3B2A6150F4003D1401 /* ForwardMessageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwardMessageUseCase.swift; sourceTree = "<group>"; };
 		CFF1F7A229B7371600B25DD2 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		CFF1F7A329B7371600B25DD2 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		CFF4679F2A0A45E50018FFAA /* View+Visibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Visibility.swift"; sourceTree = "<group>"; };
@@ -1073,6 +1079,7 @@
 		CF08A85C29B5A16A00D6CE5F /* ContactLists */ = {
 			isa = PBXGroup;
 			children = (
+				CFF0FB352A614E0E003D1401 /* ForwardMessage */,
 				CFE135D32A318D6100630B94 /* AddFriend */,
 				CFB2F6D329E1CB4700191AA3 /* UpdateConversation */,
 				CFB2F6C029E19E5500191AA3 /* CreateConversation */,
@@ -2588,6 +2595,24 @@
 			path = UseCases;
 			sourceTree = "<group>";
 		};
+		CFF0FB352A614E0E003D1401 /* ForwardMessage */ = {
+			isa = PBXGroup;
+			children = (
+				CFF0FB3A2A6150C4003D1401 /* UseCases */,
+				CFF0FB362A614E29003D1401 /* ForwardMessageContactListView.swift */,
+				CFF0FB372A614E29003D1401 /* ForwardMessageContactListViewModel.swift */,
+			);
+			path = ForwardMessage;
+			sourceTree = "<group>";
+		};
+		CFF0FB3A2A6150C4003D1401 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				CFF0FB3B2A6150F4003D1401 /* ForwardMessageUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
 		CFF520F12A17C16500F29A4E /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -3432,6 +3457,7 @@
 				CF8737E229CB539F0018237B /* ChatInputExpandView.swift in Sources */,
 				CFD095232A02AE49004BF047 /* VideoDetailPlayerViewModel.swift in Sources */,
 				CF30B1972A13EA0600C43A54 /* TransactionHistoryHeaderView.swift in Sources */,
+				CFF0FB382A614E29003D1401 /* ForwardMessageContactListView.swift in Sources */,
 				CF3E0EF82A372875009EF665 /* CouponBrand.swift in Sources */,
 				CF775BBE29C625C900E82183 /* NotificationAppDelegate.swift in Sources */,
 				CF615C512A11488400CAF9C5 /* WalletPointModel.swift in Sources */,
@@ -3700,6 +3726,7 @@
 				CFDC637229EC7A83002F4BFC /* WalletNavigations.swift in Sources */,
 				CFAA37612A4B370C0085CE88 /* BannerRepository.swift in Sources */,
 				CF615C402A10ACC300CAF9C5 /* LoyaltyMemberInfo.swift in Sources */,
+				CFF0FB392A614E29003D1401 /* ForwardMessageContactListViewModel.swift in Sources */,
 				CF28A1A829B4FFC50003C204 /* WalletViewModel.swift in Sources */,
 				CFF863972A435FC700EC0713 /* StorableReactIcon.swift in Sources */,
 				CFEF9BFB2A34F7EA001DEC32 /* ScanQRNavigations.swift in Sources */,
@@ -3710,6 +3737,7 @@
 				CF74A1A529B5831800419342 /* ConversationItemView.swift in Sources */,
 				CFFD70CA298AC5F800D4F5A2 /* TargetType+Default.swift in Sources */,
 				CFAAEF202A5736AE004CE778 /* MessageQuickReactionViewModel.swift in Sources */,
+				CFF0FB3C2A6150F4003D1401 /* ForwardMessageUseCase.swift in Sources */,
 				CF615C4D2A11452600CAF9C5 /* WalletUserInfoModel.swift in Sources */,
 				CF59759129FBAF630068EC88 /* ImageEditorResultViewModel.swift in Sources */,
 				CFC0DE492A3B1165007AB0F4 /* String+QRCode.swift in Sources */,

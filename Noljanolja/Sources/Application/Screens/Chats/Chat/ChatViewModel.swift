@@ -553,4 +553,10 @@ extension ChatViewModel: MessageActionDetailViewModelDelegate {
     func messageActionDetailReply(_ message: Message) {
         replyToMessage = message
     }
+
+    func messageActionDetailForward(_ message: Message) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            self?.navigationType = .forwardMessage(message)
+        }
+    }
 }

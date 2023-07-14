@@ -88,8 +88,9 @@ struct NormalMessageView: View {
                     cornerRadius: 8,
                     isRemoveEnabled: false
                 )
-                .opacity(0.5)
+                .opacity(0.75)
                 .padding(.bottom, -12)
+                .padding(.top, 4)
             }
 
             MessageContentView(

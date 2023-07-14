@@ -16,6 +16,7 @@ import UIKit
 protocol MessageActionDetailViewModelDelegate: AnyObject {
     func messageActionDetailDelete(_ message: Message)
     func messageActionDetailReply(_ message: Message)
+    func messageActionDetailForward(_ message: Message)
 }
 
 // MARK: - MessageActionDetailViewModel
@@ -144,7 +145,8 @@ final class MessageActionDetailViewModel: ViewModel {
                     closeAction.send()
                     delegate?.messageActionDetailReply(input.message)
                 case .forward:
-                    break
+                    closeAction.send()
+                    delegate?.messageActionDetailForward(input.message)
                 case .delete:
                     closeAction.send()
                     delegate?.messageActionDetailDelete(input.message)

@@ -16,7 +16,6 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
-    var createConversationType: ConversationType
 
     // MARK: State
 
@@ -35,7 +34,7 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
                 ToolbarItem(placement: .principal) {
                     Text(
                         { () -> String in
-                            switch createConversationType {
+                            switch viewModel.createConversationType {
                             case .single, .unknown:
                                 return L10n.contactsTitleNormal
                             case .group:
@@ -48,14 +47,12 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     ZStack {
-                        switch createConversationType {
+                        switch viewModel.createConversationType {
                         case .single, .unknown:
                             EmptyView()
                         case .group:
                             Button(L10n.commonAgree) {
-                                viewModel.createConversationAction.send(
-                                    (createConversationType, selectedUsers)
-                                )
+                                viewModel.action.send(selectedUsers)
                             }
                             .font(.system(size: 16))
                             .foregroundColor(
@@ -80,7 +77,7 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
         ContactListView(
             viewModel: ContactListViewModel(
                 isMultiSelectionEnabled: {
-                    switch createConversationType {
+                    switch viewModel.createConversationType {
                     case .single: return false
                     case .group: return true
                     case .unknown: return false
@@ -90,11 +87,9 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
             ),
             selectedUsers: $selectedUsers,
             selectUserAction: { _ in
-                switch createConversationType {
+                switch viewModel.createConversationType {
                 case .single:
-                    viewModel.createConversationAction.send(
-                        (createConversationType, selectedUsers)
-                    )
+                    viewModel.action.send(selectedUsers)
                 case .group, .unknown:
                     return
                 }
@@ -109,8 +104,9 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
 struct CreateConversationContactListView_Previews: PreviewProvider {
     static var previews: some View {
         CreateConversationContactListView(
-            viewModel: CreateConversationContactListViewModel(),
-            createConversationType: .single
+            viewModel: CreateConversationContactListViewModel(
+                createConversationType: .single
+            )
         )
     }
 }

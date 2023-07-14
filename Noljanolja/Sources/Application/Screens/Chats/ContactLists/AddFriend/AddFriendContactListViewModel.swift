@@ -28,7 +28,8 @@ final class AddFriendContactListViewModel: ViewModel {
 
     // MARK: Action
 
-    let addFriendAction = PassthroughSubject<User, Never>()
+    let action = PassthroughSubject<User, Never>()
+    let closeAction = PassthroughSubject<Void, Never>()
 
     // MARK: Dependencies
 
@@ -53,7 +54,7 @@ final class AddFriendContactListViewModel: ViewModel {
     }
 
     private func configureActions() {
-        addFriendAction
+        action
             .handleEvents(receiveOutput: { [weak self] _ in
                 self?.isProgressHUDShowing = true
             })

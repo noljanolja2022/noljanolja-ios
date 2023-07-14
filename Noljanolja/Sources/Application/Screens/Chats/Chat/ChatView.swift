@@ -236,6 +236,10 @@ extension ChatView {
                     delegate: viewModel
                 )
             )
+        case let .forwardMessage(message):
+            ForwardMessageContactListView(
+                viewModel: ForwardMessageContactListViewModel(message: message)
+            )
         }
     }
 

@@ -52,7 +52,7 @@ struct AddFriendContactListView<ViewModel: AddFriendContactListViewModel>: View 
                 contactListUseCase: ContactListUseCaseImpl()
             ),
             selectedUsers: .constant([]),
-            selectUserAction: { viewModel.addFriendAction.send($0) }
+            selectUserAction: { viewModel.action.send($0) }
         )
         .background(ColorAssets.neutralLight.swiftUIColor.ignoresSafeArea())
     }

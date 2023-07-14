@@ -117,9 +117,9 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
                 case let .contactList(conversationType):
                     CreateConversationContactListView(
                         viewModel: CreateConversationContactListViewModel(
+                            createConversationType: conversationType,
                             delegate: viewModel
-                        ),
-                        createConversationType: conversationType
+                        )
                     )
                 }
             },
