@@ -58,6 +58,7 @@ struct NormalMessageModel: Equatable {
     let isSendByCurrentUser: Bool
     let senderAvatar: String
     let senderName: String
+    let replyToMessage: PreviewReplyMessageModel?
     let content: ContentType
     let reactionsModel: MessageReactionsModel?
     let status: StatusType
@@ -79,12 +80,7 @@ struct NormalMessageModel: Equatable {
         self.isSendByCurrentUser = currentUser.id == message.sender.id
         self.senderAvatar = message.sender.avatar ?? ""
         self.senderName = message.sender.name ?? ""
-        self.reactionsModel = MessageReactionsModel(
-            currentUser: currentUser,
-            reactionIcons: reactionIcons,
-            message: message,
-            positionTypeBySenderType: positionTypeBySenderType
-        )
+        self.replyToMessage = message.replyToMessage.flatMap { PreviewReplyMessageModel($0) }
 
         let background: MessageContentBackgroundModel = {
             let backgroundColor = message.sender.id == currentUser.id
@@ -154,6 +150,12 @@ struct NormalMessageModel: Equatable {
         case .eventUpdated, .eventJoined, .eventLeft, .unknown:
             return nil
         }
+        self.reactionsModel = MessageReactionsModel(
+            currentUser: currentUser,
+            reactionIcons: reactionIcons,
+            message: message,
+            positionTypeBySenderType: positionTypeBySenderType
+        )
         self.status = status
         
         self.senderAvatarVisibility = {

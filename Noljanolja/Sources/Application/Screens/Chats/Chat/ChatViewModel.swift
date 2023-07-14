@@ -29,6 +29,7 @@ final class ChatViewModel: ViewModel {
     @Published var isChatSettingEnabled = false
 
     @Published var chatItems = [ChatItemModelType]()
+    @Published var replyToMessage: Message?
     @Published var error: Error?
 
     @Published var viewState = ViewState.loading
@@ -367,36 +368,41 @@ final class ChatViewModel: ViewModel {
         let conversationID = conversationID
 
         sendAction
-            .map { sendMessageType in
+            .map { [weak self] sendMessageType in
                 switch sendMessageType {
                 case let .text(message):
                     return SendMessageRequest(
                         conversationID: conversationID,
                         type: .plaintext,
-                        message: message
+                        message: message,
+                        replyToMessage: self?.replyToMessage
                     )
                 case let .images(images):
                     return SendMessageRequest(
                         conversationID: conversationID,
                         type: .photo,
-                        attachments: .images(images)
+                        attachments: .images(images),
+                        replyToMessage: self?.replyToMessage
                     )
                 case let .photoAssets(photos):
                     return SendMessageRequest(
                         conversationID: conversationID,
                         type: .photo,
-                        attachments: .photos(photos)
+                        attachments: .photos(photos),
+                        replyToMessage: self?.replyToMessage
                     )
                 case let .sticker(stickerPack, sticker):
                     return SendMessageRequest(
                         conversationID: conversationID,
                         type: .sticker,
-                        sticker: (stickerPack, sticker)
+                        sticker: (stickerPack, sticker),
+                        replyToMessage: self?.replyToMessage
                     )
                 }
             }
             .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in
+                self?.replyToMessage = nil
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
                     self?.scrollToChatItemAction.send((0, .top))
                 }
@@ -542,5 +548,9 @@ extension ChatViewModel: MessageActionDetailViewModelDelegate {
                 secondaryButton: .default(TextState(L10n.commonYes.uppercased()), action: .send(.deleteMessage(message)))
             )
         }
+    }
+
+    func messageActionDetailReply(_ message: Message) {
+        replyToMessage = message
     }
 }

@@ -15,6 +15,7 @@ import UIKit
 
 protocol MessageActionDetailViewModelDelegate: AnyObject {
     func messageActionDetailDelete(_ message: Message)
+    func messageActionDetailReply(_ message: Message)
 }
 
 // MARK: - MessageActionDetailViewModel
@@ -139,7 +140,10 @@ final class MessageActionDetailViewModel: ViewModel {
             .sink { [weak self] action in
                 guard let self else { return }
                 switch action {
-                case .reply, .forward:
+                case .reply:
+                    closeAction.send()
+                    delegate?.messageActionDetailReply(input.message)
+                case .forward:
                     break
                 case .delete:
                     closeAction.send()

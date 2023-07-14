@@ -80,6 +80,18 @@ struct NormalMessageView: View {
             alignment: model.reactionsModel?.horizontalAlignment ?? .center,
             spacing: 0
         ) {
+            if let replyToMessage = model.replyToMessage {
+                PreviewReplyMessageView(
+                    model: replyToMessage,
+                    background: ColorAssets.neutralLightGrey.swiftUIColor,
+                    isExpand: false,
+                    cornerRadius: 8,
+                    isRemoveEnabled: false
+                )
+                .opacity(0.5)
+                .padding(.bottom, -12)
+            }
+
             MessageContentView(
                 model: model.content,
                 action: {

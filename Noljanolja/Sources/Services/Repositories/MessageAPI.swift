@@ -57,6 +57,16 @@ private enum MessageAPITargets {
                 multipartFormDatas.append(MultipartFormData(provider: .data(data), name: "localId"))
             }
 
+            if let replyToMessageID = param.replyToMessage?.id,
+               let data = String(replyToMessageID).data(using: .utf8) {
+                multipartFormDatas.append(MultipartFormData(provider: .data(data), name: "replyToMessageId"))
+            }
+
+            if let shareMessageId = param.shareMessage?.id,
+               let data = String(shareMessageId).data(using: .utf8) {
+                multipartFormDatas.append(MultipartFormData(provider: .data(data), name: "shareMessageId"))
+            }
+
             return .uploadMultipart(multipartFormDatas.compactMap { $0 })
         }
 

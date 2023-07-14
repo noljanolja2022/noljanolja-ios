@@ -306,6 +306,7 @@
 		CFC4EFD129FAC7E400DBD831 /* ImageEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC4EFCF29FAC7E400DBD831 /* ImageEditorView.swift */; };
 		CFC4EFD229FAC7E400DBD831 /* ImageEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC4EFD029FAC7E400DBD831 /* ImageEditorViewModel.swift */; };
 		CFC709E02996051800B64216 /* View+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709DF2996051800B64216 /* View+Progress.swift */; };
+		CFCBD6C42A6134EC0002B06D /* PreviewReplyMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCBD6C32A6134EC0002B06D /* PreviewReplyMessageModel.swift */; };
 		CFCD10AB29D350C900C5DAFF /* SendMessageParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCD10AA29D350C900C5DAFF /* SendMessageParam.swift */; };
 		CFCFFA3729E5C82A002B7FB6 /* ConversationSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFCFFA3629E5C82A002B7FB6 /* ConversationSocketService.swift */; };
 		CFD095172A02A87F004BF047 /* VideoSocketAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD095162A02A87F004BF047 /* VideoSocketAPI.swift */; };
@@ -383,6 +384,7 @@
 		CFED124829F32159000B320B /* VideoDetailInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFED124729F32159000B320B /* VideoDetailInformationView.swift */; };
 		CFED124A29F323CD000B320B /* VideoDetailCommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFED124929F323CD000B320B /* VideoDetailCommentsView.swift */; };
 		CFED124C29F32587000B320B /* VideoDetailCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFED124B29F32587000B320B /* VideoDetailCommentView.swift */; };
+		CFED619F2A60570D0015DEEB /* PreviewReplyMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFED619E2A60570D0015DEEB /* PreviewReplyMessageView.swift */; };
 		CFEF9BEF2A34E162001DEC32 /* AddFriendUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEF9BEE2A34E162001DEC32 /* AddFriendUseCase.swift */; };
 		CFEF9BF12A34E4AC001DEC32 /* FindUsersResultNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEF9BF02A34E4AC001DEC32 /* FindUsersResultNavigations.swift */; };
 		CFEF9BF32A34E72C001DEC32 /* AddFriendContactListNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEF9BF22A34E72C001DEC32 /* AddFriendContactListNavigations.swift */; };
@@ -779,6 +781,7 @@
 		CFC4EFCF29FAC7E400DBD831 /* ImageEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditorView.swift; sourceTree = "<group>"; };
 		CFC4EFD029FAC7E400DBD831 /* ImageEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditorViewModel.swift; sourceTree = "<group>"; };
 		CFC709DF2996051800B64216 /* View+Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Progress.swift"; sourceTree = "<group>"; };
+		CFCBD6C32A6134EC0002B06D /* PreviewReplyMessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewReplyMessageModel.swift; sourceTree = "<group>"; };
 		CFCD10AA29D350C900C5DAFF /* SendMessageParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageParam.swift; sourceTree = "<group>"; };
 		CFCFFA3629E5C82A002B7FB6 /* ConversationSocketService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationSocketService.swift; sourceTree = "<group>"; };
 		CFD095162A02A87F004BF047 /* VideoSocketAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSocketAPI.swift; sourceTree = "<group>"; };
@@ -850,6 +853,7 @@
 		CFED124729F32159000B320B /* VideoDetailInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailInformationView.swift; sourceTree = "<group>"; };
 		CFED124929F323CD000B320B /* VideoDetailCommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailCommentsView.swift; sourceTree = "<group>"; };
 		CFED124B29F32587000B320B /* VideoDetailCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailCommentView.swift; sourceTree = "<group>"; };
+		CFED619E2A60570D0015DEEB /* PreviewReplyMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewReplyMessageView.swift; sourceTree = "<group>"; };
 		CFEF9BEE2A34E162001DEC32 /* AddFriendUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendUseCase.swift; sourceTree = "<group>"; };
 		CFEF9BF02A34E4AC001DEC32 /* FindUsersResultNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUsersResultNavigations.swift; sourceTree = "<group>"; };
 		CFEF9BF22A34E72C001DEC32 /* AddFriendContactListNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendContactListNavigations.swift; sourceTree = "<group>"; };
@@ -1474,6 +1478,7 @@
 			children = (
 				CF3A82C82A2105C9001365DF /* MessageContentBackgroundView.swift */,
 				CFA924B52A4998DE000918D8 /* MessageReactionsView.swift */,
+				CFED619E2A60570D0015DEEB /* PreviewReplyMessageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1484,6 +1489,7 @@
 				CF3A82CB2A2105E9001365DF /* MessageContentBackgroundModel.swift */,
 				CFA924B72A499A25000918D8 /* MessageReactionsModel.swift */,
 				CFBF28972A52D85700A91F1E /* PhotoMessageContentItemModel.swift */,
+				CFCBD6C32A6134EC0002B06D /* PreviewReplyMessageModel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3533,6 +3539,7 @@
 				CF8633FD29B8F2F50091BF5D /* Contact.swift in Sources */,
 				CF8737DF29CB525B0018237B /* ChatMediaInputType.swift in Sources */,
 				CF59759429FBBBB10068EC88 /* SendMessageType.swift in Sources */,
+				CFCBD6C42A6134EC0002B06D /* PreviewReplyMessageModel.swift in Sources */,
 				CFB2F6D729E1CB6400191AA3 /* UpdateConversationContactListViewModel.swift in Sources */,
 				CFED123F29F31D05000B320B /* VideoDetailViewModel.swift in Sources */,
 				CFBC275E29E27896008E0F92 /* ParticipantDetailActionViewModel.swift in Sources */,
@@ -3617,6 +3624,7 @@
 				CF0CC9FD29D14C790027D2C1 /* SendMessageRequest.swift in Sources */,
 				CFF5210F2A1915DC00F29A4E /* TransactionDashboardHeaderModel.swift in Sources */,
 				CFAF84C02A380E1A005C1082 /* ShopHomeView.swift in Sources */,
+				CFED619F2A60570D0015DEEB /* PreviewReplyMessageView.swift in Sources */,
 				CFD5424929BF7A520053C5B1 /* NormalMessageView.swift in Sources */,
 				CF4D338A2A546305004B5136 /* MessageImageItemView.swift in Sources */,
 				CFAA37632A4B38E00085CE88 /* Banner.swift in Sources */,
