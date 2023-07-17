@@ -1594,7 +1594,7 @@
 			path = Launch/Launch;
 			sourceTree = "<group>";
 		};
-		CF52AB6229B8D7D000C9C90C /* Stores */ = {
+		CF52AB6229B8D7D000C9C90C /* Local */ = {
 			isa = PBXGroup;
 			children = (
 				CFFB71EF2A400A2B0019663C /* LocalCouponKeywordRepository.swift */,
@@ -1609,7 +1609,7 @@
 				CF5923FD29EDA1C8009C2516 /* UserStore.swift */,
 				CFB386692A443028001B0849 /* ReactionIconsLocalRepository.swift */,
 			);
-			path = Stores;
+			path = Local;
 			sourceTree = "<group>";
 		};
 		CF52AB6529B8D90D00C9C90C /* Models */ = {
@@ -2012,17 +2012,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		CFAC6BB42A123397004AD4A5 /* UseCases */ = {
-			isa = PBXGroup;
-			children = (
-				CF30B1862A13D1D000C43A54 /* DeleteCacheUseCases.swift */,
-				CFF818312A3CD6D5009CD057 /* MemberInfoUseCases.swift */,
-				CFB386672A442E3A001B0849 /* ReactionIconsUseCases.swift */,
-				CFA924B32A49926D000918D8 /* MessageReactionUseCases.swift */,
-			);
-			path = UseCases;
-			sourceTree = "<group>";
-		};
 		CFAC6BB52A123766004AD4A5 /* ProfileSetting */ = {
 			isa = PBXGroup;
 			children = (
@@ -2242,12 +2231,12 @@
 			path = SearchView;
 			sourceTree = "<group>";
 		};
-		CFBCE41629B98A4E000D6F73 /* Erros */ = {
+		CFBCE41629B98A4E000D6F73 /* Errors */ = {
 			isa = PBXGroup;
 			children = (
 				CFBCE41729B98A65000D6F73 /* CommonError.swift */,
 			);
-			path = Erros;
+			path = Errors;
 			sourceTree = "<group>";
 		};
 		CFBF28922A52CD4400A91F1E /* MessageImages */ = {
@@ -2453,15 +2442,16 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
-		CFE09258298DF79300F197F0 /* Commons */ = {
+		CFE09258298DF79300F197F0 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				CFFD70B7298AC55600D4F5A2 /* Network */,
 				CF62EF8929B23DF200D6B688 /* ViewModel */,
 				CF15500D299396260053E86D /* Views */,
 				CFE0933F299007C600F197F0 /* Extensions */,
 				CFE09259298DF7A000F197F0 /* Loggers */,
 			);
-			path = Commons;
+			path = Base;
 			sourceTree = "<group>";
 		};
 		CFE09259298DF7A000F197F0 /* Loggers */ = {
@@ -2521,6 +2511,81 @@
 				CFE9694F29EC48CE00441903 /* ProfileSettingItemView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		CFEA46EB2A65AE9700F20B82 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA46EE2A65AEB500F20B82 /* Presentation */,
+				CFEA46ED2A65AEB000F20B82 /* Data */,
+				CFEA46EC2A65AEA900F20B82 /* Domain */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		CFEA46EC2A65AEA900F20B82 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA46EF2A65AEF000F20B82 /* Entity */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		CFEA46ED2A65AEB000F20B82 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA46F12A65AF0D00F20B82 /* UseCase */,
+				CFEA46F02A65AF0600F20B82 /* Repository */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		CFEA46EE2A65AEB500F20B82 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		CFEA46EF2A65AEF000F20B82 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				CFCD10A929D350B300C5DAFF /* Requests */,
+				CF398DD629BF891C0015DB18 /* Params */,
+				CFBCE41629B98A4E000D6F73 /* Errors */,
+				CF52AB6629B8D91200C9C90C /* StorableModels */,
+				CF52AB6529B8D90D00C9C90C /* Models */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		CFEA46F02A65AF0600F20B82 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				CFFD70CD298AC5FD00D4F5A2 /* Network */,
+				CF52AB6229B8D7D000C9C90C /* Local */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		CFEA46F12A65AF0D00F20B82 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				CF14F267298CF87E00BC2066 /* AuthService.swift */,
+				CF52AB6329B8D85000C9C90C /* ContactService.swift */,
+				CF1B625529B9D3BF00DE53E6 /* ConversationService.swift */,
+				CFCFFA3629E5C82A002B7FB6 /* ConversationSocketService.swift */,
+				CF54FA2129D0179B0092E2C6 /* MediaService.swift */,
+				CF11B1D729BB65B4002E8151 /* MessageService.swift */,
+				CF775BC929C630B800E82183 /* NotificationService.swift */,
+				CF3CE18429B79FD50054BBEF /* UserDefaults.swift */,
+				CF1BD1FC29ACEAA000778786 /* UserService.swift */,
+				CF30B1862A13D1D000C43A54 /* DeleteCacheUseCases.swift */,
+				CFF818312A3CD6D5009CD057 /* MemberInfoUseCases.swift */,
+				CFB386672A442E3A001B0849 /* ReactionIconsUseCases.swift */,
+				CFA924B32A49926D000918D8 /* MessageReactionUseCases.swift */,
+			);
+			path = UseCase;
 			sourceTree = "<group>";
 		};
 		CFECC12829B4D6D400E20B58 /* Views */ = {
@@ -2804,8 +2869,9 @@
 		CFFD70AB298AC19400D4F5A2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				CFE09258298DF79300F197F0 /* Commons */,
 				CFFD70B4298AC42800D4F5A2 /* Application */,
+				CFE09258298DF79300F197F0 /* Base */,
+				CFEA46EB2A65AE9700F20B82 /* Main */,
 				CFFD70AF298AC21000D4F5A2 /* Services */,
 			);
 			path = Sources;
@@ -2820,43 +2886,9 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		CFFD70AD298AC1B400D4F5A2 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				CFCD10A929D350B300C5DAFF /* Requests */,
-				CF398DD629BF891C0015DB18 /* Params */,
-				CFBCE41629B98A4E000D6F73 /* Erros */,
-				CF52AB6629B8D91200C9C90C /* StorableModels */,
-				CF52AB6529B8D90D00C9C90C /* Models */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		CFFD70AE298AC1CE00D4F5A2 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				CF14F267298CF87E00BC2066 /* AuthService.swift */,
-				CF52AB6329B8D85000C9C90C /* ContactService.swift */,
-				CF1B625529B9D3BF00DE53E6 /* ConversationService.swift */,
-				CFCFFA3629E5C82A002B7FB6 /* ConversationSocketService.swift */,
-				CF54FA2129D0179B0092E2C6 /* MediaService.swift */,
-				CF11B1D729BB65B4002E8151 /* MessageService.swift */,
-				CF775BC929C630B800E82183 /* NotificationService.swift */,
-				CF3CE18429B79FD50054BBEF /* UserDefaults.swift */,
-				CF1BD1FC29ACEAA000778786 /* UserService.swift */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
 		CFFD70AF298AC21000D4F5A2 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				CFAC6BB42A123397004AD4A5 /* UseCases */,
-				CFFD70CD298AC5FD00D4F5A2 /* Repositories */,
-				CFFD70AD298AC1B400D4F5A2 /* Models */,
-				CFFD70B7298AC55600D4F5A2 /* Network */,
-				CFFD70AE298AC1CE00D4F5A2 /* Services */,
-				CF52AB6229B8D7D000C9C90C /* Stores */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -2963,7 +2995,7 @@
 			path = API;
 			sourceTree = "<group>";
 		};
-		CFFD70CD298AC5FD00D4F5A2 /* Repositories */ = {
+		CFFD70CD298AC5FD00D4F5A2 /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				CFD095182A02A936004BF047 /* Socket */,
@@ -2983,7 +3015,7 @@
 				CFB3866B2A44588F001B0849 /* ReactionIconsRemoteRepository.swift */,
 				CFAA37602A4B370C0085CE88 /* BannerRepository.swift */,
 			);
-			path = Repositories;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		CFFD70D1298AC87800D4F5A2 /* Configs */ = {
