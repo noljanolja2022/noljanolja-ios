@@ -19,6 +19,8 @@ protocol MessageServiceType {
 
     func sendMessage(request: SendMessageRequest) -> AnyPublisher<Message, Error>
 
+    func forwardMessage(message: Message, users: [User]) -> AnyPublisher<[Message], Error>
+
     func deleteMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error>
 
     func seenMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error>
@@ -41,18 +43,23 @@ final class MessageService: MessageServiceType {
 
     private let userStore: UserStoreType
     private let messageAPI: MessageAPIType
+    private let conversationService: ConversationServiceType
     private let messageStore: MessageStoreType
     private let photoAssetAPI: PhotoAssetAPI
+    private let dataRepository: DataRepository
 
     private init(userStore: UserStoreType = UserStore.default,
                  messageAPI: MessageAPIType = MessageAPI.default,
-                 conversationStore: ConversationStoreType = ConversationStore.default,
+                 conversationService: ConversationServiceType = ConversationService.default,
                  messageStore: MessageStoreType = MessageStore.default,
-                 photoAssetAPI: PhotoAssetAPI = PhotoAssetAPI.default) {
+                 photoAssetAPI: PhotoAssetAPI = PhotoAssetAPI.default,
+                 dataRepository: DataRepository = DataRepositoryImpl.shared) {
         self.userStore = userStore
         self.messageAPI = messageAPI
+        self.conversationService = conversationService
         self.messageStore = messageStore
         self.photoAssetAPI = photoAssetAPI
+        self.dataRepository = dataRepository
     }
 
     func getLocalMessages(conversationID: Int) -> AnyPublisher<[Message], Error> {
@@ -145,6 +152,71 @@ final class MessageService: MessageServiceType {
             .handleEvents(receiveOutput: { [weak self] in
                 self?.messageStore.saveMessages([$0])
             })
+            .eraseToAnyPublisher()
+    }
+
+    func forwardMessage(message: Message, users: [User]) -> AnyPublisher<[Message], Error> {
+        let attachmentPublishers = message.attachments
+            .compactMap {
+                $0.getPhotoURL(conversationID: message.conversationID)
+            }
+            .compactMap {
+                self.dataRepository.getData(url: $0)
+                    .map {
+                        let id = UUID().uuidString
+                        return AttachmentParam(
+                            id: id,
+                            name: "\(id).png",
+                            data: $0
+                        )
+                    }
+            }
+
+        let attachmentPublisher = Publishers.MergeMany(attachmentPublishers)
+            .collect()
+            .eraseToAnyPublisher()
+
+        return attachmentPublisher
+            .flatMapLatest { [weak self] attachments in
+                guard let self else {
+                    return Empty<[Message], Error>().eraseToAnyPublisher()
+                }
+                return self.userStore
+                    .getCurrentUserPublisher()
+                    .setFailureType(to: Error.self)
+                    .flatMapLatest { [weak self] currentUser in
+                        guard let self else {
+                            return Empty<[Message], Error>().eraseToAnyPublisher()
+                        }
+                        let messages = users
+                            .map { user in
+                                self.conversationService.createConversation(
+                                    type: .single,
+                                    participants: [user]
+                                )
+                                .flatMapLatest { conversation in
+                                    self.messageAPI.sendMessage(
+                                        param: SendMessageParam(
+                                            currentUser: currentUser,
+                                            localID: UUID().uuidString,
+                                            conversationID: conversation.id,
+                                            type: message.type,
+                                            message: message.message,
+                                            attachments: attachments,
+                                            shareMessage: message,
+                                            replyToMessage: nil
+                                        )
+                                    )
+                                }
+                            }
+                        let message: AnyPublisher<[Message], Error> = Publishers.MergeMany(messages)
+                            .collect()
+                            .eraseToAnyPublisher()
+
+                        return message
+                    }
+                    .eraseToAnyPublisher()
+            }
             .eraseToAnyPublisher()
     }
 

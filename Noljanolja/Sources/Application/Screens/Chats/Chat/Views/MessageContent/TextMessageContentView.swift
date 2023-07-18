@@ -27,9 +27,12 @@ struct TextMessageContentView: View {
     }
 
     private func buildContentView() -> some View {
-        HStack(alignment: .bottom, spacing: 10) {
-            buildTextView()
-            buildInfoView()
+        VStack(alignment: .leading, spacing: 4) {
+            buildForwardView()
+            HStack(alignment: .bottom, spacing: 10) {
+                buildTextView()
+                buildInfoView()
+            }
         }
         .padding(12)
         .background(
@@ -48,25 +51,10 @@ struct TextMessageContentView: View {
         }
     }
 
-    private func buildMainView() -> some View {
-        HStack(alignment: .bottom, spacing: 10) {
-            buildTextView()
-            buildInfoView()
-        }
-        .padding(12)
-        .background(
-            GeometryReader { geometry in
-                MessageContentBackgroundView(
-                    model: model.background
-                )
-                .onAppear {
-                    geometryProxy = geometry
-                }
-            }
-        )
-        .onTapGesture {}
-        .onLongPressGesture {
-            action?(.openMessageActionDetail(geometryProxy))
+    @ViewBuilder
+    private func buildForwardView() -> some View {
+        if model.isForward {
+            ForwardView()
         }
     }
 

@@ -24,6 +24,7 @@ struct StickerMessageContentModel: Equatable {
     let sticker: URL?
     let createdAt: Date
     let status: MessageStatusModel.StatusType
+    let isForward: Bool
     let background: MessageContentBackgroundModel
 
     init(currentUser: User,
@@ -41,6 +42,7 @@ struct StickerMessageContentModel: Equatable {
             case let .seen(users): return .seen(.single(!users.isEmpty))
             }
         }()
+        self.isForward = message.shareMessage != nil
         self.background = background
     }
 }

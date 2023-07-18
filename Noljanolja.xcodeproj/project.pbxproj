@@ -17,6 +17,8 @@
 		CF00D1732995457600505702 /* ProgressHUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D1722995457600505702 /* ProgressHUDView.swift */; };
 		CF076D5129D0BF2B0013B6F9 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = CF076D5029D0BF2B0013B6F9 /* SDWebImageSwiftUI */; };
 		CF076D5729D0C0130013B6F9 /* SDWebImageWebPCoder in Frameworks */ = {isa = PBXBuildFile; productRef = CF076D5629D0C0130013B6F9 /* SDWebImageWebPCoder */; };
+		CF0798662A66DFBE004D09B2 /* DataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0798652A66DFBE004D09B2 /* DataRepository.swift */; };
+		CF07986F2A66F720004D09B2 /* ForwardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF07986E2A66F720004D09B2 /* ForwardView.swift */; };
 		CF08A85F29B5A17A00D6CE5F /* CreateConversationContactListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF08A85D29B5A17A00D6CE5F /* CreateConversationContactListView.swift */; };
 		CF08A86029B5A17A00D6CE5F /* CreateConversationContactListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF08A85E29B5A17A00D6CE5F /* CreateConversationContactListViewModel.swift */; };
 		CF08A86229B5A26600D6CE5F /* ContactAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF08A86129B5A26600D6CE5F /* ContactAPI.swift */; };
@@ -502,6 +504,8 @@
 		CF00D151299407EF00505702 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CF00D1682994E0A700505702 /* TextField+ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+ErrorMessage.swift"; sourceTree = "<group>"; };
 		CF00D1722995457600505702 /* ProgressHUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressHUDView.swift; sourceTree = "<group>"; };
+		CF0798652A66DFBE004D09B2 /* DataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRepository.swift; sourceTree = "<group>"; };
+		CF07986E2A66F720004D09B2 /* ForwardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForwardView.swift; sourceTree = "<group>"; };
 		CF08A85D29B5A17A00D6CE5F /* CreateConversationContactListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateConversationContactListView.swift; sourceTree = "<group>"; };
 		CF08A85E29B5A17A00D6CE5F /* CreateConversationContactListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateConversationContactListViewModel.swift; sourceTree = "<group>"; };
 		CF08A86129B5A26600D6CE5F /* ContactAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactAPI.swift; sourceTree = "<group>"; };
@@ -1486,6 +1490,7 @@
 				CF3A82C82A2105C9001365DF /* MessageContentBackgroundView.swift */,
 				CFA924B52A4998DE000918D8 /* MessageReactionsView.swift */,
 				CFED619E2A60570D0015DEEB /* PreviewReplyMessageView.swift */,
+				CF07986E2A66F720004D09B2 /* ForwardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2872,7 +2877,6 @@
 				CFFD70B4298AC42800D4F5A2 /* Application */,
 				CFE09258298DF79300F197F0 /* Base */,
 				CFEA46EB2A65AE9700F20B82 /* Main */,
-				CFFD70AF298AC21000D4F5A2 /* Services */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -2884,13 +2888,6 @@
 				CFFD70B0298AC33C00D4F5A2 /* Sources */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		CFFD70AF298AC21000D4F5A2 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Services;
 			sourceTree = "<group>";
 		};
 		CFFD70B0298AC33C00D4F5A2 /* Sources */ = {
@@ -3014,6 +3011,7 @@
 				CF3E0EFA2A37299D009EF665 /* GiftsAPI.swift */,
 				CFB3866B2A44588F001B0849 /* ReactionIconsRemoteRepository.swift */,
 				CFAA37602A4B370C0085CE88 /* BannerRepository.swift */,
+				CF0798652A66DFBE004D09B2 /* DataRepository.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -3569,6 +3567,7 @@
 				CF9DF0AA2A36B2D80054E105 /* UIImage+QRCode.swift in Sources */,
 				CFF818402A3F7207009CD057 /* SearchCouponsNavigations.swift in Sources */,
 				CFED122A29F2D7C6000B320B /* Result+Extension.swift in Sources */,
+				CF0798662A66DFBE004D09B2 /* DataRepository.swift in Sources */,
 				CFAC6BCB2A124074004AD4A5 /* FAQItemView.swift in Sources */,
 				CFD778472A14D07D00F20527 /* Transaction.swift in Sources */,
 				CF3DEB382A3789F400E61C6D /* ShopCouponView.swift in Sources */,
@@ -3621,6 +3620,7 @@
 				CFB386682A442E3A001B0849 /* ReactionIconsUseCases.swift in Sources */,
 				CFF8183E2A3F70A7009CD057 /* SearchCouponsViewModel.swift in Sources */,
 				CF3E0EFB2A37299D009EF665 /* GiftsAPI.swift in Sources */,
+				CF07986F2A66F720004D09B2 /* ForwardView.swift in Sources */,
 				CFB2F6A629E0754A00191AA3 /* ChatSettingViewModel.swift in Sources */,
 				CF220D422A08FBDF006BF463 /* MessageChatItemModel.swift in Sources */,
 				CF30B1872A13D1D000C43A54 /* DeleteCacheUseCases.swift in Sources */,

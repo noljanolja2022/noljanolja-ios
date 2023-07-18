@@ -21,7 +21,17 @@ struct StickerMessageContentView: View {
     }
 
     private func buildBodyView() -> some View {
-        buildContentView()
+        VStack(alignment: .leading, spacing: 4) {
+            buildForwardView()
+            buildContentView()
+        }
+    }
+
+    @ViewBuilder
+    private func buildForwardView() -> some View {
+        if model.isForward {
+            ForwardView()
+        }
     }
 
     private func buildContentView() -> some View {
