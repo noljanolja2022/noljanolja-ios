@@ -25,6 +25,19 @@ struct StickerMessageContentView: View {
             buildForwardView()
             buildContentView()
         }
+        .padding(.bottom, 10)
+        .background {
+            GeometryReader { geometry in
+                Spacer()
+                    .onAppear {
+                        geometryProxy = geometry
+                    }
+            }
+        }
+        .onTapGesture {}
+        .onLongPressGesture {
+            action?(.openMessageActionDetail(geometryProxy))
+        }
     }
 
     @ViewBuilder
@@ -38,19 +51,6 @@ struct StickerMessageContentView: View {
         ZStack(alignment: .bottomTrailing) {
             buildStickerView()
             buildInfoView()
-        }
-        .background {
-            GeometryReader { geometry in
-                Spacer()
-                    .onAppear {
-                        geometryProxy = geometry
-                    }
-            }
-        }
-        .padding(.bottom, 10)
-        .onTapGesture {}
-        .onLongPressGesture {
-            action?(.openMessageActionDetail(geometryProxy))
         }
     }
 

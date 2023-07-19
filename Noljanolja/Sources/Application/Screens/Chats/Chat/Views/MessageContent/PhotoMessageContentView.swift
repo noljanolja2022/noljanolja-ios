@@ -23,14 +23,16 @@ struct PhotoMessageContentView: View {
 
     @ViewBuilder
     private func buildBodyView() -> some View {
-        HStack(spacing: 8) {
+//        HStack(spacing: 8) {
 //            buildShareView()
 //                .environment(\.layoutDirection, .leftToRight)
-            buildContentView()
-                .environment(\.layoutDirection, .leftToRight)
-        }
-        .padding(.leading, -36)
-        .environment(\.layoutDirection, model.isSendByCurrentUser ? .leftToRight : .rightToLeft)
+//            buildContentView()
+//                .environment(\.layoutDirection, .leftToRight)
+//        }
+//        .padding(.leading, -36)
+//        .environment(\.layoutDirection, model.isSendByCurrentUser ? .leftToRight : .rightToLeft)
+
+        buildContentView()
     }
 
     @ViewBuilder

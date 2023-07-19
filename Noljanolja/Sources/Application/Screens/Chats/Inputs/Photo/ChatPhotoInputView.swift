@@ -52,6 +52,7 @@ struct ChatPhotoInputView<ViewModel: ChatPhotoInputViewModel>: View {
         VStack(spacing: 16) {
             Text(L10n.permissionRequiredDescription)
                 .font(.system(size: 14))
+                .multilineTextAlignment(.center)
 
             Button(L10n.permissionGoToSettings) {
                 guard let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) else { return }

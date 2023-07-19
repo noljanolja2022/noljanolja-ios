@@ -119,6 +119,7 @@ struct MessageActionDetailView<ViewModel: MessageActionDetailViewModel>: View {
                             Image(model.imageName)
                                 .resizable()
                                 .frame(width: 24, height: 24)
+                                .foregroundColor(ColorAssets.primaryGreen200.swiftUIColor)
                             Text(model.title)
                                 .font(.system(size: 14, weight: .medium))
                                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
