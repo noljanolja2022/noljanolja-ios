@@ -7,6 +7,7 @@
 
 import Combine
 import SwiftUI
+import SwiftUIX
 
 extension View {
     func progressHUB(isActive: Binding<Bool>) -> some View {
@@ -20,9 +21,9 @@ struct ProgressHUBViewModifier: ViewModifier {
     @Binding var isActive: Bool
 
     func body(content: Content) -> some View {
-        ZStack {
-            content
+        content.overlay {
             if isActive {
+                let _ = Keyboard.main.dismiss()
                 ProgressHUDView()
             }
         }
