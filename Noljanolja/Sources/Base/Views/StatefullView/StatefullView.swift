@@ -44,16 +44,51 @@ struct StatefullWithStateModifier<LoadingView, EmptyView, ErrorView>: ViewModifi
     var error: () -> ErrorView
 
     func body(content: Content) -> some View {
+        StatefullView(
+            state: $state,
+            isEmpty: isEmpty,
+            content: content,
+            loading: loading,
+            empty: empty,
+            error: error
+        )
+    }
+}
+
+// MARK: - StatefullView
+
+struct StatefullView<ContentView: View, LoadingView: View, EmptyView: View, ErrorView: View>: View {
+    @Binding private var state: ViewState
+    private let isEmpty: () -> Bool?
+    private let content: ContentView
+    private let loading: () -> LoadingView
+    private let empty: () -> EmptyView
+    private let error: () -> ErrorView
+
+    init(state: Binding<ViewState>,
+         isEmpty: @escaping () -> Bool?,
+         content: ContentView,
+         loading: @escaping () -> LoadingView = { SwiftUI.EmptyView() },
+         empty: @escaping () -> EmptyView = { SwiftUI.EmptyView() },
+         error: @escaping () -> ErrorView = { SwiftUI.EmptyView() }) {
+        self._state = state
+        self.isEmpty = isEmpty
+        self.content = content
+        self.loading = loading
+        self.empty = empty
+        self.error = error
+    }
+
+    var body: some View {
         ZStack {
-            let isNotEmpty = !(isEmpty() ?? true)
-            if isNotEmpty {
-                content
-            } else {
+            content
+        }
+        .overlay {
+            let isEmpty = isEmpty() ?? false
+            if isEmpty {
                 switch state {
                 case .content:
-                    if isNotEmpty {
-                        content
-                    } else {
+                    if isEmpty {
                         empty()
                     }
                 case .loading:
