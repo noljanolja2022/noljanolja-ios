@@ -66,10 +66,8 @@ final class MediaStore: MediaStoreType {
     }
 
     func generateDownloadStickerPackURL(id: Int) -> URL {
-        let directories = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask)
-        let directory = directories[0]
-        let stickerPacksDirectory = directory.appendingPathComponent("sticker_packs/download")
-        let stickerFile = stickerPacksDirectory.appendingPathComponent("\(id)").appendingPathExtension("zip")
+        let directoryURL = generateZipStickerPacksURL()
+        let stickerFile = directoryURL.appendingPathComponent("\(id)").appendingPathExtension("zip")
         return stickerFile
     }
 
@@ -79,8 +77,7 @@ final class MediaStore: MediaStoreType {
     }
 
     func getStickerPackURL(id: Int) -> URL? {
-        let stickerPacksURL = generateStickerPacksURL()
-        let stickerPackURL = stickerPacksURL.appendingPathComponent("\(id)")
+        let stickerPackURL = generateStickerPackURL(id)
 
         if FileManager.default.fileExists(atPath: stickerPackURL.path) {
             return stickerPackURL
@@ -126,8 +123,20 @@ extension MediaStore {
         return stickerPacksURL
     }
 
+    private func generateZipStickerPacksURL() -> URL {
+        let stickerPacksURL = generateStickerPacksURL()
+        let zipStickerPacksURL = stickerPacksURL.appendingPathComponent("zip")
+        return zipStickerPacksURL
+    }
+
+    private func generateUnzipStickerPacksURL() -> URL {
+        let stickerPacksURL = generateStickerPacksURL()
+        let unzipStickerPacksURL = stickerPacksURL.appendingPathComponent("unzip")
+        return unzipStickerPacksURL
+    }
+
     private func generateStickerPackURL(_ id: Int) -> URL {
-        let getStickerPacksURL = generateStickerPacksURL()
+        let getStickerPacksURL = generateUnzipStickerPacksURL()
         let stickerPackURL = getStickerPacksURL.appendingPathComponent("\(id)")
         return stickerPackURL
     }
