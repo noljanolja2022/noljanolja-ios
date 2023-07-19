@@ -31,7 +31,7 @@ struct VideosView<ViewModel: VideosViewModel>: View {
 
     private func buildContentView() -> some View {
         ScrollView {
-            LazyVStack(spacing: 8) {
+            VStack(spacing: 8) {
                 buildHighlightView()
                 buildWatchingView()
 
