@@ -196,7 +196,6 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 .introspectTextView {
                     uiViews.textView = $0
-                    viewModel.didReceiveTextViewAction.send()
                 }
         }
         .font(.system(size: 14))
