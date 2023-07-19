@@ -61,7 +61,7 @@ final class LocalCouponKeywordRepositoryImpl: LocalCouponKeywordRepository {
                                 if string.isEmpty {
                                     return true
                                 } else {
-                                    return $0.keyword.contains(string)
+                                    return $0.keyword.lowercased().contains(string.lowercased())
                                 }
                             }
                             .sorted { $0.createdAt > $1.createdAt }
