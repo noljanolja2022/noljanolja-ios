@@ -129,6 +129,7 @@
 		CF446B8E29D8A97700ED66BF /* LottieAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF446B8D29D8A97700ED66BF /* LottieAssets.xcassets */; };
 		CF446B9029D8AB0D00ED66BF /* LottieAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF446B8F29D8AB0D00ED66BF /* LottieAssets.swift */; };
 		CF446B9329D8AE2F00ED66BF /* RefreshTokenInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF446B9229D8AE2F00ED66BF /* RefreshTokenInterceptor.swift */; };
+		CF45BCB62A67C68C003FB991 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CF45BCB52A67C68C003FB991 /* IQKeyboardManagerSwift */; };
 		CF4A6EF129E3C0D000CB75E5 /* CreateConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6EEF29E3C0D000CB75E5 /* CreateConversationView.swift */; };
 		CF4A6EF229E3C0D000CB75E5 /* CreateConversationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6EF029E3C0D000CB75E5 /* CreateConversationViewModel.swift */; };
 		CF4A6EF429E3C45A00CB75E5 /* MainNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A6EF329E3C45A00CB75E5 /* MainNavigations.swift */; };
@@ -974,6 +975,7 @@
 				CFFD70D0298AC7A900D4F5A2 /* CombineMoya in Frameworks */,
 				AEDBBDE12EEA3CADCA87D4F2 /* Pods_Noljanolja.framework in Frameworks */,
 				CF88ABCD299F2E7400D8AB67 /* SwiftUINavigation in Frameworks */,
+				CF45BCB62A67C68C003FB991 /* IQKeyboardManagerSwift in Frameworks */,
 				CF54FA2929D01F8A0092E2C6 /* Zip in Frameworks */,
 				CFF520FB2A17D92400F29A4E /* Charts in Frameworks */,
 				CF10C7F129C21FAE0020924D /* KMPNativeCoroutinesCombine in Frameworks */,
@@ -3102,6 +3104,7 @@
 				CF446B8429D89C3000ED66BF /* Lottie */,
 				CF18378629F6F4F500DDC15C /* YouTubePlayerKit */,
 				CFF520FA2A17D92400F29A4E /* Charts */,
+				CF45BCB52A67C68C003FB991 /* IQKeyboardManagerSwift */,
 			);
 			productName = Noljanolja;
 			productReference = CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */;
@@ -3200,6 +3203,7 @@
 				CF446B8329D89C3000ED66BF /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				CF18378529F6F4F500DDC15C /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */,
 				CFF520F92A17D92400F29A4E /* XCRemoteSwiftPackageReference "Charts" */,
+				CF45BCB42A67C68C003FB991 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = CFFD707F298AB9FF00D4F5A2 /* Products */;
 			projectDirPath = "";
@@ -4247,6 +4251,14 @@
 				version = 4.1.3;
 			};
 		};
+		CF45BCB42A67C68C003FB991 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = exactVersion;
+				version = 6.5.12;
+			};
+		};
 		CF52AB7129B8E3B600C9C90C /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift";
@@ -4401,6 +4413,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CF446B8329D89C3000ED66BF /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		CF45BCB52A67C68C003FB991 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF45BCB42A67C68C003FB991 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 		CF52AB7229B8E3B700C9C90C /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
