@@ -149,9 +149,13 @@ struct MyRankingView<ViewModel: MyRankingViewModel>: View {
         .background(ColorAssets.neutralLight.swiftUIColor)
         .cornerRadius(8)
     }
+}
 
+extension MyRankingView {
     private func buildLoadingView() -> some View {
         LoadingView()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
     private func buildEmptyView() -> some View {

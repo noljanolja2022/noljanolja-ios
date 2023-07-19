@@ -187,19 +187,21 @@ struct ChatView<ViewModel: ChatViewModel>: View {
             )
         )
     }
+}
 
+extension ChatView {
     private func buildLoadingView() -> some View {
         LoadingView()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
     private func buildEmptyView() -> some View {
-        Spacer()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        EmptyView()
     }
 
     private func buildErrorView() -> some View {
-        Spacer()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        EmptyView()
     }
     
     private func buildNavigationLinks() -> some View {

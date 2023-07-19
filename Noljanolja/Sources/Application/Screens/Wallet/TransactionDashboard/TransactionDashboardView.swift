@@ -160,9 +160,13 @@ struct TransactionDashboardView<ViewModel: TransactionDashboardViewModel>: View 
     private func buildItemView(_ item: TransactionDashboardItemModel) -> some View {
         TransactionDashboardItemView(model: item)
     }
+}
 
+extension TransactionDashboardView {
     private func buildLoadingView() -> some View {
         LoadingView()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
     private func buildEmptyView() -> some View {

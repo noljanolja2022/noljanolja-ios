@@ -98,9 +98,13 @@ struct VideosView<ViewModel: VideosViewModel>: View {
             label: {}
         )
     }
+}
 
+extension VideosView {
     private func buildLoadingView() -> some View {
         LoadingView()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
     private func buildEmptyView() -> some View {

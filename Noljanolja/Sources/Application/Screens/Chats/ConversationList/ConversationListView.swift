@@ -88,19 +88,6 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
         }
     }
 
-    private func buildLoadingView() -> some View {
-        LoadingView()
-    }
-
-    private func buildEmptyView() -> some View {
-        EmptyView()
-    }
-
-    private func buildErrorView() -> some View {
-        Text(L10n.commonErrorTitle)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-
     private func buildNavigationLink() -> some View {
         NavigationLink(
             unwrapping: $viewModel.navigationType,
@@ -129,7 +116,26 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
         )
         .isDetailLink(false)
     }
+}
 
+extension ConversationListView {
+    private func buildLoadingView() -> some View {
+        LoadingView()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(ColorAssets.neutralLight.swiftUIColor)
+    }
+
+    private func buildEmptyView() -> some View {
+        EmptyView()
+    }
+
+    private func buildErrorView() -> some View {
+        Text(L10n.commonErrorTitle)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}
+
+extension ConversationListView {
     @ViewBuilder
     private func buildFullScreenCoverDestinationView(
         _ type: Binding<ConversationListFullScreenCoverType>
