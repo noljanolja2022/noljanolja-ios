@@ -21,6 +21,7 @@ struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
     @Environment(\.presentationMode) private var presentationMode
 
     @EnvironmentObject private var progressHUBState: ProgressHUBState
+    @StateObject private var keyboard = Keyboard.main
 
     @State private var isFocused = false
 
@@ -63,9 +64,14 @@ struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
                     text: $viewModel.verificationCode,
                     isFocused: $isFocused,
                     action: {
+                        keyboard.dismiss()
                         viewModel.verifyAction.send()
                     }
                 )
+                .introspectTextField { textField in
+                    textField.becomeFirstResponder()
+                }
+
                 ZStack {
                     if viewModel.countdownResendCodeTime != 0 {
                         Text(L10n.otpResendCodeWaiting(viewModel.countdownResendCodeTime))
