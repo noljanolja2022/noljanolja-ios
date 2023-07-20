@@ -196,7 +196,6 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 .introspectTextView {
                     uiViews.textView = $0
-                    viewModel.didReceiveTextViewAction.send()
                 }
         }
         .font(.system(size: 14))
@@ -317,8 +316,7 @@ struct ChatInputView_Previews: PreviewProvider {
 
             ChatInputView(
                 viewModel: ChatInputViewModel(
-                    conversationID: 0,
-                    sendAction: PassthroughSubject<SendMessageType, Never>()
+                    conversationID: 0
                 )
             )
         }

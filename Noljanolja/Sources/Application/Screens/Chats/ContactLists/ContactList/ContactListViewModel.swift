@@ -35,7 +35,6 @@ final class ContactListViewModel: ViewModel {
     var isMultiSelectionEnabled: Bool
     private let contactService: ContactServiceType
     private let contactListUseCase: ContactListUseCase
-    private let conversationService: ConversationServiceType
     private weak var delegate: ContactListViewModelDelegate?
 
     // MARK: Private
@@ -49,12 +48,10 @@ final class ContactListViewModel: ViewModel {
     init(isMultiSelectionEnabled: Bool,
          contactService: ContactServiceType = ContactService.default,
          contactListUseCase: ContactListUseCase,
-         conversationService: ConversationServiceType = ConversationService.default,
          delegate: ContactListViewModelDelegate? = nil) {
         self.isMultiSelectionEnabled = isMultiSelectionEnabled
         self.contactService = contactService
         self.contactListUseCase = contactListUseCase
-        self.conversationService = conversationService
         self.delegate = delegate
         super.init()
 

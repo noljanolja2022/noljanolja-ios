@@ -39,9 +39,13 @@ struct ChatPhotoInputView<ViewModel: ChatPhotoInputViewModel>: View {
     private func buildContentView() -> some View {
         PhotoPickerView(selectAssets: $photoAssets)
     }
+}
 
+extension ChatPhotoInputView {
     private func buildLoadingView() -> some View {
         LoadingView()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
     private func buildEmptyView() -> some View {
@@ -52,6 +56,8 @@ struct ChatPhotoInputView<ViewModel: ChatPhotoInputViewModel>: View {
         VStack(spacing: 16) {
             Text(L10n.permissionRequiredDescription)
                 .font(.system(size: 14))
+                .multilineTextAlignment(.center)
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
             Button(L10n.permissionGoToSettings) {
                 guard let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) else { return }
@@ -60,6 +66,7 @@ struct ChatPhotoInputView<ViewModel: ChatPhotoInputViewModel>: View {
             .font(.system(size: 16, weight: .bold))
             .padding(.horizontal, 32)
             .padding(.vertical, 12)
+            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             .background(ColorAssets.primaryGreen200.swiftUIColor)
             .cornerRadius(8)
         }

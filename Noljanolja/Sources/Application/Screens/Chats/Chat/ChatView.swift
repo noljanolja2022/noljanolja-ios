@@ -27,7 +27,7 @@ struct ChatView<ViewModel: ChatViewModel>: View {
 
     func buildBodyView() -> some View {
         ZStack {
-            buildMainView()
+            buildContentView()
             buildNavigationLinks()
         }
         .navigationBarTitle("", displayMode: .inline)
@@ -63,6 +63,16 @@ struct ChatView<ViewModel: ChatViewModel>: View {
             guard let fullScreenCoverType else { return }
             UIView.setAnimationsEnabled(fullScreenCoverType.isAnimationsEnabled)
         }
+        .alert(item: $viewModel.alertState) {
+            Alert($0) { action in
+                switch action {
+                case let .deleteMessage(message):
+                    viewModel.deleteMessageAction.send(message)
+                case .none:
+                    break
+                }
+            }
+        }
         .fullScreenCover(
             unwrapping: $viewModel.fullScreenCoverType,
             content: {
@@ -71,32 +81,26 @@ struct ChatView<ViewModel: ChatViewModel>: View {
         )
     }
 
-    private func buildMainView() -> some View {
+    private func buildContentView() -> some View {
         VStack(spacing: 0) {
-            buildContentView()
-                .statefull(
-                    state: $viewModel.viewState,
-                    isEmpty: { viewModel.chatItems.isEmpty },
-                    loading: buildLoadingView,
-                    empty: buildEmptyView,
-                    error: buildErrorView
-                )
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-            ChatInputView(
-                viewModel: ChatInputViewModel(
-                    conversationID: viewModel.conversationID,
-                    sendAction: viewModel.sendAction,
-                    delegate: viewModel
-                )
-            )
+            buildMainView()
+            buildReplyToMessageView()
+            buildInputView()
         }
         .background(ColorAssets.neutralLight.swiftUIColor)
+        .statefull(
+            state: $viewModel.viewState,
+            isEmpty: { viewModel.chatItems.isEmpty },
+            loading: buildLoadingView,
+            empty: buildEmptyView,
+            error: buildErrorView
+        )
     }
 
-    private func buildContentView() -> some View {
+    private func buildMainView() -> some View {
         ScrollViewReader { proxy in
             ZStack(alignment: .bottomTrailing) {
-                buildChatView()
+                buildMessagesView()
                 buildQuickScrollDownView(proxy)
             }
             .onReceive(viewModel.scrollToChatItemAction) { index, anchor in
@@ -105,6 +109,28 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                 }
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private func buildMessagesView() -> some View {
+        ChatScrollView(scrollOffset: $scrollOffset) {
+            LazyVStack(spacing: 0) {
+                ForEach(viewModel.chatItems.indices, id: \.self) { index in
+                    let model = viewModel.chatItems[index]
+                    ChatItemView(
+                        chatItem: model,
+                        action: {
+                            viewModel.chatItemAction.send((model, $0))
+                        }
+                    )
+                    .onAppear { viewModel.loadMoreDataAction.send(index) }
+                    .id("\(ChatItemModelType.viewIdPrefix)_\(index)")
+                }
+                .scaleEffect(x: 1, y: -1, anchor: .center)
+            }
+            .padding(.top, 4)
+        }
+        .scaleEffect(x: 1, y: -1, anchor: .center)
     }
 
     @ViewBuilder
@@ -141,39 +167,41 @@ struct ChatView<ViewModel: ChatViewModel>: View {
         .hidden(scrollOffset < UIScreen.main.bounds.height / 2)
     }
 
-    private func buildChatView() -> some View {
-        ChatScrollView(scrollOffset: $scrollOffset) {
-            LazyVStack(spacing: 0) {
-                ForEach(viewModel.chatItems.indices, id: \.self) { index in
-                    let model = viewModel.chatItems[index]
-                    ChatItemView(
-                        chatItem: model,
-                        action: {
-                            viewModel.chatItemAction.send((model, $0))
-                        }
-                    )
-                    .onAppear { viewModel.loadMoreDataAction.send(index) }
-                    .id("\(ChatItemModelType.viewIdPrefix)_\(index)")
+    @ViewBuilder
+    private func buildReplyToMessageView() -> some View {
+        if let message = viewModel.replyToMessage {
+            PreviewReplyMessageView(
+                model: PreviewReplyMessageModel(message),
+                removeAction: {
+                    viewModel.replyToMessage = nil
                 }
-                .scaleEffect(x: 1, y: -1, anchor: .center)
-            }
-            .padding(.top, 4)
+            )
         }
-        .scaleEffect(x: 1, y: -1, anchor: .center)
     }
 
+    private func buildInputView() -> some View {
+        ChatInputView(
+            viewModel: ChatInputViewModel(
+                conversationID: viewModel.conversationID,
+                delegate: viewModel
+            )
+        )
+    }
+}
+
+extension ChatView {
     private func buildLoadingView() -> some View {
         LoadingView()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
     private func buildEmptyView() -> some View {
-        Spacer()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        EmptyView()
     }
 
     private func buildErrorView() -> some View {
-        Spacer()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        EmptyView()
     }
     
     private func buildNavigationLinks() -> some View {
@@ -210,6 +238,10 @@ extension ChatView {
                     delegate: viewModel
                 )
             )
+        case let .forwardMessage(message):
+            ForwardMessageContactListView(
+                viewModel: ForwardMessageContactListViewModel(message: message)
+            )
         }
     }
 
@@ -239,7 +271,8 @@ extension ChatView {
                         message: normalMessageModel.message,
                         normalMessageModel: normalMessageModel,
                         rect: rect
-                    )
+                    ),
+                    delegate: viewModel
                 )
             )
             .onDisappear {

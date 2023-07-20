@@ -21,14 +21,11 @@ struct StickerMessageContentView: View {
     }
 
     private func buildBodyView() -> some View {
-        buildContentView()
-    }
-
-    private func buildContentView() -> some View {
-        ZStack(alignment: .bottomTrailing) {
-            buildStickerView()
-            buildInfoView()
+        VStack(alignment: .leading, spacing: 4) {
+            buildForwardView()
+            buildContentView()
         }
+        .padding(.bottom, 10)
         .background {
             GeometryReader { geometry in
                 Spacer()
@@ -37,10 +34,23 @@ struct StickerMessageContentView: View {
                     }
             }
         }
-        .padding(.bottom, 10)
         .onTapGesture {}
         .onLongPressGesture {
             action?(.openMessageActionDetail(geometryProxy))
+        }
+    }
+
+    @ViewBuilder
+    private func buildForwardView() -> some View {
+        if model.isForward {
+            ForwardView()
+        }
+    }
+
+    private func buildContentView() -> some View {
+        ZStack(alignment: .bottomTrailing) {
+            buildStickerView()
+            buildInfoView()
         }
     }
 

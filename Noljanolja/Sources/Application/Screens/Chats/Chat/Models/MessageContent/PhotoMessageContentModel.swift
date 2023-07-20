@@ -27,6 +27,7 @@ struct PhotoMessageContentModel: Equatable {
     let createdAt: Date
     let status: MessageStatusModel.StatusType
     let isShareHidden: Bool
+    let isForward: Bool
     let background: MessageContentBackgroundModel
 
     init(currentUser: User,
@@ -47,6 +48,7 @@ struct PhotoMessageContentModel: Equatable {
             }
         }()
         self.isShareHidden = message.sender.id != currentUser.id
+        self.isForward = message.shareMessage != nil
         self.background = background
     }
 }

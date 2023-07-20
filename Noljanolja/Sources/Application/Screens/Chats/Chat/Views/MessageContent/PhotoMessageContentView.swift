@@ -23,14 +23,16 @@ struct PhotoMessageContentView: View {
 
     @ViewBuilder
     private func buildBodyView() -> some View {
-        HStack(spacing: 8) {
-            buildShareView()
-                .environment(\.layoutDirection, .leftToRight)
-            buildContentView()
-                .environment(\.layoutDirection, .leftToRight)
-        }
-        .padding(.leading, -36)
-        .environment(\.layoutDirection, model.isSendByCurrentUser ? .leftToRight : .rightToLeft)
+//        HStack(spacing: 8) {
+//            buildShareView()
+//                .environment(\.layoutDirection, .leftToRight)
+//            buildContentView()
+//                .environment(\.layoutDirection, .leftToRight)
+//        }
+//        .padding(.leading, -36)
+//        .environment(\.layoutDirection, model.isSendByCurrentUser ? .leftToRight : .rightToLeft)
+
+        buildContentView()
     }
 
     @ViewBuilder
@@ -49,12 +51,9 @@ struct PhotoMessageContentView: View {
     }
 
     private func buildContentView() -> some View {
-        ZStack {
-            if model.photos.count < 4 {
-                buildSingleRowImagesView()
-            } else {
-                buildMultiRowImagesView()
-            }
+        VStack(alignment: .leading, spacing: 4) {
+            buildForwardView()
+            buildMainView()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(4)
@@ -70,6 +69,22 @@ struct PhotoMessageContentView: View {
         )
         .onLongPressGesture {
             action?(.openMessageActionDetail(geometryProxy))
+        }
+    }
+
+    @ViewBuilder
+    private func buildForwardView() -> some View {
+        if model.isForward {
+            ForwardView()
+        }
+    }
+
+    @ViewBuilder
+    private func buildMainView() -> some View {
+        if model.photos.count < 4 {
+            buildSingleRowImagesView()
+        } else {
+            buildMultiRowImagesView()
         }
     }
     

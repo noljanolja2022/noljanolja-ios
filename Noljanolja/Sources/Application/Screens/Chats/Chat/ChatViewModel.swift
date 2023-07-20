@@ -6,6 +6,7 @@
 //
 //
 
+import _SwiftUINavigationState
 import Combine
 import Foundation
 import SwiftUIX
@@ -22,10 +23,13 @@ protocol ChatViewModelDelegate: AnyObject {
 final class ChatViewModel: ViewModel {
     // MARK: State
 
+    @Published var alertState: AlertState<ChatAlertActionType>?
+
     @Published var title = ""
     @Published var isChatSettingEnabled = false
 
     @Published var chatItems = [ChatItemModelType]()
+    @Published var replyToMessage: Message?
     @Published var error: Error?
 
     @Published var viewState = ViewState.loading
@@ -39,7 +43,7 @@ final class ChatViewModel: ViewModel {
 
     // MARK: Action
 
-    let sendAction = PassthroughSubject<SendMessageType, Never>()
+    private let sendAction = PassthroughSubject<SendMessageType, Never>()
 
     let closeAction = PassthroughSubject<Void, Never>()
     let chatItemAction = PassthroughSubject<(ChatItemModelType, NormalMessageModel.ActionType), Never>()
@@ -47,6 +51,7 @@ final class ChatViewModel: ViewModel {
     let openChatSettingSubject = PassthroughSubject<Void, Never>()
     let reactionAction = PassthroughSubject<(Message, ReactIcon), Never>()
     let scrollToChatItemAction = PassthroughSubject<(Int, UnitPoint), Never>()
+    let deleteMessageAction = PassthroughSubject<Message, Never>()
 
     private let loadPreviousDataTrigger = PassthroughSubject<Void, Never>()
     private let loadNextDataTrigger = PassthroughSubject<Void, Never>()
@@ -360,6 +365,59 @@ final class ChatViewModel: ViewModel {
     }
 
     private func configureActions() {
+        let conversationID = conversationID
+
+        sendAction
+            .map { [weak self] sendMessageType in
+                switch sendMessageType {
+                case let .text(message):
+                    return SendMessageRequest(
+                        conversationID: conversationID,
+                        type: .plaintext,
+                        message: message,
+                        replyToMessage: self?.replyToMessage
+                    )
+                case let .images(images):
+                    return SendMessageRequest(
+                        conversationID: conversationID,
+                        type: .photo,
+                        attachments: .images(images),
+                        replyToMessage: self?.replyToMessage
+                    )
+                case let .photoAssets(photos):
+                    return SendMessageRequest(
+                        conversationID: conversationID,
+                        type: .photo,
+                        attachments: .photos(photos),
+                        replyToMessage: self?.replyToMessage
+                    )
+                case let .sticker(stickerPack, sticker):
+                    return SendMessageRequest(
+                        conversationID: conversationID,
+                        type: .sticker,
+                        sticker: (stickerPack, sticker),
+                        replyToMessage: self?.replyToMessage
+                    )
+                }
+            }
+            .receive(on: DispatchQueue.main)
+            .handleEvents(receiveOutput: { [weak self] _ in
+                self?.replyToMessage = nil
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                    self?.scrollToChatItemAction.send((0, .top))
+                }
+            })
+            .flatMapToResult { [weak self] request in
+                guard let self else {
+                    return Empty<Message, Error>().eraseToAnyPublisher()
+                }
+                return self.messageService
+                    .sendMessage(request: request)
+            }
+            .receive(on: DispatchQueue.main)
+            .sink { _ in }
+            .store(in: &cancellables)
+
         chatItemAction
             .sink { [weak self] chatItemModel, actionType in
                 guard let self else { return }
@@ -433,9 +491,19 @@ final class ChatViewModel: ViewModel {
                 )
             }
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                guard let self else { return }
+            .sink { _ in }
+            .store(in: &cancellables)
+
+        deleteMessageAction
+            .flatMapLatestToResult { [weak self] message -> AnyPublisher<Void, Error> in
+                guard let self, let messageId = message.id else {
+                    return Fail<Void, Error>(error: CommonError.unknown).eraseToAnyPublisher()
+                }
+                return self.messageService
+                    .deleteMessage(conversationID: message.conversationID, messageID: messageId)
             }
+            .receive(on: DispatchQueue.main)
+            .sink { _ in }
             .store(in: &cancellables)
     }
 }
@@ -443,11 +511,9 @@ final class ChatViewModel: ViewModel {
 // MARK: ChatInputViewModelDelegate
 
 extension ChatViewModel: ChatInputViewModelDelegate {
-    func chatInputViewModelWillSendMessage() {
-        scrollToChatItemAction.send((0, .top))
+    func chatInputSendMessage(_ type: SendMessageType) {
+        sendAction.send(type)
     }
-
-    func chatInputViewModelDidSendMessage() {}
 }
 
 // MARK: ChatSettingViewModelDelegate
@@ -467,5 +533,30 @@ extension ChatViewModel: ChatSettingViewModelDelegate {
 extension ChatViewModel: MessageImagesViewModelDelegate {
     func sendImage(_ image: UIImage) {
         sendAction.send(.images([image]))
+    }
+}
+
+// MARK: MessageActionDetailViewModelDelegate
+
+extension ChatViewModel: MessageActionDetailViewModelDelegate {
+    func messageActionDetailDelete(_ message: Message) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            self?.alertState = AlertState(
+                title: TextState("You want to delete this message?"),
+                message: TextState("This message will be deleted on your chat screen."),
+                primaryButton: .destructive(TextState(L10n.commonNo.uppercased())),
+                secondaryButton: .default(TextState(L10n.commonYes.uppercased()), action: .send(.deleteMessage(message)))
+            )
+        }
+    }
+
+    func messageActionDetailReply(_ message: Message) {
+        replyToMessage = message
+    }
+
+    func messageActionDetailForward(_ message: Message) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            self?.navigationType = .forwardMessage(message)
+        }
     }
 }

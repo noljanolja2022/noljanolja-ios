@@ -9,6 +9,7 @@ import FirebaseAuth
 import FirebaseCore
 import Foundation
 import GoogleSignIn
+import IQKeyboardManagerSwift
 import KakaoSDKAuth
 import KakaoSDKCommon
 import NaverThirdPartyLogin
@@ -16,21 +17,27 @@ import SDWebImage
 import SDWebImageWebPCoder
 import UIKit
 
+// MARK: - FrameworkAppDelegate
+
 final class FrameworkAppDelegate: NSObject, AppDelegateProtocol {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        KakaoSDK.initSDK(appKey: AppConfigs.SDK.Kakao.nativeAppKey)
+        configureIQKeyboard()
+        configureSDWebImage()
+        configureAuth()
+        configureFirebase()
 
-        let naverLoginConnection = NaverThirdPartyLoginConnection.getSharedInstance()
-        naverLoginConnection?.isNaverAppOauthEnable = true
-        naverLoginConnection?.isInAppOauthEnable = true
-        naverLoginConnection?.setOnlyPortraitSupportInIphone(true)
+        return true
+    }
+}
 
-        naverLoginConnection?.serviceUrlScheme = AppConfigs.SDK.Naver.serviceUrlScheme
-        naverLoginConnection?.consumerKey = AppConfigs.SDK.Naver.consumerKey
-        naverLoginConnection?.consumerSecret = AppConfigs.SDK.Naver.consumerSecret
-        naverLoginConnection?.appName = AppConfigs.SDK.Naver.appName
+extension FrameworkAppDelegate {
+    private func configureIQKeyboard() {
+        IQKeyboardManager.shared.enable = false
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+    }
 
+    private func configureSDWebImage() {
         let requestModifier: (URLRequest) -> URLRequest? = { request -> URLRequest? in
             var request = request
             let baseUrl = URL(string: NetworkConfigs.BaseUrl.baseUrl)
@@ -55,9 +62,23 @@ final class FrameworkAppDelegate: NSObject, AppDelegateProtocol {
             }
             return SDWebImageOptionsResult(options: options, context: context)
         }
+    }
 
+    private func configureAuth() {
+        KakaoSDK.initSDK(appKey: AppConfigs.SDK.Kakao.nativeAppKey)
+
+        let naverLoginConnection = NaverThirdPartyLoginConnection.getSharedInstance()
+        naverLoginConnection?.isNaverAppOauthEnable = true
+        naverLoginConnection?.isInAppOauthEnable = true
+        naverLoginConnection?.setOnlyPortraitSupportInIphone(true)
+
+        naverLoginConnection?.serviceUrlScheme = AppConfigs.SDK.Naver.serviceUrlScheme
+        naverLoginConnection?.consumerKey = AppConfigs.SDK.Naver.consumerKey
+        naverLoginConnection?.consumerSecret = AppConfigs.SDK.Naver.consumerSecret
+        naverLoginConnection?.appName = AppConfigs.SDK.Naver.appName
+    }
+
+    private func configureFirebase() {
         FirebaseApp.configure()
-
-        return true
     }
 }

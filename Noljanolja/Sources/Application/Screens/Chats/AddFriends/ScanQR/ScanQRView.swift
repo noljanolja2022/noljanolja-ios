@@ -25,41 +25,42 @@ struct ScanQRView<ViewModel: ScanQRViewModel>: View {
     }
 
     private func buildBodyView() -> some View {
-        buildMainView()
-            .navigationBarTitle("", displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text(L10n.addFriendsTitle)
-                        .font(.system(size: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
-            }
-            .onAppear { viewModel.isAppearSubject.send(true) }
-            .onDisappear { viewModel.isAppearSubject.send(false) }
-            .onChange(of: viewModel.isProgressHUDShowing) {
-                progressHUBState.isLoading = $0
-            }
-            .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
-            .fullScreenCover(
-                unwrapping: $viewModel.fullScreenCoverType,
-                content: {
-                    buildFullScreenCoverDestinationView($0)
-                }
-            )
-    }
-
-    private func buildMainView() -> some View {
         ZStack {
             buildContentView()
             buildNavigationLink()
         }
+        .navigationBarTitle("", displayMode: .inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(L10n.addFriendsTitle)
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            }
+        }
+        .onAppear { viewModel.isAppearSubject.send(true) }
+        .onDisappear { viewModel.isAppearSubject.send(false) }
+        .onChange(of: viewModel.isProgressHUDShowing) {
+            progressHUBState.isLoading = $0
+        }
+        .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
+        .fullScreenCover(
+            unwrapping: $viewModel.fullScreenCoverType,
+            content: {
+                buildFullScreenCoverDestinationView($0)
+            }
+        )
     }
 
     private func buildContentView() -> some View {
-        VStack(spacing: 0) {
-            FriendScannerView()
+        VStack(spacing: 12) {
+            CameraStatefulView(
+                viewModel: CameraStatefulViewModel(
+                    cameraViewModel: viewModel.cameraViewModel
+                )
+            )
             buildActionsView()
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     private func buildActionsView() -> some View {

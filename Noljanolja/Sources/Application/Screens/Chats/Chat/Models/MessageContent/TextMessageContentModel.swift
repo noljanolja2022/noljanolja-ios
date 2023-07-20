@@ -25,6 +25,7 @@ struct TextMessageContentModel: Equatable {
     let messageString: String
     let createdAt: Date
     let status: MessageStatusModel.StatusType
+    let isForward: Bool
     let background: MessageContentBackgroundModel
 
     init(currentUser: User,
@@ -55,6 +56,7 @@ struct TextMessageContentModel: Equatable {
                 }())
             }
         }()
+        self.isForward = message.shareMessage != nil
         self.background = background
     }
 }

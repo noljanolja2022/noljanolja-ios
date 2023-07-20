@@ -237,6 +237,8 @@ struct SearchCouponsView<ViewModel: SearchCouponsViewModel>: View {
 extension SearchCouponsView {
     private func buildLoadingView() -> some View {
         LoadingView()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(ColorAssets.primaryGreen200.swiftUIColor)
     }
 
     private func buildEmptyView() -> some View {

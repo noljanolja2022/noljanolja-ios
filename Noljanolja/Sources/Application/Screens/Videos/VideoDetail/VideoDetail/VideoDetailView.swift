@@ -20,7 +20,7 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
     }
 
     private func buildBodyView() -> some View {
-        buildMainView()
+        buildContentView()
             .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -31,6 +31,17 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
             }
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
+    }
+
+    private func buildContentView() -> some View {
+        buildMainView()
+            .statefull(
+                state: $viewModel.viewState,
+                isEmpty: { viewModel.video == nil },
+                loading: buildLoadingView,
+                empty: buildEmptyView,
+                error: buildErrorView
+            )
     }
 
     private func buildMainView() -> some View {
@@ -104,9 +115,13 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
             )
         )
     }
+}
 
+extension VideoDetailView {
     private func buildLoadingView() -> some View {
         LoadingView()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
     private func buildEmptyView() -> some View {

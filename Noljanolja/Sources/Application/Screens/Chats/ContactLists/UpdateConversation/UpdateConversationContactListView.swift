@@ -39,7 +39,7 @@ struct UpdateConversationContactListView<ViewModel: UpdateConversationContactLis
                 ToolbarItem(placement: .navigationBarTrailing) {
                     ZStack {
                         Button(L10n.commonAgree) {
-                            viewModel.actionSubject.send(selectedUsers)
+                            viewModel.action.send(selectedUsers)
                         }
                         .font(.system(size: 16))
                         .foregroundColor(
@@ -56,7 +56,7 @@ struct UpdateConversationContactListView<ViewModel: UpdateConversationContactLis
             .onChange(of: viewModel.isProgressHUDShowing) {
                 progressHUBState.isLoading = $0
             }
-            .onReceive(viewModel.closeSubject) {
+            .onReceive(viewModel.closeAction) {
                 presentationMode.wrappedValue.dismiss()
             }
             .alert(item: $viewModel.alertState) { Alert($0) { _ in } }

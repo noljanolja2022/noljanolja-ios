@@ -119,9 +119,13 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
             .padding(.horizontal, 16)
         }
     }
+}
 
+extension ShopHomeView {
     private func buildLoadingView() -> some View {
         LoadingView()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
     private func buildEmptyView() -> some View {

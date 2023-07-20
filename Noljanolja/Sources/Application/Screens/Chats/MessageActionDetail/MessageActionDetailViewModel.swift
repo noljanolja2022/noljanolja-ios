@@ -13,7 +13,11 @@ import UIKit
 
 // MARK: - MessageActionDetailViewModelDelegate
 
-protocol MessageActionDetailViewModelDelegate: AnyObject {}
+protocol MessageActionDetailViewModelDelegate: AnyObject {
+    func messageActionDetailDelete(_ message: Message)
+    func messageActionDetailReply(_ message: Message)
+    func messageActionDetailForward(_ message: Message)
+}
 
 // MARK: - MessageActionDetailViewModel
 
@@ -23,6 +27,7 @@ final class MessageActionDetailViewModel: ViewModel {
     @Published var isProgressHUDShowing = false
     @Published var alertState: AlertState<Void>?
     @Published var reactionIcons = [ReactIcon]()
+    @Published var messageActionTypes = [MessageActionType]()
 
     // MARK: Action
 
@@ -33,19 +38,23 @@ final class MessageActionDetailViewModel: ViewModel {
     // MARK: Dependencies
 
     let input: MessageActionDetailInput
+    private let userService: UserServiceType
     private let reactionIconsUseCases: ReactionIconsUseCasesProtocol
     private let messageReactionUseCases: MessageReactionUseCases
     private weak var delegate: MessageActionDetailViewModelDelegate?
 
     // MARK: Private
 
+    private let currentUserSubject = CurrentValueSubject<User?, Never>(nil)
     private var cancellables = Set<AnyCancellable>()
 
     init(input: MessageActionDetailInput,
+         userService: UserServiceType = UserService.default,
          reactionIconsUseCases: ReactionIconsUseCasesProtocol = ReactionIconsUseCases.default,
          messageReactionUseCases: MessageReactionUseCases = MessageReactionUseCasesImpl.shared,
          delegate: MessageActionDetailViewModelDelegate? = nil) {
         self.input = input
+        self.userService = userService
         self.reactionIconsUseCases = reactionIconsUseCases
         self.messageReactionUseCases = messageReactionUseCases
         self.delegate = delegate
@@ -60,6 +69,11 @@ final class MessageActionDetailViewModel: ViewModel {
     }
 
     private func configureLoadData() {
+        userService
+            .getCurrentUserPublisher()
+            .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
+            .store(in: &cancellables)
+
         isAppearSubject
             .first(where: { $0 })
             .handleEvents(receiveOutput: { [weak self] _ in
@@ -79,6 +93,25 @@ final class MessageActionDetailViewModel: ViewModel {
                 case .failure:
                     break
                 }
+            }
+            .store(in: &cancellables)
+
+        currentUserSubject
+            .compactMap { $0 }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] currentUser in
+                guard let self else { return }
+                var messageActionTypes: [MessageActionType] = [.reply, .forward]
+                switch self.input.message.type {
+                case .plaintext:
+                    messageActionTypes.append(.copy)
+                case .photo, .sticker, .eventUpdated, .eventJoined, .eventLeft, .unknown:
+                    break
+                }
+                if self.input.message.sender.id == currentUser.id {
+                    messageActionTypes.append(.delete)
+                }
+                self.messageActionTypes = messageActionTypes
             }
             .store(in: &cancellables)
     }
@@ -108,13 +141,21 @@ final class MessageActionDetailViewModel: ViewModel {
             .sink { [weak self] action in
                 guard let self else { return }
                 switch action {
-                case .reply, .forward, .delete:
-                    break
+                case .reply:
+                    closeAction.send()
+                    delegate?.messageActionDetailReply(input.message)
+                case .forward:
+                    closeAction.send()
+                    delegate?.messageActionDetailForward(input.message)
+                case .delete:
+                    closeAction.send()
+                    delegate?.messageActionDetailDelete(input.message)
                 case .copy:
                     switch self.input.message.type {
                     case .plaintext:
                         guard let message = self.input.message.message else { return }
                         UIPasteboard.general.string = message
+                        closeAction.send()
                     case .photo, .sticker, .eventUpdated, .eventJoined, .eventLeft, .unknown:
                         break
                     }

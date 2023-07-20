@@ -21,7 +21,6 @@ struct NoljanoljaApp: App {
     var body: some Scene {
         WindowGroup {
             RootView(viewModel: RootViewModel())
-                .coordinateSpace(name: "window")
         }
     }
 }

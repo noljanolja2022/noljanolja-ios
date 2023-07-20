@@ -25,10 +25,12 @@ final class CreateConversationContactListViewModel: ViewModel {
     
     // MARK: Action
 
-    let createConversationAction = PassthroughSubject<(ConversationType, [User]), Never>()
+    let action = PassthroughSubject<[User], Never>()
+    let closeAction = PassthroughSubject<Void, Never>()
 
     // MARK: Dependencies
 
+    let createConversationType: ConversationType
     private let conversationService: ConversationServiceType
     private weak var delegate: CreateConversationContactListViewModelDelegate?
 
@@ -36,8 +38,10 @@ final class CreateConversationContactListViewModel: ViewModel {
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(conversationService: ConversationServiceType = ConversationService.default,
+    init(createConversationType: ConversationType,
+         conversationService: ConversationServiceType = ConversationService.default,
          delegate: CreateConversationContactListViewModelDelegate? = nil) {
+        self.createConversationType = createConversationType
         self.conversationService = conversationService
         self.delegate = delegate
         super.init()
@@ -50,15 +54,15 @@ final class CreateConversationContactListViewModel: ViewModel {
     }
 
     private func configureCreateConversation() {
-        createConversationAction
-            .filter { !$0.1.isEmpty }
+        action
+            .filter { !$0.isEmpty }
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
-            .flatMapLatestToResult { [weak self] createConversationType, users -> AnyPublisher<Conversation, Error> in
+            .flatMapLatestToResult { [weak self] users -> AnyPublisher<Conversation, Error> in
                 guard let self else {
                     return Empty<Conversation, Error>().eraseToAnyPublisher()
                 }
                 return self.conversationService
-                    .createConversation(type: createConversationType, participants: users)
+                    .createConversation(type: self.createConversationType, participants: users)
             }
             .sink(receiveValue: { [weak self] result in
                 self?.isProgressHUDShowing = false

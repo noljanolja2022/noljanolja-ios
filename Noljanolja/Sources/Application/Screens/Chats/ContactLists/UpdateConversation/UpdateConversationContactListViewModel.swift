@@ -24,8 +24,8 @@ final class UpdateConversationContactListViewModel: ViewModel {
 
     // MARK: Action
 
-    let actionSubject = PassthroughSubject<[User], Never>()
-    let closeSubject = PassthroughSubject<Void, Never>()
+    let action = PassthroughSubject<[User], Never>()
+    let closeAction = PassthroughSubject<Void, Never>()
 
     // MARK: Dependencies
 
@@ -54,7 +54,7 @@ final class UpdateConversationContactListViewModel: ViewModel {
     }
 
     private func configureUpdateConversation() {
-        actionSubject
+        action
             .filter { !$0.isEmpty }
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] users -> AnyPublisher<Conversation, Error> in
@@ -69,7 +69,7 @@ final class UpdateConversationContactListViewModel: ViewModel {
                 self.isProgressHUDShowing = false
                 switch result {
                 case .success:
-                    self.closeSubject.send()
+                    self.closeAction.send()
                 case .failure:
                     self.alertState = AlertState(
                         title: TextState(L10n.commonErrorTitle),

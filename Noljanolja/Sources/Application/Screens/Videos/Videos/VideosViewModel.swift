@@ -63,6 +63,7 @@ final class VideosViewModel: ViewModel {
             watchingVideosSubject.removeDuplicates(),
             trendingVideosSubject.removeDuplicates()
         )
+        .receive(on: DispatchQueue.main)
         .sink(receiveValue: { highlightVideos, watchingVideos, trendingVideos in
             self.model = VideosModel(
                 highlightVideos: highlightVideos,
@@ -76,6 +77,7 @@ final class VideosViewModel: ViewModel {
     private func configureLoadData() {
         isAppearSubject
             .first(where: { $0 })
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.viewState = .loading })
             .flatMapLatestToResult { [weak self] _ -> AnyPublisher<VideosModel, Error> in
                 guard let self else {
@@ -83,6 +85,7 @@ final class VideosViewModel: ViewModel {
                 }
                 return self.getDatas()
             }
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 guard let self else { return }
                 switch result {
@@ -98,6 +101,7 @@ final class VideosViewModel: ViewModel {
             .store(in: &cancellables)
 
         isAppearSubject
+            .filter { $0 }
             .dropFirst()
             .flatMapLatestToResult { [weak self] _ -> AnyPublisher<[Video], Error> in
                 guard let self else {
@@ -105,6 +109,7 @@ final class VideosViewModel: ViewModel {
                 }
                 return self.videoAPI.getWatchingVideos()
             }
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 guard let self else { return }
                 switch result {
@@ -128,7 +133,7 @@ final class VideosViewModel: ViewModel {
             .getTrendingVideos(duration: .day, limit: pageSize)
             .mapToResult()
 
-        return Publishers.CombineLatest3(
+        return Publishers.Zip3(
             highlightVideos,
             watchingVideos,
             trendingVideos

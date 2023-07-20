@@ -102,9 +102,6 @@ struct AddFriendsHomeView<ViewModel: AddFriendsHomeViewModel>: View {
                 .font(.system(size: 16))
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                .introspectTextField { textField in
-                    textField.becomeFirstResponder()
-                }
             }
             .padding(.horizontal, 4)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

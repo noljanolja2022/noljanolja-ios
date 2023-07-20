@@ -108,16 +108,33 @@ struct ContactListView<ViewModel: ContactListViewModel>: View {
             .background(ColorAssets.neutralLight.swiftUIColor)
         }
     }
+}
+
+extension ContactListView {
+    private func selectUser(_ user: User) {
+        if viewModel.isMultiSelectionEnabled {
+            if let user = selectedUsers.first(where: { $0.id == user.id }) {
+                selectedUsers = selectedUsers.removeAll(user)
+            } else {
+                selectedUsers.append(user)
+            }
+        } else {
+            selectedUsers = [user]
+        }
+    }
+}
+
+extension ContactListView {
+    @ViewBuilder
+    private func buildLoadingView() -> some View {
+        LoadingView()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(ColorAssets.neutralLight.swiftUIColor)
+    }
 
     @ViewBuilder
     private func buildEmptyView() -> some View {
         Text(L10n.contactsNotFound)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-
-    @ViewBuilder
-    private func buildLoadingView() -> some View {
-        LoadingView()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
@@ -158,18 +175,6 @@ struct ContactListView<ViewModel: ContactListViewModel>: View {
             Text(L10n.commonErrorTitle)
                 .font(.system(size: 16, weight: .bold))
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-        }
-    }
-
-    private func selectUser(_ user: User) {
-        if viewModel.isMultiSelectionEnabled {
-            if let user = selectedUsers.first(where: { $0.id == user.id }) {
-                selectedUsers = selectedUsers.removeAll(user)
-            } else {
-                selectedUsers.append(user)
-            }
-        } else {
-            selectedUsers = [user]
         }
     }
 }

@@ -8,6 +8,7 @@
 
 import Combine
 import SwiftUINavigation
+import SwiftUIX
 
 // MARK: - AuthViewModelDelegate
 
