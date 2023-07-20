@@ -10,6 +10,6 @@ import Foundation
 
 // MARK: - ViewModel
 
-public class ViewModel: ObservableObject {
+public class ViewModel: NSObject, ObservableObject {
     public let isAppearSubject = CurrentValueSubject<Bool, Never>(false)
 }

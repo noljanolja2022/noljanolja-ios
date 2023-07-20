@@ -16,7 +16,11 @@ protocol FriendScannerViewControllerDelegate: AnyObject {}
 // MARK: - FriendScannerViewController
 
 final class FriendScannerViewController: UIViewController {
-    private let captureSession = AVCaptureSession()
+    private lazy var captureSession: AVCaptureSession = {
+        let captureSession = AVCaptureSession()
+        return captureSession
+    }()
+
     var previewLayer: AVCaptureVideoPreviewLayer!
 
     weak var delegate: FriendScannerViewControllerDelegate?
@@ -57,7 +61,9 @@ final class FriendScannerViewController: UIViewController {
         previewLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer)
 
-        captureSession.startRunning()
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            self?.captureSession.startRunning()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -98,6 +104,6 @@ extension FriendScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
     }
 
     func found(code: String) {
-        print(code)
+        print("AAAAAA", code)
     }
 }

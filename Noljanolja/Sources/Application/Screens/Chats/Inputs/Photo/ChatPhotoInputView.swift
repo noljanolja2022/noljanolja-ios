@@ -57,6 +57,7 @@ extension ChatPhotoInputView {
             Text(L10n.permissionRequiredDescription)
                 .font(.system(size: 14))
                 .multilineTextAlignment(.center)
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
             Button(L10n.permissionGoToSettings) {
                 guard let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) else { return }
@@ -65,6 +66,7 @@ extension ChatPhotoInputView {
             .font(.system(size: 16, weight: .bold))
             .padding(.horizontal, 32)
             .padding(.vertical, 12)
+            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             .background(ColorAssets.primaryGreen200.swiftUIColor)
             .cornerRadius(8)
         }

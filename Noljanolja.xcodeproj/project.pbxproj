@@ -72,6 +72,10 @@
 		CF1BD1FD29ACEAA000778786 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1BD1FC29ACEAA000778786 /* UserService.swift */; };
 		CF1BD20529ACF5F200778786 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1BD20429ACF5F200778786 /* LoadingView.swift */; };
 		CF1BD20B29ACF67D00778786 /* StateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1BD20A29ACF67D00778786 /* StateView.swift */; };
+		CF1E5D742A6984DE00481376 /* CameraStatefulView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E5D722A6984DE00481376 /* CameraStatefulView.swift */; };
+		CF1E5D752A6984DE00481376 /* CameraStatefulViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E5D732A6984DE00481376 /* CameraStatefulViewModel.swift */; };
+		CF1E5D7F2A69878700481376 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E5D7D2A69878700481376 /* CameraView.swift */; };
+		CF1E5D802A69878700481376 /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1E5D7E2A69878700481376 /* CameraViewModel.swift */; };
 		CF1EA57C2A1D05C9006846DF /* Legend+Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1EA57B2A1D05C9006846DF /* Legend+Config.swift */; };
 		CF1EA57E2A1D05FD006846DF /* ComponentBase+Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1EA57D2A1D05FD006846DF /* ComponentBase+Config.swift */; };
 		CF1EA5862A1D32CD006846DF /* PublishedCurrentValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1EA5852A1D32CD006846DF /* PublishedCurrentValue.swift */; };
@@ -179,6 +183,7 @@
 		CF62EF8B29B23E0000D6B688 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF62EF8A29B23E0000D6B688 /* ViewModelType.swift */; };
 		CF62EF8D29B254DD00D6B688 /* _SwiftUINavigationState in Frameworks */ = {isa = PBXBuildFile; productRef = CF62EF8C29B254DD00D6B688 /* _SwiftUINavigationState */; };
 		CF66C2302A40A134000CB925 /* SearchCouponsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF66C22F2A40A134000CB925 /* SearchCouponsModel.swift */; };
+		CF68E7AA2A69360E00424C32 /* UIDevice+Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF68E7A92A69360E00424C32 /* UIDevice+Orientation.swift */; };
 		CF6ABC1F29935D7B00D78213 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC1D29935D7B00D78213 /* RootView.swift */; };
 		CF6ABC2029935D7B00D78213 /* RootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6ABC1E29935D7B00D78213 /* RootViewModel.swift */; };
 		CF6ABC232993618000D78213 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = CF6ABC222993618000D78213 /* Introspect */; };
@@ -221,7 +226,7 @@
 		CF8A02982A0BA35600A01B21 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8A02972A0BA35600A01B21 /* CustomTabView.swift */; };
 		CF8BA79D2A5DC36F006CF850 /* ChatAlertActionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8BA79C2A5DC36F006CF850 /* ChatAlertActionType.swift */; };
 		CF8FA6452A3219E300950D9C /* FindUserResultItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8FA6442A3219E300950D9C /* FindUserResultItemView.swift */; };
-		CF91CCFF2A2E3BD400BFC08A /* FriendScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF91CCFE2A2E3BD400BFC08A /* FriendScannerViewController.swift */; };
+		CF91CCFF2A2E3BD400BFC08A /* FriendScannerViewController___.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF91CCFE2A2E3BD400BFC08A /* FriendScannerViewController___.swift */; };
 		CF9779DC29BE2FC600D1CAB0 /* PhoneNumberKit in Frameworks */ = {isa = PBXBuildFile; productRef = CF9779DB29BE2FC600D1CAB0 /* PhoneNumberKit */; };
 		CF9DF0AA2A36B2D80054E105 /* UIImage+QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9DF0A92A36B2D80054E105 /* UIImage+QRCode.swift */; };
 		CFA3304729BE3352008D7449 /* String+Phone.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA3304629BE3352008D7449 /* String+Phone.swift */; };
@@ -559,6 +564,10 @@
 		CF1BD1FC29ACEAA000778786 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		CF1BD20429ACF5F200778786 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		CF1BD20A29ACF67D00778786 /* StateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateView.swift; sourceTree = "<group>"; };
+		CF1E5D722A6984DE00481376 /* CameraStatefulView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraStatefulView.swift; sourceTree = "<group>"; };
+		CF1E5D732A6984DE00481376 /* CameraStatefulViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraStatefulViewModel.swift; sourceTree = "<group>"; };
+		CF1E5D7D2A69878700481376 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		CF1E5D7E2A69878700481376 /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
 		CF1EA57B2A1D05C9006846DF /* Legend+Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Legend+Config.swift"; sourceTree = "<group>"; };
 		CF1EA57D2A1D05FD006846DF /* ComponentBase+Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentBase+Config.swift"; sourceTree = "<group>"; };
 		CF1EA5852A1D32CD006846DF /* PublishedCurrentValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishedCurrentValue.swift; sourceTree = "<group>"; };
@@ -663,6 +672,7 @@
 		CF615C522A1159FB00CAF9C5 /* WalletNotiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletNotiView.swift; sourceTree = "<group>"; };
 		CF62EF8A29B23E0000D6B688 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		CF66C22F2A40A134000CB925 /* SearchCouponsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCouponsModel.swift; sourceTree = "<group>"; };
+		CF68E7A92A69360E00424C32 /* UIDevice+Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Orientation.swift"; sourceTree = "<group>"; };
 		CF6ABC1D29935D7B00D78213 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		CF6ABC1E29935D7B00D78213 /* RootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
 		CF745A592998E5EA008177E5 /* TappableTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableTextFieldStyle.swift; sourceTree = "<group>"; };
@@ -702,7 +712,7 @@
 		CF8A02972A0BA35600A01B21 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		CF8BA79C2A5DC36F006CF850 /* ChatAlertActionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAlertActionType.swift; sourceTree = "<group>"; };
 		CF8FA6442A3219E300950D9C /* FindUserResultItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindUserResultItemView.swift; sourceTree = "<group>"; };
-		CF91CCFE2A2E3BD400BFC08A /* FriendScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendScannerViewController.swift; sourceTree = "<group>"; };
+		CF91CCFE2A2E3BD400BFC08A /* FriendScannerViewController___.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendScannerViewController___.swift"; sourceTree = "<group>"; };
 		CF9DF0A92A36B2D80054E105 /* UIImage+QRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+QRCode.swift"; sourceTree = "<group>"; };
 		CFA3304629BE3352008D7449 /* String+Phone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Phone.swift"; sourceTree = "<group>"; };
 		CFA3304829BE3AB9008D7449 /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
@@ -1212,6 +1222,7 @@
 		CF15500D299396260053E86D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CF45BDA92A6856B7003FB991 /* CameraView */,
 				CFD12CE82A1C6CF00095D28D /* Charts */,
 				CFA5BD2A29EEFB7E00251176 /* TextView */,
 				CF876C3729EAB2E700C8C9B0 /* NavigationBarView */,
@@ -1269,6 +1280,41 @@
 				CFBC6F0129C0CF44000509EC /* StatefullFooterView.swift */,
 			);
 			path = StatefullView;
+			sourceTree = "<group>";
+		};
+		CF1E5D782A6985BF00481376 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CF68E7A92A69360E00424C32 /* UIDevice+Orientation.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CF1E5D792A6985D400481376 /* CameraStateful */ = {
+			isa = PBXGroup;
+			children = (
+				CF1E5D722A6984DE00481376 /* CameraStatefulView.swift */,
+				CF1E5D732A6984DE00481376 /* CameraStatefulViewModel.swift */,
+			);
+			path = CameraStateful;
+			sourceTree = "<group>";
+		};
+		CF1E5D7B2A6985E800481376 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CF1E5D7C2A6985F500481376 /* Camera */,
+				CF1E5D792A6985D400481376 /* CameraStateful */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CF1E5D7C2A6985F500481376 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				CF1E5D7D2A69878700481376 /* CameraView.swift */,
+				CF1E5D7E2A69878700481376 /* CameraViewModel.swift */,
+			);
+			path = Camera;
 			sourceTree = "<group>";
 		};
 		CF1EEE2B29AE354F004F570A /* NibOwnerLoadable */ = {
@@ -1564,6 +1610,15 @@
 				CF446B9229D8AE2F00ED66BF /* RefreshTokenInterceptor.swift */,
 			);
 			path = Interceptors;
+			sourceTree = "<group>";
+		};
+		CF45BDA92A6856B7003FB991 /* CameraView */ = {
+			isa = PBXGroup;
+			children = (
+				CF1E5D7B2A6985E800481376 /* Views */,
+				CF1E5D782A6985BF00481376 /* Extensions */,
+			);
+			path = CameraView;
 			sourceTree = "<group>";
 		};
 		CF4A6EEE29E3C09C00CB75E5 /* CreateConversation */ = {
@@ -1961,7 +2016,7 @@
 		CF91CCFD2A2E3BBB00BFC08A /* QRScanner */ = {
 			isa = PBXGroup;
 			children = (
-				CF91CCFE2A2E3BD400BFC08A /* FriendScannerViewController.swift */,
+				CF91CCFE2A2E3BD400BFC08A /* FriendScannerViewController___.swift */,
 				CFEF9BF82A34F4AB001DEC32 /* FriendScannerView.swift */,
 			);
 			path = QRScanner;
@@ -3492,6 +3547,7 @@
 				CFD095232A02AE49004BF047 /* VideoDetailPlayerViewModel.swift in Sources */,
 				CF30B1972A13EA0600C43A54 /* TransactionHistoryHeaderView.swift in Sources */,
 				CFF0FB382A614E29003D1401 /* ForwardMessageContactListView.swift in Sources */,
+				CF1E5D752A6984DE00481376 /* CameraStatefulViewModel.swift in Sources */,
 				CF3E0EF82A372875009EF665 /* CouponBrand.swift in Sources */,
 				CF775BBE29C625C900E82183 /* NotificationAppDelegate.swift in Sources */,
 				CF615C512A11488400CAF9C5 /* WalletPointModel.swift in Sources */,
@@ -3620,6 +3676,7 @@
 				CFD5424829BF7A520053C5B1 /* ChatItemView.swift in Sources */,
 				CFEF9BF92A34F4AB001DEC32 /* FriendScannerView.swift in Sources */,
 				CFFD70D5298AC92500D4F5A2 /* UserAPI.swift in Sources */,
+				CF68E7AA2A69360E00424C32 /* UIDevice+Orientation.swift in Sources */,
 				CFB2F6AC29E08BF100191AA3 /* ChatSettingItemModel.swift in Sources */,
 				CFB386682A442E3A001B0849 /* ReactionIconsUseCases.swift in Sources */,
 				CFF8183E2A3F70A7009CD057 /* SearchCouponsViewModel.swift in Sources */,
@@ -3652,6 +3709,7 @@
 				CFB0A82D29F1BD3800298546 /* VideoTrendingDurationType.swift in Sources */,
 				CFF520F32A17C17200F29A4E /* TransactionDetailModel.swift in Sources */,
 				CF775BC229C6287F00E82183 /* AppDelegateProtocol.swift in Sources */,
+				CF1E5D7F2A69878700481376 /* CameraView.swift in Sources */,
 				CFAF9C582A3B6606003E1BD2 /* MyCouponsView.swift in Sources */,
 				CFD12CEC2A1C6D610095D28D /* LargeValueFormatter.swift in Sources */,
 				CF0052C929F46074003900B5 /* VideoDetailInputView.swift in Sources */,
@@ -3728,7 +3786,7 @@
 				CFE48BC3299207DA0062C903 /* AuthStore.swift in Sources */,
 				CFAA37682A4B44F70085CE88 /* BannersViewModel.swift in Sources */,
 				CF28A19F29B4E9CF0003C204 /* AuthRootView.swift in Sources */,
-				CF91CCFF2A2E3BD400BFC08A /* FriendScannerViewController.swift in Sources */,
+				CF91CCFF2A2E3BD400BFC08A /* FriendScannerViewController___.swift in Sources */,
 				CFB2A89D29D1F0A2008D1689 /* StorableStickerPack.swift in Sources */,
 				CFFD70CB298AC5F800D4F5A2 /* ApiProvider.swift in Sources */,
 				CFB0A82929F1B95A00298546 /* VideoCategory.swift in Sources */,
@@ -3812,6 +3870,7 @@
 				CF0CC9FF29D155DD0027D2C1 /* StickerMessageContentView.swift in Sources */,
 				CFD0951A2A02A944004BF047 /* AuthStore+AuthRepo.swift in Sources */,
 				CFED123829F2EF54000B320B /* Number+Format.swift in Sources */,
+				CF1E5D742A6984DE00481376 /* CameraStatefulView.swift in Sources */,
 				CFAC6BB92A1237A0004AD4A5 /* SourceLicenseView.swift in Sources */,
 				CFB0A82129F1B6FD00298546 /* Video.swift in Sources */,
 				CF28566C29BA2EF100593FA5 /* NormalMessageModel.swift in Sources */,
@@ -3834,6 +3893,7 @@
 				CFAAEF1F2A5736AE004CE778 /* MessageQuickReactionView.swift in Sources */,
 				CF3A82C92A2105C9001365DF /* MessageContentBackgroundView.swift in Sources */,
 				CFC4EFCE29FAC71200DBD831 /* ImageDetailNavigations.swift in Sources */,
+				CF1E5D802A69878700481376 /* CameraViewModel.swift in Sources */,
 				CFF521142A19174500F29A4E /* TransactionHistorySectionModel.swift in Sources */,
 				CF28567C29BA408F00593FA5 /* ChatInputViewModel.swift in Sources */,
 			);
@@ -4040,7 +4100,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.noljanolja.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = ios_development;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "ios development";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
