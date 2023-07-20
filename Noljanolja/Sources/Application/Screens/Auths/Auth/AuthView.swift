@@ -19,6 +19,7 @@ struct AuthView<ViewModel: AuthViewModel>: View {
 
     // MARK: State
 
+    @StateObject private var keyboard = Keyboard.main
     @EnvironmentObject private var progressHUBState: ProgressHUBState
 
     var body: some View {
@@ -158,6 +159,7 @@ struct AuthView<ViewModel: AuthViewModel>: View {
                 guard let title = viewModel.phoneNumber?.formatPhone(type: .international) else {
                     return
                 }
+                keyboard.dismiss()
                 viewModel.alertState = AlertState(
                     title: TextState(title),
                     message: TextState(L10n.loginConfirmPhoneDescription),
