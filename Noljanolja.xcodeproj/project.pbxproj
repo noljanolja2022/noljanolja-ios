@@ -298,7 +298,6 @@
 		CF53D62C2A6AF548009B3A69 /* ImageDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D5072A6AF548009B3A69 /* ImageDetailViewModel.swift */; };
 		CF53D62D2A6AF548009B3A69 /* ImageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D5082A6AF548009B3A69 /* ImageDetailView.swift */; };
 		CF53D62E2A6AF548009B3A69 /* ImageDetailNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D5092A6AF548009B3A69 /* ImageDetailNavigations.swift */; };
-		CF53D62F2A6AF548009B3A69 /* colorful_room.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CF53D50D2A6AF548009B3A69 /* colorful_room.xcdatamodeld */; };
 		CF53D6302A6AF548009B3A69 /* AnyImageEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D50F2A6AF548009B3A69 /* AnyImageEditorView.swift */; };
 		CF53D6312A6AF548009B3A69 /* ImageEditorResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D5112A6AF548009B3A69 /* ImageEditorResultViewModel.swift */; };
 		CF53D6322A6AF548009B3A69 /* ImageEditorResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D5122A6AF548009B3A69 /* ImageEditorResultView.swift */; };
@@ -796,7 +795,6 @@
 		CF53D5072A6AF548009B3A69 /* ImageDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDetailViewModel.swift; sourceTree = "<group>"; };
 		CF53D5082A6AF548009B3A69 /* ImageDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDetailView.swift; sourceTree = "<group>"; };
 		CF53D5092A6AF548009B3A69 /* ImageDetailNavigations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDetailNavigations.swift; sourceTree = "<group>"; };
-		CF53D50E2A6AF548009B3A69 /* colorful_room.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = colorful_room.xcdatamodel; sourceTree = "<group>"; };
 		CF53D50F2A6AF548009B3A69 /* AnyImageEditorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyImageEditorView.swift; sourceTree = "<group>"; };
 		CF53D5112A6AF548009B3A69 /* ImageEditorResultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageEditorResultViewModel.swift; sourceTree = "<group>"; };
 		CF53D5122A6AF548009B3A69 /* ImageEditorResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageEditorResultView.swift; sourceTree = "<group>"; };
@@ -2413,26 +2411,9 @@
 		CF53D50A2A6AF548009B3A69 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CF53D50B2A6AF548009B3A69 /* Custom0 */,
 				CF53D50F2A6AF548009B3A69 /* AnyImageEditorView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		CF53D50B2A6AF548009B3A69 /* Custom0 */ = {
-			isa = PBXGroup;
-			children = (
-				CF53D50C2A6AF548009B3A69 /* Custom */,
-			);
-			path = Custom0;
-			sourceTree = "<group>";
-		};
-		CF53D50C2A6AF548009B3A69 /* Custom */ = {
-			isa = PBXGroup;
-			children = (
-				CF53D50D2A6AF548009B3A69 /* colorful_room.xcdatamodeld */,
-			);
-			path = Custom;
 			sourceTree = "<group>";
 		};
 		CF53D5102A6AF548009B3A69 /* ImageEditorResult */ = {
@@ -2901,6 +2882,7 @@
 		CFEA46EE2A65AEB500F20B82 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				CFFD70B6298AC43B00D4F5A2 /* App */,
 				CF53D3C52A6AF547009B3A69 /* Screens */,
 			);
 			path = Presentation;
@@ -3018,7 +3000,6 @@
 		CFFD70AB298AC19400D4F5A2 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				CFFD70B4298AC42800D4F5A2 /* Application */,
 				CFE09258298DF79300F197F0 /* Base */,
 				CFEA46EB2A65AE9700F20B82 /* Main */,
 			);
@@ -3054,14 +3035,6 @@
 				CF446B8F29D8AB0D00ED66BF /* LottieAssets.swift */,
 			);
 			path = Generated;
-			sourceTree = "<group>";
-		};
-		CFFD70B4298AC42800D4F5A2 /* Application */ = {
-			isa = PBXGroup;
-			children = (
-				CFFD70B6298AC43B00D4F5A2 /* App */,
-			);
-			path = Application;
 			sourceTree = "<group>";
 		};
 		CFFD70B6298AC43B00D4F5A2 /* App */ = {
@@ -3570,7 +3543,6 @@
 				CF131EB329CF32C400054719 /* PhotoAssetAPI.swift in Sources */,
 				CF53D5E72A6AF548009B3A69 /* TextMessageContentModel.swift in Sources */,
 				CFF467A02A0A45E50018FFAA /* View+Visibility.swift in Sources */,
-				CF53D62F2A6AF548009B3A69 /* colorful_room.xcdatamodeld in Sources */,
 				CF1B625029B9BCC200DE53E6 /* StorableConversation.swift in Sources */,
 				CFB2A89F29D1F31A008D1689 /* StorableSticker.swift in Sources */,
 				CF54FA2429D0187B0092E2C6 /* MediaStore.swift in Sources */,
@@ -4072,7 +4044,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = YN4QYR8CRU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Noljanolja/Sources/Application/App/Info.plist;
+				INFOPLIST_FILE = Noljanolja/Sources/Main/Presentation/App/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To enhance the user experience, please grant permissions to the app";
 				INFOPLIST_KEY_NSContactsUsageDescription = "To help you message friends and family on Noja Noja, allow Noja Noja access to your contacts";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To enhance the user experience, please grant permissions to the app";
@@ -4266,7 +4238,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = YN4QYR8CRU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Noljanolja/Sources/Application/App/Info.plist;
+				INFOPLIST_FILE = Noljanolja/Sources/Main/Presentation/App/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To enhance the user experience, please grant permissions to the app";
 				INFOPLIST_KEY_NSContactsUsageDescription = "To help you message friends and family on Noja Noja, allow Noja Noja access to your contacts";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To enhance the user experience, please grant permissions to the app";
@@ -4308,7 +4280,7 @@
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = YN4QYR8CRU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Noljanolja/Sources/Application/App/Info.plist;
+				INFOPLIST_FILE = Noljanolja/Sources/Main/Presentation/App/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To enhance the user experience, please grant permissions to the app";
 				INFOPLIST_KEY_NSContactsUsageDescription = "To help you message friends and family on Noja Noja, allow Noja Noja access to your contacts";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To enhance the user experience, please grant permissions to the app";
@@ -4763,19 +4735,6 @@
 			productName = CombineMoya;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		CF53D50D2A6AF548009B3A69 /* colorful_room.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				CF53D50E2A6AF548009B3A69 /* colorful_room.xcdatamodel */,
-			);
-			currentVersion = CF53D50E2A6AF548009B3A69 /* colorful_room.xcdatamodel */;
-			path = colorful_room.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = CFFD7076298AB9FF00D4F5A2 /* Project object */;
 }
