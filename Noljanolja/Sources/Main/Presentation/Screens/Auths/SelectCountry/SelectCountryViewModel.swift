@@ -52,6 +52,7 @@ final class SelectCountryViewModel: ViewModel {
 
     private func configure() {
         allCountries
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in self?.countries = $0 })
             .store(in: &cancellables)
 
@@ -69,6 +70,7 @@ final class SelectCountryViewModel: ViewModel {
                     }
                     .sorted(by: \.name)
             }
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in self?.countries = $0 })
             .store(in: &cancellables)
 

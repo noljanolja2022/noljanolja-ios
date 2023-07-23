@@ -78,6 +78,7 @@ final class ProfileSettingViewModel: ViewModel {
 
         currentUserSubject
             .compactMap { $0 }
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] user in
                 self?.name = user.name ?? ""
                 self?.phoneNumber = user.phone
@@ -132,6 +133,7 @@ final class ProfileSettingViewModel: ViewModel {
                     )
                 }
         )
+        .receive(on: DispatchQueue.main)
         .sink(receiveValue: { [weak self] in
             self?.alertState = $0
         })
@@ -147,6 +149,7 @@ final class ProfileSettingViewModel: ViewModel {
             .store(in: &cancellables)
 
         signOutAction
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] in
                 guard let self else {
@@ -154,6 +157,7 @@ final class ProfileSettingViewModel: ViewModel {
                 }
                 return self.authService.signOut()
             }
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 guard let self else { return }
                 self.isProgressHUDShowing = false

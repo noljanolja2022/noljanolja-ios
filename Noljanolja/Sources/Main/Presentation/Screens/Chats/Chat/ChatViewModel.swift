@@ -145,6 +145,7 @@ final class ChatViewModel: ViewModel {
                 )
                 .build()
             }
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in
                 self?.chatItems = $0
                 self?.viewState = .content
@@ -152,6 +153,7 @@ final class ChatViewModel: ViewModel {
             .store(in: &cancellables)
 
         conversationSubject
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 switch $0?.type {
                 case .single, .group:
@@ -186,6 +188,7 @@ final class ChatViewModel: ViewModel {
         )
 
         getMessagesTrigger
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in
                 self?.viewState = .loading
             })
@@ -209,6 +212,7 @@ final class ChatViewModel: ViewModel {
                     })
                     .eraseToAnyPublisher()
             }
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
                 switch result {
                 case .success:
@@ -314,6 +318,7 @@ final class ChatViewModel: ViewModel {
         conversationSocketService
             .getConversationStream(id: conversationID)
             .withLatestFrom(currentUserSubject.compactMap { $0 }) { ($0, $1) }
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result, currentUser in
                 guard let self else { return }
                 switch result {
@@ -419,6 +424,7 @@ final class ChatViewModel: ViewModel {
             .store(in: &cancellables)
 
         chatItemAction
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] chatItemModel, actionType in
                 guard let self else { return }
 

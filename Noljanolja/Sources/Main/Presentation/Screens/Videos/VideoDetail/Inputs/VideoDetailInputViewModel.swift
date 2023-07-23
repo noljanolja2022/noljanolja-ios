@@ -52,13 +52,16 @@ final class VideoDetailInputViewModel: ViewModel {
     }
 
     private func configure() {
-        userService.getCurrentUserPublisher()
+        userService
+            .getCurrentUserPublisher()
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] user in
                 self?.user = user
             }
             .store(in: &cancellables)
 
         sendCommentAction
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] comment -> AnyPublisher<VideoComment, Error> in
                 guard let self else {
@@ -67,6 +70,7 @@ final class VideoDetailInputViewModel: ViewModel {
                 return self.videoAPI
                     .postVideoComment(videoId: self.videoId, comment: comment)
             }
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 guard let self else { return }
                 self.isProgressHUDShowing = false

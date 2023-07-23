@@ -58,6 +58,7 @@ final class VideoDetailViewModel: ViewModel {
     private func configureLoadData() {
         isAppearSubject
             .first(where: { $0 })
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.viewState = .loading })
             .flatMapLatestToResult { [weak self] _ -> AnyPublisher<Video, Error> in
                 guard let self else {
@@ -65,6 +66,7 @@ final class VideoDetailViewModel: ViewModel {
                 }
                 return self.videoAPI.getVideoDetail(id: self.videoId)
             }
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 guard let self else { return }
                 switch result {
@@ -86,6 +88,7 @@ final class VideoDetailViewModel: ViewModel {
             .store(in: &cancellables)
 
         loadMoreAction
+            .receive(on: DispatchQueue.main)
             .filter { [weak self] in
                 guard let self else { return false }
                 return self.viewState != .loading && self.footerViewState != .noMoreData
@@ -100,6 +103,7 @@ final class VideoDetailViewModel: ViewModel {
                     limit: self.pageSize
                 )
             }
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 guard let self else { return }
                 switch result {

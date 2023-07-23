@@ -64,6 +64,7 @@ final class ConversationAdjustmentModel: ViewModel {
         title = conversation.title ?? ""
 
         actionSubject
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] in
                 guard let self else {
@@ -75,6 +76,7 @@ final class ConversationAdjustmentModel: ViewModel {
                         title: self.title
                     )
             }
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
                 guard let self else { return }
                 self.isProgressHUDShowing = false

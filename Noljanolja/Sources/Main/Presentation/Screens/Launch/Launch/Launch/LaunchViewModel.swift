@@ -74,6 +74,7 @@ final class LaunchViewModel: ViewModel {
                     .flatMap { _ in self.userService.getCurrentUser() }
                     .eraseToAnyPublisher()
             }
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
                 switch result {
                 case let .success(user):

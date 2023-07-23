@@ -48,6 +48,7 @@ final class ChatStickerPacksInputViewModel: ViewModel {
     private func configure() {
         isAppearSubject
             .first(where: { $0 })
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.viewState = .loading })
             .flatMapToResult { [weak self] _ -> AnyPublisher<[StickerPack], Error> in
                 guard let self else {
@@ -55,6 +56,7 @@ final class ChatStickerPacksInputViewModel: ViewModel {
                 }
                 return self.mediaService.getStickerPacks()
             }
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 switch result {
                 case let .success(stickerPacks):

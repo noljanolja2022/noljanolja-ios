@@ -42,6 +42,7 @@ final class ChatPhotoInputViewModel: ViewModel {
     private func configure() {
         isAppearSubject
             .filter { $0 }
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in self?.checkPermissionState() }
             .store(in: &cancellables)
     }

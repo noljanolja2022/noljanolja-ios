@@ -65,6 +65,7 @@ final class TransactionDashboardViewModel: ViewModel {
 
         isAppearSubject
             .first(where: { $0 })
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.viewState = .loading })
             .flatMapLatestToResult { [weak self] _ -> AnyPublisher<[Transaction], Error> in
                 guard let self else {

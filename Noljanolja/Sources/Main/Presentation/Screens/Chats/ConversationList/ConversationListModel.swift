@@ -93,6 +93,7 @@ final class ConversationListViewModel: ViewModel {
                         )
                     }
             }
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] conversationItemModels in
                 self?.conversations = conversationItemModels
                 self?.viewState = .content
@@ -107,6 +108,7 @@ final class ConversationListViewModel: ViewModel {
         isAppearSubject
             .filter { $0 }
             .first()
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self else { return }
                 self.userNotificationCenter.getNotificationSettings { [weak self] notificationSettings in
@@ -131,6 +133,7 @@ final class ConversationListViewModel: ViewModel {
     private func configureLoadData() {
         isAppearSubject
             .first(where: { $0 })
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.viewState = .loading })
             .flatMapLatestToResult { [weak self] _ in
                 guard let self else {
@@ -138,6 +141,7 @@ final class ConversationListViewModel: ViewModel {
                 }
                 return self.conversationService.getConversations()
             }
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
                 guard let self else { return }
                 switch result {
@@ -161,9 +165,7 @@ final class ConversationListViewModel: ViewModel {
 
         conversationSocketService
             .getConversationStream()
-            .sink(receiveValue: { _ in
-
-            })
+            .sink(receiveValue: { _ in })
             .store(in: &cancellables)
     }
 
@@ -173,6 +175,7 @@ final class ConversationListViewModel: ViewModel {
             .compactMap { conversationItemModel, conversations in
                 conversations.first(where: { $0.id == conversationItemModel.id })
             }
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in self?.navigationType = .chat($0) })
             .store(in: &cancellables)
 
@@ -213,6 +216,7 @@ final class ConversationListViewModel: ViewModel {
                     .map { _ in navigationType }
                     .eraseToAnyPublisher()
             }
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 switch result {
                 case let .success(navigationType):

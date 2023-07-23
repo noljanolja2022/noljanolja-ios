@@ -131,6 +131,7 @@ final class ChatSettingViewModel: ViewModel {
     private func configureActions() {
         assignAdminAction
             .withLatestFrom(conversationSubject) { ($1, $0) }
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] conversation, user in
                 guard let self else {
@@ -139,6 +140,7 @@ final class ChatSettingViewModel: ViewModel {
                 return self.conversationService
                     .assignAdmin(conversationID: conversation.id, admin: user)
             }
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 guard let self else { return }
                 self.isProgressHUDShowing = false
@@ -157,6 +159,7 @@ final class ChatSettingViewModel: ViewModel {
 
         removeParticipantAction
             .withLatestFrom(conversationSubject) { ($1, $0) }
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] conversation, user in
                 guard let self else {
@@ -165,6 +168,7 @@ final class ChatSettingViewModel: ViewModel {
                 return self.conversationService
                     .removeParticipant(conversationID: conversation.id, participants: [user])
             }
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 guard let self else { return }
                 self.isProgressHUDShowing = false
@@ -199,6 +203,7 @@ final class ChatSettingViewModel: ViewModel {
             .store(in: &cancellables)
 
         leaveAlertAction
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.alertState = AlertState(
                     title: TextState(""),
@@ -216,6 +221,7 @@ final class ChatSettingViewModel: ViewModel {
                 }
                 return self.conversationService.leave(conversationID: conversation.id)
             }
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 guard let self else { return }
                 self.isProgressHUDShowing = false
@@ -247,6 +253,7 @@ final class ChatSettingViewModel: ViewModel {
                     .mapToValue(alertState)
                     .eraseToAnyPublisher()
             }
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.alertState = $0
             }

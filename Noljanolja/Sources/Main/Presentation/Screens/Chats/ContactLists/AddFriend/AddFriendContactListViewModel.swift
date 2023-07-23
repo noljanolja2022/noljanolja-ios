@@ -55,6 +55,7 @@ final class AddFriendContactListViewModel: ViewModel {
 
     private func configureActions() {
         action
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in
                 self?.isProgressHUDShowing = true
             })

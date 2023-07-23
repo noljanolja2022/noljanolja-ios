@@ -73,12 +73,14 @@ final class AuthVerificationViewModel: ViewModel {
     private func configure() {
         resendCodeAction
             .compactMap { countryCode, phoneNumber in phoneNumber.flatMap { (countryCode, $0) } }
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] countryCode, phoneNumber -> AnyPublisher<String, Error> in
                 guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
                 return self.authService
                     .sendPhoneVerificationCode(phoneNumber, languageCode: countryCode)
             }
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
                 guard let self else { return }
                 self.isProgressHUDShowing = false
@@ -97,6 +99,7 @@ final class AuthVerificationViewModel: ViewModel {
             .store(in: &cancellables)
 
         verifyAction
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] _ -> AnyPublisher<User, Error> in
                 guard let self else {
@@ -109,6 +112,7 @@ final class AuthVerificationViewModel: ViewModel {
                     }
                     .eraseToAnyPublisher()
             }
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
                 self?.isProgressHUDShowing = false
                 switch result {

@@ -61,6 +61,7 @@ final class MyRankingViewModel: ViewModel {
 
         isAppearSubject
             .first(where: { $0 })
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.viewState = .loading })
             .flatMapLatestToResult { [weak self] _ -> AnyPublisher<LoyaltyMemberInfo, Error> in
                 guard let self else {
@@ -68,6 +69,7 @@ final class MyRankingViewModel: ViewModel {
                 }
                 return self.memberInfoUseCase.getLoyaltyMemberInfo()
             }
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 guard let self else { return }
                 switch result {

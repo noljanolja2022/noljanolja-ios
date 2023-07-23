@@ -81,10 +81,12 @@ final class ImageDetailViewModel: ViewModel {
             .store(in: &cancellables)
 
         editImageAction
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult {
                 SDWebImageManager.shared.loadImagePublisher(with: $0, progress: nil)
             }
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 guard let self else { return }
                 self.isProgressHUDShowing = false

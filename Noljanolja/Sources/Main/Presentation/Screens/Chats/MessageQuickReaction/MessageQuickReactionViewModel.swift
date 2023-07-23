@@ -62,6 +62,7 @@ final class MessageQuickReactionViewModel: ViewModel {
     private func configureLoadData() {
         isAppearSubject
             .first(where: { $0 })
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in
                 self?.isProgressHUDShowing = true
             })
@@ -71,6 +72,7 @@ final class MessageQuickReactionViewModel: ViewModel {
                 }
                 return self.reactionIconsUseCases.getReactionIcons()
             }
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 guard let self else { return }
                 switch result {
@@ -85,6 +87,7 @@ final class MessageQuickReactionViewModel: ViewModel {
 
     private func configureActions() {
         reactionAction
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapToResult { [weak self] reactionIcon -> AnyPublisher<Void, Error> in
                 guard let self else {

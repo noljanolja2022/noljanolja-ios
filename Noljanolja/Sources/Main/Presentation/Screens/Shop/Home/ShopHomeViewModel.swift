@@ -62,6 +62,7 @@ final class ShopHomeViewModel: ViewModel {
     private func configureLoadData() {
         isAppearSubject
             .first { $0 }
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.viewState = .loading })
             .flatMapLatestToResult { [weak self] _ in
                 guard let self else {
@@ -69,6 +70,7 @@ final class ShopHomeViewModel: ViewModel {
                 }
                 return self.getData()
             }
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 guard let self else { return }
                 switch result {
@@ -93,6 +95,7 @@ final class ShopHomeViewModel: ViewModel {
                     .map { $0.data }
                     .eraseToAnyPublisher()
             }
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 guard let self else { return }
                 switch result {

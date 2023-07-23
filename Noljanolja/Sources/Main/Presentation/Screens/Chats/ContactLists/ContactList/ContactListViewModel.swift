@@ -65,6 +65,7 @@ final class ContactListViewModel: ViewModel {
 
     private func configureLoadData() {
         loadDataSubject
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.viewState = .loading })
             .flatMapLatestToResult { [weak self] _ -> AnyPublisher<[User], Error> in
                 guard let self else {
@@ -101,6 +102,7 @@ final class ContactListViewModel: ViewModel {
                 }
                 return self.contactService.requestContactPermission()
             }
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
                 switch result {
                 case .success:
@@ -132,6 +134,7 @@ final class ContactListViewModel: ViewModel {
                             || ($0.phone ?? "").lowercased().contains(text.lowercased())
                     }
             }
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in self?.users = $0 })
             .store(in: &cancellables)
     }

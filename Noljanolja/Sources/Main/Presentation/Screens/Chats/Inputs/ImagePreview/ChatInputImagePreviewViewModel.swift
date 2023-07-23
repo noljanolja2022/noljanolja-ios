@@ -49,6 +49,7 @@ final class ChatInputImagePreviewViewModel: ViewModel {
 
     private func configure() {
         downloadImageAction
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 guard let self else { return }
                 UIImageWriteToSavedPhotosAlbum(self.image, nil, nil, nil)

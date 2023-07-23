@@ -162,6 +162,7 @@ final class SearchCouponsViewModel: ViewModel {
                 }
                 return self.localCouponKeywordRepository.observeCouponKeywords(string)
             }
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 guard let self else { return }
                 switch result {

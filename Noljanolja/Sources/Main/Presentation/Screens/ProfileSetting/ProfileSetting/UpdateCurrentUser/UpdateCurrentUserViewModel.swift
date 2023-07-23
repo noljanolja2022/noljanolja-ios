@@ -63,6 +63,7 @@ final class UpdateCurrentUserViewModel: ViewModel {
 
     private func configure() {
         currentUserSubject
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] user in
                 self?.avatar = user.avatar
                 self?.name = user.name
@@ -73,6 +74,7 @@ final class UpdateCurrentUserViewModel: ViewModel {
 
         $image
             .compactMap { $0?.jpegData(compressionQuality: 0.5) }
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] imageData in
                 guard let self else {
@@ -80,6 +82,7 @@ final class UpdateCurrentUserViewModel: ViewModel {
                 }
                 return self.userService.updateCurrentUserAvatar(imageData)
             }
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
                 guard let self else { return }
                 self.isProgressHUDShowing = false
@@ -118,6 +121,7 @@ final class UpdateCurrentUserViewModel: ViewModel {
             .store(in: &cancellables)
 
         updateCurrentUserAction
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] param in
                 guard let self else {
@@ -125,6 +129,7 @@ final class UpdateCurrentUserViewModel: ViewModel {
                 }
                 return self.userService.updateCurrentUser(param)
             }
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
                 guard let self else { return }
                 self.isProgressHUDShowing = false

@@ -56,6 +56,7 @@ final class CreateConversationContactListViewModel: ViewModel {
     private func configureCreateConversation() {
         action
             .filter { !$0.isEmpty }
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] users -> AnyPublisher<Conversation, Error> in
                 guard let self else {
@@ -64,6 +65,7 @@ final class CreateConversationContactListViewModel: ViewModel {
                 return self.conversationService
                     .createConversation(type: self.createConversationType, participants: users)
             }
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
                 self?.isProgressHUDShowing = false
                 switch result {

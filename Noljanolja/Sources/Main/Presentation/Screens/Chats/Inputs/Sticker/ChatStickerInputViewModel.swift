@@ -61,6 +61,7 @@ final class ChatStickerInputViewModel: ViewModel {
             isAppearSubject.first(where: { $0 }).mapToVoid(),
             reloadDataAction
         )
+        .receive(on: DispatchQueue.main)
         .sink(receiveValue: { [weak self] in
             guard let self else { return }
             if self.mediaService.getLocalStickerPackURL(id: self.stickerPack.id) != nil {
@@ -72,6 +73,7 @@ final class ChatStickerInputViewModel: ViewModel {
         .store(in: &cancellables)
 
         downloadDataAction
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] in self?.viewState = .loading })
             .flatMapLatestToResult { [weak self] in
                 guard let self else {
@@ -79,6 +81,7 @@ final class ChatStickerInputViewModel: ViewModel {
                 }
                 return self.mediaService.downloadStickerPack(id: self.stickerPack.id)
             }
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
                 switch result {
                 case .success:

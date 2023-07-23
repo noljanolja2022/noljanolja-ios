@@ -92,6 +92,7 @@ final class AddFriendsHomeViewModel: ViewModel {
 
     private func configureActions() {
         searchAction
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in
                 self?.isProgressHUDShowing = true
             })

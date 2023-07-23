@@ -57,6 +57,7 @@ final class FindUsersResultViewModel: ViewModel {
 
     private func configureActions() {
         addFriendAction
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in
                 self?.isProgressHUDShowing = true
             })

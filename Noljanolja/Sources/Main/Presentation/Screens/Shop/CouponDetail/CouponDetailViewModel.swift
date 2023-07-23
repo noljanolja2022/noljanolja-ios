@@ -70,6 +70,7 @@ final class CouponDetailViewModel: ViewModel {
     private func configureLoadData() {
         isAppearSubject
             .first { $0 }
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.viewState = .loading })
             .flatMapLatestToResult { [weak self] _ in
                 guard let self else {

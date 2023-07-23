@@ -76,6 +76,7 @@ final class MessageActionDetailViewModel: ViewModel {
 
         isAppearSubject
             .first(where: { $0 })
+            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in
                 self?.isProgressHUDShowing = true
             })
@@ -85,6 +86,7 @@ final class MessageActionDetailViewModel: ViewModel {
                 }
                 return self.reactionIconsUseCases.getReactionIcons()
             }
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 guard let self else { return }
                 switch result {
