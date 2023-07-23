@@ -39,7 +39,7 @@ protocol AuthServiceType {
 final class AuthService: NSObject, AuthServiceType {
     static let `default` = AuthService()
 
-    private lazy var notificationService = NotificationService.default
+    private lazy var notificationUseCases = NotificationUseCasesImpl.default
     private lazy var appleAuthAPI = AppleAuthAPI()
     private lazy var googleAuthAPI = GoogleAuthAPI()
     private lazy var kakaoAuthAPI = KakaoAuthAPI()
@@ -216,7 +216,7 @@ final class AuthService: NSObject, AuthServiceType {
     }
 
     func signOut() -> AnyPublisher<Void, Error> {
-        notificationService
+        notificationUseCases
             .deletePushToken()
             .flatMap { [weak self] _ in
                 guard let self else { return Empty<Void, Error>().eraseToAnyPublisher() }

@@ -1,5 +1,5 @@
 //
-//  NotificationService.swift
+//  NotificationUseCasesImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 19/03/2023.
@@ -9,29 +9,29 @@ import Combine
 import Foundation
 import UserNotifications
 
-// MARK: - NotificationServiceType
+// MARK: - NotificationUseCases
 
-protocol NotificationServiceType {
+protocol NotificationUseCases {
     func sendPushToken(token: String)
     func deletePushToken() -> AnyPublisher<Void, Error>
 }
 
-// MARK: - NotificationService
+// MARK: - NotificationUseCasesImpl
 
-final class NotificationService: NotificationServiceType {
-    static let `default` = NotificationService()
+final class NotificationUseCasesImpl: NotificationUseCases {
+    static let `default` = NotificationUseCasesImpl()
 
     private let userStore: UserStoreType
-    private let notificationAPI: NotificationAPIType
+    private let networkNotificationRepository: NetworkNotificationRepository
 
     private let pushTokenSubject = PassthroughSubject<String, Never>()
 
     private var cancellables = Set<AnyCancellable>()
 
     private init(userStore: UserStoreType = UserStore.default,
-                 notificationAPI: NotificationAPIType = NotificationAPI.default) {
+                 networkNotificationRepository: NetworkNotificationRepository = NetworkNotificationRepositoryImpl.shared) {
         self.userStore = userStore
-        self.notificationAPI = notificationAPI
+        self.networkNotificationRepository = networkNotificationRepository
 
         configure()
     }
@@ -47,7 +47,7 @@ final class NotificationService: NotificationServiceType {
             guard let self else {
                 return Empty<Void, Error>().eraseToAnyPublisher()
             }
-            return self.notificationAPI
+            return self.networkNotificationRepository
                 .sendPushToken(deviceToken: token)
         }
         .sink(receiveValue: { _ in })
@@ -59,7 +59,7 @@ final class NotificationService: NotificationServiceType {
     }
 
     func deletePushToken() -> AnyPublisher<Void, Error> {
-        notificationAPI
+        networkNotificationRepository
             .sendPushToken(deviceToken: "")
     }
 }

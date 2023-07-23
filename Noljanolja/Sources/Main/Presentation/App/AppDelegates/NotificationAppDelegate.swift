@@ -12,10 +12,10 @@ import UIKit
 // MARK: - NotificationAppDelegate
 
 final class NotificationAppDelegate: NSObject, AppDelegateProtocol {
-    private let notificationService: NotificationServiceType
+    private let notificationUseCases: NotificationUseCases
 
-    init(notificationService: NotificationServiceType = NotificationService.default) {
-        self.notificationService = notificationService
+    init(notificationUseCases: NotificationUseCases = NotificationUseCasesImpl.default) {
+        self.notificationUseCases = notificationUseCases
     }
 
     func application(_ application: UIApplication,
@@ -59,6 +59,6 @@ extension NotificationAppDelegate: UNUserNotificationCenterDelegate {
 extension NotificationAppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         guard let fcmToken else { return }
-        notificationService.sendPushToken(token: fcmToken)
+        notificationUseCases.sendPushToken(token: fcmToken)
     }
 }
