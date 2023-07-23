@@ -2460,9 +2460,9 @@
 		CF53D51A2A6AF548009B3A69 /* Input */ = {
 			isa = PBXGroup;
 			children = (
+				CF53D51E2A6AF548009B3A69 /* ChatInputView.swift */,
 				CF53D51B2A6AF548009B3A69 /* ChatInputViewModel.swift */,
 				CF53D51C2A6AF548009B3A69 /* Models */,
-				CF53D51E2A6AF548009B3A69 /* ChatInputView.swift */,
 			);
 			path = Input;
 			sourceTree = "<group>";

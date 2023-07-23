@@ -32,6 +32,12 @@ struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
     private func buildBodyView() -> some View {
         buildContentView()
             .hideNavigationBar()
+            .onAppear {
+                viewModel.isAppearSubject.send(true)
+            }
+            .onDisappear {
+                viewModel.isAppearSubject.send(false)
+            }
             .onChange(of: viewModel.isProgressHUDShowing) {
                 progressHUBState.isLoading = $0
             }
@@ -44,6 +50,7 @@ struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
             Spacer()
             buildActionView()
         }
+        .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
     private func buildMainView() -> some View {

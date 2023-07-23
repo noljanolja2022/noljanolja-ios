@@ -23,7 +23,6 @@ final class NotificationService: NotificationServiceType {
     private let userStore: UserStoreType
     private let notificationAPI: NotificationAPIType
 
-    private let currentUserSubject = PassthroughSubject<User, Never>()
     private let pushTokenSubject = PassthroughSubject<String, Never>()
 
     private var cancellables = Set<AnyCancellable>()
@@ -37,22 +36,21 @@ final class NotificationService: NotificationServiceType {
     }
 
     private func configure() {
-        pushTokenSubject
-            .removeDuplicates()
-            .filter { !$0.trimmed.isEmpty }
-            .flatMapLatestToResult { [weak self] token in
-                guard let self else {
-                    return Empty<Void, Error>().eraseToAnyPublisher()
-                }
-                return self.notificationAPI
-                    .sendPushToken(deviceToken: token)
+        Publishers.CombineLatest(
+            userStore.getCurrentUserPublisher(),
+            pushTokenSubject
+                .removeDuplicates()
+                .filter { !$0.trimmed.isEmpty }
+        )
+        .flatMapLatestToResult { [weak self] _, token in
+            guard let self else {
+                return Empty<Void, Error>().eraseToAnyPublisher()
             }
-            .sink(receiveValue: { _ in })
-            .store(in: &cancellables)
-
-        userStore.getCurrentUserPublisher()
-            .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
-            .store(in: &cancellables)
+            return self.notificationAPI
+                .sendPushToken(deviceToken: token)
+        }
+        .sink(receiveValue: { _ in })
+        .store(in: &cancellables)
     }
 
     func sendPushToken(token: String) {

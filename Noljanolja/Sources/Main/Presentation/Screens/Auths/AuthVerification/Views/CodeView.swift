@@ -35,6 +35,7 @@ struct CodeView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(ColorAssets.neutralLight.swiftUIColor)
             .onTapGesture {
                 text = ""
                 isFocused = true

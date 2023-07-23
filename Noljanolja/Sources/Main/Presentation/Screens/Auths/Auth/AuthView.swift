@@ -32,6 +32,12 @@ struct AuthView<ViewModel: AuthViewModel>: View {
             buildNavigationLink()
         }
         .hideNavigationBar()
+        .onAppear {
+            viewModel.isAppearSubject.send(true)
+        }
+        .onDisappear {
+            viewModel.isAppearSubject.send(false)
+        }
         .onChange(of: viewModel.isProgressHUDShowing) {
             progressHUBState.isLoading = $0
         }
