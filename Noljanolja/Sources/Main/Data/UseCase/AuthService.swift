@@ -39,6 +39,7 @@ protocol AuthServiceType {
 final class AuthService: NSObject, AuthServiceType {
     static let `default` = AuthService()
 
+    private lazy var notificationService = NotificationService.default
     private lazy var appleAuthAPI = AppleAuthAPI()
     private lazy var googleAuthAPI = GoogleAuthAPI()
     private lazy var kakaoAuthAPI = KakaoAuthAPI()
@@ -215,27 +216,34 @@ final class AuthService: NSObject, AuthServiceType {
     }
 
     func signOut() -> AnyPublisher<Void, Error> {
-        Publishers.CombineLatest4(
-            appleAuthAPI.signOutIfNeeded(),
-            googleAuthAPI.signOutIfNeeded(),
-            kakaoAuthAPI.signOutIfNeeded(),
-            naverAuthAPI.signOutIfNeeded()
-        )
-        .flatMap { [weak self] _ in
-            guard let self else { return Empty<Void, Error>().eraseToAnyPublisher() }
-            return self.firebaseAuth
-                .signOutCombine()
+        notificationService
+            .deletePushToken()
+            .flatMap { [weak self] _ in
+                guard let self else { return Empty<Void, Error>().eraseToAnyPublisher() }
+                return Publishers.CombineLatest4(
+                    appleAuthAPI.signOutIfNeeded(),
+                    googleAuthAPI.signOutIfNeeded(),
+                    kakaoAuthAPI.signOutIfNeeded(),
+                    naverAuthAPI.signOutIfNeeded()
+                )
+                .map { _ in () }
                 .eraseToAnyPublisher()
-        }
-        .handleEvents(receiveOutput: { [weak self] in
-            guard let self else { return }
-            self.authStore.clearToken()
-            self.contactStore.deleteAll()
-            self.conversationStore.deleteAll()
-            self.conversationDetailStore.deleteAll()
-            self.messageStore.deleteAll()
-            self.isAuthenticated.send(false)
-        })
-        .eraseToAnyPublisher()
+            }
+            .flatMap { [weak self] _ in
+                guard let self else { return Empty<Void, Error>().eraseToAnyPublisher() }
+                return self.firebaseAuth
+                    .signOutCombine()
+                    .eraseToAnyPublisher()
+            }
+            .handleEvents(receiveOutput: { [weak self] in
+                guard let self else { return }
+                self.authStore.clearToken()
+                self.contactStore.deleteAll()
+                self.conversationStore.deleteAll()
+                self.conversationDetailStore.deleteAll()
+                self.messageStore.deleteAll()
+                self.isAuthenticated.send(false)
+            })
+            .eraseToAnyPublisher()
     }
 }

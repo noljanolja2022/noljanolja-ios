@@ -13,6 +13,7 @@ import UserNotifications
 
 protocol NotificationServiceType {
     func sendPushToken(token: String)
+    func deletePushToken() -> AnyPublisher<Void, Error>
 }
 
 // MARK: - NotificationService
@@ -55,5 +56,10 @@ final class NotificationService: NotificationServiceType {
 
     func sendPushToken(token: String) {
         pushTokenSubject.send(token)
+    }
+
+    func deletePushToken() -> AnyPublisher<Void, Error> {
+        notificationAPI
+            .sendPushToken(deviceToken: "")
     }
 }

@@ -22,7 +22,7 @@ private enum NotificationAPITargets {
         var parameters: [String: Any] {
             [
                 "deviceToken": deviceToken,
-                "deviceType": "iOS"
+                "deviceType": "MOBILE"
             ]
         }
 

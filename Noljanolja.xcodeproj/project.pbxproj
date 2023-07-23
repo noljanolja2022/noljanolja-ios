@@ -1826,11 +1826,11 @@
 		CF53D4572A6AF548009B3A69 /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
-				CF53D4582A6AF548009B3A69 /* WalletNavigations.swift */,
 				CF53D4592A6AF548009B3A69 /* Model */,
-				CF53D45E2A6AF548009B3A69 /* WalletViewModel.swift */,
-				CF53D45F2A6AF548009B3A69 /* WalletView.swift */,
 				CF53D4602A6AF548009B3A69 /* Views */,
+				CF53D4582A6AF548009B3A69 /* WalletNavigations.swift */,
+				CF53D45F2A6AF548009B3A69 /* WalletView.swift */,
+				CF53D45E2A6AF548009B3A69 /* WalletViewModel.swift */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
