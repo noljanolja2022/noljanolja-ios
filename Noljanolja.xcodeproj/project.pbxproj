@@ -1637,8 +1637,8 @@
 		CF53D4172A6AF547009B3A69 /* PlayerView */ = {
 			isa = PBXGroup;
 			children = (
-				CF53D4182A6AF547009B3A69 /* VideoDetailPlayerView.swift */,
 				CF53D4192A6AF547009B3A69 /* Models */,
+				CF53D4182A6AF547009B3A69 /* VideoDetailPlayerView.swift */,
 				CF53D41B2A6AF547009B3A69 /* VideoDetailPlayerViewModel.swift */,
 			);
 			path = PlayerView;

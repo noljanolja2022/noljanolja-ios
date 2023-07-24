@@ -19,7 +19,7 @@ enum AppConfigs {
             static let serviceUrlScheme = "com.noljanolja.app.ios" // TODO: Update Auth - Kakao - Update URLSchemes on Info.plist (noljanolja)
             static let consumerKey = "3zDg6vMsJmoFk2TGOjcq"
             static let consumerSecret = "8keRny2c_4"
-            static let appName = "놀자놀자"
+            static let appName = "놀구벌구"
         }
     }
 

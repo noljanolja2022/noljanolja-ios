@@ -1,7 +1,7 @@
-"splash_welcome" = "Welcome to Noja Noja. Follow these steps to be our member.";
+"splash_welcome" = "Welcome to NolguBulgu. Follow these steps to be our member.";
 "tos_welcome" = "Welcome to Nolja Nolja. Please read our terms of service carefully.";
 "common_try_again" = "Try again";
-"auth_welcome" = "Welcome to Noja Noja. Follow these steps to be our member.";
+"auth_welcome" = "Welcome to NolguBulgu. Follow these steps to be our member.";
 "permission_notification_title" = "Turn on notification\nfor Nolja Nolja";
 "permission_notification_description" = "Permit Nolja Nolja to send you notification in order to\nconect with your friends.";
 "common_send" = "Send";
@@ -68,7 +68,7 @@
 "common_warning" = "경고";
 "common_all" = "모두";
 "common_download" = "다운로드";
-"welcome_noljanolja" = "Welcome to 놀자놀자\nWATCH PLAY EARN";
+"welcome_noljanolja" = "Welcome to 놀구벌구\nWATCH PLAY EARN";
 "splash_explore" = "지금 바로 시작하기";
 "splash_wait" = "잠시만 기다려주세요...";
 "signup" = "회원가입";
@@ -103,7 +103,7 @@
 "home_wallet" = "지갑";
 "home_shop" = "쇼핑";
 "home_news" = "뉴스";
-"login_phone_description" = "Welcome to 놀자놀자. 계속 진행하기 위해 휴대폰 번호를 넣어주세요.";
+"login_phone_description" = "Welcome to 놀구벌구. 계속 진행하기 위해 휴대폰 번호를 넣어주세요.";
 "login_country_input_label" = "국가";
 "login_phone_input_label" = "휴대폰 번호";
 "login_invalid_phone_title" = "유효하지 않은 번호";
@@ -172,10 +172,10 @@
 "contacts_title_add_memmber" = "친구 추가";
 "contacts_not_found" = "등록된 친구가 없습니다";
 "permission" = "권한";
-"permission_contacts_description" = "놀자놀자 앱에서 친구와 가족에게 메시지를 보낼 수 있도록 연락처 접근 권한을 허용해주세요.";
-"permission_access_storage_description" = "놀자놀자 앱에서 갤러리(사진)에 접근할 수 있도록 미디에 파일에 접근 권한을 허용해주세요.";
+"permission_contacts_description" = "놀구벌구 앱에서 친구와 가족에게 메시지를 보낼 수 있도록 연락처 접근 권한을 허용해주세요.";
+"permission_access_storage_description" = "놀구벌구 앱에서 갤러리(사진)에 접근할 수 있도록 미디에 파일에 접근 권한을 허용해주세요.";
 "permission_accept" = "허용";
-"permission_required_description" = "권한이 없으면 이 기능을 사용할 수 없습니다. 놀자놀자 앱이 필요한 권한에 접근할 수 있도록 설정버튼을 눌러주세요.";
+"permission_required_description" = "권한이 없으면 이 기능을 사용할 수 없습니다. 놀구벌구 앱이 필요한 권한에 접근할 수 있도록 설정버튼을 눌러주세요.";
 "permission_go_to_settings" = "설정";
 "conversation_empty" = "친구추가";
 "conversation_create" = "%@ 님이 채팅방을 개설하였습니다.";
