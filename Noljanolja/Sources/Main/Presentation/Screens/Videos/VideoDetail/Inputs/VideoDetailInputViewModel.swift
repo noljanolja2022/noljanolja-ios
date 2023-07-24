@@ -13,6 +13,7 @@ import Foundation
 
 protocol VideoDetailInputViewModelDelegate: AnyObject {
     func didCommentSuccess(_ comment: VideoComment)
+    func didCommentFail(_ error: Error)
 }
 
 // MARK: - VideoDetailInputViewModel
@@ -77,8 +78,8 @@ final class VideoDetailInputViewModel: ViewModel {
                 switch result {
                 case let .success(comment):
                     self.delegate?.didCommentSuccess(comment)
-                case .failure:
-                    break
+                case let .failure(error):
+                    self.delegate?.didCommentFail(error)
                 }
             }
             .store(in: &cancellables)

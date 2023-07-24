@@ -376,10 +376,10 @@ internal enum L10n {
   internal static let permission = L10n.tr("Localizable", "permission", fallback: "Permission")
   /// Accept
   internal static let permissionAccept = L10n.tr("Localizable", "permission_accept", fallback: "Accept")
-  /// To help you access gallery on Noljanolja, allow Noljanolja access to your media files.
-  internal static let permissionAccessStorageDescription = L10n.tr("Localizable", "permission_access_storage_description", fallback: "To help you access gallery on Noljanolja, allow Noljanolja access to your media files.")
-  /// To help you message friends and family on Noljanolja, allow Noljanolja access to your contacts.
-  internal static let permissionContactsDescription = L10n.tr("Localizable", "permission_contacts_description", fallback: "To help you message friends and family on Noljanolja, allow Noljanolja access to your contacts.")
+  /// To help you access gallery on NolguBulgu, allow NolguBulgu access to your media files.
+  internal static let permissionAccessStorageDescription = L10n.tr("Localizable", "permission_access_storage_description", fallback: "To help you access gallery on NolguBulgu, allow NolguBulgu access to your media files.")
+  /// To help you message friends and family on NolguBulgu, allow NolguBulgu access to your contacts.
+  internal static let permissionContactsDescription = L10n.tr("Localizable", "permission_contacts_description", fallback: "To help you message friends and family on NolguBulgu, allow NolguBulgu access to your contacts.")
   /// Go to setting
   internal static let permissionGoToSettings = L10n.tr("Localizable", "permission_go_to_settings", fallback: "Go to setting")
   /// Permit Nolja Nolja to send you notification in order to
@@ -389,8 +389,8 @@ internal enum L10n {
   /// for Nolja Nolja
   internal static let permissionNotificationTitle = L10n.tr("Localizable", "permission_notification_title", fallback: "Turn on notification\nfor Nolja Nolja")
   /// You're unable to use this feature without the required permissions. 
-  /// Tap the Settings button to allow Noljanolja to access the required permission.
-  internal static let permissionRequiredDescription = L10n.tr("Localizable", "permission_required_description", fallback: "You're unable to use this feature without the required permissions. \nTap the Settings button to allow Noljanolja to access the required permission.")
+  /// Tap the Settings button to allow NolguBulgu to access the required permission.
+  internal static let permissionRequiredDescription = L10n.tr("Localizable", "permission_required_description", fallback: "You're unable to use this feature without the required permissions. \nTap the Settings button to allow NolguBulgu to access the required permission.")
   /// Let's Play Log in
   internal static let requireLoginButton = L10n.tr("Localizable", "require_login_button", fallback: "Let's Play Log in")
   /// Log in to play

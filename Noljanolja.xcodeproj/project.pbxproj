@@ -456,6 +456,8 @@
 		CFF8639B2A4363A400EC0713 /* StorableMessageReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF8639A2A4363A400EC0713 /* StorableMessageReaction.swift */; };
 		CFF868B92A6E2D74006F0B87 /* VideoUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF868B82A6E2D74006F0B87 /* VideoUseCases.swift */; };
 		CFF868BC2A6E345E006F0B87 /* GIDGoogleUser+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF868BB2A6E345E006F0B87 /* GIDGoogleUser+Combine.swift */; };
+		CFF868BE2A6E7791006F0B87 /* VideoDetailFullScreenCoverType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF868BD2A6E7791006F0B87 /* VideoDetailFullScreenCoverType.swift */; };
+		CFF868C02A6E8457006F0B87 /* BaseReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF868BF2A6E8457006F0B87 /* BaseReponse.swift */; };
 		CFFB05A229BF739D000D65EE /* Date+RelativeString.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFB05A129BF739D000D65EE /* Date+RelativeString.swift */; };
 		CFFB71EC2A4004550019663C /* StorableCouponKeyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFB71EB2A4004550019663C /* StorableCouponKeyword.swift */; };
 		CFFB71EE2A4004A20019663C /* CouponKeyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFB71ED2A4004A20019663C /* CouponKeyword.swift */; };
@@ -940,6 +942,8 @@
 		CFF8639A2A4363A400EC0713 /* StorableMessageReaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorableMessageReaction.swift; sourceTree = "<group>"; };
 		CFF868B82A6E2D74006F0B87 /* VideoUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoUseCases.swift; sourceTree = "<group>"; };
 		CFF868BB2A6E345E006F0B87 /* GIDGoogleUser+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GIDGoogleUser+Combine.swift"; sourceTree = "<group>"; };
+		CFF868BD2A6E7791006F0B87 /* VideoDetailFullScreenCoverType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailFullScreenCoverType.swift; sourceTree = "<group>"; };
+		CFF868BF2A6E8457006F0B87 /* BaseReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseReponse.swift; sourceTree = "<group>"; };
 		CFFB05A129BF739D000D65EE /* Date+RelativeString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+RelativeString.swift"; sourceTree = "<group>"; };
 		CFFB71EB2A4004550019663C /* StorableCouponKeyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorableCouponKeyword.swift; sourceTree = "<group>"; };
 		CFFB71ED2A4004A20019663C /* CouponKeyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponKeyword.swift; sourceTree = "<group>"; };
@@ -1323,6 +1327,7 @@
 				CFF863942A435F8400EC0713 /* ReactIcon.swift */,
 				CFF863982A4362ED00EC0713 /* MessageReaction.swift */,
 				CFAA37622A4B38E00085CE88 /* Banner.swift */,
+				CFF868BF2A6E8457006F0B87 /* BaseReponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1657,6 +1662,7 @@
 			children = (
 				CF53D41D2A6AF547009B3A69 /* VideoDetailViewModel.swift */,
 				CF53D41E2A6AF547009B3A69 /* VideoDetailView.swift */,
+				CFF868BD2A6E7791006F0B87 /* VideoDetailFullScreenCoverType.swift */,
 			);
 			path = VideoDetail;
 			sourceTree = "<group>";
@@ -3521,6 +3527,7 @@
 				CF53D5BB2A6AF548009B3A69 /* WalletViewModel.swift in Sources */,
 				CFD0952E2A02BDE8004BF047 /* Dictionary+JSON.swift in Sources */,
 				CF53D5572A6AF548009B3A69 /* LaunchRootViewModel.swift in Sources */,
+				CFF868C02A6E8457006F0B87 /* BaseReponse.swift in Sources */,
 				CF0EA31029AA3DD30014A7DE /* Country.swift in Sources */,
 				CF53D5CF2A6AF548009B3A69 /* ContactListViewModel.swift in Sources */,
 				CF1B625629B9D3BF00DE53E6 /* ConversationService.swift in Sources */,
@@ -3665,6 +3672,7 @@
 				CF53D5F62A6AF548009B3A69 /* StickerMessageContentView.swift in Sources */,
 				CF53D5C32A6AF548009B3A69 /* MyRankingView.swift in Sources */,
 				CFFD70C6298AC5F800D4F5A2 /* AuthPluggin.swift in Sources */,
+				CFF868BE2A6E7791006F0B87 /* VideoDetailFullScreenCoverType.swift in Sources */,
 				CF53D6402A6AF548009B3A69 /* ChatStickerInputViewModel.swift in Sources */,
 				CF53D5832A6AF548009B3A69 /* CouponDetailModel.swift in Sources */,
 				CF53D56D2A6AF548009B3A69 /* UpdateCurrentUserView.swift in Sources */,

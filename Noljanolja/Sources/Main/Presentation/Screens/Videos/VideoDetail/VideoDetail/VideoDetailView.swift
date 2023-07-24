@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 // MARK: - VideoDetailView
 
@@ -31,6 +32,12 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
             }
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
+            .fullScreenCover(
+                unwrapping: $viewModel.fullScreenCoverType,
+                content: {
+                    buildFullScreenCoverDestinationView($0)
+                }
+            )
     }
 
     private func buildContentView() -> some View {
@@ -132,6 +139,18 @@ extension VideoDetailView {
     private func buildErrorView() -> some View {
         Spacer()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}
+
+extension VideoDetailView {
+    @ViewBuilder
+    private func buildFullScreenCoverDestinationView(
+        _ type: Binding<VideoDetailFullScreenCoverType>
+    ) -> some View {
+        switch type.wrappedValue {
+        case let .webView(url):
+            SafariView(url: url)
+        }
     }
 }
 

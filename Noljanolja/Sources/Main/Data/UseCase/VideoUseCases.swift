@@ -38,24 +38,11 @@ final class VideoUseCasesImpl: VideoUseCases {
             }
             return self.videoRepository.postVideoComment(videoId: videoId, comment: comment, youtubeToken: accessTokenString)
         }
-        if let currentUser = GIDSignIn.sharedInstance.currentUser {
-            let grantedScopes = currentUser.grantedScopes
-            if grantedScopes?.contains(GIDSignInScope.youtube) ?? false {
-                return postComment()
-            } else {
-                return currentUser.addScopes(scopes: [GIDSignInScope.youtube])
-                    .flatMap { _ in
-                        postComment()
-                    }
-                    .eraseToAnyPublisher()
+
+        return GIDSignIn.sharedInstance.signInIfNeededCombine(additionalScopes: [GIDSignInScope.youtube])
+            .flatMap { _ in
+                postComment()
             }
-        } else {
-            return GIDSignIn.sharedInstance
-                .signInCombine(additionalScopes: [GIDSignInScope.youtube])
-                .flatMap { _ in
-                    postComment()
-                }
-                .eraseToAnyPublisher()
-        }
+            .eraseToAnyPublisher()
     }
 }

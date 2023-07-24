@@ -18,6 +18,50 @@ enum GIDSignInScope {
 // MARK: - GoogleAuthAPI
 
 extension GIDSignIn {
+    func signInIfNeededCombine(hint: String? = nil,
+                               additionalScopes: [String]? = nil) -> AnyPublisher<GIDGoogleUser, Error> {
+        if let currentUser {
+            let grantedScopes = currentUser.grantedScopes ?? []
+            let additionalScopes = additionalScopes ?? []
+            if additionalScopes.isEmpty || grantedScopes.contains(additionalScopes) {
+                return Just(currentUser)
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
+            } else {
+                return currentUser.addScopes(scopes: additionalScopes)
+                    .map { $0.user }
+                    .eraseToAnyPublisher()
+            }
+        } else {
+            return restorePreviousSignInCombine()
+                .replaceError(with: nil)
+                .flatMap { [weak self] currentUser in
+                    guard let self else {
+                        return Fail<GIDGoogleUser, Error>(error: CommonError.captureSelfNotFound)
+                            .eraseToAnyPublisher()
+                    }
+                    if let currentUser {
+                        let grantedScopes = currentUser.grantedScopes ?? []
+                        let additionalScopes = additionalScopes ?? []
+                        if additionalScopes.isEmpty || grantedScopes.contains(additionalScopes) {
+                            return Just(currentUser)
+                                .setFailureType(to: Error.self)
+                                .eraseToAnyPublisher()
+                        } else {
+                            return currentUser.addScopes(scopes: additionalScopes)
+                                .map { $0.user }
+                                .eraseToAnyPublisher()
+                        }
+                    } else {
+                        return self.signInCombine(hint: hint, additionalScopes: additionalScopes)
+                            .map { $0.user }
+                            .eraseToAnyPublisher()
+                    }
+                }
+                .eraseToAnyPublisher()
+        }
+    }
+
     func signInCombine(hint: String? = nil,
                        additionalScopes: [String]? = nil) -> Future<GIDSignInResult, Error> {
         Future { [weak self] promise in
@@ -36,6 +80,22 @@ extension GIDSignIn {
                     promise(.success(result))
                 } else {
                     promise(.failure(CommonError.informationNotFound(message: "Result not found")))
+                }
+            }
+        }
+    }
+
+    func restorePreviousSignInCombine() -> Future<GIDGoogleUser?, Error> {
+        Future { [weak self] promise in
+            guard let self else {
+                promise(.failure(CommonError.captureSelfNotFound))
+                return
+            }
+            self.restorePreviousSignIn { user, error in
+                if let error {
+                    promise(.failure(error))
+                } else {
+                    promise(.success(user))
                 }
             }
         }

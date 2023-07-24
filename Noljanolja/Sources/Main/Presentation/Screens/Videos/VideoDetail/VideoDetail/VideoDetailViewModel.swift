@@ -8,6 +8,7 @@
 
 import Combine
 import Foundation
+import Moya
 
 // MARK: - VideoDetailViewModelDelegate
 
@@ -23,6 +24,10 @@ final class VideoDetailViewModel: ViewModel {
     @Published var commentCount: Int?
     @Published var viewState = ViewState.loading
     @Published var footerViewState = StatefullFooterViewState.loading
+
+    // MARK: Navigations
+
+    @Published var fullScreenCoverType: VideoDetailFullScreenCoverType?
 
     // MARK: Action
 
@@ -129,5 +134,18 @@ extension VideoDetailViewModel: VideoDetailInputViewModelDelegate {
         comments.insert(comment, at: 0)
         commentCount = commentCount.flatMap { $0 + 1 }
         scrollToTopAction.send()
+    }
+
+    func didCommentFail(_ error: Error) {
+        switch error as? MoyaError {
+        case let .underlying(_, response):
+            guard let data = response?.data,
+                  let baseResponse = BaseResponse(from: data),
+                  baseResponse.code == 400014,
+                  let url = URL(string: "https://support.google.com/youtube/answer/1646861?topic=3024170&hl=en") else { return }
+            fullScreenCoverType = .webView(url)
+        default:
+            break
+        }
     }
 }
