@@ -7,12 +7,6 @@
 
 import Foundation
 
-// MARK: - GoogleAuthError
-
-enum GoogleAuthError: Error {
-    case tokenNotExit
-}
-
 // MARK: - AppleAuthError
 
 enum AppleAuthError: Error {

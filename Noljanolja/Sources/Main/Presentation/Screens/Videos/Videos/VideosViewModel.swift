@@ -31,7 +31,7 @@ final class VideosViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    private let videoAPI: VideoAPIType
+    private let videoRepository: VideoRepository
     private weak var delegate: VideosViewModelDelegate?
 
     // MARK: Private
@@ -43,9 +43,9 @@ final class VideosViewModel: ViewModel {
     private let pageSize = 20
     private var cancellables = Set<AnyCancellable>()
 
-    init(videoAPI: VideoAPIType = VideoAPI.default,
+    init(videoRepository: VideoRepository = VideoRepositoryImpl.shared,
          delegate: VideosViewModelDelegate? = nil) {
-        self.videoAPI = videoAPI
+        self.videoRepository = videoRepository
         self.delegate = delegate
         super.init()
 
@@ -107,7 +107,7 @@ final class VideosViewModel: ViewModel {
                 guard let self else {
                     return Empty<[Video], Error>().eraseToAnyPublisher()
                 }
-                return self.videoAPI.getWatchingVideos()
+                return self.videoRepository.getWatchingVideos()
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
@@ -123,13 +123,13 @@ final class VideosViewModel: ViewModel {
     }
 
     private func getDatas() -> AnyPublisher<VideosModel, Error> {
-        let highlightVideos = videoAPI
+        let highlightVideos = videoRepository
             .getVideos(page: 1, pageSize: pageSize, isHighlighted: true)
             .mapToResult()
-        let watchingVideos = videoAPI
+        let watchingVideos = videoRepository
             .getWatchingVideos()
             .mapToResult()
-        let trendingVideos = videoAPI
+        let trendingVideos = videoRepository
             .getTrendingVideos(duration: .day, limit: pageSize)
             .mapToResult()
 

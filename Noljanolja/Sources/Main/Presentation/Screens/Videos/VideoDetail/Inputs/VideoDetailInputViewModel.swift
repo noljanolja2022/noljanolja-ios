@@ -31,7 +31,7 @@ final class VideoDetailInputViewModel: ViewModel {
 
     private let videoId: String
     private let userService: UserServiceType
-    private let videoAPI: VideoAPIType
+    private let videoUseCases: VideoUseCases
     private weak var delegate: VideoDetailInputViewModelDelegate?
 
     // MARK: Private
@@ -40,11 +40,11 @@ final class VideoDetailInputViewModel: ViewModel {
 
     init(videoId: String,
          userService: UserServiceType = UserService.default,
-         videoAPI: VideoAPIType = VideoAPI.default,
+         videoUseCases: VideoUseCases = VideoUseCasesImpl.shared,
          delegate: VideoDetailInputViewModelDelegate? = nil) {
         self.videoId = videoId
         self.userService = userService
-        self.videoAPI = videoAPI
+        self.videoUseCases = videoUseCases
         self.delegate = delegate
         super.init()
 
@@ -67,7 +67,7 @@ final class VideoDetailInputViewModel: ViewModel {
                 guard let self else {
                     return Empty<VideoComment, Error>().eraseToAnyPublisher()
                 }
-                return self.videoAPI
+                return self.videoUseCases
                     .postVideoComment(videoId: self.videoId, comment: comment)
             }
             .receive(on: DispatchQueue.main)

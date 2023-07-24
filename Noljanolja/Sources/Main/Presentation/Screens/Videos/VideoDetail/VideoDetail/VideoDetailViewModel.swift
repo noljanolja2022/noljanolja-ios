@@ -32,7 +32,7 @@ final class VideoDetailViewModel: ViewModel {
     // MARK: Dependencies
 
     let videoId: String
-    private let videoAPI: VideoAPIType
+    private let videoRepository: VideoRepository
     private weak var delegate: VideoDetailViewModelDelegate?
 
     // MARK: Private
@@ -41,10 +41,10 @@ final class VideoDetailViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(videoId: String,
-         videoAPI: VideoAPIType = VideoAPI.default,
+         videoRepository: VideoRepository = VideoRepositoryImpl.shared,
          delegate: VideoDetailViewModelDelegate? = nil) {
         self.videoId = videoId
-        self.videoAPI = videoAPI
+        self.videoRepository = videoRepository
         self.delegate = delegate
         super.init()
 
@@ -64,7 +64,7 @@ final class VideoDetailViewModel: ViewModel {
                 guard let self else {
                     return Empty<Video, Error>().eraseToAnyPublisher()
                 }
-                return self.videoAPI.getVideoDetail(id: self.videoId)
+                return self.videoRepository.getVideoDetail(id: self.videoId)
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
@@ -97,7 +97,7 @@ final class VideoDetailViewModel: ViewModel {
                 guard let self else {
                     return Empty<[VideoComment], Error>().eraseToAnyPublisher()
                 }
-                return self.videoAPI.getVideoComments(
+                return self.videoRepository.getVideoComments(
                     videoId: self.videoId,
                     beforeCommentId: self.comments.last?.id,
                     limit: self.pageSize

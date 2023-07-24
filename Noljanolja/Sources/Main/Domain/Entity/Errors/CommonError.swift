@@ -10,6 +10,9 @@ import Foundation
 // MARK: - CommonError
 
 enum CommonError: Error {
+    case captureSelfNotFound
+    case captureObjectNotFound(message: String)
+    case informationNotFound(message: String)
     case currentUserNotFound
     case unknown
 }

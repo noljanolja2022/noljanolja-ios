@@ -1,5 +1,5 @@
 //
-//  VideoAPI.swift
+//  VideoRepositoryImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 21/04/2023.
@@ -9,9 +9,9 @@ import Combine
 import Foundation
 import Moya
 
-// MARK: - VideoAPITargets
+// MARK: - VideoTargets
 
-private enum VideoAPITargets {
+private enum VideoTargets {
     struct GetVideos: BaseAuthTargetType {
         var path: String { "v1/media/videos" }
         let method: Moya.Method = .get
@@ -89,10 +89,12 @@ private enum VideoAPITargets {
 
         let videoId: String
         let comment: String
+        let youtubeToken: String
 
         var parameters: [String: Any] {
             [
-                "comment": comment
+                "comment": comment,
+                "youtubeToken": youtubeToken
             ]
         }
     }
@@ -106,20 +108,20 @@ private enum VideoAPITargets {
     }
 }
 
-// MARK: - VideoAPIType
+// MARK: - VideoRepository
 
-protocol VideoAPIType {
+protocol VideoRepository {
     func getVideos(page: Int, pageSize: Int?, isHighlighted: Bool?, categoryId: String?) -> AnyPublisher<[Video], Error>
     func getWatchingVideos() -> AnyPublisher<[Video], Error>
     func getTrendingVideos(duration: VideoTrendingDurationType, limit: Int?) -> AnyPublisher<[Video], Error>
 
     func getVideoDetail(id: String) -> AnyPublisher<Video, Error>
     func getVideoComments(videoId: String, beforeCommentId: Int?, limit: Int?) -> AnyPublisher<[VideoComment], Error>
-    func postVideoComment(videoId: String, comment: String) -> AnyPublisher<VideoComment, Error>
+    func postVideoComment(videoId: String, comment: String, youtubeToken: String) -> AnyPublisher<VideoComment, Error>
     func likeVideo(videoId: String) -> AnyPublisher<Void, Error>
 }
 
-extension VideoAPIType {
+extension VideoRepository {
     func getVideos(page: Int, pageSize: Int? = nil, isHighlighted: Bool? = true, categoryId: String? = nil) -> AnyPublisher<[Video], Error> {
         getVideos(page: page, pageSize: pageSize, isHighlighted: isHighlighted, categoryId: categoryId)
     }
@@ -133,10 +135,10 @@ extension VideoAPIType {
     }
 }
 
-// MARK: - VideoAPI
+// MARK: - VideoRepositoryImpl
 
-final class VideoAPI: VideoAPIType {
-    static let `default` = VideoAPI()
+final class VideoRepositoryImpl: VideoRepository {
+    static let shared = VideoRepositoryImpl()
 
     private let api: ApiType
 
@@ -146,7 +148,7 @@ final class VideoAPI: VideoAPIType {
 
     func getVideos(page: Int, pageSize: Int?, isHighlighted: Bool?, categoryId: String?) -> AnyPublisher<[Video], Error> {
         api.request(
-            target: VideoAPITargets.GetVideos(
+            target: VideoTargets.GetVideos(
                 page: page,
                 pageSize: pageSize,
                 isHighlighted: isHighlighted,
@@ -158,28 +160,28 @@ final class VideoAPI: VideoAPIType {
 
     func getWatchingVideos() -> AnyPublisher<[Video], Error> {
         api.request(
-            target: VideoAPITargets.WatchingVideos(),
+            target: VideoTargets.WatchingVideos(),
             atKeyPath: "data"
         )
     }
 
     func getTrendingVideos(duration: VideoTrendingDurationType, limit: Int?) -> AnyPublisher<[Video], Error> {
         api.request(
-            target: VideoAPITargets.GetTrendingVideos(duration: duration, limit: limit),
+            target: VideoTargets.GetTrendingVideos(duration: duration, limit: limit),
             atKeyPath: "data"
         )
     }
 
     func getVideoDetail(id: String) -> AnyPublisher<Video, Error> {
         api.request(
-            target: VideoAPITargets.GetVideoDetail(videoId: id),
+            target: VideoTargets.GetVideoDetail(videoId: id),
             atKeyPath: "data"
         )
     }
 
     func getVideoComments(videoId: String, beforeCommentId: Int?, limit: Int?) -> AnyPublisher<[VideoComment], Error> {
         api.request(
-            target: VideoAPITargets.GetVideoComments(
+            target: VideoTargets.GetVideoComments(
                 videoId: videoId,
                 beforeCommentId: beforeCommentId,
                 limit: limit
@@ -188,11 +190,12 @@ final class VideoAPI: VideoAPIType {
         )
     }
 
-    func postVideoComment(videoId: String, comment: String) -> AnyPublisher<VideoComment, Error> {
+    func postVideoComment(videoId: String, comment: String, youtubeToken: String) -> AnyPublisher<VideoComment, Error> {
         api.request(
-            target: VideoAPITargets.PostVideoComments(
+            target: VideoTargets.PostVideoComments(
                 videoId: videoId,
-                comment: comment
+                comment: comment,
+                youtubeToken: youtubeToken
             ),
             atKeyPath: "data"
         )
@@ -200,7 +203,7 @@ final class VideoAPI: VideoAPIType {
 
     func likeVideo(videoId: String) -> AnyPublisher<Void, Error> {
         api.request(
-            target: VideoAPITargets.LikeVideo(videoId: videoId)
+            target: VideoTargets.LikeVideo(videoId: videoId)
         )
     }
 }

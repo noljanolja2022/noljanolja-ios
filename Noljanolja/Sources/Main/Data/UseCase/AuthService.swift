@@ -9,6 +9,7 @@ import Combine
 import FirebaseAuth
 import FirebaseAuthCombineSwift
 import Foundation
+import GoogleSignIn
 
 // MARK: - AuthServiceType
 
@@ -41,7 +42,6 @@ final class AuthService: NSObject, AuthServiceType {
 
     private lazy var notificationUseCases = NotificationUseCasesImpl.default
     private lazy var appleAuthAPI = AppleAuthAPI()
-    private lazy var googleAuthAPI = GoogleAuthAPI()
     private lazy var kakaoAuthAPI = KakaoAuthAPI()
     private lazy var naverAuthAPI = NaverAuthAPI()
     private lazy var cloudFunctionAuthAPI = CloudFunctionAuthAPI()
@@ -140,9 +140,16 @@ final class AuthService: NSObject, AuthServiceType {
     }
 
     func signInWithGoogle() -> AnyPublisher<String, Error> {
-        googleAuthAPI.signIn()
-            .flatMap { [weak self] idToken, accessToken in
-                guard let self else { return Empty<AuthDataResult, Error>().eraseToAnyPublisher() }
+        GIDSignIn.sharedInstance.signInCombine()
+            .flatMap { [weak self] result in
+                guard let self else {
+                    return Empty<AuthDataResult, Error>().eraseToAnyPublisher()
+                }
+                guard let idToken = result.user.idToken?.tokenString else {
+                    return Fail(error: CommonError.informationNotFound(message: "IDToken not found"))
+                        .eraseToAnyPublisher()
+                }
+                let accessToken = result.user.accessToken.tokenString
                 let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
                 return self.firebaseAuth
                     .signIn(with: credential)
@@ -222,7 +229,7 @@ final class AuthService: NSObject, AuthServiceType {
                 guard let self else { return Empty<Void, Error>().eraseToAnyPublisher() }
                 return Publishers.CombineLatest4(
                     appleAuthAPI.signOutIfNeeded(),
-                    googleAuthAPI.signOutIfNeeded(),
+                    GIDSignIn.sharedInstance.signOutIfNeededCombine(),
                     kakaoAuthAPI.signOutIfNeeded(),
                     naverAuthAPI.signOutIfNeeded()
                 )
