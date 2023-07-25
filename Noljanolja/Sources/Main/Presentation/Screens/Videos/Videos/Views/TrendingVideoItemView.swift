@@ -9,7 +9,7 @@ import SDWebImageSwiftUI
 import SwiftUI
 
 struct TrendingVideoItemView: View {
-    var video: Video
+    var model: Video
 
     var body: some View {
         buildBodyView()
@@ -19,7 +19,7 @@ struct TrendingVideoItemView: View {
         VStack(spacing: 12) {
             GeometryReader { geometry in
                 WebImage(
-                    url: URL(string: video.thumbnail),
+                    url: URL(string: model.thumbnail),
                     context: [
                         .imageTransformer: SDImageResizingTransformer(
                             size: CGSize(
@@ -45,14 +45,14 @@ struct TrendingVideoItemView: View {
 
     private func buildContentView() -> some View {
         VStack(spacing: 2) {
-            Text(video.title ?? "")
+            Text(model.title ?? "")
                 .lineLimit(2)
                 .multilineTextAlignment(.leading)
                 .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
-            if let category = video.category?.title, !category.isEmpty {
+            if let category = model.category?.title, !category.isEmpty {
                 Text("#\(category)")
                     .lineLimit(2)
                     .multilineTextAlignment(.leading)
@@ -62,9 +62,9 @@ struct TrendingVideoItemView: View {
             }
 
             let description = [
-                video.channel?.title,
-                "\(video.viewCount.relativeFormatted()) Views",
-                video.publishedAt.relative()
+                model.channel?.title,
+                "\(model.viewCount.relativeFormatted()) Views",
+                model.publishedAt.relative()
             ]
             .compactMap { $0 }
             .filter { !$0.isEmpty }

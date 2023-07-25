@@ -52,7 +52,7 @@ final class SearchCouponsViewModel: ViewModel {
     private let pageSize = 20
     private var cancellables = Set<AnyCancellable>()
 
-    init(localCouponKeywordRepository: LocalCouponKeywordRepository = LocalCouponKeywordRepositoryImpl.default,
+    init(localCouponKeywordRepository: LocalCouponKeywordRepository = LocalCouponKeywordRepositoryImpl.shared,
          memberInfoUseCases: MemberInfoUseCases = MemberInfoUseCasesImpl.default,
          giftsApi: GiftsAPIType = GiftsAPI.default,
          delegate: SearchCouponsViewModelDelegate? = nil) {
@@ -160,7 +160,7 @@ final class SearchCouponsViewModel: ViewModel {
                 guard let self else {
                     return Empty<[CouponKeyword], Error>().eraseToAnyPublisher()
                 }
-                return self.localCouponKeywordRepository.observeCouponKeywords(string)
+                return self.localCouponKeywordRepository.observeKeywords(string)
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
@@ -182,8 +182,8 @@ final class SearchCouponsViewModel: ViewModel {
             .filter { !$0.isEmpty }
             .removeDuplicates()
             .sink { [weak self] keyword in
-                let couponKeyword = CouponKeyword(keyword: keyword)
-                self?.localCouponKeywordRepository.saveCouponKeyword(couponKeyword)
+                let keyword = CouponKeyword(keyword: keyword)
+                self?.localCouponKeywordRepository.saveKeyword(keyword)
             }
             .store(in: &cancellables)
         clearCouponKeywordsAction

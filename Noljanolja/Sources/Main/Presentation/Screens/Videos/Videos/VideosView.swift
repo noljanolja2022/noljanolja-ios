@@ -81,7 +81,7 @@ struct VideosView<ViewModel: VideosViewModel>: View {
     private func buildTrendingView() -> some View {
         if !viewModel.model.trendingVideos.isEmpty {
             TrendingVideoView(
-                videos: viewModel.model.trendingVideos,
+                models: viewModel.model.trendingVideos,
                 selectAction: {
                     viewModel.navigationType = .videoDetail($0)
                 }

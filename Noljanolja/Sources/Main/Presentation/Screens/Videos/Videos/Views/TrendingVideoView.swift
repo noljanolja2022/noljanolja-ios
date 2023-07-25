@@ -11,7 +11,7 @@ import SwiftUIX
 // MARK: - TrendingVideoView
 
 struct TrendingVideoView: View {
-    var videos: [Video]
+    var models: [Video]
     var selectAction: ((Video) -> Void)?
 
     var body: some View {
@@ -32,10 +32,10 @@ struct TrendingVideoView: View {
 
     private func buildContentView() -> some View {
         LazyVStack(spacing: 24) {
-            ForEach(videos.indices, id: \.self) { index in
-                let video = videos[index]
-                TrendingVideoItemView(video: video)
-                    .onTapGesture { selectAction?(video) }
+            ForEach(models.indices, id: \.self) { index in
+                let model = models[index]
+                TrendingVideoItemView(model: model)
+                    .onTapGesture { selectAction?(model) }
             }
         }
         .padding(.horizontal, 16)
@@ -47,6 +47,6 @@ struct TrendingVideoView: View {
 
 struct TrendingVideoView_Previews: PreviewProvider {
     static var previews: some View {
-        TrendingVideoView(videos: [])
+        TrendingVideoView(models: [])
     }
 }

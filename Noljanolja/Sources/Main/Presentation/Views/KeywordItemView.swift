@@ -1,5 +1,5 @@
 //
-//  CouponKeywordItemView.swift
+//  KeywordItemView.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 19/06/2023.
@@ -7,10 +7,16 @@
 
 import SwiftUI
 
-// MARK: - CouponKeywordItemView
+// MARK: - KeywordItemViewModel
 
-struct CouponKeywordItemView: View {
-    var model: CouponKeyword
+struct KeywordItemViewModel: Equatable {
+    let keyword: String
+}
+
+// MARK: - KeywordItemView
+
+struct KeywordItemView: View {
+    var model: KeywordItemViewModel
     var removeAction: (() -> Void)?
 
     var body: some View {

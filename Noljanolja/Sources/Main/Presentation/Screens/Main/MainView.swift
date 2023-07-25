@@ -262,7 +262,9 @@ extension MainView {
                 )
             )
         case .searchVideo:
-            EmptyView()
+            SearchVideosView(
+                viewModel: SearchVideosViewModel()
+            )
         }
     }
 

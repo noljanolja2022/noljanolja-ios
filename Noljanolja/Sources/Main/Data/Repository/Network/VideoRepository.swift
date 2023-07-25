@@ -17,6 +17,7 @@ private enum VideoTargets {
         let method: Moya.Method = .get
         var task: Task { .requestParameters(parameters: parameters, encoding: URLEncoding.default) }
 
+        let query: String?
         let page: Int
         let pageSize: Int?
         let isHighlighted: Bool?
@@ -24,6 +25,7 @@ private enum VideoTargets {
 
         var parameters: [String: Any] {
             let parameters: [String: Any?] = [
+                "query": query,
                 "page": page,
                 "pageSize": pageSize,
                 "isHighlighted": isHighlighted,
@@ -111,7 +113,11 @@ private enum VideoTargets {
 // MARK: - VideoRepository
 
 protocol VideoRepository {
-    func getVideos(page: Int, pageSize: Int?, isHighlighted: Bool?, categoryId: String?) -> AnyPublisher<[Video], Error>
+    func getVideos(query: String?,
+                   page: Int,
+                   pageSize: Int?,
+                   isHighlighted: Bool?,
+                   categoryId: String?) -> AnyPublisher<PaginationResponse<[Video]>, Error>
     func getWatchingVideos() -> AnyPublisher<[Video], Error>
     func getTrendingVideos(duration: VideoTrendingDurationType, limit: Int?) -> AnyPublisher<[Video], Error>
 
@@ -122,8 +128,12 @@ protocol VideoRepository {
 }
 
 extension VideoRepository {
-    func getVideos(page: Int, pageSize: Int? = nil, isHighlighted: Bool? = true, categoryId: String? = nil) -> AnyPublisher<[Video], Error> {
-        getVideos(page: page, pageSize: pageSize, isHighlighted: isHighlighted, categoryId: categoryId)
+    func getVideos(query: String? = nil,
+                   page: Int,
+                   pageSize: Int? = nil,
+                   isHighlighted: Bool? = nil,
+                   categoryId: String? = nil) -> AnyPublisher<PaginationResponse<[Video]>, Error> {
+        getVideos(query: query, page: page, pageSize: pageSize, isHighlighted: isHighlighted, categoryId: categoryId)
     }
 
     func getTrendingVideos(duration: VideoTrendingDurationType, limit: Int? = nil) -> AnyPublisher<[Video], Error> {
@@ -146,15 +156,19 @@ final class VideoRepositoryImpl: VideoRepository {
         self.api = api
     }
 
-    func getVideos(page: Int, pageSize: Int?, isHighlighted: Bool?, categoryId: String?) -> AnyPublisher<[Video], Error> {
+    func getVideos(query: String?,
+                   page: Int,
+                   pageSize: Int?,
+                   isHighlighted: Bool?,
+                   categoryId: String?) -> AnyPublisher<PaginationResponse<[Video]>, Error> {
         api.request(
             target: VideoTargets.GetVideos(
+                query: query,
                 page: page,
                 pageSize: pageSize,
                 isHighlighted: isHighlighted,
                 categoryId: categoryId
-            ),
-            atKeyPath: "data"
+            )
         )
     }
 

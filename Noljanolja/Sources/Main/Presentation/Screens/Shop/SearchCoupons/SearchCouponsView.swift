@@ -160,8 +160,8 @@ struct SearchCouponsView<ViewModel: SearchCouponsViewModel>: View {
                 LazyVStack(spacing: 0) {
                     ForEach(viewModel.keywords.indices, id: \.self) {
                         let model = viewModel.keywords[$0]
-                        CouponKeywordItemView(
-                            model: model,
+                        KeywordItemView(
+                            model: KeywordItemViewModel(keyword: model.keyword),
                             removeAction: {
                                 viewModel.removeKeywordAction.send(model)
                             }

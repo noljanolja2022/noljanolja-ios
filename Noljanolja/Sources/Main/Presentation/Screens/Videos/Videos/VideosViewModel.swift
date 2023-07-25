@@ -139,7 +139,7 @@ final class VideosViewModel: ViewModel {
             trendingVideos
         )
         .tryMap { highlightResult, watchingResult, trendingResult in
-            let highlightVideos = highlightResult.success ?? []
+            let highlightVideos = highlightResult.success?.data ?? []
             let watchingVideos = watchingResult.success ?? []
             let trendingVideos = trendingResult.success ?? []
 
