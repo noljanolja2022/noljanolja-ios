@@ -103,16 +103,16 @@ struct CouponDetailView<ViewModel: CouponDetailViewModel>: View {
 
             VStack(spacing: 4) {
                 Text(viewModel.model?.couponBrandName ?? "")
-                    .font(.system(size: 22, weight: .medium))
+                    .dynamicFont(.systemFont(ofSize: 22, weight: .medium))
                     .lineLimit(1)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                 Text(viewModel.model?.couponName ?? "")
-                    .font(.system(size: 22, weight: .medium))
+                    .dynamicFont(.systemFont(ofSize: 22, weight: .medium))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 Text("1 shot Arabica Espresso with milk")
-                    .font(.system(size: 14))
+                    .dynamicFont(.systemFont(ofSize: 14))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
             }
@@ -133,29 +133,29 @@ struct CouponDetailView<ViewModel: CouponDetailViewModel>: View {
         VStack(spacing: 12) {
             HStack(spacing: 12) {
                 Text("Holding points")
-                    .font(.system(size: 16))
+                    .dynamicFont(.systemFont(ofSize: 16))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                 Text("\((viewModel.model?.myPoint ?? 0).formatted()) P")
-                    .font(.system(size: 16, weight: .bold))
+                    .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }
             HStack(spacing: 12) {
                 Text("Deduction point")
-                    .font(.system(size: 16))
+                    .dynamicFont(.systemFont(ofSize: 16))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                 Text("\((viewModel.model?.couponPrice ?? 0).formatted()) P")
-                    .font(.system(size: 16, weight: .bold))
+                    .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                     .foregroundColor(ColorAssets.systemRed100.swiftUIColor)
             }
             HStack(spacing: 12) {
                 Text("Remaining points")
-                    .font(.system(size: 16))
+                    .dynamicFont(.systemFont(ofSize: 16))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                 Text("\((viewModel.model?.remainingPoint ?? 0).formatted()) P")
-                    .font(.system(size: 16, weight: .bold))
+                    .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                     .foregroundColor(ColorAssets.secondaryYellow400.swiftUIColor)
             }
         }
@@ -173,7 +173,7 @@ struct CouponDetailView<ViewModel: CouponDetailViewModel>: View {
                     .aspectRatio(1, contentMode: .fit)
 
                 Text("Give this Code to the cashier to get products")
-                    .font(.system(size: 14, weight: .medium))
+                    .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
                     .frame(maxWidth: .infinity)
                     .foregroundColor(ColorAssets.primaryGreen300.swiftUIColor)
             }
@@ -194,7 +194,7 @@ struct CouponDetailView<ViewModel: CouponDetailViewModel>: View {
             )
             .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.model?.isPurchasable ?? false))
             .disabled(!(viewModel.model?.isPurchasable ?? false))
-            .font(.system(size: 16, weight: .bold))
+            .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
             .padding(.horizontal, 16)
         case .myCoupon, .none:
             EmptyView()

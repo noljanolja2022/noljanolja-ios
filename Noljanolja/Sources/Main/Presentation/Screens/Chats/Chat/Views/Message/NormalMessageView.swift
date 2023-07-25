@@ -58,7 +58,7 @@ struct NormalMessageView: View {
     @ViewBuilder
     private func buildSenderNameView() -> some View {
         Text(model.senderName)
-            .font(.system(size: 11, weight: .medium))
+            .dynamicFont(.systemFont(ofSize: 11, weight: .medium))
             .frame(maxWidth: .infinity, alignment: .leading)
             .frame(height: 16)
             .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)

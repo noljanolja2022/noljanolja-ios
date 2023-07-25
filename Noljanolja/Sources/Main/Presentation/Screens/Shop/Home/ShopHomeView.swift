@@ -63,7 +63,7 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
         VStack(spacing: 8) {
             HStack(spacing: 8) {
                 Text("Welcome to Nolja shop!")
-                    .font(.system(size: 14, weight: .medium))
+                    .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
                     .frame(maxWidth: .infinity, alignment: .leading)
                 ImageAssets.icQuestion.swiftUIImage
                     .resizable()

@@ -70,13 +70,13 @@ struct NotificationSettingView<ViewModel: NotificationSettingViewModel>: View {
 
             VStack(spacing: 12) {
                 Text(L10n.permissionNotificationTitle)
-                    .font(.system(size: 22, weight: .medium))
+                    .dynamicFont(.systemFont(ofSize: 22, weight: .medium))
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
                 Text(L10n.permissionNotificationDescription)
-                    .font(.system(size: 12))
+                    .dynamicFont(.systemFont(ofSize: 12))
                     .multilineTextAlignment(.center)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
@@ -91,7 +91,7 @@ struct NotificationSettingView<ViewModel: NotificationSettingViewModel>: View {
                 }
             )
             .buttonStyle(PrimaryButtonStyle())
-            .font(.system(size: 16, weight: .bold))
+            .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
 
             Spacer()
                 .frame(

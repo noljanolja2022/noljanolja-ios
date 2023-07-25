@@ -85,7 +85,7 @@ struct VideoDetailInputView<ViewModel: VideoDetailInputViewModel>: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
         }
-        .font(.system(size: 14))
+        .dynamicFont(.systemFont(ofSize: 14))
         .padding(.horizontal, 8)
         .background(ColorAssets.neutralLightGrey.swiftUIColor)
         .cornerRadius(inputItemSize / 2)

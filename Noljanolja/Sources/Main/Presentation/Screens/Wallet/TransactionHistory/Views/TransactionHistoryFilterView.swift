@@ -51,7 +51,7 @@ struct TransactionHistoryFilterItemView: View {
             },
             label: {
                 Text(type.title)
-                    .font(.system(size: 11, weight: .medium))
+                    .dynamicFont(.systemFont(ofSize: 11, weight: .medium))
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     .foregroundColor(
                         isSelected

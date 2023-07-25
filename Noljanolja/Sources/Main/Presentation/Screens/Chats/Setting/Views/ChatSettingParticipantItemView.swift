@@ -34,13 +34,13 @@ struct ChatSettingParticipantItemView: View {
             VStack(spacing: 0) {
                 if let displayName = model.displayName {
                     Text(displayName)
-                        .font(.system(size: 16, weight: .medium))
+                        .dynamicFont(.systemFont(ofSize: 16, weight: .medium))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
                 if let originalName = model.originalName {
                     Text(originalName)
-                        .font(.system(size: 14))
+                        .dynamicFont(.systemFont(ofSize: 14))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
                 }
@@ -48,7 +48,7 @@ struct ChatSettingParticipantItemView: View {
 
             if model.isAdmin {
                 Text(L10n.commonAdmin)
-                    .font(.system(size: 12, weight: .bold))
+                    .dynamicFont(.systemFont(ofSize: 12, weight: .bold))
                     .frame(height: 26)
                     .padding(.horizontal, 12)
                     .foregroundColor(ColorAssets.neutralLight.swiftUIColor)

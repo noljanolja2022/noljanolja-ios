@@ -42,7 +42,7 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
                             }
                         }()
                     )
-                    .font(.system(size: 16, weight: .bold))
+                    .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -54,7 +54,7 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
                             Button(L10n.commonAgree) {
                                 viewModel.action.send(selectedUsers)
                             }
-                            .font(.system(size: 16))
+                            .dynamicFont(.systemFont(ofSize: 16))
                             .foregroundColor(
                                 isCreateConversationEnabled
                                     ? ColorAssets.neutralDarkGrey.swiftUIColor

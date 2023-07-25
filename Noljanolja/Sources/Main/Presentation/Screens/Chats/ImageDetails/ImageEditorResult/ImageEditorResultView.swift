@@ -76,7 +76,7 @@ struct ImageEditorResultView<ViewModel: ImageEditorResultViewModel>: View {
                 },
                 label: {
                     Text(L10n.commonSave)
-                        .font(.system(size: 16, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
                         .background(ColorAssets.neutralDeepGrey.swiftUIColor)
@@ -90,7 +90,7 @@ struct ImageEditorResultView<ViewModel: ImageEditorResultViewModel>: View {
                 },
                 label: {
                     Text(L10n.commonSend)
-                        .font(.system(size: 16, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
                         .background(ColorAssets.primaryGreen200.swiftUIColor)

@@ -17,11 +17,11 @@ struct TransactionDashboardItemView: View {
     private func buildBodyView() -> some View {
         HStack(spacing: 8) {
             Text(model.title)
-                .font(.system(size: 11, weight: .medium))
+                .dynamicFont(.systemFont(ofSize: 11, weight: .medium))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             Text(model.point)
-                .font(.system(size: 14, weight: .bold))
+                .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                 .foregroundColor(Color(model.pointColor))
         }
         .padding(16)

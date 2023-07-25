@@ -41,7 +41,7 @@ struct CreateConversationView<ViewModel: CreateConversationViewModel>: View {
                 }
                 ToolbarItem(placement: .principal) {
                     Text(L10n.contactsStartChat)
-                        .font(.system(size: 16, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             }
@@ -86,7 +86,7 @@ struct CreateConversationView<ViewModel: CreateConversationViewModel>: View {
                             .frame(width: 16, height: 21)
 
                         Text(L10n.contactsTitleNormal)
-                            .font(.system(size: 14))
+                            .dynamicFont(.systemFont(ofSize: 14))
                     }
                     .frame(height: 40)
                     .frame(maxWidth: .infinity)
@@ -107,7 +107,7 @@ struct CreateConversationView<ViewModel: CreateConversationViewModel>: View {
                             .frame(width: 21, height: 21)
 
                         Text(L10n.contactsTitleGroup)
-                            .font(.system(size: 14))
+                            .dynamicFont(.systemFont(ofSize: 14))
                     }
                     .frame(height: 40)
                     .frame(maxWidth: .infinity)

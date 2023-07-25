@@ -67,7 +67,7 @@ struct ConversationAdjustment<ViewModel: ConversationAdjustmentModel>: View {
                 action: { viewModel.actionSubject.send() }
             )
             .buttonStyle(PrimaryButtonStyle())
-            .font(.system(size: 16, weight: .bold))
+            .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
         }
         .padding(16)
     }
@@ -128,11 +128,11 @@ struct ConversationAdjustment<ViewModel: ConversationAdjustmentModel>: View {
     private func buildTitleView() -> some View {
         VStack(spacing: 8) {
             Text(L10n.editChatChangeRoomAdjustmentDescription)
-                .font(.system(size: 16))
+                .dynamicFont(.systemFont(ofSize: 16))
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
             CocoaTextField("Title", text: $viewModel.title)
-                .font(.system(size: 16, weight: .bold))
+                .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal, 8)
                 .frame(height: 48)

@@ -86,7 +86,7 @@ struct MessageQuickReactionView<ViewModel: MessageQuickReactionViewModel>: View 
                     },
                     label: {
                         Text(model.code ?? "")
-                            .font(.system(size: 16))
+                            .dynamicFont(.systemFont(ofSize: 16))
                     }
                 )
             }
@@ -110,7 +110,7 @@ struct MessageQuickReactionView<ViewModel: MessageQuickReactionViewModel>: View 
                                 .resizable()
                                 .frame(width: 24, height: 24)
                             Text(model.title)
-                                .font(.system(size: 14, weight: .medium))
+                                .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
                                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                         }
                         .padding(12)

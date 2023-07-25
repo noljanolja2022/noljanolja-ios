@@ -30,20 +30,20 @@ struct VideoDetailCommentsView: View {
     private func buildHeader() -> some View {
         VStack(spacing: 8) {
             Text(L10n.videoDetailComment)
-                .font(.system(size: 16, weight: .bold))
+                .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
             HStack(spacing: 12) {
                 Text(L10n.videoDetailCommentPopular)
-                    .font(.system(size: 12, weight: .medium))
+                    .dynamicFont(.systemFont(ofSize: 12, weight: .medium))
                     .frame(height: 28)
                     .padding(.horizontal, 12)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                     .background(ColorAssets.neutralGrey.swiftUIColor)
                     .cornerRadius(14)
                 Text(L10n.videoDetailCommentNewest)
-                    .font(.system(size: 12, weight: .medium))
+                    .dynamicFont(.systemFont(ofSize: 12, weight: .medium))
                     .frame(height: 28)
                     .padding(.horizontal, 12)
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)

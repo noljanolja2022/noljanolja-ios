@@ -58,12 +58,12 @@ struct SwiftUIView_Previews: PreviewProvider {
                         .aspectRatio(1, contentMode: .fit)
 
                     Text("Back back")
-                        .font(.system(size: 18, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 18, weight: .bold))
                 }
             },
             centerView: {
                 Text("Title")
-                    .font(.system(size: 18, weight: .bold))
+                    .dynamicFont(.systemFont(ofSize: 18, weight: .bold))
             },
             trailingView: {
                 HStack {

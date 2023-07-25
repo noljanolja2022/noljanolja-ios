@@ -40,14 +40,14 @@ struct ConversationItemView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(model.title ?? "")
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .font(Font.system(size: 16, weight: .medium))
+                    .dynamicFont(.systemFont(ofSize: 16, weight: .medium))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
                 if let message = model.message, !message.isEmpty {
                     Text(message)
                         .lineLimit(2)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .font(Font.system(size: 14))
+                        .dynamicFont(.systemFont(ofSize: 14))
                         .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
                 }
             }
@@ -56,7 +56,7 @@ struct ConversationItemView: View {
             VStack(alignment: .trailing, spacing: 2) {
                 Text(model.date ?? "")
                     .lineLimit(1)
-                    .font(Font.system(size: 12, weight: .regular))
+                    .dynamicFont(.systemFont(ofSize: 12, weight: .regular))
                     .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
                 if !model.isSeen {
                     Spacer()

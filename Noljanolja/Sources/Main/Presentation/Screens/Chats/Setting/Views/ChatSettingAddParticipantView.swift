@@ -23,7 +23,7 @@ struct ChatSettingAddParticipantView: View {
                     lineWidth: 1
                 )
             Text(L10n.editChatAddMembers)
-                .font(.system(size: 16, weight: .medium))
+                .dynamicFont(.systemFont(ofSize: 16, weight: .medium))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.primaryGreen200.swiftUIColor)
         }

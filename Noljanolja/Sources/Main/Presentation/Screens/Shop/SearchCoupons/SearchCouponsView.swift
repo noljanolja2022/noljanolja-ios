@@ -105,7 +105,7 @@ struct SearchCouponsView<ViewModel: SearchCouponsViewModel>: View {
     private func buildSearchView() -> some View {
         VStack(spacing: 8) {
             Text("Welcome to Nolja shop!")
-                .font(.system(size: 14, weight: .medium))
+                .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
                 .frame(maxWidth: .infinity, alignment: .leading)
             HStack(spacing: 0) {
                 Button(
@@ -148,7 +148,7 @@ struct SearchCouponsView<ViewModel: SearchCouponsViewModel>: View {
                 },
                 label: {
                     Text("Clear all")
-                        .font(.system(size: 14, weight: .medium))
+                        .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
                         .foregroundColor(ColorAssets.neutralDeeperGrey.swiftUIColor)
                         .padding(16)
                 }

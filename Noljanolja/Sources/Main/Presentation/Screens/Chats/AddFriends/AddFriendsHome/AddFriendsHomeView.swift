@@ -31,7 +31,7 @@ struct AddFriendsHomeView<ViewModel: AddFriendsHomeViewModel>: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text(L10n.addFriendsTitle)
-                        .font(.system(size: 16, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             }
@@ -77,12 +77,12 @@ struct AddFriendsHomeView<ViewModel: AddFriendsHomeViewModel>: View {
                     label: {
                         HStack(spacing: 8) {
                             Text(viewModel.country.flag)
-                                .font(.system(size: 24))
+                                .dynamicFont(.systemFont(ofSize: 24))
                                 .frame(width: 30, height: 24)
                                 .background(ColorAssets.neutralLightGrey.swiftUIColor)
                                 .cornerRadius(3)
                             Text(viewModel.country.prefix)
-                                .font(.system(size: 16))
+                                .dynamicFont(.systemFont(ofSize: 16))
                             ImageAssets.icArrowRight.swiftUIImage
                                 .resizable()
                                 .scaledToFit()
@@ -99,7 +99,7 @@ struct AddFriendsHomeView<ViewModel: AddFriendsHomeViewModel>: View {
                 )
                 .keyboardType(.phonePad)
                 .textFieldStyle(TappableTextFieldStyle())
-                .font(.system(size: 16))
+                .dynamicFont(.systemFont(ofSize: 16))
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }
@@ -139,7 +139,7 @@ struct AddFriendsHomeView<ViewModel: AddFriendsHomeViewModel>: View {
                             .scaledToFit()
                             .frame(width: 24, height: 24)
                         Text(L10n.addFriendsScanQrCode)
-                            .font(.system(size: 14))
+                            .dynamicFont(.systemFont(ofSize: 14))
                             .frame(maxWidth: .infinity)
                     }
                     .padding(8)
@@ -160,7 +160,7 @@ struct AddFriendsHomeView<ViewModel: AddFriendsHomeViewModel>: View {
                             .scaledToFit()
                             .frame(width: 24, height: 24)
                         Text(L10n.addFriendsAddByContactTitle)
-                            .font(.system(size: 14))
+                            .dynamicFont(.systemFont(ofSize: 14))
                             .frame(maxWidth: .infinity)
                     }
                     .padding(8)
@@ -203,7 +203,7 @@ struct AddFriendsHomeView<ViewModel: AddFriendsHomeViewModel>: View {
             VStack(spacing: 12) {
                 VStack(spacing: 12) {
                     Text(viewModel.name ?? "")
-                        .font(.system(size: 14, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                         .frame(maxWidth: .infinity, alignment: .trailing)
 
                     IfLet(
@@ -231,7 +231,7 @@ struct AddFriendsHomeView<ViewModel: AddFriendsHomeViewModel>: View {
                     .frame(width: 40, height: 14)
 
                 Text(L10n.addFriendsAddByContactDescription)
-                    .font(.system(size: 16))
+                    .dynamicFont(.systemFont(ofSize: 16))
                     .frame(maxWidth: .infinity)
             }
             .padding(24)

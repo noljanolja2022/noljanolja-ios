@@ -29,7 +29,7 @@ struct MyCouponsView<ViewModel: MyCouponsViewModel>: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("Coupons")
-                        .font(.system(size: 16, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             }

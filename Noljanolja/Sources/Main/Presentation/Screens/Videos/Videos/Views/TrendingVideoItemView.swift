@@ -48,7 +48,7 @@ struct TrendingVideoItemView: View {
             Text(video.title ?? "")
                 .lineLimit(2)
                 .multilineTextAlignment(.leading)
-                .font(.system(size: 14, weight: .bold))
+                .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
@@ -56,7 +56,7 @@ struct TrendingVideoItemView: View {
                 Text("#\(category)")
                     .lineLimit(2)
                     .multilineTextAlignment(.leading)
-                    .font(.system(size: 12))
+                    .dynamicFont(.systemFont(ofSize: 12))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(.blue)
             }
@@ -72,7 +72,7 @@ struct TrendingVideoItemView: View {
             Text(description)
                 .lineLimit(2)
                 .multilineTextAlignment(.leading)
-                .font(.system(size: 10))
+                .dynamicFont(.systemFont(ofSize: 10))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
         }

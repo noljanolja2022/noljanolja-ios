@@ -61,7 +61,7 @@ struct TextMessageContentView: View {
     private func buildTextView() -> some View {
         ZStack {
             Text(model.messageString)
-                .font(.system(size: 16, weight: .regular))
+                .dynamicFont(.systemFont(ofSize: 16))
                 .background(.clear)
                 .foregroundColor(.clear)
 
@@ -71,7 +71,7 @@ struct TextMessageContentView: View {
                     action?(.openURL($0))
                 }
             )
-            .font(.system(size: 16, weight: .regular))
+            .dynamicFont(.systemFont(ofSize: 16), isDynamicFontEnabled: true)
             .dataDetectorTypes(.link)
             .isEditable(false)
             .isScrollEnabled(false)

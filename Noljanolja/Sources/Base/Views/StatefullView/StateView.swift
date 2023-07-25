@@ -20,12 +20,12 @@
 //                if let title, !title.isEmpty {
 //                    Text(title)
 //                        .multilineTextAlignment(.center)
-//                        .font(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
+//                        .dynamicFont(FontFamily.NotoSans.bold.swiftUIFont(size: 18))
 //                }
 //                if let description, !description.isEmpty {
 //                    Text(description)
 //                        .multilineTextAlignment(.center)
-//                        .font(FontFamily.NotoSans.medium.swiftUIFont(size: 16))
+//                        .dynamicFont(FontFamily.NotoSans.medium.swiftUIFont(size: 16))
 //                }
 //
 //                actions()

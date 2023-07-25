@@ -17,11 +17,11 @@ struct TransactionDashboardHeaderView: View {
     private func buildBodyView() -> some View {
         VStack(spacing: 8) {
             Text(model.weekday)
-                .font(.system(size: 12))
+                .dynamicFont(.systemFont(ofSize: 12))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             Text(model.date)
-                .font(.system(size: 14, weight: .bold))
+                .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
         }

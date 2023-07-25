@@ -60,7 +60,7 @@ struct MainView<ViewModel: MainViewModel>: View {
             switch viewModel.selectedTab {
             case .chat:
                 Text(viewModel.selectedTab.navigationBarTitle)
-                    .font(.system(size: 16, weight: .bold))
+                    .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             case .watch, .wallet, .shop, .news:
                 EmptyView()
@@ -73,7 +73,7 @@ struct MainView<ViewModel: MainViewModel>: View {
                 EmptyView()
             case .watch, .wallet, .shop, .news:
                 Text(viewModel.selectedTab.navigationBarTitle)
-                    .font(.system(size: 16, weight: .bold))
+                    .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                     .frame(minWidth: 120)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }

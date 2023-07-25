@@ -40,7 +40,7 @@ struct SettingItemView<Content: View>: View {
     private func buildContentView() -> some View {
         HStack(spacing: 8) {
             Text(title)
-                .font(.system(size: 16))
+                .dynamicFont(.systemFont(ofSize: 16))
                 .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
             Spacer()
             content

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SwiftUIX
 
 extension ContentSizeCategory {
     var scaleLevel: Double {
@@ -28,32 +29,57 @@ extension ContentSizeCategory {
     }
 }
 
-struct ScaledFont: ViewModifier {
-    @Environment(\.sizeCategory) private var sizeCategory
-    private let originalfont: UIFont
+extension UIFont {
+    func dynamicFont(contentSizeCategory: ContentSizeCategory,
+                     minScale: CGFloat,
+                     maxScale: CGFloat) -> UIFont {
+        let positiveSizeCategory = ContentSizeCategory.allCases.filter { $0.scaleLevel >= 0 }
+        let negativeSizeCategory = ContentSizeCategory.allCases.filter { $0.scaleLevel <= 0 }
+
+        let positiveStep = (maxScale - 1) / Double(positiveSizeCategory.count)
+        let negativeStep = (1 - minScale) / Double(negativeSizeCategory.count)
+
+        let scaledstep = min(positiveStep, negativeStep)
+        let scaledDelta = contentSizeCategory.scaleLevel * scaledstep
+        let scaledSize = pointSize + scaledDelta * pointSize
+
+        let dynamicUIFont = withSize(scaledSize)
+
+        return dynamicUIFont
+    }
+}
+
+// MARK: - DynamicFont
+
+extension DynamicFont {
+    static let minScale = 0.25
+    static let maxScale = 1.25
+}
+
+// MARK: - DynamicFont
+
+struct DynamicFont: ViewModifier {
+    @Environment(\.sizeCategory) private var contentSizeCategory
+    private let originalFont: UIFont
 
     init(_ font: UIFont) {
-        self.originalfont = font
+        self.originalFont = font
     }
 
     func body(content: Content) -> some View {
-        let minRatio: CGFloat = 0.5
-        let maxRatio: CGFloat = 2.0
+        let dynamicUIFont = originalFont.dynamicFont(
+            contentSizeCategory: contentSizeCategory,
+            minScale: DynamicFont.minScale,
+            maxScale: DynamicFont.maxScale
+        )
+        let dynamicFont = Font(dynamicUIFont)
 
-        let positiveSizeCategory = ContentSizeCategory.allCases.filter { $0.scaleLevel >= 0 }
-        let negativeSizeCategory = ContentSizeCategory.allCases.filter { $0.scaleLevel <= 0 }
-        let positiveStep = (maxRatio - 1) / Double(positiveSizeCategory.count)
-        let negativeStep = (1 - minRatio) / Double(negativeSizeCategory.count)
-        let scaledstep = min(positiveStep, negativeStep)
-        let scaledDelta = sizeCategory.scaleLevel * scaledstep
-        let scaledSize = originalfont.pointSize + scaledDelta * originalfont.pointSize
-        let scaledFont = Font(originalfont.withSize(scaledSize) as CTFont)
-        return content.font(scaledFont)
+        return content.font(dynamicFont)
     }
 }
 
 extension View {
-    func scaledFont(_ font: UIFont) -> some View {
-        return self.modifier(ScaledFont(font))
+    func dynamicFont(_ font: UIFont) -> some View {
+        modifier(DynamicFont(font))
     }
 }

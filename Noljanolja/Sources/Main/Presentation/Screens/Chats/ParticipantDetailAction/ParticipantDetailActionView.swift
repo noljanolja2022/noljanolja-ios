@@ -66,7 +66,7 @@ struct ParticipantDetailActionView<ViewModel: ParticipantDetailActionViewModel>:
                 .background(ColorAssets.neutralLightGrey.swiftUIColor)
                 .cornerRadius(14)
                 Text(viewModel.participantModel.user.name ?? "")
-                    .font(.system(size: 16, weight: .medium))
+                    .dynamicFont(.systemFont(ofSize: 16, weight: .medium))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }
             .padding(16)
@@ -80,7 +80,7 @@ struct ParticipantDetailActionView<ViewModel: ParticipantDetailActionViewModel>:
                     },
                     label: {
                         Text(action.title)
-                            .font(.system(size: 16))
+                            .dynamicFont(.systemFont(ofSize: 16))
                             .foregroundColor(Color(asset: action.color))
                             .padding(12)
                     }

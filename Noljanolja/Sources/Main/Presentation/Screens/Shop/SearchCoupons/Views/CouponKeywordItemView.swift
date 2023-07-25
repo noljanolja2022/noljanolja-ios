@@ -25,7 +25,7 @@ struct CouponKeywordItemView: View {
                 .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
 
             Text(model.keyword)
-                .font(.system(size: 14))
+                .dynamicFont(.systemFont(ofSize: 14))
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(ColorAssets.neutralLight.swiftUIColor)

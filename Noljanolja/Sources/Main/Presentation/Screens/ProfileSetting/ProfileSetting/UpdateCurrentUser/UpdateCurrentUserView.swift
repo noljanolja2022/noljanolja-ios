@@ -39,7 +39,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("")
-                        .font(.system(size: 16, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             }
@@ -117,7 +117,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
     private func buildNameView() -> some View {
         VStack(spacing: 0) {
             Text("Name")
-                .font(.system(size: 12))
+                .dynamicFont(.systemFont(ofSize: 12))
                 .foregroundColor(
                     isNameEditing
                         ? ColorAssets.primaryGreen200.swiftUIColor
@@ -131,7 +131,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                 isEditing: $isNameEditing
             )
             .textFieldStyle(TappableTextFieldStyle())
-            .font(.system(size: 16))
+            .dynamicFont(.systemFont(ofSize: 16))
             .frame(height: 38)
             .padding(0)
             .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
@@ -149,7 +149,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                 Spacer()
                 Text("\(viewModel.name?.count ?? 0)/\(nameMaxLength)")
             }
-            .font(.system(size: 12))
+            .dynamicFont(.systemFont(ofSize: 12))
             .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
             .padding(.top, 8)
             .padding(.horizontal, 12)
@@ -186,7 +186,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                     viewModel.dob?.string(withFormat: "dd/MM/yyyy")
                         ?? "Day of Birth"
                 )
-                .font(.system(size: 16))
+                .dynamicFont(.systemFont(ofSize: 16))
                 .foregroundColor(
                     viewModel.fullScreenCoverType == .datePicker
                         ? ColorAssets.primaryGreen200.swiftUIColor
@@ -229,7 +229,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                     viewModel.gender?.rawValue.lowercased().capitalized
                         ?? L10n.updateProfileGender
                 )
-                .font(.system(size: 16))
+                .dynamicFont(.systemFont(ofSize: 16))
                 .foregroundColor(
                     viewModel.actionSheetType == .gender
                         ? ColorAssets.primaryGreen200.swiftUIColor
@@ -273,7 +273,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
             }
         )
         .buttonStyle(PrimaryButtonStyle())
-        .font(.system(size: 16, weight: .bold))
+        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
     }
 
     private func buildActionSheetDestinationView(
@@ -352,7 +352,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                     },
                     centerView: {
                         Text(L10n.updateProfileDateOfBirth)
-                            .font(.system(size: 18, weight: .bold))
+                            .dynamicFont(.systemFont(ofSize: 18, weight: .bold))
                     }
                 )
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)

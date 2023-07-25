@@ -33,7 +33,7 @@ struct ScanQRView<ViewModel: ScanQRViewModel>: View {
         .toolbar {
             ToolbarItem(placement: .principal) {
                 Text(L10n.addFriendsTitle)
-                    .font(.system(size: 16, weight: .bold))
+                    .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }
         }
@@ -71,7 +71,7 @@ struct ScanQRView<ViewModel: ScanQRViewModel>: View {
             }
         )
         .buttonStyle(PrimaryButtonStyle())
-        .font(.system(size: 16, weight: .bold))
+        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
         .padding(.horizontal, 16)
         .padding(.bottom, 16)
     }

@@ -74,7 +74,7 @@ struct ChatInputExpandMenuView<ViewModel: ChatInputExpandMenuViewModel>: View {
                         .background(Color(hexadecimal: model.backgroundColor))
                         .cornerRadius(16)
                     Text(model.title)
-                        .font(.system(size: 14))
+                        .dynamicFont(.systemFont(ofSize: 14))
                         .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                 }
             }

@@ -37,7 +37,7 @@ struct WatchingVideoItemView: View {
             Text(video.title ?? "")
                 .lineLimit(2)
                 .multilineTextAlignment(.leading)
-                .font(.system(size: 8, weight: .medium))
+                .dynamicFont(.systemFont(ofSize: 8, weight: .medium))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
         }

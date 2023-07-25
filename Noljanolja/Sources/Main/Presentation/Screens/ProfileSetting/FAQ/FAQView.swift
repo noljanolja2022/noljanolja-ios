@@ -25,7 +25,7 @@ struct FAQView<ViewModel: FAQViewModel>: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text(L10n.videoTitle)
-                        .font(.system(size: 16, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             }

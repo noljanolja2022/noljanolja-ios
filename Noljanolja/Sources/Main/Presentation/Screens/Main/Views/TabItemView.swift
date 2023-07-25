@@ -52,7 +52,7 @@ struct TabItemView: View {
 
             Text(title)
                 .lineLimit(1)
-                .font(.system(size: 10))
+                .dynamicFont(.systemFont(ofSize: 10))
         }
         .padding(.vertical, 4)
     }

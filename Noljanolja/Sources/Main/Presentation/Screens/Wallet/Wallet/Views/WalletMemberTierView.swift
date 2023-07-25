@@ -25,7 +25,7 @@ struct WalletMemberTierView: View {
                     .foregroundColor(Color(model.iconColor))
 
                 Text(model.text)
-                    .font(.system(size: 11, weight: .bold))
+                    .dynamicFont(.systemFont(ofSize: 11, weight: .bold))
                     .foregroundColor(Color(model.textColor))
             }
             .frame(height: 28)

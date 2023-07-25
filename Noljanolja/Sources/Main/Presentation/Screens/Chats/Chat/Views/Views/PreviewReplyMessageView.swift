@@ -102,7 +102,7 @@ struct PreviewReplyMessageView: View {
     private func buildSenderView() -> some View {
         if let senderName = model.senderName, !senderName.isEmpty {
             Text(senderName)
-                .font(.system(size: 12, weight: .bold))
+                .dynamicFont(.systemFont(ofSize: 12, weight: .bold))
                 .multilineTextAlignment(.leading)
                 .frame(alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
@@ -113,7 +113,7 @@ struct PreviewReplyMessageView: View {
     private func buildMessageView() -> some View {
         if let message = model.message {
             Text(message)
-                .font(.system(size: 12))
+                .dynamicFont(.systemFont(ofSize: 12))
                 .lineLimit(1)
                 .multilineTextAlignment(.leading)
                 .frame(alignment: .leading)

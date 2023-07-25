@@ -25,7 +25,7 @@ struct SourceLicenseView<ViewModel: SourceLicenseViewModel>: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("Open source license")
-                        .font(.system(size: 16, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             }
@@ -73,7 +73,7 @@ struct SourceLicenseView<ViewModel: SourceLicenseViewModel>: View {
                 Copyright (c) 2014 Flipboard
                 """
             )
-            .font(.system(size: 14))
+            .dynamicFont(.systemFont(ofSize: 14))
             .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             .padding(16)
         }
@@ -87,7 +87,7 @@ struct SourceLicenseView<ViewModel: SourceLicenseViewModel>: View {
             }
         )
         .buttonStyle(PrimaryButtonStyle())
-        .font(.system(size: 16, weight: .bold))
+        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
         .padding(.horizontal, 16)
     }
 

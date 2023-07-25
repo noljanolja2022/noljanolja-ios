@@ -83,7 +83,7 @@ struct ContactListView<ViewModel: ContactListViewModel>: View {
         ListView {
             VStack(spacing: 0) {
                 Text(L10n.commonFriends)
-                    .font(Font.system(size: 16, weight: .semibold))
+                    .dynamicFont(.systemFont(ofSize: 16, weight: .semibold))
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                     .padding(.horizontal, 16)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -145,9 +145,9 @@ extension ContactListView {
            contactsError.isPermissionError {
             VStack(spacing: 16) {
                 Text(L10n.permission)
-                    .font(.system(size: 20).bold())
+                    .dynamicFont(.systemFont(ofSize: 20, weight: .bold))
                 Text(L10n.permissionContactsDescription)
-                    .font(.system(size: 16))
+                    .dynamicFont(.systemFont(ofSize: 16))
                     .multilineTextAlignment(.center)
                 Button(
                     action: {
@@ -160,7 +160,7 @@ extension ContactListView {
                     },
                     label: {
                         Text(L10n.permissionAccept)
-                            .font(.system(size: 16, weight: .bold))
+                            .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                             .frame(height: 40)
                             .padding(.horizontal, 24)
                     }
@@ -173,7 +173,7 @@ extension ContactListView {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         } else {
             Text(L10n.commonErrorTitle)
-                .font(.system(size: 16, weight: .bold))
+                .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }

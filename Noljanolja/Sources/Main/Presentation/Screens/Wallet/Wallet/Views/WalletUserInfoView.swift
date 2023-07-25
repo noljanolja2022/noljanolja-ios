@@ -37,7 +37,7 @@ struct WalletUserInfoView: View {
 
             VStack(alignment: .leading, spacing: 8) {
                 Text(model.name ?? "")
-                    .font(.system(size: 16, weight: .bold))
+                    .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 

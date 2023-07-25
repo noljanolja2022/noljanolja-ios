@@ -20,7 +20,7 @@ struct WatchingVideoView: View {
     private func buildBodyView() -> some View {
         LazyVStack(spacing: 16) {
             Text(L10n.videoListWatchingToGetPoint)
-                .font(.system(size: 14, weight: .bold))
+                .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 .padding(.horizontal, 16)

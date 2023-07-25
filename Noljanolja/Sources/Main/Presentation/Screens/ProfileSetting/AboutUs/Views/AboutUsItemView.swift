@@ -26,7 +26,7 @@ struct AboutUsItemView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
         }
-        .font(.system(size: 14))
+        .dynamicFont(.systemFont(ofSize: 14))
         .multilineTextAlignment(.leading)
     }
 }

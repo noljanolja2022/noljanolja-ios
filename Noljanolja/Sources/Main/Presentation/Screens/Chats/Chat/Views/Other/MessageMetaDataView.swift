@@ -15,7 +15,7 @@ struct MessageCreatedDateTimeView: View {
 
     var body: some View {
         Text(model.string(withFormat: "HH:mm"))
-            .font(.system(size: 12))
+            .dynamicFont(.systemFont(ofSize: 12))
     }
 }
 
@@ -59,7 +59,7 @@ struct MessageSeenView: View {
         case let .group(count):
             if count > 0 {
                 Text(String(count))
-                    .font(.system(size: 12, weight: .bold))
+                    .dynamicFont(.systemFont(ofSize: 12, weight: .bold))
                     .foregroundColor(ColorAssets.primaryGreen300.swiftUIColor)
                     .padding(.bottom, 2)
             }

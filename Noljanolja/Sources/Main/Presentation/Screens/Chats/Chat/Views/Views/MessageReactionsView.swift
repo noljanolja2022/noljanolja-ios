@@ -38,7 +38,7 @@ struct MessageReactionsView: View {
         if let quick = model.quick {
             GeometryReader { geometry in
                 Text(quick.code ?? "")
-                    .font(.system(size: 11))
+                    .dynamicFont(.systemFont(ofSize: 11))
                     .saturation(model.quickSaturation)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(ColorAssets.neutralLightGrey.swiftUIColor)
@@ -63,11 +63,11 @@ struct MessageReactionsView: View {
                     ForEach(model.recents.indices, id: \.self) { index in
                         let model = model.recents[index]
                         Text(model.code ?? "")
-                            .font(.system(size: 10))
+                            .dynamicFont(.systemFont(ofSize: 10))
                     }
                 }
                 Text(String(model.count))
-                    .font(.system(size: 10))
+                    .dynamicFont(.systemFont(ofSize: 10))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }
             .frame(height: 20)

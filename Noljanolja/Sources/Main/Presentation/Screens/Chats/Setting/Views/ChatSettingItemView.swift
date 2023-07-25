@@ -19,7 +19,7 @@ struct ChatSettingItemView: View {
                 .frame(width: 24, height: 24)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             Text(itemModel.title)
-                .font(.system(size: 13))
+                .dynamicFont(.systemFont(ofSize: 13))
                 .frame(maxWidth: .infinity, alignment: .leading)
             ImageAssets.icArrowRight.swiftUIImage
                 .frame(width: 20, height: 20)

@@ -57,10 +57,10 @@ struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
         VStack(spacing: 36) {
             VStack(spacing: 16) {
                 Text(L10n.otpTitle)
-                    .font(.system(size: 24))
+                    .dynamicFont(.systemFont(ofSize: 24))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 Text("\(L10n.otpDescription)  \(viewModel.phoneNumber.formatPhone() ?? "")")
-                    .font(.system(size: 16))
+                    .dynamicFont(.systemFont(ofSize: 16))
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .multilineTextAlignment(.center)
@@ -92,7 +92,7 @@ struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
                         .foregroundColor(ColorAssets.primaryGreen200.swiftUIColor)
                     }
                 }
-                .font(.system(size: 12))
+                .dynamicFont(.systemFont(ofSize: 12))
                 .padding(.vertical, 8)
                 .padding(.horizontal, 32)
             }

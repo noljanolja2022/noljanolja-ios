@@ -27,7 +27,7 @@ struct TransactionDashboardView<ViewModel: TransactionDashboardViewModel>: View 
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("Dashboard")
-                        .font(.system(size: 16, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             }
@@ -59,7 +59,7 @@ struct TransactionDashboardView<ViewModel: TransactionDashboardViewModel>: View 
         if let model = viewModel.model {
             VStack(alignment: .trailing, spacing: 12) {
                 Text(model.title)
-                    .font(.system(size: 14))
+                    .dynamicFont(.systemFont(ofSize: 14))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                     .frame(maxWidth: .infinity, alignment: .center)
 
@@ -106,7 +106,7 @@ struct TransactionDashboardView<ViewModel: TransactionDashboardViewModel>: View 
                                 .background(Color(dataSet.colors[0]))
                                 .cornerRadius(4)
                             Text(dataSet.label ?? "")
-                                .font(.system(size: 6, weight: .medium))
+                                .dynamicFont(.systemFont(ofSize: 6, weight: .medium))
                                 .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                                 .alignmentGuide(.leading, computeValue: { $0[.leading] })
                                 .alignmentGuide(.top, computeValue: { $0[.top] })
@@ -127,7 +127,7 @@ struct TransactionDashboardView<ViewModel: TransactionDashboardViewModel>: View 
     private func buildListView() -> some View {
         VStack(spacing: 16) {
             Text("Recent transactions")
-                .font(.system(size: 14, weight: .bold))
+                .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .center)
 
             ScrollView {

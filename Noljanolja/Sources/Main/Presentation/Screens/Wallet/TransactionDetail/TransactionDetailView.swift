@@ -25,7 +25,7 @@ struct TransactionDetailView<ViewModel: TransactionDetailViewModel>: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text(L10n.transactionDetail)
-                        .font(.system(size: 16, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             }
@@ -54,12 +54,12 @@ struct TransactionDetailView<ViewModel: TransactionDetailViewModel>: View {
     private func buildPointsView() -> some View {
         VStack(spacing: 8) {
             Text(viewModel.model.type)
-                .font(.system(size: 16))
+                .dynamicFont(.systemFont(ofSize: 16))
                 .frame(maxWidth: .infinity, alignment: .center)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
             Text(viewModel.model.point)
-                .font(.system(size: 22, weight: .bold))
+                .dynamicFont(.systemFont(ofSize: 22, weight: .bold))
                 .foregroundColor(Color(viewModel.model.pointColor))
         }
     }
@@ -68,11 +68,11 @@ struct TransactionDetailView<ViewModel: TransactionDetailViewModel>: View {
         VStack(spacing: 8) {
             HStack(spacing: 8) {
                 Text(L10n.transactionDetailStatus)
-                    .font(.system(size: 14))
+                    .dynamicFont(.systemFont(ofSize: 14))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 Text("Complete")
-                    .font(.system(size: 14))
+                    .dynamicFont(.systemFont(ofSize: 14))
                     .frame(height: 24)
                     .padding(.horizontal, 12)
                     .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
@@ -82,21 +82,21 @@ struct TransactionDetailView<ViewModel: TransactionDetailViewModel>: View {
 
             HStack(spacing: 8) {
                 Text(L10n.transactionDetailTime)
-                    .font(.system(size: 14))
+                    .dynamicFont(.systemFont(ofSize: 14))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 Text(viewModel.model.dateTime)
-                    .font(.system(size: 14, weight: .bold))
+                    .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }
 
             HStack(spacing: 8) {
                 Text(L10n.transactionDetailCode)
-                    .font(.system(size: 14))
+                    .dynamicFont(.systemFont(ofSize: 14))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 Text(viewModel.model.code)
-                    .font(.system(size: 14, weight: .bold))
+                    .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }
         }

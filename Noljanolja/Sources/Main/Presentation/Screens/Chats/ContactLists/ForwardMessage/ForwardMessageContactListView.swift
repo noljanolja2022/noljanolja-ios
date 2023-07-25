@@ -33,7 +33,7 @@ struct ForwardMessageContactListView<ViewModel: ForwardMessageContactListViewMod
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("Forward Message")
-                        .font(.system(size: 16, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -41,7 +41,7 @@ struct ForwardMessageContactListView<ViewModel: ForwardMessageContactListViewMod
                         Button(L10n.commonAgree) {
                             viewModel.action.send(selectedUsers)
                         }
-                        .font(.system(size: 16))
+                        .dynamicFont(.systemFont(ofSize: 16))
                         .foregroundColor(
                             isCreateConversationEnabled
                                 ? ColorAssets.neutralDarkGrey.swiftUIColor

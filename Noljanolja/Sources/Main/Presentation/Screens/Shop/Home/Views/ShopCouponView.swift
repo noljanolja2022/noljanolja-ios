@@ -20,7 +20,7 @@ struct ShopCouponView: View {
     private func buildBodyView() -> some View {
         VStack(spacing: 12) {
             Text("Shop")
-                .font(.system(size: 16, weight: .bold))
+                .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
             LazyVGrid(columns: Array(repeating: GridItem.flexible(spacing: 12), count: 2)) {
                 ForEach(model.indices, id: \.self) {

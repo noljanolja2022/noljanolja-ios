@@ -44,12 +44,12 @@ struct VideoDetailCommentView: View {
 
             VStack(spacing: 4) {
                 Text(comment.createdAt?.string(withFormat: "yyyy.MM.dd HH:mm") ?? "")
-                    .font(.system(size: 11))
+                    .dynamicFont(.systemFont(ofSize: 11))
                     .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                 Text(comment.commenter?.name ?? "")
-                    .font(.system(size: 14, weight: .bold))
+                    .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                     .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -69,7 +69,7 @@ struct VideoDetailCommentView: View {
             VStack(spacing: 8) {
                 Text(comment.comment ?? "")
                     .multilineTextAlignment(.leading)
-                    .font(.system(size: 12))
+                    .dynamicFont(.systemFont(ofSize: 12))
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                     .padding(12)
                     .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)

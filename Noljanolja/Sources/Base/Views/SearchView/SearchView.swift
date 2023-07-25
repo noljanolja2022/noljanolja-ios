@@ -24,7 +24,7 @@ struct SearchView: View {
             TextField(placeholder, text: $text)
                 .textFieldStyle(TappableTextFieldStyle())
                 .keyboardType(.default)
-                .font(.system(size: 16))
+                .dynamicFont(.systemFont(ofSize: 16))
                 .frame(maxWidth: .infinity)
                 .introspectTextField { textField in
                     textField.returnKeyType = .search

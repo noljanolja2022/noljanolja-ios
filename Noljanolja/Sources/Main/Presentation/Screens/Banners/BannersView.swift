@@ -111,7 +111,7 @@ struct BannersView<ViewModel: BannersViewModel>: View {
                     action: {}
                 )
                 .buttonStyle(PrimaryButtonStyle())
-                .font(.system(size: 16, weight: .bold))
+                .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                 .padding(.horizontal, 16)
                 .padding(.bottom, 40)
             }

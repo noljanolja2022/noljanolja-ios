@@ -29,7 +29,7 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text(L10n.commonSetting)
-                        .font(.system(size: 16, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             }
@@ -106,7 +106,7 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
                 content: {
                     HStack(spacing: 12) {
                         Text(viewModel.name)
-                            .font(.system(size: 16, weight: .bold))
+                            .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
 
                         ImageAssets.icEdit.swiftUIImage
                             .frame(width: 24, height: 24)
@@ -122,7 +122,7 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
                 title: L10n.settingPhoneNumber,
                 content: {
                     Text(viewModel.phoneNumber)
-                        .font(.system(size: 16, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             )
@@ -179,7 +179,7 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
             }
         )
         .buttonStyle(PrimaryButtonStyle())
-        .font(.system(size: 16, weight: .bold))
+        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
         .padding(.horizontal, 16)
     }
     

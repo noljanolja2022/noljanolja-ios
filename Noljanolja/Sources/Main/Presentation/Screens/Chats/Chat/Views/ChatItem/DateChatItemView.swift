@@ -14,7 +14,7 @@ struct DateChatItemView: View {
 
     var body: some View {
         Text(model.message)
-            .font(.system(size: 14, weight: .medium))
+            .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
             .frame(height: 26)
             .padding(.horizontal, 12)
             .foregroundColor(ColorAssets.neutralRawLight.swiftUIColor)

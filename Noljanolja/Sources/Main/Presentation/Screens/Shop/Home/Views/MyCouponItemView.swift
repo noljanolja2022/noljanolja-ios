@@ -47,12 +47,12 @@ struct MyCouponItemView: View {
             .aspectRatio(1, contentMode: .fill)
             .frame(maxWidth: .infinity)
             Text(model.brand?.name ?? "")
-                .font(.system(size: 12))
+                .dynamicFont(.systemFont(ofSize: 12))
                 .lineLimit(1)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
             Text(model.name ?? "")
-                .font(.system(size: 11))
+                .dynamicFont(.systemFont(ofSize: 11))
                 .lineLimit(1)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
@@ -63,7 +63,7 @@ struct MyCouponItemView: View {
                 }
             )
             .buttonStyle(MyCouponButtonStyle())
-            .font(.system(size: 12, weight: .medium))
+            .dynamicFont(.systemFont(ofSize: 12, weight: .medium))
             .frame(height: 30)
             .cornerRadius(4)
         }

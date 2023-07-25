@@ -31,7 +31,7 @@ struct WalletNotiView: View {
                     action: {},
                     label: {
                         Text(L10n.walletAttendNow)
-                            .font(.system(size: 14, weight: .bold))
+                            .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                             .height(32)
                             .padding(.horizontal, 24)
                             .foregroundColor(ColorAssets.neutralRawLight.swiftUIColor)
@@ -60,22 +60,22 @@ struct WalletNotiView: View {
         VStack(spacing: 4) {
             HStack(spacing: 8) {
                 Text(L10n.walletMyAttendance)
-                    .font(.system(size: 12, weight: .bold))
+                    .dynamicFont(.systemFont(ofSize: 12, weight: .bold))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
                 Spacer()
 
                 HStack(spacing: 4) {
                     Text("12")
-                        .font(.system(size: 16, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
                     Text("/")
-                        .font(.system(size: 14, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
 
                     Text("30")
-                        .font(.system(size: 14, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                 }
             }

@@ -123,7 +123,7 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
                 .cornerRadius(14)
 
                 Text(model.displayName ?? "")
-                    .font(.system(size: 16, weight: .bold))
+                    .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                     .multilineTextAlignment(.center)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -137,7 +137,7 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
     private func buildHeaderViewForGroupChat(_ model: GroupChatSettingHeaderModel) -> some View {
         VStack(spacing: 0) {
             Text(L10n.commonMembers)
-                .font(.system(size: 16, weight: .bold))
+                .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.vertical, 10)
                 .padding(.horizontal, 16)
@@ -179,7 +179,7 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
                         .overlay(ColorAssets.neutralLightGrey.swiftUIColor)
 
                     Text("Settings")
-                        .font(.system(size: 16, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.vertical, 10)
                         .padding(.horizontal, 16)
@@ -221,7 +221,7 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
                 },
                 label: {
                     Text(L10n.editChatLeaveChat.uppercased())
-                        .font(.system(size: 14, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .padding(12)
                         .foregroundColor(ColorAssets.systemRed100.swiftUIColor)

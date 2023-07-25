@@ -198,7 +198,7 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
                     uiViews.textView = $0
                 }
         }
-        .font(.system(size: 14))
+        .dynamicFont(.systemFont(ofSize: 14))
         .padding(.horizontal, 8)
     }
 

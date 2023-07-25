@@ -19,7 +19,7 @@ struct WalletMyPointView: View {
     private func buildBodyView() -> some View {
         VStack(spacing: 16) {
             Text(L10n.walletMyPoint)
-                .font(.system(size: 16, weight: .medium))
+                .dynamicFont(.systemFont(ofSize: 16, weight: .medium))
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             HStack(spacing: 12) {
                 ImageAssets.icPoint.swiftUIImage
@@ -27,7 +27,7 @@ struct WalletMyPointView: View {
                     .scaledToFit()
                     .frame(width: 36, height: 36)
                 Text(point.formatted())
-                    .font(.system(size: 28, weight: .bold))
+                    .dynamicFont(.systemFont(ofSize: 28, weight: .bold))
                     .foregroundColor(ColorAssets.secondaryYellow400.swiftUIColor)
             }
         }

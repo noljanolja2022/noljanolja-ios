@@ -47,22 +47,22 @@ struct ShopCouponItemView: View {
             .aspectRatio(1, contentMode: .fill)
 
             Text(model.brand?.name ?? "")
-                .font(.system(size: 12, weight: .medium))
+                .dynamicFont(.systemFont(ofSize: 12, weight: .medium))
                 .lineLimit(1)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
             Text(model.name ?? "")
-                .font(.system(size: 14, weight: .medium))
+                .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
                 .lineLimit(1)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
             HStack(spacing: 4) {
                 Text(String(model.price))
-                    .font(.system(size: 24, weight: .bold))
+                    .dynamicFont(.systemFont(ofSize: 24, weight: .bold))
                     .foregroundColor(ColorAssets.secondaryYellow300.swiftUIColor)
                 Text("Points")
-                    .font(.system(size: 24))
+                    .dynamicFont(.systemFont(ofSize: 24))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }
             .frame(maxWidth: .infinity, alignment: .leading)

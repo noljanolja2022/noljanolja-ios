@@ -58,11 +58,11 @@ struct TermDetailView<ViewModel: TermDetailViewModel>: View {
             )
 
             Text(L10n.tosTitle)
-                .font(.system(size: 32, weight: .bold))
+                .dynamicFont(.systemFont(ofSize: 32, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
 
             Text(L10n.tosWelcome)
-                .font(.system(size: 14))
+                .dynamicFont(.systemFont(ofSize: 14))
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
         .padding(16)
@@ -73,7 +73,7 @@ struct TermDetailView<ViewModel: TermDetailViewModel>: View {
     private func buildContentView() -> some View {
         VStack(spacing: 0) {
             Text(termType.title)
-                .font(.system(size: 14, weight: .bold))
+                .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                 .frame(height: 44)
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.horizontal, 32)
@@ -85,7 +85,7 @@ struct TermDetailView<ViewModel: TermDetailViewModel>: View {
 
                 It's a beautiful thing that is engraved asurahi shui. Loneliness and Poetry and Hale People's dirt, roe deer, children's stars seem far away. heal the wounds Is there no one anywhere? it's beautiful outside Loneliness and Poetry and Hale People's dirt, roe deer, children's stars seem far away. heal the wounds Is there no one anywhere? Is there no one anywhere?
                 """)
-                .font(.system(size: 12))
+                .dynamicFont(.systemFont(ofSize: 12))
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             }
             .padding(.horizontal, 16)

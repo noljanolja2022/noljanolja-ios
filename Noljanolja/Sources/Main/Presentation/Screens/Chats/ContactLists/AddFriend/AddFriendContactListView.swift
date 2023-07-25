@@ -25,7 +25,7 @@ struct AddFriendContactListView<ViewModel: AddFriendContactListViewModel>: View 
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text(L10n.contactsTitleAddMemmber)
-                        .font(.system(size: 16, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             }

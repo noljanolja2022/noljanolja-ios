@@ -96,7 +96,7 @@ struct MessageActionDetailView<ViewModel: MessageActionDetailViewModel>: View {
                     },
                     label: {
                         Text(model.code ?? "")
-                            .font(.system(size: 16))
+                            .dynamicFont(.systemFont(ofSize: 16))
                     }
                 )
             }
@@ -121,7 +121,7 @@ struct MessageActionDetailView<ViewModel: MessageActionDetailViewModel>: View {
                                 .frame(width: 24, height: 24)
                                 .foregroundColor(ColorAssets.primaryGreen200.swiftUIColor)
                             Text(model.title)
-                                .font(.system(size: 14, weight: .medium))
+                                .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
                                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                         }
                         .padding(12)

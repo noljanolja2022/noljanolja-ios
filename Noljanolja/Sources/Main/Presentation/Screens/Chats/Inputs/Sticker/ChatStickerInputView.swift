@@ -119,7 +119,7 @@ extension ChatStickerInputView {
             Button(L10n.commonDownload) {
                 viewModel.downloadDataAction.send()
             }
-            .font(.system(size: 16, weight: .bold))
+            .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
             .padding(.horizontal, 32)
             .padding(.vertical, 12)
             .background(ColorAssets.primaryGreen200.swiftUIColor)

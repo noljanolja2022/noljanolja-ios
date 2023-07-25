@@ -99,11 +99,11 @@ struct AuthView<ViewModel: AuthViewModel>: View {
     private func buildAuthHeaderView() -> some View {
         VStack(spacing: 4) {
             Text(L10n.commonLogin)
-                .font(.system(size: 32, weight: .bold))
+                .dynamicFont(.systemFont(ofSize: 32, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             Text(L10n.loginPhoneDescription)
-                .font(.system(size: 14))
+                .dynamicFont(.systemFont(ofSize: 14))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
@@ -120,12 +120,12 @@ struct AuthView<ViewModel: AuthViewModel>: View {
                     VStack {
                         HStack(spacing: 8) {
                             Text(viewModel.country.flag)
-                                .font(.system(size: 24))
+                                .dynamicFont(.systemFont(ofSize: 24))
                                 .frame(width: 30, height: 24)
                                 .background(ColorAssets.neutralLightGrey.swiftUIColor)
                                 .cornerRadius(3)
                             Text(viewModel.country.prefix)
-                                .font(.system(size: 16))
+                                .dynamicFont(.systemFont(ofSize: 16))
                                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                         }
                         .frame(maxHeight: .infinity)
@@ -142,7 +142,7 @@ struct AuthView<ViewModel: AuthViewModel>: View {
                 TextField("", text: $viewModel.phoneNumberText)
                     .keyboardType(.phonePad)
                     .textFieldStyle(TappableTextFieldStyle())
-                    .font(.system(size: 16))
+                    .dynamicFont(.systemFont(ofSize: 16))
                     .frame(maxHeight: .infinity)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                     .introspectTextField { textField in
@@ -180,7 +180,7 @@ struct AuthView<ViewModel: AuthViewModel>: View {
             )
         )
         .disabled(viewModel.phoneNumberText.isEmpty)
-        .font(.system(size: 16, weight: .bold))
+        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
         .padding(.horizontal, 16)
         .padding(.bottom, 16)
     }

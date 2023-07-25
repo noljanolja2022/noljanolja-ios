@@ -29,7 +29,7 @@ struct VideoDetailInformationView: View {
             Text(video.title ?? "")
                 .lineLimit(2)
                 .multilineTextAlignment(.leading)
-                .font(.system(size: 14, weight: .bold))
+                .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
@@ -37,7 +37,7 @@ struct VideoDetailInformationView: View {
                 Text("#\(category)")
                     .lineLimit(2)
                     .multilineTextAlignment(.leading)
-                    .font(.system(size: 12))
+                    .dynamicFont(.systemFont(ofSize: 12))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(.blue)
             }
@@ -46,7 +46,7 @@ struct VideoDetailInformationView: View {
                 Text(channelTitle)
                     .lineLimit(2)
                     .multilineTextAlignment(.leading)
-                    .font(.system(size: 10))
+                    .dynamicFont(.systemFont(ofSize: 10))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
             }
@@ -57,11 +57,11 @@ struct VideoDetailInformationView: View {
         HStack(alignment: .top, spacing: 12) {
             VStack(spacing: 8) {
                 Text(L10n.videoDetailViews)
-                    .font(.system(size: 12, weight: .medium))
+                    .dynamicFont(.systemFont(ofSize: 12, weight: .medium))
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
 
                 Text(video.viewCount.formatted())
-                    .font(.system(size: 14, weight: .bold))
+                    .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }
             .frame(minWidth: 0, maxWidth: .infinity)
@@ -77,12 +77,12 @@ struct VideoDetailInformationView: View {
 
             VStack(spacing: 8) {
                 Text(L10n.videoDetailComment)
-                    .font(.system(size: 12, weight: .medium))
+                    .dynamicFont(.systemFont(ofSize: 12, weight: .medium))
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
 
                 if let commentCount = commentCount?.formatted() {
                     Text(commentCount)
-                        .font(.system(size: 14, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             }
@@ -99,11 +99,11 @@ struct VideoDetailInformationView: View {
 
             VStack(spacing: 8) {
                 Text(L10n.videoDetailReward)
-                    .font(.system(size: 12, weight: .medium))
+                    .dynamicFont(.systemFont(ofSize: 12, weight: .medium))
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
 
                 Text(L10n.videoDetailRewardPoint(video.totalPoints.formatted()))
-                    .font(.system(size: 14, weight: .bold))
+                    .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                     .foregroundColor(.orange)
             }
             .frame(minWidth: 0, maxWidth: .infinity)

@@ -38,11 +38,11 @@ struct FindUserResultItemView: View {
 
             VStack(spacing: 4) {
                 Text(model.name ?? "")
-                    .font(.system(size: 16, weight: .medium))
+                    .dynamicFont(.systemFont(ofSize: 16, weight: .medium))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 Text(model.phone ?? "")
-                    .font(.system(size: 14))
+                    .dynamicFont(.systemFont(ofSize: 14))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
             }
@@ -58,7 +58,7 @@ struct FindUserResultItemView: View {
                             .scaledToFit()
                             .frame(width: 24, height: 24)
                         Text(L10n.addFriendsChatNow)
-                            .font(.system(size: 14, weight: .medium))
+                            .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
                     }
                     .padding(.horizontal, 8)
                     .padding(.vertical, 4)

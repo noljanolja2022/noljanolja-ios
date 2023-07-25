@@ -35,7 +35,7 @@ struct SelectCountryView<ViewModel: SelectCountryViewModel>: View {
                 }
                 ToolbarItem(placement: .principal) {
                     Text(L10n.countriesTitle)
-                        .font(.system(size: 16, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             }
@@ -59,7 +59,7 @@ struct SelectCountryView<ViewModel: SelectCountryViewModel>: View {
             TextField(L10n.commonSearch, text: $viewModel.searchString)
                 .textFieldStyle(TappableTextFieldStyle())
                 .frame(maxHeight: .infinity)
-                .font(.system(size: 16))
+                .dynamicFont(.systemFont(ofSize: 16))
             if !viewModel.searchString.isEmpty {
                 Button(
                     action: {
@@ -95,7 +95,7 @@ struct SelectCountryView<ViewModel: SelectCountryViewModel>: View {
                     label: {
                         VStack(spacing: 0) {
                             Text(country.name)
-                                .font(.system(size: 16))
+                                .dynamicFont(.systemFont(ofSize: 16))
                                 .frame(height: 52)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             Divider()

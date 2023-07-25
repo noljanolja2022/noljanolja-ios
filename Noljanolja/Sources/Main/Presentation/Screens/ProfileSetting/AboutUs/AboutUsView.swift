@@ -25,7 +25,7 @@ struct AboutUsView<ViewModel: AboutUsViewModel>: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text(L10n.settingAboutUsTitle)
-                        .font(.system(size: 16, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             }

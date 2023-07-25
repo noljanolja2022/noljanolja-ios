@@ -33,7 +33,7 @@ struct ContactItemView: View {
             .cornerRadius(14)
 
             Text(user.name ?? "")
-                .font(.system(size: 16, weight: .medium))
+                .dynamicFont(.systemFont(ofSize: 16, weight: .medium))
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
 
             switch isSelected {

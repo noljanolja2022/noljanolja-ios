@@ -35,7 +35,7 @@ struct ChatView<ViewModel: ChatViewModel>: View {
             ToolbarItem(placement: .principal) {
                 Text(viewModel.title)
                     .lineLimit(1)
-                    .font(.system(size: 16, weight: .bold))
+                    .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }
             ToolbarItem(placement: .navigationBarTrailing) {

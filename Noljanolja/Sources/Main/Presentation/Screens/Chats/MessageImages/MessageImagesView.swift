@@ -30,7 +30,7 @@ struct MessageImagesView<ViewModel: MessageImagesViewModel>: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text(viewModel.title)
-                        .font(.system(size: 16, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             }

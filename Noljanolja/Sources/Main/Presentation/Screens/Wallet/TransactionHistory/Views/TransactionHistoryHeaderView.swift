@@ -17,13 +17,13 @@ struct TransactionHistoryHeaderView: View {
     private func buildBodyView() -> some View {
         HStack(spacing: 12) {
             Text(model.displayDateTime)
-                .font(.system(size: 14, weight: .medium))
+                .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
 
             HStack(spacing: 0) {
                 Text(L10n.walletHistoryDashboard)
-                    .font(.system(size: 14, weight: .medium))
+                    .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
                     .foregroundColor(ColorAssets.systemBlue.swiftUIColor)
 
                 ImageAssets.icArrowRight.swiftUIImage

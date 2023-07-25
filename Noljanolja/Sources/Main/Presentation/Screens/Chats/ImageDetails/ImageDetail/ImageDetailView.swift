@@ -59,7 +59,7 @@ struct ImageDetailView<ViewModel: ImageDetailViewModel>: View {
     private func buildItemView(_ index: Int) -> some View {
         VStack(spacing: 8) {
             Text("\(index + 1)/\(viewModel.imageUrls.count)")
-                .font(.system(size: 22, weight: .medium))
+                .dynamicFont(.systemFont(ofSize: 22, weight: .medium))
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             WebImage(url: viewModel.imageUrls[index])
                 .resizable()

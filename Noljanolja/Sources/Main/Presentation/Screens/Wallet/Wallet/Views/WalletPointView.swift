@@ -20,7 +20,7 @@ struct WalletPointView: View {
         VStack(spacing: 12) {
             Text(model.title)
                 .multilineTextAlignment(.center)
-                .font(.system(size: 16, weight: .medium))
+                .dynamicFont(.systemFont(ofSize: 16, weight: .medium))
                 .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
 
             HStack(spacing: 4) {
@@ -29,7 +29,7 @@ struct WalletPointView: View {
                 Text("P")
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
             }
-            .font(.system(size: 28, weight: .bold))
+            .dynamicFont(.systemFont(ofSize: 28, weight: .bold))
 
             Button(
                 action: {
@@ -37,7 +37,7 @@ struct WalletPointView: View {
                 },
                 label: {
                     Text(model.actionTitle.uppercased())
-                        .font(.system(size: 14, weight: .medium))
+                        .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 12)
                         .padding(.horizontal, 8)

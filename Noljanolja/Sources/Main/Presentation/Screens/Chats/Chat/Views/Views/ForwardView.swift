@@ -17,8 +17,8 @@ struct ForwardView: View {
                 .scaledToFit()
                 .frame(width: 16, height: 16)
             Text("Forwarded")
-                .font(.system(size: 10))
                 .italic()
+                .dynamicFont(.systemFont(ofSize: 10))
         }
         .foregroundColor(ColorAssets.neutralRawDeepGrey.swiftUIColor)
     }

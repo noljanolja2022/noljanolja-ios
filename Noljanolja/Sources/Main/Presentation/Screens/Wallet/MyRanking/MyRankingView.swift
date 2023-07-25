@@ -25,7 +25,7 @@ struct MyRankingView<ViewModel: MyRankingViewModel>: View {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text(L10n.myRankingTitle)
-                        .font(.system(size: 16, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             }
@@ -71,12 +71,12 @@ struct MyRankingView<ViewModel: MyRankingViewModel>: View {
                     .foregroundColor(Color(currentModel.iconColor))
 
                 Text(currentModel.text)
-                    .font(.system(size: 16, weight: .medium))
+                    .dynamicFont(.systemFont(ofSize: 16, weight: .medium))
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
                 Text("If 2 additional people are General membership\nthe group will be promoted")
-                    .font(.system(size: 14, weight: .medium))
+                    .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
                     .multilineTextAlignment(.center)
                     .padding(8)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
@@ -95,7 +95,7 @@ struct MyRankingView<ViewModel: MyRankingViewModel>: View {
         if let model {
             VStack(spacing: 8) {
                 Text("Expected rating for next month")
-                    .font(.system(size: 11, weight: .medium))
+                    .dynamicFont(.systemFont(ofSize: 11, weight: .medium))
                     .frame(maxWidth: .infinity, alignment: .center)
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
 
@@ -105,7 +105,7 @@ struct MyRankingView<ViewModel: MyRankingViewModel>: View {
                     .foregroundColor(Color(model.iconColor))
 
                 Text(model.text)
-                    .font(.system(size: 11, weight: .medium))
+                    .dynamicFont(.systemFont(ofSize: 11, weight: .medium))
                     .frame(height: 28)
                     .padding(.horizontal, 12)
                     .foregroundColor(Color(model.textColor))
@@ -141,7 +141,7 @@ struct MyRankingView<ViewModel: MyRankingViewModel>: View {
                 .cornerRadius(4)
 
             Text(model.text)
-                .font(.system(size: 16, weight: .medium))
+                .dynamicFont(.systemFont(ofSize: 16, weight: .medium))
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
         .padding(.horizontal, 48)

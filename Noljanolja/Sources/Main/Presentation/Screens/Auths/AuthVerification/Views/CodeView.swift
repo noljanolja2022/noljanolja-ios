@@ -65,7 +65,7 @@ struct CodeView: View {
         }()
         VStack(spacing: 0) {
             Text(digit)
-                .font(.system(size: 28, weight: .medium))
+                .dynamicFont(.systemFont(ofSize: 28, weight: .medium))
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .foregroundColor(color)
             Spacer()

@@ -82,7 +82,7 @@ struct ChatInputImagePreviewView<ViewModel: ChatInputImagePreviewViewModel>: Vie
                             .frame(width: 24, height: 24)
 
                         Text(L10n.commonSave)
-                            .font(.system(size: 16, weight: .bold))
+                            .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                     }
                     .foregroundColor(ColorAssets.primaryGreen200.swiftUIColor)
                 }
@@ -98,7 +98,7 @@ struct ChatInputImagePreviewView<ViewModel: ChatInputImagePreviewViewModel>: Vie
                 label: {
                     HStack(spacing: 8) {
                         Text(L10n.commonSend)
-                            .font(.system(size: 16, weight: .bold))
+                            .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
 
                         ImageAssets.icSend.swiftUIImage
                             .resizable()

@@ -85,7 +85,7 @@ struct PhotoMessageContentItemView: View {
     private func buildOverlayView() -> some View {
         if let overlayText = model.overlayText, !overlayText.isEmpty {
             Text(overlayText)
-                .font(.system(size: 36))
+                .dynamicFont(.systemFont(ofSize: 36))
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
                 .background(ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.5))

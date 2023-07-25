@@ -65,11 +65,11 @@ struct TermView<ViewModel: TermViewModel>: View {
                 .scaledToFill()
                 .frame(width: 66, height: 62)
             Text(L10n.commonLogin)
-                .font(.system(size: 32, weight: .bold))
+                .dynamicFont(.systemFont(ofSize: 32, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 12)
             Text(L10n.authWelcome)
-                .font(.system(size: 14))
+                .dynamicFont(.systemFont(ofSize: 14))
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
         .padding(16)
@@ -81,7 +81,7 @@ struct TermView<ViewModel: TermViewModel>: View {
                 ForEach(TermSectionType.allCases) { sectionType in
                     Text(sectionType.title.uppercased())
                         .frame(alignment: .leading)
-                        .font(.system(size: 14, weight: .medium))
+                        .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                         .padding(.top, 32)
 
@@ -116,7 +116,7 @@ struct TermView<ViewModel: TermViewModel>: View {
         )
         .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.isAllTermChecked))
         .disabled(!viewModel.isAllTermChecked)
-        .font(.system(size: 16, weight: .bold))
+        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
         .padding(16)
     }
 }

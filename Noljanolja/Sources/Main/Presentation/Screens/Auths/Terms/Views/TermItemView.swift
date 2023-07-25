@@ -44,7 +44,7 @@ struct TermItemView: View {
                             .frame(alignment: .leading)
                             .multilineTextAlignment(.leading)
                             .lineLimit(titleLineLimit)
-                            .font(.system(size: 16))
+                            .dynamicFont(.systemFont(ofSize: 16))
                             .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                         Spacer(minLength: 4)
 

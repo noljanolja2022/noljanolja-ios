@@ -52,7 +52,7 @@ struct FAQItemView: View {
     private func buildTitleView() -> some View {
         HStack(spacing: 8) {
             Text(title)
-                .font(.system(size: 16, weight: .medium))
+                .dynamicFont(.systemFont(ofSize: 16, weight: .medium))
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.primaryGreen300.swiftUIColor)
@@ -69,7 +69,7 @@ struct FAQItemView: View {
     private func buildDescriptionView() -> some View {
         if !isDescriptionHidden {
             Text(description)
-                .font(.system(size: 16))
+                .dynamicFont(.systemFont(ofSize: 16))
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)

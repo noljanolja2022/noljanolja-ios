@@ -33,7 +33,7 @@ struct UpdateConversationContactListView<ViewModel: UpdateConversationContactLis
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text(L10n.contactsTitleAddMemmber)
-                        .font(.system(size: 16, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -41,7 +41,7 @@ struct UpdateConversationContactListView<ViewModel: UpdateConversationContactLis
                         Button(L10n.commonAgree) {
                             viewModel.action.send(selectedUsers)
                         }
-                        .font(.system(size: 16))
+                        .dynamicFont(.systemFont(ofSize: 16))
                         .foregroundColor(
                             isCreateConversationEnabled
                                 ? ColorAssets.neutralDarkGrey.swiftUIColor
