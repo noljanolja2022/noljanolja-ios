@@ -58,6 +58,7 @@ enum MainTabType: Equatable {
 
 enum MainNavigationType {
     case addFriends
+    case searchVideo
 }
 
 // MARK: - MainScreenCoverType

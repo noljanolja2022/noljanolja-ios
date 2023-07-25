@@ -128,7 +128,22 @@ struct MainView<ViewModel: MainViewModel>: View {
                     )
                 }
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            case .watch, .wallet, .shop, .news:
+            case .watch:
+                HStack(spacing: 4) {
+                    Button(
+                        action: {
+                            viewModel.navigationType = .searchVideo
+                        },
+                        label: {
+                            ImageAssets.icSearch.swiftUIImage
+                                .resizable()
+                                .scaledToFit()
+                                .padding(2)
+                        }
+                    )
+                }
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            case .wallet, .shop, .news:
                 EmptyView()
             }
         }
@@ -246,6 +261,8 @@ extension MainView {
                     delegate: viewModel
                 )
             )
+        case .searchVideo:
+            EmptyView()
         }
     }
 

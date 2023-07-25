@@ -385,6 +385,8 @@
 		CFAA37612A4B370C0085CE88 /* BannerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAA37602A4B370C0085CE88 /* BannerRepository.swift */; };
 		CFAA37632A4B38E00085CE88 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAA37622A4B38E00085CE88 /* Banner.swift */; };
 		CFAD27B129E2DAE400947BC3 /* ConversationDetailStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAD27B029E2DAE400947BC3 /* ConversationDetailStore.swift */; };
+		CFAE00D02A6EEA14006A1FF0 /* SearchVideosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAE00CE2A6EEA14006A1FF0 /* SearchVideosView.swift */; };
+		CFAE00D12A6EEA14006A1FF0 /* SearchVideosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAE00CF2A6EEA14006A1FF0 /* SearchVideosViewModel.swift */; };
 		CFB0A82129F1B6FD00298546 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB0A82029F1B6FD00298546 /* Video.swift */; };
 		CFB0A82329F1B7CC00298546 /* VideoComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB0A82229F1B7CC00298546 /* VideoComment.swift */; };
 		CFB0A82529F1B81400298546 /* VideoCommenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB0A82429F1B81400298546 /* VideoCommenter.swift */; };
@@ -462,6 +464,7 @@
 		CFFB71EC2A4004550019663C /* StorableCouponKeyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFB71EB2A4004550019663C /* StorableCouponKeyword.swift */; };
 		CFFB71EE2A4004A20019663C /* CouponKeyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFB71ED2A4004A20019663C /* CouponKeyword.swift */; };
 		CFFB71F02A400A2B0019663C /* LocalCouponKeywordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFB71EF2A400A2B0019663C /* LocalCouponKeywordRepository.swift */; };
+		CFFC37492A6FBA5600B29726 /* Font+Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFC37482A6FBA5600B29726 /* Font+Dynamic.swift */; };
 		CFFD7082298AB9FF00D4F5A2 /* NoljanoljaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */; };
 		CFFD7086298ABA0100D4F5A2 /* ImageAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7085298ABA0100D4F5A2 /* ImageAssets.xcassets */; };
 		CFFD7089298ABA0100D4F5A2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD7088298ABA0100D4F5A2 /* Preview Assets.xcassets */; };
@@ -880,6 +883,8 @@
 		CFAA37602A4B370C0085CE88 /* BannerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerRepository.swift; sourceTree = "<group>"; };
 		CFAA37622A4B38E00085CE88 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		CFAD27B029E2DAE400947BC3 /* ConversationDetailStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDetailStore.swift; sourceTree = "<group>"; };
+		CFAE00CE2A6EEA14006A1FF0 /* SearchVideosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVideosView.swift; sourceTree = "<group>"; };
+		CFAE00CF2A6EEA14006A1FF0 /* SearchVideosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVideosViewModel.swift; sourceTree = "<group>"; };
 		CFB0A82029F1B6FD00298546 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		CFB0A82229F1B7CC00298546 /* VideoComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoComment.swift; sourceTree = "<group>"; };
 		CFB0A82429F1B81400298546 /* VideoCommenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCommenter.swift; sourceTree = "<group>"; };
@@ -948,6 +953,7 @@
 		CFFB71EB2A4004550019663C /* StorableCouponKeyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorableCouponKeyword.swift; sourceTree = "<group>"; };
 		CFFB71ED2A4004A20019663C /* CouponKeyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponKeyword.swift; sourceTree = "<group>"; };
 		CFFB71EF2A400A2B0019663C /* LocalCouponKeywordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCouponKeywordRepository.swift; sourceTree = "<group>"; };
+		CFFC37482A6FBA5600B29726 /* Font+Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Dynamic.swift"; sourceTree = "<group>"; };
 		CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Noljanolja.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoljanoljaApp.swift; sourceTree = "<group>"; };
 		CFFD7085298ABA0100D4F5A2 /* ImageAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImageAssets.xcassets; sourceTree = "<group>"; };
@@ -1069,6 +1075,7 @@
 				CFBC6EFF29C054B0000509EC /* View+EditView.swift */,
 				CF1307FB29C8C96900EED044 /* TextEditor+Background.swift */,
 				CFF4679F2A0A45E50018FFAA /* View+Visibility.swift */,
+				CFFC37482A6FBA5600B29726 /* Font+Dynamic.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -1175,6 +1182,15 @@
 				CF00D1672994E08A00505702 /* CustomTextField */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		CF1A20962A6EE8D000A5D0BB /* SearchVideos */ = {
+			isa = PBXGroup;
+			children = (
+				CFAE00CE2A6EEA14006A1FF0 /* SearchVideosView.swift */,
+				CFAE00CF2A6EEA14006A1FF0 /* SearchVideosViewModel.swift */,
+			);
+			path = SearchVideos;
 			sourceTree = "<group>";
 		};
 		CF1BD20129ACF5CC00778786 /* StatefullView */ = {
@@ -1555,11 +1571,11 @@
 		CF53D3FF2A6AF547009B3A69 /* SearchCoupons */ = {
 			isa = PBXGroup;
 			children = (
-				CF53D4002A6AF547009B3A69 /* SearchCouponsViewModel.swift */,
 				CF53D4012A6AF547009B3A69 /* Models */,
 				CF53D4032A6AF547009B3A69 /* SearchCouponsNavigations.swift */,
-				CF53D4042A6AF547009B3A69 /* Views */,
 				CF53D4062A6AF547009B3A69 /* SearchCouponsView.swift */,
+				CF53D4002A6AF547009B3A69 /* SearchCouponsViewModel.swift */,
+				CF53D4042A6AF547009B3A69 /* Views */,
 			);
 			path = SearchCoupons;
 			sourceTree = "<group>";
@@ -1622,6 +1638,7 @@
 		CF53D4152A6AF547009B3A69 /* Videos */ = {
 			isa = PBXGroup;
 			children = (
+				CF1A20962A6EE8D000A5D0BB /* SearchVideos */,
 				CF53D4162A6AF547009B3A69 /* VideoDetail */,
 				CF53D4262A6AF547009B3A69 /* Videos */,
 			);
@@ -3580,6 +3597,7 @@
 				CF131EB329CF32C400054719 /* PhotoAssetAPI.swift in Sources */,
 				CF53D5E72A6AF548009B3A69 /* TextMessageContentModel.swift in Sources */,
 				CFF467A02A0A45E50018FFAA /* View+Visibility.swift in Sources */,
+				CFAE00D12A6EEA14006A1FF0 /* SearchVideosViewModel.swift in Sources */,
 				CF1B625029B9BCC200DE53E6 /* StorableConversation.swift in Sources */,
 				CFB2A89F29D1F31A008D1689 /* StorableSticker.swift in Sources */,
 				CF54FA2429D0187B0092E2C6 /* MediaStore.swift in Sources */,
@@ -3791,6 +3809,7 @@
 				CF1B624829B9B55F00DE53E6 /* ConversationAPI.swift in Sources */,
 				CF1EEE2D29AE355E004F570A /* NibOwnerLoadable.swift in Sources */,
 				CF53D5AB2A6AF548009B3A69 /* TransactionHistoryView.swift in Sources */,
+				CFFC37492A6FBA5600B29726 /* Font+Dynamic.swift in Sources */,
 				CF876C3929EAB2F200C8C9B0 /* NavigationBarView.swift in Sources */,
 				CF53D57E2A6AF548009B3A69 /* SearchCouponsView.swift in Sources */,
 				CF53D5AD2A6AF548009B3A69 /* TransactionHistorySectionModel.swift in Sources */,
@@ -3800,6 +3819,7 @@
 				CF00D1692994E0A700505702 /* TextField+ErrorMessage.swift in Sources */,
 				CF53D6042A6AF548009B3A69 /* ParticipantDetailActionViewModel.swift in Sources */,
 				CF53D5D42A6AF548009B3A69 /* CreateConversationContactListView.swift in Sources */,
+				CFAE00D02A6EEA14006A1FF0 /* SearchVideosView.swift in Sources */,
 				CF53D5742A6AF548009B3A69 /* ShopHomeNavigations.swift in Sources */,
 				CF53D6212A6AF548009B3A69 /* ChatSettingViewModel.swift in Sources */,
 				CF53D64D2A6AF548009B3A69 /* TermDetailView.swift in Sources */,
