@@ -9,7 +9,7 @@ import Foundation
 
 enum NetworkConfigs {
     enum BaseUrl {
-        static let baseUrl = "http://34.64.110.104/api"
+        static let baseUrl = "http://dev.consumer-service.ppnyy.com/api"
         static let socketBaseUrl = "ws://34.64.110.104/rsocket"
     }
 
