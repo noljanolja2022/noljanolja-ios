@@ -193,11 +193,11 @@ struct SearchVideosView<ViewModel: SearchVideosViewModel>: View {
     @ViewBuilder
     private func buildResultView() -> some View {
         ScrollView {
-            LazyVGrid(columns: Array(repeating: GridItem.flexible(spacing: 12), count: 2), spacing: 12) {
+            LazyVStack(spacing: 12) {
                 let models = viewModel.model?.data ?? []
                 ForEach(models.indices, id: \.self) {
                     let model = models[$0]
-                    TrendingVideoItemView(model: model)
+                    CommonVideoItemView(model: model)
                         .frame(maxWidth: .infinity)
                         .onTapGesture {
                             viewModel.navigationType = .videoDetail(model)
@@ -216,6 +216,19 @@ struct SearchVideosView<ViewModel: SearchVideosViewModel>: View {
             }
         }
     }
+
+    private func buildNavigationLinks() -> some View {
+        NavigationLink(
+            unwrapping: $viewModel.navigationType,
+            onNavigate: { _ in },
+            destination: {
+                buildNavigationLinkDestinationView($0)
+            },
+            label: {
+                EmptyView()
+            }
+        )
+    }
 }
 
 extension SearchVideosView {
@@ -233,19 +246,6 @@ extension SearchVideosView {
     private func buildErrorView() -> some View {
         Spacer()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-
-    private func buildNavigationLinks() -> some View {
-        NavigationLink(
-            unwrapping: $viewModel.navigationType,
-            onNavigate: { _ in },
-            destination: {
-                buildNavigationLinkDestinationView($0)
-            },
-            label: {
-                EmptyView()
-            }
-        )
     }
 }
 

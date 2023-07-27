@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 // MARK: - VideosView
 
@@ -27,6 +28,12 @@ struct VideosView<ViewModel: VideosViewModel>: View {
         .clipped()
         .onAppear { viewModel.isAppearSubject.send(true) }
         .onDisappear { viewModel.isAppearSubject.send(false) }
+        .fullScreenCover(
+            unwrapping: $viewModel.fullScreenCoverType,
+            content: {
+                buildFullScreenCoverDestinationView($0)
+            }
+        )
     }
 
     private func buildContentView() -> some View {
@@ -84,6 +91,11 @@ struct VideosView<ViewModel: VideosViewModel>: View {
                 models: viewModel.model.trendingVideos,
                 selectAction: {
                     viewModel.navigationType = .videoDetail($0)
+                },
+                moreAction: { model in
+                    withoutAnimation {
+                        viewModel.fullScreenCoverType = .more(model)
+                    }
                 }
             )
         }
@@ -116,7 +128,9 @@ extension VideosView {
         Spacer()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
+}
 
+extension VideosView {
     @ViewBuilder
     private func buildNavigationDestinationView(
         _ type: Binding<VideosNavigationType>
@@ -126,6 +140,20 @@ extension VideosView {
             VideoDetailView(
                 viewModel: VideoDetailViewModel(
                     videoId: video.id
+                )
+            )
+        }
+    }
+
+    @ViewBuilder
+    private func buildFullScreenCoverDestinationView(
+        _ type: Binding<VideosFullScreenCoverType>
+    ) -> some View {
+        switch type.wrappedValue {
+        case let .more(model):
+            VideoActionContainerView(
+                viewModel: VideoActionContainerViewModel(
+                    video: model
                 )
             )
         }

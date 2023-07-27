@@ -24,29 +24,42 @@ struct ContactListView<ViewModel: ContactListViewModel>: View {
 
     @ViewBuilder
     private func buildBodyView() -> some View {
-        buildMainView()
+        buildContentView()
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
     }
 
-    private func buildMainView() -> some View {
+    private func buildContentView() -> some View {
         VStack(spacing: 0) {
+            buildSearchView()
+            buildMainView()
+        }
+        .background(ColorAssets.neutralLight.swiftUIColor)
+    }
+
+    @ViewBuilder
+    private func buildSearchView() -> some View {
+        if !viewModel.isSearchHidden {
             SearchView(placeholder: L10n.contactSearchHint, text: $viewModel.searchString)
                 .background(ColorAssets.neutralLightGrey.swiftUIColor)
                 .cornerRadius(10)
                 .padding(.horizontal, 16)
                 .padding(.top, 12)
                 .padding(.bottom, 20)
-            buildContentView()
         }
-        .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
     @ViewBuilder
-    private func buildContentView() -> some View {
+    private func buildMainView() -> some View {
         VStack(spacing: 16) {
             buildSelectedUsersView()
-            buildListView()
+
+            switch viewModel.axis {
+            case .vertical:
+                buildVerticalListView()
+            case .horizontal:
+                buildHorizontalListView()
+            }
         }
         .statefull(
             state: $viewModel.viewState,
@@ -56,7 +69,61 @@ struct ContactListView<ViewModel: ContactListViewModel>: View {
             error: buildErrorView
         )
     }
+}
 
+extension ContactListView {
+    @ViewBuilder
+    private func buildVerticalListView() -> some View {
+        ListView {
+            VStack(spacing: 0) {
+                Text(L10n.commonFriends)
+                    .dynamicFont(.systemFont(ofSize: 16, weight: .semibold))
+                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
+                    .padding(.horizontal, 16)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                ForEach(viewModel.users, id: \.id) { user in
+                    VerticalContactItemView(
+                        user: user,
+                        isSelected: {
+                            if viewModel.isMultiSelectionEnabled {
+                                return selectedUsers.contains(user)
+                            } else {
+                                return nil
+                            }
+                        }()
+                    )
+                    .background(ColorAssets.neutralLight.swiftUIColor) // TODO: TO enable tap item
+                    .onTapGesture {
+                        selectUser(user)
+                        selectUserAction?(user)
+                    }
+                }
+            }
+            .background(ColorAssets.neutralLight.swiftUIColor)
+        }
+    }
+
+    @ViewBuilder
+    private func buildHorizontalListView() -> some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(alignment: .top, spacing: 0) {
+                ForEach(viewModel.users, id: \.id) { user in
+                    HorizontalContactItemView(
+                        user: user
+                    )
+                    .background(ColorAssets.neutralLight.swiftUIColor) // TODO: TO enable tap item
+                    .onTapGesture {
+                        selectUser(user)
+                        selectUserAction?(user)
+                    }
+                }
+            }
+            .background(ColorAssets.neutralLight.swiftUIColor)
+        }
+    }
+}
+
+extension ContactListView {
     @ViewBuilder
     private func buildSelectedUsersView() -> some View {
         if viewModel.isMultiSelectionEnabled, !selectedUsers.isEmpty {
@@ -77,65 +144,36 @@ struct ContactListView<ViewModel: ContactListViewModel>: View {
             EmptyView()
         }
     }
-
-    @ViewBuilder
-    private func buildListView() -> some View {
-        ListView {
-            VStack(spacing: 0) {
-                Text(L10n.commonFriends)
-                    .dynamicFont(.systemFont(ofSize: 16, weight: .semibold))
-                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
-                    .padding(.horizontal, 16)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                ForEach(viewModel.users, id: \.id) { user in
-                    ContactItemView(
-                        user: user,
-                        isSelected: {
-                            if viewModel.isMultiSelectionEnabled {
-                                return selectedUsers.contains(user)
-                            } else {
-                                return nil
-                            }
-                        }()
-                    )
-                    .background(ColorAssets.neutralLight.swiftUIColor) // TODO: TO enable tap item
-                    .onTapGesture {
-                        selectUser(user)
-                        selectUserAction?(user)
-                    }
-                }
-            }
-            .background(ColorAssets.neutralLight.swiftUIColor)
-        }
-    }
-}
-
-extension ContactListView {
-    private func selectUser(_ user: User) {
-        if viewModel.isMultiSelectionEnabled {
-            if let user = selectedUsers.first(where: { $0.id == user.id }) {
-                selectedUsers = selectedUsers.removeAll(user)
-            } else {
-                selectedUsers.append(user)
-            }
-        } else {
-            selectedUsers = [user]
-        }
-    }
 }
 
 extension ContactListView {
     @ViewBuilder
     private func buildLoadingView() -> some View {
         LoadingView()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .frame(
+                maxWidth: .infinity,
+                maxHeight: {
+                    switch viewModel.axis {
+                    case .horizontal: return nil
+                    case .vertical: return .infinity
+                    }
+                }()
+            )
             .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
     @ViewBuilder
     private func buildEmptyView() -> some View {
         Text(L10n.contactsNotFound)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .frame(
+                maxWidth: .infinity,
+                maxHeight: {
+                    switch viewModel.axis {
+                    case .horizontal: return nil
+                    case .vertical: return .infinity
+                    }
+                }()
+            )
     }
 
     @ViewBuilder
@@ -170,25 +208,41 @@ extension ContactListView {
                 .cornerRadius(10)
             }
             .padding(16)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .frame(
+                maxWidth: .infinity,
+                maxHeight: {
+                    switch viewModel.axis {
+                    case .horizontal: return nil
+                    case .vertical: return .infinity
+                    }
+                }()
+            )
         } else {
             Text(L10n.commonErrorTitle)
                 .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .frame(
+                    maxWidth: .infinity,
+                    maxHeight: {
+                        switch viewModel.axis {
+                        case .horizontal: return nil
+                        case .vertical: return .infinity
+                        }
+                    }()
+                )
         }
     }
 }
 
-// MARK: - ContactListView_Previews
-
-struct ContactListView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContactListView(
-            viewModel: ContactListViewModel(
-                isMultiSelectionEnabled: true,
-                contactListUseCase: ContactListUseCaseImpl()
-            ),
-            selectedUsers: .constant([])
-        )
+extension ContactListView {
+    private func selectUser(_ user: User) {
+        if viewModel.isMultiSelectionEnabled {
+            if let user = selectedUsers.first(where: { $0.id == user.id }) {
+                selectedUsers = selectedUsers.removeAll(user)
+            } else {
+                selectedUsers.append(user)
+            }
+        } else {
+            selectedUsers = [user]
+        }
     }
 }

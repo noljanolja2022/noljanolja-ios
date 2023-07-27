@@ -8,9 +8,9 @@
 import SDWebImageSwiftUI
 import SwiftUI
 
-// MARK: - ContactItemView
+// MARK: - VerticalContactItemView
 
-struct ContactItemView: View {
+struct VerticalContactItemView: View {
     var user: User
     var isSelected: Bool?
 
@@ -55,25 +55,35 @@ struct ContactItemView: View {
     }
 }
 
-// MARK: - ContactItemView_Previews
+// MARK: - HorizontalContactItemView
 
-struct ContactItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContactItemView(
-            user: User(
-                id: "",
-                name: nil,
-                avatar: nil,
-                pushToken: nil,
-                phone: nil,
-                email: nil,
-                isEmailVerified: false,
-                dob: nil,
-                gender: nil,
-                preferences: nil,
-                createdAt: Date(),
-                updatedAt: Date()
+struct HorizontalContactItemView: View {
+    var user: User
+
+    var body: some View {
+        VStack(spacing: 8) {
+            WebImage(
+                url: URL(string: user.avatar),
+                context: [
+                    .imageTransformer: SDImageResizingTransformer(
+                        size: CGSize(width: 40 * 3, height: 40 * 3),
+                        scaleMode: .aspectFill
+                    )
+                ]
             )
-        )
+            .resizable()
+            .indicator(.activity)
+            .scaledToFill()
+            .frame(width: 40, height: 40)
+            .background(ColorAssets.neutralGrey.swiftUIColor)
+            .cornerRadius(14)
+
+            Text(user.name ?? "")
+                .dynamicFont(.systemFont(ofSize: 11, weight: .medium))
+                .lineLimit(2)
+                .multilineTextAlignment(.center)
+                .frame(alignment: .center)
+        }
+        .padding(16)
     }
 }

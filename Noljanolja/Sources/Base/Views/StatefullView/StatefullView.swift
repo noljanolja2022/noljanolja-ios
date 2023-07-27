@@ -82,8 +82,7 @@ struct StatefullView<ContentView: View, LoadingView: View, EmptyView: View, Erro
     var body: some View {
         ZStack {
             content
-        }
-        .overlay {
+
             let isEmpty = isEmpty() ?? false
             if isEmpty {
                 switch state {

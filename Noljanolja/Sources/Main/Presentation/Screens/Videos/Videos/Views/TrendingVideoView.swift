@@ -13,6 +13,7 @@ import SwiftUIX
 struct TrendingVideoView: View {
     var models: [Video]
     var selectAction: ((Video) -> Void)?
+    var moreAction: ((Video) -> Void)?
 
     var body: some View {
         buildBodyView()
@@ -34,8 +35,13 @@ struct TrendingVideoView: View {
         LazyVStack(spacing: 24) {
             ForEach(models.indices, id: \.self) { index in
                 let model = models[index]
-                TrendingVideoItemView(model: model)
-                    .onTapGesture { selectAction?(model) }
+                CommonVideoItemView(
+                    model: model,
+                    action: {
+                        moreAction?(model)
+                    }
+                )
+                .onTapGesture { selectAction?(model) }
             }
         }
         .padding(.horizontal, 16)

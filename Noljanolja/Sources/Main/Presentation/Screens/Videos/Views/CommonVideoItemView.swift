@@ -1,5 +1,5 @@
 //
-//  TrendingVideoItemView.swift
+//  CommonVideoItemView.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 21/04/2023.
@@ -8,8 +8,9 @@
 import SDWebImageSwiftUI
 import SwiftUI
 
-struct TrendingVideoItemView: View {
+struct CommonVideoItemView: View {
     var model: Video
+    var action: (() -> Void)?
 
     var body: some View {
         buildBodyView()
@@ -44,6 +45,13 @@ struct TrendingVideoItemView: View {
     }
 
     private func buildContentView() -> some View {
+        HStack(alignment: .top, spacing: 8) {
+            buildMainView()
+            buildActionView()
+        }
+    }
+
+    private func buildMainView() -> some View {
         VStack(spacing: 2) {
             Text(model.title ?? "")
                 .lineLimit(2)
@@ -76,5 +84,20 @@ struct TrendingVideoItemView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
         }
+    }
+
+    private func buildActionView() -> some View {
+        Button(
+            action: {
+                action?()
+            },
+            label: {
+                ImageAssets.icMore.swiftUIImage
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            }
+        )
     }
 }

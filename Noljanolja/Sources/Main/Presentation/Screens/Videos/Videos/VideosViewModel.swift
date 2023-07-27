@@ -24,6 +24,7 @@ final class VideosViewModel: ViewModel {
     // MARK: Navigations
 
     @Published var navigationType: VideosNavigationType?
+    @Published var fullScreenCoverType: VideosFullScreenCoverType?
 
     // MARK: Action
 

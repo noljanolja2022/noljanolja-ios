@@ -8,6 +8,7 @@
 
 import Combine
 import Foundation
+import SwiftUI
 
 // MARK: - ContactListViewModelDelegate
 
@@ -24,8 +25,6 @@ final class ContactListViewModel: ViewModel {
 
     @Published var viewState = ViewState.loading
 
-    @Published var isCreateConversationEnabled = false
-
     // MARK: Action
 
     let requestPermissionSubject = PassthroughSubject<Void, Never>()
@@ -33,6 +32,8 @@ final class ContactListViewModel: ViewModel {
     // MARK: Dependencies
 
     var isMultiSelectionEnabled: Bool
+    var isSearchHidden: Bool
+    var axis: Axis
     private let contactService: ContactServiceType
     private let contactListUseCase: ContactListUseCase
     private weak var delegate: ContactListViewModelDelegate?
@@ -46,10 +47,14 @@ final class ContactListViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(isMultiSelectionEnabled: Bool,
+         isSearchHidden: Bool = false,
+         axis: Axis = .vertical,
          contactService: ContactServiceType = ContactService.default,
          contactListUseCase: ContactListUseCase,
          delegate: ContactListViewModelDelegate? = nil) {
         self.isMultiSelectionEnabled = isMultiSelectionEnabled
+        self.isSearchHidden = isSearchHidden
+        self.axis = axis
         self.contactService = contactService
         self.contactListUseCase = contactListUseCase
         self.delegate = delegate

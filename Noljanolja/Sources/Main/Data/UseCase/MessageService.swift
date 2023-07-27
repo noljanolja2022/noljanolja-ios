@@ -19,6 +19,8 @@ protocol MessageServiceType {
 
     func sendMessage(request: SendMessageRequest) -> AnyPublisher<Message, Error>
 
+    func shareMessage(request: ShareMessageRequest, users: [User]) -> AnyPublisher<[Message], Error>
+
     func forwardMessage(message: Message, users: [User]) -> AnyPublisher<[Message], Error>
 
     func deleteMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error>
@@ -151,6 +153,59 @@ final class MessageService: MessageServiceType {
             .receive(on: DispatchQueue.main) // NOTED: Do on serial queue to wait write then read
             .handleEvents(receiveOutput: { [weak self] in
                 self?.messageStore.saveMessages([$0])
+            })
+            .eraseToAnyPublisher()
+    }
+
+    func shareMessage(request: ShareMessageRequest, users: [User]) -> AnyPublisher<[Message], Error> {
+        var message: String? {
+            switch request.type {
+            case .plaintext:
+                return request.message
+            case .sticker:
+                if let sticker = request.sticker {
+                    return "\(sticker.0.id)/\(sticker.1.imageFile)"
+                } else {
+                    return nil
+                }
+            case .photo, .eventUpdated, .eventJoined, .eventLeft, .unknown:
+                return nil
+            }
+        }
+
+        let attachmentsPublisher = buildAttachmentTrigger(request.attachments)
+
+        let conversationPublishers = users
+            .map { user in
+                self.conversationService.createConversation(
+                    type: .single,
+                    participants: [user]
+                )
+            }
+        let conversationsPublisher = Publishers.MergeMany(conversationPublishers).collect()
+
+        return Publishers.Zip(attachmentsPublisher, conversationsPublisher)
+            .map { attachments, conversations in
+                ShareMessageParam(
+                    type: request.type,
+                    message: message,
+                    attachments: attachments,
+                    shareMessageID: request.shareMessage?.id,
+                    replyToMessageID: request.replyToMessage?.id,
+                    shareVideoID: request.shareVideo?.id,
+                    conversationIDs: conversations.map { $0.id }
+                )
+            }
+            .flatMapLatest { [weak self] param -> AnyPublisher<[Message], Error> in
+                guard let self else {
+                    return Empty<[Message], Error>().eraseToAnyPublisher()
+                }
+                return self.messageAPI
+                    .shareMessage(param: param)
+            }
+            .receive(on: DispatchQueue.main) // NOTED: Do on serial queue to wait write then read
+            .handleEvents(receiveOutput: { [weak self] in
+                self?.messageStore.saveMessages($0)
             })
             .eraseToAnyPublisher()
     }
