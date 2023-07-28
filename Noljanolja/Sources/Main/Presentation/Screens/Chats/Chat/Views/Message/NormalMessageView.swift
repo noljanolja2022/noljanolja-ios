@@ -103,6 +103,8 @@ struct NormalMessageView: View {
                         action?(.openImages(model.message))
                     case let .reaction(reactionIcon):
                         action?(.reaction(model.message, reactionIcon))
+                    case let .openVideoDetail(model):
+                        action?(.openVideoDetail(model))
                     case let .openMessageQuickReactionDetail(geometryProxy):
                         action?(.openMessageQuickReactionDetail(model.message, geometryProxy))
                     case let .openMessageActionDetail(geometryProxy):

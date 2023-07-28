@@ -66,6 +66,20 @@ struct MessageContentView: View {
                     }
                 }
             )
+        case let .video(model):
+            VideoMessageContentView(
+                model: model,
+                action: {
+                    switch $0 {
+                    case let .openVideoDetail(model):
+                        action?(.openVideoDetail(model))
+                    case let .openMessageQuickReactionDetail(geometryProxy):
+                        action?(.openMessageQuickReactionDetail(geometryProxy))
+                    case let .openMessageActionDetail(geometryProxy):
+                        action?(.openMessageActionDetail(geometryProxy))
+                    }
+                }
+            )
         case .none:
             EmptyView()
         }

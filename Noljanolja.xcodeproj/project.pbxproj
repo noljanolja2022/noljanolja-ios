@@ -468,6 +468,8 @@
 		CFF530A82A74101C00908DEB /* StorableVideoCommenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF530A72A74101C00908DEB /* StorableVideoCommenter.swift */; };
 		CFF530AA2A74120200908DEB /* StorableVideoChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF530A92A74120200908DEB /* StorableVideoChannel.swift */; };
 		CFF530AC2A7412A100908DEB /* StorableVideoCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF530AB2A7412A100908DEB /* StorableVideoCategory.swift */; };
+		CFF530AE2A741F8900908DEB /* VideoMessageContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF530AD2A741F8900908DEB /* VideoMessageContentModel.swift */; };
+		CFF530B02A74218B00908DEB /* VideoMessageContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF530AF2A74218B00908DEB /* VideoMessageContentView.swift */; };
 		CFF8182E2A3CB2FA009CD057 /* PaginationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF8182D2A3CB2FA009CD057 /* PaginationResponse.swift */; };
 		CFF818322A3CD6D5009CD057 /* MemberInfoUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF818312A3CD6D5009CD057 /* MemberInfoUseCases.swift */; };
 		CFF818352A3CD868009CD057 /* CacheMemberInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF818342A3CD868009CD057 /* CacheMemberInfoRepository.swift */; };
@@ -976,6 +978,8 @@
 		CFF530A72A74101C00908DEB /* StorableVideoCommenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorableVideoCommenter.swift; sourceTree = "<group>"; };
 		CFF530A92A74120200908DEB /* StorableVideoChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorableVideoChannel.swift; sourceTree = "<group>"; };
 		CFF530AB2A7412A100908DEB /* StorableVideoCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorableVideoCategory.swift; sourceTree = "<group>"; };
+		CFF530AD2A741F8900908DEB /* VideoMessageContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoMessageContentModel.swift; sourceTree = "<group>"; };
+		CFF530AF2A74218B00908DEB /* VideoMessageContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoMessageContentView.swift; sourceTree = "<group>"; };
 		CFF8182D2A3CB2FA009CD057 /* PaginationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationResponse.swift; sourceTree = "<group>"; };
 		CFF818312A3CD6D5009CD057 /* MemberInfoUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberInfoUseCases.swift; sourceTree = "<group>"; };
 		CFF818342A3CD868009CD057 /* CacheMemberInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheMemberInfoRepository.swift; sourceTree = "<group>"; };
@@ -2156,6 +2160,7 @@
 				CF53D49F2A6AF548009B3A69 /* StickerMessageContentModel.swift */,
 				CF53D4A02A6AF548009B3A69 /* PhotoMessageContentModel.swift */,
 				CF53D4A12A6AF548009B3A69 /* TextMessageContentModel.swift */,
+				CFF530AD2A741F8900908DEB /* VideoMessageContentModel.swift */,
 			);
 			path = MessageContent;
 			sourceTree = "<group>";
@@ -2216,6 +2221,7 @@
 			isa = PBXGroup;
 			children = (
 				CF53D4B52A6AF548009B3A69 /* PhotoMessageContentView.swift */,
+				CFF530AF2A74218B00908DEB /* VideoMessageContentView.swift */,
 				CF53D4B62A6AF548009B3A69 /* StickerMessageContentView.swift */,
 				CF53D4B72A6AF548009B3A69 /* PhotoMessageContentItemView.swift */,
 				CF53D4B82A6AF548009B3A69 /* MessageContentView.swift */,
@@ -3689,12 +3695,14 @@
 				CF53D5A82A6AF548009B3A69 /* TransactionDashboardSectionModel.swift in Sources */,
 				CFA3304D29BEB674008D7449 /* SearchView.swift in Sources */,
 				CFB0A82B29F1BB5800298546 /* VideoRepository.swift in Sources */,
+				CFF530B02A74218B00908DEB /* VideoMessageContentView.swift in Sources */,
 				CF53D59B2A6AF548009B3A69 /* HighlightVideoItemView.swift in Sources */,
 				CF53D5E92A6AF548009B3A69 /* ChatAlertActionType.swift in Sources */,
 				CF53D6342A6AF548009B3A69 /* ImageEditorView.swift in Sources */,
 				CF53D5642A6AF548009B3A69 /* SourceLicenseViewModel.swift in Sources */,
 				CFF530AC2A7412A100908DEB /* StorableVideoCategory.swift in Sources */,
 				CFF530AA2A74120200908DEB /* StorableVideoChannel.swift in Sources */,
+				CFF530AE2A741F8900908DEB /* VideoMessageContentModel.swift in Sources */,
 				CF53D6352A6AF548009B3A69 /* ChatInputExpandViewModel.swift in Sources */,
 				CF53D63D2A6AF548009B3A69 /* ChatStickerInputView.swift in Sources */,
 				CF53D5CC2A6AF548009B3A69 /* ForwardMessageContactListView.swift in Sources */,

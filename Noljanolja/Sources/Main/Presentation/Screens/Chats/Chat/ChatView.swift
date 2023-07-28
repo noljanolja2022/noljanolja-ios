@@ -242,6 +242,12 @@ extension ChatView {
             ForwardMessageContactListView(
                 viewModel: ForwardMessageContactListViewModel(message: message)
             )
+        case let .openVideoDetail(model):
+            VideoDetailView(
+                viewModel: VideoDetailViewModel(
+                    videoId: model.id
+                )
+            )
         }
     }
 

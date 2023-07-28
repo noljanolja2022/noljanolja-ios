@@ -50,6 +50,7 @@ final class ChatViewModel: ViewModel {
     let loadMoreDataAction = PassthroughSubject<Int, Never>()
     let openChatSettingSubject = PassthroughSubject<Void, Never>()
     let reactionAction = PassthroughSubject<(Message, ReactIcon), Never>()
+    let openDetailVideoAction = PassthroughSubject<Video?, Never>()
     let scrollToChatItemAction = PassthroughSubject<(Int, UnitPoint), Never>()
     let deleteMessageAction = PassthroughSubject<Message, Never>()
 
@@ -459,6 +460,8 @@ final class ChatViewModel: ViewModel {
                     self.navigationType = .openImages(message)
                 case let .reaction(message, reactionIcon):
                     reactionAction.send((message, reactionIcon))
+                case let .openVideoDetail(model):
+                    openDetailVideoAction.send(model)
                 case let .openMessageQuickReactionDetail(message, geometryProxy):
                     guard let geometryProxy else { return }
                     dismissKeyboard {
@@ -498,6 +501,14 @@ final class ChatViewModel: ViewModel {
             }
             .receive(on: DispatchQueue.main)
             .sink { _ in }
+            .store(in: &cancellables)
+
+        openDetailVideoAction
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] model in
+                guard let model else { return }
+                self?.navigationType = .openVideoDetail(model)
+            }
             .store(in: &cancellables)
 
         deleteMessageAction

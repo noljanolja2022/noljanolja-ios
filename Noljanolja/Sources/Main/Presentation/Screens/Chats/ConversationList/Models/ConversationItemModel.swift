@@ -32,6 +32,14 @@ struct ConversationItemModel: Equatable {
                 return L10n.conversationCreate(creatorName)
             }
 
+            guard lastMessage.shareVideo == nil else {
+                if lastMessage.sender.id == currentUser.id {
+                    return "You sent a video"
+                } else {
+                    return "You received a video"
+                }
+            }
+
             switch lastMessage.type {
             case .plaintext:
                 return lastMessage.message

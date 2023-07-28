@@ -16,6 +16,7 @@ extension NormalMessageModel {
         case plaintext(TextMessageContentModel)
         case photo(PhotoMessageContentModel)
         case sticker(StickerMessageContentModel)
+        case video(VideoMessageContentModel)
     }
 
     struct PositionType: OptionSet {
@@ -37,6 +38,7 @@ extension NormalMessageModel {
         case openURL(String)
         case openImages(Message)
         case reaction(Message, ReactIcon)
+        case openVideoDetail(Video?)
         case openMessageQuickReactionDetail(Message, GeometryProxy?)
         case openMessageActionDetail(NormalMessageModel, GeometryProxy?)
     }
@@ -45,6 +47,7 @@ extension NormalMessageModel {
         case openURL(String)
         case openImages
         case reaction(ReactIcon)
+        case openVideoDetail(Video?)
         case openMessageQuickReactionDetail(GeometryProxy?)
         case openMessageActionDetail(GeometryProxy?)
     }
@@ -118,37 +121,47 @@ struct NormalMessageModel: Equatable {
                 )
             }
         }()
-        switch message.type {
-        case .plaintext:
-            self.content = .plaintext(
-                TextMessageContentModel(
-                    currentUser: currentUser,
-                    conversation: conversation,
+
+        if let shareVideo = message.shareVideo {
+            self.content = .video(
+                VideoMessageContentModel(
                     message: message,
-                    status: status,
                     background: background
                 )
             )
-        case .photo:
-            self.content = .photo(
-                PhotoMessageContentModel(
-                    currentUser: currentUser,
-                    message: message,
-                    status: status,
-                    background: background
+        } else {
+            switch message.type {
+            case .plaintext:
+                self.content = .plaintext(
+                    TextMessageContentModel(
+                        currentUser: currentUser,
+                        conversation: conversation,
+                        message: message,
+                        status: status,
+                        background: background
+                    )
                 )
-            )
-        case .sticker:
-            self.content = .sticker(
-                StickerMessageContentModel(
-                    currentUser: currentUser,
-                    message: message,
-                    status: status,
-                    background: background
+            case .photo:
+                self.content = .photo(
+                    PhotoMessageContentModel(
+                        currentUser: currentUser,
+                        message: message,
+                        status: status,
+                        background: background
+                    )
                 )
-            )
-        case .eventUpdated, .eventJoined, .eventLeft, .unknown:
-            return nil
+            case .sticker:
+                self.content = .sticker(
+                    StickerMessageContentModel(
+                        currentUser: currentUser,
+                        message: message,
+                        status: status,
+                        background: background
+                    )
+                )
+            case .eventUpdated, .eventJoined, .eventLeft, .unknown:
+                return nil
+            }
         }
         self.reactionsModel = MessageReactionsModel(
             currentUser: currentUser,
