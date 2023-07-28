@@ -79,7 +79,16 @@ extension VideoActionContainerView {
             BottomSheet {
                 ShareVideoView(
                     viewModel: ShareVideoViewModel(
+                        delegate: viewModel
+                    )
+                )
+            }
+        case let .shareDetail(model):
+            BottomSheet {
+                ShareVideoDetailView(
+                    viewModel: ShareVideoDetailViewModel(
                         video: viewModel.video,
+                        user: model,
                         delegate: viewModel
                     )
                 )

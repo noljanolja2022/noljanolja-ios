@@ -12,4 +12,5 @@ import Foundation
 enum VideoActionContainerFullScreenCoverType: Equatable {
     case more
     case share
+    case shareDetail(User)
 }

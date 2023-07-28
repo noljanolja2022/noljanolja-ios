@@ -1,8 +1,8 @@
 //
-//  ShareVideoViewModel.swift
+//  ShareVideoDetailViewModel.swift
 //  Noljanolja
 //
-//  Created by Nguyen The Trinh on 28/07/2023.
+//  Created by Nguyen The Trinh on 29/07/2023.
 //
 //
 
@@ -10,15 +10,15 @@ import _SwiftUINavigationState
 import Combine
 import Foundation
 
-// MARK: - ShareVideoViewModelDelegate
+// MARK: - ShareVideoDetailViewModelDelegate
 
-protocol ShareVideoViewModelDelegate: AnyObject {
+protocol ShareVideoDetailViewModelDelegate: AnyObject {
     func didShare()
 }
 
-// MARK: - ShareVideoViewModel
+// MARK: - ShareVideoDetailViewModel
 
-final class ShareVideoViewModel: ViewModel {
+final class ShareVideoDetailViewModel: ViewModel {
     // MARK: State
 
     @Published var isProgressHUDShowing = false
@@ -26,22 +26,25 @@ final class ShareVideoViewModel: ViewModel {
 
     // MARK: Action
 
-    let action = PassthroughSubject<User, Never>()
+    let action = PassthroughSubject<Void, Never>()
 
     // MARK: Dependencies
 
-    private let video: Video
+    let video: Video
+    let user: User
     private let messageService: MessageServiceType
-    private weak var delegate: ShareVideoViewModelDelegate?
+    private weak var delegate: ShareVideoDetailViewModelDelegate?
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
     init(video: Video,
+         user: User,
          messageService: MessageServiceType = MessageService.default,
-         delegate: ShareVideoViewModelDelegate? = nil) {
+         delegate: ShareVideoDetailViewModelDelegate? = nil) {
         self.video = video
+        self.user = user
         self.messageService = messageService
         self.delegate = delegate
         super.init()
@@ -55,7 +58,7 @@ final class ShareVideoViewModel: ViewModel {
             .handleEvents(receiveOutput: { [weak self] _ in
                 self?.isProgressHUDShowing = true
             })
-            .flatMapLatestToResult { [weak self] user -> AnyPublisher<[Message], Error> in
+            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<[Message], Error> in
                 guard let self else {
                     return Fail(error: CommonError.captureSelfNotFound).eraseToAnyPublisher()
                 }

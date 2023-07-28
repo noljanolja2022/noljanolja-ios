@@ -72,6 +72,16 @@ extension VideoActionContainerViewModel: VideoActionViewModelDelegate {
 // MARK: ShareVideoViewModelDelegate
 
 extension VideoActionContainerViewModel: ShareVideoViewModelDelegate {
+    func openShareDetail(_ user: User) {
+        withoutAnimation {
+            fullScreenCoverType = .shareDetail(user)
+        }
+    }
+}
+
+// MARK: ShareVideoDetailViewModelDelegate
+
+extension VideoActionContainerViewModel: ShareVideoDetailViewModelDelegate {
     func didShare() {
         closeAction.send()
     }

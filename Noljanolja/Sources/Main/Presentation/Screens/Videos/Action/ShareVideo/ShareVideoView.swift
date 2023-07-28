@@ -17,8 +17,6 @@ struct ShareVideoView<ViewModel: ShareVideoViewModel>: View {
 
     // MARK: State
 
-    @StateObject private var progressHUBState = ProgressHUBState()
-
     var body: some View {
         buildBodyView()
     }
@@ -28,14 +26,6 @@ struct ShareVideoView<ViewModel: ShareVideoViewModel>: View {
             .navigationBarTitle("", displayMode: .inline)
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
-            .progressHUB(isActive: $progressHUBState.isLoading)
-            .environmentObject(progressHUBState)
-            .onChange(of: viewModel.isProgressHUDShowing) {
-                progressHUBState.isLoading = $0
-            }
-            .alert(item: $viewModel.alertState) {
-                Alert($0) { _ in }
-            }
     }
 
     private func buildContentView() -> some View {
