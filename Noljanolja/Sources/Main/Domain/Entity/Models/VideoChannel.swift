@@ -24,4 +24,10 @@ struct VideoChannel: Equatable, Codable {
         self.title = try container.decodeIfPresent(String.self, forKey: .title)
         self.thumbnail = try container.decodeIfPresent(String.self, forKey: .thumbnail)
     }
+
+    init(id: String, title: String?, thumbnail: String?) {
+        self.id = id
+        self.title = title
+        self.thumbnail = thumbnail
+    }
 }

@@ -21,4 +21,9 @@ struct VideoCategory: Equatable, Codable {
         self.id = try container.decode(String.self, forKey: .id)
         self.title = try container.decodeIfPresent(String.self, forKey: .title)
     }
+
+    init(id: String, title: String?) {
+        self.id = id
+        self.title = title
+    }
 }

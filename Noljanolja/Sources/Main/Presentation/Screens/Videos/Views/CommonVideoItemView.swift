@@ -72,7 +72,7 @@ struct CommonVideoItemView: View {
             let description = [
                 model.channel?.title,
                 "\(model.viewCount.relativeFormatted()) Views",
-                model.publishedAt.relative()
+                model.publishedAt?.relative()
             ]
             .compactMap { $0 }
             .filter { !$0.isEmpty }

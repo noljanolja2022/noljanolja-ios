@@ -53,6 +53,7 @@ struct Message: Equatable, Decodable {
     let reactions: [MessageReaction]
     let createdAt: Date
     let isDeleted: Bool
+    let shareVideo: Video?
     var shareMessage: Message? {
         shareMessages?.compactMap { $0 }.first
     }
@@ -78,6 +79,7 @@ struct Message: Equatable, Decodable {
         case reactions
         case createdAt
         case isDeleted
+        case shareVideo
         case shareMessage
         case replyToMessage
     }
@@ -95,6 +97,7 @@ struct Message: Equatable, Decodable {
          reactions: [MessageReaction],
          createdAt: Date,
          isDeleted: Bool,
+         shareVideo: Video?,
          shareMessage: Message?,
          replyToMessage: Message?) {
         self.id = id
@@ -110,6 +113,7 @@ struct Message: Equatable, Decodable {
         self.reactions = reactions
         self.createdAt = createdAt
         self.isDeleted = isDeleted
+        self.shareVideo = shareVideo
         self.shareMessages = [shareMessage]
         self.replyToMessages = [replyToMessage]
     }
@@ -142,6 +146,7 @@ struct Message: Equatable, Decodable {
         }
 
         self.isDeleted = try container.decodeIfPresent(Bool.self, forKey: .isDeleted) ?? false
+        self.shareVideo = try container.decodeIfPresent(Video.self, forKey: .shareVideo)
         self.shareMessages = [try container.decodeIfPresent(Message.self, forKey: .shareMessage)]
         self.replyToMessages = [try container.decodeIfPresent(Message.self, forKey: .replyToMessage)]
     }
