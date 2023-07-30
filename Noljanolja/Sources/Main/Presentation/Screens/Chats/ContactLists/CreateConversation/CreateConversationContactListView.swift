@@ -17,10 +17,6 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
 
     @StateObject var viewModel: ViewModel
 
-    // MARK: State
-
-    @EnvironmentObject private var progressHUBState: ProgressHUBState
-    
     @State private var selectedUsers = [User]()
 
     private var isCreateConversationEnabled: Bool {
@@ -67,9 +63,7 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
             }
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
-            .onChange(of: viewModel.isProgressHUDShowing) {
-                progressHUBState.isLoading = $0
-            }
+            .isProgressHUBVisible($viewModel.isProgressHUDShowing)
     }
 
     @ViewBuilder

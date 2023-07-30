@@ -20,7 +20,6 @@ struct CouponDetailView<ViewModel: CouponDetailViewModel>: View {
     // MARK: State
 
     @Environment(\.presentationMode) private var presentationMode
-    @EnvironmentObject private var progressHUBState: ProgressHUBState
 
     var body: some View {
         buildBodyView()
@@ -31,9 +30,7 @@ struct CouponDetailView<ViewModel: CouponDetailViewModel>: View {
             .navigationBarTitle("", displayMode: .inline)
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
-            .onChange(of: viewModel.isProgressHUDShowing) {
-                progressHUBState.isLoading = $0
-            }
+            .isProgressHUBVisible($viewModel.isProgressHUDShowing)
             .alert(item: $viewModel.alertState) {
                 Alert($0) { action in
                     switch action {

@@ -20,7 +20,6 @@ struct AuthView<ViewModel: AuthViewModel>: View {
     // MARK: State
 
     @StateObject private var keyboard = Keyboard.main
-    @EnvironmentObject private var progressHUBState: ProgressHUBState
 
     var body: some View {
         buildBodyView()
@@ -38,9 +37,7 @@ struct AuthView<ViewModel: AuthViewModel>: View {
         .onDisappear {
             viewModel.isAppearSubject.send(false)
         }
-        .onChange(of: viewModel.isProgressHUDShowing) {
-            progressHUBState.isLoading = $0
-        }
+        .isProgressHUBVisible($viewModel.isProgressHUDShowing)
         .alert(item: $viewModel.alertState) {
             Alert($0) { action in
                 guard let action, action else { return }

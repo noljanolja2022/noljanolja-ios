@@ -20,7 +20,6 @@ struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
 
     @Environment(\.presentationMode) private var presentationMode
 
-    @EnvironmentObject private var progressHUBState: ProgressHUBState
     @StateObject private var keyboard = Keyboard.main
 
     @State private var isFocused = false
@@ -38,9 +37,7 @@ struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
             .onDisappear {
                 viewModel.isAppearSubject.send(false)
             }
-            .onChange(of: viewModel.isProgressHUDShowing) {
-                progressHUBState.isLoading = $0
-            }
+            .isProgressHUBVisible($viewModel.isProgressHUDShowing)
             .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
     }
 

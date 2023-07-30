@@ -20,7 +20,6 @@ struct ImageDetailView<ViewModel: ImageDetailViewModel>: View {
     // MARK: State
     
     @Environment(\.presentationMode) private var presentationMode
-    @StateObject private var progressHUBState = ProgressHUBState()
     @State private var isMoreMenuVisible = false
     
     var body: some View {
@@ -33,11 +32,7 @@ struct ImageDetailView<ViewModel: ImageDetailViewModel>: View {
             .toolbar { buildToolBarContent() }
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
-            .progressHUB(isActive: $progressHUBState.isLoading)
-            .environmentObject(progressHUBState)
-            .onChange(of: viewModel.isProgressHUDShowing) {
-                progressHUBState.isLoading = $0
-            }
+            .isProgressHUBVisible($viewModel.isProgressHUDShowing)
             .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
             .fullScreenCover(
                 unwrapping: $viewModel.fullScreenCoverType,

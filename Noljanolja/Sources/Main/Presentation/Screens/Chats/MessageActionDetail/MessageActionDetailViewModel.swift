@@ -89,6 +89,7 @@ final class MessageActionDetailViewModel: ViewModel {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 guard let self else { return }
+                self.isProgressHUDShowing = false
                 switch result {
                 case let .success(model):
                     self.reactionIcons = model

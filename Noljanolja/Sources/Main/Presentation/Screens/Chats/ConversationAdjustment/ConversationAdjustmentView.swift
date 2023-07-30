@@ -22,8 +22,6 @@ struct ConversationAdjustment<ViewModel: ConversationAdjustmentModel>: View {
 
     @Environment(\.presentationMode) private var presentationMode
 
-    @EnvironmentObject private var progressHUBState: ProgressHUBState
-
     @StateObject private var keyboard = Keyboard.main
 
     var body: some View {
@@ -35,9 +33,7 @@ struct ConversationAdjustment<ViewModel: ConversationAdjustmentModel>: View {
             .navigationBarTitle("", displayMode: .inline)
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
-            .onChange(of: viewModel.isProgressHUDShowing) {
-                progressHUBState.isLoading = $0
-            }
+            .isProgressHUBVisible($viewModel.isProgressHUDShowing)
             .alert(item: $viewModel.alertState) {
                 Alert($0) { _ in }
             }

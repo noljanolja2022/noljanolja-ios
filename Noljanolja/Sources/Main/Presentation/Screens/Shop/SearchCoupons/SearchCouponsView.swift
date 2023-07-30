@@ -63,7 +63,6 @@ struct SearchCouponsView<ViewModel: SearchCouponsViewModel>: View {
     // MARK: State
 
     @Environment(\.presentationMode) private var presentationMode
-    @EnvironmentObject private var progressHUBState: ProgressHUBState
 
     var body: some View {
         buildBodyView()
@@ -71,9 +70,7 @@ struct SearchCouponsView<ViewModel: SearchCouponsViewModel>: View {
             .hideNavigationBar()
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
-            .onChange(of: viewModel.isProgressHUDShowing) {
-                progressHUBState.isLoading = $0
-            }
+            .isProgressHUBVisible($viewModel.isProgressHUDShowing)
             .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
     }
 

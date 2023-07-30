@@ -18,10 +18,6 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
     // MARK: Dependencies
     
     @StateObject var viewModel: ViewModel
-    
-    // MARK: State
-
-    @EnvironmentObject private var progressHUBState: ProgressHUBState
 
     @StateObject private var keyboard = Keyboard.main
 
@@ -45,9 +41,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
             }
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
-            .onChange(of: viewModel.isProgressHUDShowing) {
-                progressHUBState.isLoading = $0
-            }
+            .isProgressHUBVisible($viewModel.isProgressHUDShowing)
             .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
             .actionSheet(item: $viewModel.actionSheetType) {
                 buildActionSheetDestinationView($0)

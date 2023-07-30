@@ -19,7 +19,6 @@ struct ImageEditorResultView<ViewModel: ImageEditorResultViewModel>: View {
     // MARK: State
 
     @Environment(\.presentationMode) private var presentationMode
-    @StateObject private var progressHUBState = ProgressHUBState()
 
     var body: some View {
         buildBodyView()
@@ -42,8 +41,6 @@ struct ImageEditorResultView<ViewModel: ImageEditorResultViewModel>: View {
             }
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
-            .progressHUB(isActive: $progressHUBState.isLoading)
-            .environmentObject(progressHUBState)
             .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
     }
 

@@ -15,10 +15,6 @@ struct MyCouponsView<ViewModel: MyCouponsViewModel>: View {
 
     @StateObject var viewModel: ViewModel
 
-    // MARK: State
-
-    @EnvironmentObject private var progressHUBState: ProgressHUBState
-
     var body: some View {
         buildBodyView()
     }
@@ -35,9 +31,7 @@ struct MyCouponsView<ViewModel: MyCouponsViewModel>: View {
             }
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
-            .onChange(of: viewModel.isProgressHUDShowing) {
-                progressHUBState.isLoading = $0
-            }
+            .isProgressHUBVisible($viewModel.isProgressHUDShowing)
             .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
     }
 

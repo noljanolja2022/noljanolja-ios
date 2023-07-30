@@ -19,7 +19,6 @@ struct VideoDetailInputView<ViewModel: VideoDetailInputViewModel>: View {
 
     // MARK: State
     
-    @EnvironmentObject private var progressHUBState: ProgressHUBState
     @StateObject private var keyboard = Keyboard.main
     @State private var text = ""
 
@@ -34,9 +33,7 @@ struct VideoDetailInputView<ViewModel: VideoDetailInputViewModel>: View {
             .navigationBarTitle("", displayMode: .inline)
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
-            .onChange(of: viewModel.isProgressHUDShowing) {
-                progressHUBState.isLoading = $0
-            }
+            .isProgressHUBVisible($viewModel.isProgressHUDShowing)
     }
 
     private func buildContentView() -> some View {

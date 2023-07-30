@@ -60,6 +60,15 @@ final class AuthViewModel: ViewModel {
     }
 
     private func configure() {
+        isAppearSubject
+            .filter { !$0 }
+            .dropFirst()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.isProgressHUDShowing = false
+            }
+            .store(in: &cancellables)
+
         sendVerificationCodeAction
             .compactMap { countryCode, phoneNumber in phoneNumber.flatMap { (countryCode, $0) } }
             .receive(on: DispatchQueue.main)

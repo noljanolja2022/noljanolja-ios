@@ -15,10 +15,6 @@ struct MessageImagesView<ViewModel: MessageImagesViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
-    
-    // MARK: State
-    
-    @StateObject private var progressHUBState = ProgressHUBState()
 
     var body: some View {
         buildBodyView()
@@ -36,8 +32,7 @@ struct MessageImagesView<ViewModel: MessageImagesViewModel>: View {
             }
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
-            .progressHUB(isActive: $progressHUBState.isLoading)
-            .environmentObject(progressHUBState)
+            .isProgressHUBVisible($viewModel.isProgressHUDShowing)
             .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
             .fullScreenCover(
                 unwrapping: $viewModel.fullScreenCoverType,

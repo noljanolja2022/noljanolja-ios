@@ -17,10 +17,6 @@ struct MainView<ViewModel: MainViewModel>: View {
 
     @StateObject var viewModel: ViewModel
 
-    // MARK: State
-
-    @EnvironmentObject private var progressHUBState: ProgressHUBState
-
     // MARK: Private
 
     private let toolBarActionSubject = PassthroughSubject<MainToolBarActionType?, Never>()
@@ -36,9 +32,7 @@ struct MainView<ViewModel: MainViewModel>: View {
             .navigationBarHidden(viewModel.selectedTab.isNavigationBarHidden)
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
-            .onChange(of: viewModel.isProgressHUDShowing) {
-                progressHUBState.isLoading = $0
-            }
+            .isProgressHUBVisible($viewModel.isProgressHUDShowing)
             .fullScreenCover(
                 unwrapping: $viewModel.fullScreenCoverType,
                 content: {

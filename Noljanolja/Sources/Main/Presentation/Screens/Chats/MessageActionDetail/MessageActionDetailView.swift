@@ -18,7 +18,6 @@ struct MessageActionDetailView<ViewModel: MessageActionDetailViewModel>: View {
     // MARK: State
 
     @Environment(\.presentationMode) private var presentationMode
-    @StateObject private var progressHUBState = ProgressHUBState()
 
     var body: some View {
         buildBodyView()
@@ -28,8 +27,7 @@ struct MessageActionDetailView<ViewModel: MessageActionDetailViewModel>: View {
         buildContentView()
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
-            .progressHUB(isActive: $progressHUBState.isLoading)
-            .environmentObject(progressHUBState)
+            .isProgressHUBVisible($viewModel.isProgressHUDShowing)
             .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
             .onReceive(viewModel.closeAction) {
                 presentationMode.wrappedValue.dismiss()

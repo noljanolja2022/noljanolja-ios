@@ -16,10 +16,6 @@ struct RootView<ViewModel: RootViewModel>: View {
     
     @StateObject var viewModel: ViewModel
 
-    // MARK: State
-
-    @StateObject private var progressHUBState = ProgressHUBState()
-
     var body: some View {
         buildBodyView()
     }
@@ -28,8 +24,6 @@ struct RootView<ViewModel: RootViewModel>: View {
         buildContentView()
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
-            .progressHUB(isActive: $progressHUBState.isLoading)
-            .environmentObject(progressHUBState)
     }
 
     @ViewBuilder

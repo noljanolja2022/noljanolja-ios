@@ -17,10 +17,6 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
     @StateObject var viewModel: ViewModel
     let toolBarAction: AnyPublisher<MainToolBarActionType?, Never>
 
-    // MARK: State
-
-    @EnvironmentObject private var progressHUBState: ProgressHUBState
-
     var body: some View {
         buildBodyView()
     }
@@ -34,9 +30,7 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
         .clipped()
         .onAppear { viewModel.isAppearSubject.send(true) }
         .onDisappear { viewModel.isAppearSubject.send(false) }
-        .onChange(of: viewModel.isProgressHUDShowing) {
-            progressHUBState.isLoading = $0
-        }
+        .isProgressHUBVisible($viewModel.isProgressHUDShowing)
         .onReceive(toolBarAction) {
             switch $0 {
             case .createConversation:

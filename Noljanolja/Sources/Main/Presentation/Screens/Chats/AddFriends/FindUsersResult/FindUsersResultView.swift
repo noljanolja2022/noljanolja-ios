@@ -15,10 +15,6 @@ struct FindUsersResultView<ViewModel: FindUsersResultViewModel>: View {
 
     @StateObject var viewModel: ViewModel
 
-    // MARK: State
-
-    @EnvironmentObject private var progressHUBState: ProgressHUBState
-
     var body: some View {
         buildBodyView()
             .navigationBarTitle("", displayMode: .inline)
@@ -31,9 +27,7 @@ struct FindUsersResultView<ViewModel: FindUsersResultViewModel>: View {
             }
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
-            .onChange(of: viewModel.isProgressHUDShowing) {
-                progressHUBState.isLoading = $0
-            }
+            .isProgressHUBVisible($viewModel.isProgressHUDShowing)
             .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
     }
 
