@@ -69,6 +69,8 @@ internal enum ImageAssets {
   internal static let icDownload = ImageAsset(name: "ic_download")
   internal static let icEdit = ImageAsset(name: "ic_edit")
   internal static let icForward = ImageAsset(name: "ic_forward")
+  internal static let icIgnore = ImageAsset(name: "ic_ignore")
+  internal static let icLink = ImageAsset(name: "ic_link")
   internal static let icMenu = ImageAsset(name: "ic_menu")
   internal static let icMore = ImageAsset(name: "ic_more")
   internal static let icNotifications = ImageAsset(name: "ic_notifications")
@@ -142,6 +144,8 @@ internal enum ImageAssets {
     icDownload,
     icEdit,
     icForward,
+    icIgnore,
+    icLink,
     icMenu,
     icMore,
     icNotifications,

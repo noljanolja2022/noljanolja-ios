@@ -130,7 +130,7 @@ struct PlainButtonStyle: ButtonStyle {
 
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .font(.system(size: 14, weight: .medium))
+            .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
             .foregroundColor(
                 isEnabled ? enabledForegroundColor : disabledForegroundColor
             )

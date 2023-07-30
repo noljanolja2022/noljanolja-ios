@@ -39,7 +39,7 @@ struct PhotoPickerItemView: View {
                     $selectedIndex,
                     then: { selectedIndex in
                         Text("\(selectedIndex.wrappedValue + 1)")
-                            .font(.system(size: 12, weight: .medium))
+                            .dynamicFont(.systemFont(ofSize: 12, weight: .medium))
                             .frame(width: 24, height: 24)
                             .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
                             .background(ColorAssets.primaryGreen100.swiftUIColor)

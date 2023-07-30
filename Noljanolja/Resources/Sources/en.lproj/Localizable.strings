@@ -1,7 +1,7 @@
-"splash_welcome" = "Welcome to Noja Noja. Follow these steps to be our member.";
+"splash_welcome" = "Welcome to NolguBulgu. Follow these steps to be our member.";
 "tos_welcome" = "Welcome to Nolja Nolja. Please read our terms of service carefully.";
 "common_try_again" = "Try again";
-"auth_welcome" = "Welcome to Noja Noja. Follow these steps to be our member.";
+"auth_welcome" = "Welcome to NolguBulgu. Follow these steps to be our member.";
 "permission_notification_title" = "Turn on notification\nfor Nolja Nolja";
 "permission_notification_description" = "Permit Nolja Nolja to send you notification in order to\nconect with your friends.";
 "common_send" = "Send";
@@ -69,7 +69,7 @@
 "common_warning" = "Warning";
 "common_all" = "All";
 "common_download" = "Download";
-"welcome_noljanolja" = "Welcome to Noja Noja. Watch videos,play and earn.";
+"welcome_noljanolja" = "Welcome to NolguBulgu. Watch videos,play and earn.";
 "splash_explore" = "EXPLORE NOW";
 "splash_wait" = "Just a moment ...";
 "signup" = "Join the membership";
@@ -173,10 +173,10 @@
 "contacts_title_add_memmber" = "Add members";
 "contacts_not_found" = "No contacts found";
 "permission" = "Permission";
-"permission_contacts_description" = "To help you message friends and family on Noljanolja, allow Noljanolja access to your contacts.";
-"permission_access_storage_description" = "To help you access gallery on Noljanolja, allow Noljanolja access to your media files.";
+"permission_contacts_description" = "To help you message friends and family on NolguBulgu, allow NolguBulgu access to your contacts.";
+"permission_access_storage_description" = "To help you access gallery on NolguBulgu, allow NolguBulgu access to your media files.";
 "permission_accept" = "Accept";
-"permission_required_description" = "You\'re unable to use this feature without the required permissions. \nTap the Settings button to allow Noljanolja to access the required permission.";
+"permission_required_description" = "You\'re unable to use this feature without the required permissions. \nTap the Settings button to allow NolguBulgu to access the required permission.";
 "permission_go_to_settings" = "Go to setting";
 "conversation_empty" = "Add friends to chat now.";
 "conversation_create" = "%@ created conversation";

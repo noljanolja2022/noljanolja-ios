@@ -40,7 +40,7 @@ struct CameraStatefulView<ViewModel: CameraStatefulViewModel>: View {
     private func buildErrorView() -> some View {
         VStack(spacing: 16) {
             Text(L10n.permissionRequiredDescription)
-                .font(.system(size: 14))
+                .dynamicFont(.systemFont(ofSize: 14))
                 .multilineTextAlignment(.center)
                 .foregroundColor(ColorAssets.neutralRawLight.swiftUIColor)
 
@@ -48,7 +48,7 @@ struct CameraStatefulView<ViewModel: CameraStatefulViewModel>: View {
                 guard let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) else { return }
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
-            .font(.system(size: 16, weight: .bold))
+            .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
             .padding(.horizontal, 32)
             .padding(.vertical, 12)
             .foregroundColor(ColorAssets.neutralRawLight.swiftUIColor)

@@ -29,7 +29,7 @@ struct EditViewModifier: ViewModifier {
     func body(content: Content) -> some View {
         VStack(spacing: 4) {
             Text(title)
-                .font(.system(size: 12))
+                .dynamicFont(.systemFont(ofSize: 12))
                 .foregroundColor(isHighlight ? highlightColor : color)
                 .frame(maxWidth: .infinity, alignment: .leading)
 

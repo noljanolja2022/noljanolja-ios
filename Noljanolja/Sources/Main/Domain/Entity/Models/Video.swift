@@ -10,7 +10,7 @@ import Foundation
 struct Video: Equatable, Codable {
     let id: String
     let url: String
-    let publishedAt: Date
+    let publishedAt: Date?
     let title: String?
     let thumbnail: String?
     let duration: String?
@@ -54,18 +54,10 @@ struct Video: Equatable, Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(String.self, forKey: .id)
         self.url = try container.decode(String.self, forKey: .url)
-        if let publishedAtString = try container.decodeIfPresent(String.self, forKey: .publishedAt),
-           let publishedAt = publishedAtString.date(withFormats: NetworkConfigs.Format.apiFullDateFormats) {
-            self.publishedAt = publishedAt
-        } else {
-            throw DecodingError.valueNotFound(
-                String.self,
-                DecodingError.Context(
-                    codingPath: container.codingPath + [CodingKeys.publishedAt],
-                    debugDescription: ""
-                )
-            )
-        }
+
+        let publishedAtString = try container.decodeIfPresent(String.self, forKey: .publishedAt)
+        self.publishedAt = publishedAtString?.date(withFormats: NetworkConfigs.Format.apiFullDateFormats)
+
         self.title = try container.decodeIfPresent(String.self, forKey: .title)
         self.thumbnail = try container.decodeIfPresent(String.self, forKey: .thumbnail)
         self.duration = try container.decodeIfPresent(String.self, forKey: .duration)
@@ -82,5 +74,27 @@ struct Video: Equatable, Codable {
         self.earnedPoints = try container.decodeIfPresent(Int.self, forKey: .earnedPoints) ?? 0
         self.totalPoints = try container.decodeIfPresent(Int.self, forKey: .totalPoints) ?? 0
         self.completed = try container.decodeIfPresent(Bool.self, forKey: .completed) ?? false
+    }
+
+    init(id: String, url: String, publishedAt: Date?, title: String?, thumbnail: String?, duration: String?, durationMs: Int, currentProgress: Int, viewCount: Int, likeCount: Int, commentCount: Int, favoriteCount: Int, isHighlighted: Bool, comments: [VideoComment], channel: VideoChannel?, category: VideoCategory?, earnedPoints: Int, totalPoints: Int, completed: Bool) {
+        self.id = id
+        self.url = url
+        self.publishedAt = publishedAt
+        self.title = title
+        self.thumbnail = thumbnail
+        self.duration = duration
+        self.durationMs = durationMs
+        self.currentProgress = currentProgress
+        self.viewCount = viewCount
+        self.likeCount = likeCount
+        self.commentCount = commentCount
+        self.favoriteCount = favoriteCount
+        self.isHighlighted = isHighlighted
+        self.comments = comments
+        self.channel = channel
+        self.category = category
+        self.earnedPoints = earnedPoints
+        self.totalPoints = totalPoints
+        self.completed = completed
     }
 }

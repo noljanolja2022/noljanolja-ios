@@ -64,8 +64,8 @@ internal enum L10n {
   internal static let authSignupWithEmail = L10n.tr("Localizable", "auth_signup_with_email", fallback: "Signup with email and password")
   /// Verify email to finish
   internal static let authVerifyEmailFinish = L10n.tr("Localizable", "auth_verify_email_finish", fallback: "Verify email to finish")
-  /// Welcome to Noja Noja. Follow these steps to be our member.
-  internal static let authWelcome = L10n.tr("Localizable", "auth_welcome", fallback: "Welcome to Noja Noja. Follow these steps to be our member.")
+  /// Welcome to NolguBulgu. Follow these steps to be our member.
+  internal static let authWelcome = L10n.tr("Localizable", "auth_welcome", fallback: "Welcome to NolguBulgu. Follow these steps to be our member.")
   /// Change Password
   internal static let changePassword = L10n.tr("Localizable", "change_password", fallback: "Change Password")
   /// Album
@@ -376,10 +376,10 @@ internal enum L10n {
   internal static let permission = L10n.tr("Localizable", "permission", fallback: "Permission")
   /// Accept
   internal static let permissionAccept = L10n.tr("Localizable", "permission_accept", fallback: "Accept")
-  /// To help you access gallery on Noljanolja, allow Noljanolja access to your media files.
-  internal static let permissionAccessStorageDescription = L10n.tr("Localizable", "permission_access_storage_description", fallback: "To help you access gallery on Noljanolja, allow Noljanolja access to your media files.")
-  /// To help you message friends and family on Noljanolja, allow Noljanolja access to your contacts.
-  internal static let permissionContactsDescription = L10n.tr("Localizable", "permission_contacts_description", fallback: "To help you message friends and family on Noljanolja, allow Noljanolja access to your contacts.")
+  /// To help you access gallery on NolguBulgu, allow NolguBulgu access to your media files.
+  internal static let permissionAccessStorageDescription = L10n.tr("Localizable", "permission_access_storage_description", fallback: "To help you access gallery on NolguBulgu, allow NolguBulgu access to your media files.")
+  /// To help you message friends and family on NolguBulgu, allow NolguBulgu access to your contacts.
+  internal static let permissionContactsDescription = L10n.tr("Localizable", "permission_contacts_description", fallback: "To help you message friends and family on NolguBulgu, allow NolguBulgu access to your contacts.")
   /// Go to setting
   internal static let permissionGoToSettings = L10n.tr("Localizable", "permission_go_to_settings", fallback: "Go to setting")
   /// Permit Nolja Nolja to send you notification in order to
@@ -389,8 +389,8 @@ internal enum L10n {
   /// for Nolja Nolja
   internal static let permissionNotificationTitle = L10n.tr("Localizable", "permission_notification_title", fallback: "Turn on notification\nfor Nolja Nolja")
   /// You're unable to use this feature without the required permissions. 
-  /// Tap the Settings button to allow Noljanolja to access the required permission.
-  internal static let permissionRequiredDescription = L10n.tr("Localizable", "permission_required_description", fallback: "You're unable to use this feature without the required permissions. \nTap the Settings button to allow Noljanolja to access the required permission.")
+  /// Tap the Settings button to allow NolguBulgu to access the required permission.
+  internal static let permissionRequiredDescription = L10n.tr("Localizable", "permission_required_description", fallback: "You're unable to use this feature without the required permissions. \nTap the Settings button to allow NolguBulgu to access the required permission.")
   /// Let's Play Log in
   internal static let requireLoginButton = L10n.tr("Localizable", "require_login_button", fallback: "Let's Play Log in")
   /// Log in to play
@@ -455,8 +455,8 @@ internal enum L10n {
   internal static let splashExplore = L10n.tr("Localizable", "splash_explore", fallback: "EXPLORE NOW")
   /// Just a moment ...
   internal static let splashWait = L10n.tr("Localizable", "splash_wait", fallback: "Just a moment ...")
-  /// Welcome to Noja Noja. Follow these steps to be our member.
-  internal static let splashWelcome = L10n.tr("Localizable", "splash_welcome", fallback: "Welcome to Noja Noja. Follow these steps to be our member.")
+  /// Welcome to NolguBulgu. Follow these steps to be our member.
+  internal static let splashWelcome = L10n.tr("Localizable", "splash_welcome", fallback: "Welcome to NolguBulgu. Follow these steps to be our member.")
   /// 1588-1588
   internal static let telephoneNumberServiceCenter = L10n.tr("Localizable", "telephone_number_service_center", fallback: "1588-1588")
   /// Agree and Continue
@@ -634,8 +634,8 @@ internal enum L10n {
   internal static let walletRankingSilver = L10n.tr("Localizable", "wallet_ranking_silver", fallback: "Silver Membership")
   /// View History
   internal static let walletViewHistory = L10n.tr("Localizable", "wallet_view_history", fallback: "View History")
-  /// Welcome to Noja Noja. Watch videos,play and earn.
-  internal static let welcomeNoljanolja = L10n.tr("Localizable", "welcome_noljanolja", fallback: "Welcome to Noja Noja. Watch videos,play and earn.")
+  /// Welcome to NolguBulgu. Watch videos,play and earn.
+  internal static let welcomeNoljanolja = L10n.tr("Localizable", "welcome_noljanolja", fallback: "Welcome to NolguBulgu. Watch videos,play and earn.")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

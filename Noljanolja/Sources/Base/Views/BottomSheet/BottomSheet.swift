@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftUIX
 import UIKit
 
 // MARK: - BottomSheet
@@ -17,7 +18,6 @@ struct BottomSheet<Content: View>: View {
 
     public init(@ViewBuilder content: () -> Content) {
         self.content = content()
-//        UIView.setAnimationsEnabled(false)
     }
 
     var body: some View {
@@ -29,9 +29,6 @@ struct BottomSheet<Content: View>: View {
             buildBackgroundView()
             buildContentView()
         }
-//        .onDisappear {
-//            UIView.setAnimationsEnabled(true)
-//        }
         .introspectViewController {
             $0.view.backgroundColor = .clear
         }
@@ -42,8 +39,10 @@ struct BottomSheet<Content: View>: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.black.opacity(0.4))
             .edgesIgnoringSafeArea(.top)
-            .onTapGesture {
-                presentationMode.wrappedValue.dismiss()
+            .onPress {
+                withoutAnimation {
+                    presentationMode.wrappedValue.dismiss()
+                }
             }
     }
 

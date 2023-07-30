@@ -8,13 +8,6 @@
 import Foundation
 import UIKit
 
-// MARK: - AttachmentsRequest
-
-enum AttachmentsRequest {
-    case images([UIImage]?)
-    case photos([PhotoAsset]?)
-}
-
 // MARK: - SendMessageRequest
 
 struct SendMessageRequest {

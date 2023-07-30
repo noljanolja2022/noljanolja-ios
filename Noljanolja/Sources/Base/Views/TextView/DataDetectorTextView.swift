@@ -23,10 +23,13 @@ final class DataDetectorUITextView: UITextView {
 // MARK: - DataDetectorTextView
 
 struct DataDetectorTextView: UIViewRepresentable {
+    @Environment(\.sizeCategory) private var contentSizeCategory
+
     let text: Binding<String>
     let dataAction: ((String) -> Void)?
 
-    var font: Font = .system(size: 14)
+    var font: UIFont = .systemFont(ofSize: 14)
+    var isDynamicFontEnabled = false
     var dataDetectorTypes: UIDataDetectorTypes = .all
     var isEditable = false
     var isScrollEnabled = false
@@ -76,7 +79,16 @@ struct DataDetectorTextView: UIViewRepresentable {
         ]
 
         uiView.dataDetectorTypes = dataDetectorTypes
-        uiView.font = try? font.toAppKitOrUIKitFont()
+        if isDynamicFontEnabled {
+            let dynamicUIFont = font.dynamicFont(
+                contentSizeCategory: contentSizeCategory,
+                minScale: DynamicFont.minScale,
+                maxScale: DynamicFont.maxScale
+            )
+            uiView.font = dynamicUIFont
+        } else {
+            uiView.font = font
+        }
         uiView.isEditable = isEditable
         uiView.isScrollEnabled = isScrollEnabled
         uiView.textColor = foregroundColor.toUIColor()
@@ -111,8 +123,11 @@ struct DataDetectorTextView: UIViewRepresentable {
 }
 
 extension DataDetectorTextView {
-    func font(_ font: Font) -> Self {
-        then { $0.font = font }
+    func dynamicFont(_ font: UIFont, isDynamicFontEnabled: Bool = false) -> Self {
+        then {
+            $0.font = font
+            $0.isDynamicFontEnabled = isDynamicFontEnabled
+        }
     }
 
     func dataDetectorTypes(_ dataDetectorTypes: UIDataDetectorTypes) -> Self {
@@ -132,28 +147,21 @@ extension DataDetectorTextView {
     }
 }
 
-// MARK: - DataDetectorTextView_Previews
+// MARK: - DataDetectorTextViewDynamicFont
 
-struct DataDetectorTextView_Previews: PreviewProvider {
-    static var previews: some View {
-        HStack {
-            VStack {
-                DataDetectorTextView(
-                    text: .constant("Hello, https://stackoverflow.com/questions/60277944/swiftui-how-can-i-get-multiline-text-to-wrap-in-a-uitextview-without-scrolling"),
-                    dataAction: nil
-                )
-                .font(.system(size: 14, weight: .regular))
-                .dataDetectorTypes(.link)
-                .isEditable(false)
-                .isScrollEnabled(false)
-                .background(.green)
+struct DataDetectorTextViewDynamicFont: View {
+    @Environment(\.sizeCategory) private var contentSizeCategory
 
-                Spacer()
-                    .frame(minWidth: 30)
-            }
+    let content: () -> DataDetectorTextView
+    let font: UIFont
 
-            Spacer()
-                .frame(maxHeight: .infinity)
-        }
+    var body: some View {
+        let dynamicUIFont = font.dynamicFont(
+            contentSizeCategory: contentSizeCategory,
+            minScale: DynamicFont.minScale,
+            maxScale: DynamicFont.maxScale
+        )
+        let dynamicFont = Font(dynamicUIFont)
+        return content().font(dynamicFont)
     }
 }

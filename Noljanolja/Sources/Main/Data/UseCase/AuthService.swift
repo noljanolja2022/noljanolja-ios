@@ -9,6 +9,7 @@ import Combine
 import FirebaseAuth
 import FirebaseAuthCombineSwift
 import Foundation
+import GoogleSignIn
 
 // MARK: - AuthServiceType
 
@@ -39,8 +40,8 @@ protocol AuthServiceType {
 final class AuthService: NSObject, AuthServiceType {
     static let `default` = AuthService()
 
+    private lazy var notificationUseCases = NotificationUseCasesImpl.default
     private lazy var appleAuthAPI = AppleAuthAPI()
-    private lazy var googleAuthAPI = GoogleAuthAPI()
     private lazy var kakaoAuthAPI = KakaoAuthAPI()
     private lazy var naverAuthAPI = NaverAuthAPI()
     private lazy var cloudFunctionAuthAPI = CloudFunctionAuthAPI()
@@ -139,9 +140,16 @@ final class AuthService: NSObject, AuthServiceType {
     }
 
     func signInWithGoogle() -> AnyPublisher<String, Error> {
-        googleAuthAPI.signIn()
-            .flatMap { [weak self] idToken, accessToken in
-                guard let self else { return Empty<AuthDataResult, Error>().eraseToAnyPublisher() }
+        GIDSignIn.sharedInstance.signInCombine()
+            .flatMap { [weak self] result in
+                guard let self else {
+                    return Empty<AuthDataResult, Error>().eraseToAnyPublisher()
+                }
+                guard let idToken = result.user.idToken?.tokenString else {
+                    return Fail(error: CommonError.informationNotFound(message: "IDToken not found"))
+                        .eraseToAnyPublisher()
+                }
+                let accessToken = result.user.accessToken.tokenString
                 let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
                 return self.firebaseAuth
                     .signIn(with: credential)
@@ -215,27 +223,34 @@ final class AuthService: NSObject, AuthServiceType {
     }
 
     func signOut() -> AnyPublisher<Void, Error> {
-        Publishers.CombineLatest4(
-            appleAuthAPI.signOutIfNeeded(),
-            googleAuthAPI.signOutIfNeeded(),
-            kakaoAuthAPI.signOutIfNeeded(),
-            naverAuthAPI.signOutIfNeeded()
-        )
-        .flatMap { [weak self] _ in
-            guard let self else { return Empty<Void, Error>().eraseToAnyPublisher() }
-            return self.firebaseAuth
-                .signOutCombine()
+        notificationUseCases
+            .deletePushToken()
+            .flatMap { [weak self] _ in
+                guard let self else { return Empty<Void, Error>().eraseToAnyPublisher() }
+                return Publishers.CombineLatest4(
+                    appleAuthAPI.signOutIfNeeded(),
+                    GIDSignIn.sharedInstance.signOutIfNeededCombine(),
+                    kakaoAuthAPI.signOutIfNeeded(),
+                    naverAuthAPI.signOutIfNeeded()
+                )
+                .map { _ in () }
                 .eraseToAnyPublisher()
-        }
-        .handleEvents(receiveOutput: { [weak self] in
-            guard let self else { return }
-            self.authStore.clearToken()
-            self.contactStore.deleteAll()
-            self.conversationStore.deleteAll()
-            self.conversationDetailStore.deleteAll()
-            self.messageStore.deleteAll()
-            self.isAuthenticated.send(false)
-        })
-        .eraseToAnyPublisher()
+            }
+            .flatMap { [weak self] _ in
+                guard let self else { return Empty<Void, Error>().eraseToAnyPublisher() }
+                return self.firebaseAuth
+                    .signOutCombine()
+                    .eraseToAnyPublisher()
+            }
+            .handleEvents(receiveOutput: { [weak self] in
+                guard let self else { return }
+                self.authStore.clearToken()
+                self.contactStore.deleteAll()
+                self.conversationStore.deleteAll()
+                self.conversationDetailStore.deleteAll()
+                self.messageStore.deleteAll()
+                self.isAuthenticated.send(false)
+            })
+            .eraseToAnyPublisher()
     }
 }

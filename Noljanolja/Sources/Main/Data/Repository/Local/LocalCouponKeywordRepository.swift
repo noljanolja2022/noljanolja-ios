@@ -12,16 +12,16 @@ import RealmSwift
 // MARK: - LocalCouponKeywordRepository
 
 protocol LocalCouponKeywordRepository {
-    func saveCouponKeyword(_ couponKeyword: CouponKeyword)
-    func observeCouponKeywords(_ string: String) -> AnyPublisher<[CouponKeyword], Error>
-    func delete(_ couponKeyword: CouponKeyword)
+    func saveKeyword(_ keyword: CouponKeyword)
+    func observeKeywords(_ string: String) -> AnyPublisher<[CouponKeyword], Error>
+    func delete(_ keyword: CouponKeyword)
     func deleteAll()
 }
 
 // MARK: - LocalCouponKeywordRepositoryImpl
 
 final class LocalCouponKeywordRepositoryImpl: LocalCouponKeywordRepository {
-    static let `default` = LocalCouponKeywordRepositoryImpl()
+    static let shared = LocalCouponKeywordRepositoryImpl()
 
     private lazy var realmManager: RealmManagerType = {
         let id = "coupon_keyword"
@@ -39,12 +39,12 @@ final class LocalCouponKeywordRepositoryImpl: LocalCouponKeywordRepository {
 
     private init() {}
 
-    func saveCouponKeyword(_ couponKeyword: CouponKeyword) {
-        let storableCouponKeyword = StorableCouponKeyword(couponKeyword)
-        realmManager.add(storableCouponKeyword, update: .all)
+    func saveKeyword(_ keyword: CouponKeyword) {
+        let storableKeyword = StorableCouponKeyword(keyword)
+        realmManager.add(storableKeyword, update: .all)
     }
 
-    func observeCouponKeywords(_ string: String) -> AnyPublisher<[CouponKeyword], Error> {
+    func observeKeywords(_ string: String) -> AnyPublisher<[CouponKeyword], Error> {
         Just(())
             .setFailureType(to: Error.self)
             .receive(on: DispatchQueue.main) // TODO: Can only add notification blocks from within runloops
@@ -71,11 +71,11 @@ final class LocalCouponKeywordRepositoryImpl: LocalCouponKeywordRepository {
             .eraseToAnyPublisher()
     }
 
-    func delete(_ couponKeyword: CouponKeyword) {
-        guard let couponKeyword = realmManager.object(ofType: StorableCouponKeyword.self, forPrimaryKey: couponKeyword.keyword) else {
+    func delete(_ keyword: CouponKeyword) {
+        guard let keyword = realmManager.object(ofType: StorableCouponKeyword.self, forPrimaryKey: keyword.keyword) else {
             return
         }
-        realmManager.delete(couponKeyword)
+        realmManager.delete(keyword)
     }
 
     func deleteAll() {

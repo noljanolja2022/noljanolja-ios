@@ -92,10 +92,10 @@ struct ErrorFooterView: View {
             label: {
                 VStack(spacing: 4) {
                     Text(L10n.commonErrorDescription)
-                        .font(.system(size: 14))
+                        .dynamicFont(.systemFont(ofSize: 14))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                     Text(L10n.commonTryAgain)
-                        .font(.system(size: 14, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
@@ -116,7 +116,7 @@ struct ErrorFooterView_Previews: PreviewProvider {
 struct NoMoreDataFooterView: View {
     var body: some View {
         Text("No more data")
-            .font(.system(size: 14))
+            .dynamicFont(.systemFont(ofSize: 14))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

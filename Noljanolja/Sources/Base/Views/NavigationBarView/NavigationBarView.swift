@@ -13,13 +13,16 @@ struct NavigationBarView<LeadingView: View, CenterView: View, TrailingView: View
     private let leadingView: LeadingView
     private let centerView: CenterView
     private let trailingView: TrailingView
+    private let isDividerHidden: Bool
 
     public init(@ViewBuilder leadingView: () -> LeadingView = { Spacer() },
                 @ViewBuilder centerView: () -> CenterView = { Spacer() },
-                @ViewBuilder trailingView: () -> TrailingView = { Spacer() }) {
+                @ViewBuilder trailingView: () -> TrailingView = { Spacer() },
+                isDividerHidden: Bool = false) {
         self.leadingView = leadingView()
         self.centerView = centerView()
         self.trailingView = trailingView()
+        self.isDividerHidden = isDividerHidden
     }
 
     var body: some View {
@@ -41,6 +44,7 @@ struct NavigationBarView<LeadingView: View, CenterView: View, TrailingView: View
             Divider()
                 .frame(height: 1)
                 .overlay(Color.gray.opacity(0.1))
+                .hidden(isDividerHidden)
         }
     }
 }
@@ -58,12 +62,12 @@ struct SwiftUIView_Previews: PreviewProvider {
                         .aspectRatio(1, contentMode: .fit)
 
                     Text("Back back")
-                        .font(.system(size: 18, weight: .bold))
+                        .dynamicFont(.systemFont(ofSize: 18, weight: .bold))
                 }
             },
             centerView: {
                 Text("Title")
-                    .font(.system(size: 18, weight: .bold))
+                    .dynamicFont(.systemFont(ofSize: 18, weight: .bold))
             },
             trailingView: {
                 HStack {

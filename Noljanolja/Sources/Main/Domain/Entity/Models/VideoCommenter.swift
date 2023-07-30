@@ -21,4 +21,10 @@ struct VideoCommenter: Equatable, Codable {
         self.name = try container.decodeIfPresent(String.self, forKey: .name)
         self.avatar = try container.decodeIfPresent(String.self, forKey: .avatar)
     }
+
+    init(name: String?,
+         avatar: String?) {
+        self.name = name
+        self.avatar = avatar
+    }
 }

@@ -44,6 +44,7 @@ final class CameraStatefulViewModel: ViewModel {
     private func configure() {
         isAppearSubject
             .first(where: { $0 })
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.checkAuthorization { [weak self] status in
                     DispatchQueue.main.async { [weak self] in

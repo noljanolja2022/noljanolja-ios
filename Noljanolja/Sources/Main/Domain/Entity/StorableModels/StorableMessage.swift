@@ -23,6 +23,7 @@ final class StorableMessage: Object {
     @Persisted var reactions = List<StorableMessageReaction>()
     @Persisted var createdAt: Date?
     @Persisted var isDeleted: Bool
+    @Persisted var shareVideo: StorableVideo?
     @Persisted var shareMessage: StorableMessage?
     @Persisted var replyToMessage: StorableMessage?
     
@@ -47,6 +48,7 @@ final class StorableMessage: Object {
             reactions: reactions.compactMap { $0.model },
             createdAt: createdAt,
             isDeleted: isDeleted,
+            shareVideo: shareVideo?.model,
             shareMessage: shareMessage?.model,
             replyToMessage: replyToMessage?.model
         )
@@ -88,6 +90,7 @@ final class StorableMessage: Object {
         }()
         self.createdAt = model.createdAt
         self.isDeleted = model.isDeleted
+        self.shareVideo = model.shareVideo.flatMap { StorableVideo($0) }
         self.shareMessage = model.shareMessage
             .flatMap {
                 StorableMessage(
@@ -126,6 +129,7 @@ final class StorableMessage: Object {
         self.reactions = List<StorableMessageReaction>()
         self.createdAt = Date()
         self.isDeleted = false
+        self.shareVideo = nil
         self.shareMessage = param.shareMessage
             .flatMap {
                 StorableMessage(

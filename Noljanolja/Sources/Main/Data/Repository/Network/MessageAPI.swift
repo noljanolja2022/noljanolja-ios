@@ -73,6 +73,58 @@ private enum MessageAPITargets {
         let param: SendMessageParam
     }
 
+    struct ShareMessage: BaseAuthTargetType {
+        var path: String { "v1/conversations/messages" }
+        let method: Moya.Method = .post
+        var task: Task {
+            var multipartFormDatas = [MultipartFormData?]()
+
+            if let data = param.type.rawValue.data(using: .utf8) {
+                multipartFormDatas.append(MultipartFormData(provider: .data(data), name: "type"))
+            }
+
+            if let data = param.message?.data(using: .utf8) {
+                multipartFormDatas.append(MultipartFormData(provider: .data(data), name: "message"))
+            }
+
+            param.attachments?.forEach { attachment in
+                if let data = attachment.data {
+                    multipartFormDatas.append(
+                        MultipartFormData(provider: .data(data), name: "attachments", fileName: attachment.name, mimeType: "image/jpeg")
+                    )
+                }
+            }
+
+            if let replyToMessageID = param.replyToMessageID,
+               let data = String(replyToMessageID).data(using: .utf8) {
+                multipartFormDatas.append(MultipartFormData(provider: .data(data), name: "replyToMessageId"))
+            }
+
+            if let shareMessageID = param.shareMessageID,
+               let data = String(shareMessageID).data(using: .utf8) {
+                multipartFormDatas.append(MultipartFormData(provider: .data(data), name: "shareMessageId"))
+            }
+
+            if let shareVideoId = param.shareVideoID,
+               let data = String(shareVideoId).data(using: .utf8) {
+                multipartFormDatas.append(MultipartFormData(provider: .data(data), name: "shareVideoId"))
+            }
+
+            param.conversationIDs.forEach {
+                let conversationIDString = String($0)
+                if let data = conversationIDString.data(using: .utf8) {
+                    multipartFormDatas.append(
+                        MultipartFormData(provider: .data(data), name: "conversationIds")
+                    )
+                }
+            }
+
+            return .uploadMultipart(multipartFormDatas.compactMap { $0 })
+        }
+
+        let param: ShareMessageParam
+    }
+
     struct DeleteMessage: BaseAuthTargetType {
         var path: String { "v1/conversations/\(conversationID)/messages/\(messageID)" }
         let method: Moya.Method = .delete
@@ -117,6 +169,7 @@ protocol MessageAPIType {
                      beforeMessageID: Int?,
                      afterMessageID: Int?) -> AnyPublisher<[Message], Error>
     func sendMessage(param: SendMessageParam) -> AnyPublisher<Message, Error>
+    func shareMessage(param: ShareMessageParam) -> AnyPublisher<[Message], Error>
     func deleteMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error>
 
     func seenMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error>
@@ -165,6 +218,13 @@ final class MessageAPI: MessageAPIType {
     func sendMessage(param: SendMessageParam) -> AnyPublisher<Message, Error> {
         api.request(
             target: MessageAPITargets.SendMessage(param: param),
+            atKeyPath: "data"
+        )
+    }
+
+    func shareMessage(param: ShareMessageParam) -> AnyPublisher<[Message], Error> {
+        api.request(
+            target: MessageAPITargets.ShareMessage(param: param),
             atKeyPath: "data"
         )
     }
