@@ -122,11 +122,13 @@ extension VideosView {
     private func buildEmptyView() -> some View {
         Spacer()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
     private func buildErrorView() -> some View {
         Spacer()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(ColorAssets.neutralLight.swiftUIColor)
     }
 }
 

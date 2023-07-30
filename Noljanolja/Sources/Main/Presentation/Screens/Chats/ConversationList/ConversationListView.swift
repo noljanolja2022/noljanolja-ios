@@ -126,6 +126,7 @@ extension ConversationListView {
     private func buildErrorView() -> some View {
         Text(L10n.commonErrorTitle)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(ColorAssets.neutralLight.swiftUIColor)
     }
 }
 

@@ -8,12 +8,6 @@
 import SwiftUI
 import SwiftUIX
 
-// MARK: - ProgressHUBState
-
-final class ProgressHUBState: ObservableObject {
-    @Published var isLoading = false
-}
-
 // MARK: - ProgressHUDView
 
 struct ProgressHUDView: View {

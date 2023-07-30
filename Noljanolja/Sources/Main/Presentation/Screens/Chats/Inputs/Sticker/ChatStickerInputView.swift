@@ -126,6 +126,7 @@ extension ChatStickerInputView {
             .cornerRadius(8)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(ColorAssets.neutralLight.swiftUIColor)
     }
 }
 

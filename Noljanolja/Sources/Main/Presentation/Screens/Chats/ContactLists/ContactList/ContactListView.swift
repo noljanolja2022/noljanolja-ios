@@ -174,6 +174,7 @@ extension ContactListView {
                     }
                 }()
             )
+            .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
     @ViewBuilder
@@ -217,6 +218,7 @@ extension ContactListView {
                     }
                 }()
             )
+            .background(ColorAssets.neutralLight.swiftUIColor)
         } else {
             Text(L10n.commonErrorTitle)
                 .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
@@ -229,6 +231,7 @@ extension ContactListView {
                         }
                     }()
                 )
+                .background(ColorAssets.neutralLight.swiftUIColor)
         }
     }
 }

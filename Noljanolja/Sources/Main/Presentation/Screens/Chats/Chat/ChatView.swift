@@ -187,6 +187,19 @@ struct ChatView<ViewModel: ChatViewModel>: View {
             )
         )
     }
+
+    private func buildNavigationLinks() -> some View {
+        NavigationLink(
+            unwrapping: $viewModel.navigationType,
+            onNavigate: { _ in },
+            destination: {
+                buildNavigationLinkDestinationView($0)
+            },
+            label: {
+                EmptyView()
+            }
+        )
+    }
 }
 
 extension ChatView {
@@ -202,19 +215,6 @@ extension ChatView {
 
     private func buildErrorView() -> some View {
         EmptyView()
-    }
-    
-    private func buildNavigationLinks() -> some View {
-        NavigationLink(
-            unwrapping: $viewModel.navigationType,
-            onNavigate: { _ in },
-            destination: {
-                buildNavigationLinkDestinationView($0)
-            },
-            label: {
-                EmptyView()
-            }
-        )
     }
 }
 
