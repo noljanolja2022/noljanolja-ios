@@ -27,6 +27,7 @@ final class AuthAppDelegate: NSObject, AppDelegateProtocol {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         // Pass device token to auth
         Auth.auth().setAPNSToken(deviceToken, type: .prod)
+        Auth.auth().setAPNSToken(deviceToken, type: .sandbox)
 
         // Further handling of the device token if needed by the app
     }
