@@ -122,7 +122,7 @@ struct NormalMessageModel: Equatable {
             }
         }()
 
-        if let shareVideo = message.shareVideo {
+        if message.shareVideo != nil {
             self.content = .video(
                 VideoMessageContentModel(
                     message: message,

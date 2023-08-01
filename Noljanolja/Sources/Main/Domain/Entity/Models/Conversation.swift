@@ -69,32 +69,34 @@ struct Conversation: Equatable, Decodable {
         self.type = try container.decode(ConversationType.self, forKey: .type)
         self.messages = try container.decodeIfPresent([Message].self, forKey: .messages) ?? []
         self.participants = try container.decode([User].self, forKey: .participants)
-
-        if let createdAtString = try container.decodeIfPresent(String.self, forKey: .createdAt),
-           let createdAt = createdAtString.date(withFormats: NetworkConfigs.Format.apiFullDateFormats) {
-            self.createdAt = createdAt
-        } else {
-            throw DecodingError.valueNotFound(
-                String.self,
-                DecodingError.Context(
-                    codingPath: container.codingPath + [CodingKeys.createdAt],
-                    debugDescription: ""
+        self.createdAt = try {
+            if let createdAtString = try container.decodeIfPresent(String.self, forKey: .createdAt),
+               let createdAt = createdAtString.date(withFormats: NetworkConfigs.Format.apiFullDateFormats) {
+                return createdAt
+            } else {
+                throw DecodingError.valueNotFound(
+                    String.self,
+                    DecodingError.Context(
+                        codingPath: container.codingPath + [CodingKeys.createdAt],
+                        debugDescription: ""
+                    )
                 )
-            )
-        }
-
-        if let updatedAtString = try container.decodeIfPresent(String.self, forKey: .updatedAt),
-           let updatedAt = updatedAtString.date(withFormats: NetworkConfigs.Format.apiFullDateFormats) {
-            self.updatedAt = updatedAt
-        } else {
-            throw DecodingError.valueNotFound(
-                String.self,
-                DecodingError.Context(
-                    codingPath: container.codingPath + [CodingKeys.updatedAt],
-                    debugDescription: ""
+            }
+        }()
+        self.updatedAt = try {
+            if let updatedAtString = try container.decodeIfPresent(String.self, forKey: .updatedAt),
+               let updatedAt = updatedAtString.date(withFormats: NetworkConfigs.Format.apiFullDateFormats) {
+                return updatedAt
+            } else {
+                throw DecodingError.valueNotFound(
+                    String.self,
+                    DecodingError.Context(
+                        codingPath: container.codingPath + [CodingKeys.updatedAt],
+                        debugDescription: ""
+                    )
                 )
-            )
-        }
+            }
+        }()
     }
 }
 

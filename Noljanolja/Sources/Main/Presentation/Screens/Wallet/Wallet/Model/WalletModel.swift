@@ -12,11 +12,13 @@ struct WalletModel {
     let point: Int
     let accumulatedPointsToday: Int
     let exchangeablePoints: Int
+    let checkinProgresses: [CheckinProgress]
 
-    init(currentUser: User, memberInfo: LoyaltyMemberInfo) {
+    init(currentUser: User, memberInfo: LoyaltyMemberInfo, checkinProgresses: [CheckinProgress]) {
         self.userInfo = WalletUserInfoModel(currentUser: currentUser, memberInfo: memberInfo)
         self.point = memberInfo.point
         self.accumulatedPointsToday = memberInfo.accumulatedPointsToday
         self.exchangeablePoints = memberInfo.exchangeablePoints
+        self.checkinProgresses = checkinProgresses
     }
 }

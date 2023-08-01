@@ -63,6 +63,10 @@
 		CF30B1872A13D1D000C43A54 /* DeleteCacheUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF30B1862A13D1D000C43A54 /* DeleteCacheUseCases.swift */; };
 		CF30B19B2A13ECEB00C43A54 /* TransactionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF30B19A2A13ECEB00C43A54 /* TransactionType.swift */; };
 		CF3282ED299E3758006A459B /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3282EC299E3758006A459B /* UIApplication+Extension.swift */; };
+		CF355C8A2A77C18B005A48F9 /* CheckinProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF355C892A77C18B005A48F9 /* CheckinProgress.swift */; };
+		CF355C8C2A77C4EA005A48F9 /* CheckinUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF355C8B2A77C4EA005A48F9 /* CheckinUseCase.swift */; };
+		CF355C8E2A77C51F005A48F9 /* LocalCheckingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF355C8D2A77C51F005A48F9 /* LocalCheckingRepository.swift */; };
+		CF355C902A77C6A2005A48F9 /* NetworkCheckinRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF355C8F2A77C6A2005A48F9 /* NetworkCheckinRepository.swift */; };
 		CF398DD829BF89430015DB18 /* UpdateCurrentUserParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF398DD729BF89430015DB18 /* UpdateCurrentUserParam.swift */; };
 		CF3CE18529B79FD50054BBEF /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3CE18429B79FD50054BBEF /* UserDefaults.swift */; };
 		CF3E0EF42A372728009EF665 /* Coupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3E0EF32A372728009EF665 /* Coupon.swift */; };
@@ -186,7 +190,6 @@
 		CF53D5BC2A6AF548009B3A69 /* WalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D45F2A6AF548009B3A69 /* WalletView.swift */; };
 		CF53D5BD2A6AF548009B3A69 /* WalletUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4612A6AF548009B3A69 /* WalletUserInfoView.swift */; };
 		CF53D5BE2A6AF548009B3A69 /* WalletMemberTierView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4622A6AF548009B3A69 /* WalletMemberTierView.swift */; };
-		CF53D5BF2A6AF548009B3A69 /* WalletNotiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4632A6AF548009B3A69 /* WalletNotiView.swift */; };
 		CF53D5C02A6AF548009B3A69 /* WalletMyPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4642A6AF548009B3A69 /* WalletMyPointView.swift */; };
 		CF53D5C12A6AF548009B3A69 /* WalletPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4652A6AF548009B3A69 /* WalletPointView.swift */; };
 		CF53D5C22A6AF548009B3A69 /* MyRankingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4672A6AF548009B3A69 /* MyRankingViewModel.swift */; };
@@ -384,6 +387,7 @@
 		CF8795222A7430D3003B0428 /* ShareVideoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8795202A7430D3003B0428 /* ShareVideoDetailView.swift */; };
 		CF8795232A7430D3003B0428 /* ShareVideoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8795212A7430D3003B0428 /* ShareVideoDetailViewModel.swift */; };
 		CF88ABCD299F2E7400D8AB67 /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = CF88ABCC299F2E7400D8AB67 /* SwiftUINavigation */; };
+		CF8BD91E2A78B2C200EAD316 /* CheckinItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8BD91D2A78B2C200EAD316 /* CheckinItemView.swift */; };
 		CF9779DC29BE2FC600D1CAB0 /* PhoneNumberKit in Frameworks */ = {isa = PBXBuildFile; productRef = CF9779DB29BE2FC600D1CAB0 /* PhoneNumberKit */; };
 		CF9DF0AA2A36B2D80054E105 /* UIImage+QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9DF0A92A36B2D80054E105 /* UIImage+QRCode.swift */; };
 		CFA3304729BE3352008D7449 /* String+Phone.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA3304629BE3352008D7449 /* String+Phone.swift */; };
@@ -397,6 +401,12 @@
 		CFAA37612A4B370C0085CE88 /* BannerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAA37602A4B370C0085CE88 /* BannerRepository.swift */; };
 		CFAA37632A4B38E00085CE88 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAA37622A4B38E00085CE88 /* Banner.swift */; };
 		CFAD27B129E2DAE400947BC3 /* ConversationDetailStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAD27B029E2DAE400947BC3 /* ConversationDetailStore.swift */; };
+		CFAD534D2A780D5A0044CB42 /* CheckinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAD534B2A780D5A0044CB42 /* CheckinView.swift */; };
+		CFAD534E2A780D5A0044CB42 /* CheckinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAD534C2A780D5A0044CB42 /* CheckinViewModel.swift */; };
+		CFAD53512A78181A0044CB42 /* LinearProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAD53502A78181A0044CB42 /* LinearProgressView.swift */; };
+		CFAD53542A781A150044CB42 /* CheckinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAD53532A781A150044CB42 /* CheckinModel.swift */; };
+		CFAD53572A781D390044CB42 /* CheckinProgressSumaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAD53562A781D390044CB42 /* CheckinProgressSumaryView.swift */; };
+		CFAD53592A781ECE0044CB42 /* CheckinOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAD53582A781ECE0044CB42 /* CheckinOverviewView.swift */; };
 		CFAE00D02A6EEA14006A1FF0 /* SearchVideosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAE00CE2A6EEA14006A1FF0 /* SearchVideosView.swift */; };
 		CFAE00D12A6EEA14006A1FF0 /* SearchVideosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAE00CF2A6EEA14006A1FF0 /* SearchVideosViewModel.swift */; };
 		CFB0A82129F1B6FD00298546 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB0A82029F1B6FD00298546 /* Video.swift */; };
@@ -592,6 +602,10 @@
 		CF30B1862A13D1D000C43A54 /* DeleteCacheUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCacheUseCases.swift; sourceTree = "<group>"; };
 		CF30B19A2A13ECEB00C43A54 /* TransactionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionType.swift; sourceTree = "<group>"; };
 		CF3282EC299E3758006A459B /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
+		CF355C892A77C18B005A48F9 /* CheckinProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinProgress.swift; sourceTree = "<group>"; };
+		CF355C8B2A77C4EA005A48F9 /* CheckinUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinUseCase.swift; sourceTree = "<group>"; };
+		CF355C8D2A77C51F005A48F9 /* LocalCheckingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCheckingRepository.swift; sourceTree = "<group>"; };
+		CF355C8F2A77C6A2005A48F9 /* NetworkCheckinRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCheckinRepository.swift; sourceTree = "<group>"; };
 		CF398DD729BF89430015DB18 /* UpdateCurrentUserParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCurrentUserParam.swift; sourceTree = "<group>"; };
 		CF3CE18429B79FD50054BBEF /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		CF3E0EF32A372728009EF665 /* Coupon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coupon.swift; sourceTree = "<group>"; };
@@ -713,7 +727,6 @@
 		CF53D45F2A6AF548009B3A69 /* WalletView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletView.swift; sourceTree = "<group>"; };
 		CF53D4612A6AF548009B3A69 /* WalletUserInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletUserInfoView.swift; sourceTree = "<group>"; };
 		CF53D4622A6AF548009B3A69 /* WalletMemberTierView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletMemberTierView.swift; sourceTree = "<group>"; };
-		CF53D4632A6AF548009B3A69 /* WalletNotiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletNotiView.swift; sourceTree = "<group>"; };
 		CF53D4642A6AF548009B3A69 /* WalletMyPointView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletMyPointView.swift; sourceTree = "<group>"; };
 		CF53D4652A6AF548009B3A69 /* WalletPointView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletPointView.swift; sourceTree = "<group>"; };
 		CF53D4672A6AF548009B3A69 /* MyRankingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRankingViewModel.swift; sourceTree = "<group>"; };
@@ -906,6 +919,7 @@
 		CF876C3829EAB2F200C8C9B0 /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
 		CF8795202A7430D3003B0428 /* ShareVideoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareVideoDetailView.swift; sourceTree = "<group>"; };
 		CF8795212A7430D3003B0428 /* ShareVideoDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareVideoDetailViewModel.swift; sourceTree = "<group>"; };
+		CF8BD91D2A78B2C200EAD316 /* CheckinItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinItemView.swift; sourceTree = "<group>"; };
 		CF9DF0A92A36B2D80054E105 /* UIImage+QRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+QRCode.swift"; sourceTree = "<group>"; };
 		CFA3304629BE3352008D7449 /* String+Phone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Phone.swift"; sourceTree = "<group>"; };
 		CFA3304829BE3AB9008D7449 /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
@@ -918,6 +932,12 @@
 		CFAA37602A4B370C0085CE88 /* BannerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerRepository.swift; sourceTree = "<group>"; };
 		CFAA37622A4B38E00085CE88 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		CFAD27B029E2DAE400947BC3 /* ConversationDetailStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDetailStore.swift; sourceTree = "<group>"; };
+		CFAD534B2A780D5A0044CB42 /* CheckinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinView.swift; sourceTree = "<group>"; };
+		CFAD534C2A780D5A0044CB42 /* CheckinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinViewModel.swift; sourceTree = "<group>"; };
+		CFAD53502A78181A0044CB42 /* LinearProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearProgressView.swift; sourceTree = "<group>"; };
+		CFAD53532A781A150044CB42 /* CheckinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinModel.swift; sourceTree = "<group>"; };
+		CFAD53562A781D390044CB42 /* CheckinProgressSumaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinProgressSumaryView.swift; sourceTree = "<group>"; };
+		CFAD53582A781ECE0044CB42 /* CheckinOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinOverviewView.swift; sourceTree = "<group>"; };
 		CFAE00CE2A6EEA14006A1FF0 /* SearchVideosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVideosView.swift; sourceTree = "<group>"; };
 		CFAE00CF2A6EEA14006A1FF0 /* SearchVideosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVideosViewModel.swift; sourceTree = "<group>"; };
 		CFB0A82029F1B6FD00298546 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
@@ -1212,6 +1232,7 @@
 		CF15500D299396260053E86D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CFAD534F2A7818020044CB42 /* LinearProgressView */,
 				CF45BDA92A6856B7003FB991 /* CameraView */,
 				CFD12CE82A1C6CF00095D28D /* Charts */,
 				CFA5BD2A29EEFB7E00251176 /* TextView */,
@@ -1364,6 +1385,7 @@
 				CF52AB7B29B8EE1A00C9C90C /* Realm+Init.swift */,
 				CF5923FD29EDA1C8009C2516 /* UserStore.swift */,
 				CFB386692A443028001B0849 /* ReactionIconsLocalRepository.swift */,
+				CF355C8D2A77C51F005A48F9 /* LocalCheckingRepository.swift */,
 			);
 			path = Local;
 			sourceTree = "<group>";
@@ -1402,6 +1424,7 @@
 				CFAA37622A4B38E00085CE88 /* Banner.swift */,
 				CFF868BF2A6E8457006F0B87 /* BaseReponse.swift */,
 				CFC9E5132A7046BD004D48E5 /* VideoKeyword.swift */,
+				CF355C892A77C18B005A48F9 /* CheckinProgress.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1431,6 +1454,7 @@
 		CF53D3C52A6AF547009B3A69 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				CFAD534A2A780D490044CB42 /* Checkin */,
 				CF53D3C62A6AF547009B3A69 /* Launch */,
 				CF53D3D82A6AF547009B3A69 /* ProfileSetting */,
 				CF53D3F32A6AF547009B3A69 /* Shop */,
@@ -1942,7 +1966,6 @@
 			children = (
 				CF53D4612A6AF548009B3A69 /* WalletUserInfoView.swift */,
 				CF53D4622A6AF548009B3A69 /* WalletMemberTierView.swift */,
-				CF53D4632A6AF548009B3A69 /* WalletNotiView.swift */,
 				CF53D4642A6AF548009B3A69 /* WalletMyPointView.swift */,
 				CF53D4652A6AF548009B3A69 /* WalletPointView.swift */,
 			);
@@ -2848,6 +2871,43 @@
 			path = TextView;
 			sourceTree = "<group>";
 		};
+		CFAD534A2A780D490044CB42 /* Checkin */ = {
+			isa = PBXGroup;
+			children = (
+				CFAD53552A781B4E0044CB42 /* Views */,
+				CFAD53522A781A000044CB42 /* Models */,
+				CFAD534B2A780D5A0044CB42 /* CheckinView.swift */,
+				CFAD534C2A780D5A0044CB42 /* CheckinViewModel.swift */,
+			);
+			path = Checkin;
+			sourceTree = "<group>";
+		};
+		CFAD534F2A7818020044CB42 /* LinearProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				CFAD53502A78181A0044CB42 /* LinearProgressView.swift */,
+			);
+			path = LinearProgressView;
+			sourceTree = "<group>";
+		};
+		CFAD53522A781A000044CB42 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CFAD53532A781A150044CB42 /* CheckinModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CFAD53552A781B4E0044CB42 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CFAD53562A781D390044CB42 /* CheckinProgressSumaryView.swift */,
+				CFAD53582A781ECE0044CB42 /* CheckinOverviewView.swift */,
+				CF8BD91D2A78B2C200EAD316 /* CheckinItemView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		CFBC6EFE29C02977000509EC /* SearchView */ = {
 			isa = PBXGroup;
 			children = (
@@ -3058,6 +3118,7 @@
 				CFB386672A442E3A001B0849 /* ReactionIconsUseCases.swift */,
 				CFA924B32A49926D000918D8 /* MessageReactionUseCases.swift */,
 				CFF868B82A6E2D74006F0B87 /* VideoUseCases.swift */,
+				CF355C8B2A77C4EA005A48F9 /* CheckinUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -3275,6 +3336,7 @@
 				CFD095182A02A936004BF047 /* Socket */,
 				CFE09252298DF67D00F197F0 /* Auth */,
 				CF08A86129B5A26600D6CE5F /* ContactAPI.swift */,
+				CF355C8F2A77C6A2005A48F9 /* NetworkCheckinRepository.swift */,
 				CF1B624729B9B55F00DE53E6 /* ConversationAPI.swift */,
 				CFB2F6BD29E1274500191AA3 /* ConversationParticipantAPI.swift */,
 				CFDA463D29DC8CCB00E6A877 /* CountryAPI.swift */,
@@ -3759,6 +3821,7 @@
 				CF53D5FB2A6AF548009B3A69 /* EventMessageView.swift in Sources */,
 				CF53D5C82A6AF548009B3A69 /* AddFriendContactListView.swift in Sources */,
 				CF53D5732A6AF548009B3A69 /* ShopHomeView.swift in Sources */,
+				CFAD53542A781A150044CB42 /* CheckinModel.swift in Sources */,
 				CF53D6372A6AF548009B3A69 /* ChatInputViewModel.swift in Sources */,
 				CF775BC429C62B3000E82183 /* FrameworkAppDelegate.swift in Sources */,
 				CFF868B92A6E2D74006F0B87 /* VideoUseCases.swift in Sources */,
@@ -3773,7 +3836,6 @@
 				CF53D6472A6AF548009B3A69 /* AuthViewModel.swift in Sources */,
 				CF53D5A32A6AF548009B3A69 /* TransactionDashboardViewModel.swift in Sources */,
 				CF14F268298CF87E00BC2066 /* AuthService.swift in Sources */,
-				CF53D5BF2A6AF548009B3A69 /* WalletNotiView.swift in Sources */,
 				CFFB71EE2A4004A20019663C /* CouponKeyword.swift in Sources */,
 				CF53D6422A6AF548009B3A69 /* ChatInputExpandModelType.swift in Sources */,
 				CF53D55C2A6AF548009B3A69 /* LaunchView.swift in Sources */,
@@ -3800,10 +3862,13 @@
 				CF53D5B82A6AF548009B3A69 /* WalletPointModel.swift in Sources */,
 				CF53D5962A6AF548009B3A69 /* VideosView.swift in Sources */,
 				CF53D5B12A6AF548009B3A69 /* TransactionHistoryNavigations.swift in Sources */,
+				CF355C902A77C6A2005A48F9 /* NetworkCheckinRepository.swift in Sources */,
 				CF800A922A717D8E00DBD9F0 /* VideoActionView.swift in Sources */,
+				CFAD53512A78181A0044CB42 /* LinearProgressView.swift in Sources */,
 				CF53D5DF2A6AF548009B3A69 /* ConversationAdjustmentView.swift in Sources */,
 				CF53D5DD2A6AF548009B3A69 /* ConversationAdjustmentViewModel.swift in Sources */,
 				CF53D5622A6AF548009B3A69 /* AboutUsViewModel.swift in Sources */,
+				CF355C8A2A77C18B005A48F9 /* CheckinProgress.swift in Sources */,
 				CF53D5DC2A6AF548009B3A69 /* NotificationSettingView.swift in Sources */,
 				CFFB71EC2A4004550019663C /* StorableCouponKeyword.swift in Sources */,
 				CF5923FE29EDA1C8009C2516 /* UserStore.swift in Sources */,
@@ -3883,6 +3948,7 @@
 				CF53D5672A6AF548009B3A69 /* FAQView.swift in Sources */,
 				CF53D65D2A6AF548009B3A69 /* CustomTabView.swift in Sources */,
 				CFFD70D5298AC92500D4F5A2 /* UserAPI.swift in Sources */,
+				CF8BD91E2A78B2C200EAD316 /* CheckinItemView.swift in Sources */,
 				CF53D5F72A6AF548009B3A69 /* PhotoMessageContentItemView.swift in Sources */,
 				CF53D5842A6AF548009B3A69 /* CouponDetailAlertActionType.swift in Sources */,
 				CF53D5592A6AF548009B3A69 /* LaunchRootNavigations.swift in Sources */,
@@ -3891,6 +3957,7 @@
 				CF53D58A2A6AF548009B3A69 /* VideoState+Event.swift in Sources */,
 				CF3E0EFB2A37299D009EF665 /* GiftsAPI.swift in Sources */,
 				CF53D62D2A6AF548009B3A69 /* ImageDetailView.swift in Sources */,
+				CF355C8C2A77C4EA005A48F9 /* CheckinUseCase.swift in Sources */,
 				CF53D58E2A6AF548009B3A69 /* VideoDetailInformationView.swift in Sources */,
 				CF30B1872A13D1D000C43A54 /* DeleteCacheUseCases.swift in Sources */,
 				CF53D59F2A6AF548009B3A69 /* TransactionDetailViewModel.swift in Sources */,
@@ -3911,6 +3978,7 @@
 				CF53D5852A6AF548009B3A69 /* CouponDetailViewModel.swift in Sources */,
 				CF53D5EC2A6AF548009B3A69 /* ChatItemModelBuilder.swift in Sources */,
 				CFB0A82D29F1BD3800298546 /* VideoTrendingDurationType.swift in Sources */,
+				CFAD53592A781ECE0044CB42 /* CheckinOverviewView.swift in Sources */,
 				CF53D5D72A6AF548009B3A69 /* UpdateConversationContactListUseCase.swift in Sources */,
 				CF775BC229C6287F00E82183 /* AppDelegateProtocol.swift in Sources */,
 				CF53D61C2A6AF548009B3A69 /* MessageActionDetailView.swift in Sources */,
@@ -3935,6 +4003,7 @@
 				CF53D5F12A6AF548009B3A69 /* ChatView.swift in Sources */,
 				CF14F266298CF4E700BC2066 /* AppConfigs.swift in Sources */,
 				CF1BD1FD29ACEAA000778786 /* UserService.swift in Sources */,
+				CF355C8E2A77C51F005A48F9 /* LocalCheckingRepository.swift in Sources */,
 				CF53D6492A6AF548009B3A69 /* AuthNavigations.swift in Sources */,
 				CF53D5982A6AF548009B3A69 /* CommonVideoItemView.swift in Sources */,
 				CF53D5792A6AF548009B3A69 /* ShopCouponItemView.swift in Sources */,
@@ -4019,6 +4088,7 @@
 				CFB2F6BE29E1274500191AA3 /* ConversationParticipantAPI.swift in Sources */,
 				CFE0925B298DF7AF00F197F0 /* Logger+SwiftyBeaver.swift in Sources */,
 				CF53D5F22A6AF548009B3A69 /* MessageChatItemView.swift in Sources */,
+				CFAD534E2A780D5A0044CB42 /* CheckinViewModel.swift in Sources */,
 				CFD0952D2A02BDE8004BF047 /* Encodable+JSON.swift in Sources */,
 				CF53D6052A6AF548009B3A69 /* ConversationListNavigations.swift in Sources */,
 				CFE09265298EB92D00F197F0 /* AppleAuthAPI.swift in Sources */,
@@ -4027,6 +4097,7 @@
 				CF53D6302A6AF548009B3A69 /* AnyImageEditorView.swift in Sources */,
 				CF53D6072A6AF548009B3A69 /* ConversationListModel.swift in Sources */,
 				CF53D62A2A6AF548009B3A69 /* ChatSettingAddParticipantView.swift in Sources */,
+				CFAD53572A781D390044CB42 /* CheckinProgressSumaryView.swift in Sources */,
 				CF615C3E2A10AC5800CAF9C5 /* LoyaltyAPI.swift in Sources */,
 				CFF868BC2A6E345E006F0B87 /* GIDGoogleUser+Combine.swift in Sources */,
 				CF53D6222A6AF548009B3A69 /* ChatSettingNavigations.swift in Sources */,
@@ -4034,6 +4105,7 @@
 				CF52AB6129B8D6BE00C9C90C /* User.swift in Sources */,
 				CF53D5602A6AF548009B3A69 /* LaunchViewModel.swift in Sources */,
 				CFF863952A435F8400EC0713 /* ReactIcon.swift in Sources */,
+				CFAD534D2A780D5A0044CB42 /* CheckinView.swift in Sources */,
 				CF53D56B2A6AF548009B3A69 /* ProfileSettingView.swift in Sources */,
 				CFCFFA3729E5C82A002B7FB6 /* ConversationSocketService.swift in Sources */,
 				CF53D5D12A6AF548009B3A69 /* SelectedContactItemView.swift in Sources */,
