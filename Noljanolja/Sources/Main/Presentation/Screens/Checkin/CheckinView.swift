@@ -20,20 +20,23 @@ struct CheckinView<ViewModel: CheckinViewModel>: View {
     }
 
     private func buildBodyView() -> some View {
-        buildMainView()
-            .navigationBarTitle("", displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("Check out and Play")
-                        .lineLimit(1)
-                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
+        ZStack {
+            buildNavigationLinks()
+            buildMainView()
+        }
+        .navigationBarTitle("", displayMode: .inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("Check out and Play")
+                    .lineLimit(1)
+                    .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }
-            .onAppear { viewModel.isAppearSubject.send(true) }
-            .onDisappear { viewModel.isAppearSubject.send(false) }
-            .isProgressHUBVisible($viewModel.isProgressHUDShowing)
-            .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
+        }
+        .onAppear { viewModel.isAppearSubject.send(true) }
+        .onDisappear { viewModel.isAppearSubject.send(false) }
+        .isProgressHUBVisible($viewModel.isProgressHUDShowing)
+        .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
     }
 
     private func buildMainView() -> some View {
@@ -92,7 +95,9 @@ struct CheckinView<ViewModel: CheckinViewModel>: View {
 
     private func buildMiddleButton() -> some View {
         Button(
-            action: {},
+            action: {
+                viewModel.navigationType = .referral
+            },
             label: {
                 HStack(spacing: 32) {
                     Text("Go to Check Out Benefits")
@@ -122,7 +127,7 @@ struct CheckinView<ViewModel: CheckinViewModel>: View {
         if let model = viewModel.model {
             VStack(spacing: 8) {
                 HStack(spacing: 8) {
-                    let weekdays = ["2", "3", "4", "5", "6", "7", "Sun"]
+                    let weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
                     ForEach(weekdays.indices, id: \.self) { index in
                         Text(weekdays[index])
                             .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
@@ -159,6 +164,33 @@ struct CheckinView<ViewModel: CheckinViewModel>: View {
         .buttonStyle(PrimaryButtonStyle(isEnabled: viewModel.model?.isCheckinEnabled ?? false))
         .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
         .padding(.horizontal, 16)
+    }
+}
+
+extension CheckinView {
+    private func buildNavigationLinks() -> some View {
+        NavigationLink(
+            unwrapping: $viewModel.navigationType,
+            onNavigate: { _ in },
+            destination: {
+                buildNavigationLinkDestinationView($0)
+            },
+            label: {
+                EmptyView()
+            }
+        )
+    }
+
+    @ViewBuilder
+    private func buildNavigationLinkDestinationView(
+        _ type: Binding<CheckinNavigationType>
+    ) -> some View {
+        switch type.wrappedValue {
+        case .referral:
+            ReferralView(
+                viewModel: ReferralViewModel()
+            )
+        }
     }
 }
 

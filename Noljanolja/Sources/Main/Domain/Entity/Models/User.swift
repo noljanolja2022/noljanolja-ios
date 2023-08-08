@@ -37,6 +37,8 @@ struct User: Equatable, Codable {
     let preferences: UserPreferences?
     let createdAt: Date?
     let updatedAt: Date?
+    let referralCode: String?
+    let referredBy: String?
 
     init(id: String,
          name: String?,
@@ -49,7 +51,9 @@ struct User: Equatable, Codable {
          gender: GenderType?,
          preferences: UserPreferences?,
          createdAt: Date?,
-         updatedAt: Date?) {
+         updatedAt: Date?,
+         referralCode: String?,
+         referredBy: String?) {
         self.id = id
         self.name = name
         self.avatar = avatar
@@ -62,6 +66,8 @@ struct User: Equatable, Codable {
         self.preferences = preferences
         self.createdAt = createdAt
         self.updatedAt = updatedAt
+        self.referralCode = referralCode
+        self.referredBy = referredBy
     }
 
     init(from decoder: Decoder) throws {
@@ -87,6 +93,8 @@ struct User: Equatable, Codable {
             let updatedAtString = try container.decodeIfPresent(String.self, forKey: .updatedAt)
             return updatedAtString?.date(withFormats: NetworkConfigs.Format.apiFullDateFormats)
         }()
+        self.referralCode = try container.decodeIfPresent(String.self, forKey: .referralCode)
+        self.referredBy = try container.decodeIfPresent(String.self, forKey: .referredBy)
     }
 }
 

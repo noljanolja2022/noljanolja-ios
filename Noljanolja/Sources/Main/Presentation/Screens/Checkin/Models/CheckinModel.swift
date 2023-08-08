@@ -25,10 +25,11 @@ struct CheckinModel: Equatable {
             let itemViewModels = checkinProgresses.map { CheckinItemViewModel(checkinProgress: $0) }
             return emptyItemViewModels + itemViewModels
         }()
-        self.isCheckinEnabled = true // {
-//            let todayCheckinProgress = checkinProgresses.first(where: { Calendar.current.isDateInToday($0.day) })
-//            return todayCheckinProgress?.isCompleted ?? false
-//        }()
+        self.isCheckinEnabled = {
+            let todayCheckinProgress = checkinProgresses.first(where: { Calendar.current.isDateInToday($0.day) })
+            let isCheckinDisabled = todayCheckinProgress?.isCompleted ?? false
+            return !isCheckinDisabled
+        }()
     }
 
     var isEmpty: Bool {

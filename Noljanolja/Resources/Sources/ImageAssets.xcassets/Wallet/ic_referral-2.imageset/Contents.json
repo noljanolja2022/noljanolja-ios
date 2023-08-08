@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "bn_wallet_noti.png",
+      "filename" : "Mask group-1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "bn_wallet_noti@2x.png",
+      "filename" : "Mask group@2x-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "bn_wallet_noti@3x.png",
+      "filename" : "Mask group@3x-1.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

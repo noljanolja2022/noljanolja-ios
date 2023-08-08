@@ -24,6 +24,10 @@ final class CheckinViewModel: ViewModel {
     @Published var alertState: AlertState<Void>?
     @Published var model: CheckinModel?
 
+    // MARK: Navigations
+
+    @Published var navigationType: CheckinNavigationType?
+
     // MARK: Action
 
     let action = PassthroughSubject<Void, Never>()

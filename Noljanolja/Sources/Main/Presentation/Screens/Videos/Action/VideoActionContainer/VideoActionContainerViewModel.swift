@@ -22,7 +22,6 @@ final class VideoActionContainerViewModel: ViewModel {
     // MARK: Navigations
 
     @Published var fullScreenCoverType: VideoActionContainerFullScreenCoverType?
-    @Published var withoutAnimationFullScreenCoverType: VideoActionContainerFullScreenCoverType?
 
     // MARK: Action
 

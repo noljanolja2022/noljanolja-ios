@@ -11,12 +11,23 @@ import SwiftUIX
 
 // MARK: - ContactListView
 
-struct ContactListView<ViewModel: ContactListViewModel>: View {
+struct ContactListView<EndingView: View, ViewModel: ContactListViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
     @Binding var selectedUsers: [User]
     var selectUserAction: ((User) -> Void)?
+    private let endingView: EndingView
+
+    public init(viewModel: ViewModel,
+                selectedUsers: Binding<[User]>,
+                selectUserAction: ((User) -> Void)? = nil,
+                @ViewBuilder endingView: () -> EndingView = { EmptyView() }) {
+        self._viewModel = StateObject(wrappedValue: viewModel)
+        self._selectedUsers = selectedUsers
+        self.selectUserAction = selectUserAction
+        self.endingView = endingView()
+    }
 
     var body: some View {
         buildBodyView()
@@ -98,6 +109,7 @@ extension ContactListView {
                         selectUserAction?(user)
                     }
                 }
+                endingView
             }
             .background(ColorAssets.neutralLight.swiftUIColor)
         }
@@ -117,6 +129,7 @@ extension ContactListView {
                         selectUserAction?(user)
                     }
                 }
+                endingView
             }
             .background(ColorAssets.neutralLight.swiftUIColor)
         }

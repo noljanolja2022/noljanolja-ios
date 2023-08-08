@@ -1,17 +1,17 @@
 //
-//  VideoActionContainerView.swift
+//  ShareReferralContainerView.swift
 //  Noljanolja
 //
-//  Created by Nguyen The Trinh on 26/07/2023.
+//  Created by Nguyen The Trinh on 02/08/2023.
 //
 //
 
 import SwiftUI
 import SwiftUIX
 
-// MARK: - VideoActionContainerView
+// MARK: - ShareReferralContainerView
 
-struct VideoActionContainerView<ViewModel: VideoActionContainerViewModel>: View {
+struct ShareReferralContainerView<ViewModel: ShareReferralContainerViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
@@ -60,36 +60,26 @@ struct VideoActionContainerView<ViewModel: VideoActionContainerViewModel>: View 
     }
 }
 
-extension VideoActionContainerView {
+extension ShareReferralContainerView {
     @ViewBuilder
     private func buildFullScreenCoverDestinationView(
-        _ type: Binding<VideoActionContainerFullScreenCoverType>
+        _ type: Binding<ShareReferralContainerFullScreenCoverType>
     ) -> some View {
         switch type.wrappedValue {
-        case .more:
+        case .horizontalShare:
             BottomSheet {
-                VideoActionView(
-                    viewModel: VideoActionViewModel(
-                        video: viewModel.video,
+                HorizontalShareReferralView(
+                    viewModel: HorizontalShareReferralViewModel(
+                        code: viewModel.code,
                         delegate: viewModel
                     )
                 )
             }
-        case .share:
+        case .verticalShare:
             BottomSheet {
-                ShareVideoView(
-                    viewModel: ShareVideoViewModel(
-                        delegate: viewModel
-                    )
-                )
-            }
-        case let .shareDetail(model):
-            BottomSheet {
-                ShareVideoDetailView(
-                    viewModel: ShareVideoDetailViewModel(
-                        video: viewModel.video,
-                        user: model,
-                        delegate: viewModel
+                VerticalShareReferralView(
+                    viewModel: VerticalShareReferralViewModel(
+                        code: viewModel.code
                     )
                 )
             }

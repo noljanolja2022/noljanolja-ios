@@ -62,7 +62,7 @@ struct CheckinItemView: View {
                 .saturation(0)
                 .frame(maxWidth: .infinity)
                 .aspectRatio(1, contentMode: .fit)
-                .padding(8)
+                .padding(12)
                 .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
                 .background(
                     Circle()
@@ -75,7 +75,7 @@ struct CheckinItemView: View {
                 .sizeToFit()
                 .frame(maxWidth: .infinity)
                 .aspectRatio(1, contentMode: .fit)
-                .padding(8)
+                .padding(12)
                 .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
                 .background(
                     Circle()

@@ -29,6 +29,8 @@ struct BottomSheet<Content: View>: View {
             buildBackgroundView()
             buildContentView()
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .ignoresSafeArea()
         .introspectViewController {
             $0.view.backgroundColor = .clear
         }
@@ -37,9 +39,8 @@ struct BottomSheet<Content: View>: View {
     private func buildBackgroundView() -> some View {
         Spacer()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.black.opacity(0.4))
-            .edgesIgnoringSafeArea(.top)
-            .onPress {
+            .background(.black.opacity(0.3))
+            .onTapGesture {
                 withoutAnimation {
                     presentationMode.wrappedValue.dismiss()
                 }
@@ -48,8 +49,14 @@ struct BottomSheet<Content: View>: View {
 
     @ViewBuilder
     private func buildContentView() -> some View {
-        content
-            .background(.white)
-            .cornerRadius([.topLeading, .topTrailing], 24)
+        VStack(spacing: 0) {
+            content
+            Spacer()
+                .frame(maxWidth: .infinity)
+                .frame(height: UIApplication.shared.rootKeyWindow?.safeAreaInsets.bottom)
+        }
+        .background(.white)
+        .cornerRadius([.topLeading, .topTrailing], 24)
+        .padding(.top, 96)
     }
 }

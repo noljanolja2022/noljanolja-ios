@@ -93,7 +93,11 @@ internal enum ImageAssets {
   internal static let icShop = ImageAsset(name: "ic_shop")
   internal static let icVideo = ImageAsset(name: "ic_video")
   internal static let icWallet = ImageAsset(name: "ic_wallet")
-  internal static let bnWalletNoti = ImageAsset(name: "bn_wallet_noti")
+  internal static let bnReferral = ImageAsset(name: "bn_referral")
+  internal static let icReferral1 = ImageAsset(name: "ic_referral-1")
+  internal static let icReferral2 = ImageAsset(name: "ic_referral-2")
+  internal static let icReferral3 = ImageAsset(name: "ic_referral-3")
+  internal static let icReferral4 = ImageAsset(name: "ic_referral-4")
 
   // swiftlint:disable trailing_comma
   @available(*, deprecated, message: "All values properties are now deprecated")
@@ -169,7 +173,11 @@ internal enum ImageAssets {
     icShop,
     icVideo,
     icWallet,
-    bnWalletNoti,
+    bnReferral,
+    icReferral1,
+    icReferral2,
+    icReferral3,
+    icReferral4,
   ]
   // swiftlint:enable trailing_comma
 }
