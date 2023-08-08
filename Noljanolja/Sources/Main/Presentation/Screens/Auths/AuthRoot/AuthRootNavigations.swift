@@ -10,5 +10,4 @@ import Foundation
 enum AuthRootBodyType: Equatable {
     case terms
     case auth
-    case updateCurrentUser
 }

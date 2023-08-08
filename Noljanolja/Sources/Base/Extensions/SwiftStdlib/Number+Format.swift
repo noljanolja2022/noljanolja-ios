@@ -17,6 +17,11 @@ extension Int {
         let formattedValue = formatter.string(from: number)!
         return formattedValue
     }
+
+    func signFormatted() -> String {
+        let signString = self > 0 ? "+" : ""
+        return "\(signString) \(formatted())"
+    }
 }
 
 extension Int {

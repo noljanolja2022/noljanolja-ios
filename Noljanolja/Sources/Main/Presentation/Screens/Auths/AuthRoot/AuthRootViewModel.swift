@@ -12,7 +12,7 @@ import Foundation
 // MARK: - AuthRootViewModelDelegate
 
 protocol AuthRootViewModelDelegate: AnyObject {
-    func navigateToMain()
+    func authRootViewModelDidComplete(_ user: User)
 }
 
 // MARK: - AuthRootViewModel
@@ -53,19 +53,7 @@ extension AuthRootViewModel: TermViewModelDelegate {
 // MARK: AuthViewModelDelegate
 
 extension AuthRootViewModel: AuthViewModelDelegate {
-    func navigateToMain() {
-        delegate?.navigateToMain()
-    }
-
-    func navigateToUpdateCurrentUser() {
-        contentType = .updateCurrentUser
-    }
-}
-
-// MARK: UpdateCurrentUserViewModelDelegate
-
-extension AuthRootViewModel: UpdateCurrentUserViewModelDelegate {
-    func didUpdateCurrentUser() {
-        delegate?.navigateToMain()
+    func authViewModelDidComplete(_ user: User) {
+        delegate?.authRootViewModelDidComplete(user)
     }
 }

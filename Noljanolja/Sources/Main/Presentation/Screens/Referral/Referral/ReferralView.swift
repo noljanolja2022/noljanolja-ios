@@ -86,7 +86,10 @@ struct ReferralView<ViewModel: ReferralViewModel>: View {
                     .padding(.horizontal, 32)
 
                 Button(
-                    action: {},
+                    action: {
+                        guard let referralCode = viewModel.currentUser?.referralCode else { return }
+                        UIPasteboard.general.string = referralCode
+                    },
                     label: {
                         Text("Copy")
                             .dynamicFont(.systemFont(ofSize: 14, weight: .bold))

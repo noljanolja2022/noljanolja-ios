@@ -28,12 +28,6 @@ struct LaunchRootView<ViewModel: LaunchRootViewModel>: View {
                     delegate: viewModel
                 )
             )
-        case .updateCurrentUser:
-            UpdateCurrentUserView(
-                viewModel: UpdateCurrentUserViewModel(
-                    delegate: viewModel
-                )
-            )
         }
     }
 }

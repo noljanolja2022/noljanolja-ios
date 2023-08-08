@@ -12,8 +12,7 @@ import Foundation
 // MARK: - LaunchRootViewModelDelegate
 
 protocol LaunchRootViewModelDelegate: AnyObject {
-    func navigateToAuth()
-    func navigateToMain()
+    func launchRootViewModelDidComplete(_ user: User?)
 }
 
 // MARK: - LaunchRootViewModel
@@ -46,23 +45,7 @@ final class LaunchRootViewModel: ViewModel {
 // MARK: LaunchViewModelDelegate
 
 extension LaunchRootViewModel: LaunchViewModelDelegate {
-    func navigateToAuth() {
-        delegate?.navigateToAuth()
-    }
-
-    func navigateToUpdateCurrentUser() {
-        contentType = .updateCurrentUser
-    }
-
-    func navigateToMain() {
-        delegate?.navigateToMain()
-    }
-}
-
-// MARK: UpdateCurrentUserViewModelDelegate
-
-extension LaunchRootViewModel: UpdateCurrentUserViewModelDelegate {
-    func didUpdateCurrentUser() {
-        delegate?.navigateToMain()
+    func launchViewModelDidComplete(_ user: User?) {
+        delegate?.launchRootViewModelDidComplete(user)
     }
 }

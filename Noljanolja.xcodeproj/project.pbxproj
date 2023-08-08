@@ -359,6 +359,14 @@
 		CF615C402A10ACC300CAF9C5 /* LoyaltyMemberInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF615C3F2A10ACC300CAF9C5 /* LoyaltyMemberInfo.swift */; };
 		CF62EF8B29B23E0000D6B688 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF62EF8A29B23E0000D6B688 /* ViewModelType.swift */; };
 		CF62EF8D29B254DD00D6B688 /* _SwiftUINavigationState in Frameworks */ = {isa = PBXBuildFile; productRef = CF62EF8C29B254DD00D6B688 /* _SwiftUINavigationState */; };
+		CF65DD992A82A4B900B554D7 /* AddReferralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF65DD972A82A4B900B554D7 /* AddReferralView.swift */; };
+		CF65DD9A2A82A4B900B554D7 /* AddReferralViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF65DD982A82A4B900B554D7 /* AddReferralViewModel.swift */; };
+		CF65DD9C2A82A58F00B554D7 /* AddReferralNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF65DD9B2A82A58F00B554D7 /* AddReferralNavigations.swift */; };
+		CF65DDA02A82AD8A00B554D7 /* UserConfigurationRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF65DD9E2A82AD8A00B554D7 /* UserConfigurationRootView.swift */; };
+		CF65DDA12A82AD8A00B554D7 /* UserConfigurationRootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF65DD9F2A82AD8A00B554D7 /* UserConfigurationRootViewModel.swift */; };
+		CF65DDA32A82AD9800B554D7 /* UserConfigurationRootNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF65DDA22A82AD9800B554D7 /* UserConfigurationRootNavigations.swift */; };
+		CF65DDA92A82BB2600B554D7 /* AddReferralAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF65DDA72A82BB2600B554D7 /* AddReferralAlertView.swift */; };
+		CF65DDAA2A82BB2600B554D7 /* AddReferralAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF65DDA82A82BB2600B554D7 /* AddReferralAlertViewModel.swift */; };
 		CF68231A2A72DA8B00CC4121 /* ShareVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6823182A72DA8B00CC4121 /* ShareVideoView.swift */; };
 		CF68231B2A72DA8B00CC4121 /* ShareVideoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6823192A72DA8B00CC4121 /* ShareVideoViewModel.swift */; };
 		CF68E7AA2A69360E00424C32 /* UIDevice+Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF68E7A92A69360E00424C32 /* UIDevice+Orientation.swift */; };
@@ -907,6 +915,14 @@
 		CF615C3D2A10AC5800CAF9C5 /* LoyaltyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoyaltyAPI.swift; sourceTree = "<group>"; };
 		CF615C3F2A10ACC300CAF9C5 /* LoyaltyMemberInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoyaltyMemberInfo.swift; sourceTree = "<group>"; };
 		CF62EF8A29B23E0000D6B688 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
+		CF65DD972A82A4B900B554D7 /* AddReferralView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReferralView.swift; sourceTree = "<group>"; };
+		CF65DD982A82A4B900B554D7 /* AddReferralViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReferralViewModel.swift; sourceTree = "<group>"; };
+		CF65DD9B2A82A58F00B554D7 /* AddReferralNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReferralNavigations.swift; sourceTree = "<group>"; };
+		CF65DD9E2A82AD8A00B554D7 /* UserConfigurationRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConfigurationRootView.swift; sourceTree = "<group>"; };
+		CF65DD9F2A82AD8A00B554D7 /* UserConfigurationRootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConfigurationRootViewModel.swift; sourceTree = "<group>"; };
+		CF65DDA22A82AD9800B554D7 /* UserConfigurationRootNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConfigurationRootNavigations.swift; sourceTree = "<group>"; };
+		CF65DDA72A82BB2600B554D7 /* AddReferralAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReferralAlertView.swift; sourceTree = "<group>"; };
+		CF65DDA82A82BB2600B554D7 /* AddReferralAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReferralAlertViewModel.swift; sourceTree = "<group>"; };
 		CF6823182A72DA8B00CC4121 /* ShareVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareVideoView.swift; sourceTree = "<group>"; };
 		CF6823192A72DA8B00CC4121 /* ShareVideoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareVideoViewModel.swift; sourceTree = "<group>"; };
 		CF68E7A92A69360E00424C32 /* UIDevice+Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Orientation.swift"; sourceTree = "<group>"; };
@@ -1490,6 +1506,7 @@
 				CF53D4332A6AF547009B3A69 /* Wallet */,
 				CF53D46B2A6AF548009B3A69 /* Root */,
 				CF53D46F2A6AF548009B3A69 /* Chats */,
+				CF65DD9D2A82AD6100B554D7 /* UserConfiguration */,
 				CF53D5322A6AF548009B3A69 /* Auths */,
 				CF53D54E2A6AF548009B3A69 /* Main */,
 			);
@@ -2806,6 +2823,53 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		CF65DD962A82A4A900B554D7 /* AddReferral */ = {
+			isa = PBXGroup;
+			children = (
+				CF65DDA62A82BA6D00B554D7 /* AddReferralAlert */,
+				CF65DDA52A82BA6100B554D7 /* AddReferral */,
+			);
+			path = AddReferral;
+			sourceTree = "<group>";
+		};
+		CF65DD9D2A82AD6100B554D7 /* UserConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				CF65DDA42A82B0DE00B554D7 /* Root */,
+				CF65DD962A82A4A900B554D7 /* AddReferral */,
+			);
+			path = UserConfiguration;
+			sourceTree = "<group>";
+		};
+		CF65DDA42A82B0DE00B554D7 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				CF65DD9E2A82AD8A00B554D7 /* UserConfigurationRootView.swift */,
+				CF65DD9F2A82AD8A00B554D7 /* UserConfigurationRootViewModel.swift */,
+				CF65DDA22A82AD9800B554D7 /* UserConfigurationRootNavigations.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		CF65DDA52A82BA6100B554D7 /* AddReferral */ = {
+			isa = PBXGroup;
+			children = (
+				CF65DD972A82A4B900B554D7 /* AddReferralView.swift */,
+				CF65DD982A82A4B900B554D7 /* AddReferralViewModel.swift */,
+				CF65DD9B2A82A58F00B554D7 /* AddReferralNavigations.swift */,
+			);
+			path = AddReferral;
+			sourceTree = "<group>";
+		};
+		CF65DDA62A82BA6D00B554D7 /* AddReferralAlert */ = {
+			isa = PBXGroup;
+			children = (
+				CF65DDA72A82BB2600B554D7 /* AddReferralAlertView.swift */,
+				CF65DDA82A82BB2600B554D7 /* AddReferralAlertViewModel.swift */,
+			);
+			path = AddReferralAlert;
+			sourceTree = "<group>";
+		};
 		CF67F8B52A7174CD007293B4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -3878,6 +3942,7 @@
 				CF53D5BC2A6AF548009B3A69 /* WalletView.swift in Sources */,
 				CF53D60F2A6AF548009B3A69 /* FindUsersResultView.swift in Sources */,
 				CF53D5BD2A6AF548009B3A69 /* WalletUserInfoView.swift in Sources */,
+				CF65DD9C2A82A58F00B554D7 /* AddReferralNavigations.swift in Sources */,
 				CFC9E5182A704B73004D48E5 /* StorableVideoKeyword.swift in Sources */,
 				CF53D5722A6AF548009B3A69 /* ShopHomeViewModel.swift in Sources */,
 				CF53D56C2A6AF548009B3A69 /* ProfileSettingAlertActionType.swift in Sources */,
@@ -3901,6 +3966,7 @@
 				CFF467A02A0A45E50018FFAA /* View+Visibility.swift in Sources */,
 				CFAE00D12A6EEA14006A1FF0 /* SearchVideosViewModel.swift in Sources */,
 				CF1B625029B9BCC200DE53E6 /* StorableConversation.swift in Sources */,
+				CF65DDA32A82AD9800B554D7 /* UserConfigurationRootNavigations.swift in Sources */,
 				CFB2A89F29D1F31A008D1689 /* StorableSticker.swift in Sources */,
 				CF54FA2429D0187B0092E2C6 /* MediaStore.swift in Sources */,
 				CF30B19B2A13ECEB00C43A54 /* TransactionType.swift in Sources */,
@@ -3910,6 +3976,7 @@
 				CF446B8229D89B2100ED66BF /* LottieView.swift in Sources */,
 				CFF530A42A740D7C00908DEB /* StorableVideo.swift in Sources */,
 				CFE0925F298EACF200F197F0 /* GIDSignIn+Combine.swift in Sources */,
+				CF65DDA02A82AD8A00B554D7 /* UserConfigurationRootView.swift in Sources */,
 				CFFD70D3298AC89000D4F5A2 /* NetworkConfigs.swift in Sources */,
 				CFF520FE2A17DB7100F29A4E /* BarChartSwiftUIView.swift in Sources */,
 				CF14F249298C331C00BC2066 /* Localizable.swift in Sources */,
@@ -3920,6 +3987,7 @@
 				CF775BBE29C625C900E82183 /* NotificationAppDelegate.swift in Sources */,
 				CF1307FC29C8C96900EED044 /* TextEditor+Background.swift in Sources */,
 				CFB0A82529F1B81400298546 /* VideoCommenter.swift in Sources */,
+				CF65DD9A2A82A4B900B554D7 /* AddReferralViewModel.swift in Sources */,
 				CF53D5A62A6AF548009B3A69 /* TransactionDashboardHeaderModel.swift in Sources */,
 				CF53D5A22A6AF548009B3A69 /* TransactionDashboardBuilder.swift in Sources */,
 				CF53D5AA2A6AF548009B3A69 /* TransactionDashboardItemView.swift in Sources */,
@@ -4025,6 +4093,7 @@
 				CFFD70CC298AC5F800D4F5A2 /* Api.swift in Sources */,
 				CF53D5D82A6AF548009B3A69 /* MessageQuickReactionInput.swift in Sources */,
 				CF12604629B78AAF00B5373B /* DeviceIdentityPlugin.swift in Sources */,
+				CF65DDAA2A82BB2600B554D7 /* AddReferralAlertViewModel.swift in Sources */,
 				CF446B9029D8AB0D00ED66BF /* LottieAssets.swift in Sources */,
 				CFE5ACEE2A7AAB360027492E /* ShareReferralContainerView.swift in Sources */,
 				CF82C30E29EAA00300EAD36C /* BottomSheet.swift in Sources */,
@@ -4042,6 +4111,7 @@
 				CF53D5BE2A6AF548009B3A69 /* WalletMemberTierView.swift in Sources */,
 				CF52AB7C29B8EE1A00C9C90C /* Realm+Init.swift in Sources */,
 				CF53D5E62A6AF548009B3A69 /* PhotoMessageContentModel.swift in Sources */,
+				CF65DDA92A82BB2600B554D7 /* AddReferralAlertView.swift in Sources */,
 				CF14F24A298C331D00BC2066 /* ColorAssets.swift in Sources */,
 				CF53D5762A6AF548009B3A69 /* MyCouponItemView.swift in Sources */,
 				CF53D59C2A6AF548009B3A69 /* TrendingVideoView.swift in Sources */,
@@ -4083,6 +4153,7 @@
 				CFC23D5E2A7A5DA0009CAD87 /* ReferralItemView.swift in Sources */,
 				CF53D6532A6AF548009B3A69 /* AuthVerificationView.swift in Sources */,
 				CF53D5922A6AF548009B3A69 /* VideoDetailInputViewModel.swift in Sources */,
+				CF65DD992A82A4B900B554D7 /* AddReferralView.swift in Sources */,
 				CF53D5E02A6AF548009B3A69 /* ChatViewModel.swift in Sources */,
 				CF53D5F42A6AF548009B3A69 /* DateChatItemView.swift in Sources */,
 				CF53D55F2A6AF548009B3A69 /* LaunchBackgroundView.swift in Sources */,
@@ -4167,6 +4238,7 @@
 				CF53D5F82A6AF548009B3A69 /* MessageContentView.swift in Sources */,
 				CFF521072A190C7E00F29A4E /* TransactionStatusType.swift in Sources */,
 				CF53D6272A6AF548009B3A69 /* ChatSettingView.swift in Sources */,
+				CF65DDA12A82AD8A00B554D7 /* UserConfigurationRootViewModel.swift in Sources */,
 				CFB0A82329F1B7CC00298546 /* VideoComment.swift in Sources */,
 				CF53D5FE2A6AF548009B3A69 /* MessageReactionsView.swift in Sources */,
 				CF53D5C22A6AF548009B3A69 /* MyRankingViewModel.swift in Sources */,
