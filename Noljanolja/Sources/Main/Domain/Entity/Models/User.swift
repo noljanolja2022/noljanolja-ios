@@ -37,6 +37,8 @@ struct User: Equatable, Codable {
     let preferences: UserPreferences?
     let createdAt: Date?
     let updatedAt: Date?
+    let referralCode: String?
+    let referredBy: String?
 
     init(id: String,
          name: String?,
@@ -49,7 +51,9 @@ struct User: Equatable, Codable {
          gender: GenderType?,
          preferences: UserPreferences?,
          createdAt: Date?,
-         updatedAt: Date?) {
+         updatedAt: Date?,
+         referralCode: String?,
+         referredBy: String?) {
         self.id = id
         self.name = name
         self.avatar = avatar
@@ -62,6 +66,8 @@ struct User: Equatable, Codable {
         self.preferences = preferences
         self.createdAt = createdAt
         self.updatedAt = updatedAt
+        self.referralCode = referralCode
+        self.referredBy = referredBy
     }
 
     init(from decoder: Decoder) throws {
@@ -73,18 +79,22 @@ struct User: Equatable, Codable {
         self.phone = try container.decodeIfPresent(String.self, forKey: .phone)
         self.email = try container.decodeIfPresent(String.self, forKey: .email)
         self.isEmailVerified = try container.decodeIfPresent(Bool.self, forKey: .isEmailVerified) ?? false
-
-        let dobString = try container.decodeIfPresent(String.self, forKey: .dob)
-        self.dob = dobString.flatMap { $0.date(withFormat: NetworkConfigs.Format.apiDateFormat) }
-        
+        self.dob = try {
+            let dobString = try container.decodeIfPresent(String.self, forKey: .dob)
+            return dobString.flatMap { $0.date(withFormat: NetworkConfigs.Format.apiDateFormat) }
+        }()
         self.gender = try container.decodeIfPresent(GenderType.self, forKey: .gender)
         self.preferences = try container.decodeIfPresent(UserPreferences.self, forKey: .preferences)
-
-        let createdAtString = try container.decodeIfPresent(String.self, forKey: .createdAt)
-        self.createdAt = createdAtString?.date(withFormats: NetworkConfigs.Format.apiFullDateFormats)
-
-        let updatedAtString = try container.decodeIfPresent(String.self, forKey: .updatedAt)
-        self.updatedAt = updatedAtString?.date(withFormats: NetworkConfigs.Format.apiFullDateFormats)
+        self.createdAt = try {
+            let createdAtString = try container.decodeIfPresent(String.self, forKey: .createdAt)
+            return createdAtString?.date(withFormats: NetworkConfigs.Format.apiFullDateFormats)
+        }()
+        self.updatedAt = try {
+            let updatedAtString = try container.decodeIfPresent(String.self, forKey: .updatedAt)
+            return updatedAtString?.date(withFormats: NetworkConfigs.Format.apiFullDateFormats)
+        }()
+        self.referralCode = try container.decodeIfPresent(String.self, forKey: .referralCode)
+        self.referredBy = try container.decodeIfPresent(String.self, forKey: .referredBy)
     }
 }
 

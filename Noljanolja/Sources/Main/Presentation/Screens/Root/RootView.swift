@@ -57,6 +57,12 @@ struct RootView<ViewModel: RootViewModel>: View {
                     foregroundColor: ColorAssets.neutralDarkGrey.color
                 )
             }
+        case .userConfiguraction:
+            UserConfigurationRootView(
+                viewModel: UserConfigurationRootViewModel(
+                    delegate: viewModel
+                )
+            )
         }
     }
 }

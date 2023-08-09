@@ -12,9 +12,7 @@ import Foundation
 // MARK: - LaunchViewModelDelegate
 
 protocol LaunchViewModelDelegate: AnyObject {
-    func navigateToAuth()
-    func navigateToUpdateCurrentUser()
-    func navigateToMain()
+    func launchViewModelDidComplete(_ user: User?)
 }
 
 // MARK: - LaunchViewModel
@@ -78,11 +76,7 @@ final class LaunchViewModel: ViewModel {
             .sink(receiveValue: { [weak self] result in
                 switch result {
                 case let .success(user):
-                    if user.isSettedUp {
-                        self?.delegate?.navigateToMain()
-                    } else {
-                        self?.delegate?.navigateToUpdateCurrentUser()
-                    }
+                    self?.delegate?.launchViewModelDidComplete(user)
                 case .failure:
                     self?.isContinueButtonHidden = false
                 }
@@ -92,7 +86,7 @@ final class LaunchViewModel: ViewModel {
         navigateToAuthAction
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
-                self?.delegate?.navigateToAuth()
+                self?.delegate?.launchViewModelDidComplete(nil)
             }
             .store(in: &cancellables)
     }

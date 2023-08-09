@@ -11,4 +11,5 @@ enum RootBodyType: Equatable {
     case launch
     case auth
     case main
+    case userConfiguraction
 }

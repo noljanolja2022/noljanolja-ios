@@ -94,6 +94,18 @@ private enum UserAPITargets {
             ["friendId": id]
         }
     }
+
+    struct AddReferral: BaseAuthTargetType {
+        var path: String { "v1/users/me/referral" }
+        let method: Moya.Method = .put
+        var task: Task { .requestParameters(parameters: parameters, encoding: JSONEncoding.default) }
+
+        let referredByCode: String
+
+        var parameters: [String: Any] {
+            ["referredByCode": referredByCode]
+        }
+    }
 }
 
 // MARK: - UserAPIType
@@ -107,6 +119,7 @@ protocol UserAPIType {
     func getContact(page: Int, pageSize: Int) -> AnyPublisher<[User], Error>
     func syncContacts(_ contacts: [Contact]) -> AnyPublisher<[User], Error>
     func inviteUser(id: String) -> AnyPublisher<Void, Error>
+    func addReferral(referredByCode: String) -> AnyPublisher<Int, Error>
 }
 
 // MARK: - UserAPI
@@ -164,6 +177,13 @@ final class UserAPI: UserAPIType {
     func inviteUser(id: String) -> AnyPublisher<Void, Error> {
         api.request(
             target: UserAPITargets.InviteUser(id: id)
+        )
+    }
+
+    func addReferral(referredByCode: String) -> AnyPublisher<Int, Error> {
+        api.request(
+            target: UserAPITargets.AddReferral(referredByCode: referredByCode),
+            atKeyPath: "data.rewardPoints"
         )
     }
 }

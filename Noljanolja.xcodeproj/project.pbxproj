@@ -41,6 +41,8 @@
 		CF14F25E298CE68600BC2066 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CF14F25D298CE68600BC2066 /* GoogleService-Info.plist */; };
 		CF14F266298CF4E700BC2066 /* AppConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F265298CF4E700BC2066 /* AppConfigs.swift */; };
 		CF14F268298CF87E00BC2066 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F267298CF87E00BC2066 /* AuthService.swift */; };
+		CF180A072A7E3C41004728C4 /* HorizontalShareReferralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF180A052A7E3C41004728C4 /* HorizontalShareReferralView.swift */; };
+		CF180A082A7E3C41004728C4 /* HorizontalShareReferralViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF180A062A7E3C41004728C4 /* HorizontalShareReferralViewModel.swift */; };
 		CF18378729F6F4F500DDC15C /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = CF18378629F6F4F500DDC15C /* YouTubePlayerKit */; };
 		CF1B624829B9B55F00DE53E6 /* ConversationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1B624729B9B55F00DE53E6 /* ConversationAPI.swift */; };
 		CF1B624A29B9B8A100DE53E6 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1B624929B9B8A100DE53E6 /* Conversation.swift */; };
@@ -63,6 +65,10 @@
 		CF30B1872A13D1D000C43A54 /* DeleteCacheUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF30B1862A13D1D000C43A54 /* DeleteCacheUseCases.swift */; };
 		CF30B19B2A13ECEB00C43A54 /* TransactionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF30B19A2A13ECEB00C43A54 /* TransactionType.swift */; };
 		CF3282ED299E3758006A459B /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3282EC299E3758006A459B /* UIApplication+Extension.swift */; };
+		CF355C8A2A77C18B005A48F9 /* CheckinProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF355C892A77C18B005A48F9 /* CheckinProgress.swift */; };
+		CF355C8C2A77C4EA005A48F9 /* CheckinUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF355C8B2A77C4EA005A48F9 /* CheckinUseCase.swift */; };
+		CF355C8E2A77C51F005A48F9 /* LocalCheckingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF355C8D2A77C51F005A48F9 /* LocalCheckingRepository.swift */; };
+		CF355C902A77C6A2005A48F9 /* NetworkCheckinRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF355C8F2A77C6A2005A48F9 /* NetworkCheckinRepository.swift */; };
 		CF398DD829BF89430015DB18 /* UpdateCurrentUserParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF398DD729BF89430015DB18 /* UpdateCurrentUserParam.swift */; };
 		CF3CE18529B79FD50054BBEF /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3CE18429B79FD50054BBEF /* UserDefaults.swift */; };
 		CF3E0EF42A372728009EF665 /* Coupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3E0EF32A372728009EF665 /* Coupon.swift */; };
@@ -186,7 +192,6 @@
 		CF53D5BC2A6AF548009B3A69 /* WalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D45F2A6AF548009B3A69 /* WalletView.swift */; };
 		CF53D5BD2A6AF548009B3A69 /* WalletUserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4612A6AF548009B3A69 /* WalletUserInfoView.swift */; };
 		CF53D5BE2A6AF548009B3A69 /* WalletMemberTierView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4622A6AF548009B3A69 /* WalletMemberTierView.swift */; };
-		CF53D5BF2A6AF548009B3A69 /* WalletNotiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4632A6AF548009B3A69 /* WalletNotiView.swift */; };
 		CF53D5C02A6AF548009B3A69 /* WalletMyPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4642A6AF548009B3A69 /* WalletMyPointView.swift */; };
 		CF53D5C12A6AF548009B3A69 /* WalletPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4652A6AF548009B3A69 /* WalletPointView.swift */; };
 		CF53D5C22A6AF548009B3A69 /* MyRankingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4672A6AF548009B3A69 /* MyRankingViewModel.swift */; };
@@ -354,6 +359,14 @@
 		CF615C402A10ACC300CAF9C5 /* LoyaltyMemberInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF615C3F2A10ACC300CAF9C5 /* LoyaltyMemberInfo.swift */; };
 		CF62EF8B29B23E0000D6B688 /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF62EF8A29B23E0000D6B688 /* ViewModelType.swift */; };
 		CF62EF8D29B254DD00D6B688 /* _SwiftUINavigationState in Frameworks */ = {isa = PBXBuildFile; productRef = CF62EF8C29B254DD00D6B688 /* _SwiftUINavigationState */; };
+		CF65DD992A82A4B900B554D7 /* AddReferralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF65DD972A82A4B900B554D7 /* AddReferralView.swift */; };
+		CF65DD9A2A82A4B900B554D7 /* AddReferralViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF65DD982A82A4B900B554D7 /* AddReferralViewModel.swift */; };
+		CF65DD9C2A82A58F00B554D7 /* AddReferralNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF65DD9B2A82A58F00B554D7 /* AddReferralNavigations.swift */; };
+		CF65DDA02A82AD8A00B554D7 /* UserConfigurationRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF65DD9E2A82AD8A00B554D7 /* UserConfigurationRootView.swift */; };
+		CF65DDA12A82AD8A00B554D7 /* UserConfigurationRootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF65DD9F2A82AD8A00B554D7 /* UserConfigurationRootViewModel.swift */; };
+		CF65DDA32A82AD9800B554D7 /* UserConfigurationRootNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF65DDA22A82AD9800B554D7 /* UserConfigurationRootNavigations.swift */; };
+		CF65DDA92A82BB2600B554D7 /* AddReferralAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF65DDA72A82BB2600B554D7 /* AddReferralAlertView.swift */; };
+		CF65DDAA2A82BB2600B554D7 /* AddReferralAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF65DDA82A82BB2600B554D7 /* AddReferralAlertViewModel.swift */; };
 		CF68231A2A72DA8B00CC4121 /* ShareVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6823182A72DA8B00CC4121 /* ShareVideoView.swift */; };
 		CF68231B2A72DA8B00CC4121 /* ShareVideoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6823192A72DA8B00CC4121 /* ShareVideoViewModel.swift */; };
 		CF68E7AA2A69360E00424C32 /* UIDevice+Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF68E7A92A69360E00424C32 /* UIDevice+Orientation.swift */; };
@@ -375,6 +388,9 @@
 		CF800A9B2A7188C500DBD9F0 /* VideoActionContainerNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF800A9A2A7188C500DBD9F0 /* VideoActionContainerNavigations.swift */; };
 		CF800A9E2A718C1A00DBD9F0 /* VideoActionItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF800A9D2A718C1A00DBD9F0 /* VideoActionItemViewModel.swift */; };
 		CF82C30E29EAA00300EAD36C /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF82C30D29EAA00300EAD36C /* BottomSheet.swift */; };
+		CF849EE42A809FD500B8BA3B /* VerticalShareReferralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF849EE22A809FD500B8BA3B /* VerticalShareReferralView.swift */; };
+		CF849EE52A809FD500B8BA3B /* VerticalShareReferralViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF849EE32A809FD500B8BA3B /* VerticalShareReferralViewModel.swift */; };
+		CF849EEB2A80A5CD00B8BA3B /* ShareReferralViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF849EEA2A80A5CD00B8BA3B /* ShareReferralViewModel.swift */; };
 		CF8633FD29B8F2F50091BF5D /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8633FC29B8F2F50091BF5D /* Contact.swift */; };
 		CF8737EA29CB5BAB0018237B /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8737E929CB5BAB0018237B /* PhotoPickerView.swift */; };
 		CF8737EC29CB5BBB0018237B /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8737EB29CB5BBB0018237B /* PhotoLibrary.swift */; };
@@ -384,6 +400,7 @@
 		CF8795222A7430D3003B0428 /* ShareVideoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8795202A7430D3003B0428 /* ShareVideoDetailView.swift */; };
 		CF8795232A7430D3003B0428 /* ShareVideoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8795212A7430D3003B0428 /* ShareVideoDetailViewModel.swift */; };
 		CF88ABCD299F2E7400D8AB67 /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = CF88ABCC299F2E7400D8AB67 /* SwiftUINavigation */; };
+		CF8BD91E2A78B2C200EAD316 /* CheckinItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8BD91D2A78B2C200EAD316 /* CheckinItemView.swift */; };
 		CF9779DC29BE2FC600D1CAB0 /* PhoneNumberKit in Frameworks */ = {isa = PBXBuildFile; productRef = CF9779DB29BE2FC600D1CAB0 /* PhoneNumberKit */; };
 		CF9DF0AA2A36B2D80054E105 /* UIImage+QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9DF0A92A36B2D80054E105 /* UIImage+QRCode.swift */; };
 		CFA3304729BE3352008D7449 /* String+Phone.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA3304629BE3352008D7449 /* String+Phone.swift */; };
@@ -397,6 +414,12 @@
 		CFAA37612A4B370C0085CE88 /* BannerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAA37602A4B370C0085CE88 /* BannerRepository.swift */; };
 		CFAA37632A4B38E00085CE88 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAA37622A4B38E00085CE88 /* Banner.swift */; };
 		CFAD27B129E2DAE400947BC3 /* ConversationDetailStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAD27B029E2DAE400947BC3 /* ConversationDetailStore.swift */; };
+		CFAD534D2A780D5A0044CB42 /* CheckinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAD534B2A780D5A0044CB42 /* CheckinView.swift */; };
+		CFAD534E2A780D5A0044CB42 /* CheckinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAD534C2A780D5A0044CB42 /* CheckinViewModel.swift */; };
+		CFAD53512A78181A0044CB42 /* LinearProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAD53502A78181A0044CB42 /* LinearProgressView.swift */; };
+		CFAD53542A781A150044CB42 /* CheckinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAD53532A781A150044CB42 /* CheckinModel.swift */; };
+		CFAD53572A781D390044CB42 /* CheckinProgressSumaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAD53562A781D390044CB42 /* CheckinProgressSumaryView.swift */; };
+		CFAD53592A781ECE0044CB42 /* CheckinOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAD53582A781ECE0044CB42 /* CheckinOverviewView.swift */; };
 		CFAE00D02A6EEA14006A1FF0 /* SearchVideosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAE00CE2A6EEA14006A1FF0 /* SearchVideosView.swift */; };
 		CFAE00D12A6EEA14006A1FF0 /* SearchVideosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAE00CF2A6EEA14006A1FF0 /* SearchVideosViewModel.swift */; };
 		CFB0A82129F1B6FD00298546 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFB0A82029F1B6FD00298546 /* Video.swift */; };
@@ -417,6 +440,10 @@
 		CFBC6F0229C0CF44000509EC /* StatefullFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBC6F0129C0CF44000509EC /* StatefullFooterView.swift */; };
 		CFBCE41829B98A65000D6F73 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBCE41729B98A65000D6F73 /* CommonError.swift */; };
 		CFC0DE492A3B1165007AB0F4 /* String+QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC0DE482A3B1165007AB0F4 /* String+QRCode.swift */; };
+		CFC23D582A7A4E53009CAD87 /* ReferralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC23D562A7A4E53009CAD87 /* ReferralView.swift */; };
+		CFC23D592A7A4E53009CAD87 /* ReferralViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC23D572A7A4E53009CAD87 /* ReferralViewModel.swift */; };
+		CFC23D5B2A7A4F58009CAD87 /* CheckinNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC23D5A2A7A4F58009CAD87 /* CheckinNavigations.swift */; };
+		CFC23D5E2A7A5DA0009CAD87 /* ReferralItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC23D5D2A7A5DA0009CAD87 /* ReferralItemView.swift */; };
 		CFC709E02996051800B64216 /* View+Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC709DF2996051800B64216 /* View+Progress.swift */; };
 		CFC9E5142A7046BD004D48E5 /* VideoKeyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC9E5132A7046BD004D48E5 /* VideoKeyword.swift */; };
 		CFC9E5162A7047FA004D48E5 /* LocalVideoKeywordRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC9E5152A7047FA004D48E5 /* LocalVideoKeywordRepository.swift */; };
@@ -453,6 +480,10 @@
 		CFE09341299007E400F197F0 /* Publisher+ResultTranforming.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE09340299007E400F197F0 /* Publisher+ResultTranforming.swift */; };
 		CFE48BC1299206830062C903 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = CFE48BC0299206830062C903 /* KeychainAccess */; };
 		CFE48BC3299207DA0062C903 /* AuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE48BC2299207DA0062C903 /* AuthStore.swift */; };
+		CFE5ACEE2A7AAB360027492E /* ShareReferralContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE5ACEC2A7AAB360027492E /* ShareReferralContainerView.swift */; };
+		CFE5ACEF2A7AAB360027492E /* ShareReferralContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE5ACED2A7AAB360027492E /* ShareReferralContainerViewModel.swift */; };
+		CFE5ACF12A7AAB6D0027492E /* ShareReferralContainerNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE5ACF02A7AAB6D0027492E /* ShareReferralContainerNavigations.swift */; };
+		CFE5ACF32A7AAD670027492E /* ReferralNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE5ACF22A7AAD670027492E /* ReferralNavigation.swift */; };
 		CFE954952A3A13BA00C109FE /* MyCoupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE954942A3A13BA00C109FE /* MyCoupon.swift */; };
 		CFE9D2DD298D66F700D936DA /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = CFE9D2DC298D66F700D936DA /* GoogleSignIn */; };
 		CFE9D2E0298D6C1500D936DA /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CFE9D2DF298D6C1500D936DA /* KakaoSDKAuth */; };
@@ -571,6 +602,8 @@
 		CF14F25D298CE68600BC2066 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CF14F265298CF4E700BC2066 /* AppConfigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigs.swift; sourceTree = "<group>"; };
 		CF14F267298CF87E00BC2066 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		CF180A052A7E3C41004728C4 /* HorizontalShareReferralView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalShareReferralView.swift; sourceTree = "<group>"; };
+		CF180A062A7E3C41004728C4 /* HorizontalShareReferralViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalShareReferralViewModel.swift; sourceTree = "<group>"; };
 		CF1B624729B9B55F00DE53E6 /* ConversationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationAPI.swift; sourceTree = "<group>"; };
 		CF1B624929B9B8A100DE53E6 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		CF1B624B29B9B92B00DE53E6 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -592,6 +625,10 @@
 		CF30B1862A13D1D000C43A54 /* DeleteCacheUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCacheUseCases.swift; sourceTree = "<group>"; };
 		CF30B19A2A13ECEB00C43A54 /* TransactionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionType.swift; sourceTree = "<group>"; };
 		CF3282EC299E3758006A459B /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
+		CF355C892A77C18B005A48F9 /* CheckinProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinProgress.swift; sourceTree = "<group>"; };
+		CF355C8B2A77C4EA005A48F9 /* CheckinUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinUseCase.swift; sourceTree = "<group>"; };
+		CF355C8D2A77C51F005A48F9 /* LocalCheckingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCheckingRepository.swift; sourceTree = "<group>"; };
+		CF355C8F2A77C6A2005A48F9 /* NetworkCheckinRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCheckinRepository.swift; sourceTree = "<group>"; };
 		CF398DD729BF89430015DB18 /* UpdateCurrentUserParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCurrentUserParam.swift; sourceTree = "<group>"; };
 		CF3CE18429B79FD50054BBEF /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		CF3E0EF32A372728009EF665 /* Coupon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coupon.swift; sourceTree = "<group>"; };
@@ -713,7 +750,6 @@
 		CF53D45F2A6AF548009B3A69 /* WalletView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletView.swift; sourceTree = "<group>"; };
 		CF53D4612A6AF548009B3A69 /* WalletUserInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletUserInfoView.swift; sourceTree = "<group>"; };
 		CF53D4622A6AF548009B3A69 /* WalletMemberTierView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletMemberTierView.swift; sourceTree = "<group>"; };
-		CF53D4632A6AF548009B3A69 /* WalletNotiView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletNotiView.swift; sourceTree = "<group>"; };
 		CF53D4642A6AF548009B3A69 /* WalletMyPointView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletMyPointView.swift; sourceTree = "<group>"; };
 		CF53D4652A6AF548009B3A69 /* WalletPointView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletPointView.swift; sourceTree = "<group>"; };
 		CF53D4672A6AF548009B3A69 /* MyRankingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRankingViewModel.swift; sourceTree = "<group>"; };
@@ -879,6 +915,14 @@
 		CF615C3D2A10AC5800CAF9C5 /* LoyaltyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoyaltyAPI.swift; sourceTree = "<group>"; };
 		CF615C3F2A10ACC300CAF9C5 /* LoyaltyMemberInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoyaltyMemberInfo.swift; sourceTree = "<group>"; };
 		CF62EF8A29B23E0000D6B688 /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
+		CF65DD972A82A4B900B554D7 /* AddReferralView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReferralView.swift; sourceTree = "<group>"; };
+		CF65DD982A82A4B900B554D7 /* AddReferralViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReferralViewModel.swift; sourceTree = "<group>"; };
+		CF65DD9B2A82A58F00B554D7 /* AddReferralNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReferralNavigations.swift; sourceTree = "<group>"; };
+		CF65DD9E2A82AD8A00B554D7 /* UserConfigurationRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConfigurationRootView.swift; sourceTree = "<group>"; };
+		CF65DD9F2A82AD8A00B554D7 /* UserConfigurationRootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConfigurationRootViewModel.swift; sourceTree = "<group>"; };
+		CF65DDA22A82AD9800B554D7 /* UserConfigurationRootNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserConfigurationRootNavigations.swift; sourceTree = "<group>"; };
+		CF65DDA72A82BB2600B554D7 /* AddReferralAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReferralAlertView.swift; sourceTree = "<group>"; };
+		CF65DDA82A82BB2600B554D7 /* AddReferralAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReferralAlertViewModel.swift; sourceTree = "<group>"; };
 		CF6823182A72DA8B00CC4121 /* ShareVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareVideoView.swift; sourceTree = "<group>"; };
 		CF6823192A72DA8B00CC4121 /* ShareVideoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareVideoViewModel.swift; sourceTree = "<group>"; };
 		CF68E7A92A69360E00424C32 /* UIDevice+Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Orientation.swift"; sourceTree = "<group>"; };
@@ -898,6 +942,9 @@
 		CF800A9A2A7188C500DBD9F0 /* VideoActionContainerNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoActionContainerNavigations.swift; sourceTree = "<group>"; };
 		CF800A9D2A718C1A00DBD9F0 /* VideoActionItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoActionItemViewModel.swift; sourceTree = "<group>"; };
 		CF82C30D29EAA00300EAD36C /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
+		CF849EE22A809FD500B8BA3B /* VerticalShareReferralView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalShareReferralView.swift; sourceTree = "<group>"; };
+		CF849EE32A809FD500B8BA3B /* VerticalShareReferralViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalShareReferralViewModel.swift; sourceTree = "<group>"; };
+		CF849EEA2A80A5CD00B8BA3B /* ShareReferralViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareReferralViewModel.swift; sourceTree = "<group>"; };
 		CF8633FC29B8F2F50091BF5D /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		CF8737E929CB5BAB0018237B /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
 		CF8737EB29CB5BBB0018237B /* PhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrary.swift; sourceTree = "<group>"; };
@@ -906,6 +953,7 @@
 		CF876C3829EAB2F200C8C9B0 /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
 		CF8795202A7430D3003B0428 /* ShareVideoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareVideoDetailView.swift; sourceTree = "<group>"; };
 		CF8795212A7430D3003B0428 /* ShareVideoDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareVideoDetailViewModel.swift; sourceTree = "<group>"; };
+		CF8BD91D2A78B2C200EAD316 /* CheckinItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinItemView.swift; sourceTree = "<group>"; };
 		CF9DF0A92A36B2D80054E105 /* UIImage+QRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+QRCode.swift"; sourceTree = "<group>"; };
 		CFA3304629BE3352008D7449 /* String+Phone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Phone.swift"; sourceTree = "<group>"; };
 		CFA3304829BE3AB9008D7449 /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
@@ -918,6 +966,12 @@
 		CFAA37602A4B370C0085CE88 /* BannerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerRepository.swift; sourceTree = "<group>"; };
 		CFAA37622A4B38E00085CE88 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		CFAD27B029E2DAE400947BC3 /* ConversationDetailStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationDetailStore.swift; sourceTree = "<group>"; };
+		CFAD534B2A780D5A0044CB42 /* CheckinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinView.swift; sourceTree = "<group>"; };
+		CFAD534C2A780D5A0044CB42 /* CheckinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinViewModel.swift; sourceTree = "<group>"; };
+		CFAD53502A78181A0044CB42 /* LinearProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearProgressView.swift; sourceTree = "<group>"; };
+		CFAD53532A781A150044CB42 /* CheckinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinModel.swift; sourceTree = "<group>"; };
+		CFAD53562A781D390044CB42 /* CheckinProgressSumaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinProgressSumaryView.swift; sourceTree = "<group>"; };
+		CFAD53582A781ECE0044CB42 /* CheckinOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinOverviewView.swift; sourceTree = "<group>"; };
 		CFAE00CE2A6EEA14006A1FF0 /* SearchVideosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVideosView.swift; sourceTree = "<group>"; };
 		CFAE00CF2A6EEA14006A1FF0 /* SearchVideosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVideosViewModel.swift; sourceTree = "<group>"; };
 		CFB0A82029F1B6FD00298546 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
@@ -938,6 +992,10 @@
 		CFBC6F0129C0CF44000509EC /* StatefullFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatefullFooterView.swift; sourceTree = "<group>"; };
 		CFBCE41729B98A65000D6F73 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
 		CFC0DE482A3B1165007AB0F4 /* String+QRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+QRCode.swift"; sourceTree = "<group>"; };
+		CFC23D562A7A4E53009CAD87 /* ReferralView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralView.swift; sourceTree = "<group>"; };
+		CFC23D572A7A4E53009CAD87 /* ReferralViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralViewModel.swift; sourceTree = "<group>"; };
+		CFC23D5A2A7A4F58009CAD87 /* CheckinNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinNavigations.swift; sourceTree = "<group>"; };
+		CFC23D5D2A7A5DA0009CAD87 /* ReferralItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralItemView.swift; sourceTree = "<group>"; };
 		CFC709DF2996051800B64216 /* View+Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Progress.swift"; sourceTree = "<group>"; };
 		CFC9E5132A7046BD004D48E5 /* VideoKeyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoKeyword.swift; sourceTree = "<group>"; };
 		CFC9E5152A7047FA004D48E5 /* LocalVideoKeywordRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalVideoKeywordRepository.swift; sourceTree = "<group>"; };
@@ -971,6 +1029,10 @@
 		CFE0933D298FFC5B00F197F0 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		CFE09340299007E400F197F0 /* Publisher+ResultTranforming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+ResultTranforming.swift"; sourceTree = "<group>"; };
 		CFE48BC2299207DA0062C903 /* AuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStore.swift; sourceTree = "<group>"; };
+		CFE5ACEC2A7AAB360027492E /* ShareReferralContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareReferralContainerView.swift; sourceTree = "<group>"; };
+		CFE5ACED2A7AAB360027492E /* ShareReferralContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareReferralContainerViewModel.swift; sourceTree = "<group>"; };
+		CFE5ACF02A7AAB6D0027492E /* ShareReferralContainerNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareReferralContainerNavigations.swift; sourceTree = "<group>"; };
+		CFE5ACF22A7AAD670027492E /* ReferralNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralNavigation.swift; sourceTree = "<group>"; };
 		CFE954942A3A13BA00C109FE /* MyCoupon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCoupon.swift; sourceTree = "<group>"; };
 		CFED122929F2D7C6000B320B /* Result+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Result+Extension.swift"; sourceTree = "<group>"; };
 		CFED123729F2EF54000B320B /* Number+Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+Format.swift"; sourceTree = "<group>"; };
@@ -1212,6 +1274,7 @@
 		CF15500D299396260053E86D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CFAD534F2A7818020044CB42 /* LinearProgressView */,
 				CF45BDA92A6856B7003FB991 /* CameraView */,
 				CFD12CE82A1C6CF00095D28D /* Charts */,
 				CFA5BD2A29EEFB7E00251176 /* TextView */,
@@ -1364,6 +1427,7 @@
 				CF52AB7B29B8EE1A00C9C90C /* Realm+Init.swift */,
 				CF5923FD29EDA1C8009C2516 /* UserStore.swift */,
 				CFB386692A443028001B0849 /* ReactionIconsLocalRepository.swift */,
+				CF355C8D2A77C51F005A48F9 /* LocalCheckingRepository.swift */,
 			);
 			path = Local;
 			sourceTree = "<group>";
@@ -1402,6 +1466,7 @@
 				CFAA37622A4B38E00085CE88 /* Banner.swift */,
 				CFF868BF2A6E8457006F0B87 /* BaseReponse.swift */,
 				CFC9E5132A7046BD004D48E5 /* VideoKeyword.swift */,
+				CF355C892A77C18B005A48F9 /* CheckinProgress.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1431,6 +1496,8 @@
 		CF53D3C52A6AF547009B3A69 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				CFC23D552A7A4CE7009CAD87 /* Referral */,
+				CFAD534A2A780D490044CB42 /* Checkin */,
 				CF53D3C62A6AF547009B3A69 /* Launch */,
 				CF53D3D82A6AF547009B3A69 /* ProfileSetting */,
 				CF53D3F32A6AF547009B3A69 /* Shop */,
@@ -1439,6 +1506,7 @@
 				CF53D4332A6AF547009B3A69 /* Wallet */,
 				CF53D46B2A6AF548009B3A69 /* Root */,
 				CF53D46F2A6AF548009B3A69 /* Chats */,
+				CF65DD9D2A82AD6100B554D7 /* UserConfiguration */,
 				CF53D5322A6AF548009B3A69 /* Auths */,
 				CF53D54E2A6AF548009B3A69 /* Main */,
 			);
@@ -1942,7 +2010,6 @@
 			children = (
 				CF53D4612A6AF548009B3A69 /* WalletUserInfoView.swift */,
 				CF53D4622A6AF548009B3A69 /* WalletMemberTierView.swift */,
-				CF53D4632A6AF548009B3A69 /* WalletNotiView.swift */,
 				CF53D4642A6AF548009B3A69 /* WalletMyPointView.swift */,
 				CF53D4652A6AF548009B3A69 /* WalletPointView.swift */,
 			);
@@ -2756,6 +2823,53 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		CF65DD962A82A4A900B554D7 /* AddReferral */ = {
+			isa = PBXGroup;
+			children = (
+				CF65DDA62A82BA6D00B554D7 /* AddReferralAlert */,
+				CF65DDA52A82BA6100B554D7 /* AddReferral */,
+			);
+			path = AddReferral;
+			sourceTree = "<group>";
+		};
+		CF65DD9D2A82AD6100B554D7 /* UserConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				CF65DDA42A82B0DE00B554D7 /* Root */,
+				CF65DD962A82A4A900B554D7 /* AddReferral */,
+			);
+			path = UserConfiguration;
+			sourceTree = "<group>";
+		};
+		CF65DDA42A82B0DE00B554D7 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				CF65DD9E2A82AD8A00B554D7 /* UserConfigurationRootView.swift */,
+				CF65DD9F2A82AD8A00B554D7 /* UserConfigurationRootViewModel.swift */,
+				CF65DDA22A82AD9800B554D7 /* UserConfigurationRootNavigations.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		CF65DDA52A82BA6100B554D7 /* AddReferral */ = {
+			isa = PBXGroup;
+			children = (
+				CF65DD972A82A4B900B554D7 /* AddReferralView.swift */,
+				CF65DD982A82A4B900B554D7 /* AddReferralViewModel.swift */,
+				CF65DD9B2A82A58F00B554D7 /* AddReferralNavigations.swift */,
+			);
+			path = AddReferral;
+			sourceTree = "<group>";
+		};
+		CF65DDA62A82BA6D00B554D7 /* AddReferralAlert */ = {
+			isa = PBXGroup;
+			children = (
+				CF65DDA72A82BB2600B554D7 /* AddReferralAlertView.swift */,
+				CF65DDA82A82BB2600B554D7 /* AddReferralAlertViewModel.swift */,
+			);
+			path = AddReferralAlert;
+			sourceTree = "<group>";
+		};
 		CF67F8B52A7174CD007293B4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -2821,6 +2935,23 @@
 			path = BottomSheet;
 			sourceTree = "<group>";
 		};
+		CF849EE12A809FC800B8BA3B /* VerticalShareReferral */ = {
+			isa = PBXGroup;
+			children = (
+				CF849EE22A809FD500B8BA3B /* VerticalShareReferralView.swift */,
+				CF849EE32A809FD500B8BA3B /* VerticalShareReferralViewModel.swift */,
+			);
+			path = VerticalShareReferral;
+			sourceTree = "<group>";
+		};
+		CF849EE92A80A5CD00B8BA3B /* ShareReferral */ = {
+			isa = PBXGroup;
+			children = (
+				CF849EEA2A80A5CD00B8BA3B /* ShareReferralViewModel.swift */,
+			);
+			path = ShareReferral;
+			sourceTree = "<group>";
+		};
 		CF8737E829CB5B9A0018237B /* PhotoPicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -2848,6 +2979,44 @@
 			path = TextView;
 			sourceTree = "<group>";
 		};
+		CFAD534A2A780D490044CB42 /* Checkin */ = {
+			isa = PBXGroup;
+			children = (
+				CFAD53552A781B4E0044CB42 /* Views */,
+				CFAD53522A781A000044CB42 /* Models */,
+				CFAD534B2A780D5A0044CB42 /* CheckinView.swift */,
+				CFAD534C2A780D5A0044CB42 /* CheckinViewModel.swift */,
+				CFC23D5A2A7A4F58009CAD87 /* CheckinNavigations.swift */,
+			);
+			path = Checkin;
+			sourceTree = "<group>";
+		};
+		CFAD534F2A7818020044CB42 /* LinearProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				CFAD53502A78181A0044CB42 /* LinearProgressView.swift */,
+			);
+			path = LinearProgressView;
+			sourceTree = "<group>";
+		};
+		CFAD53522A781A000044CB42 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CFAD53532A781A150044CB42 /* CheckinModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CFAD53552A781B4E0044CB42 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CFAD53562A781D390044CB42 /* CheckinProgressSumaryView.swift */,
+				CFAD53582A781ECE0044CB42 /* CheckinOverviewView.swift */,
+				CF8BD91D2A78B2C200EAD316 /* CheckinItemView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		CFBC6EFE29C02977000509EC /* SearchView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2862,6 +3031,23 @@
 				CFBCE41729B98A65000D6F73 /* CommonError.swift */,
 			);
 			path = Errors;
+			sourceTree = "<group>";
+		};
+		CFC23D552A7A4CE7009CAD87 /* Referral */ = {
+			isa = PBXGroup;
+			children = (
+				CFE5ACE42A7AA93B0027492E /* Referral */,
+				CFE5ACE52A7AA9480027492E /* Share */,
+			);
+			path = Referral;
+			sourceTree = "<group>";
+		};
+		CFC23D5C2A7A5D93009CAD87 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CFC23D5D2A7A5DA0009CAD87 /* ReferralItemView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		CFC709E12996211E00B64216 /* ProgressView */ = {
@@ -2982,6 +3168,47 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		CFE5ACE42A7AA93B0027492E /* Referral */ = {
+			isa = PBXGroup;
+			children = (
+				CFC23D5C2A7A5D93009CAD87 /* Views */,
+				CFC23D562A7A4E53009CAD87 /* ReferralView.swift */,
+				CFC23D572A7A4E53009CAD87 /* ReferralViewModel.swift */,
+				CFE5ACF22A7AAD670027492E /* ReferralNavigation.swift */,
+			);
+			path = Referral;
+			sourceTree = "<group>";
+		};
+		CFE5ACE52A7AA9480027492E /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				CF849EE92A80A5CD00B8BA3B /* ShareReferral */,
+				CF849EE12A809FC800B8BA3B /* VerticalShareReferral */,
+				CFE5ACEB2A7AAB1D0027492E /* Container */,
+				CFE5ACEA2A7AAAD60027492E /* HorizontalShareReferral */,
+			);
+			path = Share;
+			sourceTree = "<group>";
+		};
+		CFE5ACEA2A7AAAD60027492E /* HorizontalShareReferral */ = {
+			isa = PBXGroup;
+			children = (
+				CF180A052A7E3C41004728C4 /* HorizontalShareReferralView.swift */,
+				CF180A062A7E3C41004728C4 /* HorizontalShareReferralViewModel.swift */,
+			);
+			path = HorizontalShareReferral;
+			sourceTree = "<group>";
+		};
+		CFE5ACEB2A7AAB1D0027492E /* Container */ = {
+			isa = PBXGroup;
+			children = (
+				CFE5ACEC2A7AAB360027492E /* ShareReferralContainerView.swift */,
+				CFE5ACED2A7AAB360027492E /* ShareReferralContainerViewModel.swift */,
+				CFE5ACF02A7AAB6D0027492E /* ShareReferralContainerNavigations.swift */,
+			);
+			path = Container;
+			sourceTree = "<group>";
+		};
 		CFEA46EB2A65AE9700F20B82 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -3058,6 +3285,7 @@
 				CFB386672A442E3A001B0849 /* ReactionIconsUseCases.swift */,
 				CFA924B32A49926D000918D8 /* MessageReactionUseCases.swift */,
 				CFF868B82A6E2D74006F0B87 /* VideoUseCases.swift */,
+				CF355C8B2A77C4EA005A48F9 /* CheckinUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -3275,6 +3503,7 @@
 				CFD095182A02A936004BF047 /* Socket */,
 				CFE09252298DF67D00F197F0 /* Auth */,
 				CF08A86129B5A26600D6CE5F /* ContactAPI.swift */,
+				CF355C8F2A77C6A2005A48F9 /* NetworkCheckinRepository.swift */,
 				CF1B624729B9B55F00DE53E6 /* ConversationAPI.swift */,
 				CFB2F6BD29E1274500191AA3 /* ConversationParticipantAPI.swift */,
 				CFDA463D29DC8CCB00E6A877 /* CountryAPI.swift */,
@@ -3693,6 +3922,7 @@
 				CF53D64A2A6AF548009B3A69 /* TermView.swift in Sources */,
 				CF10C7EE29C21CDB0020924D /* ConversationSocketAPI.swift in Sources */,
 				CF74A1A729B586EF00419342 /* StatefullView.swift in Sources */,
+				CF180A082A7E3C41004728C4 /* HorizontalShareReferralViewModel.swift in Sources */,
 				CF53D5F92A6AF548009B3A69 /* TextMessageContentView.swift in Sources */,
 				CF53D62C2A6AF548009B3A69 /* ImageDetailViewModel.swift in Sources */,
 				CF53D5692A6AF548009B3A69 /* FAQViewModel.swift in Sources */,
@@ -3712,6 +3942,7 @@
 				CF53D5BC2A6AF548009B3A69 /* WalletView.swift in Sources */,
 				CF53D60F2A6AF548009B3A69 /* FindUsersResultView.swift in Sources */,
 				CF53D5BD2A6AF548009B3A69 /* WalletUserInfoView.swift in Sources */,
+				CF65DD9C2A82A58F00B554D7 /* AddReferralNavigations.swift in Sources */,
 				CFC9E5182A704B73004D48E5 /* StorableVideoKeyword.swift in Sources */,
 				CF53D5722A6AF548009B3A69 /* ShopHomeViewModel.swift in Sources */,
 				CF53D56C2A6AF548009B3A69 /* ProfileSettingAlertActionType.swift in Sources */,
@@ -3725,6 +3956,7 @@
 				CF53D5642A6AF548009B3A69 /* SourceLicenseViewModel.swift in Sources */,
 				CFF530AC2A7412A100908DEB /* StorableVideoCategory.swift in Sources */,
 				CFF530AA2A74120200908DEB /* StorableVideoChannel.swift in Sources */,
+				CFC23D582A7A4E53009CAD87 /* ReferralView.swift in Sources */,
 				CFF530AE2A741F8900908DEB /* VideoMessageContentModel.swift in Sources */,
 				CF53D6352A6AF548009B3A69 /* ChatInputExpandViewModel.swift in Sources */,
 				CF53D63D2A6AF548009B3A69 /* ChatStickerInputView.swift in Sources */,
@@ -3734,6 +3966,7 @@
 				CFF467A02A0A45E50018FFAA /* View+Visibility.swift in Sources */,
 				CFAE00D12A6EEA14006A1FF0 /* SearchVideosViewModel.swift in Sources */,
 				CF1B625029B9BCC200DE53E6 /* StorableConversation.swift in Sources */,
+				CF65DDA32A82AD9800B554D7 /* UserConfigurationRootNavigations.swift in Sources */,
 				CFB2A89F29D1F31A008D1689 /* StorableSticker.swift in Sources */,
 				CF54FA2429D0187B0092E2C6 /* MediaStore.swift in Sources */,
 				CF30B19B2A13ECEB00C43A54 /* TransactionType.swift in Sources */,
@@ -3743,6 +3976,7 @@
 				CF446B8229D89B2100ED66BF /* LottieView.swift in Sources */,
 				CFF530A42A740D7C00908DEB /* StorableVideo.swift in Sources */,
 				CFE0925F298EACF200F197F0 /* GIDSignIn+Combine.swift in Sources */,
+				CF65DDA02A82AD8A00B554D7 /* UserConfigurationRootView.swift in Sources */,
 				CFFD70D3298AC89000D4F5A2 /* NetworkConfigs.swift in Sources */,
 				CFF520FE2A17DB7100F29A4E /* BarChartSwiftUIView.swift in Sources */,
 				CF14F249298C331C00BC2066 /* Localizable.swift in Sources */,
@@ -3753,12 +3987,14 @@
 				CF775BBE29C625C900E82183 /* NotificationAppDelegate.swift in Sources */,
 				CF1307FC29C8C96900EED044 /* TextEditor+Background.swift in Sources */,
 				CFB0A82529F1B81400298546 /* VideoCommenter.swift in Sources */,
+				CF65DD9A2A82A4B900B554D7 /* AddReferralViewModel.swift in Sources */,
 				CF53D5A62A6AF548009B3A69 /* TransactionDashboardHeaderModel.swift in Sources */,
 				CF53D5A22A6AF548009B3A69 /* TransactionDashboardBuilder.swift in Sources */,
 				CF53D5AA2A6AF548009B3A69 /* TransactionDashboardItemView.swift in Sources */,
 				CF53D5FB2A6AF548009B3A69 /* EventMessageView.swift in Sources */,
 				CF53D5C82A6AF548009B3A69 /* AddFriendContactListView.swift in Sources */,
 				CF53D5732A6AF548009B3A69 /* ShopHomeView.swift in Sources */,
+				CFAD53542A781A150044CB42 /* CheckinModel.swift in Sources */,
 				CF53D6372A6AF548009B3A69 /* ChatInputViewModel.swift in Sources */,
 				CF775BC429C62B3000E82183 /* FrameworkAppDelegate.swift in Sources */,
 				CFF868B92A6E2D74006F0B87 /* VideoUseCases.swift in Sources */,
@@ -3769,11 +4005,11 @@
 				CF53D5B02A6AF548009B3A69 /* TransactionHistoryModel.swift in Sources */,
 				CF53D5FF2A6AF548009B3A69 /* PreviewReplyMessageView.swift in Sources */,
 				CF53D60D2A6AF548009B3A69 /* FindUsersResultNavigations.swift in Sources */,
+				CFE5ACF32A7AAD670027492E /* ReferralNavigation.swift in Sources */,
 				CF53D6192A6AF548009B3A69 /* MessageImageItemView.swift in Sources */,
 				CF53D6472A6AF548009B3A69 /* AuthViewModel.swift in Sources */,
 				CF53D5A32A6AF548009B3A69 /* TransactionDashboardViewModel.swift in Sources */,
 				CF14F268298CF87E00BC2066 /* AuthService.swift in Sources */,
-				CF53D5BF2A6AF548009B3A69 /* WalletNotiView.swift in Sources */,
 				CFFB71EE2A4004A20019663C /* CouponKeyword.swift in Sources */,
 				CF53D6422A6AF548009B3A69 /* ChatInputExpandModelType.swift in Sources */,
 				CF53D55C2A6AF548009B3A69 /* LaunchView.swift in Sources */,
@@ -3793,17 +4029,22 @@
 				CF53D5F02A6AF548009B3A69 /* MessageContentBackgroundModel.swift in Sources */,
 				CF53D6152A6AF548009B3A69 /* FriendScannerViewController___.swift in Sources */,
 				CF775BCA29C630B800E82183 /* NotificationUseCases.swift in Sources */,
+				CF180A072A7E3C41004728C4 /* HorizontalShareReferralView.swift in Sources */,
 				CF53D61F2A6AF548009B3A69 /* CreateConversationView.swift in Sources */,
 				CFFD70C8298AC5F800D4F5A2 /* BaseAuthTargetType.swift in Sources */,
 				CF1B625229B9BED800DE53E6 /* StorableMessage.swift in Sources */,
+				CFC23D5B2A7A4F58009CAD87 /* CheckinNavigations.swift in Sources */,
 				CF53D6002A6AF548009B3A69 /* MessageContentBackgroundView.swift in Sources */,
 				CF53D5B82A6AF548009B3A69 /* WalletPointModel.swift in Sources */,
 				CF53D5962A6AF548009B3A69 /* VideosView.swift in Sources */,
 				CF53D5B12A6AF548009B3A69 /* TransactionHistoryNavigations.swift in Sources */,
+				CF355C902A77C6A2005A48F9 /* NetworkCheckinRepository.swift in Sources */,
 				CF800A922A717D8E00DBD9F0 /* VideoActionView.swift in Sources */,
+				CFAD53512A78181A0044CB42 /* LinearProgressView.swift in Sources */,
 				CF53D5DF2A6AF548009B3A69 /* ConversationAdjustmentView.swift in Sources */,
 				CF53D5DD2A6AF548009B3A69 /* ConversationAdjustmentViewModel.swift in Sources */,
 				CF53D5622A6AF548009B3A69 /* AboutUsViewModel.swift in Sources */,
+				CF355C8A2A77C18B005A48F9 /* CheckinProgress.swift in Sources */,
 				CF53D5DC2A6AF548009B3A69 /* NotificationSettingView.swift in Sources */,
 				CFFB71EC2A4004550019663C /* StorableCouponKeyword.swift in Sources */,
 				CF5923FE29EDA1C8009C2516 /* UserStore.swift in Sources */,
@@ -3818,6 +4059,7 @@
 				CF11B1DC29BB668D002E8151 /* MessageStore.swift in Sources */,
 				CF53D5752A6AF548009B3A69 /* ShopHomeModel.swift in Sources */,
 				CF53D5A02A6AF548009B3A69 /* TransactionDashboardView.swift in Sources */,
+				CFE5ACEF2A7AAB360027492E /* ShareReferralContainerViewModel.swift in Sources */,
 				CF3282ED299E3758006A459B /* UIApplication+Extension.swift in Sources */,
 				CF131EB529CF32F100054719 /* PhotoModel.swift in Sources */,
 				CF53D6582A6AF548009B3A69 /* MainNavigations.swift in Sources */,
@@ -3830,6 +4072,7 @@
 				CF53D5C32A6AF548009B3A69 /* MyRankingView.swift in Sources */,
 				CFFD70C6298AC5F800D4F5A2 /* AuthPluggin.swift in Sources */,
 				CFF868BE2A6E7791006F0B87 /* VideoDetailFullScreenCoverType.swift in Sources */,
+				CF849EE42A809FD500B8BA3B /* VerticalShareReferralView.swift in Sources */,
 				CF53D6402A6AF548009B3A69 /* ChatStickerInputViewModel.swift in Sources */,
 				CF53D5832A6AF548009B3A69 /* CouponDetailModel.swift in Sources */,
 				CF53D56D2A6AF548009B3A69 /* UpdateCurrentUserView.swift in Sources */,
@@ -3850,7 +4093,9 @@
 				CFFD70CC298AC5F800D4F5A2 /* Api.swift in Sources */,
 				CF53D5D82A6AF548009B3A69 /* MessageQuickReactionInput.swift in Sources */,
 				CF12604629B78AAF00B5373B /* DeviceIdentityPlugin.swift in Sources */,
+				CF65DDAA2A82BB2600B554D7 /* AddReferralAlertViewModel.swift in Sources */,
 				CF446B9029D8AB0D00ED66BF /* LottieAssets.swift in Sources */,
+				CFE5ACEE2A7AAB360027492E /* ShareReferralContainerView.swift in Sources */,
 				CF82C30E29EAA00300EAD36C /* BottomSheet.swift in Sources */,
 				CFCD10AB29D350C900C5DAFF /* SendMessageParam.swift in Sources */,
 				CF53D5B62A6AF548009B3A69 /* WalletNavigations.swift in Sources */,
@@ -3866,6 +4111,7 @@
 				CF53D5BE2A6AF548009B3A69 /* WalletMemberTierView.swift in Sources */,
 				CF52AB7C29B8EE1A00C9C90C /* Realm+Init.swift in Sources */,
 				CF53D5E62A6AF548009B3A69 /* PhotoMessageContentModel.swift in Sources */,
+				CF65DDA92A82BB2600B554D7 /* AddReferralAlertView.swift in Sources */,
 				CF14F24A298C331D00BC2066 /* ColorAssets.swift in Sources */,
 				CF53D5762A6AF548009B3A69 /* MyCouponItemView.swift in Sources */,
 				CF53D59C2A6AF548009B3A69 /* TrendingVideoView.swift in Sources */,
@@ -3883,6 +4129,7 @@
 				CF53D5672A6AF548009B3A69 /* FAQView.swift in Sources */,
 				CF53D65D2A6AF548009B3A69 /* CustomTabView.swift in Sources */,
 				CFFD70D5298AC92500D4F5A2 /* UserAPI.swift in Sources */,
+				CF8BD91E2A78B2C200EAD316 /* CheckinItemView.swift in Sources */,
 				CF53D5F72A6AF548009B3A69 /* PhotoMessageContentItemView.swift in Sources */,
 				CF53D5842A6AF548009B3A69 /* CouponDetailAlertActionType.swift in Sources */,
 				CF53D5592A6AF548009B3A69 /* LaunchRootNavigations.swift in Sources */,
@@ -3891,6 +4138,7 @@
 				CF53D58A2A6AF548009B3A69 /* VideoState+Event.swift in Sources */,
 				CF3E0EFB2A37299D009EF665 /* GiftsAPI.swift in Sources */,
 				CF53D62D2A6AF548009B3A69 /* ImageDetailView.swift in Sources */,
+				CF355C8C2A77C4EA005A48F9 /* CheckinUseCase.swift in Sources */,
 				CF53D58E2A6AF548009B3A69 /* VideoDetailInformationView.swift in Sources */,
 				CF30B1872A13D1D000C43A54 /* DeleteCacheUseCases.swift in Sources */,
 				CF53D59F2A6AF548009B3A69 /* TransactionDetailViewModel.swift in Sources */,
@@ -3902,8 +4150,10 @@
 				CF53D5C72A6AF548009B3A69 /* RootView.swift in Sources */,
 				CF8737EE29CB5F730018237B /* PhotoPickerItemView.swift in Sources */,
 				CF53D63E2A6AF548009B3A69 /* ChatStickerPacksInputViewModel.swift in Sources */,
+				CFC23D5E2A7A5DA0009CAD87 /* ReferralItemView.swift in Sources */,
 				CF53D6532A6AF548009B3A69 /* AuthVerificationView.swift in Sources */,
 				CF53D5922A6AF548009B3A69 /* VideoDetailInputViewModel.swift in Sources */,
+				CF65DD992A82A4B900B554D7 /* AddReferralView.swift in Sources */,
 				CF53D5E02A6AF548009B3A69 /* ChatViewModel.swift in Sources */,
 				CF53D5F42A6AF548009B3A69 /* DateChatItemView.swift in Sources */,
 				CF53D55F2A6AF548009B3A69 /* LaunchBackgroundView.swift in Sources */,
@@ -3911,6 +4161,7 @@
 				CF53D5852A6AF548009B3A69 /* CouponDetailViewModel.swift in Sources */,
 				CF53D5EC2A6AF548009B3A69 /* ChatItemModelBuilder.swift in Sources */,
 				CFB0A82D29F1BD3800298546 /* VideoTrendingDurationType.swift in Sources */,
+				CFAD53592A781ECE0044CB42 /* CheckinOverviewView.swift in Sources */,
 				CF53D5D72A6AF548009B3A69 /* UpdateConversationContactListUseCase.swift in Sources */,
 				CF775BC229C6287F00E82183 /* AppDelegateProtocol.swift in Sources */,
 				CF53D61C2A6AF548009B3A69 /* MessageActionDetailView.swift in Sources */,
@@ -3935,6 +4186,7 @@
 				CF53D5F12A6AF548009B3A69 /* ChatView.swift in Sources */,
 				CF14F266298CF4E700BC2066 /* AppConfigs.swift in Sources */,
 				CF1BD1FD29ACEAA000778786 /* UserService.swift in Sources */,
+				CF355C8E2A77C51F005A48F9 /* LocalCheckingRepository.swift in Sources */,
 				CF53D6492A6AF548009B3A69 /* AuthNavigations.swift in Sources */,
 				CF53D5982A6AF548009B3A69 /* CommonVideoItemView.swift in Sources */,
 				CF53D5792A6AF548009B3A69 /* ShopCouponItemView.swift in Sources */,
@@ -3977,6 +4229,7 @@
 				CF53D57A2A6AF548009B3A69 /* SearchCouponsViewModel.swift in Sources */,
 				CF53D5A12A6AF548009B3A69 /* TransactionDashboardBarChartSectionModel.swift in Sources */,
 				CF53D58D2A6AF548009B3A69 /* VideoDetailView.swift in Sources */,
+				CF849EEB2A80A5CD00B8BA3B /* ShareReferralViewModel.swift in Sources */,
 				CF53D5FA2A6AF548009B3A69 /* MessageMetaDataView.swift in Sources */,
 				CF53D6172A6AF548009B3A69 /* MessageImagesNavigations.swift in Sources */,
 				CFBC6F0029C054B0000509EC /* View+EditView.swift in Sources */,
@@ -3985,6 +4238,7 @@
 				CF53D5F82A6AF548009B3A69 /* MessageContentView.swift in Sources */,
 				CFF521072A190C7E00F29A4E /* TransactionStatusType.swift in Sources */,
 				CF53D6272A6AF548009B3A69 /* ChatSettingView.swift in Sources */,
+				CF65DDA12A82AD8A00B554D7 /* UserConfigurationRootViewModel.swift in Sources */,
 				CFB0A82329F1B7CC00298546 /* VideoComment.swift in Sources */,
 				CF53D5FE2A6AF548009B3A69 /* MessageReactionsView.swift in Sources */,
 				CF53D5C22A6AF548009B3A69 /* MyRankingViewModel.swift in Sources */,
@@ -4019,6 +4273,7 @@
 				CFB2F6BE29E1274500191AA3 /* ConversationParticipantAPI.swift in Sources */,
 				CFE0925B298DF7AF00F197F0 /* Logger+SwiftyBeaver.swift in Sources */,
 				CF53D5F22A6AF548009B3A69 /* MessageChatItemView.swift in Sources */,
+				CFAD534E2A780D5A0044CB42 /* CheckinViewModel.swift in Sources */,
 				CFD0952D2A02BDE8004BF047 /* Encodable+JSON.swift in Sources */,
 				CF53D6052A6AF548009B3A69 /* ConversationListNavigations.swift in Sources */,
 				CFE09265298EB92D00F197F0 /* AppleAuthAPI.swift in Sources */,
@@ -4027,13 +4282,16 @@
 				CF53D6302A6AF548009B3A69 /* AnyImageEditorView.swift in Sources */,
 				CF53D6072A6AF548009B3A69 /* ConversationListModel.swift in Sources */,
 				CF53D62A2A6AF548009B3A69 /* ChatSettingAddParticipantView.swift in Sources */,
+				CFAD53572A781D390044CB42 /* CheckinProgressSumaryView.swift in Sources */,
 				CF615C3E2A10AC5800CAF9C5 /* LoyaltyAPI.swift in Sources */,
 				CFF868BC2A6E345E006F0B87 /* GIDGoogleUser+Combine.swift in Sources */,
 				CF53D6222A6AF548009B3A69 /* ChatSettingNavigations.swift in Sources */,
 				CF53D6462A6AF548009B3A69 /* ChatPhotoInputView.swift in Sources */,
 				CF52AB6129B8D6BE00C9C90C /* User.swift in Sources */,
 				CF53D5602A6AF548009B3A69 /* LaunchViewModel.swift in Sources */,
+				CF849EE52A809FD500B8BA3B /* VerticalShareReferralViewModel.swift in Sources */,
 				CFF863952A435F8400EC0713 /* ReactIcon.swift in Sources */,
+				CFAD534D2A780D5A0044CB42 /* CheckinView.swift in Sources */,
 				CF53D56B2A6AF548009B3A69 /* ProfileSettingView.swift in Sources */,
 				CFCFFA3729E5C82A002B7FB6 /* ConversationSocketService.swift in Sources */,
 				CF53D5D12A6AF548009B3A69 /* SelectedContactItemView.swift in Sources */,
@@ -4051,9 +4309,11 @@
 				CFE954952A3A13BA00C109FE /* MyCoupon.swift in Sources */,
 				CF53D5702A6AF548009B3A69 /* ProfileSettingNavigations.swift in Sources */,
 				CF62EF8B29B23E0000D6B688 /* ViewModelType.swift in Sources */,
+				CFE5ACF12A7AAB6D0027492E /* ShareReferralContainerNavigations.swift in Sources */,
 				CF53D5912A6AF548009B3A69 /* VideoDetailInputView.swift in Sources */,
 				CF53D5CE2A6AF548009B3A69 /* ContactListView.swift in Sources */,
 				CFE0925D298DFDCB00F197F0 /* KakaoAuthAPI.swift in Sources */,
+				CFC23D592A7A4E53009CAD87 /* ReferralViewModel.swift in Sources */,
 				CF53D6322A6AF548009B3A69 /* ImageEditorResultView.swift in Sources */,
 				CFFD70CA298AC5F800D4F5A2 /* TargetType+Default.swift in Sources */,
 				CF53D5F52A6AF548009B3A69 /* PhotoMessageContentView.swift in Sources */,

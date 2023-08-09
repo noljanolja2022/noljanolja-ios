@@ -54,7 +54,7 @@ struct VideoActionContainerView<ViewModel: VideoActionContainerViewModel>: View 
         Spacer()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .contentShape(Rectangle())
-            .onPress {
+            .onTapGesture {
                 presentationMode.wrappedValue.dismiss()
             }
     }

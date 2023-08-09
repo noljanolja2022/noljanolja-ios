@@ -50,26 +50,3 @@ struct SelectedContactItemView: View {
         }
     }
 }
-
-// MARK: - SelectedContactItemView_Previews
-
-struct SelectedContactItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        SelectedContactItemView(
-            user: User(
-                id: "",
-                name: "Test",
-                avatar: nil,
-                pushToken: nil,
-                phone: nil,
-                email: nil,
-                isEmailVerified: false,
-                dob: nil,
-                gender: nil,
-                preferences: nil,
-                createdAt: Date(),
-                updatedAt: Date()
-            )
-        )
-    }
-}

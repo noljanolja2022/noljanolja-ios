@@ -13,8 +13,7 @@ import SwiftUINavigation
 // MARK: - AuthVerificationViewModelDelegate
 
 protocol AuthVerificationViewModelDelegate: AnyObject {
-    func navigateToMain()
-    func navigateToUpdateCurrentUser()
+    func authVerificationViewModelDidComplete(_ user: User)
 }
 
 // MARK: - AuthVerificationViewModel
@@ -117,11 +116,7 @@ final class AuthVerificationViewModel: ViewModel {
                 self?.isProgressHUDShowing = false
                 switch result {
                 case let .success(user):
-                    if user.isSettedUp {
-                        self?.delegate?.navigateToMain()
-                    } else {
-                        self?.delegate?.navigateToUpdateCurrentUser()
-                    }
+                    self?.delegate?.authVerificationViewModelDidComplete(user)
                 case .failure:
                     self?.alertState = AlertState(
                         title: TextState(L10n.commonErrorTitle),

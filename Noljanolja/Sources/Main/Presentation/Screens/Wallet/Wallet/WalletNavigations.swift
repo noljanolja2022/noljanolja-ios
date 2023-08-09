@@ -11,4 +11,5 @@ enum WalletNavigationType {
     case myRanking
     case setting
     case transactionHistory
+    case checkin
 }
