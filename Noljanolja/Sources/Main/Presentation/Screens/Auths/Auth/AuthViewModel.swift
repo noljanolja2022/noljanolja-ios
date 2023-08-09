@@ -13,8 +13,7 @@ import SwiftUIX
 // MARK: - AuthViewModelDelegate
 
 protocol AuthViewModelDelegate: AnyObject {
-    func navigateToMain()
-    func navigateToUpdateCurrentUser()
+    func authViewModelDidComplete(_ user: User)
 }
 
 // MARK: - AuthViewModel
@@ -108,11 +107,7 @@ extension AuthViewModel: SelectCountryViewModelDelegate {
 // MARK: AuthVerificationViewModelDelegate
 
 extension AuthViewModel: AuthVerificationViewModelDelegate {
-    func navigateToMain() {
-        delegate?.navigateToMain()
-    }
-
-    func navigateToUpdateCurrentUser() {
-        delegate?.navigateToUpdateCurrentUser()
+    func authVerificationViewModelDidComplete(_ user: User) {
+        delegate?.authViewModelDidComplete(user)
     }
 }

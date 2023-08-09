@@ -44,12 +44,6 @@ struct AuthRootView<ViewModel: AuthRootViewModel>: View {
                 )
             }
             .navigationViewStyle(StackNavigationViewStyle())
-        case .updateCurrentUser:
-            UpdateCurrentUserView(
-                viewModel: UpdateCurrentUserViewModel(
-                    delegate: viewModel
-                )
-            )
         }
     }
 }

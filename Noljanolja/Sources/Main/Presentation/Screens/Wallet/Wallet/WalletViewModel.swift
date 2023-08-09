@@ -36,19 +36,23 @@ final class WalletViewModel: ViewModel {
 
     private let userService: UserServiceType
     private let memberInfoUseCase: MemberInfoUseCases
+    private let checkinUseCase: CheckinUseCase
     private weak var delegate: WalletViewModelDelegate?
 
     // MARK: Private
 
     private let currentUserSubject = CurrentValueSubject<User?, Never>(nil)
     private let memberInfoSubject = CurrentValueSubject<LoyaltyMemberInfo?, Never>(nil)
+    private let checkinProgressesSubject = CurrentValueSubject<[CheckinProgress]?, Never>(nil)
     private var cancellables = Set<AnyCancellable>()
 
     init(userService: UserServiceType = UserService.default,
          memberInfoUseCase: MemberInfoUseCases = MemberInfoUseCasesImpl.default,
+         checkinUseCase: CheckinUseCase = CheckinUseCaseImpl.shared,
          delegate: WalletViewModelDelegate? = nil) {
         self.userService = userService
         self.memberInfoUseCase = memberInfoUseCase
+        self.checkinUseCase = checkinUseCase
         self.delegate = delegate
         super.init()
 
@@ -61,11 +65,12 @@ final class WalletViewModel: ViewModel {
     }
 
     private func configureLoadData() {
-        Publishers.CombineLatest(
+        Publishers.CombineLatest3(
             currentUserSubject.compactMap { $0 },
-            memberInfoSubject.compactMap { $0 }
+            memberInfoSubject.compactMap { $0 },
+            checkinProgressesSubject.compactMap { $0 }
         )
-        .map { WalletModel(currentUser: $0, memberInfo: $1) }
+        .map { WalletModel(currentUser: $0, memberInfo: $1, checkinProgresses: $2) }
         .receive(on: DispatchQueue.main)
         .sink { [weak self] in
             self?.model = $0
@@ -76,18 +81,23 @@ final class WalletViewModel: ViewModel {
             .first(where: { $0 })
             .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.viewState = .loading })
-            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<LoyaltyMemberInfo, Error> in
+            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<(LoyaltyMemberInfo, [CheckinProgress]), Error> in
                 guard let self else {
-                    return Empty<LoyaltyMemberInfo, Error>().eraseToAnyPublisher()
+                    return Empty<(LoyaltyMemberInfo, [CheckinProgress]), Error>().eraseToAnyPublisher()
                 }
-                return self.memberInfoUseCase.getLoyaltyMemberInfo()
+                return Publishers.Zip(
+                    self.memberInfoUseCase.getLoyaltyMemberInfo(),
+                    self.checkinUseCase.getCheckinProgresses()
+                )
+                .eraseToAnyPublisher()
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 guard let self else { return }
                 switch result {
-                case let .success(model):
-                    self.memberInfoSubject.send(model)
+                case let .success((memberInfo, checkinProgresses)):
+                    self.memberInfoSubject.send(memberInfo)
+                    self.checkinProgressesSubject.send(checkinProgresses)
                     self.viewState = .content
                 case .failure:
                     self.viewState = .error

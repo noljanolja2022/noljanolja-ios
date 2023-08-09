@@ -15,8 +15,6 @@ struct ShareVideoView<ViewModel: ShareVideoViewModel>: View {
 
     @StateObject var viewModel: ViewModel
 
-    // MARK: State
-
     var body: some View {
         buildBodyView()
     }

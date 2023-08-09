@@ -38,6 +38,8 @@ final class StorableUser: Object {
     @Persisted var preferences: StorableUserPreferences?
     @Persisted var createdAt: Date?
     @Persisted var updatedAt: Date?
+    @Persisted var referralCode: String?
+    @Persisted var referredBy: String?
 
     var model: User? {
         User(
@@ -52,7 +54,9 @@ final class StorableUser: Object {
             gender: gender.flatMap { GenderType(rawValue: $0) },
             preferences: preferences?.model,
             createdAt: createdAt,
-            updatedAt: updatedAt
+            updatedAt: updatedAt,
+            referralCode: referralCode,
+            referredBy: referredBy
         )
     }
 
@@ -70,6 +74,8 @@ final class StorableUser: Object {
         self.preferences = model.preferences.flatMap { StorableUserPreferences($0) }
         self.createdAt = model.createdAt
         self.updatedAt = model.updatedAt
+        self.referralCode = model.referralCode
+        self.referredBy = model.referredBy
     }
 
     override static func primaryKey() -> String? {

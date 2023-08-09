@@ -43,22 +43,42 @@ final class RootViewModel: ViewModel {
 // MARK: Delegate
 
 extension RootViewModel {
-    func navigateToMain() {
-        contentType = .main
+    func checkUser(_ user: User?) {
+        if let user {
+            if user.isSettedUp {
+                contentType = .main
+            } else {
+                contentType = .userConfiguraction
+            }
+        } else {
+            contentType = .auth
+        }
     }
 }
 
 // MARK: LaunchRootViewModelDelegate
 
 extension RootViewModel: LaunchRootViewModelDelegate {
-    func navigateToAuth() {
-        contentType = .auth
+    func launchRootViewModelDidComplete(_ user: User?) {
+        checkUser(user)
     }
 }
 
 // MARK: AuthRootViewModelDelegate
 
-extension RootViewModel: AuthRootViewModelDelegate {}
+extension RootViewModel: AuthRootViewModelDelegate {
+    func authRootViewModelDidComplete(_ user: User) {
+        checkUser(user)
+    }
+}
+
+// MARK: UserConfigurationRootViewModelDelegate
+
+extension RootViewModel: UserConfigurationRootViewModelDelegate {
+    func userConfigurationRootViewModelDidComplete() {
+        contentType = .main
+    }
+}
 
 // MARK: MainViewModelDelegate
 
