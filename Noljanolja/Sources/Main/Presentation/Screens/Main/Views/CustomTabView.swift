@@ -38,7 +38,6 @@ struct CustomTabView<SelectionValue, Content, TabItem>: View where SelectionValu
                     .frame(maxWidth: .infinity)
             }
         }
-        .background(ColorAssets.neutralLight.swiftUIColor.ignoresSafeArea())
     }
 }
 

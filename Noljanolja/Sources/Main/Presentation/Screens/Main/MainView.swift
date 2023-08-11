@@ -41,13 +41,6 @@ struct MainView<ViewModel: MainViewModel>: View {
             )
     }
 
-    private func buildMainView() -> some View {
-        ZStack {
-            buildContentView()
-            buildNavigationLinks()
-        }
-    }
-
     @ToolbarContentBuilder
     private func buildToolBarContent() -> some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
@@ -141,6 +134,21 @@ struct MainView<ViewModel: MainViewModel>: View {
                 EmptyView()
             }
         }
+    }
+
+    private func buildMainView() -> some View {
+        ZStack {
+            buildContentView()
+            buildNavigationLinks()
+        }
+        .background(
+            viewModel.selectedTab.topColor
+                .ignoresSafeArea()
+                .overlay {
+                    ColorAssets.neutralLight.swiftUIColor
+                        .ignoresSafeArea(edges: .bottom)
+                }
+        )
     }
 
     private func buildContentView() -> some View {
