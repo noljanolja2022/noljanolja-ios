@@ -77,6 +77,9 @@ struct VideosView<ViewModel: VideosViewModel>: View {
         if !viewModel.model.highlightVideos.isEmpty {
             WatchingVideoView(
                 videos: viewModel.model.watchingVideos,
+                seeAllAction: {
+                    viewModel.navigationType = .uncompleteVideos
+                },
                 selectAction: {
                     viewModel.navigationType = .videoDetail($0)
                 }
@@ -143,6 +146,10 @@ extension VideosView {
                 viewModel: VideoDetailViewModel(
                     videoId: video.id
                 )
+            )
+        case .uncompleteVideos:
+            UncompleteVideosView(
+                viewModel: UncompleteVideosViewModel()
             )
         }
     }

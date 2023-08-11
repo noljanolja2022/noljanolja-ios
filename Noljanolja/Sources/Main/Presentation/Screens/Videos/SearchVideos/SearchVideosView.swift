@@ -194,14 +194,17 @@ struct SearchVideosView<ViewModel: SearchVideosViewModel>: View {
                 let models = viewModel.model?.data ?? []
                 ForEach(models.indices, id: \.self) {
                     let model = models[$0]
-                    CommonVideoItemView(model: model)
-                        .frame(maxWidth: .infinity)
-                        .onTapGesture {
-                            viewModel.navigationType = .videoDetail(model)
-                        }
+                    let itemViewmodel = CommonVideoItemViewModel(model)
+                    CommonVideoItemView(
+                        model: itemViewmodel,
+                        elementTypes: [.actionButton, .category, .description]
+                    )
+                    .frame(maxWidth: .infinity)
+                    .onTapGesture {
+                        viewModel.navigationType = .videoDetail(model)
+                    }
                 }
             }
-            .padding(16)
 
             StatefullFooterView(
                 state: $viewModel.footerState,

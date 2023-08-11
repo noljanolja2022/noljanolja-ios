@@ -11,6 +11,8 @@ import SwiftUI
 
 struct LinearProgressView: View {
     let progress: CGFloat
+    let forcegroundColor: Color
+    let backgroundColor: Color
 
     var body: some View {
         buildBodyView()
@@ -21,12 +23,12 @@ struct LinearProgressView: View {
             ZStack(alignment: .leading) {
                 Spacer()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(ColorAssets.neutralRawLightGrey.swiftUIColor)
+                    .background(backgroundColor)
                     .cornerRadius(proxy.size.height / 2.0)
                 Spacer()
                     .frame(maxHeight: .infinity)
                     .frame(width: min(max(0.0, progress), 1.0) * proxy.size.width)
-                    .background(ColorAssets.secondaryYellow200.swiftUIColor)
+                    .background(forcegroundColor)
                     .cornerRadius(proxy.size.height / 2.0)
             }
         }
