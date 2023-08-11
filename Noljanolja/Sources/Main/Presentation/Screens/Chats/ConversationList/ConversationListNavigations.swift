@@ -19,10 +19,4 @@ enum ConversationListNavigationType {
 enum ConversationListFullScreenCoverType {
     case createConversation
     case notificationSetting
-
-    var isAnimationsEnabled: Bool {
-        switch self {
-        case .createConversation, .notificationSetting: return false
-        }
-    }
 }

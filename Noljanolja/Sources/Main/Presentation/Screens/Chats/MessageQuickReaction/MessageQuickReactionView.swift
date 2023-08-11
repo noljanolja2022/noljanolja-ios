@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 // MARK: MessageQuickReactionView
 
@@ -30,7 +31,9 @@ struct MessageQuickReactionView<ViewModel: MessageQuickReactionViewModel>: View 
             .isProgressHUBVisible($viewModel.isProgressHUDShowing)
             .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
             .onReceive(viewModel.closeAction) {
-                presentationMode.wrappedValue.dismiss()
+                withoutAnimation {
+                    presentationMode.wrappedValue.dismiss()
+                }
             }
             .introspectViewController {
                 $0.view.backgroundColor = .clear
@@ -70,7 +73,9 @@ struct MessageQuickReactionView<ViewModel: MessageQuickReactionViewModel>: View 
         .background { Color.black.opacity(0.5) }
         .ignoresSafeArea()
         .onTapGesture {
-            presentationMode.dismiss()
+            withoutAnimation {
+                presentationMode.dismiss()
+            }
         }
     }
 
