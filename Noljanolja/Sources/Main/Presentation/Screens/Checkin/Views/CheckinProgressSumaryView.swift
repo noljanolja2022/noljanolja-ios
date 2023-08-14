@@ -53,8 +53,8 @@ struct CheckinProgressSumaryView: View {
     private func buildProgressView() -> some View {
         LinearProgressView(
             progress: CGFloat(completedCount) / CGFloat(count),
-            forcegroundColor: ColorAssets.neutralRawLightGrey.swiftUIColor,
-            backgroundColor: ColorAssets.secondaryYellow200.swiftUIColor
+            forcegroundColor: ColorAssets.secondaryYellow200.swiftUIColor,
+            backgroundColor: ColorAssets.neutralRawGrey.swiftUIColor
         )
         .frame(height: 6)
     }
