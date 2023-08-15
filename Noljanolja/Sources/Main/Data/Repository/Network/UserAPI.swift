@@ -71,10 +71,11 @@ private enum UserAPITargets {
         let pageSize: Int
     }
     
-    struct SyncContacts: BaseAuthTargetType {
+    struct SyncContacts: BaseAuthTargetType, RequestTimeoutConfigurable {
         var path: String { "v1/users/me/contacts" }
         let method: Moya.Method = .post
         var task: Task { .requestParameters(parameters: parameters, encoding: JSONEncoding.default) }
+        var timeout: TimeInterval = 120
 
         let contacts: [Contact]
 
