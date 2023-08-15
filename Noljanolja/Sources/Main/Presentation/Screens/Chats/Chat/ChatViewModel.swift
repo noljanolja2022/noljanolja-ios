@@ -466,14 +466,18 @@ final class ChatViewModel: ViewModel {
                     guard let geometryProxy else { return }
                     dismissKeyboard {
                         let contentRect = geometryProxy.frame(in: .global)
-                        self.fullScreenCoverType = .messageQuickReaction(message, contentRect)
+                        withoutAnimation {
+                            self.fullScreenCoverType = .messageQuickReaction(message, contentRect)
+                        }
                     }
                 case let .openMessageActionDetail(normalMessageModel, geometryProxy):
                     guard let geometryProxy else { return }
                     dismissKeyboard {
                         scrollToMessage {
                             let contentRect = geometryProxy.frame(in: .global)
-                            self.fullScreenCoverType = .messageActionDetail(normalMessageModel, contentRect)
+                            withoutAnimation {
+                                self.fullScreenCoverType = .messageActionDetail(normalMessageModel, contentRect)
+                            }
                         }
                     }
                 }

@@ -45,18 +45,7 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
             buildSearchView()
             buildScrollView()
         }
-        .background(ColorAssets.primaryGreen200.swiftUIColor)
-    }
-
-    private func buildScrollView() -> some View {
-        ScrollView {
-            LazyVStack(spacing: 16) {
-                buildMyPointView()
-                buildMyCouponsView()
-                buildShopCouponsView()
-            }
-            .padding(.vertical, 16)
-        }
+        .background(ColorAssets.neutralLightGrey.swiftUIColor)
     }
 
     private func buildSearchView() -> some View {
@@ -71,16 +60,27 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
             }
             SearchView(placeholder: "Search product", text: .constant(""))
                 .frame(maxWidth: .infinity)
-                .background(ColorAssets.neutralLightGrey.swiftUIColor)
+                .background(ColorAssets.neutralLight.swiftUIColor)
                 .cornerRadius(8)
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 8)
-        .background(ColorAssets.neutralLight.swiftUIColor)
+        .background(ColorAssets.primaryGreen100.swiftUIColor)
         .cornerRadius([.bottomLeading, .bottomTrailing], 12)
         .disabled(true)
         .onTapGesture {
             viewModel.navigationType = .search
+        }
+    }
+
+    private func buildScrollView() -> some View {
+        ScrollView {
+            LazyVStack(spacing: 16) {
+                buildMyPointView()
+                buildMyCouponsView()
+                buildShopCouponsView()
+            }
+            .padding(.vertical, 16)
         }
     }
 
@@ -89,6 +89,12 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
         if let memberInfo = viewModel.model.memberInfo {
             WalletMyPointView(point: memberInfo.point)
                 .padding(.horizontal, 16)
+                .shadow(
+                    color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.15),
+                    radius: 2,
+                    x: 0,
+                    y: 2
+                )
         }
     }
 

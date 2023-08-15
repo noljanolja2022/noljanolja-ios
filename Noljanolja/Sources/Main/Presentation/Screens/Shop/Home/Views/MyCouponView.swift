@@ -44,11 +44,11 @@ struct MyCouponView: View {
                             .scaledToFit()
                             .frame(width: 24, height: 24)
                     }
-                    .foregroundColor(ColorAssets.neutralRawLight.swiftUIColor)
                 }
             )
         }
         .padding(.horizontal, 16)
+        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
     }
 
     private func buildListView() -> some View {

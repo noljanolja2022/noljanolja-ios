@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 // MARK: - CreateConversationView
 
@@ -31,7 +32,9 @@ struct CreateConversationView<ViewModel: CreateConversationViewModel>: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(
                         action: {
-                            presentationMode.wrappedValue.dismiss()
+                            withoutAnimation {
+                                presentationMode.wrappedValue.dismiss()
+                            }
                         },
                         label: {
                             Image(systemName: "xmark")
@@ -67,7 +70,9 @@ struct CreateConversationView<ViewModel: CreateConversationViewModel>: View {
                     .edgesIgnoringSafeArea(.bottom)
             )
             .onTapGesture {
-                presentationMode.wrappedValue.dismiss()
+                withoutAnimation {
+                    presentationMode.wrappedValue.dismiss()
+                }
             }
     }
 

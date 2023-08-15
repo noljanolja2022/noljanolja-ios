@@ -42,32 +42,54 @@ final class ContactService: ContactServiceType {
     }
 
     func getContacts(page: Int, pageSize: Int) -> AnyPublisher<[User], Error> {
-        let localContacts = contactStore.observeContacts()
-            .filter { !$0.isEmpty }
+        contactAPI.getAuthorizationStatus()
+            .flatMapLatest { [weak self] _ -> AnyPublisher<[User], Error> in
+                guard let self else {
+                    return Fail(error: CommonError.captureSelfNotFound).eraseToAnyPublisher()
+                }
 
-        let remoteContacts = contactAPI
+                let localContacts = contactStore.observeContacts()
+                    .filter { !$0.isEmpty }
+
+                let remoteGetContacts = getRemoteContacts(page: page, pageSize: pageSize)
+
+                let remoteSyncContacts = syncContacts()
+                    .flatMapLatest { [weak self] _ -> AnyPublisher<[User], Error> in
+                        guard let self else {
+                            return Fail(error: CommonError.captureSelfNotFound).eraseToAnyPublisher()
+                        }
+                        return self.getRemoteContacts(page: page, pageSize: pageSize)
+                    }
+
+                return Publishers.Merge3(localContacts, remoteGetContacts, remoteSyncContacts)
+                    .map { $0.sorted { $0.name ?? "" < $1.name ?? "" } }
+                    .removeDuplicates()
+                    .eraseToAnyPublisher()
+            }
+            .eraseToAnyPublisher()
+    }
+}
+
+extension ContactService {
+    private func syncContacts() -> AnyPublisher<[User], Error> {
+        contactAPI
             .getContacts()
             .flatMapLatest { [weak self] contacts -> AnyPublisher<[User], Error> in
                 guard let self else {
-                    return Empty<[User], Error>().eraseToAnyPublisher()
+                    return Fail(error: CommonError.captureSelfNotFound).eraseToAnyPublisher()
                 }
                 return self.userAPI
                     .syncContacts(contacts.filter { !$0.phones.isEmpty })
             }
-            .flatMapLatest { [weak self] _ in
-                guard let self else {
-                    return Empty<[User], Error>().eraseToAnyPublisher()
-                }
-                return self.userAPI
-                    .getContact(page: page, pageSize: pageSize)
-            }
+            .eraseToAnyPublisher()
+    }
+
+    private func getRemoteContacts(page: Int, pageSize: Int) -> AnyPublisher<[User], Error> {
+        userAPI
+            .getContact(page: page, pageSize: pageSize)
             .handleEvents(receiveOutput: { [weak self] in
                 self?.contactStore.saveContact($0)
             })
-
-        return Publishers.Merge(localContacts, remoteContacts)
-            .map { $0.sorted { $0.name ?? "" < $1.name ?? "" } }
-            .removeDuplicates()
             .eraseToAnyPublisher()
     }
 }

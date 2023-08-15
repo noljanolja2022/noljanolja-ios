@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUIX
 
 // MARK: - MainTabType
 
@@ -50,6 +51,16 @@ enum MainTabType: Equatable {
         case .wallet: return ImageAssets.icWallet.name
         case .shop: return ImageAssets.icShop.name
         case .news: return ImageAssets.icNews.name
+        }
+    }
+
+    var topColor: Color {
+        switch self {
+        case .chat: return ColorAssets.primaryGreen200.swiftUIColor
+        case .watch: return ColorAssets.primaryGreen200.swiftUIColor
+        case .wallet: return ColorAssets.neutralLight.swiftUIColor
+        case .shop: return ColorAssets.primaryGreen100.swiftUIColor
+        case .news: return ColorAssets.primaryGreen200.swiftUIColor
         }
     }
 }

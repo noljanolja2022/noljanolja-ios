@@ -18,9 +18,11 @@ enum CheckinItemStatus {
 // MARK: - CheckinItemViewModel
 
 struct CheckinItemViewModel: Equatable {
+    let date: Date
     let status: CheckinItemStatus
 
     init(checkinProgress: CheckinProgress) {
+        self.date = checkinProgress.day
         self.status = {
             if checkinProgress.isCompleted {
                 return .checked
@@ -56,31 +58,36 @@ struct CheckinItemView: View {
                         .foregroundColor(ColorAssets.primaryGreen100.swiftUIColor)
                 )
         case .miss:
-            ImageAssets.icPoint.swiftUIImage
-                .resizable()
-                .sizeToFit()
-                .saturation(0)
-                .frame(maxWidth: .infinity)
+            Text(model?.date.string(withFormat: "d") ?? "")
+                .dynamicFont(.systemFont(ofSize: 12, weight: .bold))
+                .foregroundColor(ColorAssets.neutralRawDeepGrey.swiftUIColor)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .aspectRatio(1, contentMode: .fit)
-                .padding(12)
-                .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
+                .background(
+                    Circle()
+                        .foregroundColor(ColorAssets.neutralRawLightGrey.swiftUIColor)
+                )
+                .padding(8)
                 .background(
                     Circle()
                         .strokeBorder(lineWidth: 1)
-                        .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
+                        .foregroundColor(ColorAssets.neutralRawDeepGrey.swiftUIColor)
                 )
         case .notChecked:
-            ImageAssets.icPoint.swiftUIImage
-                .resizable()
-                .sizeToFit()
-                .frame(maxWidth: .infinity)
-                .aspectRatio(1, contentMode: .fit)
-                .padding(12)
+            Text(model?.date.string(withFormat: "d") ?? "")
+                .dynamicFont(.systemFont(ofSize: 12, weight: .bold))
                 .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .aspectRatio(1, contentMode: .fit)
+                .background(
+                    Circle()
+                        .foregroundColor(ColorAssets.secondaryYellow200.swiftUIColor)
+                )
+                .padding(8)
                 .background(
                     Circle()
                         .strokeBorder(lineWidth: 1)
-                        .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
+                        .foregroundColor(ColorAssets.neutralRawDeepGrey.swiftUIColor)
                 )
         case .none:
             Spacer()

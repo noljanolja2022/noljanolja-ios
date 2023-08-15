@@ -23,11 +23,4 @@ enum ChatFullScreenCoverType: Equatable {
     case urlDetail(URL)
     case messageQuickReaction(Message, CGRect)
     case messageActionDetail(NormalMessageModel, CGRect)
-
-    var isAnimationsEnabled: Bool {
-        switch self {
-        case .urlDetail: return true
-        case .messageQuickReaction, .messageActionDetail: return false
-        }
-    }
 }

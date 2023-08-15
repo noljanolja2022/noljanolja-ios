@@ -9,6 +9,7 @@
 import Combine
 import CombineExt
 import Foundation
+import SwiftUIX
 import UserNotifications
 
 // MARK: - ConversationListViewModelDelegate
@@ -118,7 +119,9 @@ final class ConversationListViewModel: ViewModel {
                         case .notDetermined:
                             self.userNotificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in }
                         case .denied:
-                            self.fullScreenCoverType = .notificationSetting
+                            withoutAnimation {
+                                self.fullScreenCoverType = .notificationSetting
+                            }
                         case .authorized, .provisional, .ephemeral:
                             break
                         @unknown default:

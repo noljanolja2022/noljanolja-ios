@@ -59,10 +59,6 @@ struct ChatView<ViewModel: ChatViewModel>: View {
         .onReceive(viewModel.closeAction) {
             presentationMode.wrappedValue.dismiss()
         }
-        .onChange(of: viewModel.fullScreenCoverType) { fullScreenCoverType in
-            guard let fullScreenCoverType else { return }
-            UIView.setAnimationsEnabled(fullScreenCoverType.isAnimationsEnabled)
-        }
         .alert(item: $viewModel.alertState) {
             Alert($0) { action in
                 switch action {
@@ -267,9 +263,6 @@ extension ChatView {
                     )
                 )
             )
-            .onDisappear {
-                UIView.setAnimationsEnabled(true)
-            }
         case let .messageActionDetail(normalMessageModel, rect):
             MessageActionDetailView(
                 viewModel: MessageActionDetailViewModel(
@@ -281,9 +274,6 @@ extension ChatView {
                     delegate: viewModel
                 )
             )
-            .onDisappear {
-                UIView.setAnimationsEnabled(true)
-            }
         }
     }
 }
