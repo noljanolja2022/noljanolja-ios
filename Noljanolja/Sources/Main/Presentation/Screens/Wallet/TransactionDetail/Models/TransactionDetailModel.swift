@@ -18,7 +18,7 @@ struct TransactionDetailModel {
         self.type = model.amount > 0 ? L10n.transactionReceiveType : L10n.transactionSpentType
         self.point = L10n.transactionHistoryPoint(model.amount.signFormatted())
         self.pointColor = model.amount > 0 ? ColorAssets.primaryGreen200.name : ColorAssets.systemRed100.name
-        self.dateTime = model.createdAt.string(withFormat: "HH:mm - MMMM dd, yyyy")
+        self.dateTime = model.createdAt.string(withFormat: "HH:mm - yyyy/MM/dd")
         self.code = String(model.id)
     }
 }

@@ -177,7 +177,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
         VStack {
             HStack(spacing: 16) {
                 Text(
-                    viewModel.dob?.string(withFormat: "dd/MM/yyyy")
+                    viewModel.dob?.string(withFormat: "yyyy/MM/dd")
                         ?? "Day of Birth"
                 )
                 .dynamicFont(.systemFont(ofSize: 16))
