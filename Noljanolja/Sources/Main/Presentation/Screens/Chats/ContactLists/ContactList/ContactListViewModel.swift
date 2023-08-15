@@ -77,15 +77,7 @@ final class ContactListViewModel: ViewModel {
                 guard let self else {
                     return Empty<[User], Error>().eraseToAnyPublisher()
                 }
-                return self.contactService
-                    .getAuthorizationStatus()
-                    .flatMap { [weak self] _ -> AnyPublisher<[User], Error> in
-                        guard let self else {
-                            return Empty<[User], Error>().eraseToAnyPublisher()
-                        }
-                        return self.contactListUseCase.getContacts(page: 1, pageSize: 1000)
-                    }
-                    .eraseToAnyPublisher()
+                return self.contactListUseCase.getContacts(page: 1, pageSize: 1000)
             }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { result in

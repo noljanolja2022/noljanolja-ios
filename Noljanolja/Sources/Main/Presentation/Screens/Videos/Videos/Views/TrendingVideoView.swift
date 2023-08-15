@@ -35,8 +35,10 @@ struct TrendingVideoView: View {
         LazyVStack(spacing: 24) {
             ForEach(models.indices, id: \.self) { index in
                 let model = models[index]
+                let itemViewmodel = CommonVideoItemViewModel(model)
                 CommonVideoItemView(
-                    model: model,
+                    model: itemViewmodel,
+                    elementTypes: [.actionButton, .category, .description],
                     action: {
                         moreAction?(model)
                     }
@@ -44,7 +46,6 @@ struct TrendingVideoView: View {
                 .onTapGesture { selectAction?(model) }
             }
         }
-        .padding(.horizontal, 16)
         .padding(.bottom, 24)
     }
 }

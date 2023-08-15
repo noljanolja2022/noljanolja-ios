@@ -15,7 +15,7 @@ struct Video: Equatable, Codable {
     let thumbnail: String?
     let duration: String?
     let durationMs: Int
-    let currentProgress: Int
+    let currentProgressMs: Int
     let viewCount: Int
     let likeCount: Int
     let commentCount: Int
@@ -36,7 +36,7 @@ struct Video: Equatable, Codable {
         case thumbnail
         case duration
         case durationMs
-        case currentProgress
+        case currentProgressMs
         case viewCount
         case likeCount
         case commentCount
@@ -62,7 +62,7 @@ struct Video: Equatable, Codable {
         self.thumbnail = try container.decodeIfPresent(String.self, forKey: .thumbnail)
         self.duration = try container.decodeIfPresent(String.self, forKey: .duration)
         self.durationMs = try container.decodeIfPresent(Int.self, forKey: .durationMs) ?? 0
-        self.currentProgress = try container.decodeIfPresent(Int.self, forKey: .durationMs) ?? 0
+        self.currentProgressMs = try container.decodeIfPresent(Int.self, forKey: .currentProgressMs) ?? 0
         self.viewCount = try container.decodeIfPresent(Int.self, forKey: .viewCount) ?? 0
         self.likeCount = try container.decodeIfPresent(Int.self, forKey: .likeCount) ?? 0
         self.commentCount = try container.decodeIfPresent(Int.self, forKey: .commentCount) ?? 0
@@ -76,7 +76,7 @@ struct Video: Equatable, Codable {
         self.completed = try container.decodeIfPresent(Bool.self, forKey: .completed) ?? false
     }
 
-    init(id: String, url: String, publishedAt: Date?, title: String?, thumbnail: String?, duration: String?, durationMs: Int, currentProgress: Int, viewCount: Int, likeCount: Int, commentCount: Int, favoriteCount: Int, isHighlighted: Bool, comments: [VideoComment], channel: VideoChannel?, category: VideoCategory?, earnedPoints: Int, totalPoints: Int, completed: Bool) {
+    init(id: String, url: String, publishedAt: Date?, title: String?, thumbnail: String?, duration: String?, durationMs: Int, currentProgressMs: Int, viewCount: Int, likeCount: Int, commentCount: Int, favoriteCount: Int, isHighlighted: Bool, comments: [VideoComment], channel: VideoChannel?, category: VideoCategory?, earnedPoints: Int, totalPoints: Int, completed: Bool) {
         self.id = id
         self.url = url
         self.publishedAt = publishedAt
@@ -84,7 +84,7 @@ struct Video: Equatable, Codable {
         self.thumbnail = thumbnail
         self.duration = duration
         self.durationMs = durationMs
-        self.currentProgress = currentProgress
+        self.currentProgressMs = currentProgressMs
         self.viewCount = viewCount
         self.likeCount = likeCount
         self.commentCount = commentCount

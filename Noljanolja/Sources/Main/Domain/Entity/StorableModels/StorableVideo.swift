@@ -16,7 +16,7 @@ final class StorableVideo: Object {
     @Persisted var thumbnail: String?
     @Persisted var duration: String?
     @Persisted var durationMs: Int
-    @Persisted var currentProgress: Int
+    @Persisted var currentProgressMs: Int
     @Persisted var viewCount: Int
     @Persisted var likeCount: Int
     @Persisted var commentCount: Int
@@ -38,7 +38,7 @@ final class StorableVideo: Object {
             thumbnail: thumbnail,
             duration: duration,
             durationMs: durationMs,
-            currentProgress: currentProgress,
+            currentProgressMs: currentProgressMs,
             viewCount: viewCount,
             likeCount: likeCount,
             commentCount: commentCount,
@@ -62,7 +62,7 @@ final class StorableVideo: Object {
         self.thumbnail = model.thumbnail
         self.duration = model.duration
         self.durationMs = model.durationMs
-        self.currentProgress = model.currentProgress
+        self.currentProgressMs = model.currentProgressMs
         self.viewCount = model.viewCount
         self.likeCount = model.likeCount
         self.commentCount = model.commentCount

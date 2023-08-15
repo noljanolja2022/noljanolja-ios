@@ -371,6 +371,9 @@
 		CF68231B2A72DA8B00CC4121 /* ShareVideoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6823192A72DA8B00CC4121 /* ShareVideoViewModel.swift */; };
 		CF68E7AA2A69360E00424C32 /* UIDevice+Orientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF68E7A92A69360E00424C32 /* UIDevice+Orientation.swift */; };
 		CF6ABC232993618000D78213 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = CF6ABC222993618000D78213 /* Introspect */; };
+		CF715AE52A862135006DF977 /* UncompleteVideosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF715AE32A862135006DF977 /* UncompleteVideosView.swift */; };
+		CF715AE62A862135006DF977 /* UncompleteVideosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF715AE42A862135006DF977 /* UncompleteVideosViewModel.swift */; };
+		CF715AE82A86239B006DF977 /* UncompleteVideosNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF715AE72A86239B006DF977 /* UncompleteVideosNavigations.swift */; };
 		CF745A5A2998E5EA008177E5 /* TappableTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF745A592998E5EA008177E5 /* TappableTextFieldStyle.swift */; };
 		CF74A1A729B586EF00419342 /* StatefullView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF74A1A629B586EF00419342 /* StatefullView.swift */; };
 		CF775BBC29C6250E00E82183 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF775BBB29C6250E00E82183 /* AppDelegate.swift */; };
@@ -926,6 +929,9 @@
 		CF6823182A72DA8B00CC4121 /* ShareVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareVideoView.swift; sourceTree = "<group>"; };
 		CF6823192A72DA8B00CC4121 /* ShareVideoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareVideoViewModel.swift; sourceTree = "<group>"; };
 		CF68E7A92A69360E00424C32 /* UIDevice+Orientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Orientation.swift"; sourceTree = "<group>"; };
+		CF715AE32A862135006DF977 /* UncompleteVideosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UncompleteVideosView.swift; sourceTree = "<group>"; };
+		CF715AE42A862135006DF977 /* UncompleteVideosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UncompleteVideosViewModel.swift; sourceTree = "<group>"; };
+		CF715AE72A86239B006DF977 /* UncompleteVideosNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UncompleteVideosNavigations.swift; sourceTree = "<group>"; };
 		CF745A592998E5EA008177E5 /* TappableTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableTextFieldStyle.swift; sourceTree = "<group>"; };
 		CF74A1A629B586EF00419342 /* StatefullView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatefullView.swift; sourceTree = "<group>"; };
 		CF775BBB29C6250E00E82183 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -1769,6 +1775,7 @@
 		CF53D4152A6AF547009B3A69 /* Videos */ = {
 			isa = PBXGroup;
 			children = (
+				CF715AE22A862125006DF977 /* UncompleteVideos */,
 				CFF530B12A74303300908DEB /* Action */,
 				CF67F8B52A7174CD007293B4 /* Views */,
 				CF1A20962A6EE8D000A5D0BB /* SearchVideos */,
@@ -2885,6 +2892,16 @@
 				CF6823192A72DA8B00CC4121 /* ShareVideoViewModel.swift */,
 			);
 			path = ShareVideo;
+			sourceTree = "<group>";
+		};
+		CF715AE22A862125006DF977 /* UncompleteVideos */ = {
+			isa = PBXGroup;
+			children = (
+				CF715AE32A862135006DF977 /* UncompleteVideosView.swift */,
+				CF715AE42A862135006DF977 /* UncompleteVideosViewModel.swift */,
+				CF715AE72A86239B006DF977 /* UncompleteVideosNavigations.swift */,
+			);
+			path = UncompleteVideos;
 			sourceTree = "<group>";
 		};
 		CF775BBA29C624F800E82183 /* AppDelegates */ = {
@@ -4195,6 +4212,7 @@
 				CF53D6162A6AF548009B3A69 /* FriendScannerView.swift in Sources */,
 				CF53D5C12A6AF548009B3A69 /* WalletPointView.swift in Sources */,
 				CF53D5D62A6AF548009B3A69 /* UpdateConversationContactListViewModel.swift in Sources */,
+				CF715AE82A86239B006DF977 /* UncompleteVideosNavigations.swift in Sources */,
 				CF0CC9FD29D14C790027D2C1 /* SendMessageRequest.swift in Sources */,
 				CFAA37632A4B38E00085CE88 /* Banner.swift in Sources */,
 				CF53D5872A6AF548009B3A69 /* BannersView.swift in Sources */,
@@ -4291,6 +4309,7 @@
 				CF53D5602A6AF548009B3A69 /* LaunchViewModel.swift in Sources */,
 				CF849EE52A809FD500B8BA3B /* VerticalShareReferralViewModel.swift in Sources */,
 				CFF863952A435F8400EC0713 /* ReactIcon.swift in Sources */,
+				CF715AE62A862135006DF977 /* UncompleteVideosViewModel.swift in Sources */,
 				CFAD534D2A780D5A0044CB42 /* CheckinView.swift in Sources */,
 				CF53D56B2A6AF548009B3A69 /* ProfileSettingView.swift in Sources */,
 				CFCFFA3729E5C82A002B7FB6 /* ConversationSocketService.swift in Sources */,
@@ -4360,6 +4379,7 @@
 				CF53D6382A6AF548009B3A69 /* SendMessageType.swift in Sources */,
 				CF53D59A2A6AF548009B3A69 /* WatchingVideoItemView.swift in Sources */,
 				CF53D5CA2A6AF548009B3A69 /* AddFriendContactListViewModel.swift in Sources */,
+				CF715AE52A862135006DF977 /* UncompleteVideosView.swift in Sources */,
 				CF1E5D742A6984DE00481376 /* CameraStatefulView.swift in Sources */,
 				CFC9E5162A7047FA004D48E5 /* LocalVideoKeywordRepository.swift in Sources */,
 				CF53D5ED2A6AF548009B3A69 /* PhotoMessageContentItemModel.swift in Sources */,
@@ -4506,7 +4526,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 0.0.4;
+				CURRENT_PROJECT_VERSION = 0.0.5;
 				DEVELOPMENT_ASSET_PATHS = "\"Noljanolja/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = YN4QYR8CRU;
@@ -4527,7 +4547,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.4;
+				MARKETING_VERSION = 0.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.noljanolja.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -4700,7 +4720,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 0.0.4;
+				CURRENT_PROJECT_VERSION = 0.0.5;
 				DEVELOPMENT_ASSET_PATHS = "\"Noljanolja/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = YN4QYR8CRU;
@@ -4721,7 +4741,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.4;
+				MARKETING_VERSION = 0.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.noljanolja.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -4742,7 +4762,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 0.0.4;
+				CURRENT_PROJECT_VERSION = 0.0.5;
 				DEVELOPMENT_ASSET_PATHS = "\"Noljanolja/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = YN4QYR8CRU;
@@ -4763,7 +4783,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.4;
+				MARKETING_VERSION = 0.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.noljanolja.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -43,7 +43,7 @@ struct VideoDetailCommentView: View {
             .cornerRadius(12)
 
             VStack(spacing: 4) {
-                Text(comment.createdAt?.string(withFormat: "yyyy.MM.dd HH:mm") ?? "")
+                Text(comment.createdAt?.string(withFormat: "HH:mm - yyyy/MM/dd") ?? "")
                     .dynamicFont(.systemFont(ofSize: 11))
                     .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
                     .frame(maxWidth: .infinity, alignment: .leading)

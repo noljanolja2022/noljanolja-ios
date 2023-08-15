@@ -62,10 +62,6 @@ final class MessageQuickReactionViewModel: ViewModel {
     private func configureLoadData() {
         isAppearSubject
             .first(where: { $0 })
-            .receive(on: DispatchQueue.main)
-            .handleEvents(receiveOutput: { [weak self] _ in
-                self?.isProgressHUDShowing = true
-            })
             .flatMapLatestToResult { [weak self] _ -> AnyPublisher<[ReactIcon], Error> in
                 guard let self else {
                     return Empty<[ReactIcon], Error>().eraseToAnyPublisher()
@@ -87,8 +83,6 @@ final class MessageQuickReactionViewModel: ViewModel {
 
     private func configureActions() {
         reactionAction
-            .receive(on: DispatchQueue.main)
-            .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapToResult { [weak self] reactionIcon -> AnyPublisher<Void, Error> in
                 guard let self else {
                     return Fail<Void, Error>(error: CommonError.unknown).eraseToAnyPublisher()
@@ -101,7 +95,6 @@ final class MessageQuickReactionViewModel: ViewModel {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self else { return }
-                self.isProgressHUDShowing = false
                 self.closeAction.send()
             }
             .store(in: &cancellables)

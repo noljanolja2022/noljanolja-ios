@@ -233,7 +233,7 @@ extension ContactListView {
             )
             .background(ColorAssets.neutralLight.swiftUIColor)
         } else {
-            Text(L10n.commonErrorTitle)
+            Text("\(L10n.commonErrorTitle)\n\(viewModel.error?.localizedDescription ?? "")")
                 .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                 .frame(
                     maxWidth: .infinity,

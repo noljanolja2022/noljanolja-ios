@@ -29,7 +29,7 @@ struct ReferralView<ViewModel: ReferralViewModel>: View {
             .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("")
+                    Text("Let’s join and Play")
                         .lineLimit(1)
                         .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)

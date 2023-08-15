@@ -8,6 +8,7 @@
 
 import Combine
 import SwiftUI
+import SwiftUIX
 
 // MARK: - ConversationListView
 
@@ -34,14 +35,12 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
         .onReceive(toolBarAction) {
             switch $0 {
             case .createConversation:
-                viewModel.fullScreenCoverType = .createConversation
+                withoutAnimation {
+                    viewModel.fullScreenCoverType = .createConversation
+                }
             case .none:
                 break
             }
-        }
-        .onChange(of: viewModel.fullScreenCoverType) { fullScreenCoverType in
-            guard let fullScreenCoverType else { return }
-            UIView.setAnimationsEnabled(fullScreenCoverType.isAnimationsEnabled)
         }
         .fullScreenCover(
             unwrapping: $viewModel.fullScreenCoverType,
@@ -50,9 +49,6 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
             },
             content: {
                 buildFullScreenCoverDestinationView($0)
-                    .onDisappear {
-                        UIView.setAnimationsEnabled(true)
-                    }
             }
         )
     }

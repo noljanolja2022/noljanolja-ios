@@ -11,6 +11,7 @@ import SwiftUI
 
 struct WatchingVideoView: View {
     var videos: [Video]
+    var seeAllAction: (() -> Void)?
     var selectAction: ((Video) -> Void)?
 
     var body: some View {
@@ -19,14 +20,31 @@ struct WatchingVideoView: View {
 
     private func buildBodyView() -> some View {
         LazyVStack(spacing: 16) {
+            buildHeaderView()
+            buildContentView()
+        }
+    }
+
+    private func buildHeaderView() -> some View {
+        HStack(spacing: 4) {
             Text(L10n.videoListWatchingToGetPoint)
                 .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                .padding(.horizontal, 16)
 
-            buildContentView()
+            Button(
+                action: {
+                    seeAllAction?()
+                },
+                label: {
+                    ImageAssets.icArrowRight.swiftUIImage
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 24, height: 24)
+                }
+            )
         }
+        .padding(.horizontal, 16)
+        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
     }
 
     private func buildContentView() -> some View {

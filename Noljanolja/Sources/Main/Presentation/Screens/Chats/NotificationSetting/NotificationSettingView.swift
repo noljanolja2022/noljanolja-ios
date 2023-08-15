@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 // MARK: - NotificationSettingView
 
@@ -33,7 +34,9 @@ struct NotificationSettingView<ViewModel: NotificationSettingViewModel>: View {
                         .edgesIgnoringSafeArea(.top)
                 )
                 .onTapGesture {
-                    presentationMode.wrappedValue.dismiss()
+                    withoutAnimation {
+                        presentationMode.wrappedValue.dismiss()
+                    }
                 }
             buildContentView()
         }
@@ -56,7 +59,9 @@ struct NotificationSettingView<ViewModel: NotificationSettingViewModel>: View {
 
                 Button(
                     action: {
-                        presentationMode.wrappedValue.dismiss()
+                        withoutAnimation {
+                            presentationMode.wrappedValue.dismiss()
+                        }
                     },
                     label: {
                         ImageAssets.icClose.swiftUIImage
@@ -87,7 +92,9 @@ struct NotificationSettingView<ViewModel: NotificationSettingViewModel>: View {
                 action: {
                     guard let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) else { return }
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                    presentationMode.wrappedValue.dismiss()
+                    withoutAnimation {
+                        presentationMode.wrappedValue.dismiss()
+                    }
                 }
             )
             .buttonStyle(PrimaryButtonStyle())
