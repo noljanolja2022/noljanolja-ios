@@ -45,7 +45,7 @@ final class AuthRootViewModel: ViewModel {
 // MARK: TermViewModelDelegate
 
 extension AuthRootViewModel: TermViewModelDelegate {
-    func navigateToAuth() {
+    func termViewModelDidComplete() {
         contentType = .auth
     }
 }

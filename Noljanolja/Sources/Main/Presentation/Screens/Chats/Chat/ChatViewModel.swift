@@ -532,7 +532,7 @@ final class ChatViewModel: ViewModel {
 // MARK: ChatInputViewModelDelegate
 
 extension ChatViewModel: ChatInputViewModelDelegate {
-    func chatInputSendMessage(_ type: SendMessageType) {
+    func chatInputViewModel(type: SendMessageType) {
         sendAction.send(type)
     }
 }
@@ -552,7 +552,7 @@ extension ChatViewModel: ChatSettingViewModelDelegate {
 // MARK: MessageImagesViewModelDelegate
 
 extension ChatViewModel: MessageImagesViewModelDelegate {
-    func sendImage(_ image: UIImage) {
+    func messageImagesViewModel(sendImage image: UIImage) {
         sendAction.send(.images([image]))
     }
 }

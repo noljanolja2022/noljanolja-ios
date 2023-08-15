@@ -14,7 +14,7 @@ import UIKit
 // MARK: - MessageImagesViewModelDelegate
 
 protocol MessageImagesViewModelDelegate: AnyObject {
-    func sendImage(_ image: UIImage)
+    func messageImagesViewModel(sendImage image: UIImage)
 }
 
 // MARK: - MessageImagesViewModel
@@ -111,7 +111,7 @@ final class MessageImagesViewModel: ViewModel {
 // MARK: ImageDetailViewModelDelegate
 
 extension MessageImagesViewModel: ImageDetailViewModelDelegate {
-    func sendImage(_ image: UIImage) {
-        delegate?.sendImage(image)
+    func imageDetailViewModel(sendImage image: UIImage) {
+        delegate?.messageImagesViewModel(sendImage: image)
     }
 }

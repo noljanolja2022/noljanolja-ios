@@ -12,7 +12,7 @@ import Foundation
 // MARK: - CreateConversationViewModelDelegate
 
 protocol CreateConversationViewModelDelegate: AnyObject {
-    func didSelectType(type: ConversationType)
+    func createConversationViewModel(type: ConversationType)
 }
 
 // MARK: - CreateConversationViewModel
@@ -43,7 +43,7 @@ final class CreateConversationViewModel: ViewModel {
         conversationTypeAction
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
-                self?.delegate?.didSelectType(type: $0)
+                self?.delegate?.createConversationViewModel(type: $0)
             }
             .store(in: &cancellables)
     }

@@ -140,7 +140,7 @@ final class AddFriendsHomeViewModel: ViewModel {
 // MARK: SelectCountryViewModelDelegate
 
 extension AddFriendsHomeViewModel: SelectCountryViewModelDelegate {
-    func didSelectCountry(_ country: Country) {
+    func selectCountryViewModel(didSelectCountry country: Country) {
         self.country = country
     }
 }

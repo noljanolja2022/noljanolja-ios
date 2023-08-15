@@ -13,7 +13,7 @@ import UIKit
 // MARK: - ImageEditorViewModelDelegate
 
 protocol ImageEditorViewModelDelegate: AnyObject {
-    func finishEditing(_ image: UIImage)
+    func imageEditorViewModel(didEditImage image: UIImage)
 }
 
 // MARK: - ImageEditorViewModel
@@ -47,7 +47,7 @@ final class ImageEditorViewModel: ViewModel {
         finishEditingAction
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
-                self?.delegate?.finishEditing($0)
+                self?.delegate?.imageEditorViewModel(didEditImage: $0)
             }
             .store(in: &cancellables)
     }

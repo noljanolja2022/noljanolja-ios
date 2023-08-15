@@ -14,7 +14,7 @@ import UIKit
 // MARK: - ImageEditorResultViewModelDelegate
 
 protocol ImageEditorResultViewModelDelegate: AnyObject {
-    func sendImage(_ image: UIImage)
+    func imageEditorResultViewModel(sendImage image: UIImage)
 }
 
 // MARK: - ImageEditorResultViewModel
@@ -65,7 +65,7 @@ final class ImageEditorResultViewModel: ViewModel {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 guard let self else { return }
-                self.delegate?.sendImage(self.image)
+                self.delegate?.imageEditorResultViewModel(sendImage: self.image)
             }
             .store(in: &cancellables)
     }

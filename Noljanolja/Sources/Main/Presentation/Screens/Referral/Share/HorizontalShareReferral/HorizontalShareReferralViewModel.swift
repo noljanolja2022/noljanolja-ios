@@ -12,7 +12,7 @@ import Foundation
 // MARK: - HorizontalShareReferralViewModelDelegate
 
 protocol HorizontalShareReferralViewModelDelegate: ShareReferralViewModelDelegate {
-    func didTapMore()
+    func horizontalShareReferralViewModelDidTapMore()
 }
 
 // MARK: - HorizontalShareReferralViewModel
@@ -46,7 +46,7 @@ final class HorizontalShareReferralViewModel: ShareReferralViewModel {
         moreAction
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.delegate?.didTapMore()
+                self?.delegate?.horizontalShareReferralViewModelDidTapMore()
             }
             .store(in: &cancellables)
     }

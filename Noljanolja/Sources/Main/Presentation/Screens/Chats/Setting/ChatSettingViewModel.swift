@@ -264,7 +264,7 @@ final class ChatSettingViewModel: ViewModel {
 // MARK: ParticipantDetailActionViewModelDelegate
 
 extension ChatSettingViewModel: ParticipantDetailActionViewModelDelegate {
-    func didSelectAction(user: User, action: ParticipantDetailActionType) {
+    func participantDetailActionViewModel(didSelect user: User, action: ParticipantDetailActionType) {
         switch action {
         case let .chat(user):
             delegate?.chatSettingViewModel(openConversation: user)
