@@ -59,14 +59,14 @@ struct AddReferralView<ViewModel: AddReferralViewModel>: View {
 
     private func buildInputView() -> some View {
         VStack(spacing: 8) {
-            Text("Referral code")
+            Text(L10n.referralCode)
                 .dynamicFont(.systemFont(ofSize: 32, weight: .bold))
                 .lineLimit(nil)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
-            Text("Please enter referral code to get bonus gifts.")
+            Text(L10n.pleaseEnterReferralCode)
                 .dynamicFont(.systemFont(ofSize: 14))
                 .lineLimit(nil)
                 .frame(maxWidth: .infinity, alignment: .leading)

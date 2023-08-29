@@ -34,9 +34,9 @@ struct ConversationItemModel: Equatable {
 
             guard lastMessage.shareVideo == nil else {
                 if lastMessage.sender.id == currentUser.id {
-                    return "You sent a video"
+                    return L10n.chatsMessageMyVideo
                 } else {
-                    return "You received a video"
+                    return L10n.chatsMessageVideo
                 }
             }
 

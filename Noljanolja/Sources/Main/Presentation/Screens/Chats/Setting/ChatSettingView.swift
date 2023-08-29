@@ -238,7 +238,6 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
             destination: { buildNavigationDestinationView($0) },
             label: { EmptyView() }
         )
-        .isDetailLink(false)
     }
 
     @ViewBuilder
@@ -259,6 +258,10 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
                     viewModel: ConversationAdjustmentModel(
                         conversation: viewModel.conversationSubject.value
                     )
+                )
+            case .media:
+                ChatAttachmentsView(
+                    viewModel: ChatAttachmentsViewModel()
                 )
             }
         }

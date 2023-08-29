@@ -26,7 +26,7 @@ struct AddFriendsHomeView<ViewModel: AddFriendsHomeViewModel>: View {
             .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text(L10n.addFriendsTitle)
+                    Text(L10n.addFriendTitle)
                         .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
@@ -88,7 +88,7 @@ struct AddFriendsHomeView<ViewModel: AddFriendsHomeViewModel>: View {
                 )
 
                 TextField(
-                    L10n.addFriendsSearchPhoneHint,
+                    L10n.enterPhoneNumber,
                     text: $viewModel.phoneNumberText
                 )
                 .keyboardType(.phonePad)
@@ -132,7 +132,7 @@ struct AddFriendsHomeView<ViewModel: AddFriendsHomeViewModel>: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 24, height: 24)
-                        Text(L10n.addFriendsScanQrCode)
+                        Text(L10n.scanQrCodeTitle)
                             .dynamicFont(.systemFont(ofSize: 14))
                             .frame(maxWidth: .infinity)
                     }
@@ -153,7 +153,7 @@ struct AddFriendsHomeView<ViewModel: AddFriendsHomeViewModel>: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 24, height: 24)
-                        Text(L10n.addFriendsAddByContactTitle)
+                        Text(L10n.addFriendAddByContact)
                             .dynamicFont(.systemFont(ofSize: 14))
                             .frame(maxWidth: .infinity)
                     }
@@ -224,7 +224,7 @@ struct AddFriendsHomeView<ViewModel: AddFriendsHomeViewModel>: View {
                     .scaledToFit()
                     .frame(width: 40, height: 14)
 
-                Text(L10n.addFriendsAddByContactDescription)
+                Text(L10n.addFriendScanQrToAdd)
                     .dynamicFont(.systemFont(ofSize: 16))
                     .frame(maxWidth: .infinity)
             }

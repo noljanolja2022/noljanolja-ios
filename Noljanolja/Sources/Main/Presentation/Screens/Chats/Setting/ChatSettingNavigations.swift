@@ -15,14 +15,17 @@ enum ChatSettingNavigationType: Equatable {
 
     enum SettingItemType {
         case adjustment
+        case media
 
         init?(_ model: ChatSettingItemModelType) {
             switch model {
-            case .changeNickname, .notification, .media, .findMessage,
+            case .changeNickname, .notification, .findMessage,
                  .theme, .deleteChatHistory, .blockUser, .secret:
                 return nil
             case .adjustment:
                 self = .adjustment
+            case .media:
+                self = .media
             }
         }
     }

@@ -26,7 +26,7 @@ struct UncompleteVideosView<ViewModel: UncompleteVideosViewModel>: View {
         }.navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Uncomplete videos")
+                    Text(L10n.uncompletedVideo)
                         .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }

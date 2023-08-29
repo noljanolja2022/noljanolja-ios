@@ -111,8 +111,8 @@ final class AddFriendsHomeViewModel: ViewModel {
                     if model.isEmpty {
                         self.alertState = AlertState(
                             title: TextState(L10n.commonErrorTitle),
-                            message: TextState(L10n.addFriendPhoneNotAvailable),
-                            dismissButton: .cancel(TextState(L10n.commonClose))
+                            message: TextState(L10n.errorPhoneIsNotAvailable),
+                            dismissButton: .cancel(TextState(L10n.commonCancel))
                         )
                     } else {
                         self.navigationType = .result(model)

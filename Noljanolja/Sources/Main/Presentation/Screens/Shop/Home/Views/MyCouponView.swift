@@ -27,7 +27,7 @@ struct MyCouponView: View {
 
     private func buildHeaderView() -> some View {
         HStack(spacing: 8) {
-            Text("Exchanged Coupons")
+            Text(L10n.shopExchangedCoupons)
                 .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
@@ -37,7 +37,7 @@ struct MyCouponView: View {
                 },
                 label: {
                     HStack(spacing: 8) {
-                        Text("View all")
+                        Text(L10n.shopViewAll)
                             .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         ImageAssets.icArrowRight.swiftUIImage
                             .resizable()

@@ -138,7 +138,7 @@ struct SearchVideosView<ViewModel: SearchVideosViewModel>: View {
                     viewModel.clearKeywordsAction.send()
                 },
                 label: {
-                    Text("Clear all")
+                    Text(L10n.shopClearAll)
                         .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
                         .foregroundColor(ColorAssets.neutralDeeperGrey.swiftUIColor)
                         .padding(16)

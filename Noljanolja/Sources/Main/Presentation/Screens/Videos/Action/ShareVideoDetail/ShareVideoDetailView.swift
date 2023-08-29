@@ -44,7 +44,7 @@ struct ShareVideoDetailView<ViewModel: ShareVideoDetailViewModel>: View {
     private func buildNavigationBarView() -> some View {
         NavigationBarView(
             centerView: {
-                Text("Share")
+                Text(L10n.commonShare)
                     .dynamicFont(.systemFont(ofSize: 14))
             }
         )
@@ -98,7 +98,7 @@ struct ShareVideoDetailView<ViewModel: ShareVideoDetailViewModel>: View {
             }
             .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width * 5 / 9)
 
-            Text("+\(model.totalPoints) Points after watching")
+            Text(L10n.getPointAfterWatching(model.totalPoints.formatted()))
                 .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(8)
@@ -124,7 +124,7 @@ struct ShareVideoDetailView<ViewModel: ShareVideoDetailViewModel>: View {
 
                 let description = [
                     model.channel?.title,
-                    "\(model.viewCount.relativeFormatted()) Views",
+                    "\(model.viewCount.relativeFormatted()) \(L10n.videoDetailViews)",
                     model.publishedAt?.relative()
                 ]
                 .compactMap { $0 }
@@ -143,7 +143,7 @@ struct ShareVideoDetailView<ViewModel: ShareVideoDetailViewModel>: View {
 
     private func buildActionView() -> some View {
         Button(
-            "SHARE",
+            L10n.commonShare.uppercased(),
             action: {
                 viewModel.action.send()
             }
