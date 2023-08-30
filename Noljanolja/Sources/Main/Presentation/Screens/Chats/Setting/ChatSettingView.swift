@@ -174,7 +174,7 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
                         .frame(height: 2)
                         .overlay(ColorAssets.neutralLightGrey.swiftUIColor)
 
-                    Text("Settings")
+                    Text(L10n.commonSetting)
                         .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.vertical, 10)

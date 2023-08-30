@@ -49,7 +49,7 @@ struct VerticalShareReferralView<ViewModel: VerticalShareReferralViewModel>: Vie
     private func buildNavigationView() -> some View {
         NavigationBarView(
             centerView: {
-                Text("Send to")
+                Text(L10n.commonSendTo)
                     .dynamicFont(.systemFont(ofSize: 14))
             },
             trailingView: {

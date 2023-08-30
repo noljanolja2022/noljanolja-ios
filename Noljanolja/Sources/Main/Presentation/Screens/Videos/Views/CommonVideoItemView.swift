@@ -67,7 +67,7 @@ struct UncompleteVideoItemViewModel: CommonVideoItemViewModelable {
         self.category = model.category?.title
         self.description = [
             model.channel?.title,
-            "\(model.viewCount.relativeFormatted()) Views",
+            "\(model.viewCount.relativeFormatted()) \(L10n.videoDetailViews)",
             model.publishedAt?.relative()
         ]
         .compactMap { $0 }

@@ -62,8 +62,8 @@ internal enum L10n {
   internal static let authSignupWithEmail = L10n.tr("Localizable", "auth_signup_with_email", fallback: "Signup with email and password")
   /// Verify email to finish
   internal static let authVerifyEmailFinish = L10n.tr("Localizable", "auth_verify_email_finish", fallback: "Verify email to finish")
-  /// Welcome to Noja Noja. Follow these steps to be our member.
-  internal static let authWelcome = L10n.tr("Localizable", "auth_welcome", fallback: "Welcome to Noja Noja. Follow these steps to be our member.")
+  /// Welcome to NolgoBulja. Follow these steps to be our member.
+  internal static let authWelcome = L10n.tr("Localizable", "auth_welcome", fallback: "Welcome to NolgoBulja. Follow these steps to be our member.")
   /// Change Password
   internal static let changePassword = L10n.tr("Localizable", "change_password", fallback: "Change Password")
   /// Album
@@ -94,6 +94,12 @@ internal enum L10n {
   internal static let chatCameraRecordVideo = L10n.tr("Localizable", "chat_camera_record_video", fallback: "Record a video")
   /// Take a photo
   internal static let chatCameraTakePhoto = L10n.tr("Localizable", "chat_camera_take_photo", fallback: "Take a photo")
+  /// This message will be deleted on your chat screen
+  internal static let chatConfirmDeleteMessage = L10n.tr("Localizable", "chat_confirm_delete_message", fallback: "This message will be deleted on your chat screen")
+  /// You want to delete this message
+  internal static let chatConfirmDeleteMessageTitle = L10n.tr("Localizable", "chat_confirm_delete_message_title", fallback: "You want to delete this message")
+  /// Forward Message
+  internal static let chatForwardMessage = L10n.tr("Localizable", "chat_forward_message", fallback: "Forward Message")
   /// Aa
   internal static let chatInputHint = L10n.tr("Localizable", "chat_input_hint", fallback: "Aa")
   /// %@ has invited %@
@@ -166,6 +172,8 @@ internal enum L10n {
   internal static let commonCancel = L10n.tr("Localizable", "common_cancel", fallback: "Cancel")
   /// Chat
   internal static let commonChat = L10n.tr("Localizable", "common_chat", fallback: "Chat")
+  /// Complete
+  internal static let commonComplete = L10n.tr("Localizable", "common_complete", fallback: "Complete")
   /// Confirm
   internal static let commonConfirm = L10n.tr("Localizable", "common_confirm", fallback: "Confirm")
   /// Continue
@@ -174,6 +182,8 @@ internal enum L10n {
   internal static let commonCopy = L10n.tr("Localizable", "common_copy", fallback: "Copy")
   /// Copied in clipboard
   internal static let commonCopySuccess = L10n.tr("Localizable", "common_copy_success", fallback: "Copied in clipboard")
+  /// Coupons
+  internal static let commonCoupons = L10n.tr("Localizable", "common_coupons", fallback: "Coupons")
   /// Disagree
   internal static let commonDisagree = L10n.tr("Localizable", "common_disagree", fallback: "Disagree")
   /// Download
@@ -184,6 +194,8 @@ internal enum L10n {
   internal static let commonErrorDescription = L10n.tr("Localizable", "common_error_description", fallback: "An unexpected error has occurred. Please try again.")
   /// Error
   internal static let commonErrorTitle = L10n.tr("Localizable", "common_error_title", fallback: "Error")
+  /// Forwarded
+  internal static let commonForwarded = L10n.tr("Localizable", "common_forwarded", fallback: "Forwarded")
   /// Friends
   internal static let commonFriends = L10n.tr("Localizable", "common_friends", fallback: "Friends")
   /// Id
@@ -198,6 +210,8 @@ internal enum L10n {
   internal static let commonLogin = L10n.tr("Localizable", "common_login", fallback: "Log in")
   /// Members
   internal static let commonMembers = L10n.tr("Localizable", "common_members", fallback: "Members")
+  /// More
+  internal static let commonMore = L10n.tr("Localizable", "common_more", fallback: "More")
   /// Next
   internal static let commonNext = L10n.tr("Localizable", "common_next", fallback: "Next")
   /// No
@@ -218,6 +232,8 @@ internal enum L10n {
   internal static let commonSearch = L10n.tr("Localizable", "common_search", fallback: "Search")
   /// Send
   internal static let commonSend = L10n.tr("Localizable", "common_send", fallback: "Send")
+  /// Send to
+  internal static let commonSendTo = L10n.tr("Localizable", "common_send_to", fallback: "Send to")
   /// Setting
   internal static let commonSetting = L10n.tr("Localizable", "common_setting", fallback: "Setting")
   /// Share
@@ -398,6 +414,8 @@ internal enum L10n {
   internal static let invalidEmailFormat = L10n.tr("Localizable", "invalid_email_format", fallback: "Email is not valid")
   /// Invalid referral code
   internal static let invalidReferral = L10n.tr("Localizable", "invalid_referral", fallback: "Invalid referral code")
+  /// Sorry, Please check your code again or skip this step
+  internal static let invalidReferralMessage = L10n.tr("Localizable", "invalid_referral_message", fallback: "Sorry, Please check your code again or skip this step")
   /// Invite Friends to get benefits
   internal static let inviteToGetBenefits = L10n.tr("Localizable", "invite_to_get_benefits", fallback: "Invite Friends to get benefits")
   /// Let’s join and Play
@@ -481,6 +499,8 @@ internal enum L10n {
   internal static let permissionRequiredDescription = L10n.tr("Localizable", "permission_required_description", fallback: "You're unable to use this feature without the required permissions. \nTap the Settings button to allow Noljanolja to access the required permission.")
   /// Please enter referral code to get bonus gifts.
   internal static let pleaseEnterReferralCode = L10n.tr("Localizable", "please_enter_referral_code", fallback: "Please enter referral code to get bonus gifts.")
+  /// Go to Check Out Benefits
+  internal static let referalGoToDetail = L10n.tr("Localizable", "referal_go_to_detail", fallback: "Go to Check Out Benefits")
   /// Referral code
   internal static let referralCode = L10n.tr("Localizable", "referral_code", fallback: "Referral code")
   /// * Even if a friend manually enters the referral code after copying and sending it. You can participate in the friend referral event.
@@ -589,8 +609,8 @@ internal enum L10n {
   internal static let splashExplore = L10n.tr("Localizable", "splash_explore", fallback: "EXPLORE NOW")
   /// Just a moment ...
   internal static let splashWait = L10n.tr("Localizable", "splash_wait", fallback: "Just a moment ...")
-  /// Welcome to Noja Noja. Follow these steps to be our member.
-  internal static let splashWelcome = L10n.tr("Localizable", "splash_welcome", fallback: "Welcome to Noja Noja. Follow these steps to be our member.")
+  /// Welcome to NolgoBulja. Follow these steps to be our member.
+  internal static let splashWelcome = L10n.tr("Localizable", "splash_welcome", fallback: "Welcome to NolgoBulja. Follow these steps to be our member.")
   /// 1588-1588
   internal static let telephoneNumberServiceCenter = L10n.tr("Localizable", "telephone_number_service_center", fallback: "1588-1588")
   /// Agree and Continue
@@ -732,6 +752,8 @@ internal enum L10n {
   internal static let videoListToday = L10n.tr("Localizable", "video_list_today", fallback: "Today features")
   /// Complete watching to reward Points
   internal static let videoListWatchingToGetPoint = L10n.tr("Localizable", "video_list_watching_to_get_point", fallback: "Complete watching to reward Points")
+  /// Search video
+  internal static let videoSearchVideo = L10n.tr("Localizable", "video_search_video", fallback: "Search video")
   /// Let‘s get points by watching
   internal static let videoTitle = L10n.tr("Localizable", "video_title", fallback: "Let‘s get points by watching")
   /// Accumulated points for the day
@@ -788,8 +810,8 @@ internal enum L10n {
   internal static let walletToGet = L10n.tr("Localizable", "wallet_to_get", fallback: "To get")
   /// View History
   internal static let walletViewHistory = L10n.tr("Localizable", "wallet_view_history", fallback: "View History")
-  /// Welcome to Noja Noja. Watch videos,play and earn.
-  internal static let welcomeNoljanolja = L10n.tr("Localizable", "welcome_noljanolja", fallback: "Welcome to Noja Noja. Watch videos,play and earn.")
+  /// Welcome to NolgoBulja. Watch videos,play and earn.
+  internal static let welcomeNoljanolja = L10n.tr("Localizable", "welcome_noljanolja", fallback: "Welcome to NolgoBulja. Watch videos,play and earn.")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

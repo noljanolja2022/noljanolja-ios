@@ -34,7 +34,7 @@
 "common_warning" = "Warning";
 "common_all" = "All";
 "common_download" = "Download";
-"welcome_noljanolja" = "Welcome to Noja Noja. Watch videos,play and earn.";
+"welcome_noljanolja" = "Welcome to NolgoBulja. Watch videos,play and earn.";
 "splash_explore" = "EXPLORE NOW";
 "splash_wait" = "Just a moment ...";
 "signup" = "Join the membership";
@@ -243,10 +243,10 @@
 "setting_faq_title" = "FAQ";
 "setting_license_title" = "Open source license";
 "setting_about_us_title" = "About us";
-"splash_welcome" = "Welcome to Noja Noja. Follow these steps to be our member.";
+"splash_welcome" = "Welcome to NolgoBulja. Follow these steps to be our member.";
 "tos_welcome" = "Welcome to Nolja Nolja. Please read our terms of service carefully.";
 "common_try_again" = "Try again";
-"auth_welcome" = "Welcome to Noja Noja. Follow these steps to be our member.";
+"auth_welcome" = "Welcome to NolgoBulja. Follow these steps to be our member.";
 "permission_notification_title" = "Turn on notification\nfor Nolja Nolja";
 "permission_notification_description" = "Permit Nolja Nolja to send you notification in order to\nconect with your friends.";
 "common_send" = "Send";
@@ -295,7 +295,7 @@
 "scan_qr_code_title" = "Scan QR code";
 "chat_setting_friend_management" = "Friends management";
 "chat_setting_auto_add_friend" = "Automatically add friends";
-"chat_setting_auto_add_description" = "Users who use Noja Noja app in your Directory will be synchronized automatically with friendlist in Nolja Nolja.";
+"chat_setting_auto_add_description" = "Users who use NolgoBulja app in your Directory will be synchronized automatically with friendlist in Nolja Nolja.";
 "chat_setting_all_friends" = "All friends";
 "chat_setting_hide_friends" = "Hiden friends";
 "chat_setting_blocked_friends" = "Blocked friends";
@@ -404,3 +404,14 @@
 "minutes" = "%@ min";
 "download_success" = "Download success";
 "download_failure" = "Download failure";
+"common_more" = "More";
+"common_send_to" = "Send to";
+"referal_go_to_detail" = "Go to Check Out Benefits";
+"common_coupons" = "Coupons";
+"common_complete" = "Complete";
+"chat_forward_message" = "Forward Message";
+"chat_confirm_delete_message_title" = "You want to delete this message";
+"chat_confirm_delete_message" = "This message will be deleted on your chat screen";
+"invalid_referral_message" = "Sorry, Please check your code again or skip this step";
+"video_search_video" = "Search video";
+"common_forwarded" = "Forwarded";

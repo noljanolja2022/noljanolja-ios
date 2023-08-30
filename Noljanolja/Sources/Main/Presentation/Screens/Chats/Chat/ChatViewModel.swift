@@ -563,8 +563,8 @@ extension ChatViewModel: MessageActionDetailViewModelDelegate {
     func messageActionDetailDelete(_ message: Message) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
             self?.alertState = AlertState(
-                title: TextState("You want to delete this message?"),
-                message: TextState("This message will be deleted on your chat screen."),
+                title: TextState(L10n.chatConfirmDeleteMessageTitle),
+                message: TextState(L10n.chatConfirmDeleteMessage),
                 primaryButton: .destructive(TextState(L10n.commonNo.uppercased())),
                 secondaryButton: .default(TextState(L10n.commonYes.uppercased()), action: .send(.deleteMessage(message)))
             )

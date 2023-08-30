@@ -100,7 +100,7 @@ struct CheckinView<ViewModel: CheckinViewModel>: View {
             },
             label: {
                 HStack(spacing: 32) {
-                    Text("Go to Check Out Benefits")
+                    Text(L10n.referalGoToDetail)
                         .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
 
                     ImageAssets.icArrowRight.swiftUIImage

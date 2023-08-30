@@ -30,7 +30,7 @@ struct ForwardMessageContactListView<ViewModel: ForwardMessageContactListViewMod
             .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Forward Message")
+                    Text(L10n.chatForwardMessage)
                         .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
