@@ -261,7 +261,9 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
                 )
             case .media:
                 ChatAttachmentsView(
-                    viewModel: ChatAttachmentsViewModel()
+                    viewModel: ChatAttachmentsViewModel(
+                        conversation: viewModel.conversationSubject.value
+                    )
                 )
             }
         }

@@ -18,17 +18,23 @@ protocol ChatAttachmentsViewModelDelegate: AnyObject {}
 final class ChatAttachmentsViewModel: ViewModel {
     // MARK: State
 
+    @Published var selectedAttachmentType = ConversationAttachmentType.photo
+    @Published var allAttachmentTypes: [ConversationAttachmentType] = [.photo, .file, .link]
+
     // MARK: Action
 
     // MARK: Dependencies
 
+    let conversation: Conversation
     private weak var delegate: ChatAttachmentsViewModelDelegate?
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(delegate: ChatAttachmentsViewModelDelegate? = nil) {
+    init(conversation: Conversation,
+         delegate: ChatAttachmentsViewModelDelegate? = nil) {
+        self.conversation = conversation
         self.delegate = delegate
         super.init()
 

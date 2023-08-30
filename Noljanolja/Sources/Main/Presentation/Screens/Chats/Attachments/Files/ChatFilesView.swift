@@ -10,20 +10,12 @@ import SwiftUI
 
 // MARK: - ChatFilesView
 
-struct ChatFilesView<ViewModel: ChatFilesViewModel>: View {
+struct ChatFilesView<ViewModel: ChatAttachmentTabViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
 
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-// MARK: - ChatFilesView_Previews
-
-struct ChatFilesView_Previews: PreviewProvider {
-    static var previews: some View {
-        ChatFilesView(viewModel: ChatFilesViewModel())
+        Text("")
     }
 }
