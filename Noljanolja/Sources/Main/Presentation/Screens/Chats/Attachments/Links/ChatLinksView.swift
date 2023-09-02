@@ -78,7 +78,7 @@ struct ChatLinksView<ViewModel: ChatAttachmentTabViewModel>: View {
                     .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                Text(Date().string(withFormat: "EEEE, dd MMMM, yyyy"))
+                Text(model.createdAt.string(withFormat: "EEEE, dd MMMM, yyyy"))
                     .dynamicFont(.systemFont(ofSize: 12))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)

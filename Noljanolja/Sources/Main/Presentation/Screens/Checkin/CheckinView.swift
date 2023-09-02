@@ -127,7 +127,7 @@ struct CheckinView<ViewModel: CheckinViewModel>: View {
         if let model = viewModel.model {
             VStack(spacing: 8) {
                 HStack(spacing: 8) {
-                    var shortWeekdaySymbols: [String] = DateFormatter().shortWeekdaySymbols
+                    let shortWeekdaySymbols: [String] = DateFormatter().shortWeekdaySymbols
                     let firstWeekday = 2
                     let weekdays = shortWeekdaySymbols[firstWeekday - 1..<shortWeekdaySymbols.count] + shortWeekdaySymbols[0..<firstWeekday - 1]
                     ForEach(weekdays.indices, id: \.self) { index in
