@@ -48,36 +48,3 @@ struct NavigationBarView<LeadingView: View, CenterView: View, TrailingView: View
         }
     }
 }
-
-// MARK: - SwiftUIView_Previews
-
-struct SwiftUIView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationBarView(
-            leadingView: {
-                HStack {
-                    Image(systemName: "xmark")
-                        .resizable()
-                        .padding(12)
-                        .aspectRatio(1, contentMode: .fit)
-
-                    Text("Back back")
-                        .dynamicFont(.systemFont(ofSize: 18, weight: .bold))
-                }
-            },
-            centerView: {
-                Text("Title")
-                    .dynamicFont(.systemFont(ofSize: 18, weight: .bold))
-            },
-            trailingView: {
-                HStack {
-                    Image(systemName: "trash")
-                        .resizable()
-                        .padding(12)
-                        .aspectRatio(1, contentMode: .fit)
-                }
-            }
-        )
-        .height(50)
-    }
-}

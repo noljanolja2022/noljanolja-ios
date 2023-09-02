@@ -51,14 +51,14 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
     private func buildSearchView() -> some View {
         VStack(spacing: 8) {
             HStack(spacing: 8) {
-                Text("Welcome to Nolja shop!")
+                Text(L10n.shopWelcomeNoljaShop)
                     .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
                     .frame(maxWidth: .infinity, alignment: .leading)
                 ImageAssets.icQuestion.swiftUIImage
                     .resizable()
                     .frame(width: 16, height: 16)
             }
-            SearchView(placeholder: "Search product", text: .constant(""))
+            SearchView(placeholder: L10n.shopSearchProducts, text: .constant(""))
                 .frame(maxWidth: .infinity)
                 .background(ColorAssets.neutralLight.swiftUIColor)
                 .cornerRadius(8)

@@ -28,7 +28,7 @@ struct ScanQRView<ViewModel: ScanQRViewModel>: View {
         .navigationBarTitle("", displayMode: .inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text(L10n.addFriendsTitle)
+                Text(L10n.addFriendTitle)
                     .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }

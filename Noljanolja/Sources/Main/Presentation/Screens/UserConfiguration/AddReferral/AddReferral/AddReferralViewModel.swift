@@ -71,7 +71,7 @@ final class AddReferralViewModel: ViewModel {
                     self.fullScreenCoverType = .successAlert(model)
                 case .failure:
                     self.alertState = AlertState(
-                        title: TextState("Invalid referrall code"),
+                        title: TextState(L10n.invalidReferral),
                         message: TextState("Sorry, Please check your code again or skip this step."),
                         dismissButton: .cancel(TextState("OK"))
                     )

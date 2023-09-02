@@ -12,7 +12,7 @@ import Foundation
 // MARK: - ShareReferralViewModelDelegate
 
 protocol ShareReferralViewModelDelegate: AnyObject {
-    func didShare()
+    func shareReferralViewModelDidShare()
 }
 
 // MARK: - ShareReferralViewModel
@@ -87,7 +87,7 @@ class ShareReferralViewModel: ViewModel {
             }
             .sink { [weak self] _ in
                 self?.isProgressHUDShowing = false
-                self?.delegate?.didShare()
+                self?.delegate?.shareReferralViewModelDidShare()
             }
             .store(in: &cancellables)
     }

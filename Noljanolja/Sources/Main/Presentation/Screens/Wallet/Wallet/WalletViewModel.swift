@@ -117,7 +117,7 @@ final class WalletViewModel: ViewModel {
 // MARK: ProfileSettingViewModelDelegate
 
 extension WalletViewModel: ProfileSettingViewModelDelegate {
-    func settingViewModelSignOut() {
+    func profileSettingViewModelSignOut() {
         delegate?.walletViewModelSignOut()
     }
 }

@@ -47,7 +47,7 @@ struct AddReferralAlertView<ViewModel: AddReferralAlertViewModel>: View {
                 .frame(width: 36, height: 36)
             Text(L10n.transactionHistoryPoint(viewModel.rewardPoints.signFormatted()))
                 .dynamicFont(.systemFont(ofSize: 22, weight: .medium))
-            Text("Congratulation! You and your friend have just got \(viewModel.rewardPoints.formatted()) Points from referal code.")
+            Text(L10n.referralReceivePoint(viewModel.rewardPoints.formatted()))
                 .dynamicFont(.systemFont(ofSize: 14))
                 .lineLimit(nil)
                 .multilineTextAlignment(.center)

@@ -57,7 +57,7 @@ struct FindUserResultItemView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 24, height: 24)
-                        Text(L10n.addFriendsChatNow)
+                        Text(L10n.addFriendChatNow)
                             .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
                     }
                     .padding(.horizontal, 8)

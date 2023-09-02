@@ -27,9 +27,9 @@ enum BannerActionType: String, Decodable {
     var title: String {
         switch self {
         case .empty: return ""
-        case .link: return "Open"
-        case .share: return "Share"
-        case .checkin: return "Checkin"
+        case .link: return L10n.openLink
+        case .share: return L10n.commonShare
+        case .checkin: return L10n.walletCheckin
         }
     }
 }

@@ -16,8 +16,8 @@ struct CheckinOverviewView: View {
 
     private func buildBodyView() -> some View {
         HStack(spacing: 12) {
-            buildItemView(isChecked: true, subtitle: "To get", title: "BENEFITS")
-            buildItemView(isChecked: true, subtitle: "Check in", title: "EVERYDAY")
+            buildItemView(isChecked: true, subtitle: L10n.walletToGet, title: L10n.walletBenefit.uppercased())
+            buildItemView(isChecked: true, subtitle: L10n.walletCheckin, title: L10n.walletEveryDay.uppercased())
         }
     }
 

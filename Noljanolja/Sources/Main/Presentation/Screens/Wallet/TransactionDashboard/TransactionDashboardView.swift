@@ -26,7 +26,7 @@ struct TransactionDashboardView<ViewModel: TransactionDashboardViewModel>: View 
             .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Dashboard")
+                    Text(L10n.walletDashboardTitle)
                         .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
@@ -126,7 +126,7 @@ struct TransactionDashboardView<ViewModel: TransactionDashboardViewModel>: View 
 
     private func buildListView() -> some View {
         VStack(spacing: 16) {
-            Text("Recent transactions")
+            Text(L10n.walletDashboardRecentTransactions)
                 .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .center)
 

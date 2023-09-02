@@ -110,7 +110,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
     
     private func buildNameView() -> some View {
         VStack(spacing: 0) {
-            Text("Name")
+            Text(L10n.settingName)
                 .dynamicFont(.systemFont(ofSize: 12))
                 .foregroundColor(
                     isNameEditing
@@ -120,7 +120,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             TextField(
-                "Name",
+                L10n.settingName,
                 text: $viewModel.name.max(nameMaxLength),
                 isEditing: $isNameEditing
             )
@@ -139,7 +139,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                 )
             
             HStack(spacing: 0) {
-                Text("Required")
+                Text(L10n.updateProfileNameRequired)
                 Spacer()
                 Text("\(viewModel.name?.count ?? 0)/\(nameMaxLength)")
             }
@@ -177,8 +177,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
         VStack {
             HStack(spacing: 16) {
                 Text(
-                    viewModel.dob?.string(withFormat: "yyyy/MM/dd")
-                        ?? "Day of Birth"
+                    viewModel.dob?.string(withFormat: "yyyy/MM/dd") ?? L10n.updateProfileDateOfBirth
                 )
                 .dynamicFont(.systemFont(ofSize: 16))
                 .foregroundColor(

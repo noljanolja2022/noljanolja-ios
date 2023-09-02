@@ -113,7 +113,7 @@ final class CheckinViewModel: ViewModel {
                 switch result {
                 case let .success(model):
                     self.alertState = AlertState(
-                        title: TextState("Success!"),
+                        title: TextState(L10n.commonSuccess),
                         message: TextState(model),
                         dismissButton: .cancel(TextState(L10n.commonOk.uppercased()))
                     )

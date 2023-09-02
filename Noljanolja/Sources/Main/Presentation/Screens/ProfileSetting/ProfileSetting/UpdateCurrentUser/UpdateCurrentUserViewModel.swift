@@ -14,7 +14,7 @@ import UIKit
 // MARK: - UpdateCurrentUserViewModelDelegate
 
 protocol UpdateCurrentUserViewModelDelegate: AnyObject {
-    func didUpdateCurrentUser()
+    func updateCurrentUserViewModelDidComplete()
 }
 
 // MARK: - UpdateCurrentUserViewModel
@@ -135,7 +135,7 @@ final class UpdateCurrentUserViewModel: ViewModel {
                 self.isProgressHUDShowing = false
                 switch result {
                 case .success:
-                    self.delegate?.didUpdateCurrentUser()
+                    self.delegate?.updateCurrentUserViewModelDidComplete()
                 case .failure:
                     self.alertState = AlertState(
                         title: TextState(L10n.commonErrorTitle),

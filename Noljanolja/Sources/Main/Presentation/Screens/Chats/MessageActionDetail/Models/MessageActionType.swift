@@ -15,10 +15,10 @@ enum MessageActionType: CaseIterable {
 
     var title: String {
         switch self {
-        case .reply: return "Reply"
-        case .forward: return "Forward"
-        case .copy: return "Copy"
-        case .delete: return "Delete"
+        case .reply: return L10n.chatActionReply
+        case .forward: return L10n.chatActionForward
+        case .copy: return L10n.chatActionCopy
+        case .delete: return L10n.chatActionDelete
         }
     }
 

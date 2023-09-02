@@ -58,11 +58,11 @@ final class ShareReferralContainerViewModel: ViewModel {
 // MARK: HorizontalShareReferralViewModelDelegate
 
 extension ShareReferralContainerViewModel: HorizontalShareReferralViewModelDelegate {
-    func didTapMore() {
+    func horizontalShareReferralViewModelDidTapMore() {
         fullScreenCoverType = .verticalShare
     }
 
-    func didShare() {
+    func shareReferralViewModelDidShare() {
         closeAction.send()
     }
 }

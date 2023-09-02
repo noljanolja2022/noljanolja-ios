@@ -12,7 +12,7 @@ import Foundation
 // MARK: - VideoActionViewModelDelegate
 
 protocol VideoActionViewModelDelegate: AnyObject {
-    func didSelectItem(_ model: VideoActionItemViewModel)
+    func videoActionViewModel(didSelectItem item: VideoActionItemViewModel)
 }
 
 // MARK: - VideoActionViewModel
@@ -50,7 +50,7 @@ final class VideoActionViewModel: ViewModel {
         selectItemAction
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
-                self?.delegate?.didSelectItem($0)
+                self?.delegate?.videoActionViewModel(didSelectItem: $0)
             }
             .store(in: &cancellables)
     }

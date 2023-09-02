@@ -61,7 +61,7 @@ struct ShopCouponItemView: View {
                 Text(String(model.price))
                     .dynamicFont(.systemFont(ofSize: 24, weight: .bold))
                     .foregroundColor(ColorAssets.secondaryYellow300.swiftUIColor)
-                Text("Points")
+                Text(L10n.commonPoints)
                     .dynamicFont(.systemFont(ofSize: 24))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }

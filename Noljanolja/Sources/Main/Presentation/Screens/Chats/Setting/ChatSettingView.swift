@@ -174,7 +174,7 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
                         .frame(height: 2)
                         .overlay(ColorAssets.neutralLightGrey.swiftUIColor)
 
-                    Text("Settings")
+                    Text(L10n.commonSetting)
                         .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.vertical, 10)
@@ -238,7 +238,6 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
             destination: { buildNavigationDestinationView($0) },
             label: { EmptyView() }
         )
-        .isDetailLink(false)
     }
 
     @ViewBuilder
@@ -257,6 +256,12 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
             case .adjustment:
                 ConversationAdjustment(
                     viewModel: ConversationAdjustmentModel(
+                        conversation: viewModel.conversationSubject.value
+                    )
+                )
+            case .media:
+                ChatAttachmentsView(
+                    viewModel: ChatAttachmentsViewModel(
                         conversation: viewModel.conversationSubject.value
                     )
                 )

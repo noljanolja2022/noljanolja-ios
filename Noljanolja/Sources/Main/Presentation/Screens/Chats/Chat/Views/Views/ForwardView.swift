@@ -16,7 +16,7 @@ struct ForwardView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 16, height: 16)
-            Text("Forwarded")
+            Text(L10n.commonForwarded)
                 .italic()
                 .dynamicFont(.systemFont(ofSize: 10))
         }

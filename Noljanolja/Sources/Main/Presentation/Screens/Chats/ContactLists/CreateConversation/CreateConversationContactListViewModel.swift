@@ -13,7 +13,7 @@ import UIKit
 // MARK: - CreateConversationContactListViewModelDelegate
 
 protocol CreateConversationContactListViewModelDelegate: AnyObject {
-    func didCreateConversation(_ conversation: Conversation)
+    func createConversationContactListViewModel(didCreateConversation conversation: Conversation)
 }
 
 // MARK: - CreateConversationContactListViewModel
@@ -70,7 +70,7 @@ final class CreateConversationContactListViewModel: ViewModel {
                 self?.isProgressHUDShowing = false
                 switch result {
                 case let .success(conversation):
-                    self?.delegate?.didCreateConversation(conversation)
+                    self?.delegate?.createConversationContactListViewModel(didCreateConversation: conversation)
                 case .failure:
                     break
                 }
