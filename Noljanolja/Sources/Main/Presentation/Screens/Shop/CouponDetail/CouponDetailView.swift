@@ -108,7 +108,7 @@ struct CouponDetailView<ViewModel: CouponDetailViewModel>: View {
                     .dynamicFont(.systemFont(ofSize: 22, weight: .medium))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                Text("1 shot Arabica Espresso with milk")
+                Text("")
                     .dynamicFont(.systemFont(ofSize: 14))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
@@ -129,7 +129,7 @@ struct CouponDetailView<ViewModel: CouponDetailViewModel>: View {
     private func buildPricesView() -> some View {
         VStack(spacing: 12) {
             HStack(spacing: 12) {
-                Text("Holding points")
+                Text(L10n.giftHoldingPoint)
                     .dynamicFont(.systemFont(ofSize: 16))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
@@ -138,7 +138,7 @@ struct CouponDetailView<ViewModel: CouponDetailViewModel>: View {
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }
             HStack(spacing: 12) {
-                Text("Deduction point")
+                Text(L10n.giftDeductionPoint)
                     .dynamicFont(.systemFont(ofSize: 16))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
@@ -147,7 +147,7 @@ struct CouponDetailView<ViewModel: CouponDetailViewModel>: View {
                     .foregroundColor(ColorAssets.systemRed100.swiftUIColor)
             }
             HStack(spacing: 12) {
-                Text("Remaining points")
+                Text(L10n.giftRemainingPoint)
                     .dynamicFont(.systemFont(ofSize: 16))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
@@ -169,7 +169,7 @@ struct CouponDetailView<ViewModel: CouponDetailViewModel>: View {
                     .frame(width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.width / 2)
                     .aspectRatio(1, contentMode: .fit)
 
-                Text("Give this Code to the cashier to get products")
+                Text(L10n.giftGiveCodeToCashier)
                     .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
                     .frame(maxWidth: .infinity)
                     .foregroundColor(ColorAssets.primaryGreen300.swiftUIColor)
@@ -184,7 +184,7 @@ struct CouponDetailView<ViewModel: CouponDetailViewModel>: View {
         switch viewModel.model?.couponDetailInputType {
         case .coupon:
             Button(
-                "Purchase".uppercased(),
+                L10n.giftPurchase.uppercased(),
                 action: {
                     viewModel.buyCouponAction.send()
                 }

@@ -46,7 +46,7 @@ struct HorizontalShareReferralView<ViewModel: HorizontalShareReferralViewModel>:
     private func buildNavigationView() -> some View {
         NavigationBarView(
             centerView: {
-                Text("Send to")
+                Text(L10n.commonSendTo)
                     .dynamicFont(.systemFont(ofSize: 14))
             }
         )
@@ -79,7 +79,7 @@ struct HorizontalShareReferralView<ViewModel: HorizontalShareReferralViewModel>:
                                 .frame(width: 40, height: 40)
                                 .background(ColorAssets.primaryGreen200.swiftUIColor)
                                 .cornerRadius(14)
-                            Text("More")
+                            Text(L10n.commonNext)
                                 .dynamicFont(.systemFont(ofSize: 11, weight: .medium))
                                 .lineLimit(2)
                                 .multilineTextAlignment(.center)

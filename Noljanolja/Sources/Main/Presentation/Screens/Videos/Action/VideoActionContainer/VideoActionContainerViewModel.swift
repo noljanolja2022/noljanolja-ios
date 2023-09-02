@@ -60,8 +60,8 @@ final class VideoActionContainerViewModel: ViewModel {
 // MARK: VideoActionViewModelDelegate
 
 extension VideoActionContainerViewModel: VideoActionViewModelDelegate {
-    func didSelectItem(_ model: VideoActionItemViewModel) {
-        switch model {
+    func videoActionViewModel(didSelectItem item: VideoActionItemViewModel) {
+        switch item {
         case .share: fullScreenCoverType = .share
         case .copyLink, .ignore: break
         }
@@ -71,7 +71,7 @@ extension VideoActionContainerViewModel: VideoActionViewModelDelegate {
 // MARK: ShareVideoViewModelDelegate
 
 extension VideoActionContainerViewModel: ShareVideoViewModelDelegate {
-    func openShareDetail(_ user: User) {
+    func shareVideoViewModel(didSelectUser user: User) {
         withoutAnimation {
             fullScreenCoverType = .shareDetail(user)
         }
@@ -81,7 +81,7 @@ extension VideoActionContainerViewModel: ShareVideoViewModelDelegate {
 // MARK: ShareVideoDetailViewModelDelegate
 
 extension VideoActionContainerViewModel: ShareVideoDetailViewModelDelegate {
-    func didShare() {
+    func shareVideoDetailViewModelDidShare() {
         closeAction.send()
     }
 }

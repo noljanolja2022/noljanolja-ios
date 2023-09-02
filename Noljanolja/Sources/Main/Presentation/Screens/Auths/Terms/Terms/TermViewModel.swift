@@ -13,7 +13,7 @@ import Foundation
 // MARK: - TermViewModelDelegate
 
 protocol TermViewModelDelegate: AnyObject {
-    func navigateToAuth()
+    func termViewModelDidComplete()
 }
 
 // MARK: - TermViewModel
@@ -60,7 +60,7 @@ final class TermViewModel: ViewModel {
         actionSubject
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in
-                self?.delegate?.navigateToAuth()
+                self?.delegate?.termViewModelDidComplete()
             })
             .store(in: &cancellables)
     }

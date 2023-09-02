@@ -12,8 +12,8 @@ import Foundation
 // MARK: - VideoDetailInputViewModelDelegate
 
 protocol VideoDetailInputViewModelDelegate: AnyObject {
-    func didCommentSuccess(_ comment: VideoComment)
-    func didCommentFail(_ error: Error)
+    func videoDetailInputViewModel(didCommentSuccess comment: VideoComment)
+    func videoDetailInputViewModel(didCommentFail error: Error)
 }
 
 // MARK: - VideoDetailInputViewModel
@@ -77,9 +77,9 @@ final class VideoDetailInputViewModel: ViewModel {
                 self.isProgressHUDShowing = false
                 switch result {
                 case let .success(comment):
-                    self.delegate?.didCommentSuccess(comment)
+                    self.delegate?.videoDetailInputViewModel(didCommentSuccess: comment)
                 case let .failure(error):
-                    self.delegate?.didCommentFail(error)
+                    self.delegate?.videoDetailInputViewModel(didCommentFail: error)
                 }
             }
             .store(in: &cancellables)

@@ -89,6 +89,25 @@ private enum ConversationAPITargets {
             return multipartFormDatas.compactMap { $0 }
         }
     }
+
+    struct GetConversationAttachments: BaseAuthTargetType {
+        var path: String { "/v1/conversations/\(conversationID)/attachments" }
+        let method: Moya.Method = .get
+        var task: Task { .requestParameters(parameters: parameters, encoding: URLEncoding.default) }
+
+        var parameters: [String: Any] {
+            [
+                "attachmentTypes": types.map { $0.rawValue }.joined(separator: ","),
+                "page": page,
+                "pageSize": pageSize
+            ]
+        }
+
+        let conversationID: Int
+        let types: [ConversationAttachmentType]
+        let page: Int
+        let pageSize: Int
+    }
 }
 
 // MARK: - ConversationAPIType
@@ -105,6 +124,11 @@ protocol ConversationAPIType {
                             title: String?,
                             participants: [User]?,
                             image: Data?) -> AnyPublisher<Conversation, Error>
+
+    func getConversationAttachments(conversationID: Int,
+                                    types: [ConversationAttachmentType],
+                                    page: Int,
+                                    pageSize: Int) -> AnyPublisher<PaginationResponse<[ConversationAttachment]>, Error>
 }
 
 // MARK: - ConversationAPI
@@ -154,6 +178,20 @@ final class ConversationAPI: ConversationAPIType {
                 image: image
             ),
             atKeyPath: "data"
+        )
+    }
+
+    func getConversationAttachments(conversationID: Int,
+                                    types: [ConversationAttachmentType],
+                                    page: Int,
+                                    pageSize: Int) -> AnyPublisher<PaginationResponse<[ConversationAttachment]>, Error> {
+        api.request(
+            target: ConversationAPITargets.GetConversationAttachments(
+                conversationID: conversationID,
+                types: types,
+                page: page,
+                pageSize: pageSize
+            )
         )
     }
 }

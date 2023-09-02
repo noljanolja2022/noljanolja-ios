@@ -12,7 +12,7 @@ import Foundation
 // MARK: - SelectCountryViewModelDelegate
 
 protocol SelectCountryViewModelDelegate: AnyObject {
-    func didSelectCountry(_ country: Country)
+    func selectCountryViewModel(didSelectCountry country: Country)
 }
 
 // MARK: - SelectCountryViewModel
@@ -95,7 +95,7 @@ final class SelectCountryViewModel: ViewModel {
             .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in
-                self?.delegate?.didSelectCountry($0)
+                self?.delegate?.selectCountryViewModel(didSelectCountry: $0)
             })
             .store(in: &cancellables)
 

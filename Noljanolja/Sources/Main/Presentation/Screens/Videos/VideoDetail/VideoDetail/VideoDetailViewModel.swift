@@ -130,13 +130,13 @@ final class VideoDetailViewModel: ViewModel {
 // MARK: VideoDetailInputViewModelDelegate
 
 extension VideoDetailViewModel: VideoDetailInputViewModelDelegate {
-    func didCommentSuccess(_ comment: VideoComment) {
+    func videoDetailInputViewModel(didCommentSuccess comment: VideoComment) {
         comments.insert(comment, at: 0)
         commentCount = commentCount.flatMap { $0 + 1 }
         scrollToTopAction.send()
     }
 
-    func didCommentFail(_ error: Error) {
+    func videoDetailInputViewModel(didCommentFail error: Error) {
         switch error as? MoyaError {
         case let .underlying(_, response):
             guard let data = response?.data,

@@ -13,7 +13,7 @@ import Foundation
 // MARK: - ShareVideoDetailViewModelDelegate
 
 protocol ShareVideoDetailViewModelDelegate: AnyObject {
-    func didShare()
+    func shareVideoDetailViewModelDidShare()
 }
 
 // MARK: - ShareVideoDetailViewModel
@@ -74,7 +74,7 @@ final class ShareVideoDetailViewModel: ViewModel {
                 self.isProgressHUDShowing = false
                 switch result {
                 case .success:
-                    self.delegate?.didShare()
+                    self.delegate?.shareVideoDetailViewModelDidShare()
                 case .failure:
                     self.alertState = AlertState(
                         title: TextState(L10n.commonErrorTitle),

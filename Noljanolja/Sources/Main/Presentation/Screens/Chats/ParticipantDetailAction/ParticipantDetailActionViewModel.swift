@@ -12,7 +12,7 @@ import Foundation
 // MARK: - ParticipantDetailActionViewModelDelegate
 
 protocol ParticipantDetailActionViewModelDelegate: AnyObject {
-    func didSelectAction(user: User, action: ParticipantDetailActionType)
+    func participantDetailActionViewModel(didSelect user: User, action: ParticipantDetailActionType)
 }
 
 // MARK: - ParticipantDetailActionViewModel
@@ -47,8 +47,8 @@ final class ParticipantDetailActionViewModel: ViewModel {
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] action in
                 guard let self else { return }
-                self.delegate?.didSelectAction(
-                    user: self.participantModel.user,
+                self.delegate?.participantDetailActionViewModel(
+                    didSelect: self.participantModel.user,
                     action: action
                 )
             })

@@ -109,10 +109,10 @@ final class CouponDetailViewModel: ViewModel {
                 switch result {
                 case let .success(model):
                     self.alertState = AlertState(
-                        title: TextState("Success!"),
-                        message: TextState("Your order has been completed. Check in Exchanged Coupon."),
-                        primaryButton: .destructive(TextState("Later".uppercased()), action: .send(.back)),
-                        secondaryButton: .default(TextState("Use".uppercased()), action: .send(.viewDetail(model)))
+                        title: TextState(L10n.commonSuccess),
+                        message: TextState(L10n.shopOrderCouponSuccess),
+                        primaryButton: .destructive(TextState(L10n.shopLater.uppercased()), action: .send(.back)),
+                        secondaryButton: .default(TextState(L10n.commonUse.uppercased()), action: .send(.viewDetail(model)))
                     )
                 case .failure:
                     self.alertState = AlertState(

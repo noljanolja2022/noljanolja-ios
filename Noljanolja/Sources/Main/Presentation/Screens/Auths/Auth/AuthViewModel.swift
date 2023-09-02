@@ -99,7 +99,7 @@ final class AuthViewModel: ViewModel {
 // MARK: SelectCountryViewModelDelegate
 
 extension AuthViewModel: SelectCountryViewModelDelegate {
-    func didSelectCountry(_ country: Country) {
+    func selectCountryViewModel(didSelectCountry country: Country) {
         self.country = country
     }
 }

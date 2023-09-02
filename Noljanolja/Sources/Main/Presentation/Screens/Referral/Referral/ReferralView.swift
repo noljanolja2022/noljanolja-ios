@@ -29,7 +29,7 @@ struct ReferralView<ViewModel: ReferralViewModel>: View {
             .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Let’s join and Play")
+                    Text(L10n.joinPlay)
                         .lineLimit(1)
                         .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
@@ -91,7 +91,7 @@ struct ReferralView<ViewModel: ReferralViewModel>: View {
                         UIPasteboard.general.string = referralCode
                     },
                     label: {
-                        Text("Copy")
+                        Text(L10n.commonCopy)
                             .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                             .frame(maxHeight: .infinity)
                             .padding(.horizontal, 32)
@@ -110,7 +110,7 @@ struct ReferralView<ViewModel: ReferralViewModel>: View {
             )
 
             Button(
-                "Send invitation link",
+                L10n.sendInviteLink,
                 action: {
                     withoutAnimation {
                         viewModel.fullScreenCoverType = .share
@@ -126,7 +126,7 @@ struct ReferralView<ViewModel: ReferralViewModel>: View {
 
     private func buildIntroView() -> some View {
         VStack(spacing: 24) {
-            Text("How to refer a friend")
+            Text(L10n.howToRefer)
                 .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
 
             LazyVGrid(columns: Array(repeating: .flexible(spacing: 16), count: 2), spacing: 16) {
@@ -134,33 +134,33 @@ struct ReferralView<ViewModel: ReferralViewModel>: View {
                     model: ReferralItemViewModel(
                         imageName: ImageAssets.icReferral1.name,
                         title: "01",
-                        description: "Send invitation link Just tap the button!"
+                        description: L10n.referralStep1
                     )
                 )
                 ReferralItemView(
                     model: ReferralItemViewModel(
                         imageName: ImageAssets.icReferral2.name,
                         title: "02",
-                        description: "Invite link to friend will be sent"
+                        description: L10n.referralStep2
                     )
                 )
                 ReferralItemView(
                     model: ReferralItemViewModel(
                         imageName: ImageAssets.icReferral3.name,
                         title: "03",
-                        description: "Via the link sent to you Proceed to membership registration"
+                        description: L10n.referralStep3
                     )
                 )
                 ReferralItemView(
                     model: ReferralItemViewModel(
                         imageName: ImageAssets.icReferral4.name,
                         title: "04",
-                        description: "When all courses are completed Friends and I also earn 1,000P!"
+                        description: L10n.referralStep4
                     )
                 )
             }
 
-            Text("* Even if a friend manually enters the referral code after copying and sending it You can participate in the friend referral event.")
+            Text(L10n.referralDescription)
                 .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
                 .multilineTextAlignment(.center)
                 .foregroundColor(ColorAssets.neutralDeeperGrey.swiftUIColor)

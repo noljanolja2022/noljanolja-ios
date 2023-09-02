@@ -45,7 +45,7 @@ final class UserConfigurationRootViewModel: ViewModel {
 // MARK: UpdateCurrentUserViewModelDelegate
 
 extension UserConfigurationRootViewModel: UpdateCurrentUserViewModelDelegate {
-    func didUpdateCurrentUser() {
+    func updateCurrentUserViewModelDidComplete() {
         contentType = .referral
     }
 }

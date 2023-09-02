@@ -235,7 +235,7 @@ final class ConversationListViewModel: ViewModel {
 // MARK: CreateConversationContactListViewModelDelegate
 
 extension ConversationListViewModel: CreateConversationContactListViewModelDelegate {
-    func didCreateConversation(_ conversation: Conversation) {
+    func createConversationContactListViewModel(didCreateConversation conversation: Conversation) {
         navigationType = .chat(conversation)
     }
 }
@@ -243,7 +243,7 @@ extension ConversationListViewModel: CreateConversationContactListViewModelDeleg
 // MARK: CreateConversationViewModelDelegate
 
 extension ConversationListViewModel: CreateConversationViewModelDelegate {
-    func didSelectType(type: ConversationType) {
+    func createConversationViewModel(type: ConversationType) {
         fullScreenCoverType = nil
         navigationTypeAction.send(.contactList(type))
     }

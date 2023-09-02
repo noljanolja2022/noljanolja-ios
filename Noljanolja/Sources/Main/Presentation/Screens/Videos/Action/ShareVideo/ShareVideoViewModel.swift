@@ -12,7 +12,7 @@ import Foundation
 // MARK: - ShareVideoViewModelDelegate
 
 protocol ShareVideoViewModelDelegate: AnyObject {
-    func openShareDetail(_ user: User)
+    func shareVideoViewModel(didSelectUser user: User)
 }
 
 // MARK: - ShareVideoViewModel
@@ -47,7 +47,7 @@ final class ShareVideoViewModel: ViewModel {
         action
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
-                self?.delegate?.openShareDetail($0)
+                self?.delegate?.shareVideoViewModel(didSelectUser: $0)
             }
             .store(in: &cancellables)
     }

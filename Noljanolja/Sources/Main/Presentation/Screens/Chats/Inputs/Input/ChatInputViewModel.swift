@@ -13,7 +13,7 @@ import UIKit
 // MARK: - ChatInputViewModelDelegate
 
 protocol ChatInputViewModelDelegate: AnyObject {
-    func chatInputSendMessage(_ type: SendMessageType)
+    func chatInputViewModel(type: SendMessageType)
 }
 
 // MARK: - ChatInputViewModel
@@ -66,7 +66,7 @@ final class ChatInputViewModel: ViewModel {
         sendAction
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
-                self?.delegate?.chatInputSendMessage($0)
+                self?.delegate?.chatInputViewModel(type: $0)
             }
             .store(in: &cancellables)
     }
@@ -76,7 +76,7 @@ final class ChatInputViewModel: ViewModel {
 
 extension ChatInputViewModel: ChatInputExpandViewModelDelegate {
     func chatInputExpandViewModel(sendImages images: [UIImage]) {
-        delegate?.chatInputSendMessage(.images(images))
+        delegate?.chatInputViewModel(type: .images(images))
     }
 
     func chatInputExpandViewModel(previewSticker stickerPack: StickerPack, sticker: Sticker) {
@@ -84,6 +84,6 @@ extension ChatInputViewModel: ChatInputExpandViewModelDelegate {
     }
 
     func chatInputExpandViewModel(sendSticker stickerPack: StickerPack, sticker: Sticker) {
-        delegate?.chatInputSendMessage(.sticker(stickerPack, sticker))
+        delegate?.chatInputViewModel(type: .sticker(stickerPack, sticker))
     }
 }

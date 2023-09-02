@@ -81,7 +81,7 @@ struct SourceLicenseView<ViewModel: SourceLicenseViewModel>: View {
 
     private func buildAboutUsView() -> some View {
         Button(
-            "About us".uppercased(),
+            L10n.settingAboutUsTitle.uppercased(),
             action: {
                 viewModel.navigationType = .aboutUs
             }

@@ -101,7 +101,7 @@ struct SearchCouponsView<ViewModel: SearchCouponsViewModel>: View {
 
     private func buildSearchView() -> some View {
         VStack(spacing: 8) {
-            Text("Welcome to Nolja shop!")
+            Text(L10n.shopWelcomeNoljaShop)
                 .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
                 .frame(maxWidth: .infinity, alignment: .leading)
             HStack(spacing: 0) {
@@ -112,7 +112,7 @@ struct SearchCouponsView<ViewModel: SearchCouponsViewModel>: View {
                     label: ImageAssets.icBack.swiftUIImage
                         .frame(width: 36, height: 36)
                 )
-                SearchView(placeholder: "Search product", text: $viewModel.searchText)
+                SearchView(placeholder: L10n.shopSearchProducts, text: $viewModel.searchText)
                     .frame(maxWidth: .infinity)
                     .background(ColorAssets.neutralLightGrey.swiftUIColor)
                     .cornerRadius(8)
@@ -144,7 +144,7 @@ struct SearchCouponsView<ViewModel: SearchCouponsViewModel>: View {
                     viewModel.clearCouponKeywordsAction.send()
                 },
                 label: {
-                    Text("Clear all")
+                    Text(L10n.shopClearAll)
                         .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
                         .foregroundColor(ColorAssets.neutralDeeperGrey.swiftUIColor)
                         .padding(16)

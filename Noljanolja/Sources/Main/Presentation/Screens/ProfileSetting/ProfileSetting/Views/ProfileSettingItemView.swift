@@ -55,7 +55,7 @@ struct SettingItemView<Content: View>: View {
 struct SettingItemView_Previews: PreviewProvider {
     static var previews: some View {
         SettingItemView(
-            title: "Setting",
+            title: L10n.commonSetting,
             content: {}
         )
     }

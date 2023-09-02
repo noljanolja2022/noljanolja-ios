@@ -16,7 +16,7 @@ import SDWebImage
 // import SVProgressHUD
 
 protocol ImageDetailViewModelDelegate: AnyObject {
-    func sendImage(_ image: UIImage)
+    func imageDetailViewModel(sendImage image: UIImage)
 }
 
 // MARK: - ImageDetailViewModel
@@ -105,7 +105,7 @@ final class ImageDetailViewModel: ViewModel {
 // MARK: ImageEditorViewModelDelegate
 
 extension ImageDetailViewModel: ImageEditorViewModelDelegate {
-    func finishEditing(_ image: UIImage) {
+    func imageEditorViewModel(didEditImage image: UIImage) {
         fullScreenCoverType = .editerResult(image)
     }
 }
@@ -113,8 +113,8 @@ extension ImageDetailViewModel: ImageEditorViewModelDelegate {
 // MARK: ImageEditorResultViewModelDelegate
 
 extension ImageDetailViewModel: ImageEditorResultViewModelDelegate {
-    func sendImage(_ image: UIImage) {
-        delegate?.sendImage(image)
+    func imageEditorResultViewModel(sendImage image: UIImage) {
+        delegate?.imageDetailViewModel(sendImage: image)
     }
 }
 

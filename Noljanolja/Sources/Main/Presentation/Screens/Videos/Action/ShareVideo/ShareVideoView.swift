@@ -30,7 +30,7 @@ struct ShareVideoView<ViewModel: ShareVideoViewModel>: View {
         VStack(spacing: 8) {
             NavigationBarView(
                 centerView: {
-                    Text("Share")
+                    Text(L10n.commonShare)
                         .dynamicFont(.systemFont(ofSize: 14))
                 }
             )

@@ -27,7 +27,7 @@ struct CheckinView<ViewModel: CheckinViewModel>: View {
         .navigationBarTitle("", displayMode: .inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text("Check out and Play")
+                Text(L10n.menuCheckoutAndPlay)
                     .lineLimit(1)
                     .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
@@ -100,7 +100,7 @@ struct CheckinView<ViewModel: CheckinViewModel>: View {
             },
             label: {
                 HStack(spacing: 32) {
-                    Text("Go to Check Out Benefits")
+                    Text(L10n.referalGoToDetail)
                         .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
 
                     ImageAssets.icArrowRight.swiftUIImage
@@ -127,7 +127,9 @@ struct CheckinView<ViewModel: CheckinViewModel>: View {
         if let model = viewModel.model {
             VStack(spacing: 8) {
                 HStack(spacing: 8) {
-                    let weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+                    let shortWeekdaySymbols: [String] = DateFormatter().shortWeekdaySymbols
+                    let firstWeekday = 2
+                    let weekdays = shortWeekdaySymbols[firstWeekday - 1..<shortWeekdaySymbols.count] + shortWeekdaySymbols[0..<firstWeekday - 1]
                     ForEach(weekdays.indices, id: \.self) { index in
                         Text(weekdays[index])
                             .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
@@ -155,7 +157,7 @@ struct CheckinView<ViewModel: CheckinViewModel>: View {
 
     private func buildActionButton() -> some View {
         Button(
-            "CHECK IN",
+            L10n.walletCheckin.uppercased(),
             action: {
                 viewModel.action.send()
             }

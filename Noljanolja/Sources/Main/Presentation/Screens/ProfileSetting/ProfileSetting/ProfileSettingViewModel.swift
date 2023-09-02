@@ -13,7 +13,7 @@ import Foundation
 // MARK: - ProfileSettingViewModelDelegate
 
 protocol ProfileSettingViewModelDelegate: AnyObject {
-    func settingViewModelSignOut()
+    func profileSettingViewModelSignOut()
 }
 
 // MARK: - ProfileSettingViewModel
@@ -163,7 +163,7 @@ final class ProfileSettingViewModel: ViewModel {
                 self.isProgressHUDShowing = false
                 switch result {
                 case .success:
-                    self.delegate?.settingViewModelSignOut()
+                    self.delegate?.profileSettingViewModelSignOut()
                 case .failure:
                     self.alertState = AlertState(
                         title: TextState(L10n.commonErrorTitle),

@@ -24,7 +24,7 @@ struct MyCouponsView<ViewModel: MyCouponsViewModel>: View {
             .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text("Coupons")
+                    Text(L10n.shopCoupon)
                         .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
