@@ -18,6 +18,17 @@ struct VideoDetailPlayerView<ViewModel: VideoDetailPlayerViewModel>: View {
     @StateObject var viewModel: ViewModel
 
     var body: some View {
+        buildBodyView()
+    }
+
+    private func buildBodyView() -> some View {
+        buildMainView()
+            .navigationBarTitle("", displayMode: .inline)
+            .onAppear { viewModel.isAppearSubject.send(true) }
+            .onDisappear { viewModel.isAppearSubject.send(false) }
+    }
+
+    private func buildMainView() -> some View {
         YouTubePlayerView(viewModel.youTubePlayer) { state in
             // Overlay ViewBuilder closure to place an overlay View
             // for the current `YouTubePlayer.State`

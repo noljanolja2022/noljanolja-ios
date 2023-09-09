@@ -21,7 +21,7 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
     }
 
     private func buildBodyView() -> some View {
-        buildContentView()
+        buildMainView()
             .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -40,8 +40,8 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
             )
     }
 
-    private func buildContentView() -> some View {
-        buildMainView()
+    private func buildMainView() -> some View {
+        buildContentView()
             .statefull(
                 state: $viewModel.viewState,
                 isEmpty: { viewModel.video == nil },
@@ -49,9 +49,11 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
                 empty: buildEmptyView,
                 error: buildErrorView
             )
+            .background(ColorAssets.neutralLight.swiftUIColor.ignoresSafeArea())
+            .padding(.top, 300)
     }
 
-    private func buildMainView() -> some View {
+    private func buildContentView() -> some View {
         VStack(spacing: 0) {
             buildPlayerView()
             buildScrollView()
