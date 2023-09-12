@@ -66,7 +66,8 @@ struct VideosView<ViewModel: VideosViewModel>: View {
             HighlightVideoView(
                 videos: viewModel.model.highlightVideos,
                 selectAction: {
-                    viewModel.navigationType = .videoDetail($0)
+//                    viewModel.navigationType = .videoDetail($0)
+                    VideoManager.shared.selecttedVideoIdSubject.send($0.id)
                 }
             )
         }
@@ -81,7 +82,8 @@ struct VideosView<ViewModel: VideosViewModel>: View {
                     viewModel.navigationType = .uncompleteVideos
                 },
                 selectAction: {
-                    viewModel.navigationType = .videoDetail($0)
+//                    viewModel.navigationType = .videoDetail($0)
+                    VideoManager.shared.selecttedVideoIdSubject.send($0.id)
                 }
             )
         }
@@ -93,7 +95,8 @@ struct VideosView<ViewModel: VideosViewModel>: View {
             TrendingVideoView(
                 models: viewModel.model.trendingVideos,
                 selectAction: {
-                    viewModel.navigationType = .videoDetail($0)
+//                    viewModel.navigationType = .videoDetail($0)
+                    VideoManager.shared.selecttedVideoIdSubject.send($0.id)
                 },
                 moreAction: { model in
                     withoutAnimation {

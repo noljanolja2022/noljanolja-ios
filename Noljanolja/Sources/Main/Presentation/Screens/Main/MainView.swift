@@ -29,7 +29,7 @@ struct MainView<ViewModel: MainViewModel>: View {
     private func buildMainView() -> some View {
         buildContentView()
             .overlay(alignment: .bottom) {
-                buildVideoDetailView()
+                buildOverlayView()
             }
     }
 
@@ -51,10 +51,13 @@ struct MainView<ViewModel: MainViewModel>: View {
         }
     }
 
-    private func buildVideoDetailView() -> some View {
-        VideoDetailView(
-            viewModel: VideoDetailViewModel(videoId: "mwj-R9EY2GI")
-        )
+    @ViewBuilder
+    private func buildOverlayView() -> some View {
+        if let videoId = viewModel.videoId {
+            VideoDetailView(
+                viewModel: VideoDetailViewModel(videoId: videoId)
+            )
+        }
     }
 }
 

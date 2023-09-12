@@ -25,7 +25,6 @@ final class VideoDetailPlayerViewModel: ViewModel {
 
     private let video: Video
     private let videoSocket: VideoSocketAPIType
-    private let videoManager: VideoManager
     private weak var delegate: VideoDetailPlayerViewModelDelegate?
 
     // MARK: Private
@@ -35,11 +34,9 @@ final class VideoDetailPlayerViewModel: ViewModel {
 
     init(video: Video,
          videoSocket: VideoSocketAPIType = VideoSocketAPI.default,
-         videoManager: VideoManager = VideoManager.shared,
          delegate: VideoDetailPlayerViewModelDelegate? = nil) {
         self.video = video
         self.videoSocket = videoSocket
-        self.videoManager = videoManager
         self.delegate = delegate
         super.init()
 
@@ -48,13 +45,6 @@ final class VideoDetailPlayerViewModel: ViewModel {
 
     private func configure() {
         let video = video
-
-        isAppearSubject
-            .dropFirst()
-            .sink { [weak self] in
-                self?.videoManager.isHiddenSubject.send($0)
-            }
-            .store(in: &cancellables)
 
         Publishers.Merge(
             youTubePlayer.playbackStatePublisher,
@@ -85,6 +75,32 @@ final class VideoDetailPlayerViewModel: ViewModel {
 
 extension VideoDetailPlayerViewModel {
     private func initYouTubePlayer() -> YouTubePlayer {
-        videoManager.createYouTubePlayer(with: video.url)
+        let youTubePlayer = YouTubePlayer(source: .url(video.url))
+        youTubePlayer.configuration = YouTubePlayer.Configuration(
+            automaticallyAdjustsContentInsets: nil,
+            allowsPictureInPictureMediaPlayback: nil,
+            fullscreenMode: .system,
+            openURLAction: .default,
+            autoPlay: true, // Updated
+            captionLanguage: nil,
+            showCaptions: false, // Updated
+            progressBarColor: nil,
+            showControls: nil,
+            keyboardControlsDisabled: nil,
+            enableJavaScriptAPI: true, // Updated
+            endTime: nil,
+            showFullscreenButton: nil,
+            language: nil,
+            showAnnotations: nil,
+            loopEnabled: nil,
+            useModestBranding: false, // Updated
+            playInline: true, // Updated
+            showRelatedVideos: nil,
+            startTime: nil,
+            referrer: nil,
+            customUserAgent: nil
+        )
+        youTubePlayer.hideStatsForNerds()
+        return youTubePlayer
     }
 }

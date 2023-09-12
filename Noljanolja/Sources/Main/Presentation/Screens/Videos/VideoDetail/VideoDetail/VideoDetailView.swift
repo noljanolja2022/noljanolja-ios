@@ -8,6 +8,7 @@
 
 import SwiftUI
 import SwiftUIX
+import YouTubePlayerKit
 
 // MARK: - VideoDetailView
 
@@ -15,6 +16,8 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
+
+    @State private var isFull = true
 
     var body: some View {
         buildBodyView()
@@ -41,6 +44,37 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
     }
 
     private func buildMainView() -> some View {
+        VStack(spacing: 0) {
+            buildHeaderView()
+            buildDetailView()
+        }
+        .frame(maxWidth: .infinity)
+        .background(ColorAssets.neutralLight.swiftUIColor.ignoresSafeArea())
+    }
+
+    @ViewBuilder
+    private func buildHeaderView() -> some View {
+        if isFull {
+            HStack {
+                Button(
+                    action: {
+                        isFull = !isFull
+                    },
+                    label: {
+                        ImageAssets.icClose.swiftUIImage
+                            .resizable()
+                            .padding(8)
+                            .frame(width: 32, height: 32)
+                            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    }
+                )
+                Spacer()
+            }
+            .frame(height: 32)
+        }
+    }
+
+    private func buildDetailView() -> some View {
         buildContentView()
             .statefull(
                 state: $viewModel.viewState,
@@ -49,33 +83,84 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
                 empty: buildEmptyView,
                 error: buildErrorView
             )
-            .background(ColorAssets.neutralLight.swiftUIColor.ignoresSafeArea())
-            .padding(.top, 300)
     }
 
+    @ViewBuilder
     private func buildContentView() -> some View {
         VStack(spacing: 0) {
-            buildPlayerView()
-            buildScrollView()
-            buildInputView()
+            buildMiniView()
+            if isFull {
+                buildScrollView()
+                buildInputView()
+            }
         }
-        .statefull(
-            state: $viewModel.viewState,
-            isEmpty: { viewModel.video == nil },
-            loading: buildLoadingView,
-            empty: buildEmptyView,
-            error: buildErrorView
-        )
+    }
+
+    private func buildMiniView() -> some View {
+        HStack(spacing: 16) {
+            buildPlayerView()
+
+            if !isFull, let video = viewModel.video {
+                VStack(spacing: 4) {
+                    Text(video.title ?? "")
+                        .lineLimit(1)
+                        .multilineTextAlignment(.leading)
+                        .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+
+                    if let channelTitle = video.channel?.title, !channelTitle.isEmpty {
+                        Text(channelTitle)
+                            .lineLimit(2)
+                            .multilineTextAlignment(.leading)
+                            .dynamicFont(.systemFont(ofSize: 10))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
+                    }
+                }
+
+                Button(
+                    action: {},
+                    label: {
+                        Image(systemName: "play.fill")
+                            .resizable()
+                            .padding(8)
+                            .frame(width: 32, height: 32)
+                            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    }
+                )
+
+                Button(
+                    action: {
+                        viewModel.closeAction.send()
+                    },
+                    label: {
+                        ImageAssets.icClose.swiftUIImage
+                            .resizable()
+                            .padding(8)
+                            .frame(width: 32, height: 32)
+                            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    }
+                )
+            }
+        }
     }
 
     @ViewBuilder
     private func buildPlayerView() -> some View {
-        if let video = viewModel.video {
-            VideoDetailPlayerView(
-                viewModel: VideoDetailPlayerViewModel(
-                    video: video
-                )
-            )
+        if let youTubePlayer = viewModel.youTubePlayer {
+            YouTubePlayerView(youTubePlayer) { state in
+                switch state {
+                case .idle:
+                    ProgressView()
+                case .ready:
+                    EmptyView()
+                case .error:
+                    Spacer()
+                }
+            }
+            .frame(width: isFull ? UIScreen.main.bounds.width : UIScreen.main.bounds.width / 3.0)
+            .frame(height: (isFull ? UIScreen.main.bounds.width : UIScreen.main.bounds.width / 3.0) * (5.0 / 9.0))
         }
     }
 
