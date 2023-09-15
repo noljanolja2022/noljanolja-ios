@@ -114,13 +114,6 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
 
     @ViewBuilder
     private func buildPlayerView() -> some View {
-        let width: CGFloat = {
-            switch viewModel.contentType {
-            case .maximize: return UIScreen.main.bounds.width
-            case .minimize: return UIScreen.main.bounds.width / 3.5
-            case .hide: return 0
-            }
-        }()
         YouTubePlayerView(viewModel.youTubePlayer) { state in
             switch state {
             case .idle:
@@ -131,16 +124,16 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
                 Spacer()
             }
         }
-        .frame(width: width)
-        .frame(height: width * (5.0 / 9.0))
-        .allowsHitTesting(
-            {
-                switch viewModel.contentType {
-                case .maximize: return true
-                case .minimize, .hide: return false
-                }
-            }()
-        )
+        .frame(width: viewModel.contentType.playerWidth)
+        .frame(height: viewModel.contentType.playerHeight)
+//        .allowsHitTesting(
+//            {
+//                switch viewModel.contentType {
+//                case .maximize: return true
+//                case .minimize, .hide: return false
+//                }
+//            }()
+//        )
     }
 
     @ViewBuilder
@@ -300,16 +293,5 @@ extension VideoDetailView {
         case let .webView(url):
             SafariView(url: url)
         }
-    }
-}
-
-// MARK: - VideoDetailView_Previews
-
-struct VideoDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        VideoDetailView(
-            viewModel: VideoDetailViewModel(
-            )
-        )
     }
 }

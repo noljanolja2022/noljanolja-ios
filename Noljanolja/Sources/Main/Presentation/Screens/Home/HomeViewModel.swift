@@ -80,25 +80,7 @@ final class HomeViewModel: ViewModel {
             .store(in: &cancellables)
     }
 
-    private func configureActions() {
-        isAppearSubject
-            .receive(on: DispatchQueue.main)
-            .sink { isAppear in
-                let minimizeBottomPadding = {
-                    if isAppear {
-                        let tabBarHeight: CGFloat = 48
-                        let dividerHeight: CGFloat = 1
-                        return tabBarHeight + dividerHeight
-                    } else {
-                        return 0
-                    }
-                }()
-                VideoDetailViewModel.shared.updateMinimizeBottomPadding(
-                    minimizeBottomPadding
-                )
-            }
-            .store(in: &cancellables)
-    }
+    private func configureActions() {}
 }
 
 // MARK: ConversationListViewModelDelegate

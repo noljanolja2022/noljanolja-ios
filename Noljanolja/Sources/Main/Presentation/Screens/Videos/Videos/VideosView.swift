@@ -141,11 +141,6 @@ extension VideosView {
         _ type: Binding<VideosNavigationType>
     ) -> some View {
         switch type.wrappedValue {
-        case let .videoDetail(video):
-            VideoDetailView(
-                viewModel: VideoDetailViewModel(
-                )
-            )
         case .uncompleteVideos:
             UncompleteVideosView(
                 viewModel: UncompleteVideosViewModel()

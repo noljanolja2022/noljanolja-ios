@@ -14,7 +14,6 @@ enum ChatNavigationType: Equatable {
     case chatSetting(Conversation)
     case openImages(Message)
     case forwardMessage(Message)
-    case openVideoDetail(Video)
 }
 
 // MARK: - ChatFullScreenCoverType

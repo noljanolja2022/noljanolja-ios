@@ -60,7 +60,7 @@ struct UncompleteVideosView<ViewModel: UncompleteVideosViewModel>: View {
                     )
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
-                        viewModel.navigationType = .videoDetail(model)
+                        VideoDetailViewModel.shared.show(videoId: model.id)
                     }
                 }
             }
@@ -104,16 +104,8 @@ extension UncompleteVideosView {
 extension UncompleteVideosView {
     @ViewBuilder
     private func buildNavigationLinkDestinationView(
-        _ type: Binding<UncompleteVideosNavigationType>
-    ) -> some View {
-        switch type.wrappedValue {
-        case let .videoDetail(video):
-            VideoDetailView(
-                viewModel: VideoDetailViewModel(
-                )
-            )
-        }
-    }
+        _: Binding<UncompleteVideosNavigationType>
+    ) -> some View {}
 }
 
 // MARK: - UncompleteVideosView_Previews

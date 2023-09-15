@@ -116,14 +116,18 @@ final class VideoDetailViewModel: ViewModel {
     }
 
     func updateContentType(_ value: VideoDetailViewContentType) {
-        withAnimation(.easeInOut(duration: 0.3)) {
-            contentType = value
+        DispatchQueue.main.async { [weak self] in
+            withAnimation(.easeInOut(duration: 0.3)) {
+                self?.contentType = value
+            }
         }
     }
 
     func updateMinimizeBottomPadding(_ value: CGFloat) {
-        withAnimation(.easeInOut(duration: 0.3)) {
-            minimizeBottomPadding = value
+        DispatchQueue.main.async { [weak self] in
+            withAnimation(.easeInOut(duration: 0.3)) {
+                self?.minimizeBottomPadding = value
+            }
         }
     }
 

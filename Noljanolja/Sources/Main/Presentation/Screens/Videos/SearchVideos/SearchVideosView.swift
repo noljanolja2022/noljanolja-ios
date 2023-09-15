@@ -201,7 +201,7 @@ struct SearchVideosView<ViewModel: SearchVideosViewModel>: View {
                     )
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
-                        viewModel.navigationType = .videoDetail(model)
+                        VideoDetailViewModel.shared.show(videoId: model.id)
                     }
                 }
             }
@@ -254,14 +254,6 @@ extension SearchVideosView {
 extension SearchVideosView {
     @ViewBuilder
     private func buildNavigationLinkDestinationView(
-        _ type: Binding<SearchVideosNavigationType>
-    ) -> some View {
-        switch type.wrappedValue {
-        case let .videoDetail(video):
-            VideoDetailView(
-                viewModel: VideoDetailViewModel(
-                )
-            )
-        }
-    }
+        _: Binding<SearchVideosNavigationType>
+    ) -> some View {}
 }

@@ -161,30 +161,42 @@ struct HomeView<ViewModel: HomeViewModel>: View {
 
     @ViewBuilder
     private func buildTabView() -> some View {
-        ConversationListView(
-            viewModel: ConversationListViewModel(
-                delegate: viewModel
+        VideoDetailRootContainerView(
+            contentView: ConversationListView(
+                viewModel: ConversationListViewModel(
+                    delegate: viewModel
+                ),
+                toolBarAction: toolBarActionSubject.eraseToAnyPublisher()
             ),
-            toolBarAction: toolBarActionSubject.eraseToAnyPublisher()
+            viewModel: VideoDetailRootContainerViewModel()
         )
         .tag(HomeTabType.chat)
 
-        VideosView(
-            viewModel: VideosViewModel()
+        VideoDetailRootContainerView(
+            contentView: VideosView(
+                viewModel: VideosViewModel()
+            ),
+            viewModel: VideoDetailRootContainerViewModel()
         )
         .tag(HomeTabType.watch)
 
-        WalletView(
-            viewModel: WalletViewModel(
-                delegate: viewModel
-            )
+        VideoDetailRootContainerView(
+            contentView: WalletView(
+                viewModel: WalletViewModel(
+                    delegate: viewModel
+                )
+            ),
+            viewModel: VideoDetailRootContainerViewModel()
         )
         .tag(HomeTabType.wallet)
 
-        ShopHomeView(
-            viewModel: ShopHomeViewModel()
+        VideoDetailRootContainerView(
+            contentView: ShopHomeView(
+                viewModel: ShopHomeViewModel()
+            )
+            .frame(maxWidth: .infinity, maxHeight: .infinity),
+            viewModel: VideoDetailRootContainerViewModel()
         )
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .tag(HomeTabType.shop)
     }
 

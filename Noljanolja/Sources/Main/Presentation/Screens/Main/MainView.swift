@@ -27,10 +27,18 @@ struct MainView<ViewModel: MainViewModel>: View {
     }
 
     private func buildMainView() -> some View {
-        buildContentView()
-            .overlay(alignment: .bottom) {
+        VStack(spacing: 0) {
+            buildContentView()
+                .padding(.bottom, viewModel.bottomPadding)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .overlay(alignment: .bottom) {
+            ZStack(alignment: .bottom) {
+                Spacer()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 buildOverlayView()
             }
+        }
     }
 
     private func buildContentView() -> some View {
@@ -40,6 +48,12 @@ struct MainView<ViewModel: MainViewModel>: View {
                     delegate: viewModel
                 )
             )
+            .onAppear {
+                viewModel.isHomeAppearSubject.send(true)
+            }
+            .onDisappear {
+                viewModel.isHomeAppearSubject.send(false)
+            }
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .accentColor(ColorAssets.neutralDarkGrey.swiftUIColor)
