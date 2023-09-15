@@ -241,7 +241,6 @@ extension ChatView {
         case let .openVideoDetail(model):
             VideoDetailView(
                 viewModel: VideoDetailViewModel(
-                    videoId: model.id
                 )
             )
         }

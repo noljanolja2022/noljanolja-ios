@@ -53,11 +53,9 @@ struct MainView<ViewModel: MainViewModel>: View {
 
     @ViewBuilder
     private func buildOverlayView() -> some View {
-        if let videoId = viewModel.videoId {
-            VideoDetailView(
-                viewModel: VideoDetailViewModel(videoId: videoId)
-            )
-        }
+        VideoDetailView(
+            viewModel: VideoDetailViewModel.shared
+        )
     }
 }
 

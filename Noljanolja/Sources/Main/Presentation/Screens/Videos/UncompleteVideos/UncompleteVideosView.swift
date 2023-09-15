@@ -110,7 +110,6 @@ extension UncompleteVideosView {
         case let .videoDetail(video):
             VideoDetailView(
                 viewModel: VideoDetailViewModel(
-                    videoId: video.id
                 )
             )
         }
