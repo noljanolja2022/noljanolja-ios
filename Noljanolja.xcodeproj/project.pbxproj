@@ -412,6 +412,7 @@
 		CF8795232A7430D3003B0428 /* ShareVideoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8795212A7430D3003B0428 /* ShareVideoDetailViewModel.swift */; };
 		CF88ABCD299F2E7400D8AB67 /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = CF88ABCC299F2E7400D8AB67 /* SwiftUINavigation */; };
 		CF8BD91E2A78B2C200EAD316 /* CheckinItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8BD91D2A78B2C200EAD316 /* CheckinItemView.swift */; };
+		CF91E6F62AB4118F0086C046 /* YouTubePlayer.State+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF91E6F52AB4118F0086C046 /* YouTubePlayer.State+Ext.swift */; };
 		CF9779DC29BE2FC600D1CAB0 /* PhoneNumberKit in Frameworks */ = {isa = PBXBuildFile; productRef = CF9779DB29BE2FC600D1CAB0 /* PhoneNumberKit */; };
 		CF9DF0AA2A36B2D80054E105 /* UIImage+QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9DF0A92A36B2D80054E105 /* UIImage+QRCode.swift */; };
 		CFA3304729BE3352008D7449 /* String+Phone.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA3304629BE3352008D7449 /* String+Phone.swift */; };
@@ -979,6 +980,7 @@
 		CF8795202A7430D3003B0428 /* ShareVideoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareVideoDetailView.swift; sourceTree = "<group>"; };
 		CF8795212A7430D3003B0428 /* ShareVideoDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareVideoDetailViewModel.swift; sourceTree = "<group>"; };
 		CF8BD91D2A78B2C200EAD316 /* CheckinItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinItemView.swift; sourceTree = "<group>"; };
+		CF91E6F52AB4118F0086C046 /* YouTubePlayer.State+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "YouTubePlayer.State+Ext.swift"; sourceTree = "<group>"; };
 		CF9DF0A92A36B2D80054E105 /* UIImage+QRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+QRCode.swift"; sourceTree = "<group>"; };
 		CFA3304629BE3352008D7449 /* String+Phone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Phone.swift"; sourceTree = "<group>"; };
 		CFA3304829BE3AB9008D7449 /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
@@ -3224,6 +3226,7 @@
 			isa = PBXGroup;
 			children = (
 				CFDE69F12AB3658A00F8750D /* VideoDetailViewContentType.swift */,
+				CF91E6F52AB4118F0086C046 /* YouTubePlayer.State+Ext.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -4225,6 +4228,7 @@
 				CF8633FD29B8F2F50091BF5D /* Contact.swift in Sources */,
 				CFAD27B129E2DAE400947BC3 /* ConversationDetailStore.swift in Sources */,
 				CF1B624A29B9B8A100DE53E6 /* Conversation.swift in Sources */,
+				CF91E6F62AB4118F0086C046 /* YouTubePlayer.State+Ext.swift in Sources */,
 				CF3CE18529B79FD50054BBEF /* UserDefaults.swift in Sources */,
 				CF2836D12A9F8E7D00663C16 /* ConversationAttachment.swift in Sources */,
 				CF53D5C52A6AF548009B3A69 /* RootNavigations.swift in Sources */,

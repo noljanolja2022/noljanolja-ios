@@ -9,6 +9,7 @@
 import Combine
 import Foundation
 import Moya
+import SwiftUIX
 import YouTubePlayerKit
 
 // MARK: - VideoDetailViewModelDelegate
@@ -52,11 +53,16 @@ final class VideoDetailViewModel: ViewModel {
         return youTubePlayer
     }()
 
-    @Published var videoId: String?
+    @Published private(set) var videoId: String?
+    @Published private(set) var contentType = VideoDetailViewContentType.hide
+    @Published private(set) var minimizeBottomPadding: CGFloat = 0
+
     @Published var video: Video?
     @Published var comments = [VideoComment]()
     @Published var commentCount: Int?
-    @Published var contentType = VideoDetailViewContentType.hide
+
+    @Published var youTubePlayerPlaybackState: YouTubePlayer.PlaybackState?
+
     @Published var viewState = ViewState.loading
     @Published var footerViewState = StatefullFooterViewState.loading
 
@@ -68,6 +74,7 @@ final class VideoDetailViewModel: ViewModel {
 
     let loadMoreAction = PassthroughSubject<Void, Never>()
     let scrollToTopAction = PassthroughSubject<Void, Never>()
+    let youTubePlayerPlaybackStateAction = PassthroughSubject<Void, Never>()
 
     // MARK: Dependencies
 
@@ -94,21 +101,36 @@ final class VideoDetailViewModel: ViewModel {
     func show(videoId: String) {
         self.videoId = videoId
         switch contentType {
-        case .full, .minimize:
+        case .maximize, .minimize:
             break
         case .hide:
-            contentType = .full
+            updateContentType(.maximize)
         }
     }
 
     func hide() {
+        youTubePlayer.source = nil
+
         videoId = nil
-        contentType = .hide
+        updateContentType(.hide)
+    }
+
+    func updateContentType(_ value: VideoDetailViewContentType) {
+        withAnimation(.easeInOut(duration: 0.3)) {
+            contentType = value
+        }
+    }
+
+    func updateMinimizeBottomPadding(_ value: CGFloat) {
+        withAnimation(.easeInOut(duration: 0.3)) {
+            minimizeBottomPadding = value
+        }
     }
 
     private func configure() {
         configureLoadData()
         configureActions()
+        configureYouTubePlayer()
     }
 
     private func configureLoadData() {
@@ -128,8 +150,9 @@ final class VideoDetailViewModel: ViewModel {
                 guard let self else { return }
                 switch result {
                 case let .success(video):
-                    self.video = video
                     self.youTubePlayer.source = .url(video.url)
+
+                    self.video = video
                     self.comments = video.comments
                     self.commentCount = video.commentCount
                     
@@ -144,7 +167,9 @@ final class VideoDetailViewModel: ViewModel {
                 }
             }
             .store(in: &cancellables)
+    }
 
+    private func configureActions() {
         loadMoreAction
             .withLatestFrom($videoId)
             .compactMap { $0 }
@@ -181,7 +206,31 @@ final class VideoDetailViewModel: ViewModel {
             .store(in: &cancellables)
     }
 
-    private func configureActions() {
+    private func configureYouTubePlayer() {
+        youTubePlayer.playbackStatePublisher
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                self?.youTubePlayerPlaybackState = $0
+            })
+            .store(in: &cancellables)
+
+        youTubePlayerPlaybackStateAction
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                switch youTubePlayer.playbackState {
+                case .buffering, .cued, .paused, .unstarted:
+                    youTubePlayer.play()
+                case .ended:
+                    youTubePlayer.seek(to: 0, allowSeekAhead: true)
+                    youTubePlayer.play()
+                case .playing:
+                    youTubePlayer.pause()
+                case .none:
+                    break
+                }
+            })
+            .store(in: &cancellables)
+
         Publishers.Merge(
             youTubePlayer.playbackStatePublisher,
             youTubePlayer.currentTimePublisher(updateInterval: 10)

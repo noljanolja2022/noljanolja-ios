@@ -24,7 +24,7 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
     @ViewBuilder
     private func buildBodyView() -> some View {
         switch viewModel.contentType {
-        case .full, .minimize:
+        case .maximize, .minimize:
             buildContainerView()
                 .navigationBarTitle("", displayMode: .inline)
                 .toolbar {
@@ -54,28 +54,37 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
         }
         .frame(maxWidth: .infinity)
         .background(ColorAssets.neutralLight.swiftUIColor.ignoresSafeArea())
+        .padding(
+            .bottom,
+            {
+                switch viewModel.contentType {
+                case .minimize: return viewModel.minimizeBottomPadding
+                case .maximize, .hide: return 0
+                }
+            }()
+        )
     }
 
     @ViewBuilder
     private func buildHeaderView() -> some View {
         switch viewModel.contentType {
-        case .full:
+        case .maximize:
             HStack {
                 Button(
                     action: {
-                        viewModel.contentType = .minimize
+                        viewModel.updateContentType(.minimize)
                     },
                     label: {
-                        ImageAssets.icClose.swiftUIImage
+                        Image(systemName: "chevron.down.circle.fill")
                             .resizable()
                             .padding(8)
-                            .frame(width: 32, height: 32)
+                            .frame(width: 44, height: 44)
                             .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                     }
                 )
                 Spacer()
             }
-            .frame(height: 32)
+            .frame(height: 44)
         case .minimize, .hide:
             EmptyView()
         }
@@ -95,76 +104,11 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
     @ViewBuilder
     private func buildContentView() -> some View {
         VStack(spacing: 0) {
-            buildTopView()
-            buildBottomView()
-        }
-    }
-
-    private func buildTopView() -> some View {
-        HStack(spacing: 16) {
-            buildPlayerView()
-
-            switch viewModel.contentType {
-            case .minimize:
-                if let video = viewModel.video {
-                    VStack(spacing: 4) {
-                        Text(video.title ?? "")
-                            .lineLimit(1)
-                            .multilineTextAlignment(.leading)
-                            .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-
-                        if let channelTitle = video.channel?.title, !channelTitle.isEmpty {
-                            Text(channelTitle)
-                                .lineLimit(2)
-                                .multilineTextAlignment(.leading)
-                                .dynamicFont(.systemFont(ofSize: 10))
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
-                        }
-                    }
-
-                    Button(
-                        action: {},
-                        label: {
-                            Image(systemName: "play.fill")
-                                .resizable()
-                                .padding(8)
-                                .frame(width: 32, height: 32)
-                                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                        }
-                    )
-
-                    Button(
-                        action: {
-                            viewModel.contentType = .hide
-                        },
-                        label: {
-                            ImageAssets.icClose.swiftUIImage
-                                .resizable()
-                                .padding(8)
-                                .frame(width: 32, height: 32)
-                                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                        }
-                    )
-                }
-            case .full, .hide:
-                EmptyView()
+            HStack(spacing: 16) {
+                buildPlayerView()
+                buildMinimizeDetailView()
             }
-        }
-    }
-
-    @ViewBuilder
-    private func buildBottomView() -> some View {
-        switch viewModel.contentType {
-        case .full:
-            VStack(spacing: 0) {
-                buildScrollView()
-                buildInputView()
-            }
-        case .minimize, .hide:
-            EmptyView()
+            buildMaximizeDetailView()
         }
     }
 
@@ -172,8 +116,8 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
     private func buildPlayerView() -> some View {
         let width: CGFloat = {
             switch viewModel.contentType {
-            case .full: return UIScreen.main.bounds.width
-            case .minimize: return UIScreen.main.bounds.width / 3.0
+            case .maximize: return UIScreen.main.bounds.width
+            case .minimize: return UIScreen.main.bounds.width / 3.5
             case .hide: return 0
             }
         }()
@@ -189,6 +133,92 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
         }
         .frame(width: width)
         .frame(height: width * (5.0 / 9.0))
+        .allowsHitTesting(
+            {
+                switch viewModel.contentType {
+                case .maximize: return true
+                case .minimize, .hide: return false
+                }
+            }()
+        )
+    }
+
+    @ViewBuilder
+    private func buildMaximizeDetailView() -> some View {
+        switch viewModel.contentType {
+        case .maximize:
+            buildMaximizeDetailContentView()
+        case .minimize, .hide:
+            EmptyView()
+        }
+    }
+
+    @ViewBuilder
+    private func buildMinimizeDetailView() -> some View {
+        switch viewModel.contentType {
+        case .minimize:
+            buildMinimizeDetailContentView()
+        case .maximize, .hide:
+            EmptyView()
+        }
+    }
+
+    private func buildMaximizeDetailContentView() -> some View {
+        VStack(spacing: 0) {
+            buildScrollView()
+            buildInputView()
+        }
+    }
+
+    private func buildMinimizeDetailContentView() -> some View {
+        HStack {
+            if let video = viewModel.video {
+                VStack(spacing: 4) {
+                    Text(video.title ?? "")
+                        .lineLimit(1)
+                        .multilineTextAlignment(.leading)
+                        .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+
+                    if let channelTitle = video.channel?.title, !channelTitle.isEmpty {
+                        Text(channelTitle)
+                            .lineLimit(2)
+                            .multilineTextAlignment(.leading)
+                            .dynamicFont(.systemFont(ofSize: 10))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
+                    }
+                }
+            }
+
+            if let systemImageName = viewModel.youTubePlayerPlaybackState?.systemImageName {
+                Image(systemName: systemImageName)
+                    .resizable()
+                    .padding(8)
+                    .frame(width: 32, height: 32)
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    .onTapGesture {
+                        viewModel.youTubePlayerPlaybackStateAction.send()
+                    }
+            }
+
+            Button(
+                action: {
+                    viewModel.hide()
+                },
+                label: {
+                    ImageAssets.icClose.swiftUIImage
+                        .resizable()
+                        .padding(8)
+                        .frame(width: 32, height: 32)
+                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                }
+            )
+        }
+        .onTapGesture {
+            viewModel.updateContentType(.maximize)
+        }
     }
 
     @ViewBuilder

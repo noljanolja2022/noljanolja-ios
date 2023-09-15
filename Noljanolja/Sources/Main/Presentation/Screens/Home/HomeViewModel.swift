@@ -51,6 +51,7 @@ final class HomeViewModel: ViewModel {
 
     private func configure() {
         configureLoadData()
+        configureActions()
     }
 
     private func configureLoadData() {
@@ -75,6 +76,26 @@ final class HomeViewModel: ViewModel {
                 case .failure:
                     break
                 }
+            }
+            .store(in: &cancellables)
+    }
+
+    private func configureActions() {
+        isAppearSubject
+            .receive(on: DispatchQueue.main)
+            .sink { isAppear in
+                let minimizeBottomPadding = {
+                    if isAppear {
+                        let tabBarHeight: CGFloat = 48
+                        let dividerHeight: CGFloat = 1
+                        return tabBarHeight + dividerHeight
+                    } else {
+                        return 0
+                    }
+                }()
+                VideoDetailViewModel.shared.updateMinimizeBottomPadding(
+                    minimizeBottomPadding
+                )
             }
             .store(in: &cancellables)
     }
