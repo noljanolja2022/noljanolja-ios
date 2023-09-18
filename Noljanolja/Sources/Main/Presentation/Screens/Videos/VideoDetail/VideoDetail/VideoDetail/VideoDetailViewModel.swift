@@ -23,32 +23,34 @@ final class VideoDetailViewModel: ViewModel {
 
     // MARK: State
 
+    lazy var youTubePlayerConfiguration = YouTubePlayer.Configuration(
+        automaticallyAdjustsContentInsets: nil,
+        allowsPictureInPictureMediaPlayback: true,
+        fullscreenMode: .system,
+        openURLAction: .init(handler: { _ in }), // Updated
+        autoPlay: true, // Updated
+        captionLanguage: nil,
+        showCaptions: false, // Updated
+        progressBarColor: nil,
+        showControls: nil,
+        keyboardControlsDisabled: nil,
+        enableJavaScriptAPI: true, // Updated
+        endTime: nil,
+        showFullscreenButton: nil,
+        language: nil,
+        showAnnotations: nil,
+        loopEnabled: nil,
+        useModestBranding: false, // Updated
+        playInline: true, // Updated
+        showRelatedVideos: nil,
+        startTime: nil,
+        referrer: nil,
+        customUserAgent: nil
+    )
+
     lazy var youTubePlayer: YouTubePlayer = {
         let youTubePlayer = YouTubePlayer()
-        youTubePlayer.configuration = YouTubePlayer.Configuration(
-            automaticallyAdjustsContentInsets: nil,
-            allowsPictureInPictureMediaPlayback: nil,
-            fullscreenMode: .system,
-            openURLAction: .default,
-            autoPlay: true, // Updated
-            captionLanguage: nil,
-            showCaptions: false, // Updated
-            progressBarColor: nil,
-            showControls: nil,
-            keyboardControlsDisabled: nil,
-            enableJavaScriptAPI: true, // Updated
-            endTime: nil,
-            showFullscreenButton: nil,
-            language: nil,
-            showAnnotations: nil,
-            loopEnabled: nil,
-            useModestBranding: false, // Updated
-            playInline: true, // Updated
-            showRelatedVideos: nil,
-            startTime: nil,
-            referrer: nil,
-            customUserAgent: nil
-        )
+        youTubePlayer.configuration = youTubePlayerConfiguration
         youTubePlayer.hideStatsForNerds()
         return youTubePlayer
     }()
