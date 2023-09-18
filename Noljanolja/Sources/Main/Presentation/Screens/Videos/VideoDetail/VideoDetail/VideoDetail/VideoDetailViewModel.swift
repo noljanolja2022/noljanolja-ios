@@ -100,13 +100,13 @@ final class VideoDetailViewModel: ViewModel {
         configure()
     }
 
-    func show(videoId: String) {
+    func show(videoId: String, contentType: VideoDetailViewContentType = .maximize) {
         self.videoId = videoId
-        switch contentType {
+        switch self.contentType {
         case .maximize, .minimize:
             break
         case .hide:
-            updateContentType(.maximize)
+            updateContentType(contentType)
         }
     }
 

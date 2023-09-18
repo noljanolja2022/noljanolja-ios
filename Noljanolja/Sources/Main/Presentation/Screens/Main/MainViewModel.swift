@@ -29,13 +29,16 @@ final class MainViewModel: ViewModel {
 
     // MARK: Dependencies
 
+    private let promotedVideosUseCase: PromotedVideosUseCase
     private weak var delegate: MainViewModelDelegate?
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(delegate: MainViewModelDelegate? = nil) {
+    init(promotedVideosUseCase: PromotedVideosUseCase = PromotedVideosUseCaseImpl.shared,
+         delegate: MainViewModelDelegate? = nil) {
+        self.promotedVideosUseCase = promotedVideosUseCase
         self.delegate = delegate
         super.init()
 

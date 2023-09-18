@@ -58,6 +58,22 @@ private enum VideoTargets {
         }
     }
 
+    struct GetPromotedVideos: BaseAuthTargetType {
+        var path: String { "v1/media/videos/promoted" }
+        let method: Moya.Method = .get
+        var task: Task { .requestParameters(parameters: parameters, encoding: URLEncoding.default) }
+
+        let page: Int
+        let pageSize: Int
+
+        var parameters: [String: Any] {
+            [
+                "page": page,
+                "pageSize": pageSize
+            ]
+        }
+    }
+
     struct GetVideoDetail: BaseAuthTargetType {
         var path: String { "v1/media/videos/\(videoId)" }
         let method: Moya.Method = .get
@@ -120,6 +136,7 @@ protocol VideoRepository {
                    categoryId: String?) -> AnyPublisher<PaginationResponse<[Video]>, Error>
     func getWatchingVideos() -> AnyPublisher<[Video], Error>
     func getTrendingVideos(duration: VideoTrendingDurationType, limit: Int?) -> AnyPublisher<[Video], Error>
+    func getPromotedVideos(page: Int, pageSize: Int) -> AnyPublisher<[PromotedVideo], Error>
 
     func getVideoDetail(id: String) -> AnyPublisher<Video, Error>
     func getVideoComments(videoId: String, beforeCommentId: Int?, limit: Int?) -> AnyPublisher<[VideoComment], Error>
@@ -182,6 +199,13 @@ final class VideoRepositoryImpl: VideoRepository {
     func getTrendingVideos(duration: VideoTrendingDurationType, limit: Int?) -> AnyPublisher<[Video], Error> {
         api.request(
             target: VideoTargets.GetTrendingVideos(duration: duration, limit: limit),
+            atKeyPath: "data"
+        )
+    }
+
+    func getPromotedVideos(page: Int, pageSize: Int) -> AnyPublisher<[PromotedVideo], Error> {
+        api.request(
+            target: VideoTargets.GetPromotedVideos(page: page, pageSize: pageSize),
             atKeyPath: "data"
         )
     }

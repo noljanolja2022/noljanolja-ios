@@ -401,6 +401,8 @@
 		CF849EE52A809FD500B8BA3B /* VerticalShareReferralViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF849EE32A809FD500B8BA3B /* VerticalShareReferralViewModel.swift */; };
 		CF849EEB2A80A5CD00B8BA3B /* ShareReferralViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF849EEA2A80A5CD00B8BA3B /* ShareReferralViewModel.swift */; };
 		CF8633FD29B8F2F50091BF5D /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8633FC29B8F2F50091BF5D /* Contact.swift */; };
+		CF8686992AB8A6F100EE530B /* PromotedVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8686982AB8A6F100EE530B /* PromotedVideo.swift */; };
+		CF86869B2AB8A98C00EE530B /* PromotedVideosUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF86869A2AB8A98C00EE530B /* PromotedVideosUseCase.swift */; };
 		CF8737EA29CB5BAB0018237B /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8737E929CB5BAB0018237B /* PhotoPickerView.swift */; };
 		CF8737EC29CB5BBB0018237B /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8737EB29CB5BBB0018237B /* PhotoLibrary.swift */; };
 		CF8737EE29CB5F730018237B /* PhotoPickerItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8737ED29CB5F730018237B /* PhotoPickerItemView.swift */; };
@@ -970,6 +972,8 @@
 		CF849EE32A809FD500B8BA3B /* VerticalShareReferralViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalShareReferralViewModel.swift; sourceTree = "<group>"; };
 		CF849EEA2A80A5CD00B8BA3B /* ShareReferralViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareReferralViewModel.swift; sourceTree = "<group>"; };
 		CF8633FC29B8F2F50091BF5D /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		CF8686982AB8A6F100EE530B /* PromotedVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotedVideo.swift; sourceTree = "<group>"; };
+		CF86869A2AB8A98C00EE530B /* PromotedVideosUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotedVideosUseCase.swift; sourceTree = "<group>"; };
 		CF8737E929CB5BAB0018237B /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
 		CF8737EB29CB5BBB0018237B /* PhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrary.swift; sourceTree = "<group>"; };
 		CF8737ED29CB5F730018237B /* PhotoPickerItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerItemView.swift; sourceTree = "<group>"; };
@@ -1552,6 +1556,7 @@
 				CF355C892A77C18B005A48F9 /* CheckinProgress.swift */,
 				CF2836D02A9F8E7D00663C16 /* ConversationAttachment.swift */,
 				CF2836D22A9F9F4300663C16 /* ConversationAttachmentType.swift */,
+				CF8686982AB8A6F100EE530B /* PromotedVideo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3410,6 +3415,7 @@
 				CFA924B32A49926D000918D8 /* MessageReactionUseCases.swift */,
 				CFF868B82A6E2D74006F0B87 /* VideoUseCases.swift */,
 				CF355C8B2A77C4EA005A48F9 /* CheckinUseCase.swift */,
+				CF86869A2AB8A98C00EE530B /* PromotedVideosUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -4085,6 +4091,7 @@
 				CFA3304D29BEB674008D7449 /* SearchView.swift in Sources */,
 				CFB0A82B29F1BB5800298546 /* VideoRepository.swift in Sources */,
 				CFF530B02A74218B00908DEB /* VideoMessageContentView.swift in Sources */,
+				CF8686992AB8A6F100EE530B /* PromotedVideo.swift in Sources */,
 				CF53D59B2A6AF548009B3A69 /* HighlightVideoItemView.swift in Sources */,
 				CF53D5E92A6AF548009B3A69 /* ChatAlertActionType.swift in Sources */,
 				CF53D6342A6AF548009B3A69 /* ImageEditorView.swift in Sources */,
@@ -4262,6 +4269,7 @@
 				CF91E6FE2AB45A840086C046 /* VideoDetailRootContainerViewModel.swift in Sources */,
 				CFE09341299007E400F197F0 /* Publisher+ResultTranforming.swift in Sources */,
 				CF53D5D02A6AF548009B3A69 /* ContactItemView.swift in Sources */,
+				CF86869B2AB8A98C00EE530B /* PromotedVideosUseCase.swift in Sources */,
 				CF53D6542A6AF548009B3A69 /* CodeView.swift in Sources */,
 				CF53D60E2A6AF548009B3A69 /* FindUsersResultViewModel.swift in Sources */,
 				CF53D5A42A6AF548009B3A69 /* TransactionDashboardItemModel.swift in Sources */,
