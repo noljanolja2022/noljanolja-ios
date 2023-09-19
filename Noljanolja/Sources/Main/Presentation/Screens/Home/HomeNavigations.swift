@@ -8,9 +8,9 @@
 import Foundation
 import SwiftUIX
 
-// MARK: - MainTabType
+// MARK: - HomeTabType
 
-enum MainTabType: Equatable {
+enum HomeTabType: Equatable {
     case chat
     case watch
     case wallet
@@ -65,15 +65,15 @@ enum MainTabType: Equatable {
     }
 }
 
-// MARK: - MainNavigationType
+// MARK: - HomeNavigationType
 
-enum MainNavigationType {
+enum HomeNavigationType {
     case addFriends
     case searchVideo
 }
 
-// MARK: - MainScreenCoverType
+// MARK: - HomeScreenCoverType
 
-enum MainScreenCoverType: Equatable {
+enum HomeScreenCoverType: Equatable {
     case banners([Banner])
 }

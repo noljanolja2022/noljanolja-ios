@@ -10,7 +10,6 @@ import Foundation
 // MARK: - VideosNavigationType
 
 enum VideosNavigationType: Equatable {
-    case videoDetail(Video)
     case uncompleteVideos
 }
 
