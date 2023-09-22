@@ -13,11 +13,11 @@ struct TrackVideoParam: Encodable, Equatable {
     let trackIntervalMs: Int
     let durationMs: Int
 
-    init?(videoId: String,
+    init?(videoId: String?,
           event: VideoProgressEventType?,
           trackIntervalMs: Int,
           durationMs: Int) {
-        guard let event else { return nil }
+        guard let videoId, let event else { return nil }
         self.videoId = videoId
         self.event = event
         self.trackIntervalMs = trackIntervalMs

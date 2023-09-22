@@ -7,6 +7,4 @@
 
 import Foundation
 
-enum SearchVideosNavigationType: Equatable {
-    case videoDetail(Video)
-}
+enum SearchVideosNavigationType: Equatable {}

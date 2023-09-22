@@ -509,9 +509,9 @@ final class ChatViewModel: ViewModel {
 
         openDetailVideoAction
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] model in
+            .sink { model in
                 guard let model else { return }
-                self?.navigationType = .openVideoDetail(model)
+                VideoDetailViewModel.shared.show(videoId: model.id)
             }
             .store(in: &cancellables)
 

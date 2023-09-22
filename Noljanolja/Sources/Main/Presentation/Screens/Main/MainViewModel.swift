@@ -2,12 +2,13 @@
 //  MainViewModel.swift
 //  Noljanolja
 //
-//  Created by Nguyen The Trinh on 05/03/2023.
+//  Created by Nguyen The Trinh on 06/09/2023.
 //
 //
 
 import Combine
 import Foundation
+import SwiftUIX
 
 // MARK: - MainViewModelDelegate
 
@@ -20,29 +21,24 @@ protocol MainViewModelDelegate: AnyObject {
 final class MainViewModel: ViewModel {
     // MARK: State
 
-    @Published var isProgressHUDShowing = false
-    @Published var selectedTab = MainTabType.chat
-    @Published var tabNews = [MainTabType: Bool]()
-
-    // MARK: Navigations
-
-    @Published var navigationType: MainNavigationType?
-    @Published var fullScreenCoverType: MainScreenCoverType?
+    @Published private(set) var bottomPadding: CGFloat = 0
 
     // MARK: Action
 
+    let isHomeAppearSubject = CurrentValueSubject<Bool, Never>(false)
+
     // MARK: Dependencies
 
-    private let bannerRepository: BannerRepository
+    private let promotedVideosUseCase: PromotedVideosUseCase
     private weak var delegate: MainViewModelDelegate?
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(bannerRepository: BannerRepository = BannerRepositoryImpl.shared,
+    init(promotedVideosUseCase: PromotedVideosUseCase = PromotedVideosUseCaseImpl.shared,
          delegate: MainViewModelDelegate? = nil) {
-        self.bannerRepository = bannerRepository
+        self.promotedVideosUseCase = promotedVideosUseCase
         self.delegate = delegate
         super.init()
 
@@ -50,52 +46,51 @@ final class MainViewModel: ViewModel {
     }
 
     private func configure() {
-        configureLoadData()
-    }
-
-    private func configureLoadData() {
-        isAppearSubject
-            .first(where: { $0 })
-            .receive(on: DispatchQueue.main)
-            .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
-            .flatMapLatestToResult { [weak self] _ in
-                guard let self else {
-                    return Empty<PaginationResponse<[Banner]>, Error>().eraseToAnyPublisher()
+        Publishers.CombineLatest(
+            VideoDetailViewModel.shared.$contentType,
+            isHomeAppearSubject
+        )
+        .receive(on: DispatchQueue.main)
+        .sink { [weak self] contentType, isHomeAppear in
+            let bottomPadding: CGFloat = {
+                switch contentType {
+                case .minimize:
+                    return isHomeAppear ? 0 : VideoDetailViewContentType.minimize.playerHeight + 8
+                case .maximize, .hide:
+                    return 0
                 }
-                return self.bannerRepository.getBanners()
+            }()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    self?.bottomPadding = bottomPadding
+                }
             }
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] result in
-                guard let self else { return }
-                self.isProgressHUDShowing = false
-                switch result {
-                case let .success(model):
-                    guard !model.data.isEmpty else { return }
-                    self.fullScreenCoverType = .banners(model.data)
-                case .failure:
-                    break
-                }
+        }
+        .store(in: &cancellables)
+
+        isHomeAppearSubject
+            .sink { isAppear in
+                let minimizeBottomPadding = {
+                    if isAppear {
+                        let tabBarHeight: CGFloat = 48
+                        let dividerHeight: CGFloat = 1
+                        return tabBarHeight + dividerHeight
+                    } else {
+                        return 0
+                    }
+                }()
+                VideoDetailViewModel.shared.updateMinimizeBottomPadding(
+                    minimizeBottomPadding
+                )
             }
             .store(in: &cancellables)
     }
 }
 
-// MARK: ConversationListViewModelDelegate
+// MARK: HomeViewModelDelegate
 
-extension MainViewModel: ConversationListViewModelDelegate {
-    func conversationListViewModel(hasUnseenConversations: Bool) {
-        tabNews[.chat] = hasUnseenConversations
-    }
-}
-
-// MARK: WalletViewModelDelegate
-
-extension MainViewModel: WalletViewModelDelegate {
-    func walletViewModelSignOut() {
+extension MainViewModel: HomeViewModelDelegate {
+    func mainViewModelSignOut() {
         delegate?.mainViewModelSignOut()
     }
 }
-
-// MARK: AddFriendsHomeViewModelDelegate
-
-extension MainViewModel: AddFriendsHomeViewModelDelegate {}

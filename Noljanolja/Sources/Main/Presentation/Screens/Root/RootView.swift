@@ -42,21 +42,9 @@ struct RootView<ViewModel: RootViewModel>: View {
                 )
             )
         case .main:
-            NavigationView {
-                MainView(
-                    viewModel: MainViewModel(
-                        delegate: viewModel
-                    )
-                )
-            }
-            .navigationViewStyle(StackNavigationViewStyle())
-            .accentColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            .introspectNavigationController { navigationController in
-                navigationController.configure(
-                    backgroundColor: ColorAssets.primaryGreen200.color,
-                    foregroundColor: ColorAssets.neutralDarkGrey.color
-                )
-            }
+            MainView(
+                viewModel: MainViewModel()
+            )
         case .userConfiguraction:
             UserConfigurationRootView(
                 viewModel: UserConfigurationRootViewModel(

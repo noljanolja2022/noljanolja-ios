@@ -63,7 +63,7 @@ struct TabItemView: View {
 struct TabItemView_Previews: PreviewProvider {
     static var previews: some View {
         TabItemView(
-            imageName: MainTabType.chat.imageName,
+            imageName: HomeTabType.chat.imageName,
             title: "String",
             hasNew: true
         )
