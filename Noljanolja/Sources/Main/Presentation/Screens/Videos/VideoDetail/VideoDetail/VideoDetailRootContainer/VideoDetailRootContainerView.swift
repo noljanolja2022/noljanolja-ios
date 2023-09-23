@@ -10,15 +10,21 @@ import SwiftUI
 
 // MARK: - VideoDetailRootContainerView
 
-struct VideoDetailRootContainerView<ContentView: View, ViewModel: VideoDetailRootContainerViewModel>: View {
+struct VideoDetailRootContainerView<Content, ViewModel>: View where Content: View, ViewModel: VideoDetailRootContainerViewModel {
     // MARK: Dependencies
 
-    let contentView: ContentView
-    @StateObject var viewModel: ViewModel
+    private let content: Content
+    @StateObject private var viewModel: ViewModel
+
+    init(@ViewBuilder content: () -> Content,
+         viewModel: ViewModel) {
+        self.content = content()
+        self._viewModel = StateObject(wrappedValue: viewModel)
+    }
 
     var body: some View {
         VStack(spacing: 0) {
-            contentView
+            content
                 .padding(.bottom, viewModel.bottomPadding)
         }
     }

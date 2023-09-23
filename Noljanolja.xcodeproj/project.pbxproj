@@ -380,6 +380,8 @@
 		CF715AE52A862135006DF977 /* UncompleteVideosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF715AE32A862135006DF977 /* UncompleteVideosView.swift */; };
 		CF715AE62A862135006DF977 /* UncompleteVideosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF715AE42A862135006DF977 /* UncompleteVideosViewModel.swift */; };
 		CF715AE82A86239B006DF977 /* UncompleteVideosNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF715AE72A86239B006DF977 /* UncompleteVideosNavigations.swift */; };
+		CF72860B2ABF49730058C75B /* HomeFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7286092ABF49730058C75B /* HomeFriendView.swift */; };
+		CF72860C2ABF49730058C75B /* HomeFriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF72860A2ABF49730058C75B /* HomeFriendViewModel.swift */; };
 		CF745A5A2998E5EA008177E5 /* TappableTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF745A592998E5EA008177E5 /* TappableTextFieldStyle.swift */; };
 		CF74A1A729B586EF00419342 /* StatefullView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF74A1A629B586EF00419342 /* StatefullView.swift */; };
 		CF775BBC29C6250E00E82183 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF775BBB29C6250E00E82183 /* AppDelegate.swift */; };
@@ -952,6 +954,8 @@
 		CF715AE32A862135006DF977 /* UncompleteVideosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UncompleteVideosView.swift; sourceTree = "<group>"; };
 		CF715AE42A862135006DF977 /* UncompleteVideosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UncompleteVideosViewModel.swift; sourceTree = "<group>"; };
 		CF715AE72A86239B006DF977 /* UncompleteVideosNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UncompleteVideosNavigations.swift; sourceTree = "<group>"; };
+		CF7286092ABF49730058C75B /* HomeFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFriendView.swift; sourceTree = "<group>"; };
+		CF72860A2ABF49730058C75B /* HomeFriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFriendViewModel.swift; sourceTree = "<group>"; };
 		CF745A592998E5EA008177E5 /* TappableTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableTextFieldStyle.swift; sourceTree = "<group>"; };
 		CF74A1A629B586EF00419342 /* StatefullView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatefullView.swift; sourceTree = "<group>"; };
 		CF775BBB29C6250E00E82183 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -1873,27 +1877,11 @@
 		CF53D4162A6AF547009B3A69 /* VideoDetail */ = {
 			isa = PBXGroup;
 			children = (
-				CF53D4172A6AF547009B3A69 /* PlayerView */,
 				CF53D41C2A6AF547009B3A69 /* VideoDetail */,
 				CF53D41F2A6AF547009B3A69 /* Views */,
 				CF53D4232A6AF547009B3A69 /* Inputs */,
 			);
 			path = VideoDetail;
-			sourceTree = "<group>";
-		};
-		CF53D4172A6AF547009B3A69 /* PlayerView */ = {
-			isa = PBXGroup;
-			children = (
-				CF53D4192A6AF547009B3A69 /* Models */,
-			);
-			path = PlayerView;
-			sourceTree = "<group>";
-		};
-		CF53D4192A6AF547009B3A69 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		CF53D41C2A6AF547009B3A69 /* VideoDetail */ = {
@@ -2158,6 +2146,7 @@
 		CF53D4702A6AF548009B3A69 /* ContactLists */ = {
 			isa = PBXGroup;
 			children = (
+				CF7286082ABF49540058C75B /* HomeFriend */,
 				CF53D4712A6AF548009B3A69 /* AddFriend */,
 				CF53D4752A6AF548009B3A69 /* ForwardMessage */,
 				CF53D47A2A6AF548009B3A69 /* ContactList */,
@@ -2985,6 +2974,15 @@
 				CF715AE72A86239B006DF977 /* UncompleteVideosNavigations.swift */,
 			);
 			path = UncompleteVideos;
+			sourceTree = "<group>";
+		};
+		CF7286082ABF49540058C75B /* HomeFriend */ = {
+			isa = PBXGroup;
+			children = (
+				CF7286092ABF49730058C75B /* HomeFriendView.swift */,
+				CF72860A2ABF49730058C75B /* HomeFriendViewModel.swift */,
+			);
+			path = HomeFriend;
 			sourceTree = "<group>";
 		};
 		CF775BBA29C624F800E82183 /* AppDelegates */ = {
@@ -4190,6 +4188,7 @@
 				CF355C8A2A77C18B005A48F9 /* CheckinProgress.swift in Sources */,
 				CF91E6FD2AB45A840086C046 /* VideoDetailRootContainerView.swift in Sources */,
 				CF53D5DC2A6AF548009B3A69 /* NotificationSettingView.swift in Sources */,
+				CF72860C2ABF49730058C75B /* HomeFriendViewModel.swift in Sources */,
 				CFFB71EC2A4004550019663C /* StorableCouponKeyword.swift in Sources */,
 				CF5923FE29EDA1C8009C2516 /* UserStore.swift in Sources */,
 				CF53D65A2A6AF548009B3A69 /* HomeViewModel.swift in Sources */,
@@ -4401,6 +4400,7 @@
 				CFFD70C7298AC5F800D4F5A2 /* DisableLocalCachePlugin.swift in Sources */,
 				CF53D64F2A6AF548009B3A69 /* TermItemView.swift in Sources */,
 				CFA6E94C2A73C47B00BF78F3 /* ShareMessageParam.swift in Sources */,
+				CF72860B2ABF49730058C75B /* HomeFriendView.swift in Sources */,
 				CF8737EC29CB5BBB0018237B /* PhotoLibrary.swift in Sources */,
 				CF53D55E2A6AF548009B3A69 /* LaunchBackgroundUIView.swift in Sources */,
 				CF53D5D22A6AF548009B3A69 /* ContactListUseCase.swift in Sources */,
