@@ -263,7 +263,7 @@ final class VideoDetailViewModel: ViewModel {
                         return Fail<Void, Error>(error: CommonError.captureSelfNotFound).eraseToAnyPublisher()
                     }
                     return self.videoUseCases
-                        .autoAction(videoId: video.id)
+                        .reactPromote(videoId: video.id)
                         .eraseToAnyPublisher()
                 }
                 .receive(on: DispatchQueue.main)
@@ -282,7 +282,7 @@ final class VideoDetailViewModel: ViewModel {
                 youTubePlayer.durationPublisher
             )
         ) { ($0, $1.0, $1.1) }
-        .compactMap { [weak self] state, currentTime, durationTime -> TrackVideoParam? in
+        .compactMap { state, currentTime, durationTime -> TrackVideoParam? in
             TrackVideoParam(
                 videoId: video.id,
                 event: state.trackEventType,
