@@ -20,7 +20,7 @@ protocol HomeViewModelDelegate: AnyObject {
 final class HomeViewModel: ViewModel {
     // MARK: State
 
-    let tabs: [HomeTabType] = [.friends, .watch, .wallet, .shop]
+    let tabs: [HomeTabType] = [.chat, .friends, .watch, .wallet, .shop]
     @Published var isProgressHUDShowing = false
     @Published var selectedTab = HomeTabType.friends
     @Published var tabNews = [HomeTabType: Bool]()

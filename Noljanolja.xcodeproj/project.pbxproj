@@ -382,6 +382,7 @@
 		CF715AE82A86239B006DF977 /* UncompleteVideosNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF715AE72A86239B006DF977 /* UncompleteVideosNavigations.swift */; };
 		CF72860B2ABF49730058C75B /* HomeFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7286092ABF49730058C75B /* HomeFriendView.swift */; };
 		CF72860C2ABF49730058C75B /* HomeFriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF72860A2ABF49730058C75B /* HomeFriendViewModel.swift */; };
+		CF72860E2ABF4EA10058C75B /* VideoDetailConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF72860D2ABF4EA10058C75B /* VideoDetailConfiguration.swift */; };
 		CF745A5A2998E5EA008177E5 /* TappableTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF745A592998E5EA008177E5 /* TappableTextFieldStyle.swift */; };
 		CF74A1A729B586EF00419342 /* StatefullView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF74A1A629B586EF00419342 /* StatefullView.swift */; };
 		CF775BBC29C6250E00E82183 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF775BBB29C6250E00E82183 /* AppDelegate.swift */; };
@@ -956,6 +957,7 @@
 		CF715AE72A86239B006DF977 /* UncompleteVideosNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UncompleteVideosNavigations.swift; sourceTree = "<group>"; };
 		CF7286092ABF49730058C75B /* HomeFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFriendView.swift; sourceTree = "<group>"; };
 		CF72860A2ABF49730058C75B /* HomeFriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFriendViewModel.swift; sourceTree = "<group>"; };
+		CF72860D2ABF4EA10058C75B /* VideoDetailConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailConfiguration.swift; sourceTree = "<group>"; };
 		CF745A592998E5EA008177E5 /* TappableTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableTextFieldStyle.swift; sourceTree = "<group>"; };
 		CF74A1A629B586EF00419342 /* StatefullView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatefullView.swift; sourceTree = "<group>"; };
 		CF775BBB29C6250E00E82183 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -3246,6 +3248,7 @@
 				CF53D41A2A6AF547009B3A69 /* VideoState+Event.swift */,
 				CFDE69F12AB3658A00F8750D /* VideoDetailViewContentType.swift */,
 				CF91E6F52AB4118F0086C046 /* YouTubePlayer.State+Ext.swift */,
+				CF72860D2ABF4EA10058C75B /* VideoDetailConfiguration.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -4177,6 +4180,7 @@
 				CFC23D5B2A7A4F58009CAD87 /* CheckinNavigations.swift in Sources */,
 				CF53D6002A6AF548009B3A69 /* MessageContentBackgroundView.swift in Sources */,
 				CF53D5B82A6AF548009B3A69 /* WalletPointModel.swift in Sources */,
+				CF72860E2ABF4EA10058C75B /* VideoDetailConfiguration.swift in Sources */,
 				CF53D5962A6AF548009B3A69 /* VideosView.swift in Sources */,
 				CF53D5B12A6AF548009B3A69 /* TransactionHistoryNavigations.swift in Sources */,
 				CF355C902A77C6A2005A48F9 /* NetworkCheckinRepository.swift in Sources */,

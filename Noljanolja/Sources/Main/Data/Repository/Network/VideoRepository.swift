@@ -124,6 +124,14 @@ private enum VideoTargets {
 
         let videoId: String
     }
+
+    struct AutoAction: BaseAuthTargetType {
+        var path: String { "" }
+        let method: Moya.Method = .post
+        var task: Task { .requestPlain }
+
+        let videoId: String
+    }
 }
 
 // MARK: - VideoRepository
@@ -142,6 +150,7 @@ protocol VideoRepository {
     func getVideoComments(videoId: String, beforeCommentId: Int?, limit: Int?) -> AnyPublisher<[VideoComment], Error>
     func postVideoComment(videoId: String, comment: String, youtubeToken: String) -> AnyPublisher<VideoComment, Error>
     func likeVideo(videoId: String) -> AnyPublisher<Void, Error>
+    func autoAction(videoId: String) -> AnyPublisher<Void, Error>
 }
 
 extension VideoRepository {
@@ -242,6 +251,12 @@ final class VideoRepositoryImpl: VideoRepository {
     func likeVideo(videoId: String) -> AnyPublisher<Void, Error> {
         api.request(
             target: VideoTargets.LikeVideo(videoId: videoId)
+        )
+    }
+
+    func autoAction(videoId: String) -> AnyPublisher<Void, Error> {
+        api.request(
+            target: VideoTargets.AutoAction(videoId: videoId)
         )
     }
 }
