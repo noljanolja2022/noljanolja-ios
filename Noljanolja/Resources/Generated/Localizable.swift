@@ -617,6 +617,10 @@ internal enum L10n {
   internal static let tosAgreeAndContinue = L10n.tr("Localizable", "tos_agree_and_continue", fallback: "Agree and Continue")
   /// Compulsory
   internal static let tosCompulsory = L10n.tr("Localizable", "tos_compulsory", fallback: "Compulsory")
+  /// tos_compulsory_item_description_1_en
+  internal static let tosCompulsoryItemDescription1 = L10n.tr("Localizable", "tos_compulsory_item_description_1", fallback: "tos_compulsory_item_description_1_en")
+  /// tos_compulsory_item_description_4_en
+  internal static let tosCompulsoryItemDescription4 = L10n.tr("Localizable", "tos_compulsory_item_description_4", fallback: "tos_compulsory_item_description_4_en")
   /// I'm 14 years old older.
   internal static let tosCompulsoryItemTitle1 = L10n.tr("Localizable", "tos_compulsory_item_title_1", fallback: "I'm 14 years old older.")
   /// Terms and Conditions
