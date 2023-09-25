@@ -282,7 +282,7 @@
 		CF53D6122A6AF548009B3A69 /* ScanQRViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4E12A6AF548009B3A69 /* ScanQRViewModel.swift */; };
 		CF53D6132A6AF548009B3A69 /* ScanQRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4E22A6AF548009B3A69 /* ScanQRView.swift */; };
 		CF53D6142A6AF548009B3A69 /* ScanQRNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4E32A6AF548009B3A69 /* ScanQRNavigations.swift */; };
-		CF53D6152A6AF548009B3A69 /* FriendScannerViewController___.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4E52A6AF548009B3A69 /* FriendScannerViewController___.swift */; };
+		CF53D6152A6AF548009B3A69 /* FriendScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4E52A6AF548009B3A69 /* FriendScannerViewController.swift */; };
 		CF53D6162A6AF548009B3A69 /* FriendScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4E62A6AF548009B3A69 /* FriendScannerView.swift */; };
 		CF53D6172A6AF548009B3A69 /* MessageImagesNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4E82A6AF548009B3A69 /* MessageImagesNavigations.swift */; };
 		CF53D6182A6AF548009B3A69 /* MessageImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4E92A6AF548009B3A69 /* MessageImagesView.swift */; };
@@ -860,7 +860,7 @@
 		CF53D4E12A6AF548009B3A69 /* ScanQRViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanQRViewModel.swift; sourceTree = "<group>"; };
 		CF53D4E22A6AF548009B3A69 /* ScanQRView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanQRView.swift; sourceTree = "<group>"; };
 		CF53D4E32A6AF548009B3A69 /* ScanQRNavigations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanQRNavigations.swift; sourceTree = "<group>"; };
-		CF53D4E52A6AF548009B3A69 /* FriendScannerViewController___.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FriendScannerViewController___.swift"; sourceTree = "<group>"; };
+		CF53D4E52A6AF548009B3A69 /* FriendScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendScannerViewController.swift; sourceTree = "<group>"; };
 		CF53D4E62A6AF548009B3A69 /* FriendScannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendScannerView.swift; sourceTree = "<group>"; };
 		CF53D4E82A6AF548009B3A69 /* MessageImagesNavigations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageImagesNavigations.swift; sourceTree = "<group>"; };
 		CF53D4E92A6AF548009B3A69 /* MessageImagesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageImagesView.swift; sourceTree = "<group>"; };
@@ -2524,7 +2524,7 @@
 		CF53D4E42A6AF548009B3A69 /* QRScanner */ = {
 			isa = PBXGroup;
 			children = (
-				CF53D4E52A6AF548009B3A69 /* FriendScannerViewController___.swift */,
+				CF53D4E52A6AF548009B3A69 /* FriendScannerViewController.swift */,
 				CF53D4E62A6AF548009B3A69 /* FriendScannerView.swift */,
 			);
 			path = QRScanner;
@@ -4171,7 +4171,7 @@
 				CF53D5EB2A6AF548009B3A69 /* NormalMessageModel.swift in Sources */,
 				CF3E0EF62A3727D1009EF665 /* CouponCategory.swift in Sources */,
 				CF53D5F02A6AF548009B3A69 /* MessageContentBackgroundModel.swift in Sources */,
-				CF53D6152A6AF548009B3A69 /* FriendScannerViewController___.swift in Sources */,
+				CF53D6152A6AF548009B3A69 /* FriendScannerViewController.swift in Sources */,
 				CF775BCA29C630B800E82183 /* NotificationUseCases.swift in Sources */,
 				CF180A072A7E3C41004728C4 /* HorizontalShareReferralView.swift in Sources */,
 				CF53D61F2A6AF548009B3A69 /* CreateConversationView.swift in Sources */,
