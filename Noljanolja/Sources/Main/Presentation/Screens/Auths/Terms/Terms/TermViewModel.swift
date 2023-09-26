@@ -25,17 +25,22 @@ final class TermViewModel: ViewModel {
 
     // MARK: State
 
-    @Published var termItems = TermItemType.allCases
-    @Published var termItemCheckeds = Dictionary(uniqueKeysWithValues: TermItemType.allCases.map { ($0, false) })
+    @Published var termModels = [
+        TermModel(section: .compulsory, items: [.minAge, .termOfService, .personalInfo])
+    ]
+    @Published var termItemCheckeds = Set<TermItemType>()
     var isAllTermChecked: Bool {
         get {
-            termItemCheckeds
-                .filter { $0.key.sectionType == .compulsory }
-                .map { $0.value }
-                .reduce(true) { $0 && $1 }
+            termModels
+                .filter { $0.section == .compulsory }
+                .map { $0.items }
+                .flatMap { $0 }
+                .reduce(true) {
+                    $0 && termItemCheckeds.contains($1)
+                }
         }
         set {
-            termItemCheckeds = Dictionary(uniqueKeysWithValues: TermItemType.allCases.map { ($0, newValue) })
+            termItemCheckeds = Set(termModels.map { $0.items }.flatMap { $0 })
         }
     }
 

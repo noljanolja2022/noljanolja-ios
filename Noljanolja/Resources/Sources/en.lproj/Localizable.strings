@@ -113,9 +113,11 @@
 "tos_description" = "You may choose to agree to the terms individually. \nYou may use the service even if you don\'t agree to the optional terms and conditions";
 "tos_compulsory" = "Compulsory";
 "tos_compulsory_item_title_1" = "I\'m 14 years old older.";
+"tos_compulsory_item_description_1" = "tos_compulsory_item_description_1_en";
 "tos_compulsory_item_title_2" = "Terms and Conditions";
 "tos_compulsory_item_title_3" = "Comprehensive Terms and Conditions";
 "tos_compulsory_item_title_4" = "Collection and Use of Personal Information";
+"tos_compulsory_item_description_4" = "tos_compulsory_item_description_4_en";
 "tos_optional" = "Optional";
 "tos_optional_item_title_1" = "Consent to the collection and use of information";
 "tos_optional_item_title_2" = "Collection and Use of Profile Information";

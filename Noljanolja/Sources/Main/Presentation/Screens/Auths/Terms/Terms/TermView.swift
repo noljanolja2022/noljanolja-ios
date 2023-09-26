@@ -78,29 +78,36 @@ struct TermView<ViewModel: TermViewModel>: View {
     private func buildTermItemsView() -> some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 32) {
-                ForEach(TermSectionType.allCases) { sectionType in
-                    Text(sectionType.title.uppercased())
+                ForEach(viewModel.termModels.indices, id: \.self) { termModelIndex in
+                    let termModel = viewModel.termModels[termModelIndex]
+                    Text(termModel.section.title.uppercased())
                         .frame(alignment: .leading)
                         .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                         .padding(.top, 32)
 
-                    ForEach(
-                        TermItemType.allCases
-                            .filter {
-                                $0.sectionType == sectionType
-                            }
-                            .sorted { $0.rawValue < $1.rawValue }
-                    ) { itemType in
+                    ForEach(termModel.items.indices, id: \.self) { itemIndex in
+                        let termItem = termModel.items[itemIndex]
                         TermItemView(
                             selected: Binding<Bool>(
-                                get: { viewModel.termItemCheckeds[itemType] ?? false },
+                                get: {
+                                    viewModel.termItemCheckeds.contains(termItem)
+                                },
                                 set: {
-                                    viewModel.termItemCheckeds[itemType] = $0
+                                    if $0 {
+                                        viewModel.termItemCheckeds.insert(termItem)
+                                    } else {
+                                        viewModel.termItemCheckeds.remove(termItem)
+                                    }
                                 }
                             ),
-                            title: itemType.title,
-                            action: { selectedTermType = itemType }
+                            title: termItem.title,
+                            idArrowIconHidden: termItem.idArrowIconHidden,
+                            action: {
+                                if !termItem.idArrowIconHidden {
+                                    selectedTermType = termItem
+                                }
+                            }
                         )
                     }
                 }
