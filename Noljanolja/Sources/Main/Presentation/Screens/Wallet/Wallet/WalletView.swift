@@ -142,6 +142,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
         .padding(.horizontal, 12)
         .background(ColorAssets.neutralLight.swiftUIColor)
         .cornerRadius(8)
+        .hidden()
     }
 
     private func buildNavigationLinks() -> some View {

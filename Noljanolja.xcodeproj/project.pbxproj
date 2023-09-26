@@ -282,7 +282,7 @@
 		CF53D6122A6AF548009B3A69 /* ScanQRViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4E12A6AF548009B3A69 /* ScanQRViewModel.swift */; };
 		CF53D6132A6AF548009B3A69 /* ScanQRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4E22A6AF548009B3A69 /* ScanQRView.swift */; };
 		CF53D6142A6AF548009B3A69 /* ScanQRNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4E32A6AF548009B3A69 /* ScanQRNavigations.swift */; };
-		CF53D6152A6AF548009B3A69 /* FriendScannerViewController___.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4E52A6AF548009B3A69 /* FriendScannerViewController___.swift */; };
+		CF53D6152A6AF548009B3A69 /* FriendScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4E52A6AF548009B3A69 /* FriendScannerViewController.swift */; };
 		CF53D6162A6AF548009B3A69 /* FriendScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4E62A6AF548009B3A69 /* FriendScannerView.swift */; };
 		CF53D6172A6AF548009B3A69 /* MessageImagesNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4E82A6AF548009B3A69 /* MessageImagesNavigations.swift */; };
 		CF53D6182A6AF548009B3A69 /* MessageImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4E92A6AF548009B3A69 /* MessageImagesView.swift */; };
@@ -380,6 +380,9 @@
 		CF715AE52A862135006DF977 /* UncompleteVideosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF715AE32A862135006DF977 /* UncompleteVideosView.swift */; };
 		CF715AE62A862135006DF977 /* UncompleteVideosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF715AE42A862135006DF977 /* UncompleteVideosViewModel.swift */; };
 		CF715AE82A86239B006DF977 /* UncompleteVideosNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF715AE72A86239B006DF977 /* UncompleteVideosNavigations.swift */; };
+		CF72860B2ABF49730058C75B /* HomeFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7286092ABF49730058C75B /* HomeFriendView.swift */; };
+		CF72860C2ABF49730058C75B /* HomeFriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF72860A2ABF49730058C75B /* HomeFriendViewModel.swift */; };
+		CF72860E2ABF4EA10058C75B /* VideoDetailConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF72860D2ABF4EA10058C75B /* VideoDetailConfiguration.swift */; };
 		CF745A5A2998E5EA008177E5 /* TappableTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF745A592998E5EA008177E5 /* TappableTextFieldStyle.swift */; };
 		CF74A1A729B586EF00419342 /* StatefullView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF74A1A629B586EF00419342 /* StatefullView.swift */; };
 		CF775BBC29C6250E00E82183 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF775BBB29C6250E00E82183 /* AppDelegate.swift */; };
@@ -857,7 +860,7 @@
 		CF53D4E12A6AF548009B3A69 /* ScanQRViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanQRViewModel.swift; sourceTree = "<group>"; };
 		CF53D4E22A6AF548009B3A69 /* ScanQRView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanQRView.swift; sourceTree = "<group>"; };
 		CF53D4E32A6AF548009B3A69 /* ScanQRNavigations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanQRNavigations.swift; sourceTree = "<group>"; };
-		CF53D4E52A6AF548009B3A69 /* FriendScannerViewController___.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FriendScannerViewController___.swift"; sourceTree = "<group>"; };
+		CF53D4E52A6AF548009B3A69 /* FriendScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendScannerViewController.swift; sourceTree = "<group>"; };
 		CF53D4E62A6AF548009B3A69 /* FriendScannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendScannerView.swift; sourceTree = "<group>"; };
 		CF53D4E82A6AF548009B3A69 /* MessageImagesNavigations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageImagesNavigations.swift; sourceTree = "<group>"; };
 		CF53D4E92A6AF548009B3A69 /* MessageImagesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageImagesView.swift; sourceTree = "<group>"; };
@@ -952,6 +955,9 @@
 		CF715AE32A862135006DF977 /* UncompleteVideosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UncompleteVideosView.swift; sourceTree = "<group>"; };
 		CF715AE42A862135006DF977 /* UncompleteVideosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UncompleteVideosViewModel.swift; sourceTree = "<group>"; };
 		CF715AE72A86239B006DF977 /* UncompleteVideosNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UncompleteVideosNavigations.swift; sourceTree = "<group>"; };
+		CF7286092ABF49730058C75B /* HomeFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFriendView.swift; sourceTree = "<group>"; };
+		CF72860A2ABF49730058C75B /* HomeFriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFriendViewModel.swift; sourceTree = "<group>"; };
+		CF72860D2ABF4EA10058C75B /* VideoDetailConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailConfiguration.swift; sourceTree = "<group>"; };
 		CF745A592998E5EA008177E5 /* TappableTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableTextFieldStyle.swift; sourceTree = "<group>"; };
 		CF74A1A629B586EF00419342 /* StatefullView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatefullView.swift; sourceTree = "<group>"; };
 		CF775BBB29C6250E00E82183 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -1873,27 +1879,11 @@
 		CF53D4162A6AF547009B3A69 /* VideoDetail */ = {
 			isa = PBXGroup;
 			children = (
-				CF53D4172A6AF547009B3A69 /* PlayerView */,
 				CF53D41C2A6AF547009B3A69 /* VideoDetail */,
 				CF53D41F2A6AF547009B3A69 /* Views */,
 				CF53D4232A6AF547009B3A69 /* Inputs */,
 			);
 			path = VideoDetail;
-			sourceTree = "<group>";
-		};
-		CF53D4172A6AF547009B3A69 /* PlayerView */ = {
-			isa = PBXGroup;
-			children = (
-				CF53D4192A6AF547009B3A69 /* Models */,
-			);
-			path = PlayerView;
-			sourceTree = "<group>";
-		};
-		CF53D4192A6AF547009B3A69 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		CF53D41C2A6AF547009B3A69 /* VideoDetail */ = {
@@ -2158,6 +2148,7 @@
 		CF53D4702A6AF548009B3A69 /* ContactLists */ = {
 			isa = PBXGroup;
 			children = (
+				CF7286082ABF49540058C75B /* HomeFriend */,
 				CF53D4712A6AF548009B3A69 /* AddFriend */,
 				CF53D4752A6AF548009B3A69 /* ForwardMessage */,
 				CF53D47A2A6AF548009B3A69 /* ContactList */,
@@ -2533,7 +2524,7 @@
 		CF53D4E42A6AF548009B3A69 /* QRScanner */ = {
 			isa = PBXGroup;
 			children = (
-				CF53D4E52A6AF548009B3A69 /* FriendScannerViewController___.swift */,
+				CF53D4E52A6AF548009B3A69 /* FriendScannerViewController.swift */,
 				CF53D4E62A6AF548009B3A69 /* FriendScannerView.swift */,
 			);
 			path = QRScanner;
@@ -2987,6 +2978,15 @@
 			path = UncompleteVideos;
 			sourceTree = "<group>";
 		};
+		CF7286082ABF49540058C75B /* HomeFriend */ = {
+			isa = PBXGroup;
+			children = (
+				CF7286092ABF49730058C75B /* HomeFriendView.swift */,
+				CF72860A2ABF49730058C75B /* HomeFriendViewModel.swift */,
+			);
+			path = HomeFriend;
+			sourceTree = "<group>";
+		};
 		CF775BBA29C624F800E82183 /* AppDelegates */ = {
 			isa = PBXGroup;
 			children = (
@@ -3248,6 +3248,7 @@
 				CF53D41A2A6AF547009B3A69 /* VideoState+Event.swift */,
 				CFDE69F12AB3658A00F8750D /* VideoDetailViewContentType.swift */,
 				CF91E6F52AB4118F0086C046 /* YouTubePlayer.State+Ext.swift */,
+				CF72860D2ABF4EA10058C75B /* VideoDetailConfiguration.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -4170,7 +4171,7 @@
 				CF53D5EB2A6AF548009B3A69 /* NormalMessageModel.swift in Sources */,
 				CF3E0EF62A3727D1009EF665 /* CouponCategory.swift in Sources */,
 				CF53D5F02A6AF548009B3A69 /* MessageContentBackgroundModel.swift in Sources */,
-				CF53D6152A6AF548009B3A69 /* FriendScannerViewController___.swift in Sources */,
+				CF53D6152A6AF548009B3A69 /* FriendScannerViewController.swift in Sources */,
 				CF775BCA29C630B800E82183 /* NotificationUseCases.swift in Sources */,
 				CF180A072A7E3C41004728C4 /* HorizontalShareReferralView.swift in Sources */,
 				CF53D61F2A6AF548009B3A69 /* CreateConversationView.swift in Sources */,
@@ -4179,6 +4180,7 @@
 				CFC23D5B2A7A4F58009CAD87 /* CheckinNavigations.swift in Sources */,
 				CF53D6002A6AF548009B3A69 /* MessageContentBackgroundView.swift in Sources */,
 				CF53D5B82A6AF548009B3A69 /* WalletPointModel.swift in Sources */,
+				CF72860E2ABF4EA10058C75B /* VideoDetailConfiguration.swift in Sources */,
 				CF53D5962A6AF548009B3A69 /* VideosView.swift in Sources */,
 				CF53D5B12A6AF548009B3A69 /* TransactionHistoryNavigations.swift in Sources */,
 				CF355C902A77C6A2005A48F9 /* NetworkCheckinRepository.swift in Sources */,
@@ -4190,6 +4192,7 @@
 				CF355C8A2A77C18B005A48F9 /* CheckinProgress.swift in Sources */,
 				CF91E6FD2AB45A840086C046 /* VideoDetailRootContainerView.swift in Sources */,
 				CF53D5DC2A6AF548009B3A69 /* NotificationSettingView.swift in Sources */,
+				CF72860C2ABF49730058C75B /* HomeFriendViewModel.swift in Sources */,
 				CFFB71EC2A4004550019663C /* StorableCouponKeyword.swift in Sources */,
 				CF5923FE29EDA1C8009C2516 /* UserStore.swift in Sources */,
 				CF53D65A2A6AF548009B3A69 /* HomeViewModel.swift in Sources */,
@@ -4401,6 +4404,7 @@
 				CFFD70C7298AC5F800D4F5A2 /* DisableLocalCachePlugin.swift in Sources */,
 				CF53D64F2A6AF548009B3A69 /* TermItemView.swift in Sources */,
 				CFA6E94C2A73C47B00BF78F3 /* ShareMessageParam.swift in Sources */,
+				CF72860B2ABF49730058C75B /* HomeFriendView.swift in Sources */,
 				CF8737EC29CB5BBB0018237B /* PhotoLibrary.swift in Sources */,
 				CF53D55E2A6AF548009B3A69 /* LaunchBackgroundUIView.swift in Sources */,
 				CF53D5D22A6AF548009B3A69 /* ContactListUseCase.swift in Sources */,
@@ -4662,7 +4666,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 0.0.7;
+				CURRENT_PROJECT_VERSION = 0.0.8;
 				DEVELOPMENT_ASSET_PATHS = "\"Noljanolja/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = YN4QYR8CRU;
@@ -4683,7 +4687,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.7;
+				MARKETING_VERSION = 0.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.noljanolja.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -4856,7 +4860,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 0.0.7;
+				CURRENT_PROJECT_VERSION = 0.0.8;
 				DEVELOPMENT_ASSET_PATHS = "\"Noljanolja/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = YN4QYR8CRU;
@@ -4877,7 +4881,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.7;
+				MARKETING_VERSION = 0.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.noljanolja.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -4898,7 +4902,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 0.0.7;
+				CURRENT_PROJECT_VERSION = 0.0.8;
 				DEVELOPMENT_ASSET_PATHS = "\"Noljanolja/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = YN4QYR8CRU;
@@ -4919,7 +4923,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.7;
+				MARKETING_VERSION = 0.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.noljanolja.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -103,7 +103,5 @@ extension FriendScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
         dismiss(animated: true)
     }
 
-    func found(code: String) {
-        print("AAAAAA", code)
-    }
+    func found(code: String) {}
 }

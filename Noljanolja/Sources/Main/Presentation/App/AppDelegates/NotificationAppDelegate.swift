@@ -59,5 +59,11 @@ extension NotificationAppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         guard let fcmToken else { return }
         notificationUseCases.sendPushToken(token: fcmToken)
+        DispatchQueue.main.async {
+            Messaging.messaging().subscribe(toTopic: "/topics/promote-video") { error in
+                let error = error.flatMap { "Error: \($0.localizedDescription)" } ?? ""
+                print("Subscribe to topic \"topics/promote-video\". \(error)")
+            }
+        }
     }
 }

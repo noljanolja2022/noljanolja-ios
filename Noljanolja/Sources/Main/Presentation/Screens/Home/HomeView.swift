@@ -49,7 +49,7 @@ struct HomeView<ViewModel: HomeViewModel>: View {
                 Text(viewModel.selectedTab.navigationBarTitle)
                     .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            case .watch, .wallet, .shop, .news:
+            case .friends, .watch, .wallet, .shop:
                 EmptyView()
             }
         }
@@ -58,7 +58,7 @@ struct HomeView<ViewModel: HomeViewModel>: View {
             switch viewModel.selectedTab {
             case .chat:
                 EmptyView()
-            case .watch, .wallet, .shop, .news:
+            case .friends, .watch, .wallet, .shop:
                 Text(viewModel.selectedTab.navigationBarTitle)
                     .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                     .frame(minWidth: 120)
@@ -115,6 +115,19 @@ struct HomeView<ViewModel: HomeViewModel>: View {
                     )
                 }
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            case .friends:
+                HStack(spacing: 4) {
+                    Button(
+                        action: {},
+                        label: {
+                            ImageAssets.icSettingOutline.swiftUIImage
+                                .resizable()
+                                .scaledToFit()
+                                .padding(2)
+                        }
+                    )
+                }
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             case .watch:
                 HStack(spacing: 4) {
                     Button(
@@ -130,7 +143,7 @@ struct HomeView<ViewModel: HomeViewModel>: View {
                     )
                 }
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            case .wallet, .shop, .news:
+            case .wallet, .shop:
                 EmptyView()
             }
         }
@@ -154,95 +167,95 @@ struct HomeView<ViewModel: HomeViewModel>: View {
     private func buildContentView() -> some View {
         CustomTabView(
             selection: $viewModel.selectedTab,
-            content: buildTabView,
-            tabItem: buildTabItemView
+            content: buildTabViews,
+            tabItem: buildTabItemViews
         )
     }
 
     @ViewBuilder
-    private func buildTabView() -> some View {
-        VideoDetailRootContainerView(
-            contentView: ConversationListView(
-                viewModel: ConversationListViewModel(
-                    delegate: viewModel
-                ),
-                toolBarAction: toolBarActionSubject.eraseToAnyPublisher()
-            ),
-            viewModel: VideoDetailRootContainerViewModel()
-        )
-        .tag(HomeTabType.chat)
-
-        VideoDetailRootContainerView(
-            contentView: VideosView(
-                viewModel: VideosViewModel()
-            ),
-            viewModel: VideoDetailRootContainerViewModel()
-        )
-        .tag(HomeTabType.watch)
-
-        VideoDetailRootContainerView(
-            contentView: WalletView(
-                viewModel: WalletViewModel(
-                    delegate: viewModel
-                )
-            ),
-            viewModel: VideoDetailRootContainerViewModel()
-        )
-        .tag(HomeTabType.wallet)
-
-        VideoDetailRootContainerView(
-            contentView: ShopHomeView(
-                viewModel: ShopHomeViewModel()
-            )
-            .frame(maxWidth: .infinity, maxHeight: .infinity),
-            viewModel: VideoDetailRootContainerViewModel()
-        )
-        .tag(HomeTabType.shop)
+    private func buildTabViews() -> some View {
+        if viewModel.tabs.contains(.chat) {
+            buildTabView(.chat)
+        }
+        if viewModel.tabs.contains(.friends) {
+            buildTabView(.friends)
+        }
+        if viewModel.tabs.contains(.watch) {
+            buildTabView(.watch)
+        }
+        if viewModel.tabs.contains(.wallet) {
+            buildTabView(.wallet)
+        }
+        if viewModel.tabs.contains(.shop) {
+            buildTabView(.shop)
+        }
     }
 
     @ViewBuilder
-    private func buildTabItemView() -> some View {
-        TabItemView(
-            imageName: HomeTabType.chat.imageName,
-            title: HomeTabType.chat.tabBarTitle,
-            hasNew: viewModel.tabNews[.chat] ?? false,
-            action: { viewModel.selectedTab = .chat }
+    private func buildTabView(_ tab: HomeTabType) -> some View {
+        VideoDetailRootContainerView(
+            content: {
+                switch tab {
+                case .chat:
+                    ConversationListView(
+                        viewModel: ConversationListViewModel(
+                            delegate: viewModel
+                        ),
+                        toolBarAction: toolBarActionSubject.eraseToAnyPublisher()
+                    )
+                case .friends:
+                    HomeFriendView(
+                        viewModel: HomeFriendViewModel()
+                    )
+                case .watch:
+                    VideosView(
+                        viewModel: VideosViewModel()
+                    )
+                case .wallet:
+                    WalletView(
+                        viewModel: WalletViewModel(
+                            delegate: viewModel
+                        )
+                    )
+                case .shop:
+                    ShopHomeView(
+                        viewModel: ShopHomeViewModel()
+                    )
+                }
+            },
+            viewModel: VideoDetailRootContainerViewModel()
         )
-        .foregroundColor(
-            viewModel.selectedTab == HomeTabType.chat
-                ? ColorAssets.primaryGreen200.swiftUIColor
-                : ColorAssets.neutralGrey.swiftUIColor
-        )
+        .tag(tab)
+    }
 
-        TabItemView(
-            imageName: HomeTabType.watch.imageName,
-            title: HomeTabType.watch.tabBarTitle,
-            action: { viewModel.selectedTab = .watch }
-        )
-        .foregroundColor(
-            viewModel.selectedTab == HomeTabType.watch
-                ? ColorAssets.primaryGreen200.swiftUIColor
-                : ColorAssets.neutralGrey.swiftUIColor
-        )
+    @ViewBuilder
+    private func buildTabItemViews() -> some View {
+        if viewModel.tabs.contains(.chat) {
+            buildTabItemView(.chat)
+        }
+        if viewModel.tabs.contains(.friends) {
+            buildTabItemView(.friends)
+        }
+        if viewModel.tabs.contains(.watch) {
+            buildTabItemView(.watch)
+        }
+        if viewModel.tabs.contains(.wallet) {
+            buildTabItemView(.wallet)
+        }
+        if viewModel.tabs.contains(.shop) {
+            buildTabItemView(.shop)
+        }
+    }
 
+    @ViewBuilder
+    private func buildTabItemView(_ tab: HomeTabType) -> some View {
         TabItemView(
-            imageName: HomeTabType.wallet.imageName,
-            title: HomeTabType.wallet.tabBarTitle,
-            action: { viewModel.selectedTab = .wallet }
+            imageName: tab.imageName,
+            title: tab.tabBarTitle,
+            action: { viewModel.selectedTab = tab }
         )
         .foregroundColor(
-            viewModel.selectedTab == HomeTabType.wallet
-                ? ColorAssets.primaryGreen200.swiftUIColor
-                : ColorAssets.neutralGrey.swiftUIColor
-        )
-
-        TabItemView(
-            imageName: HomeTabType.shop.imageName,
-            title: HomeTabType.shop.tabBarTitle,
-            action: { viewModel.selectedTab = .shop }
-        )
-        .foregroundColor(
-            viewModel.selectedTab == HomeTabType.shop
+            viewModel.selectedTab == tab
                 ? ColorAssets.primaryGreen200.swiftUIColor
                 : ColorAssets.neutralGrey.swiftUIColor
         )

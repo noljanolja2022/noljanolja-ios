@@ -124,6 +124,21 @@ private enum VideoTargets {
 
         let videoId: String
     }
+
+    struct ReactPromote: BaseAuthTargetType {
+        var path: String { "v1/media/videos/\(videoId)/react-promote" }
+        let method: Moya.Method = .post
+        var task: Task { .requestParameters(parameters: parameters, encoding: JSONEncoding.default) }
+
+        let videoId: String
+        let youtubeToken: String
+
+        var parameters: [String: Any] {
+            [
+                "youtubeToken": youtubeToken
+            ]
+        }
+    }
 }
 
 // MARK: - VideoRepository
@@ -142,6 +157,7 @@ protocol VideoRepository {
     func getVideoComments(videoId: String, beforeCommentId: Int?, limit: Int?) -> AnyPublisher<[VideoComment], Error>
     func postVideoComment(videoId: String, comment: String, youtubeToken: String) -> AnyPublisher<VideoComment, Error>
     func likeVideo(videoId: String) -> AnyPublisher<Void, Error>
+    func reactPromote(videoId: String, youtubeToken: String) -> AnyPublisher<Void, Error>
 }
 
 extension VideoRepository {
@@ -242,6 +258,12 @@ final class VideoRepositoryImpl: VideoRepository {
     func likeVideo(videoId: String) -> AnyPublisher<Void, Error> {
         api.request(
             target: VideoTargets.LikeVideo(videoId: videoId)
+        )
+    }
+
+    func reactPromote(videoId: String, youtubeToken: String) -> AnyPublisher<Void, Error> {
+        api.request(
+            target: VideoTargets.ReactPromote(videoId: videoId, youtubeToken: youtubeToken)
         )
     }
 }

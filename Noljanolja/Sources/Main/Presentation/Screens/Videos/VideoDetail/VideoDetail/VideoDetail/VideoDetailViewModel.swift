@@ -56,6 +56,7 @@ final class VideoDetailViewModel: ViewModel {
     }()
 
     @Published private(set) var videoId: String?
+    @Published private var configuration: VideoDetailConfiguration?
     @Published private(set) var contentType = VideoDetailViewContentType.hide
     @Published private(set) var minimizeBottomPadding: CGFloat = 0
 
@@ -82,26 +83,33 @@ final class VideoDetailViewModel: ViewModel {
 
     private let videoRepository: VideoRepository
     private let videoSocket: VideoSocketAPIType
+    private let videoUseCases: VideoUseCases
     private weak var delegate: VideoDetailViewModelDelegate?
 
     // MARK: Private
 
     private var pageSize = 20
     private var cancellables = Set<AnyCancellable>()
+    private var videoCancellables = Set<AnyCancellable>()
 
     init(videoRepository: VideoRepository = VideoRepositoryImpl.shared,
          videoSocket: VideoSocketAPIType = VideoSocketAPI.default,
+         videoUseCases: VideoUseCases = VideoUseCasesImpl.shared,
          delegate: VideoDetailViewModelDelegate? = nil) {
         self.videoRepository = videoRepository
         self.videoSocket = videoSocket
+        self.videoUseCases = videoUseCases
         self.delegate = delegate
         super.init()
 
         configure()
     }
 
-    func show(videoId: String, contentType: VideoDetailViewContentType = .maximize) {
+    func show(videoId: String,
+              configuration: VideoDetailConfiguration? = nil,
+              contentType: VideoDetailViewContentType = .maximize) {
         self.videoId = videoId
+        self.configuration = configuration
         switch self.contentType {
         case .maximize, .minimize:
             break
@@ -135,8 +143,6 @@ final class VideoDetailViewModel: ViewModel {
 
     private func configure() {
         configureLoadData()
-        configureActions()
-        configureYouTubePlayer()
     }
 
     private func configureLoadData() {
@@ -156,23 +162,34 @@ final class VideoDetailViewModel: ViewModel {
                 guard let self else { return }
                 switch result {
                 case let .success(video):
-                    self.youTubePlayer.source = .url(video.url)
-
-                    self.video = video
-                    self.comments = video.comments
-                    self.commentCount = video.commentCount
-                    
-                    self.viewState = .content
-                    if video.comments.count < self.pageSize {
-                        self.footerViewState = .noMoreData
-                    } else {
-                        self.footerViewState = .loading
-                    }
+                    self.configureVideo(video)
                 case .failure:
                     self.viewState = .error
                 }
             }
             .store(in: &cancellables)
+    }
+
+    private func configureVideo(_ video: Video) {
+        videoCancellables = Set<AnyCancellable>()
+        setVideo(video)
+        configureActions()
+        configureYouTubePlayer(video)
+    }
+
+    private func setVideo(_ video: Video) {
+        youTubePlayer.source = .url(video.url)
+
+        self.video = video
+        comments = video.comments
+        commentCount = video.commentCount
+
+        viewState = .content
+        if video.comments.count < pageSize {
+            footerViewState = .noMoreData
+        } else {
+            footerViewState = .loading
+        }
     }
 
     private func configureActions() {
@@ -209,16 +226,16 @@ final class VideoDetailViewModel: ViewModel {
                     break
                 }
             }
-            .store(in: &cancellables)
+            .store(in: &videoCancellables)
     }
 
-    private func configureYouTubePlayer() {
+    private func configureYouTubePlayer(_ video: Video) {
         youTubePlayer.playbackStatePublisher
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in
                 self?.youTubePlayerPlaybackState = $0
             })
-            .store(in: &cancellables)
+            .store(in: &videoCancellables)
 
         youTubePlayerPlaybackStateAction
             .sink(receiveValue: { [weak self] in
@@ -235,7 +252,24 @@ final class VideoDetailViewModel: ViewModel {
                     break
                 }
             })
-            .store(in: &cancellables)
+            .store(in: &videoCancellables)
+
+        if let configuration {
+            youTubePlayer
+                .currentTimePublisher(updateInterval: configuration.autoActionDuration)
+                .first()
+                .flatMapLatestToResult { [weak self] _ in
+                    guard let self else {
+                        return Fail<Void, Error>(error: CommonError.captureSelfNotFound).eraseToAnyPublisher()
+                    }
+                    return self.videoUseCases
+                        .reactPromote(videoId: video.id)
+                        .eraseToAnyPublisher()
+                }
+                .receive(on: DispatchQueue.main)
+                .sink { _ in }
+                .store(in: &cancellables)
+        }
 
         Publishers.Merge(
             youTubePlayer.playbackStatePublisher,
@@ -248,9 +282,9 @@ final class VideoDetailViewModel: ViewModel {
                 youTubePlayer.durationPublisher
             )
         ) { ($0, $1.0, $1.1) }
-        .compactMap { [weak self] state, currentTime, durationTime -> TrackVideoParam? in
+        .compactMap { state, currentTime, durationTime -> TrackVideoParam? in
             TrackVideoParam(
-                videoId: self?.video?.id,
+                videoId: video.id,
                 event: state.trackEventType,
                 trackIntervalMs: Int(currentTime * 1000),
                 durationMs: Int(durationTime * 1000)
@@ -260,7 +294,7 @@ final class VideoDetailViewModel: ViewModel {
         .sink(receiveValue: { [weak self] in
             self?.videoSocket.trackVideoProgress(data: $0)
         })
-        .store(in: &cancellables)
+        .store(in: &videoCancellables)
     }
 }
 
