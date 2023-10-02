@@ -14,4 +14,9 @@ extension String {
         let phoneNumber = try? phoneNumberKit.parse(self, ignoreType: true)
         return phoneNumber.flatMap { phoneNumberKit.format($0, toType: type) }
     }
+
+    var phoneNumber: PhoneNumber? {
+        let phoneNumberKit = PhoneNumberKit()
+        return try? phoneNumberKit.parse(self, ignoreType: true)
+    }
 }
