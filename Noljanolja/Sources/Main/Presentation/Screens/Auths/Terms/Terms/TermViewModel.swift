@@ -26,7 +26,7 @@ final class TermViewModel: ViewModel {
     // MARK: State
 
     @Published var termModels = [
-        TermModel(section: .compulsory, items: [.minAge, .termOfService, .personalInfo])
+        TermModel(section: .compulsory, items: [.minAge, .termOfService, .collectProfileInformation])
     ]
     @Published var termItemCheckeds = Set<TermItemType>()
     var isAllTermChecked: Bool {
