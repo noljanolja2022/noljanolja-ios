@@ -42,6 +42,11 @@ struct AuthRootView<ViewModel: AuthRootViewModel>: View {
                         delegate: viewModel
                     )
                 )
+//                GoogleAuthView(
+//                    viewModel: GoogleAuthViewModel(
+//                        delegate: viewModel
+//                    )
+//                )
             }
             .navigationViewStyle(StackNavigationViewStyle())
         }

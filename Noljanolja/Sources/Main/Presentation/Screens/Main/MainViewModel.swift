@@ -90,7 +90,7 @@ final class MainViewModel: ViewModel {
 // MARK: HomeViewModelDelegate
 
 extension MainViewModel: HomeViewModelDelegate {
-    func mainViewModelSignOut() {
+    func homeViewModelSignOut() {
         delegate?.mainViewModelSignOut()
     }
 }

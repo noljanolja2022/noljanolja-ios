@@ -57,3 +57,7 @@ extension AuthRootViewModel: AuthViewModelDelegate {
         delegate?.authRootViewModelDidComplete(user)
     }
 }
+
+// MARK: GoogleAuthViewModelDelegate
+
+extension AuthRootViewModel: GoogleAuthViewModelDelegate {}

@@ -43,7 +43,9 @@ struct RootView<ViewModel: RootViewModel>: View {
             )
         case .main:
             MainView(
-                viewModel: MainViewModel()
+                viewModel: MainViewModel(
+                    delegate: viewModel
+                )
             )
         case .userConfiguraction:
             UserConfigurationRootView(
