@@ -36,6 +36,7 @@ final class GoogleAuthViewModel: ViewModel {
 
     // MARK: Private
 
+    private let getUserAction = PassthroughSubject<Void, Never>()
     private var cancellables = Set<AnyCancellable>()
 
     init(authUseCase: AuthServiceType = AuthService.default,
@@ -51,18 +52,38 @@ final class GoogleAuthViewModel: ViewModel {
 
     private func configure() {
         action
-//            .handleEvents(receiveOutput: { [weak self] in self?.isProgressHUDShowing = true })
+            .flatMapLatestToResult { [weak self] in
+                guard let self else {
+                    return Fail<String, Error>(error: CommonError.captureSelfNotFound)
+                        .eraseToAnyPublisher()
+                }
+                return self.authUseCase
+                    .signInWithGoogle(additionalScopes: [GIDSignInScope.youtube])
+            }
+            .sink { [weak self] result in
+                guard let self else { return }
+                switch result {
+                case .success:
+                    getUserAction.send()
+                case .failure:
+                    alertState = AlertState(
+                        title: TextState(L10n.commonErrorTitle),
+                        message: TextState(L10n.commonErrorDescription),
+                        dismissButton: .cancel(TextState("OK"))
+                    )
+                }
+            }
+            .store(in: &cancellables)
+
+        getUserAction
+            .receive(on: DispatchQueue.main)
+            .handleEvents(receiveOutput: { [weak self] in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] in
                 guard let self else {
                     return Fail<User, Error>(error: CommonError.captureSelfNotFound)
                         .eraseToAnyPublisher()
                 }
-                return self.authUseCase
-                    .signInWithGoogle(additionalScopes: [GIDSignInScope.youtube])
-                    .flatMap { _ in
-                        self.userService.getCurrentUser()
-                    }
-                    .eraseToAnyPublisher()
+                return self.userService.getCurrentUser()
             }
             .sink { [weak self] result in
                 guard let self else { return }
