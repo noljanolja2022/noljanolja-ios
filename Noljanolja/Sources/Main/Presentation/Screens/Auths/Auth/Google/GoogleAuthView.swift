@@ -16,7 +16,42 @@ struct GoogleAuthView<ViewModel: GoogleAuthViewModel>: View {
     @StateObject var viewModel: ViewModel
 
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        buildBodyView()
+    }
+
+    private func buildBodyView() -> some View {
+        buildMainView()
+            .onAppear {
+                viewModel.isAppearSubject.send(true)
+            }
+            .onDisappear {
+                viewModel.isAppearSubject.send(false)
+            }
+            .isProgressHUBVisible($viewModel.isProgressHUDShowing)
+            .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
+    }
+
+    private func buildMainView() -> some View {
+        buildContentView()
+    }
+
+    private func buildContentView() -> some View {
+        VStack(spacing: 32) {
+            ImageAssets.logo.swiftUIImage
+                .resizable()
+                .scaledToFill()
+                .frame(width: 120, height: 120)
+
+            Button(
+                "Login with Google",
+                action: {
+                    viewModel.action.send()
+                }
+            )
+            .buttonStyle(PrimaryButtonStyle())
+            .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
+        }
+        .padding(32)
     }
 }
 

@@ -37,16 +37,16 @@ struct AuthRootView<ViewModel: AuthRootViewModel>: View {
             .navigationViewStyle(StackNavigationViewStyle())
         case .auth:
             NavigationView {
-                AuthView(
-                    viewModel: AuthViewModel(
-                        delegate: viewModel
-                    )
-                )
-//                GoogleAuthView(
-//                    viewModel: GoogleAuthViewModel(
+//                AuthView(
+//                    viewModel: AuthViewModel(
 //                        delegate: viewModel
 //                    )
 //                )
+                GoogleAuthView(
+                    viewModel: GoogleAuthViewModel(
+                        delegate: viewModel
+                    )
+                )
             }
             .navigationViewStyle(StackNavigationViewStyle())
         }

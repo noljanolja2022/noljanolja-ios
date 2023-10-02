@@ -25,6 +25,8 @@ final class UpdateCurrentUserViewModel: ViewModel {
     @Published var image: UIImage?
     @Published var avatar: String?
     @Published var name: String?
+    @Published var country = CountryAPI().getDefaultCountry()
+    @Published var phoneNumberText = ""
     @Published var dob: Date?
     @Published var gender: GenderType?
 
@@ -102,21 +104,23 @@ final class UpdateCurrentUserViewModel: ViewModel {
         validateUpdateCurrentUserAction
             .withLatestFrom(currentUserSubject)
             .sink(receiveValue: { [weak self] _ in
-                guard let name = self?.name, !name.isEmpty else {
-                    self?.alertState = AlertState(
+                guard let self else { return }
+                if let name, !name.isEmpty,
+                   !phoneNumberText.isEmpty {
+                    let param = UpdateCurrentUserParam(
+                        name: name.trimmed,
+                        phone: phoneNumberText,
+                        gender: gender,
+                        dob: dob
+                    )
+                    updateCurrentUserAction.send(param)
+                } else {
+                    alertState = AlertState(
                         title: TextState(L10n.commonErrorTitle),
                         message: TextState("Please enter all fields"),
                         dismissButton: .cancel(TextState("OK"))
                     )
-                    return
                 }
-
-                let param = UpdateCurrentUserParam(
-                    name: name.trimmed,
-                    gender: self?.gender,
-                    dob: self?.dob
-                )
-                self?.updateCurrentUserAction.send(param)
             })
             .store(in: &cancellables)
 
@@ -150,5 +154,13 @@ final class UpdateCurrentUserViewModel: ViewModel {
             .getCurrentUserPublisher()
             .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
             .store(in: &cancellables)
+    }
+}
+
+// MARK: SelectCountryViewModelDelegate
+
+extension UpdateCurrentUserViewModel: SelectCountryViewModelDelegate {
+    func selectCountryViewModel(didSelectCountry country: Country) {
+        self.country = country
     }
 }

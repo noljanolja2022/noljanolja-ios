@@ -60,4 +60,8 @@ extension AuthRootViewModel: AuthViewModelDelegate {
 
 // MARK: GoogleAuthViewModelDelegate
 
-extension AuthRootViewModel: GoogleAuthViewModelDelegate {}
+extension AuthRootViewModel: GoogleAuthViewModelDelegate {
+    func googleAuthViewModelDidComplete(_ user: User) {
+        delegate?.authRootViewModelDidComplete(user)
+    }
+}
