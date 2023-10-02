@@ -26,13 +26,19 @@ protocol AuthServiceType {
 
     func signIn(email: String, password: String) -> AnyPublisher<String, Error>
     func signInWithApple() -> AnyPublisher<String, Error>
-    func signInWithGoogle() -> AnyPublisher<String, Error>
+    func signInWithGoogle(additionalScopes: [String]?) -> AnyPublisher<String, Error>
     func signInWithKakao() -> AnyPublisher<String, Error>
     func signInWithNaver(_ signInWithNaverCompletion: (() -> Void)?) -> AnyPublisher<String, Error>
 
     func getIDTokenResult() -> AnyPublisher<String, Error>
 
     func signOut() -> AnyPublisher<Void, Error>
+}
+
+extension AuthServiceType {
+    func signInWithGoogle(additionalScopes: [String]? = nil) -> AnyPublisher<String, Error> {
+        signInWithGoogle(additionalScopes: additionalScopes)
+    }
 }
 
 // MARK: - AuthService
@@ -139,8 +145,8 @@ final class AuthService: NSObject, AuthServiceType {
             .eraseToAnyPublisher()
     }
 
-    func signInWithGoogle() -> AnyPublisher<String, Error> {
-        GIDSignIn.sharedInstance.signInCombine()
+    func signInWithGoogle(additionalScopes: [String]? = nil) -> AnyPublisher<String, Error> {
+        GIDSignIn.sharedInstance.signInCombine(additionalScopes: additionalScopes)
             .flatMap { [weak self] result in
                 guard let self else {
                     return Empty<AuthDataResult, Error>().eraseToAnyPublisher()

@@ -42,4 +42,19 @@ final class CountryAPI: CountryAPIType {
             .setFailureType(to: Error.self)
             .eraseToAnyPublisher()
     }
+
+    func getCountry(countryCode: String?) -> Country? {
+        guard let countryCode else { return nil }
+
+        let phoneNumberKit = PhoneNumberKit()
+        let fullCountryCode = countryCode.hasPrefix("+") ? countryCode : "+\(countryCode)"
+
+        let allCountries = phoneNumberKit
+            .allCountries()
+            .compactMap { CountryCodePickerViewController.Country(for: $0, with: phoneNumberKit) }
+            .map { Country($0.code, $0.flag, $0.name, $0.prefix) }
+        let country = allCountries.first(where: { $0.prefix == fullCountryCode })
+        
+        return country
+    }
 }
