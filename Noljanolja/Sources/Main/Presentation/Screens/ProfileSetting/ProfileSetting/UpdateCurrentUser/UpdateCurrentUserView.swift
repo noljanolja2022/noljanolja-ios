@@ -22,6 +22,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
     @StateObject private var keyboard = Keyboard.main
 
     @State private var isNameEditing = false
+    @State private var isPhoneEditing = false
     
     private let nameMaxLength = 20
 
@@ -60,6 +61,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
             
             VStack(spacing: 20) {
                 buildNameView()
+                buildPhoneView()
                 buildDOBAndGenderView()
             }
             
@@ -147,6 +149,76 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
             .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
             .padding(.top, 8)
             .padding(.horizontal, 12)
+        }
+    }
+
+    private func buildPhoneView() -> some View {
+        VStack(spacing: 0) {
+            HStack(spacing: 12) {
+                VStack {
+                    Button(
+                        action: {
+                            viewModel.fullScreenCoverType = .selectCountry
+                        },
+                        label: {
+                            VStack {
+                                HStack(spacing: 8) {
+                                    Text(viewModel.country.flag)
+                                        .dynamicFont(.systemFont(ofSize: 24))
+                                        .frame(width: 30, height: 24)
+                                        .background(ColorAssets.neutralLightGrey.swiftUIColor)
+                                        .cornerRadius(3)
+                                    Text(viewModel.country.prefix)
+                                        .dynamicFont(.systemFont(ofSize: 16))
+                                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                                }
+                                .frame(maxHeight: .infinity)
+                            }
+                        }
+                    )
+
+                    Divider()
+                        .frame(height: 2)
+                        .overlay(
+                            isPhoneEditing
+                                ? ColorAssets.primaryGreen200.swiftUIColor
+                                : ColorAssets.neutralDeepGrey.swiftUIColor
+                        )
+                }
+                .frame(width: 88)
+
+                VStack {
+                    TextField(
+                        "",
+                        text: $viewModel.phoneNumberText,
+                        isEditing: $isPhoneEditing
+                    )
+                    .keyboardType(.phonePad)
+                    .textFieldStyle(TappableTextFieldStyle())
+                    .dynamicFont(.systemFont(ofSize: 16))
+                    .frame(maxHeight: .infinity)
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    .introspectTextField { textField in
+                        textField.becomeFirstResponder()
+                    }
+
+                    Divider()
+                        .frame(height: 2)
+                        .overlay(
+                            isPhoneEditing
+                                ? ColorAssets.primaryGreen200.swiftUIColor
+                                : ColorAssets.neutralDeepGrey.swiftUIColor
+                        )
+                }
+            }
+            .frame(height: 36)
+
+            Text(L10n.updateProfileNameRequired)
+                .dynamicFont(.systemFont(ofSize: 12))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
+                .padding(.top, 8)
+                .padding(.horizontal, 12)
         }
     }
     
@@ -268,7 +340,9 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
         .buttonStyle(PrimaryButtonStyle())
         .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
     }
+}
 
+extension UpdateCurrentUserView {
     private func buildActionSheetDestinationView(
         _ type: UpdateCurrentUserActionSheetType
     ) -> ActionSheet {
@@ -320,6 +394,16 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                         break
                     }
                 }
+        case .selectCountry:
+            NavigationView {
+                SelectCountryView(
+                    viewModel: SelectCountryViewModel(
+                        selectedCountry: viewModel.country,
+                        delegate: viewModel
+                    )
+                )
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
         case .datePicker:
             buildDatePickerView()
         }

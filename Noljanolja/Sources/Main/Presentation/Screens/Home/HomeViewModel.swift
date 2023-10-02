@@ -12,7 +12,7 @@ import Foundation
 // MARK: - HomeViewModelDelegate
 
 protocol HomeViewModelDelegate: AnyObject {
-    func mainViewModelSignOut()
+    func homeViewModelSignOut()
 }
 
 // MARK: - HomeViewModel
@@ -96,7 +96,7 @@ extension HomeViewModel: ConversationListViewModelDelegate {
 
 extension HomeViewModel: WalletViewModelDelegate {
     func walletViewModelSignOut() {
-        delegate?.mainViewModelSignOut()
+        delegate?.homeViewModelSignOut()
     }
 }
 

@@ -100,7 +100,7 @@ struct User: Equatable, Codable {
 
 extension User {
     var isSettedUp: Bool {
-        !(name ?? "").isEmpty
+        !(name?.isEmpty ?? true) && !(phone?.isEmpty ?? true)
     }
 
     func getDisplayName(currentUser: User) -> String {

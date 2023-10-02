@@ -424,6 +424,9 @@
 		CFA3304929BE3AB9008D7449 /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA3304829BE3AB9008D7449 /* String+Date.swift */; };
 		CFA3304D29BEB674008D7449 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA3304C29BEB674008D7449 /* SearchView.swift */; };
 		CFA5BD2C29EEFB9000251176 /* DataDetectorTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA5BD2B29EEFB9000251176 /* DataDetectorTextView.swift */; };
+		CFA66B882ACA6F490090BC1A /* GoogleAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA66B862ACA6F490090BC1A /* GoogleAuthView.swift */; };
+		CFA66B892ACA6F490090BC1A /* GoogleAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA66B872ACA6F490090BC1A /* GoogleAuthViewModel.swift */; };
+		CFA66B8B2ACA6F590090BC1A /* GoogleAuthNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA66B8A2ACA6F590090BC1A /* GoogleAuthNavigations.swift */; };
 		CFA6E94C2A73C47B00BF78F3 /* ShareMessageParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA6E94B2A73C47B00BF78F3 /* ShareMessageParam.swift */; };
 		CFA6E94E2A73C65000BF78F3 /* AttachmentsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA6E94D2A73C65000BF78F3 /* AttachmentsRequest.swift */; };
 		CFA6E9502A73C6E700BF78F3 /* ShareMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA6E94F2A73C6E700BF78F3 /* ShareMessageRequest.swift */; };
@@ -996,6 +999,9 @@
 		CFA3304829BE3AB9008D7449 /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
 		CFA3304C29BEB674008D7449 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		CFA5BD2B29EEFB9000251176 /* DataDetectorTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDetectorTextView.swift; sourceTree = "<group>"; };
+		CFA66B862ACA6F490090BC1A /* GoogleAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthView.swift; sourceTree = "<group>"; };
+		CFA66B872ACA6F490090BC1A /* GoogleAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthViewModel.swift; sourceTree = "<group>"; };
+		CFA66B8A2ACA6F590090BC1A /* GoogleAuthNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthNavigations.swift; sourceTree = "<group>"; };
 		CFA6E94B2A73C47B00BF78F3 /* ShareMessageParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareMessageParam.swift; sourceTree = "<group>"; };
 		CFA6E94D2A73C65000BF78F3 /* AttachmentsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentsRequest.swift; sourceTree = "<group>"; };
 		CFA6E94F2A73C6E700BF78F3 /* ShareMessageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareMessageRequest.swift; sourceTree = "<group>"; };
@@ -2778,9 +2784,8 @@
 		CF53D5332A6AF548009B3A69 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				CF53D5342A6AF548009B3A69 /* AuthViewModel.swift */,
-				CF53D5352A6AF548009B3A69 /* AuthView.swift */,
-				CF53D5362A6AF548009B3A69 /* AuthNavigations.swift */,
+				CFA66B852ACA6F200090BC1A /* Google */,
+				CFA66B842ACA6F0E0090BC1A /* Phone */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -3096,6 +3101,26 @@
 				CFA5BD2B29EEFB9000251176 /* DataDetectorTextView.swift */,
 			);
 			path = TextView;
+			sourceTree = "<group>";
+		};
+		CFA66B842ACA6F0E0090BC1A /* Phone */ = {
+			isa = PBXGroup;
+			children = (
+				CF53D5342A6AF548009B3A69 /* AuthViewModel.swift */,
+				CF53D5352A6AF548009B3A69 /* AuthView.swift */,
+				CF53D5362A6AF548009B3A69 /* AuthNavigations.swift */,
+			);
+			path = Phone;
+			sourceTree = "<group>";
+		};
+		CFA66B852ACA6F200090BC1A /* Google */ = {
+			isa = PBXGroup;
+			children = (
+				CFA66B862ACA6F490090BC1A /* GoogleAuthView.swift */,
+				CFA66B872ACA6F490090BC1A /* GoogleAuthViewModel.swift */,
+				CFA66B8A2ACA6F590090BC1A /* GoogleAuthNavigations.swift */,
+			);
+			path = Google;
 			sourceTree = "<group>";
 		};
 		CFAD534A2A780D490044CB42 /* Checkin */ = {
@@ -4234,6 +4259,7 @@
 				CF53D6332A6AF548009B3A69 /* ImageEditorViewModel.swift in Sources */,
 				CF53D6022A6AF548009B3A69 /* ParticipantDetailActionView.swift in Sources */,
 				CFE0926B298FE73000F197F0 /* CloudFunctionAuthAPI.swift in Sources */,
+				CFA66B882ACA6F490090BC1A /* GoogleAuthView.swift in Sources */,
 				CF53D61D2A6AF548009B3A69 /* MessageActionDetailInput.swift in Sources */,
 				CFB3866A2A443028001B0849 /* ReactionIconsLocalRepository.swift in Sources */,
 				CF53D5AF2A6AF548009B3A69 /* TransactionHistoryItemModel.swift in Sources */,
@@ -4467,6 +4493,7 @@
 				CFE954952A3A13BA00C109FE /* MyCoupon.swift in Sources */,
 				CF53D5702A6AF548009B3A69 /* ProfileSettingNavigations.swift in Sources */,
 				CF62EF8B29B23E0000D6B688 /* ViewModelType.swift in Sources */,
+				CFA66B8B2ACA6F590090BC1A /* GoogleAuthNavigations.swift in Sources */,
 				CFE5ACF12A7AAB6D0027492E /* ShareReferralContainerNavigations.swift in Sources */,
 				CF53D5912A6AF548009B3A69 /* VideoDetailInputView.swift in Sources */,
 				CF53D5CE2A6AF548009B3A69 /* ContactListView.swift in Sources */,
@@ -4521,6 +4548,7 @@
 				CF53D5CA2A6AF548009B3A69 /* AddFriendContactListViewModel.swift in Sources */,
 				CF715AE52A862135006DF977 /* UncompleteVideosView.swift in Sources */,
 				CF1E5D742A6984DE00481376 /* CameraStatefulView.swift in Sources */,
+				CFA66B892ACA6F490090BC1A /* GoogleAuthViewModel.swift in Sources */,
 				CFC9E5162A7047FA004D48E5 /* LocalVideoKeywordRepository.swift in Sources */,
 				CF53D5ED2A6AF548009B3A69 /* PhotoMessageContentItemModel.swift in Sources */,
 				CFB0A82129F1B6FD00298546 /* Video.swift in Sources */,
@@ -4666,7 +4694,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 0.0.9;
+				CURRENT_PROJECT_VERSION = 0.0.11;
 				DEVELOPMENT_ASSET_PATHS = "\"Noljanolja/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = YN4QYR8CRU;
@@ -4687,7 +4715,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.9;
+				MARKETING_VERSION = 0.0.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.noljanolja.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -4860,7 +4888,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 0.0.9;
+				CURRENT_PROJECT_VERSION = 0.0.11;
 				DEVELOPMENT_ASSET_PATHS = "\"Noljanolja/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = YN4QYR8CRU;
@@ -4881,7 +4909,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.9;
+				MARKETING_VERSION = 0.0.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.noljanolja.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -4902,7 +4930,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 0.0.9;
+				CURRENT_PROJECT_VERSION = 0.0.11;
 				DEVELOPMENT_ASSET_PATHS = "\"Noljanolja/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = YN4QYR8CRU;
@@ -4923,7 +4951,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.0.9;
+				MARKETING_VERSION = 0.0.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.noljanolja.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

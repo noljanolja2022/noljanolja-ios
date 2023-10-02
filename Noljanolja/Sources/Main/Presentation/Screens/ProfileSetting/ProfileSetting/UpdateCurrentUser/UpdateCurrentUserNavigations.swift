@@ -27,5 +27,6 @@ extension UpdateCurrentUserActionSheetType: Identifiable {
 
 enum UpdateCurrentUserFullScreenCoverType: Equatable {
     case imagePickerView(UIImagePickerController.SourceType)
+    case selectCountry
     case datePicker
 }
