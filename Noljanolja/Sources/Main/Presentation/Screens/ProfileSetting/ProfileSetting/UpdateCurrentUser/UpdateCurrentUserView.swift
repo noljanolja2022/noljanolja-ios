@@ -449,6 +449,7 @@ extension UpdateCurrentUserView {
                 )
                 .datePickerStyle(GraphicalDatePickerStyle())
             }
+            .background(ColorAssets.neutralLight.swiftUIColor.ignoresSafeArea())
         }
     }
 }

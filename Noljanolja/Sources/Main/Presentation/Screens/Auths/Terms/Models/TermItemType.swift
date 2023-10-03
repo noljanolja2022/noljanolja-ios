@@ -31,29 +31,30 @@ enum TermSectionType: Int, CaseIterable {
 // MARK: - TermItemType
 
 enum TermItemType: Int, CaseIterable {
-    case termOfService
     case minAge
-    case personalInfo
-    case marketingInfo
+    case termOfService
+    case collectInfomation
+    case collectProfileInformation
 
     var idArrowIconHidden: Bool {
         switch self {
         case .minAge: return true
-        case .termOfService, .personalInfo, .marketingInfo: return false
+        case .termOfService, .collectInfomation, .collectProfileInformation: return false
         }
     }
 
     var title: String {
         switch self {
-        case .termOfService: return L10n.tosCompulsoryItemTitle1
-        case .minAge: return L10n.tosCompulsoryItemTitle2
-        case .personalInfo: return L10n.tosCompulsoryItemTitle3
-        case .marketingInfo: return L10n.tosOptionalItemTitle1
+        case .minAge: return L10n.tosCompulsoryItemTitle1
+        case .termOfService: return L10n.tosCompulsoryItemTitle2
+        case .collectInfomation: return L10n.tosCompulsoryItemTitle3
+        case .collectProfileInformation: return L10n.tosOptionalItemTitle1
         }
     }
 
     var description: String {
         switch self {
+        case .minAge: return ""
         case .termOfService: return """
             서비스 이용약관
 
@@ -215,8 +216,10 @@ enum TermItemType: Int, CaseIterable {
             부칙
             ① 이 약관은 2023년 10월 1일부터 적용됩니다.
             """
-        case .minAge: return ""
-        case .personalInfo: return """
+        case .collectInfomation:
+            return ""
+        case .collectProfileInformation:
+            return """
             개인정보 처리방침
 
             제1조 개인정보 수집에 대한 동의
@@ -356,7 +359,6 @@ enum TermItemType: Int, CaseIterable {
 
             이 개인정보처리방침은 시행일(2023년 10월 1일)로부터 적용되며, 법령 및 방침에 따른 변경내용의 추가, 삭제 및 정정이 있는 경우에는 변경사항의 시행 7일 전부터 공지사항을 통하여 고지할 것입니다.
             """
-        case .marketingInfo: return ""
         }
     }
 }

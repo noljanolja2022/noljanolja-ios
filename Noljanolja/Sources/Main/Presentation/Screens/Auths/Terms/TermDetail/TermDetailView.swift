@@ -95,7 +95,7 @@ struct TermDetailView_Previews: PreviewProvider {
     static var previews: some View {
         TermDetailView(
             viewModel: TermDetailViewModel(),
-            termType: .marketingInfo
+            termType: .collectProfileInformation
         )
     }
 }
