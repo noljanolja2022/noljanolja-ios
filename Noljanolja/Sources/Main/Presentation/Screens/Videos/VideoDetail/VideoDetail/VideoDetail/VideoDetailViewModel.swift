@@ -126,10 +126,15 @@ final class VideoDetailViewModel: ViewModel {
     }
 
     func updateContentType(_ value: VideoDetailViewContentType) {
-        DispatchQueue.main.async { [weak self] in
-            withAnimation(.easeInOut(duration: 0.3)) {
-                self?.contentType = value
+        switch value {
+        case .maximize, .hide:
+            DispatchQueue.main.async { [weak self] in
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    self?.contentType = value
+                }
             }
+        case .minimize:
+            break
         }
     }
 

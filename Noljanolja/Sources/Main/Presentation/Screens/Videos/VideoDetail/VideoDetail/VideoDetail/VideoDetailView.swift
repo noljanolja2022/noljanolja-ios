@@ -72,12 +72,12 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
             HStack {
                 Button(
                     action: {
-                        viewModel.updateContentType(.minimize)
+                        viewModel.updateContentType(.hide)
                     },
                     label: {
-                        Image(systemName: "chevron.down.circle.fill")
+                        ImageAssets.icClose.swiftUIImage
                             .resizable()
-                            .padding(8)
+                            .padding(16)
                             .frame(width: 44, height: 44)
                             .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                     }

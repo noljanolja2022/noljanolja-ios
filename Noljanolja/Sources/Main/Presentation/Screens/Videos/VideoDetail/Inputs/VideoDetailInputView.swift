@@ -52,16 +52,16 @@ struct VideoDetailInputView<ViewModel: VideoDetailInputViewModel>: View {
             url: URL(string: viewModel.user?.avatar),
             context: [
                 .imageTransformer: SDImageResizingTransformer(
-                    size: CGSize(width: 64 * 3, height: 64 * 3),
+                    size: CGSize(width: inputItemSize * 3, height: inputItemSize * 3),
                     scaleMode: .aspectFill
                 )
             ]
         )
         .resizable()
         .indicator(.activity)
-        .scaledToFill()
         .padding(6)
         .frame(width: inputItemSize, height: inputItemSize)
+        .scaledToFill()
         .background(ColorAssets.neutralLightGrey.swiftUIColor)
         .cornerRadius(32)
     }
