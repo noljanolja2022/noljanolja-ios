@@ -4701,6 +4701,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Noljanolja/Sources/Main/Presentation/App/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NolgoBulja;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To enhance the user experience, please grant permissions to the app";
 				INFOPLIST_KEY_NSContactsUsageDescription = "To help you message friends and family on Noja Noja, allow Noja Noja access to your contacts";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To enhance the user experience, please grant permissions to the app";
@@ -4895,6 +4896,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Noljanolja/Sources/Main/Presentation/App/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NolgoBulja;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To enhance the user experience, please grant permissions to the app";
 				INFOPLIST_KEY_NSContactsUsageDescription = "To help you message friends and family on Noja Noja, allow Noja Noja access to your contacts";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To enhance the user experience, please grant permissions to the app";
@@ -4937,6 +4939,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Noljanolja/Sources/Main/Presentation/App/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NolgoBulja;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To enhance the user experience, please grant permissions to the app";
 				INFOPLIST_KEY_NSContactsUsageDescription = "To help you message friends and family on Noja Noja, allow Noja Noja access to your contacts";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To enhance the user experience, please grant permissions to the app";
