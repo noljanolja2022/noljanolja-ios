@@ -14,12 +14,14 @@ PODS:
   - AnyImageKit/Picker (0.15.1):
     - AnyImageKit/Core
   - Kingfisher (7.6.2)
+  - Natrium (8.3.0)
   - naveridlogin-sdk-ios (4.1.5)
   - shared (1.0)
   - SnapKit (5.6.0)
 
 DEPENDENCIES:
   - AnyImageKit
+  - Natrium
   - naveridlogin-sdk-ios (= 4.1.5)
   - shared (from `./shared`)
 
@@ -27,6 +29,7 @@ SPEC REPOS:
   trunk:
     - AnyImageKit
     - Kingfisher
+    - Natrium
     - naveridlogin-sdk-ios
     - SnapKit
 
@@ -37,10 +40,11 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AnyImageKit: 2f1ad09414e52313d8914df52869909ea2b71019
   Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
+  Natrium: 630942cf96e0dd78f9fb1f2fcc984e4f908d7278
   naveridlogin-sdk-ios: 4351fe7162cd6b8b6dbb37bd7cc205304fa1d889
   shared: 39716697cdb03064a2a5d4da9d9d75c8ca73d2e7
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: 594f1dfd706c861b7d61fb724733e5e471ae998b
+PODFILE CHECKSUM: 16bca1c775096063ad96524f35e8214729ae443c
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.13.0
