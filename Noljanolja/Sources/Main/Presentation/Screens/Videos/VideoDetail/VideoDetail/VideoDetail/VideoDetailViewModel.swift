@@ -286,7 +286,9 @@ final class VideoDetailViewModel: ViewModel {
                 youTubePlayer.currentTimePublisher(),
                 youTubePlayer.durationPublisher
             )
-        ) { ($0, $1.0, $1.1) }
+        ) { (playbackState: YouTubePlayer.PlaybackState, times: (Double, Double)) in
+            (playbackState, times.0, times.1)
+        }
         .compactMap { state, currentTime, durationTime -> TrackVideoParam? in
             TrackVideoParam(
                 videoId: video.id,

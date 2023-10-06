@@ -53,7 +53,7 @@ kotlin {
         }
 
         // Maps custom Xcode configuration to NativeBuildType
+        xcodeConfigurationToNativeBuildType["Dev"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
         xcodeConfigurationToNativeBuildType["App Store"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
-        xcodeConfigurationToNativeBuildType["Ad hoc"] = org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType.RELEASE
     }
 }
