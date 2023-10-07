@@ -5,7 +5,7 @@ environments:
 xcconfig:
     CONFIG_PRODUCT_BUNDLE_IDENTIFIER:
         Dev: com.noljanolja.app.ios
-        AppStore: com.noljanolja.app.ios
+        AppStore: com.ppnyy.nolgobulja
     CONFIG_DISPLAY_NAME:
         Dev: NolgoBulja Dev
         AppStore: NolgoBulja
@@ -27,6 +27,9 @@ appicon:
         AppStore: ""
 
 variables:
-    testString:
-        Dev: "dev"
-        AppStore: "production"
+    baseUrl:
+        Dev: "http://dev.consumer-service.ppnyy.com/api"
+        AppStore: "http://dev.consumer-service.ppnyy.com/api"
+    socketBaseUrl:
+        Dev: "ws://34.64.110.104/rsocket"
+        AppStore: "ws://34.64.110.104/rsocket"

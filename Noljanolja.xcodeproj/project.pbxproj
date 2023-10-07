@@ -4741,7 +4741,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Noljanolja/Sources/Main/Presentation/App/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = NolgoBulja;
+				INFOPLIST_KEY_CFBundleDisplayName = $CONFIG_DISPLAY_NAME;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To enhance the user experience, please grant permissions to the app";
 				INFOPLIST_KEY_NSContactsUsageDescription = "To help you message friends and family on Noja Noja, allow Noja Noja access to your contacts";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To enhance the user experience, please grant permissions to the app";
@@ -4757,7 +4757,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.13;
-				PRODUCT_BUNDLE_IDENTIFIER = com.noljanolja.app.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = $CONFIG_PRODUCT_BUNDLE_IDENTIFIER;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "ios distribution_app store";
@@ -4882,7 +4882,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Noljanolja/Sources/Main/Presentation/App/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = NolgoBulja;
+				INFOPLIST_KEY_CFBundleDisplayName = $CONFIG_DISPLAY_NAME;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To enhance the user experience, please grant permissions to the app";
 				INFOPLIST_KEY_NSContactsUsageDescription = "To help you message friends and family on Noja Noja, allow Noja Noja access to your contacts";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To enhance the user experience, please grant permissions to the app";
@@ -4898,7 +4898,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.13;
-				PRODUCT_BUNDLE_IDENTIFIER = com.noljanolja.app.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = $CONFIG_PRODUCT_BUNDLE_IDENTIFIER;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "ios development";
