@@ -5,6 +5,24 @@
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
+      <PreActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Natrium"
+               scriptText = "# Type a script or drag a script file from your workspace to insert its path.&#10;&quot;${PROJECT_DIR}/Pods/Natrium/Natrium/natrium&quot; AppStore&#10;">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "CFFD707D298AB9FF00D4F5A2"
+                     BuildableName = "Noljanolja.app"
+                     BlueprintName = "Noljanolja"
+                     ReferencedContainer = "container:Noljanolja.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PreActions>
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"

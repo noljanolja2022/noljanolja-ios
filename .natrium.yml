@@ -1,0 +1,32 @@
+environments:
+  - Dev
+  - AppStore
+
+xcconfig:
+    CONFIG_PRODUCT_BUNDLE_IDENTIFIER:
+        Dev: com.noljanolja.app.ios
+        AppStore: com.noljanolja.app.ios
+    CONFIG_DISPLAY_NAME:
+        Dev: NolgoBulja Dev
+        AppStore: NolgoBulja
+
+files:
+    Noljanolja/Configs/FireBases/GoogleService-Info.plist:
+        Dev: Noljanolja/Configs/FireBases/GoogleService-Info-Dev.plist
+        AppStore: Noljanolja/Configs/FireBases/GoogleService-Info-AppStore.plist
+
+appicon:
+    original: Noljanolja/Resources/Sources/ImageAssets.xcassets/AppIcon.appiconset/Source.png
+    appiconset: Noljanolja/Resources/Sources/ImageAssets.xcassets/AppIcon.appiconset/
+    all_sizes: false
+    idioms:
+        - ipad
+        - iphone
+    ribbon:
+        Dev: "Dev"
+        AppStore: ""
+
+variables:
+    testString:
+        Dev: "dev"
+        AppStore: "production"

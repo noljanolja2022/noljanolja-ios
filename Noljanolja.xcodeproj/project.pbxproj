@@ -73,6 +73,9 @@
 		CF30B1872A13D1D000C43A54 /* DeleteCacheUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF30B1862A13D1D000C43A54 /* DeleteCacheUseCases.swift */; };
 		CF30B19B2A13ECEB00C43A54 /* TransactionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF30B19A2A13ECEB00C43A54 /* TransactionType.swift */; };
 		CF3282ED299E3758006A459B /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3282EC299E3758006A459B /* UIApplication+Extension.swift */; };
+		CF340D392AD07AFC001762F6 /* ProjectEnvironment.dev.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = CF340D352AD07AFC001762F6 /* ProjectEnvironment.dev.xcconfig */; };
+		CF340D3B2AD07AFC001762F6 /* ProjectEnvironment.appstore.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = CF340D372AD07AFC001762F6 /* ProjectEnvironment.appstore.xcconfig */; };
+		CF340D3C2AD07AFC001762F6 /* Natrium.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF340D382AD07AFC001762F6 /* Natrium.swift */; };
 		CF355C8A2A77C18B005A48F9 /* CheckinProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF355C892A77C18B005A48F9 /* CheckinProgress.swift */; };
 		CF355C8C2A77C4EA005A48F9 /* CheckinUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF355C8B2A77C4EA005A48F9 /* CheckinUseCase.swift */; };
 		CF355C8E2A77C51F005A48F9 /* LocalCheckingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF355C8D2A77C51F005A48F9 /* LocalCheckingRepository.swift */; };
@@ -661,6 +664,11 @@
 		CF30B1862A13D1D000C43A54 /* DeleteCacheUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCacheUseCases.swift; sourceTree = "<group>"; };
 		CF30B19A2A13ECEB00C43A54 /* TransactionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionType.swift; sourceTree = "<group>"; };
 		CF3282EC299E3758006A459B /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
+		CF340D0C2AD06FF4001762F6 /* .natrium.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .natrium.yml; sourceTree = SOURCE_ROOT; };
+		CF340D352AD07AFC001762F6 /* ProjectEnvironment.dev.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = ProjectEnvironment.dev.xcconfig; path = Pods/Natrium/Natrium/ProjectEnvironment.dev.xcconfig; sourceTree = SOURCE_ROOT; };
+		CF340D362AD07AFC001762F6 /* natrium.log */ = {isa = PBXFileReference; lastKnownFileType = file; name = natrium.log; path = Pods/Natrium/Natrium/natrium.log; sourceTree = SOURCE_ROOT; };
+		CF340D372AD07AFC001762F6 /* ProjectEnvironment.appstore.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = ProjectEnvironment.appstore.xcconfig; path = Pods/Natrium/Natrium/ProjectEnvironment.appstore.xcconfig; sourceTree = SOURCE_ROOT; };
+		CF340D382AD07AFC001762F6 /* Natrium.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Natrium.swift; path = Pods/Natrium/Natrium/Natrium.swift; sourceTree = SOURCE_ROOT; };
 		CF355C892A77C18B005A48F9 /* CheckinProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinProgress.swift; sourceTree = "<group>"; };
 		CF355C8B2A77C4EA005A48F9 /* CheckinUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinUseCase.swift; sourceTree = "<group>"; };
 		CF355C8D2A77C51F005A48F9 /* LocalCheckingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCheckingRepository.swift; sourceTree = "<group>"; };
@@ -1003,6 +1011,8 @@
 		CFA3304629BE3352008D7449 /* String+Phone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Phone.swift"; sourceTree = "<group>"; };
 		CFA3304829BE3AB9008D7449 /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
 		CFA3304C29BEB674008D7449 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		CFA546DB2AD0611300762F27 /* GoogleService-Info-Dev.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Dev.plist"; sourceTree = "<group>"; };
+		CFA546DC2AD0611300762F27 /* GoogleService-Info-AppStore.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-AppStore.plist"; sourceTree = "<group>"; };
 		CFA5BD2B29EEFB9000251176 /* DataDetectorTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDetectorTextView.swift; sourceTree = "<group>"; };
 		CFA66B862ACA6F490090BC1A /* GoogleAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthView.swift; sourceTree = "<group>"; };
 		CFA66B872ACA6F490090BC1A /* GoogleAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthViewModel.swift; sourceTree = "<group>"; };
@@ -1298,6 +1308,7 @@
 		CF14F23F298C313A00BC2066 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
+				CF340D0C2AD06FF4001762F6 /* .natrium.yml */,
 				CF14F242298C31C200BC2066 /* .swiftformat */,
 				CF14F241298C31C200BC2066 /* swiftgen.yml */,
 			);
@@ -1307,6 +1318,7 @@
 		CF14F25B298CE68600BC2066 /* Configs */ = {
 			isa = PBXGroup;
 			children = (
+				CF340D342AD07ADE001762F6 /* Natrium */,
 				CF14F264298CF4C300BC2066 /* App */,
 				CF14F25C298CE68600BC2066 /* Firebases */,
 			);
@@ -1316,6 +1328,8 @@
 		CF14F25C298CE68600BC2066 /* Firebases */ = {
 			isa = PBXGroup;
 			children = (
+				CFA546DB2AD0611300762F27 /* GoogleService-Info-Dev.plist */,
+				CFA546DC2AD0611300762F27 /* GoogleService-Info-AppStore.plist */,
 				CF14F25D298CE68600BC2066 /* GoogleService-Info.plist */,
 			);
 			path = Firebases;
@@ -1484,6 +1498,17 @@
 				CFC0DE482A3B1165007AB0F4 /* String+QRCode.swift */,
 			);
 			path = UIKit;
+			sourceTree = "<group>";
+		};
+		CF340D342AD07ADE001762F6 /* Natrium */ = {
+			isa = PBXGroup;
+			children = (
+				CF340D362AD07AFC001762F6 /* natrium.log */,
+				CF340D382AD07AFC001762F6 /* Natrium.swift */,
+				CF340D372AD07AFC001762F6 /* ProjectEnvironment.appstore.xcconfig */,
+				CF340D352AD07AFC001762F6 /* ProjectEnvironment.dev.xcconfig */,
+			);
+			path = Natrium;
 			sourceTree = "<group>";
 		};
 		CF398DD629BF891C0015DB18 /* Params */ = {
@@ -3837,8 +3862,8 @@
 				CFFD70CE298AC7A900D4F5A2 /* XCRemoteSwiftPackageReference "Moya" */,
 				CF14F24B298CC11600BC2066 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				CFE9D2DB298D66F700D936DA /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
-				CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk.git" */,
-				CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver.git" */,
+				CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+				CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 				CFE09270298FEACD00F197F0 /* XCRemoteSwiftPackageReference "SwifterSwift" */,
 				CFE48BBF299206830062C903 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				CF6ABC212993617F00D78213 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
@@ -3847,14 +3872,14 @@
 				CFF1F7A929B737F300B25DD2 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 				CF52AB7129B8E3B600C9C90C /* XCRemoteSwiftPackageReference "realm-swift" */,
 				CF9779DA29BE2FC600D1CAB0 /* XCRemoteSwiftPackageReference "PhoneNumberKit" */,
-				CF10C7EF29C21FAE0020924D /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines.git" */,
+				CF10C7EF29C21FAE0020924D /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */,
 				CF54FA2729D01F8A0092E2C6 /* XCRemoteSwiftPackageReference "Zip" */,
 				CF076D4F29D0BF2B0013B6F9 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				CF076D5529D0C0120013B6F9 /* XCRemoteSwiftPackageReference "SDWebImageWebPCoder" */,
 				CF446B8329D89C3000ED66BF /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				CF18378529F6F4F500DDC15C /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */,
 				CFF520F92A17D92400F29A4E /* XCRemoteSwiftPackageReference "Charts" */,
-				CF45BCB42A67C68C003FB991 /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */,
+				CF45BCB42A67C68C003FB991 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = CFFD707F298AB9FF00D4F5A2 /* Products */;
 			projectDirPath = "";
@@ -3874,6 +3899,7 @@
 			files = (
 				CFFD7089298ABA0100D4F5A2 /* Preview Assets.xcassets in Resources */,
 				CF53D55D2A6AF548009B3A69 /* LaunchBackgroundUIView.xib in Resources */,
+				CF340D3B2AD07AFC001762F6 /* ProjectEnvironment.appstore.xcconfig in Resources */,
 				CF53D55A2A6AF548009B3A69 /* Launch Screen.strings in Resources */,
 				CF53D55B2A6AF548009B3A69 /* Launch Screen.storyboard in Resources */,
 				CF00D14E299407EB00505702 /* Localizable.strings in Resources */,
@@ -3881,6 +3907,7 @@
 				CFFD7086298ABA0100D4F5A2 /* ImageAssets.xcassets in Resources */,
 				CF14F25E298CE68600BC2066 /* GoogleService-Info.plist in Resources */,
 				CF446B8E29D8A97700ED66BF /* LottieAssets.xcassets in Resources */,
+				CF340D392AD07AFC001762F6 /* ProjectEnvironment.dev.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4476,6 +4503,7 @@
 				CF53D57D2A6AF548009B3A69 /* KeywordItemView.swift in Sources */,
 				CF53D6302A6AF548009B3A69 /* AnyImageEditorView.swift in Sources */,
 				CF53D6072A6AF548009B3A69 /* ConversationListModel.swift in Sources */,
+				CF340D3C2AD07AFC001762F6 /* Natrium.swift in Sources */,
 				CF53D62A2A6AF548009B3A69 /* ChatSettingAddParticipantView.swift in Sources */,
 				CFAD53572A781D390044CB42 /* CheckinProgressSumaryView.swift in Sources */,
 				CF615C3E2A10AC5800CAF9C5 /* LoyaltyAPI.swift in Sources */,
@@ -4976,7 +5004,7 @@
 				version = 0.9.1;
 			};
 		};
-		CF10C7EF29C21FAE0020924D /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines.git" */ = {
+		CF10C7EF29C21FAE0020924D /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/rickclephas/KMP-NativeCoroutines.git";
 			requirement = {
@@ -5008,7 +5036,7 @@
 				version = 4.1.3;
 			};
 		};
-		CF45BCB42A67C68C003FB991 /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */ = {
+		CF45BCB42A67C68C003FB991 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
 			requirement = {
@@ -5056,7 +5084,7 @@
 				version = 3.5.7;
 			};
 		};
-		CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver.git" */ = {
+		CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver.git";
 			requirement = {
@@ -5088,7 +5116,7 @@
 				version = 7.0.0;
 			};
 		};
-		CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk.git" */ = {
+		CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kakao/kakao-ios-sdk.git";
 			requirement = {
@@ -5148,7 +5176,7 @@
 		};
 		CF10C7F029C21FAE0020924D /* KMPNativeCoroutinesCombine */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CF10C7EF29C21FAE0020924D /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines.git" */;
+			package = CF10C7EF29C21FAE0020924D /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */;
 			productName = KMPNativeCoroutinesCombine;
 		};
 		CF14F24C298CC11700BC2066 /* FirebaseAnalytics */ = {
@@ -5173,7 +5201,7 @@
 		};
 		CF45BCB52A67C68C003FB991 /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CF45BCB42A67C68C003FB991 /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */;
+			package = CF45BCB42A67C68C003FB991 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
 		};
 		CF52AB7229B8E3B700C9C90C /* RealmSwift */ = {
@@ -5213,7 +5241,7 @@
 		};
 		CFE09256298DF78700F197F0 /* SwiftyBeaver */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver.git" */;
+			package = CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
 			productName = SwiftyBeaver;
 		};
 		CFE0926C298FE75500F197F0 /* FirebaseFunctionsCombine-Community */ = {
@@ -5238,12 +5266,12 @@
 		};
 		CFE9D2DF298D6C1500D936DA /* KakaoSDKAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk.git" */;
+			package = CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
 			productName = KakaoSDKAuth;
 		};
 		CFE9D2E1298D6C1500D936DA /* KakaoSDKUser */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk.git" */;
+			package = CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
 			productName = KakaoSDKUser;
 		};
 		CFF1F79929B6E7FE00B25DD2 /* CombineExt */ = {
