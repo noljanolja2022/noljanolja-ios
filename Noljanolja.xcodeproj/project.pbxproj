@@ -73,9 +73,9 @@
 		CF30B1872A13D1D000C43A54 /* DeleteCacheUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF30B1862A13D1D000C43A54 /* DeleteCacheUseCases.swift */; };
 		CF30B19B2A13ECEB00C43A54 /* TransactionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF30B19A2A13ECEB00C43A54 /* TransactionType.swift */; };
 		CF3282ED299E3758006A459B /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3282EC299E3758006A459B /* UIApplication+Extension.swift */; };
-		CF340D392AD07AFC001762F6 /* ProjectEnvironment.dev.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = CF340D352AD07AFC001762F6 /* ProjectEnvironment.dev.xcconfig */; };
-		CF340D3B2AD07AFC001762F6 /* ProjectEnvironment.appstore.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = CF340D372AD07AFC001762F6 /* ProjectEnvironment.appstore.xcconfig */; };
 		CF340D3C2AD07AFC001762F6 /* Natrium.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF340D382AD07AFC001762F6 /* Natrium.swift */; };
+		CF340D532AD1CC04001762F6 /* ProjectEnvironment.release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = CF340D512AD1CC04001762F6 /* ProjectEnvironment.release.xcconfig */; };
+		CF340D542AD1CC04001762F6 /* ProjectEnvironment.debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = CF340D522AD1CC04001762F6 /* ProjectEnvironment.debug.xcconfig */; };
 		CF355C8A2A77C18B005A48F9 /* CheckinProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF355C892A77C18B005A48F9 /* CheckinProgress.swift */; };
 		CF355C8C2A77C4EA005A48F9 /* CheckinUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF355C8B2A77C4EA005A48F9 /* CheckinUseCase.swift */; };
 		CF355C8E2A77C51F005A48F9 /* LocalCheckingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF355C8D2A77C51F005A48F9 /* LocalCheckingRepository.swift */; };
@@ -665,10 +665,10 @@
 		CF30B19A2A13ECEB00C43A54 /* TransactionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionType.swift; sourceTree = "<group>"; };
 		CF3282EC299E3758006A459B /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		CF340D0C2AD06FF4001762F6 /* .natrium.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .natrium.yml; sourceTree = SOURCE_ROOT; };
-		CF340D352AD07AFC001762F6 /* ProjectEnvironment.dev.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = ProjectEnvironment.dev.xcconfig; path = Pods/Natrium/Natrium/ProjectEnvironment.dev.xcconfig; sourceTree = SOURCE_ROOT; };
-		CF340D362AD07AFC001762F6 /* natrium.log */ = {isa = PBXFileReference; lastKnownFileType = file; name = natrium.log; path = Pods/Natrium/Natrium/natrium.log; sourceTree = SOURCE_ROOT; };
-		CF340D372AD07AFC001762F6 /* ProjectEnvironment.appstore.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = ProjectEnvironment.appstore.xcconfig; path = Pods/Natrium/Natrium/ProjectEnvironment.appstore.xcconfig; sourceTree = SOURCE_ROOT; };
+		CF340D362AD07AFC001762F6 /* natrium.log */ = {isa = PBXFileReference; lastKnownFileType = text; name = natrium.log; path = Pods/Natrium/Natrium/natrium.log; sourceTree = SOURCE_ROOT; };
 		CF340D382AD07AFC001762F6 /* Natrium.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Natrium.swift; path = Pods/Natrium/Natrium/Natrium.swift; sourceTree = SOURCE_ROOT; };
+		CF340D512AD1CC04001762F6 /* ProjectEnvironment.release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = ProjectEnvironment.release.xcconfig; path = Pods/Natrium/Natrium/ProjectEnvironment.release.xcconfig; sourceTree = SOURCE_ROOT; };
+		CF340D522AD1CC04001762F6 /* ProjectEnvironment.debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = ProjectEnvironment.debug.xcconfig; path = Pods/Natrium/Natrium/ProjectEnvironment.debug.xcconfig; sourceTree = SOURCE_ROOT; };
 		CF355C892A77C18B005A48F9 /* CheckinProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinProgress.swift; sourceTree = "<group>"; };
 		CF355C8B2A77C4EA005A48F9 /* CheckinUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckinUseCase.swift; sourceTree = "<group>"; };
 		CF355C8D2A77C51F005A48F9 /* LocalCheckingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCheckingRepository.swift; sourceTree = "<group>"; };
@@ -1505,8 +1505,8 @@
 			children = (
 				CF340D362AD07AFC001762F6 /* natrium.log */,
 				CF340D382AD07AFC001762F6 /* Natrium.swift */,
-				CF340D372AD07AFC001762F6 /* ProjectEnvironment.appstore.xcconfig */,
-				CF340D352AD07AFC001762F6 /* ProjectEnvironment.dev.xcconfig */,
+				CF340D522AD1CC04001762F6 /* ProjectEnvironment.debug.xcconfig */,
+				CF340D512AD1CC04001762F6 /* ProjectEnvironment.release.xcconfig */,
 			);
 			path = Natrium;
 			sourceTree = "<group>";
@@ -3899,15 +3899,15 @@
 			files = (
 				CFFD7089298ABA0100D4F5A2 /* Preview Assets.xcassets in Resources */,
 				CF53D55D2A6AF548009B3A69 /* LaunchBackgroundUIView.xib in Resources */,
-				CF340D3B2AD07AFC001762F6 /* ProjectEnvironment.appstore.xcconfig in Resources */,
 				CF53D55A2A6AF548009B3A69 /* Launch Screen.strings in Resources */,
 				CF53D55B2A6AF548009B3A69 /* Launch Screen.storyboard in Resources */,
 				CF00D14E299407EB00505702 /* Localizable.strings in Resources */,
+				CF340D532AD1CC04001762F6 /* ProjectEnvironment.release.xcconfig in Resources */,
 				CFFD718D298AD38C00D4F5A2 /* ColorAssets.xcassets in Resources */,
+				CF340D542AD1CC04001762F6 /* ProjectEnvironment.debug.xcconfig in Resources */,
 				CFFD7086298ABA0100D4F5A2 /* ImageAssets.xcassets in Resources */,
 				CF14F25E298CE68600BC2066 /* GoogleService-Info.plist in Resources */,
 				CF446B8E29D8A97700ED66BF /* LottieAssets.xcassets in Resources */,
-				CF340D392AD07AFC001762F6 /* ProjectEnvironment.dev.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4670,8 +4670,9 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		CF1E5D812A699D8200481376 /* AppStore */ = {
+		CF1E5D812A699D8200481376 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CF340D512AD1CC04001762F6 /* ProjectEnvironment.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -4722,11 +4723,11 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = AppStore;
+			name = Release;
 		};
-		CF1E5D822A699D8200481376 /* AppStore */ = {
+		CF1E5D822A699D8200481376 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5879C2BFEBE4D9558BAF7834 /* Pods-Noljanolja.appstore.xcconfig */;
+			baseConfigurationReference = 0DBF76FA6A01D9DCD69E6220 /* Pods-Noljanolja.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -4765,11 +4766,11 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = AppStore;
+			name = Release;
 		};
-		CF1E5D832A699D8200481376 /* AppStore */ = {
+		CF1E5D832A699D8200481376 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D679419D0EF876C4EEBBF3F7 /* Pods-NoljanoljaTests.appstore.xcconfig */;
+			baseConfigurationReference = F53231636127B61B7E5B0B97 /* Pods-NoljanoljaTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -4785,11 +4786,11 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Noljanolja.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Noljanolja";
 			};
-			name = AppStore;
+			name = Release;
 		};
-		CF1E5D842A699D8200481376 /* AppStore */ = {
+		CF1E5D842A699D8200481376 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6715BC6ABC822611987F15CD /* Pods-Noljanolja-NoljanoljaUITests.appstore.xcconfig */;
+			baseConfigurationReference = 216373F9231F3C6A300BE8C9 /* Pods-Noljanolja-NoljanoljaUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -4803,10 +4804,11 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Noljanolja;
 			};
-			name = AppStore;
+			name = Release;
 		};
-		CFFD70A0298ABA0100D4F5A2 /* Dev */ = {
+		CFFD70A0298ABA0100D4F5A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CF340D522AD1CC04001762F6 /* ProjectEnvironment.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -4863,11 +4865,11 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = Dev;
+			name = Debug;
 		};
-		CFFD70A3298ABA0100D4F5A2 /* Dev */ = {
+		CFFD70A3298ABA0100D4F5A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5474C50410F0452A681DEAAB /* Pods-Noljanolja.dev.xcconfig */;
+			baseConfigurationReference = 67F6E05E9B2EC43CAF12E51A /* Pods-Noljanolja.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -4906,11 +4908,11 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Dev;
+			name = Debug;
 		};
-		CFFD70A6298ABA0100D4F5A2 /* Dev */ = {
+		CFFD70A6298ABA0100D4F5A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CCA5F0DD9B3B2290AE80BE14 /* Pods-NoljanoljaTests.dev.xcconfig */;
+			baseConfigurationReference = 73EF59F50B2CC10F71D05CCA /* Pods-NoljanoljaTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -4926,11 +4928,11 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Noljanolja.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Noljanolja";
 			};
-			name = Dev;
+			name = Debug;
 		};
-		CFFD70A9298ABA0100D4F5A2 /* Dev */ = {
+		CFFD70A9298ABA0100D4F5A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8ECA425ABE84B0928E360095 /* Pods-Noljanolja-NoljanoljaUITests.dev.xcconfig */;
+			baseConfigurationReference = 9437E8407EBB11681966323A /* Pods-Noljanolja-NoljanoljaUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -4944,7 +4946,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Noljanolja;
 			};
-			name = Dev;
+			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
@@ -4952,38 +4954,38 @@
 		CFFD7079298AB9FF00D4F5A2 /* Build configuration list for PBXProject "Noljanolja" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CFFD70A0298ABA0100D4F5A2 /* Dev */,
-				CF1E5D812A699D8200481376 /* AppStore */,
+				CFFD70A0298ABA0100D4F5A2 /* Debug */,
+				CF1E5D812A699D8200481376 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Dev;
+			defaultConfigurationName = Debug;
 		};
 		CFFD70A2298ABA0100D4F5A2 /* Build configuration list for PBXNativeTarget "Noljanolja" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CFFD70A3298ABA0100D4F5A2 /* Dev */,
-				CF1E5D822A699D8200481376 /* AppStore */,
+				CFFD70A3298ABA0100D4F5A2 /* Debug */,
+				CF1E5D822A699D8200481376 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Dev;
+			defaultConfigurationName = Debug;
 		};
 		CFFD70A5298ABA0100D4F5A2 /* Build configuration list for PBXNativeTarget "NoljanoljaTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CFFD70A6298ABA0100D4F5A2 /* Dev */,
-				CF1E5D832A699D8200481376 /* AppStore */,
+				CFFD70A6298ABA0100D4F5A2 /* Debug */,
+				CF1E5D832A699D8200481376 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Dev;
+			defaultConfigurationName = Debug;
 		};
 		CFFD70A8298ABA0100D4F5A2 /* Build configuration list for PBXNativeTarget "NoljanoljaUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CFFD70A9298ABA0100D4F5A2 /* Dev */,
-				CF1E5D842A699D8200481376 /* AppStore */,
+				CFFD70A9298ABA0100D4F5A2 /* Debug */,
+				CF1E5D842A699D8200481376 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Dev;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 
