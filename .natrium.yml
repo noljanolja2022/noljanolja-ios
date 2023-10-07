@@ -3,12 +3,19 @@ environments:
   - AppStore
 
 xcconfig:
-    CONFIG_PRODUCT_BUNDLE_IDENTIFIER:
+    NATRIUM_PRODUCT_BUNDLE_IDENTIFIER:
         Dev: com.noljanolja.app.ios
         AppStore: com.ppnyy.nolgobulja
-    CONFIG_DISPLAY_NAME:
+    NATRIUM_DISPLAY_NAME:
         Dev: NolgoBulja Dev
         AppStore: NolgoBulja
+    NATRIUM_PROVISIONING_PROFILE_SPECIFIER:
+        Dev:
+            Debug: NolgoBulja-Dev-Development
+            Release:
+        AppStore:
+            Debug: NolgoBulja-AppStore-Development
+            Release: NolgoBulja-AppStore-Distribution
 
 files:
     Noljanolja/Configs/FireBases/GoogleService-Info.plist:
