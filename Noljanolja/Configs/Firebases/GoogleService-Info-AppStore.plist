@@ -3,32 +3,32 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>954965503519-ajo51hke58jsfhalvonone0eujp65elr.apps.googleusercontent.com</string>
+	<string>178013335305-k5uo0q32lure8a4p70rvcnvv7acmfi9s.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.954965503519-ajo51hke58jsfhalvonone0eujp65elr</string>
+	<string>com.googleusercontent.apps.178013335305-k5uo0q32lure8a4p70rvcnvv7acmfi9s</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAB3iOXKSBHEoFZWVV1-LgsmvWDQU8z00c</string>
+	<string>AIzaSyBBdA4r9vVfEWgpBUSlAc4guJQV9hUnuek</string>
 	<key>GCM_SENDER_ID</key>
-	<string>954965503519</string>
+	<string>178013335305</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.noljanolja.app.ios</string>
+	<string>com.ppnyy.nolgobulja</string>
 	<key>PROJECT_ID</key>
-	<string>noljanolja2023</string>
+	<string>nolgobulja-2023</string>
 	<key>STORAGE_BUCKET</key>
-	<string>noljanolja2023.appspot.com</string>
+	<string>nolgobulja-2023.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:954965503519:ios:cff20b8f7c8c550f1d6f2a</string>
+	<string>1:178013335305:ios:3bad15109e1aa48c306dd8</string>
 </dict>
 </plist>
