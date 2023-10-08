@@ -5,6 +5,24 @@
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
+      <PreActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Natrium"
+               scriptText = "# Type a script or drag a script file from your workspace to insert its path.&#10;&quot;${PROJECT_DIR}/Pods/Natrium/Natrium/natrium&quot; Dev&#10;">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "CFFD707D298AB9FF00D4F5A2"
+                     BuildableName = "Noljanolja.app"
+                     BlueprintName = "Noljanolja"
+                     ReferencedContainer = "container:Noljanolja.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PreActions>
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
@@ -23,7 +41,7 @@
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Dev"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
@@ -75,7 +93,7 @@
       </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Ad hoc"
+      buildConfiguration = "Dev"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -92,10 +110,10 @@
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Debug">
+      buildConfiguration = "Dev">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Ad hoc"
+      buildConfiguration = "Dev"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

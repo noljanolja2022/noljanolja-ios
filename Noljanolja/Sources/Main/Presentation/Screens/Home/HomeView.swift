@@ -301,6 +301,13 @@ extension HomeView {
         switch type.wrappedValue {
         case let .banners(banners):
             BannersView(viewModel: BannersViewModel(banners: banners))
+        case .notificationSetting:
+            NotificationSettingView(
+                viewModel: NotificationSettingViewModel()
+            )
+            .introspectViewController { viewController in
+                viewController.view.backgroundColor = .clear
+            }
         }
     }
 }

@@ -16,13 +16,13 @@ import UIKit
 
 final class AppDelegate: NSObject, UIApplicationDelegate {
     var window: UIWindow?
-    private lazy var appDelegates: [AppDelegateProtocol] = [FrameworkAppDelegate(), AuthAppDelegate(), NotificationAppDelegate()]
+    private lazy var appDelegates: [UIApplicationDelegate] = [FrameworkAppDelegate(), AuthAppDelegate(), NotificationAppDelegate()]
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         appDelegates
-            .map { appDelegate in
-                appDelegate.application(application, didFinishLaunchingWithOptions: launchOptions)
+            .compactMap { appDelegate in
+                appDelegate.application?(application, didFinishLaunchingWithOptions: launchOptions)
             }
             .reduce(true) { $0 && $1 }
     }
@@ -30,7 +30,14 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         appDelegates
             .forEach { appDelegate in
-                appDelegate.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
+                appDelegate.application?(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
+            }
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        appDelegates
+            .forEach { appDelegate in
+                appDelegate.application?(application, didFailToRegisterForRemoteNotificationsWithError: error)
             }
     }
 
@@ -39,14 +46,14 @@ final class AppDelegate: NSObject, UIApplicationDelegate {
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         appDelegates
             .forEach { appDelegate in
-                appDelegate.application(application, didReceiveRemoteNotification: notification, fetchCompletionHandler: completionHandler)
+                appDelegate.application?(application, didReceiveRemoteNotification: notification, fetchCompletionHandler: completionHandler)
             }
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         appDelegates
-            .map { appDelegate in
-                appDelegate.application(app, open: url, options: options)
+            .compactMap { appDelegate in
+                appDelegate.application?(app, open: url, options: options)
             }
             .reduce(false) { $0 || $1 }
     }

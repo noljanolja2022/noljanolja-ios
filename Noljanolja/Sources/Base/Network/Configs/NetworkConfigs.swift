@@ -9,8 +9,8 @@ import Foundation
 
 enum NetworkConfigs {
     enum BaseUrl {
-        static let baseUrl = "http://dev.consumer-service.ppnyy.com/api"
-        static let socketBaseUrl = "ws://34.64.110.104/rsocket"
+        static let baseUrl = Natrium.Config.baseUrl
+        static let socketBaseUrl = Natrium.Config.socketBaseUrl
     }
 
     enum Format {

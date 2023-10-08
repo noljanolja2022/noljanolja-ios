@@ -16,7 +16,7 @@ import UIKit
 
 // MARK: - AppDelegate
 
-final class AuthAppDelegate: NSObject, AppDelegateProtocol {
+final class AuthAppDelegate: NSObject, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         Auth.auth().canHandle(url)
             || GIDSignIn.sharedInstance.handle(url)

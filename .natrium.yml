@@ -1,0 +1,48 @@
+environments:
+  - Dev
+  - AppStore
+
+xcconfig:
+    NATRIUM_PRODUCT_BUNDLE_IDENTIFIER:
+        Dev: com.noljanolja.app.ios
+        AppStore: com.ppnyy.nolgobulja
+    NATRIUM_DISPLAY_NAME:
+        Dev: NolgoBulja Dev
+        AppStore: NolgoBulja
+    NATRIUM_PROVISIONING_PROFILE_SPECIFIER:
+        Dev:
+            Debug: NolgoBulja-Dev-Development
+            Release:
+        AppStore:
+            Debug: NolgoBulja-AppStore-Development
+            Release: NolgoBulja-AppStore-Distribution
+    NATRIUM_GID_CLIENT_ID:
+        Dev: 954965503519-ajo51hke58jsfhalvonone0eujp65elr.apps.googleusercontent.com
+        AppStore: 178013335305-u139pt1c45nv77u97shthoqi2tp0jafv.apps.googleusercontent.com
+    NATRIUM_DOT_REVERSED_GID_CLIENT_ID:
+        Dev: com.googleusercontent.apps.954965503519-ajo51hke58jsfhalvonone0eujp65elr
+        AppStore: com.googleusercontent.apps.178013335305-u139pt1c45nv77u97shthoqi2tp0jafv
+
+files:
+    Noljanolja/Configs/FireBases/GoogleService-Info.plist:
+        Dev: Noljanolja/Configs/FireBases/GoogleService-Info-Dev.plist
+        AppStore: Noljanolja/Configs/FireBases/GoogleService-Info-AppStore.plist
+
+appicon:
+    original: Noljanolja/Resources/Sources/ImageAssets.xcassets/AppIcon.appiconset/Source.png
+    appiconset: Noljanolja/Resources/Sources/ImageAssets.xcassets/AppIcon.appiconset/
+    all_sizes: false
+    idioms:
+        - ipad
+        - iphone
+    ribbon:
+        Dev: "Dev"
+        AppStore: ""
+
+variables:
+    baseUrl:
+        Dev: "http://dev.consumer-service.ppnyy.com/api"
+        AppStore: "http://consumer-service.ppnyy.com/api"
+    socketBaseUrl:
+        Dev: "ws://34.64.110.104/rsocket"
+        AppStore: "ws://34.64.110.104/rsocket"
