@@ -46,6 +46,10 @@ final class MainViewModel: ViewModel {
     }
 
     private func configure() {
+        configureVideoDetail()
+    }
+    
+    private func configureVideoDetail() {
         Publishers.CombineLatest(
             VideoDetailViewModel.shared.$contentType,
             isHomeAppearSubject

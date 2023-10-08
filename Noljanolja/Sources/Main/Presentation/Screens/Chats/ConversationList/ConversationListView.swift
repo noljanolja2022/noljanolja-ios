@@ -153,13 +153,6 @@ extension ConversationListView {
                 navigationController.view.backgroundColor = .clear
                 navigationController.parent?.view.backgroundColor = .clear
             }
-        case .notificationSetting:
-            NotificationSettingView(
-                viewModel: NotificationSettingViewModel()
-            )
-            .introspectViewController { viewController in
-                viewController.view.backgroundColor = .clear
-            }
         }
     }
 }
