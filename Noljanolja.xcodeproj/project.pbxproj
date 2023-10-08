@@ -391,7 +391,6 @@
 		CF775BBC29C6250E00E82183 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF775BBB29C6250E00E82183 /* AppDelegate.swift */; };
 		CF775BBE29C625C900E82183 /* NotificationAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF775BBD29C625C900E82183 /* NotificationAppDelegate.swift */; };
 		CF775BC029C6269200E82183 /* AuthAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF775BBF29C6269200E82183 /* AuthAppDelegate.swift */; };
-		CF775BC229C6287F00E82183 /* AppDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF775BC129C6287F00E82183 /* AppDelegateProtocol.swift */; };
 		CF775BC429C62B3000E82183 /* FrameworkAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF775BC329C62B3000E82183 /* FrameworkAppDelegate.swift */; };
 		CF775BC629C62CF400E82183 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = CF775BC529C62CF400E82183 /* FirebaseMessaging */; };
 		CF775BC829C62EB200E82183 /* NetworkNotificationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF775BC729C62EB200E82183 /* NetworkNotificationRepository.swift */; };
@@ -979,7 +978,6 @@
 		CF775BBB29C6250E00E82183 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF775BBD29C625C900E82183 /* NotificationAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAppDelegate.swift; sourceTree = "<group>"; };
 		CF775BBF29C6269200E82183 /* AuthAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAppDelegate.swift; sourceTree = "<group>"; };
-		CF775BC129C6287F00E82183 /* AppDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateProtocol.swift; sourceTree = "<group>"; };
 		CF775BC329C62B3000E82183 /* FrameworkAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameworkAppDelegate.swift; sourceTree = "<group>"; };
 		CF775BC729C62EB200E82183 /* NetworkNotificationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkNotificationRepository.swift; sourceTree = "<group>"; };
 		CF775BC929C630B800E82183 /* NotificationUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUseCases.swift; sourceTree = "<group>"; };
@@ -3033,7 +3031,6 @@
 			isa = PBXGroup;
 			children = (
 				CF775BBB29C6250E00E82183 /* AppDelegate.swift */,
-				CF775BC129C6287F00E82183 /* AppDelegateProtocol.swift */,
 				CF775BBF29C6269200E82183 /* AuthAppDelegate.swift */,
 				CF775BBD29C625C900E82183 /* NotificationAppDelegate.swift */,
 				CF775BC329C62B3000E82183 /* FrameworkAppDelegate.swift */,
@@ -4381,7 +4378,6 @@
 				CFB0A82D29F1BD3800298546 /* VideoTrendingDurationType.swift in Sources */,
 				CFAD53592A781ECE0044CB42 /* CheckinOverviewView.swift in Sources */,
 				CF53D5D72A6AF548009B3A69 /* UpdateConversationContactListUseCase.swift in Sources */,
-				CF775BC229C6287F00E82183 /* AppDelegateProtocol.swift in Sources */,
 				CF53D61C2A6AF548009B3A69 /* MessageActionDetailView.swift in Sources */,
 				CF53D61A2A6AF548009B3A69 /* MessageImagesViewModel.swift in Sources */,
 				CF1E5D7F2A69878700481376 /* CameraView.swift in Sources */,
