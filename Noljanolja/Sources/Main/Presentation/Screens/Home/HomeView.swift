@@ -177,9 +177,6 @@ struct HomeView<ViewModel: HomeViewModel>: View {
         if viewModel.tabs.contains(.chat) {
             buildTabView(.chat)
         }
-        if viewModel.tabs.contains(.friends) {
-            buildTabView(.friends)
-        }
         if viewModel.tabs.contains(.watch) {
             buildTabView(.watch)
         }
@@ -189,39 +186,43 @@ struct HomeView<ViewModel: HomeViewModel>: View {
         if viewModel.tabs.contains(.shop) {
             buildTabView(.shop)
         }
+        if viewModel.tabs.contains(.friends) {
+            buildTabView(.friends)
+        }
     }
 
     @ViewBuilder
     private func buildTabView(_ tab: HomeTabType) -> some View {
         VideoDetailRootContainerView(
             content: {
-                switch tab {
-                case .chat:
-                    ConversationListView(
-                        viewModel: ConversationListViewModel(
-                            delegate: viewModel
-                        ),
-                        toolBarAction: toolBarActionSubject.eraseToAnyPublisher()
-                    )
-                case .friends:
-                    HomeFriendView(
-                        viewModel: HomeFriendViewModel()
-                    )
-                case .watch:
-                    VideosView(
-                        viewModel: VideosViewModel()
-                    )
-                case .wallet:
-                    WalletView(
-                        viewModel: WalletViewModel(
-                            delegate: viewModel
-                        )
-                    )
-                case .shop:
-                    ShopHomeView(
-                        viewModel: ShopHomeViewModel()
-                    )
-                }
+                ComingSoonView()
+//                switch tab {
+//                case .chat:
+//                    ConversationListView(
+//                        viewModel: ConversationListViewModel(
+//                            delegate: viewModel
+//                        ),
+//                        toolBarAction: toolBarActionSubject.eraseToAnyPublisher()
+//                    )
+//                case .watch:
+//                    VideosView(
+//                        viewModel: VideosViewModel()
+//                    )
+//                case .wallet:
+//                    WalletView(
+//                        viewModel: WalletViewModel(
+//                            delegate: viewModel
+//                        )
+//                    )
+//                case .shop:
+//                    ShopHomeView(
+//                        viewModel: ShopHomeViewModel()
+//                    )
+//                case .friends:
+//                    HomeFriendView(
+//                        viewModel: HomeFriendViewModel()
+//                    )
+//                }
             },
             viewModel: VideoDetailRootContainerViewModel()
         )
@@ -233,9 +234,6 @@ struct HomeView<ViewModel: HomeViewModel>: View {
         if viewModel.tabs.contains(.chat) {
             buildTabItemView(.chat)
         }
-        if viewModel.tabs.contains(.friends) {
-            buildTabItemView(.friends)
-        }
         if viewModel.tabs.contains(.watch) {
             buildTabItemView(.watch)
         }
@@ -244,6 +242,9 @@ struct HomeView<ViewModel: HomeViewModel>: View {
         }
         if viewModel.tabs.contains(.shop) {
             buildTabItemView(.shop)
+        }
+        if viewModel.tabs.contains(.friends) {
+            buildTabItemView(.friends)
         }
     }
 

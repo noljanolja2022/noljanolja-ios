@@ -47,7 +47,7 @@ enum HomeTabType: Equatable {
     var imageName: String {
         switch self {
         case .chat: return ImageAssets.icChat.name
-        case .friends: return ImageAssets.icChat.name
+        case .friends: return ImageAssets.icFriends.name
         case .watch: return ImageAssets.icVideo.name
         case .wallet: return ImageAssets.icWallet.name
         case .shop: return ImageAssets.icShop.name
