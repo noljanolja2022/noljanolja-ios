@@ -19,7 +19,7 @@ import UIKit
 
 // MARK: - FrameworkAppDelegate
 
-final class FrameworkAppDelegate: NSObject, AppDelegateProtocol {
+final class FrameworkAppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         configureIQKeyboard()

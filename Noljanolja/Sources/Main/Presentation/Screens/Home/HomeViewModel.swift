@@ -8,6 +8,7 @@
 
 import Combine
 import Foundation
+import SwiftUIX
 
 // MARK: - HomeViewModelDelegate
 
@@ -34,6 +35,7 @@ final class HomeViewModel: ViewModel {
 
     // MARK: Dependencies
 
+    private let userNotificationCenter = UNUserNotificationCenter.current()
     private let bannerRepository: BannerRepository
     private weak var delegate: HomeViewModelDelegate?
 
@@ -51,8 +53,37 @@ final class HomeViewModel: ViewModel {
     }
 
     private func configure() {
+        configureNotificationPermission()
         configureLoadData()
         configureActions()
+    }
+    
+    private func configureNotificationPermission() {
+        isAppearSubject
+            .filter { $0 }
+            .first()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self else { return }
+                self.userNotificationCenter.getNotificationSettings { [weak self] notificationSettings in
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self else { return }
+                        switch notificationSettings.authorizationStatus {
+                        case .notDetermined:
+                            self.userNotificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in }
+                        case .denied:
+                            withoutAnimation {
+                                self.fullScreenCoverType = .notificationSetting
+                            }
+                        case .authorized, .provisional, .ephemeral:
+                            break
+                        @unknown default:
+                            break
+                        }
+                    }
+                }
+            }
+            .store(in: &cancellables)
     }
 
     private func configureLoadData() {
