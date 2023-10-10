@@ -17,7 +17,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.954965503519-ajo51hke58jsfhalvonone0eujp65elr</string>
+				<string>$NATRIUM_DOT_REVERSED_GID_CLIENT_ID</string>
 			</array>
 		</dict>
 		<dict>
@@ -30,7 +30,7 @@
 		</dict>
 	</array>
 	<key>GIDClientID</key>
-	<string>954965503519-ajo51hke58jsfhalvonone0eujp65elr.apps.googleusercontent.com</string>
+	<string>$NATRIUM_GID_CLIENT_ID</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>

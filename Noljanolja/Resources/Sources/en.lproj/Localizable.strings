@@ -140,10 +140,10 @@
 "contacts_title_add_memmber" = "Add members";
 "contacts_not_found" = "No contacts found";
 "permission" = "Permission";
-"permission_contacts_description" = "To help you message friends and family on Noljanolja, allow Noljanolja access to your contacts.";
-"permission_access_storage_description" = "To help you access gallery on Noljanolja, allow Noljanolja access to your media files.";
+"permission_contacts_description" = "To help you message friends and family on Nolgobulja, allow Nolgobulja access to your contacts.";
+"permission_access_storage_description" = "To help you access gallery on Nolgobulja, allow Nolgobulja access to your media files.";
 "permission_accept" = "Accept";
-"permission_required_description" = "You\'re unable to use this feature without the required permissions. \nTap the Settings button to allow Noljanolja to access the required permission.";
+"permission_required_description" = "You\'re unable to use this feature without the required permissions. \nTap the Settings button to allow Nolgobulja to access the required permission.";
 "permission_go_to_settings" = "Settings";
 "conversation_empty" = "Add friends to chat now.";
 "conversation_create" = "%@ created conversation";
@@ -326,7 +326,7 @@
 "chat_action_forward" = "Forward";
 "chat_action_copy" = "Copy";
 "chat_action_delete" = "Delete";
-"permission_camera" = "To help you send image or video, allow Noljanolja access to your camera.";
+"permission_camera" = "To help you send image or video, allow Nolgobulja access to your camera.";
 "chat_settings_title" = "Chat Settings";
 "chat_settings_change_avatar" = "Change avatar";
 "video_earn_point" = "+ Earn %@";

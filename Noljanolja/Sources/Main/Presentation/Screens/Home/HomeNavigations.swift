@@ -75,5 +75,6 @@ enum HomeNavigationType {
 // MARK: - HomeScreenCoverType
 
 enum HomeScreenCoverType: Equatable {
+    case notificationSetting
     case banners([Banner])
 }

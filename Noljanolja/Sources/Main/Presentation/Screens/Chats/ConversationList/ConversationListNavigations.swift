@@ -18,5 +18,4 @@ enum ConversationListNavigationType {
 
 enum ConversationListFullScreenCoverType {
     case createConversation
-    case notificationSetting
 }

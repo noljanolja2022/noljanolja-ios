@@ -11,7 +11,7 @@ import UIKit
 
 // MARK: - NotificationAppDelegate
 
-final class NotificationAppDelegate: NSObject, AppDelegateProtocol {
+final class NotificationAppDelegate: NSObject, UIApplicationDelegate {
     private let notificationUseCases: NotificationUseCases
 
     init(notificationUseCases: NotificationUseCases = NotificationUseCasesImpl.default) {
@@ -30,9 +30,13 @@ final class NotificationAppDelegate: NSObject, AppDelegateProtocol {
         return true
     }
 
-    func application(application: UIApplication,
+    func application(_ application: UIApplication,
                      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Messaging.messaging().apnsToken = deviceToken
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Error", error)
     }
 }
 
