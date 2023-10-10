@@ -80,7 +80,7 @@ struct GoogleAuthView<ViewModel: GoogleAuthViewModel>: View {
                 .dynamicFont(.systemFont(ofSize: 32, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            Text("Welcome to Nolja Nolja. Please connect your Google account to continue.")
+            Text(L10n.loginGoogleDescription)
                 .dynamicFont(.systemFont(ofSize: 14))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
@@ -100,7 +100,7 @@ struct GoogleAuthView<ViewModel: GoogleAuthViewModel>: View {
                         .scaleEffect(1.2)
                         .scaledToFill()
                         .cornerRadius(20)
-                    Text("Connect with Google")
+                    Text(L10n.loginGoogleButton)
                         .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }

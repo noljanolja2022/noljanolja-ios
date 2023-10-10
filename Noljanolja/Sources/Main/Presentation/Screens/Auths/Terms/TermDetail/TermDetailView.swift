@@ -57,7 +57,7 @@ struct TermDetailView<ViewModel: TermDetailViewModel>: View {
                 }
             )
 
-            Text(L10n.tosTitle)
+            Text(termType.title)
                 .dynamicFont(.systemFont(ofSize: 32, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
 

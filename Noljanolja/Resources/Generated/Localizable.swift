@@ -162,6 +162,8 @@ internal enum L10n {
   internal static let chatsTitle = L10n.tr("Localizable", "chats_title", fallback: "Chats")
   /// Checkout and play
   internal static let checkoutAndPlay = L10n.tr("Localizable", "checkout_and_play", fallback: "Checkout and play")
+  /// Welcome to NolgoBulja. We will be coming soon. Thank you.
+  internal static let comingSoonDescription = L10n.tr("Localizable", "coming_soon_description", fallback: "Welcome to NolgoBulja. We will be coming soon. Thank you.")
   /// Admin
   internal static let commonAdmin = L10n.tr("Localizable", "common_admin", fallback: "Admin")
   /// Agree
@@ -424,12 +426,16 @@ internal enum L10n {
   internal static let loginConfirmPhoneDescription = L10n.tr("Localizable", "login_confirm_phone_description", fallback: "You will receive a code to verify to this phone number via text message.")
   /// Country
   internal static let loginCountryInputLabel = L10n.tr("Localizable", "login_country_input_label", fallback: "Country")
+  /// Connect with Google
+  internal static let loginGoogleButton = L10n.tr("Localizable", "login_google_button", fallback: "Connect with Google")
+  /// Welcome to NolgoBulja. Please connect your Google account to continue.
+  internal static let loginGoogleDescription = L10n.tr("Localizable", "login_google_description", fallback: "Welcome to NolgoBulja. Please connect your Google account to continue.")
   /// Please input the correct phone number since this number will be used to verify your account.
   internal static let loginInvalidPhoneDescription = L10n.tr("Localizable", "login_invalid_phone_description", fallback: "Please input the correct phone number since this number will be used to verify your account.")
   /// Incorrect Number
   internal static let loginInvalidPhoneTitle = L10n.tr("Localizable", "login_invalid_phone_title", fallback: "Incorrect Number")
-  /// Welcome to Nolja Nolja. Please enter your Phone number to join continue.
-  internal static let loginPhoneDescription = L10n.tr("Localizable", "login_phone_description", fallback: "Welcome to Nolja Nolja. Please enter your Phone number to join continue.")
+  /// Welcome to NolgoBulja. Please enter your Phone number to join continue.
+  internal static let loginPhoneDescription = L10n.tr("Localizable", "login_phone_description", fallback: "Welcome to NolgoBulja. Please enter your Phone number to join continue.")
   /// Phone Number
   internal static let loginPhoneInputLabel = L10n.tr("Localizable", "login_phone_input_label", fallback: "Phone Number")
   /// Announcement
@@ -488,12 +494,12 @@ internal enum L10n {
   internal static let permissionContactsDescription = L10n.tr("Localizable", "permission_contacts_description", fallback: "To help you message friends and family on Nolgobulja, allow Nolgobulja access to your contacts.")
   /// Settings
   internal static let permissionGoToSettings = L10n.tr("Localizable", "permission_go_to_settings", fallback: "Settings")
-  /// Permit Nolja Nolja to send you notification in order to
+  /// Permit NolgoBulja to send you notification in order to
   /// conect with your friends.
-  internal static let permissionNotificationDescription = L10n.tr("Localizable", "permission_notification_description", fallback: "Permit Nolja Nolja to send you notification in order to\nconect with your friends.")
+  internal static let permissionNotificationDescription = L10n.tr("Localizable", "permission_notification_description", fallback: "Permit NolgoBulja to send you notification in order to\nconect with your friends.")
   /// Turn on notification
-  /// for Nolja Nolja
-  internal static let permissionNotificationTitle = L10n.tr("Localizable", "permission_notification_title", fallback: "Turn on notification\nfor Nolja Nolja")
+  /// for NolgoBulja
+  internal static let permissionNotificationTitle = L10n.tr("Localizable", "permission_notification_title", fallback: "Turn on notification\nfor NolgoBulja")
   /// You're unable to use this feature without the required permissions. 
   /// Tap the Settings button to allow Nolgobulja to access the required permission.
   internal static let permissionRequiredDescription = L10n.tr("Localizable", "permission_required_description", fallback: "You're unable to use this feature without the required permissions. \nTap the Settings button to allow Nolgobulja to access the required permission.")
@@ -640,10 +646,10 @@ internal enum L10n {
   internal static let tosOptionalItemTitle2 = L10n.tr("Localizable", "tos_optional_item_title_2", fallback: "Collection and Use of Profile Information")
   /// I have read and agreed to all terms and conditions
   internal static let tosReadAndAgree = L10n.tr("Localizable", "tos_read_and_agree", fallback: "I have read and agreed to all terms and conditions")
-  /// Terms of service
-  internal static let tosTitle = L10n.tr("Localizable", "tos_title", fallback: "Terms of service")
-  /// Welcome to Nolja Nolja. Please read our terms of service carefully.
-  internal static let tosWelcome = L10n.tr("Localizable", "tos_welcome", fallback: "Welcome to Nolja Nolja. Please read our terms of service carefully.")
+  /// Term of Service
+  internal static let tosTitle = L10n.tr("Localizable", "tos_title", fallback: "Term of Service")
+  /// Welcome to NolgoBulja. Please read our terms of service carefully.
+  internal static let tosWelcome = L10n.tr("Localizable", "tos_welcome", fallback: "Welcome to NolgoBulja. Please read our terms of service carefully.")
   /// Detail Transaction
   internal static let transactionDetail = L10n.tr("Localizable", "transaction_detail", fallback: "Detail Transaction")
   /// Transaction code

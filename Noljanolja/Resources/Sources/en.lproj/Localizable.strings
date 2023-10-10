@@ -69,7 +69,9 @@
 "home_wallet" = "Wallet";
 "home_shop" = "Shop";
 "home_news" = "News";
-"login_phone_description" = "Welcome to Nolja Nolja. Please enter your Phone number to join continue.";
+"login_phone_description" = "Welcome to NolgoBulja. Please enter your Phone number to join continue.";
+"login_google_description" = "Welcome to NolgoBulja. Please connect your Google account to continue.";
+"login_google_button" = "Connect with Google";
 "login_country_input_label" = "Country";
 "login_phone_input_label" = "Phone Number";
 "login_invalid_phone_title" = "Incorrect Number";
@@ -109,7 +111,7 @@
 "menu_checkout_and_play" = "Check out and play";
 "menu_point_details" = "Point details";
 "menu_exchange_money" = "Exchanging money";
-"tos_title" = "Terms of service";
+"tos_title" = "Term of Service";
 "tos_description" = "You may choose to agree to the terms individually. \nYou may use the service even if you don\'t agree to the optional terms and conditions";
 "tos_compulsory" = "Compulsory";
 "tos_compulsory_item_title_1" = "I\'m 14 years old older.";
@@ -246,11 +248,11 @@
 "setting_license_title" = "Open source license";
 "setting_about_us_title" = "About us";
 "splash_welcome" = "Welcome to NolgoBulja. Follow these steps to be our member.";
-"tos_welcome" = "Welcome to Nolja Nolja. Please read our terms of service carefully.";
+"tos_welcome" = "Welcome to NolgoBulja. Please read our terms of service carefully.";
 "common_try_again" = "Try again";
 "auth_welcome" = "Welcome to NolgoBulja. Follow these steps to be our member.";
-"permission_notification_title" = "Turn on notification\nfor Nolja Nolja";
-"permission_notification_description" = "Permit Nolja Nolja to send you notification in order to\nconect with your friends.";
+"permission_notification_title" = "Turn on notification\nfor NolgoBulja";
+"permission_notification_description" = "Permit NolgoBulja to send you notification in order to\nconect with your friends.";
 "common_send" = "Send";
 "common_saved" = "Saved";
 "common_edit" = "Edit";
@@ -297,7 +299,7 @@
 "scan_qr_code_title" = "Scan QR code";
 "chat_setting_friend_management" = "Friends management";
 "chat_setting_auto_add_friend" = "Automatically add friends";
-"chat_setting_auto_add_description" = "Users who use NolgoBulja app in your Directory will be synchronized automatically with friendlist in Nolja Nolja.";
+"chat_setting_auto_add_description" = "Users who use NolgoBulja app in your Directory will be synchronized automatically with friendlist in NolgoBulja.";
 "chat_setting_all_friends" = "All friends";
 "chat_setting_hide_friends" = "Hiden friends";
 "chat_setting_blocked_friends" = "Blocked friends";
@@ -417,3 +419,4 @@
 "invalid_referral_message" = "Sorry, Please check your code again or skip this step";
 "video_search_video" = "Search video";
 "common_forwarded" = "Forwarded";
+"coming_soon_description" = "Welcome to NolgoBulja. We will be coming soon. Thank you.";

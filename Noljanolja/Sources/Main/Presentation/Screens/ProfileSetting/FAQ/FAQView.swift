@@ -41,25 +41,25 @@ struct FAQView<ViewModel: FAQViewModel>: View {
         ScrollView {
             LazyVStack(spacing: 4) {
                 FAQItemView(
-                    title: "What is Nolja Nolja?",
-                    description: "Nolja Nolja is an entertainment app. We provide video, livestream service. you can earn by watching and buy products in the shop by the points received after watching."
+                    title: "What is NolgoBulja?",
+                    description: "NolgoBulja is an entertainment app. We provide video, livestream service. you can earn by watching and buy products in the shop by the points received after watching."
                 )
                 FAQItemView(
                     title: "What are Benefits?",
-                    description: "Nolja Nolja is an entertainment app. We provide video, livestream service. you can earn by watching and buy products in the shop by the points received after watching."
+                    description: "NolgoBulja is an entertainment app. We provide video, livestream service. you can earn by watching and buy products in the shop by the points received after watching."
                 )
                 FAQItemView(
                     title: "How can I make purchase?",
-                    description: "Nolja Nolja is an entertainment app. We provide video, livestream service. you can earn by watching and buy products in the shop by the points received after watching."
+                    description: "NolgoBulja is an entertainment app. We provide video, livestream service. you can earn by watching and buy products in the shop by the points received after watching."
                 )
                 FAQItemView(
                     title: "How can I get more points?",
-                    description: "Nolja Nolja is an entertainment app. We provide video, livestream service. you can earn by watching and buy products in the shop by the points received after watching."
+                    description: "NolgoBulja is an entertainment app. We provide video, livestream service. you can earn by watching and buy products in the shop by the points received after watching."
                 )
 
                 FAQItemView(
                     title: "How to delete account?",
-                    description: "Nolja Nolja is an entertainment app. We provide video, livestream service. you can earn by watching and buy products in the shop by the points received after watching."
+                    description: "NolgoBulja is an entertainment app. We provide video, livestream service. you can earn by watching and buy products in the shop by the points received after watching."
                 )
             }
         }

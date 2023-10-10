@@ -406,6 +406,7 @@
 		CF849EEB2A80A5CD00B8BA3B /* ShareReferralViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF849EEA2A80A5CD00B8BA3B /* ShareReferralViewModel.swift */; };
 		CF861E9F2AD5C5A500500721 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CF861EA12AD5C5A500500721 /* InfoPlist.strings */; };
 		CF861EA42AD5C5DE00500721 /* Launch Screen_KO.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF861EA32AD5C5DE00500721 /* Launch Screen_KO.storyboard */; };
+		CF861EA72AD5CC3B00500721 /* ComingSoonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF861EA62AD5CC3B00500721 /* ComingSoonView.swift */; };
 		CF8633FD29B8F2F50091BF5D /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8633FC29B8F2F50091BF5D /* Contact.swift */; };
 		CF8686992AB8A6F100EE530B /* PromotedVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8686982AB8A6F100EE530B /* PromotedVideo.swift */; };
 		CF86869B2AB8A98C00EE530B /* PromotedVideosUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF86869A2AB8A98C00EE530B /* PromotedVideosUseCase.swift */; };
@@ -993,6 +994,7 @@
 		CF861EA02AD5C5A500500721 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CF861EA22AD5C5A700500721 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CF861EA32AD5C5DE00500721 /* Launch Screen_KO.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen_KO.storyboard"; sourceTree = "<group>"; };
+		CF861EA62AD5CC3B00500721 /* ComingSoonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComingSoonView.swift; sourceTree = "<group>"; };
 		CF8633FC29B8F2F50091BF5D /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		CF8686982AB8A6F100EE530B /* PromotedVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotedVideo.swift; sourceTree = "<group>"; };
 		CF86869A2AB8A98C00EE530B /* PromotedVideosUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotedVideosUseCase.swift; sourceTree = "<group>"; };
@@ -1346,6 +1348,7 @@
 		CF15500D299396260053E86D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CF861EA52AD5CC2C00500721 /* ComingSoonView */,
 				CFAD534F2A7818020044CB42 /* LinearProgressView */,
 				CF45BDA92A6856B7003FB991 /* CameraView */,
 				CFD12CE82A1C6CF00095D28D /* Charts */,
@@ -3093,6 +3096,14 @@
 			path = ShareReferral;
 			sourceTree = "<group>";
 		};
+		CF861EA52AD5CC2C00500721 /* ComingSoonView */ = {
+			isa = PBXGroup;
+			children = (
+				CF861EA62AD5CC3B00500721 /* ComingSoonView.swift */,
+			);
+			path = ComingSoonView;
+			sourceTree = "<group>";
+		};
 		CF8737E829CB5B9A0018237B /* PhotoPicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -4566,6 +4577,7 @@
 				CF53D5902A6AF548009B3A69 /* VideoDetailCommentView.swift in Sources */,
 				CF53D5992A6AF548009B3A69 /* HighlightVideoView.swift in Sources */,
 				CF1EA5862A1D32CD006846DF /* PublishedCurrentValue.swift in Sources */,
+				CF861EA72AD5CC3B00500721 /* ComingSoonView.swift in Sources */,
 				CF53D5952A6AF548009B3A69 /* VideosModel.swift in Sources */,
 				CF53D6512A6AF548009B3A69 /* SelectCountryView.swift in Sources */,
 				CF53D56E2A6AF548009B3A69 /* UpdateCurrentUserViewModel.swift in Sources */,

@@ -90,6 +90,7 @@ internal enum ImageAssets {
   internal static let icSplashMultiCoin = ImageAsset(name: "ic_splash_multi_coin")
   internal static let icSplashSingleCoin = ImageAsset(name: "ic_splash_single_coin")
   internal static let icChat = ImageAsset(name: "ic_chat")
+  internal static let icFriends = ImageAsset(name: "ic_friends")
   internal static let icNews = ImageAsset(name: "ic_news")
   internal static let icShop = ImageAsset(name: "ic_shop")
   internal static let icVideo = ImageAsset(name: "ic_video")
@@ -171,6 +172,7 @@ internal enum ImageAssets {
     icSplashMultiCoin,
     icSplashSingleCoin,
     icChat,
+    icFriends,
     icNews,
     icShop,
     icVideo,
