@@ -9,6 +9,12 @@ xcconfig:
     NATRIUM_DISPLAY_NAME:
         Dev: NolgoBulja Dev
         AppStore: NolgoBulja
+    NATRIUM_CURRENT_PROJECT_VERSION:
+        Dev: 1.0.0
+        AppStore: 1.0.0
+    NATRIUM_MARKETING_VERSION:
+        Dev: 1.0.0
+        AppStore: 1.0.0
     NATRIUM_PROVISIONING_PROFILE_SPECIFIER:
         Dev:
             Debug: NolgoBulja-Dev-Development
