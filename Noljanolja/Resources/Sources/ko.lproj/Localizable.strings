@@ -34,6 +34,7 @@
 "common_warning" = "경고";
 "common_all" = "모두";
 "common_download" = "다운로드";
+"common_exit" = "출구";
 "welcome_noljanolja" = "Welcome to 놀고벌자\nWATCH PLAY EARN";
 "splash_explore" = "지금 바로 시작하기";
 "splash_wait" = "잠시만 기다려주세요...";
@@ -130,7 +131,7 @@
 "update_profile_avatar_select_photo" = "갤러리";
 "update_profile_name" = "이름";
 "update_profile_name_required" = "입력필요";
-"update_profile_dob" = "생일";
+"update_profile_dob" = "생년월일";
 "update_profile_gender" = "성별";
 "update_profile_gender_male" = "남자";
 "update_profile_gender_female" = "여자";

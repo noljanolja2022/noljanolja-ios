@@ -1,38 +1,41 @@
 environments:
-  - Dev
-  - AppStore
+  - Development
+  - Production
 
 xcconfig:
+    NATRIUM_OTHER_SWIFT_FLAGS:
+        Development: $(inherited) -D DEVELOPMENT
+        Production:  $(inherited) -D PRODUCTION
     NATRIUM_PRODUCT_BUNDLE_IDENTIFIER:
-        Dev: com.noljanolja.app.ios
-        AppStore: com.ppnyy.nolgobulja
+        Development: com.noljanolja.app.ios
+        Production: com.ppnyy.nolgobulja
     NATRIUM_DISPLAY_NAME:
-        Dev: NolgoBulja Dev
-        AppStore: NolgoBulja
+        Development: NolgoBulja Development
+        Production: NolgoBulja
     NATRIUM_CURRENT_PROJECT_VERSION:
-        Dev: 1.0.0
-        AppStore: 1.0.0
+        Development: 1.0.0
+        Production: 1.0.0
     NATRIUM_MARKETING_VERSION:
-        Dev: 1.0.0
-        AppStore: 1.0.0
+        Development: 1.0.0
+        Production: 1.0.0
     NATRIUM_PROVISIONING_PROFILE_SPECIFIER:
-        Dev:
-            Debug: NolgoBulja-Dev-Development
-            Release:
-        AppStore:
-            Debug: NolgoBulja-AppStore-Development
-            Release: NolgoBulja-AppStore-Distribution
+        Development:
+            Development: NolgoBulja-Dev-Development
+            AppStore:
+        Production:
+            Development: NolgoBulja-AppStore-Development
+            AppStore: NolgoBulja-AppStore-Distribution
     NATRIUM_GID_CLIENT_ID:
-        Dev: 954965503519-ajo51hke58jsfhalvonone0eujp65elr.apps.googleusercontent.com
-        AppStore: 178013335305-u139pt1c45nv77u97shthoqi2tp0jafv.apps.googleusercontent.com
+        Development: 954965503519-ajo51hke58jsfhalvonone0eujp65elr.apps.googleusercontent.com
+        Production: 178013335305-u139pt1c45nv77u97shthoqi2tp0jafv.apps.googleusercontent.com
     NATRIUM_DOT_REVERSED_GID_CLIENT_ID:
-        Dev: com.googleusercontent.apps.954965503519-ajo51hke58jsfhalvonone0eujp65elr
-        AppStore: com.googleusercontent.apps.178013335305-u139pt1c45nv77u97shthoqi2tp0jafv
+        Development: com.googleusercontent.apps.954965503519-ajo51hke58jsfhalvonone0eujp65elr
+        Production: com.googleusercontent.apps.178013335305-u139pt1c45nv77u97shthoqi2tp0jafv
 
 files:
     Noljanolja/Configs/FireBases/GoogleService-Info.plist:
-        Dev: Noljanolja/Configs/FireBases/GoogleService-Info-Dev.plist
-        AppStore: Noljanolja/Configs/FireBases/GoogleService-Info-AppStore.plist
+        Development: Noljanolja/Configs/FireBases/GoogleService-Info_Development.plist
+        Production: Noljanolja/Configs/FireBases/GoogleService-Info_Production.plist
 
 appicon:
     original: Noljanolja/Resources/Sources/ImageAssets.xcassets/AppIcon.appiconset/Source.png
@@ -42,13 +45,13 @@ appicon:
         - ipad
         - iphone
     ribbon:
-        Dev: "Dev"
+        Development: "Development"
         AppStore: ""
 
 variables:
     baseUrl:
-        Dev: "http://dev.consumer-service.ppnyy.com/api"
-        AppStore: "http://consumer-service.ppnyy.com/api"
+        Development: "http://dev.consumer-service.ppnyy.com/api"
+        Production: "http://consumer-service.ppnyy.com/api"
     socketBaseUrl:
-        Dev: "ws://34.64.110.104/rsocket"
-        AppStore: "ws://34.64.110.104/rsocket"
+        Development: "ws://34.64.110.104/rsocket"
+        Production: "ws://34.64.110.104/rsocket"
