@@ -33,6 +33,16 @@ struct HomeView<ViewModel: HomeViewModel>: View {
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .isProgressHUBVisible($viewModel.isProgressHUDShowing)
+            .alert(item: $viewModel.alertState) {
+                Alert($0) { action in
+                    switch action {
+                    case .exitApp:
+                        exit(0)
+                    case .none:
+                        break
+                    }
+                }
+            }
             .fullScreenCover(
                 unwrapping: $viewModel.fullScreenCoverType,
                 content: {
@@ -195,34 +205,38 @@ struct HomeView<ViewModel: HomeViewModel>: View {
     private func buildTabView(_ tab: HomeTabType) -> some View {
         VideoDetailRootContainerView(
             content: {
-                ComingSoonView()
-//                switch tab {
-//                case .chat:
-//                    ConversationListView(
-//                        viewModel: ConversationListViewModel(
-//                            delegate: viewModel
-//                        ),
-//                        toolBarAction: toolBarActionSubject.eraseToAnyPublisher()
-//                    )
-//                case .watch:
-//                    VideosView(
-//                        viewModel: VideosViewModel()
-//                    )
-//                case .wallet:
-//                    WalletView(
-//                        viewModel: WalletViewModel(
-//                            delegate: viewModel
-//                        )
-//                    )
-//                case .shop:
-//                    ShopHomeView(
-//                        viewModel: ShopHomeViewModel()
-//                    )
-//                case .friends:
-//                    HomeFriendView(
-//                        viewModel: HomeFriendViewModel()
-//                    )
-//                }
+                switch Natrium.Config.environment {
+                case .development:
+                    switch tab {
+                    case .chat:
+                        ConversationListView(
+                            viewModel: ConversationListViewModel(
+                                delegate: viewModel
+                            ),
+                            toolBarAction: toolBarActionSubject.eraseToAnyPublisher()
+                        )
+                    case .watch:
+                        VideosView(
+                            viewModel: VideosViewModel()
+                        )
+                    case .wallet:
+                        WalletView(
+                            viewModel: WalletViewModel(
+                                delegate: viewModel
+                            )
+                        )
+                    case .shop:
+                        ShopHomeView(
+                            viewModel: ShopHomeViewModel()
+                        )
+                    case .friends:
+                        HomeFriendView(
+                            viewModel: HomeFriendViewModel()
+                        )
+                    }
+                case .production:
+                    ComingSoonView()
+                }
             },
             viewModel: VideoDetailRootContainerViewModel()
         )

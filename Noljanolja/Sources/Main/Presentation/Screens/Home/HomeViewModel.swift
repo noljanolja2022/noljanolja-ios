@@ -6,6 +6,7 @@
 //
 //
 
+import _SwiftUINavigationState
 import Combine
 import Foundation
 import SwiftUIX
@@ -25,6 +26,7 @@ final class HomeViewModel: ViewModel {
     @Published var isProgressHUDShowing = false
     @Published var selectedTab = HomeTabType.watch
     @Published var tabNews = [HomeTabType: Bool]()
+    @Published var alertState: AlertState<HomeAlertActionType>?
 
     // MARK: Navigations
 
@@ -53,9 +55,29 @@ final class HomeViewModel: ViewModel {
     }
 
     private func configure() {
+        switch Natrium.Config.environment {
+        case .development:
+            configureForDevelopment()
+        case .production:
+            configureForProduction()
+        }
+    }
+    
+    private func configureForDevelopment() {
         configureNotificationPermission()
         configureLoadData()
         configureActions()
+    }
+    
+    private func configureForProduction() {
+        alertState = AlertState(
+            title: TextState(""),
+            message: TextState(L10n.comingSoonDescription),
+            dismissButton: .cancel(
+                TextState(L10n.commonExit),
+                action: .send(.exitApp)
+            )
+        )
     }
     
     private func configureNotificationPermission() {

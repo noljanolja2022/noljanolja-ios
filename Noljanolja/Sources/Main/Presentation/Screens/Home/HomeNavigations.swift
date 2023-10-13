@@ -65,6 +65,12 @@ enum HomeTabType: Equatable {
     }
 }
 
+// MARK: - HomeAlertActionType
+
+enum HomeAlertActionType {
+    case exitApp
+}
+
 // MARK: - HomeNavigationType
 
 enum HomeNavigationType {

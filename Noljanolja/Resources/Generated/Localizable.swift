@@ -196,6 +196,8 @@ internal enum L10n {
   internal static let commonErrorDescription = L10n.tr("Localizable", "common_error_description", fallback: "An unexpected error has occurred. Please try again.")
   /// Error
   internal static let commonErrorTitle = L10n.tr("Localizable", "common_error_title", fallback: "Error")
+  /// Exit
+  internal static let commonExit = L10n.tr("Localizable", "common_exit", fallback: "Exit")
   /// Forwarded
   internal static let commonForwarded = L10n.tr("Localizable", "common_forwarded", fallback: "Forwarded")
   /// Friends
