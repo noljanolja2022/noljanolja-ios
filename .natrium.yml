@@ -20,11 +20,11 @@ xcconfig:
         Production: 1.0.0
     NATRIUM_PROVISIONING_PROFILE_SPECIFIER:
         Development:
-            Debug: NolgoBulja-Dev-Development
-            Release:
+            Development: NolgoBulja-Dev-Development
+            AppStore:
         Production:
-            Debug: NolgoBulja-AppStore-Development
-            Release: NolgoBulja-AppStore-Distribution
+            Development: NolgoBulja-AppStore-Development
+            AppStore: NolgoBulja-AppStore-Distribution
     NATRIUM_GID_CLIENT_ID:
         Development: 954965503519-ajo51hke58jsfhalvonone0eujp65elr.apps.googleusercontent.com
         Production: 178013335305-u139pt1c45nv77u97shthoqi2tp0jafv.apps.googleusercontent.com
