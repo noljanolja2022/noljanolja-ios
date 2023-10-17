@@ -1,19 +1,19 @@
 PODS:
-  - AnyImageKit (0.15.1):
-    - AnyImageKit/Capture (= 0.15.1)
-    - AnyImageKit/Core (= 0.15.1)
-    - AnyImageKit/Editor (= 0.15.1)
-    - AnyImageKit/Picker (= 0.15.1)
-  - AnyImageKit/Capture (0.15.1):
+  - AnyImageKit (0.16.0):
+    - AnyImageKit/Capture (= 0.16.0)
+    - AnyImageKit/Core (= 0.16.0)
+    - AnyImageKit/Editor (= 0.16.0)
+    - AnyImageKit/Picker (= 0.16.0)
+  - AnyImageKit/Capture (0.16.0):
     - AnyImageKit/Core
-  - AnyImageKit/Core (0.15.1):
+  - AnyImageKit/Core (0.16.0):
     - Kingfisher
     - SnapKit
-  - AnyImageKit/Editor (0.15.1):
+  - AnyImageKit/Editor (0.16.0):
     - AnyImageKit/Core
-  - AnyImageKit/Picker (0.15.1):
+  - AnyImageKit/Picker (0.16.0):
     - AnyImageKit/Core
-  - Kingfisher (7.6.2)
+  - Kingfisher (7.9.1)
   - Natrium (8.3.0)
   - naveridlogin-sdk-ios (4.1.5)
   - shared (1.0)
@@ -38,8 +38,8 @@ EXTERNAL SOURCES:
     :path: "./shared"
 
 SPEC CHECKSUMS:
-  AnyImageKit: 2f1ad09414e52313d8914df52869909ea2b71019
-  Kingfisher: 6c5449c6450c5239166510ba04afe374a98afc4f
+  AnyImageKit: 5f30ce2cad2ffa9162c3e6d827ccb3a280553640
+  Kingfisher: 1d14e9f59cbe19389f591c929000332bf70efd32
   Natrium: 630942cf96e0dd78f9fb1f2fcc984e4f908d7278
   naveridlogin-sdk-ios: 4351fe7162cd6b8b6dbb37bd7cc205304fa1d889
   shared: 39716697cdb03064a2a5d4da9d9d75c8ca73d2e7
