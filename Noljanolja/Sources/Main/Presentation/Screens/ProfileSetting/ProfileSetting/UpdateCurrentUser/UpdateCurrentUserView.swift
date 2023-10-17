@@ -185,7 +185,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                                 : ColorAssets.neutralDeepGrey.swiftUIColor
                         )
                 }
-                .frame(width: 88)
+                .frame(width: 80)
 
                 VStack {
                     TextField(
@@ -273,7 +273,6 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                     : ColorAssets.neutralDeepGrey.swiftUIColor
             )
             .frame(height: 38)
-            .padding(.horizontal, 16)
             
             Divider()
                 .frame(height: 2)
@@ -316,7 +315,6 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                     : ColorAssets.neutralDeepGrey.swiftUIColor
             )
             .frame(height: 38)
-            .padding(.horizontal, 16)
             
             Divider()
                 .frame(height: 2)
