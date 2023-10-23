@@ -220,6 +220,12 @@
 "wallet_dashboard_recent_transactions" = "Recent transactions";
 "wallet_attend_now" = "Attend now";
 "wallet_my_attendance" = "My attendance";
+"wallet_my_points" = "My Points";
+"wallet_my_cash" = "My Cash";
+"wallet_exchange_description" = "NolgoBulja pays a cashbox every minute";
+"wallet_exchange_action" = "Exchange Cash!";
+"exchange_title" = "Exchange";
+"exchange_desciption" = "Exchange Point to Cash";
 "transaction_detail" = "Detail Transaction";
 "transaction_detail_status" = "Status";
 "transaction_detail_time" = "Time";

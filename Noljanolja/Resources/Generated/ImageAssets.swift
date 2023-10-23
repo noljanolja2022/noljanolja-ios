@@ -63,13 +63,17 @@ internal enum ImageAssets {
   internal static let icAvatarPlaceholder = ImageAsset(name: "ic_avatar_placeholder")
   internal static let icBack = ImageAsset(name: "ic_back")
   internal static let icCameraFill = ImageAsset(name: "ic_camera_fill")
+  internal static let icChange = ImageAsset(name: "ic_change")
   internal static let icChecked = ImageAsset(name: "ic_checked")
   internal static let icClose = ImageAsset(name: "ic_close")
+  internal static let icCoin = ImageAsset(name: "ic_coin")
   internal static let icCopy = ImageAsset(name: "ic_copy")
   internal static let icDelete = ImageAsset(name: "ic_delete")
   internal static let icDownload = ImageAsset(name: "ic_download")
   internal static let icEdit = ImageAsset(name: "ic_edit")
+  internal static let icExchange = ImageAsset(name: "ic_exchange")
   internal static let icForward = ImageAsset(name: "ic_forward")
+  internal static let icGift = ImageAsset(name: "ic_gift")
   internal static let icGoogle = ImageAsset(name: "ic_google")
   internal static let icIgnore = ImageAsset(name: "ic_ignore")
   internal static let icLink = ImageAsset(name: "ic_link")
@@ -95,6 +99,10 @@ internal enum ImageAssets {
   internal static let icShop = ImageAsset(name: "ic_shop")
   internal static let icVideo = ImageAsset(name: "ic_video")
   internal static let icWallet = ImageAsset(name: "ic_wallet")
+  internal static let bgPointGreen = ImageAsset(name: "bg_point_green")
+  internal static let bgPointYellow = ImageAsset(name: "bg_point_yellow")
+  internal static let bnCash = ImageAsset(name: "bn_cash")
+  internal static let bnPoint = ImageAsset(name: "bn_point")
   internal static let bnReferral = ImageAsset(name: "bn_referral")
   internal static let icReferral1 = ImageAsset(name: "ic_referral-1")
   internal static let icReferral2 = ImageAsset(name: "ic_referral-2")
@@ -145,13 +153,17 @@ internal enum ImageAssets {
     icAvatarPlaceholder,
     icBack,
     icCameraFill,
+    icChange,
     icChecked,
     icClose,
+    icCoin,
     icCopy,
     icDelete,
     icDownload,
     icEdit,
+    icExchange,
     icForward,
+    icGift,
     icGoogle,
     icIgnore,
     icLink,
@@ -177,6 +189,10 @@ internal enum ImageAssets {
     icShop,
     icVideo,
     icWallet,
+    bgPointGreen,
+    bgPointYellow,
+    bnCash,
+    bnPoint,
     bnReferral,
     icReferral1,
     icReferral2,

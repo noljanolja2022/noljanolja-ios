@@ -12,4 +12,5 @@ enum WalletNavigationType {
     case setting
     case transactionHistory
     case checkin
+    case exchange
 }

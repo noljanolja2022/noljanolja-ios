@@ -1,63 +1,49 @@
-//
-//  WalletViewModel.swift
-//  Noljanolja
-//
-//  Created by Nguyen The Trinh on 05/03/2023.
-//
-//
-
 import _SwiftUINavigationState
 import Combine
 import Foundation
 
-// MARK: - WalletViewModelDelegate
+// MARK: - ExchangeListener
 
-protocol WalletViewModelDelegate: AnyObject {
-    func walletViewModelSignOut()
-}
+protocol ExchangeListener: AnyObject {}
 
-// MARK: - WalletViewModel
+// MARK: - ExchangeViewModel
 
-final class WalletViewModel: ViewModel {
+final class ExchangeViewModel: ViewModel {
     // MARK: State
-
+    
     @Published var viewState = ViewState.loading
-    @Published var model: WalletModel?
     @Published var isProgressHUDShowing = false
     @Published var alertState: AlertState<Void>?
+    @Published var model: ExchangeViewDataModel?
 
     // MARK: Navigations
 
-    @Published var navigationType: WalletNavigationType?
-
-    // MARK: Action
+    @Published var navigationType: ExchangeNavigationType?
+    @Published var fullScreenCoverType: ExchangeFullScreenCoverType?
 
     // MARK: Dependencies
 
-    private let userService: UserServiceType
     private let memberInfoUseCase: MemberInfoUseCases
     private let coinExchangeUseCase: CoinExchangeUseCase
-    private let checkinUseCase: CheckinUseCase
-    private weak var delegate: WalletViewModelDelegate?
+    private let coinExchangeRepository: CoinExchangeRepository
+    private weak var listener: ExchangeListener?
 
     // MARK: Private
 
-    private let currentUserSubject = CurrentValueSubject<User?, Never>(nil)
     private let memberInfoSubject = CurrentValueSubject<LoyaltyMemberInfo?, Never>(nil)
     private let coinModelSubject = CurrentValueSubject<CoinModel?, Never>(nil)
-    private let checkinProgressesSubject = CurrentValueSubject<[CheckinProgress]?, Never>(nil)
+    private let coinExchangeRateSubject = CurrentValueSubject<CoinExchangeRate?, Never>(nil)
+
     private var cancellables = Set<AnyCancellable>()
 
-    init(userService: UserServiceType = UserService.default,
-         memberInfoUseCase: MemberInfoUseCases = MemberInfoUseCasesImpl.default,
-         checkinUseCase: CheckinUseCase = CheckinUseCaseImpl.shared,
+    init(memberInfoUseCase: MemberInfoUseCases = MemberInfoUseCasesImpl.default,
          coinExchangeUseCase: CoinExchangeUseCase = CoinExchangeUseCaseImpl.shared,
-         delegate: WalletViewModelDelegate? = nil) {
-        self.userService = userService
+         coinExchangeRepository: CoinExchangeRepository = CoinExchangeRepositoryImpl.shared,
+         listener: ExchangeListener? = nil) {
         self.memberInfoUseCase = memberInfoUseCase
         self.coinExchangeUseCase = coinExchangeUseCase
-        self.checkinUseCase = checkinUseCase
-        self.delegate = delegate
+        self.coinExchangeRepository = coinExchangeRepository
+        self.listener = listener
         super.init()
 
         configure()
@@ -69,14 +55,13 @@ final class WalletViewModel: ViewModel {
     }
 
     private func configureLoadData() {
-        Publishers.CombineLatest4(
-            currentUserSubject.compactMap { $0 },
+        Publishers.CombineLatest3(
             memberInfoSubject.compactMap { $0 },
             coinModelSubject.compactMap { $0 },
-            checkinProgressesSubject.compactMap { $0 }
+            coinExchangeRateSubject.compactMap { $0 }
         )
         .map {
-            WalletModel(currentUser: $0, memberInfo: $1, coinModel: $2, checkinProgresses: $3)
+            ExchangeViewDataModel(memberInfo: $0, coinModel: $1, coinExchangeRate: $2)
         }
         .receive(on: DispatchQueue.main)
         .sink { [weak self] in
@@ -88,14 +73,14 @@ final class WalletViewModel: ViewModel {
             .first(where: { $0 })
             .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.viewState = .loading })
-            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<(LoyaltyMemberInfo, CoinModel, [CheckinProgress]), Error> in
+            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<(LoyaltyMemberInfo, CoinModel, CoinExchangeRate), Error> in
                 guard let self else {
-                    return Empty<(LoyaltyMemberInfo, CoinModel, [CheckinProgress]), Error>().eraseToAnyPublisher()
+                    return Empty<(LoyaltyMemberInfo, CoinModel, CoinExchangeRate), Error>().eraseToAnyPublisher()
                 }
                 return Publishers.Zip3(
                     self.memberInfoUseCase.getLoyaltyMemberInfo(),
                     self.coinExchangeUseCase.getCoin(),
-                    self.checkinUseCase.getCheckinProgresses()
+                    self.coinExchangeRepository.getCoinExchangeRate()
                 )
                 .eraseToAnyPublisher()
             }
@@ -103,30 +88,17 @@ final class WalletViewModel: ViewModel {
             .sink { [weak self] result in
                 guard let self else { return }
                 switch result {
-                case let .success((memberInfo, coinModel, checkinProgresses)):
+                case let .success((memberInfo, coinModel, coinExchangeRate)):
                     self.memberInfoSubject.send(memberInfo)
                     self.coinModelSubject.send(coinModel)
-                    self.checkinProgressesSubject.send(checkinProgresses)
+                    self.coinExchangeRateSubject.send(coinExchangeRate)
                     self.viewState = .content
                 case .failure:
                     self.viewState = .error
                 }
             }
             .store(in: &cancellables)
-
-        userService
-            .getCurrentUserPublisher()
-            .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
-            .store(in: &cancellables)
     }
 
     private func configureActions() {}
-}
-
-// MARK: ProfileSettingViewModelDelegate
-
-extension WalletViewModel: ProfileSettingViewModelDelegate {
-    func profileSettingViewModelSignOut() {
-        delegate?.walletViewModelSignOut()
-    }
 }
