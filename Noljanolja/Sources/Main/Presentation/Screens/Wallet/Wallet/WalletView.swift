@@ -148,7 +148,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                         viewModel.navigationType = .exchange
                     },
                     label: {
-                        Text(L10n.walletExchangeAction)
+                        Text(L10n.exchangeCashTitle)
                             .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                             .padding(.vertical, 8)
                             .padding(.horizontal, 16)

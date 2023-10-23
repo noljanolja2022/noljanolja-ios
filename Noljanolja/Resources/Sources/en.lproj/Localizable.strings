@@ -223,8 +223,8 @@
 "wallet_my_points" = "My Points";
 "wallet_my_cash" = "My Cash";
 "wallet_exchange_description" = "NolgoBulja pays a cashbox every minute";
-"wallet_exchange_action" = "Exchange Cash!";
 "exchange_title" = "Exchange";
+"exchange_cash_title" = "Exchange Cash!";
 "exchange_desciption" = "Exchange Point to Cash";
 "transaction_detail" = "Detail Transaction";
 "transaction_detail_status" = "Status";

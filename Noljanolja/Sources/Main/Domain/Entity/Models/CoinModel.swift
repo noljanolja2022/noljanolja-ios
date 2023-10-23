@@ -8,7 +8,7 @@
 import Foundation
 
 struct CoinModel: Equatable, Codable {
-    let balance: Int
+    let balance: Double
 
     enum CodingKeys: String, CodingKey {
         case balance
@@ -16,6 +16,6 @@ struct CoinModel: Equatable, Codable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.balance = try container.decodeIfPresent(Int.self, forKey: .balance) ?? 0
+        self.balance = try container.decodeIfPresent(Double.self, forKey: .balance) ?? 0
     }
 }

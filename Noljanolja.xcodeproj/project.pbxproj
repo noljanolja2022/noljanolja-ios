@@ -513,6 +513,8 @@
 		CFE2155F2AE6337800C83BAD /* ExchangeViewDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE2155E2AE6337800C83BAD /* ExchangeViewDataModel.swift */; };
 		CFE2156D2AE6683600C83BAD /* CoinExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE2156C2AE6683600C83BAD /* CoinExchangeRate.swift */; };
 		CFE2156F2AE669C200C83BAD /* CoinExchangeResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE2156E2AE669C200C83BAD /* CoinExchangeResult.swift */; };
+		CFE215712AE66F7100C83BAD /* AdMobRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE215702AE66F7100C83BAD /* AdMobRepository.swift */; };
+		CFE215732AE6758700C83BAD /* UIViewController+Top.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE215722AE6758700C83BAD /* UIViewController+Top.swift */; };
 		CFE48BC1299206830062C903 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = CFE48BC0299206830062C903 /* KeychainAccess */; };
 		CFE48BC3299207DA0062C903 /* AuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE48BC2299207DA0062C903 /* AuthStore.swift */; };
 		CFE5ACEE2A7AAB360027492E /* ShareReferralContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE5ACEC2A7AAB360027492E /* ShareReferralContainerView.swift */; };
@@ -1111,6 +1113,8 @@
 		CFE2155E2AE6337800C83BAD /* ExchangeViewDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewDataModel.swift; sourceTree = "<group>"; };
 		CFE2156C2AE6683600C83BAD /* CoinExchangeRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinExchangeRate.swift; sourceTree = "<group>"; };
 		CFE2156E2AE669C200C83BAD /* CoinExchangeResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinExchangeResult.swift; sourceTree = "<group>"; };
+		CFE215702AE66F7100C83BAD /* AdMobRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMobRepository.swift; sourceTree = "<group>"; };
+		CFE215722AE6758700C83BAD /* UIViewController+Top.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Top.swift"; sourceTree = "<group>"; };
 		CFE48BC2299207DA0062C903 /* AuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStore.swift; sourceTree = "<group>"; };
 		CFE5ACEC2A7AAB360027492E /* ShareReferralContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareReferralContainerView.swift; sourceTree = "<group>"; };
 		CFE5ACED2A7AAB360027492E /* ShareReferralContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareReferralContainerViewModel.swift; sourceTree = "<group>"; };
@@ -1525,6 +1529,7 @@
 				CF3282EC299E3758006A459B /* UIApplication+Extension.swift */,
 				CF9DF0A92A36B2D80054E105 /* UIImage+QRCode.swift */,
 				CFC0DE482A3B1165007AB0F4 /* String+QRCode.swift */,
+				CFE215722AE6758700C83BAD /* UIViewController+Top.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -3783,6 +3788,7 @@
 				CFAA37602A4B370C0085CE88 /* BannerRepository.swift */,
 				CF0798652A66DFBE004D09B2 /* DataRepository.swift */,
 				CF4B27AD2AE043620066D863 /* CoinExchangeRepository.swift */,
+				CFE215702AE66F7100C83BAD /* AdMobRepository.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -4299,6 +4305,7 @@
 				CF53D5812A6AF548009B3A69 /* MyCouponsViewModel.swift in Sources */,
 				CF53D5632A6AF548009B3A69 /* AboutUsItemView.swift in Sources */,
 				CF53D5A72A6AF548009B3A69 /* TransactionDashboardModel.swift in Sources */,
+				CFE215712AE66F7100C83BAD /* AdMobRepository.swift in Sources */,
 				CF53D5EB2A6AF548009B3A69 /* NormalMessageModel.swift in Sources */,
 				CF3E0EF62A3727D1009EF665 /* CouponCategory.swift in Sources */,
 				CF53D5F02A6AF548009B3A69 /* MessageContentBackgroundModel.swift in Sources */,
@@ -4546,6 +4553,7 @@
 				CF53D5C92A6AF548009B3A69 /* AddFriendContactListNavigations.swift in Sources */,
 				CF4B27AE2AE043620066D863 /* CoinExchangeRepository.swift in Sources */,
 				CF53D61E2A6AF548009B3A69 /* MessageActionType.swift in Sources */,
+				CFE215732AE6758700C83BAD /* UIViewController+Top.swift in Sources */,
 				CFDCA37929964501003C2C77 /* ButtonStyle.swift in Sources */,
 				CF53D64B2A6AF548009B3A69 /* TermViewModel.swift in Sources */,
 				CF54FA2229D0179B0092E2C6 /* MediaService.swift in Sources */,

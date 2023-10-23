@@ -13,14 +13,62 @@ PODS:
     - AnyImageKit/Core
   - AnyImageKit/Picker (0.16.0):
     - AnyImageKit/Core
+  - Google-Mobile-Ads-SDK (10.12.0):
+    - GoogleAppMeasurement (< 11.0, >= 7.0)
+    - GoogleUserMessagingPlatform (>= 1.1)
+  - GoogleAppMeasurement (10.16.0):
+    - GoogleAppMeasurement/AdIdSupport (= 10.16.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
+    - GoogleUtilities/MethodSwizzler (~> 7.11)
+    - GoogleUtilities/Network (~> 7.11)
+    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - GoogleAppMeasurement/AdIdSupport (10.16.0):
+    - GoogleAppMeasurement/WithoutAdIdSupport (= 10.16.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
+    - GoogleUtilities/MethodSwizzler (~> 7.11)
+    - GoogleUtilities/Network (~> 7.11)
+    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - GoogleAppMeasurement/WithoutAdIdSupport (10.16.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
+    - GoogleUtilities/MethodSwizzler (~> 7.11)
+    - GoogleUtilities/Network (~> 7.11)
+    - "GoogleUtilities/NSData+zlib (~> 7.11)"
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+  - GoogleUserMessagingPlatform (2.1.0)
+  - GoogleUtilities/AppDelegateSwizzler (7.11.5):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (7.11.5):
+    - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleUtilities/Logger (7.11.5):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (7.11.5):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (7.11.5):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (7.11.5)"
+  - GoogleUtilities/Reachability (7.11.5):
+    - GoogleUtilities/Logger
   - Kingfisher (7.9.1)
+  - nanopb (2.30909.0):
+    - nanopb/decode (= 2.30909.0)
+    - nanopb/encode (= 2.30909.0)
+  - nanopb/decode (2.30909.0)
+  - nanopb/encode (2.30909.0)
   - Natrium (8.3.0)
   - naveridlogin-sdk-ios (4.1.5)
+  - PromisesObjC (2.3.1)
   - shared (1.0)
   - SnapKit (5.6.0)
 
 DEPENDENCIES:
   - AnyImageKit
+  - Google-Mobile-Ads-SDK
   - Natrium
   - naveridlogin-sdk-ios (= 4.1.5)
   - shared (from `./shared`)
@@ -28,9 +76,15 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AnyImageKit
+    - Google-Mobile-Ads-SDK
+    - GoogleAppMeasurement
+    - GoogleUserMessagingPlatform
+    - GoogleUtilities
     - Kingfisher
+    - nanopb
     - Natrium
     - naveridlogin-sdk-ios
+    - PromisesObjC
     - SnapKit
 
 EXTERNAL SOURCES:
@@ -39,12 +93,18 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AnyImageKit: 5f30ce2cad2ffa9162c3e6d827ccb3a280553640
+  Google-Mobile-Ads-SDK: 976fdf273815674eed30b8aafffedb3c25b055e4
+  GoogleAppMeasurement: 079d7632810e9d9704a99932547ba1554acc4342
+  GoogleUserMessagingPlatform: dce302b8f1b84d6e945812ee7a15c3f65a102cbf
+  GoogleUtilities: 13e2c67ede716b8741c7989e26893d151b2b2084
   Kingfisher: 1d14e9f59cbe19389f591c929000332bf70efd32
+  nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   Natrium: 630942cf96e0dd78f9fb1f2fcc984e4f908d7278
   naveridlogin-sdk-ios: 4351fe7162cd6b8b6dbb37bd7cc205304fa1d889
+  PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   shared: 39716697cdb03064a2a5d4da9d9d75c8ca73d2e7
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: 16bca1c775096063ad96524f35e8214729ae443c
+PODFILE CHECKSUM: c12419562ce24a151dcd26acae288870051d95cd
 
 COCOAPODS: 1.13.0

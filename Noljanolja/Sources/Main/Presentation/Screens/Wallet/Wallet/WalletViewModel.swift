@@ -92,7 +92,7 @@ final class WalletViewModel: ViewModel {
                 guard let self else {
                     return Empty<(LoyaltyMemberInfo, CoinModel, [CheckinProgress]), Error>().eraseToAnyPublisher()
                 }
-                return Publishers.Zip3(
+                return Publishers.CombineLatest3(
                     self.memberInfoUseCase.getLoyaltyMemberInfo(),
                     self.coinExchangeUseCase.getCoin(),
                     self.checkinUseCase.getCheckinProgresses()

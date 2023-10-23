@@ -8,6 +8,7 @@ target 'Noljanolja' do
   # Pods for Noljanolja
   pod 'Natrium'
   pod 'AnyImageKit'
+  pod 'Google-Mobile-Ads-SDK'
   pod 'naveridlogin-sdk-ios', '4.1.5'
   pod 'shared', :path => './shared'
 

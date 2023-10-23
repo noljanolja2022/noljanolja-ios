@@ -1,3 +1,4 @@
+import GoogleMobileAds
 import SwiftUI
 import SwiftUIX
 
@@ -17,13 +18,17 @@ struct ExchangeView: View {
         buildMainView()
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text(L10n.exchangeTitle)
+                    Text(L10n.exchangeCashTitle)
                         .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             }
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
+            .isProgressHUBVisible($viewModel.isProgressHUDShowing)
+            .alert(item: $viewModel.alertState) {
+                Alert($0) { _ in }
+            }
             .fullScreenCover(
                 unwrapping: $viewModel.fullScreenCoverType,
                 content: {
@@ -117,30 +122,17 @@ struct ExchangeView: View {
     }
     
     private func buildCashBoxView() -> some View {
-        VStack(alignment: .center, spacing: 12) {
-            Text(L10n.walletExchangeDescription)
-                .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
-                .frame(maxWidth: .infinity, alignment: .center)
-            HStack(alignment: .center, spacing: 4) {
-                ImageAssets.icGift.swiftUIImage
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 40, height: 40)
-                Text("750 Open box")
-                    .dynamicFont(.systemFont(ofSize: 14))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Button(
-                    action: {},
-                    label: {
-                        Text(L10n.walletExchangeAction)
-                            .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
-                            .padding(.vertical, 8)
-                            .padding(.horizontal, 16)
-                            .background(ColorAssets.secondaryYellow400.swiftUIColor)
-                            .cornerRadius(4)
-                    }
-                )
-            }
+        HStack(alignment: .center, spacing: 4) {
+            ImageAssets.icGift.swiftUIImage
+                .resizable()
+                .scaledToFit()
+                .frame(width: 40, height: 40)
+            Text("Cash Box")
+                .dynamicFont(.systemFont(ofSize: 14))
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Text("750 Open box")
+                .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
+                .foregroundColor(ColorAssets.systemBlue.swiftUIColor)
         }
         .padding(12)
         .background(ColorAssets.secondaryYellow50.swiftUIColor)
@@ -150,7 +142,9 @@ struct ExchangeView: View {
     private func buildExchangeView() -> some View {
         Button(
             L10n.exchangeTitle.uppercased(),
-            action: {}
+            action: {
+                viewModel.exchangeAction.send()
+            }
         )
         .disabled((viewModel.model?.exchangeRate ?? 0) <= 0)
         .buttonStyle(

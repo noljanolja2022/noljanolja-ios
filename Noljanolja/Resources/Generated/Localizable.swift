@@ -376,6 +376,8 @@ internal enum L10n {
   internal static let errorUnexpected = L10n.tr("Localizable", "error_unexpected", fallback: "Unexpected Error")
   /// Exchange Account Management
   internal static let exchangeAccountManagement = L10n.tr("Localizable", "exchange_account_management", fallback: "Exchange Account Management")
+  /// Exchange Cash!
+  internal static let exchangeCashTitle = L10n.tr("Localizable", "exchange_cash_title", fallback: "Exchange Cash!")
   /// Exchange Point to Cash
   internal static let exchangeDesciption = L10n.tr("Localizable", "exchange_desciption", fallback: "Exchange Point to Cash")
   /// Exchange
@@ -792,8 +794,6 @@ internal enum L10n {
   internal static let walletDashboardTitle = L10n.tr("Localizable", "wallet_dashboard_title", fallback: "Dashboard")
   /// Everyday
   internal static let walletEveryDay = L10n.tr("Localizable", "wallet_every_day", fallback: "Everyday")
-  /// Exchange Cash!
-  internal static let walletExchangeAction = L10n.tr("Localizable", "wallet_exchange_action", fallback: "Exchange Cash!")
   /// NolgoBulja pays a cashbox every minute
   internal static let walletExchangeDescription = L10n.tr("Localizable", "wallet_exchange_description", fallback: "NolgoBulja pays a cashbox every minute")
   /// Use now

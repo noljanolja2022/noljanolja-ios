@@ -8,6 +8,7 @@
 import FirebaseAuth
 import FirebaseCore
 import Foundation
+import GoogleMobileAds
 import GoogleSignIn
 import IQKeyboardManagerSwift
 import KakaoSDKAuth
@@ -26,6 +27,7 @@ final class FrameworkAppDelegate: NSObject, UIApplicationDelegate {
         configureSDWebImage()
         configureAuth()
         configureFirebase()
+        configureGoogleAds()
 
         return true
     }
@@ -80,5 +82,10 @@ extension FrameworkAppDelegate {
 
     private func configureFirebase() {
         FirebaseApp.configure()
+    }
+    
+    private func configureGoogleAds() {
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = AdMobConfigs.TestDevice.testDevices
     }
 }

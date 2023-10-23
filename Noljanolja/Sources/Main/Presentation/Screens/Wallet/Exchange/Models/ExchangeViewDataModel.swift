@@ -9,7 +9,7 @@ import Foundation
 
 struct ExchangeViewDataModel {
     let point: Int
-    let coin: Int
+    let coin: Double
     let exchangeRate: Int?
 
     init(memberInfo: LoyaltyMemberInfo, coinModel: CoinModel, coinExchangeRate: CoinExchangeRate) {

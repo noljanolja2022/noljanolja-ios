@@ -10,7 +10,7 @@ import Foundation
 struct WalletModel {
     let userInfo: WalletUserInfoModel
     let point: Int
-    let coin: Int
+    let coin: Double
     let accumulatedPointsToday: Int
     let exchangeablePoints: Int
     let checkinProgresses: [CheckinProgress]
