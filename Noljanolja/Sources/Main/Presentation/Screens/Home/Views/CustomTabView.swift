@@ -32,10 +32,10 @@ struct CustomTabView<SelectionValue, Content, TabItem>: View where SelectionValu
             Divider()
                 .frame(height: 1)
                 .overlay(Color.gray.opacity(0.1))
+                .background(.white)
 
             HStack(spacing: 0) {
                 tabItem
-                    .frame(maxWidth: .infinity)
             }
         }
     }
