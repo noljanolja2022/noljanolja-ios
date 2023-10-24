@@ -21,7 +21,7 @@ xcconfig:
     NATRIUM_PROVISIONING_PROFILE_SPECIFIER:
         Development:
             Development: NolgoBulja-Dev-Development
-            AppStore:
+            AppStore: NolgoBulja-Dev-Distribution
         Production:
             Development: NolgoBulja-AppStore-Development
             AppStore: NolgoBulja-AppStore-Distribution
