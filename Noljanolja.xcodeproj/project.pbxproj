@@ -93,6 +93,9 @@
 		CF446B9029D8AB0D00ED66BF /* LottieAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF446B8F29D8AB0D00ED66BF /* LottieAssets.swift */; };
 		CF446B9329D8AE2F00ED66BF /* RefreshTokenInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF446B9229D8AE2F00ED66BF /* RefreshTokenInterceptor.swift */; };
 		CF45BCB62A67C68C003FB991 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CF45BCB52A67C68C003FB991 /* IQKeyboardManagerSwift */; };
+		CF4B27AE2AE043620066D863 /* CoinExchangeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4B27AD2AE043620066D863 /* CoinExchangeRepository.swift */; };
+		CF4B27B02AE043D60066D863 /* CoinModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4B27AF2AE043D60066D863 /* CoinModel.swift */; };
+		CF4B27B22AE0455E0066D863 /* CoinExchangeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4B27B12AE0455E0066D863 /* CoinExchangeUseCase.swift */; };
 		CF52AB6129B8D6BE00C9C90C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF52AB6029B8D6BE00C9C90C /* User.swift */; };
 		CF52AB6429B8D85000C9C90C /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF52AB6329B8D85000C9C90C /* ContactService.swift */; };
 		CF52AB6829B8D93D00C9C90C /* StorableUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF52AB6729B8D93D00C9C90C /* StorableUser.swift */; };
@@ -193,7 +196,6 @@
 		CF53D5B52A6AF548009B3A69 /* TransactionHistoryFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4562A6AF548009B3A69 /* TransactionHistoryFilterView.swift */; };
 		CF53D5B62A6AF548009B3A69 /* WalletNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4582A6AF548009B3A69 /* WalletNavigations.swift */; };
 		CF53D5B72A6AF548009B3A69 /* WalletModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D45A2A6AF548009B3A69 /* WalletModel.swift */; };
-		CF53D5B82A6AF548009B3A69 /* WalletPointModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D45B2A6AF548009B3A69 /* WalletPointModel.swift */; };
 		CF53D5B92A6AF548009B3A69 /* LoyaltyTierModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D45C2A6AF548009B3A69 /* LoyaltyTierModelType.swift */; };
 		CF53D5BA2A6AF548009B3A69 /* WalletUserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D45D2A6AF548009B3A69 /* WalletUserInfoModel.swift */; };
 		CF53D5BB2A6AF548009B3A69 /* WalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D45E2A6AF548009B3A69 /* WalletViewModel.swift */; };
@@ -423,6 +425,8 @@
 		CF91E6FD2AB45A840086C046 /* VideoDetailRootContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF91E6FB2AB45A840086C046 /* VideoDetailRootContainerView.swift */; };
 		CF91E6FE2AB45A840086C046 /* VideoDetailRootContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF91E6FC2AB45A840086C046 /* VideoDetailRootContainerViewModel.swift */; };
 		CF9779DC29BE2FC600D1CAB0 /* PhoneNumberKit in Frameworks */ = {isa = PBXBuildFile; productRef = CF9779DB29BE2FC600D1CAB0 /* PhoneNumberKit */; };
+		CF9B393A2ADFCC6400CB72B8 /* WalletMoneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9B39392ADFCC6400CB72B8 /* WalletMoneyView.swift */; };
+		CF9B393C2ADFEAC900CB72B8 /* MoneyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9B393B2ADFEAC900CB72B8 /* MoneyType.swift */; };
 		CF9DF0AA2A36B2D80054E105 /* UIImage+QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF9DF0A92A36B2D80054E105 /* UIImage+QRCode.swift */; };
 		CFA3304729BE3352008D7449 /* String+Phone.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA3304629BE3352008D7449 /* String+Phone.swift */; };
 		CFA3304929BE3AB9008D7449 /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA3304829BE3AB9008D7449 /* String+Date.swift */; };
@@ -503,6 +507,14 @@
 		CFE09272298FEACD00F197F0 /* SwifterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CFE09271298FEACD00F197F0 /* SwifterSwift */; };
 		CFE0933E298FFC5B00F197F0 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0933D298FFC5B00F197F0 /* AuthError.swift */; };
 		CFE09341299007E400F197F0 /* Publisher+ResultTranforming.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE09340299007E400F197F0 /* Publisher+ResultTranforming.swift */; };
+		CFE2155A2AE630DA00C83BAD /* ExchangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE215572AE630DA00C83BAD /* ExchangeView.swift */; };
+		CFE2155B2AE630DA00C83BAD /* ExchangeNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE215582AE630DA00C83BAD /* ExchangeNavigations.swift */; };
+		CFE2155C2AE630DA00C83BAD /* ExchangeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE215592AE630DA00C83BAD /* ExchangeViewModel.swift */; };
+		CFE2155F2AE6337800C83BAD /* ExchangeViewDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE2155E2AE6337800C83BAD /* ExchangeViewDataModel.swift */; };
+		CFE2156D2AE6683600C83BAD /* CoinExchangeRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE2156C2AE6683600C83BAD /* CoinExchangeRate.swift */; };
+		CFE2156F2AE669C200C83BAD /* CoinExchangeResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE2156E2AE669C200C83BAD /* CoinExchangeResult.swift */; };
+		CFE215712AE66F7100C83BAD /* AdMobRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE215702AE66F7100C83BAD /* AdMobRepository.swift */; };
+		CFE215732AE6758700C83BAD /* UIViewController+Top.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE215722AE6758700C83BAD /* UIViewController+Top.swift */; };
 		CFE48BC1299206830062C903 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = CFE48BC0299206830062C903 /* KeychainAccess */; };
 		CFE48BC3299207DA0062C903 /* AuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE48BC2299207DA0062C903 /* AuthStore.swift */; };
 		CFE5ACEE2A7AAB360027492E /* ShareReferralContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE5ACEC2A7AAB360027492E /* ShareReferralContainerView.swift */; };
@@ -687,6 +699,9 @@
 		CF446B8D29D8A97700ED66BF /* LottieAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LottieAssets.xcassets; sourceTree = "<group>"; };
 		CF446B8F29D8AB0D00ED66BF /* LottieAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieAssets.swift; sourceTree = "<group>"; };
 		CF446B9229D8AE2F00ED66BF /* RefreshTokenInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshTokenInterceptor.swift; sourceTree = "<group>"; };
+		CF4B27AD2AE043620066D863 /* CoinExchangeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinExchangeRepository.swift; sourceTree = "<group>"; };
+		CF4B27AF2AE043D60066D863 /* CoinModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinModel.swift; sourceTree = "<group>"; };
+		CF4B27B12AE0455E0066D863 /* CoinExchangeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinExchangeUseCase.swift; sourceTree = "<group>"; };
 		CF52AB6029B8D6BE00C9C90C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CF52AB6329B8D85000C9C90C /* ContactService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
 		CF52AB6729B8D93D00C9C90C /* StorableUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorableUser.swift; sourceTree = "<group>"; };
@@ -786,7 +801,6 @@
 		CF53D4562A6AF548009B3A69 /* TransactionHistoryFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionHistoryFilterView.swift; sourceTree = "<group>"; };
 		CF53D4582A6AF548009B3A69 /* WalletNavigations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletNavigations.swift; sourceTree = "<group>"; };
 		CF53D45A2A6AF548009B3A69 /* WalletModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletModel.swift; sourceTree = "<group>"; };
-		CF53D45B2A6AF548009B3A69 /* WalletPointModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletPointModel.swift; sourceTree = "<group>"; };
 		CF53D45C2A6AF548009B3A69 /* LoyaltyTierModelType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoyaltyTierModelType.swift; sourceTree = "<group>"; };
 		CF53D45D2A6AF548009B3A69 /* WalletUserInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletUserInfoModel.swift; sourceTree = "<group>"; };
 		CF53D45E2A6AF548009B3A69 /* WalletViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletViewModel.swift; sourceTree = "<group>"; };
@@ -1011,6 +1025,8 @@
 		CF91E6F52AB4118F0086C046 /* YouTubePlayer.State+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "YouTubePlayer.State+Ext.swift"; sourceTree = "<group>"; };
 		CF91E6FB2AB45A840086C046 /* VideoDetailRootContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailRootContainerView.swift; sourceTree = "<group>"; };
 		CF91E6FC2AB45A840086C046 /* VideoDetailRootContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailRootContainerViewModel.swift; sourceTree = "<group>"; };
+		CF9B39392ADFCC6400CB72B8 /* WalletMoneyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletMoneyView.swift; sourceTree = "<group>"; };
+		CF9B393B2ADFEAC900CB72B8 /* MoneyType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyType.swift; sourceTree = "<group>"; };
 		CF9DF0A92A36B2D80054E105 /* UIImage+QRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+QRCode.swift"; sourceTree = "<group>"; };
 		CFA3304629BE3352008D7449 /* String+Phone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Phone.swift"; sourceTree = "<group>"; };
 		CFA3304829BE3AB9008D7449 /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
@@ -1091,6 +1107,14 @@
 		CFE0926A298FE73000F197F0 /* CloudFunctionAuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudFunctionAuthAPI.swift; sourceTree = "<group>"; };
 		CFE0933D298FFC5B00F197F0 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		CFE09340299007E400F197F0 /* Publisher+ResultTranforming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+ResultTranforming.swift"; sourceTree = "<group>"; };
+		CFE215572AE630DA00C83BAD /* ExchangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeView.swift; sourceTree = "<group>"; };
+		CFE215582AE630DA00C83BAD /* ExchangeNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeNavigations.swift; sourceTree = "<group>"; };
+		CFE215592AE630DA00C83BAD /* ExchangeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewModel.swift; sourceTree = "<group>"; };
+		CFE2155E2AE6337800C83BAD /* ExchangeViewDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewDataModel.swift; sourceTree = "<group>"; };
+		CFE2156C2AE6683600C83BAD /* CoinExchangeRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinExchangeRate.swift; sourceTree = "<group>"; };
+		CFE2156E2AE669C200C83BAD /* CoinExchangeResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinExchangeResult.swift; sourceTree = "<group>"; };
+		CFE215702AE66F7100C83BAD /* AdMobRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMobRepository.swift; sourceTree = "<group>"; };
+		CFE215722AE6758700C83BAD /* UIViewController+Top.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Top.swift"; sourceTree = "<group>"; };
 		CFE48BC2299207DA0062C903 /* AuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStore.swift; sourceTree = "<group>"; };
 		CFE5ACEC2A7AAB360027492E /* ShareReferralContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareReferralContainerView.swift; sourceTree = "<group>"; };
 		CFE5ACED2A7AAB360027492E /* ShareReferralContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareReferralContainerViewModel.swift; sourceTree = "<group>"; };
@@ -1505,6 +1529,7 @@
 				CF3282EC299E3758006A459B /* UIApplication+Extension.swift */,
 				CF9DF0A92A36B2D80054E105 /* UIImage+QRCode.swift */,
 				CFC0DE482A3B1165007AB0F4 /* String+QRCode.swift */,
+				CFE215722AE6758700C83BAD /* UIViewController+Top.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -1615,6 +1640,10 @@
 				CF2836D02A9F8E7D00663C16 /* ConversationAttachment.swift */,
 				CF2836D22A9F9F4300663C16 /* ConversationAttachmentType.swift */,
 				CF8686982AB8A6F100EE530B /* PromotedVideo.swift */,
+				CF9B393B2ADFEAC900CB72B8 /* MoneyType.swift */,
+				CF4B27AF2AE043D60066D863 /* CoinModel.swift */,
+				CFE2156E2AE669C200C83BAD /* CoinExchangeResult.swift */,
+				CFE2156C2AE6683600C83BAD /* CoinExchangeRate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2002,6 +2031,7 @@
 		CF53D4332A6AF547009B3A69 /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				CFBB5D6F2AE2E1DF007D0A4A /* Exchange */,
 				CF53D4342A6AF547009B3A69 /* TransactionDetail */,
 				CF53D4392A6AF547009B3A69 /* TransactionDashboard */,
 				CF53D4482A6AF548009B3A69 /* TransactionHistory */,
@@ -2129,7 +2159,6 @@
 			isa = PBXGroup;
 			children = (
 				CF53D45A2A6AF548009B3A69 /* WalletModel.swift */,
-				CF53D45B2A6AF548009B3A69 /* WalletPointModel.swift */,
 				CF53D45C2A6AF548009B3A69 /* LoyaltyTierModelType.swift */,
 				CF53D45D2A6AF548009B3A69 /* WalletUserInfoModel.swift */,
 			);
@@ -2143,6 +2172,7 @@
 				CF53D4622A6AF548009B3A69 /* WalletMemberTierView.swift */,
 				CF53D4642A6AF548009B3A69 /* WalletMyPointView.swift */,
 				CF53D4652A6AF548009B3A69 /* WalletPointView.swift */,
+				CF9B39392ADFCC6400CB72B8 /* WalletMoneyView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3214,6 +3244,17 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		CFBB5D6F2AE2E1DF007D0A4A /* Exchange */ = {
+			isa = PBXGroup;
+			children = (
+				CFE2155D2AE6336C00C83BAD /* Models */,
+				CFE215572AE630DA00C83BAD /* ExchangeView.swift */,
+				CFE215582AE630DA00C83BAD /* ExchangeNavigations.swift */,
+				CFE215592AE630DA00C83BAD /* ExchangeViewModel.swift */,
+			);
+			path = Exchange;
+			sourceTree = "<group>";
+		};
 		CFBC6EFE29C02977000509EC /* SearchView */ = {
 			isa = PBXGroup;
 			children = (
@@ -3376,6 +3417,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		CFE2155D2AE6336C00C83BAD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CFE2155E2AE6337800C83BAD /* ExchangeViewDataModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		CFE5ACE42A7AA93B0027492E /* Referral */ = {
 			isa = PBXGroup;
 			children = (
@@ -3495,6 +3544,7 @@
 				CFF868B82A6E2D74006F0B87 /* VideoUseCases.swift */,
 				CF355C8B2A77C4EA005A48F9 /* CheckinUseCase.swift */,
 				CF86869A2AB8A98C00EE530B /* PromotedVideosUseCase.swift */,
+				CF4B27B12AE0455E0066D863 /* CoinExchangeUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -3737,6 +3787,8 @@
 				CFB3866B2A44588F001B0849 /* ReactionIconsRemoteRepository.swift */,
 				CFAA37602A4B370C0085CE88 /* BannerRepository.swift */,
 				CF0798652A66DFBE004D09B2 /* DataRepository.swift */,
+				CF4B27AD2AE043620066D863 /* CoinExchangeRepository.swift */,
+				CFE215702AE66F7100C83BAD /* AdMobRepository.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -4190,6 +4242,7 @@
 				CF53D5E72A6AF548009B3A69 /* TextMessageContentModel.swift in Sources */,
 				CFF467A02A0A45E50018FFAA /* View+Visibility.swift in Sources */,
 				CFAE00D12A6EEA14006A1FF0 /* SearchVideosViewModel.swift in Sources */,
+				CF4B27B22AE0455E0066D863 /* CoinExchangeUseCase.swift in Sources */,
 				CF1B625029B9BCC200DE53E6 /* StorableConversation.swift in Sources */,
 				CF65DDA32A82AD9800B554D7 /* UserConfigurationRootNavigations.swift in Sources */,
 				CF16480D2A991BF900B12313 /* ChatLinksView.swift in Sources */,
@@ -4238,11 +4291,13 @@
 				CF14F268298CF87E00BC2066 /* AuthService.swift in Sources */,
 				CFFB71EE2A4004A20019663C /* CouponKeyword.swift in Sources */,
 				CF53D6422A6AF548009B3A69 /* ChatInputExpandModelType.swift in Sources */,
+				CFE2155B2AE630DA00C83BAD /* ExchangeNavigations.swift in Sources */,
 				CF53D55C2A6AF548009B3A69 /* LaunchView.swift in Sources */,
 				CF53D6412A6AF548009B3A69 /* ChatInputExpandMenuViewModel.swift in Sources */,
 				CF53D5FD2A6AF548009B3A69 /* ChatScrollView.swift in Sources */,
 				CFFD70C9298AC5F800D4F5A2 /* TargetType+RawTarget.swift in Sources */,
 				CF53D59E2A6AF548009B3A69 /* TransactionDetailView.swift in Sources */,
+				CFE2155C2AE630DA00C83BAD /* ExchangeViewModel.swift in Sources */,
 				CF53D6262A6AF548009B3A69 /* ChatSettingHeaderModel.swift in Sources */,
 				CF53D60B2A6AF548009B3A69 /* AddFriendsNavigations.swift in Sources */,
 				CF53D5E42A6AF548009B3A69 /* MessageChatItemModel.swift in Sources */,
@@ -4250,6 +4305,7 @@
 				CF53D5812A6AF548009B3A69 /* MyCouponsViewModel.swift in Sources */,
 				CF53D5632A6AF548009B3A69 /* AboutUsItemView.swift in Sources */,
 				CF53D5A72A6AF548009B3A69 /* TransactionDashboardModel.swift in Sources */,
+				CFE215712AE66F7100C83BAD /* AdMobRepository.swift in Sources */,
 				CF53D5EB2A6AF548009B3A69 /* NormalMessageModel.swift in Sources */,
 				CF3E0EF62A3727D1009EF665 /* CouponCategory.swift in Sources */,
 				CF53D5F02A6AF548009B3A69 /* MessageContentBackgroundModel.swift in Sources */,
@@ -4261,7 +4317,6 @@
 				CF1B625229B9BED800DE53E6 /* StorableMessage.swift in Sources */,
 				CFC23D5B2A7A4F58009CAD87 /* CheckinNavigations.swift in Sources */,
 				CF53D6002A6AF548009B3A69 /* MessageContentBackgroundView.swift in Sources */,
-				CF53D5B82A6AF548009B3A69 /* WalletPointModel.swift in Sources */,
 				CF72860E2ABF4EA10058C75B /* VideoDetailConfiguration.swift in Sources */,
 				CF53D5962A6AF548009B3A69 /* VideosView.swift in Sources */,
 				CF53D5B12A6AF548009B3A69 /* TransactionHistoryNavigations.swift in Sources */,
@@ -4285,8 +4340,10 @@
 				CF53D5A52A6AF548009B3A69 /* TransactionDashboardChartModel.swift in Sources */,
 				CFC709E02996051800B64216 /* View+Progress.swift in Sources */,
 				CFDE69F22AB3658A00F8750D /* VideoDetailViewContentType.swift in Sources */,
+				CFE2156F2AE669C200C83BAD /* CoinExchangeResult.swift in Sources */,
 				CF53D6432A6AF548009B3A69 /* ChatInputExpandMenuNavigations.swift in Sources */,
 				CF11B1DC29BB668D002E8151 /* MessageStore.swift in Sources */,
+				CFE2155F2AE6337800C83BAD /* ExchangeViewDataModel.swift in Sources */,
 				CF53D5752A6AF548009B3A69 /* ShopHomeModel.swift in Sources */,
 				CF53D5A02A6AF548009B3A69 /* TransactionDashboardView.swift in Sources */,
 				CFE5ACEF2A7AAB360027492E /* ShareReferralContainerViewModel.swift in Sources */,
@@ -4391,10 +4448,12 @@
 				CF53D5922A6AF548009B3A69 /* VideoDetailInputViewModel.swift in Sources */,
 				CF65DD992A82A4B900B554D7 /* AddReferralView.swift in Sources */,
 				CF53D5E02A6AF548009B3A69 /* ChatViewModel.swift in Sources */,
+				CF9B393A2ADFCC6400CB72B8 /* WalletMoneyView.swift in Sources */,
 				CF53D5F42A6AF548009B3A69 /* DateChatItemView.swift in Sources */,
 				CF53D55F2A6AF548009B3A69 /* LaunchBackgroundView.swift in Sources */,
 				CFD095252A02B2E3004BF047 /* TrackVideoParam.swift in Sources */,
 				CF53D5852A6AF548009B3A69 /* CouponDetailViewModel.swift in Sources */,
+				CFE2156D2AE6683600C83BAD /* CoinExchangeRate.swift in Sources */,
 				CF53D5EC2A6AF548009B3A69 /* ChatItemModelBuilder.swift in Sources */,
 				CFB0A82D29F1BD3800298546 /* VideoTrendingDurationType.swift in Sources */,
 				CFAD53592A781ECE0044CB42 /* CheckinOverviewView.swift in Sources */,
@@ -4422,6 +4481,7 @@
 				CF14F266298CF4E700BC2066 /* AppConfigs.swift in Sources */,
 				CF1BD1FD29ACEAA000778786 /* UserService.swift in Sources */,
 				CF355C8E2A77C51F005A48F9 /* LocalCheckingRepository.swift in Sources */,
+				CF4B27B02AE043D60066D863 /* CoinModel.swift in Sources */,
 				CF53D6492A6AF548009B3A69 /* AuthNavigations.swift in Sources */,
 				CF53D5982A6AF548009B3A69 /* CommonVideoItemView.swift in Sources */,
 				CF53D5792A6AF548009B3A69 /* ShopCouponItemView.swift in Sources */,
@@ -4491,7 +4551,9 @@
 				CF53D55E2A6AF548009B3A69 /* LaunchBackgroundUIView.swift in Sources */,
 				CF53D5D22A6AF548009B3A69 /* ContactListUseCase.swift in Sources */,
 				CF53D5C92A6AF548009B3A69 /* AddFriendContactListNavigations.swift in Sources */,
+				CF4B27AE2AE043620066D863 /* CoinExchangeRepository.swift in Sources */,
 				CF53D61E2A6AF548009B3A69 /* MessageActionType.swift in Sources */,
+				CFE215732AE6758700C83BAD /* UIViewController+Top.swift in Sources */,
 				CFDCA37929964501003C2C77 /* ButtonStyle.swift in Sources */,
 				CF53D64B2A6AF548009B3A69 /* TermViewModel.swift in Sources */,
 				CF54FA2229D0179B0092E2C6 /* MediaService.swift in Sources */,
@@ -4520,6 +4582,7 @@
 				CF53D57D2A6AF548009B3A69 /* KeywordItemView.swift in Sources */,
 				CF53D6302A6AF548009B3A69 /* AnyImageEditorView.swift in Sources */,
 				CF53D6072A6AF548009B3A69 /* ConversationListModel.swift in Sources */,
+				CF9B393C2ADFEAC900CB72B8 /* MoneyType.swift in Sources */,
 				CF340D3C2AD07AFC001762F6 /* Natrium.swift in Sources */,
 				CF53D62A2A6AF548009B3A69 /* ChatSettingAddParticipantView.swift in Sources */,
 				CFAD53572A781D390044CB42 /* CheckinProgressSumaryView.swift in Sources */,
@@ -4583,6 +4646,7 @@
 				CF53D5902A6AF548009B3A69 /* VideoDetailCommentView.swift in Sources */,
 				CF53D5992A6AF548009B3A69 /* HighlightVideoView.swift in Sources */,
 				CF1EA5862A1D32CD006846DF /* PublishedCurrentValue.swift in Sources */,
+				CFE2155A2AE630DA00C83BAD /* ExchangeView.swift in Sources */,
 				CF861EA72AD5CC3B00500721 /* ComingSoonView.swift in Sources */,
 				CF53D5952A6AF548009B3A69 /* VideosModel.swift in Sources */,
 				CF53D6512A6AF548009B3A69 /* SelectCountryView.swift in Sources */,

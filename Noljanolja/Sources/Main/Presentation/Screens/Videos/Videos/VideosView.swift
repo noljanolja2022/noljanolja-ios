@@ -58,6 +58,7 @@ struct VideosView<ViewModel: VideosViewModel>: View {
             error: buildErrorView
         )
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
     @ViewBuilder

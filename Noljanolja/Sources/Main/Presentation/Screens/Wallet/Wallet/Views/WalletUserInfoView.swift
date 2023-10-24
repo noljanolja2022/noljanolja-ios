@@ -66,7 +66,5 @@ struct WalletUserInfoView: View {
         }
         .frame(maxWidth: .infinity)
         .padding(16)
-        .background(ColorAssets.neutralLight.swiftUIColor)
-        .cornerRadius([.bottomLeading, .bottomTrailing], 24)
     }
 }

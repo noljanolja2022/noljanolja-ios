@@ -165,11 +165,26 @@ struct HomeView<ViewModel: HomeViewModel>: View {
             buildNavigationLinks()
         }
         .background(
-            viewModel.selectedTab.topColor
+            ColorAssets.neutralLight.swiftUIColor
                 .ignoresSafeArea()
                 .overlay {
-                    ColorAssets.neutralLight.swiftUIColor
-                        .ignoresSafeArea(edges: .bottom)
+                    ZStack(alignment: .top) {
+                        switch viewModel.selectedTab {
+                        case .chat, .friends, .watch:
+                            Spacer().background(ColorAssets.primaryGreen200.swiftUIColor)
+                        case .wallet:
+                            ImageAssets.bgWalletHeader.swiftUIImage
+                                .resizable()
+                                .frame(maxWidth: .infinity)
+                                .aspectRatio(1.8, contentMode: .fit)
+                                .background(ColorAssets.primaryGreen200.swiftUIColor)
+                            Spacer()
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        case .shop:
+                            Spacer().background(ColorAssets.primaryGreen100.swiftUIColor)
+                        }
+                    }
+                    .ignoresSafeArea(edges: .top)
                 }
         )
     }
@@ -269,11 +284,13 @@ struct HomeView<ViewModel: HomeViewModel>: View {
             title: tab.tabBarTitle,
             action: { viewModel.selectedTab = tab }
         )
+        .frame(maxWidth: .infinity)
         .foregroundColor(
             viewModel.selectedTab == tab
                 ? ColorAssets.primaryGreen200.swiftUIColor
                 : ColorAssets.neutralGrey.swiftUIColor
         )
+        .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
     private func buildNavigationLinks() -> some View {

@@ -376,6 +376,12 @@ internal enum L10n {
   internal static let errorUnexpected = L10n.tr("Localizable", "error_unexpected", fallback: "Unexpected Error")
   /// Exchange Account Management
   internal static let exchangeAccountManagement = L10n.tr("Localizable", "exchange_account_management", fallback: "Exchange Account Management")
+  /// Exchange Cash
+  internal static let exchangeCashTitle = L10n.tr("Localizable", "exchange_cash_title", fallback: "Exchange Cash")
+  /// Exchange Point to Cash
+  internal static let exchangeDesciption = L10n.tr("Localizable", "exchange_desciption", fallback: "Exchange Point to Cash")
+  /// Exchange
+  internal static let exchangeTitle = L10n.tr("Localizable", "exchange_title", fallback: "Exchange")
   /// Forgot your password?
   internal static let forgotPassword = L10n.tr("Localizable", "forgot_password", fallback: "Forgot your password?")
   /// Full agreement
@@ -788,6 +794,8 @@ internal enum L10n {
   internal static let walletDashboardTitle = L10n.tr("Localizable", "wallet_dashboard_title", fallback: "Dashboard")
   /// Everyday
   internal static let walletEveryDay = L10n.tr("Localizable", "wallet_every_day", fallback: "Everyday")
+  /// NolgoBulja pays a cashbox every minute
+  internal static let walletExchangeDescription = L10n.tr("Localizable", "wallet_exchange_description", fallback: "NolgoBulja pays a cashbox every minute")
   /// Use now
   internal static let walletExchangeMoney = L10n.tr("Localizable", "wallet_exchange_money", fallback: "Use now")
   /// Expected ranking for next month
@@ -798,8 +806,12 @@ internal enum L10n {
   internal static let walletHistoryDashboard = L10n.tr("Localizable", "wallet_history_dashboard", fallback: "Dashboard")
   /// My attendance
   internal static let walletMyAttendance = L10n.tr("Localizable", "wallet_my_attendance", fallback: "My attendance")
+  /// My Cash
+  internal static let walletMyCash = L10n.tr("Localizable", "wallet_my_cash", fallback: "My Cash")
   /// My point
   internal static let walletMyPoint = L10n.tr("Localizable", "wallet_my_point", fallback: "My point")
+  /// My Points
+  internal static let walletMyPoints = L10n.tr("Localizable", "wallet_my_points", fallback: "My Points")
   /// Friend: %@
   internal static func walletNumberFriends(_ p1: Any) -> String {
     return L10n.tr("Localizable", "wallet_number_friends", String(describing: p1), fallback: "Friend: %@")
