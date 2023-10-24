@@ -101,6 +101,7 @@ internal enum ImageAssets {
   internal static let icWallet = ImageAsset(name: "ic_wallet")
   internal static let bgPointGreen = ImageAsset(name: "bg_point_green")
   internal static let bgPointYellow = ImageAsset(name: "bg_point_yellow")
+  internal static let bgWalletHeader = ImageAsset(name: "bg_wallet_header")
   internal static let bnCash = ImageAsset(name: "bn_cash")
   internal static let bnPoint = ImageAsset(name: "bn_point")
   internal static let bnReferral = ImageAsset(name: "bn_referral")
@@ -191,6 +192,7 @@ internal enum ImageAssets {
     icWallet,
     bgPointGreen,
     bgPointYellow,
+    bgWalletHeader,
     bnCash,
     bnPoint,
     bnReferral,

@@ -224,7 +224,7 @@
 "wallet_my_cash" = "My Cash";
 "wallet_exchange_description" = "NolgoBulja pays a cashbox every minute";
 "exchange_title" = "Exchange";
-"exchange_cash_title" = "Exchange Cash!";
+"exchange_cash_title" = "Exchange Cash";
 "exchange_desciption" = "Exchange Point to Cash";
 "transaction_detail" = "Detail Transaction";
 "transaction_detail_status" = "Status";

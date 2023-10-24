@@ -49,7 +49,6 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                 buildUserInfoView(model)
                 buildScrollView(model)
             }
-            .background(ColorAssets.primaryGreen200.swiftUIColor)
         }
     }
     
@@ -73,8 +72,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                 buildPointsView(model)
                 buildCheckinProgressView(model)
             }
-            .padding(.horizontal, 16)
-            .padding(.bottom, 16)
+            .padding(16)
             .shadow(
                 color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.2),
                 radius: 8,
@@ -82,6 +80,8 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                 y: 4
             )
         }
+        .background(ColorAssets.neutralLight.swiftUIColor)
+        .cornerRadius([.topLeading, .topTrailing], 24)
     }
     
     private func buildCoinsView(_ model: WalletModel) -> some View {

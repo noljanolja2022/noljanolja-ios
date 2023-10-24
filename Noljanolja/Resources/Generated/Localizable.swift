@@ -376,8 +376,8 @@ internal enum L10n {
   internal static let errorUnexpected = L10n.tr("Localizable", "error_unexpected", fallback: "Unexpected Error")
   /// Exchange Account Management
   internal static let exchangeAccountManagement = L10n.tr("Localizable", "exchange_account_management", fallback: "Exchange Account Management")
-  /// Exchange Cash!
-  internal static let exchangeCashTitle = L10n.tr("Localizable", "exchange_cash_title", fallback: "Exchange Cash!")
+  /// Exchange Cash
+  internal static let exchangeCashTitle = L10n.tr("Localizable", "exchange_cash_title", fallback: "Exchange Cash")
   /// Exchange Point to Cash
   internal static let exchangeDesciption = L10n.tr("Localizable", "exchange_desciption", fallback: "Exchange Point to Cash")
   /// Exchange
