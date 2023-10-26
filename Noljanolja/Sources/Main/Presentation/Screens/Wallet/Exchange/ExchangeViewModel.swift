@@ -138,7 +138,7 @@ final class ExchangeViewModel: ViewModel {
                 self.isProgressHUDShowing = false
                 switch result {
                 case let .success(ad):
-                    guard let viewController = UIApplication.shared.keyWindowPresentedController else {
+                    guard let viewController = UIApplication.shared.rootKeyWindow?.topViewController else {
                         self.alertState = AlertState(
                             title: TextState(L10n.commonErrorTitle),
                             message: TextState(L10n.commonErrorDescription),
