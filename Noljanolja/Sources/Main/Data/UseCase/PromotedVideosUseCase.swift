@@ -35,7 +35,7 @@ final class PromotedVideosUseCaseImpl: PromotedVideosUseCase {
                 receiveCompletion: { _ in },
                 receiveValue: { promotedVideos in
                     guard let video = promotedVideos.first(where: { $0.autoPlay })?.video else { return }
-                    VideoDetailViewModel.shared.show(videoId: video.id, contentType: .minimize)
+                    VideoDetailViewModel.shared.show(videoId: video.id, contentType: .bottom)
                 }
             )
             .store(in: &cancellables)

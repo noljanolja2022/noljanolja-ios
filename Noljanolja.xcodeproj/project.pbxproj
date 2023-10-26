@@ -507,6 +507,7 @@
 		CFE09272298FEACD00F197F0 /* SwifterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CFE09271298FEACD00F197F0 /* SwifterSwift */; };
 		CFE0933E298FFC5B00F197F0 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0933D298FFC5B00F197F0 /* AuthError.swift */; };
 		CFE09341299007E400F197F0 /* Publisher+ResultTranforming.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE09340299007E400F197F0 /* Publisher+ResultTranforming.swift */; };
+		CFE15C622AEA1F0200E94E9B /* YoutubePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE15C612AEA1F0200E94E9B /* YoutubePlayerView.swift */; };
 		CFE2155A2AE630DA00C83BAD /* ExchangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE215572AE630DA00C83BAD /* ExchangeView.swift */; };
 		CFE2155B2AE630DA00C83BAD /* ExchangeNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE215582AE630DA00C83BAD /* ExchangeNavigations.swift */; };
 		CFE2155C2AE630DA00C83BAD /* ExchangeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE215592AE630DA00C83BAD /* ExchangeViewModel.swift */; };
@@ -1107,6 +1108,7 @@
 		CFE0926A298FE73000F197F0 /* CloudFunctionAuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudFunctionAuthAPI.swift; sourceTree = "<group>"; };
 		CFE0933D298FFC5B00F197F0 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		CFE09340299007E400F197F0 /* Publisher+ResultTranforming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+ResultTranforming.swift"; sourceTree = "<group>"; };
+		CFE15C612AEA1F0200E94E9B /* YoutubePlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubePlayerView.swift; sourceTree = "<group>"; };
 		CFE215572AE630DA00C83BAD /* ExchangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeView.swift; sourceTree = "<group>"; };
 		CFE215582AE630DA00C83BAD /* ExchangeNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeNavigations.swift; sourceTree = "<group>"; };
 		CFE215592AE630DA00C83BAD /* ExchangeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewModel.swift; sourceTree = "<group>"; };
@@ -3162,6 +3164,7 @@
 		CF91E6F92AB45A6C0086C046 /* VideoDetail */ = {
 			isa = PBXGroup;
 			children = (
+				CFE15C602AEA1F0200E94E9B /* Views */,
 				CF53D41D2A6AF547009B3A69 /* VideoDetailViewModel.swift */,
 				CF53D41E2A6AF547009B3A69 /* VideoDetailView.swift */,
 				CFF868BD2A6E7791006F0B87 /* VideoDetailFullScreenCoverType.swift */,
@@ -3415,6 +3418,14 @@
 				CF00D158299417F400505702 /* Combines */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CFE15C602AEA1F0200E94E9B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CFE15C612AEA1F0200E94E9B /* YoutubePlayerView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		CFE2155D2AE6336C00C83BAD /* Models */ = {
@@ -4226,6 +4237,7 @@
 				CFA3304D29BEB674008D7449 /* SearchView.swift in Sources */,
 				CFB0A82B29F1BB5800298546 /* VideoRepository.swift in Sources */,
 				CFF530B02A74218B00908DEB /* VideoMessageContentView.swift in Sources */,
+				CFE15C622AEA1F0200E94E9B /* YoutubePlayerView.swift in Sources */,
 				CF8686992AB8A6F100EE530B /* PromotedVideo.swift in Sources */,
 				CF53D59B2A6AF548009B3A69 /* HighlightVideoItemView.swift in Sources */,
 				CF53D5E92A6AF548009B3A69 /* ChatAlertActionType.swift in Sources */,
@@ -4833,7 +4845,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "";
+				INFOPLIST_KEY_UILaunchStoryboardName = UILaunchStoryboardName;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -4976,7 +4988,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "";
+				INFOPLIST_KEY_UILaunchStoryboardName = UILaunchStoryboardName;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -10,6 +10,7 @@ import Combine
 import Foundation
 import Moya
 import SwiftUIX
+import youtube_ios_player_helper
 import YouTubePlayerKit
 
 // MARK: - VideoDetailViewModelDelegate
@@ -48,10 +49,8 @@ final class VideoDetailViewModel: ViewModel {
         customUserAgent: nil
     )
 
-    lazy var youTubePlayer: YouTubePlayer = {
-        let youTubePlayer = YouTubePlayer()
-        youTubePlayer.configuration = youTubePlayerConfiguration
-        youTubePlayer.hideStatsForNerds()
+    lazy var youTubePlayer: YTPlayerView = {
+        let youTubePlayer = YTPlayerView()
         return youTubePlayer
     }()
 
@@ -107,34 +106,24 @@ final class VideoDetailViewModel: ViewModel {
 
     func show(videoId: String,
               configuration: VideoDetailConfiguration? = nil,
-              contentType: VideoDetailViewContentType = .maximize) {
+              contentType: VideoDetailViewContentType = .full) {
         self.videoId = videoId
         self.configuration = configuration
-        switch self.contentType {
-        case .maximize, .minimize:
-            break
-        case .hide:
-            updateContentType(contentType)
-        }
+        updateContentType(contentType)
     }
 
     func hide() {
-        youTubePlayer.source = nil
+        youTubePlayer.stopVideo()
 
         videoId = nil
         updateContentType(.hide)
     }
 
     func updateContentType(_ value: VideoDetailViewContentType) {
-        switch value {
-        case .maximize, .hide:
-            DispatchQueue.main.async { [weak self] in
-                withAnimation(.easeInOut(duration: 0.3)) {
-                    self?.contentType = value
-                }
+        DispatchQueue.main.async { [weak self] in
+            withAnimation(.easeInOut(duration: 0.3)) {
+                self?.contentType = value
             }
-        case .minimize:
-            break
         }
     }
 
@@ -183,7 +172,16 @@ final class VideoDetailViewModel: ViewModel {
     }
 
     private func setVideo(_ video: Video) {
-        youTubePlayer.source = .url(video.url)
+        youTubePlayer.load(withVideoId: video.id)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            self.youTubePlayer.playVideo()
+            self.youTubePlayer.requestPictureInPicture()
+            self.youTubePlayer.pictureInPicture()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
+            self.youTubePlayer.requestPictureInPicture()
+            self.youTubePlayer.pictureInPicture()
+        }
 
         self.video = video
         comments = video.comments
@@ -234,74 +232,74 @@ final class VideoDetailViewModel: ViewModel {
             .store(in: &videoCancellables)
     }
 
-    private func configureYouTubePlayer(_ video: Video) {
-        youTubePlayer.playbackStatePublisher
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] in
-                self?.youTubePlayerPlaybackState = $0
-            })
-            .store(in: &videoCancellables)
+    private func configureYouTubePlayer(_: Video) {
+//        youTubePlayer.playbackStatePublisher
+//            .receive(on: DispatchQueue.main)
+//            .sink(receiveValue: { [weak self] in
+//                self?.youTubePlayerPlaybackState = $0
+//            })
+//            .store(in: &videoCancellables)
+//
+//        youTubePlayerPlaybackStateAction
+//            .sink(receiveValue: { [weak self] in
+//                guard let self else { return }
+//                switch youTubePlayer.playbackState {
+//                case .buffering, .cued, .paused, .unstarted:
+//                    youTubePlayer.play()
+//                case .ended:
+//                    youTubePlayer.seek(to: 0, allowSeekAhead: true)
+//                    youTubePlayer.play()
+//                case .playing:
+//                    youTubePlayer.pause()
+//                case .none:
+//                    break
+//                }
+//            })
+//            .store(in: &videoCancellables)
 
-        youTubePlayerPlaybackStateAction
-            .sink(receiveValue: { [weak self] in
-                guard let self else { return }
-                switch youTubePlayer.playbackState {
-                case .buffering, .cued, .paused, .unstarted:
-                    youTubePlayer.play()
-                case .ended:
-                    youTubePlayer.seek(to: 0, allowSeekAhead: true)
-                    youTubePlayer.play()
-                case .playing:
-                    youTubePlayer.pause()
-                case .none:
-                    break
-                }
-            })
-            .store(in: &videoCancellables)
+//        if let configuration {
+//            youTubePlayer
+//                .currentTimePublisher(updateInterval: configuration.autoActionDuration)
+//                .first()
+//                .flatMapLatestToResult { [weak self] _ in
+//                    guard let self else {
+//                        return Fail<Void, Error>(error: CommonError.captureSelfNotFound).eraseToAnyPublisher()
+//                    }
+//                    return self.videoUseCases
+//                        .reactPromote(videoId: video.id)
+//                        .eraseToAnyPublisher()
+//                }
+//                .receive(on: DispatchQueue.main)
+//                .sink { _ in }
+//                .store(in: &cancellables)
+//        }
 
-        if let configuration {
-            youTubePlayer
-                .currentTimePublisher(updateInterval: configuration.autoActionDuration)
-                .first()
-                .flatMapLatestToResult { [weak self] _ in
-                    guard let self else {
-                        return Fail<Void, Error>(error: CommonError.captureSelfNotFound).eraseToAnyPublisher()
-                    }
-                    return self.videoUseCases
-                        .reactPromote(videoId: video.id)
-                        .eraseToAnyPublisher()
-                }
-                .receive(on: DispatchQueue.main)
-                .sink { _ in }
-                .store(in: &cancellables)
-        }
-
-        Publishers.Merge(
-            youTubePlayer.playbackStatePublisher,
-            youTubePlayer.currentTimePublisher(updateInterval: 10)
-                .map { _ in YouTubePlayer.PlaybackState.playing }
-        )
-        .withLatestFrom(
-            Publishers.CombineLatest(
-                youTubePlayer.currentTimePublisher(),
-                youTubePlayer.durationPublisher
-            )
-        ) { (playbackState: YouTubePlayer.PlaybackState, times: (Double, Double)) in
-            (playbackState, times.0, times.1)
-        }
-        .compactMap { state, currentTime, durationTime -> TrackVideoParam? in
-            TrackVideoParam(
-                videoId: video.id,
-                event: state.trackEventType,
-                trackIntervalMs: Int(currentTime * 1000),
-                durationMs: Int(durationTime * 1000)
-            )
-        }
-        .compactMap { try? $0.jsonString() }
-        .sink(receiveValue: { [weak self] in
-            self?.videoSocket.trackVideoProgress(data: $0)
-        })
-        .store(in: &videoCancellables)
+//        Publishers.Merge(
+//            youTubePlayer.playbackStatePublisher,
+//            youTubePlayer.currentTimePublisher(updateInterval: 10)
+//                .map { _ in YouTubePlayer.PlaybackState.playing }
+//        )
+//        .withLatestFrom(
+//            Publishers.CombineLatest(
+//                youTubePlayer.currentTimePublisher(),
+//                youTubePlayer.durationPublisher
+//            )
+//        ) { (playbackState: YouTubePlayer.PlaybackState, times: (Double, Double)) in
+//            (playbackState, times.0, times.1)
+//        }
+//        .compactMap { state, currentTime, durationTime -> TrackVideoParam? in
+//            TrackVideoParam(
+//                videoId: video.id,
+//                event: state.trackEventType,
+//                trackIntervalMs: Int(currentTime * 1000),
+//                durationMs: Int(durationTime * 1000)
+//            )
+//        }
+//        .compactMap { try? $0.jsonString() }
+//        .sink(receiveValue: { [weak self] in
+//            self?.videoSocket.trackVideoProgress(data: $0)
+//        })
+//        .store(in: &videoCancellables)
     }
 }
 

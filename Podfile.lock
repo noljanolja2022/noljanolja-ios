@@ -65,6 +65,7 @@ PODS:
   - PromisesObjC (2.3.1)
   - shared (1.0)
   - SnapKit (5.6.0)
+  - youtube-ios-player-helper (1.0.2)
 
 DEPENDENCIES:
   - AnyImageKit
@@ -72,6 +73,7 @@ DEPENDENCIES:
   - Natrium
   - naveridlogin-sdk-ios (= 4.1.5)
   - shared (from `./shared`)
+  - youtube-ios-player-helper (from `https://github.com/HyunjoonKo/youtube-ios-player-helper`)
 
 SPEC REPOS:
   trunk:
@@ -90,6 +92,13 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   shared:
     :path: "./shared"
+  youtube-ios-player-helper:
+    :git: https://github.com/HyunjoonKo/youtube-ios-player-helper
+
+CHECKOUT OPTIONS:
+  youtube-ios-player-helper:
+    :commit: 449e457517cbaf1e4dac31f380b272bee7df360a
+    :git: https://github.com/HyunjoonKo/youtube-ios-player-helper
 
 SPEC CHECKSUMS:
   AnyImageKit: 5f30ce2cad2ffa9162c3e6d827ccb3a280553640
@@ -104,7 +113,8 @@ SPEC CHECKSUMS:
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   shared: 39716697cdb03064a2a5d4da9d9d75c8ca73d2e7
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  youtube-ios-player-helper: 40b96e52c22445f0fdc43731cefa32c67075ff81
 
-PODFILE CHECKSUM: c12419562ce24a151dcd26acae288870051d95cd
+PODFILE CHECKSUM: 65a1be3d0c7920b5fa883f87ad91f499cffd637f
 
 COCOAPODS: 1.13.0
