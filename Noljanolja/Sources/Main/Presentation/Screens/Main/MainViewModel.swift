@@ -60,7 +60,7 @@ final class MainViewModel: ViewModel {
                 switch contentType {
                 case .bottom:
                     return isHomeAppear ? 0 : VideoDetailViewContentType.bottom.playerHeight + 8
-                case .full, .inAppPictureInPicture, .pictureInPicture, .hide:
+                case .full, .pictureInPicture, .hide:
                     return 0
                 }
             }()

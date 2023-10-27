@@ -23,7 +23,7 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
 
     @ViewBuilder
     private func buildBodyView() -> some View {
-        buildView()
+        buildContentTypeView()
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .fullScreenCover(
@@ -35,9 +35,9 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
     }
     
     @ViewBuilder
-    private func buildView() -> some View {
+    private func buildContentTypeView() -> some View {
         switch viewModel.contentType {
-        case .full, .bottom, .inAppPictureInPicture, .pictureInPicture:
+        case .full, .bottom, .pictureInPicture:
             buildNavigationView()
         case .hide:
             EmptyView()
@@ -56,10 +56,22 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
             {
                 switch viewModel.contentType {
                 case .bottom: return viewModel.minimizeBottomPadding
-                case .full, .inAppPictureInPicture, .pictureInPicture, .hide: return 0
+                case .full, .pictureInPicture, .hide: return 0
                 }
             }()
         )
+        .opacity({
+            switch viewModel.contentType {
+            case .full, .bottom: return 1
+            case .pictureInPicture, .hide: return 0
+            }
+        }())
+//        .hidden({
+//            switch viewModel.contentType {
+//            case .full, .bottom: return false
+//            case .pictureInPicture, .hide: return true
+//            }
+//        }())
     }
     
     @ViewBuilder
@@ -103,7 +115,7 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
             }
             .frame(maxWidth: .infinity)
             .frame(height: 44)
-        case .bottom, .inAppPictureInPicture, .hide:
+        case .bottom, .hide:
             EmptyView()
         }
     }
@@ -132,7 +144,7 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
 
     @ViewBuilder
     private func buildPlayerView() -> some View {
-        YoutubePlayerView(viewModel.youTubePlayer)
+        YoutubePlayerView(viewModel.youtubePlayerView)
             .frame(width: viewModel.contentType.playerWidth)
             .frame(height: viewModel.contentType.playerHeight)
     }
@@ -140,7 +152,7 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
     @ViewBuilder
     private func buildHorizontalDetailView() -> some View {
         switch viewModel.contentType {
-        case .full, .inAppPictureInPicture, .pictureInPicture, .hide:
+        case .full, .pictureInPicture, .hide:
             EmptyView()
         case .bottom:
             buildHorizontalDetailContentView()
@@ -152,7 +164,7 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
         switch viewModel.contentType {
         case .full, .pictureInPicture:
             buildVerticalDetailContentView()
-        case .bottom, .inAppPictureInPicture, .hide:
+        case .bottom, .hide:
             EmptyView()
         }
     }
@@ -179,7 +191,7 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
                 }
             }
 
-            if let systemImageName = viewModel.youTubePlayerPlaybackState?.systemImageName {
+            if let systemImageName = viewModel.youtubePlayerState?.systemImageName {
                 Image(systemName: systemImageName)
                     .resizable()
                     .padding(8)

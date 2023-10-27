@@ -6,15 +6,16 @@
 //
 
 import Foundation
-import YouTubePlayerKit
+import youtube_ios_player_helper
 
-extension YouTubePlayer.PlaybackState {
+extension YTPlayerState {
     var trackEventType: VideoProgressEventType? {
         switch self {
         case .playing: return .play
         case .paused: return .pause
         case .ended: return .finish
-        case .unstarted, .buffering, .cued: return nil
+        case .unstarted, .buffering, .cued, .unknown: return nil
+        @unknown default: return nil
         }
     }
 }

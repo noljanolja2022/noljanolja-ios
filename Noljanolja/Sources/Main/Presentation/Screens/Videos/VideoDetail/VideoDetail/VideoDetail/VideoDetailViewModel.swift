@@ -24,34 +24,11 @@ final class VideoDetailViewModel: ViewModel {
 
     // MARK: State
 
-    lazy var youTubePlayerConfiguration = YouTubePlayer.Configuration(
-        automaticallyAdjustsContentInsets: nil,
-        allowsPictureInPictureMediaPlayback: true,
-        fullscreenMode: .system,
-        openURLAction: .init(handler: { _ in }), // Updated
-        autoPlay: true, // Updated
-        captionLanguage: nil,
-        showCaptions: false, // Updated
-        progressBarColor: nil,
-        showControls: nil,
-        keyboardControlsDisabled: nil,
-        enableJavaScriptAPI: true, // Updated
-        endTime: nil,
-        showFullscreenButton: nil,
-        language: nil,
-        showAnnotations: nil,
-        loopEnabled: nil,
-        useModestBranding: false, // Updated
-        playInline: true, // Updated
-        showRelatedVideos: nil,
-        startTime: nil,
-        referrer: nil,
-        customUserAgent: nil
-    )
-
-    lazy var youTubePlayer: YTPlayerView = {
-        let youTubePlayer = YTPlayerView()
-        return youTubePlayer
+    lazy var youtubePlayerView: YTPlayerView = {
+        let youtubePlayerView = YTPlayerView()
+        youtubePlayerView.requestPictureInPicture()
+        youtubePlayerView.delegate = self
+        return youtubePlayerView
     }()
 
     @Published private(set) var videoId: String?
@@ -63,7 +40,7 @@ final class VideoDetailViewModel: ViewModel {
     @Published var comments = [VideoComment]()
     @Published var commentCount: Int?
 
-    @Published var youTubePlayerPlaybackState: YouTubePlayer.PlaybackState?
+    @Published var youtubePlayerState: YTPlayerState?
 
     @Published var viewState = ViewState.loading
     @Published var footerViewState = StatefullFooterViewState.loading
@@ -86,6 +63,9 @@ final class VideoDetailViewModel: ViewModel {
     private weak var delegate: VideoDetailViewModelDelegate?
 
     // MARK: Private
+    
+    private let playbackStateSubject = CurrentValueSubject<YTPlayerState?, Never>(nil)
+    private let currentTimeSubject = CurrentValueSubject<Double?, Never>(nil)
 
     private var pageSize = 20
     private var cancellables = Set<AnyCancellable>()
@@ -113,7 +93,7 @@ final class VideoDetailViewModel: ViewModel {
     }
 
     func hide() {
-        youTubePlayer.stopVideo()
+        youtubePlayerView.stopVideo()
 
         videoId = nil
         updateContentType(.hide)
@@ -172,16 +152,7 @@ final class VideoDetailViewModel: ViewModel {
     }
 
     private func setVideo(_ video: Video) {
-        youTubePlayer.load(withVideoId: video.id)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            self.youTubePlayer.playVideo()
-            self.youTubePlayer.requestPictureInPicture()
-            self.youTubePlayer.pictureInPicture()
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
-            self.youTubePlayer.requestPictureInPicture()
-            self.youTubePlayer.pictureInPicture()
-        }
+        youtubePlayerView.load(withVideoId: video.id)
 
         self.video = video
         comments = video.comments
@@ -232,74 +203,145 @@ final class VideoDetailViewModel: ViewModel {
             .store(in: &videoCancellables)
     }
 
-    private func configureYouTubePlayer(_: Video) {
-//        youTubePlayer.playbackStatePublisher
-//            .receive(on: DispatchQueue.main)
-//            .sink(receiveValue: { [weak self] in
-//                self?.youTubePlayerPlaybackState = $0
-//            })
-//            .store(in: &videoCancellables)
-//
-//        youTubePlayerPlaybackStateAction
-//            .sink(receiveValue: { [weak self] in
-//                guard let self else { return }
-//                switch youTubePlayer.playbackState {
-//                case .buffering, .cued, .paused, .unstarted:
-//                    youTubePlayer.play()
-//                case .ended:
-//                    youTubePlayer.seek(to: 0, allowSeekAhead: true)
-//                    youTubePlayer.play()
-//                case .playing:
-//                    youTubePlayer.pause()
-//                case .none:
-//                    break
-//                }
-//            })
-//            .store(in: &videoCancellables)
+    private func configureYouTubePlayer(_ video: Video) {
+        playbackStateSubject
+            .compactMap { $0 }
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                self?.youtubePlayerState = $0
+            })
+            .store(in: &videoCancellables)
 
-//        if let configuration {
-//            youTubePlayer
-//                .currentTimePublisher(updateInterval: configuration.autoActionDuration)
-//                .first()
-//                .flatMapLatestToResult { [weak self] _ in
-//                    guard let self else {
-//                        return Fail<Void, Error>(error: CommonError.captureSelfNotFound).eraseToAnyPublisher()
-//                    }
-//                    return self.videoUseCases
-//                        .reactPromote(videoId: video.id)
-//                        .eraseToAnyPublisher()
-//                }
-//                .receive(on: DispatchQueue.main)
-//                .sink { _ in }
-//                .store(in: &cancellables)
-//        }
+        youTubePlayerPlaybackStateAction
+            .sink(receiveValue: { [weak self] in
+                guard let self else { return }
+                switch playbackStateSubject.value {
+                case .buffering, .cued, .paused, .unstarted:
+                    youtubePlayerView.playVideo()
+                case .ended:
+                    youtubePlayerView.seek(toSeconds: 0, allowSeekAhead: true)
+                    youtubePlayerView.playVideo()
+                case .playing:
+                    youtubePlayerView.pauseVideo()
+                case .unknown, .none:
+                    break
+                @unknown default:
+                    break
+                }
+            })
+            .store(in: &videoCancellables)
 
-//        Publishers.Merge(
-//            youTubePlayer.playbackStatePublisher,
-//            youTubePlayer.currentTimePublisher(updateInterval: 10)
-//                .map { _ in YouTubePlayer.PlaybackState.playing }
-//        )
-//        .withLatestFrom(
-//            Publishers.CombineLatest(
-//                youTubePlayer.currentTimePublisher(),
-//                youTubePlayer.durationPublisher
-//            )
-//        ) { (playbackState: YouTubePlayer.PlaybackState, times: (Double, Double)) in
-//            (playbackState, times.0, times.1)
-//        }
-//        .compactMap { state, currentTime, durationTime -> TrackVideoParam? in
-//            TrackVideoParam(
-//                videoId: video.id,
-//                event: state.trackEventType,
-//                trackIntervalMs: Int(currentTime * 1000),
-//                durationMs: Int(durationTime * 1000)
-//            )
-//        }
-//        .compactMap { try? $0.jsonString() }
-//        .sink(receiveValue: { [weak self] in
-//            self?.videoSocket.trackVideoProgress(data: $0)
-//        })
-//        .store(in: &videoCancellables)
+        currentTimePublisher()
+            .first(where: { [weak self] currentTime in
+                guard let configuration = self?.configuration else {
+                    return false
+                }
+                return currentTime >= configuration.autoActionDuration
+            })
+            .flatMapLatestToResult { [weak self] _ in
+                guard let self else {
+                    return Fail<Void, Error>(error: CommonError.captureSelfNotFound).eraseToAnyPublisher()
+                }
+                return self.videoUseCases
+                    .reactPromote(videoId: video.id)
+                    .eraseToAnyPublisher()
+            }
+            .receive(on: DispatchQueue.main)
+            .sink { _ in }
+            .store(in: &cancellables)
+        
+        let aaaa = Publishers.Merge(
+            playbackStateSubject
+                .compactMap { $0 },
+            currentTimePublisher(updateInterval: 10)
+                .map { _ in YTPlayerState.playing }
+        )
+        .withLatestFrom(
+            Publishers.CombineLatest(
+                currentTimePublisher(),
+                durationPublisher()
+            )
+        ) { (playbackState: YTPlayerState, times: (Double, Double)) in
+            (playbackState, times.0, times.1)
+        }
+        .compactMap { state, currentTime, durationTime -> TrackVideoParam? in
+            TrackVideoParam(
+                videoId: video.id,
+                event: state.trackEventType,
+                trackIntervalMs: Int(currentTime * 1000),
+                durationMs: Int(durationTime * 1000)
+            )
+        }
+        .compactMap { try? $0.jsonString() }
+        .sink(receiveValue: { [weak self] in
+            self?.videoSocket.trackVideoProgress(data: $0)
+        })
+        .store(in: &videoCancellables)
+    }
+}
+
+extension VideoDetailViewModel {
+    private func currentTimePublisher(updateInterval: TimeInterval = 0.5) -> AnyPublisher<Double, Never> {
+        Publishers.Merge(
+            Just(()),
+            Timer
+                .publish(every: updateInterval, on: .main, in: .common)
+                .autoconnect()
+                .mapToVoid()
+        )
+        .flatMap {
+            self.playbackStateSubject
+                .filter { $0 == .playing }
+                .removeDuplicates()
+        }
+        .flatMap { _ in
+            self.currentTimeSubject
+                .compactMap { $0 }
+                .removeDuplicates()
+        }
+        .removeDuplicates()
+        .eraseToAnyPublisher()
+    }
+    
+    private func durationPublisher() -> AnyPublisher<Double, Never> {
+        Future { [weak self] promise in
+            self?.youtubePlayerView.duration { duration, _ in
+                promise(.success(duration))
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+}
+
+// MARK: YTPlayerViewDelegate
+
+extension VideoDetailViewModel: YTPlayerViewDelegate {
+    func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
+        playerView.playVideo()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            playerView.pictureInPicture()
+        }
+    }
+    
+    func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
+        playbackStateSubject.send(state)
+    }
+    
+    func playerView(_ playerView: YTPlayerView, didPlayTime playTime: Float) {
+        currentTimeSubject.send(Double(playTime))
+    }
+    
+    func playerView(_ playerView: YTPlayerView, didChangeTo quality: YTPlaybackQuality) {}
+    
+    func playerView(_ playerView: YTPlayerView, didChangeToStatePictureInPicture state: String?) {
+        switch state {
+        case "picture_in_picture":
+            updateContentType(.pictureInPicture)
+        case "inline":
+            updateContentType(.full)
+        default:
+            break
+        }
     }
 }
 

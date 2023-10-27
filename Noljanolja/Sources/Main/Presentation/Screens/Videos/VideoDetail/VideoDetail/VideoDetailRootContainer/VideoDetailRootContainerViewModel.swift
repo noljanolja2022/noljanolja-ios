@@ -46,7 +46,7 @@ final class VideoDetailRootContainerViewModel: ViewModel {
                     switch contentType {
                     case .bottom:
                         return VideoDetailViewContentType.bottom.playerHeight
-                    case .full, .inAppPictureInPicture, .pictureInPicture, .hide:
+                    case .full, .pictureInPicture, .hide:
                         return 0
                     }
                 }()
