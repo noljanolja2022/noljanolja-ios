@@ -6,6 +6,7 @@
 //
 //
 
+import AVKit
 import Combine
 import Foundation
 import Moya
@@ -26,7 +27,6 @@ final class VideoDetailViewModel: ViewModel {
 
     lazy var youtubePlayerView: YTPlayerView = {
         let youtubePlayerView = YTPlayerView()
-        youtubePlayerView.requestPictureInPicture()
         youtubePlayerView.delegate = self
         return youtubePlayerView
     }()
@@ -97,6 +97,7 @@ final class VideoDetailViewModel: ViewModel {
 
         videoId = nil
         updateContentType(.hide)
+        stopPictureInPicture()
     }
 
     func updateContentType(_ value: VideoDetailViewContentType) {
@@ -111,6 +112,28 @@ final class VideoDetailViewModel: ViewModel {
         DispatchQueue.main.async { [weak self] in
             withAnimation(.easeInOut(duration: 0.3)) {
                 self?.minimizeBottomPadding = value
+            }
+        }
+    }
+    
+    func startPictureInPicture() {
+        if AVPictureInPictureController.isPictureInPictureSupported() {
+            youtubePlayerView.requestPicture { [weak self] state, _ in
+                switch state {
+                case "picture_in_picture": break
+                default: self?.youtubePlayerView.pictureInPicture()
+                }
+            }
+        } else {
+            updateContentType(.bottom)
+        }
+    }
+    
+    func stopPictureInPicture() {
+        youtubePlayerView.requestPicture { [weak self] state, _ in
+            switch state {
+            case "picture_in_picture": self?.youtubePlayerView.pictureInPicture()
+            default: break
             }
         }
     }
@@ -250,7 +273,7 @@ final class VideoDetailViewModel: ViewModel {
             .sink { _ in }
             .store(in: &cancellables)
         
-        let aaaa = Publishers.Merge(
+        Publishers.Merge(
             playbackStateSubject
                 .compactMap { $0 },
             currentTimePublisher(updateInterval: 10)
@@ -298,6 +321,7 @@ extension VideoDetailViewModel {
             self.currentTimeSubject
                 .compactMap { $0 }
                 .removeDuplicates()
+                .first()
         }
         .removeDuplicates()
         .eraseToAnyPublisher()
@@ -318,8 +342,13 @@ extension VideoDetailViewModel {
 extension VideoDetailViewModel: YTPlayerViewDelegate {
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
         playerView.playVideo()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            playerView.pictureInPicture()
+        switch contentType {
+        case .full, .bottom, .hide:
+            break
+        case .pictureInPicture:
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+                self?.startPictureInPicture()
+            }
         }
     }
     
@@ -337,10 +366,13 @@ extension VideoDetailViewModel: YTPlayerViewDelegate {
         switch state {
         case "picture_in_picture":
             updateContentType(.pictureInPicture)
-        case "inline":
-            updateContentType(.full)
         default:
-            break
+            switch contentType {
+            case .pictureInPicture:
+                updateContentType(.hide)
+            case .full, .bottom, .hide:
+                break
+            }
         }
     }
 }

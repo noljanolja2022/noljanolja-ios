@@ -25,20 +25,21 @@ struct MainView<ViewModel: MainViewModel>: View {
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
     }
-
+    
     private func buildMainView() -> some View {
+        ZStack(alignment: .bottom) {
+            buildHomeContainerView()
+            buildVideoDetailView()
+        }
+    }
+
+    private func buildHomeContainerView() -> some View {
         VStack(spacing: 0) {
             buildContentView()
                 .padding(.bottom, viewModel.bottomPadding)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .overlay(alignment: .bottom) {
-            ZStack(alignment: .bottom) {
-                Spacer()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                buildOverlayView()
-            }
-        }
+        .zIndex(1)
     }
 
     private func buildContentView() -> some View {
@@ -66,7 +67,7 @@ struct MainView<ViewModel: MainViewModel>: View {
     }
 
     @ViewBuilder
-    private func buildOverlayView() -> some View {
+    private func buildVideoDetailView() -> some View {
         VideoDetailView(
             viewModel: VideoDetailViewModel.shared
         )

@@ -24,6 +24,12 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
     @ViewBuilder
     private func buildBodyView() -> some View {
         buildContentTypeView()
+            .zIndex({
+                switch viewModel.contentType {
+                case .full, .bottom: return 2
+                case .pictureInPicture, .hide: return 0
+                }
+            }())
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .fullScreenCover(
@@ -60,18 +66,6 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
                 }
             }()
         )
-        .opacity({
-            switch viewModel.contentType {
-            case .full, .bottom: return 1
-            case .pictureInPicture, .hide: return 0
-            }
-        }())
-//        .hidden({
-//            switch viewModel.contentType {
-//            case .full, .bottom: return false
-//            case .pictureInPicture, .hide: return true
-//            }
-//        }())
     }
     
     @ViewBuilder
@@ -81,7 +75,8 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
             HStack(spacing: 4) {
                 Button(
                     action: {
-                        viewModel.updateContentType(.hide)
+                        viewModel.updateContentType(.pictureInPicture)
+                        viewModel.startPictureInPicture()
                     },
                     label: {
                         ImageAssets.icClose.swiftUIImage
@@ -97,14 +92,10 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
                 
                 Button(
                     action: {
-                        let newContentType = VideoDetailViewContentType(
-                            rawValue: (viewModel.contentType.rawValue + 1) % VideoDetailViewContentType.allCases.count
-                        )
-                        guard let newContentType else { return }
-                        viewModel.updateContentType(newContentType)
+                        viewModel.startPictureInPicture()
                     },
                     label: {
-                        Image(systemName: "gobackward.5.ar")
+                        Image(systemName: "pip")
                             .resizable()
                             .scaledToFit()
                             .padding(10)
@@ -112,6 +103,24 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
                             .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                     }
                 )
+                switch Natrium.Config.environment {
+                case .development:
+                    Button(
+                        action: {
+                            viewModel.updateContentType(.bottom)
+                        },
+                        label: {
+                            Image(systemName: "rectangle.portrait.bottomright.inset.filled")
+                                .resizable()
+                                .scaledToFit()
+                                .padding(10)
+                                .aspectRatio(1, contentMode: .fit)
+                                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                        }
+                    )
+                case .production:
+                    EmptyView()
+                }
             }
             .frame(maxWidth: .infinity)
             .frame(height: 44)
