@@ -44,9 +44,9 @@ final class VideoDetailRootContainerViewModel: ViewModel {
             .sink { [weak self] contentType in
                 let bottomPadding: CGFloat = {
                     switch contentType {
-                    case .minimize:
-                        return VideoDetailViewContentType.minimize.playerHeight
-                    case .maximize, .hide:
+                    case .bottom:
+                        return VideoDetailViewContentType.bottom.playerHeight
+                    case .full, .pictureInPicture, .hide:
                         return 0
                     }
                 }()

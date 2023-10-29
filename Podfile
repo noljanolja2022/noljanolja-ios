@@ -9,6 +9,7 @@ target 'Noljanolja' do
   pod 'Natrium'
   pod 'AnyImageKit'
   pod 'Google-Mobile-Ads-SDK'
+  pod "youtube-ios-player-helper", :git => 'https://github.com/HyunjoonKo/youtube-ios-player-helper'
   pod 'naveridlogin-sdk-ios', '4.1.5'
   pod 'shared', :path => './shared'
 

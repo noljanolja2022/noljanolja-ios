@@ -6,13 +6,14 @@
 //
 
 import Foundation
-import YouTubePlayerKit
+import youtube_ios_player_helper
 
-extension YouTubePlayer.PlaybackState {
+extension YTPlayerState {
     var systemImageName: String? {
         switch self {
         case .playing, .buffering: return "pause.fill"
-        case .cued, .ended, .paused, .unstarted: return "play.fill"
+        case .cued, .ended, .paused, .unstarted, .unknown: return "play.fill"
+        @unknown default: return "play.fill"
         }
     }
 }

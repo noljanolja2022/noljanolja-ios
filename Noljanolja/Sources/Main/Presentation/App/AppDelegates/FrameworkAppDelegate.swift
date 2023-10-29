@@ -5,6 +5,7 @@
 //  Created by Nguyen The Trinh on 19/03/2023.
 //
 
+import AVKit
 import FirebaseAuth
 import FirebaseCore
 import Foundation
@@ -23,6 +24,7 @@ import UIKit
 final class FrameworkAppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        configureAudioSesion()
         configureIQKeyboard()
         configureSDWebImage()
         configureAuth()
@@ -34,6 +36,15 @@ final class FrameworkAppDelegate: NSObject, UIApplicationDelegate {
 }
 
 extension FrameworkAppDelegate {
+    private func configureAudioSesion() {
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(.playback, mode: .moviePlayback)
+        } catch {
+            print("Failed to set audioSession category to playback")
+        }
+    }
+
     private func configureIQKeyboard() {
         IQKeyboardManager.shared.enable = false
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
