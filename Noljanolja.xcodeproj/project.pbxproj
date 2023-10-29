@@ -49,7 +49,6 @@
 		CF16480D2A991BF900B12313 /* ChatLinksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF16480B2A991BF900B12313 /* ChatLinksView.swift */; };
 		CF180A072A7E3C41004728C4 /* HorizontalShareReferralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF180A052A7E3C41004728C4 /* HorizontalShareReferralView.swift */; };
 		CF180A082A7E3C41004728C4 /* HorizontalShareReferralViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF180A062A7E3C41004728C4 /* HorizontalShareReferralViewModel.swift */; };
-		CF18378729F6F4F500DDC15C /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = CF18378629F6F4F500DDC15C /* YouTubePlayerKit */; };
 		CF1B624829B9B55F00DE53E6 /* ConversationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1B624729B9B55F00DE53E6 /* ConversationAPI.swift */; };
 		CF1B624A29B9B8A100DE53E6 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1B624929B9B8A100DE53E6 /* Conversation.swift */; };
 		CF1B624C29B9B92B00DE53E6 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1B624B29B9B92B00DE53E6 /* Message.swift */; };
@@ -507,6 +506,7 @@
 		CFE09272298FEACD00F197F0 /* SwifterSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CFE09271298FEACD00F197F0 /* SwifterSwift */; };
 		CFE0933E298FFC5B00F197F0 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE0933D298FFC5B00F197F0 /* AuthError.swift */; };
 		CFE09341299007E400F197F0 /* Publisher+ResultTranforming.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE09340299007E400F197F0 /* Publisher+ResultTranforming.swift */; };
+		CFE15C622AEA1F0200E94E9B /* YoutubePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE15C612AEA1F0200E94E9B /* YoutubePlayerView.swift */; };
 		CFE2155A2AE630DA00C83BAD /* ExchangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE215572AE630DA00C83BAD /* ExchangeView.swift */; };
 		CFE2155B2AE630DA00C83BAD /* ExchangeNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE215582AE630DA00C83BAD /* ExchangeNavigations.swift */; };
 		CFE2155C2AE630DA00C83BAD /* ExchangeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFE215592AE630DA00C83BAD /* ExchangeViewModel.swift */; };
@@ -1107,6 +1107,7 @@
 		CFE0926A298FE73000F197F0 /* CloudFunctionAuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudFunctionAuthAPI.swift; sourceTree = "<group>"; };
 		CFE0933D298FFC5B00F197F0 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		CFE09340299007E400F197F0 /* Publisher+ResultTranforming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+ResultTranforming.swift"; sourceTree = "<group>"; };
+		CFE15C612AEA1F0200E94E9B /* YoutubePlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubePlayerView.swift; sourceTree = "<group>"; };
 		CFE215572AE630DA00C83BAD /* ExchangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeView.swift; sourceTree = "<group>"; };
 		CFE215582AE630DA00C83BAD /* ExchangeNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeNavigations.swift; sourceTree = "<group>"; };
 		CFE215592AE630DA00C83BAD /* ExchangeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeViewModel.swift; sourceTree = "<group>"; };
@@ -1186,7 +1187,6 @@
 			files = (
 				CF52AB7329B8E3B700C9C90C /* RealmSwift in Frameworks */,
 				CF9779DC29BE2FC600D1CAB0 /* PhoneNumberKit in Frameworks */,
-				CF18378729F6F4F500DDC15C /* YouTubePlayerKit in Frameworks */,
 				CFF1F79A29B6E7FE00B25DD2 /* CombineExt in Frameworks */,
 				CFE9D2E0298D6C1500D936DA /* KakaoSDKAuth in Frameworks */,
 				CF6ABC232993618000D78213 /* Introspect in Frameworks */,
@@ -3162,6 +3162,7 @@
 		CF91E6F92AB45A6C0086C046 /* VideoDetail */ = {
 			isa = PBXGroup;
 			children = (
+				CFE15C602AEA1F0200E94E9B /* Views */,
 				CF53D41D2A6AF547009B3A69 /* VideoDetailViewModel.swift */,
 				CF53D41E2A6AF547009B3A69 /* VideoDetailView.swift */,
 				CFF868BD2A6E7791006F0B87 /* VideoDetailFullScreenCoverType.swift */,
@@ -3415,6 +3416,14 @@
 				CF00D158299417F400505702 /* Combines */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CFE15C602AEA1F0200E94E9B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CFE15C612AEA1F0200E94E9B /* YoutubePlayerView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		CFE2155D2AE6336C00C83BAD /* Models */ = {
@@ -3847,7 +3856,6 @@
 				CF076D5029D0BF2B0013B6F9 /* SDWebImageSwiftUI */,
 				CF076D5629D0C0130013B6F9 /* SDWebImageWebPCoder */,
 				CF446B8429D89C3000ED66BF /* Lottie */,
-				CF18378629F6F4F500DDC15C /* YouTubePlayerKit */,
 				CFF520FA2A17D92400F29A4E /* Charts */,
 				CF45BCB52A67C68C003FB991 /* IQKeyboardManagerSwift */,
 			);
@@ -3946,7 +3954,6 @@
 				CF076D4F29D0BF2B0013B6F9 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				CF076D5529D0C0120013B6F9 /* XCRemoteSwiftPackageReference "SDWebImageWebPCoder" */,
 				CF446B8329D89C3000ED66BF /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				CF18378529F6F4F500DDC15C /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */,
 				CFF520F92A17D92400F29A4E /* XCRemoteSwiftPackageReference "Charts" */,
 				CF45BCB42A67C68C003FB991 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
@@ -4226,6 +4233,7 @@
 				CFA3304D29BEB674008D7449 /* SearchView.swift in Sources */,
 				CFB0A82B29F1BB5800298546 /* VideoRepository.swift in Sources */,
 				CFF530B02A74218B00908DEB /* VideoMessageContentView.swift in Sources */,
+				CFE15C622AEA1F0200E94E9B /* YoutubePlayerView.swift in Sources */,
 				CF8686992AB8A6F100EE530B /* PromotedVideo.swift in Sources */,
 				CF53D59B2A6AF548009B3A69 /* HighlightVideoItemView.swift in Sources */,
 				CF53D5E92A6AF548009B3A69 /* ChatAlertActionType.swift in Sources */,
@@ -4833,7 +4841,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "";
+				INFOPLIST_KEY_UILaunchStoryboardName = UILaunchStoryboardName;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -4976,7 +4984,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "";
+				INFOPLIST_KEY_UILaunchStoryboardName = UILaunchStoryboardName;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -5104,14 +5112,6 @@
 			requirement = {
 				kind = exactVersion;
 				version = 10.4.0;
-			};
-		};
-		CF18378529F6F4F500DDC15C /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SvenTiigi/YouTubePlayerKit";
-			requirement = {
-				kind = exactVersion;
-				version = 1.4.0;
 			};
 		};
 		CF446B8329D89C3000ED66BF /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
@@ -5274,11 +5274,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CF14F24B298CC11600BC2066 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseAuthCombine-Community";
-		};
-		CF18378629F6F4F500DDC15C /* YouTubePlayerKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CF18378529F6F4F500DDC15C /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */;
-			productName = YouTubePlayerKit;
 		};
 		CF446B8429D89C3000ED66BF /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;

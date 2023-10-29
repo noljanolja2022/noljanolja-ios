@@ -23,31 +23,28 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
 
     @ViewBuilder
     private func buildBodyView() -> some View {
-        switch viewModel.contentType {
-        case .maximize, .minimize:
-            buildContainerView()
-                .navigationBarTitle("", displayMode: .inline)
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        Text(L10n.videoTitle)
-                            .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                    }
+        buildContentTypeView()
+            .onAppear { viewModel.isAppearSubject.send(true) }
+            .onDisappear { viewModel.isAppearSubject.send(false) }
+            .fullScreenCover(
+                unwrapping: $viewModel.fullScreenCoverType,
+                content: {
+                    buildFullScreenCoverDestinationView($0)
                 }
-                .onAppear { viewModel.isAppearSubject.send(true) }
-                .onDisappear { viewModel.isAppearSubject.send(false) }
-                .fullScreenCover(
-                    unwrapping: $viewModel.fullScreenCoverType,
-                    content: {
-                        buildFullScreenCoverDestinationView($0)
-                    }
-                )
+            )
+    }
+    
+    @ViewBuilder
+    private func buildContentTypeView() -> some View {
+        switch viewModel.contentType {
+        case .full, .bottom, .pictureInPicture:
+            buildNavigationView()
         case .hide:
             EmptyView()
         }
     }
-
-    private func buildContainerView() -> some View {
+    
+    private func buildNavigationView() -> some View {
         VStack(spacing: 0) {
             buildHeaderView()
             buildMainView()
@@ -58,18 +55,24 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
             .bottom,
             {
                 switch viewModel.contentType {
-                case .minimize: return viewModel.minimizeBottomPadding
-                case .maximize, .hide: return 0
+                case .bottom: return viewModel.minimizeBottomPadding
+                case .full, .pictureInPicture, .hide: return 0
                 }
             }()
         )
+        .zIndex({
+            switch viewModel.contentType {
+            case .full, .bottom: return 2
+            case .pictureInPicture, .hide: return 0
+            }
+        }())
     }
-
+    
     @ViewBuilder
     private func buildHeaderView() -> some View {
         switch viewModel.contentType {
-        case .maximize:
-            HStack {
+        case .full, .pictureInPicture:
+            HStack(spacing: 4) {
                 Button(
                     action: {
                         viewModel.updateContentType(.hide)
@@ -77,15 +80,62 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
                     label: {
                         ImageAssets.icClose.swiftUIImage
                             .resizable()
-                            .padding(16)
-                            .frame(width: 44, height: 44)
+                            .scaledToFit()
+                            .padding(14)
+                            .aspectRatio(1, contentMode: .fit)
                             .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                     }
                 )
                 Spacer()
+                Button(
+                    action: {
+                        viewModel.updateContentType(.pictureInPicture)
+                    },
+                    label: {
+                        Image(systemName: "pip")
+                            .resizable()
+                            .scaledToFit()
+                            .padding(10)
+                            .aspectRatio(1, contentMode: .fit)
+                            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    }
+                )
+                
+                switch Natrium.Config.configuration {
+                case .development:
+                    Button(
+                        action: {
+                            viewModel.switchPictureInPicture()
+                        },
+                        label: {
+                            Image(systemName: "pip.swap")
+                                .resizable()
+                                .scaledToFit()
+                                .padding(10)
+                                .aspectRatio(1, contentMode: .fit)
+                                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                        }
+                    )
+                    Button(
+                        action: {
+                            viewModel.updateContentType(.bottom)
+                        },
+                        label: {
+                            Image(systemName: "rectangle.portrait.bottomright.inset.filled")
+                                .resizable()
+                                .scaledToFit()
+                                .padding(10)
+                                .aspectRatio(1, contentMode: .fit)
+                                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                        }
+                    )
+                case .appstore:
+                    EmptyView()
+                }
             }
+            .frame(maxWidth: .infinity)
             .frame(height: 44)
-        case .minimize, .hide:
+        case .bottom, .hide:
             EmptyView()
         }
     }
@@ -106,64 +156,40 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
         VStack(spacing: 0) {
             HStack(spacing: 16) {
                 buildPlayerView()
-                buildMinimizeDetailView()
+                buildHorizontalDetailView()
             }
-            buildMaximizeDetailView()
+            buildVerticalDetailView()
         }
     }
 
     @ViewBuilder
     private func buildPlayerView() -> some View {
-        YouTubePlayerView(viewModel.youTubePlayer) { state in
-            switch state {
-            case .idle:
-                ProgressView()
-            case .ready:
-                EmptyView()
-            case .error:
-                Spacer()
-            }
-        }
-        .frame(width: viewModel.contentType.playerWidth)
-        .frame(height: viewModel.contentType.playerHeight)
-//        .allowsHitTesting(
-//            {
-//                switch viewModel.contentType {
-//                case .maximize: return true
-//                case .minimize, .hide: return false
-//                }
-//            }()
-//        )
+        YoutubePlayerView(viewModel.youtubePlayerView)
+            .frame(width: viewModel.contentType.playerWidth)
+            .frame(height: viewModel.contentType.playerHeight)
     }
-
+    
     @ViewBuilder
-    private func buildMaximizeDetailView() -> some View {
+    private func buildHorizontalDetailView() -> some View {
         switch viewModel.contentType {
-        case .maximize:
-            buildMaximizeDetailContentView()
-        case .minimize, .hide:
+        case .full, .pictureInPicture, .hide:
             EmptyView()
+        case .bottom:
+            buildHorizontalDetailContentView()
         }
     }
 
     @ViewBuilder
-    private func buildMinimizeDetailView() -> some View {
+    private func buildVerticalDetailView() -> some View {
         switch viewModel.contentType {
-        case .minimize:
-            buildMinimizeDetailContentView()
-        case .maximize, .hide:
+        case .full, .pictureInPicture:
+            buildVerticalDetailContentView()
+        case .bottom, .hide:
             EmptyView()
         }
     }
 
-    private func buildMaximizeDetailContentView() -> some View {
-        VStack(spacing: 0) {
-            buildScrollView()
-            buildInputView()
-        }
-    }
-
-    private func buildMinimizeDetailContentView() -> some View {
+    private func buildHorizontalDetailContentView() -> some View {
         HStack {
             if let video = viewModel.video {
                 VStack(spacing: 4) {
@@ -185,7 +211,7 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
                 }
             }
 
-            if let systemImageName = viewModel.youTubePlayerPlaybackState?.systemImageName {
+            if let systemImageName = viewModel.youtubePlayerState?.systemImageName {
                 Image(systemName: systemImageName)
                     .resizable()
                     .padding(8)
@@ -198,7 +224,7 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
 
             Button(
                 action: {
-                    viewModel.hide()
+                    viewModel.updateContentType(.hide)
                 },
                 label: {
                     ImageAssets.icClose.swiftUIImage
@@ -210,7 +236,14 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
             )
         }
         .onTapGesture {
-            viewModel.updateContentType(.maximize)
+            viewModel.updateContentType(.full)
+        }
+    }
+    
+    private func buildVerticalDetailContentView() -> some View {
+        VStack(spacing: 0) {
+            buildScrollView()
+            buildInputView()
         }
     }
 

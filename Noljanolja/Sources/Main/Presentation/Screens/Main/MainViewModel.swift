@@ -58,9 +58,9 @@ final class MainViewModel: ViewModel {
         .sink { [weak self] contentType, isHomeAppear in
             let bottomPadding: CGFloat = {
                 switch contentType {
-                case .minimize:
-                    return isHomeAppear ? 0 : VideoDetailViewContentType.minimize.playerHeight + 8
-                case .maximize, .hide:
+                case .bottom:
+                    return isHomeAppear ? 0 : VideoDetailViewContentType.bottom.playerHeight + 8
+                case .full, .pictureInPicture, .hide:
                     return 0
                 }
             }()
