@@ -64,7 +64,7 @@ final class VideoDetailViewModel: ViewModel {
 
     // MARK: Private
     
-    private let playbackStateSubject = CurrentValueSubject<YTPlayerState?, Never>(nil)
+    private var pictureInPictureState: String?
     private let currentTimeSubject = CurrentValueSubject<Double?, Never>(nil)
 
     private var pageSize = 20
@@ -87,17 +87,20 @@ final class VideoDetailViewModel: ViewModel {
     func show(videoId: String,
               configuration: VideoDetailConfiguration? = nil,
               contentType: VideoDetailViewContentType = .full) {
+        // For reopen last video
+        if self.videoId == videoId {
+            switch pictureInPictureState {
+            case "picture-in-picture":
+                break
+            default:
+                youtubePlayerView.seek(toSeconds: 0, allowSeekAhead: true)
+                youtubePlayerView.playVideo()
+            }
+        }
+        
         self.videoId = videoId
         self.configuration = configuration
         updateContentType(contentType)
-    }
-
-    func hide() {
-        youtubePlayerView.stopVideo()
-
-        videoId = nil
-        updateContentType(.hide)
-        stopPictureInPicture()
     }
 
     func updateContentType(_ value: VideoDetailViewContentType) {
@@ -105,6 +108,15 @@ final class VideoDetailViewModel: ViewModel {
             withAnimation(.easeInOut(duration: 0.3)) {
                 self?.contentType = value
             }
+        }
+
+        switch value {
+        case .full:
+            stopPictureInPicture()
+        case .pictureInPicture:
+            startPictureInPicture()
+        case .bottom, .hide:
+            break
         }
     }
 
@@ -118,11 +130,9 @@ final class VideoDetailViewModel: ViewModel {
     
     func startPictureInPicture() {
         if AVPictureInPictureController.isPictureInPictureSupported() {
-            youtubePlayerView.requestPicture { [weak self] state, _ in
-                switch state {
-                case "picture_in_picture": break
-                default: self?.youtubePlayerView.pictureInPicture()
-                }
+            switch pictureInPictureState {
+            case "picture-in-picture": break
+            default: youtubePlayerView.pictureInPicture()
             }
         } else {
             updateContentType(.bottom)
@@ -130,12 +140,14 @@ final class VideoDetailViewModel: ViewModel {
     }
     
     func stopPictureInPicture() {
-        youtubePlayerView.requestPicture { [weak self] state, _ in
-            switch state {
-            case "picture_in_picture": self?.youtubePlayerView.pictureInPicture()
-            default: break
-            }
+        switch pictureInPictureState {
+        case "picture-in-picture": youtubePlayerView.pictureInPicture()
+        default: break
         }
+    }
+    
+    func switchPictureInPicture() {
+        youtubePlayerView.pictureInPicture()
     }
 
     private func configure() {
@@ -171,11 +183,11 @@ final class VideoDetailViewModel: ViewModel {
         videoCancellables = Set<AnyCancellable>()
         setVideo(video)
         configureActions()
-        configureYouTubePlayer(video)
+        configureYoutubePlayer(video)
     }
 
     private func setVideo(_ video: Video) {
-        youtubePlayerView.load(withVideoId: video.id)
+        youtubePlayerView.load(withVideoId: video.id, playerVars: ["autoplay": 1])
 
         self.video = video
         comments = video.comments
@@ -226,19 +238,11 @@ final class VideoDetailViewModel: ViewModel {
             .store(in: &videoCancellables)
     }
 
-    private func configureYouTubePlayer(_ video: Video) {
-        playbackStateSubject
-            .compactMap { $0 }
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] in
-                self?.youtubePlayerState = $0
-            })
-            .store(in: &videoCancellables)
-
+    private func configureYoutubePlayer(_ video: Video) {
         youTubePlayerPlaybackStateAction
             .sink(receiveValue: { [weak self] in
                 guard let self else { return }
-                switch playbackStateSubject.value {
+                switch youtubePlayerState {
                 case .buffering, .cued, .paused, .unstarted:
                     youtubePlayerView.playVideo()
                 case .ended:
@@ -274,7 +278,7 @@ final class VideoDetailViewModel: ViewModel {
             .store(in: &cancellables)
         
         Publishers.Merge(
-            playbackStateSubject
+            $youtubePlayerState
                 .compactMap { $0 },
             currentTimePublisher(updateInterval: 10)
                 .map { _ in YTPlayerState.playing }
@@ -313,7 +317,7 @@ extension VideoDetailViewModel {
                 .mapToVoid()
         )
         .flatMap {
-            self.playbackStateSubject
+            self.$youtubePlayerState
                 .filter { $0 == .playing }
                 .removeDuplicates()
         }
@@ -340,20 +344,19 @@ extension VideoDetailViewModel {
 // MARK: YTPlayerViewDelegate
 
 extension VideoDetailViewModel: YTPlayerViewDelegate {
-    func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
-        playerView.playVideo()
+    func playerViewDidBecomeReady(_: YTPlayerView) {
         switch contentType {
         case .full, .bottom, .hide:
             break
         case .pictureInPicture:
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
                 self?.startPictureInPicture()
             }
         }
     }
     
     func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
-        playbackStateSubject.send(state)
+        youtubePlayerState = state
     }
     
     func playerView(_ playerView: YTPlayerView, didPlayTime playTime: Float) {
@@ -363,16 +366,12 @@ extension VideoDetailViewModel: YTPlayerViewDelegate {
     func playerView(_ playerView: YTPlayerView, didChangeTo quality: YTPlaybackQuality) {}
     
     func playerView(_ playerView: YTPlayerView, didChangeToStatePictureInPicture state: String?) {
+        pictureInPictureState = state
         switch state {
-        case "picture_in_picture":
-            updateContentType(.pictureInPicture)
+        case "picture-in-picture":
+            break
         default:
-            switch contentType {
-            case .pictureInPicture:
-                updateContentType(.hide)
-            case .full, .bottom, .hide:
-                break
-            }
+            updateContentType(.full)
         }
     }
 }

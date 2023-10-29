@@ -24,12 +24,6 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
     @ViewBuilder
     private func buildBodyView() -> some View {
         buildContentTypeView()
-            .zIndex({
-                switch viewModel.contentType {
-                case .full, .bottom: return 2
-                case .pictureInPicture, .hide: return 0
-                }
-            }())
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .fullScreenCover(
@@ -66,6 +60,12 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
                 }
             }()
         )
+        .zIndex({
+            switch viewModel.contentType {
+            case .full, .bottom: return 2
+            case .pictureInPicture, .hide: return 0
+            }
+        }())
     }
     
     @ViewBuilder
@@ -75,8 +75,7 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
             HStack(spacing: 4) {
                 Button(
                     action: {
-                        viewModel.updateContentType(.pictureInPicture)
-                        viewModel.startPictureInPicture()
+                        viewModel.updateContentType(.hide)
                     },
                     label: {
                         ImageAssets.icClose.swiftUIImage
@@ -87,12 +86,10 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
                             .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                     }
                 )
-                
                 Spacer()
-                
                 Button(
                     action: {
-                        viewModel.startPictureInPicture()
+                        viewModel.updateContentType(.pictureInPicture)
                     },
                     label: {
                         Image(systemName: "pip")
@@ -103,8 +100,22 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
                             .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                     }
                 )
-                switch Natrium.Config.environment {
+                
+                switch Natrium.Config.configuration {
                 case .development:
+                    Button(
+                        action: {
+                            viewModel.switchPictureInPicture()
+                        },
+                        label: {
+                            Image(systemName: "pip.swap")
+                                .resizable()
+                                .scaledToFit()
+                                .padding(10)
+                                .aspectRatio(1, contentMode: .fit)
+                                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                        }
+                    )
                     Button(
                         action: {
                             viewModel.updateContentType(.bottom)
@@ -118,7 +129,7 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
                                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                         }
                     )
-                case .production:
+                case .appstore:
                     EmptyView()
                 }
             }
@@ -213,7 +224,7 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
 
             Button(
                 action: {
-                    viewModel.hide()
+                    viewModel.updateContentType(.hide)
                 },
                 label: {
                     ImageAssets.icClose.swiftUIImage

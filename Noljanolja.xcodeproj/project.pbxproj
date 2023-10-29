@@ -49,7 +49,6 @@
 		CF16480D2A991BF900B12313 /* ChatLinksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF16480B2A991BF900B12313 /* ChatLinksView.swift */; };
 		CF180A072A7E3C41004728C4 /* HorizontalShareReferralView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF180A052A7E3C41004728C4 /* HorizontalShareReferralView.swift */; };
 		CF180A082A7E3C41004728C4 /* HorizontalShareReferralViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF180A062A7E3C41004728C4 /* HorizontalShareReferralViewModel.swift */; };
-		CF18378729F6F4F500DDC15C /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = CF18378629F6F4F500DDC15C /* YouTubePlayerKit */; };
 		CF1B624829B9B55F00DE53E6 /* ConversationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1B624729B9B55F00DE53E6 /* ConversationAPI.swift */; };
 		CF1B624A29B9B8A100DE53E6 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1B624929B9B8A100DE53E6 /* Conversation.swift */; };
 		CF1B624C29B9B92B00DE53E6 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1B624B29B9B92B00DE53E6 /* Message.swift */; };
@@ -1188,7 +1187,6 @@
 			files = (
 				CF52AB7329B8E3B700C9C90C /* RealmSwift in Frameworks */,
 				CF9779DC29BE2FC600D1CAB0 /* PhoneNumberKit in Frameworks */,
-				CF18378729F6F4F500DDC15C /* YouTubePlayerKit in Frameworks */,
 				CFF1F79A29B6E7FE00B25DD2 /* CombineExt in Frameworks */,
 				CFE9D2E0298D6C1500D936DA /* KakaoSDKAuth in Frameworks */,
 				CF6ABC232993618000D78213 /* Introspect in Frameworks */,
@@ -3858,7 +3856,6 @@
 				CF076D5029D0BF2B0013B6F9 /* SDWebImageSwiftUI */,
 				CF076D5629D0C0130013B6F9 /* SDWebImageWebPCoder */,
 				CF446B8429D89C3000ED66BF /* Lottie */,
-				CF18378629F6F4F500DDC15C /* YouTubePlayerKit */,
 				CFF520FA2A17D92400F29A4E /* Charts */,
 				CF45BCB52A67C68C003FB991 /* IQKeyboardManagerSwift */,
 			);
@@ -3957,7 +3954,6 @@
 				CF076D4F29D0BF2B0013B6F9 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				CF076D5529D0C0120013B6F9 /* XCRemoteSwiftPackageReference "SDWebImageWebPCoder" */,
 				CF446B8329D89C3000ED66BF /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				CF18378529F6F4F500DDC15C /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */,
 				CFF520F92A17D92400F29A4E /* XCRemoteSwiftPackageReference "Charts" */,
 				CF45BCB42A67C68C003FB991 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
@@ -5118,14 +5114,6 @@
 				version = 10.4.0;
 			};
 		};
-		CF18378529F6F4F500DDC15C /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SvenTiigi/YouTubePlayerKit";
-			requirement = {
-				kind = exactVersion;
-				version = 1.4.0;
-			};
-		};
 		CF446B8329D89C3000ED66BF /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios";
@@ -5286,11 +5274,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CF14F24B298CC11600BC2066 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseAuthCombine-Community";
-		};
-		CF18378629F6F4F500DDC15C /* YouTubePlayerKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CF18378529F6F4F500DDC15C /* XCRemoteSwiftPackageReference "YouTubePlayerKit" */;
-			productName = YouTubePlayerKit;
 		};
 		CF446B8429D89C3000ED66BF /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
