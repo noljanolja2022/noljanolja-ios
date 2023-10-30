@@ -8,7 +8,6 @@
 
 import SwiftUI
 import SwiftUIX
-import YouTubePlayerKit
 
 // MARK: - VideoDetailView
 

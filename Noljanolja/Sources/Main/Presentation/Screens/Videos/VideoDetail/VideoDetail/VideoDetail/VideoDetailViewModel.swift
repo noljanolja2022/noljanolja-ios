@@ -12,7 +12,6 @@ import Foundation
 import Moya
 import SwiftUIX
 import youtube_ios_player_helper
-import YouTubePlayerKit
 
 // MARK: - VideoDetailViewModelDelegate
 
@@ -141,8 +140,11 @@ final class VideoDetailViewModel: ViewModel {
     
     func stopPictureInPicture() {
         switch pictureInPictureState {
-        case "picture-in-picture": youtubePlayerView.pictureInPicture()
-        default: break
+        case "picture-in-picture":
+            youtubePlayerView.pictureInPicture()
+            pictureInPictureState = "inline"
+        default:
+            break
         }
     }
     

@@ -84,7 +84,7 @@ struct VideoDetailCommentView: View {
 
                 Divider()
                     .frame(height: 1)
-                    .frame(maxHeight: .infinity)
+                    .frame(maxWidth: .infinity)
                     .overlay(ColorAssets.neutralGrey.swiftUIColor)
             }
             .padding(.bottom, 12)
