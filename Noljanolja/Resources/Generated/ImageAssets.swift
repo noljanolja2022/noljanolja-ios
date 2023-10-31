@@ -36,7 +36,7 @@ internal enum ImageAssets {
   internal static let icChatEvent = ImageAsset(name: "ic_chat_event")
   internal static let icChatFile = ImageAsset(name: "ic_chat_file")
   internal static let icChatGif = ImageAsset(name: "ic_chat_gif")
-  internal static let icChatImage = ImageAsset(name: "ic_chat_image")
+  internal static let icChatImageAsset = ImageAsset(name: "ic_chat_image_asset")
   internal static let icChatLocation = ImageAsset(name: "ic_chat_location")
   internal static let icChatMedia = ImageAsset(name: "ic_chat_media")
   internal static let icChatNew = ImageAsset(name: "ic_chat_new")
@@ -127,7 +127,7 @@ internal enum ImageAssets {
     icChatEvent,
     icChatFile,
     icChatGif,
-    icChatImage,
+    icChatImageAsset,
     icChatLocation,
     icChatMedia,
     icChatNew,
