@@ -1,5 +1,5 @@
 //
-//  LocalContactRepositoryImpl.swift
+//  ContactLocalRepositoryImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 08/03/2023.
@@ -9,18 +9,18 @@ import Combine
 import Foundation
 import RealmSwift
 
-// MARK: - LocalContactRepository
+// MARK: - ContactLocalRepository
 
-protocol LocalContactRepository {
+protocol ContactLocalRepository {
     func saveContact(_ users: [User])
     func observeContacts() -> AnyPublisher<[User], Error>
     func deleteAll()
 }
 
-// MARK: - LocalContactRepositoryImpl
+// MARK: - ContactLocalRepositoryImpl
 
-final class LocalContactRepositoryImpl: LocalContactRepository {
-    static let `default` = LocalContactRepositoryImpl()
+final class ContactLocalRepositoryImpl: ContactLocalRepository {
+    static let `default` = ContactLocalRepositoryImpl()
     
     private lazy var realmManager: RealmManagerType = {
         let id = "contact"

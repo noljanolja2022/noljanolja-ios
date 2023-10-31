@@ -32,16 +32,16 @@ final class ReferralViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    private let userService: UserServiceType
+    private let userUseCases: UserUseCases
     private weak var delegate: ReferralViewModelDelegate?
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(userService: UserServiceType = UserService.default,
+    init(userUseCases: UserUseCases = UserUseCasesImpl.default,
          delegate: ReferralViewModelDelegate? = nil) {
-        self.userService = userService
+        self.userUseCases = userUseCases
         self.delegate = delegate
         super.init()
 
@@ -57,7 +57,7 @@ final class ReferralViewModel: ViewModel {
                 guard let self else {
                     return Fail<User, Error>(error: CommonError.captureSelfNotFound).eraseToAnyPublisher()
                 }
-                return self.userService.getCurrentUserIfNeeded()
+                return self.userUseCases.getCurrentUserIfNeeded()
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in

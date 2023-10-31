@@ -49,32 +49,32 @@ final class ConversationUseCasesImpl: ConversationUseCases {
 
     private let conversationRepository: ConversationRepository
     private let conversationParticipantRepository: ConversationParticipantRepository
-    private let conversationStore: ConversationStoreType
-    private let conversationDetailStore: ConversationDetailStoreType
+    private let conversationLocalRepository: ConversationLocalRepository
+    private let localDetailConversationRepository: LocalDetailConversationRepository
     private let localUserRepository: LocalUserRepository
 
     private init(conversationRepository: ConversationRepository = ConversationRepositoryImpl.default,
                  conversationParticipantRepository: ConversationParticipantRepository = ConversationParticipantRepositoryImpl.default,
-                 conversationStore: ConversationStoreType = ConversationStore.default,
-                 conversationDetailStore: ConversationDetailStoreType = ConversationDetailStore.default,
+                 conversationLocalRepository: ConversationLocalRepository = ConversationLocalRepositoryImpl.default,
+                 localDetailConversationRepository: LocalDetailConversationRepository = LocalDetailConversationRepositoryImpl.default,
                  localUserRepository: LocalUserRepository = LocalUserRepositoryImpl.default) {
         self.conversationRepository = conversationRepository
         self.conversationParticipantRepository = conversationParticipantRepository
-        self.conversationStore = conversationStore
-        self.conversationDetailStore = conversationDetailStore
+        self.conversationLocalRepository = conversationLocalRepository
+        self.localDetailConversationRepository = localDetailConversationRepository
         self.localUserRepository = localUserRepository
     }
 
     func getConversations() -> AnyPublisher<[Conversation], Error> {
-        let localConversations = conversationStore
+        let localConversations = conversationLocalRepository
             .observeConversations()
             .filter { !$0.isEmpty }
 
         let remoteConversations = conversationRepository
             .getConversations()
             .handleEvents(receiveOutput: { [weak self] conversations in
-                self?.conversationStore.saveConversations(conversations)
-                self?.conversationStore.removeConversation(notIn: conversations)
+                self?.conversationLocalRepository.saveConversations(conversations)
+                self?.conversationLocalRepository.removeConversation(notIn: conversations)
             })
 
         return Publishers.Merge(localConversations, remoteConversations)
@@ -113,12 +113,12 @@ final class ConversationUseCasesImpl: ConversationUseCases {
     }
 
     func getConversation(conversationID: Int) -> AnyPublisher<Conversation, Error> {
-        let localConversation = conversationDetailStore
+        let localConversation = localDetailConversationRepository
             .observeConversationDetail(conversationID: conversationID)
         let remoteConversation = conversationRepository
             .getConversation(conversationID: conversationID)
             .handleEvents(receiveOutput: { [weak self] in
-                self?.conversationDetailStore.saveConversationDetails([$0])
+                self?.localDetailConversationRepository.saveConversationDetails([$0])
             })
         return Publishers.Merge(localConversation, remoteConversation)
             .removeDuplicates()
@@ -129,7 +129,7 @@ final class ConversationUseCasesImpl: ConversationUseCases {
                             participants: [User]) -> AnyPublisher<Conversation, Error> {
         if participants.count == 1,
            let currentUser = localUserRepository.getCurrentUser(),
-           let conversation = conversationStore.getConversations(
+           let conversation = conversationLocalRepository.getConversations(
                type: .single,
                participants: participants + [currentUser]
            ).first {
@@ -140,7 +140,7 @@ final class ConversationUseCasesImpl: ConversationUseCases {
             return conversationRepository
                 .createConversation(title: "", type: type, participants: participants)
                 .handleEvents(receiveOutput: { [weak self] in
-                    self?.conversationDetailStore.saveConversationDetails([$0])
+                    self?.localDetailConversationRepository.saveConversationDetails([$0])
                 })
                 .eraseToAnyPublisher()
         }
@@ -158,7 +158,7 @@ final class ConversationUseCasesImpl: ConversationUseCases {
                 image: image
             )
             .handleEvents(receiveOutput: { [weak self] in
-                self?.conversationDetailStore.saveConversationDetails([$0])
+                self?.localDetailConversationRepository.saveConversationDetails([$0])
             })
             .eraseToAnyPublisher()
     }
@@ -171,7 +171,7 @@ final class ConversationUseCasesImpl: ConversationUseCases {
                 return self.conversationRepository.getConversation(conversationID: conversationID)
             }
             .handleEvents(receiveOutput: { [weak self] in
-                self?.conversationDetailStore.saveConversationDetails([$0])
+                self?.localDetailConversationRepository.saveConversationDetails([$0])
             })
             .eraseToAnyPublisher()
     }
@@ -184,7 +184,7 @@ final class ConversationUseCasesImpl: ConversationUseCases {
                 return self.conversationRepository.getConversation(conversationID: conversationID)
             }
             .handleEvents(receiveOutput: { [weak self] in
-                self?.conversationDetailStore.saveConversationDetails([$0])
+                self?.localDetailConversationRepository.saveConversationDetails([$0])
             })
             .eraseToAnyPublisher()
     }
@@ -197,7 +197,7 @@ final class ConversationUseCasesImpl: ConversationUseCases {
                 return self.conversationRepository.getConversation(conversationID: conversationID)
             }
             .handleEvents(receiveOutput: { [weak self] in
-                self?.conversationDetailStore.saveConversationDetails([$0])
+                self?.localDetailConversationRepository.saveConversationDetails([$0])
             })
             .eraseToAnyPublisher()
     }

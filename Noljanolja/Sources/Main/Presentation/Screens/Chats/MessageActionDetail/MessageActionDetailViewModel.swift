@@ -38,7 +38,7 @@ final class MessageActionDetailViewModel: ViewModel {
     // MARK: Dependencies
 
     let input: MessageActionDetailInput
-    private let userService: UserServiceType
+    private let userUseCases: UserUseCases
     private let reactionIconsUseCases: ReactionIconsUseCasesProtocol
     private let messageReactionUseCases: MessageReactionUseCases
     private weak var delegate: MessageActionDetailViewModelDelegate?
@@ -49,12 +49,12 @@ final class MessageActionDetailViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(input: MessageActionDetailInput,
-         userService: UserServiceType = UserService.default,
+         userUseCases: UserUseCases = UserUseCasesImpl.default,
          reactionIconsUseCases: ReactionIconsUseCasesProtocol = ReactionIconsUseCases.default,
          messageReactionUseCases: MessageReactionUseCases = MessageReactionUseCasesImpl.shared,
          delegate: MessageActionDetailViewModelDelegate? = nil) {
         self.input = input
-        self.userService = userService
+        self.userUseCases = userUseCases
         self.reactionIconsUseCases = reactionIconsUseCases
         self.messageReactionUseCases = messageReactionUseCases
         self.delegate = delegate
@@ -69,7 +69,7 @@ final class MessageActionDetailViewModel: ViewModel {
     }
 
     private func configureLoadData() {
-        userService
+        userUseCases
             .getCurrentUserPublisher()
             .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
             .store(in: &cancellables)

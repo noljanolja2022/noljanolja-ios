@@ -23,19 +23,19 @@ final class ConversationSocketService: ConversationSocketServiceType {
 
     private let localUserRepository: LocalUserRepository
     private let socketAPI: ConversationSocketAPIType
-    private let conversationStore: ConversationStoreType
-    private let conversationDetailStore: ConversationDetailStoreType
+    private let conversationLocalRepository: ConversationLocalRepository
+    private let localDetailConversationRepository: LocalDetailConversationRepository
     private let localMessageRepository: LocalMessageRepository
 
     init(localUserRepository: LocalUserRepository = LocalUserRepositoryImpl.default,
          socketAPI: ConversationSocketAPIType = ConversationSocketAPI.default,
-         conversationStore: ConversationStoreType = ConversationStore.default,
-         conversationDetailStore: ConversationDetailStoreType = ConversationDetailStore.default,
+         conversationLocalRepository: ConversationLocalRepository = ConversationLocalRepositoryImpl.default,
+         localDetailConversationRepository: LocalDetailConversationRepository = LocalDetailConversationRepositoryImpl.default,
          localMessageRepository: LocalMessageRepository = LocalMessageRepositoryImpl.default) {
         self.localUserRepository = localUserRepository
         self.socketAPI = socketAPI
-        self.conversationStore = conversationStore
-        self.conversationDetailStore = conversationDetailStore
+        self.conversationLocalRepository = conversationLocalRepository
+        self.localDetailConversationRepository = localDetailConversationRepository
         self.localMessageRepository = localMessageRepository
     }
 
@@ -54,17 +54,17 @@ final class ConversationSocketService: ConversationSocketServiceType {
                     switch lastMessage?.type {
                     case .eventLeft:
                         if lastMessage?.leftParticipants.map({ $0.id }).contains(currentUser.id) ?? false {
-                            self.conversationStore
+                            self.conversationLocalRepository
                                 .removeConversation(conversationID: conversation.id)
-                            self.conversationDetailStore
+                            self.localDetailConversationRepository
                                 .removeConversationDetail(conversationID: conversation.id)
                         } else {
-                            self.conversationStore.saveConversations([conversation])
-                            self.conversationDetailStore.saveConversationDetails([conversation])
+                            self.conversationLocalRepository.saveConversations([conversation])
+                            self.localDetailConversationRepository.saveConversationDetails([conversation])
                         }
                     case .plaintext, .photo, .sticker, .eventUpdated, .eventJoined, .unknown, .none:
-                        self.conversationStore.saveConversations([conversation])
-                        self.conversationDetailStore.saveConversationDetails([conversation])
+                        self.conversationLocalRepository.saveConversations([conversation])
+                        self.localDetailConversationRepository.saveConversationDetails([conversation])
                     }
                 case .failure:
                     return

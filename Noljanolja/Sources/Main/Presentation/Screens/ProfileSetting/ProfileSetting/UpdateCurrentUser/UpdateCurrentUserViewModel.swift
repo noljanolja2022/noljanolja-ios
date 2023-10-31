@@ -49,7 +49,7 @@ final class UpdateCurrentUserViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    private let userService: UserServiceType
+    private let userUseCases: UserUseCases
     private weak var delegate: UpdateCurrentUserViewModelDelegate?
 
     // MARK: Private
@@ -58,9 +58,9 @@ final class UpdateCurrentUserViewModel: ViewModel {
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(userService: UserServiceType = UserService.default,
+    init(userUseCases: UserUseCases = UserUseCasesImpl.default,
          delegate: UpdateCurrentUserViewModelDelegate? = nil) {
-        self.userService = userService
+        self.userUseCases = userUseCases
         self.delegate = delegate
         super.init()
 
@@ -94,7 +94,7 @@ final class UpdateCurrentUserViewModel: ViewModel {
                 guard let self else {
                     return Empty<User, Error>().eraseToAnyPublisher()
                 }
-                return self.userService.updateCurrentUserAvatar(imageData)
+                return self.userUseCases.updateCurrentUserAvatar(imageData)
             }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
@@ -143,7 +143,7 @@ final class UpdateCurrentUserViewModel: ViewModel {
                 guard let self else {
                     return Empty<User, Error>().eraseToAnyPublisher()
                 }
-                return self.userService.updateCurrentUser(param)
+                return self.userUseCases.updateCurrentUser(param)
             }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
@@ -162,7 +162,7 @@ final class UpdateCurrentUserViewModel: ViewModel {
             })
             .store(in: &cancellables)
 
-        userService
+        userUseCases
             .getCurrentUserPublisher()
             .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
             .store(in: &cancellables)

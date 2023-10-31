@@ -1,5 +1,5 @@
 //
-//  LocalAuthRepositoryImpl.swift
+//  AuthLocalRepositoryImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 07/02/2023.
@@ -15,18 +15,18 @@ private extension Keychain {
     }()
 }
 
-// MARK: - LocalAuthRepository
+// MARK: - AuthLocalRepository
 
-protocol LocalAuthRepository {
+protocol AuthLocalRepository {
     func saveToken(_ token: String)
     func getToken() -> String?
     func clearToken()
 }
 
-// MARK: - LocalAuthRepositoryImpl
+// MARK: - AuthLocalRepositoryImpl
 
-final class LocalAuthRepositoryImpl: LocalAuthRepository {
-    static let `default` = LocalAuthRepositoryImpl(keychain: .default)
+final class AuthLocalRepositoryImpl: AuthLocalRepository {
+    static let `default` = AuthLocalRepositoryImpl(keychain: .default)
 
     private let keychain: Keychain
 

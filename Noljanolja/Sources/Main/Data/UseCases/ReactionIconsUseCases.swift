@@ -20,10 +20,10 @@ final class ReactionIconsUseCases: ReactionIconsUseCasesProtocol {
     static let `default` = ReactionIconsUseCases()
 
     private let reactionIconsRemoteRepository: ReactionIconsRemoteRepositoryProtocol
-    private let reactionIconsLocalRepository: ReactionIconsLocalRepositoryProtocol
+    private let reactionIconsLocalRepository: ReactionIconsLocalRepository
 
     init(reactionIconsRemoteRepository: ReactionIconsRemoteRepositoryProtocol = ReactionIconsRemoteRepository.default,
-         reactionIconsLocalRepository: ReactionIconsLocalRepositoryProtocol = ReactionIconsLocalRepository.default) {
+         reactionIconsLocalRepository: ReactionIconsLocalRepository = ReactionIconsLocalRepositoryImpl.default) {
         self.reactionIconsRemoteRepository = reactionIconsRemoteRepository
         self.reactionIconsLocalRepository = reactionIconsLocalRepository
     }

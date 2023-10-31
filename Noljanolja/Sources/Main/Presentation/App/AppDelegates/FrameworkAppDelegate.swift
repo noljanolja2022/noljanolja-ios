@@ -55,7 +55,7 @@ extension FrameworkAppDelegate {
             var request = request
             let baseUrl = URL(string: NetworkConfigs.BaseUrl.baseUrl)
             if request.url?.host == baseUrl?.host {
-                if let token = LocalAuthRepositoryImpl.default.getToken() {
+                if let token = AuthLocalRepositoryImpl.default.getToken() {
                     request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
                 }
             }

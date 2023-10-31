@@ -52,10 +52,10 @@ final class AuthUseCasesImpl: NSObject, AuthUseCases {
     private lazy var naverAuthRepository = NaverAuthRepository()
     private lazy var cloudFunctionAuthRepository = CloudFunctionAuthRepository()
     private lazy var firebaseAuth = Auth.auth()
-    private lazy var localAuthRepository = LocalAuthRepositoryImpl.default
-    private lazy var localContactRepository: LocalContactRepository = LocalContactRepositoryImpl.default
-    private lazy var conversationStore: ConversationStoreType = ConversationStore.default
-    private lazy var conversationDetailStore: ConversationDetailStoreType = ConversationDetailStore.default
+    private lazy var localAuthRepository = AuthLocalRepositoryImpl.default
+    private lazy var contactLocalRepository: ContactLocalRepository = ContactLocalRepositoryImpl.default
+    private lazy var conversationLocalRepository: ConversationLocalRepository = ConversationLocalRepositoryImpl.default
+    private lazy var localDetailConversationRepository: LocalDetailConversationRepository = LocalDetailConversationRepositoryImpl.default
     private lazy var localMessageRepository: LocalMessageRepository = LocalMessageRepositoryImpl.default
 
     lazy var isAuthenticated = CurrentValueSubject<Bool, Never>(localAuthRepository.getToken() != nil)
@@ -251,9 +251,9 @@ final class AuthUseCasesImpl: NSObject, AuthUseCases {
             .handleEvents(receiveOutput: { [weak self] in
                 guard let self else { return }
                 self.localAuthRepository.clearToken()
-                self.localContactRepository.deleteAll()
-                self.conversationStore.deleteAll()
-                self.conversationDetailStore.deleteAll()
+                self.contactLocalRepository.deleteAll()
+                self.conversationLocalRepository.deleteAll()
+                self.localDetailConversationRepository.deleteAll()
                 self.localMessageRepository.deleteAll()
                 self.isAuthenticated.send(false)
             })

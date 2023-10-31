@@ -63,7 +63,7 @@ final class ChatViewModel: ViewModel {
 
     let conversationID: Int
     
-    private let userService: UserServiceType
+    private let userUseCases: UserUseCases
     private let conversationUseCases: ConversationUseCases
     private let messageUseCases: MessageUseCases
     private let conversationSocketService: ConversationSocketServiceType
@@ -81,7 +81,7 @@ final class ChatViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(conversationID: Int,
-         userService: UserServiceType = UserService.default,
+         userUseCases: UserUseCases = UserUseCasesImpl.default,
          conversationUseCases: ConversationUseCases = ConversationUseCasesImpl.default,
          messageUseCases: MessageUseCases = MessageUseCasesImpl.default,
          conversationSocketService: ConversationSocketServiceType = ConversationSocketService.default,
@@ -89,7 +89,7 @@ final class ChatViewModel: ViewModel {
          messageReactionUseCases: MessageReactionUseCases = MessageReactionUseCasesImpl.shared,
          delegate: ChatViewModelDelegate? = nil) {
         self.conversationID = conversationID
-        self.userService = userService
+        self.userUseCases = userUseCases
         self.conversationUseCases = conversationUseCases
         self.messageUseCases = messageUseCases
         self.conversationSocketService = conversationSocketService
@@ -288,7 +288,7 @@ final class ChatViewModel: ViewModel {
             })
             .store(in: &cancellables)
 
-        userService
+        userUseCases
             .getCurrentUserPublisher()
             .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
             .store(in: &cancellables)

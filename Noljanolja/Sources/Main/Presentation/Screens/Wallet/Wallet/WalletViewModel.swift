@@ -34,7 +34,7 @@ final class WalletViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    private let userService: UserServiceType
+    private let userUseCases: UserUseCases
     private let memberInfoUseCase: MemberInfoUseCases
     private let coinExchangeUseCase: CoinExchangeUseCase
     private let checkinUseCase: CheckinUseCase
@@ -48,12 +48,12 @@ final class WalletViewModel: ViewModel {
     private let checkinProgressesSubject = CurrentValueSubject<[CheckinProgress]?, Never>(nil)
     private var cancellables = Set<AnyCancellable>()
 
-    init(userService: UserServiceType = UserService.default,
+    init(userUseCases: UserUseCases = UserUseCasesImpl.default,
          memberInfoUseCase: MemberInfoUseCases = MemberInfoUseCasesImpl.default,
          checkinUseCase: CheckinUseCase = CheckinUseCaseImpl.shared,
          coinExchangeUseCase: CoinExchangeUseCase = CoinExchangeUseCaseImpl.shared,
          delegate: WalletViewModelDelegate? = nil) {
-        self.userService = userService
+        self.userUseCases = userUseCases
         self.memberInfoUseCase = memberInfoUseCase
         self.coinExchangeUseCase = coinExchangeUseCase
         self.checkinUseCase = checkinUseCase
@@ -114,7 +114,7 @@ final class WalletViewModel: ViewModel {
             }
             .store(in: &cancellables)
 
-        userService
+        userUseCases
             .getCurrentUserPublisher()
             .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
             .store(in: &cancellables)

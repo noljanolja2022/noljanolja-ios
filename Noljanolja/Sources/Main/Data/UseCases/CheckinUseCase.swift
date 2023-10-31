@@ -22,12 +22,12 @@ final class CheckinUseCaseImpl: CheckinUseCase {
     static let shared = CheckinUseCaseImpl()
 
     private let localCheckinRepository: LocalCheckingRepository
-    private let networkCheckinRepository: NetworkCheckinRepository
+    private let checkinNetworkRepository: CheckinNetworkRepository
 
     init(localCheckinRepository: LocalCheckingRepository = LocalCheckingRepositoryImpl.shared,
-         networkCheckinRepository: NetworkCheckinRepository = NetworkCheckinRepositoryImpl.shared) {
+         checkinNetworkRepository: CheckinNetworkRepository = CheckinNetworkRepositoryImpl.shared) {
         self.localCheckinRepository = localCheckinRepository
-        self.networkCheckinRepository = networkCheckinRepository
+        self.checkinNetworkRepository = checkinNetworkRepository
     }
 
     func getCheckinProgresses() -> AnyPublisher<[CheckinProgress], Error> {
@@ -43,7 +43,7 @@ final class CheckinUseCaseImpl: CheckinUseCase {
                         .setFailureType(to: Error.self)
                         .eraseToAnyPublisher()
                 } else {
-                    return self.networkCheckinRepository
+                    return self.checkinNetworkRepository
                         .getCheckinProgresses()
                         .handleEvents(receiveOutput: { [weak self] in
                             self?.localCheckinRepository.updateCheckinProgresses($0)
@@ -55,13 +55,13 @@ final class CheckinUseCaseImpl: CheckinUseCase {
     }
 
     func dailyCheckin() -> AnyPublisher<String, Error> {
-        networkCheckinRepository
+        checkinNetworkRepository
             .dailyCheckin()
             .flatMapLatest { [weak self] message -> AnyPublisher<String, Error> in
                 guard let self else {
                     return Fail(error: CommonError.captureSelfNotFound).eraseToAnyPublisher()
                 }
-                return self.networkCheckinRepository
+                return self.checkinNetworkRepository
                     .getCheckinProgresses()
                     .handleEvents(receiveOutput: { [weak self] in
                         self?.localCheckinRepository.updateCheckinProgresses($0)

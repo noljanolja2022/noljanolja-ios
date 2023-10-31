@@ -43,7 +43,7 @@ final class AuthVerificationViewModel: ViewModel {
     private var verificationID: String
 
     private let authUseCases: AuthUseCases
-    private let userService: UserServiceType
+    private let userUseCases: UserUseCases
     private weak var delegate: AuthVerificationViewModelDelegate?
 
     // MARK: Private
@@ -56,13 +56,13 @@ final class AuthVerificationViewModel: ViewModel {
          phoneNumberText: String,
          verificationID: String,
          authUseCases: AuthUseCases = AuthUseCasesImpl.default,
-         userService: UserServiceType = UserService.default,
+         userUseCases: UserUseCases = UserUseCasesImpl.default,
          delegate: AuthVerificationViewModelDelegate? = nil) {
         self.country = country
         self.phoneNumberText = phoneNumberText
         self.verificationID = verificationID
         self.authUseCases = authUseCases
-        self.userService = userService
+        self.userUseCases = userUseCases
         self.delegate = delegate
         super.init()
 
@@ -107,7 +107,7 @@ final class AuthVerificationViewModel: ViewModel {
                 return self.authUseCases
                     .verificationCode(verificationID: self.verificationID, verificationCode: self.verificationCode)
                     .flatMap { _ in
-                        self.userService.getCurrentUser()
+                        self.userUseCases.getCurrentUser()
                     }
                     .eraseToAnyPublisher()
             }

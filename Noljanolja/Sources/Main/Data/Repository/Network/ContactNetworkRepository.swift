@@ -1,5 +1,5 @@
 //
-//  NetworkContactRepositoryImpl.swift
+//  ContactNetworkRepositoryImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 06/03/2023.
@@ -9,9 +9,9 @@ import Combine
 import Contacts
 import Foundation
 
-// MARK: - NetworkContactRepository
+// MARK: - ContactNetworkRepository
 
-protocol NetworkContactRepository {
+protocol ContactNetworkRepository {
     func getAuthorizationStatus() -> AnyPublisher<Void, Error>
     func requestContactPermission() -> AnyPublisher<Bool, Error>
     func getContacts() -> AnyPublisher<[Contact], Error>
@@ -32,10 +32,10 @@ enum ContactsError: Error {
     }
 }
 
-// MARK: - NetworkContactRepositoryImpl
+// MARK: - ContactNetworkRepositoryImpl
 
-final class NetworkContactRepositoryImpl: NetworkContactRepository {
-    static let `default` = NetworkContactRepositoryImpl()
+final class ContactNetworkRepositoryImpl: ContactNetworkRepository {
+    static let `default` = ContactNetworkRepositoryImpl()
 
     private lazy var store = CNContactStore()
 

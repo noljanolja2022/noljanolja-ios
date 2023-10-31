@@ -31,7 +31,7 @@ final class GoogleAuthViewModel: ViewModel {
     // MARK: Dependencies
 
     private let authUseCase: AuthUseCases
-    private let userService: UserServiceType
+    private let userUseCases: UserUseCases
     private weak var delegate: GoogleAuthViewModelDelegate?
 
     // MARK: Private
@@ -40,10 +40,10 @@ final class GoogleAuthViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(authUseCase: AuthUseCases = AuthUseCasesImpl.default,
-         userService: UserServiceType = UserService.default,
+         userUseCases: UserUseCases = UserUseCasesImpl.default,
          delegate: GoogleAuthViewModelDelegate? = nil) {
         self.authUseCase = authUseCase
-        self.userService = userService
+        self.userUseCases = userUseCases
         self.delegate = delegate
         super.init()
 
@@ -83,7 +83,7 @@ final class GoogleAuthViewModel: ViewModel {
                     return Fail<User, Error>(error: CommonError.captureSelfNotFound)
                         .eraseToAnyPublisher()
                 }
-                return self.userService.getCurrentUser()
+                return self.userUseCases.getCurrentUser()
             }
             .sink { [weak self] result in
                 guard let self else { return }

@@ -7,9 +7,9 @@
 
 import shared
 
-// MARK: - LocalAuthRepositoryImpl + AuthRepo
+// MARK: - AuthLocalRepositoryImpl + AuthRepo
 
-extension LocalAuthRepositoryImpl: AuthRepo {
+extension AuthLocalRepositoryImpl: AuthRepo {
     func getAuthToken() async throws -> String? {
         getToken()
     }

@@ -37,7 +37,7 @@ final class MessageImagesViewModel: ViewModel {
     // MARK: Dependencies
 
     private let messageSubject: CurrentValueSubject<Message, Never>
-    private let userService: UserServiceType
+    private let userUseCases: UserUseCases
     private weak var delegate: MessageImagesViewModelDelegate?
 
     // MARK: Private
@@ -46,10 +46,10 @@ final class MessageImagesViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(message: Message,
-         userService: UserServiceType = UserService.default,
+         userUseCases: UserUseCases = UserUseCasesImpl.default,
          delegate: MessageImagesViewModelDelegate? = nil) {
         self.messageSubject = CurrentValueSubject<Message, Never>(message)
-        self.userService = userService
+        self.userUseCases = userUseCases
         self.delegate = delegate
         super.init()
 
@@ -91,7 +91,7 @@ final class MessageImagesViewModel: ViewModel {
                 guard let self else {
                     return Fail(error: CommonError.unknown).eraseToAnyPublisher()
                 }
-                return self.userService.getCurrentUserIfNeeded()
+                return self.userUseCases.getCurrentUserIfNeeded()
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in

@@ -43,7 +43,7 @@ final class AddFriendsHomeViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    private let userService: UserServiceType
+    private let userUseCases: UserUseCases
     private let userAPI: UserAPIType
     private weak var delegate: AddFriendsHomeViewModelDelegate?
 
@@ -53,10 +53,10 @@ final class AddFriendsHomeViewModel: ViewModel {
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(userService: UserServiceType = UserService.default,
+    init(userUseCases: UserUseCases = UserUseCasesImpl.default,
          userAPI: UserAPIType = UserAPI.default,
          delegate: AddFriendsHomeViewModelDelegate? = nil) {
-        self.userService = userService
+        self.userUseCases = userUseCases
         self.userAPI = userAPI
         self.delegate = delegate
         super.init()
@@ -129,7 +129,7 @@ final class AddFriendsHomeViewModel: ViewModel {
     }
 
     private func configureLoadData() {
-        userService.getCurrentUserPublisher()
+        userUseCases.getCurrentUserPublisher()
             .sink(receiveValue: { [weak self] in
                 self?.currentUserSubject.send($0)
             })

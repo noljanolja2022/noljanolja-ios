@@ -1,5 +1,5 @@
 //
-//  UserServices.swift
+//  UserUseCasesImpls.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 27/02/2023.
@@ -9,9 +9,9 @@ import Combine
 import CombineExt
 import Foundation
 
-// MARK: - UserServiceType
+// MARK: - UserUseCases
 
-protocol UserServiceType {
+protocol UserUseCases {
     func getCurrentUser() -> User?
     func getCurrentUserPublisher() -> AnyPublisher<User, Never>
     
@@ -22,10 +22,10 @@ protocol UserServiceType {
     func updateCurrentUserAvatar(_ image: Data?) -> AnyPublisher<User, Error>
 }
 
-// MARK: - UserService
+// MARK: - UserUseCasesImpl
 
-final class UserService: UserServiceType {
-    static let `default` = UserService()
+final class UserUseCasesImpl: UserUseCases {
+    static let `default` = UserUseCasesImpl()
 
     // MARK: Dependencies
 

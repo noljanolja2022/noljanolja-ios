@@ -1,5 +1,5 @@
 //
-//  ConversationDetailStore.swift
+//  ConversationLocalRepositoryImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 09/04/2023.
@@ -9,9 +9,9 @@ import Combine
 import Foundation
 import RealmSwift
 
-// MARK: - ConversationDetailStoreType
+// MARK: - LocalDetailConversationRepository
 
-protocol ConversationDetailStoreType {
+protocol LocalDetailConversationRepository {
     func saveConversationDetails(_ conversations: [Conversation])
 
     func getConversationDetail(id: Int) -> Conversation?
@@ -22,10 +22,10 @@ protocol ConversationDetailStoreType {
     func deleteAll()
 }
 
-// MARK: - ConversationDetailStore
+// MARK: - LocalDetailConversationRepositoryImpl
 
-final class ConversationDetailStore: ConversationDetailStoreType {
-    static let `default` = ConversationDetailStore()
+final class LocalDetailConversationRepositoryImpl: LocalDetailConversationRepository {
+    static let `default` = LocalDetailConversationRepositoryImpl()
 
     private lazy var realmManager: RealmManagerType = {
         let id = "conversation_detail"

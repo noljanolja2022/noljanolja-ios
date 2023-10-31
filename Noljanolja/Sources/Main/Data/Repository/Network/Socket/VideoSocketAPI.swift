@@ -26,7 +26,7 @@ final class VideoSocketAPI: VideoSocketAPIType {
     private var cancellable: AnyCancellable?
 
     private init(rsocketUrl: String = NetworkConfigs.BaseUrl.socketBaseUrl,
-                 authRepo: AuthRepo = LocalAuthRepositoryImpl.default) {
+                 authRepo: AuthRepo = AuthLocalRepositoryImpl.default) {
         self.socket = VideoSocket(
             rsocketUrl: rsocketUrl,
             authRepo: authRepo

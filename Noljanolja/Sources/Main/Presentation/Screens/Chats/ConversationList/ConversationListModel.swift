@@ -49,7 +49,7 @@ final class ConversationListViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    private let userService: UserServiceType
+    private let userUseCases: UserUseCases
     private let conversationUseCases: ConversationUseCases
     private let conversationSocketService: ConversationSocketServiceType
     private weak var delegate: ConversationListViewModelDelegate?
@@ -61,11 +61,11 @@ final class ConversationListViewModel: ViewModel {
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(userService: UserServiceType = UserService.default,
+    init(userUseCases: UserUseCases = UserUseCasesImpl.default,
          conversationUseCases: ConversationUseCases = ConversationUseCasesImpl.default,
          conversationSocketService: ConversationSocketServiceType = ConversationSocketService.default,
          delegate: ConversationListViewModelDelegate? = nil) {
-        self.userService = userService
+        self.userUseCases = userUseCases
         self.conversationUseCases = conversationUseCases
         self.conversationSocketService = conversationSocketService
         self.delegate = delegate
@@ -127,7 +127,7 @@ final class ConversationListViewModel: ViewModel {
             })
             .store(in: &cancellables)
 
-        userService
+        userUseCases
             .getCurrentUserPublisher()
             .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
             .store(in: &cancellables)

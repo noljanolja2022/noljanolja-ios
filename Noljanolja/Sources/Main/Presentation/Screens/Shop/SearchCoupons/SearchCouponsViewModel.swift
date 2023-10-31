@@ -41,7 +41,7 @@ final class SearchCouponsViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    private let localCouponKeywordRepository: LocalCouponKeywordRepository
+    private let couponKeywordLocalRepository: CouponKeywordLocalRepository
     private let memberInfoUseCases: MemberInfoUseCases
     private let giftsApi: GiftsAPIType
     private weak var delegate: SearchCouponsViewModelDelegate?
@@ -52,11 +52,11 @@ final class SearchCouponsViewModel: ViewModel {
     private let pageSize = 20
     private var cancellables = Set<AnyCancellable>()
 
-    init(localCouponKeywordRepository: LocalCouponKeywordRepository = LocalCouponKeywordRepositoryImpl.shared,
+    init(couponKeywordLocalRepository: CouponKeywordLocalRepository = CouponKeywordLocalRepositoryImpl.shared,
          memberInfoUseCases: MemberInfoUseCases = MemberInfoUseCasesImpl.default,
          giftsApi: GiftsAPIType = GiftsAPI.default,
          delegate: SearchCouponsViewModelDelegate? = nil) {
-        self.localCouponKeywordRepository = localCouponKeywordRepository
+        self.couponKeywordLocalRepository = couponKeywordLocalRepository
         self.memberInfoUseCases = memberInfoUseCases
         self.giftsApi = giftsApi
         self.delegate = delegate
@@ -160,7 +160,7 @@ final class SearchCouponsViewModel: ViewModel {
                 guard let self else {
                     return Empty<[CouponKeyword], Error>().eraseToAnyPublisher()
                 }
-                return self.localCouponKeywordRepository.observeKeywords(string)
+                return self.couponKeywordLocalRepository.observeKeywords(string)
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
@@ -183,17 +183,17 @@ final class SearchCouponsViewModel: ViewModel {
             .removeDuplicates()
             .sink { [weak self] keyword in
                 let keyword = CouponKeyword(keyword: keyword)
-                self?.localCouponKeywordRepository.saveKeyword(keyword)
+                self?.couponKeywordLocalRepository.saveKeyword(keyword)
             }
             .store(in: &cancellables)
         clearCouponKeywordsAction
             .sink { [weak self] in
-                self?.localCouponKeywordRepository.deleteAll()
+                self?.couponKeywordLocalRepository.deleteAll()
             }
             .store(in: &cancellables)
         removeKeywordAction
             .sink { [weak self] in
-                self?.localCouponKeywordRepository.delete($0)
+                self?.couponKeywordLocalRepository.delete($0)
             }
             .store(in: &cancellables)
     }

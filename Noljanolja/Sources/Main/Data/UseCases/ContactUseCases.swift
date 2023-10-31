@@ -21,34 +21,34 @@ protocol ContactUseCases {
 final class ContactUseCasesImpl: ContactUseCases {
     static let `default` = ContactUseCasesImpl()
 
-    private let networkContactRepository: NetworkContactRepository
-    private let localContactRepository: LocalContactRepository
+    private let contactNetworkRepository: ContactNetworkRepository
+    private let contactLocalRepository: ContactLocalRepository
     private let userAPI: UserAPIType
 
-    private init(networkContactRepository: NetworkContactRepository = NetworkContactRepositoryImpl.default,
-                 localContactRepository: LocalContactRepository = LocalContactRepositoryImpl.default,
+    private init(contactNetworkRepository: ContactNetworkRepository = ContactNetworkRepositoryImpl.default,
+                 contactLocalRepository: ContactLocalRepository = ContactLocalRepositoryImpl.default,
                  userAPI: UserAPIType = UserAPI.default) {
-        self.networkContactRepository = networkContactRepository
-        self.localContactRepository = localContactRepository
+        self.contactNetworkRepository = contactNetworkRepository
+        self.contactLocalRepository = contactLocalRepository
         self.userAPI = userAPI
     }
 
     func getAuthorizationStatus() -> AnyPublisher<Void, Error> {
-        networkContactRepository.getAuthorizationStatus()
+        contactNetworkRepository.getAuthorizationStatus()
     }
 
     func requestContactPermission() -> AnyPublisher<Bool, Error> {
-        networkContactRepository.requestContactPermission()
+        contactNetworkRepository.requestContactPermission()
     }
 
     func getContacts(page: Int, pageSize: Int) -> AnyPublisher<[User], Error> {
-        networkContactRepository.getAuthorizationStatus()
+        contactNetworkRepository.getAuthorizationStatus()
             .flatMapLatest { [weak self] _ -> AnyPublisher<[User], Error> in
                 guard let self else {
                     return Fail(error: CommonError.captureSelfNotFound).eraseToAnyPublisher()
                 }
 
-                let localContacts = localContactRepository.observeContacts()
+                let localContacts = contactLocalRepository.observeContacts()
                     .filter { !$0.isEmpty }
 
                 let remoteGetContacts = getRemoteContacts(page: page, pageSize: pageSize)
@@ -72,7 +72,7 @@ final class ContactUseCasesImpl: ContactUseCases {
 
 extension ContactUseCasesImpl {
     private func syncContacts() -> AnyPublisher<[User], Error> {
-        networkContactRepository
+        contactNetworkRepository
             .getContacts()
             .flatMapLatest { [weak self] contacts -> AnyPublisher<[User], Error> in
                 guard let self else {
@@ -88,7 +88,7 @@ extension ContactUseCasesImpl {
         userAPI
             .getContact(page: page, pageSize: pageSize)
             .handleEvents(receiveOutput: { [weak self] in
-                self?.localContactRepository.saveContact($0)
+                self?.contactLocalRepository.saveContact($0)
             })
             .eraseToAnyPublisher()
     }

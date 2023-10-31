@@ -9,9 +9,9 @@ import Combine
 import Foundation
 import Moya
 
-// MARK: - NetworkCheckinTargets
+// MARK: - CheckinTargets
 
-private enum NetworkCheckinTargets {
+private enum CheckinTargets {
     struct DailyCheckin: BaseAuthTargetType {
         var path: String { "v1/users/me/checkin" }
         let method: Moya.Method = .post
@@ -25,17 +25,17 @@ private enum NetworkCheckinTargets {
     }
 }
 
-// MARK: - NetworkCheckinRepository
+// MARK: - CheckinNetworkRepository
 
-protocol NetworkCheckinRepository {
+protocol CheckinNetworkRepository {
     func dailyCheckin() -> AnyPublisher<String, Error>
     func getCheckinProgresses() -> AnyPublisher<[CheckinProgress], Error>
 }
 
-// MARK: - NetworkCheckinRepositoryImpl
+// MARK: - CheckinNetworkRepositoryImpl
 
-final class NetworkCheckinRepositoryImpl: NetworkCheckinRepository {
-    static let shared = NetworkCheckinRepositoryImpl()
+final class CheckinNetworkRepositoryImpl: CheckinNetworkRepository {
+    static let shared = CheckinNetworkRepositoryImpl()
 
     private let api: ApiType
 
@@ -45,14 +45,14 @@ final class NetworkCheckinRepositoryImpl: NetworkCheckinRepository {
 
     func dailyCheckin() -> AnyPublisher<String, Error> {
         api.request(
-            target: NetworkCheckinTargets.DailyCheckin(),
+            target: CheckinTargets.DailyCheckin(),
             atKeyPath: "message"
         )
     }
 
     func getCheckinProgresses() -> AnyPublisher<[CheckinProgress], Error> {
         api.request(
-            target: NetworkCheckinTargets.GetCheckinProgresses(),
+            target: CheckinTargets.GetCheckinProgresses(),
             atKeyPath: "data"
         )
     }

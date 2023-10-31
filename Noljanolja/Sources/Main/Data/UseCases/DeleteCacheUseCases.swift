@@ -18,28 +18,28 @@ protocol DeleteCacheUseCaseProtocol {
 final class DeleteCacheUseCase: DeleteCacheUseCaseProtocol {
     static let `default` = DeleteCacheUseCase()
 
-    private let localContactRepository: LocalContactRepository
-    private let conversationStore: ConversationStoreType
-    private let conversationDetailStore: ConversationDetailStoreType
+    private let contactLocalRepository: ContactLocalRepository
+    private let conversationLocalRepository: ConversationLocalRepository
+    private let localDetailConversationRepository: LocalDetailConversationRepository
     private let localMediaRepository: LocalMediaRepository
     private let localMessageRepository: LocalMessageRepository
 
-    init(localContactRepository: LocalContactRepository = LocalContactRepositoryImpl.default,
-         conversationStore: ConversationStoreType = ConversationStore.default,
-         conversationDetailStore: ConversationDetailStoreType = ConversationDetailStore.default,
+    init(contactLocalRepository: ContactLocalRepository = ContactLocalRepositoryImpl.default,
+         conversationLocalRepository: ConversationLocalRepository = ConversationLocalRepositoryImpl.default,
+         localDetailConversationRepository: LocalDetailConversationRepository = LocalDetailConversationRepositoryImpl.default,
          localMediaRepository: LocalMediaRepository = LocalMediaRepositoryImpl.default,
          localMessageRepository: LocalMessageRepository = LocalMessageRepositoryImpl.default) {
-        self.localContactRepository = localContactRepository
-        self.conversationStore = conversationStore
-        self.conversationDetailStore = conversationDetailStore
+        self.contactLocalRepository = contactLocalRepository
+        self.conversationLocalRepository = conversationLocalRepository
+        self.localDetailConversationRepository = localDetailConversationRepository
         self.localMediaRepository = localMediaRepository
         self.localMessageRepository = localMessageRepository
     }
 
     func deleteCache() {
-        localContactRepository.deleteAll()
-        conversationStore.deleteAll()
-        conversationDetailStore.deleteAll()
+        contactLocalRepository.deleteAll()
+        conversationLocalRepository.deleteAll()
+        localDetailConversationRepository.deleteAll()
         localMediaRepository.deleteAll()
         localMessageRepository.deleteAll()
     }

@@ -9,17 +9,17 @@ import Combine
 import Foundation
 import RealmSwift
 
-// MARK: - ReactionIconsLocalRepositoryProtocol
+// MARK: - ReactionIconsLocalRepository
 
-protocol ReactionIconsLocalRepositoryProtocol {
+protocol ReactionIconsLocalRepository {
     func saveReactIcons(_ models: [ReactIcon])
     func observeReactIcons() -> AnyPublisher<[ReactIcon], Error>
 }
 
-// MARK: - ReactionIconsLocalRepository
+// MARK: - ReactionIconsLocalRepositoryImpl
 
-final class ReactionIconsLocalRepository: ReactionIconsLocalRepositoryProtocol {
-    static let `default` = ReactionIconsLocalRepository()
+final class ReactionIconsLocalRepositoryImpl: ReactionIconsLocalRepository {
+    static let `default` = ReactionIconsLocalRepositoryImpl()
 
     private lazy var realmManager: RealmManagerType = {
         let id = "react_icons"

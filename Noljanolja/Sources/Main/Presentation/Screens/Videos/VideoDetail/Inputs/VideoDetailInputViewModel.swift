@@ -31,7 +31,7 @@ final class VideoDetailInputViewModel: ViewModel {
     // MARK: Dependencies
 
     private let videoId: String
-    private let userService: UserServiceType
+    private let userUseCases: UserUseCases
     private let videoUseCases: VideoUseCases
     private weak var delegate: VideoDetailInputViewModelDelegate?
 
@@ -40,11 +40,11 @@ final class VideoDetailInputViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(videoId: String,
-         userService: UserServiceType = UserService.default,
+         userUseCases: UserUseCases = UserUseCasesImpl.default,
          videoUseCases: VideoUseCases = VideoUseCasesImpl.shared,
          delegate: VideoDetailInputViewModelDelegate? = nil) {
         self.videoId = videoId
-        self.userService = userService
+        self.userUseCases = userUseCases
         self.videoUseCases = videoUseCases
         self.delegate = delegate
         super.init()
@@ -53,7 +53,7 @@ final class VideoDetailInputViewModel: ViewModel {
     }
 
     private func configure() {
-        userService
+        userUseCases
             .getCurrentUserPublisher()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] user in

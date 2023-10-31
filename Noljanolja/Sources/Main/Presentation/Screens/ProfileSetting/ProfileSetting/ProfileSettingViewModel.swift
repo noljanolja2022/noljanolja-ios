@@ -42,7 +42,7 @@ final class ProfileSettingViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    private let userService: UserServiceType
+    private let userUseCases: UserUseCases
     private let authUseCases: AuthUseCases
     private let deleteCacheUseCase: DeleteCacheUseCaseProtocol
     private weak var delegate: ProfileSettingViewModelDelegate?
@@ -52,11 +52,11 @@ final class ProfileSettingViewModel: ViewModel {
     private let currentUserSubject = CurrentValueSubject<User?, Never>(nil)
     private var cancellables = Set<AnyCancellable>()
 
-    init(userService: UserServiceType = UserService.default,
+    init(userUseCases: UserUseCases = UserUseCasesImpl.default,
          authUseCases: AuthUseCases = AuthUseCasesImpl.default,
          deleteCacheUseCase: DeleteCacheUseCaseProtocol = DeleteCacheUseCase.default,
          delegate: ProfileSettingViewModelDelegate? = nil) {
-        self.userService = userService
+        self.userUseCases = userUseCases
         self.authUseCases = authUseCases
         self.deleteCacheUseCase = deleteCacheUseCase
         self.delegate = delegate
@@ -98,7 +98,7 @@ final class ProfileSettingViewModel: ViewModel {
             })
             .store(in: &cancellables)
 
-        userService.getCurrentUserPublisher()
+        userUseCases.getCurrentUserPublisher()
             .sink(receiveValue: { [weak self] in
                 self?.currentUserSubject.send($0)
             })

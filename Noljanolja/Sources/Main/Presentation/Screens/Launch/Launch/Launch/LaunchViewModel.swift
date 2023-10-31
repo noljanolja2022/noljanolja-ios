@@ -30,7 +30,7 @@ final class LaunchViewModel: ViewModel {
 
     private var userDefaults: UserDefaultsType
     private let authUseCases: AuthUseCases
-    private let userService: UserServiceType
+    private let userUseCases: UserUseCases
     private weak var delegate: LaunchViewModelDelegate?
 
     // MARK: Private
@@ -39,11 +39,11 @@ final class LaunchViewModel: ViewModel {
 
     init(userDefaults: UserDefaultsType = UserDefaults.standard,
          authUseCases: AuthUseCases = AuthUseCasesImpl.default,
-         userService: UserServiceType = UserService.default,
+         userUseCases: UserUseCases = UserUseCasesImpl.default,
          delegate: LaunchViewModelDelegate? = nil) {
         self.userDefaults = userDefaults
         self.authUseCases = authUseCases
-        self.userService = userService
+        self.userUseCases = userUseCases
         self.delegate = delegate
         super.init()
 
@@ -69,7 +69,7 @@ final class LaunchViewModel: ViewModel {
                 }()
                 return trigger
                     .flatMap { _ in self.authUseCases.getIDTokenResult() }
-                    .flatMap { _ in self.userService.getCurrentUser() }
+                    .flatMap { _ in self.userUseCases.getCurrentUser() }
                     .eraseToAnyPublisher()
             }
             .receive(on: DispatchQueue.main)

@@ -41,7 +41,7 @@ final class SearchVideosViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    private let localVideoKeywordRepository: LocalVideoKeywordRepository
+    private let videoKeywordLocalRepository: VideoKeywordLocalRepository
     private let videoRepository: VideoRepository
     private weak var delegate: SearchVideosViewModelDelegate?
 
@@ -51,10 +51,10 @@ final class SearchVideosViewModel: ViewModel {
     private let pageSize = 20
     private var cancellables = Set<AnyCancellable>()
 
-    init(localVideoKeywordRepository: LocalVideoKeywordRepository = LocalVideoKeywordRepositoryImpl.shared,
+    init(videoKeywordLocalRepository: VideoKeywordLocalRepository = VideoKeywordLocalRepositoryImpl.shared,
          videoRepository: VideoRepository = VideoRepositoryImpl.shared,
          delegate: SearchVideosViewModelDelegate? = nil) {
-        self.localVideoKeywordRepository = localVideoKeywordRepository
+        self.videoKeywordLocalRepository = videoKeywordLocalRepository
         self.videoRepository = videoRepository
         self.delegate = delegate
         super.init()
@@ -154,7 +154,7 @@ final class SearchVideosViewModel: ViewModel {
                 guard let self else {
                     return Empty<[VideoKeyword], Error>().eraseToAnyPublisher()
                 }
-                return self.localVideoKeywordRepository.observeKeywords(string)
+                return self.videoKeywordLocalRepository.observeKeywords(string)
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
@@ -177,17 +177,17 @@ final class SearchVideosViewModel: ViewModel {
             .removeDuplicates()
             .sink { [weak self] keyword in
                 let keyword = VideoKeyword(keyword: keyword)
-                self?.localVideoKeywordRepository.saveKeyword(keyword)
+                self?.videoKeywordLocalRepository.saveKeyword(keyword)
             }
             .store(in: &cancellables)
         clearKeywordsAction
             .sink { [weak self] in
-                self?.localVideoKeywordRepository.deleteAll()
+                self?.videoKeywordLocalRepository.deleteAll()
             }
             .store(in: &cancellables)
         removeKeywordAction
             .sink { [weak self] in
-                self?.localVideoKeywordRepository.delete($0)
+                self?.videoKeywordLocalRepository.delete($0)
             }
             .store(in: &cancellables)
     }
