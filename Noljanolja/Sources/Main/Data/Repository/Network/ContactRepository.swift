@@ -1,5 +1,5 @@
 //
-//  ContactAPI.swift
+//  ContactRepositoryImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 06/03/2023.
@@ -9,9 +9,9 @@ import Combine
 import Contacts
 import Foundation
 
-// MARK: - ContactAPIType
+// MARK: - ContactRepository
 
-protocol ContactAPIType {
+protocol ContactRepository {
     func getAuthorizationStatus() -> AnyPublisher<Void, Error>
     func requestContactPermission() -> AnyPublisher<Bool, Error>
     func getContacts() -> AnyPublisher<[Contact], Error>
@@ -32,10 +32,10 @@ enum ContactsError: Error {
     }
 }
 
-// MARK: - ContactAPI
+// MARK: - ContactRepositoryImpl
 
-final class ContactAPI: ContactAPIType {
-    static let `default` = ContactAPI()
+final class ContactRepositoryImpl: ContactRepository {
+    static let `default` = ContactRepositoryImpl()
 
     private lazy var store = CNContactStore()
 

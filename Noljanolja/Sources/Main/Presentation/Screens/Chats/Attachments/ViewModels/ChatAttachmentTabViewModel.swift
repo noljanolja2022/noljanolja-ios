@@ -30,7 +30,7 @@ final class ChatAttachmentTabViewModel: ViewModel {
 
     let conversation: Conversation
     private let type: ConversationAttachmentType
-    private let conversationRepository: ConversationAPIType
+    private let conversationRepository: ConversationRepository
     private weak var delegate: ChatAttachmentTabViewModelDelegate?
 
     // MARK: Private
@@ -41,7 +41,7 @@ final class ChatAttachmentTabViewModel: ViewModel {
 
     init(conversation: Conversation,
          type: ConversationAttachmentType,
-         conversationRepository: ConversationAPIType = ConversationAPI.default,
+         conversationRepository: ConversationRepository = ConversationRepositoryImpl.default,
          delegate: ChatAttachmentTabViewModelDelegate? = nil) {
         self.conversation = conversation
         self.type = type

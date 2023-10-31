@@ -1,5 +1,5 @@
 //
-//  ConversationParticipantAPI.swift
+//  ConversationParticipantRepositoryImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 08/04/2023.
@@ -9,9 +9,9 @@ import Combine
 import Foundation
 import Moya
 
-// MARK: - ConversationParticipantAPITargets
+// MARK: - ConversationParticipantTargets
 
-private enum ConversationParticipantAPITargets {
+private enum ConversationParticipantTargets {
     struct AddParticipant: BaseAuthTargetType {
         var path: String { "v1/conversations/\(conversationID)/participants" }
         let method: Moya.Method = .put
@@ -58,18 +58,18 @@ private enum ConversationParticipantAPITargets {
     }
 }
 
-// MARK: - ConversationParticipantAPIType
+// MARK: - ConversationParticipantRepository
 
-protocol ConversationParticipantAPIType {
+protocol ConversationParticipantRepository {
     func addParticipant(conversationID: Int, participants: [User]) -> AnyPublisher<Void, Error>
     func removeParticipant(conversationID: Int, participants: [User]) -> AnyPublisher<Void, Error>
     func assignAdmin(conversationID: Int, admin: User) -> AnyPublisher<Void, Error>
 }
 
-// MARK: - ConversationParticipantAPI
+// MARK: - ConversationParticipantRepositoryImpl
 
-final class ConversationParticipantAPI: ConversationParticipantAPIType {
-    static let `default` = ConversationParticipantAPI()
+final class ConversationParticipantRepositoryImpl: ConversationParticipantRepository {
+    static let `default` = ConversationParticipantRepositoryImpl()
 
     private let api: ApiType
 
@@ -79,7 +79,7 @@ final class ConversationParticipantAPI: ConversationParticipantAPIType {
 
     func addParticipant(conversationID: Int, participants: [User]) -> AnyPublisher<Void, Error> {
         api.request(
-            target: ConversationParticipantAPITargets.AddParticipant(
+            target: ConversationParticipantTargets.AddParticipant(
                 conversationID: conversationID,
                 participants: participants
             )
@@ -88,7 +88,7 @@ final class ConversationParticipantAPI: ConversationParticipantAPIType {
 
     func removeParticipant(conversationID: Int, participants: [User]) -> AnyPublisher<Void, Error> {
         api.request(
-            target: ConversationParticipantAPITargets.RemoveParticipant(
+            target: ConversationParticipantTargets.RemoveParticipant(
                 conversationID: conversationID,
                 participants: participants
             )
@@ -97,7 +97,7 @@ final class ConversationParticipantAPI: ConversationParticipantAPIType {
 
     func assignAdmin(conversationID: Int, admin: User) -> AnyPublisher<Void, Error> {
         api.request(
-            target: ConversationParticipantAPITargets.AssignAdmin(
+            target: ConversationParticipantTargets.AssignAdmin(
                 conversationID: conversationID,
                 admin: admin
             )

@@ -47,14 +47,14 @@ extension ConversationServiceType {
 final class ConversationService: ConversationServiceType {
     static let `default` = ConversationService()
 
-    private let conversationAPI: ConversationAPIType
-    private let conversationParticipantAPI: ConversationParticipantAPIType
+    private let conversationAPI: ConversationRepository
+    private let conversationParticipantAPI: ConversationParticipantRepository
     private let conversationStore: ConversationStoreType
     private let conversationDetailStore: ConversationDetailStoreType
     private let userStore: UserStoreType
 
-    private init(conversationAPI: ConversationAPIType = ConversationAPI.default,
-                 conversationParticipantAPI: ConversationParticipantAPIType = ConversationParticipantAPI.default,
+    private init(conversationAPI: ConversationRepository = ConversationRepositoryImpl.default,
+                 conversationParticipantAPI: ConversationParticipantRepository = ConversationParticipantRepositoryImpl.default,
                  conversationStore: ConversationStoreType = ConversationStore.default,
                  conversationDetailStore: ConversationDetailStoreType = ConversationDetailStore.default,
                  userStore: UserStoreType = UserStore.default) {

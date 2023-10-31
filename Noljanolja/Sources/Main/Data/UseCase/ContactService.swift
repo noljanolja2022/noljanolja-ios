@@ -21,11 +21,11 @@ protocol ContactServiceType {
 final class ContactService: ContactServiceType {
     static let `default` = ContactService()
 
-    private let contactAPI: ContactAPIType
+    private let contactAPI: ContactRepository
     private let userAPI: UserAPIType
     private let contactStore: ContactStoreType
 
-    private init(contactAPI: ContactAPIType = ContactAPI.default,
+    private init(contactAPI: ContactRepository = ContactRepositoryImpl.default,
                  userAPI: UserAPIType = UserAPI.default,
                  contactStore: ContactStoreType = ContactStore.default) {
         self.contactAPI = contactAPI

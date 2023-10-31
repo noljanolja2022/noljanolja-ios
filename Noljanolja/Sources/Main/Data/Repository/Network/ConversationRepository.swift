@@ -1,5 +1,5 @@
 //
-//  ConversationAPI.swift
+//  ConversationRepositoryImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 09/03/2023.
@@ -9,9 +9,9 @@ import Combine
 import Foundation
 import Moya
 
-// MARK: - ConversationAPITargets
+// MARK: - ConversationTargets
 
-private enum ConversationAPITargets {
+private enum ConversationTargets {
     struct CreateConversation: BaseAuthTargetType {
         var path: String { "v1/conversations" }
         let method: Moya.Method = .post
@@ -110,9 +110,9 @@ private enum ConversationAPITargets {
     }
 }
 
-// MARK: - ConversationAPIType
+// MARK: - ConversationRepository
 
-protocol ConversationAPIType {
+protocol ConversationRepository {
     func createConversation(title: String,
                             type: ConversationType,
                             participants: [User]) -> AnyPublisher<Conversation, Error>
@@ -131,10 +131,10 @@ protocol ConversationAPIType {
                                     pageSize: Int) -> AnyPublisher<PaginationResponse<[ConversationAttachment]>, Error>
 }
 
-// MARK: - ConversationAPI
+// MARK: - ConversationRepositoryImpl
 
-final class ConversationAPI: ConversationAPIType {
-    static let `default` = ConversationAPI()
+final class ConversationRepositoryImpl: ConversationRepository {
+    static let `default` = ConversationRepositoryImpl()
 
     private let api: ApiType
 
@@ -146,21 +146,21 @@ final class ConversationAPI: ConversationAPIType {
                             type: ConversationType,
                             participants: [User]) -> AnyPublisher<Conversation, Error> {
         api.request(
-            target: ConversationAPITargets.CreateConversation(title: title, type: type, participants: participants),
+            target: ConversationTargets.CreateConversation(title: title, type: type, participants: participants),
             atKeyPath: "data"
         )
     }
 
     func getConversations() -> AnyPublisher<[Conversation], Error> {
         api.request(
-            target: ConversationAPITargets.GetConversations(),
+            target: ConversationTargets.GetConversations(),
             atKeyPath: "data"
         )
     }
 
     func getConversation(conversationID: Int) -> AnyPublisher<Conversation, Error> {
         api.request(
-            target: ConversationAPITargets.GetConversation(conversationID: conversationID),
+            target: ConversationTargets.GetConversation(conversationID: conversationID),
             atKeyPath: "data"
         )
     }
@@ -170,7 +170,7 @@ final class ConversationAPI: ConversationAPIType {
                             participants: [User]?,
                             image: Data?) -> AnyPublisher<Conversation, Error> {
         api.request(
-            target: ConversationAPITargets.UpdateConversation(
+            target: ConversationTargets.UpdateConversation(
                 conversationID: conversationID,
                 title: title,
                 participants:
@@ -186,7 +186,7 @@ final class ConversationAPI: ConversationAPIType {
                                     page: Int,
                                     pageSize: Int) -> AnyPublisher<PaginationResponse<[ConversationAttachment]>, Error> {
         api.request(
-            target: ConversationAPITargets.GetConversationAttachments(
+            target: ConversationTargets.GetConversationAttachments(
                 conversationID: conversationID,
                 types: types,
                 page: page,

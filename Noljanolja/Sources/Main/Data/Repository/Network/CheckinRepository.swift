@@ -1,5 +1,5 @@
 //
-//  NetworkCheckinRepository.swift
+//  CheckinRepository.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 31/07/2023.
@@ -9,9 +9,9 @@ import Combine
 import Foundation
 import Moya
 
-// MARK: - CheckinAPITargets
+// MARK: - CheckinTargets
 
-private enum CheckinAPITargets {
+private enum CheckinTargets {
     struct DailyCheckin: BaseAuthTargetType {
         var path: String { "v1/users/me/checkin" }
         let method: Moya.Method = .post
@@ -25,17 +25,17 @@ private enum CheckinAPITargets {
     }
 }
 
-// MARK: - NetworkCheckinRepository
+// MARK: - CheckinRepository
 
-protocol NetworkCheckinRepository {
+protocol CheckinRepository {
     func dailyCheckin() -> AnyPublisher<String, Error>
     func getCheckinProgresses() -> AnyPublisher<[CheckinProgress], Error>
 }
 
-// MARK: - NetworkCheckinRepositoryImpl
+// MARK: - CheckinRepositoryImpl
 
-final class NetworkCheckinRepositoryImpl: NetworkCheckinRepository {
-    static let shared = NetworkCheckinRepositoryImpl()
+final class CheckinRepositoryImpl: CheckinRepository {
+    static let shared = CheckinRepositoryImpl()
 
     private let api: ApiType
 
@@ -45,14 +45,14 @@ final class NetworkCheckinRepositoryImpl: NetworkCheckinRepository {
 
     func dailyCheckin() -> AnyPublisher<String, Error> {
         api.request(
-            target: CheckinAPITargets.DailyCheckin(),
+            target: CheckinTargets.DailyCheckin(),
             atKeyPath: "message"
         )
     }
 
     func getCheckinProgresses() -> AnyPublisher<[CheckinProgress], Error> {
         api.request(
-            target: CheckinAPITargets.GetCheckinProgresses(),
+            target: CheckinTargets.GetCheckinProgresses(),
             atKeyPath: "data"
         )
     }
