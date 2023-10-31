@@ -25,12 +25,12 @@ protocol MediaServiceType {
 final class MediaService: MediaServiceType {
     static let `default` = MediaService()
 
-    private let mediaAPI: MediaAPIType
+    private let mediaRepository: NetworkMediaRepository
     private let mediaStore: MediaStoreType
 
-    private init(mediaAPI: MediaAPIType = MediaAPI.default,
+    private init(mediaRepository: NetworkMediaRepository = NetworkMediaRepositoryImpl.default,
                  mediaStore: MediaStoreType = MediaStore.default) {
-        self.mediaAPI = mediaAPI
+        self.mediaRepository = mediaRepository
         self.mediaStore = mediaStore
     }
 
@@ -38,7 +38,7 @@ final class MediaService: MediaServiceType {
         let localStickerPacks = mediaStore.observeStickerPacks()
             .filter { !$0.isEmpty }
 
-        let remoteStickerPacks = mediaAPI
+        let remoteStickerPacks = mediaRepository
             .getStickerPacks()
             .handleEvents(receiveOutput: { [weak self] in
                 self?.mediaStore.saveStickerPacks($0)
@@ -51,7 +51,7 @@ final class MediaService: MediaServiceType {
 
     func downloadStickerPack(id: Int) -> AnyPublisher<Void, Error> {
         let downloadURL = mediaStore.generateDownloadStickerPackURL(id: id)
-        return mediaAPI.downloadStickerPack(id: id, downloadURL: downloadURL)
+        return mediaRepository.downloadStickerPack(id: id, downloadURL: downloadURL)
             .tryMap { [weak self] _ in
                 try self?.mediaStore.saveStickerPack(id: id, source: downloadURL)
             }
@@ -64,13 +64,13 @@ final class MediaService: MediaServiceType {
 
     func getStickerURL(stickerPackID: Int, stickerFile: String) -> URL? {
         let localStickerURL = mediaStore.getStickerURL(stickerPackID: stickerPackID, stickerFile: stickerFile)
-        let remoteStickerURL = mediaAPI.getStickerURL(stickerPackID: stickerPackID, stickerFile: stickerFile)
+        let remoteStickerURL = mediaRepository.getStickerURL(stickerPackID: stickerPackID, stickerFile: stickerFile)
         return localStickerURL ?? remoteStickerURL
     }
 
     func getStickerURL(stickerPath: String) -> URL? {
         let localStickerURL = mediaStore.getStickerURL(stickerPath: stickerPath)
-        let remoteStickerURL = mediaAPI.getStickerURL(stickerPath: stickerPath)
+        let remoteStickerURL = mediaRepository.getStickerURL(stickerPath: stickerPath)
         return localStickerURL ?? remoteStickerURL
     }
 }

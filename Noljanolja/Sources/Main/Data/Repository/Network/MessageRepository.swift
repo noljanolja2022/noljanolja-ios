@@ -1,5 +1,5 @@
 //
-//  MessageAPI.swift
+//  MessageRepositoryImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 10/03/2023.
@@ -10,9 +10,9 @@ import Foundation
 import Moya
 import UIKit
 
-// MARK: - MessageAPITargets
+// MARK: - MessageTargets
 
-private enum MessageAPITargets {
+private enum MessageTargets {
     struct GetMessages: BaseAuthTargetType {
         var path: String { "v1/conversations/\(conversationID)/messages" }
         let method: Moya.Method = .get
@@ -162,9 +162,9 @@ private enum MessageAPITargets {
     }
 }
 
-// MARK: - MessageAPIType
+// MARK: - MessageRepository
 
-protocol MessageAPIType {
+protocol MessageRepository {
     func getMessages(conversationID: Int,
                      beforeMessageID: Int?,
                      afterMessageID: Int?) -> AnyPublisher<[Message], Error>
@@ -179,7 +179,7 @@ protocol MessageAPIType {
     func reactMessage(conversationID: Int, messageID: Int, reactionId: Int) -> AnyPublisher<Void, Error>
 }
 
-extension MessageAPIType {
+extension MessageRepository {
     func getMessages(conversationID: Int,
                      beforeMessageID: Int? = nil,
                      afterMessageID: Int? = nil) -> AnyPublisher<[Message], Error> {
@@ -191,10 +191,10 @@ extension MessageAPIType {
     }
 }
 
-// MARK: - MessageAPI
+// MARK: - MessageRepositoryImpl
 
-final class MessageAPI: MessageAPIType {
-    static let `default` = MessageAPI()
+final class MessageRepositoryImpl: MessageRepository {
+    static let `default` = MessageRepositoryImpl()
 
     private let api: ApiType
 
@@ -206,7 +206,7 @@ final class MessageAPI: MessageAPIType {
                      beforeMessageID: Int?,
                      afterMessageID: Int?) -> AnyPublisher<[Message], Error> {
         api.request(
-            target: MessageAPITargets.GetMessages(
+            target: MessageTargets.GetMessages(
                 conversationID: conversationID,
                 beforeMessageID: beforeMessageID,
                 afterMessageID: afterMessageID
@@ -217,27 +217,27 @@ final class MessageAPI: MessageAPIType {
 
     func sendMessage(param: SendMessageParam) -> AnyPublisher<Message, Error> {
         api.request(
-            target: MessageAPITargets.SendMessage(param: param),
+            target: MessageTargets.SendMessage(param: param),
             atKeyPath: "data"
         )
     }
 
     func shareMessage(param: ShareMessageParam) -> AnyPublisher<[Message], Error> {
         api.request(
-            target: MessageAPITargets.ShareMessage(param: param),
+            target: MessageTargets.ShareMessage(param: param),
             atKeyPath: "data"
         )
     }
 
     func deleteMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error> {
         api.request(
-            target: MessageAPITargets.DeleteMessage(conversationID: conversationID, messageID: messageID)
+            target: MessageTargets.DeleteMessage(conversationID: conversationID, messageID: messageID)
         )
     }
 
     func seenMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error> {
         api.request(
-            target: MessageAPITargets.SeenMessage(conversationID: conversationID, messageID: messageID)
+            target: MessageTargets.SeenMessage(conversationID: conversationID, messageID: messageID)
         )
     }
 
@@ -248,7 +248,7 @@ final class MessageAPI: MessageAPIType {
 
     func reactMessage(conversationID: Int, messageID: Int, reactionId: Int) -> AnyPublisher<Void, Error> {
         api.request(
-            target: MessageAPITargets.ReactMessage(
+            target: MessageTargets.ReactMessage(
                 conversationID: conversationID,
                 messageID: messageID,
                 reactionId: reactionId

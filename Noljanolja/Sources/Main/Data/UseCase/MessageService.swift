@@ -44,14 +44,14 @@ final class MessageService: MessageServiceType {
     static let `default` = MessageService()
 
     private let userStore: UserStoreType
-    private let messageAPI: MessageAPIType
+    private let messageAPI: MessageRepository
     private let conversationService: ConversationServiceType
     private let messageStore: MessageStoreType
     private let photoAssetAPI: PhotoAssetAPI
     private let dataRepository: DataRepository
 
     private init(userStore: UserStoreType = UserStore.default,
-                 messageAPI: MessageAPIType = MessageAPI.default,
+                 messageAPI: MessageRepository = MessageRepositoryImpl.default,
                  conversationService: ConversationServiceType = ConversationService.default,
                  messageStore: MessageStoreType = MessageStore.default,
                  photoAssetAPI: PhotoAssetAPI = PhotoAssetAPI.default,

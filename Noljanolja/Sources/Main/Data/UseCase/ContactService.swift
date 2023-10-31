@@ -21,28 +21,28 @@ protocol ContactServiceType {
 final class ContactService: ContactServiceType {
     static let `default` = ContactService()
 
-    private let contactAPI: ContactRepository
+    private let contactRepository: ContactRepository
     private let userAPI: UserAPIType
     private let contactStore: ContactStoreType
 
-    private init(contactAPI: ContactRepository = ContactRepositoryImpl.default,
+    private init(contactRepository: ContactRepository = ContactRepositoryImpl.default,
                  userAPI: UserAPIType = UserAPI.default,
                  contactStore: ContactStoreType = ContactStore.default) {
-        self.contactAPI = contactAPI
+        self.contactRepository = contactRepository
         self.userAPI = userAPI
         self.contactStore = contactStore
     }
 
     func getAuthorizationStatus() -> AnyPublisher<Void, Error> {
-        contactAPI.getAuthorizationStatus()
+        contactRepository.getAuthorizationStatus()
     }
 
     func requestContactPermission() -> AnyPublisher<Bool, Error> {
-        contactAPI.requestContactPermission()
+        contactRepository.requestContactPermission()
     }
 
     func getContacts(page: Int, pageSize: Int) -> AnyPublisher<[User], Error> {
-        contactAPI.getAuthorizationStatus()
+        contactRepository.getAuthorizationStatus()
             .flatMapLatest { [weak self] _ -> AnyPublisher<[User], Error> in
                 guard let self else {
                     return Fail(error: CommonError.captureSelfNotFound).eraseToAnyPublisher()
@@ -72,7 +72,7 @@ final class ContactService: ContactServiceType {
 
 extension ContactService {
     private func syncContacts() -> AnyPublisher<[User], Error> {
-        contactAPI
+        contactRepository
             .getContacts()
             .flatMapLatest { [weak self] contacts -> AnyPublisher<[User], Error> in
                 guard let self else {

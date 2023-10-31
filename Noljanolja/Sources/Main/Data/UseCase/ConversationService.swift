@@ -47,19 +47,19 @@ extension ConversationServiceType {
 final class ConversationService: ConversationServiceType {
     static let `default` = ConversationService()
 
-    private let conversationAPI: ConversationRepository
-    private let conversationParticipantAPI: ConversationParticipantRepository
+    private let conversationRepository: ConversationRepository
+    private let conversationParticipantRepository: ConversationParticipantRepository
     private let conversationStore: ConversationStoreType
     private let conversationDetailStore: ConversationDetailStoreType
     private let userStore: UserStoreType
 
-    private init(conversationAPI: ConversationRepository = ConversationRepositoryImpl.default,
-                 conversationParticipantAPI: ConversationParticipantRepository = ConversationParticipantRepositoryImpl.default,
+    private init(conversationRepository: ConversationRepository = ConversationRepositoryImpl.default,
+                 conversationParticipantRepository: ConversationParticipantRepository = ConversationParticipantRepositoryImpl.default,
                  conversationStore: ConversationStoreType = ConversationStore.default,
                  conversationDetailStore: ConversationDetailStoreType = ConversationDetailStore.default,
                  userStore: UserStoreType = UserStore.default) {
-        self.conversationAPI = conversationAPI
-        self.conversationParticipantAPI = conversationParticipantAPI
+        self.conversationRepository = conversationRepository
+        self.conversationParticipantRepository = conversationParticipantRepository
         self.conversationStore = conversationStore
         self.conversationDetailStore = conversationDetailStore
         self.userStore = userStore
@@ -70,7 +70,7 @@ final class ConversationService: ConversationServiceType {
             .observeConversations()
             .filter { !$0.isEmpty }
 
-        let remoteConversations = conversationAPI
+        let remoteConversations = conversationRepository
             .getConversations()
             .handleEvents(receiveOutput: { [weak self] conversations in
                 self?.conversationStore.saveConversations(conversations)
@@ -115,7 +115,7 @@ final class ConversationService: ConversationServiceType {
     func getConversation(conversationID: Int) -> AnyPublisher<Conversation, Error> {
         let localConversation = conversationDetailStore
             .observeConversationDetail(conversationID: conversationID)
-        let remoteConversation = conversationAPI
+        let remoteConversation = conversationRepository
             .getConversation(conversationID: conversationID)
             .handleEvents(receiveOutput: { [weak self] in
                 self?.conversationDetailStore.saveConversationDetails([$0])
@@ -137,7 +137,7 @@ final class ConversationService: ConversationServiceType {
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         } else {
-            return conversationAPI
+            return conversationRepository
                 .createConversation(title: "", type: type, participants: participants)
                 .handleEvents(receiveOutput: { [weak self] in
                     self?.conversationDetailStore.saveConversationDetails([$0])
@@ -150,7 +150,7 @@ final class ConversationService: ConversationServiceType {
                             title: String?,
                             participants: [User]?,
                             image: Data?) -> AnyPublisher<Conversation, Error> {
-        conversationAPI
+        conversationRepository
             .updateConversation(
                 conversationID: conversationID,
                 title: title,
@@ -164,11 +164,11 @@ final class ConversationService: ConversationServiceType {
     }
 
     func addParticipant(conversationID: Int, participants: [User]) -> AnyPublisher<Conversation, Error> {
-        conversationParticipantAPI
+        conversationParticipantRepository
             .addParticipant(conversationID: conversationID, participants: participants)
             .flatMap { [weak self] in
                 guard let self else { return Empty<Conversation, Error>().eraseToAnyPublisher() }
-                return self.conversationAPI.getConversation(conversationID: conversationID)
+                return self.conversationRepository.getConversation(conversationID: conversationID)
             }
             .handleEvents(receiveOutput: { [weak self] in
                 self?.conversationDetailStore.saveConversationDetails([$0])
@@ -177,11 +177,11 @@ final class ConversationService: ConversationServiceType {
     }
 
     func removeParticipant(conversationID: Int, participants: [User]) -> AnyPublisher<Conversation, Error> {
-        conversationParticipantAPI
+        conversationParticipantRepository
             .removeParticipant(conversationID: conversationID, participants: participants)
             .flatMap { [weak self] in
                 guard let self else { return Empty<Conversation, Error>().eraseToAnyPublisher() }
-                return self.conversationAPI.getConversation(conversationID: conversationID)
+                return self.conversationRepository.getConversation(conversationID: conversationID)
             }
             .handleEvents(receiveOutput: { [weak self] in
                 self?.conversationDetailStore.saveConversationDetails([$0])
@@ -190,11 +190,11 @@ final class ConversationService: ConversationServiceType {
     }
 
     func assignAdmin(conversationID: Int, admin: User) -> AnyPublisher<Conversation, Error> {
-        conversationParticipantAPI
+        conversationParticipantRepository
             .assignAdmin(conversationID: conversationID, admin: admin)
             .flatMap { [weak self] in
                 guard let self else { return Empty<Conversation, Error>().eraseToAnyPublisher() }
-                return self.conversationAPI.getConversation(conversationID: conversationID)
+                return self.conversationRepository.getConversation(conversationID: conversationID)
             }
             .handleEvents(receiveOutput: { [weak self] in
                 self?.conversationDetailStore.saveConversationDetails([$0])

@@ -1,5 +1,5 @@
 //
-//  CountryAPI.swift
+//  CountryRepositoryImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 04/04/2023.
@@ -9,16 +9,16 @@ import Combine
 import Foundation
 import PhoneNumberKit
 
-// MARK: - CountryAPIType
+// MARK: - CountryRepository
 
-protocol CountryAPIType {
+protocol CountryRepository {
     func getDefaultCountry() -> Country
     func getCountries() -> AnyPublisher<[Country], Error>
 }
 
-// MARK: - CountryAPI
+// MARK: - CountryRepositoryImpl
 
-final class CountryAPI: CountryAPIType {
+final class CountryRepositoryImpl: CountryRepository {
     func getDefaultCountry() -> Country {
         let countryCode = "KR"
         let phoneNumberKit = PhoneNumberKit()

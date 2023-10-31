@@ -19,9 +19,9 @@ protocol MessageReactionUseCases {
 final class MessageReactionUseCasesImpl: MessageReactionUseCases {
     static let shared = MessageReactionUseCasesImpl()
 
-    private let messageAPI: MessageAPIType
+    private let messageAPI: MessageRepository
 
-    init(messageAPI: MessageAPIType = MessageAPI.default) {
+    init(messageAPI: MessageRepository = MessageRepositoryImpl.default) {
         self.messageAPI = messageAPI
     }
 

@@ -9,9 +9,9 @@ import Combine
 import Foundation
 import Moya
 
-// MARK: - MediaAPITargets
+// MARK: - NetworkMediaTargets
 
-private enum MediaAPITargets {
+private enum NetworkMediaTargets {
     struct GetStickerPacks: BaseAuthTargetType {
         var path: String { "v1/media/sticker-packs" }
         var method: Moya.Method { .get }
@@ -34,19 +34,19 @@ private enum MediaAPITargets {
     }
 }
 
-// MARK: - MediaAPIType
+// MARK: - NetworkMediaRepository
 
-protocol MediaAPIType {
+protocol NetworkMediaRepository {
     func getStickerPacks() -> AnyPublisher<[StickerPack], Error>
     func downloadStickerPack(id: Int, downloadURL: URL) -> AnyPublisher<Void, Error>
     func getStickerURL(stickerPackID: Int, stickerFile: String) -> URL?
     func getStickerURL(stickerPath: String) -> URL?
 }
 
-// MARK: - MediaAPI
+// MARK: - NetworkMediaRepositoryImpl
 
-final class MediaAPI: MediaAPIType {
-    static let `default` = MediaAPI()
+final class NetworkMediaRepositoryImpl: NetworkMediaRepository {
+    static let `default` = NetworkMediaRepositoryImpl()
 
     private let api: ApiType
 
@@ -56,14 +56,14 @@ final class MediaAPI: MediaAPIType {
 
     func getStickerPacks() -> AnyPublisher<[StickerPack], Error> {
         api.request(
-            target: MediaAPITargets.GetStickerPacks(),
+            target: NetworkMediaTargets.GetStickerPacks(),
             atKeyPath: "data"
         )
     }
 
     func downloadStickerPack(id: Int, downloadURL: URL) -> AnyPublisher<Void, Error> {
         api.request(
-            target: MediaAPITargets.DownloadStickerPacks(id: id, destinationURL: downloadURL)
+            target: NetworkMediaTargets.DownloadStickerPacks(id: id, destinationURL: downloadURL)
         )
     }
 

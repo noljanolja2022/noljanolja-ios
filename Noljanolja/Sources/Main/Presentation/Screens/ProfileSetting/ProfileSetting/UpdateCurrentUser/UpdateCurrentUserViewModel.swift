@@ -25,7 +25,7 @@ final class UpdateCurrentUserViewModel: ViewModel {
     @Published var image: UIImage?
     @Published var avatar: String?
     @Published var name: String?
-    @Published var country = CountryAPI().getDefaultCountry()
+    @Published var country = CountryRepositoryImpl().getDefaultCountry()
     @Published var phoneNumberText = ""
     @Published var dob: Date?
     @Published var gender: GenderType?
@@ -75,7 +75,7 @@ final class UpdateCurrentUserViewModel: ViewModel {
 
                 self?.avatar = user.avatar
                 self?.name = user.name
-                if let country = CountryAPI().getCountry(countryCode: (phoneNumber?.countryCode).flatMap { String($0) }) {
+                if let country = CountryRepositoryImpl().getCountry(countryCode: (phoneNumber?.countryCode).flatMap { String($0) }) {
                     self?.country = country
                 }
                 if let phoneNumberText = (phoneNumber?.nationalNumber).flatMap({ String($0) }) {

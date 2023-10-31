@@ -21,7 +21,7 @@ protocol AddFriendsHomeViewModelDelegate: AnyObject {}
 final class AddFriendsHomeViewModel: ViewModel {
     // MARK: State
 
-    @Published var country = CountryAPI().getDefaultCountry()
+    @Published var country = CountryRepositoryImpl().getDefaultCountry()
     @Published var phoneNumberText = ""
     @Published var name: String?
     @Published var qrImage: UIImage?

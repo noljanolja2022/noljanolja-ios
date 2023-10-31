@@ -22,10 +22,10 @@ final class CheckinUseCaseImpl: CheckinUseCase {
     static let shared = CheckinUseCaseImpl()
 
     private let localCheckinRepository: LocalCheckingRepository
-    private let networkCheckinRepository: CheckinRepository
+    private let networkCheckinRepository: NetworkCheckinRepository
 
     init(localCheckinRepository: LocalCheckingRepository = LocalCheckingRepositoryImpl.shared,
-         networkCheckinRepository: CheckinRepository = CheckinRepositoryImpl.shared) {
+         networkCheckinRepository: NetworkCheckinRepository = NetworkCheckinRepositoryImpl.shared) {
         self.localCheckinRepository = localCheckinRepository
         self.networkCheckinRepository = networkCheckinRepository
     }

@@ -28,7 +28,7 @@ final class SelectCountryViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    private let countryAPI: CountryAPIType
+    private let countryRepository: CountryRepository
     private weak var delegate: SelectCountryViewModelDelegate?
 
     // MARK: Private
@@ -40,10 +40,10 @@ final class SelectCountryViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(selectedCountry: Country,
-         countryAPI: CountryAPIType = CountryAPI(),
+         countryRepository: CountryRepository = CountryRepositoryImpl(),
          delegate: SelectCountryViewModelDelegate? = nil) {
         self.selectedCountry = selectedCountry
-        self.countryAPI = countryAPI
+        self.countryRepository = countryRepository
         self.delegate = delegate
         super.init()
 
@@ -79,7 +79,7 @@ final class SelectCountryViewModel: ViewModel {
                 guard let self else {
                     return Empty<[Country], Error>().eraseToAnyPublisher()
                 }
-                return self.countryAPI.getCountries()
+                return self.countryRepository.getCountries()
             }
             .sink { [weak self] result in
                 switch result {
