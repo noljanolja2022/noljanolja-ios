@@ -1,5 +1,5 @@
 //
-//  CoinExchangeRepository.swift
+//  CoinExchangeNetworkRepository.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 18/10/2023.
@@ -40,18 +40,18 @@ private enum CoinExchangeTargets {
     }
 }
 
-// MARK: - CoinExchangeRepository
+// MARK: - CoinExchangeNetworkRepository
 
-protocol CoinExchangeRepository {
+protocol CoinExchangeNetworkRepository {
     func getCoin() -> AnyPublisher<CoinModel, Error>
     func getCoinExchangeRate() -> AnyPublisher<CoinExchangeRate, Error>
     func convert(_ points: Int) -> AnyPublisher<CoinExchangeResult, Error>
 }
 
-// MARK: - CoinExchangeRepositoryImpl
+// MARK: - CoinExchangeNetworkRepositoryImpl
 
-final class CoinExchangeRepositoryImpl: CoinExchangeRepository {
-    static let shared: CoinExchangeRepository = CoinExchangeRepositoryImpl()
+final class CoinExchangeNetworkRepositoryImpl: CoinExchangeNetworkRepository {
+    static let shared: CoinExchangeNetworkRepository = CoinExchangeNetworkRepositoryImpl()
 
     private let api: ApiType
 

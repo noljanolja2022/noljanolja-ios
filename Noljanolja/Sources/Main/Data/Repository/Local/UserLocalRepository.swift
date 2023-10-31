@@ -1,5 +1,5 @@
 //
-//  LocalUserRepositoryImpl.swift
+//  UserLocalRepositoryImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 17/04/2023.
@@ -8,19 +8,19 @@
 import Combine
 import Foundation
 
-// MARK: - LocalUserRepository
+// MARK: - UserLocalRepository
 
-protocol LocalUserRepository {
+protocol UserLocalRepository {
     func saveCurrentUser(_ user: User)
     
     func getCurrentUser() -> User?
     func getCurrentUserPublisher() -> AnyPublisher<User, Never>
 }
 
-// MARK: - LocalUserRepositoryImpl
+// MARK: - UserLocalRepositoryImpl
 
-final class LocalUserRepositoryImpl: LocalUserRepository {
-    static let `default` = LocalUserRepositoryImpl()
+final class UserLocalRepositoryImpl: UserLocalRepository {
+    static let `default` = UserLocalRepositoryImpl()
 
     private let currentUserSubject = CurrentValueSubject<User?, Never>(nil)
 

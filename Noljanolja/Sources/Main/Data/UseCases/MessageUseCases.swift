@@ -43,29 +43,29 @@ extension MessageUseCases {
 final class MessageUseCasesImpl: MessageUseCases {
     static let `default` = MessageUseCasesImpl()
 
-    private let localUserRepository: LocalUserRepository
-    private let networkMessageRepository: NetworkMessageRepository
+    private let userLocalRepository: UserLocalRepository
+    private let messageNetworkRepository: MessageNetworkRepository
     private let conversationUseCases: ConversationUseCases
-    private let localMessageRepository: LocalMessageRepository
-    private let photoAssetAPI: PhotoAssetAPI
-    private let dataRepository: DataRepository
+    private let messageLocalRepository: MessageLocalRepository
+    private let photoAssetRepository: PhotoAssetRepository
+    private let dataNetworkRepository: DataNetworkRepository
 
-    private init(localUserRepository: LocalUserRepository = LocalUserRepositoryImpl.default,
-                 networkMessageRepository: NetworkMessageRepository = NetworkMessageRepositoryImpl.default,
+    private init(userLocalRepository: UserLocalRepository = UserLocalRepositoryImpl.default,
+                 messageNetworkRepository: MessageNetworkRepository = MessageNetworkRepositoryImpl.default,
                  conversationUseCases: ConversationUseCases = ConversationUseCasesImpl.default,
-                 localMessageRepository: LocalMessageRepository = LocalMessageRepositoryImpl.default,
-                 photoAssetAPI: PhotoAssetAPI = PhotoAssetAPI.default,
-                 dataRepository: DataRepository = DataRepositoryImpl.shared) {
-        self.localUserRepository = localUserRepository
-        self.networkMessageRepository = networkMessageRepository
+                 messageLocalRepository: MessageLocalRepository = MessageLocalRepositoryImpl.default,
+                 photoAssetRepository: PhotoAssetRepository = PhotoAssetRepository.default,
+                 dataNetworkRepository: DataNetworkRepository = DataNetworkRepositoryImpl.shared) {
+        self.userLocalRepository = userLocalRepository
+        self.messageNetworkRepository = messageNetworkRepository
         self.conversationUseCases = conversationUseCases
-        self.localMessageRepository = localMessageRepository
-        self.photoAssetAPI = photoAssetAPI
-        self.dataRepository = dataRepository
+        self.messageLocalRepository = messageLocalRepository
+        self.photoAssetRepository = photoAssetRepository
+        self.dataNetworkRepository = dataNetworkRepository
     }
 
     func getLocalMessages(conversationID: Int) -> AnyPublisher<[Message], Error> {
-        localMessageRepository
+        messageLocalRepository
             .observeMessages(conversationID: conversationID)
             .map {
                 $0
@@ -79,7 +79,7 @@ final class MessageUseCasesImpl: MessageUseCases {
     func getMessages(conversationID: Int,
                      beforeMessageID: Int?,
                      afterMessageID: Int?) -> AnyPublisher<[Message], Error> {
-        networkMessageRepository
+        messageNetworkRepository
             .getMessages(
                 conversationID: conversationID,
                 beforeMessageID: beforeMessageID,
@@ -87,7 +87,7 @@ final class MessageUseCasesImpl: MessageUseCases {
             )
             .receive(on: DispatchQueue.main) // NOTED: Do on serial queue to wait write then read
             .handleEvents(receiveOutput: { [weak self] in
-                self?.localMessageRepository.saveMessages($0)
+                self?.messageLocalRepository.saveMessages($0)
             })
             .eraseToAnyPublisher()
     }
@@ -112,7 +112,7 @@ final class MessageUseCasesImpl: MessageUseCases {
             .handleEvents(receiveOutput: {
                 $0?.forEach { [weak self] in
                     guard let data = $0.data else { return }
-                    try? self?.localMessageRepository
+                    try? self?.messageLocalRepository
                         .savePhoto(
                             conversationID: request.conversationID,
                             fileName: $0.name,
@@ -123,7 +123,7 @@ final class MessageUseCasesImpl: MessageUseCases {
 
         return attachmentsPublisher
             .withLatestFrom(
-                localUserRepository
+                userLocalRepository
                     .getCurrentUserPublisher()
                     .setFailureType(to: Error.self)
             ) { ($0, $1) }
@@ -141,18 +141,18 @@ final class MessageUseCasesImpl: MessageUseCases {
             }
             .receive(on: DispatchQueue.main) // NOTED: Do on serial queue to wait write then read
             .handleEvents(receiveOutput: { [weak self] in
-                self?.localMessageRepository.saveMessageParameters([$0])
+                self?.messageLocalRepository.saveMessageParameters([$0])
             })
             .flatMapLatest { [weak self] param -> AnyPublisher<Message, Error> in
                 guard let self else {
                     return Empty<Message, Error>().eraseToAnyPublisher()
                 }
-                return self.networkMessageRepository
+                return self.messageNetworkRepository
                     .sendMessage(param: param)
             }
             .receive(on: DispatchQueue.main) // NOTED: Do on serial queue to wait write then read
             .handleEvents(receiveOutput: { [weak self] in
-                self?.localMessageRepository.saveMessages([$0])
+                self?.messageLocalRepository.saveMessages([$0])
             })
             .eraseToAnyPublisher()
     }
@@ -200,12 +200,12 @@ final class MessageUseCasesImpl: MessageUseCases {
                 guard let self else {
                     return Empty<[Message], Error>().eraseToAnyPublisher()
                 }
-                return self.networkMessageRepository
+                return self.messageNetworkRepository
                     .shareMessage(param: param)
             }
             .receive(on: DispatchQueue.main) // NOTED: Do on serial queue to wait write then read
             .handleEvents(receiveOutput: { [weak self] in
-                self?.localMessageRepository.saveMessages($0)
+                self?.messageLocalRepository.saveMessages($0)
             })
             .eraseToAnyPublisher()
     }
@@ -216,7 +216,7 @@ final class MessageUseCasesImpl: MessageUseCases {
                 $0.getPhotoURL(conversationID: message.conversationID)
             }
             .compactMap {
-                self.dataRepository.getData(url: $0)
+                self.dataNetworkRepository.getData(url: $0)
                     .map {
                         let id = UUID().uuidString
                         return AttachmentParam(
@@ -236,7 +236,7 @@ final class MessageUseCasesImpl: MessageUseCases {
                 guard let self else {
                     return Empty<[Message], Error>().eraseToAnyPublisher()
                 }
-                return self.localUserRepository
+                return self.userLocalRepository
                     .getCurrentUserPublisher()
                     .setFailureType(to: Error.self)
                     .flatMapLatest { [weak self] currentUser in
@@ -250,7 +250,7 @@ final class MessageUseCasesImpl: MessageUseCases {
                                     participants: [user]
                                 )
                                 .flatMapLatest { conversation in
-                                    self.networkMessageRepository.sendMessage(
+                                    self.messageNetworkRepository.sendMessage(
                                         param: SendMessageParam(
                                             currentUser: currentUser,
                                             localID: UUID().uuidString,
@@ -276,24 +276,24 @@ final class MessageUseCasesImpl: MessageUseCases {
     }
 
     func deleteMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error> {
-        networkMessageRepository
+        messageNetworkRepository
             .deleteMessage(conversationID: conversationID, messageID: messageID)
             .handleEvents(receiveOutput: { [weak self] in
-                self?.localMessageRepository.deleteMessage(conversationID: conversationID, messageID: messageID)
+                self?.messageLocalRepository.deleteMessage(conversationID: conversationID, messageID: messageID)
             })
             .eraseToAnyPublisher()
     }
 
     func seenMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error> {
-        networkMessageRepository
+        messageNetworkRepository
             .seenMessage(conversationID: conversationID, messageID: messageID)
     }
 
     func getPhotoURL(conversationID: Int, attachmentId: String, fileName: String?) -> URL? {
         let localStickerURL = fileName.flatMap {
-            localMessageRepository.getPhotoURL(conversationID: conversationID, fileName: $0)
+            messageLocalRepository.getPhotoURL(conversationID: conversationID, fileName: $0)
         }
-        let remoteStickerURL = networkMessageRepository.getPhotoURL(conversationId: conversationID, attachmentId: attachmentId)
+        let remoteStickerURL = messageNetworkRepository.getPhotoURL(conversationId: conversationID, attachmentId: attachmentId)
         return localStickerURL ?? remoteStickerURL
     }
 }
@@ -321,7 +321,7 @@ extension MessageUseCasesImpl {
             }
         case let .photos(photos):
             if let photos {
-                return photoAssetAPI
+                return photoAssetRepository
                     .requestImage(photos)
                     .map { photoModels -> [AttachmentParam]? in
                         photoModels?.map { photoModel -> AttachmentParam in

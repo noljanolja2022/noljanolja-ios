@@ -21,10 +21,10 @@ protocol VideoUseCases {
 final class VideoUseCasesImpl: VideoUseCases {
     static let shared = VideoUseCasesImpl()
 
-    private let videoRepository: VideoRepository
+    private let videoNetworkRepository: VideoNetworkRepository
 
-    init(videoRepository: VideoRepository = VideoRepositoryImpl.shared) {
-        self.videoRepository = videoRepository
+    init(videoNetworkRepository: VideoNetworkRepository = VideoNetworkRepositoryImpl.shared) {
+        self.videoNetworkRepository = videoNetworkRepository
     }
 
     func reactPromote(videoId: String) -> AnyPublisher<Void, Error> {
@@ -37,7 +37,7 @@ final class VideoUseCasesImpl: VideoUseCases {
                 return Fail<Void, Error>(error: CommonError.informationNotFound(message: "Access token not found"))
                     .eraseToAnyPublisher()
             }
-            return self.videoRepository.reactPromote(videoId: videoId, youtubeToken: accessTokenString)
+            return self.videoNetworkRepository.reactPromote(videoId: videoId, youtubeToken: accessTokenString)
         }
 
         return GIDSignIn.sharedInstance.signInIfNeededCombine(additionalScopes: [GIDSignInScope.youtube])
@@ -57,7 +57,7 @@ final class VideoUseCasesImpl: VideoUseCases {
                 return Fail<VideoComment, Error>(error: CommonError.informationNotFound(message: "Access token not found"))
                     .eraseToAnyPublisher()
             }
-            return self.videoRepository.postVideoComment(videoId: videoId, comment: comment, youtubeToken: accessTokenString)
+            return self.videoNetworkRepository.postVideoComment(videoId: videoId, comment: comment, youtubeToken: accessTokenString)
         }
 
         return GIDSignIn.sharedInstance.signInIfNeededCombine(additionalScopes: [GIDSignInScope.youtube])

@@ -23,14 +23,14 @@ final class ContactUseCasesImpl: ContactUseCases {
 
     private let contactNetworkRepository: ContactNetworkRepository
     private let contactLocalRepository: ContactLocalRepository
-    private let userAPI: UserAPIType
+    private let userNetworkRepository: UserNetworkRepository
 
     private init(contactNetworkRepository: ContactNetworkRepository = ContactNetworkRepositoryImpl.default,
                  contactLocalRepository: ContactLocalRepository = ContactLocalRepositoryImpl.default,
-                 userAPI: UserAPIType = UserAPI.default) {
+                 userNetworkRepository: UserNetworkRepository = UserNetworkRepositoryImpl.default) {
         self.contactNetworkRepository = contactNetworkRepository
         self.contactLocalRepository = contactLocalRepository
-        self.userAPI = userAPI
+        self.userNetworkRepository = userNetworkRepository
     }
 
     func getAuthorizationStatus() -> AnyPublisher<Void, Error> {
@@ -78,14 +78,14 @@ extension ContactUseCasesImpl {
                 guard let self else {
                     return Fail(error: CommonError.captureSelfNotFound).eraseToAnyPublisher()
                 }
-                return self.userAPI
+                return self.userNetworkRepository
                     .syncContacts(contacts.filter { !$0.phones.isEmpty })
             }
             .eraseToAnyPublisher()
     }
 
     private func getRemoteContacts(page: Int, pageSize: Int) -> AnyPublisher<[User], Error> {
-        userAPI
+        userNetworkRepository
             .getContact(page: page, pageSize: pageSize)
             .handleEvents(receiveOutput: { [weak self] in
                 self?.contactLocalRepository.saveContact($0)

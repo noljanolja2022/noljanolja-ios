@@ -20,27 +20,27 @@ final class DeleteCacheUseCase: DeleteCacheUseCaseProtocol {
 
     private let contactLocalRepository: ContactLocalRepository
     private let conversationLocalRepository: ConversationLocalRepository
-    private let localDetailConversationRepository: LocalDetailConversationRepository
-    private let localMediaRepository: LocalMediaRepository
-    private let localMessageRepository: LocalMessageRepository
+    private let detailConversationLocalRepository: DetailConversationLocalRepository
+    private let mediaLocalRepository: MediaLocalRepository
+    private let messageLocalRepository: MessageLocalRepository
 
     init(contactLocalRepository: ContactLocalRepository = ContactLocalRepositoryImpl.default,
          conversationLocalRepository: ConversationLocalRepository = ConversationLocalRepositoryImpl.default,
-         localDetailConversationRepository: LocalDetailConversationRepository = LocalDetailConversationRepositoryImpl.default,
-         localMediaRepository: LocalMediaRepository = LocalMediaRepositoryImpl.default,
-         localMessageRepository: LocalMessageRepository = LocalMessageRepositoryImpl.default) {
+         detailConversationLocalRepository: DetailConversationLocalRepository = DetailConversationLocalRepositoryImpl.default,
+         mediaLocalRepository: MediaLocalRepository = MediaLocalRepositoryImpl.default,
+         messageLocalRepository: MessageLocalRepository = MessageLocalRepositoryImpl.default) {
         self.contactLocalRepository = contactLocalRepository
         self.conversationLocalRepository = conversationLocalRepository
-        self.localDetailConversationRepository = localDetailConversationRepository
-        self.localMediaRepository = localMediaRepository
-        self.localMessageRepository = localMessageRepository
+        self.detailConversationLocalRepository = detailConversationLocalRepository
+        self.mediaLocalRepository = mediaLocalRepository
+        self.messageLocalRepository = messageLocalRepository
     }
 
     func deleteCache() {
         contactLocalRepository.deleteAll()
         conversationLocalRepository.deleteAll()
-        localDetailConversationRepository.deleteAll()
-        localMediaRepository.deleteAll()
-        localMessageRepository.deleteAll()
+        detailConversationLocalRepository.deleteAll()
+        mediaLocalRepository.deleteAll()
+        messageLocalRepository.deleteAll()
     }
 }

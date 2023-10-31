@@ -1,5 +1,5 @@
 //
-//  ConversationParticipantRepositoryImpl.swift
+//  ConversationParticipantNetworkRepositoryImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 08/04/2023.
@@ -58,18 +58,18 @@ private enum ConversationParticipantTargets {
     }
 }
 
-// MARK: - ConversationParticipantRepository
+// MARK: - ConversationParticipantNetworkRepository
 
-protocol ConversationParticipantRepository {
+protocol ConversationParticipantNetworkRepository {
     func addParticipant(conversationID: Int, participants: [User]) -> AnyPublisher<Void, Error>
     func removeParticipant(conversationID: Int, participants: [User]) -> AnyPublisher<Void, Error>
     func assignAdmin(conversationID: Int, admin: User) -> AnyPublisher<Void, Error>
 }
 
-// MARK: - ConversationParticipantRepositoryImpl
+// MARK: - ConversationParticipantNetworkRepositoryImpl
 
-final class ConversationParticipantRepositoryImpl: ConversationParticipantRepository {
-    static let `default` = ConversationParticipantRepositoryImpl()
+final class ConversationParticipantNetworkRepositoryImpl: ConversationParticipantNetworkRepository {
+    static let `default` = ConversationParticipantNetworkRepositoryImpl()
 
     private let api: ApiType
 

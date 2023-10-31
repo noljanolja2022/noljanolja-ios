@@ -1,5 +1,5 @@
 //
-//  GiftsAPI.swift
+//  GiftsNetworkRepositoryImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 12/06/2023.
@@ -9,9 +9,9 @@ import Combine
 import Foundation
 import Moya
 
-// MARK: - GiftsAPITargets
+// MARK: - GiftsTargets
 
-private enum GiftsAPITargets {
+private enum GiftsTargets {
     struct GetMyGifts: BaseAuthTargetType {
         var path: String { "v1/gifts/me" }
         let method: Moya.Method = .get
@@ -88,9 +88,9 @@ private enum GiftsAPITargets {
     }
 }
 
-// MARK: - GiftsAPIType
+// MARK: - GiftsNetworkRepository
 
-protocol GiftsAPIType {
+protocol GiftsNetworkRepository {
     func getMyGifts(categoryId: Int?, brandId: Int?, page: Int, pageSize: Int?) -> AnyPublisher<PaginationResponse<[MyCoupon]>, Error>
     func getGiftsInShop(categoryId: Int?, brandId: Int?, name: String?, page: Int, pageSize: Int?) -> AnyPublisher<PaginationResponse<[Coupon]>, Error>
     func getGiftsBrands(page: Int, pageSize: Int) -> AnyPublisher<[CouponBrand], Error>
@@ -98,7 +98,7 @@ protocol GiftsAPIType {
     func buyCoupon(_ id: Int) -> AnyPublisher<MyCoupon, Error>
 }
 
-extension GiftsAPIType {
+extension GiftsNetworkRepository {
     func getMyGifts(categoryId: Int? = nil,
                     brandId: Int? = nil,
                     page: Int,
@@ -115,10 +115,10 @@ extension GiftsAPIType {
     }
 }
 
-// MARK: - GiftsAPI
+// MARK: - GiftsNetworkRepositoryImpl
 
-final class GiftsAPI: GiftsAPIType {
-    static let `default` = GiftsAPI()
+final class GiftsNetworkRepositoryImpl: GiftsNetworkRepository {
+    static let `default` = GiftsNetworkRepositoryImpl()
 
     private let api: ApiType
 
@@ -128,7 +128,7 @@ final class GiftsAPI: GiftsAPIType {
 
     func getMyGifts(categoryId: Int?, brandId: Int?, page: Int, pageSize: Int?) -> AnyPublisher<PaginationResponse<[MyCoupon]>, Error> {
         api.request(
-            target: GiftsAPITargets.GetMyGifts(
+            target: GiftsTargets.GetMyGifts(
                 categoryId: categoryId,
                 brandId: brandId,
                 page: page,
@@ -139,7 +139,7 @@ final class GiftsAPI: GiftsAPIType {
 
     func getGiftsInShop(categoryId: Int?, brandId: Int?, name: String?, page: Int, pageSize: Int?) -> AnyPublisher<PaginationResponse<[Coupon]>, Error> {
         api.request(
-            target: GiftsAPITargets.GetGiftsInShop(
+            target: GiftsTargets.GetGiftsInShop(
                 categoryId: categoryId,
                 brandId: brandId,
                 name: name,
@@ -151,7 +151,7 @@ final class GiftsAPI: GiftsAPIType {
 
     func getGiftsBrands(page: Int, pageSize: Int) -> AnyPublisher<[CouponBrand], Error> {
         api.request(
-            target: GiftsAPITargets.GetGiftsBrands(
+            target: GiftsTargets.GetGiftsBrands(
                 page: page,
                 pageSize: pageSize
             ),
@@ -161,14 +161,14 @@ final class GiftsAPI: GiftsAPIType {
 
     func getGiftsCategories() -> AnyPublisher<[CouponCategory], Error> {
         api.request(
-            target: GiftsAPITargets.GetGiftsCategories(),
+            target: GiftsTargets.GetGiftsCategories(),
             atKeyPath: "data"
         )
     }
 
     func buyCoupon(_ id: Int) -> AnyPublisher<MyCoupon, Error> {
         api.request(
-            target: GiftsAPITargets.BuyCoupon(couponId: id),
+            target: GiftsTargets.BuyCoupon(couponId: id),
             atKeyPath: "data"
         )
     }

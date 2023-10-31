@@ -1,5 +1,5 @@
 //
-//  CheckinUseCase.swift
+//  CheckinUseCases.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 31/07/2023.
@@ -9,29 +9,29 @@ import Combine
 import CombineExt
 import Foundation
 
-// MARK: - CheckinUseCase
+// MARK: - CheckinUseCases
 
-protocol CheckinUseCase {
+protocol CheckinUseCases {
     func getCheckinProgresses() -> AnyPublisher<[CheckinProgress], Error>
     func dailyCheckin() -> AnyPublisher<String, Error>
 }
 
-// MARK: - CheckinUseCaseImpl
+// MARK: - CheckinUseCasesImpl
 
-final class CheckinUseCaseImpl: CheckinUseCase {
-    static let shared = CheckinUseCaseImpl()
+final class CheckinUseCasesImpl: CheckinUseCases {
+    static let shared = CheckinUseCasesImpl()
 
-    private let localCheckinRepository: LocalCheckingRepository
+    private let checkinLocalRepository: CheckingLocalRepository
     private let checkinNetworkRepository: CheckinNetworkRepository
 
-    init(localCheckinRepository: LocalCheckingRepository = LocalCheckingRepositoryImpl.shared,
+    init(checkinLocalRepository: CheckingLocalRepository = CheckingLocalRepositoryImpl.shared,
          checkinNetworkRepository: CheckinNetworkRepository = CheckinNetworkRepositoryImpl.shared) {
-        self.localCheckinRepository = localCheckinRepository
+        self.checkinLocalRepository = checkinLocalRepository
         self.checkinNetworkRepository = checkinNetworkRepository
     }
 
     func getCheckinProgresses() -> AnyPublisher<[CheckinProgress], Error> {
-        localCheckinRepository
+        checkinLocalRepository
             .getCheckinProgresses()
             .setFailureType(to: Error.self)
             .flatMapLatest { [weak self] checkinProgresses -> AnyPublisher<[CheckinProgress], Error> in
@@ -46,7 +46,7 @@ final class CheckinUseCaseImpl: CheckinUseCase {
                     return self.checkinNetworkRepository
                         .getCheckinProgresses()
                         .handleEvents(receiveOutput: { [weak self] in
-                            self?.localCheckinRepository.updateCheckinProgresses($0)
+                            self?.checkinLocalRepository.updateCheckinProgresses($0)
                         })
                         .eraseToAnyPublisher()
                 }
@@ -64,7 +64,7 @@ final class CheckinUseCaseImpl: CheckinUseCase {
                 return self.checkinNetworkRepository
                     .getCheckinProgresses()
                     .handleEvents(receiveOutput: { [weak self] in
-                        self?.localCheckinRepository.updateCheckinProgresses($0)
+                        self?.checkinLocalRepository.updateCheckinProgresses($0)
                     })
                     .map { _ in message }
                     .eraseToAnyPublisher()

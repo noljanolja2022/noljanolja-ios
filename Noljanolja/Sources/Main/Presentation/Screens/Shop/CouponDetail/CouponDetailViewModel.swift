@@ -32,7 +32,7 @@ final class CouponDetailViewModel: ViewModel {
     // MARK: Dependencies
 
     private let couponDetailInputTypeSubject: CurrentValueSubject<CouponDetailInputType, Never>
-    private let giftsApi: GiftsAPIType
+    private let giftsApi: GiftsNetworkRepository
     private let memberInfoUseCase: MemberInfoUseCases
     private weak var delegate: CouponDetailViewModelDelegate?
 
@@ -41,7 +41,7 @@ final class CouponDetailViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(couponDetailInputType: CouponDetailInputType,
-         giftsApi: GiftsAPIType = GiftsAPI.default,
+         giftsApi: GiftsNetworkRepository = GiftsNetworkRepositoryImpl.default,
          memberInfoUseCase: MemberInfoUseCases = MemberInfoUseCasesImpl.default,
          delegate: CouponDetailViewModelDelegate? = nil) {
         self.couponDetailInputTypeSubject = CurrentValueSubject<CouponDetailInputType, Never>(couponDetailInputType)

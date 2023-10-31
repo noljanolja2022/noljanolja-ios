@@ -1,5 +1,5 @@
 //
-//  LoyaltyAPI.swift
+//  LoyaltyNetworkNetworkRepository.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 14/05/2023.
@@ -9,9 +9,9 @@ import Combine
 import Foundation
 import Moya
 
-// MARK: - LoyaltyAPITargets
+// MARK: - LoyaltyTargets
 
-private enum LoyaltyAPITargets {
+private enum LoyaltyTargets {
     struct GetLoyaltyMemberInfo: BaseAuthTargetType {
         var path: String { "v1/loyalty/me" }
         let method: Moya.Method = .get
@@ -43,16 +43,16 @@ private enum LoyaltyAPITargets {
     }
 }
 
-// MARK: - LoyaltyAPIType
+// MARK: - LoyaltyNetworkRepository
 
-protocol LoyaltyAPIType {
+protocol LoyaltyNetworkRepository {
     func getLoyaltyMemberInfo() -> AnyPublisher<LoyaltyMemberInfo, Error>
     func getTransactionHistory(lastOffsetDate: Date?,
                                type: TransactionType,
                                monthYearDate: Date?) -> AnyPublisher<[Transaction], Error>
 }
 
-extension LoyaltyAPIType {
+extension LoyaltyNetworkRepository {
     func getTransactionHistory(lastOffsetDate: Date? = nil,
                                type: TransactionType = .all,
                                monthYearDate: Date? = nil) -> AnyPublisher<[Transaction], Error> {
@@ -64,10 +64,10 @@ extension LoyaltyAPIType {
     }
 }
 
-// MARK: - LoyaltyAPI
+// MARK: - LoyaltyNetworkNetworkRepository
 
-final class LoyaltyAPI: LoyaltyAPIType {
-    static let `default` = LoyaltyAPI()
+final class LoyaltyNetworkNetworkRepository: LoyaltyNetworkRepository {
+    static let `default` = LoyaltyNetworkNetworkRepository()
 
     private let api: ApiType
 
@@ -77,7 +77,7 @@ final class LoyaltyAPI: LoyaltyAPIType {
 
     func getLoyaltyMemberInfo() -> AnyPublisher<LoyaltyMemberInfo, Error> {
         api.request(
-            target: LoyaltyAPITargets.GetLoyaltyMemberInfo(),
+            target: LoyaltyTargets.GetLoyaltyMemberInfo(),
             atKeyPath: "data"
         )
     }
@@ -87,7 +87,7 @@ final class LoyaltyAPI: LoyaltyAPIType {
                                monthYearDate: Date?) -> AnyPublisher<[Transaction], Error> {
         api
             .request(
-                target: LoyaltyAPITargets.GetTransactionHistory(
+                target: LoyaltyTargets.GetTransactionHistory(
                     lastOffsetDate: lastOffsetDate,
                     type: type,
                     monthYearDate: monthYearDate

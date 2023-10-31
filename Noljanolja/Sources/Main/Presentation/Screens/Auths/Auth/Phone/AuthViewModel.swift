@@ -21,7 +21,7 @@ protocol AuthViewModelDelegate: AnyObject {
 final class AuthViewModel: ViewModel {
     // MARK: State
 
-    @Published var country = CountryRepositoryImpl().getDefaultCountry()
+    @Published var country = CountryNetworkRepositoryImpl().getDefaultCountry()
     @Published var phoneNumberText = ""
     @Published var isProgressHUDShowing = false
     @Published var alertState: AlertState<Bool>?

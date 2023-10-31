@@ -19,17 +19,17 @@ protocol MessageReactionUseCases {
 final class MessageReactionUseCasesImpl: MessageReactionUseCases {
     static let shared = MessageReactionUseCasesImpl()
 
-    private let networkMessageRepository: NetworkMessageRepository
+    private let messageNetworkRepository: MessageNetworkRepository
 
-    init(networkMessageRepository: NetworkMessageRepository = NetworkMessageRepositoryImpl.default) {
-        self.networkMessageRepository = networkMessageRepository
+    init(messageNetworkRepository: MessageNetworkRepository = MessageNetworkRepositoryImpl.default) {
+        self.messageNetworkRepository = messageNetworkRepository
     }
 
     func reactMessage(message: Message, reactionId: Int) -> AnyPublisher<Void, Error> {
         guard let messageId = message.id else {
             return Fail(error: CommonError.unknown).eraseToAnyPublisher()
         }
-        return networkMessageRepository
+        return messageNetworkRepository
             .reactMessage(
                 conversationID: message.conversationID,
                 messageID: messageId,

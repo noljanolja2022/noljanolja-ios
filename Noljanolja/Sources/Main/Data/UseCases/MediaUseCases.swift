@@ -25,23 +25,23 @@ protocol MediaUseCases {
 final class MediaUseCasesImpl: MediaUseCases {
     static let `default` = MediaUseCasesImpl()
 
-    private let networkMediaRepository: NetworkMediaRepository
-    private let localMediaRepository: LocalMediaRepository
+    private let mediaNetworkRepository: MediaNetworkRepository
+    private let mediaLocalRepository: MediaLocalRepository
 
-    private init(networkMediaRepository: NetworkMediaRepository = NetworkMediaRepositoryImpl.default,
-                 localMediaRepository: LocalMediaRepository = LocalMediaRepositoryImpl.default) {
-        self.networkMediaRepository = networkMediaRepository
-        self.localMediaRepository = localMediaRepository
+    private init(mediaNetworkRepository: MediaNetworkRepository = MediaNetworkRepositoryImpl.default,
+                 mediaLocalRepository: MediaLocalRepository = MediaLocalRepositoryImpl.default) {
+        self.mediaNetworkRepository = mediaNetworkRepository
+        self.mediaLocalRepository = mediaLocalRepository
     }
 
     func getStickerPacks() -> AnyPublisher<[StickerPack], Error> {
-        let localStickerPacks = localMediaRepository.observeStickerPacks()
+        let localStickerPacks = mediaLocalRepository.observeStickerPacks()
             .filter { !$0.isEmpty }
 
-        let remoteStickerPacks = networkMediaRepository
+        let remoteStickerPacks = mediaNetworkRepository
             .getStickerPacks()
             .handleEvents(receiveOutput: { [weak self] in
-                self?.localMediaRepository.saveStickerPacks($0)
+                self?.mediaLocalRepository.saveStickerPacks($0)
             })
 
         return Publishers.Merge(localStickerPacks, remoteStickerPacks)
@@ -50,27 +50,27 @@ final class MediaUseCasesImpl: MediaUseCases {
     }
 
     func downloadStickerPack(id: Int) -> AnyPublisher<Void, Error> {
-        let downloadURL = localMediaRepository.generateDownloadStickerPackURL(id: id)
-        return networkMediaRepository.downloadStickerPack(id: id, downloadURL: downloadURL)
+        let downloadURL = mediaLocalRepository.generateDownloadStickerPackURL(id: id)
+        return mediaNetworkRepository.downloadStickerPack(id: id, downloadURL: downloadURL)
             .tryMap { [weak self] _ in
-                try self?.localMediaRepository.saveStickerPack(id: id, source: downloadURL)
+                try self?.mediaLocalRepository.saveStickerPack(id: id, source: downloadURL)
             }
             .eraseToAnyPublisher()
     }
 
     func getLocalStickerPackURL(id: Int) -> URL? {
-        localMediaRepository.getStickerPackURL(id: id)
+        mediaLocalRepository.getStickerPackURL(id: id)
     }
 
     func getStickerURL(stickerPackID: Int, stickerFile: String) -> URL? {
-        let localStickerURL = localMediaRepository.getStickerURL(stickerPackID: stickerPackID, stickerFile: stickerFile)
-        let remoteStickerURL = networkMediaRepository.getStickerURL(stickerPackID: stickerPackID, stickerFile: stickerFile)
+        let localStickerURL = mediaLocalRepository.getStickerURL(stickerPackID: stickerPackID, stickerFile: stickerFile)
+        let remoteStickerURL = mediaNetworkRepository.getStickerURL(stickerPackID: stickerPackID, stickerFile: stickerFile)
         return localStickerURL ?? remoteStickerURL
     }
 
     func getStickerURL(stickerPath: String) -> URL? {
-        let localStickerURL = localMediaRepository.getStickerURL(stickerPath: stickerPath)
-        let remoteStickerURL = networkMediaRepository.getStickerURL(stickerPath: stickerPath)
+        let localStickerURL = mediaLocalRepository.getStickerURL(stickerPath: stickerPath)
+        let remoteStickerURL = mediaNetworkRepository.getStickerURL(stickerPath: stickerPath)
         return localStickerURL ?? remoteStickerURL
     }
 }

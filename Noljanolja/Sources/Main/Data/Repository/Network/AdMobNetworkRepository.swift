@@ -1,5 +1,5 @@
 //
-//  AdMobRepository.swift
+//  AdMobNetworkRepository.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 23/10/2023.
@@ -31,16 +31,16 @@ enum AdMobConfigs {
     }
 }
 
-// MARK: - AdMobRepository
+// MARK: - AdMobNetworkRepository
 
-protocol AdMobRepository {
+protocol AdMobNetworkRepository {
     func loadRewardedAd() -> Future<GADRewardedAd, Error>
 }
 
-// MARK: - AdMobRepositoryImpl
+// MARK: - AdMobNetworkRepositoryImpl
 
-final class AdMobRepositoryImpl: AdMobRepository {
-    static let shared: AdMobRepository = AdMobRepositoryImpl()
+final class AdMobNetworkRepositoryImpl: AdMobNetworkRepository {
+    static let shared: AdMobNetworkRepository = AdMobNetworkRepositoryImpl()
     
     func loadRewardedAd() -> Future<GADRewardedAd, Error> {
         Future { promise in

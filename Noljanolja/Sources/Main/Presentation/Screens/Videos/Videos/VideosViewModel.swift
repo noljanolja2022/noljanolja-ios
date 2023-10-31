@@ -32,7 +32,7 @@ final class VideosViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    private let videoRepository: VideoRepository
+    private let videoNetworkRepository: VideoNetworkRepository
     private weak var delegate: VideosViewModelDelegate?
 
     // MARK: Private
@@ -44,9 +44,9 @@ final class VideosViewModel: ViewModel {
     private let pageSize = 20
     private var cancellables = Set<AnyCancellable>()
 
-    init(videoRepository: VideoRepository = VideoRepositoryImpl.shared,
+    init(videoNetworkRepository: VideoNetworkRepository = VideoNetworkRepositoryImpl.shared,
          delegate: VideosViewModelDelegate? = nil) {
-        self.videoRepository = videoRepository
+        self.videoNetworkRepository = videoNetworkRepository
         self.delegate = delegate
         super.init()
 
@@ -108,7 +108,7 @@ final class VideosViewModel: ViewModel {
                 guard let self else {
                     return Empty<[Video], Error>().eraseToAnyPublisher()
                 }
-                return self.videoRepository.getWatchingVideos()
+                return self.videoNetworkRepository.getWatchingVideos()
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
@@ -124,13 +124,13 @@ final class VideosViewModel: ViewModel {
     }
 
     private func getDatas() -> AnyPublisher<VideosModel, Error> {
-        let highlightVideos = videoRepository
+        let highlightVideos = videoNetworkRepository
             .getVideos(page: 1, pageSize: pageSize, isHighlighted: true)
             .mapToResult()
-        let watchingVideos = videoRepository
+        let watchingVideos = videoNetworkRepository
             .getWatchingVideos()
             .mapToResult()
-        let trendingVideos = videoRepository
+        let trendingVideos = videoNetworkRepository
             .getTrendingVideos(duration: .day, limit: pageSize)
             .mapToResult()
 

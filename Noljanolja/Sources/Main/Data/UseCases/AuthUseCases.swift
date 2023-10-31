@@ -55,8 +55,8 @@ final class AuthUseCasesImpl: NSObject, AuthUseCases {
     private lazy var localAuthRepository = AuthLocalRepositoryImpl.default
     private lazy var contactLocalRepository: ContactLocalRepository = ContactLocalRepositoryImpl.default
     private lazy var conversationLocalRepository: ConversationLocalRepository = ConversationLocalRepositoryImpl.default
-    private lazy var localDetailConversationRepository: LocalDetailConversationRepository = LocalDetailConversationRepositoryImpl.default
-    private lazy var localMessageRepository: LocalMessageRepository = LocalMessageRepositoryImpl.default
+    private lazy var detailConversationLocalRepository: DetailConversationLocalRepository = DetailConversationLocalRepositoryImpl.default
+    private lazy var messageLocalRepository: MessageLocalRepository = MessageLocalRepositoryImpl.default
 
     lazy var isAuthenticated = CurrentValueSubject<Bool, Never>(localAuthRepository.getToken() != nil)
 
@@ -253,8 +253,8 @@ final class AuthUseCasesImpl: NSObject, AuthUseCases {
                 self.localAuthRepository.clearToken()
                 self.contactLocalRepository.deleteAll()
                 self.conversationLocalRepository.deleteAll()
-                self.localDetailConversationRepository.deleteAll()
-                self.localMessageRepository.deleteAll()
+                self.detailConversationLocalRepository.deleteAll()
+                self.messageLocalRepository.deleteAll()
                 self.isAuthenticated.send(false)
             })
             .eraseToAnyPublisher()

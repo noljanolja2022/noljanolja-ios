@@ -1,5 +1,5 @@
 //
-//  NetworkDataRepository.swift
+//  NetworkDataNetworkRepository.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 18/07/2023.
@@ -25,16 +25,16 @@ private enum DataTargets {
     }
 }
 
-// MARK: - DataRepository
+// MARK: - DataNetworkRepository
 
-protocol DataRepository {
+protocol DataNetworkRepository {
     func getData(url: URL) -> AnyPublisher<Data, Error>
 }
 
-// MARK: - DataRepositoryImpl
+// MARK: - DataNetworkRepositoryImpl
 
-final class DataRepositoryImpl: DataRepository {
-    static let shared = DataRepositoryImpl()
+final class DataNetworkRepositoryImpl: DataNetworkRepository {
+    static let shared = DataNetworkRepositoryImpl()
 
     private let api: ApiType
 

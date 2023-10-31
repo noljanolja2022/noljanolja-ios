@@ -1,5 +1,5 @@
 //
-//  VideoRepositoryImpl.swift
+//  VideoNetworkRepositoryImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 21/04/2023.
@@ -141,9 +141,9 @@ private enum VideoTargets {
     }
 }
 
-// MARK: - VideoRepository
+// MARK: - VideoNetworkRepository
 
-protocol VideoRepository {
+protocol VideoNetworkRepository {
     func getVideos(query: String?,
                    page: Int,
                    pageSize: Int?,
@@ -160,7 +160,7 @@ protocol VideoRepository {
     func reactPromote(videoId: String, youtubeToken: String) -> AnyPublisher<Void, Error>
 }
 
-extension VideoRepository {
+extension VideoNetworkRepository {
     func getVideos(query: String? = nil,
                    page: Int,
                    pageSize: Int? = nil,
@@ -178,10 +178,10 @@ extension VideoRepository {
     }
 }
 
-// MARK: - VideoRepositoryImpl
+// MARK: - VideoNetworkRepositoryImpl
 
-final class VideoRepositoryImpl: VideoRepository {
-    static let shared = VideoRepositoryImpl()
+final class VideoNetworkRepositoryImpl: VideoNetworkRepository {
+    static let shared = VideoNetworkRepositoryImpl()
 
     private let api: ApiType
 

@@ -29,16 +29,16 @@ final class UncompleteVideosViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    private let videoRepository: VideoRepository
+    private let videoNetworkRepository: VideoNetworkRepository
     private weak var delegate: UncompleteVideosViewModelDelegate?
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(videoRepository: VideoRepository = VideoRepositoryImpl.shared,
+    init(videoNetworkRepository: VideoNetworkRepository = VideoNetworkRepositoryImpl.shared,
          delegate: UncompleteVideosViewModelDelegate? = nil) {
-        self.videoRepository = videoRepository
+        self.videoNetworkRepository = videoNetworkRepository
         self.delegate = delegate
         super.init()
 
@@ -54,7 +54,7 @@ final class UncompleteVideosViewModel: ViewModel {
                 guard let self else {
                     return Fail<[Video], Error>(error: CommonError.captureSelfNotFound).eraseToAnyPublisher()
                 }
-                return self.videoRepository.getWatchingVideos()
+                return self.videoNetworkRepository.getWatchingVideos()
             }
             .receive(on: DispatchQueue.main)
             .sink { result in

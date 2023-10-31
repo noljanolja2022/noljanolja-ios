@@ -19,19 +19,19 @@ protocol ReactionIconsUseCasesProtocol {
 final class ReactionIconsUseCases: ReactionIconsUseCasesProtocol {
     static let `default` = ReactionIconsUseCases()
 
-    private let reactionIconsRemoteRepository: ReactionIconsRemoteRepositoryProtocol
+    private let reactionIconsNetworkRepository: ReactionIconsNetworkRepository
     private let reactionIconsLocalRepository: ReactionIconsLocalRepository
 
-    init(reactionIconsRemoteRepository: ReactionIconsRemoteRepositoryProtocol = ReactionIconsRemoteRepository.default,
+    init(reactionIconsNetworkRepository: ReactionIconsNetworkRepository = ReactionIconsNetworkRepositoryImpl.default,
          reactionIconsLocalRepository: ReactionIconsLocalRepository = ReactionIconsLocalRepositoryImpl.default) {
-        self.reactionIconsRemoteRepository = reactionIconsRemoteRepository
+        self.reactionIconsNetworkRepository = reactionIconsNetworkRepository
         self.reactionIconsLocalRepository = reactionIconsLocalRepository
     }
 
     func getReactionIcons() -> AnyPublisher<[ReactIcon], Error> {
         let local = reactionIconsLocalRepository
             .observeReactIcons()
-        let remote = reactionIconsRemoteRepository
+        let remote = reactionIconsNetworkRepository
             .getReactIcons()
             .handleEvents(receiveOutput: { [weak self] in
                 self?.reactionIconsLocalRepository.saveReactIcons($0)

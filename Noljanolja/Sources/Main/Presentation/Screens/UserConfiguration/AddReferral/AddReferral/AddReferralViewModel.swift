@@ -36,16 +36,16 @@ final class AddReferralViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    private let userAPIType: UserAPIType
+    private let userNetworkRepositoryType: UserNetworkRepository
     private weak var delegate: AddReferralViewModelDelegate?
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(userAPIType: UserAPIType = UserAPI.default,
+    init(userNetworkRepositoryType: UserNetworkRepository = UserNetworkRepositoryImpl.default,
          delegate: AddReferralViewModelDelegate? = nil) {
-        self.userAPIType = userAPIType
+        self.userNetworkRepositoryType = userNetworkRepositoryType
         self.delegate = delegate
         super.init()
 
@@ -60,7 +60,7 @@ final class AddReferralViewModel: ViewModel {
                 guard let self else {
                     return Fail<Int, Error>(error: CommonError.captureSelfNotFound).eraseToAnyPublisher()
                 }
-                return self.userAPIType.addReferral(referredByCode: self.referralCode)
+                return self.userNetworkRepositoryType.addReferral(referredByCode: self.referralCode)
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in

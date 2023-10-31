@@ -42,7 +42,7 @@ final class SearchVideosViewModel: ViewModel {
     // MARK: Dependencies
 
     private let videoKeywordLocalRepository: VideoKeywordLocalRepository
-    private let videoRepository: VideoRepository
+    private let videoNetworkRepository: VideoNetworkRepository
     private weak var delegate: SearchVideosViewModelDelegate?
 
     // MARK: Private
@@ -52,10 +52,10 @@ final class SearchVideosViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(videoKeywordLocalRepository: VideoKeywordLocalRepository = VideoKeywordLocalRepositoryImpl.shared,
-         videoRepository: VideoRepository = VideoRepositoryImpl.shared,
+         videoNetworkRepository: VideoNetworkRepository = VideoNetworkRepositoryImpl.shared,
          delegate: SearchVideosViewModelDelegate? = nil) {
         self.videoKeywordLocalRepository = videoKeywordLocalRepository
-        self.videoRepository = videoRepository
+        self.videoNetworkRepository = videoNetworkRepository
         self.delegate = delegate
         super.init()
 
@@ -79,7 +79,7 @@ final class SearchVideosViewModel: ViewModel {
                 guard let self else {
                     return Empty<PaginationResponse<[Video]>, Error>().eraseToAnyPublisher()
                 }
-                return self.videoRepository
+                return self.videoNetworkRepository
                     .getVideos(page: NetworkConfigs.Param.firstPage, pageSize: pageSize)
             }
             .receive(on: DispatchQueue.main)
@@ -123,7 +123,7 @@ final class SearchVideosViewModel: ViewModel {
                 guard let self else {
                     return Empty<PaginationResponse<[Video]>, Error>().eraseToAnyPublisher()
                 }
-                return self.videoRepository
+                return self.videoNetworkRepository
                     .getVideos(query: keyword, page: page, pageSize: self.pageSize)
             }
             .receive(on: DispatchQueue.main)

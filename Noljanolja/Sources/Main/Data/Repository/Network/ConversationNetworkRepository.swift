@@ -1,5 +1,5 @@
 //
-//  ConversationRepositoryImpl.swift
+//  ConversationNetworkRepositoryImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 09/03/2023.
@@ -110,9 +110,9 @@ private enum ConversationTargets {
     }
 }
 
-// MARK: - ConversationRepository
+// MARK: - ConversationNetworkRepository
 
-protocol ConversationRepository {
+protocol ConversationNetworkRepository {
     func createConversation(title: String,
                             type: ConversationType,
                             participants: [User]) -> AnyPublisher<Conversation, Error>
@@ -131,10 +131,10 @@ protocol ConversationRepository {
                                     pageSize: Int) -> AnyPublisher<PaginationResponse<[ConversationAttachment]>, Error>
 }
 
-// MARK: - ConversationRepositoryImpl
+// MARK: - ConversationNetworkRepositoryImpl
 
-final class ConversationRepositoryImpl: ConversationRepository {
-    static let `default` = ConversationRepositoryImpl()
+final class ConversationNetworkRepositoryImpl: ConversationNetworkRepository {
+    static let `default` = ConversationNetworkRepositoryImpl()
 
     private let api: ApiType
 

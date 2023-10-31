@@ -1,5 +1,5 @@
 //
-//  CountryRepositoryImpl.swift
+//  CountryNetworkRepositoryImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 04/04/2023.
@@ -9,16 +9,16 @@ import Combine
 import Foundation
 import PhoneNumberKit
 
-// MARK: - CountryRepository
+// MARK: - CountryNetworkRepository
 
-protocol CountryRepository {
+protocol CountryNetworkRepository {
     func getDefaultCountry() -> Country
     func getCountries() -> AnyPublisher<[Country], Error>
 }
 
-// MARK: - CountryRepositoryImpl
+// MARK: - CountryNetworkRepositoryImpl
 
-final class CountryRepositoryImpl: CountryRepository {
+final class CountryNetworkRepositoryImpl: CountryNetworkRepository {
     func getDefaultCountry() -> Country {
         let countryCode = "KR"
         let phoneNumberKit = PhoneNumberKit()

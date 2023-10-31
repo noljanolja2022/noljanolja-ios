@@ -1,5 +1,5 @@
 //
-//  PhotoAssetAPI.swift
+//  PhotoAssetRepository.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 25/03/2023.
@@ -9,17 +9,17 @@ import Combine
 import Photos
 import UIKit
 
-// MARK: - PhotoAssetAPIError
+// MARK: - PhotoAssetRepositoryError
 
-enum PhotoAssetAPIError: Error {
+enum PhotoAssetRepositoryError: Error {
     case noUIImage
     case unknown
 }
 
-// MARK: - PhotoAssetAPI
+// MARK: - PhotoAssetRepository
 
-final class PhotoAssetAPI {
-    static let `default` = PhotoAssetAPI()
+final class PhotoAssetRepository {
+    static let `default` = PhotoAssetRepository()
 
     func requestImage(_ assets: [PhotoAsset]) -> AnyPublisher<[PhotoModel]?, Never> {
         AnyPublisher<[PhotoModel]?, Never> { subscriber in

@@ -9,9 +9,9 @@ import Combine
 import Foundation
 import Moya
 
-// MARK: - UserAPITargets
+// MARK: - UserTargets
 
-private enum UserAPITargets {
+private enum UserTargets {
     struct GetCurrentUser: BaseAuthTargetType {
         var path: String { "v1/users/me" }
         let method: Moya.Method = .get
@@ -109,9 +109,9 @@ private enum UserAPITargets {
     }
 }
 
-// MARK: - UserAPIType
+// MARK: - UserNetworkRepository
 
-protocol UserAPIType {
+protocol UserNetworkRepository {
     func getCurrentUser() -> AnyPublisher<User, Error>
     func updateCurrentUser(_ param: UpdateCurrentUserParam) -> AnyPublisher<User, Error>
     func updateCurrentUserAvatar(_ image: Data?) -> AnyPublisher<Void, Error>
@@ -123,10 +123,10 @@ protocol UserAPIType {
     func addReferral(referredByCode: String) -> AnyPublisher<Int, Error>
 }
 
-// MARK: - UserAPI
+// MARK: - UserNetworkRepositoryImpl
 
-final class UserAPI: UserAPIType {
-    static let `default` = UserAPI()
+final class UserNetworkRepositoryImpl: UserNetworkRepository {
+    static let `default` = UserNetworkRepositoryImpl()
 
     private let api: ApiType
 
@@ -136,54 +136,54 @@ final class UserAPI: UserAPIType {
 
     func getCurrentUser() -> AnyPublisher<User, Error> {
         api.request(
-            target: UserAPITargets.GetCurrentUser(),
+            target: UserTargets.GetCurrentUser(),
             atKeyPath: "data"
         )
     }
 
     func updateCurrentUser(_ param: UpdateCurrentUserParam) -> AnyPublisher<User, Error> {
         api.request(
-            target: UserAPITargets.UpdateCurrentUser(param: param),
+            target: UserTargets.UpdateCurrentUser(param: param),
             atKeyPath: "data"
         )
     }
 
     func updateCurrentUserAvatar(_ image: Data?) -> AnyPublisher<Void, Error> {
         api.request(
-            target: UserAPITargets.UpdateCurrentUserAvatar(image: image)
+            target: UserTargets.UpdateCurrentUserAvatar(image: image)
         )
     }
 
     func findUsers(phoneNumber: String?, friendId: String?) -> AnyPublisher<[User], Error> {
         api.request(
-            target: UserAPITargets.FindUsers(phoneNumber: phoneNumber, friendId: friendId),
+            target: UserTargets.FindUsers(phoneNumber: phoneNumber, friendId: friendId),
             atKeyPath: "data"
         )
     }
 
     func getContact(page: Int, pageSize: Int) -> AnyPublisher<[User], Error> {
         api.request(
-            target: UserAPITargets.GetContacts(page: page, pageSize: pageSize),
+            target: UserTargets.GetContacts(page: page, pageSize: pageSize),
             atKeyPath: "data"
         )
     }
 
     func syncContacts(_ contacts: [Contact]) -> AnyPublisher<[User], Error> {
         api.request(
-            target: UserAPITargets.SyncContacts(contacts: contacts),
+            target: UserTargets.SyncContacts(contacts: contacts),
             atKeyPath: "data"
         )
     }
 
     func inviteUser(id: String) -> AnyPublisher<Void, Error> {
         api.request(
-            target: UserAPITargets.InviteUser(id: id)
+            target: UserTargets.InviteUser(id: id)
         )
     }
 
     func addReferral(referredByCode: String) -> AnyPublisher<Int, Error> {
         api.request(
-            target: UserAPITargets.AddReferral(referredByCode: referredByCode),
+            target: UserTargets.AddReferral(referredByCode: referredByCode),
             atKeyPath: "data.rewardPoints"
         )
     }

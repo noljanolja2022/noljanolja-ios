@@ -47,22 +47,22 @@ extension ConversationUseCases {
 final class ConversationUseCasesImpl: ConversationUseCases {
     static let `default` = ConversationUseCasesImpl()
 
-    private let conversationRepository: ConversationRepository
-    private let conversationParticipantRepository: ConversationParticipantRepository
+    private let conversationNetworkRepository: ConversationNetworkRepository
+    private let conversationParticipantNetworkRepository: ConversationParticipantNetworkRepository
     private let conversationLocalRepository: ConversationLocalRepository
-    private let localDetailConversationRepository: LocalDetailConversationRepository
-    private let localUserRepository: LocalUserRepository
+    private let detailConversationLocalRepository: DetailConversationLocalRepository
+    private let userLocalRepository: UserLocalRepository
 
-    private init(conversationRepository: ConversationRepository = ConversationRepositoryImpl.default,
-                 conversationParticipantRepository: ConversationParticipantRepository = ConversationParticipantRepositoryImpl.default,
+    private init(conversationNetworkRepository: ConversationNetworkRepository = ConversationNetworkRepositoryImpl.default,
+                 conversationParticipantNetworkRepository: ConversationParticipantNetworkRepository = ConversationParticipantNetworkRepositoryImpl.default,
                  conversationLocalRepository: ConversationLocalRepository = ConversationLocalRepositoryImpl.default,
-                 localDetailConversationRepository: LocalDetailConversationRepository = LocalDetailConversationRepositoryImpl.default,
-                 localUserRepository: LocalUserRepository = LocalUserRepositoryImpl.default) {
-        self.conversationRepository = conversationRepository
-        self.conversationParticipantRepository = conversationParticipantRepository
+                 detailConversationLocalRepository: DetailConversationLocalRepository = DetailConversationLocalRepositoryImpl.default,
+                 userLocalRepository: UserLocalRepository = UserLocalRepositoryImpl.default) {
+        self.conversationNetworkRepository = conversationNetworkRepository
+        self.conversationParticipantNetworkRepository = conversationParticipantNetworkRepository
         self.conversationLocalRepository = conversationLocalRepository
-        self.localDetailConversationRepository = localDetailConversationRepository
-        self.localUserRepository = localUserRepository
+        self.detailConversationLocalRepository = detailConversationLocalRepository
+        self.userLocalRepository = userLocalRepository
     }
 
     func getConversations() -> AnyPublisher<[Conversation], Error> {
@@ -70,7 +70,7 @@ final class ConversationUseCasesImpl: ConversationUseCases {
             .observeConversations()
             .filter { !$0.isEmpty }
 
-        let remoteConversations = conversationRepository
+        let remoteConversations = conversationNetworkRepository
             .getConversations()
             .handleEvents(receiveOutput: { [weak self] conversations in
                 self?.conversationLocalRepository.saveConversations(conversations)
@@ -113,12 +113,12 @@ final class ConversationUseCasesImpl: ConversationUseCases {
     }
 
     func getConversation(conversationID: Int) -> AnyPublisher<Conversation, Error> {
-        let localConversation = localDetailConversationRepository
+        let localConversation = detailConversationLocalRepository
             .observeConversationDetail(conversationID: conversationID)
-        let remoteConversation = conversationRepository
+        let remoteConversation = conversationNetworkRepository
             .getConversation(conversationID: conversationID)
             .handleEvents(receiveOutput: { [weak self] in
-                self?.localDetailConversationRepository.saveConversationDetails([$0])
+                self?.detailConversationLocalRepository.saveConversationDetails([$0])
             })
         return Publishers.Merge(localConversation, remoteConversation)
             .removeDuplicates()
@@ -128,7 +128,7 @@ final class ConversationUseCasesImpl: ConversationUseCases {
     func createConversation(type: ConversationType,
                             participants: [User]) -> AnyPublisher<Conversation, Error> {
         if participants.count == 1,
-           let currentUser = localUserRepository.getCurrentUser(),
+           let currentUser = userLocalRepository.getCurrentUser(),
            let conversation = conversationLocalRepository.getConversations(
                type: .single,
                participants: participants + [currentUser]
@@ -137,10 +137,10 @@ final class ConversationUseCasesImpl: ConversationUseCases {
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         } else {
-            return conversationRepository
+            return conversationNetworkRepository
                 .createConversation(title: "", type: type, participants: participants)
                 .handleEvents(receiveOutput: { [weak self] in
-                    self?.localDetailConversationRepository.saveConversationDetails([$0])
+                    self?.detailConversationLocalRepository.saveConversationDetails([$0])
                 })
                 .eraseToAnyPublisher()
         }
@@ -150,7 +150,7 @@ final class ConversationUseCasesImpl: ConversationUseCases {
                             title: String?,
                             participants: [User]?,
                             image: Data?) -> AnyPublisher<Conversation, Error> {
-        conversationRepository
+        conversationNetworkRepository
             .updateConversation(
                 conversationID: conversationID,
                 title: title,
@@ -158,52 +158,52 @@ final class ConversationUseCasesImpl: ConversationUseCases {
                 image: image
             )
             .handleEvents(receiveOutput: { [weak self] in
-                self?.localDetailConversationRepository.saveConversationDetails([$0])
+                self?.detailConversationLocalRepository.saveConversationDetails([$0])
             })
             .eraseToAnyPublisher()
     }
 
     func addParticipant(conversationID: Int, participants: [User]) -> AnyPublisher<Conversation, Error> {
-        conversationParticipantRepository
+        conversationParticipantNetworkRepository
             .addParticipant(conversationID: conversationID, participants: participants)
             .flatMap { [weak self] in
                 guard let self else { return Empty<Conversation, Error>().eraseToAnyPublisher() }
-                return self.conversationRepository.getConversation(conversationID: conversationID)
+                return self.conversationNetworkRepository.getConversation(conversationID: conversationID)
             }
             .handleEvents(receiveOutput: { [weak self] in
-                self?.localDetailConversationRepository.saveConversationDetails([$0])
+                self?.detailConversationLocalRepository.saveConversationDetails([$0])
             })
             .eraseToAnyPublisher()
     }
 
     func removeParticipant(conversationID: Int, participants: [User]) -> AnyPublisher<Conversation, Error> {
-        conversationParticipantRepository
+        conversationParticipantNetworkRepository
             .removeParticipant(conversationID: conversationID, participants: participants)
             .flatMap { [weak self] in
                 guard let self else { return Empty<Conversation, Error>().eraseToAnyPublisher() }
-                return self.conversationRepository.getConversation(conversationID: conversationID)
+                return self.conversationNetworkRepository.getConversation(conversationID: conversationID)
             }
             .handleEvents(receiveOutput: { [weak self] in
-                self?.localDetailConversationRepository.saveConversationDetails([$0])
+                self?.detailConversationLocalRepository.saveConversationDetails([$0])
             })
             .eraseToAnyPublisher()
     }
 
     func assignAdmin(conversationID: Int, admin: User) -> AnyPublisher<Conversation, Error> {
-        conversationParticipantRepository
+        conversationParticipantNetworkRepository
             .assignAdmin(conversationID: conversationID, admin: admin)
             .flatMap { [weak self] in
                 guard let self else { return Empty<Conversation, Error>().eraseToAnyPublisher() }
-                return self.conversationRepository.getConversation(conversationID: conversationID)
+                return self.conversationNetworkRepository.getConversation(conversationID: conversationID)
             }
             .handleEvents(receiveOutput: { [weak self] in
-                self?.localDetailConversationRepository.saveConversationDetails([$0])
+                self?.detailConversationLocalRepository.saveConversationDetails([$0])
             })
             .eraseToAnyPublisher()
     }
 
     func leave(conversationID: Int) -> AnyPublisher<Conversation, Error> {
-        guard let currentUser = localUserRepository.getCurrentUser() else {
+        guard let currentUser = userLocalRepository.getCurrentUser() else {
             return Fail<Conversation, Error>(error: CommonError.currentUserNotFound)
                 .eraseToAnyPublisher()
         }

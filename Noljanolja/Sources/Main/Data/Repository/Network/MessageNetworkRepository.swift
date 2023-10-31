@@ -1,5 +1,5 @@
 //
-//  NetworkMessageRepositoryImpl.swift
+//  MessageNetworkRepositoryImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 10/03/2023.
@@ -162,9 +162,9 @@ private enum MessageTargets {
     }
 }
 
-// MARK: - NetworkMessageRepository
+// MARK: - MessageNetworkRepository
 
-protocol NetworkMessageRepository {
+protocol MessageNetworkRepository {
     func getMessages(conversationID: Int,
                      beforeMessageID: Int?,
                      afterMessageID: Int?) -> AnyPublisher<[Message], Error>
@@ -179,7 +179,7 @@ protocol NetworkMessageRepository {
     func reactMessage(conversationID: Int, messageID: Int, reactionId: Int) -> AnyPublisher<Void, Error>
 }
 
-extension NetworkMessageRepository {
+extension MessageNetworkRepository {
     func getMessages(conversationID: Int,
                      beforeMessageID: Int? = nil,
                      afterMessageID: Int? = nil) -> AnyPublisher<[Message], Error> {
@@ -191,10 +191,10 @@ extension NetworkMessageRepository {
     }
 }
 
-// MARK: - NetworkMessageRepositoryImpl
+// MARK: - MessageNetworkRepositoryImpl
 
-final class NetworkMessageRepositoryImpl: NetworkMessageRepository {
-    static let `default` = NetworkMessageRepositoryImpl()
+final class MessageNetworkRepositoryImpl: MessageNetworkRepository {
+    static let `default` = MessageNetworkRepositoryImpl()
 
     private let api: ApiType
 

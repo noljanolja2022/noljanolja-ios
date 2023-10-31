@@ -21,13 +21,13 @@ final class MemberInfoUseCasesImpl: MemberInfoUseCases {
 
     // MARK: Dependencies
 
-    private let loyaltyApi: LoyaltyAPIType
+    private let loyaltyApi: LoyaltyNetworkRepository
 
     // MARK: Private
 
     private let memberInfoSubject = CurrentValueSubject<LoyaltyMemberInfo?, Never>(nil)
 
-    init(loyaltyApi: LoyaltyAPIType = LoyaltyAPI.default) {
+    init(loyaltyApi: LoyaltyNetworkRepository = LoyaltyNetworkNetworkRepository.default) {
         self.loyaltyApi = loyaltyApi
     }
 

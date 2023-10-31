@@ -123,7 +123,7 @@ struct SelectCountryView_Previews: PreviewProvider {
         NavigationView {
             SelectCountryView(
                 viewModel: SelectCountryViewModel(
-                    selectedCountry: CountryRepositoryImpl().getDefaultCountry()
+                    selectedCountry: CountryNetworkRepositoryImpl().getDefaultCountry()
                 )
             )
         }

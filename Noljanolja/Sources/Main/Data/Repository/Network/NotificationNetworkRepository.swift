@@ -1,5 +1,5 @@
 //
-//  NetworkNotificationRepositoryImpl.swift
+//  NotificationNetworkRepositoryImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 19/03/2023.
@@ -9,9 +9,9 @@ import Combine
 import Foundation
 import Moya
 
-// MARK: - NetworkNotificationTargets
+// MARK: - NotificationTargets
 
-private enum NetworkNotificationTargets {
+private enum NotificationTargets {
     struct SendPushToken: BaseAuthTargetType {
         var path: String { "v1/push-tokens" }
         var method: Moya.Method { .post }
@@ -30,16 +30,16 @@ private enum NetworkNotificationTargets {
     }
 }
 
-// MARK: - NetworkNotificationRepository
+// MARK: - NotificationNetworkRepository
 
-protocol NetworkNotificationRepository {
+protocol NotificationNetworkRepository {
     func sendPushToken(deviceToken: String) -> AnyPublisher<Void, Error>
 }
 
-// MARK: - NetworkNotificationRepositoryImpl
+// MARK: - NotificationNetworkRepositoryImpl
 
-final class NetworkNotificationRepositoryImpl: NetworkNotificationRepository {
-    static let shared = NetworkNotificationRepositoryImpl()
+final class NotificationNetworkRepositoryImpl: NotificationNetworkRepository {
+    static let shared = NotificationNetworkRepositoryImpl()
 
     private let api: ApiType
 
@@ -49,7 +49,7 @@ final class NetworkNotificationRepositoryImpl: NetworkNotificationRepository {
 
     func sendPushToken(deviceToken: String) -> AnyPublisher<Void, Error> {
         api.request(
-            target: NetworkNotificationTargets.SendPushToken(
+            target: NotificationTargets.SendPushToken(
                 deviceToken: deviceToken
             )
         )

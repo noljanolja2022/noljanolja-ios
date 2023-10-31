@@ -9,9 +9,9 @@ import Combine
 import Foundation
 import RealmSwift
 
-// MARK: - LocalDetailConversationRepository
+// MARK: - DetailConversationLocalRepository
 
-protocol LocalDetailConversationRepository {
+protocol DetailConversationLocalRepository {
     func saveConversationDetails(_ conversations: [Conversation])
 
     func getConversationDetail(id: Int) -> Conversation?
@@ -22,10 +22,10 @@ protocol LocalDetailConversationRepository {
     func deleteAll()
 }
 
-// MARK: - LocalDetailConversationRepositoryImpl
+// MARK: - DetailConversationLocalRepositoryImpl
 
-final class LocalDetailConversationRepositoryImpl: LocalDetailConversationRepository {
-    static let `default` = LocalDetailConversationRepositoryImpl()
+final class DetailConversationLocalRepositoryImpl: DetailConversationLocalRepository {
+    static let `default` = DetailConversationLocalRepositoryImpl()
 
     private lazy var realmManager: RealmManagerType = {
         let id = "conversation_detail"

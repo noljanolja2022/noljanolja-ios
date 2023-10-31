@@ -1,5 +1,5 @@
 //
-//  BannerRepository.swift
+//  BannerNetworkRepository.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 27/06/2023.
@@ -30,22 +30,22 @@ private enum BannerTargets {
     }
 }
 
-// MARK: - BannerRepository
+// MARK: - BannerNetworkRepository
 
-protocol BannerRepository {
+protocol BannerNetworkRepository {
     func getBanners(page: Int?, pageSize: Int?) -> AnyPublisher<PaginationResponse<[Banner]>, Error>
 }
 
-extension BannerRepository {
+extension BannerNetworkRepository {
     func getBanners(page: Int? = nil, pageSize: Int? = nil) -> AnyPublisher<PaginationResponse<[Banner]>, Error> {
         getBanners(page: page, pageSize: pageSize)
     }
 }
 
-// MARK: - BannerRepositoryImpl
+// MARK: - BannerNetworkRepositoryImpl
 
-final class BannerRepositoryImpl: BannerRepository {
-    static let shared = BannerRepositoryImpl()
+final class BannerNetworkRepositoryImpl: BannerNetworkRepository {
+    static let shared = BannerNetworkRepositoryImpl()
 
     private let api: ApiType
 

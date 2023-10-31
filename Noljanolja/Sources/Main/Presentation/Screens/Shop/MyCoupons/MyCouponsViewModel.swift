@@ -35,7 +35,7 @@ final class MyCouponsViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    private let giftsApi: GiftsAPIType
+    private let giftsApi: GiftsNetworkRepository
     private weak var delegate: MyCouponsViewModelDelegate?
 
     // MARK: Private
@@ -44,7 +44,7 @@ final class MyCouponsViewModel: ViewModel {
     private let pageSize = 20
     private var cancellables = Set<AnyCancellable>()
 
-    init(giftsApi: GiftsAPIType = GiftsAPI.default,
+    init(giftsApi: GiftsNetworkRepository = GiftsNetworkRepositoryImpl.default,
          delegate: MyCouponsViewModelDelegate? = nil) {
         self.giftsApi = giftsApi
         self.delegate = delegate

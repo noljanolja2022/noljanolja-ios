@@ -21,7 +21,7 @@ protocol AddFriendsHomeViewModelDelegate: AnyObject {}
 final class AddFriendsHomeViewModel: ViewModel {
     // MARK: State
 
-    @Published var country = CountryRepositoryImpl().getDefaultCountry()
+    @Published var country = CountryNetworkRepositoryImpl().getDefaultCountry()
     @Published var phoneNumberText = ""
     @Published var name: String?
     @Published var qrImage: UIImage?
@@ -44,7 +44,7 @@ final class AddFriendsHomeViewModel: ViewModel {
     // MARK: Dependencies
 
     private let userUseCases: UserUseCases
-    private let userAPI: UserAPIType
+    private let userNetworkRepository: UserNetworkRepository
     private weak var delegate: AddFriendsHomeViewModelDelegate?
 
     // MARK: Private
@@ -54,10 +54,10 @@ final class AddFriendsHomeViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(userUseCases: UserUseCases = UserUseCasesImpl.default,
-         userAPI: UserAPIType = UserAPI.default,
+         userNetworkRepository: UserNetworkRepository = UserNetworkRepositoryImpl.default,
          delegate: AddFriendsHomeViewModelDelegate? = nil) {
         self.userUseCases = userUseCases
-        self.userAPI = userAPI
+        self.userNetworkRepository = userNetworkRepository
         self.delegate = delegate
         super.init()
 
@@ -100,7 +100,7 @@ final class AddFriendsHomeViewModel: ViewModel {
                 guard let self else {
                     return Empty<[User], Error>().eraseToAnyPublisher()
                 }
-                return self.userAPI.findUsers(phoneNumber: self.phoneNumber?.formatPhone(), friendId: nil)
+                return self.userNetworkRepository.findUsers(phoneNumber: self.phoneNumber?.formatPhone(), friendId: nil)
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in

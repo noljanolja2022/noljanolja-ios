@@ -1,5 +1,5 @@
 //
-//  CoinExchangeUseCase.swift
+//  CoinExchangeUseCases.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 18/10/2023.
@@ -8,31 +8,31 @@
 import Combine
 import Foundation
 
-// MARK: - CoinExchangeUseCase
+// MARK: - CoinExchangeUseCases
 
-protocol CoinExchangeUseCase {
+protocol CoinExchangeUseCases {
     func getCoin() -> AnyPublisher<CoinModel, Error>
 }
 
-// MARK: - CoinExchangeUseCaseImpl
+// MARK: - CoinExchangeUseCasesImpl
 
-final class CoinExchangeUseCaseImpl: CoinExchangeUseCase {
-    static let shared: CoinExchangeUseCase = CoinExchangeUseCaseImpl()
+final class CoinExchangeUseCasesImpl: CoinExchangeUseCases {
+    static let shared: CoinExchangeUseCases = CoinExchangeUseCasesImpl()
 
     // MARK: Dependencies
 
-    private let coinExchangeRepository: CoinExchangeRepository
+    private let coinExchangeNetworkRepository: CoinExchangeNetworkRepository
 
     // MARK: Private
 
     private let coinSubject = CurrentValueSubject<CoinModel?, Never>(nil)
 
-    init(coinExchangeRepository: CoinExchangeRepository = CoinExchangeRepositoryImpl.shared) {
-        self.coinExchangeRepository = coinExchangeRepository
+    init(coinExchangeNetworkRepository: CoinExchangeNetworkRepository = CoinExchangeNetworkRepositoryImpl.shared) {
+        self.coinExchangeNetworkRepository = coinExchangeNetworkRepository
     }
 
     func getCoin() -> AnyPublisher<CoinModel, Error> {
-        coinExchangeRepository
+        coinExchangeNetworkRepository
             .getCoin()
             .handleEvents(receiveOutput: { [weak self] in
                 self?.coinSubject.send($0)

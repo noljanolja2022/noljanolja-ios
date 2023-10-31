@@ -34,7 +34,7 @@ final class CheckinViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    private let checkinUseCase: CheckinUseCase
+    private let checkinUseCases: CheckinUseCases
     private weak var delegate: CheckinViewModelDelegate?
 
     // MARK: Private
@@ -42,9 +42,9 @@ final class CheckinViewModel: ViewModel {
     private let checkinProgressesSubject = CurrentValueSubject<[CheckinProgress], Never>([])
     private var cancellables = Set<AnyCancellable>()
 
-    init(checkinUseCase: CheckinUseCase = CheckinUseCaseImpl.shared,
+    init(checkinUseCases: CheckinUseCases = CheckinUseCasesImpl.shared,
          delegate: CheckinViewModelDelegate? = nil) {
-        self.checkinUseCase = checkinUseCase
+        self.checkinUseCases = checkinUseCases
         self.delegate = delegate
         super.init()
 
@@ -75,7 +75,7 @@ final class CheckinViewModel: ViewModel {
                 guard let self else {
                     return Empty<[CheckinProgress], Error>().eraseToAnyPublisher()
                 }
-                return self.checkinUseCase.getCheckinProgresses()
+                return self.checkinUseCases.getCheckinProgresses()
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
@@ -102,7 +102,7 @@ final class CheckinViewModel: ViewModel {
                     return Fail<String, Error>(error: CommonError.captureSelfNotFound)
                         .eraseToAnyPublisher()
                 }
-                return self.checkinUseCase
+                return self.checkinUseCases
                     .dailyCheckin()
                     .eraseToAnyPublisher()
             }

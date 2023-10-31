@@ -43,7 +43,7 @@ final class SearchCouponsViewModel: ViewModel {
 
     private let couponKeywordLocalRepository: CouponKeywordLocalRepository
     private let memberInfoUseCases: MemberInfoUseCases
-    private let giftsApi: GiftsAPIType
+    private let giftsApi: GiftsNetworkRepository
     private weak var delegate: SearchCouponsViewModelDelegate?
 
     // MARK: Private
@@ -54,7 +54,7 @@ final class SearchCouponsViewModel: ViewModel {
 
     init(couponKeywordLocalRepository: CouponKeywordLocalRepository = CouponKeywordLocalRepositoryImpl.shared,
          memberInfoUseCases: MemberInfoUseCases = MemberInfoUseCasesImpl.default,
-         giftsApi: GiftsAPIType = GiftsAPI.default,
+         giftsApi: GiftsNetworkRepository = GiftsNetworkRepositoryImpl.default,
          delegate: SearchCouponsViewModelDelegate? = nil) {
         self.couponKeywordLocalRepository = couponKeywordLocalRepository
         self.memberInfoUseCases = memberInfoUseCases

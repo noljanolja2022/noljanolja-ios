@@ -53,13 +53,13 @@ final class ScanQRViewModel: ViewModel {
 
     // MARK: Private
 
-    private let userAPI: UserAPIType
+    private let userNetworkRepository: UserNetworkRepository
     private var isQREnabled = true
     private var cancellables = Set<AnyCancellable>()
 
-    init(userAPI: UserAPIType = UserAPI.default,
+    init(userNetworkRepository: UserNetworkRepository = UserNetworkRepositoryImpl.default,
          delegate: ScanQRViewModelDelegate? = nil) {
-        self.userAPI = userAPI
+        self.userNetworkRepository = userNetworkRepository
         self.delegate = delegate
         super.init()
 
@@ -92,7 +92,7 @@ final class ScanQRViewModel: ViewModel {
                 guard let self else {
                     return Empty<[User], Error>().eraseToAnyPublisher()
                 }
-                return self.userAPI.findUsers(phoneNumber: nil, friendId: userId)
+                return self.userNetworkRepository.findUsers(phoneNumber: nil, friendId: userId)
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in

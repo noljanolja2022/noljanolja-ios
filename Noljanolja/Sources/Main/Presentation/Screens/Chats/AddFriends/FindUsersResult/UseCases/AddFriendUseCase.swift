@@ -19,17 +19,17 @@ protocol AddFriendUseCaseType {
 final class AddFriendUseCase: AddFriendUseCaseType {
     static let `default` = AddFriendUseCase()
 
-    private let userAPI: UserAPIType
+    private let userNetworkRepository: UserNetworkRepository
     private let conversationUseCases: ConversationUseCases
 
-    init(userAPI: UserAPIType = UserAPI.default,
+    init(userNetworkRepository: UserNetworkRepository = UserNetworkRepositoryImpl.default,
          conversationUseCases: ConversationUseCases = ConversationUseCasesImpl.default) {
-        self.userAPI = userAPI
+        self.userNetworkRepository = userNetworkRepository
         self.conversationUseCases = conversationUseCases
     }
 
     func addFriend(user: User) -> AnyPublisher<Conversation, Error> {
-        userAPI
+        userNetworkRepository
             .inviteUser(id: user.id)
             .flatMap { [weak self] in
                 guard let self else {

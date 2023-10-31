@@ -29,53 +29,53 @@ final class UserUseCasesImpl: UserUseCases {
 
     // MARK: Dependencies
 
-    private let userAPI: UserAPIType
-    private let localUserRepository: LocalUserRepository
+    private let userNetworkRepository: UserNetworkRepository
+    private let userLocalRepository: UserLocalRepository
 
-    init(userAPI: UserAPIType = UserAPI.default,
-         localUserRepository: LocalUserRepository = LocalUserRepositoryImpl.default) {
-        self.userAPI = userAPI
-        self.localUserRepository = localUserRepository
+    init(userNetworkRepository: UserNetworkRepository = UserNetworkRepositoryImpl.default,
+         userLocalRepository: UserLocalRepository = UserLocalRepositoryImpl.default) {
+        self.userNetworkRepository = userNetworkRepository
+        self.userLocalRepository = userLocalRepository
     }
 
     func getCurrentUser() -> User? {
-        localUserRepository.getCurrentUser()
+        userLocalRepository.getCurrentUser()
     }
 
     func getCurrentUserPublisher() -> AnyPublisher<User, Never> {
-        localUserRepository.getCurrentUserPublisher()
+        userLocalRepository.getCurrentUserPublisher()
     }
 
     func getCurrentUser() -> AnyPublisher<User, Error> {
-        userAPI
+        userNetworkRepository
             .getCurrentUser()
-            .handleEvents(receiveOutput: { [weak self] in self?.localUserRepository.saveCurrentUser($0) })
+            .handleEvents(receiveOutput: { [weak self] in self?.userLocalRepository.saveCurrentUser($0) })
             .eraseToAnyPublisher()
     }
 
     func getCurrentUserIfNeeded() -> AnyPublisher<User, Error> {
         if getCurrentUser() != nil {
-            return localUserRepository
+            return userLocalRepository
                 .getCurrentUserPublisher()
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         } else {
-            return userAPI
+            return userNetworkRepository
                 .getCurrentUser()
-                .handleEvents(receiveOutput: { [weak self] in self?.localUserRepository.saveCurrentUser($0) })
+                .handleEvents(receiveOutput: { [weak self] in self?.userLocalRepository.saveCurrentUser($0) })
                 .eraseToAnyPublisher()
         }
     }
 
     func updateCurrentUser(_ param: UpdateCurrentUserParam) -> AnyPublisher<User, Error> {
-        userAPI
+        userNetworkRepository
             .updateCurrentUser(param)
-            .handleEvents(receiveOutput: { [weak self] in self?.localUserRepository.saveCurrentUser($0) })
+            .handleEvents(receiveOutput: { [weak self] in self?.userLocalRepository.saveCurrentUser($0) })
             .eraseToAnyPublisher()
     }
 
     func updateCurrentUserAvatar(_ image: Data?) -> AnyPublisher<User, Error> {
-        userAPI
+        userNetworkRepository
             .updateCurrentUserAvatar(image)
             .flatMap { [weak self] in
                 guard let self else {
@@ -83,7 +83,7 @@ final class UserUseCasesImpl: UserUseCases {
                 }
                 return self.getCurrentUser()
             }
-            .handleEvents(receiveOutput: { [weak self] in self?.localUserRepository.saveCurrentUser($0) })
+            .handleEvents(receiveOutput: { [weak self] in self?.userLocalRepository.saveCurrentUser($0) })
             .eraseToAnyPublisher()
     }
 }

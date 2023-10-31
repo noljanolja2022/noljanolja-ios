@@ -1,5 +1,5 @@
 //
-//  PromotedVideosUseCase.swift
+//  PromotedVideosUseCases.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 18/09/2023.
@@ -8,28 +8,28 @@
 import Combine
 import Foundation
 
-// MARK: - PromotedVideosUseCase
+// MARK: - PromotedVideosUseCases
 
-protocol PromotedVideosUseCase {}
+protocol PromotedVideosUseCases {}
 
-// MARK: - PromotedVideosUseCaseImpl
+// MARK: - PromotedVideosUseCasesImpl
 
-final class PromotedVideosUseCaseImpl: PromotedVideosUseCase {
-    static let shared = PromotedVideosUseCaseImpl()
+final class PromotedVideosUseCasesImpl: PromotedVideosUseCases {
+    static let shared = PromotedVideosUseCasesImpl()
 
-    private let videoRepository: VideoRepository
+    private let videoNetworkRepository: VideoNetworkRepository
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(videoRepository: VideoRepository = VideoRepositoryImpl.shared) {
-        self.videoRepository = videoRepository
+    init(videoNetworkRepository: VideoNetworkRepository = VideoNetworkRepositoryImpl.shared) {
+        self.videoNetworkRepository = videoNetworkRepository
         configure()
     }
 
     private func configure() {
-        videoRepository
+        videoNetworkRepository
             .getPromotedVideos(page: 1, pageSize: 100)
             .sink(
                 receiveCompletion: { _ in },

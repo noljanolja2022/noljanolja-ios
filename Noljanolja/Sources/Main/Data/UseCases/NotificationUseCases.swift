@@ -21,24 +21,24 @@ protocol NotificationUseCases {
 final class NotificationUseCasesImpl: NotificationUseCases {
     static let `default` = NotificationUseCasesImpl()
 
-    private let localUserRepository: LocalUserRepository
-    private let networkNotificationRepository: NetworkNotificationRepository
+    private let userLocalRepository: UserLocalRepository
+    private let notificationNetworkRepository: NotificationNetworkRepository
 
     private let pushTokenSubject = PassthroughSubject<String, Never>()
 
     private var cancellables = Set<AnyCancellable>()
 
-    private init(localUserRepository: LocalUserRepository = LocalUserRepositoryImpl.default,
-                 networkNotificationRepository: NetworkNotificationRepository = NetworkNotificationRepositoryImpl.shared) {
-        self.localUserRepository = localUserRepository
-        self.networkNotificationRepository = networkNotificationRepository
+    private init(userLocalRepository: UserLocalRepository = UserLocalRepositoryImpl.default,
+                 notificationNetworkRepository: NotificationNetworkRepository = NotificationNetworkRepositoryImpl.shared) {
+        self.userLocalRepository = userLocalRepository
+        self.notificationNetworkRepository = notificationNetworkRepository
 
         configure()
     }
 
     private func configure() {
         Publishers.CombineLatest(
-            localUserRepository.getCurrentUserPublisher(),
+            userLocalRepository.getCurrentUserPublisher(),
             pushTokenSubject
                 .removeDuplicates()
                 .filter { !$0.trimmed.isEmpty }
@@ -47,7 +47,7 @@ final class NotificationUseCasesImpl: NotificationUseCases {
             guard let self else {
                 return Empty<Void, Error>().eraseToAnyPublisher()
             }
-            return self.networkNotificationRepository
+            return self.notificationNetworkRepository
                 .sendPushToken(deviceToken: token)
         }
         .sink(receiveValue: { _ in })
@@ -59,7 +59,7 @@ final class NotificationUseCasesImpl: NotificationUseCases {
     }
 
     func deletePushToken() -> AnyPublisher<Void, Error> {
-        networkNotificationRepository
+        notificationNetworkRepository
             .sendPushToken(deviceToken: "")
     }
 }

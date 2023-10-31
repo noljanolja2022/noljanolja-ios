@@ -1,5 +1,5 @@
 //
-//  LocalMessageRepositoryImpl.swift
+//  MessageLocalRepositoryImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 10/03/2023.
@@ -10,9 +10,9 @@ import Foundation
 import RealmSwift
 import SwifterSwift
 
-// MARK: - LocalMessageRepository
+// MARK: - MessageLocalRepository
 
-protocol LocalMessageRepository {
+protocol MessageLocalRepository {
     func saveMessages(_ messages: [Message])
     func saveMessageParameters(_ parameters: [SendMessageParam])
     func observeMessages(conversationID: Int) -> AnyPublisher<[Message], Error>
@@ -25,10 +25,10 @@ protocol LocalMessageRepository {
     func deleteAll()
 }
 
-// MARK: - LocalMessageRepositoryImpl
+// MARK: - MessageLocalRepositoryImpl
 
-final class LocalMessageRepositoryImpl: LocalMessageRepository {
-    static let `default` = LocalMessageRepositoryImpl()
+final class MessageLocalRepositoryImpl: MessageLocalRepository {
+    static let `default` = MessageLocalRepositoryImpl()
 
     private lazy var realmManager: RealmManagerType = {
         let id = "messages"
@@ -113,7 +113,7 @@ final class LocalMessageRepositoryImpl: LocalMessageRepository {
     }
 }
 
-extension LocalMessageRepositoryImpl {
+extension MessageLocalRepositoryImpl {
     private func generatePhotoURL(conversationID: Int, fileName: String) -> URL {
         let directories = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
         let directory = directories[0]

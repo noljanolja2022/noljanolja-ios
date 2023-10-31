@@ -1,5 +1,5 @@
 //
-//  ReactionIconsRemoteRepository.swift
+//  ReactionIconsNetworkRepositoryImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 22/06/2023.
@@ -10,9 +10,9 @@ import Foundation
 import Moya
 import UIKit
 
-// MARK: - ReactionIconsRemoteTargets
+// MARK: - ReactionIconsTargets
 
-private enum ReactionIconsRemoteTargets {
+private enum ReactionIconsTargets {
     struct GetReactIcons: BaseAuthTargetType {
         var path: String { "v1/conversations/react-icons" }
         let method: Moya.Method = .get
@@ -20,16 +20,16 @@ private enum ReactionIconsRemoteTargets {
     }
 }
 
-// MARK: - ReactionIconsRemoteRepositoryProtocol
+// MARK: - ReactionIconsNetworkRepository
 
-protocol ReactionIconsRemoteRepositoryProtocol {
+protocol ReactionIconsNetworkRepository {
     func getReactIcons() -> AnyPublisher<[ReactIcon], Error>
 }
 
-// MARK: - ReactionIconsRemoteRepository
+// MARK: - ReactionIconsNetworkRepositoryImpl
 
-final class ReactionIconsRemoteRepository: ReactionIconsRemoteRepositoryProtocol {
-    static let `default` = ReactionIconsRemoteRepository()
+final class ReactionIconsNetworkRepositoryImpl: ReactionIconsNetworkRepository {
+    static let `default` = ReactionIconsNetworkRepositoryImpl()
 
     private let api: ApiType
 
@@ -39,7 +39,7 @@ final class ReactionIconsRemoteRepository: ReactionIconsRemoteRepositoryProtocol
 
     func getReactIcons() -> AnyPublisher<[ReactIcon], Error> {
         api.request(
-            target: ReactionIconsRemoteTargets.GetReactIcons(),
+            target: ReactionIconsTargets.GetReactIcons(),
             atKeyPath: "data"
         )
     }

@@ -38,16 +38,16 @@ final class HomeViewModel: ViewModel {
     // MARK: Dependencies
 
     private let userNotificationCenter = UNUserNotificationCenter.current()
-    private let bannerRepository: BannerRepository
+    private let bannerNetworkRepository: BannerNetworkRepository
     private weak var delegate: HomeViewModelDelegate?
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(bannerRepository: BannerRepository = BannerRepositoryImpl.shared,
+    init(bannerNetworkRepository: BannerNetworkRepository = BannerNetworkRepositoryImpl.shared,
          delegate: HomeViewModelDelegate? = nil) {
-        self.bannerRepository = bannerRepository
+        self.bannerNetworkRepository = bannerNetworkRepository
         self.delegate = delegate
         super.init()
 
@@ -117,7 +117,7 @@ final class HomeViewModel: ViewModel {
                 guard let self else {
                     return Empty<PaginationResponse<[Banner]>, Error>().eraseToAnyPublisher()
                 }
-                return self.bannerRepository.getBanners()
+                return self.bannerNetworkRepository.getBanners()
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in

@@ -21,22 +21,22 @@ protocol ConversationSocketServiceType {
 final class ConversationSocketService: ConversationSocketServiceType {
     static let `default` = ConversationSocketService()
 
-    private let localUserRepository: LocalUserRepository
+    private let userLocalRepository: UserLocalRepository
     private let socketAPI: ConversationSocketAPIType
     private let conversationLocalRepository: ConversationLocalRepository
-    private let localDetailConversationRepository: LocalDetailConversationRepository
-    private let localMessageRepository: LocalMessageRepository
+    private let detailConversationLocalRepository: DetailConversationLocalRepository
+    private let messageLocalRepository: MessageLocalRepository
 
-    init(localUserRepository: LocalUserRepository = LocalUserRepositoryImpl.default,
+    init(userLocalRepository: UserLocalRepository = UserLocalRepositoryImpl.default,
          socketAPI: ConversationSocketAPIType = ConversationSocketAPI.default,
          conversationLocalRepository: ConversationLocalRepository = ConversationLocalRepositoryImpl.default,
-         localDetailConversationRepository: LocalDetailConversationRepository = LocalDetailConversationRepositoryImpl.default,
-         localMessageRepository: LocalMessageRepository = LocalMessageRepositoryImpl.default) {
-        self.localUserRepository = localUserRepository
+         detailConversationLocalRepository: DetailConversationLocalRepository = DetailConversationLocalRepositoryImpl.default,
+         messageLocalRepository: MessageLocalRepository = MessageLocalRepositoryImpl.default) {
+        self.userLocalRepository = userLocalRepository
         self.socketAPI = socketAPI
         self.conversationLocalRepository = conversationLocalRepository
-        self.localDetailConversationRepository = localDetailConversationRepository
-        self.localMessageRepository = localMessageRepository
+        self.detailConversationLocalRepository = detailConversationLocalRepository
+        self.messageLocalRepository = messageLocalRepository
     }
 
     func register() {
@@ -45,7 +45,7 @@ final class ConversationSocketService: ConversationSocketServiceType {
 
     private func getStream() -> AnyPublisher<Result<Conversation, Error>, Never> {
         socketAPI.getStream()
-            .withLatestFrom(localUserRepository.getCurrentUserPublisher()) { ($0, $1) }
+            .withLatestFrom(userLocalRepository.getCurrentUserPublisher()) { ($0, $1) }
             .handleEvents(receiveOutput: { [weak self] result, currentUser in
                 guard let self else { return }
                 switch result {
@@ -56,15 +56,15 @@ final class ConversationSocketService: ConversationSocketServiceType {
                         if lastMessage?.leftParticipants.map({ $0.id }).contains(currentUser.id) ?? false {
                             self.conversationLocalRepository
                                 .removeConversation(conversationID: conversation.id)
-                            self.localDetailConversationRepository
+                            self.detailConversationLocalRepository
                                 .removeConversationDetail(conversationID: conversation.id)
                         } else {
                             self.conversationLocalRepository.saveConversations([conversation])
-                            self.localDetailConversationRepository.saveConversationDetails([conversation])
+                            self.detailConversationLocalRepository.saveConversationDetails([conversation])
                         }
                     case .plaintext, .photo, .sticker, .eventUpdated, .eventJoined, .unknown, .none:
                         self.conversationLocalRepository.saveConversations([conversation])
-                        self.localDetailConversationRepository.saveConversationDetails([conversation])
+                        self.detailConversationLocalRepository.saveConversationDetails([conversation])
                     }
                 case .failure:
                     return
@@ -95,7 +95,7 @@ final class ConversationSocketService: ConversationSocketServiceType {
                 case let .success(conversation):
                     let sortedMessages = conversation.messages.sorted { $0.createdAt > $1.createdAt }
                     guard let lastMessage = sortedMessages.first else { return }
-                    self?.localMessageRepository.saveMessages([lastMessage])
+                    self?.messageLocalRepository.saveMessages([lastMessage])
                 case .failure:
                     break
                 }
