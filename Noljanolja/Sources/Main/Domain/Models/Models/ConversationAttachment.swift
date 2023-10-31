@@ -48,6 +48,6 @@ struct ConversationAttachment: Equatable, Decodable {
     }
 
     func getPhotoURL(conversationID: Int) -> URL? {
-        MessageService.default.getPhotoURL(conversationID: conversationID, attachmentId: id, fileName: nil)
+        MessageUseCasesImpl.default.getPhotoURL(conversationID: conversationID, attachmentId: id, fileName: nil)
     }
 }

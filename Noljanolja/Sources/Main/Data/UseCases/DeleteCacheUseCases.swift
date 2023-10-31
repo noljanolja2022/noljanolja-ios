@@ -18,29 +18,29 @@ protocol DeleteCacheUseCaseProtocol {
 final class DeleteCacheUseCase: DeleteCacheUseCaseProtocol {
     static let `default` = DeleteCacheUseCase()
 
-    private let contactStore: ContactStoreType
+    private let localContactRepository: LocalContactRepository
     private let conversationStore: ConversationStoreType
     private let conversationDetailStore: ConversationDetailStoreType
-    private let mediaStore: MediaStoreType
-    private let messageStore: MessageStoreType
+    private let localMediaRepository: LocalMediaRepository
+    private let localMessageRepository: LocalMessageRepository
 
-    init(contactStore: ContactStoreType = ContactStore.default,
+    init(localContactRepository: LocalContactRepository = LocalContactRepositoryImpl.default,
          conversationStore: ConversationStoreType = ConversationStore.default,
          conversationDetailStore: ConversationDetailStoreType = ConversationDetailStore.default,
-         mediaStore: MediaStoreType = MediaStore.default,
-         messageStore: MessageStoreType = MessageStore.default) {
-        self.contactStore = contactStore
+         localMediaRepository: LocalMediaRepository = LocalMediaRepositoryImpl.default,
+         localMessageRepository: LocalMessageRepository = LocalMessageRepositoryImpl.default) {
+        self.localContactRepository = localContactRepository
         self.conversationStore = conversationStore
         self.conversationDetailStore = conversationDetailStore
-        self.mediaStore = mediaStore
-        self.messageStore = messageStore
+        self.localMediaRepository = localMediaRepository
+        self.localMessageRepository = localMessageRepository
     }
 
     func deleteCache() {
-        contactStore.deleteAll()
+        localContactRepository.deleteAll()
         conversationStore.deleteAll()
         conversationDetailStore.deleteAll()
-        mediaStore.deleteAll()
-        messageStore.deleteAll()
+        localMediaRepository.deleteAll()
+        localMessageRepository.deleteAll()
     }
 }

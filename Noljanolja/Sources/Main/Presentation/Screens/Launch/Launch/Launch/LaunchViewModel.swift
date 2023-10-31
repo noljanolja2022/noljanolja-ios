@@ -29,7 +29,7 @@ final class LaunchViewModel: ViewModel {
     // MARK: Dependencies
 
     private var userDefaults: UserDefaultsType
-    private let authService: AuthServiceType
+    private let authUseCases: AuthUseCases
     private let userService: UserServiceType
     private weak var delegate: LaunchViewModelDelegate?
 
@@ -38,11 +38,11 @@ final class LaunchViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(userDefaults: UserDefaultsType = UserDefaults.standard,
-         authService: AuthServiceType = AuthService.default,
+         authUseCases: AuthUseCases = AuthUseCasesImpl.default,
          userService: UserServiceType = UserService.default,
          delegate: LaunchViewModelDelegate? = nil) {
         self.userDefaults = userDefaults
-        self.authService = authService
+        self.authUseCases = authUseCases
         self.userService = userService
         self.delegate = delegate
         super.init()
@@ -60,7 +60,7 @@ final class LaunchViewModel: ViewModel {
                 let trigger: AnyPublisher<Void, Error> = {
                     if self.userDefaults.isFirstLaunch {
                         self.userDefaults.isFirstLaunch = false
-                        return self.authService.signOut()
+                        return self.authUseCases.signOut()
                     } else {
                         return Just(())
                             .setFailureType(to: Error.self)
@@ -68,7 +68,7 @@ final class LaunchViewModel: ViewModel {
                     }
                 }()
                 return trigger
-                    .flatMap { _ in self.authService.getIDTokenResult() }
+                    .flatMap { _ in self.authUseCases.getIDTokenResult() }
                     .flatMap { _ in self.userService.getCurrentUser() }
                     .eraseToAnyPublisher()
             }

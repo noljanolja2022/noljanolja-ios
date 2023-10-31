@@ -1,5 +1,5 @@
 //
-//  MessageService.swift
+//  MessageUseCasesImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 10/03/2023.
@@ -8,9 +8,9 @@
 import Combine
 import Foundation
 
-// MARK: - MessageServiceType
+// MARK: - MessageUseCases
 
-protocol MessageServiceType {
+protocol MessageUseCases {
     func getLocalMessages(conversationID: Int) -> AnyPublisher<[Message], Error>
 
     func getMessages(conversationID: Int,
@@ -30,7 +30,7 @@ protocol MessageServiceType {
     func getPhotoURL(conversationID: Int, attachmentId: String, fileName: String?) -> URL?
 }
 
-extension MessageServiceType {
+extension MessageUseCases {
     func getMessages(conversationID: Int,
                      beforeMessageID: Int? = nil,
                      afterMessageID: Int? = nil) -> AnyPublisher<[Message], Error> {
@@ -38,34 +38,34 @@ extension MessageServiceType {
     }
 }
 
-// MARK: - MessageService
+// MARK: - MessageUseCasesImpl
 
-final class MessageService: MessageServiceType {
-    static let `default` = MessageService()
+final class MessageUseCasesImpl: MessageUseCases {
+    static let `default` = MessageUseCasesImpl()
 
-    private let userStore: UserStoreType
-    private let messageAPI: MessageRepository
-    private let conversationService: ConversationServiceType
-    private let messageStore: MessageStoreType
+    private let localUserRepository: LocalUserRepository
+    private let networkMessageRepository: NetworkMessageRepository
+    private let conversationUseCases: ConversationUseCases
+    private let localMessageRepository: LocalMessageRepository
     private let photoAssetAPI: PhotoAssetAPI
     private let dataRepository: DataRepository
 
-    private init(userStore: UserStoreType = UserStore.default,
-                 messageAPI: MessageRepository = MessageRepositoryImpl.default,
-                 conversationService: ConversationServiceType = ConversationService.default,
-                 messageStore: MessageStoreType = MessageStore.default,
+    private init(localUserRepository: LocalUserRepository = LocalUserRepositoryImpl.default,
+                 networkMessageRepository: NetworkMessageRepository = NetworkMessageRepositoryImpl.default,
+                 conversationUseCases: ConversationUseCases = ConversationUseCasesImpl.default,
+                 localMessageRepository: LocalMessageRepository = LocalMessageRepositoryImpl.default,
                  photoAssetAPI: PhotoAssetAPI = PhotoAssetAPI.default,
                  dataRepository: DataRepository = DataRepositoryImpl.shared) {
-        self.userStore = userStore
-        self.messageAPI = messageAPI
-        self.conversationService = conversationService
-        self.messageStore = messageStore
+        self.localUserRepository = localUserRepository
+        self.networkMessageRepository = networkMessageRepository
+        self.conversationUseCases = conversationUseCases
+        self.localMessageRepository = localMessageRepository
         self.photoAssetAPI = photoAssetAPI
         self.dataRepository = dataRepository
     }
 
     func getLocalMessages(conversationID: Int) -> AnyPublisher<[Message], Error> {
-        messageStore
+        localMessageRepository
             .observeMessages(conversationID: conversationID)
             .map {
                 $0
@@ -79,7 +79,7 @@ final class MessageService: MessageServiceType {
     func getMessages(conversationID: Int,
                      beforeMessageID: Int?,
                      afterMessageID: Int?) -> AnyPublisher<[Message], Error> {
-        messageAPI
+        networkMessageRepository
             .getMessages(
                 conversationID: conversationID,
                 beforeMessageID: beforeMessageID,
@@ -87,7 +87,7 @@ final class MessageService: MessageServiceType {
             )
             .receive(on: DispatchQueue.main) // NOTED: Do on serial queue to wait write then read
             .handleEvents(receiveOutput: { [weak self] in
-                self?.messageStore.saveMessages($0)
+                self?.localMessageRepository.saveMessages($0)
             })
             .eraseToAnyPublisher()
     }
@@ -112,7 +112,7 @@ final class MessageService: MessageServiceType {
             .handleEvents(receiveOutput: {
                 $0?.forEach { [weak self] in
                     guard let data = $0.data else { return }
-                    try? self?.messageStore
+                    try? self?.localMessageRepository
                         .savePhoto(
                             conversationID: request.conversationID,
                             fileName: $0.name,
@@ -123,7 +123,7 @@ final class MessageService: MessageServiceType {
 
         return attachmentsPublisher
             .withLatestFrom(
-                userStore
+                localUserRepository
                     .getCurrentUserPublisher()
                     .setFailureType(to: Error.self)
             ) { ($0, $1) }
@@ -141,18 +141,18 @@ final class MessageService: MessageServiceType {
             }
             .receive(on: DispatchQueue.main) // NOTED: Do on serial queue to wait write then read
             .handleEvents(receiveOutput: { [weak self] in
-                self?.messageStore.saveMessageParameters([$0])
+                self?.localMessageRepository.saveMessageParameters([$0])
             })
             .flatMapLatest { [weak self] param -> AnyPublisher<Message, Error> in
                 guard let self else {
                     return Empty<Message, Error>().eraseToAnyPublisher()
                 }
-                return self.messageAPI
+                return self.networkMessageRepository
                     .sendMessage(param: param)
             }
             .receive(on: DispatchQueue.main) // NOTED: Do on serial queue to wait write then read
             .handleEvents(receiveOutput: { [weak self] in
-                self?.messageStore.saveMessages([$0])
+                self?.localMessageRepository.saveMessages([$0])
             })
             .eraseToAnyPublisher()
     }
@@ -177,7 +177,7 @@ final class MessageService: MessageServiceType {
 
         let conversationPublishers = users
             .map { user in
-                self.conversationService.createConversation(
+                self.conversationUseCases.createConversation(
                     type: .single,
                     participants: [user]
                 )
@@ -200,12 +200,12 @@ final class MessageService: MessageServiceType {
                 guard let self else {
                     return Empty<[Message], Error>().eraseToAnyPublisher()
                 }
-                return self.messageAPI
+                return self.networkMessageRepository
                     .shareMessage(param: param)
             }
             .receive(on: DispatchQueue.main) // NOTED: Do on serial queue to wait write then read
             .handleEvents(receiveOutput: { [weak self] in
-                self?.messageStore.saveMessages($0)
+                self?.localMessageRepository.saveMessages($0)
             })
             .eraseToAnyPublisher()
     }
@@ -236,7 +236,7 @@ final class MessageService: MessageServiceType {
                 guard let self else {
                     return Empty<[Message], Error>().eraseToAnyPublisher()
                 }
-                return self.userStore
+                return self.localUserRepository
                     .getCurrentUserPublisher()
                     .setFailureType(to: Error.self)
                     .flatMapLatest { [weak self] currentUser in
@@ -245,12 +245,12 @@ final class MessageService: MessageServiceType {
                         }
                         let messages = users
                             .map { user in
-                                self.conversationService.createConversation(
+                                self.conversationUseCases.createConversation(
                                     type: .single,
                                     participants: [user]
                                 )
                                 .flatMapLatest { conversation in
-                                    self.messageAPI.sendMessage(
+                                    self.networkMessageRepository.sendMessage(
                                         param: SendMessageParam(
                                             currentUser: currentUser,
                                             localID: UUID().uuidString,
@@ -276,29 +276,29 @@ final class MessageService: MessageServiceType {
     }
 
     func deleteMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error> {
-        messageAPI
+        networkMessageRepository
             .deleteMessage(conversationID: conversationID, messageID: messageID)
             .handleEvents(receiveOutput: { [weak self] in
-                self?.messageStore.deleteMessage(conversationID: conversationID, messageID: messageID)
+                self?.localMessageRepository.deleteMessage(conversationID: conversationID, messageID: messageID)
             })
             .eraseToAnyPublisher()
     }
 
     func seenMessage(conversationID: Int, messageID: Int) -> AnyPublisher<Void, Error> {
-        messageAPI
+        networkMessageRepository
             .seenMessage(conversationID: conversationID, messageID: messageID)
     }
 
     func getPhotoURL(conversationID: Int, attachmentId: String, fileName: String?) -> URL? {
         let localStickerURL = fileName.flatMap {
-            messageStore.getPhotoURL(conversationID: conversationID, fileName: $0)
+            localMessageRepository.getPhotoURL(conversationID: conversationID, fileName: $0)
         }
-        let remoteStickerURL = messageAPI.getPhotoURL(conversationId: conversationID, attachmentId: attachmentId)
+        let remoteStickerURL = networkMessageRepository.getPhotoURL(conversationId: conversationID, attachmentId: attachmentId)
         return localStickerURL ?? remoteStickerURL
     }
 }
 
-extension MessageService {
+extension MessageUseCasesImpl {
     private func buildAttachmentTrigger(_ attachment: AttachmentsRequest?) -> AnyPublisher<[AttachmentParam]?, Error> {
         switch attachment {
         case let .images(images):

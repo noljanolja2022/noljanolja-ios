@@ -63,7 +63,7 @@ struct UpdateConversationContactListView<ViewModel: UpdateConversationContactLis
         ContactListView(
             viewModel: ContactListViewModel(
                 isMultiSelectionEnabled: true,
-                contactListUseCase: UpdateConversationContactListUseCase(
+                contactListUseCases: UpdateConversationContactListUseCases(
                     conversation: viewModel.conversation
                 )
             ),

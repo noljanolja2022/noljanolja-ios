@@ -1,5 +1,5 @@
 //
-//  CloudFunctionAuthAPI.swift
+//  CloudFunctionAuthRepository.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 05/02/2023.
@@ -10,7 +10,7 @@ import FirebaseFunctions
 import FirebaseFunctionsCombineSwift
 import Foundation
 
-final class CloudFunctionAuthAPI {
+final class CloudFunctionAuthRepository {
     private lazy var functions = Functions.functions(region: "asia-northeast3")
 
     func authWithKakao(token: String) -> AnyPublisher<String, Error> {

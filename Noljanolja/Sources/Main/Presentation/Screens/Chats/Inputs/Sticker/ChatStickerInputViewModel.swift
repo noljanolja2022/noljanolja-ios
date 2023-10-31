@@ -33,7 +33,7 @@ final class ChatStickerInputViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    private let mediaService: MediaServiceType
+    private let mediaUseCases: MediaUseCases
     private weak var delegate: ChatStickerInputViewModelDelegate?
 
     // MARK: Private
@@ -41,10 +41,10 @@ final class ChatStickerInputViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(stickerPack: StickerPack,
-         mediaService: MediaServiceType = MediaService.default,
+         mediaUseCases: MediaUseCases = MediaUseCasesImpl.default,
          delegate: ChatStickerInputViewModelDelegate? = nil) {
         self.stickerPack = stickerPack
-        self.mediaService = mediaService
+        self.mediaUseCases = mediaUseCases
         self.delegate = delegate
         super.init()
 
@@ -64,7 +64,7 @@ final class ChatStickerInputViewModel: ViewModel {
         .receive(on: DispatchQueue.main)
         .sink(receiveValue: { [weak self] in
             guard let self else { return }
-            if self.mediaService.getLocalStickerPackURL(id: self.stickerPack.id) != nil {
+            if self.mediaUseCases.getLocalStickerPackURL(id: self.stickerPack.id) != nil {
                 self.viewState = .content
             } else {
                 self.viewState = .error
@@ -79,7 +79,7 @@ final class ChatStickerInputViewModel: ViewModel {
                 guard let self else {
                     return Empty<Void, Error>().eraseToAnyPublisher()
                 }
-                return self.mediaService.downloadStickerPack(id: self.stickerPack.id)
+                return self.mediaUseCases.downloadStickerPack(id: self.stickerPack.id)
             }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in

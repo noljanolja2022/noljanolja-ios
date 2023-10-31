@@ -1,5 +1,5 @@
 //
-//  AuthService.swift
+//  AuthUseCasesImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 03/02/2023.
@@ -11,9 +11,9 @@ import FirebaseAuthCombineSwift
 import Foundation
 import GoogleSignIn
 
-// MARK: - AuthServiceType
+// MARK: - AuthUseCases
 
-protocol AuthServiceType {
+protocol AuthUseCases {
     var isAuthenticated: CurrentValueSubject<Bool, Never> { get set }
 
     func signUp(email: String, password: String) -> AnyPublisher<String, Error>
@@ -35,30 +35,30 @@ protocol AuthServiceType {
     func signOut() -> AnyPublisher<Void, Error>
 }
 
-extension AuthServiceType {
+extension AuthUseCases {
     func signInWithGoogle(additionalScopes: [String]? = nil) -> AnyPublisher<String, Error> {
         signInWithGoogle(additionalScopes: additionalScopes)
     }
 }
 
-// MARK: - AuthService
+// MARK: - AuthUseCasesImpl
 
-final class AuthService: NSObject, AuthServiceType {
-    static let `default` = AuthService()
+final class AuthUseCasesImpl: NSObject, AuthUseCases {
+    static let `default` = AuthUseCasesImpl()
 
     private lazy var notificationUseCases = NotificationUseCasesImpl.default
-    private lazy var appleAuthAPI = AppleAuthAPI()
-    private lazy var kakaoAuthAPI = KakaoAuthAPI()
-    private lazy var naverAuthAPI = NaverAuthAPI()
-    private lazy var cloudFunctionAuthAPI = CloudFunctionAuthAPI()
+    private lazy var appleAuthRepository = AppleAuthRepository()
+    private lazy var kakaoAuthRepository = KakaoAuthRepository()
+    private lazy var naverAuthRepository = NaverAuthRepository()
+    private lazy var cloudFunctionAuthRepository = CloudFunctionAuthRepository()
     private lazy var firebaseAuth = Auth.auth()
-    private lazy var authStore = AuthStore.default
-    private lazy var contactStore: ContactStoreType = ContactStore.default
+    private lazy var localAuthRepository = LocalAuthRepositoryImpl.default
+    private lazy var localContactRepository: LocalContactRepository = LocalContactRepositoryImpl.default
     private lazy var conversationStore: ConversationStoreType = ConversationStore.default
     private lazy var conversationDetailStore: ConversationDetailStoreType = ConversationDetailStore.default
-    private lazy var messageStore: MessageStoreType = MessageStore.default
+    private lazy var localMessageRepository: LocalMessageRepository = LocalMessageRepositoryImpl.default
 
-    lazy var isAuthenticated = CurrentValueSubject<Bool, Never>(authStore.getToken() != nil)
+    lazy var isAuthenticated = CurrentValueSubject<Bool, Never>(localAuthRepository.getToken() != nil)
 
     override private init() {
         super.init()
@@ -130,7 +130,7 @@ final class AuthService: NSObject, AuthServiceType {
     }
 
     func signInWithApple() -> AnyPublisher<String, Error> {
-        appleAuthAPI.signIn()
+        appleAuthRepository.signIn()
             .flatMap { [weak self] idToken, nonce in
                 guard let self else { return Empty<AuthDataResult, Error>().eraseToAnyPublisher() }
                 let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idToken, rawNonce: nonce)
@@ -169,10 +169,10 @@ final class AuthService: NSObject, AuthServiceType {
     }
 
     func signInWithKakao() -> AnyPublisher<String, Error> {
-        kakaoAuthAPI.signIn()
+        kakaoAuthRepository.signIn()
             .flatMap { [weak self] in
                 guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
-                return self.cloudFunctionAuthAPI.authWithKakao(token: $0)
+                return self.cloudFunctionAuthRepository.authWithKakao(token: $0)
             }
             .flatMap { [weak self] in
                 guard let self else { return Empty<AuthDataResult, Error>().eraseToAnyPublisher() }
@@ -188,12 +188,12 @@ final class AuthService: NSObject, AuthServiceType {
     }
 
     func signInWithNaver(_ signInWithNaverCompletion: (() -> Void)?) -> AnyPublisher<String, Error> {
-        naverAuthAPI
+        naverAuthRepository
             .signIn()
             .handleEvents(receiveOutput: { _ in signInWithNaverCompletion?() })
             .flatMap { [weak self] in
                 guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
-                return self.cloudFunctionAuthAPI.authWithNaver(token: $0)
+                return self.cloudFunctionAuthRepository.authWithNaver(token: $0)
             }
             .flatMap { [weak self] in
                 guard let self else { return Empty<AuthDataResult, Error>().eraseToAnyPublisher() }
@@ -222,7 +222,7 @@ final class AuthService: NSObject, AuthServiceType {
 
         return user.getIDTokenResult()
             .handleEvents(receiveOutput: { [weak self] token in
-                self?.authStore.saveToken(token)
+                self?.localAuthRepository.saveToken(token)
                 self?.isAuthenticated.send(true)
             })
             .eraseToAnyPublisher()
@@ -234,10 +234,10 @@ final class AuthService: NSObject, AuthServiceType {
             .flatMap { [weak self] _ in
                 guard let self else { return Empty<Void, Error>().eraseToAnyPublisher() }
                 return Publishers.CombineLatest4(
-                    appleAuthAPI.signOutIfNeeded(),
+                    appleAuthRepository.signOutIfNeeded(),
                     GIDSignIn.sharedInstance.signOutIfNeededCombine(),
-                    kakaoAuthAPI.signOutIfNeeded(),
-                    naverAuthAPI.signOutIfNeeded()
+                    kakaoAuthRepository.signOutIfNeeded(),
+                    naverAuthRepository.signOutIfNeeded()
                 )
                 .map { _ in () }
                 .eraseToAnyPublisher()
@@ -250,11 +250,11 @@ final class AuthService: NSObject, AuthServiceType {
             }
             .handleEvents(receiveOutput: { [weak self] in
                 guard let self else { return }
-                self.authStore.clearToken()
-                self.contactStore.deleteAll()
+                self.localAuthRepository.clearToken()
+                self.localContactRepository.deleteAll()
                 self.conversationStore.deleteAll()
                 self.conversationDetailStore.deleteAll()
-                self.messageStore.deleteAll()
+                self.localMessageRepository.deleteAll()
                 self.isAuthenticated.send(false)
             })
             .eraseToAnyPublisher()

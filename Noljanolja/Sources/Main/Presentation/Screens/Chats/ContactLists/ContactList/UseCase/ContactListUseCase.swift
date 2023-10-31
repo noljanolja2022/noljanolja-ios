@@ -1,5 +1,5 @@
 //
-//  ContactListUseCase.swift
+//  ContactListUseCases.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 08/04/2023.
@@ -8,22 +8,22 @@
 import Combine
 import Foundation
 
-// MARK: - ContactListUseCase
+// MARK: - ContactListUseCases
 
-protocol ContactListUseCase {
+protocol ContactListUseCases {
     func getContacts(page: Int, pageSize: Int) -> AnyPublisher<[User], Error>
 }
 
-// MARK: - ContactListUseCaseImpl
+// MARK: - ContactListUseCasesImpl
 
-final class ContactListUseCaseImpl: ContactListUseCase {
-    private let contactService: ContactServiceType
+final class ContactListUseCasesImpl: ContactListUseCases {
+    private let contactUseCases: ContactUseCases
 
-    init(contactService: ContactServiceType = ContactService.default) {
-        self.contactService = contactService
+    init(contactUseCases: ContactUseCases = ContactUseCasesImpl.default) {
+        self.contactUseCases = contactUseCases
     }
 
     func getContacts(page: Int, pageSize: Int) -> AnyPublisher<[User], Error> {
-        contactService.getContacts(page: page, pageSize: pageSize)
+        contactUseCases.getContacts(page: page, pageSize: pageSize)
     }
 }

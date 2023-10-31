@@ -10,9 +10,9 @@ import Foundation
 import RealmSwift
 import Zip
 
-// MARK: - MediaStoreType
+// MARK: - LocalMediaRepository
 
-protocol MediaStoreType {
+protocol LocalMediaRepository {
     func saveStickerPacks(_ stickerPacks: [StickerPack])
     func observeStickerPacks() -> AnyPublisher<[StickerPack], Error>
     
@@ -26,10 +26,10 @@ protocol MediaStoreType {
     func deleteAll()
 }
 
-// MARK: - MediaStore
+// MARK: - LocalMediaRepositoryImpl
 
-final class MediaStore: MediaStoreType {
-    static let `default` = MediaStore()
+final class LocalMediaRepositoryImpl: LocalMediaRepository {
+    static let `default` = LocalMediaRepositoryImpl()
 
     private lazy var realmManager: RealmManagerType = RealmManager(
         configuration: {
@@ -115,7 +115,7 @@ final class MediaStore: MediaStoreType {
     }
 }
 
-extension MediaStore {
+extension LocalMediaRepositoryImpl {
     private func generateStickerPacksURL() -> URL {
         let directories = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
         let directory = directories[0]

@@ -153,7 +153,7 @@ struct Message: Equatable, Decodable {
 
     func getStickerURL() -> URL? {
         if let message {
-            return MediaService.default.getStickerURL(stickerPath: message)
+            return MediaUseCasesImpl.default.getStickerURL(stickerPath: message)
         } else {
             return nil
         }

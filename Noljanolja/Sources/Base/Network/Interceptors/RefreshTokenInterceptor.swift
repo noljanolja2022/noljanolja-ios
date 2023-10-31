@@ -14,14 +14,14 @@ final class RefreshTokenInterceptor: RequestInterceptor {
 
     // MARK: Denependencies
 
-    private let authService: AuthServiceType
+    private let authUseCases: AuthUseCases
 
     // MARK: Private
 
     private let maxRetryTime = 3
 
-    init(authService: AuthServiceType = AuthService.default) {
-        self.authService = authService
+    init(authUseCases: AuthUseCases = AuthUseCasesImpl.default) {
+        self.authUseCases = authUseCases
     }
 
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
@@ -32,7 +32,7 @@ final class RefreshTokenInterceptor: RequestInterceptor {
         }
 
         var cancellable = AnyCancellable {}
-        cancellable = authService.getIDTokenResult()
+        cancellable = authUseCases.getIDTokenResult()
             .sink(
                 receiveCompletion: { result in
                     switch result {

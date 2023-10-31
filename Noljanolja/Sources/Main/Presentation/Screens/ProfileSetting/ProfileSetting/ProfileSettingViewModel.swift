@@ -43,7 +43,7 @@ final class ProfileSettingViewModel: ViewModel {
     // MARK: Dependencies
 
     private let userService: UserServiceType
-    private let authService: AuthServiceType
+    private let authUseCases: AuthUseCases
     private let deleteCacheUseCase: DeleteCacheUseCaseProtocol
     private weak var delegate: ProfileSettingViewModelDelegate?
 
@@ -53,11 +53,11 @@ final class ProfileSettingViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(userService: UserServiceType = UserService.default,
-         authService: AuthServiceType = AuthService.default,
+         authUseCases: AuthUseCases = AuthUseCasesImpl.default,
          deleteCacheUseCase: DeleteCacheUseCaseProtocol = DeleteCacheUseCase.default,
          delegate: ProfileSettingViewModelDelegate? = nil) {
         self.userService = userService
-        self.authService = authService
+        self.authUseCases = authUseCases
         self.deleteCacheUseCase = deleteCacheUseCase
         self.delegate = delegate
         super.init()
@@ -155,7 +155,7 @@ final class ProfileSettingViewModel: ViewModel {
                 guard let self else {
                     return Empty<Void, Error>().eraseToAnyPublisher()
                 }
-                return self.authService.signOut()
+                return self.authUseCases.signOut()
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in

@@ -21,22 +21,22 @@ protocol ConversationSocketServiceType {
 final class ConversationSocketService: ConversationSocketServiceType {
     static let `default` = ConversationSocketService()
 
-    private let userStore: UserStoreType
+    private let localUserRepository: LocalUserRepository
     private let socketAPI: ConversationSocketAPIType
     private let conversationStore: ConversationStoreType
     private let conversationDetailStore: ConversationDetailStoreType
-    private let messageStore: MessageStoreType
+    private let localMessageRepository: LocalMessageRepository
 
-    init(userStore: UserStoreType = UserStore.default,
+    init(localUserRepository: LocalUserRepository = LocalUserRepositoryImpl.default,
          socketAPI: ConversationSocketAPIType = ConversationSocketAPI.default,
          conversationStore: ConversationStoreType = ConversationStore.default,
          conversationDetailStore: ConversationDetailStoreType = ConversationDetailStore.default,
-         messageStore: MessageStoreType = MessageStore.default) {
-        self.userStore = userStore
+         localMessageRepository: LocalMessageRepository = LocalMessageRepositoryImpl.default) {
+        self.localUserRepository = localUserRepository
         self.socketAPI = socketAPI
         self.conversationStore = conversationStore
         self.conversationDetailStore = conversationDetailStore
-        self.messageStore = messageStore
+        self.localMessageRepository = localMessageRepository
     }
 
     func register() {
@@ -45,7 +45,7 @@ final class ConversationSocketService: ConversationSocketServiceType {
 
     private func getStream() -> AnyPublisher<Result<Conversation, Error>, Never> {
         socketAPI.getStream()
-            .withLatestFrom(userStore.getCurrentUserPublisher()) { ($0, $1) }
+            .withLatestFrom(localUserRepository.getCurrentUserPublisher()) { ($0, $1) }
             .handleEvents(receiveOutput: { [weak self] result, currentUser in
                 guard let self else { return }
                 switch result {
@@ -95,7 +95,7 @@ final class ConversationSocketService: ConversationSocketServiceType {
                 case let .success(conversation):
                     let sortedMessages = conversation.messages.sorted { $0.createdAt > $1.createdAt }
                     guard let lastMessage = sortedMessages.first else { return }
-                    self?.messageStore.saveMessages([lastMessage])
+                    self?.localMessageRepository.saveMessages([lastMessage])
                 case .failure:
                     break
                 }

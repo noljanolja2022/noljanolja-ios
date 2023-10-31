@@ -1,5 +1,5 @@
 //
-//  ContactService.swift
+//  ContactUseCasesImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 08/03/2023.
@@ -8,47 +8,47 @@
 import Combine
 import Foundation
 
-// MARK: - ContactServiceType
+// MARK: - ContactUseCases
 
-protocol ContactServiceType {
+protocol ContactUseCases {
     func getAuthorizationStatus() -> AnyPublisher<Void, Error>
     func requestContactPermission() -> AnyPublisher<Bool, Error>
     func getContacts(page: Int, pageSize: Int) -> AnyPublisher<[User], Error>
 }
 
-// MARK: - ContactService
+// MARK: - ContactUseCasesImpl
 
-final class ContactService: ContactServiceType {
-    static let `default` = ContactService()
+final class ContactUseCasesImpl: ContactUseCases {
+    static let `default` = ContactUseCasesImpl()
 
-    private let contactRepository: ContactRepository
+    private let networkContactRepository: NetworkContactRepository
+    private let localContactRepository: LocalContactRepository
     private let userAPI: UserAPIType
-    private let contactStore: ContactStoreType
 
-    private init(contactRepository: ContactRepository = ContactRepositoryImpl.default,
-                 userAPI: UserAPIType = UserAPI.default,
-                 contactStore: ContactStoreType = ContactStore.default) {
-        self.contactRepository = contactRepository
+    private init(networkContactRepository: NetworkContactRepository = NetworkContactRepositoryImpl.default,
+                 localContactRepository: LocalContactRepository = LocalContactRepositoryImpl.default,
+                 userAPI: UserAPIType = UserAPI.default) {
+        self.networkContactRepository = networkContactRepository
+        self.localContactRepository = localContactRepository
         self.userAPI = userAPI
-        self.contactStore = contactStore
     }
 
     func getAuthorizationStatus() -> AnyPublisher<Void, Error> {
-        contactRepository.getAuthorizationStatus()
+        networkContactRepository.getAuthorizationStatus()
     }
 
     func requestContactPermission() -> AnyPublisher<Bool, Error> {
-        contactRepository.requestContactPermission()
+        networkContactRepository.requestContactPermission()
     }
 
     func getContacts(page: Int, pageSize: Int) -> AnyPublisher<[User], Error> {
-        contactRepository.getAuthorizationStatus()
+        networkContactRepository.getAuthorizationStatus()
             .flatMapLatest { [weak self] _ -> AnyPublisher<[User], Error> in
                 guard let self else {
                     return Fail(error: CommonError.captureSelfNotFound).eraseToAnyPublisher()
                 }
 
-                let localContacts = contactStore.observeContacts()
+                let localContacts = localContactRepository.observeContacts()
                     .filter { !$0.isEmpty }
 
                 let remoteGetContacts = getRemoteContacts(page: page, pageSize: pageSize)
@@ -70,9 +70,9 @@ final class ContactService: ContactServiceType {
     }
 }
 
-extension ContactService {
+extension ContactUseCasesImpl {
     private func syncContacts() -> AnyPublisher<[User], Error> {
-        contactRepository
+        networkContactRepository
             .getContacts()
             .flatMapLatest { [weak self] contacts -> AnyPublisher<[User], Error> in
                 guard let self else {
@@ -88,7 +88,7 @@ extension ContactService {
         userAPI
             .getContact(page: page, pageSize: pageSize)
             .handleEvents(receiveOutput: { [weak self] in
-                self?.contactStore.saveContact($0)
+                self?.localContactRepository.saveContact($0)
             })
             .eraseToAnyPublisher()
     }

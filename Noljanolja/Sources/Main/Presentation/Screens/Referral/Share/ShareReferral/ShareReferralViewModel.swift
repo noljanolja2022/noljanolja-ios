@@ -26,7 +26,7 @@ class ShareReferralViewModel: ViewModel {
     // MARK: Dependencies
 
     private let code: String?
-    private let messageService: MessageServiceType
+    private let messageUseCases: MessageUseCases
     private weak var delegate: ShareReferralViewModelDelegate?
 
     // MARK: Action
@@ -39,10 +39,10 @@ class ShareReferralViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(code: String?,
-         messageService: MessageServiceType = MessageService.default,
+         messageUseCases: MessageUseCases = MessageUseCasesImpl.default,
          delegate: ShareReferralViewModelDelegate? = nil) {
         self.code = code
-        self.messageService = messageService
+        self.messageUseCases = messageUseCases
         self.delegate = delegate
         super.init()
 
@@ -62,7 +62,7 @@ class ShareReferralViewModel: ViewModel {
                 guard let self else {
                     return Fail<[Message], Error>(error: CommonError.captureSelfNotFound).eraseToAnyPublisher()
                 }
-                return self.messageService
+                return self.messageUseCases
                     .shareMessage(
                         request: ShareMessageRequest(
                             type: .plaintext,
@@ -74,7 +74,7 @@ class ShareReferralViewModel: ViewModel {
                         guard let self else {
                             return Fail<[Message], Error>(error: CommonError.captureSelfNotFound).eraseToAnyPublisher()
                         }
-                        return self.messageService
+                        return self.messageUseCases
                             .shareMessage(
                                 request: ShareMessageRequest(
                                     type: .plaintext,

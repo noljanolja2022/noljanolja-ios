@@ -1,5 +1,5 @@
 //
-//  UserStore.swift
+//  LocalUserRepositoryImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 17/04/2023.
@@ -8,19 +8,19 @@
 import Combine
 import Foundation
 
-// MARK: - UserStoreType
+// MARK: - LocalUserRepository
 
-protocol UserStoreType {
+protocol LocalUserRepository {
     func saveCurrentUser(_ user: User)
     
     func getCurrentUser() -> User?
     func getCurrentUserPublisher() -> AnyPublisher<User, Never>
 }
 
-// MARK: - UserStore
+// MARK: - LocalUserRepositoryImpl
 
-final class UserStore: UserStoreType {
-    static let `default` = UserStore()
+final class LocalUserRepositoryImpl: LocalUserRepository {
+    static let `default` = LocalUserRepositoryImpl()
 
     private let currentUserSubject = CurrentValueSubject<User?, Never>(nil)
 

@@ -19,7 +19,7 @@ struct AuthPluggin: PluginType {
         guard target.rawTarget is AuthConfigurable else { return request }
 
         var request = request
-        if let token = AuthStore.default.getToken() {
+        if let token = LocalAuthRepositoryImpl.default.getToken() {
             request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
 

@@ -30,39 +30,39 @@ final class UserService: UserServiceType {
     // MARK: Dependencies
 
     private let userAPI: UserAPIType
-    private let userStore: UserStoreType
+    private let localUserRepository: LocalUserRepository
 
     init(userAPI: UserAPIType = UserAPI.default,
-         userStore: UserStoreType = UserStore.default) {
+         localUserRepository: LocalUserRepository = LocalUserRepositoryImpl.default) {
         self.userAPI = userAPI
-        self.userStore = userStore
+        self.localUserRepository = localUserRepository
     }
 
     func getCurrentUser() -> User? {
-        userStore.getCurrentUser()
+        localUserRepository.getCurrentUser()
     }
 
     func getCurrentUserPublisher() -> AnyPublisher<User, Never> {
-        userStore.getCurrentUserPublisher()
+        localUserRepository.getCurrentUserPublisher()
     }
 
     func getCurrentUser() -> AnyPublisher<User, Error> {
         userAPI
             .getCurrentUser()
-            .handleEvents(receiveOutput: { [weak self] in self?.userStore.saveCurrentUser($0) })
+            .handleEvents(receiveOutput: { [weak self] in self?.localUserRepository.saveCurrentUser($0) })
             .eraseToAnyPublisher()
     }
 
     func getCurrentUserIfNeeded() -> AnyPublisher<User, Error> {
         if getCurrentUser() != nil {
-            return userStore
+            return localUserRepository
                 .getCurrentUserPublisher()
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         } else {
             return userAPI
                 .getCurrentUser()
-                .handleEvents(receiveOutput: { [weak self] in self?.userStore.saveCurrentUser($0) })
+                .handleEvents(receiveOutput: { [weak self] in self?.localUserRepository.saveCurrentUser($0) })
                 .eraseToAnyPublisher()
         }
     }
@@ -70,7 +70,7 @@ final class UserService: UserServiceType {
     func updateCurrentUser(_ param: UpdateCurrentUserParam) -> AnyPublisher<User, Error> {
         userAPI
             .updateCurrentUser(param)
-            .handleEvents(receiveOutput: { [weak self] in self?.userStore.saveCurrentUser($0) })
+            .handleEvents(receiveOutput: { [weak self] in self?.localUserRepository.saveCurrentUser($0) })
             .eraseToAnyPublisher()
     }
 
@@ -83,7 +83,7 @@ final class UserService: UserServiceType {
                 }
                 return self.getCurrentUser()
             }
-            .handleEvents(receiveOutput: { [weak self] in self?.userStore.saveCurrentUser($0) })
+            .handleEvents(receiveOutput: { [weak self] in self?.localUserRepository.saveCurrentUser($0) })
             .eraseToAnyPublisher()
     }
 }

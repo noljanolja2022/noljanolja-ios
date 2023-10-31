@@ -21,16 +21,16 @@ protocol NotificationUseCases {
 final class NotificationUseCasesImpl: NotificationUseCases {
     static let `default` = NotificationUseCasesImpl()
 
-    private let userStore: UserStoreType
+    private let localUserRepository: LocalUserRepository
     private let networkNotificationRepository: NetworkNotificationRepository
 
     private let pushTokenSubject = PassthroughSubject<String, Never>()
 
     private var cancellables = Set<AnyCancellable>()
 
-    private init(userStore: UserStoreType = UserStore.default,
+    private init(localUserRepository: LocalUserRepository = LocalUserRepositoryImpl.default,
                  networkNotificationRepository: NetworkNotificationRepository = NetworkNotificationRepositoryImpl.shared) {
-        self.userStore = userStore
+        self.localUserRepository = localUserRepository
         self.networkNotificationRepository = networkNotificationRepository
 
         configure()
@@ -38,7 +38,7 @@ final class NotificationUseCasesImpl: NotificationUseCases {
 
     private func configure() {
         Publishers.CombineLatest(
-            userStore.getCurrentUserPublisher(),
+            localUserRepository.getCurrentUserPublisher(),
             pushTokenSubject
                 .removeDuplicates()
                 .filter { !$0.trimmed.isEmpty }

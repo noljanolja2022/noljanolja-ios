@@ -20,12 +20,12 @@ final class AddFriendUseCase: AddFriendUseCaseType {
     static let `default` = AddFriendUseCase()
 
     private let userAPI: UserAPIType
-    private let conversationService: ConversationServiceType
+    private let conversationUseCases: ConversationUseCases
 
     init(userAPI: UserAPIType = UserAPI.default,
-         conversationService: ConversationServiceType = ConversationService.default) {
+         conversationUseCases: ConversationUseCases = ConversationUseCasesImpl.default) {
         self.userAPI = userAPI
-        self.conversationService = conversationService
+        self.conversationUseCases = conversationUseCases
     }
 
     func addFriend(user: User) -> AnyPublisher<Conversation, Error> {
@@ -35,7 +35,7 @@ final class AddFriendUseCase: AddFriendUseCaseType {
                 guard let self else {
                     return Empty<Conversation, Error>().eraseToAnyPublisher()
                 }
-                return self.conversationService
+                return self.conversationUseCases
                     .createConversation(type: .single, participants: [user])
             }
             .eraseToAnyPublisher()

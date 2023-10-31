@@ -30,7 +30,7 @@ final class GoogleAuthViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    private let authUseCase: AuthServiceType
+    private let authUseCase: AuthUseCases
     private let userService: UserServiceType
     private weak var delegate: GoogleAuthViewModelDelegate?
 
@@ -39,7 +39,7 @@ final class GoogleAuthViewModel: ViewModel {
     private let getUserAction = PassthroughSubject<Void, Never>()
     private var cancellables = Set<AnyCancellable>()
 
-    init(authUseCase: AuthServiceType = AuthService.default,
+    init(authUseCase: AuthUseCases = AuthUseCasesImpl.default,
          userService: UserServiceType = UserService.default,
          delegate: GoogleAuthViewModelDelegate? = nil) {
         self.authUseCase = authUseCase

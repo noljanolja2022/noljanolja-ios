@@ -46,6 +46,6 @@ struct StickerPack: Equatable, Codable {
     }
 
     func getImageURL() -> URL? {
-        MediaService.default.getStickerURL(stickerPackID: id, stickerFile: trayImageFile)
+        MediaUseCasesImpl.default.getStickerURL(stickerPackID: id, stickerFile: trayImageFile)
     }
 }

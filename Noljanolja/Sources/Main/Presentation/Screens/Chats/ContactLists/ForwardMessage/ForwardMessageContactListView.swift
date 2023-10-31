@@ -63,7 +63,7 @@ struct ForwardMessageContactListView<ViewModel: ForwardMessageContactListViewMod
         ContactListView(
             viewModel: ContactListViewModel(
                 isMultiSelectionEnabled: true,
-                contactListUseCase: ContactListUseCaseImpl()
+                contactListUseCases: ContactListUseCasesImpl()
             ),
             selectedUsers: $selectedUsers,
             selectUserAction: { _ in }

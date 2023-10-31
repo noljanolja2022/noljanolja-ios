@@ -42,16 +42,16 @@ final class AuthViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    private let authService: AuthServiceType
+    private let authUseCases: AuthUseCases
     private weak var delegate: AuthViewModelDelegate?
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(authService: AuthServiceType = AuthService.default,
+    init(authUseCases: AuthUseCases = AuthUseCasesImpl.default,
          delegate: AuthViewModelDelegate? = nil) {
-        self.authService = authService
+        self.authUseCases = authUseCases
         self.delegate = delegate
         super.init()
 
@@ -74,7 +74,7 @@ final class AuthViewModel: ViewModel {
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] countryCode, phoneNumber -> AnyPublisher<String, Error> in
                 guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
-                return self.authService
+                return self.authUseCases
                     .sendPhoneVerificationCode(phoneNumber, languageCode: countryCode)
             }
             .receive(on: DispatchQueue.main)

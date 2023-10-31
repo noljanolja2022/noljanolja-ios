@@ -42,7 +42,7 @@ final class AuthVerificationViewModel: ViewModel {
     
     private var verificationID: String
 
-    private let authService: AuthServiceType
+    private let authUseCases: AuthUseCases
     private let userService: UserServiceType
     private weak var delegate: AuthVerificationViewModelDelegate?
 
@@ -55,13 +55,13 @@ final class AuthVerificationViewModel: ViewModel {
     init(country: Country,
          phoneNumberText: String,
          verificationID: String,
-         authService: AuthServiceType = AuthService.default,
+         authUseCases: AuthUseCases = AuthUseCasesImpl.default,
          userService: UserServiceType = UserService.default,
          delegate: AuthVerificationViewModelDelegate? = nil) {
         self.country = country
         self.phoneNumberText = phoneNumberText
         self.verificationID = verificationID
-        self.authService = authService
+        self.authUseCases = authUseCases
         self.userService = userService
         self.delegate = delegate
         super.init()
@@ -76,7 +76,7 @@ final class AuthVerificationViewModel: ViewModel {
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] countryCode, phoneNumber -> AnyPublisher<String, Error> in
                 guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
-                return self.authService
+                return self.authUseCases
                     .sendPhoneVerificationCode(phoneNumber, languageCode: countryCode)
             }
             .receive(on: DispatchQueue.main)
@@ -104,7 +104,7 @@ final class AuthVerificationViewModel: ViewModel {
                 guard let self else {
                     return Empty<User, Error>().eraseToAnyPublisher()
                 }
-                return self.authService
+                return self.authUseCases
                     .verificationCode(verificationID: self.verificationID, verificationCode: self.verificationCode)
                     .flatMap { _ in
                         self.userService.getCurrentUser()

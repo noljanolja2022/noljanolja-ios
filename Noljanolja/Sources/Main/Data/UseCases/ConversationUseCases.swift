@@ -1,5 +1,5 @@
 //
-//  ConversationService.swift
+//  ConversationUseCasesImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 09/03/2023.
@@ -8,9 +8,9 @@
 import Combine
 import Foundation
 
-// MARK: - ConversationServiceType
+// MARK: - ConversationUseCases
 
-protocol ConversationServiceType {
+protocol ConversationUseCases {
     func getConversations() -> AnyPublisher<[Conversation], Error>
     func getConversation(conversationID: Int) -> AnyPublisher<Conversation, Error>
 
@@ -28,7 +28,7 @@ protocol ConversationServiceType {
     func leave(conversationID: Int) -> AnyPublisher<Conversation, Error>
 }
 
-extension ConversationServiceType {
+extension ConversationUseCases {
     func updateConversation(conversationID: Int,
                             title: String? = nil,
                             participants: [User]? = nil,
@@ -42,27 +42,27 @@ extension ConversationServiceType {
     }
 }
 
-// MARK: - ConversationService
+// MARK: - ConversationUseCasesImpl
 
-final class ConversationService: ConversationServiceType {
-    static let `default` = ConversationService()
+final class ConversationUseCasesImpl: ConversationUseCases {
+    static let `default` = ConversationUseCasesImpl()
 
     private let conversationRepository: ConversationRepository
     private let conversationParticipantRepository: ConversationParticipantRepository
     private let conversationStore: ConversationStoreType
     private let conversationDetailStore: ConversationDetailStoreType
-    private let userStore: UserStoreType
+    private let localUserRepository: LocalUserRepository
 
     private init(conversationRepository: ConversationRepository = ConversationRepositoryImpl.default,
                  conversationParticipantRepository: ConversationParticipantRepository = ConversationParticipantRepositoryImpl.default,
                  conversationStore: ConversationStoreType = ConversationStore.default,
                  conversationDetailStore: ConversationDetailStoreType = ConversationDetailStore.default,
-                 userStore: UserStoreType = UserStore.default) {
+                 localUserRepository: LocalUserRepository = LocalUserRepositoryImpl.default) {
         self.conversationRepository = conversationRepository
         self.conversationParticipantRepository = conversationParticipantRepository
         self.conversationStore = conversationStore
         self.conversationDetailStore = conversationDetailStore
-        self.userStore = userStore
+        self.localUserRepository = localUserRepository
     }
 
     func getConversations() -> AnyPublisher<[Conversation], Error> {
@@ -128,7 +128,7 @@ final class ConversationService: ConversationServiceType {
     func createConversation(type: ConversationType,
                             participants: [User]) -> AnyPublisher<Conversation, Error> {
         if participants.count == 1,
-           let currentUser = userStore.getCurrentUser(),
+           let currentUser = localUserRepository.getCurrentUser(),
            let conversation = conversationStore.getConversations(
                type: .single,
                participants: participants + [currentUser]
@@ -203,7 +203,7 @@ final class ConversationService: ConversationServiceType {
     }
 
     func leave(conversationID: Int) -> AnyPublisher<Conversation, Error> {
-        guard let currentUser = userStore.getCurrentUser() else {
+        guard let currentUser = localUserRepository.getCurrentUser() else {
             return Fail<Conversation, Error>(error: CommonError.currentUserNotFound)
                 .eraseToAnyPublisher()
         }

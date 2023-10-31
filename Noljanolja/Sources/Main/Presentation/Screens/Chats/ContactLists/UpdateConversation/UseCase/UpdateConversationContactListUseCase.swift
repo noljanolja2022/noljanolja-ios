@@ -1,5 +1,5 @@
 //
-//  UpdateConversationContactListUseCase.swift
+//  UpdateConversationContactListUseCases.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 08/04/2023.
@@ -8,19 +8,19 @@
 import Combine
 import Foundation
 
-final class UpdateConversationContactListUseCase: ContactListUseCase {
+final class UpdateConversationContactListUseCases: ContactListUseCases {
     private let conversation: Conversation
-    private let contactService: ContactServiceType
+    private let contactUseCases: ContactUseCases
 
     init(conversation: Conversation,
-         contactService: ContactServiceType = ContactService.default) {
+         contactUseCases: ContactUseCases = ContactUseCasesImpl.default) {
         self.conversation = conversation
-        self.contactService = contactService
+        self.contactUseCases = contactUseCases
     }
 
     func getContacts(page: Int, pageSize: Int) -> AnyPublisher<[User], Error> {
         let conversation = conversation
-        return contactService
+        return contactUseCases
             .getContacts(page: page, pageSize: pageSize)
             .map { users in
                 users.filter { user in

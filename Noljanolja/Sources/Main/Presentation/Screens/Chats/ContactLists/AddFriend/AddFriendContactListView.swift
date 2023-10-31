@@ -43,7 +43,7 @@ struct AddFriendContactListView<ViewModel: AddFriendContactListViewModel>: View 
         ContactListView(
             viewModel: ContactListViewModel(
                 isMultiSelectionEnabled: false,
-                contactListUseCase: ContactListUseCaseImpl()
+                contactListUseCases: ContactListUseCasesImpl()
             ),
             selectedUsers: .constant([]),
             selectUserAction: { viewModel.action.send($0) }

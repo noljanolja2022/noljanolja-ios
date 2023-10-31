@@ -1,5 +1,5 @@
 //
-//  AppleAuthAPI.swift
+//  AppleAuthRepository.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 04/02/2023.
@@ -10,9 +10,9 @@ import Combine
 import CryptoKit
 import Foundation
 
-// MARK: - AppleAuthAPI
+// MARK: - AppleAuthRepository
 
-final class AppleAuthAPI: NSObject {
+final class AppleAuthRepository: NSObject {
     private var currentNonce: String?
     private let successTrigger = PassthroughSubject<(String, String), Never>()
     private let failTrigger = PassthroughSubject<Error, Never>()
@@ -40,7 +40,7 @@ final class AppleAuthAPI: NSObject {
 
 // MARK: ASAuthorizationControllerPresentationContextProviding, ASAuthorizationControllerDelegate
 
-extension AppleAuthAPI: ASAuthorizationControllerPresentationContextProviding, ASAuthorizationControllerDelegate {
+extension AppleAuthRepository: ASAuthorizationControllerPresentationContextProviding, ASAuthorizationControllerDelegate {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         UIApplication.shared.rootKeyWindow ?? UIWindow(frame: UIScreen.main.bounds)
     }
@@ -62,7 +62,7 @@ extension AppleAuthAPI: ASAuthorizationControllerPresentationContextProviding, A
     }
 }
 
-extension AppleAuthAPI {
+extension AppleAuthRepository {
     private func signInWithApple() {
         let nonce = randomNonceString()
         currentNonce = nonce

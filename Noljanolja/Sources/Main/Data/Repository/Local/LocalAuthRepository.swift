@@ -1,5 +1,5 @@
 //
-//  AuthStore.swift
+//  LocalAuthRepositoryImpl.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 07/02/2023.
@@ -15,18 +15,18 @@ private extension Keychain {
     }()
 }
 
-// MARK: - AuthStoreType
+// MARK: - LocalAuthRepository
 
-protocol AuthStoreType {
+protocol LocalAuthRepository {
     func saveToken(_ token: String)
     func getToken() -> String?
     func clearToken()
 }
 
-// MARK: - AuthStore
+// MARK: - LocalAuthRepositoryImpl
 
-final class AuthStore: AuthStoreType {
-    static let `default` = AuthStore(keychain: .default)
+final class LocalAuthRepositoryImpl: LocalAuthRepository {
+    static let `default` = LocalAuthRepositoryImpl(keychain: .default)
 
     private let keychain: Keychain
 

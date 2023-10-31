@@ -30,6 +30,6 @@ struct Sticker: Equatable, Codable {
     }
 
     func getImageURL(_ stickerPackID: Int) -> URL? {
-        MediaService.default.getStickerURL(stickerPackID: stickerPackID, stickerFile: imageFile)
+        MediaUseCasesImpl.default.getStickerURL(stickerPackID: stickerPackID, stickerFile: imageFile)
     }
 }
