@@ -16,7 +16,3 @@ struct ComingSoonView: View {
             .padding(16)
     }
 }
-
-#Preview {
-    ComingSoonView()
-}

@@ -194,9 +194,3 @@ extension ExchangeView {
     @ViewBuilder
     private func buildFullScreenCoverDestinationView(_: Binding<ExchangeFullScreenCoverType>) -> some View {}
 }
-
-#Preview {
-    ExchangeView(
-        viewModel: ExchangeViewModel()
-    )
-}
