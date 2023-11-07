@@ -430,6 +430,8 @@ internal enum L10n {
   internal static let inviteToGetBenefits = L10n.tr("Localizable", "invite_to_get_benefits", fallback: "Invite Friends to get benefits")
   /// Let’s join and Play
   internal static let joinPlay = L10n.tr("Localizable", "join_play", fallback: "Let’s join and Play")
+  /// Sign in with Apple
+  internal static let loginAppleButton = L10n.tr("Localizable", "login_apple_button", fallback: "Sign in with Apple")
   /// You will receive a code to verify to this phone number via text message.
   internal static let loginConfirmPhoneDescription = L10n.tr("Localizable", "login_confirm_phone_description", fallback: "You will receive a code to verify to this phone number via text message.")
   /// Country

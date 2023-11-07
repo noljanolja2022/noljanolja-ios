@@ -50,7 +50,7 @@ extension AppleAuthRepository: ASAuthorizationControllerPresentationContextProvi
             if let nonce = currentNonce,
                let idToken = credential.identityToken,
                let idTokenString = String(data: idToken, encoding: .utf8) {
-                successTrigger.send((nonce, idTokenString))
+                successTrigger.send((idTokenString, nonce))
             } else {
                 failTrigger.send(AppleAuthError.tokenNotExit)
             }
