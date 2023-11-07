@@ -102,6 +102,10 @@ extension User {
     var isSettedUp: Bool {
         !(name?.isEmpty ?? true) && !(phone?.isEmpty ?? true)
     }
+    
+    var isTesting: Bool {
+        id == "91KiWSTuDEX7D2TV94dqH11Y49D3"
+    }
 
     func getDisplayName(currentUser: User) -> String {
         id == currentUser.id ? L10n.commonYou : (name ?? "")
