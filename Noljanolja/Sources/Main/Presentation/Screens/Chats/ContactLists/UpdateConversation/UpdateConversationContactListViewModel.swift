@@ -31,7 +31,7 @@ final class UpdateConversationContactListViewModel: ViewModel {
 
     let conversation: Conversation
     
-    private let conversationService: ConversationServiceType
+    private let conversationUseCases: ConversationUseCases
     private weak var delegate: UpdateConversationContactListViewModelDelegate?
 
     // MARK: Private
@@ -39,10 +39,10 @@ final class UpdateConversationContactListViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(conversation: Conversation,
-         conversationService: ConversationServiceType = ConversationService.default,
+         conversationUseCases: ConversationUseCases = ConversationUseCasesImpl.default,
          delegate: UpdateConversationContactListViewModelDelegate? = nil) {
         self.conversation = conversation
-        self.conversationService = conversationService
+        self.conversationUseCases = conversationUseCases
         self.delegate = delegate
         super.init()
 
@@ -62,7 +62,7 @@ final class UpdateConversationContactListViewModel: ViewModel {
                 guard let self else {
                     return Empty<Conversation, Error>().eraseToAnyPublisher()
                 }
-                return self.conversationService
+                return self.conversationUseCases
                     .addParticipant(conversationID: self.conversation.id, participants: users)
             }
             .receive(on: DispatchQueue.main)

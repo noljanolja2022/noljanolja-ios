@@ -32,7 +32,7 @@ final class ShareVideoDetailViewModel: ViewModel {
 
     let video: Video
     let user: User
-    private let messageService: MessageServiceType
+    private let messageUseCases: MessageUseCases
     private weak var delegate: ShareVideoDetailViewModelDelegate?
 
     // MARK: Private
@@ -41,11 +41,11 @@ final class ShareVideoDetailViewModel: ViewModel {
 
     init(video: Video,
          user: User,
-         messageService: MessageServiceType = MessageService.default,
+         messageUseCases: MessageUseCases = MessageUseCasesImpl.default,
          delegate: ShareVideoDetailViewModelDelegate? = nil) {
         self.video = video
         self.user = user
-        self.messageService = messageService
+        self.messageUseCases = messageUseCases
         self.delegate = delegate
         super.init()
 
@@ -62,7 +62,7 @@ final class ShareVideoDetailViewModel: ViewModel {
                 guard let self else {
                     return Fail(error: CommonError.captureSelfNotFound).eraseToAnyPublisher()
                 }
-                return self.messageService
+                return self.messageUseCases
                     .shareMessage(
                         request: ShareMessageRequest(type: .plaintext, shareVideo: video),
                         users: [user]

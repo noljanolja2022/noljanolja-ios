@@ -29,8 +29,8 @@ final class LaunchViewModel: ViewModel {
     // MARK: Dependencies
 
     private var userDefaults: UserDefaultsType
-    private let authService: AuthServiceType
-    private let userService: UserServiceType
+    private let authUseCases: AuthUseCases
+    private let userUseCases: UserUseCases
     private weak var delegate: LaunchViewModelDelegate?
 
     // MARK: Private
@@ -38,12 +38,12 @@ final class LaunchViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(userDefaults: UserDefaultsType = UserDefaults.standard,
-         authService: AuthServiceType = AuthService.default,
-         userService: UserServiceType = UserService.default,
+         authUseCases: AuthUseCases = AuthUseCasesImpl.default,
+         userUseCases: UserUseCases = UserUseCasesImpl.default,
          delegate: LaunchViewModelDelegate? = nil) {
         self.userDefaults = userDefaults
-        self.authService = authService
-        self.userService = userService
+        self.authUseCases = authUseCases
+        self.userUseCases = userUseCases
         self.delegate = delegate
         super.init()
 
@@ -60,7 +60,7 @@ final class LaunchViewModel: ViewModel {
                 let trigger: AnyPublisher<Void, Error> = {
                     if self.userDefaults.isFirstLaunch {
                         self.userDefaults.isFirstLaunch = false
-                        return self.authService.signOut()
+                        return self.authUseCases.signOut()
                     } else {
                         return Just(())
                             .setFailureType(to: Error.self)
@@ -68,8 +68,8 @@ final class LaunchViewModel: ViewModel {
                     }
                 }()
                 return trigger
-                    .flatMap { _ in self.authService.getIDTokenResult() }
-                    .flatMap { _ in self.userService.getCurrentUser() }
+                    .flatMap { _ in self.authUseCases.getIDTokenResult() }
+                    .flatMap { _ in self.userUseCases.getCurrentUser() }
                     .eraseToAnyPublisher()
             }
             .receive(on: DispatchQueue.main)

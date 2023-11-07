@@ -42,7 +42,7 @@ final class ConversationAdjustmentModel: ViewModel {
     // MARK: Dependencies
 
     let conversation: Conversation
-    private let conversationService: ConversationServiceType
+    private let conversationUseCases: ConversationUseCases
     private weak var delegate: ConversationAdjustmentModelDelegate?
 
     // MARK: Private
@@ -50,10 +50,10 @@ final class ConversationAdjustmentModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(conversation: Conversation,
-         conversationService: ConversationServiceType = ConversationService.default,
+         conversationUseCases: ConversationUseCases = ConversationUseCasesImpl.default,
          delegate: ConversationAdjustmentModelDelegate? = nil) {
         self.conversation = conversation
-        self.conversationService = conversationService
+        self.conversationUseCases = conversationUseCases
         self.delegate = delegate
         super.init()
 
@@ -70,7 +70,7 @@ final class ConversationAdjustmentModel: ViewModel {
                 guard let self else {
                     return Empty<Conversation, Error>().eraseToAnyPublisher()
                 }
-                return self.conversationService
+                return self.conversationUseCases
                     .updateConversation(
                         conversationID: self.conversation.id,
                         title: self.title

@@ -120,7 +120,7 @@ struct AuthVerificationView_Previews: PreviewProvider {
     static var previews: some View {
         AuthVerificationView(
             viewModel: AuthVerificationViewModel(
-                country: CountryAPI().getDefaultCountry(),
+                country: CountryNetworkRepositoryImpl().getDefaultCountry(),
                 phoneNumberText: "123456789",
                 verificationID: ""
             )

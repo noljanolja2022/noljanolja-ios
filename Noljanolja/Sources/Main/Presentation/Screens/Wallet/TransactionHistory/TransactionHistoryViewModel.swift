@@ -35,7 +35,7 @@ final class TransactionHistoryViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    private let loyaltyAPI: LoyaltyAPIType
+    private let loyaltyNetworkRepository: LoyaltyNetworkRepository
     private weak var delegate: TransactionHistoryViewModelDelegate?
 
     // MARK: Private
@@ -44,9 +44,9 @@ final class TransactionHistoryViewModel: ViewModel {
     private let transationsSubject = CurrentValueSubject<[Transaction], Never>([])
     private var cancellables = Set<AnyCancellable>()
 
-    init(loyaltyAPI: LoyaltyAPIType = LoyaltyAPI.default,
+    init(loyaltyNetworkRepository: LoyaltyNetworkRepository = LoyaltyNetworkNetworkRepository.default,
          delegate: TransactionHistoryViewModelDelegate? = nil) {
-        self.loyaltyAPI = loyaltyAPI
+        self.loyaltyNetworkRepository = loyaltyNetworkRepository
         self.delegate = delegate
         super.init()
 
@@ -116,7 +116,7 @@ final class TransactionHistoryViewModel: ViewModel {
                 guard let self else {
                     return Empty<[Transaction], Error>().eraseToAnyPublisher()
                 }
-                return self.loyaltyAPI.getTransactionHistory(
+                return self.loyaltyNetworkRepository.getTransactionHistory(
                     lastOffsetDate: lastOffsetDate,
                     type: transactionType
                 )

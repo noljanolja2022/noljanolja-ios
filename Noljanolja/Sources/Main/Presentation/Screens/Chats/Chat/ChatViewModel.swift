@@ -63,9 +63,9 @@ final class ChatViewModel: ViewModel {
 
     let conversationID: Int
     
-    private let userService: UserServiceType
-    private let conversationService: ConversationServiceType
-    private let messageService: MessageServiceType
+    private let userUseCases: UserUseCases
+    private let conversationUseCases: ConversationUseCases
+    private let messageUseCases: MessageUseCases
     private let conversationSocketService: ConversationSocketServiceType
     private let reactionIconsUseCases: ReactionIconsUseCasesProtocol
     private let messageReactionUseCases: MessageReactionUseCases
@@ -81,17 +81,17 @@ final class ChatViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(conversationID: Int,
-         userService: UserServiceType = UserService.default,
-         conversationService: ConversationServiceType = ConversationService.default,
-         messageService: MessageServiceType = MessageService.default,
+         userUseCases: UserUseCases = UserUseCasesImpl.default,
+         conversationUseCases: ConversationUseCases = ConversationUseCasesImpl.default,
+         messageUseCases: MessageUseCases = MessageUseCasesImpl.default,
          conversationSocketService: ConversationSocketServiceType = ConversationSocketService.default,
          reactionIconsUseCases: ReactionIconsUseCasesProtocol = ReactionIconsUseCases.default,
          messageReactionUseCases: MessageReactionUseCases = MessageReactionUseCasesImpl.shared,
          delegate: ChatViewModelDelegate? = nil) {
         self.conversationID = conversationID
-        self.userService = userService
-        self.conversationService = conversationService
-        self.messageService = messageService
+        self.userUseCases = userUseCases
+        self.conversationUseCases = conversationUseCases
+        self.messageUseCases = messageUseCases
         self.conversationSocketService = conversationSocketService
         self.reactionIconsUseCases = reactionIconsUseCases
         self.messageReactionUseCases = messageReactionUseCases
@@ -197,7 +197,7 @@ final class ChatViewModel: ViewModel {
                 guard let self else {
                     return Empty<[Message], Error>().eraseToAnyPublisher()
                 }
-                return self.messageService
+                return self.messageUseCases
                     .getMessages(
                         conversationID: self.conversationID,
                         beforeMessageID: lastMessage?.id,
@@ -255,7 +255,7 @@ final class ChatViewModel: ViewModel {
                 guard let self else {
                     return Empty<[Message], Error>().eraseToAnyPublisher()
                 }
-                return self.messageService
+                return self.messageUseCases
                     .getLocalMessages(conversationID: self.conversationID)
             }
             .sink(receiveValue: { [weak self] result in
@@ -275,7 +275,7 @@ final class ChatViewModel: ViewModel {
                 guard let self else {
                     return Empty<Conversation, Error>().eraseToAnyPublisher()
                 }
-                return self.conversationService
+                return self.conversationUseCases
                     .getConversation(conversationID: self.conversationID)
             }
             .sink(receiveValue: { [weak self] result in
@@ -288,7 +288,7 @@ final class ChatViewModel: ViewModel {
             })
             .store(in: &cancellables)
 
-        userService
+        userUseCases
             .getCurrentUserPublisher()
             .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
             .store(in: &cancellables)
@@ -364,7 +364,7 @@ final class ChatViewModel: ViewModel {
                 guard let self else {
                     return Empty<Void, Error>().eraseToAnyPublisher()
                 }
-                return self.messageService.seenMessage(conversationID: self.conversationID, messageID: messageID)
+                return self.messageUseCases.seenMessage(conversationID: self.conversationID, messageID: messageID)
             }
             .sink(receiveValue: { _ in })
             .store(in: &cancellables)
@@ -417,7 +417,7 @@ final class ChatViewModel: ViewModel {
                 guard let self else {
                     return Empty<Message, Error>().eraseToAnyPublisher()
                 }
-                return self.messageService
+                return self.messageUseCases
                     .sendMessage(request: request)
             }
             .receive(on: DispatchQueue.main)
@@ -520,7 +520,7 @@ final class ChatViewModel: ViewModel {
                 guard let self, let messageId = message.id else {
                     return Fail<Void, Error>(error: CommonError.unknown).eraseToAnyPublisher()
                 }
-                return self.messageService
+                return self.messageUseCases
                     .deleteMessage(conversationID: message.conversationID, messageID: messageId)
             }
             .receive(on: DispatchQueue.main)

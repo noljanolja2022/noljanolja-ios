@@ -29,7 +29,7 @@ final class ConversationSocketAPI: ConversationSocketAPIType {
     private var cancellables = Set<AnyCancellable>()
 
     private init(rsocketUrl: String = NetworkConfigs.BaseUrl.socketBaseUrl,
-                 authRepo: AuthRepo = AuthStore.default) {
+                 authRepo: AuthRepo = AuthLocalRepositoryImpl.default) {
         self.socket = ConversationSocket(
             rsocketUrl: rsocketUrl,
             authRepo: authRepo

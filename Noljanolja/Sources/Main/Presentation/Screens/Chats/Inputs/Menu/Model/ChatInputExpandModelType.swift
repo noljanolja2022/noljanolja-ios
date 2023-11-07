@@ -20,7 +20,7 @@ enum ChatInputExpandModelType: CaseIterable, Equatable {
 
     var imageName: String {
         switch self {
-        case .image: return ImageAssets.icChatImage.name
+        case .image: return ImageAssets.icChatImageAsset.name
         case .camera: return ImageAssets.icChatCamera.name
         case .events: return ImageAssets.icChatEvent.name
         case .wallet: return ImageAssets.icChatWallet.name

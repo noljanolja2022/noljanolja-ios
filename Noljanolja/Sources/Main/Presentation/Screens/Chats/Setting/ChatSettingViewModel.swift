@@ -56,8 +56,8 @@ final class ChatSettingViewModel: ViewModel {
 
     let conversationSubject: CurrentValueSubject<Conversation, Never>
 
-    private let userService: UserServiceType
-    private let conversationService: ConversationServiceType
+    private let userUseCases: UserUseCases
+    private let conversationUseCases: ConversationUseCases
     private weak var delegate: ChatSettingViewModelDelegate?
 
     // MARK: Private
@@ -67,12 +67,12 @@ final class ChatSettingViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(conversation: Conversation,
-         userService: UserServiceType = UserService.default,
-         conversationService: ConversationServiceType = ConversationService.default,
+         userUseCases: UserUseCases = UserUseCasesImpl.default,
+         conversationUseCases: ConversationUseCases = ConversationUseCasesImpl.default,
          delegate: ChatSettingViewModelDelegate? = nil) {
         self.conversationSubject = CurrentValueSubject<Conversation, Never>(conversation)
-        self.userService = userService
-        self.conversationService = conversationService
+        self.userUseCases = userUseCases
+        self.conversationUseCases = conversationUseCases
         self.delegate = delegate
         super.init()
 
@@ -108,7 +108,7 @@ final class ChatSettingViewModel: ViewModel {
                 guard let self else {
                     return Empty<Conversation, Error>().eraseToAnyPublisher()
                 }
-                return self.conversationService
+                return self.conversationUseCases
                     .getConversation(conversationID: self.conversationSubject.value.id)
             }
             .sink { [weak self] result in
@@ -121,7 +121,7 @@ final class ChatSettingViewModel: ViewModel {
             }
             .store(in: &cancellables)
 
-        userService.getCurrentUserPublisher()
+        userUseCases.getCurrentUserPublisher()
             .sink(receiveValue: { [weak self] in
                 self?.currentUserSubject.send($0)
             })
@@ -137,7 +137,7 @@ final class ChatSettingViewModel: ViewModel {
                 guard let self else {
                     return Empty<Conversation, Error>().eraseToAnyPublisher()
                 }
-                return self.conversationService
+                return self.conversationUseCases
                     .assignAdmin(conversationID: conversation.id, admin: user)
             }
             .receive(on: DispatchQueue.main)
@@ -165,7 +165,7 @@ final class ChatSettingViewModel: ViewModel {
                 guard let self else {
                     return Empty<Conversation, Error>().eraseToAnyPublisher()
                 }
-                return self.conversationService
+                return self.conversationUseCases
                     .removeParticipant(conversationID: conversation.id, participants: [user])
             }
             .receive(on: DispatchQueue.main)
@@ -219,7 +219,7 @@ final class ChatSettingViewModel: ViewModel {
                 guard let self else {
                     return Empty<Conversation, Error>().eraseToAnyPublisher()
                 }
-                return self.conversationService.leave(conversationID: conversation.id)
+                return self.conversationUseCases.leave(conversationID: conversation.id)
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in

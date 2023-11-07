@@ -76,7 +76,7 @@ struct VerticalShareReferralView<ViewModel: VerticalShareReferralViewModel>: Vie
         ContactListView(
             viewModel: ContactListViewModel(
                 isMultiSelectionEnabled: true,
-                contactListUseCase: ContactListUseCaseImpl()
+                contactListUseCases: ContactListUseCasesImpl()
             ),
             selectedUsers: $selectedUsers,
             selectUserAction: { _ in }

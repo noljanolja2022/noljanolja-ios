@@ -25,7 +25,7 @@ final class MyRankingViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    private let userService: UserServiceType
+    private let userUseCases: UserUseCases
     private let memberInfoUseCase: MemberInfoUseCases
     private weak var delegate: MyRankingViewModelDelegate?
 
@@ -35,10 +35,10 @@ final class MyRankingViewModel: ViewModel {
     private let memberInfoSubject = CurrentValueSubject<LoyaltyMemberInfo?, Never>(nil)
     private var cancellables = Set<AnyCancellable>()
 
-    init(userService: UserServiceType = UserService.default,
+    init(userUseCases: UserUseCases = UserUseCasesImpl.default,
          memberInfoUseCase: MemberInfoUseCases = MemberInfoUseCasesImpl.default,
          delegate: MyRankingViewModelDelegate? = nil) {
-        self.userService = userService
+        self.userUseCases = userUseCases
         self.memberInfoUseCase = memberInfoUseCase
         self.delegate = delegate
         super.init()
@@ -82,7 +82,7 @@ final class MyRankingViewModel: ViewModel {
             }
             .store(in: &cancellables)
 
-        userService
+        userUseCases
             .getCurrentUserPublisher()
             .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
             .store(in: &cancellables)

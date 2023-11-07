@@ -26,7 +26,7 @@ final class TransactionDashboardViewModel: ViewModel {
     // MARK: Dependencies
 
     private let monthYearDate: Date
-    private let loyaltyAPI: LoyaltyAPIType
+    private let loyaltyNetworkRepository: LoyaltyNetworkRepository
     private weak var delegate: TransactionDashboardViewModelDelegate?
 
     // MARK: Private
@@ -35,10 +35,10 @@ final class TransactionDashboardViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(monthYearDate: Date,
-         loyaltyAPI: LoyaltyAPIType = LoyaltyAPI.default,
+         loyaltyNetworkRepository: LoyaltyNetworkRepository = LoyaltyNetworkNetworkRepository.default,
          delegate: TransactionDashboardViewModelDelegate? = nil) {
         self.monthYearDate = monthYearDate
-        self.loyaltyAPI = loyaltyAPI
+        self.loyaltyNetworkRepository = loyaltyNetworkRepository
         self.delegate = delegate
         super.init()
 
@@ -71,7 +71,7 @@ final class TransactionDashboardViewModel: ViewModel {
                 guard let self else {
                     return Empty<[Transaction], Error>().eraseToAnyPublisher()
                 }
-                return self.loyaltyAPI.getTransactionHistory(
+                return self.loyaltyNetworkRepository.getTransactionHistory(
                     monthYearDate: monthYearDate
                 )
             }

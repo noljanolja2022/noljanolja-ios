@@ -49,8 +49,8 @@ final class ConversationListViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    private let userService: UserServiceType
-    private let conversationService: ConversationServiceType
+    private let userUseCases: UserUseCases
+    private let conversationUseCases: ConversationUseCases
     private let conversationSocketService: ConversationSocketServiceType
     private weak var delegate: ConversationListViewModelDelegate?
 
@@ -61,12 +61,12 @@ final class ConversationListViewModel: ViewModel {
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(userService: UserServiceType = UserService.default,
-         conversationService: ConversationServiceType = ConversationService.default,
+    init(userUseCases: UserUseCases = UserUseCasesImpl.default,
+         conversationUseCases: ConversationUseCases = ConversationUseCasesImpl.default,
          conversationSocketService: ConversationSocketServiceType = ConversationSocketService.default,
          delegate: ConversationListViewModelDelegate? = nil) {
-        self.userService = userService
-        self.conversationService = conversationService
+        self.userUseCases = userUseCases
+        self.conversationUseCases = conversationUseCases
         self.conversationSocketService = conversationSocketService
         self.delegate = delegate
         super.init()
@@ -112,7 +112,7 @@ final class ConversationListViewModel: ViewModel {
                 guard let self else {
                     return Empty<[Conversation], Error>().eraseToAnyPublisher()
                 }
-                return self.conversationService.getConversations()
+                return self.conversationUseCases.getConversations()
             }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
@@ -127,7 +127,7 @@ final class ConversationListViewModel: ViewModel {
             })
             .store(in: &cancellables)
 
-        userService
+        userUseCases
             .getCurrentUserPublisher()
             .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
             .store(in: &cancellables)

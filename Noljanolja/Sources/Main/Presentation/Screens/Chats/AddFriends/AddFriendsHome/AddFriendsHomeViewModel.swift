@@ -21,7 +21,7 @@ protocol AddFriendsHomeViewModelDelegate: AnyObject {}
 final class AddFriendsHomeViewModel: ViewModel {
     // MARK: State
 
-    @Published var country = CountryAPI().getDefaultCountry()
+    @Published var country = CountryNetworkRepositoryImpl().getDefaultCountry()
     @Published var phoneNumberText = ""
     @Published var name: String?
     @Published var qrImage: UIImage?
@@ -43,8 +43,8 @@ final class AddFriendsHomeViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    private let userService: UserServiceType
-    private let userAPI: UserAPIType
+    private let userUseCases: UserUseCases
+    private let userNetworkRepository: UserNetworkRepository
     private weak var delegate: AddFriendsHomeViewModelDelegate?
 
     // MARK: Private
@@ -53,11 +53,11 @@ final class AddFriendsHomeViewModel: ViewModel {
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(userService: UserServiceType = UserService.default,
-         userAPI: UserAPIType = UserAPI.default,
+    init(userUseCases: UserUseCases = UserUseCasesImpl.default,
+         userNetworkRepository: UserNetworkRepository = UserNetworkRepositoryImpl.default,
          delegate: AddFriendsHomeViewModelDelegate? = nil) {
-        self.userService = userService
-        self.userAPI = userAPI
+        self.userUseCases = userUseCases
+        self.userNetworkRepository = userNetworkRepository
         self.delegate = delegate
         super.init()
 
@@ -100,7 +100,7 @@ final class AddFriendsHomeViewModel: ViewModel {
                 guard let self else {
                     return Empty<[User], Error>().eraseToAnyPublisher()
                 }
-                return self.userAPI.findUsers(phoneNumber: self.phoneNumber?.formatPhone(), friendId: nil)
+                return self.userNetworkRepository.findUsers(phoneNumber: self.phoneNumber?.formatPhone(), friendId: nil)
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
@@ -129,7 +129,7 @@ final class AddFriendsHomeViewModel: ViewModel {
     }
 
     private func configureLoadData() {
-        userService.getCurrentUserPublisher()
+        userUseCases.getCurrentUserPublisher()
             .sink(receiveValue: { [weak self] in
                 self?.currentUserSubject.send($0)
             })

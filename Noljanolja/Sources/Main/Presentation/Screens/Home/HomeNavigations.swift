@@ -19,8 +19,8 @@ enum HomeTabType: Equatable {
 
     var isNavigationBarHidden: Bool {
         switch self {
-        case .chat, .friends, .watch: return false
-        case .wallet, .shop: return true
+        case .chat, .friends: return false
+        case .wallet, .shop, .watch: return true
         }
     }
 

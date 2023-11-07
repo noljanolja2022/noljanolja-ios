@@ -11,6 +11,7 @@ import Foundation
 
 enum VideosNavigationType: Equatable {
     case uncompleteVideos
+    case searchVideo
 }
 
 // MARK: - VideosFullScreenCoverType

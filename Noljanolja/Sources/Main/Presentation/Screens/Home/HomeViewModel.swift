@@ -22,9 +22,9 @@ protocol HomeViewModelDelegate: AnyObject {
 final class HomeViewModel: ViewModel {
     // MARK: State
 
-    let tabs: [HomeTabType] = [.watch, .wallet, .shop, .friends]
+    let tabs: [HomeTabType] = [.chat, .watch, .wallet, .shop, .friends]
     @Published var isProgressHUDShowing = false
-    @Published var selectedTab = HomeTabType.watch
+    @Published var selectedTab = HomeTabType.chat
     @Published var tabNews = [HomeTabType: Bool]()
     @Published var alertState: AlertState<HomeAlertActionType>?
 
@@ -38,16 +38,19 @@ final class HomeViewModel: ViewModel {
     // MARK: Dependencies
 
     private let userNotificationCenter = UNUserNotificationCenter.current()
-    private let bannerRepository: BannerRepository
+    private let userUseCases: UserUseCases
+    private let bannerNetworkRepository: BannerNetworkRepository
     private weak var delegate: HomeViewModelDelegate?
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(bannerRepository: BannerRepository = BannerRepositoryImpl.shared,
+    init(userUseCases: UserUseCases = UserUseCasesImpl.default,
+         bannerNetworkRepository: BannerNetworkRepository = BannerNetworkRepositoryImpl.shared,
          delegate: HomeViewModelDelegate? = nil) {
-        self.bannerRepository = bannerRepository
+        self.userUseCases = userUseCases
+        self.bannerNetworkRepository = bannerNetworkRepository
         self.delegate = delegate
         super.init()
 
@@ -70,14 +73,19 @@ final class HomeViewModel: ViewModel {
     }
     
     private func configureForProduction() {
-        alertState = AlertState(
-            title: TextState(""),
-            message: TextState(L10n.comingSoonDescription),
-            dismissButton: .cancel(
-                TextState(L10n.commonExit),
-                action: .send(.exitApp)
+        let user: User? = userUseCases.getCurrentUser()
+        if user?.isTesting == true {
+            configureForDevelopment()
+        } else {
+            alertState = AlertState(
+                title: TextState(""),
+                message: TextState(L10n.comingSoonDescription),
+                dismissButton: .cancel(
+                    TextState(L10n.commonExit),
+                    action: .send(.exitApp)
+                )
             )
-        )
+        }
     }
     
     private func configureNotificationPermission() {
@@ -117,7 +125,7 @@ final class HomeViewModel: ViewModel {
                 guard let self else {
                     return Empty<PaginationResponse<[Banner]>, Error>().eraseToAnyPublisher()
                 }
-                return self.bannerRepository.getBanners()
+                return self.bannerNetworkRepository.getBanners()
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in

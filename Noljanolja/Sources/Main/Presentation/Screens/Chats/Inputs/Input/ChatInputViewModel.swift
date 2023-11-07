@@ -32,7 +32,7 @@ final class ChatInputViewModel: ViewModel {
     // MARK: Dependencies
 
     private let conversationID: Int
-    private let messageService: MessageServiceType
+    private let messageUseCases: MessageUseCases
     private weak var delegate: ChatInputViewModelDelegate?
 
     // MARK: Private
@@ -40,10 +40,10 @@ final class ChatInputViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(conversationID: Int,
-         messageService: MessageServiceType = MessageService.default,
+         messageUseCases: MessageUseCases = MessageUseCasesImpl.default,
          delegate: ChatInputViewModelDelegate? = nil) {
         self.conversationID = conversationID
-        self.messageService = messageService
+        self.messageUseCases = messageUseCases
         self.delegate = delegate
         super.init()
 

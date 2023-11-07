@@ -31,7 +31,7 @@ final class ForwardMessageContactListViewModel: ViewModel {
 
     let message: Message
 
-    private let messageService: MessageServiceType
+    private let messageUseCases: MessageUseCases
     private weak var delegate: ForwardMessageContactListViewModelDelegate?
 
     // MARK: Private
@@ -39,10 +39,10 @@ final class ForwardMessageContactListViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(message: Message,
-         messageService: MessageServiceType = MessageService.default,
+         messageUseCases: MessageUseCases = MessageUseCasesImpl.default,
          delegate: ForwardMessageContactListViewModelDelegate? = nil) {
         self.message = message
-        self.messageService = messageService
+        self.messageUseCases = messageUseCases
         self.delegate = delegate
         super.init()
 
@@ -62,7 +62,7 @@ final class ForwardMessageContactListViewModel: ViewModel {
                 guard let self else {
                     return Empty<[Message], Error>().eraseToAnyPublisher()
                 }
-                return self.messageService
+                return self.messageUseCases
                     .forwardMessage(message: self.message, users: users)
             }
             .receive(on: DispatchQueue.main)

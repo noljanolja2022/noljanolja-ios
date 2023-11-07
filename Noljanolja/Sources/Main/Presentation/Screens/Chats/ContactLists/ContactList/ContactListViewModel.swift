@@ -34,8 +34,8 @@ final class ContactListViewModel: ViewModel {
     var isMultiSelectionEnabled: Bool
     var isSearchHidden: Bool
     var axis: Axis
-    private let contactService: ContactServiceType
-    private let contactListUseCase: ContactListUseCase
+    private let contactUseCases: ContactUseCases
+    private let contactListUseCases: ContactListUseCases
     private weak var delegate: ContactListViewModelDelegate?
 
     // MARK: Private
@@ -49,14 +49,14 @@ final class ContactListViewModel: ViewModel {
     init(isMultiSelectionEnabled: Bool,
          isSearchHidden: Bool = false,
          axis: Axis = .vertical,
-         contactService: ContactServiceType = ContactService.default,
-         contactListUseCase: ContactListUseCase,
+         contactUseCases: ContactUseCases = ContactUseCasesImpl.default,
+         contactListUseCases: ContactListUseCases,
          delegate: ContactListViewModelDelegate? = nil) {
         self.isMultiSelectionEnabled = isMultiSelectionEnabled
         self.isSearchHidden = isSearchHidden
         self.axis = axis
-        self.contactService = contactService
-        self.contactListUseCase = contactListUseCase
+        self.contactUseCases = contactUseCases
+        self.contactListUseCases = contactListUseCases
         self.delegate = delegate
         super.init()
 
@@ -77,7 +77,7 @@ final class ContactListViewModel: ViewModel {
                 guard let self else {
                     return Empty<[User], Error>().eraseToAnyPublisher()
                 }
-                return self.contactListUseCase.getContacts(page: 1, pageSize: 1000)
+                return self.contactListUseCases.getContacts(page: 1, pageSize: 1000)
             }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { result in
@@ -98,7 +98,7 @@ final class ContactListViewModel: ViewModel {
                 guard let self else {
                     return Empty<Bool, Error>().eraseToAnyPublisher()
                 }
-                return self.contactService.requestContactPermission()
+                return self.contactUseCases.requestContactPermission()
             }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in

@@ -135,6 +135,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
             Text(L10n.walletExchangeDescription)
                 .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
                 .frame(maxWidth: .infinity, alignment: .center)
+                .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
             HStack(alignment: .center, spacing: 4) {
                 ImageAssets.icGift.swiftUIImage
                     .resizable()
@@ -143,6 +144,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                 Text("750 Open box")
                     .dynamicFont(.systemFont(ofSize: 14))
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
                 Button(
                     action: {
                         viewModel.navigationType = .exchange

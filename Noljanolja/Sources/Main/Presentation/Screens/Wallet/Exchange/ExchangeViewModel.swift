@@ -32,9 +32,9 @@ final class ExchangeViewModel: ViewModel {
     // MARK: Dependencies
 
     private let memberInfoUseCase: MemberInfoUseCases
-    private let coinExchangeUseCase: CoinExchangeUseCase
-    private let coinExchangeRepository: CoinExchangeRepository
-    private let adMobRepository: AdMobRepository
+    private let coinExchangeUseCases: CoinExchangeUseCases
+    private let coinExchangeNetworkRepository: CoinExchangeNetworkRepository
+    private let adMobNetworkRepository: AdMobNetworkRepository
     private weak var listener: ExchangeListener?
 
     // MARK: Private
@@ -47,14 +47,14 @@ final class ExchangeViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(memberInfoUseCase: MemberInfoUseCases = MemberInfoUseCasesImpl.default,
-         coinExchangeUseCase: CoinExchangeUseCase = CoinExchangeUseCaseImpl.shared,
-         coinExchangeRepository: CoinExchangeRepository = CoinExchangeRepositoryImpl.shared,
-         adMobRepository: AdMobRepository = AdMobRepositoryImpl.shared,
+         coinExchangeUseCases: CoinExchangeUseCases = CoinExchangeUseCasesImpl.shared,
+         coinExchangeNetworkRepository: CoinExchangeNetworkRepository = CoinExchangeNetworkRepositoryImpl.shared,
+         adMobNetworkRepository: AdMobNetworkRepository = AdMobNetworkRepositoryImpl.shared,
          listener: ExchangeListener? = nil) {
         self.memberInfoUseCase = memberInfoUseCase
-        self.coinExchangeUseCase = coinExchangeUseCase
-        self.coinExchangeRepository = coinExchangeRepository
-        self.adMobRepository = adMobRepository
+        self.coinExchangeUseCases = coinExchangeUseCases
+        self.coinExchangeNetworkRepository = coinExchangeNetworkRepository
+        self.adMobNetworkRepository = adMobNetworkRepository
         self.listener = listener
         super.init()
 
@@ -96,8 +96,8 @@ final class ExchangeViewModel: ViewModel {
             }
             return Publishers.CombineLatest3(
                 self.memberInfoUseCase.getLoyaltyMemberInfo(),
-                self.coinExchangeUseCase.getCoin(),
-                self.coinExchangeRepository.getCoinExchangeRate()
+                self.coinExchangeUseCases.getCoin(),
+                self.coinExchangeNetworkRepository.getCoinExchangeRate()
             )
             .eraseToAnyPublisher()
         }
@@ -128,7 +128,7 @@ final class ExchangeViewModel: ViewModel {
                     )
                     .eraseToAnyPublisher()
                 }
-                return self.adMobRepository
+                return self.adMobNetworkRepository
                     .loadRewardedAd()
                     .eraseToAnyPublisher()
             }
@@ -170,7 +170,7 @@ final class ExchangeViewModel: ViewModel {
                     )
                     .eraseToAnyPublisher()
                 }
-                return self.coinExchangeRepository
+                return self.coinExchangeNetworkRepository
                     .convert(exchangeRate)
             }
             .receive(on: DispatchQueue.main)

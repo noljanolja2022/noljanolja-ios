@@ -59,7 +59,7 @@ struct HorizontalShareReferralView<ViewModel: HorizontalShareReferralViewModel>:
                 isMultiSelectionEnabled: false,
                 isSearchHidden: true,
                 axis: .horizontal,
-                contactListUseCase: ContactListUseCaseImpl()
+                contactListUseCases: ContactListUseCasesImpl()
             ),
             selectedUsers: .constant([]),
             selectUserAction: {

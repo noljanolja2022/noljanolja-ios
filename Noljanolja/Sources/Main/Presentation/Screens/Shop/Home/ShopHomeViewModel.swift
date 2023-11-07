@@ -32,7 +32,7 @@ final class ShopHomeViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    private let giftsApi: GiftsAPIType
+    private let giftsApi: GiftsNetworkRepository
     private let memberInfoUseCase: MemberInfoUseCases
     private weak var delegate: ShopHomeViewModelDelegate?
 
@@ -41,7 +41,7 @@ final class ShopHomeViewModel: ViewModel {
     private let pageSize = 20
     private var cancellables = Set<AnyCancellable>()
 
-    init(giftsApi: GiftsAPIType = GiftsAPI.default,
+    init(giftsApi: GiftsNetworkRepository = GiftsNetworkRepositoryImpl.default,
          memberInfoUseCase: MemberInfoUseCases = MemberInfoUseCasesImpl.default,
          delegate: ShopHomeViewModelDelegate? = nil) {
         self.giftsApi = giftsApi

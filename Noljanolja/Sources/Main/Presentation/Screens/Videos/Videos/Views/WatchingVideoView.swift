@@ -19,7 +19,7 @@ struct WatchingVideoView: View {
     }
 
     private func buildBodyView() -> some View {
-        LazyVStack(spacing: 16) {
+        LazyVStack(spacing: 7) {
             buildHeaderView()
             buildContentView()
         }

@@ -130,6 +130,7 @@ struct ExchangeView: View {
             Text("Cash Box")
                 .dynamicFont(.systemFont(ofSize: 14))
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
             Text("750 Open box")
                 .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                 .foregroundColor(ColorAssets.systemBlue.swiftUIColor)
@@ -192,10 +193,4 @@ extension ExchangeView {
 
     @ViewBuilder
     private func buildFullScreenCoverDestinationView(_: Binding<ExchangeFullScreenCoverType>) -> some View {}
-}
-
-#Preview {
-    ExchangeView(
-        viewModel: ExchangeViewModel()
-    )
 }

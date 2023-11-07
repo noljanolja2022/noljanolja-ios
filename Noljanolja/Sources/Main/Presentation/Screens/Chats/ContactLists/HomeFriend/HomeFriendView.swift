@@ -24,7 +24,7 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
         ContactListView(
             viewModel: ContactListViewModel(
                 isMultiSelectionEnabled: false,
-                contactListUseCase: ContactListUseCaseImpl()
+                contactListUseCases: ContactListUseCasesImpl()
             ),
             selectedUsers: $viewModel.selectedUsers,
             selectUserAction: { _ in }

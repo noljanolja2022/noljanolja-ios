@@ -56,7 +56,7 @@ final class VideoDetailViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    private let videoRepository: VideoRepository
+    private let videoNetworkRepository: VideoNetworkRepository
     private let videoSocket: VideoSocketAPIType
     private let videoUseCases: VideoUseCases
     private weak var delegate: VideoDetailViewModelDelegate?
@@ -70,11 +70,11 @@ final class VideoDetailViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
     private var videoCancellables = Set<AnyCancellable>()
 
-    init(videoRepository: VideoRepository = VideoRepositoryImpl.shared,
+    init(videoNetworkRepository: VideoNetworkRepository = VideoNetworkRepositoryImpl.shared,
          videoSocket: VideoSocketAPIType = VideoSocketAPI.default,
          videoUseCases: VideoUseCases = VideoUseCasesImpl.shared,
          delegate: VideoDetailViewModelDelegate? = nil) {
-        self.videoRepository = videoRepository
+        self.videoNetworkRepository = videoNetworkRepository
         self.videoSocket = videoSocket
         self.videoUseCases = videoUseCases
         self.delegate = delegate
@@ -166,7 +166,7 @@ final class VideoDetailViewModel: ViewModel {
                 guard let self else {
                     return Empty<Video, Error>().eraseToAnyPublisher()
                 }
-                return self.videoRepository.getVideoDetail(id: videoId)
+                return self.videoNetworkRepository.getVideoDetail(id: videoId)
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
@@ -216,7 +216,7 @@ final class VideoDetailViewModel: ViewModel {
                 guard let self else {
                     return Empty<[VideoComment], Error>().eraseToAnyPublisher()
                 }
-                return self.videoRepository.getVideoComments(
+                return self.videoNetworkRepository.getVideoComments(
                     videoId: videoId,
                     beforeCommentId: self.comments.last?.id,
                     limit: self.pageSize
