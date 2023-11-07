@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B6B93BC2AF95BF000749EB2 /* HeaderVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6B93BB2AF95BF000749EB2 /* HeaderVideoView.swift */; };
 		7647F56A2DB765C44F009B8C /* Pods_Noljanolja_NoljanoljaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 264F630FC4DDFC0E9074F9D2 /* Pods_Noljanolja_NoljanoljaUITests.framework */; };
 		8353A88CBCF1CAFD239985BE /* Pods_NoljanoljaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD0295CC3C0D04548A9867CB /* Pods_NoljanoljaTests.framework */; };
 		AEDBBDE12EEA3CADCA87D4F2 /* Pods_Noljanolja.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB5BA5AC93BBFAA68677C79 /* Pods_Noljanolja.framework */; };
@@ -602,6 +603,7 @@
 		1F2349C15C44A8E1267B843B /* Pods-Noljanolja-NoljanoljaUITests.ad hoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.ad hoc.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.ad hoc.xcconfig"; sourceTree = "<group>"; };
 		216373F9231F3C6A300BE8C9 /* Pods-Noljanolja-NoljanoljaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.release.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.release.xcconfig"; sourceTree = "<group>"; };
 		264F630FC4DDFC0E9074F9D2 /* Pods_Noljanolja_NoljanoljaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Noljanolja_NoljanoljaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B6B93BB2AF95BF000749EB2 /* HeaderVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderVideoView.swift; sourceTree = "<group>"; };
 		2DDD25D24A7930AF482D9C5C /* Pods-Noljanolja-NoljanoljaUITests.app store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.app store.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.app store.xcconfig"; sourceTree = "<group>"; };
 		4186FA57228107FEF2D2C426 /* Pods-NoljanoljaTests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoljanoljaTests.development.xcconfig"; path = "Target Support Files/Pods-NoljanoljaTests/Pods-NoljanoljaTests.development.xcconfig"; sourceTree = "<group>"; };
 		5474C50410F0452A681DEAAB /* Pods-Noljanolja.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja.dev.xcconfig"; path = "Target Support Files/Pods-Noljanolja/Pods-Noljanolja.dev.xcconfig"; sourceTree = "<group>"; };
@@ -2015,6 +2017,7 @@
 				CF53D4302A6AF547009B3A69 /* WatchingVideoItemView.swift */,
 				CF53D4312A6AF547009B3A69 /* HighlightVideoItemView.swift */,
 				CF53D4322A6AF547009B3A69 /* TrendingVideoView.swift */,
+				2B6B93BB2AF95BF000749EB2 /* HeaderVideoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4540,6 +4543,7 @@
 				CF53D61E2A6AF548009B3A69 /* MessageActionType.swift in Sources */,
 				CFE215732AE6758700C83BAD /* UIViewController+Top.swift in Sources */,
 				CFDCA37929964501003C2C77 /* ButtonStyle.swift in Sources */,
+				2B6B93BC2AF95BF000749EB2 /* HeaderVideoView.swift in Sources */,
 				CF53D64B2A6AF548009B3A69 /* TermViewModel.swift in Sources */,
 				CF54FA2229D0179B0092E2C6 /* MediaUseCases.swift in Sources */,
 				CF775BC029C6269200E82183 /* AuthAppDelegate.swift in Sources */,

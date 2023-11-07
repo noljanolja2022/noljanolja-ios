@@ -13,26 +13,32 @@ struct WatchingVideoItemView: View {
 
     var body: some View {
         VStack(spacing: 8) {
-            GeometryReader { geometry in
-                WebImage(
-                    url: URL(string: video.thumbnail),
-                    context: [
-                        .imageTransformer: SDImageResizingTransformer(
-                            size: CGSize(
-                                width: geometry.size.width * 3,
-                                height: geometry.size.height * 3
-                            ),
-                            scaleMode: .aspectFill
-                        )
-                    ]
-                )
-                .resizable()
-                .indicator(.activity)
-                .scaledToFill()
-                .background(ColorAssets.neutralLightGrey.swiftUIColor)
-                .clipped()
+            ZStack(alignment: .bottom) {
+                GeometryReader { geometry in
+                    WebImage(
+                        url: URL(string: video.thumbnail),
+                        context: [
+                            .imageTransformer: SDImageResizingTransformer(
+                                size: CGSize(
+                                    width: geometry.size.width * 3,
+                                    height: geometry.size.height * 3
+                                ),
+                                scaleMode: .aspectFill
+                            )
+                        ]
+                    )
+                    .resizable()
+                    .indicator(.activity)
+                    .scaledToFill()
+                    .background(ColorAssets.neutralLightGrey.swiftUIColor)
+                    .clipped()
+                }
+                .frame(height: 80)
+
+                ProgressView(value: video.currentProgressMs.float, total: video.durationMs.float)
+                    .progressViewStyle(LinearProgressViewStyle(tint: ColorAssets.primaryGreen200.swiftUIColor))
+                    .background(ColorAssets.neutralLightGrey.swiftUIColor)
             }
-            .frame(height: 80)
 
             Text(video.title ?? "")
                 .lineLimit(2)
@@ -41,6 +47,6 @@ struct WatchingVideoItemView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
         }
-        .frame(width: 152)
+        .frame(width: 142)
     }
 }
