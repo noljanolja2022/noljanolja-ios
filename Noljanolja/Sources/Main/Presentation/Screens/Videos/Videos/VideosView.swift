@@ -39,7 +39,7 @@ struct VideosView<ViewModel: VideosViewModel>: View {
     private func buildContentView() -> some View {
         ScrollView {
             VStack(spacing: 8) {
-                buildHighlightView()
+                buildHeaderView()
                 buildWatchingView()
 
                 Divider()
@@ -71,6 +71,15 @@ struct VideosView<ViewModel: VideosViewModel>: View {
                 }
             )
         }
+    }
+
+    @ViewBuilder
+    private func buildHeaderView() -> some View {
+        HeaderVideoView(
+            searchAction: {
+                viewModel.navigationType = .searchVideo
+            }
+        )
     }
 
     @ViewBuilder
@@ -145,6 +154,10 @@ extension VideosView {
         case .uncompleteVideos:
             UncompleteVideosView(
                 viewModel: UncompleteVideosViewModel()
+            )
+        case .searchVideo:
+            SearchVideosView(
+                viewModel: SearchVideosViewModel()
             )
         }
     }

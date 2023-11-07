@@ -170,7 +170,9 @@ struct HomeView<ViewModel: HomeViewModel>: View {
                 .overlay {
                     ZStack(alignment: .top) {
                         switch viewModel.selectedTab {
-                        case .chat, .friends, .watch:
+                        case .watch:
+                            Spacer().background(.white)
+                        case .chat, .friends:
                             Spacer().background(ColorAssets.primaryGreen200.swiftUIColor)
                         case .wallet:
                             ImageAssets.bgWalletHeader.swiftUIImage
