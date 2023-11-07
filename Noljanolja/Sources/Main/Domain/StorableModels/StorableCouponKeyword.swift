@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-// MARK: - StorableUser
+// MARK: - StorableCouponKeyword
 
 final class StorableCouponKeyword: Object {
     @Persisted(primaryKey: true) var keyword: String

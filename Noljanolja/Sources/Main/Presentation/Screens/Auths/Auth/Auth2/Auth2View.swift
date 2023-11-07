@@ -1,5 +1,5 @@
 //
-//  GoogleAuthView.swift
+//  Auth2View.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 02/10/2023.
@@ -8,9 +8,9 @@
 
 import SwiftUI
 
-// MARK: - GoogleAuthView
+// MARK: - Auth2View
 
-struct GoogleAuthView<ViewModel: GoogleAuthViewModel>: View {
+struct Auth2View<ViewModel: Auth2ViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
@@ -89,34 +89,57 @@ struct GoogleAuthView<ViewModel: GoogleAuthViewModel>: View {
     }
 
     private func buildAuthContentView() -> some View {
-        Button(
-            action: {
-                viewModel.action.send()
-            },
-            label: {
-                HStack(spacing: 12) {
-                    ImageAssets.icGoogle.swiftUIImage
-                        .frame(width: 36, height: 36)
-                        .scaleEffect(1.2)
-                        .scaledToFill()
-                        .cornerRadius(20)
-                    Text(L10n.loginGoogleButton)
-                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+        VStack(spacing: 16) {
+            Button(
+                action: {
+                    viewModel.googleSignInAction.send()
+                },
+                label: {
+                    HStack(spacing: 12) {
+                        ImageAssets.icGoogle.swiftUIImage
+                            .frame(width: 36, height: 36)
+                            .scaleEffect(1.2)
+                            .scaledToFill()
+                            .cornerRadius(20)
+                        Text(L10n.loginGoogleButton)
+                            .dynamicFont(.systemFont(ofSize: 19, weight: .medium))
+                            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 48)
+                    .background(ColorAssets.primaryGreen200.swiftUIColor)
+                    .cornerRadius(8)
                 }
-                .frame(maxWidth: .infinity)
-                .frame(height: 48)
-                .background(ColorAssets.primaryGreen200.swiftUIColor)
-                .cornerRadius(8)
-            }
-        )
+            )
+            Button(
+                action: {
+                    viewModel.appleSignInAction.send()
+                },
+                label: {
+                    HStack(spacing: 12) {
+                        ImageAssets.icApple.swiftUIImage
+                            .frame(width: 36, height: 36)
+                            .scaleEffect(1.2)
+                            .scaledToFill()
+                            .cornerRadius(20)
+                        Text(L10n.loginAppleButton)
+                            .dynamicFont(.systemFont(ofSize: 19, weight: .medium))
+                            .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 48)
+                    .background(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    .cornerRadius(8)
+                }
+            )
+        }
     }
 }
 
-// MARK: - GoogleAuthView_Previews
+// MARK: - Auth2View_Previews
 
-struct GoogleAuthView_Previews: PreviewProvider {
+struct Auth2View_Previews: PreviewProvider {
     static var previews: some View {
-        GoogleAuthView(viewModel: GoogleAuthViewModel())
+        Auth2View(viewModel: Auth2ViewModel())
     }
 }

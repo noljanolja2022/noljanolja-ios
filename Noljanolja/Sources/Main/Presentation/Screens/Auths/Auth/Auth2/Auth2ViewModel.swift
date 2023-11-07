@@ -1,5 +1,5 @@
 //
-//  GoogleAuthViewModel.swift
+//  Auth2ViewModel.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 02/10/2023.
@@ -10,15 +10,15 @@ import _SwiftUINavigationState
 import Combine
 import Foundation
 
-// MARK: - GoogleAuthViewModelDelegate
+// MARK: - Auth2ViewModelDelegate
 
-protocol GoogleAuthViewModelDelegate: AnyObject {
+protocol Auth2ViewModelDelegate: AnyObject {
     func googleAuthViewModelDidComplete(_ user: User)
 }
 
-// MARK: - GoogleAuthViewModel
+// MARK: - Auth2ViewModel
 
-final class GoogleAuthViewModel: ViewModel {
+final class Auth2ViewModel: ViewModel {
     // MARK: State
 
     @Published var isProgressHUDShowing = false
@@ -26,13 +26,14 @@ final class GoogleAuthViewModel: ViewModel {
 
     // MARK: Action
 
-    let action = PassthroughSubject<Void, Never>()
+    let googleSignInAction = PassthroughSubject<Void, Never>()
+    let appleSignInAction = PassthroughSubject<Void, Never>()
 
     // MARK: Dependencies
 
     private let authUseCase: AuthUseCases
     private let userUseCases: UserUseCases
-    private weak var delegate: GoogleAuthViewModelDelegate?
+    private weak var delegate: Auth2ViewModelDelegate?
 
     // MARK: Private
 
@@ -41,7 +42,7 @@ final class GoogleAuthViewModel: ViewModel {
 
     init(authUseCase: AuthUseCases = AuthUseCasesImpl.default,
          userUseCases: UserUseCases = UserUseCasesImpl.default,
-         delegate: GoogleAuthViewModelDelegate? = nil) {
+         delegate: Auth2ViewModelDelegate? = nil) {
         self.authUseCase = authUseCase
         self.userUseCases = userUseCases
         self.delegate = delegate
@@ -51,7 +52,7 @@ final class GoogleAuthViewModel: ViewModel {
     }
 
     private func configure() {
-        action
+        googleSignInAction
             .flatMapLatestToResult { [weak self] in
                 guard let self else {
                     return Fail<String, Error>(error: CommonError.captureSelfNotFound)
@@ -59,6 +60,30 @@ final class GoogleAuthViewModel: ViewModel {
                 }
                 return self.authUseCase
                     .signInWithGoogle(additionalScopes: [GIDSignInScope.youtube])
+            }
+            .sink { [weak self] result in
+                guard let self else { return }
+                switch result {
+                case .success:
+                    getUserAction.send()
+                case .failure:
+                    alertState = AlertState(
+                        title: TextState(L10n.commonErrorTitle),
+                        message: TextState(L10n.commonErrorDescription),
+                        dismissButton: .cancel(TextState("OK"))
+                    )
+                }
+            }
+            .store(in: &cancellables)
+        
+        appleSignInAction
+            .flatMapLatestToResult { [weak self] in
+                guard let self else {
+                    return Fail<String, Error>(error: CommonError.captureSelfNotFound)
+                        .eraseToAnyPublisher()
+                }
+                return self.authUseCase
+                    .signInWithApple()
             }
             .sink { [weak self] result in
                 guard let self else { return }

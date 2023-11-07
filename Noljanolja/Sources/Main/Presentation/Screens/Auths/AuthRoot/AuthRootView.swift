@@ -42,8 +42,8 @@ struct AuthRootView<ViewModel: AuthRootViewModel>: View {
 //                        delegate: viewModel
 //                    )
 //                )
-                GoogleAuthView(
-                    viewModel: GoogleAuthViewModel(
+                Auth2View(
+                    viewModel: Auth2ViewModel(
                         delegate: viewModel
                     )
                 )

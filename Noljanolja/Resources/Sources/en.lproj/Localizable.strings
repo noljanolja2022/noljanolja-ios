@@ -73,6 +73,7 @@
 "login_phone_description" = "Welcome to NolgoBulja. Please enter your Phone number to join continue.";
 "login_google_description" = "Welcome to NolgoBulja. Please connect your Google account to continue.";
 "login_google_button" = "Connect with Google";
+"login_apple_button" = "Sign in with Apple";
 "login_country_input_label" = "Country";
 "login_phone_input_label" = "Phone Number";
 "login_invalid_phone_title" = "Incorrect Number";

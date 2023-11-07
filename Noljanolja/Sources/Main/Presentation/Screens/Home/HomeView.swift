@@ -220,37 +220,32 @@ struct HomeView<ViewModel: HomeViewModel>: View {
     private func buildTabView(_ tab: HomeTabType) -> some View {
         VideoDetailRootContainerView(
             content: {
-                switch Natrium.Config.environment {
-                case .development:
-                    switch tab {
-                    case .chat:
-                        ConversationListView(
-                            viewModel: ConversationListViewModel(
-                                delegate: viewModel
-                            ),
-                            toolBarAction: toolBarActionSubject.eraseToAnyPublisher()
+                switch tab {
+                case .chat:
+                    ConversationListView(
+                        viewModel: ConversationListViewModel(
+                            delegate: viewModel
+                        ),
+                        toolBarAction: toolBarActionSubject.eraseToAnyPublisher()
+                    )
+                case .watch:
+                    VideosView(
+                        viewModel: VideosViewModel()
+                    )
+                case .wallet:
+                    WalletView(
+                        viewModel: WalletViewModel(
+                            delegate: viewModel
                         )
-                    case .watch:
-                        VideosView(
-                            viewModel: VideosViewModel()
-                        )
-                    case .wallet:
-                        WalletView(
-                            viewModel: WalletViewModel(
-                                delegate: viewModel
-                            )
-                        )
-                    case .shop:
-                        ShopHomeView(
-                            viewModel: ShopHomeViewModel()
-                        )
-                    case .friends:
-                        HomeFriendView(
-                            viewModel: HomeFriendViewModel()
-                        )
-                    }
-                case .production:
-                    ComingSoonView()
+                    )
+                case .shop:
+                    ShopHomeView(
+                        viewModel: ShopHomeViewModel()
+                    )
+                case .friends:
+                    HomeFriendView(
+                        viewModel: HomeFriendViewModel()
+                    )
                 }
             },
             viewModel: VideoDetailRootContainerViewModel()

@@ -432,9 +432,9 @@
 		CFA3304D29BEB674008D7449 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA3304C29BEB674008D7449 /* SearchView.swift */; };
 		CFA442142AF405560044D4BE /* VideoDetailViewContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA442132AF405560044D4BE /* VideoDetailViewContentType.swift */; };
 		CFA5BD2C29EEFB9000251176 /* DataDetectorTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA5BD2B29EEFB9000251176 /* DataDetectorTextView.swift */; };
-		CFA66B882ACA6F490090BC1A /* GoogleAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA66B862ACA6F490090BC1A /* GoogleAuthView.swift */; };
-		CFA66B892ACA6F490090BC1A /* GoogleAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA66B872ACA6F490090BC1A /* GoogleAuthViewModel.swift */; };
-		CFA66B8B2ACA6F590090BC1A /* GoogleAuthNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA66B8A2ACA6F590090BC1A /* GoogleAuthNavigations.swift */; };
+		CFA66B882ACA6F490090BC1A /* Auth2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA66B862ACA6F490090BC1A /* Auth2View.swift */; };
+		CFA66B892ACA6F490090BC1A /* Auth2ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA66B872ACA6F490090BC1A /* Auth2ViewModel.swift */; };
+		CFA66B8B2ACA6F590090BC1A /* Auth2Navigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA66B8A2ACA6F590090BC1A /* Auth2Navigations.swift */; };
 		CFA6E94C2A73C47B00BF78F3 /* ShareMessageParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA6E94B2A73C47B00BF78F3 /* ShareMessageParam.swift */; };
 		CFA6E94E2A73C65000BF78F3 /* AttachmentsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA6E94D2A73C65000BF78F3 /* AttachmentsRequest.swift */; };
 		CFA6E9502A73C6E700BF78F3 /* ShareMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFA6E94F2A73C6E700BF78F3 /* ShareMessageRequest.swift */; };
@@ -1035,9 +1035,9 @@
 		CFA546DB2AD0611300762F27 /* GoogleService-Info_Development.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info_Development.plist"; sourceTree = "<group>"; };
 		CFA546DC2AD0611300762F27 /* GoogleService-Info_Production.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info_Production.plist"; sourceTree = "<group>"; };
 		CFA5BD2B29EEFB9000251176 /* DataDetectorTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataDetectorTextView.swift; sourceTree = "<group>"; };
-		CFA66B862ACA6F490090BC1A /* GoogleAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthView.swift; sourceTree = "<group>"; };
-		CFA66B872ACA6F490090BC1A /* GoogleAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthViewModel.swift; sourceTree = "<group>"; };
-		CFA66B8A2ACA6F590090BC1A /* GoogleAuthNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthNavigations.swift; sourceTree = "<group>"; };
+		CFA66B862ACA6F490090BC1A /* Auth2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth2View.swift; sourceTree = "<group>"; };
+		CFA66B872ACA6F490090BC1A /* Auth2ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth2ViewModel.swift; sourceTree = "<group>"; };
+		CFA66B8A2ACA6F590090BC1A /* Auth2Navigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth2Navigations.swift; sourceTree = "<group>"; };
 		CFA6E94B2A73C47B00BF78F3 /* ShareMessageParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareMessageParam.swift; sourceTree = "<group>"; };
 		CFA6E94D2A73C65000BF78F3 /* AttachmentsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentsRequest.swift; sourceTree = "<group>"; };
 		CFA6E94F2A73C6E700BF78F3 /* ShareMessageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareMessageRequest.swift; sourceTree = "<group>"; };
@@ -2851,8 +2851,8 @@
 		CF53D5332A6AF548009B3A69 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				CFA66B852ACA6F200090BC1A /* Google */,
-				CFA66B842ACA6F0E0090BC1A /* Phone */,
+				CFA66B852ACA6F200090BC1A /* Auth2 */,
+				CFA66B842ACA6F0E0090BC1A /* Auth */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -3198,24 +3198,24 @@
 			path = TextView;
 			sourceTree = "<group>";
 		};
-		CFA66B842ACA6F0E0090BC1A /* Phone */ = {
+		CFA66B842ACA6F0E0090BC1A /* Auth */ = {
 			isa = PBXGroup;
 			children = (
 				CF53D5362A6AF548009B3A69 /* AuthNavigations.swift */,
 				CF53D5352A6AF548009B3A69 /* AuthView.swift */,
 				CF53D5342A6AF548009B3A69 /* AuthViewModel.swift */,
 			);
-			path = Phone;
+			path = Auth;
 			sourceTree = "<group>";
 		};
-		CFA66B852ACA6F200090BC1A /* Google */ = {
+		CFA66B852ACA6F200090BC1A /* Auth2 */ = {
 			isa = PBXGroup;
 			children = (
-				CFA66B8A2ACA6F590090BC1A /* GoogleAuthNavigations.swift */,
-				CFA66B862ACA6F490090BC1A /* GoogleAuthView.swift */,
-				CFA66B872ACA6F490090BC1A /* GoogleAuthViewModel.swift */,
+				CFA66B8A2ACA6F590090BC1A /* Auth2Navigations.swift */,
+				CFA66B862ACA6F490090BC1A /* Auth2View.swift */,
+				CFA66B872ACA6F490090BC1A /* Auth2ViewModel.swift */,
 			);
-			path = Google;
+			path = Auth2;
 			sourceTree = "<group>";
 		};
 		CFAD534A2A780D490044CB42 /* Checkin */ = {
@@ -4358,7 +4358,7 @@
 				CF53D6332A6AF548009B3A69 /* ImageEditorViewModel.swift in Sources */,
 				CF53D6022A6AF548009B3A69 /* ParticipantDetailActionView.swift in Sources */,
 				CFE0926B298FE73000F197F0 /* CloudFunctionAuthRepository.swift in Sources */,
-				CFA66B882ACA6F490090BC1A /* GoogleAuthView.swift in Sources */,
+				CFA66B882ACA6F490090BC1A /* Auth2View.swift in Sources */,
 				CF53D61D2A6AF548009B3A69 /* MessageActionDetailInput.swift in Sources */,
 				CFB3866A2A443028001B0849 /* ReactionIconsLocalRepository.swift in Sources */,
 				CF53D5AF2A6AF548009B3A69 /* TransactionHistoryItemModel.swift in Sources */,
@@ -4598,7 +4598,7 @@
 				CFE954952A3A13BA00C109FE /* MyCoupon.swift in Sources */,
 				CF53D5702A6AF548009B3A69 /* ProfileSettingNavigations.swift in Sources */,
 				CF62EF8B29B23E0000D6B688 /* ViewModelType.swift in Sources */,
-				CFA66B8B2ACA6F590090BC1A /* GoogleAuthNavigations.swift in Sources */,
+				CFA66B8B2ACA6F590090BC1A /* Auth2Navigations.swift in Sources */,
 				CFE5ACF12A7AAB6D0027492E /* ShareReferralContainerNavigations.swift in Sources */,
 				CF53D5912A6AF548009B3A69 /* VideoDetailInputView.swift in Sources */,
 				CF53D5CE2A6AF548009B3A69 /* ContactListView.swift in Sources */,
@@ -4655,7 +4655,7 @@
 				CF53D5CA2A6AF548009B3A69 /* AddFriendContactListViewModel.swift in Sources */,
 				CF715AE52A862135006DF977 /* UncompleteVideosView.swift in Sources */,
 				CF1E5D742A6984DE00481376 /* CameraStatefulView.swift in Sources */,
-				CFA66B892ACA6F490090BC1A /* GoogleAuthViewModel.swift in Sources */,
+				CFA66B892ACA6F490090BC1A /* Auth2ViewModel.swift in Sources */,
 				CFC9E5162A7047FA004D48E5 /* VideoKeywordLocalRepository.swift in Sources */,
 				CF53D5ED2A6AF548009B3A69 /* PhotoMessageContentItemModel.swift in Sources */,
 				CFB0A82129F1B6FD00298546 /* Video.swift in Sources */,
