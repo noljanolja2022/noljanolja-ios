@@ -54,9 +54,9 @@ struct HeaderVideoView: View {
                 .padding(.top, 10)
             }
             ZStack {
-                Text("Let's Get ").foregroundColor(.black)
+                Text("Let's Get ").foregroundColor(.label)
                     + Text("Points \n").foregroundColor(ColorAssets.primaryGreen200.swiftUIColor).fontWeight(.bold)
-                    + Text("By ").foregroundColor(.black)
+                    + Text("By ").foregroundColor(.label)
                     + Text("Watching").foregroundColor(ColorAssets.secondaryYellow400.swiftUIColor).fontWeight(.bold)
             }
             .dynamicFont(.systemFont(ofSize: 24))

@@ -73,11 +73,13 @@ final class VideoDetailViewModel: ViewModel {
     init(videoNetworkRepository: VideoNetworkRepository = VideoNetworkRepositoryImpl.shared,
          videoSocket: VideoSocketAPIType = VideoSocketAPI.default,
          videoUseCases: VideoUseCases = VideoUseCasesImpl.shared,
-         delegate: VideoDetailViewModelDelegate? = nil) {
+         delegate: VideoDetailViewModelDelegate? = nil,
+         videoId: String? = nil) {
         self.videoNetworkRepository = videoNetworkRepository
         self.videoSocket = videoSocket
         self.videoUseCases = videoUseCases
         self.delegate = delegate
+        self.videoId = videoId
         super.init()
 
         configure()
@@ -189,7 +191,7 @@ final class VideoDetailViewModel: ViewModel {
     }
 
     private func setVideo(_ video: Video) {
-        youtubePlayerView.load(withVideoId: video.id, playerVars: ["autoplay": 1])
+        youtubePlayerView.load(withVideoId: video.id, playerVars: ["autoplay": 1, "playsinline": 1])
 
         self.video = video
         comments = video.comments

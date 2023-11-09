@@ -16,6 +16,8 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
 
     @StateObject var viewModel: ViewModel
 
+    @Environment(\.presentationMode) private var presentationMode
+
     var body: some View {
         buildBodyView()
     }
@@ -32,7 +34,7 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
                 }
             )
     }
-    
+
     @ViewBuilder
     private func buildContentTypeView() -> some View {
         switch viewModel.contentType {
@@ -42,14 +44,14 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
             EmptyView()
         }
     }
-    
+
     private func buildNavigationView() -> some View {
         VStack(spacing: 0) {
             buildHeaderView()
             buildMainView()
         }
         .frame(maxWidth: .infinity)
-        .background(ColorAssets.neutralLight.swiftUIColor.ignoresSafeArea())
+        .background(ColorAssets.primaryGreen200.swiftUIColor.ignoresSafeArea())
         .padding(
             .bottom,
             {
@@ -66,74 +68,87 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
             }
         }())
     }
-    
+
     @ViewBuilder
     private func buildHeaderView() -> some View {
         switch viewModel.contentType {
         case .full, .pictureInPicture:
-            HStack(spacing: 4) {
-                Button(
-                    action: {
-                        viewModel.updateContentType(.hide)
-                    },
-                    label: {
-                        ImageAssets.icClose.swiftUIImage
-                            .resizable()
-                            .scaledToFit()
-                            .padding(14)
-                            .aspectRatio(1, contentMode: .fit)
-                            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                    }
-                )
-                Spacer()
-                Button(
-                    action: {
-                        viewModel.updateContentType(.pictureInPicture)
-                    },
-                    label: {
-                        Image(systemName: "pip")
-                            .resizable()
-                            .scaledToFit()
-                            .padding(10)
-                            .aspectRatio(1, contentMode: .fit)
-                            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                    }
-                )
-                
-                switch Natrium.Config.configuration {
-                case .development:
+            ZStack {
+                HStack(spacing: 4) {
                     Button(
                         action: {
-                            viewModel.switchPictureInPicture()
+                            viewModel.updateContentType(.pictureInPicture)
                         },
                         label: {
-                            Image(systemName: "pip.swap")
+                            ImageAssets.icBack.swiftUIImage
                                 .resizable()
                                 .scaledToFit()
-                                .padding(10)
+                                .padding(.leading, 16)
+                                .padding(.vertical, 14)
                                 .aspectRatio(1, contentMode: .fit)
                                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                         }
                     )
-                    Button(
-                        action: {
-                            viewModel.updateContentType(.bottom)
-                        },
-                        label: {
-                            Image(systemName: "rectangle.portrait.bottomright.inset.filled")
-                                .resizable()
-                                .scaledToFit()
-                                .padding(10)
-                                .aspectRatio(1, contentMode: .fit)
-                                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                        }
-                    )
-                case .appstore:
-                    EmptyView()
+                    Spacer()
+                    //                Button(
+                    //                    action: {
+                    //                        viewModel.updateContentType(.pictureInPicture)
+                    //                    },
+                    //                    label: {
+                    //                        Image(systemName: "pip")
+                    //                            .resizable()
+                    //                            .scaledToFit()
+                    //                            .padding(10)
+                    //                            .aspectRatio(1, contentMode: .fit)
+                    //                            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    //                    }
+                    //                )
+                    //
+                    //                switch Natrium.Config.configuration {
+                    //                case .development:
+                    //                    Button(
+                    //                        action: {
+                    //                            viewModel.switchPictureInPicture()
+                    //                        },
+                    //                        label: {
+                    //                            Image(systemName: "pip.swap")
+                    //                                .resizable()
+                    //                                .scaledToFit()
+                    //                                .padding(10)
+                    //                                .aspectRatio(1, contentMode: .fit)
+                    //                                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    //                        }
+                    //                    )
+                    //                    Button(
+                    //                        action: {
+                    //                            viewModel.updateContentType(.bottom)
+                    //                        },
+                    //                        label: {
+                    //                            Image(systemName: "rectangle.portrait.bottomright.inset.filled")
+                    //                                .resizable()
+                    //                                .scaledToFit()
+                    //                                .padding(10)
+                    //                                .aspectRatio(1, contentMode: .fit)
+                    //                                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    //                        }
+                    //                    )
+                    //                case .appstore:
+                    //                    EmptyView()
+                    //                }
                 }
+                .frame(maxWidth: .infinity)
+                .frame(height: 44)
+                .background(ColorAssets.primaryGreen200.swiftUIColor)
+                HStack {
+                    Spacer()
+                    Text(L10n.videoTitle)
+                        .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity)
+                .frame(height: 44)
+                .background(Color.clear)
             }
-            .frame(maxWidth: .infinity)
-            .frame(height: 44)
         case .bottom, .hide:
             EmptyView()
         }
@@ -159,6 +174,7 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
             }
             buildVerticalDetailView()
         }
+        .background(ColorAssets.neutralLight.swiftUIColor.edgesIgnoringSafeArea(.bottom))
     }
 
     @ViewBuilder
@@ -167,7 +183,7 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
             .frame(width: viewModel.contentType.playerWidth)
             .frame(height: viewModel.contentType.playerHeight)
     }
-    
+
     @ViewBuilder
     private func buildHorizontalDetailView() -> some View {
         switch viewModel.contentType {
@@ -238,7 +254,7 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
             viewModel.updateContentType(.full)
         }
     }
-    
+
     private func buildVerticalDetailContentView() -> some View {
         VStack(spacing: 0) {
             buildScrollView()

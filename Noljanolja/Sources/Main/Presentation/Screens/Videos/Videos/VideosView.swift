@@ -37,17 +37,19 @@ struct VideosView<ViewModel: VideosViewModel>: View {
     }
 
     private func buildContentView() -> some View {
-        ScrollView {
-            VStack(spacing: 8) {
-                buildHeaderView()
-                buildWatchingView()
-
-                Divider()
-                    .frame(height: 2)
-                    .overlay(ColorAssets.neutralLightGrey.swiftUIColor)
-                    .padding(.vertical, 4)
-
-                buildTrendingView()
+        VStack {
+            buildHeaderView()
+            ScrollView {
+                VStack(spacing: 8) {
+                    buildWatchingView()
+                    
+                    Divider()
+                        .frame(height: 2)
+                        .overlay(ColorAssets.neutralLightGrey.swiftUIColor)
+                        .padding(.vertical, 4)
+                    
+                    buildTrendingView()
+                }
             }
         }
         .statefull(

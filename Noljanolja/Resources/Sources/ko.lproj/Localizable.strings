@@ -243,7 +243,7 @@
 "video_detail_require_google_description" = "댓글을 달거나 좋아요를 누르려면 구글에 로그인하고 유튜브 접근을 허용해야 합니다.";
 "video_detail_need_youtube_account" = "회원님은 아직 등록된 유튜브 계정이 없습니다.";
 "video_detail_need_youtube_account_description" = "유튜브에 댓글을 작성하려면 유튜브 계정이 필요합니다. 유튜브 계정을 만드는 방법에 대한 가이드를 보려면 확인 버튼을 클릭해주세요.";
-"video_detail_reward_point" = "%@ 포인트";
+"video_detail_reward_point" = "%@ 포인트들";
 "chat_new_chat_tooltip" = "새 채팅을 시작하려면 이 버튼을 누르세요.";
 "setting_faq_title" = "FAQ";
 "setting_license_title" = "오픈소스 라이센스";

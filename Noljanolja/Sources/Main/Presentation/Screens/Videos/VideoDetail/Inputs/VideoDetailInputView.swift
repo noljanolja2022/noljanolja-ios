@@ -18,7 +18,7 @@ struct VideoDetailInputView<ViewModel: VideoDetailInputViewModel>: View {
     @StateObject var viewModel: ViewModel
 
     // MARK: State
-    
+
     @StateObject private var keyboard = Keyboard.main
     @State private var text = ""
 
@@ -30,6 +30,7 @@ struct VideoDetailInputView<ViewModel: VideoDetailInputViewModel>: View {
 
     private func buildBodyView() -> some View {
         buildContentView()
+            .edgesIgnoringSafeArea(.bottom)
             .navigationBarTitle("", displayMode: .inline)
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
@@ -44,6 +45,10 @@ struct VideoDetailInputView<ViewModel: VideoDetailInputViewModel>: View {
         }
         .padding(.vertical, 4)
         .padding(.horizontal, 12)
+        .background(
+            ColorAssets.neutralLight.swiftUIColor
+                .shadow(color: ColorAssets.neutralLightGrey.swiftUIColor, radius: 5, x: 4, y: -9)
+        )
     }
 
     @ViewBuilder
@@ -69,9 +74,9 @@ struct VideoDetailInputView<ViewModel: VideoDetailInputViewModel>: View {
     private func buildTextInputView() -> some View {
         ZStack(alignment: .center) {
             if text.isEmpty {
-                Text("Aa")
+                Text(L10n.videoDetailEnterComment)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
+                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                     .padding(.horizontal, 6)
             }
             TextEditor(text: $text)
