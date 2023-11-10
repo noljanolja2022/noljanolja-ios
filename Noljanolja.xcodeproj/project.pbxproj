@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B6876F92AFDEA22000BBD55 /* ListSocialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6876F82AFDEA21000BBD55 /* ListSocialView.swift */; };
+		2B6876FB2AFDF964000BBD55 /* String+Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6876FA2AFDF964000BBD55 /* String+Encode.swift */; };
 		2B6B93BC2AF95BF000749EB2 /* HeaderVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6B93BB2AF95BF000749EB2 /* HeaderVideoView.swift */; };
+		2BF3B31E2AFC8EFA00A1CC6F /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 2BF3B31D2AFC8EFA00A1CC6F /* AlertToast */; };
 		7647F56A2DB765C44F009B8C /* Pods_Noljanolja_NoljanoljaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 264F630FC4DDFC0E9074F9D2 /* Pods_Noljanolja_NoljanoljaUITests.framework */; };
 		8353A88CBCF1CAFD239985BE /* Pods_NoljanoljaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD0295CC3C0D04548A9867CB /* Pods_NoljanoljaTests.framework */; };
 		AEDBBDE12EEA3CADCA87D4F2 /* Pods_Noljanolja.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB5BA5AC93BBFAA68677C79 /* Pods_Noljanolja.framework */; };
@@ -603,6 +606,8 @@
 		1F2349C15C44A8E1267B843B /* Pods-Noljanolja-NoljanoljaUITests.ad hoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.ad hoc.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.ad hoc.xcconfig"; sourceTree = "<group>"; };
 		216373F9231F3C6A300BE8C9 /* Pods-Noljanolja-NoljanoljaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.release.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.release.xcconfig"; sourceTree = "<group>"; };
 		264F630FC4DDFC0E9074F9D2 /* Pods_Noljanolja_NoljanoljaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Noljanolja_NoljanoljaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B6876F82AFDEA21000BBD55 /* ListSocialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSocialView.swift; sourceTree = "<group>"; };
+		2B6876FA2AFDF964000BBD55 /* String+Encode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Encode.swift"; sourceTree = "<group>"; };
 		2B6B93BB2AF95BF000749EB2 /* HeaderVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderVideoView.swift; sourceTree = "<group>"; };
 		2DDD25D24A7930AF482D9C5C /* Pods-Noljanolja-NoljanoljaUITests.app store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.app store.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.app store.xcconfig"; sourceTree = "<group>"; };
 		4186FA57228107FEF2D2C426 /* Pods-NoljanoljaTests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoljanoljaTests.development.xcconfig"; path = "Target Support Files/Pods-NoljanoljaTests/Pods-NoljanoljaTests.development.xcconfig"; sourceTree = "<group>"; };
@@ -1188,6 +1193,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF52AB7329B8E3B700C9C90C /* RealmSwift in Frameworks */,
+				2BF3B31E2AFC8EFA00A1CC6F /* AlertToast in Frameworks */,
 				CF9779DC29BE2FC600D1CAB0 /* PhoneNumberKit in Frameworks */,
 				CFF1F79A29B6E7FE00B25DD2 /* CombineExt in Frameworks */,
 				CFE9D2E0298D6C1500D936DA /* KakaoSDKAuth in Frameworks */,
@@ -1578,6 +1584,7 @@
 				CF3282EC299E3758006A459B /* UIApplication+Extension.swift */,
 				CF9DF0A92A36B2D80054E105 /* UIImage+QRCode.swift */,
 				CFE215722AE6758700C83BAD /* UIViewController+Top.swift */,
+				2B6876FA2AFDF964000BBD55 /* String+Encode.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -3030,6 +3037,7 @@
 			isa = PBXGroup;
 			children = (
 				CF53D42E2A6AF547009B3A69 /* CommonVideoItemView.swift */,
+				2B6876F82AFDEA21000BBD55 /* ListSocialView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3838,6 +3846,7 @@
 				CF446B8429D89C3000ED66BF /* Lottie */,
 				CFF520FA2A17D92400F29A4E /* Charts */,
 				CF45BCB52A67C68C003FB991 /* IQKeyboardManagerSwift */,
+				2BF3B31D2AFC8EFA00A1CC6F /* AlertToast */,
 			);
 			productName = Noljanolja;
 			productReference = CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */;
@@ -3936,6 +3945,7 @@
 				CF446B8329D89C3000ED66BF /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				CFF520F92A17D92400F29A4E /* XCRemoteSwiftPackageReference "Charts" */,
 				CF45BCB42A67C68C003FB991 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				2BF3B31C2AFC8EFA00A1CC6F /* XCRemoteSwiftPackageReference "AlertToast" */,
 			);
 			productRefGroup = CFFD707F298AB9FF00D4F5A2 /* Products */;
 			projectDirPath = "";
@@ -4322,6 +4332,7 @@
 				CFFB71EC2A4004550019663C /* StorableCouponKeyword.swift in Sources */,
 				CF5923FE29EDA1C8009C2516 /* UserLocalRepository.swift in Sources */,
 				CF53D65A2A6AF548009B3A69 /* HomeViewModel.swift in Sources */,
+				2B6876F92AFDEA22000BBD55 /* ListSocialView.swift in Sources */,
 				CFFD70D9298ACAF600D4F5A2 /* BaseTargetType.swift in Sources */,
 				CF00D1732995457600505702 /* ProgressHUDView.swift in Sources */,
 				CF53D5882A6AF548009B3A69 /* BannersViewModel.swift in Sources */,
@@ -4663,6 +4674,7 @@
 				CFC9E5162A7047FA004D48E5 /* VideoKeywordLocalRepository.swift in Sources */,
 				CF53D5ED2A6AF548009B3A69 /* PhotoMessageContentItemModel.swift in Sources */,
 				CFB0A82129F1B6FD00298546 /* Video.swift in Sources */,
+				2B6876FB2AFDF964000BBD55 /* String+Encode.swift in Sources */,
 				CF53D5AC2A6AF548009B3A69 /* TransactionHistoryModelBuilder.swift in Sources */,
 				CF53D5C02A6AF548009B3A69 /* WalletMyPointView.swift in Sources */,
 				CFE09263298EB69700F197F0 /* FirebaseUser+Combine.swift in Sources */,
@@ -5063,6 +5075,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2BF3B31C2AFC8EFA00A1CC6F /* XCRemoteSwiftPackageReference "AlertToast" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elai950/AlertToast.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		CF076D4F29D0BF2B0013B6F9 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
@@ -5226,6 +5246,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2BF3B31D2AFC8EFA00A1CC6F /* AlertToast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2BF3B31C2AFC8EFA00A1CC6F /* XCRemoteSwiftPackageReference "AlertToast" */;
+			productName = AlertToast;
+		};
 		CF076D5029D0BF2B0013B6F9 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CF076D4F29D0BF2B0013B6F9 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;

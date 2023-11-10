@@ -171,7 +171,7 @@ struct HomeView<ViewModel: HomeViewModel>: View {
                     ZStack(alignment: .top) {
                         switch viewModel.selectedTab {
                         case .watch:
-                            Spacer().background(.white)
+                            Spacer().background(ColorAssets.neutralLight.swiftUIColor)
                         case .chat, .friends:
                             Spacer().background(ColorAssets.primaryGreen200.swiftUIColor)
                         case .wallet:

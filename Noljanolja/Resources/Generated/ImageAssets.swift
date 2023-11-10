@@ -91,6 +91,11 @@ internal enum ImageAssets {
   internal static let icShare = ImageAsset(name: "ic_share")
   internal static let icTimeRecent = ImageAsset(name: "ic_time_recent")
   internal static let logo = ImageAsset(name: "logo")
+  internal static let icFacebook = ImageAsset(name: "ic_facebook")
+  internal static let icMessenger = ImageAsset(name: "ic_messenger")
+  internal static let icTelegram = ImageAsset(name: "ic_telegram")
+  internal static let icTwitter = ImageAsset(name: "ic_twitter")
+  internal static let icWhatapps = ImageAsset(name: "ic_whatapps")
   internal static let icChat = ImageAsset(name: "ic_chat")
   internal static let icFriends = ImageAsset(name: "ic_friends")
   internal static let icNews = ImageAsset(name: "ic_news")
@@ -183,6 +188,11 @@ internal enum ImageAssets {
     icShare,
     icTimeRecent,
     logo,
+    icFacebook,
+    icMessenger,
+    icTelegram,
+    icTwitter,
+    icWhatapps,
     icChat,
     icFriends,
     icNews,

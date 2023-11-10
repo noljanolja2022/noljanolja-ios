@@ -79,6 +79,7 @@ extension VideoActionContainerView {
             BottomSheet {
                 ShareVideoView(
                     viewModel: ShareVideoViewModel(
+                        video: viewModel.video,
                         delegate: viewModel
                     )
                 )

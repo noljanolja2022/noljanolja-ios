@@ -8,11 +8,13 @@
 
 import Combine
 import Foundation
+import UIKit
 
 // MARK: - ShareVideoViewModelDelegate
 
 protocol ShareVideoViewModelDelegate: AnyObject {
     func shareVideoViewModel(didSelectUser user: User)
+    func sharedSocial()
 }
 
 // MARK: - ShareVideoViewModel
@@ -23,8 +25,11 @@ final class ShareVideoViewModel: ViewModel {
     // MARK: Action
 
     let action = PassthroughSubject<User, Never>()
+    let shareAction = PassthroughSubject<String, Never>()
 
     // MARK: Dependencies
+
+    let video: Video
 
     private weak var delegate: ShareVideoViewModelDelegate?
 
@@ -32,8 +37,9 @@ final class ShareVideoViewModel: ViewModel {
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(delegate: ShareVideoViewModelDelegate? = nil) {
+    init(video: Video, delegate: ShareVideoViewModelDelegate? = nil) {
         self.delegate = delegate
+        self.video = video
         super.init()
 
         configure()
@@ -48,6 +54,18 @@ final class ShareVideoViewModel: ViewModel {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.delegate?.shareVideoViewModel(didSelectUser: $0)
+            }
+            .store(in: &cancellables)
+
+        shareAction
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] schemaURL in
+                guard let self else { return }
+                let urlEncode = self.video.url.stringEncode()
+                guard let url = URL(string: schemaURL + "\(urlEncode)"),
+                      UIApplication.shared.canOpenURL(url) else { return }
+                UIApplication.shared.open(url)
+                self.delegate?.sharedSocial()
             }
             .store(in: &cancellables)
     }
