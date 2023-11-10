@@ -6,6 +6,7 @@
 //
 //
 
+import AlertToast
 import SwiftUI
 import SwiftUIX
 
@@ -34,6 +35,17 @@ struct VideosView<ViewModel: VideosViewModel>: View {
                 buildFullScreenCoverDestinationView($0)
             }
         )
+        .toast(isPresenting: $viewModel.isShowToastCopy, duration: 2, tapToDismiss: true) {
+            AlertToast(
+                displayMode: .banner(.pop),
+                type: .regular,
+                title: "Link copied",
+                style: .style(
+                    backgroundColor: ColorAssets.neutralDarkGrey.swiftUIColor,
+                    titleColor: ColorAssets.neutralLight.swiftUIColor
+                )
+            )
+        }
     }
 
     private func buildContentView() -> some View {
@@ -161,6 +173,12 @@ extension VideosView {
             SearchVideosView(
                 viewModel: SearchVideosViewModel()
             )
+        case let .chat(conversationId):
+            ChatView(
+                viewModel: ChatViewModel(
+                    conversationID: conversationId
+                )
+            )
         }
     }
 
@@ -172,7 +190,8 @@ extension VideosView {
         case let .more(model):
             VideoActionContainerView(
                 viewModel: VideoActionContainerViewModel(
-                    video: model
+                    video: model,
+                    delegate: viewModel
                 )
             )
         }

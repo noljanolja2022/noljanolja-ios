@@ -42,6 +42,7 @@ struct VideoActionView<ViewModel: VideoActionViewModel>: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 8)
+        .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
     private func buildItemView(_ model: VideoActionItemViewModel) -> some View {
@@ -49,6 +50,7 @@ struct VideoActionView<ViewModel: VideoActionViewModel>: View {
             Image(model.imageName)
                 .resizable()
                 .scaledToFit()
+                .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                 .frame(width: 24, height: 24)
                 .padding(2)
 

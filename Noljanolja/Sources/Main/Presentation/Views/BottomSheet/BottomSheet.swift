@@ -55,7 +55,7 @@ struct BottomSheet<Content: View>: View {
                 .frame(maxWidth: .infinity)
                 .frame(height: UIApplication.shared.rootKeyWindow?.safeAreaInsets.bottom)
         }
-        .background(.white)
+        .background(ColorAssets.neutralLight.swiftUIColor)
         .cornerRadius([.topLeading, .topTrailing], 24)
         .padding(.top, 96)
     }

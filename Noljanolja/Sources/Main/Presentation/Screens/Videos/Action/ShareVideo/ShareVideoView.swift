@@ -47,7 +47,14 @@ struct ShareVideoView<ViewModel: ShareVideoViewModel>: View {
                     viewModel.action.send($0)
                 }
             )
+            Divider()
+                .height(2)
+                .overlay(ColorAssets.neutralLightGrey.swiftUIColor)
+            ListSocialView {
+                viewModel.shareAction.send($0)
+            }
         }
         .frame(maxWidth: .infinity)
+        .background(ColorAssets.neutralLight.swiftUIColor)
     }
 }
