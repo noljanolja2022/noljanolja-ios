@@ -33,7 +33,6 @@ struct ShareVideoDetailView<ViewModel: ShareVideoDetailViewModel>: View {
 
     private func buildContentView() -> some View {
         VStack(spacing: 12) {
-            buildNavigationBarView()
             buildUserView(viewModel.user)
             buildVideoView(viewModel.video)
             buildActionView()
@@ -53,6 +52,11 @@ struct ShareVideoDetailView<ViewModel: ShareVideoDetailViewModel>: View {
 
     private func buildUserView(_ model: User) -> some View {
         VStack(spacing: 8) {
+            Text("Send To")
+                .dynamicFont(.systemFont(ofSize: 14))
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                .padding(.top, 24)
+
             WebImage(
                 url: URL(string: model.avatar),
                 context: [

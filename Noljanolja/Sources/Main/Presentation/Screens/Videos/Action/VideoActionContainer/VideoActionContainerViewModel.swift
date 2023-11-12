@@ -12,7 +12,10 @@ import SwiftUIX
 
 // MARK: - VideoActionContainerViewModelDelegate
 
-protocol VideoActionContainerViewModelDelegate: AnyObject {}
+protocol VideoActionContainerViewModelDelegate: AnyObject {
+    func showToastCopy()
+    func pushToChat(conversationId: Int?)
+}
 
 // MARK: - VideoActionContainerViewModel
 
@@ -63,7 +66,11 @@ extension VideoActionContainerViewModel: VideoActionViewModelDelegate {
     func videoActionViewModel(didSelectItem item: VideoActionItemViewModel) {
         switch item {
         case .share: fullScreenCoverType = .share
-        case .copyLink, .ignore: break
+        case .ignore: break
+        case .copyLink:
+            UIPasteboard.general.string = video.url
+            closeAction.send()
+            delegate?.showToastCopy()
         }
     }
 }
@@ -71,6 +78,10 @@ extension VideoActionContainerViewModel: VideoActionViewModelDelegate {
 // MARK: ShareVideoViewModelDelegate
 
 extension VideoActionContainerViewModel: ShareVideoViewModelDelegate {
+    func sharedSocial() {
+        closeAction.send()
+    }
+    
     func shareVideoViewModel(didSelectUser user: User) {
         withoutAnimation {
             fullScreenCoverType = .shareDetail(user)
@@ -81,7 +92,8 @@ extension VideoActionContainerViewModel: ShareVideoViewModelDelegate {
 // MARK: ShareVideoDetailViewModelDelegate
 
 extension VideoActionContainerViewModel: ShareVideoDetailViewModelDelegate {
-    func shareVideoDetailViewModelDidShare() {
+    func shareVideoDetailViewModelDidShare(conversationId: Int?) {
         closeAction.send()
+        delegate?.pushToChat(conversationId: conversationId)
     }
 }

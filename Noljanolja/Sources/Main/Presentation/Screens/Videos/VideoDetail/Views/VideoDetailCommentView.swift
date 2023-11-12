@@ -22,7 +22,6 @@ struct VideoDetailCommentView: View {
             buildHeaderView()
             buildContentView()
         }
-        .padding(.top, 12)
     }
 
     private func buildHeaderView() -> some View {
@@ -44,13 +43,13 @@ struct VideoDetailCommentView: View {
 
             VStack(spacing: 4) {
                 Text(comment.createdAt?.string(withFormat: "HH:mm - yyyy/MM/dd") ?? "")
-                    .dynamicFont(.systemFont(ofSize: 11))
+                    .dynamicFont(.systemFont(ofSize: 11, weight: .semibold))
                     .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                 Text(comment.commenter?.name ?? "")
                     .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
-                    .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
@@ -62,7 +61,7 @@ struct VideoDetailCommentView: View {
                 Divider()
                     .frame(width: 1)
                     .frame(maxHeight: .infinity)
-                    .overlay(ColorAssets.neutralGrey.swiftUIColor)
+                    .overlay(Color.clear)
             }
             .frame(width: 24)
 
@@ -71,16 +70,10 @@ struct VideoDetailCommentView: View {
                     .multilineTextAlignment(.leading)
                     .dynamicFont(.systemFont(ofSize: 12))
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                    .padding(12)
-                    .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
+                    .padding(.bottom, 10)
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                     .background(ColorAssets.neutralLight.swiftUIColor)
                     .cornerRadius(8)
-                    .shadow(
-                        color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.15),
-                        radius: 2,
-                        x: 0,
-                        y: 2
-                    )
 
                 Divider()
                     .frame(height: 1)

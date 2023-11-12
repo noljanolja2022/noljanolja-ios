@@ -29,6 +29,7 @@ final class VideosViewModel: ViewModel {
     // MARK: Action
 
     let loadMoreTrendingVideos = PassthroughSubject<Int, Never>()
+    @Published var isShowToastCopy = false
 
     // MARK: Dependencies
 
@@ -159,5 +160,18 @@ final class VideosViewModel: ViewModel {
             }
         }
         .eraseToAnyPublisher()
+    }
+}
+
+// MARK: VideoActionContainerViewModelDelegate
+
+extension VideosViewModel: VideoActionContainerViewModelDelegate {
+    func pushToChat(conversationId: Int?) {
+        guard let conversationId else { return }
+        navigationType = .chat(conversationId: conversationId)
+    }
+
+    func showToastCopy() {
+        isShowToastCopy = true
     }
 }
