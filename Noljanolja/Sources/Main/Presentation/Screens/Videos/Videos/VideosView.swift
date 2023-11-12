@@ -98,7 +98,7 @@ struct VideosView<ViewModel: VideosViewModel>: View {
 
     @ViewBuilder
     private func buildWatchingView() -> some View {
-        if !viewModel.model.highlightVideos.isEmpty {
+        if !viewModel.model.watchingVideos.isEmpty {
             WatchingVideoView(
                 videos: viewModel.model.watchingVideos,
                 seeAllAction: {

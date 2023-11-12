@@ -10,13 +10,14 @@ import Foundation
 enum VideoActionItemViewModel: CaseIterable {
     case share
     case copyLink
-    case ignore
+    // TODO: Add ignore video
+//    case ignore
 
     var imageName: String {
         switch self {
         case .share: return ImageAssets.icShare.name
         case .copyLink: return ImageAssets.icLink.name
-        case .ignore: return ImageAssets.icIgnore.name
+//        case .ignore: return ImageAssets.icIgnore.name
         }
     }
 
@@ -24,7 +25,7 @@ enum VideoActionItemViewModel: CaseIterable {
         switch self {
         case .share: return "Share Video"
         case .copyLink: return "Copy link"
-        case .ignore: return "Ignore Video"
+//        case .ignore: return "Ignore Video"
         }
     }
 }

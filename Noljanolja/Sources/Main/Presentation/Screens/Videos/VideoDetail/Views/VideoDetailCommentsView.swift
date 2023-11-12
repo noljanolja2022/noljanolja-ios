@@ -34,23 +34,24 @@ struct VideoDetailCommentsView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
-            HStack(spacing: 12) {
-                Text(L10n.videoDetailCommentPopular)
-                    .dynamicFont(.systemFont(ofSize: 12, weight: .medium))
-                    .frame(height: 28)
-                    .padding(.horizontal, 12)
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                    .background(ColorAssets.neutralGrey.swiftUIColor)
-                    .cornerRadius(14)
-                Text(L10n.videoDetailCommentNewest)
-                    .dynamicFont(.systemFont(ofSize: 12, weight: .medium))
-                    .frame(height: 28)
-                    .padding(.horizontal, 12)
-                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
-                    .background(ColorAssets.neutralLightGrey.swiftUIColor)
-                    .cornerRadius(14)
-                Spacer()
-            }
+            // TODO: Popular/Newest comments
+//            HStack(spacing: 12) {
+//                Text(L10n.videoDetailCommentPopular)
+//                    .dynamicFont(.systemFont(ofSize: 12, weight: .medium))
+//                    .frame(height: 28)
+//                    .padding(.horizontal, 12)
+//                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+//                    .background(ColorAssets.neutralGrey.swiftUIColor)
+//                    .cornerRadius(14)
+//                Text(L10n.videoDetailCommentNewest)
+//                    .dynamicFont(.systemFont(ofSize: 12, weight: .medium))
+//                    .frame(height: 28)
+//                    .padding(.horizontal, 12)
+//                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
+//                    .background(ColorAssets.neutralLightGrey.swiftUIColor)
+//                    .cornerRadius(14)
+//                Spacer()
+//            }
         }
     }
 

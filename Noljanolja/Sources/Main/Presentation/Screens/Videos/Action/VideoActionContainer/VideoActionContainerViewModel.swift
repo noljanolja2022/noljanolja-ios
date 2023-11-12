@@ -66,7 +66,8 @@ extension VideoActionContainerViewModel: VideoActionViewModelDelegate {
     func videoActionViewModel(didSelectItem item: VideoActionItemViewModel) {
         switch item {
         case .share: fullScreenCoverType = .share
-        case .ignore: break
+        // TODO: Add ignore video
+//        case .ignore: break
         case .copyLink:
             UIPasteboard.general.string = video.url
             closeAction.send()
