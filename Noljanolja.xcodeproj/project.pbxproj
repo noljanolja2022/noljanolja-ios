@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B5FC3C02B021A4300906C18 /* HeaderCommonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5FC3BF2B021A4300906C18 /* HeaderCommonView.swift */; };
+		2B5FC3C22B0285FA00906C18 /* HomeFriendNavigationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5FC3C12B0285FA00906C18 /* HomeFriendNavigationType.swift */; };
 		2B6876F92AFDEA22000BBD55 /* ListSocialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6876F82AFDEA21000BBD55 /* ListSocialView.swift */; };
 		2B6876FB2AFDF964000BBD55 /* String+Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6876FA2AFDF964000BBD55 /* String+Encode.swift */; };
-		2B6B93BC2AF95BF000749EB2 /* HeaderVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6B93BB2AF95BF000749EB2 /* HeaderVideoView.swift */; };
 		2BF3B31E2AFC8EFA00A1CC6F /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 2BF3B31D2AFC8EFA00A1CC6F /* AlertToast */; };
 		7647F56A2DB765C44F009B8C /* Pods_Noljanolja_NoljanoljaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 264F630FC4DDFC0E9074F9D2 /* Pods_Noljanolja_NoljanoljaUITests.framework */; };
 		8353A88CBCF1CAFD239985BE /* Pods_NoljanoljaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD0295CC3C0D04548A9867CB /* Pods_NoljanoljaTests.framework */; };
@@ -611,9 +612,10 @@
 		1F2349C15C44A8E1267B843B /* Pods-Noljanolja-NoljanoljaUITests.ad hoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.ad hoc.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.ad hoc.xcconfig"; sourceTree = "<group>"; };
 		216373F9231F3C6A300BE8C9 /* Pods-Noljanolja-NoljanoljaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.release.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.release.xcconfig"; sourceTree = "<group>"; };
 		264F630FC4DDFC0E9074F9D2 /* Pods_Noljanolja_NoljanoljaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Noljanolja_NoljanoljaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B5FC3BF2B021A4300906C18 /* HeaderCommonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCommonView.swift; sourceTree = "<group>"; };
+		2B5FC3C12B0285FA00906C18 /* HomeFriendNavigationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFriendNavigationType.swift; sourceTree = "<group>"; };
 		2B6876F82AFDEA21000BBD55 /* ListSocialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSocialView.swift; sourceTree = "<group>"; };
 		2B6876FA2AFDF964000BBD55 /* String+Encode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Encode.swift"; sourceTree = "<group>"; };
-		2B6B93BB2AF95BF000749EB2 /* HeaderVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderVideoView.swift; sourceTree = "<group>"; };
 		2DDD25D24A7930AF482D9C5C /* Pods-Noljanolja-NoljanoljaUITests.app store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.app store.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.app store.xcconfig"; sourceTree = "<group>"; };
 		4186FA57228107FEF2D2C426 /* Pods-NoljanoljaTests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoljanoljaTests.development.xcconfig"; path = "Target Support Files/Pods-NoljanoljaTests/Pods-NoljanoljaTests.development.xcconfig"; sourceTree = "<group>"; };
 		5474C50410F0452A681DEAAB /* Pods-Noljanolja.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja.dev.xcconfig"; path = "Target Support Files/Pods-Noljanolja/Pods-Noljanolja.dev.xcconfig"; sourceTree = "<group>"; };
@@ -1252,6 +1254,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B5FC3BE2B021A3400906C18 /* HeaderCommonView */ = {
+			isa = PBXGroup;
+			children = (
+				2B5FC3BF2B021A4300906C18 /* HeaderCommonView.swift */,
+			);
+			path = HeaderCommonView;
+			sourceTree = "<group>";
+		};
 		7EDA28669CED10C0C42B836E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1450,6 +1460,7 @@
 		CF162D542A705DA500B8096D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2B5FC3BE2B021A3400906C18 /* HeaderCommonView */,
 				CF82C30C29EA9FF000EAD36C /* BottomSheet */,
 				CFDCA377299644E7003C2C77 /* ButtonStyle */,
 				CF45BDA92A6856B7003FB991 /* CameraView */,
@@ -2033,7 +2044,6 @@
 				CF53D4302A6AF547009B3A69 /* WatchingVideoItemView.swift */,
 				CF53D4312A6AF547009B3A69 /* HighlightVideoItemView.swift */,
 				CF53D4322A6AF547009B3A69 /* TrendingVideoView.swift */,
-				2B6B93BB2AF95BF000749EB2 /* HeaderVideoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -3075,6 +3085,7 @@
 			children = (
 				CF7286092ABF49730058C75B /* HomeFriendView.swift */,
 				CF72860A2ABF49730058C75B /* HomeFriendViewModel.swift */,
+				2B5FC3C12B0285FA00906C18 /* HomeFriendNavigationType.swift */,
 			);
 			path = HomeFriend;
 			sourceTree = "<group>";
@@ -4311,6 +4322,7 @@
 				CF3E0EF82A372875009EF665 /* GiftBrand.swift in Sources */,
 				CF775BBE29C625C900E82183 /* NotificationAppDelegate.swift in Sources */,
 				CF1307FC29C8C96900EED044 /* TextEditor+Background.swift in Sources */,
+				2B5FC3C22B0285FA00906C18 /* HomeFriendNavigationType.swift in Sources */,
 				CFB0A82529F1B81400298546 /* VideoCommenter.swift in Sources */,
 				CF65DD9A2A82A4B900B554D7 /* AddReferralViewModel.swift in Sources */,
 				CF53D5A62A6AF548009B3A69 /* TransactionDashboardHeaderModel.swift in Sources */,
@@ -4433,6 +4445,7 @@
 				CF65DDAA2A82BB2600B554D7 /* AddReferralAlertViewModel.swift in Sources */,
 				CF446B9029D8AB0D00ED66BF /* LottieAssets.swift in Sources */,
 				CFE5ACEE2A7AAB360027492E /* ShareReferralContainerView.swift in Sources */,
+				2B5FC3C02B021A4300906C18 /* HeaderCommonView.swift in Sources */,
 				CF82C30E29EAA00300EAD36C /* BottomSheet.swift in Sources */,
 				CFCD10AB29D350C900C5DAFF /* SendMessageParam.swift in Sources */,
 				CF53D5B62A6AF548009B3A69 /* WalletNavigations.swift in Sources */,
@@ -4603,7 +4616,6 @@
 				CF53D61E2A6AF548009B3A69 /* MessageActionType.swift in Sources */,
 				CFE215732AE6758700C83BAD /* UIViewController+Top.swift in Sources */,
 				CFDCA37929964501003C2C77 /* ButtonStyle.swift in Sources */,
-				2B6B93BC2AF95BF000749EB2 /* HeaderVideoView.swift in Sources */,
 				CF53D64B2A6AF548009B3A69 /* TermViewModel.swift in Sources */,
 				CF54FA2229D0179B0092E2C6 /* MediaUseCases.swift in Sources */,
 				CF8A1F6A2AFFDDFD0094749A /* ShopGiftViewModel.swift in Sources */,

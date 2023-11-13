@@ -17,14 +17,16 @@ struct ContactListView<EndingView: View, ViewModel: ContactListViewModel>: View 
     @StateObject var viewModel: ViewModel
     @Binding var selectedUsers: [User]
     var selectUserAction: ((User) -> Void)?
+    var searchAction: (() -> Void)?
     private let endingView: EndingView
 
     public init(viewModel: ViewModel,
                 selectedUsers: Binding<[User]>,
                 selectUserAction: ((User) -> Void)? = nil,
+                searchAction: (() -> Void)? = nil,
                 @ViewBuilder endingView: () -> EndingView = { EmptyView() }) {
-        self._viewModel = StateObject(wrappedValue: viewModel)
-        self._selectedUsers = selectedUsers
+        _viewModel = StateObject(wrappedValue: viewModel)
+        _selectedUsers = selectedUsers
         self.selectUserAction = selectUserAction
         self.endingView = endingView()
     }
@@ -86,12 +88,24 @@ extension ContactListView {
     @ViewBuilder
     private func buildVerticalListView() -> some View {
         ListView {
-            VStack(spacing: 0) {
-                Text(L10n.commonFriends)
-                    .dynamicFont(.systemFont(ofSize: 16, weight: .semibold))
-                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
-                    .padding(.horizontal, 16)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+            VStack(spacing: 4) {
+                HStack {
+                    Text("Friendlist")
+                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
+                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                    ImageAssets.icSearch.swiftUIImage
+                        .resizable()
+                        .frame(.init(width: 24, height: 24))
+                        .scaledToFit()
+                        .onPress {
+                            searchAction?()
+                        }
+                }
+                .padding(.top, 22)
+                .padding(.horizontal, 16)
+
                 ForEach(viewModel.users, id: \.id) { user in
                     VerticalContactItemView(
                         user: user,

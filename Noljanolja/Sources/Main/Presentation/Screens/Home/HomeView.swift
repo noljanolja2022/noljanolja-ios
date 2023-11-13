@@ -66,9 +66,9 @@ struct HomeView<ViewModel: HomeViewModel>: View {
 
         ToolbarItem(placement: .principal) {
             switch viewModel.selectedTab {
-            case .chat:
+            case .chat, .friends:
                 EmptyView()
-            case .friends, .watch, .wallet, .shop:
+            case .watch, .wallet, .shop:
                 Text(viewModel.selectedTab.navigationBarTitle)
                     .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                     .frame(minWidth: 120)
@@ -125,19 +125,6 @@ struct HomeView<ViewModel: HomeViewModel>: View {
                     )
                 }
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            case .friends:
-                HStack(spacing: 4) {
-                    Button(
-                        action: {},
-                        label: {
-                            ImageAssets.icSettingOutline.swiftUIImage
-                                .resizable()
-                                .scaledToFit()
-                                .padding(2)
-                        }
-                    )
-                }
-                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             case .watch:
                 HStack(spacing: 4) {
                     Button(
@@ -153,7 +140,7 @@ struct HomeView<ViewModel: HomeViewModel>: View {
                     )
                 }
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            case .wallet, .shop:
+            case .wallet, .shop, .friends:
                 EmptyView()
             }
         }
@@ -172,7 +159,7 @@ struct HomeView<ViewModel: HomeViewModel>: View {
                         switch viewModel.selectedTab {
                         case .watch:
                             Spacer().background(ColorAssets.neutralLight.swiftUIColor)
-                        case .chat, .friends:
+                        case .chat:
                             Spacer().background(ColorAssets.primaryGreen200.swiftUIColor)
                         case .wallet:
                             ImageAssets.bgWalletHeader.swiftUIImage
@@ -183,7 +170,16 @@ struct HomeView<ViewModel: HomeViewModel>: View {
                             Spacer()
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                         case .shop:
-                            Spacer().background(ColorAssets.neutralLight.swiftUIColor)
+                            Spacer().background(ColorAssets.primaryGreen100.swiftUIColor)
+                        case .friends:
+                            ImageAssets.bgFriendsHeader.swiftUIImage
+                                .resizable()
+                                .frame(maxWidth: .infinity)
+                                .scaledToFit()
+                                .zIndex(999)
+                            Spacer()
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .background(ColorAssets.primaryGreen50.swiftUIColor)
                         }
                     }
                     .ignoresSafeArea(edges: .top)
@@ -220,38 +216,39 @@ struct HomeView<ViewModel: HomeViewModel>: View {
 
     @ViewBuilder
     private func buildTabView(_ tab: HomeTabType) -> some View {
-        switch tab {
-        case .chat:
-            ConversationListView(
-                viewModel: ConversationListViewModel(
-                    delegate: viewModel
-                ),
-                toolBarAction: toolBarActionSubject.eraseToAnyPublisher()
-            )
-            .tag(tab)
-        case .watch:
-            VideosView(
-                viewModel: VideosViewModel()
-            )
-            .tag(tab)
-        case .wallet:
-            WalletView(
-                viewModel: WalletViewModel(
-                    delegate: viewModel
-                )
-            )
-            .tag(tab)
-        case .shop:
-            ShopHomeView(
-                viewModel: ShopHomeViewModel()
-            )
-            .tag(tab)
-        case .friends:
-            HomeFriendView(
-                viewModel: HomeFriendViewModel()
-            )
-            .tag(tab)
-        }
+        VideoDetailRootContainerView(
+            content: {
+                switch tab {
+                case .chat:
+                    ConversationListView(
+                        viewModel: ConversationListViewModel(
+                            delegate: viewModel
+                        ),
+                        toolBarAction: toolBarActionSubject.eraseToAnyPublisher()
+                    )
+                case .watch:
+                    VideosView(
+                        viewModel: VideosViewModel()
+                    )
+                case .wallet:
+                    WalletView(
+                        viewModel: WalletViewModel(
+                            delegate: viewModel
+                        )
+                    )
+                case .shop:
+                    ShopHomeView(
+                        viewModel: ShopHomeViewModel()
+                    )
+                case .friends:
+                    HomeFriendView(
+                        viewModel: HomeFriendViewModel()
+                    )
+                }
+            },
+            viewModel: VideoDetailRootContainerViewModel()
+        )
+        .tag(tab)
     }
 
     @ViewBuilder

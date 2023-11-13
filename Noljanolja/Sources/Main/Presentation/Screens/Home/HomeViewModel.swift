@@ -22,9 +22,9 @@ protocol HomeViewModelDelegate: AnyObject {
 final class HomeViewModel: ViewModel {
     // MARK: State
 
-    let tabs: [HomeTabType] = [.chat, .watch, .wallet, .shop, .friends]
+    let tabs: [HomeTabType] = [.watch, .wallet, .shop, .friends]
     @Published var isProgressHUDShowing = false
-    @Published var selectedTab = HomeTabType.chat
+    @Published var selectedTab = HomeTabType.watch
     @Published var tabNews = [HomeTabType: Bool]()
     @Published var alertState: AlertState<HomeAlertActionType>?
 
@@ -65,13 +65,13 @@ final class HomeViewModel: ViewModel {
             configureForProduction()
         }
     }
-    
+
     private func configureForDevelopment() {
         configureNotificationPermission()
         configureLoadData()
         configureActions()
     }
-    
+
     private func configureForProduction() {
         let user: User? = userUseCases.getCurrentUser()
         if user?.isTesting == true {
@@ -87,7 +87,7 @@ final class HomeViewModel: ViewModel {
             )
         }
     }
-    
+
     private func configureNotificationPermission() {
         isAppearSubject
             .filter { $0 }

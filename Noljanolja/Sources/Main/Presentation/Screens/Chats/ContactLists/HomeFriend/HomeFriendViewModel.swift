@@ -16,11 +16,18 @@ protocol HomeFriendViewModelDelegate: AnyObject {}
 // MARK: - HomeFriendViewModel
 
 final class HomeFriendViewModel: ViewModel {
+    // MARK: Navigation
+
+    @Published var navigationType: HomeFriendNavigationType?
+    let isPresentingSubject = CurrentValueSubject<Bool, Never>(false)
+
     // MARK: State
 
     @Published var selectedUsers = [User]()
 
     // MARK: Action
+
+    let navigationTypeAction = PassthroughSubject<HomeFriendNavigationType?, Never>()
 
     // MARK: Dependencies
 
@@ -35,7 +42,36 @@ final class HomeFriendViewModel: ViewModel {
         super.init()
 
         configure()
+        configActions()
     }
 
     private func configure() {}
+    
+    private func configActions() {
+        navigationTypeAction
+            .flatMapLatestToResult { [weak self] navigationType in
+                guard let self else {
+                    return Empty<HomeFriendNavigationType?, Never>().eraseToAnyPublisher()
+                }
+                return self.isPresentingSubject
+                    .filter { !$0 }
+                    .first()
+                    .map { _ in navigationType }
+                    .eraseToAnyPublisher()
+            }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] result in
+                switch result {
+                case let .success(navigationType):
+                    self?.navigationType = navigationType
+                case .failure:
+                    break
+                }
+            }
+            .store(in: &cancellables)
+    }
 }
+
+// MARK: AddFriendsHomeViewModelDelegate
+
+extension HomeFriendViewModel: AddFriendsHomeViewModelDelegate {}

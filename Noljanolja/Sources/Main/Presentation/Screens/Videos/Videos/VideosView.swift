@@ -102,11 +102,21 @@ struct VideosView<ViewModel: VideosViewModel>: View {
 
     @ViewBuilder
     private func buildHeaderView() -> some View {
-        HeaderVideoView(
+        HeaderCommonView(
             searchAction: {
                 viewModel.navigationType = .searchVideo
+            },
+            notificationAction: {},
+            settingAction: {}
+        ) {
+            ZStack {
+                Text("Let's Get ").foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    + Text("Points \n").foregroundColor(ColorAssets.primaryGreen200.swiftUIColor).fontWeight(.bold)
+                    + Text("By ").foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    + Text("Watching").foregroundColor(ColorAssets.secondaryYellow400.swiftUIColor).fontWeight(.bold)
             }
-        )
+            .dynamicFont(.systemFont(ofSize: 24))
+        }
     }
 
     @ViewBuilder
