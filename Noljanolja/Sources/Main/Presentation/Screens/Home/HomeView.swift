@@ -183,7 +183,7 @@ struct HomeView<ViewModel: HomeViewModel>: View {
                             Spacer()
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                         case .shop:
-                            Spacer().background(ColorAssets.primaryGreen100.swiftUIColor)
+                            Spacer().background(ColorAssets.neutralLight.swiftUIColor)
                         }
                     }
                     .ignoresSafeArea(edges: .top)
@@ -220,39 +220,38 @@ struct HomeView<ViewModel: HomeViewModel>: View {
 
     @ViewBuilder
     private func buildTabView(_ tab: HomeTabType) -> some View {
-        VideoDetailRootContainerView(
-            content: {
-                switch tab {
-                case .chat:
-                    ConversationListView(
-                        viewModel: ConversationListViewModel(
-                            delegate: viewModel
-                        ),
-                        toolBarAction: toolBarActionSubject.eraseToAnyPublisher()
-                    )
-                case .watch:
-                    VideosView(
-                        viewModel: VideosViewModel()
-                    )
-                case .wallet:
-                    WalletView(
-                        viewModel: WalletViewModel(
-                            delegate: viewModel
-                        )
-                    )
-                case .shop:
-                    ShopHomeView(
-                        viewModel: ShopHomeViewModel()
-                    )
-                case .friends:
-                    HomeFriendView(
-                        viewModel: HomeFriendViewModel()
-                    )
-                }
-            },
-            viewModel: VideoDetailRootContainerViewModel()
-        )
-        .tag(tab)
+        switch tab {
+        case .chat:
+            ConversationListView(
+                viewModel: ConversationListViewModel(
+                    delegate: viewModel
+                ),
+                toolBarAction: toolBarActionSubject.eraseToAnyPublisher()
+            )
+            .tag(tab)
+        case .watch:
+            VideosView(
+                viewModel: VideosViewModel()
+            )
+            .tag(tab)
+        case .wallet:
+            WalletView(
+                viewModel: WalletViewModel(
+                    delegate: viewModel
+                )
+            )
+            .tag(tab)
+        case .shop:
+            ShopHomeView(
+                viewModel: ShopHomeViewModel()
+            )
+            .tag(tab)
+        case .friends:
+            HomeFriendView(
+                viewModel: HomeFriendViewModel()
+            )
+            .tag(tab)
+        }
     }
 
     @ViewBuilder

@@ -8,21 +8,13 @@
 import Foundation
 
 struct ShopHomeModel {
-    let memberInfo: LoyaltyMemberInfo?
-    let myCoupons: [MyCoupon]
-    let shopCoupons: [Coupon]
+    let coinModel: CoinModel?
 
     var isEmpty: Bool {
-        memberInfo == nil
-            && myCoupons.isEmpty
-            && shopCoupons.isEmpty
+        coinModel == nil
     }
 
-    init(memberInfo: LoyaltyMemberInfo? = nil,
-         myCoupons: [MyCoupon] = [],
-         shopCoupons: [Coupon] = []) {
-        self.memberInfo = memberInfo
-        self.myCoupons = myCoupons
-        self.shopCoupons = shopCoupons
+    init(coinModel: CoinModel? = nil) {
+        self.coinModel = coinModel
     }
 }

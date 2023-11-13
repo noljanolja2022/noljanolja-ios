@@ -28,18 +28,26 @@ struct WalletView<ViewModel: WalletViewModel>: View {
     }
     
     private func buildMainView() -> some View {
-        ZStack {
-            buildContentView()
-                .statefull(
-                    state: $viewModel.viewState,
-                    isEmpty: { viewModel.model == nil },
-                    loading: buildLoadingView,
-                    empty: buildEmptyView,
-                    error: buildErrorView
-                )
-            
-            buildNavigationLinks()
-        }
+        VideoDetailRootContainerView(
+            content: {
+                ZStack {
+                    buildContentStatefullView()
+                    buildNavigationLinks()
+                }
+            },
+            viewModel: VideoDetailRootContainerViewModel()
+        )
+    }
+    
+    private func buildContentStatefullView() -> some View {
+        buildContentView()
+            .statefull(
+                state: $viewModel.viewState,
+                isEmpty: { viewModel.model == nil },
+                loading: buildLoadingView,
+                empty: buildEmptyView,
+                error: buildErrorView
+            )
     }
     
     @ViewBuilder
@@ -99,6 +107,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                     padding: 16
                 )
             )
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .padding(.horizontal, selectedMoneyType == .point ? 0 : 12)
             .offset(y: selectedMoneyType == .point ? 16 : 0)
             .aspectRatio(2, contentMode: .fill)
@@ -117,6 +126,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                     padding: 16
                 )
             )
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .padding(.horizontal, selectedMoneyType == .coin ? 0 : 12)
             .offset(y: selectedMoneyType == .coin ? 16 : 0)
             .aspectRatio(2, contentMode: .fill)

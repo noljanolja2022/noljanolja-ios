@@ -79,30 +79,30 @@ private enum GiftsTargets {
         var task: Task { .requestPlain }
     }
 
-    struct BuyCoupon: BaseAuthTargetType {
-        var path: String { "v1/gifts/\(couponId)/buy" }
+    struct BuyGift: BaseAuthTargetType {
+        var path: String { "v1/gifts/\(giftId)/buy" }
         let method: Moya.Method = .post
         var task: Task { .requestPlain }
 
-        let couponId: Int
+        let giftId: String
     }
 }
 
 // MARK: - GiftsNetworkRepository
 
 protocol GiftsNetworkRepository {
-    func getMyGifts(categoryId: Int?, brandId: Int?, page: Int, pageSize: Int?) -> AnyPublisher<PaginationResponse<[MyCoupon]>, Error>
-    func getGiftsInShop(categoryId: Int?, brandId: Int?, name: String?, page: Int, pageSize: Int?) -> AnyPublisher<PaginationResponse<[Coupon]>, Error>
-    func getGiftsBrands(page: Int, pageSize: Int) -> AnyPublisher<[CouponBrand], Error>
-    func getGiftsCategories() -> AnyPublisher<[CouponCategory], Error>
-    func buyCoupon(_ id: Int) -> AnyPublisher<MyCoupon, Error>
+    func getMyGifts(categoryId: Int?, brandId: Int?, page: Int, pageSize: Int?) -> AnyPublisher<PaginationResponse<[MyGift]>, Error>
+    func getGiftsInShop(categoryId: Int?, brandId: Int?, name: String?, page: Int, pageSize: Int?) -> AnyPublisher<PaginationResponse<[Gift]>, Error>
+    func getGiftsBrands(page: Int, pageSize: Int) -> AnyPublisher<[GiftBrand], Error>
+    func getGiftsCategories() -> AnyPublisher<[GiftCategory], Error>
+    func buyGift(_ id: String) -> AnyPublisher<MyGift, Error>
 }
 
 extension GiftsNetworkRepository {
     func getMyGifts(categoryId: Int? = nil,
                     brandId: Int? = nil,
                     page: Int,
-                    pageSize: Int? = nil) -> AnyPublisher<PaginationResponse<[MyCoupon]>, Error> {
+                    pageSize: Int? = nil) -> AnyPublisher<PaginationResponse<[MyGift]>, Error> {
         getMyGifts(categoryId: categoryId, brandId: brandId, page: page, pageSize: pageSize)
     }
 
@@ -110,7 +110,7 @@ extension GiftsNetworkRepository {
                         brandId: Int? = nil,
                         name: String? = nil,
                         page: Int,
-                        pageSize: Int? = nil) -> AnyPublisher<PaginationResponse<[Coupon]>, Error> {
+                        pageSize: Int? = nil) -> AnyPublisher<PaginationResponse<[Gift]>, Error> {
         getGiftsInShop(categoryId: categoryId, brandId: brandId, name: name, page: page, pageSize: pageSize)
     }
 }
@@ -126,7 +126,7 @@ final class GiftsNetworkRepositoryImpl: GiftsNetworkRepository {
         self.api = api
     }
 
-    func getMyGifts(categoryId: Int?, brandId: Int?, page: Int, pageSize: Int?) -> AnyPublisher<PaginationResponse<[MyCoupon]>, Error> {
+    func getMyGifts(categoryId: Int?, brandId: Int?, page: Int, pageSize: Int?) -> AnyPublisher<PaginationResponse<[MyGift]>, Error> {
         api.request(
             target: GiftsTargets.GetMyGifts(
                 categoryId: categoryId,
@@ -137,7 +137,7 @@ final class GiftsNetworkRepositoryImpl: GiftsNetworkRepository {
         )
     }
 
-    func getGiftsInShop(categoryId: Int?, brandId: Int?, name: String?, page: Int, pageSize: Int?) -> AnyPublisher<PaginationResponse<[Coupon]>, Error> {
+    func getGiftsInShop(categoryId: Int?, brandId: Int?, name: String?, page: Int, pageSize: Int?) -> AnyPublisher<PaginationResponse<[Gift]>, Error> {
         api.request(
             target: GiftsTargets.GetGiftsInShop(
                 categoryId: categoryId,
@@ -149,7 +149,7 @@ final class GiftsNetworkRepositoryImpl: GiftsNetworkRepository {
         )
     }
 
-    func getGiftsBrands(page: Int, pageSize: Int) -> AnyPublisher<[CouponBrand], Error> {
+    func getGiftsBrands(page: Int, pageSize: Int) -> AnyPublisher<[GiftBrand], Error> {
         api.request(
             target: GiftsTargets.GetGiftsBrands(
                 page: page,
@@ -159,16 +159,16 @@ final class GiftsNetworkRepositoryImpl: GiftsNetworkRepository {
         )
     }
 
-    func getGiftsCategories() -> AnyPublisher<[CouponCategory], Error> {
+    func getGiftsCategories() -> AnyPublisher<[GiftCategory], Error> {
         api.request(
             target: GiftsTargets.GetGiftsCategories(),
             atKeyPath: "data"
         )
     }
 
-    func buyCoupon(_ id: Int) -> AnyPublisher<MyCoupon, Error> {
+    func buyGift(_ id: String) -> AnyPublisher<MyGift, Error> {
         api.request(
-            target: GiftsTargets.BuyCoupon(couponId: id),
+            target: GiftsTargets.BuyGift(giftId: id),
             atKeyPath: "data"
         )
     }
