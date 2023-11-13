@@ -1,30 +1,30 @@
 //
-//  VideoKeywordLocalRepository.swift
+//  GiftKeywordLocalRepository.swift
 //  Noljanolja
 //
-//  Created by Nguyen The Trinh on 26/07/2023.
+//  Created by Nguyen The Trinh on 19/06/2023.
 //
 
 import Combine
 import Foundation
 import RealmSwift
 
-// MARK: - VideoKeywordLocalRepository
+// MARK: - GiftKeywordLocalRepository
 
-protocol VideoKeywordLocalRepository {
-    func saveKeyword(_ keyword: VideoKeyword)
-    func observeKeywords(_ string: String) -> AnyPublisher<[VideoKeyword], Error>
-    func delete(_ keyword: VideoKeyword)
+protocol GiftKeywordLocalRepository {
+    func saveKeyword(_ keyword: GiftKeyword)
+    func observeKeywords(_ string: String) -> AnyPublisher<[GiftKeyword], Error>
+    func delete(_ keyword: GiftKeyword)
     func deleteAll()
 }
 
-// MARK: - VideoKeywordLocalRepositoryImpl
+// MARK: - GiftKeywordLocalRepositoryImpl
 
-final class VideoKeywordLocalRepositoryImpl: VideoKeywordLocalRepository {
-    static let shared = VideoKeywordLocalRepositoryImpl()
+final class GiftKeywordLocalRepositoryImpl: GiftKeywordLocalRepository {
+    static let shared = GiftKeywordLocalRepositoryImpl()
 
     private lazy var realmManager: RealmManagerType = {
-        let id = "video_keyword"
+        let id = "gift_keyword"
         return RealmManager(
             configuration: {
                 var config = Realm.Configuration.defaultConfiguration
@@ -39,22 +39,22 @@ final class VideoKeywordLocalRepositoryImpl: VideoKeywordLocalRepository {
 
     private init() {}
 
-    func saveKeyword(_ keyword: VideoKeyword) {
-        let storableGiftKeyword = StorableVideoKeyword(keyword)
-        realmManager.add(storableGiftKeyword, update: .all)
+    func saveKeyword(_ keyword: GiftKeyword) {
+        let storableKeyword = StorableGiftKeyword(keyword)
+        realmManager.add(storableKeyword, update: .all)
     }
 
-    func observeKeywords(_ string: String) -> AnyPublisher<[VideoKeyword], Error> {
+    func observeKeywords(_ string: String) -> AnyPublisher<[GiftKeyword], Error> {
         Just(())
             .setFailureType(to: Error.self)
             .receive(on: DispatchQueue.main) // TODO: Can only add notification blocks from within runloops
-            .flatMapLatest { [weak self] _ -> AnyPublisher<[VideoKeyword], Error> in
+            .flatMapLatest { [weak self] _ -> AnyPublisher<[GiftKeyword], Error> in
                 guard let self else {
-                    return Empty<[VideoKeyword], Error>().eraseToAnyPublisher()
+                    return Empty<[GiftKeyword], Error>().eraseToAnyPublisher()
                 }
-                return self.realmManager.objects(StorableVideoKeyword.self)
+                return self.realmManager.objects(StorableGiftKeyword.self)
                     .collectionPublisher
-                    .map { keywords -> [VideoKeyword] in
+                    .map { keywords -> [GiftKeyword] in
                         keywords
                             .compactMap { $0.model }
                             .filter {
@@ -71,8 +71,8 @@ final class VideoKeywordLocalRepositoryImpl: VideoKeywordLocalRepository {
             .eraseToAnyPublisher()
     }
 
-    func delete(_ keyword: VideoKeyword) {
-        guard let keyword = realmManager.object(ofType: StorableVideoKeyword.self, forPrimaryKey: keyword.keyword) else {
+    func delete(_ keyword: GiftKeyword) {
+        guard let keyword = realmManager.object(ofType: StorableGiftKeyword.self, forPrimaryKey: keyword.keyword) else {
             return
         }
         realmManager.delete(keyword)

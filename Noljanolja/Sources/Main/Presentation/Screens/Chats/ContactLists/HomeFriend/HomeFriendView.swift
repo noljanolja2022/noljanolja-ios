@@ -21,6 +21,19 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
 
     @ViewBuilder
     private func buildBodyView() -> some View {
+        buildMainView()
+    }
+    
+    private func buildMainView() -> some View {
+        VideoDetailRootContainerView(
+            content: {
+                buildContentView()
+            },
+            viewModel: VideoDetailRootContainerViewModel()
+        )
+    }
+    
+    private func buildContentView() -> some View {
         ContactListView(
             viewModel: ContactListViewModel(
                 isMultiSelectionEnabled: false,

@@ -317,14 +317,14 @@
 "shop_later" = "나중에";
 "common_use" = "사용";
 "common_use_now" = "지금 사용";
-"shop_order_coupon_success" = "주문이 완료되었습니다. 교환 쿠폰을 확인해주세요.";
+"shop_order_gift_success" = "주문이 완료되었습니다. 교환 쿠폰을 확인해주세요.";
 "gift_value_point" = "%@ P";
 "gift_holding_point" = "보류중인 포인트";
 "gift_deduction_point" = "차감 포인트";
 "gift_remaining_point" = "잔여 포인트";
 "gift_purchase" = "구매";
 "gift_give_code_to_cashier" = "제품을 구매하기 위해 매장에서 이 코드(QR)를 보여주세요.";
-"shop_coupon" = "쿠폰";
+"shop_gift" = "쿠폰";
 "chat_action_reply" = "답장";
 "chat_action_forward" = "전달";
 "chat_action_copy" = "복사";
@@ -365,7 +365,7 @@
 "shop_later" = "나중에";
 "common_use" = "사용";
 "common_use_now" = "지금 사용";
-"shop_order_coupon_success" = "주문이 완료되었습니다. 교환 쿠폰을 확인해주세요.";
+"shop_order_gift_success" = "주문이 완료되었습니다. 교환 쿠폰을 확인해주세요.";
 "gift_value_point" = "%a P";
 "gift_holding_point" = "보류중인 포인트";
 "gift_deduction_point" = "차감 포인트";
@@ -412,7 +412,6 @@
 "common_more" = "더";
 "common_send_to" = "보내기";
 "referal_go_to_detail" = "혜택 확인하러 가기";
-"common_coupons" = "쿠폰";
 "common_complete" = "완료";
 "chat_forward_message" = "메시지 전달";
 "chat_confirm_delete_message_title" = "이 메시지를 삭제하고 싶습니다";

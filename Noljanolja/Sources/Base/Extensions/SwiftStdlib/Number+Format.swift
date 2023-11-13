@@ -11,7 +11,10 @@ extension Int {
     func formatted() -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
-        formatter.decimalSeparator = ","
+        formatter.usesGroupingSeparator = true
+        formatter.groupingSize = 3
+        formatter.groupingSeparator = ","
+        formatter.decimalSeparator = "."
 
         let number = NSNumber(value: self)
         let formattedValue = formatter.string(from: number)!
@@ -51,11 +54,15 @@ extension Int {
 }
 
 extension Double {
-    func formatted(maximumFractionDigits: Int = 1) -> String {
+    func formatted(maximumFractionDigits: Int = 1, minimumFractionDigits: Int = 1) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
+        formatter.usesGroupingSeparator = true
+        formatter.groupingSize = 3
+        formatter.groupingSeparator = ","
         formatter.decimalSeparator = "."
-        formatter.maximumFractionDigits = 1
+        formatter.minimumFractionDigits = minimumFractionDigits
+        formatter.maximumFractionDigits = maximumFractionDigits
 
         let number = NSNumber(value: self)
         let formattedValue = formatter.string(from: number)!

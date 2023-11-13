@@ -139,9 +139,9 @@ struct PlainButtonStyle: ButtonStyle {
     }
 }
 
-// MARK: - MyCouponButtonStyle
+// MARK: - MyGiftButtonStyle
 
-struct MyCouponButtonStyle: CustomButtonStyle {
+struct MyGiftButtonStyle: CustomButtonStyle {
     let isEnabled: Bool
     let enabledForegroundColor: Color
     let disabledForegroundColor: Color

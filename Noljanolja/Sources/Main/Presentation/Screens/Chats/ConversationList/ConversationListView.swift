@@ -24,37 +24,46 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
 
     @ViewBuilder
     private func buildBodyView() -> some View {
-        ZStack(alignment: .bottomTrailing) {
-            buildContentView()
-            buildNavigationLink()
-        }
-        .clipped()
-        .onAppear { viewModel.isAppearSubject.send(true) }
-        .onDisappear { viewModel.isAppearSubject.send(false) }
-        .isProgressHUBVisible($viewModel.isProgressHUDShowing)
-        .onReceive(toolBarAction) {
-            switch $0 {
-            case .createConversation:
-                withoutAnimation {
-                    viewModel.fullScreenCoverType = .createConversation
+        buildMainView()
+            .clipped()
+            .onAppear { viewModel.isAppearSubject.send(true) }
+            .onDisappear { viewModel.isAppearSubject.send(false) }
+            .isProgressHUBVisible($viewModel.isProgressHUDShowing)
+            .onReceive(toolBarAction) {
+                switch $0 {
+                case .createConversation:
+                    withoutAnimation {
+                        viewModel.fullScreenCoverType = .createConversation
+                    }
+                case .none:
+                    break
                 }
-            case .none:
-                break
             }
-        }
-        .fullScreenCover(
-            unwrapping: $viewModel.fullScreenCoverType,
-            onDismiss: {
-                viewModel.isPresentingSubject.send(false)
-            },
+            .fullScreenCover(
+                unwrapping: $viewModel.fullScreenCoverType,
+                onDismiss: {
+                    viewModel.isPresentingSubject.send(false)
+                },
+                content: {
+                    buildFullScreenCoverDestinationView($0)
+                }
+            )
+    }
+    
+    private func buildMainView() -> some View {
+        VideoDetailRootContainerView(
             content: {
-                buildFullScreenCoverDestinationView($0)
-            }
+                ZStack(alignment: .bottomTrailing) {
+                    buildContentStatefullView()
+                    buildNavigationLink()
+                }
+            },
+            viewModel: VideoDetailRootContainerViewModel()
         )
     }
-
-    private func buildContentView() -> some View {
-        buildListView()
+    
+    private func buildContentStatefullView() -> some View {
+        buildContentView()
             .statefull(
                 state: $viewModel.viewState,
                 isEmpty: { viewModel.conversations.isEmpty },
@@ -65,7 +74,7 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
-    private func buildListView() -> some View {
+    private func buildContentView() -> some View {
         ScrollView {
             LazyVStack(spacing: 0) {
                 ForEach(viewModel.conversations, id: \.id) { conversation in

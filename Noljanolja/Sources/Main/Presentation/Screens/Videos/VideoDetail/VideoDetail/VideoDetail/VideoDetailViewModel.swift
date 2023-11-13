@@ -353,7 +353,7 @@ extension VideoDetailViewModel: YTPlayerViewDelegate {
         case .full, .bottom, .hide:
             break
         case .pictureInPicture:
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
                 self?.startPictureInPicture()
             }
         }

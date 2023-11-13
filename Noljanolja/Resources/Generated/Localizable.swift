@@ -184,8 +184,6 @@ internal enum L10n {
   internal static let commonCopy = L10n.tr("Localizable", "common_copy", fallback: "Copy")
   /// Copied in clipboard
   internal static let commonCopySuccess = L10n.tr("Localizable", "common_copy_success", fallback: "Copied in clipboard")
-  /// Coupons
-  internal static let commonCoupons = L10n.tr("Localizable", "common_coupons", fallback: "Coupons")
   /// Disagree
   internal static let commonDisagree = L10n.tr("Localizable", "common_disagree", fallback: "Disagree")
   /// Download
@@ -390,14 +388,20 @@ internal enum L10n {
   internal static func getPointAfterWatching(_ p1: Any) -> String {
     return L10n.tr("Localizable", "get_point_after_watching", String(describing: p1), fallback: "+ %@ Points after watching")
   }
+  /// Deduction Cash
+  internal static let giftDeductionCash = L10n.tr("Localizable", "gift_deduction_cash", fallback: "Deduction Cash")
   /// Deduction point
   internal static let giftDeductionPoint = L10n.tr("Localizable", "gift_deduction_point", fallback: "Deduction point")
   /// Give this Code to the cashier to get pradoducts
   internal static let giftGiveCodeToCashier = L10n.tr("Localizable", "gift_give_code_to_cashier", fallback: "Give this Code to the cashier to get pradoducts")
+  /// Holding Cash
+  internal static let giftHoldingCash = L10n.tr("Localizable", "gift_holding_cash", fallback: "Holding Cash")
   /// Holding points
   internal static let giftHoldingPoint = L10n.tr("Localizable", "gift_holding_point", fallback: "Holding points")
   /// Purchase
   internal static let giftPurchase = L10n.tr("Localizable", "gift_purchase", fallback: "Purchase")
+  /// Remaining Cash
+  internal static let giftRemainingCash = L10n.tr("Localizable", "gift_remaining_cash", fallback: "Remaining Cash")
   /// Remaining points
   internal static let giftRemainingPoint = L10n.tr("Localizable", "gift_remaining_point", fallback: "Remaining points")
   /// %@ P
@@ -605,6 +609,8 @@ internal enum L10n {
   internal static let shopCoupon = L10n.tr("Localizable", "shop_coupon", fallback: "Coupon")
   /// Exchanged Coupons
   internal static let shopExchangedCoupons = L10n.tr("Localizable", "shop_exchanged_coupons", fallback: "Exchanged Coupons")
+  /// Coupon
+  internal static let shopGift = L10n.tr("Localizable", "shop_gift", fallback: "Coupon")
   /// Got it
   internal static let shopGotIt = L10n.tr("Localizable", "shop_got_it", fallback: "Got it")
   /// You can use Points to exchange Coupons. Then you can bring them to the local stores to get products.
@@ -612,7 +618,7 @@ internal enum L10n {
   /// Later
   internal static let shopLater = L10n.tr("Localizable", "shop_later", fallback: "Later")
   /// Your order has been completed. Check in Exchanged Coupon.
-  internal static let shopOrderCouponSuccess = L10n.tr("Localizable", "shop_order_coupon_success", fallback: "Your order has been completed. Check in Exchanged Coupon.")
+  internal static let shopOrderGiftSuccess = L10n.tr("Localizable", "shop_order_gift_success", fallback: "Your order has been completed. Check in Exchanged Coupon.")
   /// Search products
   internal static let shopSearchProducts = L10n.tr("Localizable", "shop_search_products", fallback: "Search products")
   /// View all

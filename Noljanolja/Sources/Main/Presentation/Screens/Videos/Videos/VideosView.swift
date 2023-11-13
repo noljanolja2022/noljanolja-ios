@@ -22,18 +22,27 @@ struct VideosView<ViewModel: VideosViewModel>: View {
     }
 
     private func buildBodyView() -> some View {
-        ZStack {
-            buildContentView()
-            buildNavigationLink()
-        }
-        .clipped()
-        .onAppear { viewModel.isAppearSubject.send(true) }
-        .onDisappear { viewModel.isAppearSubject.send(false) }
-        .fullScreenCover(
-            unwrapping: $viewModel.fullScreenCoverType,
+        buildMainView()
+            .clipped()
+            .onAppear { viewModel.isAppearSubject.send(true) }
+            .onDisappear { viewModel.isAppearSubject.send(false) }
+            .fullScreenCover(
+                unwrapping: $viewModel.fullScreenCoverType,
+                content: {
+                    buildFullScreenCoverDestinationView($0)
+                }
+            )
+    }
+    
+    private func buildMainView() -> some View {
+        VideoDetailRootContainerView(
             content: {
-                buildFullScreenCoverDestinationView($0)
-            }
+                ZStack {
+                    buildContentStatefullView()
+                    buildNavigationLink()
+                }
+            },
+            viewModel: VideoDetailRootContainerViewModel()
         )
         .toast(isPresenting: $viewModel.isShowToastCopy, duration: 2, tapToDismiss: true) {
             AlertToast(
@@ -48,6 +57,19 @@ struct VideosView<ViewModel: VideosViewModel>: View {
         }
     }
 
+    private func buildContentStatefullView() -> some View {
+        buildContentView()
+            .statefull(
+                state: $viewModel.viewState,
+                isEmpty: { viewModel.model.isEmpty },
+                loading: buildLoadingView,
+                empty: buildEmptyView,
+                error: buildErrorView
+            )
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(ColorAssets.neutralLight.swiftUIColor)
+    }
+    
     private func buildContentView() -> some View {
         VStack {
             buildHeaderView()
@@ -64,15 +86,6 @@ struct VideosView<ViewModel: VideosViewModel>: View {
                 }
             }
         }
-        .statefull(
-            state: $viewModel.viewState,
-            isEmpty: { viewModel.model.isEmpty },
-            loading: buildLoadingView,
-            empty: buildEmptyView,
-            error: buildErrorView
-        )
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
     @ViewBuilder

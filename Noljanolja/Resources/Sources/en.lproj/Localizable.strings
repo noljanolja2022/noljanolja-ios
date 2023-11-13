@@ -324,14 +324,14 @@
 "shop_later" = "Later";
 "common_use" = "Use";
 "common_use_now" = "Use now";
-"shop_order_coupon_success" = "Your order has been completed. Check in Exchanged Coupon.";
+"shop_order_gift_success" = "Your order has been completed. Check in Exchanged Coupon.";
 "gift_value_point" = "%@ P";
-"gift_holding_point" = "Holding points";
-"gift_deduction_point" = "Deduction point";
-"gift_remaining_point" = "Remaining points";
+"gift_holding_cash" = "Holding Cash";
+"gift_deduction_cash" = "Deduction Cash";
+"gift_remaining_cash" = "Remaining Cash";
 "gift_purchase" = "Purchase";
 "gift_give_code_to_cashier" = "Give this Code to the cashier to get products";
-"shop_coupon" = "Coupon";
+"shop_gift" = "Coupon";
 "chat_action_reply" = "Reply";
 "chat_action_forward" = "Forward";
 "chat_action_copy" = "Copy";
@@ -372,7 +372,7 @@
 "shop_later" = "Later";
 "common_use" = "Use";
 "common_use_now" = "Use now";
-"shop_order_coupon_success" = "Your order has been completed. Check in Exchanged Coupon.";
+"shop_order_gift_success" = "Your order has been completed. Check in Exchanged Coupon.";
 "gift_value_point" = "%@ P";
 "gift_holding_point" = "Holding points";
 "gift_deduction_point" = "Deduction point";
@@ -419,7 +419,6 @@
 "common_more" = "More";
 "common_send_to" = "Send to";
 "referal_go_to_detail" = "Go to Check Out Benefits";
-"common_coupons" = "Coupons";
 "common_complete" = "Complete";
 "chat_forward_message" = "Forward Message";
 "chat_confirm_delete_message_title" = "You want to delete this message";
