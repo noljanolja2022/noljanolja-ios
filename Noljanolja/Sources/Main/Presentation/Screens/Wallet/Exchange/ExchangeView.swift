@@ -147,10 +147,10 @@ struct ExchangeView: View {
                 viewModel.exchangeAction.send()
             }
         )
-        .disabled((viewModel.model?.exchangeRate ?? 0) <= 0)
+        .disabled((viewModel.model?.exchangePoint ?? 0) <= 0)
         .buttonStyle(
             PrimaryButtonStyle(
-                isEnabled: (viewModel.model?.exchangeRate ?? 0) > 0
+                isEnabled: (viewModel.model?.exchangePoint ?? 0) > 0
             )
         )
         .dynamicFont(.systemFont(ofSize: 16, weight: .bold))

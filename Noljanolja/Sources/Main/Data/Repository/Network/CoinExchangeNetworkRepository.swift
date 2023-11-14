@@ -30,7 +30,7 @@ private enum CoinExchangeTargets {
         let method: Moya.Method = .post
         var task: Task { .requestParameters(parameters: parameters, encoding: JSONEncoding.default) }
 
-        let points: Int
+        let points: Double
         
         var parameters: [String: Any] {
             [
@@ -45,7 +45,7 @@ private enum CoinExchangeTargets {
 protocol CoinExchangeNetworkRepository {
     func getCoin() -> AnyPublisher<CoinModel, Error>
     func getCoinExchangeRate() -> AnyPublisher<CoinExchangeRate, Error>
-    func convert(_ points: Int) -> AnyPublisher<CoinExchangeResult, Error>
+    func convert(_ points: Double) -> AnyPublisher<CoinExchangeResult, Error>
 }
 
 // MARK: - CoinExchangeNetworkRepositoryImpl
@@ -73,7 +73,7 @@ final class CoinExchangeNetworkRepositoryImpl: CoinExchangeNetworkRepository {
         )
     }
     
-    func convert(_ points: Int) -> AnyPublisher<CoinExchangeResult, Error> {
+    func convert(_ points: Double) -> AnyPublisher<CoinExchangeResult, Error> {
         api.request(
             target: CoinExchangeTargets.Convert(points: points),
             atKeyPath: "data"
