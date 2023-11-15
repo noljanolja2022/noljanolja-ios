@@ -72,6 +72,7 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
                 error: buildErrorView
             )
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
     private func buildContentView() -> some View {
