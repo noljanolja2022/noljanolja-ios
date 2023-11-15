@@ -8,10 +8,13 @@
 import Foundation
 
 struct SearchGiftsModel {
-    let memberInfo: LoyaltyMemberInfo?
+    let coinModel: CoinModel?
+    let myGiftString: String?
     let giftsResponse: PaginationResponse<[Gift]>
 
     var isEmpty: Bool {
-        giftsResponse.data.isEmpty
+        coinModel == nil
+            && myGiftString == nil
+            && giftsResponse.data.isEmpty
     }
 }

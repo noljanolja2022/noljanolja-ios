@@ -26,7 +26,6 @@ final class ShopHomeViewModel: ViewModel {
 
     // MARK: Navigations
 
-    @Published var tabContentType: ShopHomeTabContentType = .shopGift
     @Published var navigationType: ShopHomeNavigationType?
 
     // MARK: Action
@@ -39,7 +38,7 @@ final class ShopHomeViewModel: ViewModel {
 
     // MARK: Private
     
-    private let pageSize = 20
+    private let pageSize = 10
     private var cancellables = Set<AnyCancellable>()
 
     init(giftsNetworkRepository: GiftsNetworkRepository = GiftsNetworkRepositoryImpl.default,
@@ -62,6 +61,7 @@ final class ShopHomeViewModel: ViewModel {
 
     private func configureLoadData() {
         isAppearSubject
+            .filter { $0 }
             .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.viewState = .loading })
             .flatMapLatestToResult { [weak self] _ in
@@ -87,9 +87,21 @@ final class ShopHomeViewModel: ViewModel {
 
 extension ShopHomeViewModel {
     private func getData() -> AnyPublisher<ShopHomeModel, Error> {
-        coinExchangeUseCases
-            .getCoin()
-            .map(ShopHomeModel.init)
-            .eraseToAnyPublisher()
+        Publishers.Zip(
+            coinExchangeUseCases
+                .getCoin(),
+            giftsNetworkRepository
+                .getMyGifts(page: NetworkConfigs.Param.firstPage, pageSize: pageSize)
+                .map { [weak self] response in
+                    guard let self else { return "" }
+                    if response.data.count <= pageSize {
+                        return "\(response.data.count)"
+                    } else {
+                        return "\(response.data.count)+"
+                    }
+                }
+        )
+        .map(ShopHomeModel.init)
+        .eraseToAnyPublisher()
     }
 }

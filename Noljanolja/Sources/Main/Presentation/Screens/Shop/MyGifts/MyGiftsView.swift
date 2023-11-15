@@ -51,7 +51,7 @@ struct MyGiftsView<ViewModel: MyGiftsViewModel>: View {
 
     private func buildMainView() -> some View {
         ScrollView {
-            LazyVGrid(columns: Array(repeating: GridItem.flexible(spacing: 12), count: 2)) {
+            LazyVStack(spacing: 12) {
                 ForEach(viewModel.myGifts.indices, id: \.self) {
                     let model = viewModel.myGifts[$0]
                     MyGiftItemView(
@@ -67,6 +67,7 @@ struct MyGiftsView<ViewModel: MyGiftsViewModel>: View {
                 }
             }
             .padding(16)
+            
             StatefullFooterView(
                 state: $viewModel.footerState,
                 errorView: EmptyView(),

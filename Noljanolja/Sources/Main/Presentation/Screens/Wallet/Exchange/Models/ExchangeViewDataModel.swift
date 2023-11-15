@@ -10,11 +10,11 @@ import Foundation
 struct ExchangeViewDataModel {
     let point: Int
     let coin: Double
-    let exchangeRate: Int?
+    let exchangePoint: Double?
 
     init(memberInfo: LoyaltyMemberInfo, coinModel: CoinModel, coinExchangeRate: CoinExchangeRate) {
         self.point = memberInfo.point
         self.coin = coinModel.balance
-        self.exchangeRate = coinExchangeRate.coinToPointRate
+        self.exchangePoint = coinExchangeRate.point
     }
 }

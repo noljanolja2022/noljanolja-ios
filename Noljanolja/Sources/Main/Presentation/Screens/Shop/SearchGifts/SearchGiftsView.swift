@@ -80,13 +80,10 @@ struct SearchGiftsView<ViewModel: SearchGiftsViewModel>: View {
             buildNavigationLinks()
         }
         .background(
-            ColorAssets.primaryGreen100.swiftUIColor
+            ColorAssets.primaryGreen200.swiftUIColor
                 .ignoresSafeArea()
                 .overlay {
-                    let color = viewModel.isKeywordHidden
-                        ? ColorAssets.primaryGreen200.swiftUIColor
-                        : ColorAssets.neutralLight.swiftUIColor
-                    color
+                    ColorAssets.neutralLight.swiftUIColor
                         .ignoresSafeArea(edges: .bottom)
                 }
         )
@@ -123,7 +120,7 @@ struct SearchGiftsView<ViewModel: SearchGiftsViewModel>: View {
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 8)
-        .background(ColorAssets.primaryGreen100.swiftUIColor)
+        .background(ColorAssets.primaryGreen200.swiftUIColor)
         .cornerRadius([.bottomLeading, .bottomTrailing], 12)
     }
 
@@ -176,20 +173,37 @@ struct SearchGiftsView<ViewModel: SearchGiftsViewModel>: View {
 
     private func buildScrollView() -> some View {
         ScrollView {
-            LazyVStack(spacing: 16) {
-                buildMyPointView()
+            VStack(spacing: 16) {
+                buildSummaryView()
                 buildStatefullGiftsView()
             }
             .padding(.vertical, 16)
         }
     }
-
+    
     @ViewBuilder
-    private func buildMyPointView() -> some View {
-        if let memberInfo = viewModel.model?.memberInfo {
-            WalletMyPointView(point: memberInfo.point)
-                .padding(.horizontal, 16)
+    private func buildSummaryView() -> some View {
+        HStack(spacing: 12) {
+            SummaryItemView(
+                title: L10n.walletMyCash,
+                titleColorName: ColorAssets.secondaryYellow400.name,
+                imageName: ImageAssets.icCoin.name,
+                value: viewModel.model?.coinModel?.balance.formatted() ?? "---"
+            )
+            SummaryItemView(
+                title: "Voucher Wallet",
+                titleColorName: ColorAssets.primaryGreen200.name,
+                imageName: ImageAssets.icWallet2.name,
+                value: viewModel.model?.myGiftString ?? "---"
+            )
         }
+        .padding(.horizontal, 16)
+        .shadow(
+            color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.2),
+            radius: 8,
+            x: 0,
+            y: 4
+        )
     }
 
     private func buildStatefullGiftsView() -> some View {
@@ -206,7 +220,7 @@ struct SearchGiftsView<ViewModel: SearchGiftsViewModel>: View {
     @ViewBuilder
     private func buildGiftsView() -> some View {
         ScrollView {
-            LazyVGrid(columns: Array(repeating: GridItem.flexible(spacing: 12), count: 2)) {
+            LazyVStack(spacing: 12) {
                 let models = viewModel.model?.giftsResponse.data ?? []
                 ForEach(models.indices, id: \.self) {
                     let model = models[$0]
@@ -217,7 +231,7 @@ struct SearchGiftsView<ViewModel: SearchGiftsViewModel>: View {
                         }
                 }
             }
-            .padding(16)
+            .padding(.horizontal, 16)
 
             StatefullFooterView(
                 state: $viewModel.footerState,
@@ -228,6 +242,12 @@ struct SearchGiftsView<ViewModel: SearchGiftsViewModel>: View {
                 viewModel.loadMoreAction.send()
             }
         }
+        .shadow(
+            color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.2),
+            radius: 8,
+            x: 0,
+            y: 4
+        )
     }
 }
 

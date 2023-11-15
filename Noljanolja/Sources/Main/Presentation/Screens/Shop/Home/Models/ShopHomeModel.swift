@@ -9,12 +9,14 @@ import Foundation
 
 struct ShopHomeModel {
     let coinModel: CoinModel?
+    let myGiftString: String?
 
     var isEmpty: Bool {
-        coinModel == nil
+        coinModel == nil && myGiftString == nil
     }
 
-    init(coinModel: CoinModel? = nil) {
+    init(coinModel: CoinModel? = nil, myGiftString: String? = nil) {
         self.coinModel = coinModel
+        self.myGiftString = myGiftString
     }
 }

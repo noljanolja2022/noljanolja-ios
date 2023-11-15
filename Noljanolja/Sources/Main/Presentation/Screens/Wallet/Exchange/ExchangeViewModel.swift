@@ -164,14 +164,14 @@ final class ExchangeViewModel: ViewModel {
             .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] _ -> AnyPublisher<CoinExchangeResult, Error> in
-                guard let self, let exchangeRate = model?.exchangeRate else {
+                guard let self, let exchangePoint = model?.exchangePoint else {
                     return Fail<CoinExchangeResult, Error>(
                         error: CommonError.captureSelfNotFound
                     )
                     .eraseToAnyPublisher()
                 }
                 return self.coinExchangeNetworkRepository
-                    .convert(exchangeRate)
+                    .convert(exchangePoint)
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in

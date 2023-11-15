@@ -92,13 +92,24 @@ struct GiftDetailView<ViewModel: GiftDetailViewModel>: View {
                 .indicator(.activity)
                 .scaledToFill()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(ColorAssets.neutralLightGrey.swiftUIColor)
                 .clipped()
             }
-            .aspectRatio(1, contentMode: .fill)
+            .aspectRatio(
+                {
+                    switch viewModel.model?.giftDetailInputType {
+                    case .gift: return 1.0
+                    case .myGift: return 2.0 / 3.0
+                    case .none: return 1.0
+                    }
+                }(),
+                contentMode: .fill
+            )
             .frame(maxWidth: .infinity)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 12)
+            .background(ColorAssets.neutralLightGrey.swiftUIColor)
 
-            VStack(spacing: 4) {
+            VStack(spacing: 8) {
                 Text(viewModel.model?.giftBrandName ?? "")
                     .dynamicFont(.systemFont(ofSize: 22, weight: .medium))
                     .lineLimit(1)
@@ -108,13 +119,13 @@ struct GiftDetailView<ViewModel: GiftDetailViewModel>: View {
                     .dynamicFont(.systemFont(ofSize: 22, weight: .medium))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                Text("")
+                Text(viewModel.model?.giftDescription ?? "")
                     .dynamicFont(.systemFont(ofSize: 14))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
             }
+            .padding(16)
         }
-        .padding(16)
     }
 
     @ViewBuilder
