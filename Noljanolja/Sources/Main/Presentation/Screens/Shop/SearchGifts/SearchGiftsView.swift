@@ -173,7 +173,7 @@ struct SearchGiftsView<ViewModel: SearchGiftsViewModel>: View {
 
     private func buildScrollView() -> some View {
         ScrollView {
-            LazyVStack(spacing: 16) {
+            VStack(spacing: 16) {
                 buildSummaryView()
                 buildStatefullGiftsView()
             }
@@ -231,7 +231,7 @@ struct SearchGiftsView<ViewModel: SearchGiftsViewModel>: View {
                         }
                 }
             }
-            .padding(16)
+            .padding(.horizontal, 16)
 
             StatefullFooterView(
                 state: $viewModel.footerState,
@@ -242,6 +242,12 @@ struct SearchGiftsView<ViewModel: SearchGiftsViewModel>: View {
                 viewModel.loadMoreAction.send()
             }
         }
+        .shadow(
+            color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.2),
+            radius: 8,
+            x: 0,
+            y: 4
+        )
     }
 }
 

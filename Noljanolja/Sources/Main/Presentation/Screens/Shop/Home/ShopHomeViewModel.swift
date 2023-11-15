@@ -61,6 +61,7 @@ final class ShopHomeViewModel: ViewModel {
 
     private func configureLoadData() {
         isAppearSubject
+            .filter { $0 }
             .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.viewState = .loading })
             .flatMapLatestToResult { [weak self] _ in

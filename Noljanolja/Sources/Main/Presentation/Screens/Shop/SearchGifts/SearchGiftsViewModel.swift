@@ -72,7 +72,7 @@ final class SearchGiftsViewModel: ViewModel {
 
     private func configureLoadData() {
         isAppearSubject
-            .first(where: { $0 })
+            .filter { $0 }
             .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in
                 self?.viewState = .loading
