@@ -15,17 +15,3 @@ enum ShopHomeNavigationType {
     case giftDetail(Gift)
     case myGiftDetail(MyGift)
 }
-
-// MARK: - ShopHomeTabContentType
-
-enum ShopHomeTabContentType: CaseIterable {
-    case shopGift
-    case myGift
-    
-    var title: String {
-        switch self {
-        case .shopGift: return "Shop"
-        case .myGift: return "My E-Vouchers"
-        }
-    }
-}

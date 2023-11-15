@@ -12,6 +12,7 @@ struct GiftDetailModel {
     let giftDetailInputType: GiftDetailInputType
     let giftBrandName: String?
     let giftName: String?
+    let giftDescription: String?
     let giftImage: String?
     let giftCode: String?
     let giftCodeQRImage: UIImage?
@@ -27,6 +28,7 @@ struct GiftDetailModel {
         case let .gift(gift):
             self.giftBrandName = gift.brand?.name
             self.giftName = gift.name
+            self.giftDescription = gift.description
             self.giftImage = gift.image
             self.giftPrice = gift.price
             self.giftCode = nil
@@ -35,6 +37,7 @@ struct GiftDetailModel {
         case let .myGift(myGift):
             self.giftBrandName = myGift.brand?.name
             self.giftName = myGift.name
+            self.giftDescription = myGift.description
             self.giftImage = myGift.image
             self.giftPrice = 0
             self.giftCode = myGift.qrCode

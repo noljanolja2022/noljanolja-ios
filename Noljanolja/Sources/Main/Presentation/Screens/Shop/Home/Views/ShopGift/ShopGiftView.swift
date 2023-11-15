@@ -1,13 +1,13 @@
 import SwiftUI
 import SwiftUIX
 
-// MARK: - MyGiftView
+// MARK: - ShopGiftView
 
-struct MyGiftView: View {
+struct ShopGiftView: View {
     // MARK: Dependencies
 
-    @StateObject var viewModel: MyGiftViewModel
-    
+    @StateObject var viewModel: ShopGiftViewModel
+
     var body: some View {
         buildBodyView()
     }
@@ -48,18 +48,14 @@ struct MyGiftView: View {
     @ViewBuilder
     private func buildContentView() -> some View {
         ScrollView {
-            LazyVGrid(columns: Array(repeating: GridItem.flexible(spacing: 12), count: 2)) {
+            LazyVStack(spacing: 12) {
                 ForEach(viewModel.models.indices, id: \.self) {
                     let model = viewModel.models[$0]
-                    MyGiftItemView(
-                        model: model, selectAction: {
-                            viewModel.navigationType = .myGiftDetail(model)
+                    ShopGiftItemView(model: model)
+                        .frame(maxWidth: .infinity)
+                        .onTapGesture {
+                            viewModel.navigationType = .giftDetail(model)
                         }
-                    )
-                    .frame(maxWidth: .infinity)
-                    .onTapGesture {
-                        viewModel.navigationType = .myGiftDetail(model)
-                    }
                 }
                 
                 StatefullFooterView(
@@ -82,7 +78,7 @@ struct MyGiftView: View {
     }
 }
 
-extension MyGiftView {
+extension ShopGiftView {
     private func buildLoadingView() -> some View {
         LoadingView()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -98,7 +94,7 @@ extension MyGiftView {
     }
 }
 
-extension MyGiftView {
+extension ShopGiftView {
     @ViewBuilder
     private func buildNavigationLink() -> some View {
         NavigationLink(
@@ -110,23 +106,17 @@ extension MyGiftView {
     }
 
     @ViewBuilder
-    private func buildNavigationLinkDestinationView(_ type: Binding<MyGiftNavigationType>) -> some View {
+    private func buildNavigationLinkDestinationView(_ type: Binding<ShopGiftNavigationType>) -> some View {
         switch type.wrappedValue {
-        case let .myGiftDetail(myGift):
+        case let .giftDetail(gift):
             GiftDetailView(
                 viewModel: GiftDetailViewModel(
-                    giftDetailInputType: .myGift(myGift)
+                    giftDetailInputType: .gift(gift)
                 )
             )
         }
     }
 
     @ViewBuilder
-    private func buildFullScreenCoverDestinationView(_: Binding<MyGiftFullScreenCoverType>) -> some View {}
-}
-
-#Preview {
-    MyGiftView(
-        viewModel: MyGiftViewModel()
-    )
+    private func buildFullScreenCoverDestinationView(_: Binding<ShopGiftFullScreenCoverType>) -> some View {}
 }

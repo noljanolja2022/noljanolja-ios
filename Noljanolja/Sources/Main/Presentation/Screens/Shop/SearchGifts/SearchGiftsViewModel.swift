@@ -42,7 +42,7 @@ final class SearchGiftsViewModel: ViewModel {
     // MARK: Dependencies
 
     private let giftKeywordLocalRepository: GiftKeywordLocalRepository
-    private let memberInfoUseCases: MemberInfoUseCases
+    private let coinExchangeUseCases: CoinExchangeUseCases
     private let giftsNetworkRepository: GiftsNetworkRepository
     private weak var delegate: SearchGiftsViewModelDelegate?
 
@@ -53,11 +53,11 @@ final class SearchGiftsViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(giftKeywordLocalRepository: GiftKeywordLocalRepository = GiftKeywordLocalRepositoryImpl.shared,
-         memberInfoUseCases: MemberInfoUseCases = MemberInfoUseCasesImpl.default,
+         coinExchangeUseCases: CoinExchangeUseCases = CoinExchangeUseCasesImpl.shared,
          giftsNetworkRepository: GiftsNetworkRepository = GiftsNetworkRepositoryImpl.default,
          delegate: SearchGiftsViewModelDelegate? = nil) {
         self.giftKeywordLocalRepository = giftKeywordLocalRepository
-        self.memberInfoUseCases = memberInfoUseCases
+        self.coinExchangeUseCases = coinExchangeUseCases
         self.giftsNetworkRepository = giftsNetworkRepository
         self.delegate = delegate
         super.init()
@@ -133,13 +133,15 @@ final class SearchGiftsViewModel: ViewModel {
                 case let .success(response):
                     if response.pagination.page == NetworkConfigs.Param.firstPage {
                         self.model = SearchGiftsModel(
-                            memberInfo: self.model?.memberInfo,
+                            coinModel: self.model?.coinModel,
+                            myGiftString: self.model?.myGiftString,
                             giftsResponse: response
                         )
                     } else {
                         let data = self.model?.giftsResponse.data ?? [] + response.data
                         self.model = SearchGiftsModel(
-                            memberInfo: self.model?.memberInfo,
+                            coinModel: self.model?.coinModel,
+                            myGiftString: self.model?.myGiftString,
                             giftsResponse: PaginationResponse<[Gift]>(data: data, pagination: response.pagination)
                         )
                     }
@@ -201,12 +203,23 @@ final class SearchGiftsViewModel: ViewModel {
 
 extension SearchGiftsViewModel {
     private func getData() -> AnyPublisher<SearchGiftsModel, Error> {
-        Publishers.CombineLatest(
-            memberInfoUseCases.getLoyaltyMemberInfo(),
+        Publishers.CombineLatest3(
+            coinExchangeUseCases
+                .getCoin(),
+            giftsNetworkRepository
+                .getMyGifts(page: NetworkConfigs.Param.firstPage, pageSize: pageSize)
+                .map { [weak self] response in
+                    guard let self else { return "" }
+                    if response.data.count <= pageSize {
+                        return "\(response.data.count)"
+                    } else {
+                        return "\(response.data.count)+"
+                    }
+                },
             giftsNetworkRepository.getGiftsInShop(page: NetworkConfigs.Param.firstPage, pageSize: pageSize)
         )
         .map {
-            SearchGiftsModel(memberInfo: $0.0, giftsResponse: $0.1)
+            SearchGiftsModel(coinModel: $0.0, myGiftString: $0.1, giftsResponse: $0.2)
         }
         .eraseToAnyPublisher()
     }

@@ -52,8 +52,8 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
     private func buildContentView() -> some View {
         VStack(spacing: 8) {
             buildHeaderView()
-            buildPointView()
-            buildTabView()
+            buildSummaryView()
+            buildShopGiftView()
         }
         .background(ColorAssets.neutralLight.swiftUIColor)
     }
@@ -68,11 +68,6 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
                     .resizable()
                     .frame(width: 16, height: 16)
             }
-            Text("Exchange The Best\nProduct With Cash")
-                .dynamicFont(.systemFont(ofSize: 32, weight: .medium))
-                .multilineTextAlignment(.leading)
-                .foregroundColor(ColorAssets.secondaryYellow400.swiftUIColor)
-                .frame(maxWidth: .infinity, alignment: .leading)
             
             SearchView(placeholder: L10n.shopSearchProducts, text: .constant(""))
                 .frame(maxWidth: .infinity)
@@ -88,71 +83,51 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
     }
     
     @ViewBuilder
-    private func buildPointView() -> some View {
-        if let coinModel = viewModel.model.coinModel {
-            WalletMoneyView(
-                model: WalletMoneyViewDataModel(
-                    title: L10n.walletMyCash,
-                    titleColorName: ColorAssets.neutralRawDarkGrey.name,
-                    changeString: nil,
-                    changeColorName: ColorAssets.neutralRawLight.name,
-                    iconName: ImageAssets.icCoin.name,
-                    valueString: coinModel.balance.formatted(),
-                    valueColorName: ColorAssets.neutralRawDarkGrey.name,
-                    backgroundImageName: ImageAssets.bnCash.name,
-                    padding: 16
-                )
+    private func buildSummaryView() -> some View {
+        HStack(spacing: 12) {
+            SummaryItemView(
+                title: L10n.walletMyCash,
+                titleColorName: ColorAssets.secondaryYellow400.name,
+                imageName: ImageAssets.icCoin.name,
+                value: viewModel.model.coinModel?.balance.formatted() ?? "---"
             )
-            .frame(height: 120)
-            .padding(.horizontal, 16)
-            .shadow(
-                color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.2),
-                radius: 8,
-                x: 0,
-                y: 4
+            SummaryItemView(
+                title: "Voucher Wallet",
+                titleColorName: ColorAssets.primaryGreen200.name,
+                imageName: ImageAssets.icWallet2.name,
+                value: viewModel.model.myGiftString ?? "---"
             )
+            .onTapGesture {
+                viewModel.navigationType = .myGifts
+            }
         }
+        .padding(.horizontal, 16)
+        .shadow(
+            color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.2),
+            radius: 8,
+            x: 0,
+            y: 4
+        )
     }
     
-    private func buildTabView() -> some View {
-        VStack(spacing: 4) {
-            HStack(spacing: 8) {
-                ForEach(ShopHomeTabContentType.allCases.indices, id: \.self) { index in
-                    let tabContentType = ShopHomeTabContentType.allCases[index]
-                    VStack(spacing: 0) {
-                        Text(tabContentType.title)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .dynamicFont(
-                                .systemFont(
-                                    ofSize: 16,
-                                    weight: viewModel.tabContentType == tabContentType ? .bold : .regular
-                                )
-                            )
-                            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                        Spacer()
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 4)
-                            .background(
-                                viewModel.tabContentType == tabContentType ? ColorAssets.primaryGreen200.swiftUIColor : .clear
-                            )
-                            .cornerRadius(2)
-                    }
-                    .frame(height: 44)
-                    .onTapGesture {
-                        viewModel.tabContentType = tabContentType
-                    }
-                }
+    private func buildShopGiftView() -> some View {
+        VStack(spacing: 0) {
+            HStack(spacing: 12) {
+                Text("For you")
+                    .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
+                ImageAssets.icArrowRight.swiftUIImage
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 16)
-            
-            switch viewModel.tabContentType {
-            case .shopGift:
-                ShopGiftView(viewModel: ShopGiftViewModel())
-            case .myGift:
-                MyGiftView(viewModel: MyGiftViewModel())
-            }
+            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+
+            ShopGiftView(viewModel: ShopGiftViewModel())
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.top, 16)
     }
 }
 

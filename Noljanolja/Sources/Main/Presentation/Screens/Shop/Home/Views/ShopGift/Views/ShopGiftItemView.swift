@@ -22,30 +22,42 @@ struct ShopGiftItemView: View {
     }
 
     private func buildContenView() -> some View {
-        VStack(spacing: 6) {
-            GeometryReader { geometry in
-                WebImage(
-                    url: URL(string: model.image),
-                    context: [
-                        .imageTransformer: SDImageResizingTransformer(
-                            size: CGSize(
-                                width: geometry.size.width * 3,
-                                height: geometry.size.height * 3
-                            ),
-                            scaleMode: .aspectFill
-                        )
-                    ]
-                )
-                .resizable()
-                .indicator(.activity)
-                .scaledToFill()
-                .frame(maxWidth: .infinity)
-                .background(ColorAssets.neutralLightGrey.swiftUIColor)
-                .cornerRadius(12)
-                .clipped()
-            }
-            .aspectRatio(1, contentMode: .fill)
-
+        HStack(spacing: 16) {
+            buildImageView()
+            buildInfoView()
+        }
+        .padding(4)
+        .background(ColorAssets.neutralLight.swiftUIColor)
+        .cornerRadius(8)
+    }
+    
+    private func buildImageView() -> some View {
+        GeometryReader { geometry in
+            WebImage(
+                url: URL(string: model.image),
+                context: [
+                    .imageTransformer: SDImageResizingTransformer(
+                        size: CGSize(
+                            width: geometry.size.width * 3,
+                            height: geometry.size.height * 3
+                        ),
+                        scaleMode: .aspectFill
+                    )
+                ]
+            )
+            .resizable()
+            .indicator(.activity)
+            .scaledToFill()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(ColorAssets.neutralLightGrey.swiftUIColor)
+            .cornerRadius(4)
+            .clipped()
+        }
+        .frame(width: 110, height: 110)
+    }
+    
+    private func buildInfoView() -> some View {
+        VStack(spacing: 8) {
             Text(model.brand?.name ?? "")
                 .dynamicFont(.systemFont(ofSize: 12, weight: .medium))
                 .lineLimit(1)
@@ -71,8 +83,6 @@ struct ShopGiftItemView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .padding(8)
-        .background(ColorAssets.neutralLight.swiftUIColor)
-        .cornerRadius(12)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
