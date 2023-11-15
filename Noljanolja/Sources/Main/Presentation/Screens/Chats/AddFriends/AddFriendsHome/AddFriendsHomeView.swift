@@ -112,10 +112,15 @@ struct AddFriendsHomeView<ViewModel: AddFriendsHomeViewModel>: View {
                         .frame(width: 24, height: 24)
                         .frame(width: 36, height: 36)
                         .foregroundColor(ColorAssets.neutralRawLight.swiftUIColor)
-                        .background(ColorAssets.primaryGreen200.swiftUIColor)
+                        .background(
+                            viewModel.isDisableSearch
+                                ? ColorAssets.neutralLightGrey.swiftUIColor
+                                : ColorAssets.primaryGreen200.swiftUIColor
+                        )
                         .cornerRadius(18)
                 }
             )
+            .disabled(viewModel.isDisableSearch)
         }
         .frame(height: 36)
     }
@@ -136,39 +141,18 @@ struct AddFriendsHomeView<ViewModel: AddFriendsHomeViewModel>: View {
                             .dynamicFont(.systemFont(ofSize: 14))
                             .frame(maxWidth: .infinity)
                     }
-                    .padding(8)
+                    .padding(10)
                 }
             )
             .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            .background(ColorAssets.neutralLight.swiftUIColor)
-            .cornerRadius(12)
-
-            Button(
-                action: {
-                    viewModel.navigationType = .contactList
-                },
-                label: {
-                    VStack(spacing: 12) {
-                        ImageAssets.icContactCalendar.swiftUIImage
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 24, height: 24)
-                        Text(L10n.addFriendAddByContact)
-                            .dynamicFont(.systemFont(ofSize: 14))
-                            .frame(maxWidth: .infinity)
-                    }
-                    .padding(8)
-                }
-            )
-            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            .background(ColorAssets.neutralLight.swiftUIColor)
-            .cornerRadius(12)
+            .background(ColorAssets.secondaryYellow50.swiftUIColor)
+            .cornerRadius(10)
         }
         .shadow(
             color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.15),
-            radius: 2,
+            radius: 6,
             x: 0,
-            y: 2
+            y: 4
         )
     }
 
@@ -253,10 +237,6 @@ extension AddFriendsHomeView {
         case .scan:
             ScanQRView(
                 viewModel: ScanQRViewModel()
-            )
-        case .contactList:
-            AddFriendContactListView(
-                viewModel: AddFriendContactListViewModel()
             )
         case let .result(users):
             FindUsersResultView(

@@ -11,7 +11,6 @@ import Foundation
 
 enum AddFriendsNavigationType {
     case scan
-    case contactList
     case result([User])
 }
 

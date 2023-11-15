@@ -11,4 +11,5 @@ import Foundation
 
 enum HomeFriendNavigationType {
     case addFriends
+    case search
 }

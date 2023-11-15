@@ -33,6 +33,7 @@ final class ContactListViewModel: ViewModel {
 
     var isMultiSelectionEnabled: Bool
     var isSearchHidden: Bool
+    var isBackButtonHidden: Bool
     var axis: Axis
     private let contactUseCases: ContactUseCases
     private let contactListUseCases: ContactListUseCases
@@ -48,12 +49,14 @@ final class ContactListViewModel: ViewModel {
 
     init(isMultiSelectionEnabled: Bool,
          isSearchHidden: Bool = false,
+         isBackButtonHidden: Bool = true,
          axis: Axis = .vertical,
          contactUseCases: ContactUseCases = ContactUseCasesImpl.default,
          contactListUseCases: ContactListUseCases,
          delegate: ContactListViewModelDelegate? = nil) {
         self.isMultiSelectionEnabled = isMultiSelectionEnabled
         self.isSearchHidden = isSearchHidden
+        self.isBackButtonHidden = isBackButtonHidden
         self.axis = axis
         self.contactUseCases = contactUseCases
         self.contactListUseCases = contactListUseCases

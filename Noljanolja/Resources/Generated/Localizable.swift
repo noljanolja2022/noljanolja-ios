@@ -20,8 +20,8 @@ internal enum L10n {
   internal static let addFriendSearchByPhone = L10n.tr("Localizable", "add_friend_search_by_phone", fallback: "Search by phone number")
   /// Search QR code
   internal static let addFriendSearchByQr = L10n.tr("Localizable", "add_friend_search_by_qr", fallback: "Search QR code")
-  /// Add friend
-  internal static let addFriendTitle = L10n.tr("Localizable", "add_friend_title", fallback: "Add friend")
+  /// Add Friends
+  internal static let addFriendTitle = L10n.tr("Localizable", "add_friend_title", fallback: "Add Friends")
   /// %@ selected
   internal static func argsChatSelected(_ p1: Any) -> String {
     return L10n.tr("Localizable", "args_chat_selected", String(describing: p1), fallback: "%@ selected")
@@ -250,6 +250,8 @@ internal enum L10n {
   }
   /// Skip
   internal static let commonSkip = L10n.tr("Localizable", "common_skip", fallback: "Skip")
+  /// Sorry!
+  internal static let commonSorry = L10n.tr("Localizable", "common_sorry", fallback: "Sorry!")
   /// [Sticker]
   internal static let commonSticker = L10n.tr("Localizable", "common_sticker", fallback: "[Sticker]")
   /// Success
@@ -282,8 +284,8 @@ internal enum L10n {
   internal static let confirmPasswordHintText = L10n.tr("Localizable", "confirm_password_hint_text", fallback: "Please enter your confirm password")
   /// Search by name/Phone number
   internal static let contactSearchHint = L10n.tr("Localizable", "contact_search_hint", fallback: "Search by name/Phone number")
-  /// No contacts found
-  internal static let contactsNotFound = L10n.tr("Localizable", "contacts_not_found", fallback: "No contacts found")
+  /// Sorry, this user is not in your contacts
+  internal static let contactsNotFound = L10n.tr("Localizable", "contacts_not_found", fallback: "Sorry, this user is not in your contacts")
   /// Start Chatting
   internal static let contactsStartChat = L10n.tr("Localizable", "contacts_start_chat", fallback: "Start Chatting")
   /// Add members
@@ -366,8 +368,8 @@ internal enum L10n {
   internal static let enterPhoneNumber = L10n.tr("Localizable", "enter_phone_number", fallback: "Enter phone number")
   /// Phone is not valid
   internal static let errorPhoneInvalid = L10n.tr("Localizable", "error_phone_invalid", fallback: "Phone is not valid")
-  /// Phone is not available
-  internal static let errorPhoneIsNotAvailable = L10n.tr("Localizable", "error_phone_is_not_available", fallback: "Phone is not available")
+  /// This phone number is not available
+  internal static let errorPhoneIsNotAvailable = L10n.tr("Localizable", "error_phone_is_not_available", fallback: "This phone number is not available")
   /// Sorry! This QR code is invalid
   internal static let errorQrNotValid = L10n.tr("Localizable", "error_qr_not_valid", fallback: "Sorry! This QR code is invalid")
   /// Unexpected Error

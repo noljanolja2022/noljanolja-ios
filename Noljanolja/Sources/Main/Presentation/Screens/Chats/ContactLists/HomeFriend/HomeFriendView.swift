@@ -67,16 +67,34 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
             })
             .padding(.horizontal, 16)
 
-            ContactListView(
-                viewModel: ContactListViewModel(
-                    isMultiSelectionEnabled: false,
-                    isSearchHidden: true,
-                    contactListUseCases: ContactListUseCasesImpl()
-                ),
-                selectedUsers: $viewModel.selectedUsers,
-                selectUserAction: { _ in },
-                searchAction: {}
-            )
+            VStack(spacing: 0) {
+                HStack {
+                    Text("Friendlist")
+                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
+                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                    ImageAssets.icSearch.swiftUIImage
+                        .resizable()
+                        .frame(.init(width: 24, height: 24))
+                        .scaledToFit()
+                        .onPress {
+                            viewModel.navigationTypeAction.send(.search)
+                        }
+                }
+                .padding(.top, 22)
+                .padding(.horizontal, 16)
+
+                ContactListView(
+                    viewModel: ContactListViewModel(
+                        isMultiSelectionEnabled: false,
+                        isSearchHidden: true,
+                        contactListUseCases: ContactListUseCasesImpl()
+                    ),
+                    selectedUsers: $viewModel.selectedUsers,
+                    selectUserAction: { _ in }
+                )
+            }
             .background(ColorAssets.neutralLight.swiftUIColor)
             .cornerRadius([.topLeading, .topTrailing], 25)
         }
@@ -117,6 +135,10 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
                         viewModel: AddFriendsHomeViewModel(
                             delegate: viewModel
                         )
+                    )
+                case .search:
+                    AddFriendContactListView(
+                        viewModel: AddFriendContactListViewModel()
                     )
                 }
             },

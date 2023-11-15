@@ -28,7 +28,7 @@ struct ScanQRView<ViewModel: ScanQRViewModel>: View {
         .navigationBarTitle("", displayMode: .inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text(L10n.addFriendTitle)
+                Text(L10n.scanQrCodeTitle)
                     .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }
@@ -52,6 +52,7 @@ struct ScanQRView<ViewModel: ScanQRViewModel>: View {
                     cameraViewModel: viewModel.cameraViewModel
                 )
             )
+            Spacer()
             buildActionsView()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -65,7 +66,7 @@ struct ScanQRView<ViewModel: ScanQRViewModel>: View {
             }
         )
         .buttonStyle(PrimaryButtonStyle())
-        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
+        .dynamicFont(.systemFont(ofSize: 16, weight: .medium))
         .padding(.horizontal, 16)
         .padding(.bottom, 16)
     }

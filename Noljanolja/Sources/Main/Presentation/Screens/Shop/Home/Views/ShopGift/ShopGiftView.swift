@@ -120,3 +120,9 @@ extension ShopGiftView {
     @ViewBuilder
     private func buildFullScreenCoverDestinationView(_: Binding<ShopGiftFullScreenCoverType>) -> some View {}
 }
+
+// #Preview {
+//    ShopGiftView(
+//        viewModel: ShopGiftViewModel()
+//    )
+// }
