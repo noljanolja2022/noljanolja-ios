@@ -132,7 +132,8 @@ struct GiftDetailView<ViewModel: GiftDetailViewModel>: View {
     private func buildBottomView() -> some View {
         switch viewModel.model?.giftDetailInputType {
         case .gift: buildPricesView()
-        case .myGift, .none: EmptyView()
+        case .myGift: buildQRCodeView()
+        case .none: EmptyView()
         }
     }
 

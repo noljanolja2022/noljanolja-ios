@@ -38,10 +38,10 @@ struct GiftDetailModel {
             self.giftBrandName = myGift.brand?.name
             self.giftName = myGift.name
             self.giftDescription = myGift.description
-            self.giftImage = myGift.image
+            self.giftImage = myGift.qrCode
             self.giftPrice = 0
             self.giftCode = myGift.qrCode
-            self.giftCodeQRImage = myGift.qrCode.qrCodeImage()
+            self.giftCodeQRImage = nil // myGift.qrCode.qrCodeImage()
             self.isPurchasable = false
         }
 
