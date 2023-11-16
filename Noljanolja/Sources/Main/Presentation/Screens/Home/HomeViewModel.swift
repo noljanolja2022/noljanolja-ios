@@ -164,3 +164,11 @@ extension HomeViewModel: WalletViewModelDelegate {
 // MARK: AddFriendsHomeViewModelDelegate
 
 extension HomeViewModel: AddFriendsHomeViewModelDelegate {}
+
+// MARK: HomeFriendViewModelDelegate
+
+extension HomeViewModel: HomeFriendViewModelDelegate {
+    func homeFriendViewModelSignOut() {
+        delegate?.homeViewModelSignOut()
+    }
+}

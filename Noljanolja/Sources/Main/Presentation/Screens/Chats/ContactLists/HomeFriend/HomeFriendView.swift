@@ -36,7 +36,7 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
     private func buildHeaderView() -> some View {
         HeaderCommonView(
             notificationAction: {},
-            settingAction: {}
+            settingAction: { viewModel.navigationTypeAction.send(.setting) }
         ) {
             ZStack {
                 Text("Earn Points\n")
@@ -52,7 +52,7 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
         VStack(spacing: 25) {
             Button(action: {}, label: {
                 HStack {
-                    Text("Invite Friends to get benefits")
+                    Text(L10n.inviteToGetBenefits)
                     ImageAssets.icArrowRight.swiftUIImage
                         .resizable()
                         .frame(width: 24, height: 24)
@@ -60,7 +60,7 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
                 .frame(maxWidth: .infinity)
                 .height(52)
                 .padding(.horizontal, 35)
-                .font(Font.system(size: 16, weight: .bold))
+                .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                 .foregroundColor(ColorAssets.secondaryYellow200.swiftUIColor)
                 .background(ColorAssets.neutralDarkGrey.swiftUIColor)
                 .cornerRadius(11)
@@ -69,7 +69,7 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
 
             VStack(spacing: 0) {
                 HStack {
-                    Text("Friendlist")
+                    Text(L10n.friendList)
                         .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -92,7 +92,9 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
                         contactListUseCases: ContactListUseCasesImpl()
                     ),
                     selectedUsers: $viewModel.selectedUsers,
-                    selectUserAction: { _ in }
+                    selectUserAction: { user in
+                        viewModel.navigationTypeAction.send(.friendDetail(user))
+                    }
                 )
             }
             .background(ColorAssets.neutralLight.swiftUIColor)
@@ -108,7 +110,7 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
             },
             label: {
                 Label {
-                    Text("Add Friends")
+                    Text(L10n.addFriendTitle)
                         .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                 } icon: {
                     ImageAssets.icAddPerson.swiftUIImage
@@ -139,6 +141,16 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
                 case .search:
                     AddFriendContactListView(
                         viewModel: AddFriendContactListViewModel()
+                    )
+                case let .friendDetail(user):
+                    FriendDetailView(
+                        viewModel: FriendDetailViewModel(user: user)
+                    )
+                case .setting:
+                    ProfileSettingView(
+                        viewModel: ProfileSettingViewModel(
+                            delegate: viewModel
+                        )
                     )
                 }
             },

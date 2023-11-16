@@ -384,6 +384,8 @@ internal enum L10n {
   internal static let exchangeTitle = L10n.tr("Localizable", "exchange_title", fallback: "Exchange")
   /// Forgot your password?
   internal static let forgotPassword = L10n.tr("Localizable", "forgot_password", fallback: "Forgot your password?")
+  /// Friendlist
+  internal static let friendList = L10n.tr("Localizable", "friend_list", fallback: "Friendlist")
   /// Full agreement
   internal static let fullAgreement = L10n.tr("Localizable", "full_agreement", fallback: "Full agreement")
   /// + %@ Points after watching
@@ -539,6 +541,8 @@ internal enum L10n {
   internal static let referralStep3 = L10n.tr("Localizable", "referral_step_3", fallback: "Via the link sent to you. Proceed to membership registration")
   /// When all courses are completed. Friends and I also earn 1,000P!
   internal static let referralStep4 = L10n.tr("Localizable", "referral_step_4", fallback: "When all courses are completed. Friends and I also earn 1,000P!")
+  /// REQUEST POINT
+  internal static let requestPoint = L10n.tr("Localizable", "request_point", fallback: "REQUEST POINT")
   /// Let's Play Log in
   internal static let requireLoginButton = L10n.tr("Localizable", "require_login_button", fallback: "Let's Play Log in")
   /// Log in to play
@@ -559,6 +563,8 @@ internal enum L10n {
   }
   /// Send invitation link
   internal static let sendInviteLink = L10n.tr("Localizable", "send_invite_link", fallback: "Send invitation link")
+  /// SEND POINT
+  internal static let sendPoint = L10n.tr("Localizable", "send_point", fallback: "SEND POINT")
   /// Service Guide
   internal static let serviceGuide = L10n.tr("Localizable", "service_guide", fallback: "Service Guide")
   /// About us

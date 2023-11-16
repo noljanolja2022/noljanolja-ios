@@ -144,7 +144,7 @@ struct AddFriendsHomeView<ViewModel: AddFriendsHomeViewModel>: View {
                     .padding(10)
                 }
             )
-            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
             .background(ColorAssets.secondaryYellow50.swiftUIColor)
             .cornerRadius(10)
         }

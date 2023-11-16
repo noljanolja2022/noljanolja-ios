@@ -11,7 +11,9 @@ import Foundation
 
 // MARK: - HomeFriendViewModelDelegate
 
-protocol HomeFriendViewModelDelegate: AnyObject {}
+protocol HomeFriendViewModelDelegate: AnyObject {
+    func homeFriendViewModelSignOut()
+}
 
 // MARK: - HomeFriendViewModel
 
@@ -46,7 +48,7 @@ final class HomeFriendViewModel: ViewModel {
     }
 
     private func configure() {}
-    
+
     private func configActions() {
         navigationTypeAction
             .flatMapLatestToResult { [weak self] navigationType in
@@ -75,3 +77,11 @@ final class HomeFriendViewModel: ViewModel {
 // MARK: AddFriendsHomeViewModelDelegate
 
 extension HomeFriendViewModel: AddFriendsHomeViewModelDelegate {}
+
+// MARK: ProfileSettingViewModelDelegate
+
+extension HomeFriendViewModel: ProfileSettingViewModelDelegate {
+    func profileSettingViewModelSignOut() {
+        delegate?.homeFriendViewModelSignOut()
+    }
+}

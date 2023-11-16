@@ -428,4 +428,6 @@
 "common_forwarded" = "Forwarded";
 "coming_soon_description" = "Welcome to NolgoBulja. We will be coming soon. Thank you.";
 "common_sorry" = "Sorry!";
-
+"request_point" = "REQUEST POINT";
+"send_point" = "SEND POINT";
+"friend_list" = "Friendlist";

@@ -242,7 +242,9 @@ struct HomeView<ViewModel: HomeViewModel>: View {
                     )
                 case .friends:
                     HomeFriendView(
-                        viewModel: HomeFriendViewModel()
+                        viewModel: HomeFriendViewModel(
+                            delegate: viewModel
+                        )
                     )
                 }
             },
