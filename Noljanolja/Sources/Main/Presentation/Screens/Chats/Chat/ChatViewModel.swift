@@ -26,6 +26,7 @@ final class ChatViewModel: ViewModel {
     @Published var alertState: AlertState<ChatAlertActionType>?
 
     @Published var title = ""
+    @Published var avatar = ""
     @Published var isChatSettingEnabled = false
 
     @Published var chatItems = [ChatItemModelType]()
@@ -114,12 +115,17 @@ final class ChatViewModel: ViewModel {
             currentUserSubject.compactMap { $0 }.removeDuplicates(),
             conversationSubject.compactMap { $0 }.removeDuplicates()
         )
-        .map { currentUser, conversation in
-            conversation.getDisplayTitleForDetail(currentUser: currentUser) ?? ""
+        .map { currentUser, conversation -> [String] in
+            let name = conversation.getDisplayTitleForDetail(currentUser: currentUser) ?? ""
+            let avatar = conversation.getAvatar(currentUser: currentUser) ?? ""
+            return [name, avatar]
         }
         .removeDuplicates()
         .receive(on: DispatchQueue.main)
-        .sink(receiveValue: { [weak self] in self?.title = $0 })
+        .sink { [weak self] user in
+            self?.title = user[0]
+            self?.avatar = user[1]
+        }
         .store(in: &cancellables)
 
         Publishers

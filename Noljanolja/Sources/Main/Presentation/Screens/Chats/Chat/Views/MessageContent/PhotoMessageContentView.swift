@@ -23,16 +23,14 @@ struct PhotoMessageContentView: View {
 
     @ViewBuilder
     private func buildBodyView() -> some View {
-//        HStack(spacing: 8) {
-//            buildShareView()
-//                .environment(\.layoutDirection, .leftToRight)
-//            buildContentView()
-//                .environment(\.layoutDirection, .leftToRight)
-//        }
+        HStack(spacing: 8) {
+            buildShareView()
+            buildContentView()
+        }
 //        .padding(.leading, -36)
-//        .environment(\.layoutDirection, model.isSendByCurrentUser ? .leftToRight : .rightToLeft)
+        .environment(\.layoutDirection, model.isSendByCurrentUser ? .leftToRight : .rightToLeft)
 
-        buildContentView()
+//        buildContentView()
     }
 
     @ViewBuilder
@@ -43,7 +41,8 @@ struct PhotoMessageContentView: View {
                 ImageAssets.icShare.swiftUIImage
                     .padding(4)
                     .frame(width: 28, height: 28)
-                    .background(ColorAssets.neutralGrey.swiftUIColor)
+                    .background(ColorAssets.neutralRawLightGrey.swiftUIColor)
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                     .cornerRadius(14)
             }
         )

@@ -26,7 +26,7 @@ struct MessageReactionsView: View {
     private func buildContentView(_ model: MessageReactionsModel) -> some View {
         HStack(spacing: 8) {
             buildQuickView(model)
-            buildSummaryView(model)
+//            buildSummaryView(model)
         }
         .frame(alignment: .trailing)
         .padding(.horizontal, 8)

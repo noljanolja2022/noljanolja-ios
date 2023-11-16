@@ -111,12 +111,15 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
         HStack(alignment: .bottom, spacing: 4) {
             buildExpandView()
             buildMainView()
+            if expandType != .images || expandType != .sticker {
+                buildVoiceView()
+            }
         }
         .padding(.leading, 8)
         .padding(.trailing, 12)
         .padding(.vertical, 8)
         .background(
-            expandType != nil
+            expandType == .images
                 ? ColorAssets.neutralLightGrey.swiftUIColor
                 : ColorAssets.neutralLight.swiftUIColor
         )
@@ -165,24 +168,38 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
                 .alignmentGuide(.bottom, computeValue: { $0[.bottom] })
                 .background(ColorAssets.neutralLightGrey.swiftUIColor)
                 .cornerRadius(18)
-                .hidden(expandType != nil)
+                .hidden(expandType == .images)
 
             HStack(alignment: .bottom, spacing: 0) {
                 HStack(alignment: .bottom, spacing: 0) {
                     buildTextInputView()
                     buildStickerView()
                 }
-                .hidden(expandType != nil)
+                .hidden(expandType == .images)
 
                 buildSendView()
             }
         }
     }
 
+    private func buildVoiceView() -> some View {
+        Button(
+            action: {},
+            label: {
+                Image(systemName: "mic.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .padding(8)
+                    .frame(width: inputItemSize, height: inputItemSize)
+                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
+            }
+        )
+    }
+
     private func buildTextInputView() -> some View {
         ZStack(alignment: .center) {
             if text.isEmpty {
-                Text("Aa")
+                Text("")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
                     .padding(.horizontal, 6)
@@ -210,7 +227,7 @@ struct ChatInputView<ViewModel: ChatInputViewModel>: View {
                 setExpandType(expandType == .sticker ? nil : .sticker)
             },
             label: {
-                ImageAssets.icChatEmoji.swiftUIImage
+                (expandType == .sticker ? Image(systemName: "keyboard") : ImageAssets.icChatEmoji.swiftUIImage)
                     .resizable()
                     .scaledToFit()
                     .padding(8)
@@ -284,7 +301,7 @@ extension ChatInputView {
         if isAnimated {
             let milliseconds = keyboard.isActive ? 0.3 : 0
             withAnimation(
-                after: .microseconds(Int(milliseconds * 1_000)),
+                after: .microseconds(Int(milliseconds * 1000)),
                 body: {
                     self.expandType = expandType
                 }
