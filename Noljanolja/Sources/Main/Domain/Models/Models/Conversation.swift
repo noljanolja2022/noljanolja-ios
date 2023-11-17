@@ -105,7 +105,7 @@ extension Conversation {
         switch type {
         case .single:
             return participants
-                .filter { $0.id == currentUser.id }
+                .filter { $0.id != currentUser.id }
                 .first?
                 .name
         case .group:
@@ -123,7 +123,7 @@ extension Conversation {
         switch type {
         case .single:
             return participants
-                .filter { $0.id == currentUser.id }
+                .filter { $0.id != currentUser.id }
                 .first?
                 .name
         case .group:
@@ -145,7 +145,7 @@ extension Conversation {
         switch type {
         case .single:
             return participants
-                .filter { $0.id == currentUser.id }
+                .filter { $0.id != currentUser.id }
                 .first?
                 .avatar
         case .group, .unknown:

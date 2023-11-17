@@ -80,7 +80,10 @@ struct MessageActionDetailView<ViewModel: MessageActionDetailViewModel>: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .background { Color.black.opacity(0.5) }
+        .background {
+            VisualEffectView(effect: UIBlurEffect(style: .systemMaterialDark))
+                .edgesIgnoringSafeArea(.all)
+        }
         .ignoresSafeArea()
         .onTapGesture {
             withoutAnimation {

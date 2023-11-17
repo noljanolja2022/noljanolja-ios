@@ -17,7 +17,7 @@ struct PhotoMessageContentView: View {
 //    let reactionIcons: [ReactIcon]
 
     @State private var geometryProxy: GeometryProxy?
-    @State private var isShowedContextMenu = false;
+    @State private var isShowedContextMenu = false
 
     var body: some View {
         buildBodyView()
@@ -25,19 +25,12 @@ struct PhotoMessageContentView: View {
 
     @ViewBuilder
     private func buildBodyView() -> some View {
-//        VStack(spacing: 5) {
-//            buildReactionIconsView()
-//                .visible(isShowedContextMenu)
-            HStack(spacing: 8) {
-                buildShareView()
-                buildContentView()
-            }
-            //        .padding(.leading, -36)
-            .environment(\.layoutDirection, model.isSendByCurrentUser ? .leftToRight : .rightToLeft)
-//        }
-//        .contextMenu {
-//
-//        }
+        HStack(spacing: 8) {
+//            buildShareView()
+            buildContentView()
+        }
+        //        .padding(.leading, -36)
+        .environment(\.layoutDirection, model.isSendByCurrentUser ? .leftToRight : .rightToLeft)
     }
 
     @ViewBuilder
@@ -84,7 +77,7 @@ struct PhotoMessageContentView: View {
 //                let model = reactionIcons[index]
 //                Button(
 //                    action: {
-////                        viewModel.reactionAction.send(model)
+    ////                        viewModel.reactionAction.send(model)
 //                    },
 //                    label: {
 //                        Text(model.code ?? "")

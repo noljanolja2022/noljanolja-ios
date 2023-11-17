@@ -13,6 +13,7 @@
 		2B6876FB2AFDF964000BBD55 /* String+Encode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6876FA2AFDF964000BBD55 /* String+Encode.swift */; };
 		2B855AE22B052C2D00A1F9B7 /* FriendDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B855AE12B052C2D00A1F9B7 /* FriendDetailView.swift */; };
 		2B855AE42B053BD800A1F9B7 /* FriendDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B855AE32B053BD800A1F9B7 /* FriendDetailViewModel.swift */; };
+		2B855AE72B075E2B00A1F9B7 /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B855AE62B075E2B00A1F9B7 /* VisualEffectView.swift */; };
 		2BF3B31E2AFC8EFA00A1CC6F /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 2BF3B31D2AFC8EFA00A1CC6F /* AlertToast */; };
 		7647F56A2DB765C44F009B8C /* Pods_Noljanolja_NoljanoljaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 264F630FC4DDFC0E9074F9D2 /* Pods_Noljanolja_NoljanoljaUITests.framework */; };
 		8353A88CBCF1CAFD239985BE /* Pods_NoljanoljaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD0295CC3C0D04548A9867CB /* Pods_NoljanoljaTests.framework */; };
@@ -621,6 +622,7 @@
 		2B6876FA2AFDF964000BBD55 /* String+Encode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Encode.swift"; sourceTree = "<group>"; };
 		2B855AE12B052C2D00A1F9B7 /* FriendDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDetailView.swift; sourceTree = "<group>"; };
 		2B855AE32B053BD800A1F9B7 /* FriendDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDetailViewModel.swift; sourceTree = "<group>"; };
+		2B855AE62B075E2B00A1F9B7 /* VisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
 		2DDD25D24A7930AF482D9C5C /* Pods-Noljanolja-NoljanoljaUITests.app store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.app store.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.app store.xcconfig"; sourceTree = "<group>"; };
 		4186FA57228107FEF2D2C426 /* Pods-NoljanoljaTests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoljanoljaTests.development.xcconfig"; path = "Target Support Files/Pods-NoljanoljaTests/Pods-NoljanoljaTests.development.xcconfig"; sourceTree = "<group>"; };
 		5474C50410F0452A681DEAAB /* Pods-Noljanolja.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja.dev.xcconfig"; path = "Target Support Files/Pods-Noljanolja/Pods-Noljanolja.dev.xcconfig"; sourceTree = "<group>"; };
@@ -1278,6 +1280,15 @@
 			path = FriendDetail;
 			sourceTree = "<group>";
 		};
+		2B855AE52B075E1300A1F9B7 /* VisualEffectView */ = {
+			isa = PBXGroup;
+			children = (
+				2B855AE62B075E2B00A1F9B7 /* VisualEffectView.swift */,
+			);
+			name = VisualEffectView;
+			path = "Ví";
+			sourceTree = "<group>";
+		};
 		7EDA28669CED10C0C42B836E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1476,6 +1487,7 @@
 		CF162D542A705DA500B8096D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2B855AE52B075E1300A1F9B7 /* VisualEffectView */,
 				2B5FC3BE2B021A3400906C18 /* HeaderCommonView */,
 				CF82C30C29EA9FF000EAD36C /* BottomSheet */,
 				CFDCA377299644E7003C2C77 /* ButtonStyle */,
@@ -4612,6 +4624,7 @@
 				CF53D6172A6AF548009B3A69 /* MessageImagesNavigations.swift in Sources */,
 				CFBC6F0029C054B0000509EC /* View+EditView.swift in Sources */,
 				CF53D5D52A6AF548009B3A69 /* UpdateConversationContactListView.swift in Sources */,
+				2B855AE72B075E2B00A1F9B7 /* VisualEffectView.swift in Sources */,
 				CFF863992A4362ED00EC0713 /* MessageReaction.swift in Sources */,
 				CF1647FE2A991B8D00B12313 /* ChatAttachmentsViewModel.swift in Sources */,
 				CF53D5F82A6AF548009B3A69 /* MessageContentView.swift in Sources */,

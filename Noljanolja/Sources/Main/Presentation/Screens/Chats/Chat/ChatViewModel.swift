@@ -63,7 +63,7 @@ final class ChatViewModel: ViewModel {
     // MARK: Dependencies
 
     let conversationID: Int
-    
+
     private let userUseCases: UserUseCases
     private let conversationUseCases: ConversationUseCases
     private let messageUseCases: MessageUseCases
@@ -586,4 +586,10 @@ extension ChatViewModel: MessageActionDetailViewModelDelegate {
             self?.navigationType = .forwardMessage(message)
         }
     }
+}
+
+// MARK: ImageDetailViewModelDelegate
+
+extension ChatViewModel: ImageDetailViewModelDelegate {
+    func imageDetailViewModel(sendImage image: UIImage) {}
 }

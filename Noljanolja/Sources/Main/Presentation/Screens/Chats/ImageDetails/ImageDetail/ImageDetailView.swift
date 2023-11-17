@@ -34,6 +34,12 @@ struct ImageDetailView<ViewModel: ImageDetailViewModel>: View {
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .isProgressHUBVisible($viewModel.isProgressHUDShowing)
             .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
+            .introspectNavigationController { navigationController in
+                navigationController.configure(
+                    backgroundColor: UIColor.clear,
+                    foregroundColor: ColorAssets.neutralDarkGrey.color
+                )
+            }
             .fullScreenCover(
                 unwrapping: $viewModel.fullScreenCoverType,
                 content: {
@@ -49,13 +55,22 @@ struct ImageDetailView<ViewModel: ImageDetailViewModel>: View {
             }
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
+        .background(
+            ZStack {
+                WebImage(url: viewModel.imageUrls[viewModel.selectedIndex])
+                    .resizable()
+                VisualEffectView(effect: UIBlurEffect(style: .systemMaterialLight))
+            }
+            .animation(.linear, value: viewModel.selectedIndex)
+            .edgesIgnoringSafeArea(.all)
+        )
     }
     
     private func buildItemView(_ index: Int) -> some View {
         VStack(spacing: 8) {
             Text("\(index + 1)/\(viewModel.imageUrls.count)")
-                .dynamicFont(.systemFont(ofSize: 22, weight: .medium))
-                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                .dynamicFont(.systemFont(ofSize: 22, weight: .regular))
+                .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
             WebImage(url: viewModel.imageUrls[index])
                 .resizable()
                 .indicator(.activity)

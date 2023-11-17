@@ -91,6 +91,12 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                 }
             }
         }
+        .introspectNavigationController { navigationController in
+            navigationController.configure(
+                backgroundColor: ColorAssets.neutralLight.color,
+                foregroundColor: ColorAssets.neutralDarkGrey.color
+            )
+        }
         .fullScreenCover(
             unwrapping: $viewModel.fullScreenCoverType,
             content: {
@@ -258,12 +264,25 @@ extension ChatView {
                     )
                 )
             } else {
-                ImageDetailView(
-                    viewModel: ImageDetailViewModel(
-                        imageUrls: message.attachments.map { $0.getPhotoURL(conversationID: message.conversationID) },
-                        delegate: viewModel
+                NavigationView {
+                    ImageDetailView(
+                        viewModel: ImageDetailViewModel(
+                            imageUrls: message.attachments.compactMap { $0.getPhotoURL(conversationID: message.conversationID) },
+                            delegate: viewModel
+                        )
                     )
-                )
+                }
+                .navigationBarHidden(true)
+                .navigationViewStyle(StackNavigationViewStyle())
+                .accentColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                .introspectNavigationController { navigationController in
+                    navigationController.configure(
+                        backgroundColor: ColorAssets.neutralLight.color,
+                        foregroundColor: ColorAssets.neutralDarkGrey.color
+                    )
+                    navigationController.view.backgroundColor = .clear
+                    navigationController.parent?.view.backgroundColor = .clear
+                }
             }
         case let .forwardMessage(message):
             ForwardMessageContactListView(
@@ -300,6 +319,7 @@ extension ChatView {
             MessageActionDetailView(
                 viewModel: viewModel
             )
+            .animation(.spring())
         }
     }
 }

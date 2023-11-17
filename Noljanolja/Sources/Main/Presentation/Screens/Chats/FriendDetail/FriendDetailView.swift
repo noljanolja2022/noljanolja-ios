@@ -28,6 +28,7 @@ struct FriendDetailView<ViewModel: FriendDetailViewModel>: View {
         .navigationBarHidden(true)
         .onAppear { viewModel.isAppearSubject.send(true) }
         .onDisappear { viewModel.isAppearSubject.send(false) }
+        .isProgressHUBVisible($viewModel.isProgressHUDShowing)
     }
 
     @ViewBuilder
