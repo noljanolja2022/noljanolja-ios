@@ -19,17 +19,11 @@ struct MessageImagesView<ViewModel: MessageImagesViewModel>: View {
     var body: some View {
         buildBodyView()
     }
-    
+
     private func buildBodyView() -> some View {
         buildContentView()
             .navigationBarTitle("", displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text(viewModel.title)
-                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
-            }
+            .navigationBarHidden(true)
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .isProgressHUBVisible($viewModel.isProgressHUDShowing)
@@ -41,7 +35,7 @@ struct MessageImagesView<ViewModel: MessageImagesViewModel>: View {
                 }
             )
     }
-    
+
     private func buildContentView() -> some View {
         ScrollView {
             LazyVStack(spacing: 0) {

@@ -23,6 +23,7 @@ struct FriendDetailView<ViewModel: FriendDetailViewModel>: View {
         ZStack(alignment: .top) {
             buildBackgroundView()
             buildContentView()
+            buildNavigationLink()
         }
         .navigationBarHidden(true)
         .onAppear { viewModel.isAppearSubject.send(true) }
@@ -131,7 +132,9 @@ struct FriendDetailView<ViewModel: FriendDetailViewModel>: View {
         .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
         .background(ColorAssets.systemBlue50.swiftUIColor)
         .cornerRadius(5, style: .circular)
-        .onPress {}
+        .onPress {
+            viewModel.openChatWithUserAction.send(viewModel.user)
+        }
 
         HStack(spacing: 12) {
             Text(L10n.requestPoint)
@@ -152,5 +155,27 @@ struct FriendDetailView<ViewModel: FriendDetailViewModel>: View {
                 .cornerRadius(5, style: .circular)
                 .onPress {}
         }
+    }
+    
+    private func buildNavigationLink() -> some View {
+        NavigationLink(
+            unwrapping: $viewModel.navigationType,
+            onNavigate: { _ in },
+            destination: { item in
+                switch item.wrappedValue {
+                case let .chat(conversation):
+                    ChatView(
+                        viewModel: ChatViewModel(
+                            conversationID: conversation.id,
+                            delegate: viewModel
+                        )
+                    )
+                }
+            },
+            label: {
+                EmptyView()
+            }
+        )
+        .isDetailLink(false)
     }
 }

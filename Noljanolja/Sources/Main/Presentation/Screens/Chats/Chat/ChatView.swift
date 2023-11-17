@@ -21,6 +21,7 @@ struct ChatView<ViewModel: ChatViewModel>: View {
 
     @Environment(\.presentationMode) private var presentationMode
     @State var scrollOffset = CGFloat.zero
+    @State private var isPresented = false
 
     var body: some View {
         buildBodyView()
@@ -249,12 +250,21 @@ extension ChatView {
                 )
             )
         case let .openImages(message):
-            MessageImagesView(
-                viewModel: MessageImagesViewModel(
-                    message: message,
-                    delegate: viewModel
+            if message.attachments.count > 1 {
+                MessageImagesView(
+                    viewModel: MessageImagesViewModel(
+                        message: message,
+                        delegate: viewModel
+                    )
                 )
-            )
+            } else {
+                ImageDetailView(
+                    viewModel: ImageDetailViewModel(
+                        imageUrls: message.attachments.map { $0.getPhotoURL(conversationID: message.conversationID) },
+                        delegate: viewModel
+                    )
+                )
+            }
         case let .forwardMessage(message):
             ForwardMessageContactListView(
                 viewModel: ForwardMessageContactListViewModel(message: message)

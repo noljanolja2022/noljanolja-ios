@@ -51,7 +51,7 @@ struct MessageReactionsView: View {
                         quickLongPressAction?(geometry)
                     }
             }
-            .frame(width: 24, height: 24)
+            .frame(width: 34, height: 24)
         }
     }
 

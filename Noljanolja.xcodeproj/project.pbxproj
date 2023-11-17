@@ -590,6 +590,7 @@
 		CFFD70D5298AC92500D4F5A2 /* UserNetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD70D4298AC92500D4F5A2 /* UserNetworkRepository.swift */; };
 		CFFD70D9298ACAF600D4F5A2 /* BaseTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD70D8298ACAF600D4F5A2 /* BaseTargetType.swift */; };
 		CFFD718D298AD38C00D4F5A2 /* ColorAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD718C298AD38C00D4F5A2 /* ColorAssets.xcassets */; };
+		E1A1B0642B065CDB00BF7D5B /* FriendDetailNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A1B0632B065CDB00BF7D5B /* FriendDetailNavigation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1197,6 +1198,7 @@
 		CFFD70D8298ACAF600D4F5A2 /* BaseTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTargetType.swift; sourceTree = "<group>"; };
 		CFFD718C298AD38C00D4F5A2 /* ColorAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorAssets.xcassets; sourceTree = "<group>"; };
 		D679419D0EF876C4EEBBF3F7 /* Pods-NoljanoljaTests.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoljanoljaTests.appstore.xcconfig"; path = "Target Support Files/Pods-NoljanoljaTests/Pods-NoljanoljaTests.appstore.xcconfig"; sourceTree = "<group>"; };
+		E1A1B0632B065CDB00BF7D5B /* FriendDetailNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDetailNavigation.swift; sourceTree = "<group>"; };
 		E631AD828276D3ED189B00A1 /* Pods-Noljanolja-NoljanoljaUITests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.development.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.development.xcconfig"; sourceTree = "<group>"; };
 		F53231636127B61B7E5B0B97 /* Pods-NoljanoljaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoljanoljaTests.release.xcconfig"; path = "Target Support Files/Pods-NoljanoljaTests/Pods-NoljanoljaTests.release.xcconfig"; sourceTree = "<group>"; };
 		FAB5BA5AC93BBFAA68677C79 /* Pods_Noljanolja.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Noljanolja.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1271,6 +1273,7 @@
 			children = (
 				2B855AE12B052C2D00A1F9B7 /* FriendDetailView.swift */,
 				2B855AE32B053BD800A1F9B7 /* FriendDetailViewModel.swift */,
+				E1A1B0632B065CDB00BF7D5B /* FriendDetailNavigation.swift */,
 			);
 			path = FriendDetail;
 			sourceTree = "<group>";
@@ -4587,6 +4590,7 @@
 				CFAE00D02A6EEA14006A1FF0 /* SearchVideosView.swift in Sources */,
 				CF53D5742A6AF548009B3A69 /* ShopHomeNavigations.swift in Sources */,
 				CF53D6212A6AF548009B3A69 /* ChatSettingViewModel.swift in Sources */,
+				E1A1B0642B065CDB00BF7D5B /* FriendDetailNavigation.swift in Sources */,
 				CF53D64D2A6AF548009B3A69 /* TermDetailView.swift in Sources */,
 				CF775BC829C62EB200E82183 /* NotificationNetworkRepository.swift in Sources */,
 				CF53D60A2A6AF548009B3A69 /* AddFriendsHomeView.swift in Sources */,
