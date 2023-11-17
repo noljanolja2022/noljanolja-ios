@@ -9,12 +9,10 @@ import Foundation
 
 struct SearchGiftsModel {
     let coinModel: CoinModel?
-    let myGiftString: String?
     let giftsResponse: PaginationResponse<[Gift]>
 
     var isEmpty: Bool {
         coinModel == nil
-            && myGiftString == nil
             && giftsResponse.data.isEmpty
     }
 }

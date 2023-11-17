@@ -134,14 +134,12 @@ final class SearchGiftsViewModel: ViewModel {
                     if response.pagination.page == NetworkConfigs.Param.firstPage {
                         self.model = SearchGiftsModel(
                             coinModel: self.model?.coinModel,
-                            myGiftString: self.model?.myGiftString,
                             giftsResponse: response
                         )
                     } else {
                         let data = self.model?.giftsResponse.data ?? [] + response.data
                         self.model = SearchGiftsModel(
                             coinModel: self.model?.coinModel,
-                            myGiftString: self.model?.myGiftString,
                             giftsResponse: PaginationResponse<[Gift]>(data: data, pagination: response.pagination)
                         )
                     }
@@ -203,23 +201,13 @@ final class SearchGiftsViewModel: ViewModel {
 
 extension SearchGiftsViewModel {
     private func getData() -> AnyPublisher<SearchGiftsModel, Error> {
-        Publishers.CombineLatest3(
+        Publishers.CombineLatest(
             coinExchangeUseCases
                 .getCoin(),
-            giftsNetworkRepository
-                .getMyGifts(page: NetworkConfigs.Param.firstPage, pageSize: pageSize)
-                .map { [weak self] response in
-                    guard let self else { return "" }
-                    if response.data.count <= pageSize {
-                        return "\(response.data.count)"
-                    } else {
-                        return "\(response.data.count)+"
-                    }
-                },
             giftsNetworkRepository.getGiftsInShop(page: NetworkConfigs.Param.firstPage, pageSize: pageSize)
         )
         .map {
-            SearchGiftsModel(coinModel: $0.0, myGiftString: $0.1, giftsResponse: $0.2)
+            SearchGiftsModel(coinModel: $0.0, giftsResponse: $0.1)
         }
         .eraseToAnyPublisher()
     }
