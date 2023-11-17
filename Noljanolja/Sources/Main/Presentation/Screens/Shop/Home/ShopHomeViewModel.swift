@@ -32,7 +32,6 @@ final class ShopHomeViewModel: ViewModel {
 
     // MARK: Dependencies
 
-    private let giftsNetworkRepository: GiftsNetworkRepository
     private let coinExchangeUseCases: CoinExchangeUseCases
     private weak var delegate: ShopHomeViewModelDelegate?
 
@@ -41,10 +40,8 @@ final class ShopHomeViewModel: ViewModel {
     private let pageSize = 10
     private var cancellables = Set<AnyCancellable>()
 
-    init(giftsNetworkRepository: GiftsNetworkRepository = GiftsNetworkRepositoryImpl.default,
-         coinExchangeUseCases: CoinExchangeUseCases = CoinExchangeUseCasesImpl.shared,
+    init(coinExchangeUseCases: CoinExchangeUseCases = CoinExchangeUseCasesImpl.shared,
          delegate: ShopHomeViewModelDelegate? = nil) {
-        self.giftsNetworkRepository = giftsNetworkRepository
         self.coinExchangeUseCases = coinExchangeUseCases
         self.delegate = delegate
         super.init()
@@ -87,21 +84,9 @@ final class ShopHomeViewModel: ViewModel {
 
 extension ShopHomeViewModel {
     private func getData() -> AnyPublisher<ShopHomeModel, Error> {
-        Publishers.Zip(
-            coinExchangeUseCases
-                .getCoin(),
-            giftsNetworkRepository
-                .getMyGifts(page: NetworkConfigs.Param.firstPage, pageSize: pageSize)
-                .map { [weak self] response in
-                    guard let self else { return "" }
-                    if response.data.count <= pageSize {
-                        return "\(response.data.count)"
-                    } else {
-                        return "\(response.data.count)+"
-                    }
-                }
-        )
-        .map(ShopHomeModel.init)
-        .eraseToAnyPublisher()
+        coinExchangeUseCases
+            .getCoin()
+            .map(ShopHomeModel.init)
+            .eraseToAnyPublisher()
     }
 }

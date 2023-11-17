@@ -95,7 +95,7 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
                 title: "Voucher Wallet",
                 titleColorName: ColorAssets.primaryGreen200.name,
                 imageName: ImageAssets.icWallet2.name,
-                value: viewModel.model.myGiftString ?? "---"
+                value: (viewModel.model.coinModel?.giftCount).flatMap { String($0) } ?? "---"
             )
             .onTapGesture {
                 viewModel.navigationType = .myGifts
