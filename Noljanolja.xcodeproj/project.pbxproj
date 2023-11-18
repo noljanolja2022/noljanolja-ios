@@ -37,6 +37,9 @@
 		CF131EAF29CEFCA400054719 /* AttachmentParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF131EAE29CEFCA400054719 /* AttachmentParam.swift */; };
 		CF131EB329CF32C400054719 /* PhotoAssetAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF131EB229CF32C400054719 /* PhotoAssetAPI.swift */; };
 		CF131EB529CF32F100054719 /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF131EB429CF32F100054719 /* PhotoModel.swift */; };
+		CF1376C82B07CBC8006E255B /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CF1376C72B07CBC8006E255B /* FirebaseRemoteConfigSwift */; };
+		CF1376CA2B07CBF6006E255B /* RemoteConfigRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1376C92B07CBF6006E255B /* RemoteConfigRepository.swift */; };
+		CF1376CC2B07CDA9006E255B /* RemoteConfigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1376CB2B07CDA9006E255B /* RemoteConfigModel.swift */; };
 		CF14F248298C331C00BC2066 /* ImageAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F245298C331C00BC2066 /* ImageAssets.swift */; };
 		CF14F249298C331C00BC2066 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F246298C331C00BC2066 /* Localizable.swift */; };
 		CF14F24A298C331D00BC2066 /* ColorAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF14F247298C331C00BC2066 /* ColorAssets.swift */; };
@@ -647,6 +650,8 @@
 		CF131EAE29CEFCA400054719 /* AttachmentParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentParam.swift; sourceTree = "<group>"; };
 		CF131EB229CF32C400054719 /* PhotoAssetAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAssetAPI.swift; sourceTree = "<group>"; };
 		CF131EB429CF32F100054719 /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
+		CF1376C92B07CBF6006E255B /* RemoteConfigRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigRepository.swift; sourceTree = "<group>"; };
+		CF1376CB2B07CDA9006E255B /* RemoteConfigModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteConfigModel.swift; sourceTree = "<group>"; };
 		CF14F23C298C30B600BC2066 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		CF14F241298C31C200BC2066 /* swiftgen.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
 		CF14F242298C31C200BC2066 /* .swiftformat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftformat; sourceTree = "<group>"; };
@@ -1220,6 +1225,7 @@
 				CF45BCB62A67C68C003FB991 /* IQKeyboardManagerSwift in Frameworks */,
 				CF54FA2929D01F8A0092E2C6 /* Zip in Frameworks */,
 				CFF520FB2A17D92400F29A4E /* Charts in Frameworks */,
+				CF1376C82B07CBC8006E255B /* FirebaseRemoteConfigSwift in Frameworks */,
 				CF10C7F129C21FAE0020924D /* KMPNativeCoroutinesCombine in Frameworks */,
 				CF62EF8D29B254DD00D6B688 /* _SwiftUINavigationState in Frameworks */,
 				CF775BC629C62CF400E82183 /* FirebaseMessaging in Frameworks */,
@@ -1371,6 +1377,7 @@
 				CFC9E5132A7046BD004D48E5 /* VideoKeyword.swift */,
 				CFD095262A02B643004BF047 /* VideoProgressEventType.swift */,
 				CFB0A82C29F1BD3800298546 /* VideoTrendingDurationType.swift */,
+				CF1376CB2B07CDA9006E255B /* RemoteConfigModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3824,6 +3831,7 @@
 				CFD095182A02A936004BF047 /* Socket */,
 				CFFD70D4298AC92500D4F5A2 /* UserNetworkRepository.swift */,
 				CFB0A82A29F1BB5800298546 /* VideoNetworkRepository.swift */,
+				CF1376C92B07CBF6006E255B /* RemoteConfigRepository.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -3885,6 +3893,7 @@
 				CFF520FA2A17D92400F29A4E /* Charts */,
 				CF45BCB52A67C68C003FB991 /* IQKeyboardManagerSwift */,
 				2BF3B31D2AFC8EFA00A1CC6F /* AlertToast */,
+				CF1376C72B07CBC8006E255B /* FirebaseRemoteConfigSwift */,
 			);
 			productName = Noljanolja;
 			productReference = CFFD707E298AB9FF00D4F5A2 /* Noljanolja.app */;
@@ -4419,6 +4428,7 @@
 				CF53D6392A6AF548009B3A69 /* ChatInputView.swift in Sources */,
 				CFFD70CC298AC5F800D4F5A2 /* Api.swift in Sources */,
 				CF53D5D82A6AF548009B3A69 /* MessageQuickReactionInput.swift in Sources */,
+				CF1376CC2B07CDA9006E255B /* RemoteConfigModel.swift in Sources */,
 				CF12604629B78AAF00B5373B /* DeviceIdentityPlugin.swift in Sources */,
 				CF65DDAA2A82BB2600B554D7 /* AddReferralAlertViewModel.swift in Sources */,
 				CF446B9029D8AB0D00ED66BF /* LottieAssets.swift in Sources */,
@@ -4526,6 +4536,7 @@
 				CF53D6162A6AF548009B3A69 /* FriendScannerView.swift in Sources */,
 				CF53D5C12A6AF548009B3A69 /* WalletPointView.swift in Sources */,
 				CF53D5D62A6AF548009B3A69 /* UpdateConversationContactListViewModel.swift in Sources */,
+				CF1376CA2B07CBF6006E255B /* RemoteConfigRepository.swift in Sources */,
 				CF715AE82A86239B006DF977 /* UncompleteVideosNavigations.swift in Sources */,
 				CF0CC9FD29D14C790027D2C1 /* SendMessageRequest.swift in Sources */,
 				CFAA37632A4B38E00085CE88 /* Banner.swift in Sources */,
@@ -5310,6 +5321,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CF10C7EF29C21FAE0020924D /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */;
 			productName = KMPNativeCoroutinesCombine;
+		};
+		CF1376C72B07CBC8006E255B /* FirebaseRemoteConfigSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF14F24B298CC11600BC2066 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfigSwift;
 		};
 		CF14F24C298CC11700BC2066 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
