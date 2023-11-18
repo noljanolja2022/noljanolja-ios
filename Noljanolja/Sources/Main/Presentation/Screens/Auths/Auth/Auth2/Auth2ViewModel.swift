@@ -21,6 +21,7 @@ protocol Auth2ViewModelDelegate: AnyObject {
 final class Auth2ViewModel: ViewModel {
     // MARK: State
 
+    @Published var remoteConfigModel = RemoteConfigModel.default
     @Published var isProgressHUDShowing = false
     @Published var alertState: AlertState<Bool>?
 
@@ -28,11 +29,13 @@ final class Auth2ViewModel: ViewModel {
 
     let googleSignInAction = PassthroughSubject<Void, Never>()
     let appleSignInAction = PassthroughSubject<Void, Never>()
+    let signInWithEmailPasswordAction = PassthroughSubject<(String, String), Never>()
 
     // MARK: Dependencies
 
     private let authUseCase: AuthUseCases
     private let userUseCases: UserUseCases
+    private let remoteConfigRepository: RemoteConfigRepository
     private weak var delegate: Auth2ViewModelDelegate?
 
     // MARK: Private
@@ -42,16 +45,73 @@ final class Auth2ViewModel: ViewModel {
 
     init(authUseCase: AuthUseCases = AuthUseCasesImpl.default,
          userUseCases: UserUseCases = UserUseCasesImpl.default,
+         remoteConfigRepository: RemoteConfigRepository = RemoteConfigRepositoryImpl.shared,
          delegate: Auth2ViewModelDelegate? = nil) {
         self.authUseCase = authUseCase
         self.userUseCases = userUseCases
+        self.remoteConfigRepository = remoteConfigRepository
         self.delegate = delegate
         super.init()
 
         configure()
     }
-
+    
     private func configure() {
+        configureLoadData()
+        configureAction()
+    }
+    
+    private func configureLoadData() {
+        isAppearSubject
+            .first(where: { $0 })
+            .receive(on: DispatchQueue.main)
+            .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
+            .flatMapLatestToResult { [weak self] _ in
+                guard let self else {
+                    return Fail<RemoteConfigModel, Error>(error: CommonError.captureSelfNotFound)
+                        .eraseToAnyPublisher()
+                }
+                return self.remoteConfigRepository.get().eraseToAnyPublisher()
+            }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] result in
+                guard let self else { return }
+                self.isProgressHUDShowing = false
+                switch result {
+                case let .success(model):
+                    self.remoteConfigModel = model
+                case .failure:
+                    return
+                }
+            }
+            .store(in: &cancellables)
+    }
+
+    private func configureAction() {
+        signInWithEmailPasswordAction
+            .receive(on: DispatchQueue.main)
+            .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
+            .flatMapLatestToResult { [weak self] email, password in
+                guard let self else { return Fail<String, Error>(error: CommonError.captureSelfNotFound).eraseToAnyPublisher() }
+                return self.authUseCase
+                    .signIn(email: email, password: password)
+            }
+            .sink(receiveValue: { [weak self] result in
+                guard let self else { return }
+                self.isProgressHUDShowing = false
+                switch result {
+                case .success:
+                    getUserAction.send()
+                case .failure:
+                    alertState = AlertState(
+                        title: TextState(L10n.commonErrorTitle),
+                        message: TextState(L10n.commonErrorDescription),
+                        dismissButton: .cancel(TextState("OK"))
+                    )
+                }
+            })
+            .store(in: &cancellables)
+
         googleSignInAction
             .flatMapLatestToResult { [weak self] in
                 guard let self else {
