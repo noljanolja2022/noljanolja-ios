@@ -142,7 +142,7 @@
 "contacts_title_group" = "Group chat";
 "contacts_title_secret" = "Secret chat";
 "contacts_title_add_memmber" = "Add members";
-"contacts_not_found" = "No contacts found";
+"contacts_not_found" = "Sorry, this user is not in your contacts";
 "permission" = "Permission";
 "permission_contacts_description" = "To help you message friends and family on Nolgobulja, allow Nolgobulja access to your contacts.";
 "permission_access_storage_description" = "To help you access gallery on Nolgobulja, allow Nolgobulja access to your media files.";
@@ -294,7 +294,7 @@
 "video_earn_point" = "+ Earn %@";
 "add_friend_chat_now" = "Chat now";
 "add_friend_scan_qr_to_add" = "Scan this QR code to add me";
-"add_friend_title" = "Add friend";
+"add_friend_title" = "Add Friends";
 "add_friend_search_by_phone" = "Search by phone number";
 "add_friend_search_by_qr" = "Search QR code";
 "add_friend_add_by_contact" = "Add by contact";
@@ -302,7 +302,7 @@
 "enter_phone_number" = "Enter phone number";
 "error_unexpected" = "Unexpected Error";
 "error_phone_invalid" = "Phone is not valid";
-"error_phone_is_not_available" = "Phone is not available";
+"error_phone_is_not_available" = "This phone number is not available";
 "error_qr_not_valid" = "Sorry! This QR code is invalid";
 "scan_qr_code_title" = "Scan QR code";
 "chat_setting_friend_management" = "Friends management";
@@ -342,7 +342,7 @@
 "video_earn_point" = "+ Earn %@";
 "add_friend_chat_now" = "Chat now";
 "add_friend_scan_qr_to_add" = "Scan this QR code to add me";
-"add_friend_title" = "Add friend";
+"add_friend_title" = "Add Friends";
 "add_friend_search_by_phone" = "Search by phone number";
 "add_friend_search_by_qr" = "Search QR code";
 "add_friend_add_by_contact" = "Add by contact";
@@ -350,7 +350,7 @@
 "enter_phone_number" = "Enter phone number";
 "error_unexpected" = "Unexpected Error";
 "error_phone_invalid" = "Phone is not valid";
-"error_phone_is_not_available" = "Phone is not available";
+"error_phone_is_not_available" = "This phone number is not available";
 "error_qr_not_valid" = "Sorry! This QR code is invalid";
 "scan_qr_code_title" = "Scan QR code";
 "chat_setting_friend_management" = "Friends management";
@@ -427,3 +427,7 @@
 "video_search_video" = "Search video";
 "common_forwarded" = "Forwarded";
 "coming_soon_description" = "Welcome to NolgoBulja. We will be coming soon. Thank you.";
+"common_sorry" = "Sorry!";
+"request_point" = "REQUEST POINT";
+"send_point" = "SEND POINT";
+"friend_list" = "Friendlist";

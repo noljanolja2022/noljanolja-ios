@@ -27,7 +27,8 @@ final class AddFriendsHomeViewModel: ViewModel {
     @Published var qrImage: UIImage?
     @Published var isProgressHUDShowing = false
     @Published var alertState: AlertState<Void>?
-
+    @Published var isDisableSearch = false
+    
     var phoneNumber: String? {
         "\(country.prefix)\(phoneNumberText)"
     }
@@ -88,6 +89,10 @@ final class AddFriendsHomeViewModel: ViewModel {
                 self?.qrImage = $0
             })
             .store(in: &cancellables)
+        
+        $phoneNumberText
+            .map { $0.isEmpty }
+            .assign(to: &$isDisableSearch)
     }
 
     private func configureActions() {
@@ -110,7 +115,7 @@ final class AddFriendsHomeViewModel: ViewModel {
                 case let .success(model):
                     if model.isEmpty {
                         self.alertState = AlertState(
-                            title: TextState(L10n.commonErrorTitle),
+                            title: TextState(L10n.commonSorry),
                             message: TextState(L10n.errorPhoneIsNotAvailable),
                             dismissButton: .cancel(TextState(L10n.commonCancel))
                         )

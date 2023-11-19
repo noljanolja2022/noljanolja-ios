@@ -6,6 +6,7 @@
 //
 //
 
+import SDWebImageSwiftUI
 import SwiftUI
 import SwiftUIX
 
@@ -20,6 +21,7 @@ struct ChatView<ViewModel: ChatViewModel>: View {
 
     @Environment(\.presentationMode) private var presentationMode
     @State var scrollOffset = CGFloat.zero
+    @State private var isPresented = false
 
     var body: some View {
         buildBodyView()
@@ -33,10 +35,30 @@ struct ChatView<ViewModel: ChatViewModel>: View {
         .navigationBarTitle("", displayMode: .inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text(viewModel.title)
-                    .lineLimit(1)
-                    .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                HStack {
+                    WebImage(
+                        url: URL(string: viewModel.avatar),
+                        context: [
+                            .imageTransformer: SDImageResizingTransformer(
+                                size: CGSize(width: 50 * 3, height: 50 * 3),
+                                scaleMode: .aspectFill
+                            )
+                        ]
+                    )
+                    .resizable()
+                    .indicator(.activity)
+                    .scaledToFill()
+                    .frame(width: 34, height: 34)
+                    .background(ColorAssets.neutralGrey.swiftUIColor)
+                    .cornerRadius(10)
+                    .padding(.trailing, 10)
+
+                    Text(viewModel.title)
+                        .lineLimit(1)
+                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
+                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    Spacer()
+                }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 if viewModel.isChatSettingEnabled {
@@ -68,6 +90,12 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                     break
                 }
             }
+        }
+        .introspectNavigationController { navigationController in
+            navigationController.configure(
+                backgroundColor: ColorAssets.neutralLight.color,
+                foregroundColor: ColorAssets.neutralDarkGrey.color
+            )
         }
         .fullScreenCover(
             unwrapping: $viewModel.fullScreenCoverType,
@@ -228,12 +256,34 @@ extension ChatView {
                 )
             )
         case let .openImages(message):
-            MessageImagesView(
-                viewModel: MessageImagesViewModel(
-                    message: message,
-                    delegate: viewModel
+            if message.attachments.count > 1 {
+                MessageImagesView(
+                    viewModel: MessageImagesViewModel(
+                        message: message,
+                        delegate: viewModel
+                    )
                 )
-            )
+            } else {
+                NavigationView {
+                    ImageDetailView(
+                        viewModel: ImageDetailViewModel(
+                            imageUrls: message.attachments.compactMap { $0.getPhotoURL(conversationID: message.conversationID) },
+                            delegate: viewModel
+                        )
+                    )
+                }
+                .navigationBarHidden(true)
+                .navigationViewStyle(StackNavigationViewStyle())
+                .accentColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                .introspectNavigationController { navigationController in
+                    navigationController.configure(
+                        backgroundColor: ColorAssets.neutralLight.color,
+                        foregroundColor: ColorAssets.neutralDarkGrey.color
+                    )
+                    navigationController.view.backgroundColor = .clear
+                    navigationController.parent?.view.backgroundColor = .clear
+                }
+            }
         case let .forwardMessage(message):
             ForwardMessageContactListView(
                 viewModel: ForwardMessageContactListViewModel(message: message)
@@ -258,16 +308,18 @@ extension ChatView {
                 )
             )
         case let .messageActionDetail(normalMessageModel, rect):
-            MessageActionDetailView(
-                viewModel: MessageActionDetailViewModel(
-                    input: MessageActionDetailInput(
-                        message: normalMessageModel.message,
-                        normalMessageModel: normalMessageModel,
-                        rect: rect
-                    ),
-                    delegate: viewModel
-                )
+            let viewModel = MessageActionDetailViewModel(
+                input: MessageActionDetailInput(
+                    message: normalMessageModel.message,
+                    normalMessageModel: normalMessageModel,
+                    rect: rect
+                ),
+                delegate: viewModel
             )
+            MessageActionDetailView(
+                viewModel: viewModel
+            )
+            .animation(.spring())
         }
     }
 }

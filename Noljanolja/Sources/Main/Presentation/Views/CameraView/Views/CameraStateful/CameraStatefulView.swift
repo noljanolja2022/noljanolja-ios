@@ -32,9 +32,14 @@ struct CameraStatefulView<ViewModel: CameraStatefulViewModel>: View {
     }
 
     private func buildContentView() -> some View {
-        CameraView(viewModel: viewModel.cameraViewModel)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.black)
+        ZStack {
+            CameraView(viewModel: viewModel.cameraViewModel)
+                .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height / 2)
+                .background(.black)
+            ImageAssets.icCenterFocus.swiftUIImage
+                .resizable()
+                .frame(width: 34, height: 34)
+        }
     }
 
     private func buildErrorView() -> some View {

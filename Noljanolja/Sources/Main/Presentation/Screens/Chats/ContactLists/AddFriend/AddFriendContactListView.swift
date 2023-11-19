@@ -17,14 +17,7 @@ struct AddFriendContactListView<ViewModel: AddFriendContactListViewModel>: View 
 
     var body: some View {
         buildBodyView()
-            .navigationBarTitle("", displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text(L10n.contactsTitleAddMemmber)
-                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
-            }
+            .navigationBarHidden(true)
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .isProgressHUBVisible($viewModel.isProgressHUDShowing)
@@ -43,6 +36,7 @@ struct AddFriendContactListView<ViewModel: AddFriendContactListViewModel>: View 
         ContactListView(
             viewModel: ContactListViewModel(
                 isMultiSelectionEnabled: false,
+                isBackButtonHidden: false,
                 contactListUseCases: ContactListUseCasesImpl()
             ),
             selectedUsers: .constant([]),

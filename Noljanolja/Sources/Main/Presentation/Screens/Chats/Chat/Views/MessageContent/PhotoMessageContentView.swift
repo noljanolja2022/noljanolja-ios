@@ -14,8 +14,10 @@ import SwiftUIX
 struct PhotoMessageContentView: View {
     let model: PhotoMessageContentModel
     let action: ((PhotoMessageContentModel.ActionType) -> Void)?
+//    let reactionIcons: [ReactIcon]
 
     @State private var geometryProxy: GeometryProxy?
+    @State private var isShowedContextMenu = false
 
     var body: some View {
         buildBodyView()
@@ -23,16 +25,12 @@ struct PhotoMessageContentView: View {
 
     @ViewBuilder
     private func buildBodyView() -> some View {
-//        HStack(spacing: 8) {
+        HStack(spacing: 8) {
 //            buildShareView()
-//                .environment(\.layoutDirection, .leftToRight)
-//            buildContentView()
-//                .environment(\.layoutDirection, .leftToRight)
-//        }
-//        .padding(.leading, -36)
-//        .environment(\.layoutDirection, model.isSendByCurrentUser ? .leftToRight : .rightToLeft)
-
-        buildContentView()
+            buildContentView()
+        }
+        //        .padding(.leading, -36)
+        .environment(\.layoutDirection, model.isSendByCurrentUser ? .leftToRight : .rightToLeft)
     }
 
     @ViewBuilder
@@ -43,7 +41,8 @@ struct PhotoMessageContentView: View {
                 ImageAssets.icShare.swiftUIImage
                     .padding(4)
                     .frame(width: 28, height: 28)
-                    .background(ColorAssets.neutralGrey.swiftUIColor)
+                    .background(ColorAssets.neutralRawLightGrey.swiftUIColor)
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                     .cornerRadius(14)
             }
         )
@@ -72,6 +71,53 @@ struct PhotoMessageContentView: View {
         }
     }
 
+//    private func buildReactionIconsView() -> some View {
+//        HStack(spacing: 4) {
+//            ForEach(reactionIcons.indices, id: \.self) { index in
+//                let model = reactionIcons[index]
+//                Button(
+//                    action: {
+    ////                        viewModel.reactionAction.send(model)
+//                    },
+//                    label: {
+//                        Text(model.code ?? "")
+//                            .dynamicFont(.systemFont(ofSize: 16))
+//                    }
+//                )
+//            }
+//        }
+//        .padding(.horizontal, 8)
+//        .frame(height: 32)
+//        .background(ColorAssets.neutralLight.swiftUIColor)
+//        .cornerRadius(8)
+//    }
+//
+//    private func buildActionsView() -> some View {
+//        HStack(spacing: 4) {
+//            ForEach(viewModel.messageActionTypes, id: \.self) { model in
+//                Button(
+//                    action: {
+//                        viewModel.action.send(model)
+//                    },
+//                    label: {
+//                        VStack(spacing: 8) {
+//                            Image(model.imageName)
+//                                .resizable()
+//                                .frame(width: 24, height: 24)
+//                                .foregroundColor(ColorAssets.primaryGreen200.swiftUIColor)
+//                            Text(model.title)
+//                                .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
+//                                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+//                        }
+//                        .padding(12)
+//                    }
+//                )
+//            }
+//        }
+//        .background(ColorAssets.neutralLight.swiftUIColor)
+//        .cornerRadius(4)
+//    }
+
     @ViewBuilder
     private func buildForwardView() -> some View {
         if model.isForward {
@@ -87,7 +133,7 @@ struct PhotoMessageContentView: View {
             buildMultiRowImagesView()
         }
     }
-    
+
     private func buildSingleRowImagesView() -> some View {
         HStack(spacing: 4) {
             ForEach(model.photos.indices, id: \.self) { index in
@@ -98,7 +144,7 @@ struct PhotoMessageContentView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
-    
+
     @ViewBuilder
     private func buildMultiRowImagesView() -> some View {
         let photoLists = model.photos

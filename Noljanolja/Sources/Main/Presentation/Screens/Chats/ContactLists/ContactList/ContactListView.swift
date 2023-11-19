@@ -14,6 +14,7 @@ import SwiftUIX
 struct ContactListView<EndingView: View, ViewModel: ContactListViewModel>: View {
     // MARK: Dependencies
 
+    @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel: ViewModel
     @Binding var selectedUsers: [User]
     var selectUserAction: ((User) -> Void)?
@@ -23,8 +24,8 @@ struct ContactListView<EndingView: View, ViewModel: ContactListViewModel>: View 
                 selectedUsers: Binding<[User]>,
                 selectUserAction: ((User) -> Void)? = nil,
                 @ViewBuilder endingView: () -> EndingView = { EmptyView() }) {
-        self._viewModel = StateObject(wrappedValue: viewModel)
-        self._selectedUsers = selectedUsers
+        _viewModel = StateObject(wrappedValue: viewModel)
+        _selectedUsers = selectedUsers
         self.selectUserAction = selectUserAction
         self.endingView = endingView()
     }
@@ -51,12 +52,24 @@ struct ContactListView<EndingView: View, ViewModel: ContactListViewModel>: View 
     @ViewBuilder
     private func buildSearchView() -> some View {
         if !viewModel.isSearchHidden {
-            SearchView(placeholder: L10n.contactSearchHint, text: $viewModel.searchString)
-                .background(ColorAssets.neutralLightGrey.swiftUIColor)
-                .cornerRadius(10)
-                .padding(.horizontal, 16)
-                .padding(.top, 12)
-                .padding(.bottom, 20)
+            HStack(spacing: 10) {
+                if !viewModel.isBackButtonHidden {
+                    Button(
+                        action: {
+                            presentationMode.wrappedValue.dismiss()
+                        },
+                        label: ImageAssets.icBack.swiftUIImage
+                            .frame(width: 24, height: 24)
+                    )
+                }
+
+                SearchView(placeholder: L10n.contactSearchHint, text: $viewModel.searchString)
+                    .background(ColorAssets.neutralLightGrey.swiftUIColor)
+                    .cornerRadius(10)
+            }
+            .padding(.horizontal, 16)
+            .padding(.top, 12)
+            .padding(.bottom, 15)
         }
     }
 
@@ -86,12 +99,7 @@ extension ContactListView {
     @ViewBuilder
     private func buildVerticalListView() -> some View {
         ListView {
-            VStack(spacing: 0) {
-                Text(L10n.commonFriends)
-                    .dynamicFont(.systemFont(ofSize: 16, weight: .semibold))
-                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
-                    .padding(.horizontal, 16)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+            VStack(spacing: 4) {
                 ForEach(viewModel.users, id: \.id) { user in
                     VerticalContactItemView(
                         user: user,
@@ -188,6 +196,7 @@ extension ContactListView {
                 }()
             )
             .background(ColorAssets.neutralLight.swiftUIColor)
+            .foregroundColor(.red)
     }
 
     @ViewBuilder

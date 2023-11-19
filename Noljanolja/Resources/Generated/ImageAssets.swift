@@ -37,6 +37,7 @@ internal enum ImageAssets {
   internal static let icChatFile = ImageAsset(name: "ic_chat_file")
   internal static let icChatGif = ImageAsset(name: "ic_chat_gif")
   internal static let icChatImageAsset = ImageAsset(name: "ic_chat_image_asset")
+  internal static let icChatLine = ImageAsset(name: "ic_chat_line")
   internal static let icChatLocation = ImageAsset(name: "ic_chat_location")
   internal static let icChatMedia = ImageAsset(name: "ic_chat_media")
   internal static let icChatNew = ImageAsset(name: "ic_chat_new")
@@ -92,14 +93,13 @@ internal enum ImageAssets {
   internal static let icTimeRecent = ImageAsset(name: "ic_time_recent")
   internal static let icWallet2 = ImageAsset(name: "ic_wallet_2")
   internal static let logo = ImageAsset(name: "logo")
+  internal static let bgFriendsHeader = ImageAsset(name: "bg_friends_header")
+  internal static let icCenterFocus = ImageAsset(name: "ic_center_focus")
   internal static let icFacebook = ImageAsset(name: "ic_facebook")
   internal static let icMessenger = ImageAsset(name: "ic_messenger")
   internal static let icTelegram = ImageAsset(name: "ic_telegram")
   internal static let icTwitter = ImageAsset(name: "ic_twitter")
   internal static let icWhatapps = ImageAsset(name: "ic_whatapps")
-  internal static let icPpyy = ImageAsset(name: "ic_ppyy")
-  internal static let icSplashMultiCoin = ImageAsset(name: "ic_splash_multi_coin")
-  internal static let icSplashSingleCoin = ImageAsset(name: "ic_splash_single_coin")
   internal static let icChat = ImageAsset(name: "ic_chat")
   internal static let icFriends = ImageAsset(name: "ic_friends")
   internal static let icNews = ImageAsset(name: "ic_news")
@@ -116,6 +116,9 @@ internal enum ImageAssets {
   internal static let icReferral2 = ImageAsset(name: "ic_referral-2")
   internal static let icReferral3 = ImageAsset(name: "ic_referral-3")
   internal static let icReferral4 = ImageAsset(name: "ic_referral-4")
+  internal static let icPpyy = ImageAsset(name: "ic_ppyy")
+  internal static let icSplashMultiCoin = ImageAsset(name: "ic_splash_multi_coin")
+  internal static let icSplashSingleCoin = ImageAsset(name: "ic_splash_single_coin")
 
   // swiftlint:disable trailing_comma
   @available(*, deprecated, message: "All values properties are now deprecated")
@@ -135,6 +138,7 @@ internal enum ImageAssets {
     icChatFile,
     icChatGif,
     icChatImageAsset,
+    icChatLine,
     icChatLocation,
     icChatMedia,
     icChatNew,
@@ -190,14 +194,13 @@ internal enum ImageAssets {
     icTimeRecent,
     icWallet2,
     logo,
+    bgFriendsHeader,
+    icCenterFocus,
     icFacebook,
     icMessenger,
     icTelegram,
     icTwitter,
     icWhatapps,
-    icPpyy,
-    icSplashMultiCoin,
-    icSplashSingleCoin,
     icChat,
     icFriends,
     icNews,
@@ -214,6 +217,9 @@ internal enum ImageAssets {
     icReferral2,
     icReferral3,
     icReferral4,
+    icPpyy,
+    icSplashMultiCoin,
+    icSplashSingleCoin,
   ]
   // swiftlint:enable trailing_comma
 }

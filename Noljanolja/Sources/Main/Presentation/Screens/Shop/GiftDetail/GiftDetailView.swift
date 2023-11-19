@@ -95,13 +95,13 @@ struct GiftDetailView<ViewModel: GiftDetailViewModel>: View {
                 .clipped()
             }
             .aspectRatio(
-                {
-                    switch viewModel.model?.giftDetailInputType {
-                    case .gift: return 1.0
-                    case .myGift: return 2.0 / 3.0
-                    case .none: return 1.0
-                    }
-                }(),
+                //                {
+//                    switch viewModel.model?.giftDetailInputType {
+//                    case .gift: return 1.0
+//                    case .myGift: return 2.0 / 3.0
+//                    }
+//                }(),
+                viewModel.model?.giftDetailInputType.gift != nil ? 1.0 : 2.0 / 3.0,
                 contentMode: .fill
             )
             .frame(maxWidth: .infinity)
