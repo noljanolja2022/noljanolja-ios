@@ -157,7 +157,7 @@ struct HomeView<ViewModel: HomeViewModel>: View {
                 .overlay {
                     ZStack(alignment: .top) {
                         switch viewModel.selectedTab {
-                        case .watch, .chat:
+                        case .watch, .chat, .shop:
                             Spacer().background(ColorAssets.neutralLight.swiftUIColor)
                         case .wallet:
                             ImageAssets.bgWalletHeader.swiftUIImage
@@ -167,8 +167,6 @@ struct HomeView<ViewModel: HomeViewModel>: View {
                                 .background(ColorAssets.primaryGreen200.swiftUIColor)
                             Spacer()
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        case .shop:
-                            Spacer().background(ColorAssets.primaryGreen100.swiftUIColor)
                         case .friends:
                             ImageAssets.bgFriendsHeader.swiftUIImage
                                 .resizable()
