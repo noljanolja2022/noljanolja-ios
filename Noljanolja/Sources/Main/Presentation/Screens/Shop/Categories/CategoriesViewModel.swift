@@ -1,46 +1,28 @@
+//
+//  CategoriesViewModel.swift
+//  Noljanolja
+//
+//  Created by duydinhv on 20/11/2023.
+//
+
 import Combine
 import Foundation
 
-// MARK: - ShopGiftListener
-
-protocol ShopGiftListener: AnyObject {}
-
-// MARK: - ShopGiftViewModel
-
-final class ShopGiftViewModel: ViewModel {
-    // MARK: State
-
+final class CategoriesViewModel: ViewModel {
     @Published var viewState = ViewState.loading
     @Published var footerState = StatefullFooterViewState.normal
-    @Published var models = [Gift]()
+    @Published var models: [GiftCategory] = []
+    @Published var selectedIndex = 0
+    @Published private var page = 0
 
-    // MARK: Navigations
-
-    @Published var navigationType: ShopGiftNavigationType?
-    @Published var fullScreenCoverType: ShopGiftFullScreenCoverType?
-
-    // MARK: Action
+    private let giftsNetworkRepository: GiftsNetworkRepository
+    private var cancellables = Set<AnyCancellable>()
+    private let pageSize = 20
 
     let loadMoreAction = PassthroughSubject<Void, Never>()
 
-    // MARK: Dependencies
-
-    private let giftsNetworkRepository: GiftsNetworkRepository
-    private weak var listener: ShopGiftListener?
-    private let categoryId: Int?
-
-    // MARK: Private
-
-    @Published private var page = 0
-    private let pageSize = 20
-    private var cancellables = Set<AnyCancellable>()
-
-    init(giftsNetworkRepository: GiftsNetworkRepository = GiftsNetworkRepositoryImpl.default,
-         listener: ShopGiftListener? = nil,
-         categoryId: Int? = nil) {
+    init(giftsNetworkRepository: GiftsNetworkRepository = GiftsNetworkRepositoryImpl.default) {
         self.giftsNetworkRepository = giftsNetworkRepository
-        self.listener = listener
-        self.categoryId = categoryId
         super.init()
 
         configure()
@@ -67,12 +49,11 @@ final class ShopGiftViewModel: ViewModel {
                 self?.viewState = .loading
                 self?.footerState = .loading
             })
-            .flatMapLatestToResult { [weak self] page -> AnyPublisher<PaginationResponse<[Gift]>, Error> in
+            .flatMapLatestToResult { [weak self] page -> AnyPublisher<PaginationResponse<[GiftCategory]>, Error> in
                 guard let self else {
-                    return Empty<PaginationResponse<[Gift]>, Error>().eraseToAnyPublisher()
+                    return Empty<PaginationResponse<[GiftCategory]>, Error>().eraseToAnyPublisher()
                 }
-                return self.giftsNetworkRepository
-                    .getGiftsInShop(categoryId: categoryId, page: page, pageSize: self.pageSize)
+                return self.giftsNetworkRepository.getGiftsCategories(page: page, pageSize: self.pageSize)
             }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
@@ -84,6 +65,7 @@ final class ShopGiftViewModel: ViewModel {
                     } else {
                         self.models = self.models + response.data
                     }
+                    self.models.insert(GiftCategory(id: self.models.endIndex + 1, name: "All"), at: 0)
                     self.page = response.pagination.page
                     self.viewState = .content
                     self.footerState = response.pagination.total == self.page ? .noMoreData : .normal

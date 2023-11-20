@@ -53,6 +53,7 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
         VStack(spacing: 8) {
             buildHeaderView()
             buildSummaryView()
+            buildCategoriesView()
             buildShopGiftView()
         }
         .background(ColorAssets.neutralLight.swiftUIColor)
@@ -81,7 +82,15 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
             viewModel.navigationType = .search
         }
     }
-    
+
+    @ViewBuilder
+    private func buildCategoriesView() -> some View {
+        CategoriesView(
+            viewModel: CategoriesViewModel()) { category in
+                viewModel.navigationType = .listGiftCategory(category)
+            }
+    }
+
     @ViewBuilder
     private func buildSummaryView() -> some View {
         HStack(spacing: 12) {
@@ -188,6 +197,12 @@ extension ShopHomeView {
             GiftDetailView(
                 viewModel: GiftDetailViewModel(
                     giftDetailInputType: .myGift(myGift)
+                )
+            )
+        case let .listGiftCategory(category):
+            ListGiftCategoryView(
+                viewModel: ListGiftCategoryViewModel(
+                    category: category
                 )
             )
         }

@@ -76,7 +76,18 @@ private enum GiftsTargets {
     struct GetGiftsCategories: BaseAuthTargetType {
         var path: String { "v1/gifts/categories" }
         let method: Moya.Method = .get
-        var task: Task { .requestPlain }
+        var task: Task { .requestParameters(parameters: parameters, encoding: URLEncoding.default) }
+        
+        let page: Int
+        let pageSize: Int
+        
+        var parameters: [String: Any] {
+            let parameters: [String: Any?] = [
+                "page": page,
+                "pageSize": pageSize
+            ]
+            return parameters.compactMapValues { $0 }
+        }
     }
 
     struct BuyGift: BaseAuthTargetType {
@@ -94,7 +105,7 @@ protocol GiftsNetworkRepository {
     func getMyGifts(categoryId: Int?, brandId: Int?, page: Int, pageSize: Int?) -> AnyPublisher<PaginationResponse<[MyGift]>, Error>
     func getGiftsInShop(categoryId: Int?, brandId: Int?, name: String?, page: Int, pageSize: Int?) -> AnyPublisher<PaginationResponse<[Gift]>, Error>
     func getGiftsBrands(page: Int, pageSize: Int) -> AnyPublisher<[GiftBrand], Error>
-    func getGiftsCategories() -> AnyPublisher<[GiftCategory], Error>
+    func getGiftsCategories(page: Int, pageSize: Int) -> AnyPublisher<PaginationResponse<[GiftCategory]>, Error>
     func buyGift(_ id: String) -> AnyPublisher<MyGift, Error>
 }
 
@@ -159,10 +170,9 @@ final class GiftsNetworkRepositoryImpl: GiftsNetworkRepository {
         )
     }
 
-    func getGiftsCategories() -> AnyPublisher<[GiftCategory], Error> {
+    func getGiftsCategories(page: Int, pageSize: Int) -> AnyPublisher<PaginationResponse<[GiftCategory]>, Error> {
         api.request(
-            target: GiftsTargets.GetGiftsCategories(),
-            atKeyPath: "data"
+            target: GiftsTargets.GetGiftsCategories(page: page, pageSize: pageSize)
         )
     }
 
