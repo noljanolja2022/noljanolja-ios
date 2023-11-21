@@ -54,7 +54,8 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
             buildHeaderView()
             buildSummaryView()
             buildCategoriesView()
-            buildShopGiftView()
+            buildTopFeaturesView()
+            buildForYouView()
         }
         .background(ColorAssets.neutralLight.swiftUIColor)
     }
@@ -119,10 +120,30 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
         )
     }
     
-    private func buildShopGiftView() -> some View {
+    private func buildTopFeaturesView() -> some View {
+        VStack(alignment: .leading) {
+            HStack {
+                Text(L10n.shopTopFeatures)
+                    .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
+                ImageAssets.icArrowRight.swiftUIImage
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
+            }
+            .padding(.leading, 16)
+            .padding(.top, 16)
+            ShopGiftCollectionView(viewModel: ShopGiftCollectionViewModel())
+                .padding(.bottom, 16)
+                .padding(.leading, 16)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+        .background(ColorAssets.primaryGreen200.swiftUIColor)
+    }
+    
+    private func buildForYouView() -> some View {
         VStack(spacing: 0) {
             HStack(spacing: 12) {
-                Text("For you")
+                Text(L10n.shopForYou)
                     .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                 ImageAssets.icArrowRight.swiftUIImage
                     .resizable()

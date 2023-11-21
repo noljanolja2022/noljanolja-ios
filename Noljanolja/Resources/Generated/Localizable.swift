@@ -619,6 +619,8 @@ internal enum L10n {
   internal static let shopCoupon = L10n.tr("Localizable", "shop_coupon", fallback: "Coupon")
   /// Exchanged Coupons
   internal static let shopExchangedCoupons = L10n.tr("Localizable", "shop_exchanged_coupons", fallback: "Exchanged Coupons")
+  /// For you
+  internal static let shopForYou = L10n.tr("Localizable", "shop_for_you", fallback: "For you")
   /// Coupon
   internal static let shopGift = L10n.tr("Localizable", "shop_gift", fallback: "Coupon")
   /// Got it
@@ -629,8 +631,14 @@ internal enum L10n {
   internal static let shopLater = L10n.tr("Localizable", "shop_later", fallback: "Later")
   /// Your order has been completed. Check in Exchanged Coupon.
   internal static let shopOrderGiftSuccess = L10n.tr("Localizable", "shop_order_gift_success", fallback: "Your order has been completed. Check in Exchanged Coupon.")
+  /// Recommend
+  internal static let shopRecommend = L10n.tr("Localizable", "shop_recommend", fallback: "Recommend")
   /// Search products
   internal static let shopSearchProducts = L10n.tr("Localizable", "shop_search_products", fallback: "Search products")
+  /// Today offers
+  internal static let shopTodayOffers = L10n.tr("Localizable", "shop_today_offers", fallback: "Today offers")
+  /// Top Features
+  internal static let shopTopFeatures = L10n.tr("Localizable", "shop_top_features", fallback: "Top Features")
   /// View all
   internal static let shopViewAll = L10n.tr("Localizable", "shop_view_all", fallback: "View all")
   /// Welcome to NolgoBulja shop!
