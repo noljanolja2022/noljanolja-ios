@@ -22,12 +22,21 @@ struct ShopGiftCollectionItemView: View {
     }
 
     private func buildContenView() -> some View {
-        VStack(spacing: 8) {
-            buildImageView()
-            buildInfoView()
+        VStack {
+            VStack(spacing: 8) {
+                buildImageView()
+                buildInfoView()
+            }
+            .background(ColorAssets.neutralLight.swiftUIColor)
+            .cornerRadius(10)
+            .padding(.bottom, 16)
         }
-        .background(ColorAssets.neutralLight.swiftUIColor)
-        .cornerRadius(10)
+        .shadow(
+            color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.2),
+            radius: 8,
+            x: 0,
+            y: 4
+        )
     }
 
     private func buildImageView() -> some View {
@@ -46,25 +55,20 @@ struct ShopGiftCollectionItemView: View {
             )
             .resizable()
             .indicator(.activity)
-            .aspectRatio(contentMode: .fill)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(ColorAssets.neutralLightGrey.swiftUIColor)
             .clipped()
+            .background(ColorAssets.neutralLightGrey.swiftUIColor)
         }
-        .frame(width: 138, height: 138)
     }
 
     private func buildInfoView() -> some View {
-        VStack(spacing: 8) {
+        VStack(alignment: .leading) {
             Text(model.brand?.name ?? "")
                 .dynamicFont(.systemFont(ofSize: 11, weight: .medium))
                 .lineLimit(2)
-                .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
             Text(model.name ?? "")
                 .dynamicFont(.systemFont(ofSize: 12, weight: .medium))
                 .lineLimit(2)
-                .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
             HStack(spacing: 4) {
@@ -79,10 +83,8 @@ struct ShopGiftCollectionItemView: View {
                     .background(ColorAssets.secondaryYellow400.swiftUIColor)
                     .cornerRadius(12)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
         }
         .padding(.leading, 8)
-        .padding(.top, 8)
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.bottom, 16)
     }
 }

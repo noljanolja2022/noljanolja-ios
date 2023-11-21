@@ -133,9 +133,6 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
             .padding(.leading, 16)
             .padding(.top, 16)
             ShopGiftCollectionView(viewModel: ShopGiftCollectionViewModel())
-                .padding(.bottom, 16)
-                .padding(.leading, 16)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .background(ColorAssets.primaryGreen200.swiftUIColor)
     }
