@@ -137,6 +137,37 @@ struct GiftDetailView<ViewModel: GiftDetailViewModel>: View {
         }
     }
 
+    @ViewBuilder
+    private func buildBottomGiftShop() -> some View {
+        VStack {
+            buildPricesView()
+            
+            VStack(spacing: 0) {
+                HStack(spacing: 12) {
+                    Text("Maybe like you")
+                        .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
+                    ImageAssets.icArrowRight.swiftUIImage
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 24, height: 24)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 16)
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+
+                ShopGiftView(
+                    viewModel: ShopGiftViewModel(
+                        categoryId: viewModel.model?.giftCategory?.id,
+                        skipGiftProduct: viewModel.model?.giftDetailInputType.gift
+                    )
+                )
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+            .padding(.vertical, 15)
+            .background(ColorAssets.neutralLightGrey.swiftUIColor)
+        }
+    }
+
     private func buildPricesView() -> some View {
         VStack(spacing: 12) {
             HStack(spacing: 12) {

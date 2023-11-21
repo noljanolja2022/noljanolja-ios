@@ -56,7 +56,7 @@ struct SearchGiftsView<ViewModel: SearchGiftsViewModel>: View {
     private let uiViews: SearchGiftsUIViews
 
     init(viewModel: ViewModel) {
-        self._viewModel = StateObject(wrappedValue: viewModel)
+        _viewModel = StateObject(wrappedValue: viewModel)
         self.uiViews = SearchGiftsUIViews(viewModel: viewModel)
     }
 
@@ -126,11 +126,7 @@ struct SearchGiftsView<ViewModel: SearchGiftsViewModel>: View {
 
     @ViewBuilder
     private func buildMainView() -> some View {
-        if viewModel.isKeywordHidden {
-            buildScrollView()
-        } else {
-            buildKeywordsView()
-        }
+        buildKeywordsView()
     }
 
     @ViewBuilder
@@ -169,85 +165,6 @@ struct SearchGiftsView<ViewModel: SearchGiftsViewModel>: View {
                 }
             }
         }
-    }
-
-    private func buildScrollView() -> some View {
-        ScrollView {
-            VStack(spacing: 16) {
-                buildSummaryView()
-                buildStatefullGiftsView()
-            }
-            .padding(.vertical, 16)
-        }
-    }
-    
-    @ViewBuilder
-    private func buildSummaryView() -> some View {
-        HStack(spacing: 12) {
-            SummaryItemView(
-                title: L10n.walletMyCash,
-                titleColorName: ColorAssets.secondaryYellow400.name,
-                imageName: ImageAssets.icCoin.name,
-                value: viewModel.model?.coinModel?.balance.formatted() ?? "---"
-            )
-            SummaryItemView(
-                title: "Voucher Wallet",
-                titleColorName: ColorAssets.primaryGreen200.name,
-                imageName: ImageAssets.icWallet2.name,
-                value: (viewModel.model?.coinModel?.giftCount).flatMap { String($0) } ?? "---"
-            )
-        }
-        .padding(.horizontal, 16)
-        .shadow(
-            color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.2),
-            radius: 8,
-            x: 0,
-            y: 4
-        )
-    }
-
-    private func buildStatefullGiftsView() -> some View {
-        buildGiftsView()
-            .statefull(
-                state: $viewModel.viewState,
-                isEmpty: { viewModel.model?.isEmpty ?? true },
-                loading: buildLoadingView,
-                empty: buildEmptyView,
-                error: buildErrorView
-            )
-    }
-
-    @ViewBuilder
-    private func buildGiftsView() -> some View {
-        ScrollView {
-            LazyVStack(spacing: 12) {
-                let models = viewModel.model?.giftsResponse.data ?? []
-                ForEach(models.indices, id: \.self) {
-                    let model = models[$0]
-                    ShopGiftItemView(model: model)
-                        .frame(maxWidth: .infinity)
-                        .onTapGesture {
-                            viewModel.navigationType = .giftDetail(model)
-                        }
-                }
-            }
-            .padding(.horizontal, 16)
-
-            StatefullFooterView(
-                state: $viewModel.footerState,
-                errorView: EmptyView(),
-                noMoreDataView: EmptyView()
-            )
-            .onAppear {
-                viewModel.loadMoreAction.send()
-            }
-        }
-        .shadow(
-            color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.2),
-            radius: 8,
-            x: 0,
-            y: 4
-        )
     }
 }
 
@@ -290,11 +207,9 @@ extension SearchGiftsView {
         _ type: Binding<SearchGiftsNavigationType>
     ) -> some View {
         switch type.wrappedValue {
-        case let .giftDetail(gift):
-            GiftDetailView(
-                viewModel: GiftDetailViewModel(
-                    giftDetailInputType: .gift(gift)
-                )
+        case let .results(searchText):
+            SearchGiftResultsView(viewModel:
+                SearchGiftResultsViewModel(searchText: searchText)
             )
         }
     }

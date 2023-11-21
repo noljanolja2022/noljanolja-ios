@@ -37,28 +37,19 @@ final class SearchGiftsViewModel: ViewModel {
     let searchAction = PassthroughSubject<Void, Never>()
     let clearGiftKeywordsAction = PassthroughSubject<Void, Never>()
     let removeKeywordAction = PassthroughSubject<GiftKeyword, Never>()
-    let loadMoreAction = PassthroughSubject<Void, Never>()
 
     // MARK: Dependencies
 
     private let giftKeywordLocalRepository: GiftKeywordLocalRepository
-    private let coinExchangeUseCases: CoinExchangeUseCases
-    private let giftsNetworkRepository: GiftsNetworkRepository
     private weak var delegate: SearchGiftsViewModelDelegate?
 
     // MARK: Private
 
-    @Published private var page = 0
-    private let pageSize = 20
     private var cancellables = Set<AnyCancellable>()
 
     init(giftKeywordLocalRepository: GiftKeywordLocalRepository = GiftKeywordLocalRepositoryImpl.shared,
-         coinExchangeUseCases: CoinExchangeUseCases = CoinExchangeUseCasesImpl.shared,
-         giftsNetworkRepository: GiftsNetworkRepository = GiftsNetworkRepositoryImpl.default,
          delegate: SearchGiftsViewModelDelegate? = nil) {
         self.giftKeywordLocalRepository = giftKeywordLocalRepository
-        self.coinExchangeUseCases = coinExchangeUseCases
-        self.giftsNetworkRepository = giftsNetworkRepository
         self.delegate = delegate
         super.init()
 
@@ -71,88 +62,6 @@ final class SearchGiftsViewModel: ViewModel {
     }
 
     private func configureLoadData() {
-        isAppearSubject
-            .filter { $0 }
-            .receive(on: DispatchQueue.main)
-            .handleEvents(receiveOutput: { [weak self] _ in
-                self?.viewState = .loading
-                self?.footerState = .loading
-            })
-            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<SearchGiftsModel, Error> in
-                guard let self else {
-                    return Empty<SearchGiftsModel, Error>().eraseToAnyPublisher()
-                }
-                return self.getData()
-            }
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] result in
-                guard let self else { return }
-                switch result {
-                case let .success(model):
-                    self.model = model
-                    self.page = model.giftsResponse.pagination.page
-                    self.viewState = .content
-                    self.footerState = model.giftsResponse.pagination.total == self.page ? .noMoreData : .normal
-                case .failure:
-                    self.viewState = .error
-                    self.footerState = .error
-                }
-            })
-            .store(in: &cancellables)
-
-        let loadGiftsAction = Publishers.Merge(
-            searchAction
-                .withLatestFrom($searchText)
-                .map { $0.trimmed }
-                .filter { !$0.isEmpty }
-                .removeDuplicates()
-                .map { searchText -> (Int, String?) in (NetworkConfigs.Param.firstPage, searchText) },
-            loadMoreAction
-                .filter { [weak self] in self?.footerState.isLoadEnabled ?? false }
-                .withLatestFrom($page)
-                .map { currentPage -> (Int, String?) in (currentPage + 1, nil) }
-        )
-
-        loadGiftsAction
-            .receive(on: DispatchQueue.main)
-            .handleEvents(receiveOutput: { [weak self] _ in
-                self?.viewState = .loading
-                self?.footerState = .loading
-            })
-            .flatMapLatestToResult { [weak self] page, keyword -> AnyPublisher<PaginationResponse<[Gift]>, Error> in
-                guard let self else {
-                    return Empty<PaginationResponse<[Gift]>, Error>().eraseToAnyPublisher()
-                }
-                return self.giftsNetworkRepository
-                    .getGiftsInShop(name: keyword, page: page, pageSize: self.pageSize)
-            }
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] result in
-                guard let self else { return }
-                switch result {
-                case let .success(response):
-                    if response.pagination.page == NetworkConfigs.Param.firstPage {
-                        self.model = SearchGiftsModel(
-                            coinModel: self.model?.coinModel,
-                            giftsResponse: response
-                        )
-                    } else {
-                        let data = self.model?.giftsResponse.data ?? [] + response.data
-                        self.model = SearchGiftsModel(
-                            coinModel: self.model?.coinModel,
-                            giftsResponse: PaginationResponse<[Gift]>(data: data, pagination: response.pagination)
-                        )
-                    }
-                    self.page = response.pagination.page
-                    self.viewState = .content
-                    self.footerState = response.pagination.total == self.page ? .noMoreData : .normal
-                case .failure:
-                    self.viewState = .error
-                    self.footerState = .error
-                }
-            })
-            .store(in: &cancellables)
-
         $searchText
             .map { $0.trimmed }
             .removeDuplicates()
@@ -180,10 +89,10 @@ final class SearchGiftsViewModel: ViewModel {
             .withLatestFrom($searchText)
             .map { $0.trimmed }
             .filter { !$0.isEmpty }
-            .removeDuplicates()
             .sink { [weak self] keyword in
                 let keyword = GiftKeyword(keyword: keyword)
                 self?.giftKeywordLocalRepository.saveKeyword(keyword)
+                self?.navigationType = .results(keyword.keyword)
             }
             .store(in: &cancellables)
         clearGiftKeywordsAction
@@ -196,19 +105,5 @@ final class SearchGiftsViewModel: ViewModel {
                 self?.giftKeywordLocalRepository.delete($0)
             }
             .store(in: &cancellables)
-    }
-}
-
-extension SearchGiftsViewModel {
-    private func getData() -> AnyPublisher<SearchGiftsModel, Error> {
-        Publishers.CombineLatest(
-            coinExchangeUseCases
-                .getCoin(),
-            giftsNetworkRepository.getGiftsInShop(page: NetworkConfigs.Param.firstPage, pageSize: pageSize)
-        )
-        .map {
-            SearchGiftsModel(coinModel: $0.0, giftsResponse: $0.1)
-        }
-        .eraseToAnyPublisher()
     }
 }
