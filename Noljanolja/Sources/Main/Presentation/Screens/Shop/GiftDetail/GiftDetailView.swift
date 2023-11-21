@@ -131,7 +131,7 @@ struct GiftDetailView<ViewModel: GiftDetailViewModel>: View {
     @ViewBuilder
     private func buildBottomView() -> some View {
         switch viewModel.model?.giftDetailInputType {
-        case .gift: buildPricesView()
+        case .gift: buildBottomGiftShop()
         case .myGift: buildQRCodeView()
         case .none: EmptyView()
         }
@@ -141,10 +141,10 @@ struct GiftDetailView<ViewModel: GiftDetailViewModel>: View {
     private func buildBottomGiftShop() -> some View {
         VStack {
             buildPricesView()
-            
+
             VStack(spacing: 0) {
                 HStack(spacing: 12) {
-                    Text("Maybe like you")
+                    Text(L10n.maybeYouLike)
                         .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                     ImageAssets.icArrowRight.swiftUIImage
                         .resizable()

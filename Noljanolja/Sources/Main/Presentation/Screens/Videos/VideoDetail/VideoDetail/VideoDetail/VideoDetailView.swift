@@ -77,7 +77,7 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
                 HStack(spacing: 4) {
                     Button(
                         action: {
-                            viewModel.updateContentType(.pictureInPicture)
+                            viewModel.updateContentType(.bottom)
                         },
                         label: {
                             ImageAssets.icBack.swiftUIImage
