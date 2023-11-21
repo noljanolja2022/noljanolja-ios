@@ -600,6 +600,10 @@
 		CFFD70D9298ACAF600D4F5A2 /* BaseTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFFD70D8298ACAF600D4F5A2 /* BaseTargetType.swift */; };
 		CFFD718D298AD38C00D4F5A2 /* ColorAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFFD718C298AD38C00D4F5A2 /* ColorAssets.xcassets */; };
 		E1A1B0642B065CDB00BF7D5B /* FriendDetailNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A1B0632B065CDB00BF7D5B /* FriendDetailNavigation.swift */; };
+		E1A9665F2B0BC9C700AFF04F /* ShopGiftCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A9665E2B0BC9C700AFF04F /* ShopGiftCollectionView.swift */; };
+		E1A966612B0BC9D300AFF04F /* ShopGiftCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A966602B0BC9D300AFF04F /* ShopGiftCollectionViewModel.swift */; };
+		E1A966632B0BC9DF00AFF04F /* ShopGiftCollectionNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A966622B0BC9DF00AFF04F /* ShopGiftCollectionNavigation.swift */; };
+		E1A966662B0BCB2D00AFF04F /* ShopGiftCollectionItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A966652B0BCB2D00AFF04F /* ShopGiftCollectionItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1217,6 +1221,10 @@
 		CFFD718C298AD38C00D4F5A2 /* ColorAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorAssets.xcassets; sourceTree = "<group>"; };
 		D679419D0EF876C4EEBBF3F7 /* Pods-NoljanoljaTests.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoljanoljaTests.appstore.xcconfig"; path = "Target Support Files/Pods-NoljanoljaTests/Pods-NoljanoljaTests.appstore.xcconfig"; sourceTree = "<group>"; };
 		E1A1B0632B065CDB00BF7D5B /* FriendDetailNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDetailNavigation.swift; sourceTree = "<group>"; };
+		E1A9665E2B0BC9C700AFF04F /* ShopGiftCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopGiftCollectionView.swift; sourceTree = "<group>"; };
+		E1A966602B0BC9D300AFF04F /* ShopGiftCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopGiftCollectionViewModel.swift; sourceTree = "<group>"; };
+		E1A966622B0BC9DF00AFF04F /* ShopGiftCollectionNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopGiftCollectionNavigation.swift; sourceTree = "<group>"; };
+		E1A966652B0BCB2D00AFF04F /* ShopGiftCollectionItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopGiftCollectionItemView.swift; sourceTree = "<group>"; };
 		E631AD828276D3ED189B00A1 /* Pods-Noljanolja-NoljanoljaUITests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.development.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.development.xcconfig"; sourceTree = "<group>"; };
 		F53231636127B61B7E5B0B97 /* Pods-NoljanoljaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoljanoljaTests.release.xcconfig"; path = "Target Support Files/Pods-NoljanoljaTests/Pods-NoljanoljaTests.release.xcconfig"; sourceTree = "<group>"; };
 		FAB5BA5AC93BBFAA68677C79 /* Pods_Noljanolja.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Noljanolja.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3269,6 +3277,7 @@
 		CF88D2FF2B046C5700777E41 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E1A9665D2B0BC8EB00AFF04F /* ShopGiftCollection */,
 				CF8A1F642AFFDDD10094749A /* ShopGift */,
 				CF88D3002B046C6D00777E41 /* SummaryItemView */,
 			);
@@ -3940,6 +3949,25 @@
 			path = Configs;
 			sourceTree = "<group>";
 		};
+		E1A9665D2B0BC8EB00AFF04F /* ShopGiftCollection */ = {
+			isa = PBXGroup;
+			children = (
+				E1A966642B0BCA5C00AFF04F /* Views */,
+				E1A9665E2B0BC9C700AFF04F /* ShopGiftCollectionView.swift */,
+				E1A966602B0BC9D300AFF04F /* ShopGiftCollectionViewModel.swift */,
+				E1A966622B0BC9DF00AFF04F /* ShopGiftCollectionNavigation.swift */,
+			);
+			path = ShopGiftCollection;
+			sourceTree = "<group>";
+		};
+		E1A966642B0BCA5C00AFF04F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E1A966652B0BCB2D00AFF04F /* ShopGiftCollectionItemView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -4372,6 +4400,7 @@
 				CFE15C622AEA1F0200E94E9B /* YoutubePlayerView.swift in Sources */,
 				CF8686992AB8A6F100EE530B /* PromotedVideo.swift in Sources */,
 				CF53D59B2A6AF548009B3A69 /* HighlightVideoItemView.swift in Sources */,
+				E1A966632B0BC9DF00AFF04F /* ShopGiftCollectionNavigation.swift in Sources */,
 				CF53D5E92A6AF548009B3A69 /* ChatAlertActionType.swift in Sources */,
 				CF53D6342A6AF548009B3A69 /* ImageEditorView.swift in Sources */,
 				CF53D5642A6AF548009B3A69 /* SourceLicenseViewModel.swift in Sources */,
@@ -4657,6 +4686,7 @@
 				CF53D5822A6AF548009B3A69 /* GiftDetailInputType.swift in Sources */,
 				CFBCE41829B98A65000D6F73 /* CommonError.swift in Sources */,
 				CF00D1692994E0A700505702 /* TextField+ErrorMessage.swift in Sources */,
+				E1A9665F2B0BC9C700AFF04F /* ShopGiftCollectionView.swift in Sources */,
 				CF53D6042A6AF548009B3A69 /* ParticipantDetailActionViewModel.swift in Sources */,
 				CF53D5D42A6AF548009B3A69 /* CreateConversationContactListView.swift in Sources */,
 				CFAE00D02A6EEA14006A1FF0 /* SearchVideosView.swift in Sources */,
@@ -4711,9 +4741,11 @@
 				CF53D61E2A6AF548009B3A69 /* MessageActionType.swift in Sources */,
 				CFE215732AE6758700C83BAD /* UIViewController+Top.swift in Sources */,
 				CF228C0F2B0E3EEF0022B19B /* UpdateCurrentUserInputView.swift in Sources */,
+				E1A966662B0BCB2D00AFF04F /* ShopGiftCollectionItemView.swift in Sources */,
 				CFDCA37929964501003C2C77 /* ButtonStyle.swift in Sources */,
 				CF53D64B2A6AF548009B3A69 /* TermViewModel.swift in Sources */,
 				CF54FA2229D0179B0092E2C6 /* MediaUseCases.swift in Sources */,
+				E1A966612B0BC9D300AFF04F /* ShopGiftCollectionViewModel.swift in Sources */,
 				CF8A1F6A2AFFDDFD0094749A /* ShopGiftViewModel.swift in Sources */,
 				CF775BC029C6269200E82183 /* AuthAppDelegate.swift in Sources */,
 				CFE48BC3299207DA0062C903 /* AuthLocalRepository.swift in Sources */,
