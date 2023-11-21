@@ -1,5 +1,5 @@
 //
-//  SearchGiftsNavigations.swift
+//  SearchGiftResultsNavigations.swift
 //  Noljanolja
 //
 //  Created by Nguyen The Trinh on 19/06/2023.
@@ -7,6 +7,6 @@
 
 import Foundation
 
-enum SearchGiftsNavigationType {
+enum SearchGiftResultsNavigationType {
     case giftDetail(Gift)
 }
