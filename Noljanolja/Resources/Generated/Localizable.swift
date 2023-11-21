@@ -456,6 +456,8 @@ internal enum L10n {
   internal static let loginPhoneDescription = L10n.tr("Localizable", "login_phone_description", fallback: "Welcome to NolgoBulja. Please enter your Phone number to join continue.")
   /// Phone Number
   internal static let loginPhoneInputLabel = L10n.tr("Localizable", "login_phone_input_label", fallback: "Phone Number")
+  /// Maybe you like
+  internal static let maybeYouLike = L10n.tr("Localizable", "maybe_you_like", fallback: "Maybe you like")
   /// Announcement
   internal static let menuAnnouncement = L10n.tr("Localizable", "menu_announcement", fallback: "Announcement")
   /// Check out and play

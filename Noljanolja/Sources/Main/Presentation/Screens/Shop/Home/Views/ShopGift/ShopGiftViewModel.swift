@@ -28,6 +28,7 @@ final class ShopGiftViewModel: ViewModel {
     private let giftsNetworkRepository: GiftsNetworkRepository
     private weak var listener: ShopGiftListener?
     private let categoryId: Int?
+    private let skipGiftProduct: Gift?
 
     // MARK: Private
 
@@ -37,10 +38,12 @@ final class ShopGiftViewModel: ViewModel {
 
     init(giftsNetworkRepository: GiftsNetworkRepository = GiftsNetworkRepositoryImpl.default,
          listener: ShopGiftListener? = nil,
-         categoryId: Int? = nil) {
+         categoryId: Int? = nil,
+         skipGiftProduct: Gift? = nil) {
         self.giftsNetworkRepository = giftsNetworkRepository
         self.listener = listener
         self.categoryId = categoryId
+        self.skipGiftProduct = skipGiftProduct
         super.init()
 
         configure()
@@ -79,10 +82,14 @@ final class ShopGiftViewModel: ViewModel {
                 guard let self else { return }
                 switch result {
                 case let .success(response):
+                    var models = response.data
+                    if let skipGiftProduct = self.skipGiftProduct {
+                        models = response.data.filter { $0.id != skipGiftProduct.id }
+                    }
                     if response.pagination.page == NetworkConfigs.Param.firstPage {
-                        self.models = response.data
+                        self.models = models
                     } else {
-                        self.models = self.models + response.data
+                        self.models = self.models + models
                     }
                     self.page = response.pagination.page
                     self.viewState = .content

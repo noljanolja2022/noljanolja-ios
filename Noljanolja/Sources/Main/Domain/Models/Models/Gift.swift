@@ -16,6 +16,7 @@ struct Gift: Equatable, Decodable {
     let endTime: Date?
     let price: Double
     let brand: GiftBrand?
+    let category: GiftCategory?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -26,6 +27,7 @@ struct Gift: Equatable, Decodable {
         case endTime
         case price
         case brand
+        case category
     }
 
     init(from decoder: Decoder) throws {
@@ -41,5 +43,6 @@ struct Gift: Equatable, Decodable {
 
         self.price = try container.decode(Double.self, forKey: .price)
         self.brand = try container.decodeIfPresent(GiftBrand.self, forKey: .brand)
+        self.category = try container.decodeIfPresent(GiftCategory.self, forKey: .category)
     }
 }

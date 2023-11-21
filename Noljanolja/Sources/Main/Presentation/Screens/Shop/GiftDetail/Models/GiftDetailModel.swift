@@ -17,6 +17,7 @@ struct GiftDetailModel {
     let giftCode: String?
     let giftCodeQRImage: UIImage?
     let giftPrice: Double
+    let giftCategory: GiftCategory?
     let myCoin: Double
     let remainingCoin: Double
     let isPurchasable: Bool
@@ -33,6 +34,7 @@ struct GiftDetailModel {
             self.giftPrice = gift.price
             self.giftCode = nil
             self.giftCodeQRImage = nil
+            self.giftCategory = gift.category
             self.isPurchasable = true
         case let .myGift(myGift):
             self.giftBrandName = myGift.brand?.name
@@ -42,6 +44,7 @@ struct GiftDetailModel {
             self.giftPrice = 0
             self.giftCode = myGift.qrCode
             self.giftCodeQRImage = nil // myGift.qrCode.qrCodeImage()
+            self.giftCategory = nil
             self.isPurchasable = false
         }
 
