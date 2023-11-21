@@ -54,34 +54,19 @@ struct ShopGiftCollectionView: View {
 
     @ViewBuilder
     private func buildContentView() -> some View {
-        ScrollView(.horizontal) {
+        ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(spacing: 10) {
                 ForEach(viewModel.models.indices, id: \.self) {
                     let model = viewModel.models[$0]
                     ShopGiftCollectionItemView(model: model)
-                        .frame(maxWidth: .infinity)
                         .onTapGesture {
                             viewModel.navigationType = .giftDetail(model)
                         }
                 }
-                
-//                StatefullFooterView(
-//                    state: $viewModel.footerState,
-//                    errorView: EmptyView(),
-//                    noMoreDataView: EmptyView()
-//                )
-//                .onAppear {
-//                    viewModel.loadMoreAction.send()
-//                }
             }
-            .padding(16)
         }
-        .shadow(
-            color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.2),
-            radius: 8,
-            x: 0,
-            y: 4
-        )
+        .padding(.top, 5)
+        .padding(.leading, 16)
     }
 }
 
