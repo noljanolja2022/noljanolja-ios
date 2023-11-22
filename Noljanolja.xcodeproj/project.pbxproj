@@ -82,6 +82,7 @@
 		CF1EA57E2A1D05FD006846DF /* ComponentBase+Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1EA57D2A1D05FD006846DF /* ComponentBase+Config.swift */; };
 		CF1EA5862A1D32CD006846DF /* PublishedCurrentValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1EA5852A1D32CD006846DF /* PublishedCurrentValue.swift */; };
 		CF1EEE2D29AE355E004F570A /* NibOwnerLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF1EEE2C29AE355E004F570A /* NibOwnerLoadable.swift */; };
+		CF228C0F2B0E3EEF0022B19B /* UpdateCurrentUserInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF228C0E2B0E3EEF0022B19B /* UpdateCurrentUserInputView.swift */; };
 		CF2836D12A9F8E7D00663C16 /* ConversationAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2836D02A9F8E7D00663C16 /* ConversationAttachment.swift */; };
 		CF2836D32A9F9F4300663C16 /* ConversationAttachmentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2836D22A9F9F4300663C16 /* ConversationAttachmentType.swift */; };
 		CF2F46EA2AD9964200C755B8 /* ProjectEnvironment.development.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = CF2F46E82AD9964200C755B8 /* ProjectEnvironment.development.xcconfig */; };
@@ -705,6 +706,7 @@
 		CF1EA57D2A1D05FD006846DF /* ComponentBase+Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ComponentBase+Config.swift"; sourceTree = "<group>"; };
 		CF1EA5852A1D32CD006846DF /* PublishedCurrentValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishedCurrentValue.swift; sourceTree = "<group>"; };
 		CF1EEE2C29AE355E004F570A /* NibOwnerLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibOwnerLoadable.swift; sourceTree = "<group>"; };
+		CF228C0E2B0E3EEF0022B19B /* UpdateCurrentUserInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCurrentUserInputView.swift; sourceTree = "<group>"; };
 		CF2836D02A9F8E7D00663C16 /* ConversationAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationAttachment.swift; sourceTree = "<group>"; };
 		CF2836D22A9F9F4300663C16 /* ConversationAttachmentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationAttachmentType.swift; sourceTree = "<group>"; };
 		CF2F46E82AD9964200C755B8 /* ProjectEnvironment.development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = ProjectEnvironment.development.xcconfig; path = Pods/Natrium/Natrium/ProjectEnvironment.development.xcconfig; sourceTree = SOURCE_ROOT; };
@@ -1645,6 +1647,14 @@
 			path = NibOwnerLoadable;
 			sourceTree = "<group>";
 		};
+		CF228C0D2B0E3ED90022B19B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CF228C0E2B0E3EEF0022B19B /* UpdateCurrentUserInputView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		CF2836D42A9FA35F00663C16 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -1905,6 +1915,7 @@
 		CF53D3EC2A6AF547009B3A69 /* UpdateCurrentUser */ = {
 			isa = PBXGroup;
 			children = (
+				CF228C0D2B0E3ED90022B19B /* Views */,
 				CF53D3EF2A6AF547009B3A69 /* UpdateCurrentUserNavigations.swift */,
 				CF53D3ED2A6AF547009B3A69 /* UpdateCurrentUserView.swift */,
 				CF53D3EE2A6AF547009B3A69 /* UpdateCurrentUserViewModel.swift */,
@@ -4679,6 +4690,7 @@
 				CF4B27AE2AE043620066D863 /* CoinExchangeNetworkRepository.swift in Sources */,
 				CF53D61E2A6AF548009B3A69 /* MessageActionType.swift in Sources */,
 				CFE215732AE6758700C83BAD /* UIViewController+Top.swift in Sources */,
+				CF228C0F2B0E3EEF0022B19B /* UpdateCurrentUserInputView.swift in Sources */,
 				CFDCA37929964501003C2C77 /* ButtonStyle.swift in Sources */,
 				CF53D64B2A6AF548009B3A69 /* TermViewModel.swift in Sources */,
 				CF54FA2229D0179B0092E2C6 /* MediaUseCases.swift in Sources */,

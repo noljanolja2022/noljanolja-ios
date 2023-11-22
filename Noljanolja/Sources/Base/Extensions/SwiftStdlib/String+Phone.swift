@@ -19,4 +19,13 @@ extension String {
         let phoneNumberKit = PhoneNumberKit()
         return try? phoneNumberKit.parse(self, ignoreType: true)
     }
+    
+    var isValidPhoneNumber: Bool {
+        PhoneNumberKit().isValidPhoneNumber(self)
+    }
+    
+    var isValidName: Bool {
+        let regex = "^[\\p{L}a-zA-Z0-9_-]"
+        return range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
+    }
 }

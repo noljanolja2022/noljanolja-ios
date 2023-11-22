@@ -12,7 +12,6 @@ import UIKit
 
 enum UpdateCurrentUserActionSheetType: String, Equatable {
     case avatar
-    case gender
 }
 
 // MARK: Identifiable

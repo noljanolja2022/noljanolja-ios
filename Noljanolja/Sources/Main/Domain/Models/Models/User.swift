@@ -13,7 +13,14 @@ enum GenderType: String, Codable, CaseIterable {
     case male = "MALE"
     case female = "FEMALE"
     case other = "OTHER"
-    case unknown = "UNKOWN"
+    
+    var title: String {
+        switch self {
+        case .male: return L10n.updateProfileGenderMale
+        case .female: return L10n.updateProfileGenderFemale
+        case .other: return L10n.updateProfileGenderOther
+        }
+    }
 }
 
 // MARK: - UserPreferences
