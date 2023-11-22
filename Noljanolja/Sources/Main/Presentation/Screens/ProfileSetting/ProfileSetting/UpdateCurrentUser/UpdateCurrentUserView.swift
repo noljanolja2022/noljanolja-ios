@@ -21,8 +21,9 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
 
     @StateObject private var keyboard = Keyboard.main
 
-    @State private var isNameEditing = false
     @State private var isPhoneEditing = false
+    @State private var isNameEditing = false
+    @State private var isGenderEditing = false
     
     private let nameMaxLength = 20
 
@@ -56,21 +57,28 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
     }
     
     private func buildContentView() -> some View {
-        VStack(spacing: 52) {
-            buildAvatarView()
-            
-            VStack(spacing: 20) {
-                buildNameView()
-                buildPhoneView()
-                buildDOBAndGenderView()
+        ScrollView {
+            VStack(spacing: 52) {
+                buildAvatarView()
+                
+                VStack(spacing: 12) {
+                    buildUserSectionHeaderView()
+                    buildPhoneView()
+                    buildNameView()
+                    buildDateOfBirth()
+                    buildGenderView()
+                }
+                
+                buildActionView()
+                
+                Spacer()
             }
-            
-            buildActionView()
-            
-            Spacer()
+            .padding(.horizontal, 16)
+            .padding(.top, 24)
+            .padding(.bottom, 16)
         }
-        .padding(16)
-        .padding(.top, 24)
+        .background(ColorAssets.neutralLight.swiftUIColor)
+        .clipped()
     }
     
     private func buildAvatarView() -> some View {
@@ -110,84 +118,36 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
         }
     }
     
-    private func buildNameView() -> some View {
-        VStack(spacing: 0) {
-            Text(L10n.settingName)
-                .dynamicFont(.systemFont(ofSize: 12))
-                .foregroundColor(
-                    isNameEditing
-                        ? ColorAssets.primaryGreen200.swiftUIColor
-                        : ColorAssets.neutralDeepGrey.swiftUIColor
-                )
-                .frame(maxWidth: .infinity, alignment: .leading)
-            
-            TextField(
-                L10n.settingName,
-                text: $viewModel.name.max(nameMaxLength),
-                isEditing: $isNameEditing
-            )
-            .textFieldStyle(TappableTextFieldStyle())
-            .dynamicFont(.systemFont(ofSize: 16))
-            .frame(height: 38)
-            .padding(0)
+    private func buildUserSectionHeaderView() -> some View {
+        Text(L10n.updateProfileUserInfo)
+            .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
+            .frame(maxWidth: .infinity, alignment: .leading)
             .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            
-            Divider()
-                .frame(height: 2)
-                .overlay(
-                    isNameEditing
-                        ? ColorAssets.primaryGreen200.swiftUIColor
-                        : ColorAssets.neutralDeepGrey.swiftUIColor
-                )
-            
-            HStack(spacing: 0) {
-                Text(L10n.updateProfileNameRequired)
-                Spacer()
-                Text("\(viewModel.name?.count ?? 0)/\(nameMaxLength)")
-            }
-            .dynamicFont(.systemFont(ofSize: 12))
-            .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
-            .padding(.top, 8)
-            .padding(.horizontal, 12)
-        }
     }
-
+    
     private func buildPhoneView() -> some View {
-        VStack(spacing: 0) {
-            HStack(spacing: 12) {
-                VStack {
+        UpdateCurrentUserInputView(
+            content: {
+                HStack(spacing: 4) {
                     Button(
                         action: {
                             viewModel.fullScreenCoverType = .selectCountry
                         },
                         label: {
-                            VStack {
-                                HStack(spacing: 8) {
-                                    Text(viewModel.country.flag)
-                                        .dynamicFont(.systemFont(ofSize: 24))
-                                        .frame(width: 30, height: 24)
-                                        .background(ColorAssets.neutralLightGrey.swiftUIColor)
-                                        .cornerRadius(3)
-                                    Text(viewModel.country.prefix)
-                                        .dynamicFont(.systemFont(ofSize: 16))
-                                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                                }
-                                .frame(maxHeight: .infinity)
+                            HStack(spacing: 8) {
+                                Text(viewModel.country.flag)
+                                    .dynamicFont(.systemFont(ofSize: 24))
+                                    .frame(width: 30, height: 24)
+                                    .background(ColorAssets.neutralLightGrey.swiftUIColor)
+                                    .cornerRadius(3)
+                                Text(viewModel.country.prefix)
+                                    .dynamicFont(.systemFont(ofSize: 16))
                             }
+                            .frame(maxHeight: .infinity)
                         }
                     )
+                    .frame(width: 80)
 
-                    Divider()
-                        .frame(height: 2)
-                        .overlay(
-                            isPhoneEditing
-                                ? ColorAssets.primaryGreen200.swiftUIColor
-                                : ColorAssets.neutralDeepGrey.swiftUIColor
-                        )
-                }
-                .frame(width: 80)
-
-                VStack {
                     TextField(
                         "",
                         text: $viewModel.phoneNumberText,
@@ -197,135 +157,167 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                     .textFieldStyle(TappableTextFieldStyle())
                     .dynamicFont(.systemFont(ofSize: 16))
                     .frame(maxHeight: .infinity)
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                     .introspectTextField { textField in
                         textField.becomeFirstResponder()
                     }
-
-                    Divider()
-                        .frame(height: 2)
-                        .overlay(
-                            isPhoneEditing
-                                ? ColorAssets.primaryGreen200.swiftUIColor
-                                : ColorAssets.neutralDeepGrey.swiftUIColor
-                        )
+                    
+                    Button(
+                        action: {
+                            viewModel.phoneNumberText = ""
+                        },
+                        label: {
+                            ImageAssets.icClose.swiftUIImage
+                                .resizable()
+                                .scaledToFit()
+                                .padding(6)
+                                .frame(width: 24, height: 24)
+                                .border(ColorAssets.neutralDarkGrey.swiftUIColor, width: 1, cornerRadius: 12)
+                        }
+                    )
                 }
-            }
-            .frame(height: 36)
-
-            Text(L10n.updateProfileNameRequired)
-                .dynamicFont(.systemFont(ofSize: 12))
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
-                .padding(.top, 8)
-                .padding(.horizontal, 12)
-        }
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                .frame(height: 52)
+            },
+            title: L10n.updateProfilePhone,
+            description: L10n.updateProfilePhoneDescription,
+            isEditing: isPhoneEditing,
+            errorMessage: {
+                if viewModel.phoneNumberText.isEmpty || viewModel.phoneNumber?.isValidPhoneNumber ?? true {
+                    return nil
+                } else {
+                    return L10n.updateProfilePhoneError
+                }
+            }()
+        )
     }
     
-    private func buildDOBAndGenderView() -> some View {
-        HStack(spacing: 16) {
-            Button(
-                action: {
-                    keyboard.dismiss()
-                    viewModel.fullScreenCoverType = .datePicker
-                },
-                label: {
-                    buildDateOfBirth()
+    private func buildNameView() -> some View {
+        UpdateCurrentUserInputView(
+            content: {
+                HStack(spacing: 4) {
+                    TextField(
+                        text: $viewModel.name.max(nameMaxLength),
+                        isEditing: $isNameEditing
+                    )
+                    .textFieldStyle(TappableTextFieldStyle())
+                    .dynamicFont(.systemFont(ofSize: 16))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    
+                    Button(
+                        action: {
+                            viewModel.name = ""
+                        },
+                        label: {
+                            ImageAssets.icClose.swiftUIImage
+                                .resizable()
+                                .scaledToFit()
+                                .padding(6)
+                                .frame(width: 24, height: 24)
+                                .border(ColorAssets.neutralDarkGrey.swiftUIColor, width: 1, cornerRadius: 12)
+                        }
+                    )
                 }
-            )
-            
-            Button(
-                action: {
-                    viewModel.actionSheetType = .gender
-                },
-                label: {
-                    buildGenderView()
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                .frame(height: 52)
+            },
+            title: L10n.updateProfileName,
+            description: L10n.updateProfileNameDescription,
+            isEditing: isNameEditing,
+            errorMessage: {
+                if viewModel.name?.isEmpty ?? true || viewModel.name?.isValidName ?? true {
+                    return nil
+                } else {
+                    return L10n.updateProfileNameError
                 }
-            )
-        }
+            }()
+        )
     }
     
     private func buildDateOfBirth() -> some View {
-        VStack {
-            HStack(spacing: 16) {
-                Text(
-                    viewModel.dob?.string(withFormat: "yyyy/MM/dd") ?? L10n.updateProfileDateOfBirth
-                )
-                .dynamicFont(.systemFont(ofSize: 16))
-                .foregroundColor(
-                    viewModel.fullScreenCoverType == .datePicker
-                        ? ColorAssets.primaryGreen200.swiftUIColor
-                        : viewModel.dob != nil
-                        ? ColorAssets.neutralDarkGrey.swiftUIColor
-                        : ColorAssets.neutralDeepGrey.swiftUIColor
-                )
-                
-                Spacer()
-                
-                Image(systemName: "arrowtriangle.down.fill")
-                    .resizable()
-                    .frame(width: 10, height: 5)
-                    .scaledToFill()
-            }
-            .foregroundColor(
-                viewModel.dob != nil
-                    ? ColorAssets.neutralDarkGrey.swiftUIColor
-                    : ColorAssets.neutralDeepGrey.swiftUIColor
-            )
-            .frame(height: 38)
-            
-            Divider()
-                .frame(height: 2)
-                .overlay(
-                    viewModel.fullScreenCoverType == .datePicker
-                        ? ColorAssets.primaryGreen200.swiftUIColor
-                        : viewModel.dob != nil
-                        ? ColorAssets.neutralDarkGrey.swiftUIColor
-                        : ColorAssets.neutralDeepGrey.swiftUIColor
-                )
-        }
+        UpdateCurrentUserInputView(
+            content: {
+                HStack(spacing: 4) {
+                    Button(
+                        action: {
+                            keyboard.dismiss()
+                            viewModel.fullScreenCoverType = .datePicker
+                        },
+                        label: {
+                            Text(viewModel.dob?.string(withFormat: "yyyy/MM/dd") ?? "YYYY/MM/DD")
+                                .dynamicFont(.systemFont(ofSize: 16))
+                                .foregroundColor(
+                                    viewModel.dob == nil
+                                        ? ColorAssets.neutralDeepGrey.swiftUIColor
+                                        : ColorAssets.neutralDarkGrey.swiftUIColor
+                                )
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                    )
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Button(
+                        action: {
+                            viewModel.dob = nil
+                        },
+                        label: {
+                            ImageAssets.icClose.swiftUIImage
+                                .resizable()
+                                .scaledToFit()
+                                .padding(6)
+                                .frame(width: 24, height: 24)
+                                .border(ColorAssets.neutralDarkGrey.swiftUIColor, width: 1, cornerRadius: 12)
+                        }
+                    )
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                }
+                .frame(height: 52)
+            },
+            title: L10n.updateProfileDob,
+            description: L10n.updateProfileDobDescription,
+            isEditing: viewModel.fullScreenCoverType == .datePicker,
+            errorMessage: nil
+        )
     }
     
     private func buildGenderView() -> some View {
-        VStack {
-            HStack(spacing: 16) {
-                Text(
-                    viewModel.gender?.rawValue.lowercased().capitalized
-                        ?? L10n.updateProfileGender
-                )
-                .dynamicFont(.systemFont(ofSize: 16))
-                .foregroundColor(
-                    viewModel.actionSheetType == .gender
-                        ? ColorAssets.primaryGreen200.swiftUIColor
-                        : viewModel.gender != nil
-                        ? ColorAssets.neutralDarkGrey.swiftUIColor
-                        : ColorAssets.neutralDeepGrey.swiftUIColor
-                )
-                
-                Spacer()
-                
-                Image(systemName: "arrowtriangle.down.fill")
-                    .resizable()
-                    .frame(width: 10, height: 5)
-                    .scaledToFill()
+        VStack(spacing: 8) {
+            Text(L10n.updateProfileGender)
+                .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
+                .frame(maxWidth: .infinity, alignment: .leading)
+            HStack(spacing: 12) {
+                ForEach(GenderType.allCases.indices, id: \.self) { index in
+                    buildGenderItemView(GenderType.allCases[index])
+                }
             }
-            .foregroundColor(
-                viewModel.dob != nil
-                    ? ColorAssets.neutralDarkGrey.swiftUIColor
-                    : ColorAssets.neutralDeepGrey.swiftUIColor
-            )
-            .frame(height: 38)
-            
-            Divider()
-                .frame(height: 2)
-                .overlay(
-                    viewModel.actionSheetType == .gender
-                        ? ColorAssets.primaryGreen200.swiftUIColor
-                        : viewModel.gender != nil
-                        ? ColorAssets.neutralDarkGrey.swiftUIColor
-                        : ColorAssets.neutralDeepGrey.swiftUIColor
-                )
         }
+        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+    }
+    
+    private func buildGenderItemView(_ gender: GenderType) -> some View {
+        Button(
+            action: {
+                viewModel.gender = gender
+            },
+            label: {
+                Text(gender.title)
+                    .dynamicFont(.systemFont(ofSize: 14))
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 40)
+                    .background(
+                        viewModel.gender == gender
+                            ? ColorAssets.primaryGreen200.swiftUIColor
+                            : ColorAssets.neutralLight.swiftUIColor
+                    )
+                    .border(
+                        viewModel.gender == gender
+                            ? ColorAssets.primaryGreen200.swiftUIColor
+                            : ColorAssets.neutralDarkGrey.swiftUIColor,
+                        width: 1,
+                        cornerRadius: 4
+                    )
+                    .cornerRadius(4)
+            }
+        )
     }
     
     private func buildActionView() -> some View {
@@ -357,16 +349,6 @@ extension UpdateCurrentUserView {
                         keyboard.dismiss()
                         viewModel.fullScreenCoverType = .imagePickerView(.photoLibrary)
                     },
-                    .cancel(Text(L10n.commonCancel))
-                ]
-            )
-        case .gender:
-            return ActionSheet(
-                title: Text(L10n.updateProfileGender),
-                buttons: [
-                    .default(Text(L10n.updateProfileGenderMale)) { viewModel.gender = .male },
-                    .default(Text(L10n.updateProfileGenderFemale)) { viewModel.gender = .female },
-                    .default(Text(L10n.updateProfileGenderOther)) { viewModel.gender = .other },
                     .cancel(Text(L10n.commonCancel))
                 ]
             )
