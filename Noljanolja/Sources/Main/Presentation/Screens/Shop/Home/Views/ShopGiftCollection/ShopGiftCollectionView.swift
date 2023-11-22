@@ -39,7 +39,7 @@ struct ShopGiftCollectionView: View {
             buildContentStatefullView()
         }
     }
-    
+
     @ViewBuilder
     private func buildContentStatefullView() -> some View {
         buildContentView()
