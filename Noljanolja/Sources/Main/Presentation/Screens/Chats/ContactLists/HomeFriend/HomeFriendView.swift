@@ -27,7 +27,6 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
                 buildBodyView()
             }
             buildFloatButton()
-
             buildNavigationLink()
         }
     }

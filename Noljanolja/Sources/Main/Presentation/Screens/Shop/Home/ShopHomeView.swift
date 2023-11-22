@@ -54,7 +54,7 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
             buildHeaderView()
             buildSummaryView()
             buildCategoriesView()
-            buildTopFeaturesView()
+//            buildTopFeaturesView()
             buildForYouView()
         }
         .background(ColorAssets.neutralLight.swiftUIColor)
