@@ -872,6 +872,12 @@ internal enum L10n {
   internal static let walletToGet = L10n.tr("Localizable", "wallet_to_get", fallback: "To get")
   /// View History
   internal static let walletViewHistory = L10n.tr("Localizable", "wallet_view_history", fallback: "View History")
+  /// by
+  internal static let watchBy = L10n.tr("Localizable", "watch_by", fallback: "by")
+  /// Let's get
+  internal static let watchLetGet = L10n.tr("Localizable", "watch_let_get", fallback: "Let's get")
+  /// watching
+  internal static let watchWatch = L10n.tr("Localizable", "watch_watch", fallback: "watching")
   /// Welcome to NolgoBulja. Watch videos,play and earn.
   internal static let welcomeNoljanolja = L10n.tr("Localizable", "welcome_noljanolja", fallback: "Welcome to NolgoBulja. Watch videos,play and earn.")
 }

@@ -44,6 +44,8 @@ private enum GiftsTargets {
         let page: Int
         let pageSize: Int?
         let isFeatured: Bool?
+        let isTodayOffer: Bool?
+        let isRecommend: Bool?
 
         var parameters: [String: Any] {
             let parameters: [String: Any?] = [
@@ -52,7 +54,8 @@ private enum GiftsTargets {
                 "query": query,
                 "page": page,
                 "pageSize": pageSize,
-                "isFeatured": isFeatured
+                "isFeatured": isFeatured,
+                "isRecommend": isRecommend
             ]
             return parameters.compactMapValues { $0 }
         }
@@ -79,10 +82,10 @@ private enum GiftsTargets {
         var path: String { "v1/gifts/categories" }
         let method: Moya.Method = .get
         var task: Task { .requestParameters(parameters: parameters, encoding: URLEncoding.default) }
-        
+
         let page: Int
         let pageSize: Int
-        
+
         var parameters: [String: Any] {
             let parameters: [String: Any?] = [
                 "page": page,
@@ -105,7 +108,7 @@ private enum GiftsTargets {
 
 protocol GiftsNetworkRepository {
     func getMyGifts(categoryId: Int?, brandId: Int?, page: Int, pageSize: Int?) -> AnyPublisher<PaginationResponse<[MyGift]>, Error>
-    func getGiftsInShop(categoryId: Int?, brandId: Int?, query: String?, page: Int, pageSize: Int?, isFeatured: Bool?) -> AnyPublisher<PaginationResponse<[Gift]>, Error>
+    func getGiftsInShop(categoryId: Int?, brandId: Int?, query: String?, page: Int, pageSize: Int?, isFeatured: Bool?, isTodayOffer: Bool?, isRecommend: Bool?) -> AnyPublisher<PaginationResponse<[Gift]>, Error>
     func getGiftsBrands(page: Int, pageSize: Int) -> AnyPublisher<[GiftBrand], Error>
     func getGiftsCategories(page: Int, pageSize: Int) -> AnyPublisher<PaginationResponse<[GiftCategory]>, Error>
     func buyGift(_ id: String) -> AnyPublisher<MyGift, Error>
@@ -124,8 +127,11 @@ extension GiftsNetworkRepository {
                         query: String? = nil,
                         page: Int = 1,
                         pageSize: Int? = nil,
-                        isFeatured: Bool? = nil) -> AnyPublisher<PaginationResponse<[Gift]>, Error> {
-        getGiftsInShop(categoryId: categoryId, brandId: brandId, query: query, page: page, pageSize: pageSize, isFeatured: isFeatured)
+                        isFeatured: Bool? = nil,
+                        isTodayOffer: Bool? = nil,
+                        isRecommend: Bool? = nil)
+        -> AnyPublisher<PaginationResponse<[Gift]>, Error> {
+        getGiftsInShop(categoryId: categoryId, brandId: brandId, query: query, page: page, pageSize: pageSize, isFeatured: isFeatured, isTodayOffer: isTodayOffer, isRecommend: isRecommend)
     }
 }
 
@@ -151,7 +157,7 @@ final class GiftsNetworkRepositoryImpl: GiftsNetworkRepository {
         )
     }
 
-    func getGiftsInShop(categoryId: Int?, brandId: Int?, query: String?, page: Int, pageSize: Int?, isFeatured: Bool?) -> AnyPublisher<PaginationResponse<[Gift]>, Error> {
+    func getGiftsInShop(categoryId: Int?, brandId: Int?, query: String?, page: Int, pageSize: Int?, isFeatured: Bool?, isTodayOffer: Bool?, isRecommend: Bool?) -> AnyPublisher<PaginationResponse<[Gift]>, Error> {
         api.request(
             target: GiftsTargets.GetGiftsInShop(
                 categoryId: categoryId,
@@ -159,7 +165,9 @@ final class GiftsNetworkRepositoryImpl: GiftsNetworkRepository {
                 query: query,
                 page: page,
                 pageSize: pageSize,
-                isFeatured: isFeatured
+                isFeatured: isFeatured,
+                isTodayOffer: isTodayOffer,
+                isRecommend: isRecommend
             )
         )
     }

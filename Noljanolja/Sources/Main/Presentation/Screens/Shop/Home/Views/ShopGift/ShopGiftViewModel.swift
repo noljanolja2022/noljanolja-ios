@@ -29,6 +29,7 @@ final class ShopGiftViewModel: ViewModel {
     private weak var listener: ShopGiftListener?
     private let categoryId: Int?
     private let skipGiftProduct: Gift?
+    let title: String?
 
     // MARK: Private
 
@@ -39,11 +40,13 @@ final class ShopGiftViewModel: ViewModel {
     init(giftsNetworkRepository: GiftsNetworkRepository = GiftsNetworkRepositoryImpl.default,
          listener: ShopGiftListener? = nil,
          categoryId: Int? = nil,
-         skipGiftProduct: Gift? = nil) {
+         skipGiftProduct: Gift? = nil,
+         title: String? = nil) {
         self.giftsNetworkRepository = giftsNetworkRepository
         self.listener = listener
         self.categoryId = categoryId
         self.skipGiftProduct = skipGiftProduct
+        self.title = title
         super.init()
 
         configure()
