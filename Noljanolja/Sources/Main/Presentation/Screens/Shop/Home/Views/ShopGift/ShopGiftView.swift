@@ -28,18 +28,19 @@ struct ShopGiftView: View {
     @ViewBuilder
     private func buildMainView() -> some View {
         VStack(spacing: 0) {
-            HStack(spacing: 12) {
-                Text(L10n.shopForYou)
-                    .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
-                ImageAssets.icArrowRight.swiftUIImage
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 24, height: 24)
+            if let title = viewModel.title {
+                HStack(spacing: 12) {
+                    Text(title)
+                        .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
+                    ImageAssets.icArrowRight.swiftUIImage
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 24, height: 24)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 16)
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, 16)
-            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-
             ZStack {
                 buildNavigationLink()
                 buildContentStatefullView()

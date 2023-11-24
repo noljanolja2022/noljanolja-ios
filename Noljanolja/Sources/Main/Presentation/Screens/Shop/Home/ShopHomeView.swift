@@ -138,7 +138,7 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
     }
 
     private func buildForYouView() -> some View {
-        ShopGiftView(viewModel: ShopGiftViewModel())
+        ShopGiftView(viewModel: ShopGiftViewModel(title: L10n.shopForYou))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }

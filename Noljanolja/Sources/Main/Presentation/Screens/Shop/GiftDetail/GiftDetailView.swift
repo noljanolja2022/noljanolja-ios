@@ -143,27 +143,16 @@ struct GiftDetailView<ViewModel: GiftDetailViewModel>: View {
             buildPricesView()
 
             VStack(spacing: 0) {
-                HStack(spacing: 12) {
-                    Text(L10n.maybeYouLike)
-                        .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
-                    ImageAssets.icArrowRight.swiftUIImage
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 24, height: 24)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 16)
-                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-
                 ShopGiftView(
                     viewModel: ShopGiftViewModel(
                         categoryId: viewModel.model?.giftCategory?.id,
-                        skipGiftProduct: viewModel.model?.giftDetailInputType.gift
+                        skipGiftProduct: viewModel.model?.giftDetailInputType.gift,
+                        title: L10n.maybeYouLike
                     )
                 )
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .padding(.vertical, 15)
+            .padding(.bottom, 15)
             .background(ColorAssets.neutralLightGrey.swiftUIColor)
         }
     }
