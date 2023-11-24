@@ -33,7 +33,7 @@ struct ShopGiftCollectionItemView: View {
         }
         .shadow(
             color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.2),
-            radius: 8,
+            radius: 4,
             x: 0,
             y: 4
         )
@@ -58,6 +58,7 @@ struct ShopGiftCollectionItemView: View {
             .clipped()
             .background(ColorAssets.neutralLightGrey.swiftUIColor)
         }
+        .frame(width: 138 * ratioW, height: 149 * ratioH)
     }
 
     private func buildInfoView() -> some View {
@@ -75,7 +76,7 @@ struct ShopGiftCollectionItemView: View {
                 Text(String(model.price))
                     .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                Text("Cash")
+                Text(L10n.commonCash)
                     .dynamicFont(.systemFont(ofSize: 14))
                     .frame(height: 24)
                     .padding(.horizontal, 8)

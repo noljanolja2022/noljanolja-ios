@@ -604,6 +604,7 @@
 		E1A966612B0BC9D300AFF04F /* ShopGiftCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A966602B0BC9D300AFF04F /* ShopGiftCollectionViewModel.swift */; };
 		E1A966632B0BC9DF00AFF04F /* ShopGiftCollectionNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A966622B0BC9DF00AFF04F /* ShopGiftCollectionNavigation.swift */; };
 		E1A966662B0BCB2D00AFF04F /* ShopGiftCollectionItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A966652B0BCB2D00AFF04F /* ShopGiftCollectionItemView.swift */; };
+		E1C03C912B0E6E2F005222EB /* UIScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C03C902B0E6E2F005222EB /* UIScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1225,6 +1226,7 @@
 		E1A966602B0BC9D300AFF04F /* ShopGiftCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopGiftCollectionViewModel.swift; sourceTree = "<group>"; };
 		E1A966622B0BC9DF00AFF04F /* ShopGiftCollectionNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopGiftCollectionNavigation.swift; sourceTree = "<group>"; };
 		E1A966652B0BCB2D00AFF04F /* ShopGiftCollectionItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopGiftCollectionItemView.swift; sourceTree = "<group>"; };
+		E1C03C902B0E6E2F005222EB /* UIScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreen.swift; sourceTree = "<group>"; };
 		E631AD828276D3ED189B00A1 /* Pods-Noljanolja-NoljanoljaUITests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.development.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.development.xcconfig"; sourceTree = "<group>"; };
 		F53231636127B61B7E5B0B97 /* Pods-NoljanoljaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoljanoljaTests.release.xcconfig"; path = "Target Support Files/Pods-NoljanoljaTests/Pods-NoljanoljaTests.release.xcconfig"; sourceTree = "<group>"; };
 		FAB5BA5AC93BBFAA68677C79 /* Pods_Noljanolja.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Noljanolja.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1696,6 +1698,7 @@
 				CF9DF0A92A36B2D80054E105 /* UIImage+QRCode.swift */,
 				CFE215722AE6758700C83BAD /* UIViewController+Top.swift */,
 				2B6876FA2AFDF964000BBD55 /* String+Encode.swift */,
+				E1C03C902B0E6E2F005222EB /* UIScreen.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -4360,6 +4363,7 @@
 				CFF508D92AA8C18E00A45C37 /* MainViewModel.swift in Sources */,
 				CF53D5AE2A6AF548009B3A69 /* TransactionHistoryHeaderModel.swift in Sources */,
 				CF446B9329D8AE2F00ED66BF /* RefreshTokenInterceptor.swift in Sources */,
+				E1C03C912B0E6E2F005222EB /* UIScreen.swift in Sources */,
 				CF53D6562A6AF548009B3A69 /* AuthRootView.swift in Sources */,
 				CF1EA57C2A1D05C9006846DF /* Legend+Config.swift in Sources */,
 				CF11B1D829BB65B4002E8151 /* MessageUseCases.swift in Sources */,

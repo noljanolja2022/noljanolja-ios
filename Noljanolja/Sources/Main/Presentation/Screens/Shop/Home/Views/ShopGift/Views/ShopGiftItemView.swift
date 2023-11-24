@@ -73,7 +73,7 @@ struct ShopGiftItemView: View {
                 Text(String(model.price))
                     .dynamicFont(.systemFont(ofSize: 24, weight: .bold))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                Text("Cash")
+                Text(L10n.commonCash)
                     .dynamicFont(.systemFont(ofSize: 16))
                     .frame(height: 24)
                     .padding(.horizontal, 8)

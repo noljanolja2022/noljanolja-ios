@@ -21,14 +21,19 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
 
     @ViewBuilder
     private func contentView() -> some View {
-        ZStack(alignment: .bottomTrailing) {
-            VStack {
-                buildHeaderView()
-                buildBodyView()
-            }
-            buildFloatButton()
-            buildNavigationLink()
-        }
+        VideoDetailRootContainerView(
+            content: {
+                ZStack(alignment: .bottomTrailing) {
+                    VStack {
+                        buildHeaderView()
+                        buildBodyView()
+                    }
+                    buildFloatButton()
+                    buildNavigationLink()
+                }
+            },
+            viewModel: VideoDetailRootContainerViewModel()
+        )
     }
 
     @ViewBuilder

@@ -24,7 +24,7 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
     }
-    
+
     private func buildMainView() -> some View {
         VideoDetailRootContainerView(
             content: {
@@ -50,16 +50,20 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
 
     @ViewBuilder
     private func buildContentView() -> some View {
-        VStack(spacing: 8) {
-            buildHeaderView()
-            buildSummaryView()
-            buildCategoriesView()
-//            buildTopFeaturesView()
-            buildForYouView()
+        ScrollView {
+            VStack(spacing: 8) {
+                buildHeaderView()
+                buildSummaryView()
+                buildCategoriesView()
+                buildTopFeaturesView()
+//                buildTodayOffersView()
+//                buildRecommendView()
+                buildForYouView()
+            }
+            .background(ColorAssets.neutralLight.swiftUIColor)
         }
-        .background(ColorAssets.neutralLight.swiftUIColor)
     }
-    
+
     private func buildHeaderView() -> some View {
         VStack(spacing: 12) {
             HStack(spacing: 8) {
@@ -70,7 +74,7 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
                     .resizable()
                     .frame(width: 16, height: 16)
             }
-            
+
             SearchView(placeholder: L10n.shopSearchProducts, text: .constant(""))
                 .frame(maxWidth: .infinity)
                 .background(ColorAssets.neutralLightGrey.swiftUIColor)
@@ -102,7 +106,7 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
                 value: viewModel.model.coinModel?.balance.formatted() ?? "---"
             )
             SummaryItemView(
-                title: "Voucher Wallet",
+                title: L10n.voucherWallet,
                 titleColorName: ColorAssets.primaryGreen200.name,
                 imageName: ImageAssets.icWallet2.name,
                 value: (viewModel.model.coinModel?.giftCount).flatMap { String($0) } ?? "---"
@@ -119,42 +123,23 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
             y: 4
         )
     }
-    
-    private func buildTopFeaturesView() -> some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Text(L10n.shopTopFeatures)
-                    .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
-                ImageAssets.icArrowRight.swiftUIImage
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 24, height: 24)
-            }
-            .padding(.leading, 16)
-            .padding(.top, 16)
-            ShopGiftCollectionView(viewModel: ShopGiftCollectionViewModel())
-        }
-        .background(ColorAssets.primaryGreen200.swiftUIColor)
-    }
-    
-    private func buildForYouView() -> some View {
-        VStack(spacing: 0) {
-            HStack(spacing: 12) {
-                Text(L10n.shopForYou)
-                    .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
-                ImageAssets.icArrowRight.swiftUIImage
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 24, height: 24)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, 16)
-            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
-            ShopGiftView(viewModel: ShopGiftViewModel())
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-        }
-        .padding(.top, 16)
+    private func buildTopFeaturesView() -> some View {
+        ShopGiftCollectionView(viewModel: ShopGiftCollectionViewModel(), title: L10n.shopTopFeatures)
+            .background(ColorAssets.primaryGreen200.swiftUIColor)
+    }
+
+    private func buildTodayOffersView() -> some View {
+        ShopGiftCollectionView(viewModel: ShopGiftCollectionViewModel(), title: L10n.shopTodayOffers)
+    }
+
+    private func buildRecommendView() -> some View {
+        ShopGiftCollectionView(viewModel: ShopGiftCollectionViewModel(), title: L10n.shopRecommend)
+    }
+
+    private func buildForYouView() -> some View {
+        ShopGiftView(viewModel: ShopGiftViewModel())
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 

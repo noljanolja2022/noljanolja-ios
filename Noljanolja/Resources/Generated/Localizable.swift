@@ -172,6 +172,8 @@ internal enum L10n {
   internal static let commonAll = L10n.tr("Localizable", "common_all", fallback: "All")
   /// Cancel
   internal static let commonCancel = L10n.tr("Localizable", "common_cancel", fallback: "Cancel")
+  /// Cash
+  internal static let commonCash = L10n.tr("Localizable", "common_cash", fallback: "Cash")
   /// Chat
   internal static let commonChat = L10n.tr("Localizable", "common_chat", fallback: "Chat")
   /// Complete
@@ -384,8 +386,8 @@ internal enum L10n {
   internal static let exchangeTitle = L10n.tr("Localizable", "exchange_title", fallback: "Exchange")
   /// Forgot your password?
   internal static let forgotPassword = L10n.tr("Localizable", "forgot_password", fallback: "Forgot your password?")
-  /// Friendlist
-  internal static let friendList = L10n.tr("Localizable", "friend_list", fallback: "Friendlist")
+  /// Friend list
+  internal static let friendList = L10n.tr("Localizable", "friend_list", fallback: "Friend list")
   /// Full agreement
   internal static let fullAgreement = L10n.tr("Localizable", "full_agreement", fallback: "Full agreement")
   /// + %@ Points after watching
@@ -808,6 +810,8 @@ internal enum L10n {
   internal static let videoSearchVideo = L10n.tr("Localizable", "video_search_video", fallback: "Search video")
   /// Let‘s get points by watching
   internal static let videoTitle = L10n.tr("Localizable", "video_title", fallback: "Let‘s get points by watching")
+  /// Voucher Wallet
+  internal static let voucherWallet = L10n.tr("Localizable", "voucher_wallet", fallback: "Voucher Wallet")
   /// Accumulated points for the day
   internal static let walletAccumulatedPoint = L10n.tr("Localizable", "wallet_accumulated_point", fallback: "Accumulated points for the day")
   /// Attend now

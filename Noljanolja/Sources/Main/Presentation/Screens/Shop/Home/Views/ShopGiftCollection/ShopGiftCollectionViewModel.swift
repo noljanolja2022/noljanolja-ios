@@ -74,12 +74,12 @@ final class ShopGiftCollectionViewModel: ViewModel {
                 self?.viewState = .loading
                 self?.footerState = .loading
             })
-            .flatMapLatestToResult { [weak self] page -> AnyPublisher<PaginationResponse<[Gift]>, Error> in
+            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<PaginationResponse<[Gift]>, Error> in
                 guard let self else {
                     return Empty<PaginationResponse<[Gift]>, Error>().eraseToAnyPublisher()
                 }
                 return self.giftsNetworkRepository
-                    .getGiftsInShop(categoryId: categoryId, page: page, pageSize: self.pageSize)
+                    .getGiftsInShop(isFeatured: true)
             }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in

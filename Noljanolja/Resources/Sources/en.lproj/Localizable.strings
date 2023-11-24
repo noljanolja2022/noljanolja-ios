@@ -434,9 +434,11 @@
 "common_sorry" = "Sorry!";
 "request_point" = "REQUEST POINT";
 "send_point" = "SEND POINT";
-"friend_list" = "Friendlist";
+"friend_list" = "Friend list";
 "maybe_you_like" = "Maybe you like";
 "shop_for_you" = "For you";
 "shop_today_offers" = "Today offers";
 "shop_recommend" = "Recommend";
 "shop_top_features" = "Top Features";
+"common_cash" = "Cash";
+"voucher_wallet" = "Voucher Wallet";
