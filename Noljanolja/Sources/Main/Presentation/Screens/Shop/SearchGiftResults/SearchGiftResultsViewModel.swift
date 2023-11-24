@@ -98,7 +98,7 @@ class SearchGiftResultsViewModel: ViewModel {
                     return Empty<PaginationResponse<[Gift]>, Error>().eraseToAnyPublisher()
                 }
                 return self.giftsNetworkRepository
-                    .getGiftsInShop(name: self.searchText, page: page, pageSize: self.pageSize)
+                    .getGiftsInShop(query: self.searchText, page: page, pageSize: self.pageSize)
             }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
@@ -134,7 +134,7 @@ extension SearchGiftResultsViewModel {
         Publishers.CombineLatest(
             coinExchangeUseCases
                 .getCoin(),
-            giftsNetworkRepository.getGiftsInShop(name: searchText, page: NetworkConfigs.Param.firstPage, pageSize: pageSize)
+            giftsNetworkRepository.getGiftsInShop(query: searchText, page: NetworkConfigs.Param.firstPage, pageSize: pageSize)
         )
         .map {
             SearchGiftsModel(coinModel: $0.0, giftsResponse: $0.1)

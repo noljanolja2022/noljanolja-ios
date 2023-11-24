@@ -14,6 +14,7 @@ struct ShopGiftCollectionView: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ShopGiftCollectionViewModel
+    var title = ""
 
     var body: some View {
         buildBodyView()
@@ -34,10 +35,23 @@ struct ShopGiftCollectionView: View {
 
     @ViewBuilder
     private func buildMainView() -> some View {
-        ZStack {
-            buildNavigationLink()
-            buildContentStatefullView()
+        VStack(alignment: .leading) {
+            HStack {
+                Text(title)
+                    .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
+                ImageAssets.icArrowRight.swiftUIImage
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
+            }
+            .padding(.leading, 16)
+            .padding(.top, 16)
+            ZStack {
+                buildNavigationLink()
+                buildContentStatefullView()
+            }
         }
+        .visible(!viewModel.models.isEmpty)
     }
 
     @ViewBuilder
