@@ -78,9 +78,9 @@ struct ShopGiftCollectionView: View {
                         }
                 }
             }
+            .padding(.horizontal, 16)
         }
         .padding(.top, 5)
-        .padding(.leading, 16)
     }
 }
 

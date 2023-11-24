@@ -73,17 +73,17 @@ struct ShopGiftView: View {
                             viewModel.navigationType = .giftDetail(model)
                         }
                 }
-
-                StatefullFooterView(
-                    state: $viewModel.footerState,
-                    errorView: EmptyView(),
-                    noMoreDataView: EmptyView()
-                )
-                .onAppear {
-                    viewModel.loadMoreAction.send()
-                }
             }
             .padding(16)
+
+            StatefullFooterView(
+                state: $viewModel.footerState,
+                errorView: EmptyView(),
+                noMoreDataView: EmptyView()
+            )
+            .onAppear {
+                viewModel.loadMoreAction.send()
+            }
         }
         .shadow(
             color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.2),
