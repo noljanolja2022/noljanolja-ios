@@ -40,12 +40,8 @@ struct Auth2View<ViewModel: Auth2ViewModel>: View {
     private func buildMainView() -> some View {
         buildContentView()
             .background(
-                ColorAssets.neutralLight.swiftUIColor
+                ColorAssets.primaryGreen100.swiftUIColor
                     .ignoresSafeArea()
-                    .overlay {
-                        ColorAssets.primaryGreen200.swiftUIColor
-                            .ignoresSafeArea(edges: .top)
-                    }
             )
     }
 
@@ -75,22 +71,22 @@ struct Auth2View<ViewModel: Auth2ViewModel>: View {
                 .padding(.top, 28)
             }
         }
-        .background(ColorAssets.neutralLight.swiftUIColor)
-        .cornerRadius([.topLeading, .topTrailing], 40)
+        .background(.clear)
     }
 
     private func buildAuthHeaderView() -> some View {
         VStack(spacing: 4) {
             Text(L10n.commonLogin)
                 .dynamicFont(.systemFont(ofSize: 32, weight: .bold))
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity, alignment: .center)
             Text(L10n.loginGoogleDescription)
                 .dynamicFont(.systemFont(ofSize: 14))
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity, alignment: .center)
                 .multilineTextAlignment(.leading)
-                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
         }
+        .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
     }
 
     private func buildAuthContentView() -> some View {
@@ -128,12 +124,12 @@ struct Auth2View<ViewModel: Auth2ViewModel>: View {
                     label: {
                         Text("Sign In")
                             .font(Font.system(size: 16).bold())
-                            .foregroundColor(.white)
+                            .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
                 )
                 .frame(height: 48)
-                .background(ColorAssets.primaryGreen200.swiftUIColor)
+                .background(ColorAssets.neutralRawLight.swiftUIColor)
                 .cornerRadius(8)
                 .padding(.vertical, 4)
                 
@@ -169,12 +165,12 @@ struct Auth2View<ViewModel: Auth2ViewModel>: View {
                             .scaledToFill()
                             .cornerRadius(20)
                         Text(L10n.loginGoogleButton)
-                            .dynamicFont(.systemFont(ofSize: 19, weight: .medium))
-                            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                            .dynamicFont(.systemFont(ofSize: 20, weight: .medium))
+                            .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
                     }
                     .frame(maxWidth: .infinity)
-                    .frame(height: 48)
-                    .background(ColorAssets.primaryGreen200.swiftUIColor)
+                    .frame(height: 54)
+                    .background(ColorAssets.neutralRawLight.swiftUIColor)
                     .cornerRadius(8)
                 }
             )
@@ -192,12 +188,12 @@ struct Auth2View<ViewModel: Auth2ViewModel>: View {
                                 .scaledToFill()
                                 .cornerRadius(20)
                             Text(L10n.loginAppleButton)
-                                .dynamicFont(.systemFont(ofSize: 19, weight: .medium))
-                                .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
+                                .dynamicFont(.systemFont(ofSize: 20, weight: .medium))
+                                .foregroundColor(ColorAssets.neutralRawLight.swiftUIColor)
                         }
                         .frame(maxWidth: .infinity)
-                        .frame(height: 48)
-                        .background(ColorAssets.neutralDarkGrey.swiftUIColor)
+                        .frame(height: 54)
+                        .background(ColorAssets.neutralRawDarkGrey.swiftUIColor)
                         .cornerRadius(8)
                     }
                 )

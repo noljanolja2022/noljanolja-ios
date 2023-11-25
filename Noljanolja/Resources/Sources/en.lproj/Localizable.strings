@@ -132,13 +132,10 @@
 "update_profile_avatar_open_camera" = "Open Camera";
 "update_profile_avatar_select_photo" = "Select Photo";
 "update_profile_name" = "Name";
-"update_profile_name_description" = "Enter your name";
 "update_profile_name_error" = "This name is invalid";
 "update_profile_name_required" = "Required";
 "update_profile_dob" = "Day of Birth";
-"update_profile_dob_description" = "Enter your birthday";
 "update_profile_phone" = "Phone";
-"update_profile_phone_description" = "Enter your phone";
 "update_profile_phone_error" = "This phone is invalid";
 "update_profile_gender" = "Gender";
 "update_profile_gender_male" = "Male";
