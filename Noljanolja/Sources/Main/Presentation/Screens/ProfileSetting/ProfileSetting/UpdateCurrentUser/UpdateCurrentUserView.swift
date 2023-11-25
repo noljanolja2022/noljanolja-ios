@@ -63,8 +63,8 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                 
                 VStack(spacing: 12) {
                     buildUserSectionHeaderView()
-                    buildPhoneView()
                     buildNameView()
+                    buildPhoneView()
                     buildDateOfBirth()
                     buildGenderView()
                 }
@@ -125,72 +125,6 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
             .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
     }
     
-    private func buildPhoneView() -> some View {
-        UpdateCurrentUserInputView(
-            content: {
-                HStack(spacing: 4) {
-                    Button(
-                        action: {
-                            viewModel.fullScreenCoverType = .selectCountry
-                        },
-                        label: {
-                            HStack(spacing: 8) {
-                                Text(viewModel.country.flag)
-                                    .dynamicFont(.systemFont(ofSize: 24))
-                                    .frame(width: 30, height: 24)
-                                    .background(ColorAssets.neutralLightGrey.swiftUIColor)
-                                    .cornerRadius(3)
-                                Text(viewModel.country.prefix)
-                                    .dynamicFont(.systemFont(ofSize: 16))
-                            }
-                            .frame(maxHeight: .infinity)
-                        }
-                    )
-                    .frame(width: 80)
-
-                    TextField(
-                        "",
-                        text: $viewModel.phoneNumberText,
-                        isEditing: $isPhoneEditing
-                    )
-                    .keyboardType(.phonePad)
-                    .textFieldStyle(TappableTextFieldStyle())
-                    .dynamicFont(.systemFont(ofSize: 16))
-                    .frame(maxHeight: .infinity)
-                    .introspectTextField { textField in
-                        textField.becomeFirstResponder()
-                    }
-                    
-                    Button(
-                        action: {
-                            viewModel.phoneNumberText = ""
-                        },
-                        label: {
-                            ImageAssets.icClose.swiftUIImage
-                                .resizable()
-                                .scaledToFit()
-                                .padding(6)
-                                .frame(width: 24, height: 24)
-                                .border(ColorAssets.neutralDarkGrey.swiftUIColor, width: 1, cornerRadius: 12)
-                        }
-                    )
-                }
-                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                .frame(height: 52)
-            },
-            title: L10n.updateProfilePhone,
-            description: L10n.updateProfilePhoneDescription,
-            isEditing: isPhoneEditing,
-            errorMessage: {
-                if viewModel.phoneNumberText.isEmpty || viewModel.phoneNumber?.isValidPhoneNumber ?? true {
-                    return nil
-                } else {
-                    return L10n.updateProfilePhoneError
-                }
-            }()
-        )
-    }
-    
     private func buildNameView() -> some View {
         UpdateCurrentUserInputView(
             content: {
@@ -202,6 +136,9 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                     .textFieldStyle(TappableTextFieldStyle())
                     .dynamicFont(.systemFont(ofSize: 16))
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .introspectTextField { textField in
+                        textField.becomeFirstResponder()
+                    }
                     
                     Button(
                         action: {
@@ -221,13 +158,82 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                 .frame(height: 52)
             },
             title: L10n.updateProfileName,
-            description: L10n.updateProfileNameDescription,
+            description: nil,
             isEditing: isNameEditing,
             errorMessage: {
                 if viewModel.name?.isEmpty ?? true || viewModel.name?.isValidName ?? true {
                     return nil
                 } else {
                     return L10n.updateProfileNameError
+                }
+            }()
+        )
+    }
+    
+    private func buildPhoneView() -> some View {
+        UpdateCurrentUserInputView(
+            content: {
+                HStack(spacing: 8) {
+                    Button(
+                        action: {
+                            viewModel.fullScreenCoverType = .selectCountry
+                        },
+                        label: {
+                            HStack(spacing: 8) {
+                                Text(viewModel.country.flag)
+                                    .dynamicFont(.systemFont(ofSize: 24))
+                                    .frame(width: 30, height: 24)
+                                    .background(ColorAssets.neutralLightGrey.swiftUIColor)
+                                    .cornerRadius(3)
+                                Text(viewModel.country.prefix)
+                                    .dynamicFont(.systemFont(ofSize: 16))
+                                Image(systemName: "chevron.down")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .padding(6)
+                                    .frame(width: 24, height: 24)
+                                    .tintColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                            }
+                            .frame(maxHeight: .infinity)
+                        }
+                    )
+                    .frame(width: 104)
+
+                    TextField(
+                        "",
+                        text: $viewModel.phoneNumberText,
+                        isEditing: $isPhoneEditing
+                    )
+                    .keyboardType(.phonePad)
+                    .textFieldStyle(TappableTextFieldStyle())
+                    .dynamicFont(.systemFont(ofSize: 16))
+                    .frame(maxHeight: .infinity)
+                    
+                    Button(
+                        action: {
+                            viewModel.phoneNumberText = ""
+                        },
+                        label: {
+                            ImageAssets.icClose.swiftUIImage
+                                .resizable()
+                                .scaledToFit()
+                                .padding(6)
+                                .frame(width: 24, height: 24)
+                                .border(ColorAssets.neutralDarkGrey.swiftUIColor, width: 1, cornerRadius: 12)
+                        }
+                    )
+                }
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                .frame(height: 52)
+            },
+            title: L10n.updateProfilePhone,
+            description: nil,
+            isEditing: isPhoneEditing,
+            errorMessage: {
+                if viewModel.phoneNumberText.isEmpty || viewModel.phoneNumber?.isValidPhoneNumber ?? true {
+                    return nil
+                } else {
+                    return L10n.updateProfilePhoneError
                 }
             }()
         )
@@ -273,7 +279,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                 .frame(height: 52)
             },
             title: L10n.updateProfileDob,
-            description: L10n.updateProfileDobDescription,
+            description: nil,
             isEditing: viewModel.fullScreenCoverType == .datePicker,
             errorMessage: nil
         )

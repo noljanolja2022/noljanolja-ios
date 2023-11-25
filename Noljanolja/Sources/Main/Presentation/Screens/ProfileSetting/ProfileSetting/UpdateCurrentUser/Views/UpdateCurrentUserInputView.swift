@@ -11,7 +11,7 @@ import SwiftUI
 struct UpdateCurrentUserInputView<Content: View>: View {
     let content: () -> Content
     let title: String
-    let description: String
+    let description: String?
     let isEditing: Bool
     let errorMessage: String?
     
@@ -26,7 +26,7 @@ struct UpdateCurrentUserInputView<Content: View>: View {
             return ColorAssets.neutralDarkGrey.swiftUIColor
         }()
         
-        let descriptionString: String = errorMessage ?? description
+        let descriptionString: String? = errorMessage ?? description
         
         let descriptionColor: Color = {
             if errorMessage != nil {
@@ -55,10 +55,12 @@ struct UpdateCurrentUserInputView<Content: View>: View {
                     .padding(.top, 12)
             }
 
-            Text(descriptionString)
-                .dynamicFont(.systemFont(ofSize: 12))
-                .foregroundColor(descriptionColor)
-                .padding(.horizontal, 16)
+            if let descriptionString {
+                Text(descriptionString)
+                    .dynamicFont(.systemFont(ofSize: 12))
+                    .foregroundColor(descriptionColor)
+                    .padding(.horizontal, 16)
+            }
         }
     }
 }

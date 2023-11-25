@@ -714,8 +714,6 @@ internal enum L10n {
   internal static let updateProfileDateOfBirth = L10n.tr("Localizable", "update_profile_date_of_birth", fallback: "Date of Birth")
   /// Day of Birth
   internal static let updateProfileDob = L10n.tr("Localizable", "update_profile_dob", fallback: "Day of Birth")
-  /// Enter your birthday
-  internal static let updateProfileDobDescription = L10n.tr("Localizable", "update_profile_dob_description", fallback: "Enter your birthday")
   /// Gender
   internal static let updateProfileGender = L10n.tr("Localizable", "update_profile_gender", fallback: "Gender")
   /// Female
@@ -726,16 +724,12 @@ internal enum L10n {
   internal static let updateProfileGenderOther = L10n.tr("Localizable", "update_profile_gender_other", fallback: "Other")
   /// Name
   internal static let updateProfileName = L10n.tr("Localizable", "update_profile_name", fallback: "Name")
-  /// Enter your name
-  internal static let updateProfileNameDescription = L10n.tr("Localizable", "update_profile_name_description", fallback: "Enter your name")
   /// This name is invalid
   internal static let updateProfileNameError = L10n.tr("Localizable", "update_profile_name_error", fallback: "This name is invalid")
   /// Required
   internal static let updateProfileNameRequired = L10n.tr("Localizable", "update_profile_name_required", fallback: "Required")
   /// Phone
   internal static let updateProfilePhone = L10n.tr("Localizable", "update_profile_phone", fallback: "Phone")
-  /// Enter your phone
-  internal static let updateProfilePhoneDescription = L10n.tr("Localizable", "update_profile_phone_description", fallback: "Enter your phone")
   /// This phone is invalid
   internal static let updateProfilePhoneError = L10n.tr("Localizable", "update_profile_phone_error", fallback: "This phone is invalid")
   /// User information

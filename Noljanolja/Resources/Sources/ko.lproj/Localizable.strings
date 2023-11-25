@@ -131,13 +131,10 @@
 "update_profile_avatar_open_camera" = "카메라";
 "update_profile_avatar_select_photo" = "갤러리";
 "update_profile_name" = "이름";
-"update_profile_name_description" = "Enter your name";
 "update_profile_name_error" = "This name is invalid";
 "update_profile_name_required" = "입력필요";
 "update_profile_dob" = "생년월일";
-"update_profile_dob_description" = "Enter your birthday";
 "update_profile_phone" = "Phone";
-"update_profile_phone_description" = "Enter your phone";
 "update_profile_phone_error" = "This phone is invalid";
 "update_profile_gender" = "성별";
 "update_profile_gender_male" = "남자";
