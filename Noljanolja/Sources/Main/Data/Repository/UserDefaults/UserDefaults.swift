@@ -11,6 +11,7 @@ import Foundation
 
 protocol UserDefaultsType {
     var isFirstLaunch: Bool { get set }
+    var exchangeCount: Int { get set }
 }
 
 // MARK: - UserDefaults.Keys
@@ -18,6 +19,7 @@ protocol UserDefaultsType {
 extension UserDefaults {
     enum Keys {
         static let isNotFirstLaunch = "is_not_first_launch"
+        static let exchangeCount = "exchange_count"
     }
 }
 
@@ -27,5 +29,10 @@ extension UserDefaults: UserDefaultsType {
     var isFirstLaunch: Bool {
         get { !bool(forKey: Keys.isNotFirstLaunch) }
         set { set(!newValue, forKey: Keys.isNotFirstLaunch) }
+    }
+    
+    var exchangeCount: Int {
+        get { integer(forKey: Keys.exchangeCount) }
+        set { set(newValue, forKey: Keys.exchangeCount) }
     }
 }
