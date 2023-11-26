@@ -31,6 +31,7 @@ final class ExchangeViewModel: ViewModel {
 
     // MARK: Dependencies
 
+    private var userDefaults: UserDefaultsType
     private let memberInfoUseCase: MemberInfoUseCases
     private let coinExchangeUseCases: CoinExchangeUseCases
     private let coinExchangeNetworkRepository: CoinExchangeNetworkRepository
@@ -46,11 +47,13 @@ final class ExchangeViewModel: ViewModel {
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(memberInfoUseCase: MemberInfoUseCases = MemberInfoUseCasesImpl.default,
+    init(userDefaults: UserDefaultsType = UserDefaults.standard,
+         memberInfoUseCase: MemberInfoUseCases = MemberInfoUseCasesImpl.default,
          coinExchangeUseCases: CoinExchangeUseCases = CoinExchangeUseCasesImpl.shared,
          coinExchangeNetworkRepository: CoinExchangeNetworkRepository = CoinExchangeNetworkRepositoryImpl.shared,
          adMobNetworkRepository: AdMobNetworkRepository = AdMobNetworkRepositoryImpl.shared,
          listener: ExchangeListener? = nil) {
+        self.userDefaults = userDefaults
         self.memberInfoUseCase = memberInfoUseCase
         self.coinExchangeUseCases = coinExchangeUseCases
         self.coinExchangeNetworkRepository = coinExchangeNetworkRepository
@@ -118,7 +121,13 @@ final class ExchangeViewModel: ViewModel {
     }
 
     private func configureActions() {
-        exchangeAction
+        let (showAdAction, convertActionWithoutAd) = exchangeAction
+            .withLatestFrom(coinExchangeRateSubject.compactMap { $0?.rewardRecurringAmount })
+            .partition { [weak self] rewardRecurringAmount in
+                self?.userDefaults.exchangeCount ?? 0 >= rewardRecurringAmount
+            }
+        
+        showAdAction
             .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] _ -> AnyPublisher<GADRewardedAd, Error> in
@@ -149,6 +158,7 @@ final class ExchangeViewModel: ViewModel {
                     self.rewardedAd = ad
                     ad.present(fromRootViewController: viewController) {
                         self.convertAction.send()
+                        self.userDefaults.exchangeCount = 0
                     }
                 case .failure:
                     self.alertState = AlertState(
@@ -160,7 +170,7 @@ final class ExchangeViewModel: ViewModel {
             }
             .store(in: &cancellables)
         
-        convertAction
+        Publishers.Merge(convertActionWithoutAd.mapToVoid(), convertAction)
             .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] _ -> AnyPublisher<CoinExchangeResult, Error> in
@@ -180,6 +190,7 @@ final class ExchangeViewModel: ViewModel {
                 switch result {
                 case .success:
                     self.reloadAction.send()
+                    self.userDefaults.exchangeCount = self.userDefaults.exchangeCount + 1
                 case .failure:
                     self.alertState = AlertState(
                         title: TextState(L10n.commonErrorTitle),
