@@ -250,6 +250,9 @@ struct HomeView<ViewModel: HomeViewModel>: View {
 
     @ViewBuilder
     private func buildTabItemViews() -> some View {
+        if viewModel.tabs.contains(.friends) {
+            buildTabItemView(.friends)
+        }
         if viewModel.tabs.contains(.chat) {
             buildTabItemView(.chat)
         }
@@ -261,9 +264,6 @@ struct HomeView<ViewModel: HomeViewModel>: View {
         }
         if viewModel.tabs.contains(.shop) {
             buildTabItemView(.shop)
-        }
-        if viewModel.tabs.contains(.friends) {
-            buildTabItemView(.friends)
         }
     }
 
