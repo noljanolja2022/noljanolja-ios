@@ -58,12 +58,12 @@ struct MainView<ViewModel: MainViewModel>: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .accentColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-        .introspectNavigationController { navigationController in
-            navigationController.configure(
-                backgroundColor: ColorAssets.primaryGreen100.color,
-                foregroundColor: ColorAssets.neutralDarkGrey.color
-            )
-        }
+//        .introspectNavigationController { navigationController in
+//            navigationController.configure(
+//                backgroundColor: ColorAssets.neutralLight.color,
+//                foregroundColor: ColorAssets.neutralDarkGrey.color
+//            )
+//        }
     }
 
     @ViewBuilder

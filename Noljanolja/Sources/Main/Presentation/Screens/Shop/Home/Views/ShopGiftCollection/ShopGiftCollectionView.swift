@@ -1,12 +1,19 @@
+//
+//  ShopGiftCollectionView.swift
+//  Noljanolja
+//
+//  Created by Duy Dinh on 21/11/2023.
+//
+
 import SwiftUI
 import SwiftUIX
 
-// MARK: - ShopGiftView
+// MARK: - ShopGiftCollectionView
 
-struct ShopGiftView: View {
+struct ShopGiftCollectionView: View {
     // MARK: Dependencies
 
-    @StateObject var viewModel: ShopGiftViewModel
+    @StateObject var viewModel: ShopGiftCollectionViewModel
 
     var body: some View {
         buildBodyView()
@@ -27,26 +34,22 @@ struct ShopGiftView: View {
 
     @ViewBuilder
     private func buildMainView() -> some View {
-        VStack(spacing: 0) {
-            if let title = viewModel.title {
-                HStack(spacing: 12) {
-                    Text(title)
-                        .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
-                    ImageAssets.icArrowRight.swiftUIImage
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 24, height: 24)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 16)
-                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+        VStack(alignment: .leading) {
+            HStack {
+                Text(viewModel.title)
+                    .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
+                ImageAssets.icArrowRight.swiftUIImage
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24, height: 24)
             }
+            .padding(.leading, 16)
+            .padding(.top, 16)
             ZStack {
                 buildNavigationLink()
                 buildContentStatefullView()
             }
         }
-        .padding(.top, 16)
         .visible(!viewModel.models.isEmpty)
     }
 
@@ -64,38 +67,23 @@ struct ShopGiftView: View {
 
     @ViewBuilder
     private func buildContentView() -> some View {
-        ScrollView {
-            LazyVStack(spacing: 12) {
+        ScrollView(.horizontal, showsIndicators: false) {
+            LazyHStack(spacing: 10) {
                 ForEach(viewModel.models.indices, id: \.self) {
                     let model = viewModel.models[$0]
-                    ShopGiftItemView(model: model)
-                        .frame(maxWidth: .infinity)
+                    ShopGiftCollectionItemView(model: model)
                         .onTapGesture {
                             viewModel.navigationType = .giftDetail(model)
                         }
                 }
             }
-            .padding(16)
-
-            StatefullFooterView(
-                state: $viewModel.footerState,
-                errorView: EmptyView(),
-                noMoreDataView: EmptyView()
-            )
-            .onAppear {
-                viewModel.loadMoreAction.send()
-            }
+            .padding(.horizontal, 16)
         }
-        .shadow(
-            color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.2),
-            radius: 8,
-            x: 0,
-            y: 4
-        )
+        .padding(.top, 5)
     }
 }
 
-extension ShopGiftView {
+extension ShopGiftCollectionView {
     private func buildLoadingView() -> some View {
         LoadingView()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -111,7 +99,7 @@ extension ShopGiftView {
     }
 }
 
-extension ShopGiftView {
+extension ShopGiftCollectionView {
     @ViewBuilder
     private func buildNavigationLink() -> some View {
         NavigationLink(
@@ -137,9 +125,3 @@ extension ShopGiftView {
     @ViewBuilder
     private func buildFullScreenCoverDestinationView(_: Binding<ShopGiftFullScreenCoverType>) -> some View {}
 }
-
-// #Preview {
-//    ShopGiftView(
-//        viewModel: ShopGiftViewModel()
-//    )
-// }

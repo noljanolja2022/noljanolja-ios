@@ -131,9 +131,29 @@ struct GiftDetailView<ViewModel: GiftDetailViewModel>: View {
     @ViewBuilder
     private func buildBottomView() -> some View {
         switch viewModel.model?.giftDetailInputType {
-        case .gift: buildPricesView()
+        case .gift: buildBottomGiftShop()
         case .myGift: buildQRCodeView()
         case .none: EmptyView()
+        }
+    }
+
+    @ViewBuilder
+    private func buildBottomGiftShop() -> some View {
+        VStack {
+            buildPricesView()
+
+            VStack(spacing: 0) {
+                ShopGiftView(
+                    viewModel: ShopGiftViewModel(
+                        categoryId: viewModel.model?.giftCategory?.id,
+                        skipGiftProduct: viewModel.model?.giftDetailInputType.gift,
+                        title: L10n.maybeYouLike
+                    )
+                )
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+            .padding(.bottom, 15)
+            .background(ColorAssets.neutralLightGrey.swiftUIColor)
         }
     }
 

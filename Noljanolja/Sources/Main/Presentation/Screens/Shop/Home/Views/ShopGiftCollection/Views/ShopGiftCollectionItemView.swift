@@ -1,8 +1,8 @@
 //
-//  ShopGiftItemView.swift
+//  ShopGiftCollectionItemView.swift
 //  Noljanolja
 //
-//  Created by Nguyen The Trinh on 13/06/2023.
+//  Created by Duy Dinh on 21/11/2023.
 //
 
 import SDWebImageSwiftUI
@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - ShopGiftItemView
 
-struct ShopGiftItemView: View {
+struct ShopGiftCollectionItemView: View {
     var model: Gift
 
     var body: some View {
@@ -22,15 +22,23 @@ struct ShopGiftItemView: View {
     }
 
     private func buildContenView() -> some View {
-        HStack(spacing: 16) {
-            buildImageView()
-            buildInfoView()
+        VStack {
+            VStack(spacing: 8) {
+                buildImageView()
+                buildInfoView()
+            }
+            .background(ColorAssets.neutralLight.swiftUIColor)
+            .cornerRadius(10)
+            .padding(.bottom, 16)
         }
-        .padding(4)
-        .background(ColorAssets.neutralLight.swiftUIColor)
-        .cornerRadius(8)
+        .shadow(
+            color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.2),
+            radius: 4,
+            x: 0,
+            y: 4
+        )
     }
-    
+
     private func buildImageView() -> some View {
         GeometryReader { geometry in
             WebImage(
@@ -47,42 +55,37 @@ struct ShopGiftItemView: View {
             )
             .resizable()
             .indicator(.activity)
-            .scaledToFill()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(ColorAssets.neutralLightGrey.swiftUIColor)
-            .cornerRadius(4)
             .clipped()
+            .background(ColorAssets.neutralLightGrey.swiftUIColor)
         }
-        .frame(width: 110, height: 110)
+        .frame(width: 138 * ratioW, height: 149 * ratioH)
     }
-    
+
     private func buildInfoView() -> some View {
-        VStack(spacing: 8) {
+        VStack(alignment: .leading) {
             Text(model.brand?.name ?? "")
-                .dynamicFont(.systemFont(ofSize: 12, weight: .medium))
-                .lineLimit(1)
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .dynamicFont(.systemFont(ofSize: 11, weight: .medium))
+                .lineLimit(2)
                 .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
             Text(model.name ?? "")
-                .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
-                .lineLimit(1)
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .dynamicFont(.systemFont(ofSize: 12, weight: .medium))
+                .lineLimit(2)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
             HStack(spacing: 4) {
                 Text(String(model.price))
-                    .dynamicFont(.systemFont(ofSize: 24, weight: .bold))
+                    .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 Text(L10n.commonCash)
-                    .dynamicFont(.systemFont(ofSize: 16))
+                    .dynamicFont(.systemFont(ofSize: 14))
                     .frame(height: 24)
                     .padding(.horizontal, 8)
                     .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
                     .background(ColorAssets.secondaryYellow400.swiftUIColor)
                     .cornerRadius(12)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.leading, 8)
+        .padding(.bottom, 16)
     }
 }

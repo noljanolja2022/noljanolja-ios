@@ -91,12 +91,6 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                 }
             }
         }
-        .introspectNavigationController { navigationController in
-            navigationController.configure(
-                backgroundColor: ColorAssets.neutralLight.color,
-                foregroundColor: ColorAssets.neutralDarkGrey.color
-            )
-        }
         .fullScreenCover(
             unwrapping: $viewModel.fullScreenCoverType,
             content: {

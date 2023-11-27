@@ -24,7 +24,7 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
     }
-    
+
     private func buildMainView() -> some View {
         VideoDetailRootContainerView(
             content: {
@@ -50,15 +50,20 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
 
     @ViewBuilder
     private func buildContentView() -> some View {
-        VStack(spacing: 8) {
-            buildHeaderView()
-            buildSummaryView()
-            buildCategoriesView()
-            buildShopGiftView()
+        ScrollView {
+            VStack(spacing: 8) {
+                buildHeaderView()
+                buildSummaryView()
+                buildCategoriesView()
+                buildTopFeaturesView()
+                buildTodayOffersView()
+                buildRecommendView()
+                buildForYouView()
+            }
+            .background(ColorAssets.neutralLight.swiftUIColor)
         }
-        .background(ColorAssets.neutralLight.swiftUIColor)
     }
-    
+
     private func buildHeaderView() -> some View {
         VStack(spacing: 12) {
             HStack(spacing: 8) {
@@ -69,7 +74,7 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
                     .resizable()
                     .frame(width: 16, height: 16)
             }
-            
+
             SearchView(placeholder: L10n.shopSearchProducts, text: .constant(""))
                 .frame(maxWidth: .infinity)
                 .background(ColorAssets.neutralLightGrey.swiftUIColor)
@@ -101,7 +106,7 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
                 value: viewModel.model.coinModel?.balance.formatted() ?? "---"
             )
             SummaryItemView(
-                title: "Voucher Wallet",
+                title: L10n.voucherWallet,
                 titleColorName: ColorAssets.primaryGreen200.name,
                 imageName: ImageAssets.icWallet2.name,
                 value: (viewModel.model.coinModel?.giftCount).flatMap { String($0) } ?? "---"
@@ -118,25 +123,23 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
             y: 4
         )
     }
-    
-    private func buildShopGiftView() -> some View {
-        VStack(spacing: 0) {
-            HStack(spacing: 12) {
-                Text("For you")
-                    .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
-                ImageAssets.icArrowRight.swiftUIImage
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 24, height: 24)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, 16)
-            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
-            ShopGiftView(viewModel: ShopGiftViewModel())
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-        }
-        .padding(.top, 16)
+    private func buildTopFeaturesView() -> some View {
+        ShopGiftCollectionView(viewModel: ShopGiftCollectionViewModel(type: .topFeatures))
+            .background(ColorAssets.primaryGreen200.swiftUIColor)
+    }
+
+    private func buildTodayOffersView() -> some View {
+        ShopGiftCollectionView(viewModel: ShopGiftCollectionViewModel(type: .todayOffers))
+    }
+
+    private func buildRecommendView() -> some View {
+        ShopGiftCollectionView(viewModel: ShopGiftCollectionViewModel(type: .recommend))
+    }
+
+    private func buildForYouView() -> some View {
+        ShopGiftView(viewModel: ShopGiftViewModel(title: L10n.shopForYou))
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 

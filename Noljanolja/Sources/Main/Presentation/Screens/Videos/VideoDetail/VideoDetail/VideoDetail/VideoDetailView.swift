@@ -77,7 +77,7 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
                 HStack(spacing: 4) {
                     Button(
                         action: {
-                            viewModel.updateContentType(.pictureInPicture)
+                            viewModel.updateContentType(.bottom)
                         },
                         label: {
                             ImageAssets.icBack.swiftUIImage
@@ -90,51 +90,6 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
                         }
                     )
                     Spacer()
-                    //                Button(
-                    //                    action: {
-                    //                        viewModel.updateContentType(.pictureInPicture)
-                    //                    },
-                    //                    label: {
-                    //                        Image(systemName: "pip")
-                    //                            .resizable()
-                    //                            .scaledToFit()
-                    //                            .padding(10)
-                    //                            .aspectRatio(1, contentMode: .fit)
-                    //                            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                    //                    }
-                    //                )
-                    //
-                    //                switch Natrium.Config.configuration {
-                    //                case .development:
-                    //                    Button(
-                    //                        action: {
-                    //                            viewModel.switchPictureInPicture()
-                    //                        },
-                    //                        label: {
-                    //                            Image(systemName: "pip.swap")
-                    //                                .resizable()
-                    //                                .scaledToFit()
-                    //                                .padding(10)
-                    //                                .aspectRatio(1, contentMode: .fit)
-                    //                                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                    //                        }
-                    //                    )
-                    //                    Button(
-                    //                        action: {
-                    //                            viewModel.updateContentType(.bottom)
-                    //                        },
-                    //                        label: {
-                    //                            Image(systemName: "rectangle.portrait.bottomright.inset.filled")
-                    //                                .resizable()
-                    //                                .scaledToFit()
-                    //                                .padding(10)
-                    //                                .aspectRatio(1, contentMode: .fit)
-                    //                                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                    //                        }
-                    //                    )
-                    //                case .appstore:
-                    //                    EmptyView()
-                    //                }
                 }
                 .frame(maxWidth: .infinity)
                 .frame(height: 44)

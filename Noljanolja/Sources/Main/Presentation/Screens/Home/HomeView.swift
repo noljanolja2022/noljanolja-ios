@@ -212,45 +212,47 @@ struct HomeView<ViewModel: HomeViewModel>: View {
 
     @ViewBuilder
     private func buildTabView(_ tab: HomeTabType) -> some View {
-        VideoDetailRootContainerView(
-            content: {
-                switch tab {
-                case .chat:
-                    ConversationListView(
-                        viewModel: ConversationListViewModel(
-                            delegate: viewModel
-                        ),
-                        toolBarAction: toolBarActionSubject.eraseToAnyPublisher()
-                    )
-                case .watch:
-                    VideosView(
-                        viewModel: VideosViewModel()
-                    )
-                case .wallet:
-                    WalletView(
-                        viewModel: WalletViewModel(
-                            delegate: viewModel
-                        )
-                    )
-                case .shop:
-                    ShopHomeView(
-                        viewModel: ShopHomeViewModel()
-                    )
-                case .friends:
-                    HomeFriendView(
-                        viewModel: HomeFriendViewModel(
-                            delegate: viewModel
-                        )
-                    )
-                }
-            },
-            viewModel: VideoDetailRootContainerViewModel()
-        )
-        .tag(tab)
+        switch tab {
+        case .chat:
+            ConversationListView(
+                viewModel: ConversationListViewModel(
+                    delegate: viewModel
+                ),
+                toolBarAction: toolBarActionSubject.eraseToAnyPublisher()
+            )
+            .tag(tab)
+        case .watch:
+            VideosView(
+                viewModel: VideosViewModel()
+            )
+            .tag(tab)
+        case .wallet:
+            WalletView(
+                viewModel: WalletViewModel(
+                    delegate: viewModel
+                )
+            )
+            .tag(tab)
+        case .shop:
+            ShopHomeView(
+                viewModel: ShopHomeViewModel()
+            )
+            .tag(tab)
+        case .friends:
+            HomeFriendView(
+                viewModel: HomeFriendViewModel(
+                    delegate: viewModel
+                )
+            )
+            .tag(tab)
+        }
     }
 
     @ViewBuilder
     private func buildTabItemViews() -> some View {
+        if viewModel.tabs.contains(.friends) {
+            buildTabItemView(.friends)
+        }
         if viewModel.tabs.contains(.chat) {
             buildTabItemView(.chat)
         }
@@ -262,9 +264,6 @@ struct HomeView<ViewModel: HomeViewModel>: View {
         }
         if viewModel.tabs.contains(.shop) {
             buildTabItemView(.shop)
-        }
-        if viewModel.tabs.contains(.friends) {
-            buildTabItemView(.friends)
         }
     }
 

@@ -1,13 +1,28 @@
+//
+//  ShopGiftCollectionViewModel.swift
+//  Noljanolja
+//
+//  Created by Duy Dinh on 21/11/2023.
+//
+
 import Combine
 import Foundation
 
-// MARK: - ShopGiftListener
+// MARK: - ShopGiftCollectionListener
 
-protocol ShopGiftListener: AnyObject {}
+protocol ShopGiftCollectionListener: AnyObject {}
 
-// MARK: - ShopGiftViewModel
+// MARK: - ShopGiftCollectionType
 
-final class ShopGiftViewModel: ViewModel {
+enum ShopGiftCollectionType {
+    case topFeatures
+    case todayOffers
+    case recommend
+}
+
+// MARK: - ShopGiftCollectionViewModel
+
+final class ShopGiftCollectionViewModel: ViewModel {
     // MARK: State
 
     @Published var viewState = ViewState.loading
@@ -22,14 +37,23 @@ final class ShopGiftViewModel: ViewModel {
     // MARK: Action
 
     let loadMoreAction = PassthroughSubject<Void, Never>()
+    var type: ShopGiftCollectionType = .topFeatures
+    var title: String {
+        switch type {
+        case .topFeatures:
+            return L10n.shopTopFeatures
+        case .todayOffers:
+            return L10n.shopTodayOffers
+        case .recommend:
+            return L10n.shopRecommend
+        }
+    }
 
     // MARK: Dependencies
 
     private let giftsNetworkRepository: GiftsNetworkRepository
     private weak var listener: ShopGiftListener?
     private let categoryId: Int?
-    private let skipGiftProduct: Gift?
-    let title: String?
 
     // MARK: Private
 
@@ -40,13 +64,11 @@ final class ShopGiftViewModel: ViewModel {
     init(giftsNetworkRepository: GiftsNetworkRepository = GiftsNetworkRepositoryImpl.default,
          listener: ShopGiftListener? = nil,
          categoryId: Int? = nil,
-         skipGiftProduct: Gift? = nil,
-         title: String? = nil) {
+         type: ShopGiftCollectionType) {
         self.giftsNetworkRepository = giftsNetworkRepository
         self.listener = listener
         self.categoryId = categoryId
-        self.skipGiftProduct = skipGiftProduct
-        self.title = title
+        self.type = type
         super.init()
 
         configure()
@@ -73,26 +95,31 @@ final class ShopGiftViewModel: ViewModel {
                 self?.viewState = .loading
                 self?.footerState = .loading
             })
-            .flatMapLatestToResult { [weak self] page -> AnyPublisher<PaginationResponse<[Gift]>, Error> in
+            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<PaginationResponse<[Gift]>, Error> in
                 guard let self else {
                     return Empty<PaginationResponse<[Gift]>, Error>().eraseToAnyPublisher()
                 }
-                return self.giftsNetworkRepository
-                    .getGiftsInShop(categoryId: categoryId, page: page, pageSize: self.pageSize)
+                switch self.type {
+                case .topFeatures:
+                    return self.giftsNetworkRepository
+                        .getGiftsInShop(isFeatured: true)
+                case .todayOffers:
+                    return self.giftsNetworkRepository
+                        .getGiftsInShop(isTodayOffer: true)
+                case .recommend:
+                    return self.giftsNetworkRepository
+                        .getGiftsInShop(isRecommend: true)
+                }
             }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
                 guard let self else { return }
                 switch result {
                 case let .success(response):
-                    var models = response.data
-                    if let skipGiftProduct = self.skipGiftProduct {
-                        models = response.data.filter { $0.id != skipGiftProduct.id }
-                    }
                     if response.pagination.page == NetworkConfigs.Param.firstPage {
-                        self.models = models
+                        self.models = response.data
                     } else {
-                        self.models = self.models + models
+                        self.models = self.models + response.data
                     }
                     self.page = response.pagination.page
                     self.viewState = .content

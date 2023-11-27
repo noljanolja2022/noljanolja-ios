@@ -172,6 +172,8 @@ internal enum L10n {
   internal static let commonAll = L10n.tr("Localizable", "common_all", fallback: "All")
   /// Cancel
   internal static let commonCancel = L10n.tr("Localizable", "common_cancel", fallback: "Cancel")
+  /// Cash
+  internal static let commonCash = L10n.tr("Localizable", "common_cash", fallback: "Cash")
   /// Chat
   internal static let commonChat = L10n.tr("Localizable", "common_chat", fallback: "Chat")
   /// Complete
@@ -384,8 +386,8 @@ internal enum L10n {
   internal static let exchangeTitle = L10n.tr("Localizable", "exchange_title", fallback: "Exchange")
   /// Forgot your password?
   internal static let forgotPassword = L10n.tr("Localizable", "forgot_password", fallback: "Forgot your password?")
-  /// Friendlist
-  internal static let friendList = L10n.tr("Localizable", "friend_list", fallback: "Friendlist")
+  /// Friend list
+  internal static let friendList = L10n.tr("Localizable", "friend_list", fallback: "Friend list")
   /// Full agreement
   internal static let fullAgreement = L10n.tr("Localizable", "full_agreement", fallback: "Full agreement")
   /// + %@ Points after watching
@@ -456,6 +458,8 @@ internal enum L10n {
   internal static let loginPhoneDescription = L10n.tr("Localizable", "login_phone_description", fallback: "Welcome to NolgoBulja. Please enter your Phone number to join continue.")
   /// Phone Number
   internal static let loginPhoneInputLabel = L10n.tr("Localizable", "login_phone_input_label", fallback: "Phone Number")
+  /// Maybe you like
+  internal static let maybeYouLike = L10n.tr("Localizable", "maybe_you_like", fallback: "Maybe you like")
   /// Announcement
   internal static let menuAnnouncement = L10n.tr("Localizable", "menu_announcement", fallback: "Announcement")
   /// Check out and play
@@ -617,6 +621,8 @@ internal enum L10n {
   internal static let shopCoupon = L10n.tr("Localizable", "shop_coupon", fallback: "Coupon")
   /// Exchanged Coupons
   internal static let shopExchangedCoupons = L10n.tr("Localizable", "shop_exchanged_coupons", fallback: "Exchanged Coupons")
+  /// For you
+  internal static let shopForYou = L10n.tr("Localizable", "shop_for_you", fallback: "For you")
   /// Coupon
   internal static let shopGift = L10n.tr("Localizable", "shop_gift", fallback: "Coupon")
   /// Got it
@@ -627,8 +633,14 @@ internal enum L10n {
   internal static let shopLater = L10n.tr("Localizable", "shop_later", fallback: "Later")
   /// Your order has been completed. Check in Exchanged Coupon.
   internal static let shopOrderGiftSuccess = L10n.tr("Localizable", "shop_order_gift_success", fallback: "Your order has been completed. Check in Exchanged Coupon.")
+  /// Recommend
+  internal static let shopRecommend = L10n.tr("Localizable", "shop_recommend", fallback: "Recommend")
   /// Search products
   internal static let shopSearchProducts = L10n.tr("Localizable", "shop_search_products", fallback: "Search products")
+  /// Today offers
+  internal static let shopTodayOffers = L10n.tr("Localizable", "shop_today_offers", fallback: "Today offers")
+  /// Top Features
+  internal static let shopTopFeatures = L10n.tr("Localizable", "shop_top_features", fallback: "Top Features")
   /// View all
   internal static let shopViewAll = L10n.tr("Localizable", "shop_view_all", fallback: "View all")
   /// Welcome to NolgoBulja shop!
@@ -798,6 +810,8 @@ internal enum L10n {
   internal static let videoSearchVideo = L10n.tr("Localizable", "video_search_video", fallback: "Search video")
   /// Let‘s get points by watching
   internal static let videoTitle = L10n.tr("Localizable", "video_title", fallback: "Let‘s get points by watching")
+  /// Voucher Wallet
+  internal static let voucherWallet = L10n.tr("Localizable", "voucher_wallet", fallback: "Voucher Wallet")
   /// Accumulated points for the day
   internal static let walletAccumulatedPoint = L10n.tr("Localizable", "wallet_accumulated_point", fallback: "Accumulated points for the day")
   /// Attend now
@@ -858,6 +872,12 @@ internal enum L10n {
   internal static let walletToGet = L10n.tr("Localizable", "wallet_to_get", fallback: "To get")
   /// View History
   internal static let walletViewHistory = L10n.tr("Localizable", "wallet_view_history", fallback: "View History")
+  /// by
+  internal static let watchBy = L10n.tr("Localizable", "watch_by", fallback: "by")
+  /// Let's get
+  internal static let watchLetGet = L10n.tr("Localizable", "watch_let_get", fallback: "Let's get")
+  /// watching
+  internal static let watchWatch = L10n.tr("Localizable", "watch_watch", fallback: "watching")
   /// Welcome to NolgoBulja. Watch videos,play and earn.
   internal static let welcomeNoljanolja = L10n.tr("Localizable", "welcome_noljanolja", fallback: "Welcome to NolgoBulja. Watch videos,play and earn.")
 }
