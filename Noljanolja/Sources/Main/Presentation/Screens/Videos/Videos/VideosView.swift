@@ -110,10 +110,10 @@ struct VideosView<ViewModel: VideosViewModel>: View {
             settingAction: {}
         ) {
             ZStack {
-                Text("Let's Get ").foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                    + Text("Points \n").foregroundColor(ColorAssets.primaryGreen200.swiftUIColor).fontWeight(.bold)
-                    + Text("By ").foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                    + Text("Watching").foregroundColor(ColorAssets.secondaryYellow400.swiftUIColor).fontWeight(.bold)
+                Text(L10n.watchLetGet + " ").foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    + Text(L10n.commonPoints + "\n").foregroundColor(ColorAssets.primaryGreen200.swiftUIColor).fontWeight(.bold)
+                    + Text(L10n.watchBy + " ").foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    + Text(L10n.watchWatch).foregroundColor(ColorAssets.secondaryYellow400.swiftUIColor).fontWeight(.bold)
             }
             .dynamicFont(.systemFont(ofSize: 24))
         }

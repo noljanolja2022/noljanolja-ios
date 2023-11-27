@@ -14,7 +14,6 @@ struct ShopGiftCollectionView: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ShopGiftCollectionViewModel
-    var title = ""
 
     var body: some View {
         buildBodyView()
@@ -37,7 +36,7 @@ struct ShopGiftCollectionView: View {
     private func buildMainView() -> some View {
         VStack(alignment: .leading) {
             HStack {
-                Text(title)
+                Text(viewModel.title)
                     .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                 ImageAssets.icArrowRight.swiftUIImage
                     .resizable()

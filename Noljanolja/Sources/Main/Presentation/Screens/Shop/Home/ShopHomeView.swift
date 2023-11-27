@@ -56,8 +56,8 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
                 buildSummaryView()
                 buildCategoriesView()
                 buildTopFeaturesView()
-//                buildTodayOffersView()
-//                buildRecommendView()
+                buildTodayOffersView()
+                buildRecommendView()
                 buildForYouView()
             }
             .background(ColorAssets.neutralLight.swiftUIColor)
@@ -125,16 +125,16 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
     }
 
     private func buildTopFeaturesView() -> some View {
-        ShopGiftCollectionView(viewModel: ShopGiftCollectionViewModel(), title: L10n.shopTopFeatures)
+        ShopGiftCollectionView(viewModel: ShopGiftCollectionViewModel(type: .topFeatures))
             .background(ColorAssets.primaryGreen200.swiftUIColor)
     }
 
     private func buildTodayOffersView() -> some View {
-        ShopGiftCollectionView(viewModel: ShopGiftCollectionViewModel(), title: L10n.shopTodayOffers)
+        ShopGiftCollectionView(viewModel: ShopGiftCollectionViewModel(type: .todayOffers))
     }
 
     private func buildRecommendView() -> some View {
-        ShopGiftCollectionView(viewModel: ShopGiftCollectionViewModel(), title: L10n.shopRecommend)
+        ShopGiftCollectionView(viewModel: ShopGiftCollectionViewModel(type: .recommend))
     }
 
     private func buildForYouView() -> some View {

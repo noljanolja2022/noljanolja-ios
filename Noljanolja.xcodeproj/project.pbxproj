@@ -22,9 +22,9 @@
 		2BFAD9CF2B0C6AE4003594A4 /* SearchGiftResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFAD9CE2B0C6AE4003594A4 /* SearchGiftResultView.swift */; };
 		2BFAD9D12B0C6B4D003594A4 /* SearchGiftNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFAD9D02B0C6B4D003594A4 /* SearchGiftNavigations.swift */; };
 		2BFAD9D32B0C6BD3003594A4 /* SearchGiftResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFAD9D22B0C6BD3003594A4 /* SearchGiftResultsViewModel.swift */; };
-		7647F56A2DB765C44F009B8C /* Pods_Noljanolja_NoljanoljaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 264F630FC4DDFC0E9074F9D2 /* Pods_Noljanolja_NoljanoljaUITests.framework */; };
-		8353A88CBCF1CAFD239985BE /* Pods_NoljanoljaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD0295CC3C0D04548A9867CB /* Pods_NoljanoljaTests.framework */; };
-		AEDBBDE12EEA3CADCA87D4F2 /* Pods_Noljanolja.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAB5BA5AC93BBFAA68677C79 /* Pods_Noljanolja.framework */; };
+		90882947172649F9E9BE6DDE /* Pods_Noljanolja_NoljanoljaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BCB5A1163B1650E0F515ADB /* Pods_Noljanolja_NoljanoljaUITests.framework */; };
+		BD7CF3BA8EDFD1C9E4D55F08 /* Pods_Noljanolja.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29DCA912D7DD4BB2BC9E1AFE /* Pods_Noljanolja.framework */; };
+		C3ACE5900BE2AF68D358536B /* Pods_NoljanoljaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 828C4099EEE1200A4BF218A4 /* Pods_NoljanoljaTests.framework */; };
 		CF00D14E299407EB00505702 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CF00D150299407EB00505702 /* Localizable.strings */; };
 		CF00D1692994E0A700505702 /* TextField+ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D1682994E0A700505702 /* TextField+ErrorMessage.swift */; };
 		CF00D1732995457600505702 /* ProgressHUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF00D1722995457600505702 /* ProgressHUDView.swift */; };
@@ -625,10 +625,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0DBF76FA6A01D9DCD69E6220 /* Pods-Noljanolja.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja.release.xcconfig"; path = "Target Support Files/Pods-Noljanolja/Pods-Noljanolja.release.xcconfig"; sourceTree = "<group>"; };
-		1F2349C15C44A8E1267B843B /* Pods-Noljanolja-NoljanoljaUITests.ad hoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.ad hoc.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.ad hoc.xcconfig"; sourceTree = "<group>"; };
-		216373F9231F3C6A300BE8C9 /* Pods-Noljanolja-NoljanoljaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.release.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.release.xcconfig"; sourceTree = "<group>"; };
-		264F630FC4DDFC0E9074F9D2 /* Pods_Noljanolja_NoljanoljaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Noljanolja_NoljanoljaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		031EB88ABBFAE800D1C79C28 /* Pods-Noljanolja-NoljanoljaUITests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.development.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.development.xcconfig"; sourceTree = "<group>"; };
+		1159DC12E3371A2BE30601EA /* Pods-NoljanoljaTests.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoljanoljaTests.appstore.xcconfig"; path = "Target Support Files/Pods-NoljanoljaTests/Pods-NoljanoljaTests.appstore.xcconfig"; sourceTree = "<group>"; };
+		29DCA912D7DD4BB2BC9E1AFE /* Pods_Noljanolja.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Noljanolja.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B5FC3BF2B021A4300906C18 /* HeaderCommonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCommonView.swift; sourceTree = "<group>"; };
 		2B5FC3C12B0285FA00906C18 /* HomeFriendNavigationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFriendNavigationType.swift; sourceTree = "<group>"; };
 		2B6876F82AFDEA21000BBD55 /* ListSocialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSocialView.swift; sourceTree = "<group>"; };
@@ -653,12 +652,10 @@
 		67F6E05E9B2EC43CAF12E51A /* Pods-Noljanolja.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja.debug.xcconfig"; path = "Target Support Files/Pods-Noljanolja/Pods-Noljanolja.debug.xcconfig"; sourceTree = "<group>"; };
 		68016C1068177F62AF6FE494 /* Pods-NoljanoljaTests.ad hoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoljanoljaTests.ad hoc.xcconfig"; path = "Target Support Files/Pods-NoljanoljaTests/Pods-NoljanoljaTests.ad hoc.xcconfig"; sourceTree = "<group>"; };
 		6993BE330DAA18645F50C697 /* Pods-NoljanoljaTests.app store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoljanoljaTests.app store.xcconfig"; path = "Target Support Files/Pods-NoljanoljaTests/Pods-NoljanoljaTests.app store.xcconfig"; sourceTree = "<group>"; };
-		73EF59F50B2CC10F71D05CCA /* Pods-NoljanoljaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoljanoljaTests.debug.xcconfig"; path = "Target Support Files/Pods-NoljanoljaTests/Pods-NoljanoljaTests.debug.xcconfig"; sourceTree = "<group>"; };
-		8ECA425ABE84B0928E360095 /* Pods-Noljanolja-NoljanoljaUITests.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.dev.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.dev.xcconfig"; sourceTree = "<group>"; };
-		9437E8407EBB11681966323A /* Pods-Noljanolja-NoljanoljaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.debug.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		A054D4120FA7B3DA1C0F8746 /* Pods-Noljanolja.ad hoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja.ad hoc.xcconfig"; path = "Target Support Files/Pods-Noljanolja/Pods-Noljanolja.ad hoc.xcconfig"; sourceTree = "<group>"; };
-		AD0295CC3C0D04548A9867CB /* Pods_NoljanoljaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoljanoljaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CCA5F0DD9B3B2290AE80BE14 /* Pods-NoljanoljaTests.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoljanoljaTests.dev.xcconfig"; path = "Target Support Files/Pods-NoljanoljaTests/Pods-NoljanoljaTests.dev.xcconfig"; sourceTree = "<group>"; };
+		2F4FEBDF44229EFA33F9F6A0 /* Pods-Noljanolja.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja.development.xcconfig"; path = "Target Support Files/Pods-Noljanolja/Pods-Noljanolja.development.xcconfig"; sourceTree = "<group>"; };
+		4BCB5A1163B1650E0F515ADB /* Pods_Noljanolja_NoljanoljaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Noljanolja_NoljanoljaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A4115819B6ADA7895299D44 /* Pods-Noljanolja.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja.appstore.xcconfig"; path = "Target Support Files/Pods-Noljanolja/Pods-Noljanolja.appstore.xcconfig"; sourceTree = "<group>"; };
+		828C4099EEE1200A4BF218A4 /* Pods_NoljanoljaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoljanoljaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF00D14F299407EB00505702 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CF00D151299407EF00505702 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CF00D1682994E0A700505702 /* TextField+ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+ErrorMessage.swift"; sourceTree = "<group>"; };
@@ -1220,16 +1217,14 @@
 		CFFD70D4298AC92500D4F5A2 /* UserNetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetworkRepository.swift; sourceTree = "<group>"; };
 		CFFD70D8298ACAF600D4F5A2 /* BaseTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTargetType.swift; sourceTree = "<group>"; };
 		CFFD718C298AD38C00D4F5A2 /* ColorAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorAssets.xcassets; sourceTree = "<group>"; };
-		D679419D0EF876C4EEBBF3F7 /* Pods-NoljanoljaTests.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoljanoljaTests.appstore.xcconfig"; path = "Target Support Files/Pods-NoljanoljaTests/Pods-NoljanoljaTests.appstore.xcconfig"; sourceTree = "<group>"; };
 		E1A1B0632B065CDB00BF7D5B /* FriendDetailNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDetailNavigation.swift; sourceTree = "<group>"; };
 		E1A9665E2B0BC9C700AFF04F /* ShopGiftCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopGiftCollectionView.swift; sourceTree = "<group>"; };
 		E1A966602B0BC9D300AFF04F /* ShopGiftCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopGiftCollectionViewModel.swift; sourceTree = "<group>"; };
 		E1A966622B0BC9DF00AFF04F /* ShopGiftCollectionNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopGiftCollectionNavigation.swift; sourceTree = "<group>"; };
 		E1A966652B0BCB2D00AFF04F /* ShopGiftCollectionItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopGiftCollectionItemView.swift; sourceTree = "<group>"; };
 		E1C03C902B0E6E2F005222EB /* UIScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIScreen.swift; sourceTree = "<group>"; };
-		E631AD828276D3ED189B00A1 /* Pods-Noljanolja-NoljanoljaUITests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.development.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.development.xcconfig"; sourceTree = "<group>"; };
-		F53231636127B61B7E5B0B97 /* Pods-NoljanoljaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoljanoljaTests.release.xcconfig"; path = "Target Support Files/Pods-NoljanoljaTests/Pods-NoljanoljaTests.release.xcconfig"; sourceTree = "<group>"; };
-		FAB5BA5AC93BBFAA68677C79 /* Pods_Noljanolja.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Noljanolja.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED964690C5488DEDAA6BF93D /* Pods-NoljanoljaTests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoljanoljaTests.development.xcconfig"; path = "Target Support Files/Pods-NoljanoljaTests/Pods-NoljanoljaTests.development.xcconfig"; sourceTree = "<group>"; };
+		FB6783F1CF506A2481793845 /* Pods-Noljanolja-NoljanoljaUITests.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.appstore.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.appstore.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1256,7 +1251,6 @@
 				CF14F24F298CC11700BC2066 /* FirebaseAuthCombine-Community in Frameworks */,
 				CFE48BC1299206830062C903 /* KeychainAccess in Frameworks */,
 				CFFD70D0298AC7A900D4F5A2 /* CombineMoya in Frameworks */,
-				AEDBBDE12EEA3CADCA87D4F2 /* Pods_Noljanolja.framework in Frameworks */,
 				CF88ABCD299F2E7400D8AB67 /* SwiftUINavigation in Frameworks */,
 				CF45BCB62A67C68C003FB991 /* IQKeyboardManagerSwift in Frameworks */,
 				CF54FA2929D01F8A0092E2C6 /* Zip in Frameworks */,
@@ -1266,6 +1260,7 @@
 				CF62EF8D29B254DD00D6B688 /* _SwiftUINavigationState in Frameworks */,
 				CF775BC629C62CF400E82183 /* FirebaseMessaging in Frameworks */,
 				CFE09257298DF78700F197F0 /* SwiftyBeaver in Frameworks */,
+				BD7CF3BA8EDFD1C9E4D55F08 /* Pods_Noljanolja.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1273,7 +1268,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8353A88CBCF1CAFD239985BE /* Pods_NoljanoljaTests.framework in Frameworks */,
+				C3ACE5900BE2AF68D358536B /* Pods_NoljanoljaTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1281,7 +1276,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7647F56A2DB765C44F009B8C /* Pods_Noljanolja_NoljanoljaUITests.framework in Frameworks */,
+				90882947172649F9E9BE6DDE /* Pods_Noljanolja_NoljanoljaUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1347,29 +1342,24 @@
 		7EDA28669CED10C0C42B836E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				67F6E05E9B2EC43CAF12E51A /* Pods-Noljanolja.debug.xcconfig */,
-				0DBF76FA6A01D9DCD69E6220 /* Pods-Noljanolja.release.xcconfig */,
-				9437E8407EBB11681966323A /* Pods-Noljanolja-NoljanoljaUITests.debug.xcconfig */,
-				216373F9231F3C6A300BE8C9 /* Pods-Noljanolja-NoljanoljaUITests.release.xcconfig */,
-				73EF59F50B2CC10F71D05CCA /* Pods-NoljanoljaTests.debug.xcconfig */,
-				F53231636127B61B7E5B0B97 /* Pods-NoljanoljaTests.release.xcconfig */,
-				A054D4120FA7B3DA1C0F8746 /* Pods-Noljanolja.ad hoc.xcconfig */,
-				56F78F2ABFFB46140C6712E1 /* Pods-Noljanolja.app store.xcconfig */,
-				1F2349C15C44A8E1267B843B /* Pods-Noljanolja-NoljanoljaUITests.ad hoc.xcconfig */,
-				2DDD25D24A7930AF482D9C5C /* Pods-Noljanolja-NoljanoljaUITests.app store.xcconfig */,
-				68016C1068177F62AF6FE494 /* Pods-NoljanoljaTests.ad hoc.xcconfig */,
-				6993BE330DAA18645F50C697 /* Pods-NoljanoljaTests.app store.xcconfig */,
-				5474C50410F0452A681DEAAB /* Pods-Noljanolja.dev.xcconfig */,
-				8ECA425ABE84B0928E360095 /* Pods-Noljanolja-NoljanoljaUITests.dev.xcconfig */,
-				CCA5F0DD9B3B2290AE80BE14 /* Pods-NoljanoljaTests.dev.xcconfig */,
-				5879C2BFEBE4D9558BAF7834 /* Pods-Noljanolja.appstore.xcconfig */,
-				6715BC6ABC822611987F15CD /* Pods-Noljanolja-NoljanoljaUITests.appstore.xcconfig */,
-				D679419D0EF876C4EEBBF3F7 /* Pods-NoljanoljaTests.appstore.xcconfig */,
-				62853F89AA74EE0E0B3A818C /* Pods-Noljanolja.development.xcconfig */,
-				E631AD828276D3ED189B00A1 /* Pods-Noljanolja-NoljanoljaUITests.development.xcconfig */,
-				4186FA57228107FEF2D2C426 /* Pods-NoljanoljaTests.development.xcconfig */,
+				2F4FEBDF44229EFA33F9F6A0 /* Pods-Noljanolja.development.xcconfig */,
+				7A4115819B6ADA7895299D44 /* Pods-Noljanolja.appstore.xcconfig */,
+				031EB88ABBFAE800D1C79C28 /* Pods-Noljanolja-NoljanoljaUITests.development.xcconfig */,
+				FB6783F1CF506A2481793845 /* Pods-Noljanolja-NoljanoljaUITests.appstore.xcconfig */,
+				ED964690C5488DEDAA6BF93D /* Pods-NoljanoljaTests.development.xcconfig */,
+				1159DC12E3371A2BE30601EA /* Pods-NoljanoljaTests.appstore.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		A4D10B9F48A79FED24B93251 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29DCA912D7DD4BB2BC9E1AFE /* Pods_Noljanolja.framework */,
+				4BCB5A1163B1650E0F515ADB /* Pods_Noljanolja_NoljanoljaUITests.framework */,
+				828C4099EEE1200A4BF218A4 /* Pods_NoljanoljaTests.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		CF00D158299417F400505702 /* Combines */ = {
@@ -1472,16 +1462,6 @@
 				CF1376CB2B07CDA9006E255B /* RemoteConfigModel.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		CF0E8843298D4E09000DAE4A /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				FAB5BA5AC93BBFAA68677C79 /* Pods_Noljanolja.framework */,
-				264F630FC4DDFC0E9074F9D2 /* Pods_Noljanolja_NoljanoljaUITests.framework */,
-				AD0295CC3C0D04548A9867CB /* Pods_NoljanoljaTests.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		CF11B1D629BB32FA002E8151 /* List */ = {
@@ -3769,8 +3749,8 @@
 				CFFD7091298ABA0100D4F5A2 /* NoljanoljaTests */,
 				CFFD709B298ABA0100D4F5A2 /* NoljanoljaUITests */,
 				CFFD707F298AB9FF00D4F5A2 /* Products */,
-				CF0E8843298D4E09000DAE4A /* Frameworks */,
 				7EDA28669CED10C0C42B836E /* Pods */,
+				A4D10B9F48A79FED24B93251 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -3978,14 +3958,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CFFD70A2298ABA0100D4F5A2 /* Build configuration list for PBXNativeTarget "Noljanolja" */;
 			buildPhases = (
-				BEC4C7E6D3B93AE685205DFD /* [CP] Check Pods Manifest.lock */,
+				C06E6E3356710FF68C354291 /* [CP] Check Pods Manifest.lock */,
 				CF14F240298C317E00BC2066 /* SwiftGen */,
 				CF14F23E298C30EB00BC2066 /* SwiftFormat */,
 				CFFD707A298AB9FF00D4F5A2 /* Sources */,
 				CFFD707B298AB9FF00D4F5A2 /* Frameworks */,
 				CFFD707C298AB9FF00D4F5A2 /* Resources */,
-				51F25C28F75DE5BDD1BEDF70 /* [CP] Embed Pods Frameworks */,
 				CF0E8846298D4E50000DAE4A /* Crashlytics */,
+				AF9F580DFD1C5D300C6F011A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -4030,7 +4010,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CFFD70A5298ABA0100D4F5A2 /* Build configuration list for PBXNativeTarget "NoljanoljaTests" */;
 			buildPhases = (
-				E6DDCA06F15064E6E7F40ABF /* [CP] Check Pods Manifest.lock */,
+				2B72DD0A19CC223BB617AA28 /* [CP] Check Pods Manifest.lock */,
 				CFFD708A298ABA0100D4F5A2 /* Sources */,
 				CFFD708B298ABA0100D4F5A2 /* Frameworks */,
 				CFFD708C298ABA0100D4F5A2 /* Resources */,
@@ -4049,11 +4029,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CFFD70A8298ABA0100D4F5A2 /* Build configuration list for PBXNativeTarget "NoljanoljaUITests" */;
 			buildPhases = (
-				7A342D1BD644929A68C3046B /* [CP] Check Pods Manifest.lock */,
+				FFC96D647E803C04B901E458 /* [CP] Check Pods Manifest.lock */,
 				CFFD7094298ABA0100D4F5A2 /* Sources */,
 				CFFD7095298ABA0100D4F5A2 /* Frameworks */,
 				CFFD7096298ABA0100D4F5A2 /* Resources */,
-				27934394C515CB0DC1EB374F /* [CP] Embed Pods Frameworks */,
+				8793F52D7216492FAA9E93A0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -4102,8 +4082,8 @@
 				CFFD70CE298AC7A900D4F5A2 /* XCRemoteSwiftPackageReference "Moya" */,
 				CF14F24B298CC11600BC2066 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				CFE9D2DB298D66F700D936DA /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
-				CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
-				CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
+				CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk.git" */,
+				CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver.git" */,
 				CFE09270298FEACD00F197F0 /* XCRemoteSwiftPackageReference "SwifterSwift" */,
 				CFE48BBF299206830062C903 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				CF6ABC212993617F00D78213 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
@@ -4112,14 +4092,14 @@
 				CFF1F7A929B737F300B25DD2 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 				CF52AB7129B8E3B600C9C90C /* XCRemoteSwiftPackageReference "realm-swift" */,
 				CF9779DA29BE2FC600D1CAB0 /* XCRemoteSwiftPackageReference "PhoneNumberKit" */,
-				CF10C7EF29C21FAE0020924D /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */,
+				CF10C7EF29C21FAE0020924D /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines.git" */,
 				CF54FA2729D01F8A0092E2C6 /* XCRemoteSwiftPackageReference "Zip" */,
 				CF076D4F29D0BF2B0013B6F9 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				CF076D5529D0C0120013B6F9 /* XCRemoteSwiftPackageReference "SDWebImageWebPCoder" */,
 				CF446B8329D89C3000ED66BF /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				CFF520F92A17D92400F29A4E /* XCRemoteSwiftPackageReference "Charts" */,
-				CF45BCB42A67C68C003FB991 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
-				2BF3B31C2AFC8EFA00A1CC6F /* XCRemoteSwiftPackageReference "AlertToast" */,
+				CF45BCB42A67C68C003FB991 /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */,
+				2BF3B31C2AFC8EFA00A1CC6F /* XCRemoteSwiftPackageReference "AlertToast.git" */,
 			);
 			productRefGroup = CFFD707F298AB9FF00D4F5A2 /* Products */;
 			projectDirPath = "";
@@ -4169,7 +4149,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		27934394C515CB0DC1EB374F /* [CP] Embed Pods Frameworks */ = {
+		2B72DD0A19CC223BB617AA28 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NoljanoljaTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8793F52D7216492FAA9E93A0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -4186,7 +4188,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		51F25C28F75DE5BDD1BEDF70 /* [CP] Embed Pods Frameworks */ = {
+		AF9F580DFD1C5D300C6F011A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -4203,29 +4205,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Noljanolja/Pods-Noljanolja-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7A342D1BD644929A68C3046B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Noljanolja-NoljanoljaUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BEC4C7E6D3B93AE685205DFD /* [CP] Check Pods Manifest.lock */ = {
+		C06E6E3356710FF68C354291 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -4303,7 +4283,7 @@
 			shellPath = /bin/sh;
 			shellScript = "cd Noljanolja/BuildTools\nSDKROOT=(xcrun --sdk macosx --show-sdk-path)\nswift run -c release swiftgen config run --config \"$SRCROOT/Noljanolja/BuildTools/Scripts/swiftgen.yml\"\n";
 		};
-		E6DDCA06F15064E6E7F40ABF /* [CP] Check Pods Manifest.lock */ = {
+		FFC96D647E803C04B901E458 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -4318,7 +4298,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-NoljanoljaTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Noljanolja-NoljanoljaUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -4997,7 +4977,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_SWIFT_FLAGS = $NATRIUM_OTHER_SWIFT_FLAGS;
+				OTHER_SWIFT_FLAGS = "$NATRIUM_OTHER_SWIFT_FLAGS";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -5007,7 +4987,7 @@
 		};
 		CF1E5D822A699D8200481376 /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5879C2BFEBE4D9558BAF7834 /* Pods-Noljanolja.appstore.xcconfig */;
+			baseConfigurationReference = 7A4115819B6ADA7895299D44 /* Pods-Noljanolja.appstore.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -5015,14 +4995,14 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = $NATRIUM_CURRENT_PROJECT_VERSION;
+				CURRENT_PROJECT_VERSION = "$NATRIUM_CURRENT_PROJECT_VERSION";
 				DEVELOPMENT_ASSET_PATHS = "\"Noljanolja/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = YN4QYR8CRU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Noljanolja/Sources/Main/Presentation/App/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = $NATRIUM_DISPLAY_NAME;
+				INFOPLIST_KEY_CFBundleDisplayName = "$NATRIUM_DISPLAY_NAME";
 				INFOPLIST_KEY_NSCameraUsageDescription = "To enhance the user experience, please grant permissions to the app";
 				INFOPLIST_KEY_NSContactsUsageDescription = "To help you message friends and family on Noja Noja, allow Noja Noja access to your contacts";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To enhance the user experience, please grant permissions to the app";
@@ -5037,11 +5017,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = $NATRIUM_MARKETING_VERSION;
-				PRODUCT_BUNDLE_IDENTIFIER = $NATRIUM_PRODUCT_BUNDLE_IDENTIFIER;
+				MARKETING_VERSION = "$NATRIUM_MARKETING_VERSION";
+				PRODUCT_BUNDLE_IDENTIFIER = "$NATRIUM_PRODUCT_BUNDLE_IDENTIFIER";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = $NATRIUM_PROVISIONING_PROFILE_SPECIFIER;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "$NATRIUM_PROVISIONING_PROFILE_SPECIFIER";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -5050,7 +5030,7 @@
 		};
 		CF1E5D832A699D8200481376 /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D679419D0EF876C4EEBBF3F7 /* Pods-NoljanoljaTests.appstore.xcconfig */;
+			baseConfigurationReference = 1159DC12E3371A2BE30601EA /* Pods-NoljanoljaTests.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -5070,7 +5050,7 @@
 		};
 		CF1E5D842A699D8200481376 /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6715BC6ABC822611987F15CD /* Pods-Noljanolja-NoljanoljaUITests.appstore.xcconfig */;
+			baseConfigurationReference = FB6783F1CF506A2481793845 /* Pods-Noljanolja-NoljanoljaUITests.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -5141,7 +5121,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_SWIFT_FLAGS = $NATRIUM_OTHER_SWIFT_FLAGS;
+				OTHER_SWIFT_FLAGS = "$NATRIUM_OTHER_SWIFT_FLAGS";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -5150,7 +5130,7 @@
 		};
 		CFFD70A3298ABA0100D4F5A2 /* Development */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 62853F89AA74EE0E0B3A818C /* Pods-Noljanolja.development.xcconfig */;
+			baseConfigurationReference = 2F4FEBDF44229EFA33F9F6A0 /* Pods-Noljanolja.development.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -5158,14 +5138,14 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = $NATRIUM_CURRENT_PROJECT_VERSION;
+				CURRENT_PROJECT_VERSION = "$NATRIUM_CURRENT_PROJECT_VERSION";
 				DEVELOPMENT_ASSET_PATHS = "\"Noljanolja/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = YN4QYR8CRU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Noljanolja/Sources/Main/Presentation/App/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = $NATRIUM_DISPLAY_NAME;
+				INFOPLIST_KEY_CFBundleDisplayName = "$NATRIUM_DISPLAY_NAME";
 				INFOPLIST_KEY_NSCameraUsageDescription = "To enhance the user experience, please grant permissions to the app";
 				INFOPLIST_KEY_NSContactsUsageDescription = "To help you message friends and family on Noja Noja, allow Noja Noja access to your contacts";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To enhance the user experience, please grant permissions to the app";
@@ -5180,8 +5160,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = $NATRIUM_MARKETING_VERSION;
-				PRODUCT_BUNDLE_IDENTIFIER = $NATRIUM_PRODUCT_BUNDLE_IDENTIFIER;
+				MARKETING_VERSION = "$NATRIUM_MARKETING_VERSION";
+				PRODUCT_BUNDLE_IDENTIFIER = "$NATRIUM_PRODUCT_BUNDLE_IDENTIFIER";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "NolgoBulja-Dev-Development";
@@ -5193,7 +5173,7 @@
 		};
 		CFFD70A6298ABA0100D4F5A2 /* Development */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4186FA57228107FEF2D2C426 /* Pods-NoljanoljaTests.development.xcconfig */;
+			baseConfigurationReference = ED964690C5488DEDAA6BF93D /* Pods-NoljanoljaTests.development.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -5213,7 +5193,7 @@
 		};
 		CFFD70A9298ABA0100D4F5A2 /* Development */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E631AD828276D3ED189B00A1 /* Pods-Noljanolja-NoljanoljaUITests.development.xcconfig */;
+			baseConfigurationReference = 031EB88ABBFAE800D1C79C28 /* Pods-Noljanolja-NoljanoljaUITests.development.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -5271,7 +5251,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2BF3B31C2AFC8EFA00A1CC6F /* XCRemoteSwiftPackageReference "AlertToast" */ = {
+		2BF3B31C2AFC8EFA00A1CC6F /* XCRemoteSwiftPackageReference "AlertToast.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/elai950/AlertToast.git";
 			requirement = {
@@ -5295,7 +5275,7 @@
 				version = 0.9.1;
 			};
 		};
-		CF10C7EF29C21FAE0020924D /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */ = {
+		CF10C7EF29C21FAE0020924D /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/rickclephas/KMP-NativeCoroutines.git";
 			requirement = {
@@ -5319,7 +5299,7 @@
 				version = 4.1.3;
 			};
 		};
-		CF45BCB42A67C68C003FB991 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+		CF45BCB42A67C68C003FB991 /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
 			requirement = {
@@ -5367,7 +5347,7 @@
 				version = 3.5.7;
 			};
 		};
-		CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
+		CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver.git";
 			requirement = {
@@ -5399,7 +5379,7 @@
 				version = 7.0.0;
 			};
 		};
-		CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+		CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kakao/kakao-ios-sdk.git";
 			requirement = {
@@ -5444,7 +5424,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		2BF3B31D2AFC8EFA00A1CC6F /* AlertToast */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2BF3B31C2AFC8EFA00A1CC6F /* XCRemoteSwiftPackageReference "AlertToast" */;
+			package = 2BF3B31C2AFC8EFA00A1CC6F /* XCRemoteSwiftPackageReference "AlertToast.git" */;
 			productName = AlertToast;
 		};
 		CF076D5029D0BF2B0013B6F9 /* SDWebImageSwiftUI */ = {
@@ -5464,7 +5444,7 @@
 		};
 		CF10C7F029C21FAE0020924D /* KMPNativeCoroutinesCombine */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CF10C7EF29C21FAE0020924D /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */;
+			package = CF10C7EF29C21FAE0020924D /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines.git" */;
 			productName = KMPNativeCoroutinesCombine;
 		};
 		CF1376C72B07CBC8006E255B /* FirebaseRemoteConfigSwift */ = {
@@ -5489,7 +5469,7 @@
 		};
 		CF45BCB52A67C68C003FB991 /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CF45BCB42A67C68C003FB991 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			package = CF45BCB42A67C68C003FB991 /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */;
 			productName = IQKeyboardManagerSwift;
 		};
 		CF52AB7229B8E3B700C9C90C /* RealmSwift */ = {
@@ -5529,7 +5509,7 @@
 		};
 		CFE09256298DF78700F197F0 /* SwiftyBeaver */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
+			package = CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver.git" */;
 			productName = SwiftyBeaver;
 		};
 		CFE0926C298FE75500F197F0 /* FirebaseFunctionsCombine-Community */ = {
@@ -5554,12 +5534,12 @@
 		};
 		CFE9D2DF298D6C1500D936DA /* KakaoSDKAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			package = CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk.git" */;
 			productName = KakaoSDKAuth;
 		};
 		CFE9D2E1298D6C1500D936DA /* KakaoSDKUser */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			package = CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk.git" */;
 			productName = KakaoSDKUser;
 		};
 		CFF1F79929B6E7FE00B25DD2 /* CombineExt */ = {

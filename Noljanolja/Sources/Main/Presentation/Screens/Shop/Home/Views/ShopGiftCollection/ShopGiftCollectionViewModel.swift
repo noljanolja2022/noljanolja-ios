@@ -12,6 +12,14 @@ import Foundation
 
 protocol ShopGiftCollectionListener: AnyObject {}
 
+// MARK: - ShopGiftCollectionType
+
+enum ShopGiftCollectionType {
+    case topFeatures
+    case todayOffers
+    case recommend
+}
+
 // MARK: - ShopGiftCollectionViewModel
 
 final class ShopGiftCollectionViewModel: ViewModel {
@@ -29,6 +37,17 @@ final class ShopGiftCollectionViewModel: ViewModel {
     // MARK: Action
 
     let loadMoreAction = PassthroughSubject<Void, Never>()
+    var type: ShopGiftCollectionType = .topFeatures
+    var title: String {
+        switch type {
+        case .topFeatures:
+            return L10n.shopTopFeatures
+        case .todayOffers:
+            return L10n.shopTodayOffers
+        case .recommend:
+            return L10n.shopRecommend
+        }
+    }
 
     // MARK: Dependencies
 
@@ -44,10 +63,12 @@ final class ShopGiftCollectionViewModel: ViewModel {
 
     init(giftsNetworkRepository: GiftsNetworkRepository = GiftsNetworkRepositoryImpl.default,
          listener: ShopGiftListener? = nil,
-         categoryId: Int? = nil) {
+         categoryId: Int? = nil,
+         type: ShopGiftCollectionType) {
         self.giftsNetworkRepository = giftsNetworkRepository
         self.listener = listener
         self.categoryId = categoryId
+        self.type = type
         super.init()
 
         configure()
@@ -78,8 +99,17 @@ final class ShopGiftCollectionViewModel: ViewModel {
                 guard let self else {
                     return Empty<PaginationResponse<[Gift]>, Error>().eraseToAnyPublisher()
                 }
-                return self.giftsNetworkRepository
-                    .getGiftsInShop(isFeatured: true)
+                switch self.type {
+                case .topFeatures:
+                    return self.giftsNetworkRepository
+                        .getGiftsInShop(isFeatured: true)
+                case .todayOffers:
+                    return self.giftsNetworkRepository
+                        .getGiftsInShop(isTodayOffer: true)
+                case .recommend:
+                    return self.giftsNetworkRepository
+                        .getGiftsInShop(isRecommend: true)
+                }
             }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
