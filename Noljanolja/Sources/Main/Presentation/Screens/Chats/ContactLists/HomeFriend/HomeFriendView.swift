@@ -54,7 +54,9 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
     @ViewBuilder
     private func buildBodyView() -> some View {
         VStack(spacing: 25) {
-            Button(action: {}, label: {
+            Button(action: {
+                viewModel.navigationTypeAction.send(.inviteFriends)
+            }, label: {
                 HStack {
                     Text(L10n.inviteToGetBenefits)
                     ImageAssets.icArrowRight.swiftUIImage
@@ -155,6 +157,10 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
                         viewModel: ProfileSettingViewModel(
                             delegate: viewModel
                         )
+                    )
+                case .inviteFriends:
+                    InviteFriendsView(
+                        viewModel: InviteFriendsViewModel()
                     )
                 }
             },

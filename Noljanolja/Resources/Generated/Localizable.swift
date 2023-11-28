@@ -436,6 +436,9 @@ internal enum L10n {
   internal static let invalidReferral = L10n.tr("Localizable", "invalid_referral", fallback: "Invalid referral code")
   /// Sorry, Please check your code again or skip this step
   internal static let invalidReferralMessage = L10n.tr("Localizable", "invalid_referral_message", fallback: "Sorry, Please check your code again or skip this step")
+  /// * Even if a friend manually enters the referral code after copying and sending it 
+  /// You can participate in the friend referral event.
+  internal static let inviteNotes = L10n.tr("Localizable", "invite_notes", fallback: "* Even if a friend manually enters the referral code after copying and sending it \nYou can participate in the friend referral event.")
   /// Invite Friends to get benefits
   internal static let inviteToGetBenefits = L10n.tr("Localizable", "invite_to_get_benefits", fallback: "Invite Friends to get benefits")
   /// Let’s join and Play

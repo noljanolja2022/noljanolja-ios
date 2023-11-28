@@ -41,6 +41,7 @@ internal enum ColorAssets {
   internal static let primaryGreen300 = ColorAsset(name: "Primary Green 300")
   internal static let primaryGreen400 = ColorAsset(name: "Primary Green 400")
   internal static let primaryGreen50 = ColorAsset(name: "Primary Green 50")
+  internal static let primaryGreen = ColorAsset(name: "Primary Green")
   internal static let secondaryYellow100 = ColorAsset(name: "Secondary Yellow 100")
   internal static let secondaryYellow200 = ColorAsset(name: "Secondary Yellow 200")
   internal static let secondaryYellow300 = ColorAsset(name: "Secondary Yellow 300")
@@ -77,6 +78,7 @@ internal enum ColorAssets {
     primaryGreen300,
     primaryGreen400,
     primaryGreen50,
+    primaryGreen,
     secondaryYellow100,
     secondaryYellow200,
     secondaryYellow300,
