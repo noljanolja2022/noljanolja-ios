@@ -11,9 +11,8 @@ import youtube_ios_player_helper
 extension YTPlayerState {
     var trackEventType: VideoProgressEventType? {
         switch self {
-        case .playing: return .play
+        case .playing, .ended: return .play
         case .paused: return .pause
-        case .ended: return .finish
         case .unstarted, .buffering, .cued, .unknown: return nil
         @unknown default: return nil
         }
