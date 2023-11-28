@@ -296,10 +296,17 @@ final class VideoDetailViewModel: ViewModel {
             (playbackState, times.0, times.1)
         }
         .compactMap { state, currentTime, durationTime -> TrackVideoParam? in
-            TrackVideoParam(
+            let trackIntervalMs = {
+                switch state {
+                case .ended: return Int(durationTime * 1000)
+                case .playing, .paused, .unstarted, .buffering, .cued, .unknown: return Int(currentTime * 1000)
+                @unknown default: return Int(currentTime * 1000)
+                }
+            }()
+            return TrackVideoParam(
                 videoId: video.id,
                 event: state.trackEventType,
-                trackIntervalMs: Int(currentTime * 1000),
+                trackIntervalMs: trackIntervalMs,
                 durationMs: Int(durationTime * 1000)
             )
         }
