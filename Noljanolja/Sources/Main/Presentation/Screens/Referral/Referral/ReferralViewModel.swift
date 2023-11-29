@@ -27,6 +27,7 @@ final class ReferralViewModel: ViewModel {
     // MARK: Navigations
 
     @Published var fullScreenCoverType: ReferralFullScreenCoverType?
+    @Published var navigationType: ReferralFullScreenNavigationType?
 
     // MARK: Action
 
@@ -71,5 +72,14 @@ final class ReferralViewModel: ViewModel {
                 }
             }
             .store(in: &cancellables)
+    }
+}
+
+// MARK: ShareReferralContainerViewModelDelegate
+
+extension ReferralViewModel: ShareReferralContainerViewModelDelegate {
+    func pushToChat(conversationId: Int?) {
+        guard let conversationId else { return }
+        navigationType = .chat(conversationId)
     }
 }

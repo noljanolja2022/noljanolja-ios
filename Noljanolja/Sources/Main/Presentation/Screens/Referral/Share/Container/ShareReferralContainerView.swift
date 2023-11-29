@@ -79,7 +79,8 @@ extension ShareReferralContainerView {
             BottomSheet {
                 VerticalShareReferralView(
                     viewModel: VerticalShareReferralViewModel(
-                        code: viewModel.code
+                        code: viewModel.code,
+                        delegate: viewModel
                     )
                 )
             }

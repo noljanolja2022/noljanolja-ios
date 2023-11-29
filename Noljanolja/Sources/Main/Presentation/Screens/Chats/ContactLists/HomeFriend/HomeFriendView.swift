@@ -159,9 +159,7 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
                         )
                     )
                 case .inviteFriends:
-                    InviteFriendsView(
-                        viewModel: InviteFriendsViewModel()
-                    )
+                    ReferralView(viewModel: ReferralViewModel())
                 }
             },
             label: {

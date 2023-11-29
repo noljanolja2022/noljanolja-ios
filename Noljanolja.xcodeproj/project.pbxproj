@@ -14,9 +14,6 @@
 		2B855AE22B052C2D00A1F9B7 /* FriendDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B855AE12B052C2D00A1F9B7 /* FriendDetailView.swift */; };
 		2B855AE42B053BD800A1F9B7 /* FriendDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B855AE32B053BD800A1F9B7 /* FriendDetailViewModel.swift */; };
 		2B855AE72B075E2B00A1F9B7 /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B855AE62B075E2B00A1F9B7 /* VisualEffectView.swift */; };
-		2BA023A72B15A2AC00E78D70 /* InviteFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA023A62B15A2AC00E78D70 /* InviteFriendsView.swift */; };
-		2BA023A92B15A2C100E78D70 /* InviteFriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA023A82B15A2C100E78D70 /* InviteFriendsViewModel.swift */; };
-		2BA023AB2B15E19700E78D70 /* InviteFriendsNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA023AA2B15E19700E78D70 /* InviteFriendsNavigations.swift */; };
 		2BC414BD2B0B180F00E76CF1 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC414BC2B0B180F00E76CF1 /* CategoriesView.swift */; };
 		2BC414BF2B0B372B00E76CF1 /* CategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC414BE2B0B372B00E76CF1 /* CategoriesViewModel.swift */; };
 		2BC414C22B0B3CE300E76CF1 /* ListGiftCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC414C12B0B3CE300E76CF1 /* ListGiftCategoryView.swift */; };
@@ -638,9 +635,6 @@
 		2B855AE12B052C2D00A1F9B7 /* FriendDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDetailView.swift; sourceTree = "<group>"; };
 		2B855AE32B053BD800A1F9B7 /* FriendDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDetailViewModel.swift; sourceTree = "<group>"; };
 		2B855AE62B075E2B00A1F9B7 /* VisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
-		2BA023A62B15A2AC00E78D70 /* InviteFriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendsView.swift; sourceTree = "<group>"; };
-		2BA023A82B15A2C100E78D70 /* InviteFriendsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendsViewModel.swift; sourceTree = "<group>"; };
-		2BA023AA2B15E19700E78D70 /* InviteFriendsNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendsNavigations.swift; sourceTree = "<group>"; };
 		2BC414BC2B0B180F00E76CF1 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		2BC414BE2B0B372B00E76CF1 /* CategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewModel.swift; sourceTree = "<group>"; };
 		2BC414C12B0B3CE300E76CF1 /* ListGiftCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGiftCategoryView.swift; sourceTree = "<group>"; };
@@ -1304,16 +1298,6 @@
 			);
 			name = VisualEffectView;
 			path = "Ví";
-			sourceTree = "<group>";
-		};
-		2BA023A52B15A26600E78D70 /* InviteFriends */ = {
-			isa = PBXGroup;
-			children = (
-				2BA023A62B15A2AC00E78D70 /* InviteFriendsView.swift */,
-				2BA023A82B15A2C100E78D70 /* InviteFriendsViewModel.swift */,
-				2BA023AA2B15E19700E78D70 /* InviteFriendsNavigations.swift */,
-			);
-			path = InviteFriends;
 			sourceTree = "<group>";
 		};
 		2BC414BB2B0B17F400E76CF1 /* Categories */ = {
@@ -2332,7 +2316,6 @@
 		CF53D4702A6AF548009B3A69 /* ContactLists */ = {
 			isa = PBXGroup;
 			children = (
-				2BA023A52B15A26600E78D70 /* InviteFriends */,
 				CF53D4712A6AF548009B3A69 /* AddFriend */,
 				CF53D47A2A6AF548009B3A69 /* ContactList */,
 				CF53D4822A6AF548009B3A69 /* CreateConversation */,
@@ -4514,7 +4497,6 @@
 				CFE2155F2AE6337800C83BAD /* ExchangeViewDataModel.swift in Sources */,
 				CF53D5752A6AF548009B3A69 /* ShopHomeModel.swift in Sources */,
 				CF53D5A02A6AF548009B3A69 /* TransactionDashboardView.swift in Sources */,
-				2BA023A72B15A2AC00E78D70 /* InviteFriendsView.swift in Sources */,
 				CFE5ACEF2A7AAB360027492E /* ShareReferralContainerViewModel.swift in Sources */,
 				CF3282ED299E3758006A459B /* UIApplication+Extension.swift in Sources */,
 				CF131EB529CF32F100054719 /* PhotoModel.swift in Sources */,
@@ -4534,7 +4516,6 @@
 				CF53D5832A6AF548009B3A69 /* GiftDetailModel.swift in Sources */,
 				CF53D56D2A6AF548009B3A69 /* UpdateCurrentUserView.swift in Sources */,
 				CF9DF0AA2A36B2D80054E105 /* UIImage+QRCode.swift in Sources */,
-				2BA023A92B15A2C100E78D70 /* InviteFriendsViewModel.swift in Sources */,
 				CFED122A29F2D7C6000B320B /* Result+Extension.swift in Sources */,
 				CF53D6142A6AF548009B3A69 /* ScanQRNavigations.swift in Sources */,
 				CF0798662A66DFBE004D09B2 /* DataNetworkRepository.swift in Sources */,
@@ -4704,7 +4685,6 @@
 				CF53D5A12A6AF548009B3A69 /* TransactionDashboardBarChartSectionModel.swift in Sources */,
 				CF53D58D2A6AF548009B3A69 /* VideoDetailView.swift in Sources */,
 				CF849EEB2A80A5CD00B8BA3B /* ShareReferralViewModel.swift in Sources */,
-				2BA023AB2B15E19700E78D70 /* InviteFriendsNavigations.swift in Sources */,
 				CF53D5FA2A6AF548009B3A69 /* MessageMetaDataView.swift in Sources */,
 				CF53D6172A6AF548009B3A69 /* MessageImagesNavigations.swift in Sources */,
 				CFBC6F0029C054B0000509EC /* View+EditView.swift in Sources */,

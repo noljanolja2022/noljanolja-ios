@@ -11,8 +11,9 @@ import SwiftUI
 
 struct ListSocialView: View {
     var onTap: (String) -> Void
+    var onCopyLink: (() -> Void)?
     var body: some View {
-        ScrollView(.horizontal) {
+        ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 30) {
                 ForEach(ShareSocial.allCases, id: \.self) { item in
                     item.image
@@ -23,10 +24,19 @@ struct ListSocialView: View {
                             onTap(item.schemaURL)
                         }
                 }
+                if let onCopyLink {
+                    ColorAssets.primaryGreen50.swiftUIColor
+                        .frame(width: 40, height: 40)
+                        .overlay(ImageAssets.icLink.swiftUIImage)
+                        .cornerRadius(14)
+                        .onPress {
+                            onCopyLink()
+                        }
+                }
             }
             .padding(.horizontal, 18)
         }
-        .padding(.top, 12)
+        .padding(.vertical, 12)
         .background(ColorAssets.neutralLight.swiftUIColor)
     }
 }

@@ -39,6 +39,10 @@ struct HorizontalShareReferralView<ViewModel: HorizontalShareReferralViewModel>:
         VStack(spacing: 8) {
             buildNavigationView()
             buildContactView()
+            Divider()
+                .height(2)
+                .overlay(ColorAssets.neutralLightGrey.swiftUIColor)
+            buildSocialView()
         }
         .frame(maxWidth: .infinity)
     }
@@ -79,7 +83,7 @@ struct HorizontalShareReferralView<ViewModel: HorizontalShareReferralViewModel>:
                                 .frame(width: 40, height: 40)
                                 .background(ColorAssets.primaryGreen200.swiftUIColor)
                                 .cornerRadius(14)
-                            Text(L10n.commonNext)
+                            Text(L10n.commonMore)
                                 .dynamicFont(.systemFont(ofSize: 11, weight: .medium))
                                 .lineLimit(2)
                                 .multilineTextAlignment(.center)
@@ -90,6 +94,13 @@ struct HorizontalShareReferralView<ViewModel: HorizontalShareReferralViewModel>:
                     }
                 )
             }
+        )
+    }
+
+    private func buildSocialView() -> some View {
+        ListSocialView(
+            onTap: { _ in },
+            onCopyLink: {}
         )
     }
 }

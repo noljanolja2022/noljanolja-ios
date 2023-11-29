@@ -12,7 +12,7 @@ import Foundation
 // MARK: - ShareReferralViewModelDelegate
 
 protocol ShareReferralViewModelDelegate: AnyObject {
-    func shareReferralViewModelDidShare()
+    func shareReferralViewModelDidShare(conversationId: Int?)
 }
 
 // MARK: - ShareReferralViewModel
@@ -58,7 +58,7 @@ class ShareReferralViewModel: ViewModel {
             .filter { !$0.isEmpty }
             .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
-            .flatMapLatestToResult { [weak self] users in
+            .flatMapLatestToResult { [weak self] users -> AnyPublisher<[Message], Error> in
                 guard let self else {
                     return Fail<[Message], Error>(error: CommonError.captureSelfNotFound).eraseToAnyPublisher()
                 }
@@ -85,9 +85,14 @@ class ShareReferralViewModel: ViewModel {
                     }
                     .eraseToAnyPublisher()
             }
-            .sink { [weak self] _ in
-                self?.isProgressHUDShowing = false
-                self?.delegate?.shareReferralViewModelDidShare()
+            .sink { [weak self] result in
+                switch result {
+                case let .success(messages):
+                    self?.isProgressHUDShowing = false
+                    self?.delegate?.shareReferralViewModelDidShare(conversationId: messages.first?.conversationID)
+                case .failure:
+                    break
+                }
             }
             .store(in: &cancellables)
     }
