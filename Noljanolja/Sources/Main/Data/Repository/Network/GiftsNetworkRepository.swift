@@ -39,7 +39,7 @@ private enum GiftsTargets {
         var task: Task { .requestParameters(parameters: parameters, encoding: URLEncoding.default) }
 
         let categoryId: Int?
-        let brandId: Int?
+        let brandId: String?
         let query: String?
         let page: Int
         let pageSize: Int?
@@ -108,8 +108,8 @@ private enum GiftsTargets {
 
 protocol GiftsNetworkRepository {
     func getMyGifts(categoryId: Int?, brandId: Int?, page: Int, pageSize: Int?) -> AnyPublisher<PaginationResponse<[MyGift]>, Error>
-    func getGiftsInShop(categoryId: Int?, brandId: Int?, query: String?, page: Int, pageSize: Int?, isFeatured: Bool?, isTodayOffer: Bool?, isRecommend: Bool?) -> AnyPublisher<PaginationResponse<[Gift]>, Error>
-    func getGiftsBrands(page: Int, pageSize: Int) -> AnyPublisher<[GiftBrand], Error>
+    func getGiftsInShop(categoryId: Int?, brandId: String?, query: String?, page: Int, pageSize: Int?, isFeatured: Bool?, isTodayOffer: Bool?, isRecommend: Bool?) -> AnyPublisher<PaginationResponse<[Gift]>, Error>
+    func getGiftsBrands(page: Int, pageSize: Int) -> AnyPublisher<PaginationResponse<[GiftBrand]>, Error>
     func getGiftsCategories(page: Int, pageSize: Int) -> AnyPublisher<PaginationResponse<[GiftCategory]>, Error>
     func buyGift(_ id: String) -> AnyPublisher<MyGift, Error>
 }
@@ -123,7 +123,7 @@ extension GiftsNetworkRepository {
     }
 
     func getGiftsInShop(categoryId: Int? = nil,
-                        brandId: Int? = nil,
+                        brandId: String? = nil,
                         query: String? = nil,
                         page: Int = 1,
                         pageSize: Int? = nil,
@@ -157,7 +157,7 @@ final class GiftsNetworkRepositoryImpl: GiftsNetworkRepository {
         )
     }
 
-    func getGiftsInShop(categoryId: Int?, brandId: Int?, query: String?, page: Int, pageSize: Int?, isFeatured: Bool?, isTodayOffer: Bool?, isRecommend: Bool?) -> AnyPublisher<PaginationResponse<[Gift]>, Error> {
+    func getGiftsInShop(categoryId: Int?, brandId: String?, query: String?, page: Int, pageSize: Int?, isFeatured: Bool?, isTodayOffer: Bool?, isRecommend: Bool?) -> AnyPublisher<PaginationResponse<[Gift]>, Error> {
         api.request(
             target: GiftsTargets.GetGiftsInShop(
                 categoryId: categoryId,
@@ -172,13 +172,12 @@ final class GiftsNetworkRepositoryImpl: GiftsNetworkRepository {
         )
     }
 
-    func getGiftsBrands(page: Int, pageSize: Int) -> AnyPublisher<[GiftBrand], Error> {
+    func getGiftsBrands(page: Int, pageSize: Int) -> AnyPublisher<PaginationResponse<[GiftBrand]>, Error> {
         api.request(
             target: GiftsTargets.GetGiftsBrands(
                 page: page,
                 pageSize: pageSize
-            ),
-            atKeyPath: "data"
+            )
         )
     }
 

@@ -1,22 +1,29 @@
+//
+//  ShopBrandsViewModel.swift
+//  Noljanolja
+//
+//  Created by Duy Đinh Văn on 29/11/2023.
+//
+
 import Combine
 import Foundation
 
-// MARK: - ShopGiftListener
+// MARK: - ShopBrandsListener
 
-protocol ShopGiftListener: AnyObject {}
+protocol ShopBrandsListener: AnyObject {}
 
-// MARK: - ShopGiftViewModel
+// MARK: - ShopBrandsViewModel
 
-final class ShopGiftViewModel: ViewModel {
+final class ShopBrandsViewModel: ViewModel {
     // MARK: State
 
     @Published var viewState = ViewState.loading
     @Published var footerState = StatefullFooterViewState.normal
-    @Published var models: [Gift] = []
+    @Published var models: [GiftBrand] = []
 
     // MARK: Navigations
 
-    @Published var navigationType: ShopGiftNavigationType?
+    @Published var navigationType: ShopBrandNavigationType?
     @Published var fullScreenCoverType: ShopGiftFullScreenCoverType?
 
     // MARK: Action
@@ -27,10 +34,6 @@ final class ShopGiftViewModel: ViewModel {
 
     private let giftsNetworkRepository: GiftsNetworkRepository
     private weak var listener: ShopGiftListener?
-    private let categoryId: Int?
-    private let brandId: String?
-    private let skipGiftProduct: Gift?
-    let title: String?
 
     // MARK: Private
 
@@ -39,17 +42,9 @@ final class ShopGiftViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(giftsNetworkRepository: GiftsNetworkRepository = GiftsNetworkRepositoryImpl.default,
-         listener: ShopGiftListener? = nil,
-         categoryId: Int? = nil,
-         brandId: String? = nil,
-         skipGiftProduct: Gift? = nil,
-         title: String? = nil) {
+         listener: ShopGiftListener? = nil) {
         self.giftsNetworkRepository = giftsNetworkRepository
         self.listener = listener
-        self.categoryId = categoryId
-        self.brandId = brandId
-        self.skipGiftProduct = skipGiftProduct
-        self.title = title
         super.init()
 
         configure()
@@ -76,31 +71,22 @@ final class ShopGiftViewModel: ViewModel {
                 self?.viewState = .loading
                 self?.footerState = .loading
             })
-            .flatMapLatestToResult { [weak self] page -> AnyPublisher<PaginationResponse<[Gift]>, Error> in
+            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<PaginationResponse<[GiftBrand]>, Error> in
                 guard let self else {
-                    return Empty<PaginationResponse<[Gift]>, Error>().eraseToAnyPublisher()
+                    return Empty<PaginationResponse<[GiftBrand]>, Error>().eraseToAnyPublisher()
                 }
                 return self.giftsNetworkRepository
-                    .getGiftsInShop(
-                        categoryId: categoryId,
-                        brandId: brandId,
-                        page: page,
-                        pageSize: self.pageSize
-                    )
+                    .getGiftsBrands(page: page, pageSize: pageSize)
             }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
                 guard let self else { return }
                 switch result {
                 case let .success(response):
-                    var models = response.data
-                    if let skipGiftProduct = self.skipGiftProduct {
-                        models = response.data.filter { $0.id != skipGiftProduct.id }
-                    }
                     if response.pagination.page == NetworkConfigs.Param.firstPage {
-                        self.models = models
+                        self.models = response.data
                     } else {
-                        self.models = self.models + models
+                        self.models = self.models + response.data
                     }
                     self.page = response.pagination.page
                     self.viewState = .content

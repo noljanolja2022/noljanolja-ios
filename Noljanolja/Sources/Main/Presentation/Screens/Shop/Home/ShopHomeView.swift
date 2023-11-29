@@ -51,10 +51,11 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
     @ViewBuilder
     private func buildContentView() -> some View {
         ScrollView {
-            VStack(spacing: 8) {
+            VStack {
                 buildHeaderView()
                 buildSummaryView()
                 buildCategoriesView()
+                buildBrandsView()
                 buildTopFeaturesView()
                 buildTodayOffersView()
                 buildRecommendView()
@@ -126,7 +127,6 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
 
     private func buildTopFeaturesView() -> some View {
         ShopGiftCollectionView(viewModel: ShopGiftCollectionViewModel(type: .topFeatures))
-            .background(ColorAssets.primaryGreen200.swiftUIColor)
     }
 
     private func buildTodayOffersView() -> some View {
@@ -140,6 +140,10 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
     private func buildForYouView() -> some View {
         ShopGiftView(viewModel: ShopGiftViewModel(title: L10n.shopForYou))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private func buildBrandsView() -> some View {
+        ShopBrandsView(viewModel: ShopBrandsViewModel())
     }
 }
 
