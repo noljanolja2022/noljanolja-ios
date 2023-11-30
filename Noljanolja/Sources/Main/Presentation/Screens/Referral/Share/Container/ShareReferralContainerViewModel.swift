@@ -12,7 +12,9 @@ import SwiftUIX
 
 // MARK: - ShareReferralContainerViewModelDelegate
 
-protocol ShareReferralContainerViewModelDelegate: AnyObject {}
+protocol ShareReferralContainerViewModelDelegate: AnyObject {
+    func pushToChat(conversationId: Int?)
+}
 
 // MARK: - ShareReferralContainerViewModel
 
@@ -58,11 +60,16 @@ final class ShareReferralContainerViewModel: ViewModel {
 // MARK: HorizontalShareReferralViewModelDelegate
 
 extension ShareReferralContainerViewModel: HorizontalShareReferralViewModelDelegate {
+    func shareReferralViewModelDidShare(conversationId: Int?) {
+        closeAction.send()
+        delegate?.pushToChat(conversationId: conversationId)
+    }
+
     func horizontalShareReferralViewModelDidTapMore() {
         fullScreenCoverType = .verticalShare
     }
-
-    func shareReferralViewModelDidShare() {
-        closeAction.send()
-    }
 }
+
+// MARK: VerticalShareReferralViewModelDelegate
+
+extension ShareReferralContainerViewModel: VerticalShareReferralViewModelDelegate {}

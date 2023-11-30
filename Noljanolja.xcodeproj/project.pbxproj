@@ -642,16 +642,6 @@
 		2BFAD9CE2B0C6AE4003594A4 /* SearchGiftResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGiftResultView.swift; sourceTree = "<group>"; };
 		2BFAD9D02B0C6B4D003594A4 /* SearchGiftNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGiftNavigations.swift; sourceTree = "<group>"; };
 		2BFAD9D22B0C6BD3003594A4 /* SearchGiftResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGiftResultsViewModel.swift; sourceTree = "<group>"; };
-		2DDD25D24A7930AF482D9C5C /* Pods-Noljanolja-NoljanoljaUITests.app store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.app store.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.app store.xcconfig"; sourceTree = "<group>"; };
-		4186FA57228107FEF2D2C426 /* Pods-NoljanoljaTests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoljanoljaTests.development.xcconfig"; path = "Target Support Files/Pods-NoljanoljaTests/Pods-NoljanoljaTests.development.xcconfig"; sourceTree = "<group>"; };
-		5474C50410F0452A681DEAAB /* Pods-Noljanolja.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja.dev.xcconfig"; path = "Target Support Files/Pods-Noljanolja/Pods-Noljanolja.dev.xcconfig"; sourceTree = "<group>"; };
-		56F78F2ABFFB46140C6712E1 /* Pods-Noljanolja.app store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja.app store.xcconfig"; path = "Target Support Files/Pods-Noljanolja/Pods-Noljanolja.app store.xcconfig"; sourceTree = "<group>"; };
-		5879C2BFEBE4D9558BAF7834 /* Pods-Noljanolja.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja.appstore.xcconfig"; path = "Target Support Files/Pods-Noljanolja/Pods-Noljanolja.appstore.xcconfig"; sourceTree = "<group>"; };
-		62853F89AA74EE0E0B3A818C /* Pods-Noljanolja.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja.development.xcconfig"; path = "Target Support Files/Pods-Noljanolja/Pods-Noljanolja.development.xcconfig"; sourceTree = "<group>"; };
-		6715BC6ABC822611987F15CD /* Pods-Noljanolja-NoljanoljaUITests.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.appstore.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.appstore.xcconfig"; sourceTree = "<group>"; };
-		67F6E05E9B2EC43CAF12E51A /* Pods-Noljanolja.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja.debug.xcconfig"; path = "Target Support Files/Pods-Noljanolja/Pods-Noljanolja.debug.xcconfig"; sourceTree = "<group>"; };
-		68016C1068177F62AF6FE494 /* Pods-NoljanoljaTests.ad hoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoljanoljaTests.ad hoc.xcconfig"; path = "Target Support Files/Pods-NoljanoljaTests/Pods-NoljanoljaTests.ad hoc.xcconfig"; sourceTree = "<group>"; };
-		6993BE330DAA18645F50C697 /* Pods-NoljanoljaTests.app store.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoljanoljaTests.app store.xcconfig"; path = "Target Support Files/Pods-NoljanoljaTests/Pods-NoljanoljaTests.app store.xcconfig"; sourceTree = "<group>"; };
 		2F4FEBDF44229EFA33F9F6A0 /* Pods-Noljanolja.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja.development.xcconfig"; path = "Target Support Files/Pods-Noljanolja/Pods-Noljanolja.development.xcconfig"; sourceTree = "<group>"; };
 		4BCB5A1163B1650E0F515ADB /* Pods_Noljanolja_NoljanoljaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Noljanolja_NoljanoljaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A4115819B6ADA7895299D44 /* Pods-Noljanolja.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja.appstore.xcconfig"; path = "Target Support Files/Pods-Noljanolja/Pods-Noljanolja.appstore.xcconfig"; sourceTree = "<group>"; };
@@ -4082,8 +4072,8 @@
 				CFFD70CE298AC7A900D4F5A2 /* XCRemoteSwiftPackageReference "Moya" */,
 				CF14F24B298CC11600BC2066 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				CFE9D2DB298D66F700D936DA /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
-				CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk.git" */,
-				CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver.git" */,
+				CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+				CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */,
 				CFE09270298FEACD00F197F0 /* XCRemoteSwiftPackageReference "SwifterSwift" */,
 				CFE48BBF299206830062C903 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				CF6ABC212993617F00D78213 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
@@ -4092,14 +4082,14 @@
 				CFF1F7A929B737F300B25DD2 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
 				CF52AB7129B8E3B600C9C90C /* XCRemoteSwiftPackageReference "realm-swift" */,
 				CF9779DA29BE2FC600D1CAB0 /* XCRemoteSwiftPackageReference "PhoneNumberKit" */,
-				CF10C7EF29C21FAE0020924D /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines.git" */,
+				CF10C7EF29C21FAE0020924D /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */,
 				CF54FA2729D01F8A0092E2C6 /* XCRemoteSwiftPackageReference "Zip" */,
 				CF076D4F29D0BF2B0013B6F9 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				CF076D5529D0C0120013B6F9 /* XCRemoteSwiftPackageReference "SDWebImageWebPCoder" */,
 				CF446B8329D89C3000ED66BF /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				CFF520F92A17D92400F29A4E /* XCRemoteSwiftPackageReference "Charts" */,
-				CF45BCB42A67C68C003FB991 /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */,
-				2BF3B31C2AFC8EFA00A1CC6F /* XCRemoteSwiftPackageReference "AlertToast.git" */,
+				CF45BCB42A67C68C003FB991 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				2BF3B31C2AFC8EFA00A1CC6F /* XCRemoteSwiftPackageReference "AlertToast" */,
 			);
 			productRefGroup = CFFD707F298AB9FF00D4F5A2 /* Products */;
 			projectDirPath = "";
@@ -4977,7 +4967,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_SWIFT_FLAGS = "$NATRIUM_OTHER_SWIFT_FLAGS";
+				OTHER_SWIFT_FLAGS = $NATRIUM_OTHER_SWIFT_FLAGS;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -4995,14 +4985,14 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "$NATRIUM_CURRENT_PROJECT_VERSION";
+				CURRENT_PROJECT_VERSION = $NATRIUM_CURRENT_PROJECT_VERSION;
 				DEVELOPMENT_ASSET_PATHS = "\"Noljanolja/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = YN4QYR8CRU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Noljanolja/Sources/Main/Presentation/App/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "$NATRIUM_DISPLAY_NAME";
+				INFOPLIST_KEY_CFBundleDisplayName = $NATRIUM_DISPLAY_NAME;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To enhance the user experience, please grant permissions to the app";
 				INFOPLIST_KEY_NSContactsUsageDescription = "To help you message friends and family on Noja Noja, allow Noja Noja access to your contacts";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To enhance the user experience, please grant permissions to the app";
@@ -5017,11 +5007,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = "$NATRIUM_MARKETING_VERSION";
-				PRODUCT_BUNDLE_IDENTIFIER = "$NATRIUM_PRODUCT_BUNDLE_IDENTIFIER";
+				MARKETING_VERSION = $NATRIUM_MARKETING_VERSION;
+				PRODUCT_BUNDLE_IDENTIFIER = $NATRIUM_PRODUCT_BUNDLE_IDENTIFIER;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "$NATRIUM_PROVISIONING_PROFILE_SPECIFIER";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = $NATRIUM_PROVISIONING_PROFILE_SPECIFIER;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -5121,7 +5111,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_SWIFT_FLAGS = "$NATRIUM_OTHER_SWIFT_FLAGS";
+				OTHER_SWIFT_FLAGS = $NATRIUM_OTHER_SWIFT_FLAGS;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -5138,14 +5128,14 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = "$NATRIUM_CURRENT_PROJECT_VERSION";
+				CURRENT_PROJECT_VERSION = $NATRIUM_CURRENT_PROJECT_VERSION;
 				DEVELOPMENT_ASSET_PATHS = "\"Noljanolja/Preview Content\"";
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = YN4QYR8CRU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Noljanolja/Sources/Main/Presentation/App/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "$NATRIUM_DISPLAY_NAME";
+				INFOPLIST_KEY_CFBundleDisplayName = $NATRIUM_DISPLAY_NAME;
 				INFOPLIST_KEY_NSCameraUsageDescription = "To enhance the user experience, please grant permissions to the app";
 				INFOPLIST_KEY_NSContactsUsageDescription = "To help you message friends and family on Noja Noja, allow Noja Noja access to your contacts";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "To enhance the user experience, please grant permissions to the app";
@@ -5160,8 +5150,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = "$NATRIUM_MARKETING_VERSION";
-				PRODUCT_BUNDLE_IDENTIFIER = "$NATRIUM_PRODUCT_BUNDLE_IDENTIFIER";
+				MARKETING_VERSION = $NATRIUM_MARKETING_VERSION;
+				PRODUCT_BUNDLE_IDENTIFIER = $NATRIUM_PRODUCT_BUNDLE_IDENTIFIER;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "NolgoBulja-Dev-Development";
@@ -5251,7 +5241,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2BF3B31C2AFC8EFA00A1CC6F /* XCRemoteSwiftPackageReference "AlertToast.git" */ = {
+		2BF3B31C2AFC8EFA00A1CC6F /* XCRemoteSwiftPackageReference "AlertToast" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/elai950/AlertToast.git";
 			requirement = {
@@ -5275,7 +5265,7 @@
 				version = 0.9.1;
 			};
 		};
-		CF10C7EF29C21FAE0020924D /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines.git" */ = {
+		CF10C7EF29C21FAE0020924D /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/rickclephas/KMP-NativeCoroutines.git";
 			requirement = {
@@ -5299,7 +5289,7 @@
 				version = 4.1.3;
 			};
 		};
-		CF45BCB42A67C68C003FB991 /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */ = {
+		CF45BCB42A67C68C003FB991 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
 			requirement = {
@@ -5347,7 +5337,7 @@
 				version = 3.5.7;
 			};
 		};
-		CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver.git" */ = {
+		CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyBeaver/SwiftyBeaver.git";
 			requirement = {
@@ -5379,7 +5369,7 @@
 				version = 7.0.0;
 			};
 		};
-		CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk.git" */ = {
+		CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kakao/kakao-ios-sdk.git";
 			requirement = {
@@ -5424,7 +5414,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		2BF3B31D2AFC8EFA00A1CC6F /* AlertToast */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2BF3B31C2AFC8EFA00A1CC6F /* XCRemoteSwiftPackageReference "AlertToast.git" */;
+			package = 2BF3B31C2AFC8EFA00A1CC6F /* XCRemoteSwiftPackageReference "AlertToast" */;
 			productName = AlertToast;
 		};
 		CF076D5029D0BF2B0013B6F9 /* SDWebImageSwiftUI */ = {
@@ -5444,7 +5434,7 @@
 		};
 		CF10C7F029C21FAE0020924D /* KMPNativeCoroutinesCombine */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CF10C7EF29C21FAE0020924D /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines.git" */;
+			package = CF10C7EF29C21FAE0020924D /* XCRemoteSwiftPackageReference "KMP-NativeCoroutines" */;
 			productName = KMPNativeCoroutinesCombine;
 		};
 		CF1376C72B07CBC8006E255B /* FirebaseRemoteConfigSwift */ = {
@@ -5469,7 +5459,7 @@
 		};
 		CF45BCB52A67C68C003FB991 /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CF45BCB42A67C68C003FB991 /* XCRemoteSwiftPackageReference "IQKeyboardManager.git" */;
+			package = CF45BCB42A67C68C003FB991 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
 		};
 		CF52AB7229B8E3B700C9C90C /* RealmSwift */ = {
@@ -5509,7 +5499,7 @@
 		};
 		CFE09256298DF78700F197F0 /* SwiftyBeaver */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver.git" */;
+			package = CFE09255298DF78700F197F0 /* XCRemoteSwiftPackageReference "SwiftyBeaver" */;
 			productName = SwiftyBeaver;
 		};
 		CFE0926C298FE75500F197F0 /* FirebaseFunctionsCombine-Community */ = {
@@ -5534,12 +5524,12 @@
 		};
 		CFE9D2DF298D6C1500D936DA /* KakaoSDKAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk.git" */;
+			package = CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
 			productName = KakaoSDKAuth;
 		};
 		CFE9D2E1298D6C1500D936DA /* KakaoSDKUser */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk.git" */;
+			package = CFE9D2DE298D6C1500D936DA /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
 			productName = KakaoSDKUser;
 		};
 		CFF1F79929B6E7FE00B25DD2 /* CombineExt */ = {

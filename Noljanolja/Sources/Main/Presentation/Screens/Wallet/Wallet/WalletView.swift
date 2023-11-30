@@ -203,7 +203,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                     backgroundImageName: ImageAssets.bgPointYellow.name
                 ),
                 action: {
-                    viewModel.navigationType = .transactionHistory
+                    viewModel.goShopAction.send()
                 }
             )
         }

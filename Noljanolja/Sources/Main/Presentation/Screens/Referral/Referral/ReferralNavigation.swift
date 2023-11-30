@@ -7,6 +7,14 @@
 
 import Foundation
 
+// MARK: - ReferralFullScreenCoverType
+
 enum ReferralFullScreenCoverType {
     case share
+}
+
+// MARK: - ReferralFullScreenNavigationType
+
+enum ReferralFullScreenNavigationType {
+    case chat(Int)
 }

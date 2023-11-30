@@ -14,6 +14,7 @@ import Foundation
 
 protocol WalletViewModelDelegate: AnyObject {
     func walletViewModelSignOut()
+    func walletViewModelGoShop()
 }
 
 // MARK: - WalletViewModel
@@ -31,6 +32,8 @@ final class WalletViewModel: ViewModel {
     @Published var navigationType: WalletNavigationType?
 
     // MARK: Action
+
+    let goShopAction = PassthroughSubject<Void, Never>()
 
     // MARK: Dependencies
 
@@ -120,7 +123,13 @@ final class WalletViewModel: ViewModel {
             .store(in: &cancellables)
     }
 
-    private func configureActions() {}
+    private func configureActions() {
+        goShopAction.sink { [weak self] _ in
+            guard let self else { return }
+            self.delegate?.walletViewModelGoShop()
+        }
+        .store(in: &cancellables)
+    }
 }
 
 // MARK: ProfileSettingViewModelDelegate

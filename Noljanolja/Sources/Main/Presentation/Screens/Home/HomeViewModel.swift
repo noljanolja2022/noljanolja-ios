@@ -156,6 +156,10 @@ extension HomeViewModel: ConversationListViewModelDelegate {
 // MARK: WalletViewModelDelegate
 
 extension HomeViewModel: WalletViewModelDelegate {
+    func walletViewModelGoShop() {
+        selectedTab = .shop
+    }
+
     func walletViewModelSignOut() {
         delegate?.homeViewModelSignOut()
     }

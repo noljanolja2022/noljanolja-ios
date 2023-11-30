@@ -14,4 +14,5 @@ enum HomeFriendNavigationType {
     case search
     case friendDetail(User)
     case setting
+    case inviteFriends
 }

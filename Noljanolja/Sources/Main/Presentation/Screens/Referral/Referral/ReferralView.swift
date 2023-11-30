@@ -48,14 +48,17 @@ struct ReferralView<ViewModel: ReferralViewModel>: View {
     }
 
     private func buildMainView() -> some View {
-        buildContentView()
-            .statefull(
-                state: $viewModel.viewState,
-                isEmpty: { viewModel.currentUser == nil },
-                loading: buildLoadingView,
-                empty: buildEmptyView,
-                error: buildErrorView
-            )
+        ZStack {
+            buildContentView()
+                .statefull(
+                    state: $viewModel.viewState,
+                    isEmpty: { viewModel.currentUser == nil },
+                    loading: buildLoadingView,
+                    empty: buildEmptyView,
+                    error: buildErrorView
+                )
+            buildNavigationLink()
+        }
     }
 
     private func buildContentView() -> some View {
@@ -118,7 +121,7 @@ struct ReferralView<ViewModel: ReferralViewModel>: View {
                 }
             )
             .buttonStyle(PrimaryButtonStyle())
-            .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
+            .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
             .padding(.horizontal, 16)
         }
         .padding(.top, -26)
@@ -171,6 +174,30 @@ struct ReferralView<ViewModel: ReferralViewModel>: View {
 
 extension ReferralView {
     @ViewBuilder
+    private func buildNavigationLink() -> some View {
+        NavigationLink(
+            unwrapping: $viewModel.navigationType,
+            onNavigate: { _ in },
+            destination: { buildNavigationDestinationView($0) },
+            label: {}
+        )
+    }
+
+    @ViewBuilder
+    private func buildNavigationDestinationView(
+        _ type: Binding<ReferralFullScreenNavigationType>
+    ) -> some View {
+        switch type.wrappedValue {
+        case let .chat(conversationId):
+            ChatView(
+                viewModel: ChatViewModel(
+                    conversationID: conversationId
+                )
+            )
+        }
+    }
+
+    @ViewBuilder
     private func buildFullScreenCoverDestinationView(
         _ type: Binding<ReferralFullScreenCoverType>
     ) -> some View {
@@ -178,7 +205,8 @@ extension ReferralView {
         case .share:
             ShareReferralContainerView(
                 viewModel: ShareReferralContainerViewModel(
-                    code: viewModel.currentUser?.referralCode
+                    code: viewModel.currentUser?.referralCode,
+                    delegate: viewModel
                 )
             )
         }
