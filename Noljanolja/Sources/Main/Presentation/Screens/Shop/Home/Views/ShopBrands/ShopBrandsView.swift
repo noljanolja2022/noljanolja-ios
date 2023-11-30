@@ -1,19 +1,19 @@
 //
-//  ShopGiftCollectionView.swift
+//  ShopBrandsView.swift
 //  Noljanolja
 //
-//  Created by Duy Dinh on 21/11/2023.
+//  Created by Duy Đinh Văn on 29/11/2023.
 //
 
 import SwiftUI
 import SwiftUIX
 
-// MARK: - ShopGiftCollectionView
+// MARK: - ShopBrandsView
 
-struct ShopGiftCollectionView: View {
+struct ShopBrandsView: View {
     // MARK: Dependencies
 
-    @StateObject var viewModel: ShopGiftCollectionViewModel
+    @StateObject var viewModel: ShopBrandsViewModel
 
     var body: some View {
         buildBodyView()
@@ -36,7 +36,7 @@ struct ShopGiftCollectionView: View {
     private func buildMainView() -> some View {
         VStack(alignment: .leading) {
             HStack {
-                Text(viewModel.title)
+                Text(L10n.shopBrands)
                     .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                 ImageAssets.icArrowRight.swiftUIImage
                     .resizable()
@@ -50,9 +50,7 @@ struct ShopGiftCollectionView: View {
                 buildContentStatefullView()
             }
         }
-        .background(viewModel.type == .topFeatures
-            ? ColorAssets.primaryGreen200.swiftUIColor
-            : ColorAssets.neutralLight.swiftUIColor)
+        .background(ColorAssets.secondaryYellow300.swiftUIColor)
         .visible(!viewModel.models.isEmpty)
     }
 
@@ -74,9 +72,9 @@ struct ShopGiftCollectionView: View {
             LazyHStack(spacing: 10) {
                 ForEach(viewModel.models.indices, id: \.self) {
                     let model = viewModel.models[$0]
-                    ShopGiftCollectionItemView(model: model)
+                    ShopBrandItemView(model: model)
                         .onTapGesture {
-                            viewModel.navigationType = .giftDetail(model)
+                            viewModel.navigationType = .listGiftCategory(model)
                         }
                 }
             }
@@ -86,7 +84,7 @@ struct ShopGiftCollectionView: View {
     }
 }
 
-extension ShopGiftCollectionView {
+extension ShopBrandsView {
     private func buildLoadingView() -> some View {
         LoadingView()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -102,7 +100,7 @@ extension ShopGiftCollectionView {
     }
 }
 
-extension ShopGiftCollectionView {
+extension ShopBrandsView {
     @ViewBuilder
     private func buildNavigationLink() -> some View {
         NavigationLink(
@@ -114,12 +112,12 @@ extension ShopGiftCollectionView {
     }
 
     @ViewBuilder
-    private func buildNavigationLinkDestinationView(_ type: Binding<ShopGiftNavigationType>) -> some View {
+    private func buildNavigationLinkDestinationView(_ type: Binding<ShopBrandNavigationType>) -> some View {
         switch type.wrappedValue {
-        case let .giftDetail(gift):
-            GiftDetailView(
-                viewModel: GiftDetailViewModel(
-                    giftDetailInputType: .gift(gift)
+        case let .listGiftCategory(brand):
+            ListGiftCategoryView(
+                viewModel: ListGiftCategoryViewModel(
+                    brand: brand
                 )
             )
         }

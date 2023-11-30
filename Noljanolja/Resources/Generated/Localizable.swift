@@ -618,6 +618,8 @@ internal enum L10n {
   internal static let settingWarningClearCacheTitle = L10n.tr("Localizable", "setting_warning_clear_cache_title", fallback: "Are you sure to clear cache data?")
   /// Do you want to Log out
   internal static let settingWarningLogOutTitle = L10n.tr("Localizable", "setting_warning_log_out_title", fallback: "Do you want to Log out")
+  /// Brands
+  internal static let shopBrands = L10n.tr("Localizable", "shop_brands", fallback: "Brands")
   /// Clear all
   internal static let shopClearAll = L10n.tr("Localizable", "shop_clear_all", fallback: "Clear all")
   /// Coupon
