@@ -215,7 +215,7 @@
 "transaction_history_search_hint" = "Search transaction";
 "transactions_history_receive_reason" = "Receive: %@";
 "transactions_history_spent_reason" = "Spent: %@";
-"transaction_history_point" = "%@ point";
+"transaction_history_point" = "%@ Points";
 "wallet_history_dashboard" = "Dashboard";
 "transaction_receive_type" = "Receive";
 "transaction_spent_type" = "Spent";
