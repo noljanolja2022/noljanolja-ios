@@ -20,7 +20,7 @@ extension TransactionType {
         switch self {
         case .all: return "All"
         case .received: return "Received"
-        case .spent: return "Exchange"
+        case .spent: return "Pay"
         }
     }
 }

@@ -701,9 +701,9 @@ internal enum L10n {
   internal static let transactionDetailTime = L10n.tr("Localizable", "transaction_detail_time", fallback: "Time")
   /// Transaction History
   internal static let transactionHistory = L10n.tr("Localizable", "transaction_history", fallback: "Transaction History")
-  /// %@ point
+  /// %@ Points
   internal static func transactionHistoryPoint(_ p1: Any) -> String {
-    return L10n.tr("Localizable", "transaction_history_point", String(describing: p1), fallback: "%@ point")
+    return L10n.tr("Localizable", "transaction_history_point", String(describing: p1), fallback: "%@ Points")
   }
   /// Search transaction
   internal static let transactionHistorySearchHint = L10n.tr("Localizable", "transaction_history_search_hint", fallback: "Search transaction")

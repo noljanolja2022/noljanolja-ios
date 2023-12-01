@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "icons8-whatsapp-48(@1×).png",
+      "filename" : "icons8-whatsapp-logo-24(@1×).png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "icons8-whatsapp-96(@2×).png",
+      "filename" : "icons8-whatsapp-logo-48(@2×).png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "icons8-whatsapp-144(@3×).png",
+      "filename" : "icons8-whatsapp-logo-72(@3×).png",
       "idiom" : "universal",
       "scale" : "3x"
     }
