@@ -691,6 +691,10 @@ internal enum L10n {
   internal static let tosTitle = L10n.tr("Localizable", "tos_title", fallback: "Term of Service")
   /// Welcome to NolgoBulja. Please read our terms of service carefully.
   internal static let tosWelcome = L10n.tr("Localizable", "tos_welcome", fallback: "Welcome to NolgoBulja. Please read our terms of service carefully.")
+  /// CONVERT NOW
+  internal static let transactionConvertNow = L10n.tr("Localizable", "transaction_convert_now", fallback: "CONVERT NOW")
+  /// Convert Points to Cash
+  internal static let transactionConvertPointsToCash = L10n.tr("Localizable", "transaction_convert_points_to_cash", fallback: "Convert Points to Cash")
   /// Detail Transaction
   internal static let transactionDetail = L10n.tr("Localizable", "transaction_detail", fallback: "Detail Transaction")
   /// Transaction code
@@ -823,6 +827,8 @@ internal enum L10n {
   internal static let walletAttendNow = L10n.tr("Localizable", "wallet_attend_now", fallback: "Attend now")
   /// Benefit
   internal static let walletBenefit = L10n.tr("Localizable", "wallet_benefit", fallback: "Benefit")
+  /// Cash that can be used
+  internal static let walletCashThatCanBeUsed = L10n.tr("Localizable", "wallet_cash_that_can_be_used", fallback: "Cash that can be used")
   /// Check in
   internal static let walletCheckin = L10n.tr("Localizable", "wallet_checkin", fallback: "Check in")
   /// Checkin success
