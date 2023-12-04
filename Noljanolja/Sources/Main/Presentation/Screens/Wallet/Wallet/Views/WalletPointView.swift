@@ -16,7 +16,8 @@ struct WalletPointViewDataModel {
     let pointColorName: String
     let unitColorName: String
     let actionTitle: String
-    let backgroundImageName: String
+    var backgroundImageName: String?
+    let type: String
 }
 
 // MARK: - WalletPointView
@@ -39,7 +40,7 @@ struct WalletPointView: View {
             HStack(spacing: 4) {
                 Text(model.point.formatted())
                     .foregroundColor(Color(model.pointColorName))
-                Text("P")
+                Text(model.type)
                     .foregroundColor(Color(model.unitColorName))
             }
             .dynamicFont(.systemFont(ofSize: 28, weight: .bold))
@@ -72,9 +73,13 @@ struct WalletPointView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .aspectRatio(1, contentMode: .fill)
         .background {
-            Image(model.backgroundImageName)
-                .resizable()
-                .scaledToFill()
+            if let backgroundImageName = model.backgroundImageName {
+                Image(backgroundImageName)
+                    .resizable()
+                    .scaledToFill()
+            } else {
+                ColorAssets.neutralLight.swiftUIColor
+            }
         }
         .cornerRadius(12)
         .onTapGesture {

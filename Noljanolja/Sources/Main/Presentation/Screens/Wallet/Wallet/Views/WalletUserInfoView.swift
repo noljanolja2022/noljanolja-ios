@@ -41,14 +41,14 @@ struct WalletUserInfoView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
-                Button(
-                    action: {
-                        tierAction?()
-                    },
-                    label: {
-                        WalletMemberTierView(model: model.tierModelType)
-                    }
-                )
+//                Button(
+//                    action: {
+//                        tierAction?()
+//                    },
+//                    label: {
+//                        WalletMemberTierView(model: model.tierModelType)
+//                    }
+//                )
             }
 
             VStack(spacing: 0) {
