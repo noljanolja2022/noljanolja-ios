@@ -377,13 +377,13 @@ extension VideoDetailViewModel: YTPlayerViewDelegate {
     func playerView(_ playerView: YTPlayerView, didChangeTo quality: YTPlaybackQuality) {}
     
     func playerView(_ playerView: YTPlayerView, didChangeToStatePictureInPicture state: String?) {
-        pictureInPictureState = state
-        switch state {
-        case "picture-in-picture":
-            break
-        default:
-            updateContentType(.full)
-        }
+//        pictureInPictureState = state
+//        switch state {
+//        case "picture-in-picture":
+//            break
+//        default:
+//            updateContentType(.hide)
+//        }
     }
 }
 
