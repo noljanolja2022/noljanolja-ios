@@ -15,6 +15,7 @@ import SwiftUIX
 protocol VideoActionContainerViewModelDelegate: AnyObject {
     func showToastCopy()
     func pushToChat(conversationId: Int?)
+    func ignoreVideo(videoId: String)
 }
 
 // MARK: - VideoActionContainerViewModel
@@ -66,8 +67,9 @@ extension VideoActionContainerViewModel: VideoActionViewModelDelegate {
     func videoActionViewModel(didSelectItem item: VideoActionItemViewModel) {
         switch item {
         case .share: fullScreenCoverType = .share
-        // TODO: Add ignore video
-//        case .ignore: break
+        case .ignore:
+            closeAction.send()
+            delegate?.ignoreVideo(videoId: video.id)
         case .copyLink:
             UIPasteboard.general.string = video.url
             closeAction.send()
@@ -82,7 +84,7 @@ extension VideoActionContainerViewModel: ShareVideoViewModelDelegate {
     func sharedSocial() {
         closeAction.send()
     }
-    
+
     func shareVideoViewModel(didSelectUser user: User) {
         withoutAnimation {
             fullScreenCoverType = .shareDetail(user)
