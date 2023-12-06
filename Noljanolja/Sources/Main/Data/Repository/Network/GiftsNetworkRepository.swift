@@ -11,6 +11,8 @@ import Moya
 
 // MARK: - GiftsTargets
 
+#warning("update locale when BE update India market")
+
 private enum GiftsTargets {
     struct GetMyGifts: BaseAuthTargetType {
         var path: String { "v1/gifts/me" }
@@ -27,7 +29,7 @@ private enum GiftsTargets {
                 "categoryId": categoryId,
                 "brandId": brandId,
                 "page": page,
-                "pageSize": pageSize
+                "pageSize": pageSize,
             ]
             return parameters.compactMapValues { $0 }
         }
@@ -55,7 +57,8 @@ private enum GiftsTargets {
                 "page": page,
                 "pageSize": pageSize,
                 "isFeatured": isFeatured,
-                "isRecommend": isRecommend
+                "isRecommend": isRecommend,
+                "locale": "KR",
             ]
             return parameters.compactMapValues { $0 }
         }
@@ -72,7 +75,8 @@ private enum GiftsTargets {
         var parameters: [String: Any] {
             let parameters: [String: Any?] = [
                 "page": page,
-                "pageSize": pageSize
+                "pageSize": pageSize,
+                "locale": "KR",
             ]
             return parameters.compactMapValues { $0 }
         }
@@ -89,7 +93,8 @@ private enum GiftsTargets {
         var parameters: [String: Any] {
             let parameters: [String: Any?] = [
                 "page": page,
-                "pageSize": pageSize
+                "pageSize": pageSize,
+                "locale": "KR",
             ]
             return parameters.compactMapValues { $0 }
         }
