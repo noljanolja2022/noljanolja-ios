@@ -8,13 +8,14 @@
 import Combine
 import CombineExt
 import Foundation
+import SDWebImage
 
 // MARK: - UserUseCases
 
 protocol UserUseCases {
     func getCurrentUser() -> User?
     func getCurrentUserPublisher() -> AnyPublisher<User, Never>
-    
+
     func getCurrentUser() -> AnyPublisher<User, Error>
     func getCurrentUserIfNeeded() -> AnyPublisher<User, Error>
 
@@ -81,6 +82,7 @@ final class UserUseCasesImpl: UserUseCases {
                 guard let self else {
                     return Empty<User, Error>().eraseToAnyPublisher()
                 }
+                SDWebImageManager.shared.imageCache.clear?(with: .all)
                 return self.getCurrentUser()
             }
             .handleEvents(receiveOutput: { [weak self] in self?.userLocalRepository.saveCurrentUser($0) })

@@ -18,21 +18,10 @@ final class PhotoAsset: ObservableObject {
         self.asset = asset
     }
 
-    func requestThumbnail(targetSize: CGSize = CGSize(width: 250, height: 250),
-                          contentMode: PHImageContentMode = .aspectFit,
-                          options: PHImageRequestOptions? = nil) {
-        DispatchQueue.global().async { [weak self] in
+    func requestThumbnail(targetSize: CGSize) {
+        asset.requestThumbnail(targetSize: targetSize) { [weak self] image in
             guard let self else { return }
-            PHImageManager.default().requestImage(
-                for: self.asset,
-                targetSize: targetSize,
-                contentMode: contentMode,
-                options: options
-            ) { [weak self] image, _ in
-                DispatchQueue.main.async { [weak self] in
-                    self?.thumbnail = image
-                }
-            }
+            self.thumbnail = image
         }
     }
 }
