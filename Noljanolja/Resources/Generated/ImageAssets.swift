@@ -61,12 +61,14 @@ internal enum ImageAssets {
   internal static let icAdd = ImageAsset(name: "ic_add")
   internal static let icAppMascot = ImageAsset(name: "ic_app_mascot")
   internal static let icApple = ImageAsset(name: "ic_apple")
+  internal static let icArrowDropDown = ImageAsset(name: "ic_arrow_drop_down")
   internal static let icArrowRight = ImageAsset(name: "ic_arrow_right")
   internal static let icAvatarPlaceholder = ImageAsset(name: "ic_avatar_placeholder")
   internal static let icBack = ImageAsset(name: "ic_back")
   internal static let icCameraFill = ImageAsset(name: "ic_camera_fill")
   internal static let icChange = ImageAsset(name: "ic_change")
   internal static let icChecked = ImageAsset(name: "ic_checked")
+  internal static let icCheckmarkRect = ImageAsset(name: "ic_checkmark_rect")
   internal static let icClose = ImageAsset(name: "ic_close")
   internal static let icCoin = ImageAsset(name: "ic_coin")
   internal static let icCopy = ImageAsset(name: "ic_copy")
@@ -79,6 +81,7 @@ internal enum ImageAssets {
   internal static let icGoogle = ImageAsset(name: "ic_google")
   internal static let icHistory = ImageAsset(name: "ic_history")
   internal static let icIgnore = ImageAsset(name: "ic_ignore")
+  internal static let icImage = ImageAsset(name: "ic_image")
   internal static let icLink = ImageAsset(name: "ic_link")
   internal static let icMenu = ImageAsset(name: "ic_menu")
   internal static let icMore = ImageAsset(name: "ic_more")
@@ -168,12 +171,14 @@ internal enum ImageAssets {
     icAdd,
     icAppMascot,
     icApple,
+    icArrowDropDown,
     icArrowRight,
     icAvatarPlaceholder,
     icBack,
     icCameraFill,
     icChange,
     icChecked,
+    icCheckmarkRect,
     icClose,
     icCoin,
     icCopy,
@@ -186,6 +191,7 @@ internal enum ImageAssets {
     icGoogle,
     icHistory,
     icIgnore,
+    icImage,
     icLink,
     icMenu,
     icMore,

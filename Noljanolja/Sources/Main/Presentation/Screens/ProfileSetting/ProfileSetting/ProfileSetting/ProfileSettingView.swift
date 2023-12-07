@@ -6,19 +6,23 @@
 //
 //
 
+import AlertToast
+import SDWebImageSwiftUI
 import SwiftUI
+import SwiftUINavigation
+import SwiftUIX
 
 // MARK: - ProfileSettingView
 
 struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
     // MARK: Dependencies
-    
+
     @StateObject var viewModel: ViewModel
 
     var body: some View {
         buildBodyView()
     }
-    
+
     private func buildBodyView() -> some View {
         buildMainView()
             .navigationBarTitle("", displayMode: .inline)
@@ -44,6 +48,19 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
                     }
                 }
             }
+            .fullScreenCover(
+                unwrapping: $viewModel.fullScreenCoverType,
+                content: {
+                    buildFullScreenCoverDestinationView($0)
+                }
+            )
+            .toast(isPresenting: $viewModel.isShowFinishAvatar, duration: 1) {
+                AlertToast(
+                    displayMode: .alert,
+                    type: .image(ImageAssets.icCheckmarkRect.name, .clear),
+                    style: .style(backgroundColor: .clear)
+                )
+            }
     }
 
     private func buildMainView() -> some View {
@@ -52,90 +69,88 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
             buildNavigationLinks()
         }
     }
-    
+
     private func buildContentView() -> some View {
         VStack(spacing: 12) {
             ScrollView {
-                VStack(spacing: 16) {
+                VStack(spacing: 5) {
                     buildUserInfoView()
-
-                    Divider()
-                        .frame(height: 1)
-                        .overlay(ColorAssets.neutralLightGrey.swiftUIColor)
 
                     buildPushNotiView()
 
-                    Divider()
-                        .frame(height: 1)
-                        .overlay(ColorAssets.neutralLightGrey.swiftUIColor)
-
                     buildAppSettingView()
-
-                    Divider()
-                        .frame(height: 1)
-                        .overlay(ColorAssets.neutralLightGrey.swiftUIColor)
 
                     buildAppInfoView()
                 }
                 .padding(16)
             }
             .frame(maxHeight: .infinity)
+            .background(ColorAssets.neutralLightGrey.swiftUIColor)
 
             buildLogOutView()
         }
     }
 
     private func buildUserInfoView() -> some View {
-        VStack(spacing: 0) {
-            SettingItemView(
-                title: L10n.settingExchangeAccountManagement,
-                content: {
-                    ImageAssets.icArrowRight.swiftUIImage
-                        .frame(width: 16, height: 16)
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
-            )
-            SettingItemView(
-                title: L10n.settingName,
-                content: {
-                    HStack(spacing: 12) {
-                        Text(viewModel.name)
-                            .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
+        VStack(spacing: 15) {
+            buildAvatarView()
 
-                        ImageAssets.icEdit.swiftUIImage
-                            .frame(width: 24, height: 24)
-                            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                    }
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                },
-                action: {
-                    viewModel.navigationType = .updateCurrentUser
-                }
+            ItemProfileView(title: L10n.settingRanking, content: "", ranking: viewModel.ranking)
+
+            ItemProfileView(title: L10n.settingName, content: viewModel.name)
+
+            ItemProfileView(title: L10n.settingPhoneNumber, content: viewModel.phoneNumber)
+
+            ItemProfileView(title: L10n.updateProfileGender, content: viewModel.gender?.title ?? "")
+        }
+        .padding(.vertical, 17)
+        .padding(.horizontal, 24)
+        .background(ColorAssets.neutralLight.swiftUIColor)
+        .cornerRadius(10)
+    }
+
+    private func buildAvatarView() -> some View {
+        VStack(spacing: 10) {
+            WebImage(
+                url: URL(string: viewModel.avatarURL ?? ""),
+                context: [
+                    .imageTransformer: SDImageResizingTransformer(
+                        size: CGSize(width: 52 * 3, height: 52 * 3),
+                        scaleMode: .aspectFill
+                    )
+                ]
             )
-            SettingItemView(
-                title: L10n.settingPhoneNumber,
-                content: {
-                    Text(viewModel.phoneNumber)
-                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            .resizable()
+            .placeholder(ImageAssets.icAvatarPlaceholder.swiftUIImage)
+            .indicator(.activity)
+            .scaledToFill()
+            .frame(width: 52, height: 52)
+            .cornerRadius(26)
+
+            Text(L10n.chatSettingsChangeAvatar)
+                .dynamicFont(.systemFont(ofSize: 12, weight: .bold))
+                .padding(.vertical, 6)
+                .padding(.horizontal, 14)
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                .background(ColorAssets.primaryGreen50.swiftUIColor)
+                .cornerRadius(5)
+                .onPress {
+                    viewModel.fullScreenCoverType = .avatar
                 }
-            )
         }
     }
 
     private func buildPushNotiView() -> some View {
-        VStack(spacing: 0) {
-            SettingItemView(
-                title: L10n.settingPushNotification,
-                content: {
-                    Toggle("", isOn: .constant(true))
-                }
-            )
-        }
+        SettingItemView(
+            title: L10n.settingPushNotification,
+            content: {
+                Toggle("", isOn: .constant(true))
+            }
+        )
     }
 
     private func buildAppSettingView() -> some View {
-        VStack(spacing: 0) {
+        Group {
             SettingItemView(
                 title: L10n.settingClearCacheData,
                 action: {
@@ -152,16 +167,18 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
     }
 
     private func buildAppInfoView() -> some View {
-        VStack(spacing: 0) {
+        Group {
             SettingItemView(
                 title: "FAQ",
                 action: {
                     viewModel.navigationType = .faq
                 }
             )
-            SettingItemView(
-                title: L10n.settingCurrentVersion(viewModel.appVersion)
-            )
+
+            Text(L10n.settingCurrentVersion(viewModel.appVersion))
+                .dynamicFont(.systemFont(ofSize: 12))
+                .padding(.vertical, 40)
+                .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
         }
     }
 
@@ -174,9 +191,10 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
         )
         .buttonStyle(PrimaryButtonStyle())
         .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
+        .padding(.vertical, 16)
         .padding(.horizontal, 16)
     }
-    
+
     private func buildNavigationLinks() -> some View {
         NavigationLink(
             unwrapping: $viewModel.navigationType,
@@ -189,7 +207,7 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
             }
         )
     }
-    
+
     @ViewBuilder
     private func buildNavigationDestinationView(
         _ type: Binding<SettingNavigationType>
@@ -205,6 +223,38 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
             )
         case .faq:
             FAQView(viewModel: FAQViewModel())
+        case .changeAvatarAlbum:
+            ChangeAvatarView(viewModel:
+                ChangeAvatarViewModel(delegate: viewModel)
+            )
+        }
+    }
+
+    @ViewBuilder
+    private func buildFullScreenCoverDestinationView(
+        _ type: Binding<SettingFullScreenCoverType>
+    ) -> some View {
+        switch type.wrappedValue {
+        case let .imagePickerView(sourceType):
+            ImagePicker(image: $viewModel.image)
+                .sourceType(sourceType)
+                .allowsEditing(true)
+                .introspectViewController {
+                    switch sourceType {
+                    case .photoLibrary, .savedPhotosAlbum:
+                        break
+                    case .camera:
+                        $0.view.backgroundColor = .black
+                    @unknown default:
+                        break
+                    }
+                }
+        case .avatar:
+            BottomSheet {
+                ProfileActionView(
+                    viewModel: ProfileActionViewModel(delegate: viewModel)
+                )
+            }
         }
     }
 }

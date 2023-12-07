@@ -28,7 +28,7 @@ struct FAQItemView: View {
                 .overlay(ColorAssets.neutralLightGrey.swiftUIColor)
                 .hidden(!isDescriptionHidden)
         }
-        .padding(.horizontal, 16)
+        .padding(.horizontal, 26)
         .background(isDescriptionHidden ? .clear : ColorAssets.secondaryYellow50.swiftUIColor)
     }
 
@@ -55,7 +55,7 @@ struct FAQItemView: View {
                 .dynamicFont(.systemFont(ofSize: 16, weight: .medium))
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .foregroundColor(ColorAssets.primaryGreen300.swiftUIColor)
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
             ImageAssets.icArrowRight.swiftUIImage
                 .resizable()

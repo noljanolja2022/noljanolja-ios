@@ -97,7 +97,7 @@
 "edit_member_infomation" = "Edit member infomation";
 "change_password" = "Change Password";
 "exchange_account_management" = "Exchange Account Management";
-"setting_push_notification" = "App push notification";
+"setting_push_notification" = "Turn on/off notification";
 "setting_exchange_account_management" = "Exchange account management";
 "setting_name" = "Name";
 "setting_phone_number" = "Phone number";
@@ -131,6 +131,7 @@
 "update_profile_avatar" = "Set Avatar";
 "update_profile_avatar_open_camera" = "Open Camera";
 "update_profile_avatar_select_photo" = "Select Photo";
+"update_profile_avatar_from_album" = "Select From Album";
 "update_profile_name" = "Name";
 "update_profile_name_error" = "This name is invalid";
 "update_profile_name_required" = "Required";
@@ -286,6 +287,7 @@
 "setting_representative_title" = "Representative";
 "setting_address_title" = "Address";
 "setting_phone_call_title" = "Phone call";
+"setting_ranking" = "Ranking";
 "setting_company_registration_number_title" = "Company Registration Number";
 "setting_warning_clear_cache_title" = "Are you sure to clear cache data?";
 "setting_warning_clear_cache_description" = "All your cache will be deleted after you do this action.";
@@ -450,3 +452,6 @@
 "invite_notes" = "* Even if a friend manually enters the referral code after copying and sending it \nYou can participate in the friend referral event.";
 "watch_watch" = "watching";
 "shop_brands" = "Brands";
+"common_done" = "Done";
+"common_recent" = "Recent";
+"common_Album" = "Album";

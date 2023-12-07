@@ -160,14 +160,13 @@ struct HomeView<ViewModel: HomeViewModel>: View {
                         case .watch, .chat, .shop:
                             Spacer().background(ColorAssets.neutralLight.swiftUIColor)
                         case .wallet:
+                            Spacer()
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .background(ColorAssets.primaryGreen200.swiftUIColor)
                             ImageAssets.bgWalletHeader.swiftUIImage
                                 .resizable()
                                 .frame(maxWidth: .infinity)
                                 .aspectRatio(1.8, contentMode: .fit)
-                                .zIndex(999)
-                            Spacer()
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .background(ColorAssets.primaryGreen200.swiftUIColor)
                         case .friends:
                             ImageAssets.bgFriendsHeader.swiftUIImage
                                 .resizable()

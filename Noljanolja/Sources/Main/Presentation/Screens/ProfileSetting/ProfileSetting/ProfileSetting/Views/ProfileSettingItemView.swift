@@ -40,13 +40,16 @@ struct SettingItemView<Content: View>: View {
     private func buildContentView() -> some View {
         HStack(spacing: 8) {
             Text(title)
-                .dynamicFont(.systemFont(ofSize: 16))
+                .dynamicFont(.systemFont(ofSize: 12))
                 .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
             Spacer()
             content
         }
-        .frame(height: 52)
+        .padding(.horizontal, 24)
+        .frame(height: 55)
         .frame(maxWidth: .infinity)
+        .background(ColorAssets.neutralLight.swiftUIColor)
+        .cornerRadius(10)
     }
 }
 

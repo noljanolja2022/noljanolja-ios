@@ -15,12 +15,14 @@ struct PhotoPickerView: View {
 
     @Binding var selectAssets: [PhotoAsset]
     var maxSelectAssets = 10
-    
+    var isMultipleSelection = true
+
     var body: some View {
         ScrollView {
             LazyVGrid(columns: Array(repeating: .flexible(spacing: 4), count: 3), spacing: 4) {
                 ForEach(0..<assets.count, id: \.self) { index in
                     PhotoPickerItemView(
+                        isMultipleSelection: isMultipleSelection,
                         photoAsset: assets[index],
                         selectedIndex: Binding<Int?>(
                             get: {
@@ -32,17 +34,39 @@ struct PhotoPickerView: View {
                         )
                     )
                     .onTapGesture {
-                        if let selectedIndex = selectAssets
-                            .firstIndex(where: { $0.asset.localIdentifier == assets[index].asset.localIdentifier }) {
-                            selectAssets.remove(at: selectedIndex)
-                        } else if selectAssets.count < maxSelectAssets {
-                            selectAssets.append(assets[index])
+                        if isMultipleSelection {
+                            if let selectedIndex = selectAssets
+                                .firstIndex(where: { $0.asset.localIdentifier == assets[index].asset.localIdentifier }) {
+                                selectAssets.remove(at: selectedIndex)
+                            } else if selectAssets.count < maxSelectAssets {
+                                selectAssets.append(assets[index])
+                            }
+                        } else {
+                            selectAssets = [assets[index]]
                         }
                     }
                 }
             }
         }
-        .onAppear { assets = PhotoLibrary.default.fetchAssets() }
+        .onAppear {
+            let status = PHPhotoLibrary.authorizationStatus()
+            switch status {
+            case .notDetermined:
+                PHPhotoLibrary.requestAuthorization { status in
+                    if status == .authorized {
+                        DispatchQueue.main.async {
+                            assets = PhotoLibrary.default.fetchAssets()
+                        }
+                    }
+                }
+            case .restricted, .denied:
+                break
+            case .authorized:
+                assets = PhotoLibrary.default.fetchAssets()
+            default:
+                break
+            }
+        }
     }
 }
 
