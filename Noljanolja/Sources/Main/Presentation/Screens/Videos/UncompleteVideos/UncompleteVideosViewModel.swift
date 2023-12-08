@@ -60,7 +60,7 @@ final class UncompleteVideosViewModel: ViewModel {
             .sink { result in
                 switch result {
                 case let .success(models):
-                    self.models = models
+                    self.models = models.filter { $0.totalPoints != 0 }
                     self.viewState = .content
                 case .failure:
                     self.viewState = .error

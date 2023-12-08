@@ -139,6 +139,14 @@ private enum VideoTargets {
             ]
         }
     }
+    
+    struct IgnoreVideo: BaseAuthTargetType {
+        var path: String { "v1/media/videos/\(videoId)/ignores" }
+        let method: Moya.Method = .post
+        var task: Task { .requestParameters(parameters: [:], encoding: JSONEncoding.default) }
+        
+        let videoId: String
+    }
 }
 
 // MARK: - VideoNetworkRepository
@@ -158,6 +166,7 @@ protocol VideoNetworkRepository {
     func postVideoComment(videoId: String, comment: String, youtubeToken: String) -> AnyPublisher<VideoComment, Error>
     func likeVideo(videoId: String) -> AnyPublisher<Void, Error>
     func reactPromote(videoId: String, youtubeToken: String) -> AnyPublisher<Void, Error>
+    func ignoreVideo(videoId: String) -> AnyPublisher<Void, Error>
 }
 
 extension VideoNetworkRepository {
@@ -265,5 +274,9 @@ final class VideoNetworkRepositoryImpl: VideoNetworkRepository {
         api.request(
             target: VideoTargets.ReactPromote(videoId: videoId, youtubeToken: youtubeToken)
         )
+    }
+    
+    func ignoreVideo(videoId: String) -> AnyPublisher<Void, Error> {
+        api.request(target: VideoTargets.IgnoreVideo(videoId: videoId))
     }
 }

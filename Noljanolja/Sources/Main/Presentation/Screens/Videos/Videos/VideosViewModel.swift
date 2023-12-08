@@ -30,6 +30,7 @@ final class VideosViewModel: ViewModel {
 
     let loadMoreTrendingVideos = PassthroughSubject<Int, Never>()
     @Published var isShowToastCopy = false
+    @Published var isProgressHUDShowing = false
 
     // MARK: Dependencies
 
@@ -149,7 +150,7 @@ final class VideosViewModel: ViewModel {
 
             let model = VideosModel(
                 highlightVideos: highlightVideos,
-                watchingVideos: watchingVideos,
+                watchingVideos: watchingVideos.filter { $0.totalPoints != 0 },
                 trendingVideos: trendingVideos.filter { $0.totalPoints != 0 }
             )
 
@@ -173,5 +174,17 @@ extension VideosViewModel: VideoActionContainerViewModelDelegate {
 
     func showToastCopy() {
         isShowToastCopy = true
+    }
+
+    func ignoreVideo(videoId: String) {
+        videoNetworkRepository.ignoreVideo(videoId: videoId)
+            .mapToResult()
+            .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+                self.trendingVideosSubject.send(self.model.trendingVideos.filter { $0.id != videoId })
+                self.isProgressHUDShowing = false
+            }
+            .store(in: &cancellables)
     }
 }

@@ -105,9 +105,7 @@ struct VideosView<ViewModel: VideosViewModel>: View {
         HeaderCommonView(
             searchAction: {
                 viewModel.navigationType = .searchVideo
-            },
-            notificationAction: {},
-            settingAction: {}
+            }
         ) {
             ZStack {
                 Text(L10n.watchLetGet + " ").foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
