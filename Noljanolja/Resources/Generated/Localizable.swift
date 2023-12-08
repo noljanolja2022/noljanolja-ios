@@ -168,6 +168,8 @@ internal enum L10n {
   internal static let commonAdmin = L10n.tr("Localizable", "common_admin", fallback: "Admin")
   /// Agree
   internal static let commonAgree = L10n.tr("Localizable", "common_agree", fallback: "Agree")
+  /// Album
+  internal static let commonAlbum = L10n.tr("Localizable", "common_Album", fallback: "Album")
   /// All
   internal static let commonAll = L10n.tr("Localizable", "common_all", fallback: "All")
   /// Cancel
@@ -188,6 +190,8 @@ internal enum L10n {
   internal static let commonCopySuccess = L10n.tr("Localizable", "common_copy_success", fallback: "Copied in clipboard")
   /// Disagree
   internal static let commonDisagree = L10n.tr("Localizable", "common_disagree", fallback: "Disagree")
+  /// Done
+  internal static let commonDone = L10n.tr("Localizable", "common_done", fallback: "Done")
   /// Download
   internal static let commonDownload = L10n.tr("Localizable", "common_download", fallback: "Download")
   /// Edit
@@ -226,6 +230,8 @@ internal enum L10n {
   internal static let commonPoints = L10n.tr("Localizable", "common_points", fallback: "Points")
   /// Previous
   internal static let commonPrevious = L10n.tr("Localizable", "common_previous", fallback: "Previous")
+  /// Recent
+  internal static let commonRecent = L10n.tr("Localizable", "common_recent", fallback: "Recent")
   /// Reload
   internal static let commonReload = L10n.tr("Localizable", "common_reload", fallback: "Reload")
   /// Save
@@ -608,8 +614,10 @@ internal enum L10n {
   internal static let settingPhoneCallTitle = L10n.tr("Localizable", "setting_phone_call_title", fallback: "Phone call")
   /// Phone number
   internal static let settingPhoneNumber = L10n.tr("Localizable", "setting_phone_number", fallback: "Phone number")
-  /// App push notification
-  internal static let settingPushNotification = L10n.tr("Localizable", "setting_push_notification", fallback: "App push notification")
+  /// Turn on/off notification
+  internal static let settingPushNotification = L10n.tr("Localizable", "setting_push_notification", fallback: "Turn on/off notification")
+  /// Ranking
+  internal static let settingRanking = L10n.tr("Localizable", "setting_ranking", fallback: "Ranking")
   /// Representative
   internal static let settingRepresentativeTitle = L10n.tr("Localizable", "setting_representative_title", fallback: "Representative")
   /// All your cache will be deleted after you do this action.
@@ -691,6 +699,10 @@ internal enum L10n {
   internal static let tosTitle = L10n.tr("Localizable", "tos_title", fallback: "Term of Service")
   /// Welcome to NolgoBulja. Please read our terms of service carefully.
   internal static let tosWelcome = L10n.tr("Localizable", "tos_welcome", fallback: "Welcome to NolgoBulja. Please read our terms of service carefully.")
+  /// CONVERT NOW
+  internal static let transactionConvertNow = L10n.tr("Localizable", "transaction_convert_now", fallback: "CONVERT NOW")
+  /// Convert Points to Cash
+  internal static let transactionConvertPointsToCash = L10n.tr("Localizable", "transaction_convert_points_to_cash", fallback: "Convert Points to Cash")
   /// Detail Transaction
   internal static let transactionDetail = L10n.tr("Localizable", "transaction_detail", fallback: "Detail Transaction")
   /// Transaction code
@@ -723,6 +735,8 @@ internal enum L10n {
   internal static let uncompletedVideo = L10n.tr("Localizable", "uncompleted_video", fallback: "Uncompleted video")
   /// Set Avatar
   internal static let updateProfileAvatar = L10n.tr("Localizable", "update_profile_avatar", fallback: "Set Avatar")
+  /// Select From Album
+  internal static let updateProfileAvatarFromAlbum = L10n.tr("Localizable", "update_profile_avatar_from_album", fallback: "Select From Album")
   /// Open Camera
   internal static let updateProfileAvatarOpenCamera = L10n.tr("Localizable", "update_profile_avatar_open_camera", fallback: "Open Camera")
   /// Select Photo
@@ -823,6 +837,8 @@ internal enum L10n {
   internal static let walletAttendNow = L10n.tr("Localizable", "wallet_attend_now", fallback: "Attend now")
   /// Benefit
   internal static let walletBenefit = L10n.tr("Localizable", "wallet_benefit", fallback: "Benefit")
+  /// Cash that can be used
+  internal static let walletCashThatCanBeUsed = L10n.tr("Localizable", "wallet_cash_that_can_be_used", fallback: "Cash that can be used")
   /// Check in
   internal static let walletCheckin = L10n.tr("Localizable", "wallet_checkin", fallback: "Check in")
   /// Checkin success

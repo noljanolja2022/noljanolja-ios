@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "친구야-같이-놀자-2222 2.png",
+      "filename" : "material-symbols_history.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "친구야-같이-놀자-2222 2@2x.png",
+      "filename" : "material-symbols_history@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "친구야-같이-놀자-2222 2@3x.png",
+      "filename" : "material-symbols_history@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

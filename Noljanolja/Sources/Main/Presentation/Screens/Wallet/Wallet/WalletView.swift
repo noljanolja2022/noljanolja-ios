@@ -13,20 +13,20 @@ import SwiftUI
 
 struct WalletView<ViewModel: WalletViewModel>: View {
     // MARK: Dependencies
-    
+
     @StateObject var viewModel: ViewModel
     @State private var selectedMoneyType = MoneyType.point
-    
+
     var body: some View {
         buildBodyView()
     }
-    
+
     private func buildBodyView() -> some View {
         buildMainView()
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
     }
-    
+
     private func buildMainView() -> some View {
         VideoDetailRootContainerView(
             content: {
@@ -38,7 +38,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
             viewModel: VideoDetailRootContainerViewModel()
         )
     }
-    
+
     private func buildContentStatefullView() -> some View {
         buildContentView()
             .statefull(
@@ -49,7 +49,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                 error: buildErrorView
             )
     }
-    
+
     @ViewBuilder
     private func buildContentView() -> some View {
         if let model = viewModel.model {
@@ -59,7 +59,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
             }
         }
     }
-    
+
     private func buildUserInfoView(_ model: WalletModel) -> some View {
         WalletUserInfoView(
             model: model.userInfo,
@@ -71,33 +71,44 @@ struct WalletView<ViewModel: WalletViewModel>: View {
             }
         )
     }
-    
+
     private func buildScrollView(_ model: WalletModel) -> some View {
         ScrollView {
-            VStack(spacing: 12) {
-                buildCoinsView(model)
-                buildExchangeView()
+            buildCoinsView(model)
+
+            VStack(spacing: 15) {
                 buildPointsView(model)
+                buildActionView()
+                buildExchangeView()
                 buildCheckinProgressView(model)
+                
+                Spacer()
             }
             .padding(16)
-            .shadow(
-                color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.2),
-                radius: 8,
-                x: 0,
-                y: 4
+            .background(ColorAssets.neutralLight.swiftUIColor)
+            .cornerRadius([.topLeading, .topTrailing], 24)
+        }
+    }
+
+    private func buildActionView() -> some View {
+        Button {
+            print("")
+        } label: {
+            Label(
+                L10n.transactionHistory.uppercased(),
+                icon: { ImageAssets.icHistory.swiftUIImage }
             )
         }
-        .background(ColorAssets.neutralLight.swiftUIColor)
-        .cornerRadius([.topLeading, .topTrailing], 24)
+        .buttonStyle(PrimaryButtonStyle())
+        .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
     }
-    
+
     private func buildCoinsView(_ model: WalletModel) -> some View {
         ZStack {
             WalletMoneyView(
                 model: WalletMoneyViewDataModel(
-                    title: L10n.walletMyPoint,
-                    titleColorName: ColorAssets.primaryGreen50.name,
+                    title: L10n.walletMyPoints,
+                    titleColorName: ColorAssets.neutralRawLight.name,
                     changeString: nil,
                     changeColorName: ColorAssets.secondaryYellow200.name,
                     iconName: ImageAssets.icPoint.name,
@@ -112,7 +123,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
             .offset(y: selectedMoneyType == .point ? 16 : 0)
             .aspectRatio(2, contentMode: .fill)
             .zIndex(selectedMoneyType == .point ? 1 : 0)
-            
+
             WalletMoneyView(
                 model: WalletMoneyViewDataModel(
                     title: L10n.walletMyCash,
@@ -132,87 +143,111 @@ struct WalletView<ViewModel: WalletViewModel>: View {
             .aspectRatio(2, contentMode: .fill)
             .zIndex(selectedMoneyType == .coin ? 1 : 0)
         }
-        .padding(.bottom, 16)
+        .padding(.horizontal, 16)
+        .padding(.bottom, 22)
         .onTapGesture {
             withAnimation(.easeInOut(duration: 0.3)) {
                 selectedMoneyType = selectedMoneyType == .point ? .coin : .point
             }
         }
     }
-    
+
     private func buildExchangeView() -> some View {
         VStack(alignment: .center, spacing: 12) {
-            Text(L10n.walletExchangeDescription)
-                .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
-                .frame(maxWidth: .infinity, alignment: .center)
-                .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
-            HStack(alignment: .center, spacing: 4) {
-                ImageAssets.icGift.swiftUIImage
+            ZStack {
+                Text(L10n.transactionConvertPointsToCash)
+                    .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
+                HStack {
+                    Spacer()
+                    ImageAssets.icQuestion.swiftUIImage
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 20, height: 20)
+                        .padding(.trailing, 6)
+                }
+            }
+
+            HStack(alignment: .center, spacing: 27) {
+                ImageAssets.icPoint.swiftUIImage
                     .resizable()
                     .scaledToFit()
                     .frame(width: 40, height: 40)
-                Text("750 Open box")
-                    .dynamicFont(.systemFont(ofSize: 14))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
-                Button(
-                    action: {
-                        viewModel.navigationType = .exchange
-                    },
-                    label: {
-                        Text(L10n.exchangeCashTitle)
-                            .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
-                            .padding(.vertical, 8)
-                            .padding(.horizontal, 16)
-                            .background(ColorAssets.secondaryYellow400.swiftUIColor)
-                            .cornerRadius(4)
-                    }
-                )
+
+                ImageAssets.icBack.swiftUIImage
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 26, height: 26)
+                    .rotationEffect(.degrees(180))
+
+                ImageAssets.icCoin.swiftUIImage
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 40, height: 40)
             }
+            Button(L10n.transactionConvertNow.uppercased(), action: {
+                viewModel.navigationType = .exchange
+            })
+            .buttonStyle(PrimaryButtonStyle(
+                enabledBackgroundColor: ColorAssets.secondaryYellow400.swiftUIColor)
+            )
+            .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
+            .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
         }
-        .padding(12)
+        .padding(14)
         .background(ColorAssets.secondaryYellow50.swiftUIColor)
-        .cornerRadius(16)
+        .cornerRadius(18)
+        .overlay(
+            RoundedRectangle(cornerRadius: 18)
+                .stroke(ColorAssets.secondaryYellow400.swiftUIColor, lineWidth: 1.5)
+        )
     }
-    
+
     private func buildPointsView(_ model: WalletModel) -> some View {
         HStack(spacing: 12) {
             WalletPointView(
                 model: WalletPointViewDataModel(
                     title: L10n.walletAccumulatedPoint,
-                    titleColorName: ColorAssets.neutralRawLight.name,
+                    titleColorName: ColorAssets.neutralRawDarkGrey.name,
                     point: model.accumulatedPointsToday,
-                    pointColorName: ColorAssets.neutralRawLight.name,
-                    unitColorName: ColorAssets.secondaryYellow300.name,
+                    pointColorName: ColorAssets.secondaryYellow300.name,
+                    unitColorName: ColorAssets.neutralRawDarkGrey.name,
                     actionTitle: L10n.walletViewHistory,
-                    backgroundImageName: ImageAssets.bgPointGreen.name
+                    type: "P"
                 ),
                 action: {
                     viewModel.navigationType = .transactionHistory
                 }
             )
-            
+
             WalletPointView(
                 model: WalletPointViewDataModel(
-                    title: L10n.walletPointCanExchange,
+                    title: L10n.walletCashThatCanBeUsed,
                     titleColorName: ColorAssets.neutralRawDarkGrey.name,
                     point: model.point,
-                    pointColorName: ColorAssets.neutralRawDarkGrey.name,
-                    unitColorName: ColorAssets.systemBlue.name,
+                    pointColorName: ColorAssets.systemBlue.name,
+                    unitColorName: ColorAssets.neutralRawDarkGrey.name,
                     actionTitle: L10n.walletExchangeMoney,
-                    backgroundImageName: ImageAssets.bgPointYellow.name
+                    type: "C"
                 ),
                 action: {
                     viewModel.goShopAction.send()
                 }
             )
         }
+        .shadow(
+            color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.3),
+            radius: 11,
+            x: 4,
+            y: 4
+        )
     }
-    
+
     private func buildCheckinProgressView(_ model: WalletModel) -> some View {
         VStack(spacing: 24) {
             CheckinOverviewView()
-            
+
             HStack(spacing: 24) {
                 CheckinProgressSumaryView(
                     completedCount: model.checkinProgresses.filter { $0.isCompleted }.count,
@@ -220,7 +255,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                     forcegroundColor: ColorAssets.neutralDarkGrey.swiftUIColor,
                     secondaryForcegroundColor: ColorAssets.neutralDeepGrey.swiftUIColor
                 )
-                
+
                 Button(
                     action: {
                         viewModel.navigationType = .checkin
@@ -243,7 +278,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
         .cornerRadius(8)
         .visible(.gone)
     }
-    
+
     private func buildNavigationLinks() -> some View {
         NavigationLink(
             unwrapping: $viewModel.navigationType,
@@ -264,13 +299,13 @@ extension WalletView {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(ColorAssets.neutralLight.swiftUIColor)
     }
-    
+
     private func buildEmptyView() -> some View {
         Spacer()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(ColorAssets.neutralLight.swiftUIColor)
     }
-    
+
     private func buildErrorView() -> some View {
         Spacer()
             .frame(maxWidth: .infinity, maxHeight: .infinity)

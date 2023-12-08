@@ -24,7 +24,7 @@ struct FAQView<ViewModel: FAQViewModel>: View {
             .navigationBarTitle("", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .principal) {
-                    Text(L10n.videoTitle)
+                    Text(L10n.settingFaq)
                         .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
@@ -62,6 +62,7 @@ struct FAQView<ViewModel: FAQViewModel>: View {
                     description: "NolgoBulja is an entertainment app. We provide video, livestream service. you can earn by watching and buy products in the shop by the points received after watching."
                 )
             }
+            .padding(.top, 40)
         }
     }
 }

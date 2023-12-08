@@ -6,9 +6,20 @@
 //
 
 import Foundation
+import UIKit
+
+// MARK: - SettingNavigationType
 
 enum SettingNavigationType: Equatable {
     case updateCurrentUser
     case sourceLicense
     case faq
+    case changeAvatarAlbum
+}
+
+// MARK: - SettingFullScreenCoverType
+
+enum SettingFullScreenCoverType: Equatable {
+    case avatar
+    case imagePickerView(UIImagePickerController.SourceType)
 }

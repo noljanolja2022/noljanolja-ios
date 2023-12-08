@@ -9,6 +9,7 @@
 import _SwiftUINavigationState
 import Combine
 import Foundation
+import UIKit
 
 // MARK: - ProfileSettingViewModelDelegate
 
@@ -23,14 +24,20 @@ final class ProfileSettingViewModel: ViewModel {
 
     @Published var name = ""
     @Published var phoneNumber = ""
+    @Published var gender: GenderType?
     @Published var appVersion = ""
-
+    @Published var avatarURL: String?
+    @Published var image: UIImage?
+    @Published var ranking: LoyaltyTierModelType?
     @Published var isProgressHUDShowing = false
     @Published var alertState: AlertState<ProfileSettingAlertActionType>?
+    @Published var viewState = ViewState.loading
+    @Published var isShowFinishAvatar = false
 
     // MARK: Navigations
 
     @Published var navigationType: SettingNavigationType?
+    @Published var fullScreenCoverType: SettingFullScreenCoverType?
 
     // MARK: Action
 
@@ -44,20 +51,24 @@ final class ProfileSettingViewModel: ViewModel {
 
     private let userUseCases: UserUseCases
     private let authUseCases: AuthUseCases
+    private let memberInfoUseCase: MemberInfoUseCases
     private let deleteCacheUseCase: DeleteCacheUseCaseProtocol
     private weak var delegate: ProfileSettingViewModelDelegate?
 
     // MARK: Private
 
     private let currentUserSubject = CurrentValueSubject<User?, Never>(nil)
+    private let memberInfoSubject = CurrentValueSubject<LoyaltyMemberInfo?, Never>(nil)
     private var cancellables = Set<AnyCancellable>()
 
     init(userUseCases: UserUseCases = UserUseCasesImpl.default,
          authUseCases: AuthUseCases = AuthUseCasesImpl.default,
+         memberInfoUseCase: MemberInfoUseCases = MemberInfoUseCasesImpl.default,
          deleteCacheUseCase: DeleteCacheUseCaseProtocol = DeleteCacheUseCase.default,
          delegate: ProfileSettingViewModelDelegate? = nil) {
         self.userUseCases = userUseCases
         self.authUseCases = authUseCases
+        self.memberInfoUseCase = memberInfoUseCase
         self.deleteCacheUseCase = deleteCacheUseCase
         self.delegate = delegate
         super.init()
@@ -80,6 +91,8 @@ final class ProfileSettingViewModel: ViewModel {
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] user in
+                self?.gender = user.gender
+                self?.avatarURL = user.avatar
                 self?.name = user.name ?? ""
                 self?.phoneNumber = user.phone
                     .flatMap {
@@ -103,6 +116,64 @@ final class ProfileSettingViewModel: ViewModel {
                 self?.currentUserSubject.send($0)
             })
             .store(in: &cancellables)
+
+        isAppearSubject
+            .first(where: { $0 })
+            .receive(on: DispatchQueue.main)
+            .handleEvents(receiveOutput: { [weak self] _ in self?.viewState = .loading })
+            .flatMapLatestToResult { [weak self] _ -> AnyPublisher<LoyaltyMemberInfo, Error> in
+                guard let self else {
+                    return Empty<LoyaltyMemberInfo, Error>().eraseToAnyPublisher()
+                }
+                return self.memberInfoUseCase.getLoyaltyMemberInfo()
+            }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] result in
+                guard let self else { return }
+                switch result {
+                case let .success(model):
+                    self.memberInfoSubject.send(model)
+                    self.viewState = .content
+                case .failure:
+                    self.viewState = .error
+                }
+            }
+            .store(in: &cancellables)
+
+        memberInfoSubject
+            .compactMap { $0 }
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in
+                self?.ranking = .init(tier: $0.currentTier)
+            })
+            .store(in: &cancellables)
+
+        $image
+            .compactMap { $0?.jpegData(compressionQuality: 0.5) }
+            .receive(on: DispatchQueue.main)
+            .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
+            .flatMapLatestToResult { [weak self] imageData in
+                guard let self else {
+                    return Empty<User, Error>().eraseToAnyPublisher()
+                }
+                return self.userUseCases.updateCurrentUserAvatar(imageData)
+            }
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] result in
+                guard let self else { return }
+                self.isProgressHUDShowing = false
+                switch result {
+                case .success:
+                    return
+                case .failure:
+                    self.alertState = AlertState(
+                        title: TextState(L10n.commonErrorTitle),
+                        message: TextState(L10n.commonErrorDescription),
+                        dismissButton: .cancel(TextState("OK"))
+                    )
+                }
+            })
+            .store(in: &cancellables)
     }
 
     private func configureActions() {
@@ -112,8 +183,11 @@ final class ProfileSettingViewModel: ViewModel {
                     AlertState(
                         title: TextState(L10n.settingWarningClearCacheTitle),
                         message: TextState(L10n.settingWarningClearCacheDescription),
-                        primaryButton: .destructive(TextState(L10n.commonDisagree.uppercased())),
-                        secondaryButton: .default(TextState(L10n.commonAgree.uppercased()), action: .send(.clearCache))
+                        primaryButton: .destructive(TextState(L10n.commonNo.uppercased())),
+                        secondaryButton: .default(
+                            TextState(L10n.commonYes.uppercased()),
+                            action: .send(.clearCache)
+                        )
                     )
                 },
             clearCacheResultAction
@@ -173,5 +247,26 @@ final class ProfileSettingViewModel: ViewModel {
                 }
             }
             .store(in: &cancellables)
+    }
+}
+
+// MARK: ProfileActionViewModelDelegate
+
+extension ProfileSettingViewModel: ProfileActionViewModelDelegate {
+    func profileActionViewModel(didSelectItem item: ProfileActionItemViewModel) {
+        switch item {
+        case .openCamera:
+            fullScreenCoverType = .imagePickerView(.camera)
+        case .selectFromAlbum:
+            navigationType = .changeAvatarAlbum
+        }
+    }
+}
+
+// MARK: ChangeAvatarViewModelDelegate
+
+extension ProfileSettingViewModel: ChangeAvatarViewModelDelegate {
+    func finishChangeAvatar() {
+        isShowFinishAvatar = true
     }
 }
