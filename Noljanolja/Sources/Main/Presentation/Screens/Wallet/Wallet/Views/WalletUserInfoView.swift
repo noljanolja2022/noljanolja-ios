@@ -40,7 +40,7 @@ struct WalletUserInfoView: View {
                 Text(model.name ?? "")
                     .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
 
 //                Button(
 //                    action: {

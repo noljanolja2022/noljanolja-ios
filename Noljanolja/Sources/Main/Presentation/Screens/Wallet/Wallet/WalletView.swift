@@ -209,10 +209,10 @@ struct WalletView<ViewModel: WalletViewModel>: View {
             WalletPointView(
                 model: WalletPointViewDataModel(
                     title: L10n.walletAccumulatedPoint,
-                    titleColorName: ColorAssets.neutralRawDarkGrey.name,
+                    titleColorName: ColorAssets.neutralDarkGrey.name,
                     point: model.accumulatedPointsToday,
                     pointColorName: ColorAssets.secondaryYellow300.name,
-                    unitColorName: ColorAssets.neutralRawDarkGrey.name,
+                    unitColorName: ColorAssets.neutralDarkGrey.name,
                     actionTitle: L10n.walletViewHistory,
                     type: "P"
                 )
@@ -221,10 +221,10 @@ struct WalletView<ViewModel: WalletViewModel>: View {
             WalletPointView(
                 model: WalletPointViewDataModel(
                     title: L10n.walletCashThatCanBeUsed,
-                    titleColorName: ColorAssets.neutralRawDarkGrey.name,
+                    titleColorName: ColorAssets.neutralDarkGrey.name,
                     point: model.point,
                     pointColorName: ColorAssets.systemBlue.name,
-                    unitColorName: ColorAssets.neutralRawDarkGrey.name,
+                    unitColorName: ColorAssets.neutralDarkGrey.name,
                     actionTitle: L10n.walletExchangeMoney,
                     type: "C"
                 ),

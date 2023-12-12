@@ -47,7 +47,7 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
                     + Text("By Refer")
             }
             .dynamicFont(.systemFont(ofSize: 32, weight: .bold))
-            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
         }
     }
 
