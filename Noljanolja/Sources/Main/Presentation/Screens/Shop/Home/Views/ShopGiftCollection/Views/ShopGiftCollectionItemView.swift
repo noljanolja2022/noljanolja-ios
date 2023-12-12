@@ -22,7 +22,7 @@ struct ShopGiftCollectionItemView: View {
     }
 
     private func buildContenView() -> some View {
-        VStack {
+        ZStack {
             VStack(spacing: 8) {
                 buildImageView()
                 buildInfoView()
@@ -31,6 +31,7 @@ struct ShopGiftCollectionItemView: View {
             .cornerRadius(10)
             .padding(.bottom, 16)
         }
+        .frame(width: 138 * ratioW)
         .shadow(
             color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.2),
             radius: 4,
@@ -58,23 +59,25 @@ struct ShopGiftCollectionItemView: View {
             .clipped()
             .background(ColorAssets.neutralLightGrey.swiftUIColor)
         }
-        .frame(width: 138 * ratioW, height: 149 * ratioH)
+        .frame(height: 149 * ratioH)
     }
 
     private func buildInfoView() -> some View {
         VStack(alignment: .leading) {
             Text(model.brand?.name ?? "")
                 .dynamicFont(.systemFont(ofSize: 11, weight: .medium))
-                .lineLimit(2)
+                .lineLimit(1)
                 .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
+                .frame(maxWidth: .infinity, alignment: .leading)
             Text(model.name ?? "")
                 .dynamicFont(.systemFont(ofSize: 12, weight: .medium))
-                .lineLimit(2)
+                .lineLimit(1)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-
+                .frame(maxWidth: .infinity, alignment: .leading)
             HStack(spacing: 4) {
                 Text(String(model.price))
                     .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
+                    .lineLimit(1)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 Text(L10n.commonCash)
                     .dynamicFont(.systemFont(ofSize: 14))
@@ -85,7 +88,7 @@ struct ShopGiftCollectionItemView: View {
                     .cornerRadius(12)
             }
         }
-        .padding(.leading, 8)
+        .padding(.horizontal, 8)
         .padding(.bottom, 16)
     }
 }

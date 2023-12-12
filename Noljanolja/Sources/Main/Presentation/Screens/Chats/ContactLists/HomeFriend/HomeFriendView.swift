@@ -59,12 +59,13 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
             }, label: {
                 HStack {
                     Text(L10n.inviteToGetBenefits)
+                        .lineLimit(1)
                     ImageAssets.icArrowRight.swiftUIImage
                         .resizable()
                         .frame(width: 24, height: 24)
                 }
                 .frame(maxWidth: .infinity)
-                .height(52)
+                .padding(.vertical, 15)
                 .padding(.horizontal, 35)
                 .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                 .foregroundColor(ColorAssets.secondaryYellow200.swiftUIColor)
