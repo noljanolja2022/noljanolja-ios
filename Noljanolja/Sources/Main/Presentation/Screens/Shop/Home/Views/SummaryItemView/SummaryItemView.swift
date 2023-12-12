@@ -12,17 +12,17 @@ struct SummaryItemView: View {
     var titleColorName: String
     var imageName: String
     var value: String
-    
+
     var body: some View {
         buildBodyView()
     }
-    
+
     private func buildBodyView() -> some View {
-        VStack(spacing: 12) {
+        VStack(alignment: .leading, spacing: 12) {
             Text(title)
                 .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
+                .fixedSize(horizontal: true, vertical: false)
                 .foregroundColor(Color(titleColorName))
-                .frame(maxWidth: .infinity, alignment: .leading)
             HStack(spacing: 8) {
                 Image(imageName)
                     .resizable()
@@ -31,11 +31,10 @@ struct SummaryItemView: View {
                 Text(value)
                     .dynamicFont(.systemFont(ofSize: 22))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                    .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
-        .padding(.horizontal, 24)
-        .padding(.vertical, 16)
+        .frame(maxWidth: .infinity, alignment: .center)
+        .padding(.vertical, 18)
         .background(ColorAssets.neutralLight.swiftUIColor)
         .cornerRadius(8)
     }

@@ -41,8 +41,8 @@ struct SettingItemView<Content: View>: View {
         HStack(spacing: 8) {
             Text(title)
                 .dynamicFont(.systemFont(ofSize: 12))
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
-            Spacer()
             content
         }
         .padding(.horizontal, 24)

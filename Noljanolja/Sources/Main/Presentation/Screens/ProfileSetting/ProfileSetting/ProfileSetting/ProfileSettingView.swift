@@ -145,6 +145,7 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
             title: L10n.settingPushNotification,
             content: {
                 Toggle("", isOn: .constant(true))
+                    .labelsHidden()
             }
         )
     }
