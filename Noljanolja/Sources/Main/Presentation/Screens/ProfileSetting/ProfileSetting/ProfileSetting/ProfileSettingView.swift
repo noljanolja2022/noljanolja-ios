@@ -113,6 +113,7 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
         VStack(spacing: 10) {
             WebImage(
                 url: URL(string: viewModel.avatarURL ?? ""),
+                options: .refreshCached,
                 context: [
                     .imageTransformer: SDImageResizingTransformer(
                         size: CGSize(width: 52 * 3, height: 52 * 3),

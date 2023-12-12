@@ -92,7 +92,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
 
     private func buildActionView() -> some View {
         Button {
-            print("")
+            viewModel.navigationType = .transactionHistory
         } label: {
             Label(
                 L10n.transactionHistory.uppercased(),
@@ -215,10 +215,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                     unitColorName: ColorAssets.neutralRawDarkGrey.name,
                     actionTitle: L10n.walletViewHistory,
                     type: "P"
-                ),
-                action: {
-                    viewModel.navigationType = .transactionHistory
-                }
+                )
             )
 
             WalletPointView(

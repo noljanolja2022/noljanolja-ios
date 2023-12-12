@@ -9,6 +9,7 @@
 import _SwiftUINavigationState
 import Combine
 import Foundation
+import SDWebImageSwiftUI
 import UIKit
 
 // MARK: - ProfileSettingViewModelDelegate

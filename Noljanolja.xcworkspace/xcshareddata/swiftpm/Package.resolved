@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
-        "revision" : "78424be314842833c04bc3bef5b72e85fff99204",
-        "version" : "5.6.4"
+        "revision" : "3dc6a42c7727c49bf26508e29b0a0b35f9c7e1ad",
+        "version" : "5.8.1"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/openid/AppAuth-iOS.git",
       "state" : {
-        "revision" : "3d36a58a2b736f7bc499453e996a704929b25080",
-        "version" : "1.6.0"
+        "revision" : "71cde449f13d453227e687458144bde372d30fc7",
+        "version" : "1.6.2"
       }
     },
     {
@@ -86,8 +86,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleDataTransport.git",
       "state" : {
-        "revision" : "aae45a320fd0d11811820335b1eabc8753902a40",
-        "version" : "9.2.5"
+        "revision" : "a732a4b47f59e4f725a2ea10f0c77e93a7131117",
+        "version" : "9.3.0"
       }
     },
     {
@@ -104,8 +104,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleUtilities.git",
       "state" : {
-        "revision" : "1cd556b33550982ec17f80e358253d905e756f0f",
-        "version" : "7.11.6"
+        "revision" : "bc27fad73504f3d4af235de451f02ee22586ebd3",
+        "version" : "7.12.1"
       }
     },
     {
@@ -122,8 +122,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/gtm-session-fetcher.git",
       "state" : {
-        "revision" : "96d7cc73a71ce950723aa3c50ce4fb275ae180b8",
-        "version" : "3.1.0"
+        "revision" : "115f75e43851774934d695449a4836123c3246e1",
+        "version" : "3.2.0"
       }
     },
     {
@@ -175,17 +175,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/leveldb.git",
       "state" : {
-        "revision" : "0706abcc6b0bd9cedfbb015ba840e4a780b5159b",
-        "version" : "1.22.2"
+        "revision" : "9d108e9112aa1d65ce508facf804674546116d9c",
+        "version" : "1.22.3"
       }
     },
     {
       "identity" : "libwebp-xcode",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SDWebImage/libwebp-Xcode",
+      "location" : "https://github.com/SDWebImage/libwebp-Xcode.git",
       "state" : {
-        "revision" : "4f52fc9b29600a03de6e05af16df0d694cb44301",
-        "version" : "1.2.4"
+        "revision" : "b2b1d20a90b14d11f6ef4241da6b81c1d3f171e4",
+        "version" : "1.3.2"
       }
     },
     {
@@ -265,8 +265,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ReactiveX/RxSwift.git",
       "state" : {
-        "revision" : "b4307ba0b6425c0ba4178e138799946c3da594f8",
-        "version" : "6.5.0"
+        "revision" : "9dcaa4b333db437b0fbfaf453fad29069044a8b4",
+        "version" : "6.6.0"
       }
     },
     {
@@ -274,8 +274,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
       "state" : {
-        "revision" : "fb50c1d20f24db5322b2f8f379de3618f75fe08e",
-        "version" : "5.15.5"
+        "revision" : "e278c13e46e8d20c895c221e922c6ac6b72aaca9",
+        "version" : "5.18.7"
       }
     },
     {
@@ -301,8 +301,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-algorithms",
       "state" : {
-        "revision" : "b14b7f4c528c942f121c8b860b9410b2bf57825e",
-        "version" : "1.0.0"
+        "revision" : "f6919dfc309e7f1b56224378b11e28bab5bccc42",
+        "version" : "1.2.0"
       }
     },
     {
@@ -310,8 +310,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-case-paths",
       "state" : {
-        "revision" : "3c4eea896f8ee9cbe1c11d1d3d46b0f2809da958",
-        "version" : "0.12.0"
+        "revision" : "fc45e7b2cfece9dd80b5a45e6469ffe67fe67984",
+        "version" : "0.14.1"
       }
     },
     {
@@ -319,14 +319,14 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-custom-dump",
       "state" : {
-        "revision" : "dd86159e25c749873f144577e5d18309bf57534f",
-        "version" : "0.8.0"
+        "revision" : "4a87bb75be70c983a9548597e8783236feb3401e",
+        "version" : "0.11.1"
       }
     },
     {
       "identity" : "swift-numerics",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-numerics",
+      "location" : "https://github.com/apple/swift-numerics.git",
       "state" : {
         "revision" : "0a5bc04095a675662cf24757cc0640aa2204253b",
         "version" : "1.0.2"
@@ -337,8 +337,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-protobuf.git",
       "state" : {
-        "revision" : "07f7f26ded8df9645c072f220378879c4642e063",
-        "version" : "1.25.1"
+        "revision" : "65e8f29b2d63c4e38e736b25c27b83e012159be8",
+        "version" : "1.25.2"
       }
     },
     {
@@ -391,8 +391,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/xctest-dynamic-overlay",
       "state" : {
-        "revision" : "62041e6016a30f56952f5d7d3f12a3fd7029e1cd",
-        "version" : "0.8.3"
+        "revision" : "50843cbb8551db836adec2290bb4bc6bac5c1865",
+        "version" : "0.9.0"
       }
     },
     {

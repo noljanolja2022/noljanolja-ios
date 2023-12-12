@@ -21,6 +21,7 @@ struct WalletUserInfoView: View {
         HStack(spacing: 24) {
             WebImage(
                 url: URL(string: model.avatar),
+                options: .refreshCached,
                 context: [
                     .imageTransformer: SDImageResizingTransformer(
                         size: CGSize(width: 64 * 3, height: 64 * 3),
