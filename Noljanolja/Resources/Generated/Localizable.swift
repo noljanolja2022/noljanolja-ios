@@ -701,6 +701,10 @@ internal enum L10n {
   internal static let tosTitle = L10n.tr("Localizable", "tos_title", fallback: "Term of Service")
   /// Welcome to NolgoBulja. Please read our terms of service carefully.
   internal static let tosWelcome = L10n.tr("Localizable", "tos_welcome", fallback: "Welcome to NolgoBulja. Please read our terms of service carefully.")
+  /// COMPLETE NOW
+  internal static let transactionComplateNow = L10n.tr("Localizable", "transaction_complate_now", fallback: "COMPLETE NOW")
+  /// Complete state
+  internal static let transactionComplateState = L10n.tr("Localizable", "transaction_complate_state", fallback: "Complete state")
   /// CONVERT NOW
   internal static let transactionConvertNow = L10n.tr("Localizable", "transaction_convert_now", fallback: "CONVERT NOW")
   /// Convert Points to Cash
@@ -713,6 +717,10 @@ internal enum L10n {
   internal static let transactionDetailStatus = L10n.tr("Localizable", "transaction_detail_status", fallback: "Status")
   /// Time
   internal static let transactionDetailTime = L10n.tr("Localizable", "transaction_detail_time", fallback: "Time")
+  /// Type
+  internal static let transactionDetailType = L10n.tr("Localizable", "transaction_detail_type", fallback: "Type")
+  /// Video name
+  internal static let transactionDetailVideoName = L10n.tr("Localizable", "transaction_detail_video_name", fallback: "Video name")
   /// Transaction History
   internal static let transactionHistory = L10n.tr("Localizable", "transaction_history", fallback: "Transaction History")
   /// %@ Points
@@ -721,8 +729,8 @@ internal enum L10n {
   }
   /// Search transaction
   internal static let transactionHistorySearchHint = L10n.tr("Localizable", "transaction_history_search_hint", fallback: "Search transaction")
-  /// Receive
-  internal static let transactionReceiveType = L10n.tr("Localizable", "transaction_receive_type", fallback: "Receive")
+  /// Received
+  internal static let transactionReceiveType = L10n.tr("Localizable", "transaction_receive_type", fallback: "Received")
   /// Spent
   internal static let transactionSpentType = L10n.tr("Localizable", "transaction_spent_type", fallback: "Spent")
   /// Receive: %@
