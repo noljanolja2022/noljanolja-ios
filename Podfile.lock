@@ -73,7 +73,7 @@ DEPENDENCIES:
   - Natrium
   - naveridlogin-sdk-ios (= 4.1.5)
   - shared (from `./shared`)
-  - youtube-ios-player-helper (from `https://github.com/HyunjoonKo/youtube-ios-player-helper`)
+  - youtube-ios-player-helper (from `https://github.com/kinguyen198/youtube-ios-player-helper`)
 
 SPEC REPOS:
   trunk:
@@ -93,12 +93,12 @@ EXTERNAL SOURCES:
   shared:
     :path: "./shared"
   youtube-ios-player-helper:
-    :git: https://github.com/HyunjoonKo/youtube-ios-player-helper
+    :git: https://github.com/kinguyen198/youtube-ios-player-helper
 
 CHECKOUT OPTIONS:
   youtube-ios-player-helper:
-    :commit: 449e457517cbaf1e4dac31f380b272bee7df360a
-    :git: https://github.com/HyunjoonKo/youtube-ios-player-helper
+    :commit: 3679db3e62ff1fb5953a9da41e4916b44c46db6c
+    :git: https://github.com/kinguyen198/youtube-ios-player-helper
 
 SPEC CHECKSUMS:
   AnyImageKit: 38641ab812a5cdb24ceca8d88d4bc3f484274be1
@@ -115,6 +115,6 @@ SPEC CHECKSUMS:
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   youtube-ios-player-helper: 40b96e52c22445f0fdc43731cefa32c67075ff81
 
-PODFILE CHECKSUM: 3cc432956d24f940821b3ddbef7e8c6797976e21
+PODFILE CHECKSUM: ef2674aa5afbfdf3399a202dcf1afb948d3f5a9d
 
 COCOAPODS: 1.11.3

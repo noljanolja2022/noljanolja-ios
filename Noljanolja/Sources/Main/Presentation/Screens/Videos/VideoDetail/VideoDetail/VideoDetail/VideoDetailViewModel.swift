@@ -53,6 +53,7 @@ final class VideoDetailViewModel: ViewModel {
     let loadMoreAction = PassthroughSubject<Void, Never>()
     let scrollToTopAction = PassthroughSubject<Void, Never>()
     let youTubePlayerPlaybackStateAction = PassthroughSubject<Void, Never>()
+    let durationPublisher = PassthroughSubject<Double, Never>()
 
     // MARK: Dependencies
 
@@ -62,7 +63,7 @@ final class VideoDetailViewModel: ViewModel {
     private weak var delegate: VideoDetailViewModelDelegate?
 
     // MARK: Private
-    
+
     private var pictureInPictureState: String?
     private let currentTimeSubject = CurrentValueSubject<Double?, Never>(nil)
 
@@ -98,7 +99,7 @@ final class VideoDetailViewModel: ViewModel {
                 youtubePlayerView.playVideo()
             }
         }
-        
+
         self.videoId = videoId
         self.configuration = configuration
         updateContentType(contentType)
@@ -128,18 +129,20 @@ final class VideoDetailViewModel: ViewModel {
             }
         }
     }
-    
+
     func startPictureInPicture() {
         if AVPictureInPictureController.isPictureInPictureSupported() {
             switch pictureInPictureState {
-            case "picture-in-picture": break
-            default: youtubePlayerView.pictureInPicture()
+            case "picture-in-picture":
+                break
+            default:
+                youtubePlayerView.pictureInPicture()
             }
         } else {
             updateContentType(.bottom)
         }
     }
-    
+
     func stopPictureInPicture() {
         switch pictureInPictureState {
         case "picture-in-picture":
@@ -149,7 +152,7 @@ final class VideoDetailViewModel: ViewModel {
             break
         }
     }
-    
+
     func switchPictureInPicture() {
         youtubePlayerView.pictureInPicture()
     }
@@ -280,7 +283,7 @@ final class VideoDetailViewModel: ViewModel {
             .receive(on: DispatchQueue.main)
             .sink { _ in }
             .store(in: &cancellables)
-        
+
         Publishers.Merge(
             $youtubePlayerState
                 .compactMap { $0 },
@@ -290,7 +293,7 @@ final class VideoDetailViewModel: ViewModel {
         .withLatestFrom(
             Publishers.CombineLatest(
                 currentTimePublisher(),
-                durationPublisher()
+                durationPublisher
             )
         ) { (playbackState: YTPlayerState, times: (Double, Double)) in
             (playbackState, times.0, times.1)
@@ -341,21 +344,16 @@ extension VideoDetailViewModel {
         .removeDuplicates()
         .eraseToAnyPublisher()
     }
-    
-    private func durationPublisher() -> AnyPublisher<Double, Never> {
-        Future { [weak self] promise in
-            self?.youtubePlayerView.duration { duration, _ in
-                promise(.success(duration))
-            }
-        }
-        .eraseToAnyPublisher()
-    }
 }
 
 // MARK: YTPlayerViewDelegate
 
 extension VideoDetailViewModel: YTPlayerViewDelegate {
-    func playerViewDidBecomeReady(_: YTPlayerView) {
+    func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
+        playerView.duration { [weak self] result, _ in
+            guard let self else { return }
+            self.durationPublisher.send(result)
+        }
         switch contentType {
         case .full, .bottom, .hide:
             break
@@ -365,21 +363,21 @@ extension VideoDetailViewModel: YTPlayerViewDelegate {
             }
         }
     }
-    
+
     func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {
         youtubePlayerState = state
     }
-    
+
     func playerView(_ playerView: YTPlayerView, didPlayTime playTime: Float) {
         currentTimeSubject.send(Double(playTime))
     }
-    
+
     func playerView(_ playerView: YTPlayerView, didChangeTo quality: YTPlaybackQuality) {}
-    
+
     func playerView(_ playerView: YTPlayerView, didChangeToStatePictureInPicture state: String?) {
         pictureInPictureState = state
         switch state {
-        case "picture-in-picture":
+        case "picture-in-picture", "inlineleave":
             break
         default:
             updateContentType(.full)
