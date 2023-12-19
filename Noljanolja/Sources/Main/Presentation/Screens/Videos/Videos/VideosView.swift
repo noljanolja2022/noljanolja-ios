@@ -33,7 +33,7 @@ struct VideosView<ViewModel: VideosViewModel>: View {
                 }
             )
     }
-    
+
     private func buildMainView() -> some View {
         VideoDetailRootContainerView(
             content: {
@@ -69,19 +69,19 @@ struct VideosView<ViewModel: VideosViewModel>: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(ColorAssets.neutralLight.swiftUIColor)
     }
-    
+
     private func buildContentView() -> some View {
         VStack {
             buildHeaderView()
             ScrollView {
                 VStack(spacing: 8) {
                     buildWatchingView()
-                    
+
                     Divider()
                         .frame(height: 2)
                         .overlay(ColorAssets.neutralLightGrey.swiftUIColor)
                         .padding(.vertical, 4)
-                    
+
                     buildTrendingView()
                 }
             }

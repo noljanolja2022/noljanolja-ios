@@ -178,7 +178,7 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
 
             Text(L10n.settingCurrentVersion(viewModel.appVersion))
                 .dynamicFont(.systemFont(ofSize: 12))
-                .padding(.vertical, 40)
+                .padding(.vertical, 10)
                 .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
         }
     }

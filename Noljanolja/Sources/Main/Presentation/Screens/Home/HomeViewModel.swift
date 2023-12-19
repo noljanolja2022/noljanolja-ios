@@ -22,9 +22,9 @@ protocol HomeViewModelDelegate: AnyObject {
 final class HomeViewModel: ViewModel {
     // MARK: State
 
-    let tabs: [HomeTabType] = [.friends, .chat, .watch, .wallet, .shop]
+    let tabs: [HomeTabType] = [.watch, .chat, .wallet, .shop, .friends]
     @Published var isProgressHUDShowing = false
-    @Published var selectedTab = HomeTabType.friends
+    @Published var selectedTab = HomeTabType.watch
     @Published var tabNews = [HomeTabType: Bool]()
     @Published var alertState: AlertState<HomeAlertActionType>?
 

@@ -76,7 +76,7 @@ final class ShopBrandsViewModel: ViewModel {
                     return Empty<PaginationResponse<[GiftBrand]>, Error>().eraseToAnyPublisher()
                 }
                 return self.giftsNetworkRepository
-                    .getGiftsBrands(page: page, pageSize: pageSize)
+                    .getGiftsBrands()
             }
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in

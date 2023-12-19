@@ -11,7 +11,13 @@ import Moya
 
 // MARK: - GiftsTargets
 
-#warning("update locale when BE update India market")
+private var locale: String {
+    let current = Locale.current.languageCode
+    if current == "hi" || current == "en-IN" {
+        return "IN"
+    }
+    return "KR"
+}
 
 // MARK: - GiftsTargets
 
@@ -60,7 +66,7 @@ private enum GiftsTargets {
                 "pageSize": pageSize,
                 "isFeatured": isFeatured,
                 "isRecommend": isRecommend,
-                "locale": "KR"
+                "locale": locale
             ]
             return parameters.compactMapValues { $0 }
         }
@@ -71,14 +77,14 @@ private enum GiftsTargets {
         let method: Moya.Method = .get
         var task: Task { .requestParameters(parameters: parameters, encoding: URLEncoding.default) }
 
-        let page: Int
-        let pageSize: Int
+//        let page: Int
+//        let pageSize: Int
 
         var parameters: [String: Any] {
             let parameters: [String: Any?] = [
-                "page": page,
-                "pageSize": pageSize,
-                "locale": "KR"
+                //                "page": page,
+//                "pageSize": pageSize,
+                "locale": locale
             ]
             return parameters.compactMapValues { $0 }
         }
@@ -96,7 +102,7 @@ private enum GiftsTargets {
             let parameters: [String: Any?] = [
                 "page": page,
                 "pageSize": pageSize,
-                "locale": "KR"
+                "locale": locale
             ]
             return parameters.compactMapValues { $0 }
         }
@@ -116,7 +122,7 @@ private enum GiftsTargets {
 protocol GiftsNetworkRepository {
     func getMyGifts(categoryId: Int?, brandId: Int?, page: Int, pageSize: Int?) -> AnyPublisher<PaginationResponse<[MyGift]>, Error>
     func getGiftsInShop(categoryId: Int?, brandId: String?, query: String?, page: Int, pageSize: Int?, isFeatured: Bool?, isTodayOffer: Bool?, isRecommend: Bool?) -> AnyPublisher<PaginationResponse<[Gift]>, Error>
-    func getGiftsBrands(page: Int, pageSize: Int) -> AnyPublisher<PaginationResponse<[GiftBrand]>, Error>
+    func getGiftsBrands() -> AnyPublisher<PaginationResponse<[GiftBrand]>, Error>
     func getGiftsCategories(page: Int, pageSize: Int) -> AnyPublisher<PaginationResponse<[GiftCategory]>, Error>
     func buyGift(_ id: String) -> AnyPublisher<MyGift, Error>
 }
@@ -179,12 +185,9 @@ final class GiftsNetworkRepositoryImpl: GiftsNetworkRepository {
         )
     }
 
-    func getGiftsBrands(page: Int, pageSize: Int) -> AnyPublisher<PaginationResponse<[GiftBrand]>, Error> {
+    func getGiftsBrands() -> AnyPublisher<PaginationResponse<[GiftBrand]>, Error> {
         api.request(
-            target: GiftsTargets.GetGiftsBrands(
-                page: page,
-                pageSize: pageSize
-            )
+            target: GiftsTargets.GetGiftsBrands()
         )
     }
 

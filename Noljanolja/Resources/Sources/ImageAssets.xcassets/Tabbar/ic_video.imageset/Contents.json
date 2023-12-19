@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ic_video.png",
+      "filename" : "ondemand_video.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ic_video@2x.png",
+      "filename" : "ondemand_video@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ic_video@3x.png",
+      "filename" : "ondemand_video@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
