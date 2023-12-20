@@ -12,4 +12,5 @@ enum RootBodyType: Equatable {
     case auth
     case main
     case userConfiguraction
+    case term
 }

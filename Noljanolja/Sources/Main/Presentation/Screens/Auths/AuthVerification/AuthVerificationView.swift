@@ -56,7 +56,7 @@ struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
                 Text(L10n.otpTitle)
                     .dynamicFont(.systemFont(ofSize: 24))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                Text("\(L10n.otpDescription)  \(viewModel.phoneNumber.formatPhone() ?? "")")
+                Text("\(L10n.otpDescription) \(viewModel.phoneNumber.formatPhone() ?? "")")
                     .dynamicFont(.systemFont(ofSize: 16))
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -68,8 +68,8 @@ struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
                     text: $viewModel.verificationCode,
                     isFocused: $isFocused,
                     action: {
-                        keyboard.dismiss()
-                        viewModel.verifyAction.send()
+//                        keyboard.dismiss()
+//                        viewModel.verifyAction.send()
                     }
                 )
                 .introspectTextField { textField in
@@ -100,10 +100,18 @@ struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
 
     private func buildActionView() -> some View {
         Button(
-            L10n.commonPrevious,
-            action: { presentationMode.wrappedValue.dismiss() }
+            L10n.commonContinue,
+            action: {
+//                presentationMode.wrappedValue.dismiss()
+                keyboard.dismiss()
+                viewModel.verifyAction.send()
+            }
         )
-        .buttonStyle(ThridyButtonStyle())
+        .buttonStyle(
+            PrimaryButtonStyle(
+                isEnabled: viewModel.isEnableContinue
+            )
+        )
         .shadow(
             color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.15),
             radius: 2,

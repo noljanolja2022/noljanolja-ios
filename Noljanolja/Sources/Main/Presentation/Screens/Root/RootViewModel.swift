@@ -48,7 +48,7 @@ extension RootViewModel {
             if user.isSettedUp {
                 contentType = .main
             } else {
-                contentType = .userConfiguraction
+                contentType = .term
             }
         } else {
             contentType = .auth
@@ -85,5 +85,13 @@ extension RootViewModel: UserConfigurationRootViewModelDelegate {
 extension RootViewModel: MainViewModelDelegate {
     func mainViewModelSignOut() {
         contentType = .auth
+    }
+}
+
+// MARK: TermViewModelDelegate
+
+extension RootViewModel: TermViewModelDelegate {
+    func termViewModelDidComplete() {
+        contentType = .userConfiguraction
     }
 }

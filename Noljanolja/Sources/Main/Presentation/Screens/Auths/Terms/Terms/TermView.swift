@@ -64,7 +64,7 @@ struct TermView<ViewModel: TermViewModel>: View {
                 .resizable()
                 .scaledToFill()
                 .frame(width: 66, height: 62)
-            Text(L10n.commonLogin)
+            Text(L10n.commonSignUp)
                 .dynamicFont(.systemFont(ofSize: 32, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.top, 12)

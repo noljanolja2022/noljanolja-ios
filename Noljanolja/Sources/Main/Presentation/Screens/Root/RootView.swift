@@ -13,7 +13,7 @@ import UIKit
 
 struct RootView<ViewModel: RootViewModel>: View {
     // MARK: Dependencies
-    
+
     @StateObject var viewModel: ViewModel
 
     var body: some View {
@@ -50,6 +50,12 @@ struct RootView<ViewModel: RootViewModel>: View {
         case .userConfiguraction:
             UserConfigurationRootView(
                 viewModel: UserConfigurationRootViewModel(
+                    delegate: viewModel
+                )
+            )
+        case .term:
+            TermView(
+                viewModel: TermViewModel(
                     delegate: viewModel
                 )
             )

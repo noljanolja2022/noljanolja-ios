@@ -42,12 +42,12 @@ struct CodeView: View {
             }
         }
         .frame(height: 48)
-        .onChange(of: text) { text in
-            if text.count == maxLength {
-                isFocused = false
-                action?()
-            }
-        }
+//        .onChange(of: text) { text in
+//            if text.count == maxLength {
+//                isFocused = false
+//                action?()
+//            }
+//        }
     }
 
     @ViewBuilder

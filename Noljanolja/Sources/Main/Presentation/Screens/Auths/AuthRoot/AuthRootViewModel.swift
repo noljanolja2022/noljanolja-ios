@@ -20,7 +20,7 @@ protocol AuthRootViewModelDelegate: AnyObject {
 final class AuthRootViewModel: ViewModel {
     // MARK: State
 
-    @Published var contentType: AuthRootBodyType = .terms
+    @Published var contentType: AuthRootBodyType = .auth
 
     // MARK: Action
 
@@ -46,7 +46,7 @@ final class AuthRootViewModel: ViewModel {
 
 extension AuthRootViewModel: TermViewModelDelegate {
     func termViewModelDidComplete() {
-        contentType = .auth
+        contentType = .userConfiguration
     }
 }
 
@@ -63,5 +63,13 @@ extension AuthRootViewModel: AuthViewModelDelegate {
 extension AuthRootViewModel: Auth2ViewModelDelegate {
     func googleAuthViewModelDidComplete(_ user: User) {
         delegate?.authRootViewModelDidComplete(user)
+    }
+}
+
+// MARK: UserConfigurationRootViewModelDelegate
+
+extension AuthRootViewModel: UserConfigurationRootViewModelDelegate {
+    func userConfigurationRootViewModelDidComplete() {
+//        contentType = .main
     }
 }

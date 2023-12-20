@@ -26,6 +26,10 @@ final class AuthVerificationViewModel: ViewModel {
     @Published var isProgressHUDShowing = false
     @Published var alertState: AlertState<Void>?
 
+    var isEnableContinue: Bool {
+        verificationCode.count == 6
+    }
+
     var phoneNumber: String {
         "\(country.prefix)\(phoneNumberText)"
     }
@@ -39,7 +43,7 @@ final class AuthVerificationViewModel: ViewModel {
 
     let country: Country
     let phoneNumberText: String
-    
+
     private var verificationID: String
 
     private let authUseCases: AuthUseCases

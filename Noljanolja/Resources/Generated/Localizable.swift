@@ -252,6 +252,8 @@ internal enum L10n {
   internal static let commonShareSuccess = L10n.tr("Localizable", "common_share_success", fallback: "Share success")
   /// Shop
   internal static let commonShop = L10n.tr("Localizable", "common_shop", fallback: "Shop")
+  /// Sign up
+  internal static let commonSignUp = L10n.tr("Localizable", "common_sign_up", fallback: "Sign up")
   /// Size %@
   internal static func commonSize(_ p1: Any) -> String {
     return L10n.tr("Localizable", "common_size", String(describing: p1), fallback: "Size %@")
