@@ -11,4 +11,15 @@ enum TransactionStatusType: String, Decodable {
     case completed = "COMPLETED"
     case pending = "PENDING"
     case unknown
+
+    var title: String {
+        switch self {
+        case .completed:
+            return L10n.commonComplete
+        case .pending:
+            return "Pending"
+        case .unknown:
+            return ""
+        }
+    }
 }

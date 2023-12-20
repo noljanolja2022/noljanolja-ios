@@ -81,7 +81,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                 buildActionView()
                 buildExchangeView()
                 buildCheckinProgressView(model)
-                
+
                 Spacer()
             }
             .padding(16)

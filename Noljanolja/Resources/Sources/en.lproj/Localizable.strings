@@ -220,7 +220,7 @@
 "transaction_convert_points_to_cash" = "Convert Points to Cash";
 "transaction_convert_now" = "CONVERT NOW";
 "wallet_history_dashboard" = "Dashboard";
-"transaction_receive_type" = "Receive";
+"transaction_receive_type" = "Received";
 "transaction_spent_type" = "Spent";
 "wallet_dashboard_title" = "Dashboard";
 "wallet_dashboard_receive" = "Receive";
@@ -456,3 +456,7 @@
 "common_recent" = "Recent";
 "common_Album" = "Album";
 "common_sign_up" = "Sign up";
+"transaction_detail_video_name" = "Video name";
+"transaction_complate_state" = "Complete state";
+"transaction_complate_now" = "COMPLETE NOW";
+"transaction_detail_type" = "Type";

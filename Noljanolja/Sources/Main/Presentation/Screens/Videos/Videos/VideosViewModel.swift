@@ -20,6 +20,7 @@ final class VideosViewModel: ViewModel {
 
     @Published var viewState = ViewState.loading
     @Published var model = VideosModel()
+    @Published var avatarURL: String?
 
     // MARK: Navigations
 
@@ -34,6 +35,7 @@ final class VideosViewModel: ViewModel {
 
     // MARK: Dependencies
 
+    private let userUseCases: UserUseCases
     private let videoNetworkRepository: VideoNetworkRepository
     private weak var delegate: VideosViewModelDelegate?
 
@@ -42,13 +44,16 @@ final class VideosViewModel: ViewModel {
     let highlightVideosSubject = CurrentValueSubject<[Video], Never>([])
     let watchingVideosSubject = CurrentValueSubject<[Video], Never>([])
     let trendingVideosSubject = CurrentValueSubject<[Video], Never>([])
+    private let currentUserSubject = CurrentValueSubject<User?, Never>(nil)
 
     private let pageSize = 20
     private var cancellables = Set<AnyCancellable>()
 
     init(videoNetworkRepository: VideoNetworkRepository = VideoNetworkRepositoryImpl.shared,
+         userUseCases: UserUseCases = UserUseCasesImpl.default,
          delegate: VideosViewModelDelegate? = nil) {
         self.videoNetworkRepository = videoNetworkRepository
+        self.userUseCases = userUseCases
         self.delegate = delegate
         super.init()
 
@@ -74,6 +79,11 @@ final class VideosViewModel: ViewModel {
                 trendingVideos: trendingVideos
             )
         })
+        .store(in: &cancellables)
+
+        currentUserSubject.sink { [weak self] user in
+            self?.avatarURL = user?.avatar
+        }
         .store(in: &cancellables)
     }
 
@@ -122,6 +132,12 @@ final class VideosViewModel: ViewModel {
                     break
                 }
             }
+            .store(in: &cancellables)
+
+        userUseCases.getCurrentUserPublisher()
+            .sink(receiveValue: { [weak self] in
+                self?.currentUserSubject.send($0)
+            })
             .store(in: &cancellables)
     }
 

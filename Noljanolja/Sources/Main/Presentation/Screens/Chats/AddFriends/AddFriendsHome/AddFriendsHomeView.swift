@@ -51,7 +51,7 @@ struct AddFriendsHomeView<ViewModel: AddFriendsHomeViewModel>: View {
     }
 
     private func buildContentView() -> some View {
-        VStack(spacing: 016) {
+        VStack(spacing: 16) {
             buildSearchPhoneView()
             buildActionView()
             buildQRCodeView()
@@ -157,64 +157,66 @@ struct AddFriendsHomeView<ViewModel: AddFriendsHomeViewModel>: View {
     }
 
     private func buildQRCodeView() -> some View {
-        ZStack {
+        VStack {
             ZStack(alignment: .topLeading) {
-                Spacer()
-                    .frame(maxWidth: .infinity)
-                    .background(ColorAssets.primaryGreen200.swiftUIColor)
-                    .cornerRadius(20)
-                    .padding(.vertical, 80)
-
                 ImageAssets.bnAddFriendQr.swiftUIImage
                     .resizable()
                     .scaledToFit()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .padding(.horizontal, -16)
+                    .padding(.horizontal, -16 * ratioW)
 
                 ImageAssets.icAppMascot.swiftUIImage
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 256, height: 256)
-                    .padding(.leading, -72)
-            }
+                    .frame(width: 214, height: 214)
+                    .offset(x: -54, y: -64)
 
-            VStack(spacing: 12) {
                 VStack(spacing: 12) {
-                    Text(viewModel.name ?? "")
-                        .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
-                        .frame(maxWidth: .infinity, alignment: .trailing)
+                    Group {
+                        Text(viewModel.name ?? "")
+                            .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .padding(.horizontal, 12)
+                        IfLet(
+                            $viewModel.qrImage,
+                            then: { image in
+                                Image(image: image.wrappedValue)
+                                    .resizable()
+                                    .interpolation(.none)
+                            },
+                            else: {
+                                Spacer()
+                            }
+                        )
+                        .aspectRatio(1, contentMode: .fit)
+                        .frame(width: 172)
+                        .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
+                        .padding(2)
+                        .background(ColorAssets.neutralRawLight.swiftUIColor)
+                        .cornerRadius(10)
+                    }
+                    .padding(.horizontal, 24)
 
-                    IfLet(
-                        $viewModel.qrImage,
-                        then: { image in
-                            Image(image: image.wrappedValue)
-                                .resizable()
-                                .interpolation(.none)
-                        },
-                        else: {
-                            Spacer()
-                        }
-                    )
-                    .aspectRatio(1, contentMode: .fit)
-                    .frame(maxWidth: .infinity)
-                    .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
-                    .background(ColorAssets.neutralRawLight.swiftUIColor)
-                    .cornerRadius(4)
+                    ImageAssets.icPpyy.swiftUIImage
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 40, height: 14)
+
+                    Text(L10n.addFriendScanQrToAdd)
+                        .dynamicFont(.systemFont(ofSize: 16))
+                        .lineLimit(1)
+                        .padding(.horizontal, 8)
+                        .frame(maxWidth: .infinity)
                 }
-                .padding(.horizontal, 24)
-
-                ImageAssets.icPpyy.swiftUIImage
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 40, height: 14)
-
-                Text(L10n.addFriendScanQrToAdd)
-                    .dynamicFont(.systemFont(ofSize: 16))
-                    .frame(maxWidth: .infinity)
+                .frame(maxHeight: .infinity, alignment: .center)
             }
-            .padding(24)
+            .frame(width: 251, height: 307)
+            .background(
+                ColorAssets.primaryGreen200.swiftUIColor
+                    .cornerRadius(20)
+            )
         }
-        .padding(.horizontal, 32)
+        .frame(maxHeight: .infinity, alignment: .center)
     }
 
     @ViewBuilder

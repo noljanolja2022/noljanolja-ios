@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B0CFE962B3294AC001E68A2 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0CFE952B3294AC001E68A2 /* AvatarView.swift */; };
+		2B0CFE992B32BE66001E68A2 /* EarnedPointsPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0CFE982B32BE66001E68A2 /* EarnedPointsPopupView.swift */; };
 		2B5FC3C02B021A4300906C18 /* HeaderCommonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5FC3BF2B021A4300906C18 /* HeaderCommonView.swift */; };
 		2B5FC3C22B0285FA00906C18 /* HomeFriendNavigationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5FC3C12B0285FA00906C18 /* HomeFriendNavigationType.swift */; };
 		2B6876F92AFDEA22000BBD55 /* ListSocialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6876F82AFDEA21000BBD55 /* ListSocialView.swift */; };
@@ -638,6 +640,8 @@
 		031EB88ABBFAE800D1C79C28 /* Pods-Noljanolja-NoljanoljaUITests.development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja-NoljanoljaUITests.development.xcconfig"; path = "Target Support Files/Pods-Noljanolja-NoljanoljaUITests/Pods-Noljanolja-NoljanoljaUITests.development.xcconfig"; sourceTree = "<group>"; };
 		1159DC12E3371A2BE30601EA /* Pods-NoljanoljaTests.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoljanoljaTests.appstore.xcconfig"; path = "Target Support Files/Pods-NoljanoljaTests/Pods-NoljanoljaTests.appstore.xcconfig"; sourceTree = "<group>"; };
 		29DCA912D7DD4BB2BC9E1AFE /* Pods_Noljanolja.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Noljanolja.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B0CFE952B3294AC001E68A2 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
+		2B0CFE982B32BE66001E68A2 /* EarnedPointsPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnedPointsPopupView.swift; sourceTree = "<group>"; };
 		2B5FC3BF2B021A4300906C18 /* HeaderCommonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCommonView.swift; sourceTree = "<group>"; };
 		2B5FC3C12B0285FA00906C18 /* HomeFriendNavigationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFriendNavigationType.swift; sourceTree = "<group>"; };
 		2B6876F82AFDEA21000BBD55 /* ListSocialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSocialView.swift; sourceTree = "<group>"; };
@@ -1293,6 +1297,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B0CFE942B32949C001E68A2 /* AvatarView */ = {
+			isa = PBXGroup;
+			children = (
+				2B0CFE952B3294AC001E68A2 /* AvatarView.swift */,
+			);
+			path = AvatarView;
+			sourceTree = "<group>";
+		};
+		2B0CFE972B32A66A001E68A2 /* EarnedPointsPopup */ = {
+			isa = PBXGroup;
+			children = (
+				2B0CFE982B32BE66001E68A2 /* EarnedPointsPopupView.swift */,
+			);
+			path = EarnedPointsPopup;
+			sourceTree = "<group>";
+		};
 		2B5FC3BE2B021A3400906C18 /* HeaderCommonView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1569,6 +1589,8 @@
 		CF162D542A705DA500B8096D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2B0CFE972B32A66A001E68A2 /* EarnedPointsPopup */,
+				2B0CFE942B32949C001E68A2 /* AvatarView */,
 				2B855AE52B075E1300A1F9B7 /* VisualEffectView */,
 				2B5FC3BE2B021A3400906C18 /* HeaderCommonView */,
 				CF82C30C29EA9FF000EAD36C /* BottomSheet */,
@@ -4488,6 +4510,7 @@
 				CFAD53542A781A150044CB42 /* CheckinModel.swift in Sources */,
 				CF53D6372A6AF548009B3A69 /* ChatInputViewModel.swift in Sources */,
 				CF775BC429C62B3000E82183 /* FrameworkAppDelegate.swift in Sources */,
+				2B0CFE962B3294AC001E68A2 /* AvatarView.swift in Sources */,
 				CFF868B92A6E2D74006F0B87 /* VideoUseCases.swift in Sources */,
 				CF53D63C2A6AF548009B3A69 /* ChatMediaInputType.swift in Sources */,
 				CF52AB6429B8D85000C9C90C /* ContactUseCases.swift in Sources */,
@@ -4636,6 +4659,7 @@
 				CF53D5A42A6AF548009B3A69 /* TransactionDashboardItemModel.swift in Sources */,
 				CF53D6292A6AF548009B3A69 /* ChatSettingParticipantItemView.swift in Sources */,
 				CF53D5DE2A6AF548009B3A69 /* ConversationAdjustmentNavigations.swift in Sources */,
+				2B0CFE992B32BE66001E68A2 /* EarnedPointsPopupView.swift in Sources */,
 				CF53D5672A6AF548009B3A69 /* FAQView.swift in Sources */,
 				CF53D65D2A6AF548009B3A69 /* CustomTabView.swift in Sources */,
 				2BD6DB562B2008960060640C /* ChangeAvatarView.swift in Sources */,

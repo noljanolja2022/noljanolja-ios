@@ -74,6 +74,7 @@ internal enum ImageAssets {
   internal static let icCopy = ImageAsset(name: "ic_copy")
   internal static let icDelete = ImageAsset(name: "ic_delete")
   internal static let icDownload = ImageAsset(name: "ic_download")
+  internal static let icEarnedPoints = ImageAsset(name: "ic_earned_points")
   internal static let icEdit = ImageAsset(name: "ic_edit")
   internal static let icExchange = ImageAsset(name: "ic_exchange")
   internal static let icForward = ImageAsset(name: "ic_forward")
@@ -184,6 +185,7 @@ internal enum ImageAssets {
     icCopy,
     icDelete,
     icDownload,
+    icEarnedPoints,
     icEdit,
     icExchange,
     icForward,

@@ -77,6 +77,7 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
                 HStack(spacing: 4) {
                     Button(
                         action: {
+                            viewModel.youtubePlayerView.playVideo()
                             viewModel.updateContentType(.pictureInPicture)
                         },
                         label: {
