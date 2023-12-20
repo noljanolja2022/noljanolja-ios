@@ -7,6 +7,7 @@
 //
 
 import AlertToast
+import SDWebImageSwiftUI
 import SwiftUI
 import SwiftUIX
 
@@ -102,19 +103,40 @@ struct VideosView<ViewModel: VideosViewModel>: View {
 
     @ViewBuilder
     private func buildHeaderView() -> some View {
-        HeaderCommonView(
-            searchAction: {
+        HStack(spacing: 12) {
+            HStack {
+                Text(L10n.videoSearchVideo)
+                    .dynamicFont(.systemFont(ofSize: 12, weight: .bold))
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                Spacer()
+                ImageAssets.icSearch.swiftUIImage
+                    .resizable()
+                    .scaledToFit()
+                    .height(24)
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            }
+            .padding(10)
+            .frame(maxWidth: .infinity)
+            .height(36)
+            .background(ColorAssets.neutralLightGrey.swiftUIColor)
+            .cornerRadius(5)
+            .onTapGesture {
                 viewModel.navigationType = .searchVideo
             }
-        ) {
-            ZStack {
-                Text(L10n.watchLetGet + " ").foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                    + Text(L10n.commonPoints + "\n").foregroundColor(ColorAssets.primaryGreen200.swiftUIColor).fontWeight(.bold)
-                    + Text(L10n.watchBy + " ").foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                    + Text(L10n.watchWatch).foregroundColor(ColorAssets.secondaryYellow400.swiftUIColor).fontWeight(.bold)
-            }
-            .dynamicFont(.systemFont(ofSize: 24))
+
+            Button(
+                action: {},
+                label: {
+                    ImageAssets.icNotifications.swiftUIImage
+                        .resizable()
+                        .scaledToFit()
+                        .height(24)
+                }
+            )
+
+            AvatarView(url: viewModel.avatarURL, size: .init(width: 24, height: 24))
         }
+        .padding(.horizontal, 10)
     }
 
     @ViewBuilder

@@ -56,7 +56,7 @@ struct SearchVideosView<ViewModel: SearchVideosViewModel>: View {
     private let uiViews: SearchVideosUIViews
 
     init(viewModel: ViewModel) {
-        self._viewModel = StateObject(wrappedValue: viewModel)
+        _viewModel = StateObject(wrappedValue: viewModel)
         self.uiViews = SearchVideosUIViews(viewModel: viewModel)
     }
 
@@ -80,7 +80,7 @@ struct SearchVideosView<ViewModel: SearchVideosViewModel>: View {
             buildNavigationLinks()
         }
         .background(
-            ColorAssets.primaryGreen100.swiftUIColor
+            ColorAssets.primaryGreen200.swiftUIColor
                 .ignoresSafeArea()
                 .overlay {
                     ColorAssets.neutralLight.swiftUIColor
@@ -98,13 +98,13 @@ struct SearchVideosView<ViewModel: SearchVideosViewModel>: View {
 
     private func buildSearchView() -> some View {
         VStack(spacing: 8) {
-            HStack(spacing: 0) {
+            HStack(spacing: 16) {
                 Button(
                     action: {
                         presentationMode.wrappedValue.dismiss()
                     },
                     label: ImageAssets.icBack.swiftUIImage
-                        .frame(width: 36, height: 36)
+                        .frame(width: 24, height: 24)
                 )
                 SearchView(placeholder: "Search video", text: $viewModel.searchText)
                     .frame(maxWidth: .infinity)
@@ -117,8 +117,7 @@ struct SearchVideosView<ViewModel: SearchVideosViewModel>: View {
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 8)
-        .background(ColorAssets.primaryGreen100.swiftUIColor)
-        .cornerRadius([.bottomLeading, .bottomTrailing], 12)
+        .background(ColorAssets.primaryGreen200.swiftUIColor)
     }
 
     @ViewBuilder
