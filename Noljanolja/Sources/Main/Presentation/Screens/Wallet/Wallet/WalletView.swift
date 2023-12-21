@@ -222,7 +222,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                 model: WalletPointViewDataModel(
                     title: L10n.walletCashThatCanBeUsed,
                     titleColorName: ColorAssets.neutralDarkGrey.name,
-                    point: model.point,
+                    point: model.coin.int,
                     pointColorName: ColorAssets.systemBlue.name,
                     unitColorName: ColorAssets.neutralDarkGrey.name,
                     actionTitle: L10n.walletExchangeMoney,

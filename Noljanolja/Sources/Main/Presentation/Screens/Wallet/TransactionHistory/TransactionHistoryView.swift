@@ -40,6 +40,7 @@ struct TransactionHistoryView<ViewModel: TransactionHistoryViewModel>: View {
             buildContentView()
             buildNavigationLinks()
         }
+        .navigationBarBackground(ColorAssets.primaryGreen200.swiftUIColor)
     }
 
     private func buildContentView() -> some View {

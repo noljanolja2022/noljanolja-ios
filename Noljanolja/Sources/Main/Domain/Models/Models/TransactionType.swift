@@ -9,10 +9,10 @@ import Foundation
 
 // MARK: - TransactionType
 
-enum TransactionType: String, Equatable, CaseIterable {
+enum TransactionType: String, Equatable, CaseIterable, Decodable {
     case all = "ALL"
     case received = "RECEIVED"
-    case spent = "SPENT"
+    case pay = "SPENT"
 }
 
 extension TransactionType {
@@ -20,7 +20,7 @@ extension TransactionType {
         switch self {
         case .all: return "All"
         case .received: return "Received"
-        case .spent: return "Pay"
+        case .pay: return "Pay"
         }
     }
 }
