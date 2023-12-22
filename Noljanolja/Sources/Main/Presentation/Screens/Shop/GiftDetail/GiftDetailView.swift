@@ -68,6 +68,7 @@ struct GiftDetailView<ViewModel: GiftDetailViewModel>: View {
                     buildBottomView()
                 }
             }
+            .padding(.top, 2)
             Spacer()
             buildActionView()
         }

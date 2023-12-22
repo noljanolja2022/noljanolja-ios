@@ -128,6 +128,7 @@ struct ChatView<ViewModel: ChatViewModel>: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.top, 2)
     }
 
     private func buildMessagesView() -> some View {

@@ -68,6 +68,7 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
             buildContentView()
             buildNavigationLinks()
         }
+        .navigationBarBackground(ColorAssets.primaryGreen200.swiftUIColor)
     }
 
     private func buildContentView() -> some View {
@@ -82,9 +83,9 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
 
                     buildAppInfoView()
                 }
-                .padding(16)
+                .padding(.horizontal, 16)
             }
-            .frame(maxHeight: .infinity)
+            .padding(.top, 12)
             .background(ColorAssets.neutralLightGrey.swiftUIColor)
 
             buildLogOutView()

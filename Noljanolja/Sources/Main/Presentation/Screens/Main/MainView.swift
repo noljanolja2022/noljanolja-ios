@@ -31,6 +31,15 @@ struct MainView<ViewModel: MainViewModel>: View {
             buildHomeContainerView()
             buildVideoDetailView()
         }
+        .onAppear {
+            let navigationBarAppearance = UINavigationBarAppearance()
+            navigationBarAppearance.configureWithOpaqueBackground()
+            navigationBarAppearance.backgroundColor = ColorAssets.neutralLight.color
+            navigationBarAppearance.titleTextAttributes = [
+                NSAttributedString.Key.foregroundColor: ColorAssets.neutralDarkGrey.color
+            ]
+            UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+        }
     }
 
     private func buildHomeContainerView() -> some View {
