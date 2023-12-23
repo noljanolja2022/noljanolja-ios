@@ -74,6 +74,7 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
                 ImageAssets.icQuestion.swiftUIImage
                     .resizable()
                     .frame(width: 16, height: 16)
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }
 
             SearchView(placeholder: L10n.shopSearchProducts, text: .constant(""))

@@ -50,7 +50,7 @@ struct TransactionDetailView<ViewModel: TransactionDetailViewModel>: View {
                 .background(ColorAssets.neutralLight.swiftUIColor)
                 .cornerRadius(12)
 
-                buildProgressVideo()
+//                buildProgressVideo()
             }
             .padding(16)
         }

@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - EarnedPointsPopupView
 
 struct EarnedPointsPopupView: View {
-    let point: Int = 100
+    let point = 100
     
     var body: some View {
         BottomSheet {

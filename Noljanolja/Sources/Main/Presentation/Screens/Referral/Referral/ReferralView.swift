@@ -32,7 +32,7 @@ struct ReferralView<ViewModel: ReferralViewModel>: View {
                     Text(L10n.joinPlay)
                         .lineLimit(1)
                         .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                        .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
                 }
             }
             .onAppear { viewModel.isAppearSubject.send(true) }

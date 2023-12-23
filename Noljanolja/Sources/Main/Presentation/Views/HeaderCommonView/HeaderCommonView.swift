@@ -40,6 +40,7 @@ struct HeaderCommonView<Content: View>: View {
                                 ImageAssets.icNotifications.swiftUIImage
                                     .resizable()
                                     .scaledToFit()
+                                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                             }
                         )
                     }
@@ -50,6 +51,7 @@ struct HeaderCommonView<Content: View>: View {
                                 ImageAssets.icSettingFill.swiftUIImage
                                     .resizable()
                                     .scaledToFit()
+                                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                             }
                         )
                     }
