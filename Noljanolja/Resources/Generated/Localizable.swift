@@ -240,6 +240,8 @@ internal enum L10n {
   internal static let commonSaved = L10n.tr("Localizable", "common_saved", fallback: "Saved")
   /// Search
   internal static let commonSearch = L10n.tr("Localizable", "common_search", fallback: "Search")
+  /// Search Friend
+  internal static let commonSearchFriend = L10n.tr("Localizable", "common_search_friend", fallback: "Search Friend")
   /// Send
   internal static let commonSend = L10n.tr("Localizable", "common_send", fallback: "Send")
   /// Send to

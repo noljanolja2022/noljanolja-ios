@@ -27,6 +27,7 @@ final class ConversationListViewModel: ViewModel {
     @Published var isProgressHUDShowing = false
     @Published var conversations = [ConversationItemModel]()
     @Published var error: Error?
+    @Published var avatarURL: String?
 
     // MARK: Navigations
 
@@ -129,7 +130,10 @@ final class ConversationListViewModel: ViewModel {
 
         userUseCases
             .getCurrentUserPublisher()
-            .sink(receiveValue: { [weak self] in self?.currentUserSubject.send($0) })
+            .sink(receiveValue: { [weak self] in
+                self?.avatarURL = $0.avatar
+                self?.currentUserSubject.send($0)
+            })
             .store(in: &cancellables)
     }
 

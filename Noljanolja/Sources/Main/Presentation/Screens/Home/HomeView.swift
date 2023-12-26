@@ -28,7 +28,6 @@ struct HomeView<ViewModel: HomeViewModel>: View {
     private func buildBodyView() -> some View {
         buildMainView()
             .navigationBarTitle("", displayMode: .inline)
-            .toolbar { buildToolBarContent() }
             .navigationBarHidden(viewModel.selectedTab.isNavigationBarHidden)
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
@@ -49,101 +48,6 @@ struct HomeView<ViewModel: HomeViewModel>: View {
                     buildFullScreenCoverDestinationView($0)
                 }
             )
-    }
-
-    @ToolbarContentBuilder
-    private func buildToolBarContent() -> some ToolbarContent {
-        ToolbarItem(placement: .navigationBarLeading) {
-            switch viewModel.selectedTab {
-            case .chat:
-                Text(viewModel.selectedTab.navigationBarTitle)
-                    .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            case .friends, .watch, .wallet, .shop:
-                EmptyView()
-            }
-        }
-
-        ToolbarItem(placement: .principal) {
-            switch viewModel.selectedTab {
-            case .chat, .friends:
-                EmptyView()
-            case .watch, .wallet, .shop:
-                Text(viewModel.selectedTab.navigationBarTitle)
-                    .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                    .frame(minWidth: 120)
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            }
-        }
-
-        ToolbarItem(placement: .navigationBarTrailing) {
-            switch viewModel.selectedTab {
-            case .chat:
-                HStack(spacing: 4) {
-                    Button(
-                        action: {
-                            viewModel.navigationType = .addFriends
-                        },
-                        label: {
-                            ImageAssets.icAddPerson.swiftUIImage
-                                .resizable()
-                                .scaledToFit()
-                                .padding(2)
-                        }
-                    )
-
-                    Button(
-                        action: {},
-                        label: {
-                            ImageAssets.icSearch.swiftUIImage
-                                .resizable()
-                                .scaledToFit()
-                                .padding(2)
-                        }
-                    )
-
-                    Button(
-                        action: {
-                            toolBarActionSubject.send(.createConversation)
-                        },
-                        label: {
-                            ImageAssets.icChatNew.swiftUIImage
-                                .resizable()
-                                .scaledToFit()
-                                .padding(4)
-                        }
-                    )
-
-                    Button(
-                        action: {},
-                        label: {
-                            ImageAssets.icSettingOutline.swiftUIImage
-                                .resizable()
-                                .scaledToFit()
-                                .padding(4)
-                        }
-                    )
-                }
-                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            case .watch:
-                HStack(spacing: 4) {
-                    Button(
-                        action: {
-                            viewModel.navigationType = .searchVideo
-                        },
-                        label: {
-                            ImageAssets.icSearch.swiftUIImage
-                                .resizable()
-                                .scaledToFit()
-                                .padding(2)
-                        }
-                    )
-                }
-                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            case .wallet, .shop, .friends:
-                EmptyView()
-            }
-        }
     }
 
     private func buildMainView() -> some View {
