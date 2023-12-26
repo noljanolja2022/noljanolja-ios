@@ -58,6 +58,14 @@ struct MainView<ViewModel: MainViewModel>: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .accentColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+        .onAppear {
+            if #available(iOS 15, *) {
+                let appearance = UINavigationBarAppearance()
+                appearance.configureWithOpaqueBackground()
+                UINavigationBar.appearance().standardAppearance = appearance
+                UINavigationBar.appearance().scrollEdgeAppearance = appearance
+            }
+        }
 //        .introspectNavigationController { navigationController in
 //            navigationController.configure(
 //                backgroundColor: ColorAssets.neutralLight.color,
