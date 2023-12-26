@@ -62,8 +62,12 @@ struct HomeView<ViewModel: HomeViewModel>: View {
                 .overlay {
                     ZStack(alignment: .top) {
                         switch viewModel.selectedTab {
-                        case .watch, .chat, .shop:
+                        case .watch, .chat:
                             Spacer().background(ColorAssets.neutralLight.swiftUIColor)
+                        case .shop:
+                            Spacer()
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .background(ColorAssets.primaryGreen200.swiftUIColor)
                         case .wallet:
                             VStack {
                                 ColorAssets.primaryGreen200.swiftUIColor
