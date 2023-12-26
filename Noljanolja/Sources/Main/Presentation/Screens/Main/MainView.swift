@@ -25,7 +25,7 @@ struct MainView<ViewModel: MainViewModel>: View {
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
     }
-    
+
     private func buildMainView() -> some View {
         ZStack(alignment: .bottom) {
             buildHomeContainerView()

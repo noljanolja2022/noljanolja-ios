@@ -9,6 +9,7 @@
 import Combine
 import Lottie
 import SwiftUI
+import SwiftUIX
 
 // MARK: - HomeView
 
@@ -64,13 +65,13 @@ struct HomeView<ViewModel: HomeViewModel>: View {
                         case .watch, .chat, .shop:
                             Spacer().background(ColorAssets.neutralLight.swiftUIColor)
                         case .wallet:
-                            Spacer()
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .background(ColorAssets.primaryGreen200.swiftUIColor)
-                            ImageAssets.bgWalletHeader.swiftUIImage
-                                .resizable()
-                                .frame(maxWidth: .infinity)
-                                .aspectRatio(1.8, contentMode: .fit)
+                            VStack {
+                                ColorAssets.primaryGreen200.swiftUIColor
+                                    .frame(maxWidth: .infinity, maxHeight: UIScreen.mainHeight * 0.5)
+                                    .cornerRadius([.bottomLeading, .bottomTrailing], 40)
+                                Spacer()
+                            }
+
                         case .friends:
                             ImageAssets.bgFriendsHeader.swiftUIImage
                                 .resizable()
