@@ -396,6 +396,8 @@ internal enum L10n {
   internal static let exchangeTitle = L10n.tr("Localizable", "exchange_title", fallback: "Exchange")
   /// Forgot your password?
   internal static let forgotPassword = L10n.tr("Localizable", "forgot_password", fallback: "Forgot your password?")
+  /// Earn points by referrals
+  internal static let friendEarnPointsByReferrals = L10n.tr("Localizable", "friend_earn_points_by_referrals", fallback: "Earn points by referrals")
   /// Friend list
   internal static let friendList = L10n.tr("Localizable", "friend_list", fallback: "Friend list")
   /// Full agreement

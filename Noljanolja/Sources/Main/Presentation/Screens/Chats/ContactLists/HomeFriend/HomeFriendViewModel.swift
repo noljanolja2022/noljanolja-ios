@@ -25,6 +25,7 @@ final class HomeFriendViewModel: ViewModel {
 
     // MARK: State
 
+    @Published var avatarURL: String?
     @Published var selectedUsers = [User]()
 
     // MARK: Action
@@ -33,13 +34,16 @@ final class HomeFriendViewModel: ViewModel {
 
     // MARK: Dependencies
 
+    private let userUseCases: UserUseCases
     private weak var delegate: HomeFriendViewModelDelegate?
 
     // MARK: Private
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(delegate: HomeFriendViewModelDelegate? = nil) {
+    init(delegate: HomeFriendViewModelDelegate? = nil,
+         userUseCases: UserUseCases = UserUseCasesImpl.default) {
+        self.userUseCases = userUseCases
         self.delegate = delegate
         super.init()
 
@@ -47,7 +51,14 @@ final class HomeFriendViewModel: ViewModel {
         configActions()
     }
 
-    private func configure() {}
+    private func configure() {
+        userUseCases
+            .getCurrentUserPublisher()
+            .sink(receiveValue: { [weak self] in
+                self?.avatarURL = $0.avatar
+            })
+            .store(in: &cancellables)
+    }
 
     private func configActions() {
         navigationTypeAction

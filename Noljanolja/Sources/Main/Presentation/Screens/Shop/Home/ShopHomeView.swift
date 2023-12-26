@@ -72,9 +72,9 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
     private func buildHeaderView() -> some View {
         HStack(spacing: 12) {
             HStack {
-                Text(L10n.commonSearchFriend)
-                    .dynamicFont(.systemFont(ofSize: 12, weight: .bold))
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                Text(L10n.shopSearchProducts)
+                    .dynamicFont(.systemFont(ofSize: 14))
+                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                 Spacer()
                 ImageAssets.icSearch.swiftUIImage
                     .resizable()

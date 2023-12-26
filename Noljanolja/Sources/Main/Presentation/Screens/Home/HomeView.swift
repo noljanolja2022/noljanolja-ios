@@ -64,7 +64,7 @@ struct HomeView<ViewModel: HomeViewModel>: View {
                         switch viewModel.selectedTab {
                         case .watch, .chat:
                             Spacer().background(ColorAssets.neutralLight.swiftUIColor)
-                        case .shop:
+                        case .shop, .friends:
                             Spacer()
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .background(ColorAssets.primaryGreen200.swiftUIColor)
@@ -75,16 +75,6 @@ struct HomeView<ViewModel: HomeViewModel>: View {
                                     .cornerRadius([.bottomLeading, .bottomTrailing], 40)
                                 Spacer()
                             }
-
-                        case .friends:
-                            ImageAssets.bgFriendsHeader.swiftUIImage
-                                .resizable()
-                                .frame(maxWidth: .infinity)
-                                .scaledToFit()
-                                .zIndex(999)
-                            Spacer()
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .background(ColorAssets.primaryGreen50.swiftUIColor)
                         }
                     }
                     .ignoresSafeArea(edges: .top)

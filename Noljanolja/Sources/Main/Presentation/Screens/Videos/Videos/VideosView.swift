@@ -106,8 +106,8 @@ struct VideosView<ViewModel: VideosViewModel>: View {
         HStack(spacing: 12) {
             HStack {
                 Text(L10n.videoSearchVideo)
-                    .dynamicFont(.systemFont(ofSize: 12, weight: .bold))
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    .dynamicFont(.systemFont(ofSize: 14))
+                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                 Spacer()
                 ImageAssets.icSearch.swiftUIImage
                     .resizable()

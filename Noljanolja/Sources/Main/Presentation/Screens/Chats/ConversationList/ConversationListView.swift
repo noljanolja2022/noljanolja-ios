@@ -39,7 +39,7 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
                 }
             )
     }
-    
+
     private func buildMainView() -> some View {
         VideoDetailRootContainerView(
             content: {
@@ -51,7 +51,7 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
             viewModel: VideoDetailRootContainerViewModel()
         )
     }
-    
+
     private func buildContentStatefullView() -> some View {
         buildContentView()
             .statefull(
@@ -92,11 +92,11 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
                         .height(24)
                 }
             )
-            
+
             HStack {
                 Text(L10n.commonSearchFriend)
-                    .dynamicFont(.systemFont(ofSize: 12, weight: .bold))
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    .dynamicFont(.systemFont(ofSize: 14))
+                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
                 Spacer()
                 ImageAssets.icSearch.swiftUIImage
                     .resizable()
