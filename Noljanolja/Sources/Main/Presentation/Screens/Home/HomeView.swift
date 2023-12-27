@@ -9,6 +9,7 @@
 import Combine
 import Lottie
 import SwiftUI
+import SwiftUIX
 
 // MARK: - HomeView
 
@@ -28,7 +29,6 @@ struct HomeView<ViewModel: HomeViewModel>: View {
     private func buildBodyView() -> some View {
         buildMainView()
             .navigationBarTitle("", displayMode: .inline)
-            .toolbar { buildToolBarContent() }
             .navigationBarHidden(viewModel.selectedTab.isNavigationBarHidden)
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
@@ -51,101 +51,6 @@ struct HomeView<ViewModel: HomeViewModel>: View {
             )
     }
 
-    @ToolbarContentBuilder
-    private func buildToolBarContent() -> some ToolbarContent {
-        ToolbarItem(placement: .navigationBarLeading) {
-            switch viewModel.selectedTab {
-            case .chat:
-                Text(viewModel.selectedTab.navigationBarTitle)
-                    .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            case .friends, .watch, .wallet, .shop:
-                EmptyView()
-            }
-        }
-
-        ToolbarItem(placement: .principal) {
-            switch viewModel.selectedTab {
-            case .chat, .friends:
-                EmptyView()
-            case .watch, .wallet, .shop:
-                Text(viewModel.selectedTab.navigationBarTitle)
-                    .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                    .frame(minWidth: 120)
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            }
-        }
-
-        ToolbarItem(placement: .navigationBarTrailing) {
-            switch viewModel.selectedTab {
-            case .chat:
-                HStack(spacing: 4) {
-                    Button(
-                        action: {
-                            viewModel.navigationType = .addFriends
-                        },
-                        label: {
-                            ImageAssets.icAddPerson.swiftUIImage
-                                .resizable()
-                                .scaledToFit()
-                                .padding(2)
-                        }
-                    )
-
-                    Button(
-                        action: {},
-                        label: {
-                            ImageAssets.icSearch.swiftUIImage
-                                .resizable()
-                                .scaledToFit()
-                                .padding(2)
-                        }
-                    )
-
-                    Button(
-                        action: {
-                            toolBarActionSubject.send(.createConversation)
-                        },
-                        label: {
-                            ImageAssets.icChatNew.swiftUIImage
-                                .resizable()
-                                .scaledToFit()
-                                .padding(4)
-                        }
-                    )
-
-                    Button(
-                        action: {},
-                        label: {
-                            ImageAssets.icSettingOutline.swiftUIImage
-                                .resizable()
-                                .scaledToFit()
-                                .padding(4)
-                        }
-                    )
-                }
-                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            case .watch:
-                HStack(spacing: 4) {
-                    Button(
-                        action: {
-                            viewModel.navigationType = .searchVideo
-                        },
-                        label: {
-                            ImageAssets.icSearch.swiftUIImage
-                                .resizable()
-                                .scaledToFit()
-                                .padding(2)
-                        }
-                    )
-                }
-                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            case .wallet, .shop, .friends:
-                EmptyView()
-            }
-        }
-    }
-
     private func buildMainView() -> some View {
         ZStack {
             buildContentView()
@@ -157,25 +62,19 @@ struct HomeView<ViewModel: HomeViewModel>: View {
                 .overlay {
                     ZStack(alignment: .top) {
                         switch viewModel.selectedTab {
-                        case .watch, .chat, .shop:
+                        case .watch, .chat:
                             Spacer().background(ColorAssets.neutralLight.swiftUIColor)
-                        case .wallet:
+                        case .shop, .friends:
                             Spacer()
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .background(ColorAssets.primaryGreen200.swiftUIColor)
-                            ImageAssets.bgWalletHeader.swiftUIImage
-                                .resizable()
-                                .frame(maxWidth: .infinity)
-                                .aspectRatio(1.8, contentMode: .fit)
-                        case .friends:
-                            ImageAssets.bgFriendsHeader.swiftUIImage
-                                .resizable()
-                                .frame(maxWidth: .infinity)
-                                .scaledToFit()
-                                .zIndex(999)
-                            Spacer()
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .background(ColorAssets.primaryGreen50.swiftUIColor)
+                        case .wallet:
+                            VStack {
+                                ColorAssets.primaryGreen200.swiftUIColor
+                                    .frame(maxWidth: .infinity, maxHeight: UIScreen.mainHeight * 0.5)
+                                    .cornerRadius([.bottomLeading, .bottomTrailing], 40)
+                                Spacer()
+                            }
                         }
                     }
                     .ignoresSafeArea(edges: .top)

@@ -24,13 +24,14 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
         VideoDetailRootContainerView(
             content: {
                 ZStack(alignment: .bottomTrailing) {
-                    VStack {
+                    VStack(spacing: 10) {
                         buildHeaderView()
                         buildBodyView()
                     }
                     buildFloatButton()
                     buildNavigationLink()
                 }
+                .background(ColorAssets.secondaryYellow100.swiftUIColor)
             },
             viewModel: VideoDetailRootContainerViewModel()
         )
@@ -38,41 +39,75 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
 
     @ViewBuilder
     private func buildHeaderView() -> some View {
-        HeaderCommonView(
-            notificationAction: {},
-            settingAction: { viewModel.navigationTypeAction.send(.setting) }
-        ) {
-            ZStack {
-                Text("Earn Points\n")
-                    + Text("By Refer")
+        HStack(spacing: 12) {
+            HStack {
+                Text(L10n.commonSearchFriend)
+                    .dynamicFont(.systemFont(ofSize: 14))
+                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
+                Spacer()
+                ImageAssets.icSearch.swiftUIImage
+                    .resizable()
+                    .scaledToFit()
+                    .height(24)
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }
-            .dynamicFont(.systemFont(ofSize: 32, weight: .bold))
-            .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
+            .padding(10)
+            .frame(maxWidth: .infinity)
+            .height(36)
+            .background(ColorAssets.neutralLightGrey.swiftUIColor)
+            .cornerRadius(5)
+            .onTapGesture {
+                viewModel.navigationType = .search
+            }
+
+            Button(
+                action: {},
+                label: {
+                    ImageAssets.icNotifications.swiftUIImage
+                        .resizable()
+                        .scaledToFit()
+                        .height(24)
+                }
+            )
+            AvatarView(url: viewModel.avatarURL, size: .init(width: 24, height: 24))
+                .onTapGesture {
+                    viewModel.navigationType = .setting
+                }
         }
+        .padding(.horizontal, 16)
+        .padding(.bottom, 12)
+        .background(ColorAssets.primaryGreen200.swiftUIColor)
+        .cornerRadius([.bottomTrailing, .bottomLeading], 13)
     }
 
     @ViewBuilder
     private func buildBodyView() -> some View {
         VStack(spacing: 25) {
-            Button(action: {
-                viewModel.navigationTypeAction.send(.inviteFriends)
-            }, label: {
-                HStack {
-                    Text(L10n.inviteToGetBenefits)
-                        .lineLimit(1)
-                    ImageAssets.icArrowRight.swiftUIImage
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 15)
-                .padding(.horizontal, 35)
-                .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                .foregroundColor(ColorAssets.secondaryYellow200.swiftUIColor)
-                .background(ColorAssets.neutralDarkGrey.swiftUIColor)
-                .cornerRadius(11)
-            })
-            .padding(.horizontal, 16)
+            VStack {
+                Text(L10n.friendEarnPointsByReferrals)
+                    .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+
+                Button(action: {
+                    viewModel.navigationTypeAction.send(.inviteFriends)
+                }, label: {
+                    HStack {
+                        Text(L10n.inviteToGetBenefits)
+                            .lineLimit(1)
+                        ImageAssets.icArrowRight.swiftUIImage
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 15)
+                    .padding(.horizontal, 35)
+                    .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
+                    .foregroundColor(ColorAssets.secondaryYellow200.swiftUIColor)
+                    .background(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    .cornerRadius(11)
+                })
+                .padding(.horizontal, 16)
+            }
 
             VStack(spacing: 0) {
                 HStack {
@@ -105,7 +140,6 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
                 )
             }
             .background(ColorAssets.neutralLight.swiftUIColor)
-            .cornerRadius([.topLeading, .topTrailing], 25)
         }
     }
 

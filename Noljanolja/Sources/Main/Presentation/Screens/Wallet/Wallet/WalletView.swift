@@ -84,9 +84,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
 
                 Spacer()
             }
-            .padding(16)
-            .background(ColorAssets.neutralLight.swiftUIColor)
-            .cornerRadius([.topLeading, .topTrailing], 24)
+            .padding(.horizontal, 16)
         }
     }
 

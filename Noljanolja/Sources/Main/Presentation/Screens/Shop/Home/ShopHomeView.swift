@@ -50,41 +50,51 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
 
     @ViewBuilder
     private func buildContentView() -> some View {
-        ScrollView {
-            VStack {
-                buildHeaderView()
-                buildSummaryView()
-                buildCategoriesView()
-                buildBrandsView()
-                buildTopFeaturesView()
-                buildTodayOffersView()
-                buildRecommendView()
-                buildForYouView()
+        VStack(spacing: 0) {
+            buildHeaderView()
+
+            ScrollView {
+                VStack {
+                    buildSummaryView()
+                    buildCategoriesView()
+                    buildBrandsView()
+                    buildTopFeaturesView()
+                    buildTodayOffersView()
+                    buildRecommendView()
+                    buildForYouView()
+                }
+                .padding(.top, 16)
             }
-            .background(ColorAssets.neutralLight.swiftUIColor)
         }
+        .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
     private func buildHeaderView() -> some View {
-        VStack(spacing: 12) {
-            HStack(spacing: 8) {
-                Text(L10n.shopWelcomeNoljaShop)
-                    .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                ImageAssets.icQuestion.swiftUIImage
+        HStack(spacing: 12) {
+            HStack {
+                Text(L10n.shopSearchProducts)
+                    .dynamicFont(.systemFont(ofSize: 14))
+                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
+                Spacer()
+                ImageAssets.icSearch.swiftUIImage
                     .resizable()
-                    .frame(width: 16, height: 16)
+                    .scaledToFit()
+                    .height(24)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }
+            .padding(10)
+            .frame(maxWidth: .infinity)
+            .height(36)
+            .background(ColorAssets.neutralLightGrey.swiftUIColor)
+            .cornerRadius(5)
+            .onTapGesture {}
 
-            SearchView(placeholder: L10n.shopSearchProducts, text: .constant(""))
-                .frame(maxWidth: .infinity)
-                .background(ColorAssets.neutralLightGrey.swiftUIColor)
-                .cornerRadius(8)
+            AvatarView(url: viewModel.avatarURL, size: .init(width: 24, height: 24))
         }
         .padding(.horizontal, 16)
-        .padding(.vertical, 8)
-        .disabled(true)
+        .padding(.bottom, 12)
+        .background(ColorAssets.primaryGreen200.swiftUIColor)
+        .cornerRadius([.bottomTrailing, .bottomLeading], 13)
         .onTapGesture {
             viewModel.navigationType = .search
         }

@@ -23,6 +23,7 @@ final class ShopHomeViewModel: ViewModel {
     @Published var model = ShopHomeModel()
     @Published var isProgressHUDShowing = false
     @Published var alertState: AlertState<Void>?
+    @Published var avatarURL: String?
 
     // MARK: Navigations
 
@@ -32,6 +33,7 @@ final class ShopHomeViewModel: ViewModel {
 
     // MARK: Dependencies
 
+    private let userUseCases: UserUseCases
     private let coinExchangeUseCases: CoinExchangeUseCases
     private weak var delegate: ShopHomeViewModelDelegate?
 
@@ -41,7 +43,9 @@ final class ShopHomeViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(coinExchangeUseCases: CoinExchangeUseCases = CoinExchangeUseCasesImpl.shared,
+         userUseCases: UserUseCases = UserUseCasesImpl.default,
          delegate: ShopHomeViewModelDelegate? = nil) {
+        self.userUseCases = userUseCases
         self.coinExchangeUseCases = coinExchangeUseCases
         self.delegate = delegate
         super.init()
@@ -78,6 +82,13 @@ final class ShopHomeViewModel: ViewModel {
                     self.viewState = .error
                 }
             }
+            .store(in: &cancellables)
+        
+        userUseCases
+            .getCurrentUserPublisher()
+            .sink(receiveValue: { [weak self] in
+                self?.avatarURL = $0.avatar
+            })
             .store(in: &cancellables)
     }
 }

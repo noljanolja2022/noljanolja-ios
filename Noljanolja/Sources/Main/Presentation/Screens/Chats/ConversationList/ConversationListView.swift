@@ -29,16 +29,6 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .isProgressHUBVisible($viewModel.isProgressHUDShowing)
-            .onReceive(toolBarAction) {
-                switch $0 {
-                case .createConversation:
-                    withoutAnimation {
-                        viewModel.fullScreenCoverType = .createConversation
-                    }
-                case .none:
-                    break
-                }
-            }
             .fullScreenCover(
                 unwrapping: $viewModel.fullScreenCoverType,
                 onDismiss: {
@@ -49,7 +39,7 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
                 }
             )
     }
-    
+
     private func buildMainView() -> some View {
         VideoDetailRootContainerView(
             content: {
@@ -61,7 +51,7 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
             viewModel: VideoDetailRootContainerViewModel()
         )
     }
-    
+
     private func buildContentStatefullView() -> some View {
         buildContentView()
             .statefull(
@@ -76,16 +66,54 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
     }
 
     private func buildContentView() -> some View {
-        ScrollView {
-            LazyVStack(spacing: 0) {
-                ForEach(viewModel.conversations, id: \.id) { conversation in
-                    ConversationItemView(model: conversation)
-                        .onTapGesture {
-                            viewModel.openChatAction.send(conversation)
-                        }
+        VStack {
+            buildHeaderView()
+            ScrollView {
+                LazyVStack(spacing: 0) {
+                    ForEach(viewModel.conversations, id: \.id) { conversation in
+                        ConversationItemView(model: conversation)
+                            .onTapGesture {
+                                viewModel.openChatAction.send(conversation)
+                            }
+                    }
                 }
             }
         }
+    }
+
+    private func buildHeaderView() -> some View {
+        HStack(spacing: 12) {
+            Button(
+                action: {},
+                label: {
+                    ImageAssets.icMenu.swiftUIImage
+                        .resizable()
+                        .scaledToFit()
+                        .height(24)
+                }
+            )
+
+            HStack {
+                Text(L10n.commonSearchFriend)
+                    .dynamicFont(.systemFont(ofSize: 14))
+                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
+                Spacer()
+                ImageAssets.icSearch.swiftUIImage
+                    .resizable()
+                    .scaledToFit()
+                    .height(24)
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            }
+            .padding(10)
+            .frame(maxWidth: .infinity)
+            .height(36)
+            .background(ColorAssets.neutralLightGrey.swiftUIColor)
+            .cornerRadius(5)
+            .onTapGesture {}
+
+            AvatarView(url: viewModel.avatarURL, size: .init(width: 24, height: 24))
+        }
+        .padding(.horizontal, 10)
     }
 
     private func buildNavigationLink() -> some View {

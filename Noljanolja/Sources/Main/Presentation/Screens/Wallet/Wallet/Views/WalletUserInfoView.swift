@@ -18,7 +18,7 @@ struct WalletUserInfoView: View {
     }
 
     private func buildBodyView() -> some View {
-        HStack(spacing: 24) {
+        HStack(spacing: 15) {
             WebImage(
                 url: URL(string: model.avatar),
                 options: .refreshCached,
@@ -42,30 +42,21 @@ struct WalletUserInfoView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
 
-//                Button(
-//                    action: {
-//                        tierAction?()
-//                    },
-//                    label: {
-//                        WalletMemberTierView(model: model.tierModelType)
-//                    }
-//                )
-            }
-
-            VStack(spacing: 0) {
                 Button(
                     action: {
-                        settingAction?()
+                        tierAction?()
                     },
                     label: {
-                        ImageAssets.icSettingFill.swiftUIImage
-                            .frame(width: 24, height: 24)
-                            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                        WalletMemberTierView(model: model.tierModelType)
                     }
                 )
+
+                Text(L10n.walletPointRanking(model.exchangeablePoints ?? 0))
+                    .dynamicFont(.systemFont(ofSize: 10, weight: .medium))
+                    .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
             }
         }
         .frame(maxWidth: .infinity)
-        .padding(16)
+        .padding(.horizontal, 16)
     }
 }
