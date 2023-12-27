@@ -42,7 +42,7 @@ struct AuthView<ViewModel: AuthViewModel>: View {
             Alert($0) { action in
                 guard let action, action else { return }
                 viewModel.sendVerificationCodeAction.send(
-                    (viewModel.country.prefix, viewModel.phoneNumber?.formatPhone())
+                    (viewModel.country.code, viewModel.phoneNumber?.formatPhone())
                 )
             }
         }
