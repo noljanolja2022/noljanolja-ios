@@ -11,6 +11,8 @@ import SwiftUI
 
 struct CategoriesView<ViewModel: CategoriesViewModel>: View {
     @StateObject var viewModel: CategoriesViewModel
+    @EnvironmentObject var themeManager: AppThemeManager
+
     var onTap: ((GiftCategory) -> Void)?
 
     var body: some View {
@@ -42,7 +44,7 @@ struct CategoriesView<ViewModel: CategoriesViewModel>: View {
                         .padding(.vertical, 5)
                         .padding(.horizontal, 13)
                         .background(viewModel.selectedIndex == index
-                            ? ColorAssets.primaryGreen200.swiftUIColor
+                            ? themeManager.theme.primary200
                             : ColorAssets.neutralLightGrey.swiftUIColor
                         )
                         .cornerRadius(5)
@@ -56,7 +58,6 @@ struct CategoriesView<ViewModel: CategoriesViewModel>: View {
             }
             .padding(.horizontal, 16)
         }
-        .padding(.top, 10)
     }
 }
 

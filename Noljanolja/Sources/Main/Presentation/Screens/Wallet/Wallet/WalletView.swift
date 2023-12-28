@@ -16,6 +16,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
 
     @StateObject var viewModel: ViewModel
     @State private var selectedMoneyType = MoneyType.point
+    @EnvironmentObject var themeManager: AppThemeManager
 
     var body: some View {
         buildBodyView()

@@ -14,6 +14,7 @@ struct ShopGiftCollectionView: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ShopGiftCollectionViewModel
+    @EnvironmentObject var themeManager: AppThemeManager
 
     var body: some View {
         buildBodyView()
@@ -51,7 +52,7 @@ struct ShopGiftCollectionView: View {
             }
         }
         .background(viewModel.type == .topFeatures
-            ? ColorAssets.primaryGreen200.swiftUIColor
+            ? themeManager.theme.primary200
             : ColorAssets.neutralLight.swiftUIColor)
         .visible(!viewModel.models.isEmpty)
     }

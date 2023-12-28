@@ -10,6 +10,8 @@
 		2B0CFE962B3294AC001E68A2 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0CFE952B3294AC001E68A2 /* AvatarView.swift */; };
 		2B0CFE992B32BE66001E68A2 /* EarnedPointsPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0CFE982B32BE66001E68A2 /* EarnedPointsPopupView.swift */; };
 		2B10DC062B33E7C300FFAE94 /* View+NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B10DC052B33E7C300FFAE94 /* View+NavigationBar.swift */; };
+		2B4885E22B3D24B2002FC70A /* AppThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4885E12B3D24B2002FC70A /* AppThemeManager.swift */; };
+		2B4885E52B3D2B26002FC70A /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4885E42B3D2B26002FC70A /* AppTheme.swift */; };
 		2B5FC3C02B021A4300906C18 /* HeaderCommonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5FC3BF2B021A4300906C18 /* HeaderCommonView.swift */; };
 		2B5FC3C22B0285FA00906C18 /* HomeFriendNavigationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5FC3C12B0285FA00906C18 /* HomeFriendNavigationType.swift */; };
 		2B6876F92AFDEA22000BBD55 /* ListSocialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B6876F82AFDEA21000BBD55 /* ListSocialView.swift */; };
@@ -644,6 +646,8 @@
 		2B0CFE952B3294AC001E68A2 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		2B0CFE982B32BE66001E68A2 /* EarnedPointsPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnedPointsPopupView.swift; sourceTree = "<group>"; };
 		2B10DC052B33E7C300FFAE94 /* View+NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+NavigationBar.swift"; sourceTree = "<group>"; };
+		2B4885E12B3D24B2002FC70A /* AppThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppThemeManager.swift; sourceTree = "<group>"; };
+		2B4885E42B3D2B26002FC70A /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		2B5FC3BF2B021A4300906C18 /* HeaderCommonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCommonView.swift; sourceTree = "<group>"; };
 		2B5FC3C12B0285FA00906C18 /* HomeFriendNavigationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFriendNavigationType.swift; sourceTree = "<group>"; };
 		2B6876F82AFDEA21000BBD55 /* ListSocialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSocialView.swift; sourceTree = "<group>"; };
@@ -1313,6 +1317,14 @@
 				2B0CFE982B32BE66001E68A2 /* EarnedPointsPopupView.swift */,
 			);
 			path = EarnedPointsPopup;
+			sourceTree = "<group>";
+		};
+		2B4885E32B3D2B1D002FC70A /* AppTheme */ = {
+			isa = PBXGroup;
+			children = (
+				2B4885E42B3D2B26002FC70A /* AppTheme.swift */,
+			);
+			path = AppTheme;
 			sourceTree = "<group>";
 		};
 		2B5FC3BE2B021A3400906C18 /* HeaderCommonView */ = {
@@ -3624,6 +3636,7 @@
 		CFE09258298DF79300F197F0 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				2B4885E32B3D2B1D002FC70A /* AppTheme */,
 				CFE0933F299007C600F197F0 /* Extensions */,
 				CFE09259298DF7A000F197F0 /* Loggers */,
 				CFFD70B7298AC55600D4F5A2 /* Network */,
@@ -3926,6 +3939,7 @@
 				CF14F25A298CE46100BC2066 /* Info.plist */,
 				CF861EA12AD5C5A500500721 /* InfoPlist.strings */,
 				CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */,
+				2B4885E12B3D24B2002FC70A /* AppThemeManager.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -4882,6 +4896,7 @@
 				CF53D5912A6AF548009B3A69 /* VideoDetailInputView.swift in Sources */,
 				CF53D5CE2A6AF548009B3A69 /* ContactListView.swift in Sources */,
 				CFE0925D298DFDCB00F197F0 /* KakaoAuthRepository.swift in Sources */,
+				2B4885E22B3D24B2002FC70A /* AppThemeManager.swift in Sources */,
 				CFC23D592A7A4E53009CAD87 /* ReferralViewModel.swift in Sources */,
 				CF53D6322A6AF548009B3A69 /* ImageEditorResultView.swift in Sources */,
 				CFFD70CA298AC5F800D4F5A2 /* TargetType+Default.swift in Sources */,
@@ -4913,6 +4928,7 @@
 				CF1EA5862A1D32CD006846DF /* PublishedCurrentValue.swift in Sources */,
 				CFE2155A2AE630DA00C83BAD /* ExchangeView.swift in Sources */,
 				CF861EA72AD5CC3B00500721 /* ComingSoonView.swift in Sources */,
+				2B4885E52B3D2B26002FC70A /* AppTheme.swift in Sources */,
 				CF53D5952A6AF548009B3A69 /* VideosModel.swift in Sources */,
 				CF53D6512A6AF548009B3A69 /* SelectCountryView.swift in Sources */,
 				CF53D56E2A6AF548009B3A69 /* UpdateCurrentUserViewModel.swift in Sources */,

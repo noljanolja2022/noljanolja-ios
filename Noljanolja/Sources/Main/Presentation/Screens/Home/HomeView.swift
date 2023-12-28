@@ -17,6 +17,7 @@ struct HomeView<ViewModel: HomeViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
+    @EnvironmentObject var themeManager: AppThemeManager
 
     // MARK: Private
 
@@ -67,14 +68,15 @@ struct HomeView<ViewModel: HomeViewModel>: View {
                         case .shop, .friends:
                             Spacer()
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .background(ColorAssets.primaryGreen200.swiftUIColor)
+                                .background(themeManager.theme.primary200)
                         case .wallet:
                             VStack {
-                                ColorAssets.primaryGreen200.swiftUIColor
+                                themeManager.theme.primary200
                                     .frame(maxWidth: .infinity, maxHeight: UIScreen.mainHeight * 0.5)
                                     .cornerRadius([.bottomLeading, .bottomTrailing], 40)
                                 Spacer()
                             }
+                            .background(themeManager.theme == .yellow ? themeManager.theme.primary400 : .clear)
                         }
                     }
                     .ignoresSafeArea(edges: .top)
@@ -176,7 +178,7 @@ struct HomeView<ViewModel: HomeViewModel>: View {
         .frame(maxWidth: .infinity)
         .foregroundColor(
             viewModel.selectedTab == tab
-                ? ColorAssets.primaryGreen200.swiftUIColor
+                ? themeManager.theme.primary200
                 : ColorAssets.neutralGrey.swiftUIColor
         )
         .background(ColorAssets.neutralLight.swiftUIColor)

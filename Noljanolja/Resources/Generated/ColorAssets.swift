@@ -36,12 +36,22 @@ internal enum ColorAssets {
   internal static let neutralRawGrey = ColorAsset(name: "Neutral Raw Grey")
   internal static let neutralRawLightGrey = ColorAsset(name: "Neutral Raw Light Grey")
   internal static let neutralRawLight = ColorAsset(name: "Neutral Raw Light")
+  internal static let primaryBlue100 = ColorAsset(name: "Primary Blue 100")
+  internal static let primaryBlue200 = ColorAsset(name: "Primary Blue 200")
+  internal static let primaryBlue300 = ColorAsset(name: "Primary Blue 300")
+  internal static let primaryBlue400 = ColorAsset(name: "Primary Blue 400")
+  internal static let primaryBlue50 = ColorAsset(name: "Primary Blue 50")
   internal static let primaryGreen100 = ColorAsset(name: "Primary Green 100")
   internal static let primaryGreen200 = ColorAsset(name: "Primary Green 200")
   internal static let primaryGreen300 = ColorAsset(name: "Primary Green 300")
   internal static let primaryGreen400 = ColorAsset(name: "Primary Green 400")
   internal static let primaryGreen50 = ColorAsset(name: "Primary Green 50")
   internal static let primaryGreen = ColorAsset(name: "Primary Green")
+  internal static let primaryYellow100 = ColorAsset(name: "Primary Yellow 100")
+  internal static let primaryYellow200 = ColorAsset(name: "Primary Yellow 200")
+  internal static let primaryYellow300 = ColorAsset(name: "Primary Yellow 300")
+  internal static let primaryYellow400 = ColorAsset(name: "Primary Yellow 400")
+  internal static let primaryYellow50 = ColorAsset(name: "Primary Yellow 50")
   internal static let secondaryYellow100 = ColorAsset(name: "Secondary Yellow 100")
   internal static let secondaryYellow200 = ColorAsset(name: "Secondary Yellow 200")
   internal static let secondaryYellow300 = ColorAsset(name: "Secondary Yellow 300")
@@ -74,12 +84,22 @@ internal enum ColorAssets {
     neutralRawGrey,
     neutralRawLightGrey,
     neutralRawLight,
+    primaryBlue100,
+    primaryBlue200,
+    primaryBlue300,
+    primaryBlue400,
+    primaryBlue50,
     primaryGreen100,
     primaryGreen200,
     primaryGreen300,
     primaryGreen400,
     primaryGreen50,
     primaryGreen,
+    primaryYellow100,
+    primaryYellow200,
+    primaryYellow300,
+    primaryYellow400,
+    primaryYellow50,
     secondaryYellow100,
     secondaryYellow200,
     secondaryYellow300,
