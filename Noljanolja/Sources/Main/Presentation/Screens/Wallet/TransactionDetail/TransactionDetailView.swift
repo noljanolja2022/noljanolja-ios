@@ -59,26 +59,26 @@ struct TransactionDetailView<ViewModel: TransactionDetailViewModel>: View {
 
     private func buildPointsView() -> some View {
         VStack(spacing: 8) {
-            Text(viewModel.model.type)
+            Text(viewModel.model?.type ?? "")
                 .dynamicFont(.systemFont(ofSize: 16))
                 .frame(maxWidth: .infinity, alignment: .center)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
-            Text(viewModel.model.point)
+            Text(viewModel.model?.point ?? "")
                 .dynamicFont(.systemFont(ofSize: 22, weight: .bold))
-                .foregroundColor(Color(viewModel.model.pointColor))
+                .foregroundColor(Color(viewModel.model?.pointColor ?? ""))
         }
     }
 
     private func buildDetailView() -> some View {
         VStack(spacing: 8) {
-            buildItemDetail(title: L10n.transactionDetailStatus, content: viewModel.model.status, isStatus: true)
+            buildItemDetail(title: L10n.transactionDetailStatus, content: viewModel.model?.status ?? "", isStatus: true)
 
-            buildItemDetail(title: L10n.transactionDetailType, content: viewModel.model.resaon)
+            buildItemDetail(title: L10n.transactionDetailType, content: viewModel.model?.reason ?? "")
 
-            buildItemDetail(title: L10n.transactionDetailTime, content: viewModel.model.dateTime)
+            buildItemDetail(title: L10n.transactionDetailTime, content: viewModel.model?.dateTime ?? "")
 
-            buildItemDetail(title: L10n.transactionDetailCode, content: viewModel.model.code)
+            buildItemDetail(title: L10n.transactionDetailCode, content: viewModel.model?.code ?? "")
         }
     }
 

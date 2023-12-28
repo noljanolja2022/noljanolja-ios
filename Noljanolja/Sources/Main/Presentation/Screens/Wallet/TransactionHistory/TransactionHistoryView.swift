@@ -180,7 +180,8 @@ extension TransactionHistoryView {
         case let .transactionDetail(transaction):
             TransactionDetailView(
                 viewModel: TransactionDetailViewModel(
-                    transaction: transaction
+                    id: transaction.id,
+                    reason: transaction.reason ?? ""
                 )
             )
         case let .dashboard(date):

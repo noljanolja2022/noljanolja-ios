@@ -13,8 +13,11 @@ struct TransactionDetailModel {
     let point: String
     let pointColor: String
     let code: String
-    let resaon: String
+    let reason: String
     let status: String
+    let reasonLocale: String?
+    let unit: String?
+    let log: String?
 
     init(model: Transaction) {
         self.type = model.amount > 0 ? L10n.transactionReceiveType : L10n.transactionSpentType
@@ -22,7 +25,10 @@ struct TransactionDetailModel {
         self.pointColor = model.amount > 0 ? ColorAssets.systemGreen.name : ColorAssets.systemRed100.name
         self.dateTime = model.createdAt.string(withFormat: "HH:mm - yyyy/MM/dd")
         self.code = String(model.id)
-        self.resaon = model.reason ?? "-"
+        self.reason = model.reason ?? "-"
         self.status = model.status.title
+        self.reasonLocale = model.reasonLocale
+        self.unit = model.unit
+        self.log = model.log
     }
 }

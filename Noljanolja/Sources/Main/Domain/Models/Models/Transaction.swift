@@ -14,6 +14,10 @@ struct Transaction: Equatable, Decodable {
     let status: TransactionStatusType
     let createdAt: Date
     let type: TransactionType
+    let reasonLocale: String?
+    let unit: String?
+    let log: String?
+
     enum CodingKeys: String, CodingKey {
         case id
         case reason
@@ -21,6 +25,9 @@ struct Transaction: Equatable, Decodable {
         case status
         case createdAt
         case type
+        case reasonLocale
+        case unit
+        case log
     }
 
     init(from decoder: Decoder) throws {
@@ -42,5 +49,8 @@ struct Transaction: Equatable, Decodable {
                 )
             )
         }
+        self.reasonLocale = try container.decode(String.self, forKey: .reasonLocale)
+        self.unit = try container.decode(String.self, forKey: .unit)
+        self.log = try container.decodeIfPresent(String.self, forKey: .log)
     }
 }

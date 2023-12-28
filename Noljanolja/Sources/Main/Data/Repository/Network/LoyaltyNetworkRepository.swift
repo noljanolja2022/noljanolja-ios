@@ -41,6 +41,22 @@ private enum LoyaltyTargets {
             .compactMapValues { $0 }
         }
     }
+    
+    struct GetTransactionDetail: BaseAuthTargetType {
+        var path: String { "v1/loyalty/me/points/\(id)" }
+        let method: Moya.Method = .get
+        var task: Task { .requestParameters(parameters: parameters, encoding: URLEncoding.queryString) }
+        
+        let id: Int
+        let reason: String
+        
+        var parameters: [String: Any] {
+            [
+                "reason": reason
+            ]
+            .compactMapValues { $0 }
+        }
+    }
 }
 
 // MARK: - LoyaltyNetworkRepository
@@ -50,6 +66,7 @@ protocol LoyaltyNetworkRepository {
     func getTransactionHistory(lastOffsetDate: Date?,
                                type: TransactionType,
                                monthYearDate: Date?) -> AnyPublisher<[Transaction], Error>
+    func getTransactionDetail(id: String, reason: String) -> AnyPublisher<Transaction, Error>
 }
 
 extension LoyaltyNetworkRepository {
@@ -61,6 +78,10 @@ extension LoyaltyNetworkRepository {
             type: type,
             monthYearDate: monthYearDate
         )
+    }
+    
+    func getTransactionDetail(id: String, reason: String) -> AnyPublisher<Transaction, Error> {
+        getTransactionDetail(id: id, reason: reason)
     }
 }
 
@@ -94,5 +115,9 @@ final class LoyaltyNetworkNetworkRepository: LoyaltyNetworkRepository {
                 ),
                 atKeyPath: "data"
             )
+    }
+    
+    func getTransactionDetail(id: Int, reason: String) -> AnyPublisher<Transaction, Error> {
+        api.request(target: LoyaltyTargets.GetTransactionDetail(id: id, reason: reason), atKeyPath: "data")
     }
 }

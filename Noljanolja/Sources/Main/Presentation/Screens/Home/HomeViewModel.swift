@@ -24,7 +24,7 @@ final class HomeViewModel: ViewModel {
 
     let tabs: [HomeTabType] = [.watch, .chat, .wallet, .shop, .friends]
     @Published var isProgressHUDShowing = false
-    @Published var selectedTab = HomeTabType.watch
+    @Published var selectedTab = HomeTabType.friends
     @Published var tabNews = [HomeTabType: Bool]()
     @Published var alertState: AlertState<HomeAlertActionType>?
 
