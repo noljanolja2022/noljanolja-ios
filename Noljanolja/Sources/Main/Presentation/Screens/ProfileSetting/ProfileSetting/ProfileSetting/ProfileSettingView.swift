@@ -19,6 +19,7 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
 
     @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel: ViewModel
+    @EnvironmentObject var themeManager: AppThemeManager
 
     var body: some View {
         buildBodyView()
@@ -67,16 +68,17 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
     private func buildContentView() -> some View {
         VStack(spacing: 12) {
             ScrollView {
-                VStack(spacing: 5) {
+                VStack(spacing: 32) {
                     buildUserInfoView()
 
-                    buildPushNotiView()
+                    buildSectionSettings()
 
-                    buildAppSettingView()
+                    buildSectionAppColors()
 
                     buildAppInfoView()
                 }
-                .padding(16)
+                .padding(.horizontal, 16)
+                .padding(.top, 10)
             }
             .frame(maxHeight: .infinity)
             .background(ColorAssets.neutralLightGrey.swiftUIColor)
@@ -127,7 +129,7 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
                 .padding(.vertical, 6)
                 .padding(.horizontal, 14)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                .background(ColorAssets.primaryGreen50.swiftUIColor)
+                .background(themeManager.theme.primary50)
                 .cornerRadius(5)
                 .onPress {
                     viewModel.fullScreenCoverType = .avatar
@@ -135,18 +137,23 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
         }
     }
 
-    private func buildPushNotiView() -> some View {
-        SettingItemView(
-            title: L10n.settingPushNotification,
-            content: {
-                Toggle("", isOn: .constant(true))
-                    .labelsHidden()
-            }
-        )
-    }
+    private func buildSectionSettings() -> some View {
+        VStack(spacing: 5) {
+            Text("Settings")
+                .dynamicFont(.systemFont(ofSize: 14, weight: .semibold))
+                .foregroundColor(.black)
+                .padding(.bottom, 10)
+                .fill(alignment: .leading)
 
-    private func buildAppSettingView() -> some View {
-        Group {
+            SettingItemView(
+                title: L10n.settingPushNotification,
+                content: {
+                    Toggle("", isOn: .constant(true))
+                        .toggleStyle(SwitchToggleStyle(tint: themeManager.theme.primary50))
+                        .labelsHidden()
+                }
+            )
+
             SettingItemView(
                 title: L10n.settingClearCacheData,
                 action: {
@@ -159,18 +166,45 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
                     viewModel.navigationType = .sourceLicense
                 }
             )
-        }
-    }
-
-    private func buildAppInfoView() -> some View {
-        Group {
             SettingItemView(
                 title: "FAQ",
                 action: {
                     viewModel.navigationType = .faq
                 }
             )
+        }
+    }
 
+    private func buildSectionAppColors() -> some View {
+        VStack(spacing: 5) {
+            Text("App colors")
+                .dynamicFont(.systemFont(ofSize: 14, weight: .semibold))
+                .foregroundColor(.black)
+                .padding(.bottom, 5)
+                .fill(alignment: .leading)
+
+            ForEach(AppTheme.allCases, id: \.self) { theme in
+                SettingItemView(
+                    content: {
+                        HStack(spacing: 12) {
+                            theme.primary200
+                                .frame(width: 24, height: 24)
+                                .clipShape(Circle())
+                            Text(theme.title)
+                                .dynamicFont(.systemFont(ofSize: 12))
+                                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                        }
+                        .fill(alignment: .leading)
+                    }
+                ) {
+                    themeManager.changeThemeAction.send(theme)
+                }
+            }
+        }
+    }
+
+    private func buildAppInfoView() -> some View {
+        Group {
             Text(L10n.settingCurrentVersion(viewModel.appVersion))
                 .dynamicFont(.systemFont(ofSize: 12))
                 .padding(.vertical, 10)

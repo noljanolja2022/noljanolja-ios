@@ -24,6 +24,7 @@ struct RootView<ViewModel: RootViewModel>: View {
         buildContentView()
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
+            .environmentObject(AppThemeManager.shared)
     }
 
     @ViewBuilder

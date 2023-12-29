@@ -10,11 +10,11 @@ import SwiftUI
 // MARK: - SettingItemView
 
 struct SettingItemView<Content: View>: View {
-    private let title: String
+    private var title: String?
     private let content: Content
     private let action: (() -> Void)?
 
-    init(title: String,
+    init(title: String? = nil,
          @ViewBuilder content: () -> Content = { EmptyView() },
          action: (() -> Void)? = nil) {
         self.title = title
@@ -39,10 +39,12 @@ struct SettingItemView<Content: View>: View {
 
     private func buildContentView() -> some View {
         HStack(spacing: 8) {
-            Text(title)
-                .dynamicFont(.systemFont(ofSize: 12))
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
+            if let title {
+                Text(title)
+                    .dynamicFont(.systemFont(ofSize: 12))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
+            }
             content
         }
         .padding(.horizontal, 24)

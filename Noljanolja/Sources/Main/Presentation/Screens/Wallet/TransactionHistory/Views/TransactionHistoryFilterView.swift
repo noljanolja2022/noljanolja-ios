@@ -60,7 +60,7 @@ struct TransactionHistoryFilterItemView: View {
                     )
                     .background(
                         isSelected
-                            ? ColorAssets.primaryGreen100.swiftUIColor
+                            ? AppThemeManager.shared.theme.primary100
                             : Color.clear
                     )
                     .border(

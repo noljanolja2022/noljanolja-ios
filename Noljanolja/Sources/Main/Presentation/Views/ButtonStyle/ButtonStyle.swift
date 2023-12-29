@@ -71,7 +71,7 @@ struct PrimaryButtonStyle: CustomButtonStyle {
     init(isEnabled: Bool = true,
          enabledForegroundColor: Color = ColorAssets.neutralDarkGrey.swiftUIColor,
          disabledForegroundColor: Color = ColorAssets.neutralDeepGrey.swiftUIColor,
-         enabledBackgroundColor: Color = ColorAssets.primaryGreen200.swiftUIColor,
+         enabledBackgroundColor: Color = AppThemeManager.shared.theme.primary200,
          disabledBackgroundColor: Color = ColorAssets.neutralGrey.swiftUIColor,
          enabledBorderColor: Color = Color.clear,
          disabledBorderColor: Color = Color.clear) {

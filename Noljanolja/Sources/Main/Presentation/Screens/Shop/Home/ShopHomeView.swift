@@ -14,6 +14,7 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
+    @EnvironmentObject var themeManager: AppThemeManager
 
     var body: some View {
         buildBodyView()
@@ -54,19 +55,25 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
             buildHeaderView()
 
             ScrollView {
-                VStack {
-                    buildSummaryView()
-                    buildCategoriesView()
+                VStack(spacing: 0) {
+                    VStack(spacing: 16) {
+                        buildSummaryView()
+                        buildCategoriesView()
+                    }
+                    .padding(.vertical, 16)
+                    .background(
+                        themeManager.theme == .yellow
+                            ? themeManager.theme.primary400
+                            : ColorAssets.neutralLight.swiftUIColor
+                    )
                     buildBrandsView()
                     buildTopFeaturesView()
                     buildTodayOffersView()
                     buildRecommendView()
                     buildForYouView()
                 }
-                .padding(.top, 16)
             }
         }
-        .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
     private func buildHeaderView() -> some View {
@@ -98,7 +105,7 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
         }
         .padding(.horizontal, 16)
         .padding(.bottom, 12)
-        .background(ColorAssets.primaryGreen200.swiftUIColor)
+        .background(themeManager.theme.primary200)
         .cornerRadius([.bottomTrailing, .bottomLeading], 13)
     }
 

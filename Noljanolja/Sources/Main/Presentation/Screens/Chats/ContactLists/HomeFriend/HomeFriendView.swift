@@ -14,6 +14,7 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
+    @EnvironmentObject var themeManager: AppThemeManager
 
     var body: some View {
         contentView()
@@ -76,7 +77,7 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
         }
         .padding(.horizontal, 16)
         .padding(.bottom, 12)
-        .background(ColorAssets.primaryGreen200.swiftUIColor)
+        .background(themeManager.theme.primary200)
         .cornerRadius([.bottomTrailing, .bottomLeading], 13)
     }
 
