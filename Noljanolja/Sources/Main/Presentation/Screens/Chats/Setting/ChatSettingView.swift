@@ -30,7 +30,7 @@ struct ChatSettingView<ViewModel: ChatSettingViewModel>: View {
             buildContentView()
             buildNavigationLinks()
         }
-        .navigationBarTitle("", displayMode: .inline)
+        .navigationBar(backButtonTitle: "", presentationMode: presentationMode, middle: {}, trailing: {})
         .onAppear { viewModel.isAppearSubject.send(true) }
         .onDisappear { viewModel.isAppearSubject.send(false) }
         .onReceive(viewModel.closeAction) {

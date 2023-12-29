@@ -87,7 +87,7 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
             VStack {
                 Text(L10n.friendEarnPointsByReferrals)
                     .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
 
                 Button(action: {
                     viewModel.navigationTypeAction.send(.inviteFriends)
@@ -104,7 +104,7 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
                     .padding(.horizontal, 35)
                     .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                     .foregroundColor(ColorAssets.secondaryYellow200.swiftUIColor)
-                    .background(ColorAssets.neutralDarkGrey.swiftUIColor)
+                    .background(ColorAssets.neutralRawDarkGrey.swiftUIColor)
                     .cornerRadius(11)
                 })
                 .padding(.horizontal, 16)

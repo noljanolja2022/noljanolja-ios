@@ -22,6 +22,8 @@ internal enum L10n {
   internal static let addFriendSearchByQr = L10n.tr("Localizable", "add_friend_search_by_qr", fallback: "Search QR code")
   /// Add Friends
   internal static let addFriendTitle = L10n.tr("Localizable", "add_friend_title", fallback: "Add Friends")
+  /// App colors
+  internal static let appColors = L10n.tr("Localizable", "app_colors", fallback: "App colors")
   /// %@ selected
   internal static func argsChatSelected(_ p1: Any) -> String {
     return L10n.tr("Localizable", "args_chat_selected", String(describing: p1), fallback: "%@ selected")
@@ -394,6 +396,8 @@ internal enum L10n {
   internal static let exchangeDesciption = L10n.tr("Localizable", "exchange_desciption", fallback: "Exchange Point to Cash")
   /// Exchange
   internal static let exchangeTitle = L10n.tr("Localizable", "exchange_title", fallback: "Exchange")
+  /// FAQ
+  internal static let faq = L10n.tr("Localizable", "faq", fallback: "FAQ")
   /// Forgot your password?
   internal static let forgotPassword = L10n.tr("Localizable", "forgot_password", fallback: "Forgot your password?")
   /// Earn points by referrals

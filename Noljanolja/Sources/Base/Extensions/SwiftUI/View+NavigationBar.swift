@@ -16,7 +16,7 @@ extension View {
     func navigationBar(@ViewBuilder leading: @escaping () -> some View,
                        @ViewBuilder middle: @escaping () -> some View,
                        @ViewBuilder trailing: @escaping () -> some View,
-                       backgroundColor: Color = .white) -> some View {
+                       backgroundColor: Color = ColorAssets.neutralLight.swiftUIColor) -> some View {
         modifier(ViewWithNavigationBar(leading: leading, middle: middle, trailing: trailing, backgroundColor: backgroundColor))
     }
 
@@ -42,7 +42,7 @@ extension View {
                        backButtonTitle: String,
                        presentationMode: Binding<PresentationMode>,
                        @ViewBuilder trailing: @escaping () -> some View,
-                       backgroundColor: Color = .white) -> some View {
+                       backgroundColor: Color = ColorAssets.neutralLight.swiftUIColor) -> some View {
         navigationBar(
             leading: { Button {
                 presentationMode.wrappedValue.dismiss()
@@ -50,7 +50,7 @@ extension View {
                 isLeadingIcon ? HStack(spacing: 4) {
                     Image(systemName: isPresent ? "xmark" : "arrow.left")
                         .scaleEffect(1.2)
-                        .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
+                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                     Text(backButtonTitle)
                 } : nil
             }
@@ -58,7 +58,6 @@ extension View {
             },
             middle: {
                 Text(title)
-                    .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
                     .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             },
@@ -73,24 +72,28 @@ extension View {
                        isPresent: Bool = false,
                        presentationMode: Binding<PresentationMode>,
                        @ViewBuilder middle: @escaping () -> some View,
-                       @ViewBuilder trailing: @escaping () -> some View) -> some View {
-        navigationBar {
-            Button {
-                presentationMode.wrappedValue.dismiss()
-            } label: {
-                HStack(spacing: 4) {
-                    Image(systemName: isPresent ? "xmark" : "arrow.left")
-                        .scaleEffect(1.2)
-                        .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
-                    Text(backButtonTitle)
+                       @ViewBuilder trailing: @escaping () -> some View,
+                       backgroundColor: Color = ColorAssets.neutralLight.swiftUIColor) -> some View {
+        navigationBar(
+            leading: {
+                Button {
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    HStack(spacing: 4) {
+                        Image(systemName: isPresent ? "xmark" : "arrow.left")
+                            .scaleEffect(1.2)
+                            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                        Text(backButtonTitle)
+                    }
                 }
-            }
-            .buttonStyle(PlainButtonStyle())
-        } middle: {
-            middle()
-        } trailing: {
-            trailing()
-        }
+                .buttonStyle(PlainButtonStyle())
+            }, middle: {
+                middle()
+            }, trailing: {
+                trailing()
+            },
+            backgroundColor: backgroundColor
+        )
     }
 
     func navigation<Item>(item: Binding<Item?>,

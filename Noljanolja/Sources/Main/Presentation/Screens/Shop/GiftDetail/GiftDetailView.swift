@@ -27,7 +27,7 @@ struct GiftDetailView<ViewModel: GiftDetailViewModel>: View {
 
     private func buildBodyView() -> some View {
         buildContentView()
-            .navigationBarTitle("", displayMode: .inline)
+            .navigationBar(backButtonTitle: "", presentationMode: presentationMode, middle: {}, trailing: {})
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .isProgressHUBVisible($viewModel.isProgressHUDShowing)

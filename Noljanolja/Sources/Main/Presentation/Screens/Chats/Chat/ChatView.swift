@@ -214,6 +214,7 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                 label: {
                     ImageAssets.icMenu.swiftUIImage
                         .padding(10)
+                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 }
             )
         } else {

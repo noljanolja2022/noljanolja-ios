@@ -128,7 +128,7 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
                 .dynamicFont(.systemFont(ofSize: 12, weight: .bold))
                 .padding(.vertical, 6)
                 .padding(.horizontal, 14)
-                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
                 .background(themeManager.theme.primary50)
                 .cornerRadius(5)
                 .onPress {
@@ -139,7 +139,7 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
 
     private func buildSectionSettings() -> some View {
         VStack(spacing: 5) {
-            Text("Settings")
+            Text(L10n.permissionGoToSettings)
                 .dynamicFont(.systemFont(ofSize: 14, weight: .semibold))
                 .foregroundColor(.black)
                 .padding(.bottom, 10)
@@ -167,7 +167,7 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
                 }
             )
             SettingItemView(
-                title: "FAQ",
+                title: L10n.faq,
                 action: {
                     viewModel.navigationType = .faq
                 }
@@ -177,7 +177,7 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
 
     private func buildSectionAppColors() -> some View {
         VStack(spacing: 5) {
-            Text("App colors")
+            Text(L10n.appColors)
                 .dynamicFont(.systemFont(ofSize: 14, weight: .semibold))
                 .foregroundColor(.black)
                 .padding(.bottom, 5)
@@ -193,6 +193,12 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
                             Text(theme.title)
                                 .dynamicFont(.systemFont(ofSize: 12))
                                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                            Spacer()
+                            Image(systemName: "checkmark")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                                .visible(themeManager.theme == theme)
                         }
                         .fill(alignment: .leading)
                     }
