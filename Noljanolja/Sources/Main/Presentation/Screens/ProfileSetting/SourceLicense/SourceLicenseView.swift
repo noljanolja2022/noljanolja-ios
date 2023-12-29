@@ -13,6 +13,7 @@ import SwiftUI
 struct SourceLicenseView<ViewModel: SourceLicenseViewModel>: View {
     // MARK: Dependencies
 
+    @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel: ViewModel
 
     var body: some View {
@@ -21,14 +22,7 @@ struct SourceLicenseView<ViewModel: SourceLicenseViewModel>: View {
 
     private func buildBodyView() -> some View {
         buildMainView()
-            .navigationBarTitle("", displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("Open source license")
-                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
-            }
+            .navigationBar(title: "Open source license", backButtonTitle: "", presentationMode: presentationMode, trailing: {})
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
     }

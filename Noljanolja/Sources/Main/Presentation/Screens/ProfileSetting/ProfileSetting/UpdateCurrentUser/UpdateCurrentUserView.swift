@@ -17,10 +17,9 @@ import SwiftUIX
 struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
     // MARK: Dependencies
     
+    @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel: ViewModel
-
     @StateObject private var keyboard = Keyboard.main
-
     @State private var isPhoneEditing = false
     @State private var isNameEditing = false
     @State private var isGenderEditing = false
@@ -33,14 +32,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
     
     private func buildBodyView() -> some View {
         buildContentView()
-            .navigationBarTitle("", displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("")
-                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
-            }
+            .navigationBar(title: "", backButtonTitle: "", presentationMode: presentationMode, trailing: {})
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .isProgressHUBVisible($viewModel.isProgressHUDShowing)

@@ -27,27 +27,7 @@ struct CreateConversationView<ViewModel: CreateConversationViewModel>: View {
     @ViewBuilder
     private func buildBodyView() -> some View {
         buildContentView()
-            .navigationBarTitle("", displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(
-                        action: {
-                            withoutAnimation {
-                                presentationMode.wrappedValue.dismiss()
-                            }
-                        },
-                        label: {
-                            Image(systemName: "xmark")
-                        }
-                    )
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
-                ToolbarItem(placement: .principal) {
-                    Text(L10n.contactsStartChat)
-                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
-            }
+            .navigationBar(title: L10n.contactsStartChat)
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
     }

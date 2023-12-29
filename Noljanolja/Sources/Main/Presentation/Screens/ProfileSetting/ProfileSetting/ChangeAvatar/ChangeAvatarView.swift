@@ -13,24 +13,7 @@ struct ChangeAvatarView<ViewModel: ChangeAvatarViewModel>: View {
 
     var body: some View {
         buildBodyView()
-            .navigationBarTitle("", displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text(L10n.commonAlbum)
-                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Text(L10n.commonDone)
-                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.systemBlue100.swiftUIColor)
-                        .onPress {
-                            viewModel.doneAction.send()
-                        }
-                }
-            }
+            .navigationBar(backButtonTitle: "", presentationMode: presentationMode, middle: { middle }, trailing: { trailing })
             .isProgressHUBVisible($viewModel.isProgressHUDShowing)
             .alert(item: $viewModel.alertState) {
                 Alert($0, action: { action in
@@ -91,5 +74,22 @@ struct ChangeAvatarView<ViewModel: ChangeAvatarViewModel>: View {
 
             PhotoPickerView(selectAssets: $viewModel.photoAssets, isMultipleSelection: false)
         }
+    }
+    
+    @ViewBuilder
+    private var middle: some View {
+        Text(L10n.commonAlbum)
+            .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
+            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+    }
+    
+    @ViewBuilder
+    private var trailing: some View {
+        Text(L10n.commonDone)
+            .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
+            .foregroundColor(ColorAssets.systemBlue100.swiftUIColor)
+            .onPress {
+                viewModel.doneAction.send()
+            }
     }
 }

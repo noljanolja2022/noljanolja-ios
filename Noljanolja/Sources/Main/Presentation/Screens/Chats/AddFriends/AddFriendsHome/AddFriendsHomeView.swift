@@ -9,12 +9,14 @@
 import Combine
 import SwiftUI
 import SwiftUINavigation
+import SwiftUIX
 
 // MARK: - AddFriendsHomeView
 
 struct AddFriendsHomeView<ViewModel: AddFriendsHomeViewModel>: View {
     // MARK: Dependencies
 
+    @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel: ViewModel
 
     var body: some View {
@@ -23,14 +25,7 @@ struct AddFriendsHomeView<ViewModel: AddFriendsHomeViewModel>: View {
 
     private func buildBodyView() -> some View {
         buildMainView()
-            .navigationBarTitle("", displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text(L10n.addFriendTitle)
-                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
-            }
+            .navigationBar(title: L10n.addFriendTitle, backButtonTitle: "", presentationMode: presentationMode, trailing: {})
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .isProgressHUBVisible($viewModel.isProgressHUDShowing)

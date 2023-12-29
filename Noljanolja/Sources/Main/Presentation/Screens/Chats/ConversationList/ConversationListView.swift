@@ -112,6 +112,9 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
             .onTapGesture {}
 
             AvatarView(url: viewModel.avatarURL, size: .init(width: 24, height: 24))
+                .onTapGesture {
+                    viewModel.navigationType = .setting
+                }
         }
         .padding(.horizontal, 10)
     }
@@ -133,6 +136,12 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
                     CreateConversationContactListView(
                         viewModel: CreateConversationContactListViewModel(
                             createConversationType: conversationType,
+                            delegate: viewModel
+                        )
+                    )
+                case .setting:
+                    ProfileSettingView(
+                        viewModel: ProfileSettingViewModel(
                             delegate: viewModel
                         )
                     )

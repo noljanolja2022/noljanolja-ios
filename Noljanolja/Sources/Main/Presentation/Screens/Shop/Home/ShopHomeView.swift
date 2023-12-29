@@ -87,17 +87,19 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
             .height(36)
             .background(ColorAssets.neutralLightGrey.swiftUIColor)
             .cornerRadius(5)
-            .onTapGesture {}
+            .onTapGesture {
+                viewModel.navigationType = .search
+            }
 
             AvatarView(url: viewModel.avatarURL, size: .init(width: 24, height: 24))
+                .onTapGesture {
+                    viewModel.navigationType = .setting
+                }
         }
         .padding(.horizontal, 16)
         .padding(.bottom, 12)
         .background(ColorAssets.primaryGreen200.swiftUIColor)
         .cornerRadius([.bottomTrailing, .bottomLeading], 13)
-        .onTapGesture {
-            viewModel.navigationType = .search
-        }
     }
 
     @ViewBuilder
@@ -221,6 +223,12 @@ extension ShopHomeView {
             ListGiftCategoryView(
                 viewModel: ListGiftCategoryViewModel(
                     category: category
+                )
+            )
+        case .setting:
+            ProfileSettingView(
+                viewModel: ProfileSettingViewModel(
+                    delegate: viewModel
                 )
             )
         }

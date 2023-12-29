@@ -15,8 +15,8 @@ import SwiftUINavigation
 struct CreateConversationContactListView<ViewModel: CreateConversationContactListViewModel>: View {
     // MARK: Dependencies
 
+    @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel: ViewModel
-
     @State private var selectedUsers = [User]()
 
     private var isCreateConversationEnabled: Bool {
@@ -25,42 +25,7 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
 
     var body: some View {
         buildBodyView()
-            .navigationBarTitle("", displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text(
-                        { () -> String in
-                            switch viewModel.createConversationType {
-                            case .single, .unknown:
-                                return L10n.contactsTitleNormal
-                            case .group:
-                                return L10n.contactsTitleGroup
-                            }
-                        }()
-                    )
-                    .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    ZStack {
-                        switch viewModel.createConversationType {
-                        case .single, .unknown:
-                            EmptyView()
-                        case .group:
-                            Button(L10n.commonAgree) {
-                                viewModel.action.send(selectedUsers)
-                            }
-                            .dynamicFont(.systemFont(ofSize: 16))
-                            .foregroundColor(
-                                isCreateConversationEnabled
-                                    ? ColorAssets.neutralDarkGrey.swiftUIColor
-                                    : ColorAssets.neutralGrey.swiftUIColor
-                            )
-                            .disabled(!isCreateConversationEnabled)
-                        }
-                    }
-                }
-            }
+            .navigationBar(backButtonTitle: "", isPresent: true, presentationMode: presentationMode, middle: { middle }, trailing: { trailing })
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .isProgressHUBVisible($viewModel.isProgressHUDShowing)
@@ -90,6 +55,43 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
             }
         )
         .background(ColorAssets.neutralLight.swiftUIColor.ignoresSafeArea())
+    }
+    
+    @ViewBuilder
+    private var middle: some View {
+        Text(
+            { () -> String in
+                switch viewModel.createConversationType {
+                case .single, .unknown:
+                    return L10n.contactsTitleNormal
+                case .group:
+                    return L10n.contactsTitleGroup
+                }
+            }()
+        )
+        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
+        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+    }
+    
+    @ViewBuilder
+    private var trailing: some View {
+        ZStack {
+            switch viewModel.createConversationType {
+            case .single, .unknown:
+                EmptyView()
+            case .group:
+                Button(L10n.commonAgree) {
+                    viewModel.action.send(selectedUsers)
+                }
+                .dynamicFont(.systemFont(ofSize: 16))
+                .foregroundColor(
+                    isCreateConversationEnabled
+                        ? ColorAssets.neutralDarkGrey.swiftUIColor
+                        : ColorAssets.neutralGrey.swiftUIColor
+                )
+                .disabled(!isCreateConversationEnabled)
+            }
+        }
     }
 }
 

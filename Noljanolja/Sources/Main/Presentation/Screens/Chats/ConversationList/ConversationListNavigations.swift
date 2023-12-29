@@ -12,6 +12,7 @@ import Foundation
 enum ConversationListNavigationType {
     case chat(Conversation)
     case contactList(ConversationType)
+    case setting
 }
 
 // MARK: - ConversationListFullScreenCoverType

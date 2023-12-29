@@ -13,6 +13,7 @@ import SwiftUI
 struct ChatAttachmentsView<ViewModel: ChatAttachmentsViewModel>: View {
     // MARK: Dependencies
 
+    @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel: ViewModel
 
     var body: some View {
@@ -23,15 +24,7 @@ struct ChatAttachmentsView<ViewModel: ChatAttachmentsViewModel>: View {
         ZStack {
             buildMainView()
         }
-        .navigationBarTitle("", displayMode: .inline)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                Text("Images/Files")
-                    .lineLimit(1)
-                    .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            }
-        }
+        .navigationBar(title: "Images/Files", backButtonTitle: "", presentationMode: presentationMode, trailing: {})
         .onAppear { viewModel.isAppearSubject.send(true) }
         .onDisappear { viewModel.isAppearSubject.send(false) }
     }

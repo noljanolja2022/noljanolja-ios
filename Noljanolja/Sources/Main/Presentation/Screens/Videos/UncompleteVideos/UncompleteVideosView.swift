@@ -13,6 +13,7 @@ import SwiftUI
 struct UncompleteVideosView<ViewModel: UncompleteVideosViewModel>: View {
     // MARK: Dependencies
 
+    @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel: ViewModel
 
     var body: some View {
@@ -23,16 +24,10 @@ struct UncompleteVideosView<ViewModel: UncompleteVideosViewModel>: View {
         ZStack {
             buildStatefullView()
             buildNavigationLinks()
-        }.navigationBarTitle("", displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text(L10n.uncompletedVideo)
-                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
-            }
-            .onAppear { viewModel.isAppearSubject.send(true) }
-            .onDisappear { viewModel.isAppearSubject.send(false) }
+        }
+        .navigationBar(title: L10n.uncompletedVideo, backButtonTitle: "", presentationMode: presentationMode, trailing: {})
+        .onAppear { viewModel.isAppearSubject.send(true) }
+        .onDisappear { viewModel.isAppearSubject.send(false) }
     }
 
     private func buildStatefullView() -> some View {

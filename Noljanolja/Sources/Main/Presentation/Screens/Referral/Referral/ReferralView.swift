@@ -26,15 +26,7 @@ struct ReferralView<ViewModel: ReferralViewModel>: View {
 
     private func buildBodyView() -> some View {
         buildMainView()
-            .navigationBarTitle("", displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text(L10n.joinPlay)
-                        .lineLimit(1)
-                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
-                }
-            }
+            .navigationBar(title: L10n.joinPlay, backButtonTitle: "", presentationMode: presentationMode, trailing: {})
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .isProgressHUBVisible($viewModel.isProgressHUDShowing)

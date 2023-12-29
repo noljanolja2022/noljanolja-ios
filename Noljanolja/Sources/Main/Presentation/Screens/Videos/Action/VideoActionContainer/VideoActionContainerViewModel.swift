@@ -87,7 +87,7 @@ extension VideoActionContainerViewModel: ShareVideoViewModelDelegate {
 
     func shareVideoViewModel(didSelectUser user: User) {
         withoutAnimation {
-            fullScreenCoverType = .shareDetail(user)
+            self.fullScreenCoverType = .shareDetail(user)
         }
     }
 }

@@ -135,6 +135,9 @@ struct VideosView<ViewModel: VideosViewModel>: View {
             )
 
             AvatarView(url: viewModel.avatarURL, size: .init(width: 24, height: 24))
+                .onTapGesture {
+                    viewModel.navigationType = .setting
+                }
         }
         .padding(.horizontal, 10)
     }
@@ -220,6 +223,12 @@ extension VideosView {
             ChatView(
                 viewModel: ChatViewModel(
                     conversationID: conversationId
+                )
+            )
+        case .setting:
+            ProfileSettingView(
+                viewModel: ProfileSettingViewModel(
+                    delegate: viewModel
                 )
             )
         }

@@ -21,14 +21,7 @@ struct AboutUsView<ViewModel: AboutUsViewModel>: View {
 
     private func buildBodyView() -> some View {
         buildMainView()
-            .navigationBarTitle("", displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text(L10n.settingAboutUsTitle)
-                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
-            }
+            .navigationBar(title: L10n.settingAboutUsTitle)
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
     }

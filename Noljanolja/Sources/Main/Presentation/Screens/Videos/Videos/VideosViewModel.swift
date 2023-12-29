@@ -11,7 +11,9 @@ import Foundation
 
 // MARK: - VideosViewModelDelegate
 
-protocol VideosViewModelDelegate: AnyObject {}
+protocol VideosViewModelDelegate: AnyObject {
+    func videosViewModelSignOut()
+}
 
 // MARK: - VideosViewModel
 
@@ -202,5 +204,13 @@ extension VideosViewModel: VideoActionContainerViewModelDelegate {
                 self.isProgressHUDShowing = false
             }
             .store(in: &cancellables)
+    }
+}
+
+// MARK: ProfileSettingViewModelDelegate
+
+extension VideosViewModel: ProfileSettingViewModelDelegate {
+    func profileSettingViewModelSignOut() {
+        delegate?.videosViewModelSignOut()
     }
 }

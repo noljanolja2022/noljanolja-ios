@@ -8,19 +8,16 @@
 import SwiftUI
 
 struct ListGiftCategoryView<ViewModel: ListGiftCategoryViewModel>: View {
+    @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel: ViewModel
+    
+    private var title: String {
+        viewModel.category != nil ? viewModel.category?.name ?? "" : viewModel.brand?.name ?? ""
+    }
 
     var body: some View {
         buildContentView()
-            .navigationBarTitle("", displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    let title = viewModel.category != nil ? viewModel.category?.name ?? "" : viewModel.brand?.name ?? ""
-                    Text(title)
-                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
-            }
+            .navigationBar(title: title, backButtonTitle: "", presentationMode: presentationMode, trailing: {})
     }
 
     @ViewBuilder

@@ -24,15 +24,7 @@ struct CheckinView<ViewModel: CheckinViewModel>: View {
             buildNavigationLinks()
             buildMainView()
         }
-        .navigationBarTitle("", displayMode: .inline)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                Text(L10n.menuCheckoutAndPlay)
-                    .lineLimit(1)
-                    .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            }
-        }
+        .navigationBar(title: L10n.menuCheckoutAndPlay)
         .onAppear { viewModel.isAppearSubject.send(true) }
         .onDisappear { viewModel.isAppearSubject.send(false) }
         .isProgressHUBVisible($viewModel.isProgressHUDShowing)

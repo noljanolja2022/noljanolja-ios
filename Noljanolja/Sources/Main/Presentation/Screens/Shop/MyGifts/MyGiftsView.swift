@@ -13,6 +13,7 @@ import SwiftUI
 struct MyGiftsView<ViewModel: MyGiftsViewModel>: View {
     // MARK: Dependencies
 
+    @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel: ViewModel
 
     var body: some View {
@@ -21,14 +22,7 @@ struct MyGiftsView<ViewModel: MyGiftsViewModel>: View {
 
     private func buildBodyView() -> some View {
         buildContentView()
-            .navigationBarTitle("", displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text(L10n.shopGift)
-                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
-            }
+            .navigationBar(title: L10n.shopGift, backButtonTitle: "", presentationMode: presentationMode, trailing: {})
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .isProgressHUBVisible($viewModel.isProgressHUDShowing)

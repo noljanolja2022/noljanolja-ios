@@ -12,6 +12,7 @@ import SwiftUI
 
 struct TransactionHistoryView<ViewModel: TransactionHistoryViewModel>: View {
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.presentationMode) var presentationMode
 
     // MARK: Dependencies
 
@@ -23,14 +24,7 @@ struct TransactionHistoryView<ViewModel: TransactionHistoryViewModel>: View {
 
     private func buildBodyView() -> some View {
         buildMainView()
-            .navigationBarTitle("", displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text(L10n.transactionHistory)
-                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
-            }
+            .navigationBar(title: L10n.transactionHistory, backButtonTitle: "", presentationMode: presentationMode, trailing: {})
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
     }
@@ -40,7 +34,7 @@ struct TransactionHistoryView<ViewModel: TransactionHistoryViewModel>: View {
             buildContentView()
             buildNavigationLinks()
         }
-        .navigationBarBackground(ColorAssets.primaryGreen200.swiftUIColor)
+        .navigationBarColor(ColorAssets.primaryGreen200.swiftUIColor)
     }
 
     private func buildContentView() -> some View {

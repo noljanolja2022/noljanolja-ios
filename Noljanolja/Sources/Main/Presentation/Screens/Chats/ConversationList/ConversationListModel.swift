@@ -16,6 +16,7 @@ import UserNotifications
 
 protocol ConversationListViewModelDelegate: AnyObject {
     func conversationListViewModel(hasUnseenConversations: Bool)
+    func conversationListViewModelSignOut()
 }
 
 // MARK: - ConversationListViewModel
@@ -228,5 +229,13 @@ extension ConversationListViewModel: CreateConversationViewModelDelegate {
 extension ConversationListViewModel: ChatViewModelDelegate {
     func chatViewModel(openConversation user: User) {
         openChatWithUserAction.send(user)
+    }
+}
+
+// MARK: ProfileSettingViewModelDelegate
+
+extension ConversationListViewModel: ProfileSettingViewModelDelegate {
+    func profileSettingViewModelSignOut() {
+        delegate?.conversationListViewModelSignOut()
     }
 }

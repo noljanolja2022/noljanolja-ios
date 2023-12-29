@@ -148,6 +148,10 @@ final class HomeViewModel: ViewModel {
 // MARK: ConversationListViewModelDelegate
 
 extension HomeViewModel: ConversationListViewModelDelegate {
+    func conversationListViewModelSignOut() {
+        delegate?.homeViewModelSignOut()
+    }
+    
     func conversationListViewModel(hasUnseenConversations: Bool) {
         tabNews[.chat] = hasUnseenConversations
     }
@@ -173,6 +177,24 @@ extension HomeViewModel: AddFriendsHomeViewModelDelegate {}
 
 extension HomeViewModel: HomeFriendViewModelDelegate {
     func homeFriendViewModelSignOut() {
+        delegate?.homeViewModelSignOut()
+    }
+}
+
+// MARK: ShopHomeViewModelDelegate
+
+extension HomeViewModel: ShopHomeViewModelDelegate {
+    func shopHomeViewModelSignOut() {
+        delegate?.homeViewModelSignOut()
+    }
+}
+
+// MARK: VideosViewModelDelegate
+
+// MARK:
+
+extension HomeViewModel: VideosViewModelDelegate {
+    func videosViewModelSignOut() {
         delegate?.homeViewModelSignOut()
     }
 }

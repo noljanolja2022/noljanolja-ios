@@ -32,50 +32,7 @@ struct ChatView<ViewModel: ChatViewModel>: View {
             buildContentView()
             buildNavigationLinks()
         }
-        .navigationBarTitle("", displayMode: .inline)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                HStack {
-                    WebImage(
-                        url: URL(string: viewModel.avatar),
-                        context: [
-                            .imageTransformer: SDImageResizingTransformer(
-                                size: CGSize(width: 50 * 3, height: 50 * 3),
-                                scaleMode: .aspectFill
-                            )
-                        ]
-                    )
-                    .resizable()
-                    .indicator(.activity)
-                    .scaledToFill()
-                    .frame(width: 34, height: 34)
-                    .background(ColorAssets.neutralGrey.swiftUIColor)
-                    .cornerRadius(10)
-                    .padding(.trailing, 10)
-
-                    Text(viewModel.title)
-                        .lineLimit(1)
-                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                    Spacer()
-                }
-            }
-            ToolbarItem(placement: .navigationBarTrailing) {
-                if viewModel.isChatSettingEnabled {
-                    Button(
-                        action: {
-                            viewModel.openChatSettingSubject.send()
-                        },
-                        label: {
-                            ImageAssets.icMenu.swiftUIImage
-                                .padding(10)
-                        }
-                    )
-                } else {
-                    Spacer()
-                }
-            }
-        }
+        .navigationBar(backButtonTitle: "", presentationMode: presentationMode, middle: { middle }, trailing: { trailing })
         .onAppear { viewModel.isAppearSubject.send(true) }
         .onDisappear { viewModel.isAppearSubject.send(false) }
         .onReceive(viewModel.closeAction) {
@@ -217,6 +174,51 @@ struct ChatView<ViewModel: ChatViewModel>: View {
                 EmptyView()
             }
         )
+    }
+    
+    @ViewBuilder
+    private var middle: some View {
+        HStack {
+            WebImage(
+                url: URL(string: viewModel.avatar),
+                context: [
+                    .imageTransformer: SDImageResizingTransformer(
+                        size: CGSize(width: 50 * 3, height: 50 * 3),
+                        scaleMode: .aspectFill
+                    )
+                ]
+            )
+            .resizable()
+            .indicator(.activity)
+            .scaledToFill()
+            .frame(width: 34, height: 34)
+            .background(ColorAssets.neutralGrey.swiftUIColor)
+            .cornerRadius(10)
+            .padding(.trailing, 10)
+
+            Text(viewModel.title)
+                .lineLimit(1)
+                .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            Spacer()
+        }
+    }
+    
+    @ViewBuilder
+    private var trailing: some View {
+        if viewModel.isChatSettingEnabled {
+            Button(
+                action: {
+                    viewModel.openChatSettingSubject.send()
+                },
+                label: {
+                    ImageAssets.icMenu.swiftUIImage
+                        .padding(10)
+                }
+            )
+        } else {
+            Spacer()
+        }
     }
 }
 

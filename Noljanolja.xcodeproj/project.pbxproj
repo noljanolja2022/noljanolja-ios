@@ -35,6 +35,9 @@
 		32FD61FF2B17825C001DE145 /* ShopBrandsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FD61FE2B17825C001DE145 /* ShopBrandsViewModel.swift */; };
 		32FD62012B178269001DE145 /* ShopBrandsNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FD62002B178269001DE145 /* ShopBrandsNavigation.swift */; };
 		32FD62042B1787ED001DE145 /* ShopBrandItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FD62032B1787ED001DE145 /* ShopBrandItemView.swift */; };
+		3B38E8902B3DC8A60018DAD8 /* ViewWithNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B38E88F2B3DC8A60018DAD8 /* ViewWithNavigationBar.swift */; };
+		3B38E8932B3DC9490018DAD8 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B38E8922B3DC9490018DAD8 /* Constant.swift */; };
+		3B38E8952B3DC9980018DAD8 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B38E8942B3DC9980018DAD8 /* NavigationBar.swift */; };
 		90882947172649F9E9BE6DDE /* Pods_Noljanolja_NoljanoljaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BCB5A1163B1650E0F515ADB /* Pods_Noljanolja_NoljanoljaUITests.framework */; };
 		BD7CF3BA8EDFD1C9E4D55F08 /* Pods_Noljanolja.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29DCA912D7DD4BB2BC9E1AFE /* Pods_Noljanolja.framework */; };
 		C3ACE5900BE2AF68D358536B /* Pods_NoljanoljaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 828C4099EEE1200A4BF218A4 /* Pods_NoljanoljaTests.framework */; };
@@ -669,6 +672,9 @@
 		32FD61FE2B17825C001DE145 /* ShopBrandsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopBrandsViewModel.swift; sourceTree = "<group>"; };
 		32FD62002B178269001DE145 /* ShopBrandsNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopBrandsNavigation.swift; sourceTree = "<group>"; };
 		32FD62032B1787ED001DE145 /* ShopBrandItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopBrandItemView.swift; sourceTree = "<group>"; };
+		3B38E88F2B3DC8A60018DAD8 /* ViewWithNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewWithNavigationBar.swift; sourceTree = "<group>"; };
+		3B38E8922B3DC9490018DAD8 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		3B38E8942B3DC9980018DAD8 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		4BCB5A1163B1650E0F515ADB /* Pods_Noljanolja_NoljanoljaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Noljanolja_NoljanoljaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A4115819B6ADA7895299D44 /* Pods-Noljanolja.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja.appstore.xcconfig"; path = "Target Support Files/Pods-Noljanolja/Pods-Noljanolja.appstore.xcconfig"; sourceTree = "<group>"; };
 		828C4099EEE1200A4BF218A4 /* Pods_NoljanoljaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoljanoljaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1408,6 +1414,23 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		3B38E88E2B3DC8920018DAD8 /* ViewModifier */ = {
+			isa = PBXGroup;
+			children = (
+				3B38E88F2B3DC8A60018DAD8 /* ViewWithNavigationBar.swift */,
+				3B38E8942B3DC9980018DAD8 /* NavigationBar.swift */,
+			);
+			path = ViewModifier;
+			sourceTree = "<group>";
+		};
+		3B38E8912B3DC9400018DAD8 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				3B38E8922B3DC9490018DAD8 /* Constant.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		7EDA28669CED10C0C42B836E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1592,6 +1615,7 @@
 		CF162D542A705DA500B8096D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3B38E88E2B3DC8920018DAD8 /* ViewModifier */,
 				2B0CFE972B32A66A001E68A2 /* EarnedPointsPopup */,
 				2B0CFE942B32949C001E68A2 /* AvatarView */,
 				2B855AE52B075E1300A1F9B7 /* VisualEffectView */,
@@ -3844,6 +3868,7 @@
 		CFFD7080298AB9FF00D4F5A2 /* Noljanolja */ = {
 			isa = PBXGroup;
 			children = (
+				3B38E8912B3DC9400018DAD8 /* Helper */,
 				CFE09269298FC6DB00F197F0 /* Noljanolja.entitlements */,
 				CF14F23B298C309600BC2066 /* BuildTools */,
 				CF14F25B298CE68600BC2066 /* Configs */,
@@ -4571,6 +4596,7 @@
 				CF53D5622A6AF548009B3A69 /* AboutUsViewModel.swift in Sources */,
 				CF355C8A2A77C18B005A48F9 /* CheckinProgress.swift in Sources */,
 				CF91E6FD2AB45A840086C046 /* VideoDetailRootContainerView.swift in Sources */,
+				3B38E8932B3DC9490018DAD8 /* Constant.swift in Sources */,
 				CF53D5DC2A6AF548009B3A69 /* NotificationSettingView.swift in Sources */,
 				CF72860C2ABF49730058C75B /* HomeFriendViewModel.swift in Sources */,
 				CFFB71EC2A4004550019663C /* StorableGiftKeyword.swift in Sources */,
@@ -4607,6 +4633,7 @@
 				CF53D6402A6AF548009B3A69 /* ChatStickerInputViewModel.swift in Sources */,
 				CF53D5832A6AF548009B3A69 /* GiftDetailModel.swift in Sources */,
 				CF53D56D2A6AF548009B3A69 /* UpdateCurrentUserView.swift in Sources */,
+				3B38E8952B3DC9980018DAD8 /* NavigationBar.swift in Sources */,
 				CF9DF0AA2A36B2D80054E105 /* UIImage+QRCode.swift in Sources */,
 				CFED122A29F2D7C6000B320B /* Result+Extension.swift in Sources */,
 				CF53D6142A6AF548009B3A69 /* ScanQRNavigations.swift in Sources */,
@@ -4919,6 +4946,7 @@
 				CF53D57B2A6AF548009B3A69 /* SearchGiftsModel.swift in Sources */,
 				CF1BD20B29ACF67D00778786 /* StateView.swift in Sources */,
 				CFA924B42A49926D000918D8 /* MessageReactionUseCases.swift in Sources */,
+				3B38E8902B3DC8A60018DAD8 /* ViewWithNavigationBar.swift in Sources */,
 				CF1648032A991BBC00B12313 /* ChatImagesView.swift in Sources */,
 				CF53D5C62A6AF548009B3A69 /* RootViewModel.swift in Sources */,
 				2BD6DB532B1F22AA0060640C /* ProfileActionViewModel.swift in Sources */,

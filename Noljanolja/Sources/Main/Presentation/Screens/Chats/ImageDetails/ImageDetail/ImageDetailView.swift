@@ -28,8 +28,7 @@ struct ImageDetailView<ViewModel: ImageDetailViewModel>: View {
     
     private func buildBodyView() -> some View {
         buildContentView()
-            .navigationBarTitle("", displayMode: .inline)
-            .toolbar { buildToolBarContent() }
+            .navigationBar(backButtonTitle: "", isPresent: true, presentationMode: presentationMode, middle: {}, trailing: { trailing })
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .isProgressHUBVisible($viewModel.isProgressHUDShowing)
@@ -82,54 +81,41 @@ struct ImageDetailView<ViewModel: ImageDetailViewModel>: View {
         }
     }
     
-    @ToolbarContentBuilder
-    private func buildToolBarContent() -> some ToolbarContent {
-        ToolbarItem(placement: .navigationBarLeading) {
+    @ViewBuilder
+    private var trailing: some View {
+        HStack(spacing: 8) {
             Button(
                 action: {
-                    presentationMode.wrappedValue.dismiss()
+                    viewModel.downloadImageAction.send(
+                        viewModel.imageUrls[viewModel.selectedIndex]
+                    )
                 },
                 label: {
-                    Image(systemName: "xmark")
+                    ImageAssets.icDownload.swiftUIImage
                 }
             )
-            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-        }
-        ToolbarItem(placement: .navigationBarTrailing) {
-            HStack(spacing: 8) {
-                Button(
-                    action: {
-                        viewModel.downloadImageAction.send(
-                            viewModel.imageUrls[viewModel.selectedIndex]
-                        )
-                    },
-                    label: {
-                        ImageAssets.icDownload.swiftUIImage
-                    }
-                )
-                Button(
-                    action: {
-                        isMoreMenuVisible = !isMoreMenuVisible
-                    },
-                    label: {
-                        ImageAssets.icMore.swiftUIImage
-                    }
-                )
-                .editMenu(isVisible: $isMoreMenuVisible) {
-                    [
-                        EditMenuItem(
-                            L10n.commonEdit,
-                            action: {
-                                viewModel.editImageAction.send(
-                                    viewModel.imageUrls[viewModel.selectedIndex]
-                                )
-                            }
-                        )
-                    ]
+            Button(
+                action: {
+                    isMoreMenuVisible = !isMoreMenuVisible
+                },
+                label: {
+                    ImageAssets.icMore.swiftUIImage
                 }
+            )
+            .editMenu(isVisible: $isMoreMenuVisible) {
+                [
+                    EditMenuItem(
+                        L10n.commonEdit,
+                        action: {
+                            viewModel.editImageAction.send(
+                                viewModel.imageUrls[viewModel.selectedIndex]
+                            )
+                        }
+                    )
+                ]
             }
-            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
         }
+        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
     }
 }
 

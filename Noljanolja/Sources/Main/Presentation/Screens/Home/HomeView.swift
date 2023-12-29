@@ -122,7 +122,8 @@ struct HomeView<ViewModel: HomeViewModel>: View {
             .tag(tab)
         case .watch:
             VideosView(
-                viewModel: VideosViewModel()
+                viewModel: VideosViewModel(
+                    delegate: viewModel)
             )
             .tag(tab)
         case .wallet:
@@ -134,7 +135,8 @@ struct HomeView<ViewModel: HomeViewModel>: View {
             .tag(tab)
         case .shop:
             ShopHomeView(
-                viewModel: ShopHomeViewModel()
+                viewModel: ShopHomeViewModel(
+                    delegate: viewModel)
             )
             .tag(tab)
         case .friends:

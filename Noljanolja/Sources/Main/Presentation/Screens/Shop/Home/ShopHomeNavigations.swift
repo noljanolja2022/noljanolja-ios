@@ -15,4 +15,5 @@ enum ShopHomeNavigationType {
     case giftDetail(Gift)
     case myGiftDetail(MyGift)
     case listGiftCategory(GiftCategory)
+    case setting
 }

@@ -26,19 +26,7 @@ struct ImageEditorResultView<ViewModel: ImageEditorResultViewModel>: View {
 
     private func buildBodyView() -> some View {
         buildContentView()
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(
-                        action: {
-                            presentationMode.wrappedValue.dismiss()
-                        },
-                        label: {
-                            Image(systemName: "xmark")
-                        }
-                    )
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
-            }
+            .navigationBar(title: "", isPresent: true, backButtonTitle: "", presentationMode: presentationMode, trailing: {})
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .alert(item: $viewModel.alertState) { Alert($0) { _ in } }

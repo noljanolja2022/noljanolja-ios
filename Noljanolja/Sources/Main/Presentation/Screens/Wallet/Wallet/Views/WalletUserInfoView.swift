@@ -30,6 +30,7 @@ struct WalletUserInfoView: View {
                 ]
             )
             .resizable()
+            .placeholder(ImageAssets.icAvatarPlaceholder.swiftUIImage)
             .indicator(.activity)
             .scaledToFill()
             .frame(width: 64, height: 64)

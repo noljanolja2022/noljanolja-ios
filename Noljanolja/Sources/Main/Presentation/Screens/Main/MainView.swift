@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SwiftUIX
 
 // MARK: - MainView
 
@@ -43,7 +44,7 @@ struct MainView<ViewModel: MainViewModel>: View {
     }
 
     private func buildContentView() -> some View {
-        NavigationView {
+        CocoaNavigationView(navigationBarHidden: true) {
             HomeView(
                 viewModel: HomeViewModel(
                     delegate: viewModel
@@ -59,19 +60,12 @@ struct MainView<ViewModel: MainViewModel>: View {
         .navigationViewStyle(StackNavigationViewStyle())
         .accentColor(ColorAssets.neutralDarkGrey.swiftUIColor)
         .onAppear {
-            if #available(iOS 15, *) {
-                let appearance = UINavigationBarAppearance()
-                appearance.configureWithOpaqueBackground()
-                UINavigationBar.appearance().standardAppearance = appearance
-                UINavigationBar.appearance().scrollEdgeAppearance = appearance
-            }
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = ColorAssets.neutralLight.color
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
         }
-//        .introspectNavigationController { navigationController in
-//            navigationController.configure(
-//                backgroundColor: ColorAssets.neutralLight.color,
-//                foregroundColor: ColorAssets.neutralDarkGrey.color
-//            )
-//        }
     }
 
     @ViewBuilder

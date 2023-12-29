@@ -27,28 +27,7 @@ struct UpdateConversationContactListView<ViewModel: UpdateConversationContactLis
 
     var body: some View {
         buildBodyView()
-            .navigationBarTitle("", displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text(L10n.contactsTitleAddMemmber)
-                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    ZStack {
-                        Button(L10n.commonAgree) {
-                            viewModel.action.send(selectedUsers)
-                        }
-                        .dynamicFont(.systemFont(ofSize: 16))
-                        .foregroundColor(
-                            isCreateConversationEnabled
-                                ? ColorAssets.neutralDarkGrey.swiftUIColor
-                                : ColorAssets.neutralGrey.swiftUIColor
-                        )
-                        .disabled(!isCreateConversationEnabled)
-                    }
-                }
-            }
+            .navigationBar(backButtonTitle: "", presentationMode: presentationMode, middle: { middle }, trailing: { trailing })
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .isProgressHUBVisible($viewModel.isProgressHUDShowing)
@@ -70,5 +49,28 @@ struct UpdateConversationContactListView<ViewModel: UpdateConversationContactLis
             selectedUsers: $selectedUsers,
             selectUserAction: { _ in }
         )
+    }
+    
+    @ViewBuilder
+    private var middle: some View {
+        Text(L10n.contactsTitleAddMemmber)
+            .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
+            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+    }
+    
+    @ViewBuilder
+    private var trailing: some View {
+        ZStack {
+            Button(L10n.commonAgree) {
+                viewModel.action.send(selectedUsers)
+            }
+            .dynamicFont(.systemFont(ofSize: 16))
+            .foregroundColor(
+                isCreateConversationEnabled
+                    ? ColorAssets.neutralDarkGrey.swiftUIColor
+                    : ColorAssets.neutralGrey.swiftUIColor
+            )
+            .disabled(!isCreateConversationEnabled)
+        }
     }
 }

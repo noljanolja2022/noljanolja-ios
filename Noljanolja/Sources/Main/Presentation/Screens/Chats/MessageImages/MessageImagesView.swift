@@ -22,16 +22,7 @@ struct MessageImagesView<ViewModel: MessageImagesViewModel>: View {
 
     private func buildBodyView() -> some View {
         buildContentView()
-            .navigationBarTitle("", displayMode: .inline)
-//            .navigationBarHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text(viewModel.title)
-                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
-            }
-
+            .navigationBar(title: viewModel.title)
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .isProgressHUBVisible($viewModel.isProgressHUDShowing)

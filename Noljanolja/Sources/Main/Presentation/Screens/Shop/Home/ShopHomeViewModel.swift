@@ -12,7 +12,9 @@ import Foundation
 
 // MARK: - ShopHomeViewModelDelegate
 
-protocol ShopHomeViewModelDelegate: AnyObject {}
+protocol ShopHomeViewModelDelegate: AnyObject {
+    func shopHomeViewModelSignOut()
+}
 
 // MARK: - ShopHomeViewModel
 
@@ -99,5 +101,13 @@ extension ShopHomeViewModel {
             .getCoin()
             .map(ShopHomeModel.init)
             .eraseToAnyPublisher()
+    }
+}
+
+// MARK: ProfileSettingViewModelDelegate
+
+extension ShopHomeViewModel: ProfileSettingViewModelDelegate {
+    func profileSettingViewModelSignOut() {
+        delegate?.shopHomeViewModelSignOut()
     }
 }

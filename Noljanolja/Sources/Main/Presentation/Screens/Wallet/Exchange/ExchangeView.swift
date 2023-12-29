@@ -7,6 +7,7 @@ import SwiftUIX
 struct ExchangeView: View {
     // MARK: Dependencies
 
+    @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel: ExchangeViewModel
 
     var body: some View {
@@ -16,13 +17,7 @@ struct ExchangeView: View {
     @ViewBuilder
     private func buildBodyView() -> some View {
         buildMainView()
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text(L10n.exchangeCashTitle)
-                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
-            }
+            .navigationBar(title: L10n.exchangeCashTitle, backButtonTitle: "", presentationMode: presentationMode, trailing: {})
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .isProgressHUBVisible($viewModel.isProgressHUDShowing)
