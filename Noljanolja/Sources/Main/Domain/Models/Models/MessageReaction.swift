@@ -13,7 +13,7 @@ struct MessageReaction: Equatable, Codable {
     let reactionDescription: String?
     let userId: String
     let userName: String
-
+    
     init(reactionId: Int, reactionCode: String, reactionDescription: String?, userId: String, userName: String) {
         self.reactionId = reactionId
         self.reactionCode = reactionCode

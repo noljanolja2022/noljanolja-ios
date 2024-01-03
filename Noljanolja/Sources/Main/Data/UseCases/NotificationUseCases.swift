@@ -12,6 +12,7 @@ import UserNotifications
 // MARK: - NotificationUseCases
 
 protocol NotificationUseCases {
+    var messageNotificationPublishSubject: PassthroughSubject<Void, Never> { get set }
     func sendPushToken(token: String)
     func deletePushToken() -> AnyPublisher<Void, Error>
 }
@@ -20,6 +21,8 @@ protocol NotificationUseCases {
 
 final class NotificationUseCasesImpl: NotificationUseCases {
     static let `default` = NotificationUseCasesImpl()
+    
+    var messageNotificationPublishSubject = PassthroughSubject<Void, Never>()
 
     private let userLocalRepository: UserLocalRepository
     private let notificationNetworkRepository: NotificationNetworkRepository

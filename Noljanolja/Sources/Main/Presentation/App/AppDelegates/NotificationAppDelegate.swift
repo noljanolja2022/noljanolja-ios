@@ -34,7 +34,7 @@ final class NotificationAppDelegate: NSObject, UIApplicationDelegate {
                      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Messaging.messaging().apnsToken = deviceToken
     }
-    
+
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("Error", error)
     }
@@ -53,7 +53,15 @@ extension NotificationAppDelegate: UNUserNotificationCenterDelegate {
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
-        print(userInfo)
+        guard let aps = userInfo["aps"] as? [String: Any],
+              let alert = aps["alert"] as? [String: Any],
+              let title = alert["title"] as? String,
+              let body = alert["body"] as? String
+        else {
+            NSLog("[AppDelegate] - Warning: user info missing aps or other data.")
+            return
+        }
+        NotificationUseCasesImpl.default.messageNotificationPublishSubject.send(())
     }
 }
 

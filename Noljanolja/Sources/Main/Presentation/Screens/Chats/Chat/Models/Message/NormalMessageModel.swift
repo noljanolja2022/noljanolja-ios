@@ -170,7 +170,7 @@ struct NormalMessageModel: Equatable {
             positionTypeBySenderType: positionTypeBySenderType
         )
         self.status = status
-        
+
         self.senderAvatarVisibility = {
             if message.sender.id == currentUser.id {
                 switch conversation.type {

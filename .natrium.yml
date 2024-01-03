@@ -27,10 +27,10 @@ xcconfig:
             AppStore: NolgoBulja-AppStore-Distribution
     NATRIUM_GID_CLIENT_ID:
         Development: 954965503519-ajo51hke58jsfhalvonone0eujp65elr.apps.googleusercontent.com
-        Production: 178013335305-u139pt1c45nv77u97shthoqi2tp0jafv.apps.googleusercontent.com
+        Production: 178013335305-k5uo0q32lure8a4p70rvcnvv7acmfi9s.apps.googleusercontent.com
     NATRIUM_DOT_REVERSED_GID_CLIENT_ID:
         Development: com.googleusercontent.apps.954965503519-ajo51hke58jsfhalvonone0eujp65elr
-        Production: com.googleusercontent.apps.178013335305-u139pt1c45nv77u97shthoqi2tp0jafv
+        Production: com.googleusercontent.apps.178013335305-k5uo0q32lure8a4p70rvcnvv7acmfi9s
 
 files:
     Noljanolja/Configs/FireBases/GoogleService-Info.plist:

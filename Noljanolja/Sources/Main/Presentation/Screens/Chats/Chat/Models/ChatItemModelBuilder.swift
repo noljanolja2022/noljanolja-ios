@@ -50,18 +50,16 @@ final class ChatItemModelBuilder {
                 )
             }()
 
-            let messageModel = MessageChatItemModel(
+            guard let messageModel = MessageChatItemModel(
                 currentUser: currentUser,
                 conversation: conversation,
                 reactionIcons: reactionIcons,
-                message: message,
+                message: conversation.messages.first(where: { $0.id == message.id }) ?? message,
                 positionTypeByBlock: positionTypeByBlock,
                 positionTypeBySenderType: positionTypeBySenderType,
                 status: statusType
-            )
-            messageModel.flatMap {
-                messageItemTypes.append(.message($0))
-            }
+            ) else { return }
+            messageItemTypes.append(.message(messageModel))
 
             let isSameDateWithBeforceMessage = beforceMessage
                 .flatMap { Calendar.current.isDate(message.createdAt, equalTo: $0.createdAt, toGranularity: .day) } ?? false
