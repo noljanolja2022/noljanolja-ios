@@ -53,33 +53,52 @@ struct FriendDetailView<ViewModel: FriendDetailViewModel>: View {
     @ViewBuilder
     private func buildContentView() -> some View {
         VStack(spacing: 20) {
-            buildPointView()
-            VStack(spacing: 8) {
-                WebImage(
-                    url: URL(string: viewModel.user.avatar),
-                    context: [
-                        .imageTransformer: SDImageResizingTransformer(
-                            size: CGSize(width: 40 * 3, height: 40 * 3),
-                            scaleMode: .aspectFill
-                        )
-                    ]
-                )
-                .resizable()
-                .indicator(.activity)
-                .scaledToFill()
-                .frame(width: 174, height: 174)
-                .background(ColorAssets.neutralLightGrey.swiftUIColor)
-                .cornerRadius(14)
-                Text(viewModel.user.name ?? "")
-                    .dynamicFont(.systemFont(ofSize: 22, weight: .medium))
-                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            Group {
+                buildPointView()
+                VStack(spacing: 8) {
+                    WebImage(
+                        url: URL(string: viewModel.user.avatar),
+                        context: [
+                            .imageTransformer: SDImageResizingTransformer(
+                                size: CGSize(width: 40 * 3, height: 40 * 3),
+                                scaleMode: .aspectFill
+                            )
+                        ]
+                    )
+                    .resizable()
+                    .indicator(.activity)
+                    .scaledToFill()
+                    .frame(width: 174, height: 174)
+                    .background(ColorAssets.neutralLightGrey.swiftUIColor)
+                    .cornerRadius(14)
+                    .padding(.horizontal, 16)
+
+                    Text(viewModel.user.name ?? "")
+                        .dynamicFont(.systemFont(ofSize: 22, weight: .medium))
+                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                        .padding(.horizontal, 16)
+
+                    if let requestPoints = viewModel.contactDetail?.userTransferPoint?.points {
+                        Group {
+                            Text(viewModel.user.name ?? "")
+                                .bold()
+                                + Text(" Requests you total: ")
+                                + Text("\(requestPoints)")
+                                .bold()
+                        }
+                        .frame(maxWidth: .infinity)
+                        .dynamicFont(.systemFont(ofSize: 12))
+                        .padding(6)
+                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                        .background(ColorAssets.lightBlue.swiftUIColor)
+                    }
+                }
             }
             buildActionView()
 
             Spacer()
         }
         .padding(.top, 12)
-        .padding(.horizontal, 16)
         .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
@@ -105,27 +124,11 @@ struct FriendDetailView<ViewModel: FriendDetailViewModel>: View {
             x: 0,
             y: 4
         )
+        .padding(.horizontal, 16)
     }
 
     @ViewBuilder
     private func buildActionView() -> some View {
-        Label {
-            Text(L10n.addFriendChatNow.uppercased())
-                .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
-        } icon: {
-            ImageAssets.icChatLine.swiftUIImage
-                .resizable()
-                .frame(width: 24, height: 24)
-        }
-        .frame(maxWidth: .infinity)
-        .padding(12)
-        .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
-        .background(ColorAssets.systemBlue50.swiftUIColor)
-        .cornerRadius(5, style: .circular)
-        .onPress {
-            viewModel.openChatWithUserAction.send(viewModel.user)
-        }
-
         HStack(spacing: 12) {
             Text(L10n.requestPoint)
                 .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
@@ -149,6 +152,7 @@ struct FriendDetailView<ViewModel: FriendDetailViewModel>: View {
                     viewModel.navigationType = .sendPoint(viewModel.user)
                 }
         }
+        .padding(.horizontal, 16)
     }
 
     private func buildNavigationLink() -> some View {

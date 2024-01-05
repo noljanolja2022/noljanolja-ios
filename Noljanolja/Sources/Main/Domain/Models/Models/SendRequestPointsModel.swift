@@ -12,7 +12,7 @@ struct SendRequestPointsModel: Equatable, Codable {
     let fromUserId: String
     let toUserId: String
     let points: Int
-    let type: String
+    let type: TransferType
     let createdAt: String
     enum CodingKeys: String, CodingKey {
         case id
@@ -29,7 +29,7 @@ struct SendRequestPointsModel: Equatable, Codable {
         self.fromUserId = try container.decodeIfPresent(String.self, forKey: .fromUserId) ?? ""
         self.toUserId = try container.decodeIfPresent(String.self, forKey: .toUserId) ?? ""
         self.points = try container.decodeIfPresent(Int.self, forKey: .points) ?? 0
-        self.type = try container.decodeIfPresent(String.self, forKey: .type) ?? ""
+        self.type = try container.decode(TransferType.self, forKey: .type)
         self.createdAt = try container.decodeIfPresent(String.self, forKey: .createdAt) ?? ""
     }
 }

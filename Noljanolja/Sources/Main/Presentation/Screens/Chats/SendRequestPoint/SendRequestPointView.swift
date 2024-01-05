@@ -96,7 +96,7 @@ struct SendRequestPointView<ViewModel: SendRequestViewModel>: View {
                     .imageTransformer: SDImageResizingTransformer(
                         size: CGSize(width: 40 * 3, height: 40 * 3),
                         scaleMode: .aspectFill
-                    ),
+                    )
                 ]
             )
             .resizable()
@@ -111,6 +111,7 @@ struct SendRequestPointView<ViewModel: SendRequestViewModel>: View {
                     : L10n.requestingFrom(viewModel.user.name ?? "")
             )
             .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
+            .multilineTextAlignment(.center)
             .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
 
             TextField(text: $viewModel.point)

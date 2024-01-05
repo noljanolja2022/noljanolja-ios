@@ -70,7 +70,15 @@ private enum UserTargets {
         let page: Int
         let pageSize: Int
     }
-    
+
+    struct GetContactDetail: BaseAuthTargetType {
+        var path: String { "v1/users/me/contacts/\(userId)" }
+        let method: Moya.Method = .get
+        var task: Task { .requestPlain }
+
+        let userId: String
+    }
+
     struct SyncContacts: BaseAuthTargetType, RequestTimeoutConfigurable {
         var path: String { "v1/users/me/contacts" }
         let method: Moya.Method = .post
@@ -121,6 +129,7 @@ protocol UserNetworkRepository {
     func syncContacts(_ contacts: [Contact]) -> AnyPublisher<[User], Error>
     func inviteUser(id: String) -> AnyPublisher<Void, Error>
     func addReferral(referredByCode: String) -> AnyPublisher<Int, Error>
+    func getContactDetail(userId: String) -> AnyPublisher<ContactDetail, Error>
 }
 
 // MARK: - UserNetworkRepositoryImpl
@@ -164,6 +173,13 @@ final class UserNetworkRepositoryImpl: UserNetworkRepository {
     func getContact(page: Int, pageSize: Int) -> AnyPublisher<[User], Error> {
         api.request(
             target: UserTargets.GetContacts(page: page, pageSize: pageSize),
+            atKeyPath: "data"
+        )
+    }
+
+    func getContactDetail(userId: String) -> AnyPublisher<ContactDetail, Error> {
+        api.request(
+            target: UserTargets.GetContactDetail(userId: userId),
             atKeyPath: "data"
         )
     }

@@ -66,12 +66,14 @@ final class Api: ApiType {
             .mapError { error -> Error in error }
             .eraseToAnyPublisher()
     }
-    
+
     func request<Model: Decodable>(target: TargetType, atKeyPath: String?) -> AnyPublisher<Model, Error> {
         provider
             .requestPublisher(MultiTarget(target))
             .filterSuccessfulStatusCodes()
-            .tryMap { try $0.map(Model.self, atKeyPath: atKeyPath) }
+            .tryMap {
+                try $0.map(Model.self, atKeyPath: atKeyPath)
+            }
             .mapError { error -> Error in error }
             .eraseToAnyPublisher()
     }

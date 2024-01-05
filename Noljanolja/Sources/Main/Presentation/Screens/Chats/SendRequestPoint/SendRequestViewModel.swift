@@ -121,14 +121,14 @@ final class SendRequestViewModel: ViewModel {
                 self?.showError = false
             })
             .flatMapLatestToResult { [weak self] in
-                guard let self, let point = Int(self.point), let memberId = self.memberId else {
+                guard let self, let point = Int(self.point) else {
                     return Empty<SendRequestPointsModel, Error>().eraseToAnyPublisher()
                 }
                 switch type {
                 case .send:
                     return self.sendRequestPointUseCase.sendPoints(point, self.user.id)
                 case .request:
-                    return self.sendRequestPointUseCase.requestPoint(point, memberId)
+                    return self.sendRequestPointUseCase.requestPoint(point, self.user.id)
                 }
             }
             .sink { [weak self] result in
