@@ -5,6 +5,7 @@
 //  Created by duydinhv on 15/11/2023.
 //
 
+import AlertToast
 import SDWebImageSwiftUI
 import SwiftUI
 
@@ -14,6 +15,7 @@ struct FriendDetailView<ViewModel: FriendDetailViewModel>: View {
     @StateObject var viewModel: ViewModel
 
     @Environment(\.presentationMode) private var presentationMode
+    @EnvironmentObject var themeManager: AppThemeManager
 
     var body: some View {
         buildBodyView()
@@ -21,7 +23,6 @@ struct FriendDetailView<ViewModel: FriendDetailViewModel>: View {
 
     private func buildBodyView() -> some View {
         ZStack(alignment: .top) {
-            buildBackgroundView()
             buildContentView()
             buildNavigationLink()
         }
@@ -29,69 +30,57 @@ struct FriendDetailView<ViewModel: FriendDetailViewModel>: View {
         .onAppear { viewModel.isAppearSubject.send(true) }
         .onDisappear { viewModel.isAppearSubject.send(false) }
         .isProgressHUBVisible($viewModel.isProgressHUDShowing)
-    }
-
-    @ViewBuilder
-    private func buildBackgroundView() -> some View {
-        Spacer()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(
-                VStack(spacing: 0) {
-                    ImageAssets.bgFriendsHeader.swiftUIImage
-                        .resizable()
-                        .frame(maxWidth: .infinity)
-                        .scaledToFit()
-                        .background(ColorAssets.primaryGreen50.swiftUIColor)
-                        .edgesIgnoringSafeArea(.top)
-                    ColorAssets.neutralLight.swiftUIColor
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
+        .navigationBar(
+            backButtonTitle: "",
+            presentationMode: presentationMode,
+            middle: {},
+            trailing: {},
+            backgroundColor: themeManager.theme.primary200
+        )
+        .toast(isPresenting: $viewModel.sendRequestSuccess, duration: 1) {
+            AlertToast(
+                displayMode: .hud,
+                type: .systemImage("checkmark", ColorAssets.systemGreen.swiftUIColor),
+                title: viewModel.typeSuccess?.successAlert,
+                style: .style(
+                    backgroundColor: ColorAssets.neutralDarkGrey.swiftUIColor,
+                    titleColor: ColorAssets.neutralLight.swiftUIColor
+                )
             )
+        }
     }
 
     @ViewBuilder
     private func buildContentView() -> some View {
-        VStack(alignment: .leading) {
-            buildHeaderView()
-
-            VStack(spacing: 20) {
-                buildPointView()
-                VStack(spacing: 8) {
-                    WebImage(
-                        url: URL(string: viewModel.user.avatar),
-                        context: [
-                            .imageTransformer: SDImageResizingTransformer(
-                                size: CGSize(width: 40 * 3, height: 40 * 3),
-                                scaleMode: .aspectFill
-                            )
-                        ]
-                    )
-                    .resizable()
-                    .indicator(.activity)
-                    .scaledToFill()
-                    .frame(width: 174, height: 174)
-                    .background(ColorAssets.neutralLightGrey.swiftUIColor)
-                    .cornerRadius(14)
-                    Text(viewModel.user.name ?? "")
-                        .dynamicFont(.systemFont(ofSize: 22, weight: .medium))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                }
-                buildActionView()
+        VStack(spacing: 20) {
+            buildPointView()
+            VStack(spacing: 8) {
+                WebImage(
+                    url: URL(string: viewModel.user.avatar),
+                    context: [
+                        .imageTransformer: SDImageResizingTransformer(
+                            size: CGSize(width: 40 * 3, height: 40 * 3),
+                            scaleMode: .aspectFill
+                        )
+                    ]
+                )
+                .resizable()
+                .indicator(.activity)
+                .scaledToFill()
+                .frame(width: 174, height: 174)
+                .background(ColorAssets.neutralLightGrey.swiftUIColor)
+                .cornerRadius(14)
+                Text(viewModel.user.name ?? "")
+                    .dynamicFont(.systemFont(ofSize: 22, weight: .medium))
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }
-            .padding(.top, 12)
-            .padding(.horizontal, 16)
-            .background(ColorAssets.neutralLight.swiftUIColor)
-        }
-    }
+            buildActionView()
 
-    @ViewBuilder
-    private func buildHeaderView() -> some View {
-        Button(action: { presentationMode.wrappedValue.dismiss() }) {
-            ImageAssets.icBack.swiftUIImage
-                .frame(width: 24, height: 24)
-                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                .padding(.horizontal, 16)
+            Spacer()
         }
+        .padding(.top, 12)
+        .padding(.horizontal, 16)
+        .background(ColorAssets.neutralLight.swiftUIColor)
     }
 
     @ViewBuilder
@@ -145,7 +134,9 @@ struct FriendDetailView<ViewModel: FriendDetailViewModel>: View {
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 .background(ColorAssets.secondaryYellow300.swiftUIColor)
                 .cornerRadius(5, style: .circular)
-                .onPress {}
+                .onPress {
+                    viewModel.navigationType = .requestPoint(viewModel.user)
+                }
 
             Text(L10n.sendPoint)
                 .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
@@ -154,10 +145,12 @@ struct FriendDetailView<ViewModel: FriendDetailViewModel>: View {
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
                 .background(ColorAssets.primaryGreen200.swiftUIColor)
                 .cornerRadius(5, style: .circular)
-                .onPress {}
+                .onPress {
+                    viewModel.navigationType = .sendPoint(viewModel.user)
+                }
         }
     }
-    
+
     private func buildNavigationLink() -> some View {
         NavigationLink(
             unwrapping: $viewModel.navigationType,
@@ -170,6 +163,14 @@ struct FriendDetailView<ViewModel: FriendDetailViewModel>: View {
                             conversationID: conversation.id,
                             delegate: viewModel
                         )
+                    )
+                case let .sendPoint(user):
+                    SendRequestPointView(
+                        viewModel: SendRequestViewModel(user: user, type: .send, delegate: viewModel)
+                    )
+                case let .requestPoint(user):
+                    SendRequestPointView(
+                        viewModel: SendRequestViewModel(user: user, type: .request, delegate: viewModel)
                     )
                 }
             },

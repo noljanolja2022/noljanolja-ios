@@ -166,6 +166,8 @@ internal enum L10n {
   internal static let checkoutAndPlay = L10n.tr("Localizable", "checkout_and_play", fallback: "Checkout and play")
   /// Welcome to NolgoBulja. We will be coming soon. Thank you.
   internal static let comingSoonDescription = L10n.tr("Localizable", "coming_soon_description", fallback: "Welcome to NolgoBulja. We will be coming soon. Thank you.")
+  /// Continue
+  internal static let commmonContinue = L10n.tr("Localizable", "commmon_continue", fallback: "Continue")
   /// Admin
   internal static let commonAdmin = L10n.tr("Localizable", "common_admin", fallback: "Admin")
   /// Agree
@@ -290,6 +292,8 @@ internal enum L10n {
   internal static let commonWithdrwal = L10n.tr("Localizable", "common_withdrwal", fallback: "Withdrawal")
   /// Yes
   internal static let commonYes = L10n.tr("Localizable", "common_yes", fallback: "Yes")
+  /// Yes, sure!
+  internal static let commonYesSure = L10n.tr("Localizable", "common_yes_sure", fallback: "Yes, sure!")
   /// Yesterday
   internal static let commonYesterday = L10n.tr("Localizable", "common_yesterday", fallback: "Yesterday")
   /// You
@@ -324,6 +328,14 @@ internal enum L10n {
   internal static let countriesTitle = L10n.tr("Localizable", "countries_title", fallback: "Select countries/regions")
   /// Custom service center
   internal static let customServiceCenter = L10n.tr("Localizable", "custom_service_center", fallback: "Custom service center")
+  /// Do you want to Request %@ Points from %@?
+  internal static func doYouWantToRequest(_ p1: Any, _ p2: Any) -> String {
+    return L10n.tr("Localizable", "do_you_want_to_request", String(describing: p1), String(describing: p2), fallback: "Do you want to Request %@ Points from %@?")
+  }
+  /// Do you want to send %@ Points to %@?
+  internal static func doYouWantToSend(_ p1: Any, _ p2: Any) -> String {
+    return L10n.tr("Localizable", "do_you_want_to_send", String(describing: p1), String(describing: p2), fallback: "Do you want to send %@ Points to %@?")
+  }
   /// Download failure
   internal static let downloadFailure = L10n.tr("Localizable", "download_failure", fallback: "Download failure")
   /// Download success
@@ -380,6 +392,8 @@ internal enum L10n {
   internal static let emailHintText = L10n.tr("Localizable", "email_hint_text", fallback: "Please enter your email")
   /// Enter phone number
   internal static let enterPhoneNumber = L10n.tr("Localizable", "enter_phone_number", fallback: "Enter phone number")
+  /// Sorry, you don’t have enough Points!
+  internal static let errorEnoughPoint = L10n.tr("Localizable", "error_enough_point", fallback: "Sorry, you don’t have enough Points!")
   /// Phone is not valid
   internal static let errorPhoneInvalid = L10n.tr("Localizable", "error_phone_invalid", fallback: "Phone is not valid")
   /// This phone number is not available
@@ -566,6 +580,10 @@ internal enum L10n {
   internal static let referralStep4 = L10n.tr("Localizable", "referral_step_4", fallback: "When all courses are completed. Friends and I also earn 1,000P!")
   /// REQUEST POINT
   internal static let requestPoint = L10n.tr("Localizable", "request_point", fallback: "REQUEST POINT")
+  /// Requesting from %@
+  internal static func requestingFrom(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "requesting_from", String(describing: p1), fallback: "Requesting from %@")
+  }
   /// Let's Play Log in
   internal static let requireLoginButton = L10n.tr("Localizable", "require_login_button", fallback: "Let's Play Log in")
   /// Log in to play
@@ -588,6 +606,10 @@ internal enum L10n {
   internal static let sendInviteLink = L10n.tr("Localizable", "send_invite_link", fallback: "Send invitation link")
   /// SEND POINT
   internal static let sendPoint = L10n.tr("Localizable", "send_point", fallback: "SEND POINT")
+  /// Sending to %@
+  internal static func sendingTo(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "sending_to", String(describing: p1), fallback: "Sending to %@")
+  }
   /// Service Guide
   internal static let serviceGuide = L10n.tr("Localizable", "service_guide", fallback: "Service Guide")
   /// About us
@@ -919,6 +941,10 @@ internal enum L10n {
   internal static let watchWatch = L10n.tr("Localizable", "watch_watch", fallback: "watching")
   /// Welcome to NolgoBulja. Watch videos,play and earn.
   internal static let welcomeNoljanolja = L10n.tr("Localizable", "welcome_noljanolja", fallback: "Welcome to NolgoBulja. Watch videos,play and earn.")
+  /// %@ will feedback you soon!
+  internal static func willFeedbackYouSoon(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "will_feedback_you soon", String(describing: p1), fallback: "%@ will feedback you soon!")
+  }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

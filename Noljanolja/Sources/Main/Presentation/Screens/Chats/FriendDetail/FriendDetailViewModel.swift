@@ -23,7 +23,8 @@ class FriendDetailViewModel: ViewModel {
     @Published var error: Error?
     @Published var isProgressHUDShowing = false
     @Published var navigationType: FriendDetailNavigationType?
-
+    @Published var sendRequestSuccess = false
+    @Published var typeSuccess: SendRequestType?
     let openChatWithUserAction = PassthroughSubject<User, Never>()
 
     private let conversationUseCases: ConversationUseCases
@@ -57,7 +58,6 @@ class FriendDetailViewModel: ViewModel {
             .store(in: &cancellables)
 
         isAppearSubject
-            .first(where: { $0 })
             .receive(on: DispatchQueue.main)
             .flatMapLatestToResult { [weak self] _ in
                 guard let self else {
@@ -78,7 +78,7 @@ class FriendDetailViewModel: ViewModel {
             }
             .store(in: &cancellables)
     }
-    
+
     private func configureActions() {
         openChatWithUserAction
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
@@ -136,5 +136,14 @@ class FriendDetailViewModel: ViewModel {
 extension FriendDetailViewModel: ChatViewModelDelegate {
     func chatViewModel(openConversation user: User) {
         openChatWithUserAction.send(user)
+    }
+}
+
+// MARK: SendRequestViewModelDelegate
+
+extension FriendDetailViewModel: SendRequestViewModelDelegate {
+    func requestSendSuccess(type: SendRequestType) {
+        typeSuccess = type
+        sendRequestSuccess = true
     }
 }

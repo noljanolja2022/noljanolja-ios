@@ -11,6 +11,8 @@ import Foundation
 
 enum FriendDetailNavigationType {
     case chat(Conversation)
+    case sendPoint(User)
+    case requestPoint(User)
 }
 
 // MARK: - FriendDetailFullScreenCoverType
