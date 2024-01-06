@@ -19,25 +19,31 @@ class FriendDetailViewModel: ViewModel {
     let user: User
 
     @Published var myPoint: Int?
+    @Published var contactDetail: ContactDetail?
     @Published var viewState = ViewState.content
     @Published var error: Error?
     @Published var isProgressHUDShowing = false
     @Published var navigationType: FriendDetailNavigationType?
-
+    @Published var sendRequestSuccess = false
+    @Published var typeSuccess: SendRequestType?
     let openChatWithUserAction = PassthroughSubject<User, Never>()
 
     private let conversationUseCases: ConversationUseCases
-    private let memberInfoSubject = CurrentValueSubject<LoyaltyMemberInfo?, Never>(nil)
     private let memberInfoUseCase: MemberInfoUseCases
+    private let contactUseCases: ContactUseCases
+    private let memberInfoSubject = CurrentValueSubject<LoyaltyMemberInfo?, Never>(nil)
+    private let contactDetailSubject = CurrentValueSubject<ContactDetail?, Never>(nil)
+
     private var cancellables = Set<AnyCancellable>()
 
     init(user: User,
          memberInfoUseCase: MemberInfoUseCases = MemberInfoUseCasesImpl.default,
-         conversationUseCases: ConversationUseCases = ConversationUseCasesImpl.default) {
+         conversationUseCases: ConversationUseCases = ConversationUseCasesImpl.default,
+         contactUseCases: ContactUseCases = ContactUseCasesImpl.default) {
         self.user = user
         self.memberInfoUseCase = memberInfoUseCase
         self.conversationUseCases = conversationUseCases
-
+        self.contactUseCases = contactUseCases
         super.init()
         configure()
     }
@@ -55,16 +61,21 @@ class FriendDetailViewModel: ViewModel {
                 self?.myPoint = $0.point
             }
             .store(in: &cancellables)
+        contactDetailSubject
+            .compactMap { $0 }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] in
+                self?.contactDetail = $0
+            }
+            .store(in: &cancellables)
 
         isAppearSubject
-            .first(where: { $0 })
             .receive(on: DispatchQueue.main)
             .flatMapLatestToResult { [weak self] _ in
                 guard let self else {
                     return Empty<LoyaltyMemberInfo, Error>().eraseToAnyPublisher()
                 }
-                return self.memberInfoUseCase.getLoyaltyMemberInfo()
-                    .eraseToAnyPublisher()
+                return self.memberInfoUseCase.getLoyaltyMemberInfo().eraseToAnyPublisher()
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
@@ -77,8 +88,29 @@ class FriendDetailViewModel: ViewModel {
                 }
             }
             .store(in: &cancellables)
+
+        isAppearSubject
+            .receive(on: DispatchQueue.main)
+            .flatMapLatestToResult { [weak self] _ in
+                guard let self else {
+                    return Empty<ContactDetail, Error>().eraseToAnyPublisher()
+                }
+                return self.contactUseCases
+                    .getContactDetail(userId: self.user.id)
+                    .eraseToAnyPublisher()
+            }
+            .sink { [weak self] result in
+                guard let self else { return }
+                switch result {
+                case let .success(contact):
+                    self.contactDetailSubject.send(contact)
+                case .failure:
+                    break
+                }
+            }
+            .store(in: &cancellables)
     }
-    
+
     private func configureActions() {
         openChatWithUserAction
             .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
@@ -136,5 +168,14 @@ class FriendDetailViewModel: ViewModel {
 extension FriendDetailViewModel: ChatViewModelDelegate {
     func chatViewModel(openConversation user: User) {
         openChatWithUserAction.send(user)
+    }
+}
+
+// MARK: SendRequestViewModelDelegate
+
+extension FriendDetailViewModel: SendRequestViewModelDelegate {
+    func requestSendSuccess(type: SendRequestType) {
+        typeSuccess = type
+        sendRequestSuccess = true
     }
 }

@@ -99,6 +99,7 @@ internal enum ImageAssets {
   internal static let icWallet2 = ImageAsset(name: "ic_wallet_2")
   internal static let logo = ImageAsset(name: "logo")
   internal static let bgFriendsHeader = ImageAsset(name: "bg_friends_header")
+  internal static let bnPopupConfirm = ImageAsset(name: "bn_popup_confirm")
   internal static let icCenterFocus = ImageAsset(name: "ic_center_focus")
   internal static let bannerHeaderInvite = ImageAsset(name: "banner_header_invite")
   internal static let inviteStep1 = ImageAsset(name: "invite_step1")
@@ -210,6 +211,7 @@ internal enum ImageAssets {
     icWallet2,
     logo,
     bgFriendsHeader,
+    bnPopupConfirm,
     icCenterFocus,
     bannerHeaderInvite,
     inviteStep1,

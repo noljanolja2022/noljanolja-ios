@@ -20,7 +20,7 @@ extension View {
         modifier(ViewWithNavigationBar(leading: leading, middle: middle, trailing: trailing, backgroundColor: backgroundColor))
     }
 
-    func navigationBar(title: String) -> some View {
+    func navigationBar(title: String, backgroundColor: Color = ColorAssets.neutralLight.swiftUIColor) -> some View {
         navigationBar(
             leading: { EmptyView() },
             middle: {
@@ -28,7 +28,8 @@ extension View {
                     .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             },
-            trailing: { EmptyView() }
+            trailing: { EmptyView() },
+            backgroundColor: backgroundColor
         )
     }
 

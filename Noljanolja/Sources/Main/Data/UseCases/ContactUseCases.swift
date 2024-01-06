@@ -14,6 +14,7 @@ protocol ContactUseCases {
     func getAuthorizationStatus() -> AnyPublisher<Void, Error>
     func requestContactPermission() -> AnyPublisher<Bool, Error>
     func getContacts(page: Int, pageSize: Int) -> AnyPublisher<[User], Error>
+    func getContactDetail(userId: String) -> AnyPublisher<ContactDetail, Error>
 }
 
 // MARK: - ContactUseCasesImpl
@@ -66,6 +67,14 @@ final class ContactUseCasesImpl: ContactUseCases {
                     .removeDuplicates()
                     .eraseToAnyPublisher()
             }
+            .eraseToAnyPublisher()
+    }
+
+    func getContactDetail(userId: String) -> AnyPublisher<ContactDetail, Error> {
+        userNetworkRepository
+            .getContactDetail(userId: userId)
+            .compactMap { $0 }
+            .removeDuplicates()
             .eraseToAnyPublisher()
     }
 }

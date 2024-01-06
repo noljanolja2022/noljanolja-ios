@@ -27,7 +27,13 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
 
     private func buildBodyView() -> some View {
         buildMainView()
-            .navigationBar(title: L10n.commonSetting, backButtonTitle: "", presentationMode: presentationMode, trailing: {})
+            .navigationBar(
+                title: L10n.commonSetting,
+                backButtonTitle: "",
+                presentationMode: presentationMode,
+                trailing: {},
+                backgroundColor: themeManager.theme.primary200
+            )
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .isProgressHUBVisible($viewModel.isProgressHUDShowing)

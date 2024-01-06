@@ -464,3 +464,11 @@
 "friend_earn_points_by_referrals" = "Earn points by referrals";
 "app_colors" = "App colors";
 "faq" = "FAQ";
+"commmon_continue" = "Continue";
+"error_enough_point" = "Sorry, you don’t have enough Points!";
+"sending_to" = "Sending to %@";
+"requesting_from" = "Requesting from %@";
+"do_you_want_to_send" = "Do you want to send %@ Points to %@?";
+"common_yes_sure" = "Yes, sure!";
+"will_feedback_you soon" = "%@ will feedback you soon!";
+"do_you_want_to_request" = "Do you want to Request %@ Points from %@?";
