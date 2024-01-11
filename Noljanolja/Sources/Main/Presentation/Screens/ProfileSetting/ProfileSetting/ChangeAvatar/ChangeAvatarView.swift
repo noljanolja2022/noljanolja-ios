@@ -10,10 +10,17 @@ import SwiftUINavigation
 struct ChangeAvatarView<ViewModel: ChangeAvatarViewModel>: View {
     @StateObject var viewModel: ViewModel
     @Environment(\.presentationMode) private var presentationMode
-
+    @EnvironmentObject private var themeManager: AppThemeManager
     var body: some View {
         buildBodyView()
-            .navigationBar(backButtonTitle: "", presentationMode: presentationMode, middle: { middle }, trailing: { trailing })
+            .navigationBar(
+                backButtonTitle: "",
+                presentationMode: presentationMode,
+
+                middle: { middle },
+                trailing: { trailing },
+                backgroundColor: themeManager.theme.primary200
+            )
             .isProgressHUBVisible($viewModel.isProgressHUDShowing)
             .alert(item: $viewModel.alertState) {
                 Alert($0, action: { action in
@@ -35,6 +42,7 @@ struct ChangeAvatarView<ViewModel: ChangeAvatarViewModel>: View {
             buildPreviewAvatar()
             buildPhotoPickerView()
         }
+        .frame(maxWidth: UIScreen.mainWidth)
     }
 
     private func buildPreviewAvatar() -> some View {
@@ -75,14 +83,14 @@ struct ChangeAvatarView<ViewModel: ChangeAvatarViewModel>: View {
             PhotoPickerView(selectAssets: $viewModel.photoAssets, isMultipleSelection: false)
         }
     }
-    
+
     @ViewBuilder
     private var middle: some View {
         Text(L10n.commonAlbum)
             .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
             .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
     }
-    
+
     @ViewBuilder
     private var trailing: some View {
         Text(L10n.commonDone)
