@@ -37,6 +37,9 @@
 		2BE07B0F2B47D90100255792 /* SendRequestPointsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE07B0E2B47D90100255792 /* SendRequestPointsModel.swift */; };
 		2BE07B112B47DB7200255792 /* SendRequestPointsUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE07B102B47DB7200255792 /* SendRequestPointsUseCases.swift */; };
 		2BE07B132B481E7600255792 /* ContactDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE07B122B481E7600255792 /* ContactDetail.swift */; };
+		2BE217142B501D8A00531719 /* RewardReferralNetworkRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE217132B501D8A00531719 /* RewardReferralNetworkRepository.swift */; };
+		2BE217162B501E3000531719 /* ReferralPointsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE217152B501E3000531719 /* ReferralPointsConfig.swift */; };
+		2BE217182B50205500531719 /* RewardReferralUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE217172B50205500531719 /* RewardReferralUseCases.swift */; };
 		2BF3B31E2AFC8EFA00A1CC6F /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 2BF3B31D2AFC8EFA00A1CC6F /* AlertToast */; };
 		2BFAD9CF2B0C6AE4003594A4 /* SearchGiftResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFAD9CE2B0C6AE4003594A4 /* SearchGiftResultView.swift */; };
 		2BFAD9D12B0C6B4D003594A4 /* SearchGiftNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFAD9D02B0C6B4D003594A4 /* SearchGiftNavigations.swift */; };
@@ -684,6 +687,9 @@
 		2BE07B0E2B47D90100255792 /* SendRequestPointsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendRequestPointsModel.swift; sourceTree = "<group>"; };
 		2BE07B102B47DB7200255792 /* SendRequestPointsUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendRequestPointsUseCases.swift; sourceTree = "<group>"; };
 		2BE07B122B481E7600255792 /* ContactDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetail.swift; sourceTree = "<group>"; };
+		2BE217132B501D8A00531719 /* RewardReferralNetworkRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardReferralNetworkRepository.swift; sourceTree = "<group>"; };
+		2BE217152B501E3000531719 /* ReferralPointsConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralPointsConfig.swift; sourceTree = "<group>"; };
+		2BE217172B50205500531719 /* RewardReferralUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardReferralUseCases.swift; sourceTree = "<group>"; };
 		2BFAD9CE2B0C6AE4003594A4 /* SearchGiftResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGiftResultView.swift; sourceTree = "<group>"; };
 		2BFAD9D02B0C6B4D003594A4 /* SearchGiftNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGiftNavigations.swift; sourceTree = "<group>"; };
 		2BFAD9D22B0C6BD3003594A4 /* SearchGiftResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGiftResultsViewModel.swift; sourceTree = "<group>"; };
@@ -1594,6 +1600,7 @@
 				CF1376CB2B07CDA9006E255B /* RemoteConfigModel.swift */,
 				2BE07B0E2B47D90100255792 /* SendRequestPointsModel.swift */,
 				2BE07B122B481E7600255792 /* ContactDetail.swift */,
+				2BE217152B501E3000531719 /* ReferralPointsConfig.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3846,6 +3853,7 @@
 				CF1BD1FC29ACEAA000778786 /* UserUseCases.swift */,
 				CFF868B82A6E2D74006F0B87 /* VideoUseCases.swift */,
 				2BE07B102B47DB7200255792 /* SendRequestPointsUseCases.swift */,
+				2BE217172B50205500531719 /* RewardReferralUseCases.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -4068,6 +4076,7 @@
 				CFB0A82A29F1BB5800298546 /* VideoNetworkRepository.swift */,
 				CF1376C92B07CBF6006E255B /* RemoteConfigRepository.swift */,
 				2BE07B0C2B47D75100255792 /* SendRequestPointNetworkRepository.swift */,
+				2BE217132B501D8A00531719 /* RewardReferralNetworkRepository.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -4556,6 +4565,7 @@
 				CFB2A89F29D1F31A008D1689 /* StorableSticker.swift in Sources */,
 				CF54FA2429D0187B0092E2C6 /* MediaLocalRepository.swift in Sources */,
 				CF30B19B2A13ECEB00C43A54 /* TransactionType.swift in Sources */,
+				2BE217182B50205500531719 /* RewardReferralUseCases.swift in Sources */,
 				CF0EA30929AA088B0014A7DE /* View+Border.swift in Sources */,
 				CF53D5D92A6AF548009B3A69 /* MessageQuickReactionView.swift in Sources */,
 				CF53D6122A6AF548009B3A69 /* ScanQRViewModel.swift in Sources */,
@@ -4815,6 +4825,7 @@
 				CF53D5C12A6AF548009B3A69 /* WalletPointView.swift in Sources */,
 				CF53D5D62A6AF548009B3A69 /* UpdateConversationContactListViewModel.swift in Sources */,
 				CF1376CA2B07CBF6006E255B /* RemoteConfigRepository.swift in Sources */,
+				2BE217162B501E3000531719 /* ReferralPointsConfig.swift in Sources */,
 				CF715AE82A86239B006DF977 /* UncompleteVideosNavigations.swift in Sources */,
 				CF0CC9FD29D14C790027D2C1 /* SendMessageRequest.swift in Sources */,
 				CFAA37632A4B38E00085CE88 /* Banner.swift in Sources */,
@@ -4954,6 +4965,7 @@
 				CF53D65C2A6AF548009B3A69 /* TabItemView.swift in Sources */,
 				CFF863972A435FC700EC0713 /* StorableReactIcon.swift in Sources */,
 				CFE954952A3A13BA00C109FE /* MyGift.swift in Sources */,
+				2BE217142B501D8A00531719 /* RewardReferralNetworkRepository.swift in Sources */,
 				CF53D5702A6AF548009B3A69 /* ProfileSettingNavigations.swift in Sources */,
 				CF62EF8B29B23E0000D6B688 /* ViewModelType.swift in Sources */,
 				CFA66B8B2ACA6F590090BC1A /* Auth2Navigations.swift in Sources */,

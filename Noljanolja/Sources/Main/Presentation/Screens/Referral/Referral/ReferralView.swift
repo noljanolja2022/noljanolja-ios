@@ -26,7 +26,13 @@ struct ReferralView<ViewModel: ReferralViewModel>: View {
 
     private func buildBodyView() -> some View {
         buildMainView()
-            .navigationBar(title: L10n.joinPlay, backButtonTitle: "", presentationMode: presentationMode, trailing: {})
+            .navigationBar(
+                title: L10n.joinPlay,
+                backButtonTitle: "",
+                presentationMode: presentationMode,
+                trailing: {},
+                backgroundColor: ColorAssets.primaryGreen200.swiftUIColor
+            )
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .isProgressHUBVisible($viewModel.isProgressHUDShowing)
@@ -112,7 +118,7 @@ struct ReferralView<ViewModel: ReferralViewModel>: View {
                     }
                 }
             )
-            .buttonStyle(PrimaryButtonStyle())
+            .buttonStyle(PrimaryButtonStyle(enabledBackgroundColor: ColorAssets.primaryGreen200.swiftUIColor))
             .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
             .padding(.horizontal, 16)
         }
