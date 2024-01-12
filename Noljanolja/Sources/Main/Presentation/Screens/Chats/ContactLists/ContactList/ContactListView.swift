@@ -109,7 +109,8 @@ extension ContactListView {
                             } else {
                                 return nil
                             }
-                        }()
+                        }(),
+                        isNotification: viewModel.checkNotification(userId: user.id)
                     )
                     .background(ColorAssets.neutralLight.swiftUIColor) // TODO: TO enable tap item
                     .onTapGesture {

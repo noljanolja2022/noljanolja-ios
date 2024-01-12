@@ -132,6 +132,7 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
                     viewModel: ContactListViewModel(
                         isMultiSelectionEnabled: false,
                         isSearchHidden: true,
+                        isShowNotification: true,
                         contactListUseCases: ContactListUseCasesImpl()
                     ),
                     selectedUsers: $viewModel.selectedUsers,

@@ -28,12 +28,29 @@ private enum NotificationTargets {
 
         let deviceToken: String
     }
+
+    struct GetNotifications: BaseAuthTargetType {
+        var path: String { "v1/notification" }
+        var method: Moya.Method { .get }
+        var task: Task { .requestParameters(parameters: parameters, encoding: URLEncoding.queryString) }
+
+        let page: Int
+        let pageSize: Int
+
+        var parameters: [String: Any] {
+            [
+                "page": page,
+                "pageSize": pageSize
+            ]
+        }
+    }
 }
 
 // MARK: - NotificationNetworkRepository
 
 protocol NotificationNetworkRepository {
     func sendPushToken(deviceToken: String) -> AnyPublisher<Void, Error>
+    func getNotificaionts(page: Int, pageSize: Int) -> AnyPublisher<[NotificationsModel], Error>
 }
 
 // MARK: - NotificationNetworkRepositoryImpl
@@ -52,6 +69,17 @@ final class NotificationNetworkRepositoryImpl: NotificationNetworkRepository {
             target: NotificationTargets.SendPushToken(
                 deviceToken: deviceToken
             )
+        )
+    }
+
+    func getNotificaionts(page: Int, pageSize: Int) -> AnyPublisher<[NotificationsModel], Error> {
+        api.request(
+            target:
+            NotificationTargets.GetNotifications(
+                page: page,
+                pageSize: pageSize
+            ),
+            atKeyPath: "data"
         )
     }
 }
