@@ -76,23 +76,31 @@ struct GiftDetailView<ViewModel: GiftDetailViewModel>: View {
     private func buildInfoView() -> some View {
         VStack(spacing: 16) {
             GeometryReader { geometry in
-                WebImage(
-                    url: URL(string: viewModel.model?.giftImage),
-                    context: [
-                        .imageTransformer: SDImageResizingTransformer(
-                            size: CGSize(
-                                width: geometry.size.width * 3,
-                                height: geometry.size.height * 3
-                            ),
-                            scaleMode: .aspectFill
-                        )
-                    ]
-                )
-                .resizable()
-                .indicator(.activity)
-                .scaledToFill()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .clipped()
+                if let log = viewModel.model?.log {
+                    Image(uiImage: generateBarcode(from: log) ?? UIImage())
+                        .resizable()
+                        .scaledToFill()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .clipped()
+                } else {
+                    WebImage(
+                        url: URL(string: viewModel.model?.giftImage),
+                        context: [
+                            .imageTransformer: SDImageResizingTransformer(
+                                size: CGSize(
+                                    width: geometry.size.width * 3,
+                                    height: geometry.size.height * 3
+                                ),
+                                scaleMode: .aspectFill
+                            )
+                        ]
+                    )
+                    .resizable()
+                    .indicator(.activity)
+                    .scaledToFill()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .clipped()
+                }
             }
             .aspectRatio(
                 //                {
@@ -247,5 +255,20 @@ extension GiftDetailView {
         Spacer()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(ColorAssets.neutralLight.swiftUIColor)
+    }
+
+    func generateBarcode(from string: String) -> UIImage? {
+        let data = string.data(using: String.Encoding.ascii)
+
+        if let filter = CIFilter(name: "CICode128BarcodeGenerator") {
+            filter.setValue(data, forKey: "inputMessage")
+            let transform = CGAffineTransform(scaleX: 3, y: 3)
+
+            if let output = filter.outputImage?.transformed(by: transform) {
+                return UIImage(ciImage: output)
+            }
+        }
+
+        return nil
     }
 }

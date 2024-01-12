@@ -21,6 +21,7 @@ struct GiftDetailModel {
     let myCoin: Double
     let remainingCoin: Double
     let isPurchasable: Bool
+    let log: String?
 
     init(coinModel: CoinModel,
          giftDetailInputType: GiftDetailInputType) {
@@ -36,6 +37,7 @@ struct GiftDetailModel {
             self.giftCodeQRImage = nil
             self.giftCategory = gift.category
             self.isPurchasable = true
+            self.log = nil
         case let .myGift(myGift):
             self.giftBrandName = myGift.brand?.name
             self.giftName = myGift.name
@@ -46,6 +48,7 @@ struct GiftDetailModel {
             self.giftCodeQRImage = nil // myGift.qrCode.qrCodeImage()
             self.giftCategory = nil
             self.isPurchasable = false
+            self.log = myGift.log
         }
 
         self.myCoin = coinModel.balance

@@ -15,6 +15,7 @@ struct MyGift: Equatable, Decodable {
     let image: String?
     let qrCode: String
     let brand: GiftBrand?
+    let log: String?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -24,6 +25,7 @@ struct MyGift: Equatable, Decodable {
         case image
         case qrCode
         case brand
+        case log
     }
 
     init(from decoder: Decoder) throws {
@@ -35,5 +37,6 @@ struct MyGift: Equatable, Decodable {
         self.image = try container.decodeIfPresent(String.self, forKey: .image)
         self.qrCode = try container.decode(String.self, forKey: .qrCode)
         self.brand = try container.decodeIfPresent(GiftBrand.self, forKey: .brand)
+        self.log = try container.decodeIfPresent(String.self, forKey: .log)
     }
 }
