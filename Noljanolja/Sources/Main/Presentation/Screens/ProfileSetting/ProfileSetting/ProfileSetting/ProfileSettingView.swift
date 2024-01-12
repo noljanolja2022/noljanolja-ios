@@ -113,22 +113,10 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
 
     private func buildAvatarView() -> some View {
         VStack(spacing: 10) {
-            WebImage(
-                url: URL(string: viewModel.avatarURL ?? ""),
-                options: .refreshCached,
-                context: [
-                    .imageTransformer: SDImageResizingTransformer(
-                        size: CGSize(width: 52 * 3, height: 52 * 3),
-                        scaleMode: .aspectFill
-                    )
-                ]
+            AvatarView(
+                url: viewModel.avatarURL,
+                size: .init(width: 52, height: 52)
             )
-            .resizable()
-            .placeholder(ImageAssets.icAvatarPlaceholder.swiftUIImage)
-            .indicator(.activity)
-            .scaledToFill()
-            .frame(width: 52, height: 52)
-            .cornerRadius(26)
 
             Text(L10n.chatSettingsChangeAvatar)
                 .dynamicFont(.systemFont(ofSize: 12, weight: .bold))

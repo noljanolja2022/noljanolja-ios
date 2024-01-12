@@ -14,6 +14,7 @@ import UserNotifications
 protocol NotificationUseCases {
     func sendPushToken(token: String)
     func deletePushToken() -> AnyPublisher<Void, Error>
+    func getNotifications(page: Int, pageSize: Int) -> AnyPublisher<[NotificationsModel], Error>
 }
 
 // MARK: - NotificationUseCasesImpl
@@ -61,5 +62,10 @@ final class NotificationUseCasesImpl: NotificationUseCases {
     func deletePushToken() -> AnyPublisher<Void, Error> {
         notificationNetworkRepository
             .sendPushToken(deviceToken: "")
+    }
+    
+    func getNotifications(page: Int, pageSize: Int) -> AnyPublisher<[NotificationsModel], Error> {
+        notificationNetworkRepository
+            .getNotificaionts(page: page, pageSize: pageSize)
     }
 }

@@ -7,12 +7,14 @@
 
 import SDWebImageSwiftUI
 import SwiftUI
+import SwiftUIX
 
 // MARK: - VerticalContactItemView
 
 struct VerticalContactItemView: View {
     var user: User
     var isSelected: Bool?
+    var isNotification = false
 
     var body: some View {
         HStack(spacing: 12) {
@@ -31,6 +33,15 @@ struct VerticalContactItemView: View {
             .frame(width: 40, height: 40)
             .background(ColorAssets.neutralGrey.swiftUIColor)
             .cornerRadius(14)
+            .overlay(
+                Circle()
+                    .fill(ColorAssets.systemRed50.swiftUIColor)
+                    .frame(width: 13, height: 13)
+                    .overlay(Circle().inset(by: -1).stroke(.white, lineWidth: 2))
+                    .offset(.init(x: 5, y: -3))
+                    .hidden(!isNotification),
+                alignment: .topTrailing
+            )
 
             Text(user.name ?? "")
                 .dynamicFont(.systemFont(ofSize: 16, weight: .medium))
