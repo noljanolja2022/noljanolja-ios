@@ -75,14 +75,20 @@ struct GiftDetailView<ViewModel: GiftDetailViewModel>: View {
 
     private func buildInfoView() -> some View {
         VStack(spacing: 16) {
-            GeometryReader { geometry in
-                if let log = viewModel.model?.log {
-                    Image(uiImage: generateBarcode(from: log) ?? UIImage())
-                        .resizable()
-                        .scaledToFill()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .clipped()
-                } else {
+            if let log = viewModel.model?.log {
+                VStack(spacing: 8) {
+                    Text("Coupon Code: \(log.voucherRef ?? "")")
+                    if let pinCode = log.pinCode {
+                        Text("Pin Code: \(pinCode)")
+                    }
+                }
+                .padding(.all, 16)
+                .frame(maxWidth: .infinity)
+                .background(ColorAssets.neutralRawDarkGrey.swiftUIColor)
+                .cornerRadius(8)
+                .padding(.all, 20)
+            } else {
+                GeometryReader { geometry in
                     WebImage(
                         url: URL(string: viewModel.model?.giftImage),
                         context: [
@@ -101,22 +107,21 @@ struct GiftDetailView<ViewModel: GiftDetailViewModel>: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .clipped()
                 }
+                .aspectRatio(
+                    //                {
+                    //                    switch viewModel.model?.giftDetailInputType {
+                    //                    case .gift: return 1.0
+                    //                    case .myGift: return 2.0 / 3.0
+                    //                    }
+                    //                }(),
+                    viewModel.model?.giftDetailInputType.gift != nil ? 1.0 : 2.0 / 3.0,
+                    contentMode: .fill
+                )
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 12)
+                .background(ColorAssets.neutralLightGrey.swiftUIColor)
             }
-            .aspectRatio(
-                //                {
-//                    switch viewModel.model?.giftDetailInputType {
-//                    case .gift: return 1.0
-//                    case .myGift: return 2.0 / 3.0
-//                    }
-//                }(),
-                viewModel.model?.giftDetailInputType.gift != nil ? 1.0 : 2.0 / 3.0,
-                contentMode: .fill
-            )
-            .frame(maxWidth: .infinity)
-            .padding(.horizontal, 8)
-            .padding(.vertical, 12)
-            .background(ColorAssets.neutralLightGrey.swiftUIColor)
-
             VStack(spacing: 8) {
                 Text(viewModel.model?.giftBrandName ?? "")
                     .dynamicFont(.systemFont(ofSize: 22, weight: .medium))

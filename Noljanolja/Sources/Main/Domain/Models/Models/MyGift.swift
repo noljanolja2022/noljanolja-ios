@@ -15,7 +15,7 @@ struct MyGift: Equatable, Decodable {
     let image: String?
     let qrCode: String
     let brand: GiftBrand?
-    let log: String?
+    let log: MyGiftLog?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -37,6 +37,16 @@ struct MyGift: Equatable, Decodable {
         self.image = try container.decodeIfPresent(String.self, forKey: .image)
         self.qrCode = try container.decode(String.self, forKey: .qrCode)
         self.brand = try container.decodeIfPresent(GiftBrand.self, forKey: .brand)
-        self.log = try container.decodeIfPresent(String.self, forKey: .log)
+        if let logString = try container.decodeIfPresent(String.self, forKey: .log),
+           let data = logString.data(using: .utf8) {
+            do {
+                let responseObject = try JSONDecoder().decode([MyGiftLog].self, from: data)
+                if let log = responseObject.first {
+                    self.log = log
+                    return
+                }
+            }
+        }
+        self.log = nil
     }
 }

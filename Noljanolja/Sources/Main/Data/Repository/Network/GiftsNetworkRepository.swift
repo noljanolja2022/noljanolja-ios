@@ -12,11 +12,11 @@ import Moya
 // MARK: - GiftsTargets
 
 private var locale: String {
-    let current = Locale.current.languageCode
-    if current == "hi" || current == "en-IN" {
-        return "IN"
+    let current = Locale.current.regionCode
+    if current != "IN" {
+        return "KR"
     }
-    return "KR"
+    return "IN"
 }
 
 // MARK: - GiftsTargets

@@ -21,7 +21,7 @@ struct GiftDetailModel {
     let myCoin: Double
     let remainingCoin: Double
     let isPurchasable: Bool
-    let log: String?
+    let log: MyGiftLog?
 
     init(coinModel: CoinModel,
          giftDetailInputType: GiftDetailInputType) {

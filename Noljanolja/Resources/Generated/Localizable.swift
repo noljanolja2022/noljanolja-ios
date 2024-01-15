@@ -228,6 +228,8 @@ internal enum L10n {
   internal static let commonNext = L10n.tr("Localizable", "common_next", fallback: "Next")
   /// No
   internal static let commonNo = L10n.tr("Localizable", "common_no", fallback: "No")
+  /// Notifcation
+  internal static let commonNotification = L10n.tr("Localizable", "common_notification", fallback: "Notifcation")
   /// OK
   internal static let commonOk = L10n.tr("Localizable", "common_ok", fallback: "OK")
   /// Points

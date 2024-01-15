@@ -53,6 +53,12 @@
 		3B38E8902B3DC8A60018DAD8 /* ViewWithNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B38E88F2B3DC8A60018DAD8 /* ViewWithNavigationBar.swift */; };
 		3B38E8932B3DC9490018DAD8 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B38E8922B3DC9490018DAD8 /* Constant.swift */; };
 		3B38E8952B3DC9980018DAD8 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B38E8942B3DC9980018DAD8 /* NavigationBar.swift */; };
+		3B3D31EE2B54CE89000DBD28 /* FriendNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3D31ED2B54CE89000DBD28 /* FriendNotificationView.swift */; };
+		3B3D31F02B54CE97000DBD28 /* FriendNotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3D31EF2B54CE97000DBD28 /* FriendNotificationViewModel.swift */; };
+		3B3D31F22B54CEA8000DBD28 /* FriendNotificationNavigationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3D31F12B54CEA8000DBD28 /* FriendNotificationNavigationType.swift */; };
+		3B3D31F52B54DFCB000DBD28 /* FriendNotificationItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3D31F42B54DFCB000DBD28 /* FriendNotificationItemView.swift */; };
+		3B3D31F82B54E011000DBD28 /* FriendNotificationItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3D31F72B54E011000DBD28 /* FriendNotificationItemModel.swift */; };
+		3BB2EAC82B538BF40022DC7F /* MyGiftLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB2EAC72B538BF40022DC7F /* MyGiftLog.swift */; };
 		90882947172649F9E9BE6DDE /* Pods_Noljanolja_NoljanoljaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BCB5A1163B1650E0F515ADB /* Pods_Noljanolja_NoljanoljaUITests.framework */; };
 		BD7CF3BA8EDFD1C9E4D55F08 /* Pods_Noljanolja.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29DCA912D7DD4BB2BC9E1AFE /* Pods_Noljanolja.framework */; };
 		C3ACE5900BE2AF68D358536B /* Pods_NoljanoljaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 828C4099EEE1200A4BF218A4 /* Pods_NoljanoljaTests.framework */; };
@@ -705,6 +711,12 @@
 		3B38E88F2B3DC8A60018DAD8 /* ViewWithNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewWithNavigationBar.swift; sourceTree = "<group>"; };
 		3B38E8922B3DC9490018DAD8 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		3B38E8942B3DC9980018DAD8 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
+		3B3D31ED2B54CE89000DBD28 /* FriendNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendNotificationView.swift; sourceTree = "<group>"; };
+		3B3D31EF2B54CE97000DBD28 /* FriendNotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendNotificationViewModel.swift; sourceTree = "<group>"; };
+		3B3D31F12B54CEA8000DBD28 /* FriendNotificationNavigationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendNotificationNavigationType.swift; sourceTree = "<group>"; };
+		3B3D31F42B54DFCB000DBD28 /* FriendNotificationItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendNotificationItemView.swift; sourceTree = "<group>"; };
+		3B3D31F72B54E011000DBD28 /* FriendNotificationItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendNotificationItemModel.swift; sourceTree = "<group>"; };
+		3BB2EAC72B538BF40022DC7F /* MyGiftLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGiftLog.swift; sourceTree = "<group>"; };
 		4BCB5A1163B1650E0F515ADB /* Pods_Noljanolja_NoljanoljaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Noljanolja_NoljanoljaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A4115819B6ADA7895299D44 /* Pods-Noljanolja.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja.appstore.xcconfig"; path = "Target Support Files/Pods-Noljanolja/Pods-Noljanolja.appstore.xcconfig"; sourceTree = "<group>"; };
 		828C4099EEE1200A4BF218A4 /* Pods_NoljanoljaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoljanoljaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1479,6 +1491,34 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		3B3D31EC2B54CE74000DBD28 /* FriendNotification */ = {
+			isa = PBXGroup;
+			children = (
+				3B3D31F62B54DFF1000DBD28 /* Models */,
+				3B3D31F32B54DFC0000DBD28 /* Views */,
+				3B3D31ED2B54CE89000DBD28 /* FriendNotificationView.swift */,
+				3B3D31EF2B54CE97000DBD28 /* FriendNotificationViewModel.swift */,
+				3B3D31F12B54CEA8000DBD28 /* FriendNotificationNavigationType.swift */,
+			);
+			path = FriendNotification;
+			sourceTree = "<group>";
+		};
+		3B3D31F32B54DFC0000DBD28 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3B3D31F42B54DFCB000DBD28 /* FriendNotificationItemView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3B3D31F62B54DFF1000DBD28 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3B3D31F72B54E011000DBD28 /* FriendNotificationItemModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		7EDA28669CED10C0C42B836E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1606,6 +1646,7 @@
 				2BE07B122B481E7600255792 /* ContactDetail.swift */,
 				2BE217152B501E3000531719 /* ReferralPointsConfig.swift */,
 				2BE217192B50EEB600531719 /* NotificationsModel.swift */,
+				3BB2EAC72B538BF40022DC7F /* MyGiftLog.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2480,6 +2521,7 @@
 		CF53D4702A6AF548009B3A69 /* ContactLists */ = {
 			isa = PBXGroup;
 			children = (
+				3B3D31EC2B54CE74000DBD28 /* FriendNotification */,
 				CF53D4712A6AF548009B3A69 /* AddFriend */,
 				CF53D47A2A6AF548009B3A69 /* ContactList */,
 				CF53D4822A6AF548009B3A69 /* CreateConversation */,
@@ -4514,6 +4556,7 @@
 				CFF818322A3CD6D5009CD057 /* MemberInfoUseCases.swift in Sources */,
 				CF53D5FC2A6AF548009B3A69 /* NormalMessageView.swift in Sources */,
 				CF53D64A2A6AF548009B3A69 /* TermView.swift in Sources */,
+				3B3D31F02B54CE97000DBD28 /* FriendNotificationViewModel.swift in Sources */,
 				CF10C7EE29C21CDB0020924D /* ConversationSocketAPI.swift in Sources */,
 				CF74A1A729B586EF00419342 /* StatefullView.swift in Sources */,
 				CF180A082A7E3C41004728C4 /* HorizontalShareReferralViewModel.swift in Sources */,
@@ -4788,7 +4831,9 @@
 				CF65DD992A82A4B900B554D7 /* AddReferralView.swift in Sources */,
 				CF53D5E02A6AF548009B3A69 /* ChatViewModel.swift in Sources */,
 				CF9B393A2ADFCC6400CB72B8 /* WalletMoneyView.swift in Sources */,
+				3B3D31EE2B54CE89000DBD28 /* FriendNotificationView.swift in Sources */,
 				CF53D5F42A6AF548009B3A69 /* DateChatItemView.swift in Sources */,
+				3BB2EAC82B538BF40022DC7F /* MyGiftLog.swift in Sources */,
 				CF53D55F2A6AF548009B3A69 /* LaunchBackgroundView.swift in Sources */,
 				CFD095252A02B2E3004BF047 /* TrackVideoParam.swift in Sources */,
 				CF53D5852A6AF548009B3A69 /* GiftDetailViewModel.swift in Sources */,
@@ -4801,6 +4846,7 @@
 				CF53D61A2A6AF548009B3A69 /* MessageImagesViewModel.swift in Sources */,
 				CF1E5D7F2A69878700481376 /* CameraView.swift in Sources */,
 				CF88D3052B046F6F00777E41 /* MyGiftItemView.swift in Sources */,
+				3B3D31F82B54E011000DBD28 /* FriendNotificationItemModel.swift in Sources */,
 				CF53D5B72A6AF548009B3A69 /* WalletModel.swift in Sources */,
 				CFD12CEC2A1C6D610095D28D /* LargeValueFormatter.swift in Sources */,
 				CFDCC33E29CCC33700E8F18C /* Attachment.swift in Sources */,
@@ -4872,6 +4918,7 @@
 				CF53D64C2A6AF548009B3A69 /* TermDetailViewModel.swift in Sources */,
 				CF53D5EF2A6AF548009B3A69 /* MessageReactionsModel.swift in Sources */,
 				CF745A5A2998E5EA008177E5 /* TappableTextFieldStyle.swift in Sources */,
+				3B3D31F52B54DFCB000DBD28 /* FriendNotificationItemView.swift in Sources */,
 				CF53D57A2A6AF548009B3A69 /* SearchGiftsViewModel.swift in Sources */,
 				CF1648042A991BBC00B12313 /* ChatAttachmentTabViewModel.swift in Sources */,
 				CF8A1F692AFFDDFD0094749A /* ShopGiftNavigations.swift in Sources */,
@@ -4959,6 +5006,7 @@
 				CFAD534D2A780D5A0044CB42 /* CheckinView.swift in Sources */,
 				CF53D56B2A6AF548009B3A69 /* ProfileSettingView.swift in Sources */,
 				CFCFFA3729E5C82A002B7FB6 /* ConversationSocketService.swift in Sources */,
+				3B3D31F22B54CEA8000DBD28 /* FriendNotificationNavigationType.swift in Sources */,
 				CF53D5D12A6AF548009B3A69 /* SelectedContactItemView.swift in Sources */,
 				CFFD70C4298AC5F800D4F5A2 /* NetworkLoggerPluggin.swift in Sources */,
 				CFF818352A3CD868009CD057 /* MemberInfoLocalRepository.swift in Sources */,
