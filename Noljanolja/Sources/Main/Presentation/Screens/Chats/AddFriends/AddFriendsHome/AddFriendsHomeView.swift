@@ -18,6 +18,7 @@ struct AddFriendsHomeView<ViewModel: AddFriendsHomeViewModel>: View {
 
     @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel: ViewModel
+    @EnvironmentObject var themeManager: AppThemeManager
 
     var body: some View {
         buildBodyView()
@@ -25,7 +26,13 @@ struct AddFriendsHomeView<ViewModel: AddFriendsHomeViewModel>: View {
 
     private func buildBodyView() -> some View {
         buildMainView()
-            .navigationBar(title: L10n.addFriendTitle, backButtonTitle: "", presentationMode: presentationMode, trailing: {})
+            .navigationBar(
+                title: L10n.addFriendTitle,
+                backButtonTitle: "",
+                presentationMode: presentationMode,
+                trailing: {},
+                backgroundColor: themeManager.theme.primary200
+            )
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .isProgressHUBVisible($viewModel.isProgressHUDShowing)

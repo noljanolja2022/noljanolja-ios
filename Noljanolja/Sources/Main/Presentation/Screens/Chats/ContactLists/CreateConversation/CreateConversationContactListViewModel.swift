@@ -21,6 +21,7 @@ protocol CreateConversationContactListViewModelDelegate: AnyObject {
 final class CreateConversationContactListViewModel: ViewModel {
     // MARK: State
 
+    @Published var navigationType: CreateConversationNavigationType?
     @Published var isProgressHUDShowing = false
     
     // MARK: Action
@@ -78,3 +79,7 @@ final class CreateConversationContactListViewModel: ViewModel {
             .store(in: &cancellables)
     }
 }
+
+// MARK: AddFriendsHomeViewModelDelegate
+
+extension CreateConversationContactListViewModel: AddFriendsHomeViewModelDelegate {}

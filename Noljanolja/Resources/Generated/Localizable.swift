@@ -945,6 +945,11 @@ internal enum L10n {
   internal static func willFeedbackYouSoon(_ p1: Any) -> String {
     return L10n.tr("Localizable", "will_feedback_you soon", String(describing: p1), fallback: "%@ will feedback you soon!")
   }
+  /// Your chat is empty now
+  internal static let yourChatIsEmpty = L10n.tr("Localizable", "your_chat_is_empty", fallback: "Your chat is empty now")
+  /// Your friendlist is empty now.
+  /// Add friends to create a chat!
+  internal static let yourFriendListEmpty = L10n.tr("Localizable", "your_friend_list_empty", fallback: "Your friendlist is empty now.\nAdd friends to create a chat!")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

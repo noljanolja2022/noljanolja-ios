@@ -25,14 +25,27 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
 
     var body: some View {
         buildBodyView()
-            .navigationBar(backButtonTitle: "", isPresent: true, presentationMode: presentationMode, middle: { middle }, trailing: { trailing })
+            .navigationBar(
+                backButtonTitle: "",
+                isPresent: true,
+                presentationMode: presentationMode,
+                middle: { middle },
+                trailing: { trailing }
+            )
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .isProgressHUBVisible($viewModel.isProgressHUDShowing)
     }
 
-    @ViewBuilder
     private func buildBodyView() -> some View {
+        ZStack {
+            buildContentView()
+            buildNavigationLink()
+        }
+    }
+
+    @ViewBuilder
+    private func buildContentView() -> some View {
         ContactListView(
             viewModel: ContactListViewModel(
                 isMultiSelectionEnabled: {
@@ -44,6 +57,7 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
                 }(),
                 contactListUseCases: ContactListUseCasesImpl()
             ),
+            title: L10n.commonFriends,
             selectedUsers: $selectedUsers,
             selectUserAction: { _ in
                 switch viewModel.createConversationType {
@@ -52,11 +66,45 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
                 case .group, .unknown:
                     return
                 }
+            }, emptyListView: {
+                buildEmptyCreateGroup()
             }
         )
         .background(ColorAssets.neutralLight.swiftUIColor.ignoresSafeArea())
     }
-    
+
+    @ViewBuilder
+    private func buildEmptyCreateGroup() -> some View {
+        VStack(spacing: 10) {
+            ImageAssets.icEmptyFriendList.swiftUIImage
+                .resizable()
+                .scaledToFit()
+                .frame(width: 247)
+            Text(L10n.yourFriendListEmpty)
+                .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
+                .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
+                .multilineTextAlignment(.center)
+
+            Button(
+                action: {
+                    viewModel.navigationType = .addFriends
+                },
+                label: {
+                    Label {
+                        Text(L10n.addFriendTitle)
+                            .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
+                    } icon: {
+                        ImageAssets.icAddPerson.swiftUIImage
+                            .resizable()
+                            .frame(width: 24, height: 24)
+                    }
+                }
+            )
+            .padding(12)
+            .buttonStyle(PrimaryButtonStyle())
+        }
+    }
+
     @ViewBuilder
     private var middle: some View {
         Text(
@@ -72,7 +120,7 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
         .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
     }
-    
+
     @ViewBuilder
     private var trailing: some View {
         ZStack {
@@ -92,6 +140,29 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
                 .disabled(!isCreateConversationEnabled)
             }
         }
+    }
+}
+
+extension CreateConversationContactListView {
+    private func buildNavigationLink() -> some View {
+        NavigationLink(
+            unwrapping: $viewModel.navigationType,
+            onNavigate: { _ in },
+            destination: { item in
+                switch item.wrappedValue {
+                case .addFriends:
+                    AddFriendsHomeView(
+                        viewModel: AddFriendsHomeViewModel(
+                            delegate: viewModel
+                        )
+                    )
+                }
+            },
+            label: {
+                EmptyView()
+            }
+        )
+        .isDetailLink(false)
     }
 }
 

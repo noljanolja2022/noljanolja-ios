@@ -19,6 +19,7 @@
 		2B855AE22B052C2D00A1F9B7 /* FriendDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B855AE12B052C2D00A1F9B7 /* FriendDetailView.swift */; };
 		2B855AE42B053BD800A1F9B7 /* FriendDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B855AE32B053BD800A1F9B7 /* FriendDetailViewModel.swift */; };
 		2B855AE72B075E2B00A1F9B7 /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B855AE62B075E2B00A1F9B7 /* VisualEffectView.swift */; };
+		2B8C30952B551DF0002710FC /* CreateConversationNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8C30942B551DF0002710FC /* CreateConversationNavigations.swift */; };
 		2BC414BD2B0B180F00E76CF1 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC414BC2B0B180F00E76CF1 /* CategoriesView.swift */; };
 		2BC414BF2B0B372B00E76CF1 /* CategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC414BE2B0B372B00E76CF1 /* CategoriesViewModel.swift */; };
 		2BC414C22B0B3CE300E76CF1 /* ListGiftCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC414C12B0B3CE300E76CF1 /* ListGiftCategoryView.swift */; };
@@ -670,6 +671,7 @@
 		2B855AE12B052C2D00A1F9B7 /* FriendDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDetailView.swift; sourceTree = "<group>"; };
 		2B855AE32B053BD800A1F9B7 /* FriendDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDetailViewModel.swift; sourceTree = "<group>"; };
 		2B855AE62B075E2B00A1F9B7 /* VisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
+		2B8C30942B551DF0002710FC /* CreateConversationNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateConversationNavigations.swift; sourceTree = "<group>"; };
 		2BC414BC2B0B180F00E76CF1 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		2BC414BE2B0B372B00E76CF1 /* CategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewModel.swift; sourceTree = "<group>"; };
 		2BC414C12B0B3CE300E76CF1 /* ListGiftCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGiftCategoryView.swift; sourceTree = "<group>"; };
@@ -2903,6 +2905,7 @@
 			children = (
 				CF53D4F42A6AF548009B3A69 /* CreateConversationView.swift */,
 				CF53D4F52A6AF548009B3A69 /* CreateConversationViewModel.swift */,
+				2B8C30942B551DF0002710FC /* CreateConversationNavigations.swift */,
 			);
 			path = CreateConversation;
 			sourceTree = "<group>";
@@ -4851,6 +4854,7 @@
 				E1A9665F2B0BC9C700AFF04F /* ShopGiftCollectionView.swift in Sources */,
 				CF53D6042A6AF548009B3A69 /* ParticipantDetailActionViewModel.swift in Sources */,
 				CF53D5D42A6AF548009B3A69 /* CreateConversationContactListView.swift in Sources */,
+				2B8C30952B551DF0002710FC /* CreateConversationNavigations.swift in Sources */,
 				CFAE00D02A6EEA14006A1FF0 /* SearchVideosView.swift in Sources */,
 				CF53D5742A6AF548009B3A69 /* ShopHomeNavigations.swift in Sources */,
 				CF53D6212A6AF548009B3A69 /* ChatSettingViewModel.swift in Sources */,
