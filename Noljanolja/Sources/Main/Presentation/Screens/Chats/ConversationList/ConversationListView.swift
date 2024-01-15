@@ -83,16 +83,6 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
 
     private func buildHeaderView() -> some View {
         HStack(spacing: 12) {
-            Button(
-                action: {},
-                label: {
-                    ImageAssets.icMenu.swiftUIImage
-                        .resizable()
-                        .scaledToFit()
-                        .height(24)
-                }
-            )
-
             HStack {
                 Text(L10n.commonSearchFriend)
                     .dynamicFont(.systemFont(ofSize: 14))
@@ -110,6 +100,18 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
             .background(ColorAssets.neutralLightGrey.swiftUIColor)
             .cornerRadius(5)
             .onTapGesture {}
+
+            Button(
+                action: {
+                    viewModel.fullScreenCoverType = .createConversation
+                },
+                label: {
+                    ImageAssets.icChatNew.swiftUIImage
+                        .resizable()
+                        .scaledToFit()
+                        .height(21)
+                }
+            )
 
             AvatarView(url: viewModel.avatarURL, size: .init(width: 24, height: 24))
                 .onTapGesture {
@@ -163,7 +165,9 @@ extension ConversationListView {
     }
 
     private func buildEmptyView() -> some View {
-        EmptyView()
+        Text(L10n.yourChatIsEmpty)
+            .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
+            .foregroundColor(ColorAssets.neutralGrey.swiftUIColor)
     }
 
     private func buildErrorView() -> some View {

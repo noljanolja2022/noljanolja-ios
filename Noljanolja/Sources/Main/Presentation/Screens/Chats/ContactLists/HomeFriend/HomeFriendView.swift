@@ -111,22 +111,22 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
             }
 
             VStack(spacing: 0) {
-                HStack {
-                    Text(L10n.friendList)
-                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-
-                    ImageAssets.icSearch.swiftUIImage
-                        .resizable()
-                        .frame(.init(width: 24, height: 24))
-                        .scaledToFit()
-                        .onPress {
-                            viewModel.navigationTypeAction.send(.search)
-                        }
-                }
-                .padding(.top, 22)
-                .padding(.horizontal, 16)
+//                HStack {
+//                    Text(L10n.friendList)
+//                        .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
+//                        .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+//                        .frame(maxWidth: .infinity, alignment: .leading)
+//
+//                    ImageAssets.icSearch.swiftUIImage
+//                        .resizable()
+//                        .frame(.init(width: 24, height: 24))
+//                        .scaledToFit()
+//                        .onPress {
+//                            viewModel.navigationTypeAction.send(.search)
+//                        }
+//                }
+//                .padding(.top, 22)
+//                .padding(.horizontal, 16)
 
                 ContactListView(
                     viewModel: ContactListViewModel(
@@ -134,6 +134,7 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
                         isSearchHidden: true,
                         contactListUseCases: ContactListUseCasesImpl()
                     ),
+                    title: L10n.friendList,
                     selectedUsers: $viewModel.selectedUsers,
                     selectUserAction: { user in
                         viewModel.navigationTypeAction.send(.friendDetail(user))

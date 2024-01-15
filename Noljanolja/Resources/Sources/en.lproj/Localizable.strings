@@ -472,3 +472,5 @@
 "common_yes_sure" = "Yes, sure!";
 "will_feedback_you soon" = "%@ will feedback you soon!";
 "do_you_want_to_request" = "Do you want to Request %@ Points from %@?";
+"your_friend_list_empty" = "Your friendlist is empty now.\nAdd friends to create a chat!";
+"your_chat_is_empty" =  "Your chat is empty now";

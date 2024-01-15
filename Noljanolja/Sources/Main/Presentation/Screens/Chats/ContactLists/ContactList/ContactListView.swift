@@ -11,7 +11,7 @@ import SwiftUIX
 
 // MARK: - ContactListView
 
-struct ContactListView<EndingView: View, ViewModel: ContactListViewModel>: View {
+struct ContactListView<EmptyListView: View, EndingView: View, ViewModel: ContactListViewModel>: View {
     // MARK: Dependencies
 
     @Environment(\.presentationMode) var presentationMode
@@ -19,15 +19,22 @@ struct ContactListView<EndingView: View, ViewModel: ContactListViewModel>: View 
     @Binding var selectedUsers: [User]
     var selectUserAction: ((User) -> Void)?
     private let endingView: EndingView
+    private let emptyListView: EmptyListView?
+    private let title: String
 
     public init(viewModel: ViewModel,
+                title: String = "",
                 selectedUsers: Binding<[User]>,
                 selectUserAction: ((User) -> Void)? = nil,
-                @ViewBuilder endingView: () -> EndingView = { EmptyView() }) {
+                addFriendAction: (() -> Void)? = nil,
+                @ViewBuilder endingView: () -> EndingView = { EmptyView() },
+                @ViewBuilder emptyListView: () -> EmptyListView? = { Never?.none }) {
         _viewModel = StateObject(wrappedValue: viewModel)
         _selectedUsers = selectedUsers
         self.selectUserAction = selectUserAction
         self.endingView = endingView()
+        self.emptyListView = emptyListView()
+        self.title = title
     }
 
     var body: some View {
@@ -77,7 +84,7 @@ struct ContactListView<EndingView: View, ViewModel: ContactListViewModel>: View 
     private func buildMainView() -> some View {
         VStack(spacing: 16) {
             buildSelectedUsersView()
-
+            buildTitleView()
             switch viewModel.axis {
             case .vertical:
                 buildVerticalListView()
@@ -92,6 +99,16 @@ struct ContactListView<EndingView: View, ViewModel: ContactListViewModel>: View 
             empty: buildEmptyView,
             error: buildErrorView
         )
+    }
+
+    @ViewBuilder
+    private func buildTitleView() -> some View {
+        Text(title)
+            .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
+            .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 16)
+            .hidden(title.isEmpty)
     }
 }
 
@@ -185,18 +202,22 @@ extension ContactListView {
 
     @ViewBuilder
     private func buildEmptyView() -> some View {
-        Text(L10n.contactsNotFound)
-            .frame(
-                maxWidth: .infinity,
-                maxHeight: {
-                    switch viewModel.axis {
-                    case .horizontal: return nil
-                    case .vertical: return .infinity
-                    }
-                }()
-            )
-            .background(ColorAssets.neutralLight.swiftUIColor)
-            .foregroundColor(.red)
+        if let emptyListView {
+            emptyListView
+        } else {
+            Text(L10n.contactsNotFound)
+                .frame(
+                    maxWidth: .infinity,
+                    maxHeight: {
+                        switch viewModel.axis {
+                        case .horizontal: return nil
+                        case .vertical: return .infinity
+                        }
+                    }()
+                )
+                .background(ColorAssets.neutralLight.swiftUIColor)
+                .foregroundColor(.red)
+        }
     }
 
     @ViewBuilder

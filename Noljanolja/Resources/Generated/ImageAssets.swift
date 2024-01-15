@@ -53,6 +53,7 @@ internal enum ImageAssets {
   internal static let icChatTheme = ImageAsset(name: "ic_chat_theme")
   internal static let icChatVoice = ImageAsset(name: "ic_chat_voice")
   internal static let icChatWallet = ImageAsset(name: "ic_chat_wallet")
+  internal static let icEmptyFriendList = ImageAsset(name: "ic_empty_friend_list")
   internal static let icSend = ImageAsset(name: "ic_send")
   internal static let icCheckboxCircleChecked = ImageAsset(name: "ic_checkbox_circle_checked")
   internal static let icCheckboxCircleUnchecked = ImageAsset(name: "ic_checkbox_circle_unchecked")
@@ -165,6 +166,7 @@ internal enum ImageAssets {
     icChatTheme,
     icChatVoice,
     icChatWallet,
+    icEmptyFriendList,
     icSend,
     icCheckboxCircleChecked,
     icCheckboxCircleUnchecked,
