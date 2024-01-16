@@ -39,15 +39,15 @@ struct FriendNotificationView<ViewModel: FriendNotificationViewModel>: View {
     private func buildContentView() -> some View {
         ScrollView {
             LazyVStack(spacing: 0) {
-                ForEach(viewModel.model.indices, id: \.self) { index in
-                    buildSectionView(viewModel.model[index])
+                ForEach(viewModel.models.indices, id: \.self) { index in
+                    buildSectionView(viewModel.models[index])
                 }
-                buildStatefullFooterView(viewModel.model[index])
+                buildStatefullFooterView(viewModel.models)
             }
         }
         .statefull(
             state: $viewModel.viewState,
-            isEmpty: { viewModel.model.isEmpty ?? false },
+            isEmpty: { viewModel.models.isEmpty },
             loading: buildLoadingView,
             empty: buildEmptyView,
             error: buildErrorView
@@ -56,29 +56,25 @@ struct FriendNotificationView<ViewModel: FriendNotificationViewModel>: View {
     }
 
     @ViewBuilder
-    private func buildSectionView() -> some View {
-        LazyVStack(spacing: 0) {
+    private func buildSectionView(_ section: FriendNotificationSectionModel) -> some View {
+        LazyVStack(alignment: .leading, spacing: 5) {
+            Text(section.header.rawValue)
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                .font(Font.system(size: 16, weight: .bold))
+                .padding(.leading, 16)
+
             ForEach(section.items.indices, id: \.self) { index in
                 let item = section.items[index]
                 FriendNotificationItemView(
-                    model: item,
-                    titleColor: {
-                        if colorScheme == .light {
-                            return ColorAssets.neutralRawDarkGrey.swiftUIColor
-                        } else if index % 2 == 0 {
-                            return ColorAssets.neutralRawDarkGrey.swiftUIColor
-                        } else {
-                            return ColorAssets.neutralRawLightGrey.swiftUIColor
-                        }
-                    }()
+                    model: item
                 )
                 .background(
                     index % 2 == 0
                         ? ColorAssets.secondaryYellow50.swiftUIColor
-                        : ColorAssets.neutralLight.swiftUIColor // TODO: TO enable tap item
+                        : ColorAssets.lightBlue.swiftUIColor
                 )
                 .onTapGesture {
-                    viewModel.transactionDetailAction.send(item.id)
+//                    viewModel.transactionDetailAction.send(item.id)
                 }
             }
         }
@@ -136,15 +132,7 @@ extension FriendNotificationView {
     ) -> some View {
         switch type.wrappedValue {
         default:
-            break
+            EmptyView()
         }
-    }
-}
-
-// MARK: - FriendNotificationView_Previews
-
-struct FriendNotificationView_Previews: PreviewProvider {
-    static var previews: some View {
-        FriendNotificationView(viewModel: FriendNotificationViewModel())
     }
 }

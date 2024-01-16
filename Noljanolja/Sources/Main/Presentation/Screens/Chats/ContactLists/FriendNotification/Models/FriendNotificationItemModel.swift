@@ -15,12 +15,12 @@ struct FriendNotificationItemModel: Equatable {
     let type: NotificationType
     let pointColor: String
 
-    init(model: NotificationsModel) {
-        id = model.id
-        title = model.title
-        dateTime = model.createdAt
-        pointColor = model.type == .requestPoint ? ColorAssets.primaryYellow50.name : ColorAssets.systemBlue.name
-        type = model.type ?? .requestPoint
-        avatarUrl = nil
+    init(model: NotificationsModel, avatar: String? = nil) {
+        self.id = model.id
+        self.title = model.title
+        self.dateTime = model.createdAt
+        self.pointColor = model.type == .requestPoint ? ColorAssets.primaryYellow50.name : ColorAssets.systemBlue.name
+        self.type = model.type ?? .requestPoint
+        self.avatarUrl = avatar
     }
 }

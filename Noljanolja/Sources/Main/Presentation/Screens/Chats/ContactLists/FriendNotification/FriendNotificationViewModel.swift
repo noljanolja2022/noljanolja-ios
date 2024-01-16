@@ -25,7 +25,8 @@ final class FriendNotificationViewModel: ViewModel {
 
     @Published var viewState = ViewState.loading
     @Published var footerState = StatefullFooterViewState.normal
-    @Published var model: [NotificationsModel?] = []
+    @Published var models: [FriendNotificationSectionModel] = []
+    @Published var users: [User] = []
 
     // MARK: Action
 
@@ -36,9 +37,10 @@ final class FriendNotificationViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
     private weak var delegate: FriendNotificationViewModeDelegate?
 
-    init(navigationType: FriendNotificationNavigationType? = nil, delegate: FriendNotificationViewModeDelegate? = nil) {
+    init(navigationType: FriendNotificationNavigationType? = nil, delegate: FriendNotificationViewModeDelegate? = nil, users: [User] = []) {
         self.navigationType = navigationType
         self.delegate = delegate
+        self.users = users
         super.init()
 
         configure()
@@ -58,25 +60,36 @@ final class FriendNotificationViewModel: ViewModel {
                 .filter { [weak self] in
                     self?.footerState.isLoadEnabled ?? false
                 }
-                .mapToVoid())
-        
+                .mapToVoid()
+        )
+
         loadDataAction
             .handleEvents(receiveOutput: { [weak self] _ in
                 self?.viewState = .loading
                 self?.footerState = .loading
             })
-            .flatMapToResult { [weak self] _ -> AnyPublisher<[NotificationsModel], Error> in
-                guard let self else {
-                    return Empty<[NotificationsModel], Error>().eraseToAnyPublisher()
-                }
-                return NotificationNetworkRepositoryImpl.shared.getNotificaionts(page: 1, pageSize: 20)
+            .flatMapToResult { _ -> AnyPublisher<[NotificationsModel], Error> in
+                NotificationNetworkRepositoryImpl.shared.getNotificaionts(page: 1, pageSize: 100)
             }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 guard let self else { return }
                 switch result {
                 case let .success(model):
-                    self.model = model
+                    var newSection = FriendNotificationSectionModel(header: .new, items: [])
+                    var previousSection = FriendNotificationSectionModel(header: .previous, items: [])
+                    model.forEach { notificationModel in
+                        let avatar = self.users.first(where: { $0.id == notificationModel.userID })?.avatar
+                        if notificationModel.isRead {
+                            newSection.items.append(FriendNotificationItemModel(model: notificationModel, avatar: avatar))
+                        } else {
+                            previousSection.items.append(FriendNotificationItemModel(model: notificationModel, avatar: avatar))
+                        }
+                    }
+                    let sectionModels = [newSection, previousSection].filter { !$0.items.isEmpty }
+                    self.models = sectionModels
+                    self.viewState = .content
+                    self.footerState = self.models.isEmpty ? .noMoreData : .normal
                 case .failure:
                     self.viewState = .error
                     self.footerState = .error

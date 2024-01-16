@@ -36,6 +36,7 @@ final class ContactListViewModel: ViewModel {
     var isBackButtonHidden: Bool
     var isShowNotification: Bool
     var axis: Axis
+    var getAllUserAction: (([User]) -> Void)?
     private let contactUseCases: ContactUseCases
     private let contactListUseCases: ContactListUseCases
     private let notificationUseCases: NotificationUseCases
@@ -56,7 +57,7 @@ final class ContactListViewModel: ViewModel {
          axis: Axis = .vertical,
          contactUseCases: ContactUseCases = ContactUseCasesImpl.default,
          notificationUseCases: NotificationUseCases = NotificationUseCasesImpl.default, contactListUseCases: ContactListUseCases,
-         
+         getAllUserAction: (([User]) -> Void)? = nil,
          delegate: ContactListViewModelDelegate? = nil) {
         self.isMultiSelectionEnabled = isMultiSelectionEnabled
         self.isSearchHidden = isSearchHidden
@@ -66,6 +67,7 @@ final class ContactListViewModel: ViewModel {
         self.contactUseCases = contactUseCases
         self.contactListUseCases = contactListUseCases
         self.notificationUseCases = notificationUseCases
+        self.getAllUserAction = getAllUserAction
         self.delegate = delegate
         super.init()
 
@@ -94,6 +96,7 @@ final class ContactListViewModel: ViewModel {
                 case let .success(users):
                     self.allUsers = users
                     self.users = users
+                    self.getAllUserAction?(users)
                     self.viewState = .content
                 case let .failure(error):
                     self.error = error

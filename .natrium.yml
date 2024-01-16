@@ -13,11 +13,11 @@ xcconfig:
         Development: NolgoBulja Development
         Production: NolgoBulja
     NATRIUM_CURRENT_PROJECT_VERSION:
-        Development: 1.0.30
-        Production: 1.0.30
+        Development: 1.0.31
+        Production: 1.0.31
     NATRIUM_MARKETING_VERSION:
-        Development: 1.0.30
-        Production: 1.0.30
+        Development: 1.0.31
+        Production: 1.0.31
     NATRIUM_PROVISIONING_PROFILE_SPECIFIER:
         Development:
             Development: NolgoBulja-Dev-Development

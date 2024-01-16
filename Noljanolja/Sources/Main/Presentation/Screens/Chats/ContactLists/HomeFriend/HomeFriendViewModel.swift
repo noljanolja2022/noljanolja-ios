@@ -26,7 +26,8 @@ final class HomeFriendViewModel: ViewModel {
     // MARK: State
 
     @Published var avatarURL: String?
-    @Published var selectedUsers = [User]()
+    @Published var selectedUsers: [User] = []
+    @Published var users: [User] = []
 
     // MARK: Action
 

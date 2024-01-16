@@ -9,4 +9,6 @@ import Foundation
 
 // MARK: - FriendNotificationNavigationType
 
-enum FriendNotificationNavigationType {}
+enum FriendNotificationNavigationType {
+    case friendDetail
+}

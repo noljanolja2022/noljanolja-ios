@@ -58,6 +58,8 @@
 		3B3D31F22B54CEA8000DBD28 /* FriendNotificationNavigationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3D31F12B54CEA8000DBD28 /* FriendNotificationNavigationType.swift */; };
 		3B3D31F52B54DFCB000DBD28 /* FriendNotificationItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3D31F42B54DFCB000DBD28 /* FriendNotificationItemView.swift */; };
 		3B3D31F82B54E011000DBD28 /* FriendNotificationItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3D31F72B54E011000DBD28 /* FriendNotificationItemModel.swift */; };
+		3B3D31FA2B557800000DBD28 /* FriendNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3D31F92B557800000DBD28 /* FriendNotificationModel.swift */; };
+		3B3D31FC2B55781F000DBD28 /* FriendNotificationSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3D31FB2B55781F000DBD28 /* FriendNotificationSectionModel.swift */; };
 		3BB2EAC82B538BF40022DC7F /* MyGiftLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB2EAC72B538BF40022DC7F /* MyGiftLog.swift */; };
 		90882947172649F9E9BE6DDE /* Pods_Noljanolja_NoljanoljaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BCB5A1163B1650E0F515ADB /* Pods_Noljanolja_NoljanoljaUITests.framework */; };
 		BD7CF3BA8EDFD1C9E4D55F08 /* Pods_Noljanolja.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29DCA912D7DD4BB2BC9E1AFE /* Pods_Noljanolja.framework */; };
@@ -716,6 +718,8 @@
 		3B3D31F12B54CEA8000DBD28 /* FriendNotificationNavigationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendNotificationNavigationType.swift; sourceTree = "<group>"; };
 		3B3D31F42B54DFCB000DBD28 /* FriendNotificationItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendNotificationItemView.swift; sourceTree = "<group>"; };
 		3B3D31F72B54E011000DBD28 /* FriendNotificationItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendNotificationItemModel.swift; sourceTree = "<group>"; };
+		3B3D31F92B557800000DBD28 /* FriendNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendNotificationModel.swift; sourceTree = "<group>"; };
+		3B3D31FB2B55781F000DBD28 /* FriendNotificationSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendNotificationSectionModel.swift; sourceTree = "<group>"; };
 		3BB2EAC72B538BF40022DC7F /* MyGiftLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyGiftLog.swift; sourceTree = "<group>"; };
 		4BCB5A1163B1650E0F515ADB /* Pods_Noljanolja_NoljanoljaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Noljanolja_NoljanoljaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A4115819B6ADA7895299D44 /* Pods-Noljanolja.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Noljanolja.appstore.xcconfig"; path = "Target Support Files/Pods-Noljanolja/Pods-Noljanolja.appstore.xcconfig"; sourceTree = "<group>"; };
@@ -1515,6 +1519,8 @@
 			isa = PBXGroup;
 			children = (
 				3B3D31F72B54E011000DBD28 /* FriendNotificationItemModel.swift */,
+				3B3D31F92B557800000DBD28 /* FriendNotificationModel.swift */,
+				3B3D31FB2B55781F000DBD28 /* FriendNotificationSectionModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -4539,6 +4545,7 @@
 				CF53D6442A6AF548009B3A69 /* ChatInputExpandMenuView.swift in Sources */,
 				CF53D6502A6AF548009B3A69 /* SelectCountryViewModel.swift in Sources */,
 				CF8795222A7430D3003B0428 /* ShareVideoDetailView.swift in Sources */,
+				3B3D31FA2B557800000DBD28 /* FriendNotificationModel.swift in Sources */,
 				CF53D63F2A6AF548009B3A69 /* ChatStickerPacksInputView.swift in Sources */,
 				CF53D62B2A6AF548009B3A69 /* ChatSettingItemView.swift in Sources */,
 				CF53D6032A6AF548009B3A69 /* ParticipantDetailAction.swift in Sources */,
@@ -5059,6 +5066,7 @@
 				CF53D5902A6AF548009B3A69 /* VideoDetailCommentView.swift in Sources */,
 				CF53D5992A6AF548009B3A69 /* HighlightVideoView.swift in Sources */,
 				CF1EA5862A1D32CD006846DF /* PublishedCurrentValue.swift in Sources */,
+				3B3D31FC2B55781F000DBD28 /* FriendNotificationSectionModel.swift in Sources */,
 				CFE2155A2AE630DA00C83BAD /* ExchangeView.swift in Sources */,
 				CF861EA72AD5CC3B00500721 /* ComingSoonView.swift in Sources */,
 				2B4885E52B3D2B26002FC70A /* AppTheme.swift in Sources */,

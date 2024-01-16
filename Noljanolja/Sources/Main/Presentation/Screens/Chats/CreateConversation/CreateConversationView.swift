@@ -27,7 +27,7 @@ struct CreateConversationView<ViewModel: CreateConversationViewModel>: View {
     @ViewBuilder
     private func buildBodyView() -> some View {
         buildContentView()
-            .navigationBar(title: L10n.contactsStartChat)
+            .navigationBar(title: L10n.contactsStartChat, isPresent: true, backButtonTitle: "", presentationMode: presentationMode, trailing: {})
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
     }

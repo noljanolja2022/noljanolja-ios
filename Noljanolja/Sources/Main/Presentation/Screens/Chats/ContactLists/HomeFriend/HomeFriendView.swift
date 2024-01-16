@@ -32,7 +32,7 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
                     buildFloatButton()
                     buildNavigationLink()
                 }
-                .background(ColorAssets.secondaryYellow100.swiftUIColor)
+                .background(ColorAssets.neutralLight.swiftUIColor)
             },
             viewModel: VideoDetailRootContainerViewModel()
         )
@@ -62,7 +62,9 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
             }
 
             Button(
-                action: {},
+                action: {
+                    viewModel.navigationType = .notifications
+                },
                 label: {
                     ImageAssets.icNotifications.swiftUIImage
                         .resizable()
@@ -85,9 +87,9 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
     private func buildBodyView() -> some View {
         VStack(spacing: 25) {
             VStack {
-                Text(L10n.friendEarnPointsByReferrals)
-                    .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
-                    .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
+//                Text(L10n.friendEarnPointsByReferrals)
+//                    .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
+//                    .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
 
                 Button(action: {
                     viewModel.navigationTypeAction.send(.inviteFriends)
@@ -103,8 +105,8 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
                     .padding(.vertical, 15)
                     .padding(.horizontal, 35)
                     .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
-                    .foregroundColor(ColorAssets.secondaryYellow200.swiftUIColor)
-                    .background(ColorAssets.neutralRawDarkGrey.swiftUIColor)
+                    .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
+                    .background(ColorAssets.primaryGreen100.swiftUIColor)
                     .cornerRadius(11)
                 })
                 .padding(.horizontal, 16)
@@ -133,7 +135,10 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
                         isMultiSelectionEnabled: false,
                         isSearchHidden: true,
                         isShowNotification: true,
-                        contactListUseCases: ContactListUseCasesImpl()
+                        contactListUseCases: ContactListUseCasesImpl(),
+                        getAllUserAction: { users in
+                            viewModel.users = users
+                        }
                     ),
                     title: L10n.friendList,
                     selectedUsers: $viewModel.selectedUsers,
@@ -198,6 +203,8 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
                     )
                 case .inviteFriends:
                     ReferralView(viewModel: ReferralViewModel())
+                case .notifications:
+                    FriendNotificationView(viewModel: FriendNotificationViewModel())
                 }
             },
             label: {

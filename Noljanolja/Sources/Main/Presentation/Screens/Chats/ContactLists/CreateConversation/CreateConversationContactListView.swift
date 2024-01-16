@@ -27,7 +27,7 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
         buildBodyView()
             .navigationBar(
                 backButtonTitle: "",
-                isPresent: true,
+                isPresent: false,
                 presentationMode: presentationMode,
                 middle: { middle },
                 trailing: { trailing }
@@ -134,7 +134,7 @@ struct CreateConversationContactListView<ViewModel: CreateConversationContactLis
                 .dynamicFont(.systemFont(ofSize: 16))
                 .foregroundColor(
                     isCreateConversationEnabled
-                        ? ColorAssets.neutralDarkGrey.swiftUIColor
+                        ? ColorAssets.systemBlue100.swiftUIColor
                         : ColorAssets.neutralGrey.swiftUIColor
                 )
                 .disabled(!isCreateConversationEnabled)
