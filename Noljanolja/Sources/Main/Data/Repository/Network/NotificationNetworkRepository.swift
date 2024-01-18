@@ -44,6 +44,20 @@ private enum NotificationTargets {
             ]
         }
     }
+
+    struct ReadNotification: BaseAuthTargetType {
+        var path: String { "/v1/notification/\(id)/read" }
+        var method: Moya.Method { .post }
+        var task: Task { .requestPlain }
+
+        let id: Int
+    }
+
+    struct ReadAllNotifications: BaseAuthTargetType {
+        var path: String { "v1/notification/readAll" }
+        var method: Moya.Method { .post }
+        var task: Task { .requestPlain }
+    }
 }
 
 // MARK: - NotificationNetworkRepository
@@ -51,6 +65,8 @@ private enum NotificationTargets {
 protocol NotificationNetworkRepository {
     func sendPushToken(deviceToken: String) -> AnyPublisher<Void, Error>
     func getNotificaionts(page: Int, pageSize: Int) -> AnyPublisher<[NotificationsModel], Error>
+    func readNotification(id: Int) -> AnyPublisher<Void, Error>
+    func readAllnotifications() -> AnyPublisher<Void, Error>
 }
 
 // MARK: - NotificationNetworkRepositoryImpl
@@ -81,5 +97,13 @@ final class NotificationNetworkRepositoryImpl: NotificationNetworkRepository {
             ),
             atKeyPath: "data"
         )
+    }
+
+    func readNotification(id: Int) -> AnyPublisher<Void, Error> {
+        api.request(target: NotificationTargets.ReadNotification(id: id))
+    }
+
+    func readAllnotifications() -> AnyPublisher<Void, Error> {
+        api.request(target: NotificationTargets.ReadAllNotifications())
     }
 }

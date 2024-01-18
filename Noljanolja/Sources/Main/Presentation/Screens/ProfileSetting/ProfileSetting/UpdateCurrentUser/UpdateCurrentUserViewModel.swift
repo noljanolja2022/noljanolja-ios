@@ -29,6 +29,7 @@ final class UpdateCurrentUserViewModel: ViewModel {
     @Published var phoneNumberText = ""
     @Published var dob: Date?
     @Published var gender: GenderType?
+    @Published var email: String?
 
     var phoneNumber: String? {
         "\(country.prefix)\(phoneNumberText)"

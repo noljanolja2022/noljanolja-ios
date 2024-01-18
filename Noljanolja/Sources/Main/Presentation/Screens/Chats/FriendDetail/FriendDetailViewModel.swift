@@ -17,6 +17,7 @@ protocol FriendDetailViewModelDelegate {}
 
 class FriendDetailViewModel: ViewModel {
     let user: User
+    let openChatWithUserAction = PassthroughSubject<User, Never>()
 
     @Published var myPoint: Int?
     @Published var contactDetail: ContactDetail?
@@ -26,14 +27,13 @@ class FriendDetailViewModel: ViewModel {
     @Published var navigationType: FriendDetailNavigationType?
     @Published var sendRequestSuccess = false
     @Published var typeSuccess: SendRequestType?
-    let openChatWithUserAction = PassthroughSubject<User, Never>()
 
     private let conversationUseCases: ConversationUseCases
     private let memberInfoUseCase: MemberInfoUseCases
     private let contactUseCases: ContactUseCases
+    private let conversationsSubject = PassthroughSubject<[Conversation], Never>()
     private let memberInfoSubject = CurrentValueSubject<LoyaltyMemberInfo?, Never>(nil)
     private let contactDetailSubject = CurrentValueSubject<ContactDetail?, Never>(nil)
-
     private var cancellables = Set<AnyCancellable>()
 
     init(user: User,

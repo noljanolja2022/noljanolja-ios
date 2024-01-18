@@ -131,11 +131,11 @@
 "update_profile_avatar_open_camera" = "카메라";
 "update_profile_avatar_select_photo" = "갤러리";
 "update_profile_name" = "이름";
-"update_profile_name_error" = "This name is invalid";
+"update_profile_name_error" = "이름이 잘못되었습니다.";
 "update_profile_name_required" = "입력필요";
 "update_profile_dob" = "생년월일";
-"update_profile_phone" = "Phone";
-"update_profile_phone_error" = "This phone is invalid";
+"update_profile_phone" = "핸드폰";
+"update_profile_phone_error" = "이 전화는 유효하지 않습니다";
 "update_profile_gender" = "성별";
 "update_profile_gender_male" = "남자";
 "update_profile_gender_female" = "여자";
@@ -444,3 +444,6 @@
 "app_colors" = "앱 색상";
 "faq" = "FAQ";
 "common_notification" = "공고";
+"update_profile_email" = "이메일";
+"update_profile_email_error" = "이 이메일은 유효하지 않습니다";
+"update_profile_email_required" = "필수의";

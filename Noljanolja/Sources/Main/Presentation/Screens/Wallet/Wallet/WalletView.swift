@@ -75,12 +75,13 @@ struct WalletView<ViewModel: WalletViewModel>: View {
 
     private func buildScrollView(_ model: WalletModel) -> some View {
         ScrollView {
-            buildCoinsView(model)
+//            buildCoinsView(model)
 
             VStack(spacing: 15) {
                 buildPointsView(model)
-                buildActionView()
+                buildMyCashView(cash: model.coin.formatted())
                 buildExchangeView()
+                buildActionView()
                 buildCheckinProgressView(model)
 
                 Spacer()
@@ -208,10 +209,10 @@ struct WalletView<ViewModel: WalletViewModel>: View {
             WalletPointView(
                 model: WalletPointViewDataModel(
                     title: L10n.walletAccumulatedPoint,
-                    titleColorName: ColorAssets.neutralDarkGrey.name,
+                    titleColorName: ColorAssets.neutralDarkGrey.swiftUIColor,
                     point: model.accumulatedPointsToday,
-                    pointColorName: ColorAssets.secondaryYellow300.name,
-                    unitColorName: ColorAssets.neutralDarkGrey.name,
+                    pointColorName: ColorAssets.systemGreen.swiftUIColor,
+                    unitColorName: ColorAssets.neutralDarkGrey.swiftUIColor,
                     actionTitle: L10n.walletViewHistory,
                     type: "P"
                 )
@@ -219,11 +220,11 @@ struct WalletView<ViewModel: WalletViewModel>: View {
 
             WalletPointView(
                 model: WalletPointViewDataModel(
-                    title: L10n.walletCashThatCanBeUsed,
-                    titleColorName: ColorAssets.neutralDarkGrey.name,
+                    title: L10n.walletMyPoints,
+                    titleColorName: ColorAssets.neutralDarkGrey.swiftUIColor,
                     point: model.coin.int,
-                    pointColorName: ColorAssets.systemBlue.name,
-                    unitColorName: ColorAssets.neutralDarkGrey.name,
+                    pointColorName: ColorAssets.neutralDarkGrey.swiftUIColor,
+                    unitColorName: ColorAssets.neutralDarkGrey.swiftUIColor,
                     actionTitle: L10n.walletExchangeMoney,
                     type: "C"
                 ),
@@ -232,12 +233,6 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                 }
             )
         }
-        .shadow(
-            color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.3),
-            radius: 11,
-            x: 4,
-            y: 4
-        )
     }
 
     private func buildCheckinProgressView(_ model: WalletModel) -> some View {
@@ -273,6 +268,32 @@ struct WalletView<ViewModel: WalletViewModel>: View {
         .background(ColorAssets.neutralLight.swiftUIColor)
         .cornerRadius(8)
         .visible(.gone)
+    }
+
+    private func buildMyCashView(cash: String) -> some View {
+        VStack(spacing: 20) {
+            Text(L10n.walletMyCash)
+                .font(Font.system(size: 16, weight: .bold))
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            HStack(spacing: 8) {
+                ImageAssets.icCoin.swiftUIImage
+                    .resizable()
+                    .size(30)
+                Text(cash)
+                    .font(Font.system(size: 23, weight: .bold))
+                    .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.all, 16)
+        .background(ColorAssets.neutralLight.swiftUIColor)
+        .cornerRadius(18)
+        .shadow(
+            color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.25),
+            radius: 11,
+            x: 0,
+            y: 4
+        )
     }
 
     private func buildNavigationLinks() -> some View {

@@ -11,10 +11,10 @@ import SwiftUI
 
 struct WalletPointViewDataModel {
     let title: String
-    let titleColorName: String
+    let titleColorName: Color
     let point: Int
-    let pointColorName: String
-    let unitColorName: String
+    let pointColorName: Color
+    let unitColorName: Color
     let actionTitle: String
     var backgroundImageName: String?
     let type: String
@@ -31,17 +31,20 @@ struct WalletPointView: View {
     }
 
     private func buildBodyView() -> some View {
-        VStack(spacing: 12) {
+        VStack(alignment: .leading, spacing: 12) {
             Text(model.title)
                 .multilineTextAlignment(.center)
-                .dynamicFont(.systemFont(ofSize: 16, weight: .medium))
-                .foregroundColor(Color(model.titleColorName))
+                .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
+                .foregroundColor(model.titleColorName)
 
-            HStack(spacing: 4) {
+            HStack(spacing: 8) {
+                ImageAssets.icPoint.swiftUIImage
+                    .resizable()
+                    .size(30)
                 Text(model.point.formatted())
-                    .foregroundColor(Color(model.pointColorName))
-                Text(model.type)
-                    .foregroundColor(Color(model.unitColorName))
+                    .foregroundColor(model.pointColorName)
+//                Text(model.type)
+//                    .foregroundColor(Color(model.unitColorName))
             }
             .dynamicFont(.systemFont(ofSize: 28, weight: .bold))
         }
@@ -59,6 +62,12 @@ struct WalletPointView: View {
             }
         }
         .cornerRadius(12)
+        .shadow(
+            color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.25),
+            radius: 11,
+            x: 0,
+            y: 4
+        )
         .onTapGesture {
             action?()
         }
