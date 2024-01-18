@@ -15,6 +15,7 @@ enum SettingNavigationType: Equatable {
     case sourceLicense
     case faq
     case changeAvatarAlbum
+    case changeUsername
 }
 
 // MARK: - SettingFullScreenCoverType

@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import SwiftUINavigation
+import SwiftUIX
 
 // MARK: - SettingItemView
 
@@ -13,11 +15,13 @@ struct SettingItemView<Content: View>: View {
     private var title: String?
     private let content: Content
     private let action: (() -> Void)?
-
+    private let isButton: Bool
     init(title: String? = nil,
+         isButton: Bool = true,
          @ViewBuilder content: () -> Content = { EmptyView() },
          action: (() -> Void)? = nil) {
         self.title = title
+        self.isButton = isButton
         self.content = content()
         self.action = action
     }
@@ -27,14 +31,20 @@ struct SettingItemView<Content: View>: View {
     }
 
     private func buildBodyView() -> some View {
-        Button(
-            action: {
-                action?()
-            },
-            label: {
+        Group {
+            if isButton {
+                Button(
+                    action: {
+                        action?()
+                    },
+                    label: {
+                        buildContentView()
+                    }
+                )
+            } else {
                 buildContentView()
             }
-        )
+        }
     }
 
     private func buildContentView() -> some View {

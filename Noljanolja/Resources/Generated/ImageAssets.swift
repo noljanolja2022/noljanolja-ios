@@ -67,6 +67,7 @@ internal enum ImageAssets {
   internal static let icAvatarPlaceholder = ImageAsset(name: "ic_avatar_placeholder")
   internal static let icBack = ImageAsset(name: "ic_back")
   internal static let icCameraFill = ImageAsset(name: "ic_camera_fill")
+  internal static let icCancel = ImageAsset(name: "ic_cancel")
   internal static let icChange = ImageAsset(name: "ic_change")
   internal static let icChecked = ImageAsset(name: "ic_checked")
   internal static let icCheckmarkRect = ImageAsset(name: "ic_checkmark_rect")
@@ -180,6 +181,7 @@ internal enum ImageAssets {
     icAvatarPlaceholder,
     icBack,
     icCameraFill,
+    icCancel,
     icChange,
     icChecked,
     icCheckmarkRect,
