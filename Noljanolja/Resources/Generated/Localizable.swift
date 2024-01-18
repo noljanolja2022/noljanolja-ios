@@ -224,6 +224,8 @@ internal enum L10n {
   internal static let commonMembers = L10n.tr("Localizable", "common_members", fallback: "Members")
   /// More
   internal static let commonMore = L10n.tr("Localizable", "common_more", fallback: "More")
+  /// Name
+  internal static let commonName = L10n.tr("Localizable", "common_name", fallback: "Name")
   /// Next
   internal static let commonNext = L10n.tr("Localizable", "common_next", fallback: "Next")
   /// No
@@ -519,6 +521,10 @@ internal enum L10n {
   internal static let myPage = L10n.tr("Localizable", "my_page", fallback: "My Page")
   /// My ranking
   internal static let myRankingTitle = L10n.tr("Localizable", "my_ranking_title", fallback: "My ranking")
+  /// Use your common name to make it easier to find. Can be full name, nickname.
+  /// 
+  /// You can change your name up to 1 time within 7 days.
+  internal static let noticeChangeUsername = L10n.tr("Localizable", "notice_change_username", fallback: "Use your common name to make it easier to find. Can be full name, nickname.\n\nYou can change your name up to 1 time within 7 days.")
   /// Open link
   internal static let openLink = L10n.tr("Localizable", "open_link", fallback: "Open link")
   /// We've sent a text message with your verification code to

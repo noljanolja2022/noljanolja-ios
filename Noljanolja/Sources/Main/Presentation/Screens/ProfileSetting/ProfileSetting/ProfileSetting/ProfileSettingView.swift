@@ -100,6 +100,9 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
             ItemProfileView(title: L10n.settingRanking, content: "", ranking: viewModel.ranking)
 
             ItemProfileView(title: L10n.settingName, content: viewModel.name)
+                .onTapGesture {
+                    viewModel.navigationType = .changeUsername
+                }
 
             ItemProfileView(title: L10n.settingPhoneNumber, content: viewModel.phoneNumber)
 
@@ -141,8 +144,9 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
 
             SettingItemView(
                 title: L10n.settingPushNotification,
+                isButton: false,
                 content: {
-                    Toggle("", isOn: .constant(true))
+                    Toggle("", isOn: $viewModel.isNotification)
                         .toggleStyle(SwitchToggleStyle(tint: themeManager.theme.primary50))
                         .labelsHidden()
                 }
@@ -256,6 +260,10 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
         case .changeAvatarAlbum:
             ChangeAvatarView(viewModel:
                 ChangeAvatarViewModel(delegate: viewModel)
+            )
+        case .changeUsername:
+            ChangeUsernameView(
+                viewModel: ChangeUsernameViewModel()
             )
         }
     }

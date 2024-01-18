@@ -22,6 +22,7 @@ extension UserDefaults {
         static let isNotFirstLaunch = "is_not_first_launch"
         static let exchangeCount = "exchange_count"
         static let appTheme = "app_theme"
+        static let isNotificaion = "is_notification"
     }
 }
 
@@ -41,5 +42,10 @@ extension UserDefaults: UserDefaultsType {
     var appTheme: AppTheme {
         get { AppTheme(rawValue: integer(forKey: Keys.appTheme)) ?? .green }
         set { set(newValue.rawValue, forKey: Keys.appTheme) }
+    }
+    
+    var isNotification: Bool {
+        get { !bool(forKey: Keys.isNotificaion) }
+        set { set(!newValue, forKey: Keys.isNotificaion) }
     }
 }

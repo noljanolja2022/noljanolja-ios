@@ -34,6 +34,7 @@ final class ProfileSettingViewModel: ViewModel {
     @Published var alertState: AlertState<ProfileSettingAlertActionType>?
     @Published var viewState = ViewState.loading
     @Published var isShowFinishAvatar = false
+    @Published var isNotification: Bool = UserDefaults.standard.isNotification
 
     // MARK: Navigations
 
@@ -174,6 +175,17 @@ final class ProfileSettingViewModel: ViewModel {
                     )
                 }
             })
+            .store(in: &cancellables)
+
+        $isNotification
+            .sink { value in
+                UserDefaults.standard.isNotification = value
+                if value {
+                    UIApplication.shared.registerForRemoteNotifications()
+                } else {
+                    UIApplication.shared.unregisterForRemoteNotifications()
+                }
+            }
             .store(in: &cancellables)
     }
 

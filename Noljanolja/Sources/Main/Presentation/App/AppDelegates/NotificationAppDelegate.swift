@@ -22,7 +22,12 @@ final class NotificationAppDelegate: NSObject, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         // Register for remote notifications
         UNUserNotificationCenter.current().delegate = self
-        application.registerForRemoteNotifications()
+        
+        if UserDefaults.standard.isNotification {
+            application.registerForRemoteNotifications()
+        } else {
+            application.unregisterForRemoteNotifications()
+        }
 
         // Set the messaging delegate
         Messaging.messaging().delegate = self
@@ -34,7 +39,7 @@ final class NotificationAppDelegate: NSObject, UIApplicationDelegate {
                      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Messaging.messaging().apnsToken = deviceToken
     }
-    
+
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("Error", error)
     }

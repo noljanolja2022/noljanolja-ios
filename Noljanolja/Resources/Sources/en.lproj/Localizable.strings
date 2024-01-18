@@ -475,6 +475,8 @@
 "your_friend_list_empty" = "Your friendlist is empty now.\nAdd friends to create a chat!";
 "your_chat_is_empty" =  "Your chat is empty now";
 "common_notification" = "Notifcation";
+"notice_change_username" = "Use your common name to make it easier to find. Can be full name, nickname.\n\nYou can change your name up to 1 time within 7 days.";
+"common_name" = "Name";
 "update_profile_email" = "Email";
 "update_profile_email_error" = "This email is invalid";
 "update_profile_email_required" = "Required";
