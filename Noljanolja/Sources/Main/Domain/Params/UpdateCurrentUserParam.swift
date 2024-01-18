@@ -35,6 +35,7 @@ struct UpdateCurrentUserParam: Codable {
     init(name: String,
          phone: String,
          email: String? = nil,
+         avatar: String? = nil,
          gender: GenderType? = nil,
          dob: Date? = nil,
          preferences: UpdateCurrentUserPreferencesParam? = nil) {

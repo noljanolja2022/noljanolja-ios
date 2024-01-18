@@ -74,6 +74,7 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
                 }
             }
         }
+        .background(Color.white)
     }
 
     private func buildHeaderView() -> some View {

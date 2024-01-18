@@ -16,20 +16,21 @@ import SwiftUIX
 
 struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
     // MARK: Dependencies
-    
+
     @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel: ViewModel
     @StateObject private var keyboard = Keyboard.main
     @State private var isPhoneEditing = false
     @State private var isNameEditing = false
     @State private var isGenderEditing = false
-    
+    @State private var isEmailEditing = false
+
     private let nameMaxLength = 20
 
     var body: some View {
         buildBodyView()
     }
-    
+
     private func buildBodyView() -> some View {
         buildContentView()
             .navigationBar(title: "", backButtonTitle: "", presentationMode: presentationMode, trailing: {})
@@ -47,12 +48,12 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                 }
             )
     }
-    
+
     private func buildContentView() -> some View {
         ScrollView {
             VStack(spacing: 52) {
                 buildAvatarView()
-                
+
                 VStack(spacing: 12) {
                     buildUserSectionHeaderView()
                     buildNameView()
@@ -60,9 +61,9 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                     buildDateOfBirth()
                     buildGenderView()
                 }
-                
+
                 buildActionView()
-                
+
                 Spacer()
             }
             .padding(.horizontal, 16)
@@ -72,7 +73,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
         .background(ColorAssets.neutralLight.swiftUIColor)
         .clipped()
     }
-    
+
     private func buildAvatarView() -> some View {
         ZStack(alignment: .bottomTrailing) {
             IfLet(
@@ -91,7 +92,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
             .scaledToFill()
             .frame(width: 112, height: 112)
             .cornerRadius(56)
-            
+
             Button(
                 action: {
                     viewModel.actionSheetType = .avatar
@@ -109,14 +110,14 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
             )
         }
     }
-    
+
     private func buildUserSectionHeaderView() -> some View {
         Text(L10n.updateProfileUserInfo)
             .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
             .frame(maxWidth: .infinity, alignment: .leading)
             .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
     }
-    
+
     private func buildNameView() -> some View {
         UpdateCurrentUserInputView(
             content: {
@@ -131,7 +132,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                     .introspectTextField { textField in
                         textField.becomeFirstResponder()
                     }
-                    
+
                     Button(
                         action: {
                             viewModel.name = ""
@@ -161,7 +162,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
             }()
         )
     }
-    
+
     private func buildPhoneView() -> some View {
         UpdateCurrentUserInputView(
             content: {
@@ -200,7 +201,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                     .textFieldStyle(TappableTextFieldStyle())
                     .dynamicFont(.systemFont(ofSize: 16))
                     .frame(maxHeight: .infinity)
-                    
+
                     Button(
                         action: {
                             viewModel.phoneNumberText = ""
@@ -230,7 +231,52 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
             }()
         )
     }
-    
+
+    private func buildEmail() -> some View {
+        UpdateCurrentUserInputView(
+            content: {
+                HStack(spacing: 4) {
+                    TextField(
+                        text: $viewModel.email,
+                        isEditing: $isNameEditing
+                    )
+                    .textFieldStyle(TappableTextFieldStyle())
+                    .dynamicFont(.systemFont(ofSize: 16))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .introspectTextField { textField in
+                        textField.becomeFirstResponder()
+                    }
+
+                    Button(
+                        action: {
+                            viewModel.email = ""
+                        },
+                        label: {
+                            ImageAssets.icClose.swiftUIImage
+                                .resizable()
+                                .scaledToFit()
+                                .padding(6)
+                                .frame(width: 24, height: 24)
+                                .border(ColorAssets.neutralDarkGrey.swiftUIColor, width: 1, cornerRadius: 12)
+                        }
+                    )
+                }
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                .frame(height: 52)
+            },
+            title: L10n.updateProfileEmail,
+            description: nil,
+            isEditing: isEmailEditing,
+            errorMessage: {
+                if viewModel.email?.isEmpty ?? true || viewModel.email?.isValidEmail ?? true {
+                    return nil
+                } else {
+                    return L10n.updateProfileEmailError
+                }
+            }()
+        )
+    }
+
     private func buildDateOfBirth() -> some View {
         UpdateCurrentUserInputView(
             content: {
@@ -252,7 +298,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
                         }
                     )
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    
+
                     Button(
                         action: {
                             viewModel.dob = nil
@@ -276,7 +322,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
             errorMessage: nil
         )
     }
-    
+
     private func buildGenderView() -> some View {
         VStack(spacing: 8) {
             Text(L10n.updateProfileGender)
@@ -290,7 +336,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
         }
         .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
     }
-    
+
     private func buildGenderItemView(_ gender: GenderType) -> some View {
         Button(
             action: {
@@ -317,7 +363,7 @@ struct UpdateCurrentUserView<ViewModel: UpdateCurrentUserViewModel>: View {
             }
         )
     }
-    
+
     private func buildActionView() -> some View {
         Button(
             "OK",

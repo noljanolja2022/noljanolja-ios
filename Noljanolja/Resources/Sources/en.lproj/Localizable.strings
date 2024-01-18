@@ -475,3 +475,6 @@
 "your_friend_list_empty" = "Your friendlist is empty now.\nAdd friends to create a chat!";
 "your_chat_is_empty" =  "Your chat is empty now";
 "common_notification" = "Notifcation";
+"update_profile_email" = "Email";
+"update_profile_email_error" = "This email is invalid";
+"update_profile_email_required" = "Required";

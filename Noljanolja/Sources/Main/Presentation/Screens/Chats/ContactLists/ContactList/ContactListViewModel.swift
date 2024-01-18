@@ -81,7 +81,6 @@ final class ContactListViewModel: ViewModel {
 
     private func configureLoadData() {
         loadDataSubject
-            .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in self?.viewState = .loading })
             .receive(on: DispatchQueue.global())
             .flatMapLatestToResult { [weak self] _ -> AnyPublisher<[User], Error> in
@@ -126,13 +125,15 @@ final class ContactListViewModel: ViewModel {
 
         isAppearSubject
             .filter { $0 }
-            .mapToVoid().first()
+            .mapToVoid()
+            .first()
             .sink(receiveValue: { [weak self] in self?.loadDataSubject.send() })
             .store(in: &cancellables)
 
         isAppearSubject
             .filter { $0 }
-            .mapToVoid().first()
+            .mapToVoid()
+            .first()
             .flatMapLatestToResult { [weak self] _ -> AnyPublisher<[NotificationsModel], Error> in
                 guard let self else {
                     return Empty<[NotificationsModel], Error>().eraseToAnyPublisher()

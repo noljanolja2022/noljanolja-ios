@@ -19,13 +19,19 @@ extension String {
         let phoneNumberKit = PhoneNumberKit()
         return try? phoneNumberKit.parse(self, ignoreType: true)
     }
-    
+
     var isValidPhoneNumber: Bool {
         PhoneNumberKit().isValidPhoneNumber(self)
     }
-    
+
     var isValidName: Bool {
         let regex = "^[\\p{L}a-zA-Z0-9_-]"
         return range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
+    }
+
+    var isValidEmail: Bool {
+        let emailRegex = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailPredicate.evaluate(with: self)
     }
 }

@@ -787,6 +787,12 @@ internal enum L10n {
   internal static let updateProfileDateOfBirth = L10n.tr("Localizable", "update_profile_date_of_birth", fallback: "Date of Birth")
   /// Day of Birth
   internal static let updateProfileDob = L10n.tr("Localizable", "update_profile_dob", fallback: "Day of Birth")
+  /// Email
+  internal static let updateProfileEmail = L10n.tr("Localizable", "update_profile_email", fallback: "Email")
+  /// This email is invalid
+  internal static let updateProfileEmailError = L10n.tr("Localizable", "update_profile_email_error", fallback: "This email is invalid")
+  /// Required
+  internal static let updateProfileEmailRequired = L10n.tr("Localizable", "update_profile_email_required", fallback: "Required")
   /// Gender
   internal static let updateProfileGender = L10n.tr("Localizable", "update_profile_gender", fallback: "Gender")
   /// Female

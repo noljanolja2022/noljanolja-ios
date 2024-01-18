@@ -95,6 +95,7 @@ struct FriendDetailView<ViewModel: FriendDetailViewModel>: View {
                 }
             }
             buildActionView()
+            buildChatNowView()
 
             Spacer()
         }
@@ -153,6 +154,26 @@ struct FriendDetailView<ViewModel: FriendDetailViewModel>: View {
                 }
         }
         .padding(.horizontal, 16)
+    }
+
+    @ViewBuilder
+    private func buildChatNowView() -> some View {
+        HStack(spacing: 15) {
+            ImageAssets.icChat.swiftUIImage
+                .resizable()
+                .size(24)
+                .foregroundColor(themeManager.theme.primary200)
+                .padding(.vertical, 8)
+            Text(L10n.addFriendChatNow.uppercased())
+                .font(Font.system(size: 12, weight: .bold))
+                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+        }
+        .frame(maxWidth: .infinity)
+        .overlayBorder(color: themeManager.theme.primary200, cornerRadius: 5, lineWidth: 1)
+        .padding(.horizontal, 16)
+        .onPress {
+            viewModel.openChatWithUserAction.send(viewModel.user)
+        }
     }
 
     private func buildNavigationLink() -> some View {

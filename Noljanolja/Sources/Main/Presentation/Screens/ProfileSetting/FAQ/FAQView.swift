@@ -14,6 +14,7 @@ struct FAQView<ViewModel: FAQViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
+    @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         buildBodyView()
@@ -21,7 +22,7 @@ struct FAQView<ViewModel: FAQViewModel>: View {
 
     private func buildBodyView() -> some View {
         buildMainView()
-            .navigationBar(title: L10n.settingFaq)
+            .navigationBar(title: L10n.settingFaq, backButtonTitle: "", presentationMode: presentationMode, trailing: {})
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
     }

@@ -72,7 +72,7 @@ struct HomeView<ViewModel: HomeViewModel>: View {
                         case .wallet:
                             VStack {
                                 themeManager.theme.primary200
-                                    .frame(maxWidth: .infinity, maxHeight: UIScreen.mainHeight * 0.5)
+                                    .frame(maxWidth: .infinity, maxHeight: UIScreen.mainHeight * 0.25)
                                     .cornerRadius([.bottomLeading, .bottomTrailing], 40)
                                 Spacer()
                             }
