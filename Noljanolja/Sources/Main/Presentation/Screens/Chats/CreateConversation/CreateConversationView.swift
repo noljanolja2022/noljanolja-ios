@@ -19,6 +19,7 @@ struct CreateConversationView<ViewModel: CreateConversationViewModel>: View {
     // MARK: State
 
     @Environment(\.presentationMode) private var presentationMode
+    @EnvironmentObject var themeManager: AppThemeManager
 
     var body: some View {
         buildBodyView()
@@ -76,7 +77,7 @@ struct CreateConversationView<ViewModel: CreateConversationViewModel>: View {
                     .frame(height: 40)
                     .frame(maxWidth: .infinity)
                     .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
-                    .background(ColorAssets.primaryGreen100.swiftUIColor)
+                    .background(themeManager.theme.primary100)
                     .cornerRadius(10)
                 }
             )

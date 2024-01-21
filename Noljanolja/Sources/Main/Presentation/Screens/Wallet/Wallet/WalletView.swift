@@ -79,7 +79,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
 
             VStack(spacing: 15) {
                 buildPointsView(model)
-                buildMyCashView(cash: model.coin.formatted())
+                buildMyCashView(cash: Int(model.coin).formatted())
                 buildExchangeView()
                 buildActionView()
                 buildCheckinProgressView(model)

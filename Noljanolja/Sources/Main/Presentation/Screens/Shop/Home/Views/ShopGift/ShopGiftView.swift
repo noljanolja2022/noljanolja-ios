@@ -47,6 +47,7 @@ struct ShopGiftView: View {
             }
         }
         .padding(.top, 16)
+        .background(ColorAssets.neutralLight.swiftUIColor)
         .visible(!viewModel.models.isEmpty)
     }
 

@@ -54,7 +54,7 @@ struct MessageReactionsModel: Equatable {
         )
         self.count = message.reactions.count
         self.backgroundColorName = message.sender.id == currentUser.id
-            ? ColorAssets.primaryGreen50.name
+            ? AppThemeManager.shared.theme.primary50.description
             : ColorAssets.neutralRawLightGrey.name
         self.horizontalAlignment = message.sender.id == currentUser.id ? .trailing : .leading
         self.layoutDirection = message.sender.id == currentUser.id ? .rightToLeft : .leftToRight

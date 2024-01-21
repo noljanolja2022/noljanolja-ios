@@ -109,7 +109,8 @@ struct AuthVerificationView<ViewModel: AuthVerificationViewModel>: View {
         )
         .buttonStyle(
             PrimaryButtonStyle(
-                isEnabled: viewModel.isEnableContinue
+                isEnabled: viewModel.isEnableContinue,
+                enabledBackgroundColor: ColorAssets.primaryGreen200.swiftUIColor
             )
         )
         .shadow(

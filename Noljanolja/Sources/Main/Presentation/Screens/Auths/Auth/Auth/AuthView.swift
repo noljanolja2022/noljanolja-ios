@@ -173,7 +173,8 @@ struct AuthView<ViewModel: AuthViewModel>: View {
         )
         .buttonStyle(
             PrimaryButtonStyle(
-                isEnabled: !viewModel.phoneNumberText.isEmpty
+                isEnabled: !viewModel.phoneNumberText.isEmpty,
+                enabledBackgroundColor: ColorAssets.primaryGreen200.swiftUIColor
             )
         )
         .disabled(viewModel.phoneNumberText.isEmpty)

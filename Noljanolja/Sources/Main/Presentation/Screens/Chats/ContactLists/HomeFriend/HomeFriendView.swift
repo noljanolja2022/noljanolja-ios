@@ -25,7 +25,7 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
         VideoDetailRootContainerView(
             content: {
                 ZStack(alignment: .bottomTrailing) {
-                    VStack(spacing: 10) {
+                    VStack(spacing: 16) {
                         buildHeaderView()
                         buildBodyView()
                     }
@@ -106,7 +106,7 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
                     .padding(.horizontal, 35)
                     .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                     .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
-                    .background(ColorAssets.primaryGreen100.swiftUIColor)
+                    .background(themeManager.theme.primary100)
                     .cornerRadius(11)
                 })
                 .padding(.horizontal, 16)
