@@ -203,14 +203,14 @@ final class ProfileSettingViewModel: ViewModel {
                         )
                     )
                 },
-            clearCacheResultAction
-                .map {
-                    AlertState(
-                        title: TextState(L10n.commonSuccess),
-                        message: TextState(L10n.settingClearCacheSuccessDescription),
-                        dismissButton: .cancel(TextState(L10n.commonContinue.uppercased()))
-                    )
-                },
+//            clearCacheResultAction
+//                .map {
+//                    AlertState(
+//                        title: TextState(L10n.commonSuccess),
+//                        message: TextState(L10n.settingClearCacheSuccessDescription),
+//                        dismissButton: .cancel(TextState(L10n.commonContinue.uppercased()))
+//                    )
+//                },
             signOutConfirmAction
                 .map {
                     AlertState(

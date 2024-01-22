@@ -59,6 +59,7 @@ internal enum ImageAssets {
   internal static let icCheckboxCircleUnchecked = ImageAsset(name: "ic_checkbox_circle_unchecked")
   internal static let icCheckboxRoundedChecked = ImageAsset(name: "ic_checkbox_rounded_checked")
   internal static let icCheckboxRoundedUnchecked = ImageAsset(name: "ic_checkbox_rounded_unchecked")
+  internal static let bgDialogClearCache = ImageAsset(name: "bg_dialog_clear_cache")
   internal static let icAdd = ImageAsset(name: "ic_add")
   internal static let icAppMascot = ImageAsset(name: "ic_app_mascot")
   internal static let icApple = ImageAsset(name: "ic_apple")
@@ -173,6 +174,7 @@ internal enum ImageAssets {
     icCheckboxCircleUnchecked,
     icCheckboxRoundedChecked,
     icCheckboxRoundedUnchecked,
+    bgDialogClearCache,
     icAdd,
     icAppMascot,
     icApple,
