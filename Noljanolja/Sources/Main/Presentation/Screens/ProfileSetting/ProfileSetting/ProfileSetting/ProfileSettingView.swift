@@ -20,6 +20,7 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
     @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel: ViewModel
     @EnvironmentObject var themeManager: AppThemeManager
+    @Environment(\.viewController) private var viewControllerHolder: UIViewController?
 
     var body: some View {
         buildBodyView()
@@ -61,6 +62,20 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
                     type: .image(ImageAssets.icCheckmarkRect.name, .clear),
                     style: .style(backgroundColor: .clear)
                 )
+            }
+            .onReceive(viewModel.clearCacheResultAction) { _ in
+                viewControllerHolder?.present(transitionStyle: .crossDissolve, builder: {
+                    DialogView(model: .init(
+                        image: ImageAssets.bgDialogClearCache.swiftUIImage,
+                        title: L10n.commonSuccess + "!",
+                        message: L10n.settingClearCacheSuccessDescription,
+                        secondaryTitle: L10n.commonOk,
+                        secondaryAction: {
+                            viewControllerHolder?.dismissSelf()
+                        }
+                    ))
+                    .environmentObject(themeManager)
+                })
             }
     }
 
