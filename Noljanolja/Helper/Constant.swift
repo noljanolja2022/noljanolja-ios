@@ -22,4 +22,10 @@ enum Constant {
             42
         }
     }
+
+    enum SearchBar {
+        static var height: CGFloat {
+            36
+        }
+    }
 }
