@@ -60,7 +60,7 @@ struct SelectCountryView<ViewModel: SelectCountryViewModel>: View {
         }
         .padding(.leading, 12)
         .padding(.trailing, 8)
-        .frame(height: 36)
+        .height(Constant.SearchBar.height)
         .background(ColorAssets.neutralLightGrey.swiftUIColor)
         .cornerRadius(12)
         .padding(.horizontal, 16)

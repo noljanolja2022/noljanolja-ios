@@ -33,7 +33,7 @@ struct SearchView: View {
                 }
         }
         .padding(.horizontal, 8)
-        .frame(height: 36)
+        .height(Constant.SearchBar.height)
     }
 }
 

@@ -90,9 +90,9 @@ struct ShopHomeView<ViewModel: ShopHomeViewModel>: View {
                     .height(24)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }
-            .padding(10)
             .frame(maxWidth: .infinity)
-            .height(36)
+            .height(Constant.SearchBar.height)
+            .padding(.horizontal, 10)
             .background(ColorAssets.neutralLightGrey.swiftUIColor)
             .cornerRadius(5)
             .onTapGesture {

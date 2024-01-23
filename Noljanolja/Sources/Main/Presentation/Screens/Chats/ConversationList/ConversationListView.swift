@@ -94,9 +94,9 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
                     .height(24)
                     .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
             }
-            .padding(10)
             .frame(maxWidth: .infinity)
-            .height(36)
+            .height(Constant.SearchBar.height)
+            .padding(.horizontal, 10)
             .background(ColorAssets.neutralLightGrey.swiftUIColor)
             .cornerRadius(5)
             .onTapGesture {
@@ -120,7 +120,7 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
                     viewModel.navigationType = .setting
                 }
         }
-        .padding(.horizontal, 10)
+        .padding(.horizontal, 16)
     }
 
     private func buildNavigationLink() -> some View {
