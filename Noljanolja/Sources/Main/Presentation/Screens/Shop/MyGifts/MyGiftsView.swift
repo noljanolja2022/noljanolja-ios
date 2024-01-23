@@ -22,7 +22,7 @@ struct MyGiftsView<ViewModel: MyGiftsViewModel>: View {
 
     private func buildBodyView() -> some View {
         buildContentView()
-            .navigationBar(title: L10n.shopGift, backButtonTitle: "", presentationMode: presentationMode, trailing: {})
+            .navigationBar(title: L10n.voucherWallet, backButtonTitle: "", presentationMode: presentationMode, trailing: {})
             .onAppear { viewModel.isAppearSubject.send(true) }
             .onDisappear { viewModel.isAppearSubject.send(false) }
             .isProgressHUBVisible($viewModel.isProgressHUDShowing)

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SummaryItemView: View {
     var title: String
-    var titleColorName: String
+    var titleColorName: Color
     var imageName: String
     var value: String
 
@@ -22,11 +22,12 @@ struct SummaryItemView: View {
             Text(title)
                 .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                 .fixedSize(horizontal: true, vertical: false)
-                .foregroundColor(Color(titleColorName))
+                .foregroundColor(titleColorName)
             HStack(spacing: 8) {
                 Image(imageName)
                     .resizable()
                     .scaledToFit()
+                    .foregroundColor(titleColorName)
                     .frame(width: 28, height: 28)
                 Text(value)
                     .dynamicFont(.systemFont(ofSize: 22))

@@ -11,13 +11,15 @@ import SwiftUI
 // MARK: - MyGiftItemView
 
 struct MyGiftItemView: View {
+    @EnvironmentObject var themeManager: AppThemeManager
+
     var model: MyGift
     var selectAction: (() -> Void)?
 
     var body: some View {
         buildBodyView()
     }
-    
+
     private func buildBodyView() -> some View {
         buildContenView()
     }
@@ -27,11 +29,11 @@ struct MyGiftItemView: View {
             buildImageView()
             buildInfoView()
         }
-        .padding(4)
+        .padding(6)
         .background(ColorAssets.neutralLight.swiftUIColor)
         .cornerRadius(8)
     }
-    
+
     private func buildImageView() -> some View {
         GeometryReader { geometry in
             WebImage(
@@ -54,32 +56,36 @@ struct MyGiftItemView: View {
             .cornerRadius(4)
             .clipped()
         }
-        .frame(width: 110, height: 110)
+        .frame(width: 100, height: 100)
     }
-    
+
     private func buildInfoView() -> some View {
-        VStack(spacing: 8) {
+        VStack {
             Text(model.brand?.name ?? "")
-                .dynamicFont(.systemFont(ofSize: 12, weight: .medium))
+                .dynamicFont(.systemFont(ofSize: 11, weight: .regular))
                 .lineLimit(1)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
             Text(model.name ?? "")
-                .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
+                .dynamicFont(.systemFont(ofSize: 12, weight: .regular))
                 .lineLimit(1)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
-            Button(
-                L10n.walletExchangeMoney.uppercased(),
-                action: {
+            HStack {
+                Button {
                     selectAction?()
+                } label: {
+                    Text(L10n.walletExchangeMoney.uppercased())
+                        .dynamicFont(.systemFont(ofSize: 14, weight: .regular))
+                        .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
+                        .padding(.horizontal, 13)
                 }
-            )
-            .buttonStyle(MyGiftButtonStyle())
-            .dynamicFont(.systemFont(ofSize: 12, weight: .medium))
-            .frame(height: 30)
-            .cornerRadius(4)
+                .frame(height: 30)
+                .background(themeManager.theme.primary200)
+                .cornerRadius(5)
+            }
+            .frame(maxWidth: .infinity, alignment: .trailing)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
     }
 }

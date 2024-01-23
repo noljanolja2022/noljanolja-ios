@@ -24,6 +24,7 @@ final class ProfileSettingViewModel: ViewModel {
     // MARK: State
 
     @Published var name = ""
+    @Published var email = ""
     @Published var phoneNumber = ""
     @Published var gender: GenderType?
     @Published var appVersion = ""
@@ -96,6 +97,7 @@ final class ProfileSettingViewModel: ViewModel {
                 self?.gender = user.gender
                 self?.avatarURL = user.avatar
                 self?.name = user.name ?? ""
+                self?.email = user.email ?? ""
                 self?.phoneNumber = user.phone
                     .flatMap {
                         $0.formatPhone()

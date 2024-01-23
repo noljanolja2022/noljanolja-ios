@@ -119,6 +119,8 @@ struct ProfileSettingView<ViewModel: ProfileSettingViewModel>: View {
                     viewModel.navigationType = .changeUsername
                 }
 
+            ItemProfileView(title: L10n.updateProfileEmail, content: viewModel.email)
+
             ItemProfileView(title: L10n.settingPhoneNumber, content: viewModel.phoneNumber)
 
             ItemProfileView(title: L10n.updateProfileGender, content: viewModel.gender?.title ?? "")

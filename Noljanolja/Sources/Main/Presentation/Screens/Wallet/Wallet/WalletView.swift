@@ -98,6 +98,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                 L10n.transactionHistory.uppercased(),
                 icon: { ImageAssets.icHistory.swiftUIImage }
             )
+            .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
         }
         .buttonStyle(PrimaryButtonStyle())
         .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
@@ -164,6 +165,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                     ImageAssets.icQuestion.swiftUIImage
                         .resizable()
                         .scaledToFit()
+                        .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
                         .frame(width: 20, height: 20)
                         .padding(.trailing, 6)
                 }
@@ -178,6 +180,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                 ImageAssets.icBack.swiftUIImage
                     .resizable()
                     .scaledToFit()
+                    .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
                     .frame(width: 26, height: 26)
                     .rotationEffect(.degrees(180))
 
@@ -186,14 +189,16 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                     .scaledToFit()
                     .frame(width: 40, height: 40)
             }
-            Button(L10n.transactionConvertNow.uppercased(), action: {
+            Button {
                 viewModel.navigationType = .exchange
-            })
+            } label: {
+                Text(L10n.transactionConvertNow.uppercased())
+                    .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
+                    .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
+            }
             .buttonStyle(PrimaryButtonStyle(
                 enabledBackgroundColor: ColorAssets.secondaryYellow400.swiftUIColor)
             )
-            .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
-            .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
         }
         .padding(14)
         .background(ColorAssets.secondaryYellow50.swiftUIColor)
@@ -211,7 +216,7 @@ struct WalletView<ViewModel: WalletViewModel>: View {
                     title: L10n.walletAccumulatedPoint,
                     titleColorName: ColorAssets.neutralDarkGrey.swiftUIColor,
                     point: model.accumulatedPointsToday,
-                    pointColorName: ColorAssets.systemGreen.swiftUIColor,
+                    pointColorName: themeManager.theme.primary200,
                     unitColorName: ColorAssets.neutralDarkGrey.swiftUIColor,
                     actionTitle: L10n.walletViewHistory,
                     type: "P"

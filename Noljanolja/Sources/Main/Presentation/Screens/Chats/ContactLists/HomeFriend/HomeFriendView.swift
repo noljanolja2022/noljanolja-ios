@@ -189,7 +189,7 @@ struct HomeFriendView<ViewModel: HomeFriendViewModel>: View {
                     )
                 case .search:
                     AddFriendContactListView(
-                        viewModel: AddFriendContactListViewModel()
+                        viewModel: AddFriendContactListViewModel(type: .friend)
                     )
                 case let .friendDetail(user):
                     FriendDetailView(

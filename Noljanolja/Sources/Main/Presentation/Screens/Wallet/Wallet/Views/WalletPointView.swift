@@ -33,7 +33,7 @@ struct WalletPointView: View {
     private func buildBodyView() -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(model.title)
-                .multilineTextAlignment(.center)
+                .multilineTextAlignment(.leading)
                 .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                 .foregroundColor(model.titleColorName)
 

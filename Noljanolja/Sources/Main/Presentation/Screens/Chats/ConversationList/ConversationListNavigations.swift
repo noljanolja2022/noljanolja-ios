@@ -13,6 +13,7 @@ enum ConversationListNavigationType {
     case chat(Conversation)
     case contactList(ConversationType)
     case setting
+    case search
 }
 
 // MARK: - ConversationListFullScreenCoverType

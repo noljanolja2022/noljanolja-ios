@@ -12,6 +12,7 @@ import SwiftUI
 struct SearchGiftResultsView<ViewModel: SearchGiftResultsViewModel>: View {
     @StateObject var viewModel: ViewModel
     @Environment(\.presentationMode) private var presentationMode
+    @EnvironmentObject var themeManager: AppThemeManager
 
     var body: some View {
         buildContentView()
@@ -64,13 +65,13 @@ struct SearchGiftResultsView<ViewModel: SearchGiftResultsViewModel>: View {
         HStack(spacing: 12) {
             SummaryItemView(
                 title: L10n.walletMyCash,
-                titleColorName: ColorAssets.secondaryYellow400.name,
+                titleColorName: ColorAssets.secondaryYellow400.swiftUIColor,
                 imageName: ImageAssets.icCoin.name,
                 value: viewModel.model?.coinModel?.balance.formatted() ?? "---"
             )
             SummaryItemView(
-                title: "Voucher Wallet",
-                titleColorName: ColorAssets.primaryGreen200.name,
+                title: L10n.voucherWallet,
+                titleColorName: themeManager.theme.primary200,
                 imageName: ImageAssets.icWallet2.name,
                 value: (viewModel.model?.coinModel?.giftCount).flatMap { String($0) } ?? "---"
             )

@@ -99,7 +99,9 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
             .height(36)
             .background(ColorAssets.neutralLightGrey.swiftUIColor)
             .cornerRadius(5)
-            .onTapGesture {}
+            .onTapGesture {
+                viewModel.navigationType = .search
+            }
 
             Button(
                 action: {
@@ -147,6 +149,8 @@ struct ConversationListView<ViewModel: ConversationListViewModel>: View {
                             delegate: viewModel
                         )
                     )
+                case .search:
+                    AddFriendContactListView(viewModel: AddFriendContactListViewModel(type: .chat))
                 }
             },
             label: {

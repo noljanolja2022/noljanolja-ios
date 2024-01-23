@@ -329,7 +329,7 @@
 		CF53D6042A6AF548009B3A69 /* ParticipantDetailActionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4CA2A6AF548009B3A69 /* ParticipantDetailActionViewModel.swift */; };
 		CF53D6052A6AF548009B3A69 /* ConversationListNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4CC2A6AF548009B3A69 /* ConversationListNavigations.swift */; };
 		CF53D6062A6AF548009B3A69 /* ConversationItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4CE2A6AF548009B3A69 /* ConversationItemModel.swift */; };
-		CF53D6072A6AF548009B3A69 /* ConversationListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4CF2A6AF548009B3A69 /* ConversationListModel.swift */; };
+		CF53D6072A6AF548009B3A69 /* ConversationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4CF2A6AF548009B3A69 /* ConversationListViewModel.swift */; };
 		CF53D6082A6AF548009B3A69 /* ConversationItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4D12A6AF548009B3A69 /* ConversationItemView.swift */; };
 		CF53D6092A6AF548009B3A69 /* ConversationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4D22A6AF548009B3A69 /* ConversationListView.swift */; };
 		CF53D60A2A6AF548009B3A69 /* AddFriendsHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF53D4D52A6AF548009B3A69 /* AddFriendsHomeView.swift */; };
@@ -989,7 +989,7 @@
 		CF53D4CA2A6AF548009B3A69 /* ParticipantDetailActionViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantDetailActionViewModel.swift; sourceTree = "<group>"; };
 		CF53D4CC2A6AF548009B3A69 /* ConversationListNavigations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationListNavigations.swift; sourceTree = "<group>"; };
 		CF53D4CE2A6AF548009B3A69 /* ConversationItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationItemModel.swift; sourceTree = "<group>"; };
-		CF53D4CF2A6AF548009B3A69 /* ConversationListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationListModel.swift; sourceTree = "<group>"; };
+		CF53D4CF2A6AF548009B3A69 /* ConversationListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationListViewModel.swift; sourceTree = "<group>"; };
 		CF53D4D12A6AF548009B3A69 /* ConversationItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationItemView.swift; sourceTree = "<group>"; };
 		CF53D4D22A6AF548009B3A69 /* ConversationListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationListView.swift; sourceTree = "<group>"; };
 		CF53D4D52A6AF548009B3A69 /* AddFriendsHomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendsHomeView.swift; sourceTree = "<group>"; };
@@ -2842,7 +2842,7 @@
 		CF53D4CB2A6AF548009B3A69 /* ConversationList */ = {
 			isa = PBXGroup;
 			children = (
-				CF53D4CF2A6AF548009B3A69 /* ConversationListModel.swift */,
+				CF53D4CF2A6AF548009B3A69 /* ConversationListViewModel.swift */,
 				CF53D4CC2A6AF548009B3A69 /* ConversationListNavigations.swift */,
 				CF53D4D22A6AF548009B3A69 /* ConversationListView.swift */,
 				CF53D4CD2A6AF548009B3A69 /* Models */,
@@ -5023,7 +5023,7 @@
 				CF0EA31A29AA56E90014A7DE /* Binding+LimitString.swift in Sources */,
 				CF53D57D2A6AF548009B3A69 /* KeywordItemView.swift in Sources */,
 				CF53D6302A6AF548009B3A69 /* AnyImageEditorView.swift in Sources */,
-				CF53D6072A6AF548009B3A69 /* ConversationListModel.swift in Sources */,
+				CF53D6072A6AF548009B3A69 /* ConversationListViewModel.swift in Sources */,
 				CF9B393C2ADFEAC900CB72B8 /* MoneyType.swift in Sources */,
 				CF340D3C2AD07AFC001762F6 /* Natrium.swift in Sources */,
 				CF53D62A2A6AF548009B3A69 /* ChatSettingAddParticipantView.swift in Sources */,

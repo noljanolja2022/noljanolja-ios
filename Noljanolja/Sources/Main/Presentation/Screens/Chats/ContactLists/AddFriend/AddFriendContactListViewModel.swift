@@ -17,17 +17,23 @@ protocol AddFriendContactListViewModelDelegate: AnyObject {}
 // MARK: - AddFriendContactListViewModel
 
 final class AddFriendContactListViewModel: ViewModel {
+    enum SearchType {
+        case chat
+        case friend
+    }
+
     // MARK: State
 
     @Published var isProgressHUDShowing = false
     @Published var alertState: AlertState<Void>?
-    
+
     // MARK: Navigations
 
     @Published var navigationType: AddFriendContactListNavigationType?
 
     // MARK: Action
 
+    let searchType: SearchType
     let action = PassthroughSubject<User, Never>()
     let closeAction = PassthroughSubject<Void, Never>()
 
@@ -41,9 +47,11 @@ final class AddFriendContactListViewModel: ViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     init(addFriendsUseCase: AddFriendUseCaseType = AddFriendUseCase.default,
-         delegate: AddFriendContactListViewModelDelegate? = nil) {
+         delegate: AddFriendContactListViewModelDelegate? = nil,
+         type: SearchType) {
         self.addFriendsUseCase = addFriendsUseCase
         self.delegate = delegate
+        self.searchType = type
         super.init()
 
         configure()
@@ -54,7 +62,7 @@ final class AddFriendContactListViewModel: ViewModel {
     }
 
     private func configureActions() {
-        action
+        let chatAction = action
             .receive(on: DispatchQueue.main)
             .handleEvents(receiveOutput: { [weak self] _ in
                 self?.isProgressHUDShowing = true
@@ -65,13 +73,21 @@ final class AddFriendContactListViewModel: ViewModel {
                 }
                 return self.addFriendsUseCase.addFriend(user: user)
             }
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] result in
+        let friendAction = action
+
+        Publishers.CombineLatest(chatAction, friendAction)
+            .sink(receiveValue: { [weak self] result, user in
                 guard let self else { return }
                 self.isProgressHUDShowing = false
                 switch result {
                 case let .success(model):
-                    self.navigationType = .chat(model.id)
+                    switch self.searchType {
+                    case .chat:
+                        self.navigationType = .chat(model.id)
+                    case .friend:
+                        self.navigationType = .detail(user)
+                    }
+
                 case .failure:
                     self.alertState = AlertState(
                         title: TextState(L10n.commonErrorTitle),

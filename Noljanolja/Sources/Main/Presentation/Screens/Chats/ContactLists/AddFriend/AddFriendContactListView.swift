@@ -68,6 +68,8 @@ extension AddFriendContactListView {
                     conversationID: conversationId
                 )
             )
+        case let .detail(user):
+            FriendDetailView(viewModel: FriendDetailViewModel(user: user))
         }
     }
 }
@@ -76,6 +78,6 @@ extension AddFriendContactListView {
 
 struct AddFriendContactListView_Previews: PreviewProvider {
     static var previews: some View {
-        AddFriendContactListView(viewModel: AddFriendContactListViewModel())
+        AddFriendContactListView(viewModel: AddFriendContactListViewModel(type: .chat))
     }
 }
