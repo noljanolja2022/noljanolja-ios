@@ -15,6 +15,9 @@ struct ReferralView<ViewModel: ReferralViewModel>: View {
     // MARK: Dependencies
 
     @StateObject var viewModel: ViewModel
+    var isKorean: Bool {
+        Locale.current.languageCode == "KR"
+    }
 
     // MARK: State
 
@@ -71,7 +74,7 @@ struct ReferralView<ViewModel: ReferralViewModel>: View {
     }
 
     private func buildBannerImageView() -> some View {
-        ImageAssets.bnReferral.swiftUIImage
+        Image(isKorean ? ImageAssets.bnReferral.name : ImageAssets.bannerHeaderInviteEnglish.name)
             .resizable()
             .scaledToFill()
             .frame(maxWidth: .infinity)

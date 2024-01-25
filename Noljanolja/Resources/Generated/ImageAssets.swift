@@ -86,6 +86,8 @@ internal enum ImageAssets {
   internal static let icHistory = ImageAsset(name: "ic_history")
   internal static let icIgnore = ImageAsset(name: "ic_ignore")
   internal static let icImage = ImageAsset(name: "ic_image")
+  internal static let icLike = ImageAsset(name: "ic_like")
+  internal static let icLikeFilled = ImageAsset(name: "ic_like_filled")
   internal static let icLink = ImageAsset(name: "ic_link")
   internal static let icMenu = ImageAsset(name: "ic_menu")
   internal static let icMore = ImageAsset(name: "ic_more")
@@ -104,7 +106,8 @@ internal enum ImageAssets {
   internal static let bgFriendsHeader = ImageAsset(name: "bg_friends_header")
   internal static let bnPopupConfirm = ImageAsset(name: "bn_popup_confirm")
   internal static let icCenterFocus = ImageAsset(name: "ic_center_focus")
-  internal static let bannerHeaderInvite = ImageAsset(name: "banner_header_invite")
+  internal static let bannerHeaderInviteEnglish = ImageAsset(name: "banner_header_invite_english")
+  internal static let bannerHeaderInviteKorean = ImageAsset(name: "banner_header_invite_korean")
   internal static let inviteStep1 = ImageAsset(name: "invite_step1")
   internal static let inviteStep2 = ImageAsset(name: "invite_step2")
   internal static let inviteStep3 = ImageAsset(name: "invite_step3")
@@ -201,6 +204,8 @@ internal enum ImageAssets {
     icHistory,
     icIgnore,
     icImage,
+    icLike,
+    icLikeFilled,
     icLink,
     icMenu,
     icMore,
@@ -219,7 +224,8 @@ internal enum ImageAssets {
     bgFriendsHeader,
     bnPopupConfirm,
     icCenterFocus,
-    bannerHeaderInvite,
+    bannerHeaderInviteEnglish,
+    bannerHeaderInviteKorean,
     inviteStep1,
     inviteStep2,
     inviteStep3,

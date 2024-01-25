@@ -28,6 +28,7 @@ final class StorableVideo: Object {
     @Persisted var earnedPoints: Int
     @Persisted var totalPoints: Int
     @Persisted var completed: Bool
+    @Persisted var isLiked: Bool
 
     var model: Video? {
         Video(
@@ -49,7 +50,8 @@ final class StorableVideo: Object {
             category: category?.model,
             earnedPoints: earnedPoints,
             totalPoints: totalPoints,
-            completed: completed
+            completed: completed,
+            isLiked: isLiked
         )
     }
 
@@ -78,6 +80,7 @@ final class StorableVideo: Object {
         self.earnedPoints = model.earnedPoints
         self.totalPoints = model.totalPoints
         self.completed = model.completed
+        self.isLiked = model.isLiked
     }
 
     override static func primaryKey() -> String? {

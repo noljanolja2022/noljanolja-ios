@@ -56,6 +56,7 @@ final class VideoDetailViewModel: ViewModel {
     let scrollToTopAction = PassthroughSubject<Void, Never>()
     let youTubePlayerPlaybackStateAction = PassthroughSubject<Void, Never>()
     let durationPublisher = PassthroughSubject<Double, Never>()
+    let likeVideoAction = PassthroughSubject<String, Never>()
 
     // MARK: Dependencies
 
@@ -245,6 +246,18 @@ final class VideoDetailViewModel: ViewModel {
                 }
             }
             .store(in: &videoCancellables)
+
+        likeVideoAction
+            .flatMapLatestToResult { [weak self] videoId in
+                guard let self else {
+                    return Empty<Void, Error>().eraseToAnyPublisher()
+                }
+                return self.videoNetworkRepository.likeVideo(videoId: videoId)
+            }
+            .sink { _ in
+                //
+            }
+            .store(in: &cancellables)
     }
 
     private func configureYoutubePlayer(_ video: Video) {
