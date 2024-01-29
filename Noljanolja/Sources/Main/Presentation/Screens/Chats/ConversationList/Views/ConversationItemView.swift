@@ -64,6 +64,14 @@ struct ConversationItemView: View {
                         .background(ColorAssets.systemRed100.swiftUIColor)
                         .cornerRadius(3)
                 }
+//                if let unseenNumber = model.unseenNumber, unseenNumber > 0 {
+//                    Text(unseenNumber.formatted())
+//                        .font(.system(size: 10, weight: .medium))
+//                        .foregroundColor(ColorAssets.neutralLight.swiftUIColor)
+//                        .frame(width: 15, height: 15)
+//                        .background(Color.red)
+//                        .clipShape(Circle())
+//                }
             }
             .padding(.top, 12)
         }

@@ -120,9 +120,18 @@ private enum VideoTargets {
     struct LikeVideo: BaseAuthTargetType {
         var path: String { "v1/media/videos/\(videoId)/likes" }
         let method: Moya.Method = .post
-        var task: Task { .requestParameters(parameters: [:], encoding: JSONEncoding.default) }
+        var task: Task { .requestParameters(parameters: parameters, encoding: JSONEncoding.default) }
 
         let videoId: String
+        let youtubeToken: String
+        let action: String
+
+        var parameters: [String: Any] {
+            [
+                "youtubeToken": youtubeToken,
+                "action": action
+            ]
+        }
     }
 
     struct ReactPromote: BaseAuthTargetType {
@@ -139,12 +148,12 @@ private enum VideoTargets {
             ]
         }
     }
-    
+
     struct IgnoreVideo: BaseAuthTargetType {
         var path: String { "v1/media/videos/\(videoId)/ignores" }
         let method: Moya.Method = .post
         var task: Task { .requestParameters(parameters: [:], encoding: JSONEncoding.default) }
-        
+
         let videoId: String
     }
 }
@@ -164,7 +173,7 @@ protocol VideoNetworkRepository {
     func getVideoDetail(id: String) -> AnyPublisher<Video, Error>
     func getVideoComments(videoId: String, beforeCommentId: Int?, limit: Int?) -> AnyPublisher<[VideoComment], Error>
     func postVideoComment(videoId: String, comment: String, youtubeToken: String) -> AnyPublisher<VideoComment, Error>
-    func likeVideo(videoId: String) -> AnyPublisher<Void, Error>
+    func likeVideo(videoId: String, youtubeToken: String, action: String) -> AnyPublisher<Void, Error>
     func reactPromote(videoId: String, youtubeToken: String) -> AnyPublisher<Void, Error>
     func ignoreVideo(videoId: String) -> AnyPublisher<Void, Error>
 }
@@ -264,9 +273,9 @@ final class VideoNetworkRepositoryImpl: VideoNetworkRepository {
         )
     }
 
-    func likeVideo(videoId: String) -> AnyPublisher<Void, Error> {
+    func likeVideo(videoId: String, youtubeToken: String, action: String) -> AnyPublisher<Void, Error> {
         api.request(
-            target: VideoTargets.LikeVideo(videoId: videoId)
+            target: VideoTargets.LikeVideo(videoId: videoId, youtubeToken: youtubeToken, action: action)
         )
     }
 
@@ -275,7 +284,7 @@ final class VideoNetworkRepositoryImpl: VideoNetworkRepository {
             target: VideoTargets.ReactPromote(videoId: videoId, youtubeToken: youtubeToken)
         )
     }
-    
+
     func ignoreVideo(videoId: String) -> AnyPublisher<Void, Error> {
         api.request(target: VideoTargets.IgnoreVideo(videoId: videoId))
     }

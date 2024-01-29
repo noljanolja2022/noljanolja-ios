@@ -116,7 +116,6 @@ final class ConversationListViewModel: ViewModel {
                 }
                 return self.conversationUseCases.getConversations()
             }
-            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
                 guard let self else { return }
                 switch result {
@@ -143,7 +142,22 @@ final class ConversationListViewModel: ViewModel {
 
         conversationSocketService
             .getConversationStream()
-            .sink(receiveValue: { _ in })
+            .flatMapLatestToResult { [weak self] _ in
+                guard let self else {
+                    return Empty<[Conversation], Error>().eraseToAnyPublisher()
+                }
+                return self.conversationUseCases.getConversations()
+            }
+            .sink(receiveValue: { [weak self] result in
+                guard let self else { return }
+                switch result {
+                case let .success(conversations):
+                    self.conversationsSubject.send(conversations)
+                case let .failure(error):
+                    self.error = error
+                    self.viewState = .error
+                }
+            })
             .store(in: &cancellables)
     }
 

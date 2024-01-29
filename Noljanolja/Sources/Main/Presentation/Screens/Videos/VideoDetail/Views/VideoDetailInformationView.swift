@@ -8,16 +8,21 @@
 import SwiftUI
 
 struct VideoDetailInformationView: View {
+    @EnvironmentObject var themeManager: AppThemeManager
+
     var video: Video
+    var isLiked: Bool
     var commentCount: Int?
+    var didTapLikeButton: ((String) -> Void)?
 
     var body: some View {
         buildBodyView()
     }
 
     private func buildBodyView() -> some View {
-        VStack(spacing: 24) {
+        VStack(alignment: .leading, spacing: 24) {
             buildHeaderView()
+            buildLikeView()
             buildContentView()
         }
         .padding(.vertical, 8)
@@ -102,7 +107,7 @@ struct VideoDetailInformationView: View {
                     .dynamicFont(.systemFont(ofSize: 12, weight: .medium))
                     .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
 
-                Text(L10n.videoDetailRewardPoint(video.totalPoints.formatted()))
+                Text(L10n.videoDetailRewardPoint(video.earnedPoints.formatted()))
                     .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
                     .foregroundColor(.orange)
             }
@@ -117,5 +122,36 @@ struct VideoDetailInformationView: View {
                 y: 2
             )
         }
+    }
+
+    private func buildLikeView() -> some View {
+        HStack(spacing: 18) {
+            HStack {
+                Image(isLiked ? ImageAssets.icLikeFilled.name : ImageAssets.icLike.name)
+                    .resizable()
+                    .frame(width: 22, height: 20)
+                    .foregroundColor(isLiked ? themeManager.theme.primary200 : ColorAssets.neutralRawDeeperGrey.swiftUIColor)
+                Text(video.likeCountString)
+                    .dynamicFont(.systemFont(ofSize: 12, weight: .regular))
+                    .foregroundColor(ColorAssets.neutralRawDeepGrey.swiftUIColor)
+            }
+            .onPress {
+                didTapLikeButton?(video.id)
+            }
+            Divider()
+                .foregroundColor(ColorAssets.neutralRawLightGrey.swiftUIColor)
+            Button {
+                //
+            } label: {
+                Text("Liked Video")
+                    .dynamicFont(.systemFont(ofSize: 12, weight: .regular))
+                    .foregroundColor(ColorAssets.neutralRawDeepGrey.swiftUIColor)
+            }
+        }
+        .padding(.vertical, 5)
+        .padding(.horizontal, 15)
+        .frame(height: 34)
+        .background(ColorAssets.neutralRawLightGrey.swiftUIColor)
+        .cornerRadius(30)
     }
 }

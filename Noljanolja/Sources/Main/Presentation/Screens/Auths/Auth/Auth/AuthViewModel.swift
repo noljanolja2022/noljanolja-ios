@@ -71,7 +71,7 @@ final class AuthViewModel: ViewModel {
         sendVerificationCodeAction
             .compactMap { countryCode, phoneNumber in phoneNumber.flatMap { (countryCode, $0) } }
             .receive(on: DispatchQueue.main)
-            .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
+//            .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] countryCode, phoneNumber -> AnyPublisher<String, Error> in
                 guard let self else { return Empty<String, Error>().eraseToAnyPublisher() }
                 return self.authUseCases

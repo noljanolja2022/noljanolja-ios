@@ -76,6 +76,7 @@ final class LaunchViewModel: ViewModel {
             .sink(receiveValue: { [weak self] result in
                 switch result {
                 case let .success(user):
+                    self?.userDefaults.currentUserId = user.id
                     self?.delegate?.launchViewModelDidComplete(user)
                 case .failure:
                     self?.isContinueButtonHidden = false

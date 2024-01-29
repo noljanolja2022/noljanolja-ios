@@ -228,7 +228,9 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
                     if let video = viewModel.video {
                         VideoDetailInformationView(
                             video: video,
-                            commentCount: viewModel.commentCount
+                            isLiked: viewModel.isLiked,
+                            commentCount: viewModel.commentCount,
+                            didTapLikeButton: { viewModel.likeVideoAction.send($0) }
                         )
                         .id(topViewId)
                     }

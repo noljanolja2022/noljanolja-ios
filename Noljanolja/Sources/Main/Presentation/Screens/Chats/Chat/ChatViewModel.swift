@@ -355,17 +355,20 @@ final class ChatViewModel: ViewModel {
                 isAppearSubject.compactMap { $0 }.removeDuplicates()
             )
             .sink(receiveValue: { [weak self] (currentUser: User, messages: [Message], isAppear: Bool) in
-                guard let message = messages.first(where: { $0.id != nil && $0.sender.id != currentUser.id }),
-                      !message.seenBy.contains(currentUser.id),
-                      let messageID = message.id,
-                      isAppear else {
+                guard isAppear else {
                     return
                 }
-                self?.seenTrigger.send(messageID)
+                let messages = messages.filter { $0.id != nil && $0.sender.id != currentUser.id }
+                for message in messages where !message.seenBy.contains(currentUser.id) {
+                    if let messageID = message.id {
+                        self?.seenTrigger.send(messageID)
+                    }
+                }
             })
             .store(in: &cancellables)
 
         seenTrigger
+            .subscribe(on: DispatchQueue.global())
             .flatMapLatestToResult { [weak self] messageID in
                 guard let self else {
                     return Empty<Void, Error>().eraseToAnyPublisher()

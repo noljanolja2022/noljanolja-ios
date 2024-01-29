@@ -27,27 +27,25 @@ struct Video: Equatable, Codable {
     let earnedPoints: Int
     let totalPoints: Int
     let completed: Bool
+    let isLiked: Bool
 
-    enum CodingKeys: String, CodingKey {
-        case id
-        case url
-        case publishedAt
-        case title
-        case thumbnail
-        case duration
-        case durationMs
-        case currentProgressMs
-        case viewCount
-        case likeCount
-        case commentCount
-        case favoriteCount
-        case isHighlighted
-        case comments
-        case channel
-        case category
-        case earnedPoints
-        case totalPoints
-        case completed
+    var likeCountString: String {
+        let thousand = 1000
+        let million = 1000000
+        let billion = 1000000000
+
+        if likeCount < thousand {
+            return "\(likeCount)"
+        } else if likeCount < million {
+            let roundedViews = Double(likeCount) / Double(thousand)
+            return String(format: "%.1fK", roundedViews)
+        } else if likeCount < billion {
+            let roundedViews = Double(likeCount) / Double(million)
+            return String(format: "%.1fM", roundedViews)
+        } else {
+            let roundedViews = Double(likeCount) / Double(billion)
+            return String(format: "%.1fB", roundedViews)
+        }
     }
 
     init(from decoder: Decoder) throws {
@@ -74,9 +72,10 @@ struct Video: Equatable, Codable {
         self.earnedPoints = try container.decodeIfPresent(Int.self, forKey: .earnedPoints) ?? 0
         self.totalPoints = try container.decodeIfPresent(Int.self, forKey: .totalPoints) ?? 0
         self.completed = try container.decodeIfPresent(Bool.self, forKey: .completed) ?? false
+        self.isLiked = try container.decodeIfPresent(Bool.self, forKey: .isLiked) ?? false
     }
 
-    init(id: String, url: String, publishedAt: Date?, title: String?, thumbnail: String?, duration: String?, durationMs: Int, currentProgressMs: Int, viewCount: Int, likeCount: Int, commentCount: Int, favoriteCount: Int, isHighlighted: Bool, comments: [VideoComment], channel: VideoChannel?, category: VideoCategory?, earnedPoints: Int, totalPoints: Int, completed: Bool) {
+    init(id: String, url: String, publishedAt: Date?, title: String?, thumbnail: String?, duration: String?, durationMs: Int, currentProgressMs: Int, viewCount: Int, likeCount: Int, commentCount: Int, favoriteCount: Int, isHighlighted: Bool, comments: [VideoComment], channel: VideoChannel?, category: VideoCategory?, earnedPoints: Int, totalPoints: Int, completed: Bool, isLiked: Bool) {
         self.id = id
         self.url = url
         self.publishedAt = publishedAt
@@ -96,5 +95,6 @@ struct Video: Equatable, Codable {
         self.earnedPoints = earnedPoints
         self.totalPoints = totalPoints
         self.completed = completed
+        self.isLiked = isLiked
     }
 }

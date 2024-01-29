@@ -18,6 +18,14 @@ import youtube_ios_player_helper
 
 protocol VideoDetailViewModelDelegate: AnyObject {}
 
+// MARK: - RateVideoAction
+
+enum RateVideoAction: String {
+    case like
+    case dislike
+    case none
+}
+
 // MARK: - VideoDetailViewModel
 
 final class VideoDetailViewModel: ViewModel {
@@ -32,6 +40,7 @@ final class VideoDetailViewModel: ViewModel {
     }()
 
     @Published private(set) var videoId: String?
+    @Published private(set) var isLiked = false
     @Published private var configuration: VideoDetailConfiguration?
     @Published private(set) var contentType = VideoDetailViewContentType.hide
     @Published private(set) var minimizeBottomPadding: CGFloat = 0
@@ -56,6 +65,7 @@ final class VideoDetailViewModel: ViewModel {
     let scrollToTopAction = PassthroughSubject<Void, Never>()
     let youTubePlayerPlaybackStateAction = PassthroughSubject<Void, Never>()
     let durationPublisher = PassthroughSubject<Double, Never>()
+    let likeVideoAction = PassthroughSubject<String, Never>()
 
     // MARK: Dependencies
 
@@ -199,6 +209,7 @@ final class VideoDetailViewModel: ViewModel {
         youtubePlayerView.load(withVideoId: video.id, playerVars: ["autoplay": 1, "playsinline": 1])
 
         self.video = video
+        isLiked = video.isLiked
         comments = video.comments
         commentCount = video.commentCount
 
@@ -245,6 +256,25 @@ final class VideoDetailViewModel: ViewModel {
                 }
             }
             .store(in: &videoCancellables)
+
+        likeVideoAction
+            .flatMapLatestToResult { [weak self] videoId in
+                guard let self else {
+                    return Empty<Void, Error>().eraseToAnyPublisher()
+                }
+                let action = video?.isLiked ?? false ? RateVideoAction.dislike : RateVideoAction.like
+                return videoUseCases.likeVideo(videoId: videoId, action: action.rawValue)
+            }
+            .sink { [weak self] result in
+                guard let self else { return }
+                switch result {
+                case .success:
+                    self.isLiked = !self.isLiked
+                case .failure:
+                    break
+                }
+            }
+            .store(in: &cancellables)
     }
 
     private func configureYoutubePlayer(_ video: Video) {

@@ -13,6 +13,7 @@ protocol UserDefaultsType {
     var isFirstLaunch: Bool { get set }
     var exchangeCount: Int { get set }
     var appTheme: AppTheme { get set }
+    var currentUserId: String { get set }
 }
 
 // MARK: - UserDefaults.Keys
@@ -23,6 +24,7 @@ extension UserDefaults {
         static let exchangeCount = "exchange_count"
         static let appTheme = "app_theme"
         static let isNotificaion = "is_notification"
+        static let currentUserId = "current_user_id"
     }
 }
 
@@ -43,9 +45,14 @@ extension UserDefaults: UserDefaultsType {
         get { AppTheme(rawValue: integer(forKey: Keys.appTheme)) ?? .green }
         set { set(newValue.rawValue, forKey: Keys.appTheme) }
     }
-    
+
     var isNotification: Bool {
         get { !bool(forKey: Keys.isNotificaion) }
         set { set(!newValue, forKey: Keys.isNotificaion) }
+    }
+
+    var currentUserId: String {
+        get { string(forKey: Keys.currentUserId) ?? "" }
+        set { set(newValue, forKey: Keys.currentUserId) }
     }
 }

@@ -18,7 +18,7 @@ protocol MessageLocalRepository {
     func observeMessages(conversationID: Int) -> AnyPublisher<[Message], Error>
 
     func deleteMessage(conversationID: Int, messageID: Int)
-    
+
     func savePhoto(conversationID: Int, fileName: String, data: Data) throws
     func getPhotoURL(conversationID: Int, fileName: String) -> URL?
 
@@ -35,6 +35,7 @@ final class MessageLocalRepositoryImpl: MessageLocalRepository {
         return RealmManager(
             configuration: {
                 var config = Realm.Configuration.defaultConfiguration
+                config.schemaVersion = 2
                 config.fileURL?.deleteLastPathComponent()
                 config.fileURL?.appendPathComponent(id)
                 config.fileURL?.appendPathExtension("realm")

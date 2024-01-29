@@ -28,6 +28,7 @@ final class VideoKeywordLocalRepositoryImpl: VideoKeywordLocalRepository {
         return RealmManager(
             configuration: {
                 var config = Realm.Configuration.defaultConfiguration
+                config.schemaVersion = 2
                 config.fileURL?.deleteLastPathComponent()
                 config.fileURL?.appendPathComponent(id)
                 config.fileURL?.appendPathExtension("realm")

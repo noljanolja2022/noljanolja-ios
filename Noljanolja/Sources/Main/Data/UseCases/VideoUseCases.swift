@@ -14,6 +14,7 @@ import GoogleSignIn
 protocol VideoUseCases {
     func reactPromote(videoId: String) -> AnyPublisher<Void, Error>
     func postVideoComment(videoId: String, comment: String) -> AnyPublisher<VideoComment, Error>
+    func likeVideo(videoId: String, action: String) -> AnyPublisher<Void, Error>
 }
 
 // MARK: - VideoUseCasesImpl
@@ -63,6 +64,26 @@ final class VideoUseCasesImpl: VideoUseCases {
         return GIDSignIn.sharedInstance.signInIfNeededCombine(additionalScopes: [GIDSignInScope.youtube])
             .flatMap { _ in
                 postComment()
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func likeVideo(videoId: String, action: String) -> AnyPublisher<Void, Error> {
+        let likeVideo = { [weak self] in
+            guard let self else {
+                return Fail<Void, Error>(error: CommonError.captureSelfNotFound)
+                    .eraseToAnyPublisher()
+            }
+            guard let accessTokenString = GIDSignIn.sharedInstance.currentUser?.accessToken.tokenString else {
+                return Fail<Void, Error>(error: CommonError.informationNotFound(message: "Access token not found"))
+                    .eraseToAnyPublisher()
+            }
+            return self.videoNetworkRepository.likeVideo(videoId: videoId, youtubeToken: accessTokenString, action: action)
+        }
+
+        return GIDSignIn.sharedInstance.signInIfNeededCombine(additionalScopes: [GIDSignInScope.youtube])
+            .flatMapLatest { _ in
+                likeVideo()
             }
             .eraseToAnyPublisher()
     }
