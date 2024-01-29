@@ -32,15 +32,19 @@ struct Video: Equatable, Codable {
     var likeCountString: String {
         let thousand = 1000
         let million = 1000000
+        let billion = 1000000000
 
         if likeCount < thousand {
             return "\(likeCount)"
         } else if likeCount < million {
             let roundedViews = Double(likeCount) / Double(thousand)
             return String(format: "%.1fK", roundedViews)
-        } else {
+        } else if likeCount < billion {
             let roundedViews = Double(likeCount) / Double(million)
             return String(format: "%.1fM", roundedViews)
+        } else {
+            let roundedViews = Double(likeCount) / Double(billion)
+            return String(format: "%.1fB", roundedViews)
         }
     }
 

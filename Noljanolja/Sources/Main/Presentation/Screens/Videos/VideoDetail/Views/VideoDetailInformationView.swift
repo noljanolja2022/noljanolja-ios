@@ -11,6 +11,7 @@ struct VideoDetailInformationView: View {
     @EnvironmentObject var themeManager: AppThemeManager
 
     var video: Video
+    var isLiked: Bool
     var commentCount: Int?
     var didTapLikeButton: ((String) -> Void)?
 
@@ -126,18 +127,21 @@ struct VideoDetailInformationView: View {
     private func buildLikeView() -> some View {
         HStack(spacing: 18) {
             HStack {
-                Image(video.isLiked ? ImageAssets.icLikeFilled.name : ImageAssets.icLike.name)
+                Image(isLiked ? ImageAssets.icLikeFilled.name : ImageAssets.icLike.name)
                     .resizable()
                     .frame(width: 22, height: 20)
-                    .foregroundColor(video.isLiked ? themeManager.theme.primary200 : ColorAssets.neutralRawDeeperGrey.swiftUIColor)
+                    .foregroundColor(isLiked ? themeManager.theme.primary200 : ColorAssets.neutralRawDeeperGrey.swiftUIColor)
                 Text(video.likeCountString)
                     .dynamicFont(.systemFont(ofSize: 12, weight: .regular))
                     .foregroundColor(ColorAssets.neutralRawDeepGrey.swiftUIColor)
             }
+            .onPress {
+                didTapLikeButton?(video.id)
+            }
             Divider()
                 .foregroundColor(ColorAssets.neutralRawLightGrey.swiftUIColor)
             Button {
-                didTapLikeButton?(video.id)
+                //
             } label: {
                 Text("Liked Video")
                     .dynamicFont(.systemFont(ofSize: 12, weight: .regular))

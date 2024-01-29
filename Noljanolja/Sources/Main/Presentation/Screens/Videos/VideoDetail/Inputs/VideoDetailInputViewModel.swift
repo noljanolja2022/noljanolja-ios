@@ -63,7 +63,6 @@ final class VideoDetailInputViewModel: ViewModel {
 
         sendCommentAction
             .receive(on: DispatchQueue.main)
-            .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .flatMapLatestToResult { [weak self] comment -> AnyPublisher<VideoComment, Error> in
                 guard let self else {
                     return Empty<VideoComment, Error>().eraseToAnyPublisher()
@@ -71,6 +70,7 @@ final class VideoDetailInputViewModel: ViewModel {
                 return self.videoUseCases
                     .postVideoComment(videoId: self.videoId, comment: comment)
             }
+            .handleEvents(receiveOutput: { [weak self] _ in self?.isProgressHUDShowing = true })
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 guard let self else { return }

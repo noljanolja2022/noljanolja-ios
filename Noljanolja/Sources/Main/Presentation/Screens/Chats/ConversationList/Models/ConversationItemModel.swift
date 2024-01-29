@@ -15,6 +15,7 @@ struct ConversationItemModel: Equatable {
     let message: String?
     let date: String?
     let isSeen: Bool
+    let unseenNumber: Int?
 
     init(currentUser: User, conversation: Conversation) {
         self.id = conversation.id
@@ -70,5 +71,11 @@ struct ConversationItemModel: Equatable {
             let lastReceiverMessage = conversation.messages.first(where: { $0.sender.id != currentUser.id })
             return lastReceiverMessage?.seenBy.contains(currentUser.id) ?? true
         }()
+        self.unseenNumber = conversation.messages.reduce(0) { partialResult, message in
+            if message.sender.id != currentUser.id, !message.seenBy.contains(currentUser.id) {
+                return partialResult + 1
+            }
+            return partialResult
+        }
     }
 }

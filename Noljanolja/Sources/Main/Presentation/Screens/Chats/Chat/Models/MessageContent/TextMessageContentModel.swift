@@ -50,7 +50,7 @@ struct TextMessageContentModel: Equatable {
                 return .seen({
                     switch conversation.type {
                     case .single: return .single(!users.isEmpty)
-                    case .group: return .group(conversation.participants.count - 1 - users.count)
+                    case .group: return .group(users.count)
                     case .unknown: return .none
                     }
                 }())

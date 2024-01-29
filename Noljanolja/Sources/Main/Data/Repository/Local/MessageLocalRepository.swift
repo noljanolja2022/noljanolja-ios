@@ -18,7 +18,7 @@ protocol MessageLocalRepository {
     func observeMessages(conversationID: Int) -> AnyPublisher<[Message], Error>
 
     func deleteMessage(conversationID: Int, messageID: Int)
-    
+
     func savePhoto(conversationID: Int, fileName: String, data: Data) throws
     func getPhotoURL(conversationID: Int, fileName: String) -> URL?
 

@@ -168,8 +168,8 @@ final class VideosViewModel: ViewModel {
 
             let model = VideosModel(
                 highlightVideos: highlightVideos,
-                watchingVideos: watchingVideos.filter { $0.totalPoints != 0 },
-                trendingVideos: trendingVideos.filter { $0.totalPoints != 0 }
+                watchingVideos: watchingVideos,
+                trendingVideos: trendingVideos
             )
 
             if let error, model.isEmpty {

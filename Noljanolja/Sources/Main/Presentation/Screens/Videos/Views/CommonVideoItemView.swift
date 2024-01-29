@@ -130,7 +130,9 @@ struct CommonVideoItemView: View {
 
     private func buildDetailView() -> some View {
         VStack(spacing: 8) {
-            buildPointView()
+            if model.point != 0 {
+                buildPointView()
+            }
             VStack(spacing: 8) {
                 buildVideoInfoView()
                 buildProgressView()

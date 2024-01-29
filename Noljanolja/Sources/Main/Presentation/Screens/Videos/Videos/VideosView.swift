@@ -84,13 +84,6 @@ struct VideosView<ViewModel: VideosViewModel>: View {
                         .padding(.vertical, 4)
 
                     buildTrendingView()
-#warning(": test video")
-                    Divider()
-                        .frame(height: 2)
-                        .overlay(ColorAssets.neutralLightGrey.swiftUIColor)
-                        .padding(.vertical, 4)
-
-                    buildHighlightView()
                 }
             }
         }
