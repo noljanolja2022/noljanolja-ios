@@ -33,6 +33,7 @@ struct VideoDetailView<ViewModel: VideoDetailViewModel>: View {
                     buildFullScreenCoverDestinationView($0)
                 }
             )
+            .alert(item: $viewModel.alertState) { Alert($0) { _ in } }
     }
 
     @ViewBuilder

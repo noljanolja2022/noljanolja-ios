@@ -6,6 +6,7 @@
 //
 //
 
+import _SwiftUINavigationState
 import AVKit
 import Combine
 import Foundation
@@ -43,6 +44,7 @@ final class VideoDetailViewModel: ViewModel {
 
     @Published var viewState = ViewState.loading
     @Published var footerViewState = StatefullFooterViewState.loading
+    @Published var alertState: AlertState<VideoComment>?
 
     // MARK: Navigations
 
@@ -400,9 +402,17 @@ extension VideoDetailViewModel: VideoDetailInputViewModelDelegate {
         case let .underlying(_, response):
             guard let data = response?.data,
                   let baseResponse = BaseResponse(from: data),
-                  baseResponse.code == 400014,
                   let url = URL(string: "https://support.google.com/youtube/answer/1646861?topic=3024170&hl=en") else { return }
-            fullScreenCoverType = .webView(url)
+            switch baseResponse.code {
+            case 400002:
+                fullScreenCoverType = .webView(url)
+            default:
+                alertState = AlertState(
+                    title: TextState(L10n.commonErrorTitle),
+                    message: TextState(L10n.commonErrorDescription),
+                    dismissButton: .cancel(TextState("OK"))
+                )
+            }
         default:
             break
         }
