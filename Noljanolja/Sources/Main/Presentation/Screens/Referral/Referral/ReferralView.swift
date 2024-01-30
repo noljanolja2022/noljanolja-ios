@@ -88,6 +88,7 @@ struct ReferralView<ViewModel: ReferralViewModel>: View {
                     .dynamicFont(.systemFont(ofSize: 16, weight: .bold))
                     .frame(maxHeight: .infinity)
                     .padding(.horizontal, 32)
+                    .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
 
                 Button(
                     action: {
@@ -97,6 +98,7 @@ struct ReferralView<ViewModel: ReferralViewModel>: View {
                     label: {
                         Text(L10n.commonCopy)
                             .dynamicFont(.systemFont(ofSize: 14, weight: .bold))
+                            .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
                             .frame(maxHeight: .infinity)
                             .padding(.horizontal, 32)
                             .background(ColorAssets.primaryGreen200.swiftUIColor)
@@ -104,25 +106,27 @@ struct ReferralView<ViewModel: ReferralViewModel>: View {
                 )
             }
             .frame(height: 52)
-            .background(ColorAssets.neutralLight.swiftUIColor)
+            .background(ColorAssets.neutralRawLight.swiftUIColor)
             .cornerRadius(8)
             .shadow(
-                color: ColorAssets.neutralDarkGrey.swiftUIColor.opacity(0.2),
+                color: ColorAssets.neutralRawDarkGrey.swiftUIColor.opacity(0.2),
                 radius: 8,
                 x: 0,
                 y: 4
             )
 
             Button(
-                L10n.sendInviteLink,
                 action: {
                     withoutAnimation {
                         viewModel.fullScreenCoverType = .share
                     }
+                }, label: {
+                    Text(L10n.sendInviteLink)
+                        .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
+                        .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
                 }
             )
             .buttonStyle(PrimaryButtonStyle(enabledBackgroundColor: ColorAssets.primaryGreen200.swiftUIColor))
-            .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
             .padding(.horizontal, 16)
         }
         .padding(.top, -26)
@@ -132,6 +136,7 @@ struct ReferralView<ViewModel: ReferralViewModel>: View {
         VStack(spacing: 24) {
             Text(L10n.howToRefer)
                 .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
+                .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
 
             LazyVGrid(columns: Array(repeating: .flexible(spacing: 16), count: 2), spacing: 16) {
                 ReferralItemView(
@@ -167,7 +172,7 @@ struct ReferralView<ViewModel: ReferralViewModel>: View {
             Text(L10n.referralDescription)
                 .dynamicFont(.systemFont(ofSize: 14, weight: .medium))
                 .multilineTextAlignment(.center)
-                .foregroundColor(ColorAssets.neutralDeeperGrey.swiftUIColor)
+                .foregroundColor(ColorAssets.neutralRawDeeperGrey.swiftUIColor)
         }
         .padding(16)
     }

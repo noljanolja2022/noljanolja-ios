@@ -30,12 +30,12 @@ struct ReferralItemView: View {
 
             Text(model.title)
                 .dynamicFont(.systemFont(ofSize: 22, weight: .medium))
-                .foregroundColor(ColorAssets.neutralDarkGrey.swiftUIColor)
+                .foregroundColor(ColorAssets.neutralRawDarkGrey.swiftUIColor)
 
             Text(model.description)
                 .dynamicFont(.systemFont(ofSize: 12))
                 .multilineTextAlignment(.center)
-                .foregroundColor(ColorAssets.neutralDeepGrey.swiftUIColor)
+                .foregroundColor(ColorAssets.neutralRawDeepGrey.swiftUIColor)
             
             Spacer()
         }

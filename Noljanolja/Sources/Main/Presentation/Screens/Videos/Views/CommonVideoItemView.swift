@@ -99,7 +99,7 @@ struct CommonVideoItemView: View {
     }
 
     private func buildBodyView() -> some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 5) {
             buildImageView()
             buildDetailView()
         }
