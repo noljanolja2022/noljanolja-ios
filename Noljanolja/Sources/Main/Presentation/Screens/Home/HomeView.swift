@@ -216,6 +216,13 @@ extension HomeView {
             SearchVideosView(
                 viewModel: SearchVideosViewModel()
             )
+        case let .chat(conversationId):
+            ChatView(
+                viewModel: ChatViewModel(
+                    conversationID: conversationId,
+                    delegate: viewModel
+                )
+            )
         }
     }
 

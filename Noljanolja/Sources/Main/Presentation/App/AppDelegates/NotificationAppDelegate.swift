@@ -22,7 +22,7 @@ final class NotificationAppDelegate: NSObject, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         // Register for remote notifications
         UNUserNotificationCenter.current().delegate = self
-        
+
         if UserDefaults.standard.isNotification {
             application.registerForRemoteNotifications()
         } else {
@@ -58,7 +58,8 @@ extension NotificationAppDelegate: UNUserNotificationCenterDelegate {
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
-        print(userInfo)
+        NotificationHelper.shared.handleNotification(userInfo)
+        completionHandler()
     }
 }
 
