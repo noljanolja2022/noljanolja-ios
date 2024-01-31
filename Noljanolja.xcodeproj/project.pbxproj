@@ -22,6 +22,7 @@
 		2B8C30952B551DF0002710FC /* CreateConversationNavigations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8C30942B551DF0002710FC /* CreateConversationNavigations.swift */; };
 		2B8C30A22B597198002710FC /* ChangeUsernameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8C30A12B597198002710FC /* ChangeUsernameView.swift */; };
 		2B8C30A42B5971AA002710FC /* ChangeUsernameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8C30A32B5971AA002710FC /* ChangeUsernameViewModel.swift */; };
+		2B8F25712B69EC2200A641FF /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8F25702B69EC2200A641FF /* NotificationHelper.swift */; };
 		2BC414BD2B0B180F00E76CF1 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC414BC2B0B180F00E76CF1 /* CategoriesView.swift */; };
 		2BC414BF2B0B372B00E76CF1 /* CategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC414BE2B0B372B00E76CF1 /* CategoriesViewModel.swift */; };
 		2BC414C22B0B3CE300E76CF1 /* ListGiftCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC414C12B0B3CE300E76CF1 /* ListGiftCategoryView.swift */; };
@@ -685,6 +686,7 @@
 		2B8C30942B551DF0002710FC /* CreateConversationNavigations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateConversationNavigations.swift; sourceTree = "<group>"; };
 		2B8C30A12B597198002710FC /* ChangeUsernameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUsernameView.swift; sourceTree = "<group>"; };
 		2B8C30A32B5971AA002710FC /* ChangeUsernameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUsernameViewModel.swift; sourceTree = "<group>"; };
+		2B8F25702B69EC2200A641FF /* NotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
 		2BC414BC2B0B180F00E76CF1 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 		2BC414BE2B0B372B00E76CF1 /* CategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewModel.swift; sourceTree = "<group>"; };
 		2BC414C12B0B3CE300E76CF1 /* ListGiftCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGiftCategoryView.swift; sourceTree = "<group>"; };
@@ -4083,6 +4085,7 @@
 				CF861EA12AD5C5A500500721 /* InfoPlist.strings */,
 				CFFD7081298AB9FF00D4F5A2 /* NoljanoljaApp.swift */,
 				2B4885E12B3D24B2002FC70A /* AppThemeManager.swift */,
+				2B8F25702B69EC2200A641FF /* NotificationHelper.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -5044,6 +5047,7 @@
 				CF53D5D12A6AF548009B3A69 /* SelectedContactItemView.swift in Sources */,
 				CFFD70C4298AC5F800D4F5A2 /* NetworkLoggerPluggin.swift in Sources */,
 				CFF818352A3CD868009CD057 /* MemberInfoLocalRepository.swift in Sources */,
+				2B8F25712B69EC2200A641FF /* NotificationHelper.swift in Sources */,
 				CFA3304929BE3AB9008D7449 /* String+Date.swift in Sources */,
 				CF53D5DA2A6AF548009B3A69 /* MessageQuickReactionViewModel.swift in Sources */,
 				CF53D6452A6AF548009B3A69 /* ChatPhotoInputViewModel.swift in Sources */,

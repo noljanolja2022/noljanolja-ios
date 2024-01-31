@@ -55,6 +55,20 @@ final class HomeViewModel: ViewModel {
         super.init()
 
         configure()
+        binding()
+    }
+
+    private func binding() {
+        UserDefaults.standard.publisher(for: \.chatSingleIdNoti)
+            .combineLatest(isAppearSubject)
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+            .sink { [weak self] conversationId, isAppearSubject in
+                guard let self, isAppearSubject, conversationId != 0 else { return }
+                self.navigationType = .chat(conversationId)
+                UserDefaults.standard.removeObject(forKey: UserDefaults.Keys.chatSingleIdNoti)
+            }
+            .store(in: &cancellables)
     }
 
     private func configure() {
@@ -151,7 +165,7 @@ extension HomeViewModel: ConversationListViewModelDelegate {
     func conversationListViewModelSignOut() {
         delegate?.homeViewModelSignOut()
     }
-    
+
     func conversationListViewModel(hasUnseenConversations: Bool) {
         tabNews[.chat] = hasUnseenConversations
     }
@@ -197,4 +211,10 @@ extension HomeViewModel: VideosViewModelDelegate {
     func videosViewModelSignOut() {
         delegate?.homeViewModelSignOut()
     }
+}
+
+// MARK: ChatViewModelDelegate
+
+extension HomeViewModel: ChatViewModelDelegate {
+    func chatViewModel(openConversation user: User) {}
 }

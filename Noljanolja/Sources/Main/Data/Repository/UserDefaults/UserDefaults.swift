@@ -9,11 +9,12 @@ import Foundation
 
 // MARK: - UserDefaultsType
 
-protocol UserDefaultsType {
+protocol UserDefaultsType: AnyObject {
     var isFirstLaunch: Bool { get set }
     var exchangeCount: Int { get set }
     var appTheme: AppTheme { get set }
     var currentUserId: String { get set }
+    var chatSingleIdNoti: Int { get set }
 }
 
 // MARK: - UserDefaults.Keys
@@ -25,6 +26,7 @@ extension UserDefaults {
         static let appTheme = "app_theme"
         static let isNotificaion = "is_notification"
         static let currentUserId = "current_user_id"
+        static let chatSingleIdNoti = "chat_single_id_noti"
     }
 }
 
@@ -54,5 +56,10 @@ extension UserDefaults: UserDefaultsType {
     var currentUserId: String {
         get { string(forKey: Keys.currentUserId) ?? "" }
         set { set(newValue, forKey: Keys.currentUserId) }
+    }
+
+    @objc var chatSingleIdNoti: Int {
+        get { integer(forKey: Keys.chatSingleIdNoti) }
+        set { set(newValue, forKey: Keys.chatSingleIdNoti) }
     }
 }

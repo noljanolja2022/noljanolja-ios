@@ -63,6 +63,7 @@ enum HomeAlertActionType {
 enum HomeNavigationType {
     case addFriends
     case searchVideo
+    case chat(Int)
 }
 
 // MARK: - HomeScreenCoverType
